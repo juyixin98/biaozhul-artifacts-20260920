@@ -1,0 +1,56 @@
+{
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "name": "发起报销",
+      "next_node": "manager"
+    },
+    {
+      "id": "manager",
+      "type": "approval",
+      "name": "直属经理审批",
+      "strategy": "any",
+      "approvers": ["manager1", "manager2"],
+      "next_node": "amount_check",
+      "timeout_seconds": 30,
+      "escalation_target": "boss"
+    },
+    {
+      "id": "amount_check",
+      "type": "condition",
+      "name": "金额分支",
+      "branches": [
+        {"expression": "amount >= 10000", "next_node": "finance_countersign"},
+        {"expression": "amount >= 1000", "next_node": "finance_single"}
+      ],
+      "default": "auto_approved_end"
+    },
+    {
+      "id": "finance_single",
+      "type": "approval",
+      "name": "财务审批（任签）",
+      "strategy": "any",
+      "approvers": ["finance1", "finance2"],
+      "next_node": "approved_end"
+    },
+    {
+      "id": "finance_countersign",
+      "type": "approval",
+      "name": "财务会签（全签）",
+      "strategy": "all",
+      "approvers": ["finance1", "finance2"],
+      "next_node": "approved_end"
+    },
+    {
+      "id": "approved_end",
+      "type": "end",
+      "name": "报销通过"
+    },
+    {
+      "id": "auto_approved_end",
+      "type": "end",
+      "name": "小额自动通过"
+    }
+  ]
+}

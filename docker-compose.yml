@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: workflow
+      POSTGRES_PASSWORD: workflow
+      POSTGRES_DB: workflow
+    volumes:
+      - workflow_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U workflow -d workflow"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+asyncpg://workflow:workflow@db:5432/workflow
+      ESCALATION_POLL_INTERVAL: "2"
+      ESCALATION_BATCH_LIMIT: "20"
+    ports:
+      - "8000:8000"
+
+volumes:
+  workflow_pgdata:

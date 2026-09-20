@@ -1,0 +1,45 @@
+{
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "name": "发起请假",
+      "next_node": "leader"
+    },
+    {
+      "id": "leader",
+      "type": "approval",
+      "name": "组长审批（全签）",
+      "strategy": "all",
+      "approvers": ["leader1", "leader2"],
+      "next_node": "days_check"
+    },
+    {
+      "id": "days_check",
+      "type": "condition",
+      "name": "请假天数分支",
+      "branches": [
+        {"expression": "days > 3", "next_node": "hr"},
+        {"expression": "days <= 3", "next_node": "short_end"}
+      ]
+    },
+    {
+      "id": "hr",
+      "type": "approval",
+      "name": "HR 审批",
+      "strategy": "any",
+      "approvers": ["hr1", "hr2"],
+      "next_node": "long_end"
+    },
+    {
+      "id": "short_end",
+      "type": "end",
+      "name": "短假通过"
+    },
+    {
+      "id": "long_end",
+      "type": "end",
+      "name": "长假通过"
+    }
+  ]
+}
