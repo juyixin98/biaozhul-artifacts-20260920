@@ -1,0 +1,35 @@
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: proofcycle
+      MYSQL_USER: proofcycle
+      MYSQL_PASSWORD: proofcycle
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-prootpass"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build: .
+    environment:
+      ADDR: ":8080"
+      DB_DSN: "proofcycle:proofcycle@tcp(mysql:3306)/proofcycle?charset=utf8mb4&parseTime=true&loc=UTC"
+      STORAGE_ROOT: /data/files
+      MAX_UPLOAD_MB: "50"
+      SEED_DEMO: "true"
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - proof_files:/data/files
+
+volumes:
+  mysql_data:
+  proof_files:

@@ -1,0 +1,8 @@
+.git
+data
+*.test
+scripts/demo.sh
+README.md
+docker-compose.yml
+Dockerfile
+.dockerignore
