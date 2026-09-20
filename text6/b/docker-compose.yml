@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: consent
+      POSTGRES_PASSWORD: consent
+      POSTGRES_DB: consentvault
+    ports:
+      # Host-published port is configurable (e.g. DB_PORT=5499) in case the
+      # host already runs PostgreSQL on 5432; the api talks to db over the
+      # internal docker network regardless.
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U consent -d consentvault"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg2://consent:consent@db:5432/consentvault
+      DB_HOST: db
+      DB_PORT: "5432"
+      SEED_DEMO_DATA: "1"
+    ports:
+      - "${API_PORT:-8000}:8000"
+
+volumes:
+  pgdata:
