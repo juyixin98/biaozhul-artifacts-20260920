@@ -1,0 +1,61 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: cloudgate
+      POSTGRES_PASSWORD: cloudgate
+      POSTGRES_DB: cloudgate
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cloudgate -d cloudgate"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  web:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg2://cloudgate:cloudgate@db:5432/cloudgate
+      JWT_SECRET: change-me-in-production
+      PLATFORM_ADMIN_USERNAME: admin
+      PLATFORM_ADMIN_PASSWORD: admin12345
+      HEARTBEAT_INTERVAL_SECONDS: "60"
+      HEARTBEAT_TIMEOUT_SECONDS: "600"
+      SWEEP_INTERVAL_SECONDS: "30"
+    ports:
+      - "8000:8000"
+
+  demo:
+    build: .
+    depends_on:
+      web:
+        condition: service_started
+    profiles: ["demo"]
+    environment:
+      BASE_URL: http://web:8000
+    entrypoint: ["./docker-entrypoint.sh", "demo"]
+
+  tests:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg2://cloudgate:cloudgate@db:5432/cloudgate_test
+      JWT_SECRET: test-secret
+      PLATFORM_ADMIN_USERNAME: admin
+      PLATFORM_ADMIN_PASSWORD: admin12345
+      # Short lifecycle so timeout/recovery tests run fast.
+      HEARTBEAT_INTERVAL_SECONDS: "1"
+      HEARTBEAT_TIMEOUT_SECONDS: "2"
+      SWEEP_INTERVAL_SECONDS: "1"
+    entrypoint: ["./docker-entrypoint.sh", "tests"]
+
+volumes:
+  pgdata:
