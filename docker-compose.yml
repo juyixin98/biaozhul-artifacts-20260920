@@ -1,0 +1,41 @@
+services:
+  db:
+    image: mysql:8.4
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-time-zone=+00:00
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: cryptolaunch
+      MYSQL_USER: cryptolaunch
+      MYSQL_PASSWORD: cryptolaunch
+    ports:
+      - "13306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pcryptolaunch"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_ENGINE: mysql
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_NAME: cryptolaunch
+      DB_USER: cryptolaunch
+      DB_PASSWORD: cryptolaunch
+      DJANGO_SECRET_KEY: local-dev-secret-change-me
+      DJANGO_DEBUG: "false"
+    ports:
+      - "8000:8000"
+
+volumes:
+  mysql_data:
