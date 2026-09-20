@@ -1,0 +1,81 @@
+# SiteVitals full local stack: MySQL + API/worker + demo site.
+# Everything runs locally — no cloud services are contacted.
+#
+#   docker compose up --build
+#   docker compose exec app /app/sitevitals demo-seed --demo-origin http://demo:8090
+#
+# The demo site lives in its own container so its "intranet" host name
+# (demo:8090) is distinct from the app; the whitelist registers exactly it.
+
+services:
+  mysql:
+    image: mysql:8.4
+    command:
+      - --innodb-buffer-pool-size=128M
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpw
+      MYSQL_DATABASE: sitevitals
+      MYSQL_USER: sitevitals
+      MYSQL_PASSWORD: sitevitals
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./deploy/sql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-usitevitals", "-psitevitals"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    ports:
+      - "3306:3306"
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: "3306"
+      MYSQL_DATABASE: sitevitals
+      MYSQL_USER: sitevitals
+      MYSQL_PASSWORD: sitevitals
+      HTTP_ADDR: ":8080"
+      CHROME_PATH: /usr/bin/chromium
+      HEADLESS: "true"
+      BROWSER_CONCURRENCY: "2"
+      LEASE_DURATION: 90s
+      ENABLE_WORKER: "true"
+      ENABLE_DEMO: "false"
+    ports:
+      - "8080:8080"
+    # The demo "site" is a separate host by design; see the demo service.
+    shm_size: "512m"
+
+  demo:
+    # Run only the API-less demo: worker disabled, API bound to an internal
+    # port so only the demo site is published on 8090.
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command:
+      - "serve"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_DATABASE: sitevitals
+      MYSQL_USER: sitevitals
+      MYSQL_PASSWORD: sitevitals
+      ENABLE_WORKER: "false"
+      ENABLE_DEMO: "true"
+      HTTP_ADDR: ":8091"
+      DEMO_ADDR: ":8090"
+    ports:
+      - "8090:8090"
+    shm_size: "256m"
+
+volumes:
+  mysql-data:
