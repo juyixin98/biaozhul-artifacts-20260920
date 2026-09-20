@@ -1,0 +1,40 @@
+services:
+  db:
+    image: mysql:8.0
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_0900_ai_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpw
+      MYSQL_DATABASE: proofcycle
+      MYSQL_USER: proofcycle
+      MYSQL_PASSWORD: proofcycle_pw
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-pproofcycle_pw"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    ports:
+      - "13316:3306"
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PROOFCYCLE_HTTP_ADDR: ":8080"
+      PROOFCYCLE_MYSQL_DSN: "proofcycle:proofcycle_pw@tcp(db:3306)/proofcycle?charset=utf8mb4&parseTime=true&loc=UTC"
+      PROOFCYCLE_STORAGE_DIR: "/app/data/storage"
+      PROOFCYCLE_MAX_UPLOAD_MB: "20"
+      PROOFCYCLE_SEED_DEMO: "1"
+    volumes:
+      - app_storage:/app/data/storage
+    ports:
+      - "18090:8080"
+
+volumes:
+  db_data:
+  app_storage:

@@ -1,0 +1,17 @@
+# build artifacts
+/bin/
+/tmp/
+*.test
+*.out
+
+# local data & storage
+/data/
+*.pdf
+*.png
+!**/testdata/**
+
+# editor / OS
+.idea/
+.vscode/
+.DS_Store
+.git/
