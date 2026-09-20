@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS audit_events;
+DROP TABLE IF EXISTS idempotent_requests;
+DROP TABLE IF EXISTS notifications;
+DROP TABLE IF EXISTS reminder_dispatches;
+DROP TABLE IF EXISTS action_item_reschedules;
+DROP TABLE IF EXISTS action_items;
+DROP TABLE IF EXISTS evidence_notes;
+DROP TABLE IF EXISTS evidence;
+DROP TABLE IF EXISTS stage_events;
+DROP TABLE IF EXISTS incident_members;
+DROP TABLE IF EXISTS incidents;
+DROP TABLE IF EXISTS users;

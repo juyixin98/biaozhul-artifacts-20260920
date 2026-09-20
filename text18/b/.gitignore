@@ -1,0 +1,12 @@
+# Binaries
+/sircc
+/out/
+*.test
+
+# Local env
+.env
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store
