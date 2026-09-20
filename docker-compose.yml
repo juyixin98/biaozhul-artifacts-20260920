@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: wfuser
+      POSTGRES_PASSWORD: wfpass
+      POSTGRES_DB: wfdb
+    # The database is only reached by the api service on the compose network;
+    # no host port is published (set one here if you want to inspect it).
+    volumes:
+      - wf_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wfuser -d wfdb"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      WF_DATABASE_URL: postgresql+psycopg2://wfuser:wfpass@db:5432/wfdb
+      WF_SCHEDULER_ENABLED: "true"
+      WF_SCHEDULER_INTERVAL_SECONDS: "1"
+      WF_SEED_DEMO: "true"
+    ports:
+      - "18088:8000"
+
+volumes:
+  wf_pgdata:
