@@ -1,0 +1,48 @@
+{
+  "start_node": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "next": "dept_approval"
+    },
+    {
+      "id": "dept_approval",
+      "type": "approval",
+      "name": "部门会签",
+      "mode": "all",
+      "assignees": ["alice", "bob"],
+      "next": "amount_check",
+      "timeout": {
+        "seconds": 120,
+        "targets": ["frank"]
+      }
+    },
+    {
+      "id": "amount_check",
+      "type": "condition",
+      "name": "金额判断",
+      "branches": [
+        { "when": "amount >= 10000", "next": "gm_approval" }
+      ],
+      "default": "end"
+    },
+    {
+      "id": "gm_approval",
+      "type": "approval",
+      "name": "总经理任签",
+      "mode": "any",
+      "assignees": ["carol", "dave"],
+      "next": "end",
+      "timeout": {
+        "seconds": 60,
+        "targets": ["erin"]
+      }
+    },
+    {
+      "id": "end",
+      "type": "end",
+      "name": "流程结束"
+    }
+  ]
+}

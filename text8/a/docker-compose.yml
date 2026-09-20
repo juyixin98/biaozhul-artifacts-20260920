@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: flow
+      POSTGRES_PASSWORD: flow
+      POSTGRES_DB: flow
+    ports:
+      - "5432:5432"
+    volumes:
+      - flow_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U flow -d flow"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg2://flow:flow@db:5432/flow
+      WORKER_ENABLED: "true"
+      WORKER_POLL_SECONDS: "1"
+      SEED_DEMO: "true"
+    ports:
+      - "8000:8000"
+
+volumes:
+  flow_pgdata:
