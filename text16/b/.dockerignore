@@ -1,0 +1,16 @@
+# 编译产物
+bin/
+*.test
+*.out
+forensic
+forensic.db
+forensic.db-*
+
+# 版本控制
+.git/
+
+# 样例镜像通过 compose 只读卷挂载，无需打进镜像
+samples/
+
+# 本地环境
+.env

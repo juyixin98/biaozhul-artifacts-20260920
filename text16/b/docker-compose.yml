@@ -1,0 +1,49 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: forensiccore-mysql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_DATABASE: forensic
+      MYSQL_USER: forensic
+      MYSQL_PASSWORD: forensic
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pforensic"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: forensiccore-api
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      FORENSIC_HTTP_ADDR: ":8080"
+      FORENSIC_DB_DRIVER: "mysql"
+      FORENSIC_DB_DSN: "forensic:forensic@tcp(mysql:3306)/forensic?charset=utf8mb4&parseTime=True&loc=Local"
+      FORENSIC_JWT_SECRET: "${FORENSIC_JWT_SECRET:-please-change-this-secret-in-production}"
+      FORENSIC_TOKEN_TTL_HOURS: "12"
+      FORENSIC_CHUNK_SIZE: "4194304"
+      # 白名单根：容器内路径；宿主机目录以只读方式挂载（:ro）。
+      FORENSIC_ROOTS: "evidence=/evidence"
+      # 本地账号：username:password:role（多个用 ; 分隔）。生产请改密码。
+      FORENSIC_USERS: "investigator:invest123:investigator;analyst:analyst123:analyst"
+    ports:
+      - "${FORENSIC_HOST_PORT:-8080}:8080"
+    volumes:
+      # 证据镜像目录只读挂载：应用无法通过任何写操作改动原始镜像。
+      - ./samples:/evidence:ro
+    restart: unless-stopped
+
+volumes:
+  mysql-data:
