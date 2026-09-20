@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: civicledger
+      POSTGRES_PASSWORD: civicledger
+      POSTGRES_DB: civicledger
+    # No host port published by default: the API reaches the database over the
+    # compose network. To inspect it locally, add:
+    #   ports: ["55432:5432"]
+    volumes:
+      - civicledger_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U civicledger -d civicledger"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      CIVICLEDGER_DATABASE_URL: postgresql+psycopg://civicledger:civicledger@db:5432/civicledger
+      RUN_MIGRATIONS: "1"
+      RUN_SEED: "1"
+      # Development keys only. Override CIVICLEDGER_API_KEYS for real deployments:
+      # "lead:...,accountant:...,auditor:..."
+    ports:
+      - "${CIVICLEDGER_HOST_PORT:-8000}:8000"
+
+volumes:
+  civicledger_pgdata:
