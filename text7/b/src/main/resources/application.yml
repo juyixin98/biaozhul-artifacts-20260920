@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: asset-lifecycle
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/assetdb?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&characterEncoding=UTF-8}
+    username: ${DB_USER:asset}
+    password: ${DB_PASSWORD:asset123}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  flyway:
+    enabled: true
+    locations: classpath:db/migration,classpath:db/seed
+
+server:
+  port: ${SERVER_PORT:8080}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
