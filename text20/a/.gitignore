@@ -1,0 +1,13 @@
+# Binaries
+/out/
+/bin/
+/server
+/seed
+*.test
+*.out
+
+# Local env / editor
+.env
+.idea/
+.vscode/
+.DS_Store

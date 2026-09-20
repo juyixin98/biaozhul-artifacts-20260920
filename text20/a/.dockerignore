@@ -1,0 +1,7 @@
+.git
+.gitignore
+*.md
+*.test
+/out
+/tmp
+internal/db/*.go.bak
