@@ -1,0 +1,52 @@
+{
+  "key": "expense",
+  "name": "报销审批流程",
+  "nodes": [
+    {"id": "start", "type": "start", "next": "manager"},
+    {
+      "id": "manager",
+      "type": "approval",
+      "name": "主管会签",
+      "mode": "all",
+      "approvers": ["alice", "bob"],
+      "on_reject": "rejected_end",
+      "timeout_seconds": 2,
+      "timeout_action": {"type": "escalate", "to": ["carol"]},
+      "next": "amount_check"
+    },
+    {
+      "id": "amount_check",
+      "type": "condition",
+      "name": "金额分支",
+      "branches": [
+        {"name": "大额", "when": "amount > 10000", "next": "cfo"},
+        {"name": "海外加签", "when": "overseas == true and amount > 1000", "next": "intl"}
+      ],
+      "default": "approved_end"
+    },
+    {
+      "id": "cfo",
+      "type": "approval",
+      "name": "CFO 任签",
+      "mode": "any",
+      "approvers": ["cfo1", "cfo2"],
+      "on_reject": "rejected_end",
+      "timeout_seconds": 2,
+      "timeout_action": {"type": "auto_reject", "reason": "CFO 超时未审批，自动拒绝"},
+      "next": "approved_end"
+    },
+    {
+      "id": "intl",
+      "type": "approval",
+      "name": "国际部审批",
+      "mode": "any",
+      "approvers": ["dave"],
+      "on_reject": "rejected_end",
+      "timeout_seconds": 2,
+      "timeout_action": {"type": "auto_approve"},
+      "next": "approved_end"
+    },
+    {"id": "approved_end", "type": "end", "name": "通过", "outcome": "approved"},
+    {"id": "rejected_end", "type": "end", "name": "拒绝", "outcome": "rejected"}
+  ]
+}
