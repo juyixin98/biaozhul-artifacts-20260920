@@ -1,0 +1,67 @@
+name: consentvault
+
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: consent
+      POSTGRES_PASSWORD: consent
+      POSTGRES_DB: consentvault
+    volumes:
+      - consentvault_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U consent -d consentvault"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    # Host port chosen to avoid clashes with other local Postgres instances.
+    ports:
+      - "55435:5432"
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      CONSENTVAULT_DATABASE_URL: postgresql+psycopg2://consent:consent@db:5432/consentvault
+      CONSENTVAULT_MANAGEMENT_API_KEY: ${CONSENTVAULT_MANAGEMENT_API_KEY:-change-me-management-key}
+      CONSENTVAULT_AUDITOR_API_KEY: ${CONSENTVAULT_AUDITOR_API_KEY:-change-me-auditor-key}
+      CONSENTVAULT_ENVIRONMENT: ${CONSENTVAULT_ENVIRONMENT:-dev}
+      POSTGRES_HOST: db
+    ports:
+      - "8010:8000"
+
+  # One-shot demo seeder: `docker compose --profile demo run --rm demo`.
+  demo:
+    profiles: ["demo"]
+    build: .
+    depends_on:
+      app:
+        condition: service_started
+    environment:
+      CONSENTVAULT_DATABASE_URL: postgresql+psycopg2://consent:consent@db:5432/consentvault
+      CONSENTVAULT_MANAGEMENT_API_KEY: ${CONSENTVAULT_MANAGEMENT_API_KEY:-change-me-management-key}
+      CONSENTVAULT_ENVIRONMENT: ${CONSENTVAULT_ENVIRONMENT:-dev}
+      BASE_URL: http://app:8000
+    entrypoint: ["python", "scripts/demo.py"]
+
+  # Test runner: `docker compose --profile test run --rm test`.
+  test:
+    profiles: ["test"]
+    build:
+      context: .
+      target: test
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      CONSENTVAULT_DATABASE_URL: postgresql+psycopg2://consent:consent@db:5432/consentvault
+      CONSENTVAULT_MANAGEMENT_API_KEY: test-mgmt-key
+      CONSENTVAULT_AUDITOR_API_KEY: test-auditor-key
+      CONSENTVAULT_ENVIRONMENT: test
+      TEST_POSTGRES_ADMIN_URL: postgresql+psycopg2://consent:consent@db:5432/postgres
+    entrypoint: ["python", "-m", "pytest", "-q"]
+
+volumes:
+  consentvault_pgdata:
