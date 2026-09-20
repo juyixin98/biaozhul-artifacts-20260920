@@ -1,0 +1,32 @@
+name: consentvault
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: consentvault
+      POSTGRES_PASSWORD: consentvault
+      POSTGRES_DB: consentvault
+    ports:
+      - "55435:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U consentvault -d consentvault"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  app:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+psycopg2://consentvault:consentvault@db:5432/consentvault
+    ports:
+      - "8010:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+
+volumes:
+  pgdata:
