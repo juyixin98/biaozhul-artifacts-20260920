@@ -1,0 +1,13 @@
+# Build a fully static binary (no CGO, tzdata embedded via time/tzdata).
+FROM golang:1.22-bookworm AS build
+WORKDIR /src
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" \
+    -o /out/signalboard ./cmd/signalboard
+
+FROM gcr.io/distroless/static-debian12:nonroot
+COPY --from=build /out/signalboard /signalboard
+EXPOSE 8080
+ENTRYPOINT ["/signalboard"]

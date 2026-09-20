@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS screens;
+DROP TABLE IF EXISTS daily_sales;
+DROP TABLE IF EXISTS sales_events;
+DROP TABLE IF EXISTS temp_prices;
+DROP TABLE IF EXISTS menu_version_items;
+DROP TABLE IF EXISTS menu_versions;
+DROP TABLE IF EXISTS items;
+DROP TABLE IF EXISTS stores;
+DROP TABLE IF EXISTS schema_migrations;
+DROP EXTENSION IF EXISTS btree_gist;
