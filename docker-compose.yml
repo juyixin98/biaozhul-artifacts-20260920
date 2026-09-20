@@ -1,0 +1,80 @@
+services:
+  db:
+    image: mysql:8.4
+    container_name: mlops-mysql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --transaction-isolation=READ-COMMITTED
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-mlops_scheduler}
+      MYSQL_USER: ${MYSQL_USER:-scheduler}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-scheduler_pw}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_pw}
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1",
+             "-u${MYSQL_USER:-scheduler}", "-p${MYSQL_PASSWORD:-scheduler_pw}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  # 一次性迁移：由它独占执行 schema 迁移，避免 api/scheduler 并发 migrate。
+  migrator:
+    build: .
+    container_name: mlops-migrator
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: "3306"
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-mlops_scheduler}
+      MYSQL_USER: ${MYSQL_USER:-scheduler}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-scheduler_pw}
+    command: ["./entrypoint.sh", "migrate"]
+    restart: "no"
+
+  api:
+    build: .
+    container_name: mlops-api
+    depends_on:
+      db:
+        condition: service_healthy
+      migrator:
+        condition: service_completed_successfully
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: "3306"
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-mlops_scheduler}
+      MYSQL_USER: ${MYSQL_USER:-scheduler}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-scheduler_pw}
+      DJANGO_DEBUG: "true"
+      GUNICORN_WORKERS: "3"
+    ports:
+      - "${API_PORT:-8000}:8000"
+    command: ["./entrypoint.sh", "web"]
+
+  scheduler:
+    build: .
+    container_name: mlops-scheduler
+    depends_on:
+      db:
+        condition: service_healthy
+      migrator:
+        condition: service_completed_successfully
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: "3306"
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-mlops_scheduler}
+      MYSQL_USER: ${MYSQL_USER:-scheduler}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-scheduler_pw}
+      SCHED_INTERVAL: "3"
+    command: ["./entrypoint.sh", "scheduler"]
+
+volumes:
+  mysql_data:
