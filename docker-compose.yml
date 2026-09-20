@@ -1,0 +1,52 @@
+services:
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: minerite
+      MYSQL_USER: minerite
+      MYSQL_PASSWORD: minerite
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      DB_ENGINE: mysql
+      MYSQL_HOST: db
+      MYSQL_PORT: "3306"
+      MYSQL_DATABASE: minerite
+      MYSQL_USER: minerite
+      MYSQL_PASSWORD: minerite
+      DJANGO_SECRET_KEY: dev-secret-key
+      LOAD_DEMO: "1"
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  test:
+    build: .
+    profiles: ["test"]
+    entrypoint: []
+    command: python manage.py test
+    environment:
+      DB_ENGINE: mysql
+      MYSQL_HOST: db
+      MYSQL_PORT: "3306"
+      MYSQL_DATABASE: minerite
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:

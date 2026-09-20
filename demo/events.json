@@ -1,0 +1,61 @@
+{
+  "template": {
+    "name": "order-flow",
+    "definition": {
+      "activities": ["register", "review", "approve", "reject", "notify", "archive"],
+      "dependencies": [
+        {"from": "register", "to": "review"},
+        {"from": "review", "to": "approve"},
+        {"from": "review", "to": "reject"},
+        {"any_of": ["approve", "reject"], "to": "notify"},
+        {"from": "notify", "to": "archive"}
+      ],
+      "exclusive_groups": [["approve", "reject"]],
+      "time_limits": [
+        {"from": "register", "to": "review", "max_seconds": 172800},
+        {"from": null, "to": "notify", "max_seconds": 604800}
+      ]
+    }
+  },
+  "batches": [
+    [
+      {"event_id": "e-1001-1", "case_id": "CASE-1001", "activity": "register", "occurred_at": "2026-09-01T09:00:00Z", "seq": 1},
+      {"event_id": "e-1001-2", "case_id": "CASE-1001", "activity": "review", "occurred_at": "2026-09-02T09:00:00Z", "seq": 2},
+      {"event_id": "e-1001-3", "case_id": "CASE-1001", "activity": "approve", "occurred_at": "2026-09-03T09:00:00Z", "seq": 3},
+      {"event_id": "e-1001-4", "case_id": "CASE-1001", "activity": "notify", "occurred_at": "2026-09-03T10:00:00Z", "seq": 4},
+      {"event_id": "e-1001-5", "case_id": "CASE-1001", "activity": "archive", "occurred_at": "2026-09-04T09:00:00Z", "seq": 5},
+
+      {"event_id": "e-1002-2", "case_id": "CASE-1002", "activity": "review", "occurred_at": "2026-09-02T08:30:00Z", "seq": 2},
+      {"event_id": "e-1002-1", "case_id": "CASE-1002", "activity": "register", "occurred_at": "2026-09-01T08:30:00Z", "seq": 1},
+      {"event_id": "e-1002-4", "case_id": "CASE-1002", "activity": "notify", "occurred_at": "2026-09-03T11:00:00Z", "seq": 4},
+
+      {"event_id": "e-1003-1", "case_id": "CASE-1003", "activity": "register", "occurred_at": "2026-09-01T09:00:00Z", "seq": 1},
+      {"event_id": "e-1003-2", "case_id": "CASE-1003", "activity": "review", "occurred_at": "2026-09-01T12:00:00Z", "seq": 2},
+      {"event_id": "e-1003-3", "case_id": "CASE-1003", "activity": "approve", "occurred_at": "2026-09-02T09:00:00Z", "seq": 3},
+      {"event_id": "e-1003-4", "case_id": "CASE-1003", "activity": "reject", "occurred_at": "2026-09-02T10:00:00Z", "seq": 4},
+      {"event_id": "e-1003-5", "case_id": "CASE-1003", "activity": "notify", "occurred_at": "2026-09-02T11:00:00Z", "seq": 5},
+
+      {"event_id": "e-1004-1", "case_id": "CASE-1004", "activity": "register", "occurred_at": "2026-09-01T09:00:00Z", "seq": 1},
+      {"event_id": "e-1004-2", "case_id": "CASE-1004", "activity": "review", "occurred_at": "2026-09-01T10:00:00Z", "seq": 2},
+      {"event_id": "e-1004-3", "case_id": "CASE-1004", "activity": "review", "occurred_at": "2026-09-01T11:00:00Z", "seq": 3},
+      {"event_id": "e-1004-4", "case_id": "CASE-1004", "activity": "approve", "occurred_at": "2026-09-02T09:00:00Z", "seq": 4},
+
+      {"event_id": "e-1005-1", "case_id": "CASE-1005", "activity": "register", "occurred_at": "2026-09-01T09:00:00Z", "seq": 1},
+      {"event_id": "e-1005-2", "case_id": "CASE-1005", "activity": "review", "occurred_at": "2026-09-06T09:00:00Z", "seq": 2},
+      {"event_id": "e-1005-3", "case_id": "CASE-1005", "activity": "approve", "occurred_at": "2026-09-07T09:00:00Z", "seq": 3},
+
+      {"event_id": "e-1006-1", "case_id": "CASE-1006", "activity": "register", "occurred_at": "2026-09-01T09:00:00Z", "seq": 1},
+      {"event_id": "e-1006-2", "case_id": "CASE-1006", "activity": "review", "occurred_at": "2026-09-01T10:00:00Z", "seq": 2},
+      {"event_id": "e-1006-3", "case_id": "CASE-1006", "activity": "archive", "occurred_at": "2026-09-02T09:00:00Z", "seq": 3},
+
+      {"event_id": "e-1007-1", "case_id": "CASE-1007", "activity": "register", "occurred_at": "2026-09-01T09:00:00Z", "seq": 1},
+      {"event_id": "e-1007-2", "case_id": "CASE-1007", "activity": "review", "occurred_at": "2026-09-01T10:00:00Z", "seq": 2},
+      {"event_id": "e-1007-3", "case_id": "CASE-1007", "activity": "approve", "occurred_at": "2026-09-02T09:00:00Z", "seq": 3},
+      {"event_id": "e-1007-5", "case_id": "CASE-1007", "activity": "archive", "occurred_at": "2026-09-03T09:00:00Z", "seq": 5}
+    ],
+    [
+      {"event_id": "e-1002-3", "case_id": "CASE-1002", "activity": "approve", "occurred_at": "2026-09-03T09:30:00Z", "seq": 3},
+      {"event_id": "e-1002-5", "case_id": "CASE-1002", "activity": "archive", "occurred_at": "2026-09-04T09:00:00Z", "seq": 5}
+    ]
+  ]
+}
