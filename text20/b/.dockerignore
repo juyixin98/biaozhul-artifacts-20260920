@@ -1,0 +1,4 @@
+signalboard
+.git/
+*.test
+*.out

@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS sellout_thresholds;
+DROP TABLE IF EXISTS daily_sales;
+DROP TABLE IF EXISTS sales_events;
+DROP TABLE IF EXISTS temp_prices;
+DROP TABLE IF EXISTS menu_version_items;
+DROP TABLE IF EXISTS menu_versions;
+DROP TABLE IF EXISTS draft_items;
+DROP TABLE IF EXISTS menu_drafts;
+DROP TABLE IF EXISTS dishes;
+DROP TABLE IF EXISTS screens;
+DROP TABLE IF EXISTS stores;
+DROP EXTENSION IF EXISTS btree_gist;

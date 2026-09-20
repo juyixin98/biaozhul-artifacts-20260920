@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: signalboard
+      POSTGRES_PASSWORD: signalboard
+      POSTGRES_DB: signalboard
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U signalboard"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  app:
+    build:
+      context: .
+    environment:
+      DATABASE_URL: postgres://signalboard:signalboard@db:5432/signalboard?sslmode=disable
+      ADDR: ":8080"
+      MANAGEMENT_API_KEY: ${MANAGEMENT_API_KEY:-dev-management-key}
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    # Applies migrations on boot (idempotent), then serves.
+    command: ["/signalboard"]
+
+  # One-shot demo seeding: `docker compose run --rm seed`.
+  seed:
+    build:
+      context: .
+    environment:
+      DATABASE_URL: postgres://signalboard:signalboard@db:5432/signalboard?sslmode=disable
+      MANAGEMENT_API_KEY: ${MANAGEMENT_API_KEY:-dev-management-key}
+    depends_on:
+      db:
+        condition: service_healthy
+    entrypoint: ["/signalboard", "seed"]
+
+volumes:
+  pgdata:
