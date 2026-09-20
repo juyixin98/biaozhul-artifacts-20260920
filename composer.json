@@ -1,0 +1,34 @@
+{
+    "name": "meridian/travelops",
+    "description": "Meridian TravelOps contract settlement backend",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.2",
+        "ext-pdo": "*",
+        "ext-bcmath": "*",
+        "ext-json": "*",
+        "slim/slim": "^4.14",
+        "slim/psr7": "^1.7",
+        "illuminate/database": "^11.0",
+        "illuminate/events": "^11.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "TravelOps\\": "src/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "8.2.99"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TravelOpsTests\\": "tests/"
+        }
+    }
+}
