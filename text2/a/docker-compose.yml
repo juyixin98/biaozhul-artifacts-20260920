@@ -1,0 +1,24 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: careforce
+      POSTGRES_PASSWORD: careforce
+      POSTGRES_DB: careforce
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U careforce"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  app:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+psycopg2://careforce:careforce@db:5432/careforce
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
