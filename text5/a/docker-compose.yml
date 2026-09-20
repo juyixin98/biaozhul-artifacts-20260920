@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: desklens
+      POSTGRES_PASSWORD: desklens
+      POSTGRES_DB: desklens
+    volumes:
+      - ./seed/00-testdb.sql:/docker-entrypoint-initdb.d/00-testdb.sql:ro
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U desklens"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    ports:
+      - "15432:5432"   # host port chosen to avoid clashing with a local Postgres
+
+  app:
+    build: .
+    environment:
+      DATABASE_URL: postgres://desklens:desklens@db:5432/desklens?sslmode=disable
+      LISTEN_ADDR: :8080
+    ports:
+      - "18080:8080"   # host port chosen to avoid clashing with other local services
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # Run the full test suite (unit + Postgres-backed integration tests):
+  #   docker compose --profile test run --rm test
+  test:
+    build:
+      context: .
+      target: build   # golang toolchain stage, sources at /src
+    profiles: ["test"]
+    working_dir: /src
+    entrypoint: ["go", "test", "-count=1", "-v", "./..."]
+    environment:
+      TEST_DATABASE_URL: postgres://desklens:desklens@db:5432/desklens_test?sslmode=disable
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
