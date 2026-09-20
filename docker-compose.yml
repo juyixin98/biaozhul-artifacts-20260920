@@ -1,0 +1,43 @@
+name: consentvault-b
+
+services:
+  cvdb:
+    image: postgres:16-alpine
+    networks: [cvnet]
+    environment:
+      POSTGRES_USER: consentvault
+      POSTGRES_PASSWORD: consentvault
+      POSTGRES_DB: consentvault
+    ports:
+      - "55444:5432"
+    volumes:
+      - consentvault_b_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U consentvault -d consentvault"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: .
+    depends_on:
+      cvdb:
+        condition: service_healthy
+    networks: [cvnet]
+    environment:
+      CV_DATABASE_URL: postgresql+psycopg2://consentvault:consentvault@cvdb:5432/consentvault
+      CV_SEED_DEMO: "true"
+      # Fixed demo keys for easy exploration (DEMO ONLY).
+      CV_DEMO_ADMIN_KEY: demo-admin-key
+      CV_DEMO_AUDITOR_KEY: demo-auditor-key
+      CV_DEMO_ORG2_ADMIN_KEY: demo-org2-admin-key
+      CV_DEMO_ORG2_AUDITOR_KEY: demo-org2-auditor-key
+    ports:
+      - "8020:8000"
+
+networks:
+  cvnet:
+    name: consentvault_b_net
+
+volumes:
+  consentvault_b_pgdata:
