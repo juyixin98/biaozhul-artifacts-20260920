@@ -1,0 +1,32 @@
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: forensic
+      MYSQL_DATABASE: forensic
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-pforensic"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  app:
+    build: .
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      FORENSIC_ADDR: ":8080"
+      FORENSIC_MYSQL_DSN: "root:forensic@tcp(mysql:3306)/forensic?parseTime=true&charset=utf8mb4&loc=UTC"
+      FORENSIC_EVIDENCE_ROOT: /evidence
+      FORENSIC_CHUNK_SIZE: "4194304"
+    volumes:
+      # 证据目录只读挂载，从容器层面保证原始镜像不被修改
+      - ./samples:/evidence:ro
+    ports:
+      - "${FORENSIC_PORT:-8080}:8080"
+
+volumes:
+  mysql-data:
