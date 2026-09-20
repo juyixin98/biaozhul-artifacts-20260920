@@ -1,0 +1,49 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: civicledger
+      POSTGRES_PASSWORD: civicledger
+      POSTGRES_DB: civicledger
+    ports:
+      - "56510:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U civicledger"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg://civicledger:civicledger@db:5432/civicledger
+      MANAGER_TOKEN: dev-manager-token
+      ACCOUNTANT_TOKEN: dev-accountant-token
+      AUDITOR_TOKEN: dev-auditor-token
+    ports:
+      - "18110:8000"
+    # 启动时执行迁移并写入演示数据（幂等）
+    command: >
+      sh -c "alembic upgrade head && python -m scripts.seed &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000"
+
+  test:
+    build: .
+    profiles: ["test"]
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg://civicledger:civicledger@db:5432/civicledger
+      TEST_DATABASE_URL: postgresql+psycopg://civicledger:civicledger@db:5432/civicledger_test
+    command: >
+      sh -c "pip install --no-cache-dir -r requirements-test.txt &&
+             python -m scripts.create_test_db && pytest -v"
+
+volumes:
+  pgdata:

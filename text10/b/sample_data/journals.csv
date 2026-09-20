@@ -1,0 +1,5 @@
+voucher_no,period,fund_code,department_code,account_code,debit_cents,credit_cents,description
+V-2026-001,2026-01,GF,PW,5001,150000,0,公共工程局办公用品采购
+V-2026-001,2026-01,GF,PW,1001,0,150000,公共工程局办公用品采购
+V-2026-002,2026-01,GF,EDU,6001,0,50000000,教育局收到财政拨款
+V-2026-002,2026-01,GF,EDU,1001,50000000,0,教育局收到财政拨款
