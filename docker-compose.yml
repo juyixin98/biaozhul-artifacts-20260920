@@ -1,0 +1,65 @@
+# SynapticGo local experiment backend.
+#
+#   docker compose up --build
+#
+# Brings up PostgreSQL (healthchecked), waits for it, and runs the server,
+# which applies embedded migrations on boot. Host ports are overridable:
+#
+#   HTTP_HOST_PORT=18091 DB_HOST_PORT=55477 docker compose up --build
+#
+# Seed two demo users (prints each API key once):
+#
+#   docker compose --profile seed up seed
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: synaptic
+      POSTGRES_PASSWORD: synaptic
+      POSTGRES_DB: synapticgo
+    ports:
+      - "${DB_HOST_PORT:-5433}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U synaptic -d synapticgo"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  server:
+    build:
+      context: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      HTTP_ADDR: ":8080"
+      DATABASE_URL: "postgres://synaptic:synaptic@db:5432/synapticgo?sslmode=disable"
+      DATA_DIR: "/data"
+    ports:
+      - "${HTTP_HOST_PORT:-8080}:8080"
+    volumes:
+      - objects:/data
+
+  # One-shot seed: creates two demo users and prints their keys.
+  seed:
+    image: curlimages/curl:8.10.1
+    depends_on:
+      - server
+    profiles: ["seed"]
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        sleep 2
+        for u in alice bob; do
+          echo "== creating user $$u =="
+          curl -s -X POST http://server:8080/api/v1/users \
+            -H 'Content-Type: application/json' \
+            -d "{\"username\":\"$$u\"}"
+          echo
+        done
+
+volumes:
+  pgdata:
+  objects:

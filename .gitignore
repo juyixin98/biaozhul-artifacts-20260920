@@ -1,0 +1,9 @@
+# Local data and binaries
+/data/
+/bin/
+*.test
+*.out
+
+# Editor/OS
+.DS_Store
+*.swp
