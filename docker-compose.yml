@@ -1,0 +1,41 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: itasset-mysql
+    command:
+      - --server-id=1
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-time-zone=+08:00
+    environment:
+      MYSQL_ROOT_PASSWORD: root_pw
+      MYSQL_DATABASE: itasset
+      MYSQL_USER: itasset
+      MYSQL_PASSWORD: itasset_pw
+    ports:
+      - "${MYSQL_HOST_PORT:-33060}:3306"
+    volumes:
+      - itasset-mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pitasset_pw"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build: .
+    container_name: itasset-app
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: "3306"
+      MYSQL_DATABASE: itasset
+      MYSQL_USER: itasset
+      MYSQL_PASSWORD: itasset_pw
+    ports:
+      - "${APP_HOST_PORT:-8080}:8080"
+
+volumes:
+  itasset-mysql-data:
