@@ -1,0 +1,35 @@
+name: targetcraft
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: targetcraft-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: targetcraft
+    ports:
+      - "${MYSQL_HOST_PORT:-33306}:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-prootpass"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  api:
+    build: .
+    container_name: targetcraft-api
+    environment:
+      HTTP_ADDR: ":8080"
+      MYSQL_DSN: "root:rootpass@tcp(mysql:3306)/targetcraft?charset=utf8mb4&parseTime=true&loc=UTC&timeout=5s"
+      SWEEP_INTERVAL: "10s"
+      RESERVATION_TTL: "5m"
+    ports:
+      - "${API_HOST_PORT:-28080}:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  mysql-data:
