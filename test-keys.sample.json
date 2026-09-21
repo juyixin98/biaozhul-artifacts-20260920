@@ -1,0 +1,26 @@
+{
+  "_warning": "THROWAWAY LOCAL TEST KEYS generated from fixed, publicly known entropy. Never fund these on any network and never reuse them.",
+  "custodial": [
+    {
+      "label": "custodial-1",
+      "private_key_hex": "0x079e6e68f056bcd04f10d3ec57ffc8206140e2c43e665aa1464300ad5dc23116",
+      "address": "0x94e1c92dC637df2FA8E49a271DA0446E17ac10e8"
+    },
+    {
+      "label": "custodial-2",
+      "private_key_hex": "0xfbc9221b7c21beed19695a554bd4d632c1d0a873413dd1187db4183845ad0631",
+      "address": "0xE9cBd710960D0e6040AB0D220927D8c70978F8Dd"
+    },
+    {
+      "label": "custodial-3",
+      "private_key_hex": "0x6805e2810a82191e01769795642ceb08401423c0aad08b23000e56ca4c1ea6ba",
+      "address": "0xA9D068AF3d6E7A604DacB176C07FAD5e411eA227"
+    }
+  ],
+  "watch_only": [
+    {
+      "label": "observe-main",
+      "address": "0x13510C4584f0a5fc8Fdf26B30a98616746c80e67"
+    }
+  ]
+}

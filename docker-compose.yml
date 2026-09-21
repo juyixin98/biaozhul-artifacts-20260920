@@ -1,0 +1,38 @@
+name: vaultcommand-text9b
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: vault
+      POSTGRES_PASSWORD: vault
+      POSTGRES_DB: vault
+    ports:
+      - "5544:5432"
+    volumes:
+      - vault_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vault -d vault"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      VAULT_DATABASE_URL: postgresql+psycopg2://vault:vault@db:5432/vault
+      # Local-test master key: base64 of 32 zero bytes. Generate your own with:
+      #   python -c 'import base64,os;print(base64.b64encode(os.urandom(32)).decode())'
+      VAULT_MASTER_KEY_B64: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+      VAULT_ENVIRONMENT: development
+      VAULT_ALLOW_REGISTRATION: "true"
+      VAULT_DAILY_QUOTA_WEI: "3000000000000000000"
+      VAULT_COOLDOWN_SECONDS: "30"
+    ports:
+      - "38080:8080"
+
+volumes:
+  vault_pgdata:
