@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS reminders;
+DROP TABLE IF EXISTS action_items;
+DROP TABLE IF EXISTS evidence_notes;
+DROP TABLE IF EXISTS evidence;
+DROP TABLE IF EXISTS transition_requests;
+DROP TABLE IF EXISTS audit_events;
+DROP TABLE IF EXISTS phase_records;
+DROP TABLE IF EXISTS incident_members;
+DROP TABLE IF EXISTS incidents;
+DROP TYPE IF EXISTS member_role;
+DROP TYPE IF EXISTS incident_status;
+DROP TYPE IF EXISTS severity_level;
