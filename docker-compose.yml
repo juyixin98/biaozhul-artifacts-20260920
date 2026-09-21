@@ -1,0 +1,83 @@
+services:
+  db:
+    image: mysql:8.4
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      # Transactions are READ COMMITTED by default in the app code via Django;
+      # keep the server default REPEATABLE READ but ensure strict SQL mode for
+      # Decimal/truncation errors.
+      - --sql-mode=STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-revstream}
+      MYSQL_USER: ${MYSQL_USER:-revstream}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-revstream_pw}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_pw}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-p${MYSQL_ROOT_PASSWORD:-root_pw}",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+
+  web:
+    build: .
+    image: revstream-text25b-web:latest
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_ENGINE: mysql
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-revstream}
+      MYSQL_USER: ${MYSQL_USER:-revstream}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-revstream_pw}
+      MYSQL_HOST: db
+      MYSQL_PORT: "3306"
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-change-me-in-production}
+      DJANGO_DEBUG: ${DJANGO_DEBUG:-0}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1}
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  scheduler:
+    build: .
+    image: revstream-text25b-web:latest
+    depends_on:
+      web:
+        condition: service_started
+    environment:
+      DB_ENGINE: mysql
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-revstream}
+      MYSQL_USER: ${MYSQL_USER:-revstream}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-revstream_pw}
+      MYSQL_HOST: db
+      MYSQL_PORT: "3306"
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-change-me-in-production}
+      DJANGO_DEBUG: "0"
+      DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
+    command: ["python", "manage.py", "run_scoring_scheduler"]
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+
+networks:
+  default:
+    # Explicit subnet: on hosts with many compose projects the default
+    # address pools can be exhausted. Override freely in a compose override.
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.250.250.0/24
+          gateway: 10.250.250.1

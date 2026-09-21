@@ -1,0 +1,13 @@
+# Local / editor
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+*.sqlite3
+db.sqlite3*
+.coverage
+htmlcov/
+.pytest_cache/
+staticfiles/
