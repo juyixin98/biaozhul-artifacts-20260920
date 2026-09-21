@@ -1,0 +1,29 @@
+{
+    "name": "meridian/travelops-settlement",
+    "description": "Meridian TravelOps contract signing & supplier settlement backend",
+    "type": "project",
+    "require": {
+        "php": ">=8.2",
+        "ext-pdo": "*",
+        "ext-bcmath": "*",
+        "slim/slim": "^4.12",
+        "slim/psr7": "^1.6",
+        "illuminate/database": "^10.25"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Meridian\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Meridian\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
