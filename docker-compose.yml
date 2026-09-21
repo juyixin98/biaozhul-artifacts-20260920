@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: careforce
+      POSTGRES_PASSWORD: careforce
+      POSTGRES_DB: careforce
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U careforce -d careforce"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      CAREFORCE_DATABASE_URL: postgresql+psycopg2://careforce:careforce@db:5432/careforce
+      CAREFORCE_INVITATION_TTL_MINUTES: "8"
+      CAREFORCE_REAPER_INTERVAL_SECONDS: "30"
+      CAREFORCE_GENERATION_HORIZON_DAYS: "14"
+      # Set this to require X-API-Key / Bearer auth:
+      # CAREFORCE_API_KEY: change-me
+      # Disable the controllable-clock API in production:
+      # CAREFORCE_ENABLE_CLOCK_API: "false"
+    ports:
+      - "8000:8000"
+
+  # One-off: load the demo dataset (run with `docker compose --profile seed run --rm seed`)
+  seed:
+    profiles: ["seed"]
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      CAREFORCE_DATABASE_URL: postgresql+psycopg2://careforce:careforce@db:5432/careforce
+    entrypoint: ["python", "-m", "scripts.seed"]
+
+volumes:
+  pgdata:
