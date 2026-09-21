@@ -1,0 +1,15 @@
+# 二进制与构建产物
+/proofcycle-server
+/bin/
+*.out
+*.test
+
+# 本地数据/存储卷
+/data/
+
+# 本机环境配置（示例见 .env.example）
+.env
+
+# 编辑器
+.idea/
+.vscode/

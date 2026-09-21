@@ -1,0 +1,9 @@
+# 本地数据与运行产物
+/data/
+/bin/
+*.out
+proofcycle-server
+
+# 版本库与文档不需要进入构建上下文
+.git/
+*.md
