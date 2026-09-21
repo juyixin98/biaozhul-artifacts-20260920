@@ -1,0 +1,31 @@
+name: civicledger-text10a
+
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: civic
+      POSTGRES_PASSWORD: civic
+      POSTGRES_DB: civicledger
+    ports:
+      - "55440:5432"  # host 55440 -> container 5432, avoids clashing with a local Postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U civic -d civicledger"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+psycopg2://civic:civic@db:5432/civicledger
+    ports:
+      - "58001:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
