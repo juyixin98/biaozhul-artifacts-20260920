@@ -1,0 +1,34 @@
+name: careforce-text2b
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: careforce
+      POSTGRES_PASSWORD: careforce
+      POSTGRES_DB: careforce
+    ports:
+      - "5434:5432"
+    volumes:
+      - careforce_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U careforce -d careforce"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: .
+    image: careforce-text2b-api
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      CAREFORCE_DATABASE_URL: postgresql+psycopg2://careforce:careforce@db:5432/careforce
+      CAREFORCE_REQUIRE_COORDINATOR: "true"
+    ports:
+      - "47823:8000"
+    command: ["./scripts/entrypoint.sh", "--seed"]
+
+volumes:
+  careforce_pgdata:
