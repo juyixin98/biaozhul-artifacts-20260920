@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+app:
+  seed-sample: false
+logging:
+  level:
+    org.hibernate.SQL: WARN

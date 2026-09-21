@@ -1,0 +1,44 @@
+services:
+  db:
+    image: mysql:8.4
+    container_name: itasset-db
+    command:
+      - --server-id=1
+      - --log-bin=mysql-bin
+      - --binlog-format=ROW
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --transaction-isolation=READ-COMMITTED
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: itasset
+      MYSQL_USER: itasset
+      MYSQL_PASSWORD: itassetpass
+    ports:
+      - "13307:3306"
+    volumes:
+      - itasset-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pitassetpass"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  app:
+    build: .
+    container_name: itasset-app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: seed-sample
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/itasset?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&characterEncoding=utf8
+      SPRING_DATASOURCE_USERNAME: itasset
+      SPRING_DATASOURCE_PASSWORD: itassetpass
+    ports:
+      - "18087:8080"
+    restart: unless-stopped
+
+volumes:
+  itasset-db-data:

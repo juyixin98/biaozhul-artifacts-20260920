@@ -1,0 +1,12 @@
+# 样例 profile：启动时插入三台不同折旧方法/阶段的资产，并补发历史折旧分录。
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+app:
+  seed-sample: true
+
+logging:
+  level:
+    com.example.itasset: INFO
