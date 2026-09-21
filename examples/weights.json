@@ -1,0 +1,13 @@
+{
+  "name": "and-gate",
+  "version": "v1",
+  "weights": {
+    "type": "linear_softmax",
+    "version": 1,
+    "dim": 2,
+    "classes": ["false", "true"],
+    "W": [[-2.0, -2.0], [2.0, 2.0]],
+    "b": [1.0, -1.0]
+  },
+  "metrics": {"accuracy": 1.0}
+}
