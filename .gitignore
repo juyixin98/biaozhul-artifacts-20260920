@@ -1,0 +1,12 @@
+# local build artifacts
+/server
+/forensiccore
+*.test
+*.out
+
+# sample images are generated, not committed
+/samples/*
+!/samples/.gitkeep
+
+# local env
+.env

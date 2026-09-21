@@ -1,0 +1,51 @@
+# An explicit project/container name avoids collisions on machines where
+# multiple sibling projects otherwise default to the same compose project name
+# ("b") and the same b-api-1/b-mysql-1 container names.
+name: forensiccore-text16b
+
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: forensiccore-text16b-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpw
+      MYSQL_DATABASE: forensiccore
+      MYSQL_USER: forensic
+      MYSQL_PASSWORD: forensicpw
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-prootpw"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    ports:
+      - "13308:3306"
+
+  api:
+    build: .
+    container_name: forensiccore-text16b-api
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      FORENSIC_LISTEN: ":8080"
+      FORENSIC_DB_DRIVER: "mysql"
+      FORENSIC_DB_DSN: "forensic:forensicpw@tcp(mysql:3306)/forensiccore?charset=utf8mb4&parseTime=True&loc=UTC"
+      FORENSIC_EVIDENCE_ROOT: "/data/evidence"
+      FORENSIC_CHUNK_SIZE: "1048576"
+      # Tokens: name:role:token. Change before any non-local use.
+      FORENSIC_AUTH: "alice:investigator:investigator-token,bob:analyst:analyst-token"
+    ports:
+      - "18088:8080"
+    # The samples directory is bind-mounted read-only: the application only
+    # ever opens evidence O_RDONLY, and the mount enforces this at the OS
+    # level as well.
+    read_only: true
+    tmpfs:
+      - /tmp
+    volumes:
+      - ./samples:/data/evidence:ro
+
+volumes:
+  mysql-data:
