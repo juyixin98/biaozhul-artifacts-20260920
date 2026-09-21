@@ -1,0 +1,16 @@
+drop table if exists cleanup_events;
+drop table if exists retention_state;
+drop table if exists weekly_department_summary;
+drop table if exists daily_employee_summary;
+drop table if exists ingest_batches;
+drop table if exists activity_snapshots;
+drop table if exists classification_rules;
+drop table if exists classification_versions;
+drop table if exists policy_exempt_departments;
+drop table if exists policy_excluded_apps;
+drop table if exists policy_versions;
+drop table if exists manager_api_keys;
+drop table if exists ingest_api_keys;
+drop table if exists workstations;
+drop table if exists employees;
+drop table if exists departments;

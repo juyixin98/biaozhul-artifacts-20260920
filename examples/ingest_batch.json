@@ -1,0 +1,19 @@
+{
+  "batch_id": "3f1a2b90-0001-4000-8000-000000000001",
+  "snapshots": [
+    {
+      "workstation_id": "WS-101",
+      "employee_id": 101,
+      "utc_time": "2026-09-15T14:00:00Z",
+      "app_name": "Chrome",
+      "activity_count": 42
+    },
+    {
+      "workstation_id": "WS-101",
+      "employee_id": 101,
+      "utc_time": "2026-09-15T14:01:00Z",
+      "app_name": "GoLand",
+      "activity_count": 18
+    }
+  ]
+}

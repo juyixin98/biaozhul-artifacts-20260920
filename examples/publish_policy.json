@@ -1,0 +1,8 @@
+{
+  "published_by": "ops",
+  "monitoring_start": "08:00",
+  "monitoring_end": "18:00",
+  "excluded_apps": ["1password*", "keepass*", "*secret-manager*", "*vault*"],
+  "exempt_departments": [4],
+  "note": "business hours monitoring; password managers never collected"
+}

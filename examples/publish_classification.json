@@ -1,0 +1,13 @@
+{
+  "published_by": "ops",
+  "rules": [
+    {"rule_id": "meet-01",   "pattern": "zoom*",      "category": "productive",   "priority": 10},
+    {"rule_id": "code-01",   "pattern": "goland*",    "category": "productive",   "priority": 10},
+    {"rule_id": "code-02",   "pattern": "vs code*",   "category": "productive",   "priority": 10},
+    {"rule_id": "browser-01","pattern": "chrome*",    "category": "productive",   "priority": 20},
+    {"rule_id": "game-01",   "pattern": "*game*",     "category": "unproductive", "priority": 30},
+    {"rule_id": "social-01", "pattern": "wechat*",    "category": "unproductive", "priority": 30},
+    {"rule_id": "social-02", "pattern": "tiktok*",    "category": "unproductive", "priority": 30}
+  ],
+  "note": "first-match-wins by priority then rule_id; unmatched apps are neutral"
+}
