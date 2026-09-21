@@ -1,0 +1,21 @@
+# binaries
+/server
+/genseed
+/bin/
+
+# local sqlite databases
+*.db
+*.db-shm
+*.db-wal
+
+# local evidence/data mounts
+/data/
+/evidence/
+
+# env
+.env
+
+# editor/os
+.DS_Store
+.idea/
+.vscode/

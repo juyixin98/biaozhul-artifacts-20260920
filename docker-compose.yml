@@ -1,0 +1,52 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: forensiccore-mysql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpw}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-forensiccore}
+      MYSQL_USER: ${MYSQL_USER:-forensic}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-forensic}
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-p${MYSQL_PASSWORD:-forensic}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: forensiccore-api
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      HTTP_LISTEN: ":8080"
+      DB_DRIVER: mysql
+      DB_DSN: "${MYSQL_USER:-forensic}:${MYSQL_PASSWORD:-forensic}@tcp(mysql:3306)/${MYSQL_DATABASE:-forensiccore}?charset=utf8mb4&parseTime=True&loc=Local"
+      # Colon-separated whitelist directories inside the container.
+      WHITELIST_DIRS: "/data/samples:/data/evidence"
+      SAMPLES_DIR: "/data/samples"
+      HASH_CHUNK_SIZE: "4194304"
+      INVESTIGATOR_TOKEN: "${INVESTIGATOR_TOKEN:?set INVESTIGATOR_TOKEN in .env}"
+      ANALYST_TOKEN: "${ANALYST_TOKEN:?set ANALYST_TOKEN in .env}"
+    ports:
+      - "${HTTP_PORT:-8080}:8080"
+    volumes:
+      # Bundled samples are generated on first start.
+      - samples-data:/data/samples
+      # Mount your real evidence root read-only here:
+      #   /home/me/images:/data/evidence:ro
+      - ${EVIDENCE_HOST_DIR:-./evidence}:/data/evidence:ro
+    restart: unless-stopped
+
+volumes:
+  mysql-data:
+  samples-data:
