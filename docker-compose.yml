@@ -1,0 +1,67 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: nn
+      POSTGRES_PASSWORD: nn
+      POSTGRES_DB: nn_training
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nn -d nn_training"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    ports:
+      - "5433:5432"  # host 5433 to avoid clashing with a local Postgres
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      POSTGRES_USER: nn
+      POSTGRES_PASSWORD: nn
+      POSTGRES_HOST: db
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: nn_training
+      DATA_WHITELIST: /data
+      CHECKPOINT_DIR: /checkpoints
+      ENABLE_WORKER: "1"
+      WORKER_CONCURRENCY: "2"
+      LEASE_SECONDS: "30"
+    volumes:
+      - data_vol:/data
+      - ckpt_vol:/checkpoints
+    ports:
+      - "8000:8000"
+
+  # A second, worker-only replica demonstrates horizontally scaled
+  # executors sharing one queue. Scale with:
+  #   docker compose up --scale worker=2
+  worker:
+    build: .
+    command: ["python", "-m", "app.workers.worker_main"]
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      POSTGRES_USER: nn
+      POSTGRES_PASSWORD: nn
+      POSTGRES_HOST: db
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: nn_training
+      DATA_WHITELIST: /data
+      CHECKPOINT_DIR: /checkpoints
+      ENABLE_WORKER: "1"
+      WORKER_CONCURRENCY: "2"
+      LEASE_SECONDS: "30"
+    volumes:
+      - data_vol:/data
+      - ckpt_vol:/checkpoints
+
+volumes:
+  pgdata:
+  data_vol:
+  ckpt_vol:

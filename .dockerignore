@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.git/
+.pytest_cache/
+.venv/
+venv/
+checkpoints/
+data/*.npy
+data/*.csv
+tests/
+*.egg-info/
