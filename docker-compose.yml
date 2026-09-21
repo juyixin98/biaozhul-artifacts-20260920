@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: vault
+      POSTGRES_PASSWORD: vault
+      POSTGRES_DB: vault
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vault -d vault"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      VAULT_DATABASE_URL: postgresql+psycopg2://vault:vault@db:5432/vault
+      # 32-byte AES key, base64. Generate: openssl rand -base64 32
+      VAULT_MASTER_KEY: ${VAULT_MASTER_KEY:?set VAULT_MASTER_KEY, e.g. via .env}
+      VAULT_DAILY_LIMIT_WEI: "10000000000000000000"
+      VAULT_COOLDOWN_SECONDS: "5"
+    ports:
+      - "${APP_PORT:-8000}:8000"
+
+volumes:
+  pgdata:
