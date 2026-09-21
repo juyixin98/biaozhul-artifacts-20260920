@@ -1,0 +1,13 @@
+# binaries
+/cv-server
+/server
+*.test
+*.out
+
+# local env
+.env
+
+# editor/os
+.DS_Store
+.idea/
+.vscode/
