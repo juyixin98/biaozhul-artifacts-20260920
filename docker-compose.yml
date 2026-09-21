@@ -1,0 +1,43 @@
+name: skillpulse-text4b
+
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: skillpulse
+      POSTGRES_PASSWORD: skillpulse
+      POSTGRES_DB: skillpulse
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U skillpulse"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+    ports:
+      - "15432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql+psycopg://skillpulse:skillpulse@db:5432/skillpulse
+      SEED_DEMO: "true"
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  test:
+    build: .
+    profiles: ["test"]
+    environment:
+      DATABASE_URL: postgresql+psycopg://skillpulse:skillpulse@db:5432/skillpulse_test
+    command: python -m pytest -q
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
