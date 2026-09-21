@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: desklens
+      POSTGRES_PASSWORD: desklens
+      POSTGRES_DB: desklens
+    ports:
+      - "5432:5432"
+    volumes:
+      - desklens-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U desklens"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  desklens:
+    build: .
+    environment:
+      DESKLENS_ADDR: ":8080"
+      DATABASE_URL: "postgres://desklens:desklens@postgres:5432/desklens?sslmode=disable"
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  desklens-pgdata:

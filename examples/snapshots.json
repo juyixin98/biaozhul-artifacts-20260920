@@ -1,0 +1,12 @@
+{
+  "snapshots": [
+    {"workstation_id": 1001, "employee_id": 101, "minute_utc": "2026-03-10T09:00:00Z", "app_name": "VS Code",        "activity_count": 42},
+    {"workstation_id": 1001, "employee_id": 101, "minute_utc": "2026-03-10T09:01:00Z", "app_name": "VS Code",        "activity_count": 38},
+    {"workstation_id": 1001, "employee_id": 101, "minute_utc": "2026-03-10T09:02:00Z", "app_name": "Slack",          "activity_count": 15},
+    {"workstation_id": 1001, "employee_id": 101, "minute_utc": "2026-03-10T09:03:00Z", "app_name": "1Password",      "activity_count": 99},
+    {"workstation_id": 1002, "employee_id": 102, "minute_utc": "2026-03-10T14:00:00Z", "app_name": "IntelliJ IDEA",  "activity_count": 51},
+    {"workstation_id": 1002, "employee_id": 102, "minute_utc": "2026-03-10T14:01:00Z", "app_name": "Firefox Browser","activity_count": 12},
+    {"workstation_id": 1003, "employee_id": 103, "minute_utc": "2026-03-10T18:00:00Z", "app_name": "Zoom Meetings",  "activity_count": 30},
+    {"workstation_id": 1004, "employee_id": 104, "minute_utc": "2026-03-10T02:30:00Z", "app_name": "Legal CRM",      "activity_count": 25}
+  ]
+}
