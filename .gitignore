@@ -1,0 +1,15 @@
+# binaries
+/out/
+/bin/
+*.exe
+cs-api
+cs-worker
+
+# local env / editor
+.env
+.idea/
+.vscode/
+*.swp
+
+# Go
+vendor/

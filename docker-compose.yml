@@ -1,0 +1,58 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: clearsettle-postgres
+    environment:
+      POSTGRES_USER: clearsettle
+      POSTGRES_PASSWORD: clearsettle
+      POSTGRES_DB: clearsettle
+    ports:
+      - "35432:5432"
+    volumes:
+      - clearsettle-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U clearsettle -d clearsettle"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: api
+    container_name: clearsettle-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      HTTP_ADDR: ":8080"
+      DATABASE_URL: "postgres://clearsettle:clearsettle@postgres:5432/clearsettle?sslmode=disable"
+      JWT_SECRET: "change-me-in-production"
+      BOOTSTRAP_ADMIN_EMAIL: "admin@clearsettle.local"
+      BOOTSTRAP_ADMIN_PASSWORD: "admin12345"
+      WORKER_ENABLED: "true"
+      SETTLE_HORIZON: "24h"
+    ports:
+      - "8080:8080"
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: worker
+    container_name: clearsettle-worker
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: "postgres://clearsettle:clearsettle@postgres:5432/clearsettle?sslmode=disable"
+      JWT_SECRET: "change-me-in-production"
+      WORKER_LOCK_ID: "standalone-worker-1"
+      SETTLE_HORIZON: "24h"
+    # The api container runs an in-process worker by default. Run this separate
+    # worker only for the split deployment (set WORKER_ENABLED=false on api).
+    profiles: ["split-worker"]
+
+volumes:
+  clearsettle-pgdata:
