@@ -1,0 +1,35 @@
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: targetcraft
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-proot"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    volumes:
+      - mysql-data:/var/lib/mysql
+    # MySQL is only reached by the app over the compose network; publish it
+    # on the host only if you need external access, e.g. "13306:3306".
+
+  app:
+    build: .
+    environment:
+      PORT: "8080"
+      DATABASE_DSN: "root:root@tcp(mysql:3306)/targetcraft?charset=utf8mb4&parseTime=true&loc=UTC"
+      RUN_MIGRATIONS: "true"
+      SEED_SAMPLE_DATA: "true"
+      RESERVATION_TTL: "5m"
+      SWEEP_INTERVAL: "1s"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      # host 8080 is often taken on dev machines; override with APP_PORT.
+      - "${APP_PORT:-18081}:8080"
+
+volumes:
+  mysql-data:

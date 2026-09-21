@@ -1,0 +1,7 @@
+bin/
+*.log
+.git
+.gitignore
+docker-compose.yml
+README.md
+scripts/
