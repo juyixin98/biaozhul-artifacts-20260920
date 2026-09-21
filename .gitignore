@@ -1,0 +1,13 @@
+# Binaries
+/proofcycle
+*.exe
+/out/
+
+# Local data
+/data/
+/tmp/
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store
