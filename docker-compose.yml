@@ -1,0 +1,60 @@
+# Local-only SiteVitals stack: MySQL 8 + the app (API + worker + demo site).
+# No external/cloud services are contacted.
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: sitevitals-mysql
+    command:
+      - --default-authentication-plugin=mysql_native_password
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: sitevitals
+      MYSQL_DATABASE: sitevitals_b
+    ports:
+      - "13396:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-psitevitals"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sitevitals-app
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SV_MYSQL_HOST: mysql
+      SV_MYSQL_PORT: "3306"
+      SV_MYSQL_USER: root
+      SV_MYSQL_PASSWORD: sitevitals
+      SV_MYSQL_DB: sitevitals_b
+      SV_HTTP_ADDR: ":8080"
+      SV_TESTSITE_ADDR: ":8093"
+      SV_WORKERS: "4"
+      SV_MAX_BROWSERS: "2"
+      SV_LEASE_TTL: "30s"
+      SV_HEARTBEAT_INTERVAL: "10s"
+      SV_REAP_INTERVAL: "5s"
+      SV_MAX_REDIRECTS: "5"
+      SV_NAV_TIMEOUT: "45s"
+    ports:
+      - "18092:8080"
+      - "18093:8093"
+    # Headless Chromium in a container.
+    shm_size: "1gb"
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+      - SYS_ADMIN
+    init: true
+    command: ["serve", "--testsite"]
+
+volumes:
+  mysql-data:
