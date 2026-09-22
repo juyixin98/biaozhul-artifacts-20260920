@@ -1,0 +1,29 @@
+{
+  "name": "careops-assessment",
+  "version": "1.0.0",
+  "description": "CareOps staff competency assessment backend: paper composition, grading and certificates",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "migrate": "node src/db/migrate.js",
+    "seed:demo": "node src/seeders/demo-data.js",
+    "demo": "node scripts/demo.js",
+    "test": "DB_NAME=careops_test ALLOW_CLOCK_OVERRIDE=1 node scripts/create-test-db.js && DB_NAME=careops_test ALLOW_CLOCK_OVERRIDE=1 jest --runInBand --forceExit"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mysql2": "^3.11.3",
+    "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "<rootDir>/tests/**/*.test.js"
+    ],
+    "verbose": true
+  }
+}

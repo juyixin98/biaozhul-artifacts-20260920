@@ -1,0 +1,38 @@
+services:
+  db:
+    image: mysql:8.0
+    command: --default-time-zone=+08:00
+    environment:
+      MYSQL_ROOT_PASSWORD: careops
+      MYSQL_DATABASE: careops
+      TZ: Asia/Shanghai
+    ports:
+      - "3306:3306"
+    volumes:
+      - careops_mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pcareops"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PORT: "3000"
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_NAME: careops
+      DB_USER: root
+      DB_PASSWORD: careops
+      ALLOW_CLOCK_OVERRIDE: "false"
+      ENABLE_DEMO_SEED: "true"
+      TZ: Asia/Shanghai
+    ports:
+      - "3000:3000"
+
+volumes:
+  careops_mysql:
