@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package syncpb;
+
+option go_package = "nodesync/proto/syncpb;syncpb";
+
+// 区块节点区间同步服务。
+// 远端节点可以是诚实的（返回真实链段）或故障的（超时 / 段内损坏 / 父哈希错误 / 虚高高度）。
+service BlockSync {
+  // 节点"宣称"的链尖高度与对应区块哈希。
+  // 注意：该高度只是 Advertised（广告）信息，不代表同步器已验证的进度。
+  rpc ChainTip(GetTipRequest) returns (TipInfo);
+
+  // 拉取半开区间 [start, start+limit) 内的区块。
+  rpc FetchSegments(GetSegmentsRequest) returns (Segment);
+}
+
+message GetTipRequest {}
+
+message TipInfo {
+  uint64 height = 1;   // 宣称高度（可能虚高，即诚实链不存在该高度）
+  bytes block_hash = 2; // 宣称链尖哈希（可能为空 / 伪造）
+  string node_id = 3;
+}
+
+message GetSegmentsRequest {
+  uint64 start = 1;   // 起始高度（含）
+  uint64 limit = 2;   // 期望区块数
+}
+
+message Block {
+  uint64 height = 1;
+  bytes parent_hash = 2;
+  bytes payload_hash = 3; // 对 payload 的 SHA-256
+  bytes payload = 4;
+  bytes signature = 5;    // 签名者对 Hash() 的 Ed25519 签名
+}
+
+message Segment {
+  uint64 start = 1;
+  repeated Block blocks = 2;
+  string node_id = 3;     // 实际提供本段的节点（证据用）
+}
