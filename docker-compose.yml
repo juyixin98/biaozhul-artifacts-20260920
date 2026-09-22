@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: videoforge
+      POSTGRES_PASSWORD: videoforge
+      POSTGRES_DB: videoforge
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U videoforge -d videoforge"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    ports:
+      - "5432:5432"
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ConnectionStrings__Postgres: Host=db;Port=5432;Username=videoforge;Password=videoforge;Database=videoforge
+      VideoForge__StorageRoot: /data
+      VideoForge__MaxParallelJobs: "3"
+      VideoForge__MaxAttempts: "2"
+    volumes:
+      - videoforge-data:/data
+    ports:
+      - "8080:8080"
+
+volumes:
+  db-data:
+  videoforge-data:
