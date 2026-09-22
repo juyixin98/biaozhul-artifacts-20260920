@@ -1,0 +1,40 @@
+{
+  "_comment": "Sample regions for downtown. Vertices are a CLOSED polygon ring WITHOUT a repeated closing vertex. Coordinates are WGS-84 lat/lng in degrees. Priority 1..5; 1 wins overlaps, ties broken by region id.",
+  "regions": [
+    {
+      "name": "central-park-zone",
+      "priority": 1,
+      "vertices": [
+        {"lat": 40.7650, "lng": -73.9857},
+        {"lat": 40.8005, "lng": -73.9580},
+        {"lat": 40.7965, "lng": -73.9490},
+        {"lat": 40.7640, "lng": -73.9730}
+      ]
+    },
+    {
+      "name": "midtown-overlay",
+      "priority": 2,
+      "vertices": [
+        {"lat": 40.7500, "lng": -73.9900},
+        {"lat": 40.7660, "lng": -73.9900},
+        {"lat": 40.7660, "lng": -73.9700},
+        {"lat": 40.7500, "lng": -73.9700}
+      ]
+    },
+    {
+      "name": "triangle-lot",
+      "priority": 3,
+      "vertices": [
+        {"lat": 40.7100, "lng": -74.0120},
+        {"lat": 40.7150, "lng": -74.0100},
+        {"lat": 40.7120, "lng": -74.0050}
+      ]
+    }
+  ],
+  "points": [
+    {"external_id": "p-inside-park", "lat": 40.7820, "lng": -73.9660},
+    {"external_id": "p-boundary-edge", "lat": 40.7580, "lng": -73.9900},
+    {"external_id": "p-overlap-priority", "lat": 40.7600, "lng": -73.9780},
+    {"external_id": "p-unassigned", "lat": 40.9000, "lng": -74.2000}
+  ]
+}

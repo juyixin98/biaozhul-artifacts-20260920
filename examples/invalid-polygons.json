@@ -1,0 +1,54 @@
+{
+  "_comment": "Polygon payloads that MUST be rejected. Useful to confirm validation behavior.",
+  "cases": [
+    {
+      "why": "crosses the antimeridian: edge from lng 179 to -179 spans >= 180 degrees",
+      "body": {
+        "name": "bad-antimeridian",
+        "priority": 2,
+        "vertices": [
+          {"lat": 10, "lng": 179},
+          {"lat": 20, "lng": 179},
+          {"lat": 20, "lng": -179},
+          {"lat": 10, "lng": -179}
+        ]
+      }
+    },
+    {
+      "why": "self-intersecting bow-tie",
+      "body": {
+        "name": "bad-bowtie",
+        "priority": 2,
+        "vertices": [
+          {"lat": 0, "lng": 0},
+          {"lat": 2, "lng": 2},
+          {"lat": 0, "lng": 2},
+          {"lat": 2, "lng": 0}
+        ]
+      }
+    },
+    {
+      "why": "too few distinct vertices",
+      "body": {
+        "name": "bad-flat",
+        "priority": 2,
+        "vertices": [
+          {"lat": 0, "lng": 0},
+          {"lat": 1, "lng": 0}
+        ]
+      }
+    },
+    {
+      "why": "latitude out of range",
+      "body": {
+        "name": "bad-lat",
+        "priority": 2,
+        "vertices": [
+          {"lat": 0, "lng": 0},
+          {"lat": 95, "lng": 0},
+          {"lat": 0, "lng": 1}
+        ]
+      }
+    }
+  ]
+}

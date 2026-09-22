@@ -1,0 +1,60 @@
+# Explicit project name: never inherit the checkout directory name, which can
+# collide with unrelated compose projects on a shared host.
+name: geoterritory
+
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: geoterritory-mysql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-time-zone=+00:00
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: geoterritory
+      MYSQL_USER: geoterritory
+      MYSQL_PASSWORD: geoterritory
+    ports:
+      - "${MYSQL_HOST_PORT:-3306}:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-proot"]
+      interval: 3s
+      timeout: 5s
+      retries: 30
+    networks:
+      - geoterritory
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: geoterritory-app
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      # multiStatements=true is required by the migration runner.
+      MYSQL_DSN: "root:root@tcp(mysql:3306)/geoterritory?charset=utf8mb4&parseTime=true&loc=UTC&multiStatements=true"
+      HTTP_ADDR: ":8080"
+      MIGRATION_DIR: "/app/migrations"
+      AUTO_MIGRATE: "true"
+      WORKER_ENABLED: "true"
+      # Two demo organizations (data is isolated per org).
+      SEED_API_KEYS: "org-a=demo-key-a,org-b=demo-key-b"
+      WORKER_TICK_MS: "300"
+      REASSIGN_BATCH_SIZE: "500"
+      STALE_JOB_SECONDS: "30"
+    ports:
+      - "${APP_HOST_PORT:-8080}:8080"
+    networks:
+      - geoterritory
+
+volumes:
+  mysql-data:
+
+networks:
+  geoterritory:
+    driver: bridge
