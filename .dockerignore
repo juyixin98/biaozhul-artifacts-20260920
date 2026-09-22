@@ -1,0 +1,10 @@
+# Build artifacts
+*.test
+*.out
+renderq
+genpng
+/data
+/data-*
+/tmp
+# Local samples are generated; keep the dir but ignore large binaries if any.
+samples/*.png

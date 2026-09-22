@@ -1,0 +1,30 @@
+{
+  "width": 120,
+  "height": 80,
+  "layers": [
+    {
+      "id": "background",
+      "asset": "layers/bg.png",
+      "x": 0,
+      "y": 0
+    },
+    {
+      "id": "middle",
+      "asset": "layers/mid.png",
+      "x": 20,
+      "y": 15,
+      "opacity": 0.9,
+      "deps": ["background"],
+      "frameOffsetX": { "2": 4, "4": 8 }
+    },
+    {
+      "id": "foreground",
+      "asset": "layers/top.png",
+      "x": 50,
+      "y": 30,
+      "opacity": 0.8,
+      "deps": ["middle"]
+    }
+  ],
+  "frames": { "start": 0, "end": 4 }
+}

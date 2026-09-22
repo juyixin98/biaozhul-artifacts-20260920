@@ -1,0 +1,54 @@
+services:
+  db:
+    image: postgres:16-bookworm
+    environment:
+      POSTGRES_USER: renderq
+      POSTGRES_PASSWORD: renderq
+      POSTGRES_DB: renderq
+    # If host port 5432 is already taken, change only the left side,
+    # e.g. "55432:5432".
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U renderq -d renderq"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      HTTP_ADDR: ":8080"
+      DATABASE_URL: "postgres://renderq:renderq@db:5432/renderq?sslmode=disable"
+      DATA_DIR: "/data"
+      WORKERS: "2"            # hard cap is 2
+      LEASE_SECONDS: "30"
+      RENEW_SECONDS: "10"
+      ADMIN_API_KEY: "dev-admin-key"
+      ALICE_API_KEY: "dev-alice-key"
+      BOB_API_KEY: "dev-bob-key"
+    ports:
+      - "8080:8080"
+    volumes:
+      - renders:/data
+
+  # One-shot job that writes sample PNG layers into ./samples on the host.
+  gen-samples:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: ["/app/genpng"]
+    command: ["/samples"]
+    volumes:
+      - ./samples:/samples
+
+volumes:
+  pgdata:
+  renders:

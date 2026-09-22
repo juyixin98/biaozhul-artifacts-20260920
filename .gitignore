@@ -1,0 +1,8 @@
+/renderq
+/genpng
+*.test
+*.out
+/data
+/data-*
+.DS_Store
+samples/*.png
