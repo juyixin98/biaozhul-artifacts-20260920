@@ -1,0 +1,94 @@
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: ${DB_NAME:-mlops}
+      MYSQL_USER: ${DB_USER:-mlops}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-mlops_password}
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --innodb-flush-log-at-trx-commit=1
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${MYSQL_ROOT_PASSWORD:-root_password}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    ports:
+      - "3306:3306"
+
+  web:
+    build: .
+    environment:
+      DB_ENGINE: mysql
+      DB_NAME: ${DB_NAME:-mlops}
+      DB_USER: ${DB_USER:-mlops}
+      DB_PASSWORD: ${DB_PASSWORD:-mlops_password}
+      DB_HOST: db
+      DB_PORT: 3306
+      HEARTBEAT_TIMEOUT_SECONDS: ${HEARTBEAT_TIMEOUT_SECONDS:-30}
+      QUEUE_TIMEOUT_SECONDS: ${QUEUE_TIMEOUT_SECONDS:-7200}
+      PREEMPT_GRACE_SECONDS: ${PREEMPT_GRACE_SECONDS:-30}
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  scheduler:
+    build: .
+    environment:
+      DB_ENGINE: mysql
+      DB_NAME: ${DB_NAME:-mlops}
+      DB_USER: ${DB_USER:-mlops}
+      DB_PASSWORD: ${DB_PASSWORD:-mlops_password}
+      DB_HOST: db
+      DB_PORT: 3306
+      HEARTBEAT_TIMEOUT_SECONDS: ${HEARTBEAT_TIMEOUT_SECONDS:-30}
+      QUEUE_TIMEOUT_SECONDS: ${QUEUE_TIMEOUT_SECONDS:-7200}
+      PREEMPT_GRACE_SECONDS: ${PREEMPT_GRACE_SECONDS:-30}
+    command: python manage.py run_scheduler --interval 2
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # Optional simulated GPU nodes. Started explicitly with:
+  #   docker compose --profile mock up -d
+  mock-node-a:
+    profiles: ["mock"]
+    build: .
+    command: >
+      python manage.py mock_node
+      --api-url http://web:8000
+      --pool demo
+      --hostname node-a
+      --gpus 8
+      --gpu-memory 81920
+      --interval 2
+      --preempt-delay 2
+      --job-lifetime 45
+    depends_on:
+      - web
+
+  mock-node-b:
+    profiles: ["mock"]
+    build: .
+    command: >
+      python manage.py mock_node
+      --api-url http://web:8000
+      --pool demo
+      --hostname node-b
+      --gpus 4
+      --gpu-memory 40960
+      --interval 2
+      --preempt-delay 2
+      --job-lifetime 60
+    depends_on:
+      - web
+
+volumes:
+  mysql_data:
