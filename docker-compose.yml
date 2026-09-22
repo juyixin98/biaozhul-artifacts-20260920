@@ -1,0 +1,35 @@
+name: communitygov
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: gov
+      POSTGRES_PASSWORD: gov
+      POSTGRES_DB: gov
+    # The DB is reachable from the api container as "db:5432". No host port
+    # is published by default to avoid clashing with a local PostgreSQL; use
+    # docker compose -f docker-compose.yml -f docker-compose.dbport.yml up ...
+    # to also publish 5432 on the host.
+    volumes:
+      - gov_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gov -d gov"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://gov:gov@db:5432/gov?sslmode=disable
+      HTTP_ADDR: ":8080"
+      JWT_SECRET: change-me-in-production
+    ports:
+      - "8080:8080"
+
+volumes:
+  gov_pgdata:

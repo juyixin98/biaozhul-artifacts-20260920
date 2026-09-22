@@ -1,0 +1,5 @@
+/server
+/seed
+*.out
+coverage.txt
+.env

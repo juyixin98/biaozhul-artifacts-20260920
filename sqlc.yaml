@@ -1,0 +1,17 @@
+version: "2"
+sql:
+  - engine: "postgresql"
+    schema: ["migrations/0001_init.up.sql"]
+    queries: "db/queries"
+    gen:
+      go:
+        out: "internal/database/sqlcgen"
+        package: "sqlcgen"
+        sql_package: "pgx/v5"
+        emit_json_tags: true
+        emit_interface: true
+        overrides:
+          - go_type: "time.Time"
+            db_type: "timestamptz"
+          - go_type: "time.Time"
+            db_type: "timestamp"
