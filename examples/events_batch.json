@@ -1,0 +1,27 @@
+{
+  "source": "db-prod-01",
+  "events": [
+    {
+      "source_event_id": "pgbin-000001",
+      "db_user": "app_svc",
+      "occurred_at": "2026-03-10T09:12:31Z",
+      "action_category": "select",
+      "schema_name": "public",
+      "table_name": "orders",
+      "row_count": 50,
+      "client_ip": "10.0.3.14",
+      "sql_text": "SELECT * FROM orders WHERE account_id = 7"
+    },
+    {
+      "source_event_id": "pgbin-000002",
+      "db_user": "app_svc",
+      "occurred_at": "2026-03-10T09:12:32Z",
+      "action_category": "update",
+      "schema_name": "public",
+      "table_name": "orders",
+      "row_count": 1,
+      "client_ip": "10.0.3.14",
+      "sql_text": "UPDATE orders SET status='paid' WHERE id=42"
+    }
+  ]
+}

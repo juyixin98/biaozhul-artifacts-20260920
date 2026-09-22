@@ -1,0 +1,5 @@
+.git
+*.md
+examples/*.json
+examples/*.http
+.env

@@ -1,0 +1,12 @@
+{
+  "rule_type": "sensitive_hours",
+  "params": {
+    "sensitive_tables": [
+      {"schema": "public", "table": "salaries"},
+      {"schema": "hr", "table": "employees"}
+    ],
+    "allowed_start_hour": 6,
+    "allowed_end_hour": 20,
+    "actions": ["select"]
+  }
+}

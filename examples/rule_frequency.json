@@ -1,0 +1,8 @@
+{
+  "rule_type": "frequency",
+  "params": {
+    "window_seconds": 300,
+    "threshold": 500,
+    "actions": ["select", "insert", "update", "delete", "ddl", "grant"]
+  }
+}

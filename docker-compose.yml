@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: dams
+      POSTGRES_PASSWORD: dams
+      POSTGRES_DB: dams
+    ports:
+      - "5432"
+    volumes:
+      - dams-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dams -d dams"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  server:
+    build:
+      context: .
+    environment:
+      DAMS_DATABASE_URL: postgres://dams:dams@db:5432/dams?sslmode=disable
+      DAMS_HTTP_ADDR: ":8080"
+      DAMS_AUTOMIGRATE: "true"
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # One-shot demo data: `docker compose --profile seed run --rm seed`.
+  seed:
+    profiles: ["seed"]
+    build:
+      context: .
+    entrypoint: ["/usr/local/bin/dams-seed"]
+    environment:
+      DAMS_DATABASE_URL: postgres://dams:dams@db:5432/dams?sslmode=disable
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  dams-pgdata:
