@@ -1,0 +1,34 @@
+services:
+  web:
+    build: .
+    image: kex-local:latest
+    environment:
+      KEX_DB_PATH: /data/kex.db
+      # One embedded worker thread in the web container. Together with the
+      # standalone worker replica below the cluster therefore runs exactly
+      # two local workers (the hard cap required by the spec).
+      KEX_EMBED_WORKER: "1"
+      KEX_MAX_WORKERS: "2"
+    ports:
+      - "8000:8000"
+    volumes:
+      - kex-data:/data
+    restart: unless-stopped
+
+  worker:
+    image: kex-local:latest
+    build:
+      context: .
+    command: []
+    environment:
+      CONTAINER_ROLE: worker
+      KEX_DB_PATH: /data/kex.db
+      KEX_MAX_WORKERS: "2"
+    volumes:
+      - kex-data:/data
+    restart: unless-stopped
+    depends_on:
+      - web
+
+volumes:
+  kex-data:
