@@ -1,0 +1,26 @@
+version: "3.9"
+
+# Optional: run PostgreSQL in Docker instead of the local service.
+#   docker compose up -d db
+# then point the server at the exposed port (TCP password auth):
+#   DATABASE_URL="postgres://fork:fork@127.0.0.1:55432/forkindexer?sslmode=disable"
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: fork
+      POSTGRES_PASSWORD: fork
+      POSTGRES_DB: forkindexer
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - fork_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fork -d forkindexer"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  fork_pgdata:
