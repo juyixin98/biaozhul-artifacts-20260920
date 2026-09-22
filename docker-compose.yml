@@ -1,0 +1,38 @@
+services:
+  api:
+    build: .
+    image: kex-local:latest
+    ports:
+      - "8080:8080"
+    environment:
+      KEX_DB_URL: sqlite:////data/kex.db
+      KEX_ADMIN_KEY: ${KEX_ADMIN_KEY:-dev-admin-key}
+      KEX_MAX_WORKERS: "2"
+      KEX_ROLE: api
+      # 起独立 worker profile 时把 API 内置线程关掉，拓扑更清晰；
+      # 单跑 api（不带 --profile worker）时仍内置 2 个工作器线程。
+      KEX_ENABLE_WORKER_THREADS: ${KEX_API_WORKER_THREADS:-1}
+    volumes:
+      - kex_data:/data
+    restart: unless-stopped
+
+  # 可选：独立工作器容器（docker compose --profile worker up）。
+  # 租约上限全局为 2，多起工作器也不会超过并发上限。
+  worker:
+    profiles: ["worker"]
+    build: .
+    image: kex-local:latest
+    command: ["python", "-m", "app.worker_main"]
+    environment:
+      KEX_DB_URL: sqlite:////data/kex.db
+      KEX_MAX_WORKERS: "2"
+      KEX_ROLE: worker
+      KEX_ENABLE_WORKER_THREADS: "0"
+    volumes:
+      - kex_data:/data
+    restart: unless-stopped
+    depends_on:
+      - api
+
+volumes:
+  kex_data:

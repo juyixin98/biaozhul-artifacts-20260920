@@ -1,0 +1,75 @@
+{
+  "pack_name": "builtin-zh-en-tech",
+  "pack_version": "v2",
+  "description": "v2：新增人名别名、新增技术名词典，用于版本隔离与回滚测试。",
+  "entity_types": ["person", "org", "tech", "date"],
+  "rules": [
+    {
+      "rule_id": "person.zh.dict.v2",
+      "entity_type": "person",
+      "match": "dict",
+      "aliases": {
+        "李明": ["李明", "李教授", "李工", "李总", "小明"],
+        "王芳": ["王芳", "王女士", "王经理"],
+        "张伟": ["张伟", "张总", "张博士"],
+        "周杰": ["周杰", "周工"]
+      },
+      "case_insensitive": false,
+      "priority": 10
+    },
+    {
+      "rule_id": "person.zh.regex.v1",
+      "entity_type": "person",
+      "match": "regex",
+      "pattern": "(?<![一-鿿])(?P<alias>[一-鿿]{1,2}(?=说|表示|指出|认为|强调|透露|宣布|回应|解释|提到|写道|问|答))",
+      "canonical": "alias",
+      "case_insensitive": false,
+      "priority": 20
+    },
+    {
+      "rule_id": "person.en.dict.v2",
+      "entity_type": "person",
+      "match": "dict",
+      "aliases": {
+        "Alan Kay": ["Alan Kay", "Kay"],
+        "Grace Hopper": ["Grace Hopper", "Hopper"],
+        "Ada Lovelace": ["Ada Lovelace", "Lovelace"]
+      },
+      "case_insensitive": true,
+      "priority": 10
+    },
+    {
+      "rule_id": "org.zh.dict.v2",
+      "entity_type": "org",
+      "match": "dict",
+      "aliases": {
+        "北京大学": ["北京大学", "北大"],
+        "阿里巴巴集团": ["阿里巴巴集团", "阿里巴巴", "阿里"],
+        "华为技术有限公司": ["华为技术有限公司", "华为"]
+      },
+      "case_insensitive": false,
+      "priority": 10
+    },
+    {
+      "rule_id": "tech.dict.v2",
+      "entity_type": "tech",
+      "match": "dict",
+      "aliases": {
+        "Rust": ["Rust", "rust"],
+        "Kubernetes": ["Kubernetes", "k8s"],
+        "SQLite": ["SQLite", "sqlite3"]
+      },
+      "case_insensitive": false,
+      "priority": 10
+    },
+    {
+      "rule_id": "date.iso.v1",
+      "entity_type": "date",
+      "match": "regex",
+      "pattern": "(?P<alias>(?P<y>\\d{4})-(?P<m>\\d{1,2})-(?P<d>\\d{1,2}))",
+      "canonical": "date_ymd",
+      "case_insensitive": false,
+      "priority": 10
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "pack_name": "builtin-zh-en-tech",
+  "pack_version": "v1",
+  "description": "内置可解释规则：中文/英文的人名、组织、技术名、日期。词典 + 正则，逐条可回溯。",
+  "entity_types": ["person", "org", "tech", "date"],
+  "rules": [
+    {
+      "rule_id": "person.zh.dict.v1",
+      "entity_type": "person",
+      "match": "dict",
+      "aliases": {
+        "李明": ["李明", "李教授", "李工", "李总"],
+        "王芳": ["王芳", "王女士", "王经理"],
+        "张伟": ["张伟", "张总", "张博士"],
+        "佐藤健一": ["佐藤健一", "佐藤先生", "佐藤"],
+        "宫崎骏": ["宫崎骏", "宫崎导演"]
+      },
+      "case_insensitive": false,
+      "priority": 10
+    },
+    {
+      "rule_id": "person.zh.regex.v1",
+      "entity_type": "person",
+      "match": "regex",
+      "pattern": "(?<![一-鿿])(?P<alias>[一-鿿]{1,2}(?=说|表示|指出|认为|强调|透露|宣布|回应|解释|提到|写道|问|答))(?![一-鿿])",
+      "canonical": "alias",
+      "case_insensitive": false,
+      "priority": 20,
+      "note": "「X 说/表示/指出…」语境下的中文说话人，长度1-2字，前邻必须是非汉字边界，避免吃到句中词。"
+    },
+    {
+      "rule_id": "person.en.dict.v1",
+      "entity_type": "person",
+      "match": "dict",
+      "aliases": {
+        "Alan Kay": ["Alan Kay", "Kay"],
+        "Grace Hopper": ["Grace Hopper", "Hopper"],
+        "Linus Torvalds": ["Linus Torvalds", "Linus", "Torvalds"],
+        "Margaret Hamilton": ["Margaret Hamilton", "Hamilton"],
+        "Donald Knuth": ["Donald Knuth", "Knuth"]
+      },
+      "case_insensitive": true,
+      "priority": 10
+    },
+    {
+      "rule_id": "person.en.title.v1",
+      "entity_type": "person",
+      "match": "regex",
+      "pattern": "(?i)(?P<alias>(?:Dr|Prof|Mr|Ms|Mrs|President|Director)\\.?\\s+[A-Z][a-zA-Z]+)",
+      "canonical": "person_en_title",
+      "priority": 20,
+      "note": "头衔 + 首字母大写姓氏。"
+    },
+    {
+      "rule_id": "org.zh.dict.v1",
+      "entity_type": "org",
+      "match": "dict",
+      "aliases": {
+        "北京大学": ["北京大学", "北大"],
+        "清华大学": ["清华大学", "清华"],
+        "阿里巴巴集团": ["阿里巴巴集团", "阿里巴巴", "阿里"],
+        "字节跳动": ["字节跳动", "字节"],
+        "华为技术有限公司": ["华为技术有限公司", "华为"],
+        "中国科学院": ["中国科学院", "中科院"]
+      },
+      "case_insensitive": false,
+      "priority": 10
+    },
+    {
+      "rule_id": "org.zh.suffix.v1",
+      "entity_type": "org",
+      "match": "regex",
+      "pattern": "(?P<alias>[一-鿿A-Za-z0-9]{2,20}?(?:股份有限公司|有限责任公司|集团有限公司|技术有限公司|科技有限公司|有限公司|集团|研究院|研究所|实验室|大学|学院|银行))",
+      "canonical": "alias",
+      "case_insensitive": false,
+      "priority": 20,
+      "note": "带强组织后缀的中文机构名，惰性匹配取最短可信跨度；匹配体不得包含与/和/及/的/在/把/被/，/。/、 等连接或标点字符。",
+      "stop_chars": "与和及的在把被，。、；：（）()[]【】 \t\n\r"
+    },
+    {
+      "rule_id": "org.en.dict.v1",
+      "entity_type": "org",
+      "match": "dict",
+      "aliases": {
+        "Xerox PARC": ["Xerox PARC", "PARC"],
+        "International Business Machines": ["IBM", "International Business Machines"],
+        "Google": ["Google", "Google LLC"],
+        "Microsoft": ["Microsoft", "Microsoft Corp"]
+      },
+      "case_insensitive": true,
+      "priority": 10
+    },
+    {
+      "rule_id": "org.en.suffix.v1",
+      "entity_type": "org",
+      "match": "regex",
+      "pattern": "(?P<alias>[A-Z][A-Za-z0-9&., ]{1,40}?(?:\\s+(?:Inc|Corp|Ltd|LLC|GmbH|Foundation|Institute|University|Laboratories))(?:\\.|,?\\s+(?:Inc|Corp|Ltd|LLC|GmbH))?)",
+      "canonical": "org_en_suffix",
+      "priority": 20,
+      "note": "首字母大写、以 Inc/Corp/Ltd/University 等结尾的英文组织名。"
+    },
+    {
+      "rule_id": "tech.dict.v1",
+      "entity_type": "tech",
+      "match": "dict",
+      "aliases": {
+        "Python": ["Python", "python", "CPython"],
+        "PostgreSQL": ["PostgreSQL", "postgres", "pgsql", "Postgre SQL"],
+        "SQLite": ["SQLite", "sqlite3", "SQLite3"],
+        "Flask": ["Flask", "flask"],
+        "SQLAlchemy": ["SQLAlchemy", "sqlalchemy"],
+        "Docker": ["Docker", "docker"],
+        "面向对象编程": ["面向对象编程", "OOP"],
+        "动态规划": ["动态规划", "DP"]
+      },
+      "case_insensitive": false,
+      "priority": 10
+    },
+    {
+      "rule_id": "tech.versioned.v1",
+      "entity_type": "tech",
+      "match": "regex",
+      "pattern": "(?<![A-Za-z])(?P<alias>[A-Z][A-Za-z]{1,15}[ ._-]?[0-9]+(?:\\.[0-9]+){0,3})(?![0-9A-Za-z])",
+      "canonical": "tech_versioned",
+      "case_insensitive": false,
+      "priority": 30,
+      "note": "带版本号的技术名，如 Python 3.12.3、Windows 11、Postgres 16.4；规范名去空格统一为 Name x.y.z。"
+    },
+    {
+      "rule_id": "tech.camel.v1",
+      "entity_type": "tech",
+      "match": "regex",
+      "pattern": "(?<![A-Za-z])(?P<alias>[a-z]+(?:[A-Z][a-z0-9]{1,20}){1,5})(?![A-Za-z])",
+      "canonical": "alias",
+      "case_insensitive": false,
+      "priority": 30,
+      "note": "lowerCamelCase 标识符，如 openAi、parseRequest、myParser（纯技术命名特征，非普通英文词）。"
+    },
+    {
+      "rule_id": "tech.snake.v1",
+      "entity_type": "tech",
+      "match": "regex",
+      "pattern": "(?<![A-Za-z0-9_])(?P<alias>[a-z][a-z0-9]{1,20}(?:_[a-z0-9]{1,20}){1,8})(?![A-Za-z0-9_])",
+      "canonical": "alias",
+      "case_insensitive": false,
+      "priority": 30,
+      "note": "snake_case 标识符，如 build_index、word_count。"
+    },
+    {
+      "rule_id": "date.iso.v1",
+      "entity_type": "date",
+      "match": "regex",
+      "pattern": "(?P<alias>(?P<y>\\d{4})-(?P<m>\\d{1,2})-(?P<d>\\d{1,2}))",
+      "canonical": "date_ymd",
+      "case_insensitive": false,
+      "priority": 10
+    },
+    {
+      "rule_id": "date.zh.v1",
+      "entity_type": "date",
+      "match": "regex",
+      "pattern": "(?P<alias>(?P<y>\\d{4})\\s*年\\s*(?P<m>\\d{1,2})\\s*月\\s*(?P<d>\\d{1,2})\\s*日)",
+      "canonical": "date_ymd",
+      "case_insensitive": false,
+      "priority": 10
+    },
+    {
+      "rule_id": "date.zh.ym.v1",
+      "entity_type": "date",
+      "match": "regex",
+      "pattern": "(?P<alias>(?P<y>\\d{4})\\s*年\\s*(?P<m>\\d{1,2})\\s*月)",
+      "canonical": "date_ym",
+      "case_insensitive": false,
+      "priority": 10
+    },
+    {
+      "rule_id": "date.en.v1",
+      "entity_type": "date",
+      "match": "regex",
+      "pattern": "(?P<alias>(?P<m>Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\\.?\\s+(?P<d>\\d{1,2})(?:st|nd|rd|th)?,?\\s+(?P<y>\\d{4}))",
+      "canonical": "date_en",
+      "case_insensitive": true,
+      "priority": 10
+    },
+    {
+      "rule_id": "date.relative.v1",
+      "entity_type": "date",
+      "match": "dict",
+      "aliases": {
+        "RELATIVE:昨天": ["昨天"],
+        "RELATIVE:今天": ["今天", "今日"],
+        "RELATIVE:明天": ["明天"],
+        "RELATIVE:前天": ["前天"],
+        "RELATIVE:上周": ["上周", "上星期"],
+        "RELATIVE:本周": ["本周", "这周", "这星期"],
+        "RELATIVE:下周": ["下周", "下星期"]
+      },
+      "case_insensitive": false,
+      "priority": 10,
+      "note": "相对日期不臆造绝对日期：规范名保留 RELATIVE: 前缀。"
+    }
+  ]
+}
