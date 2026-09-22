@@ -1,0 +1,67 @@
+name: text27b-engine
+
+services:
+  db:
+    image: mysql:8.0
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_DATABASE: text_engine
+      MYSQL_USER: engine
+      MYSQL_PASSWORD: engine_password
+      MYSQL_ROOT_PASSWORD: root_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  web:
+    build: .
+    image: text27b-engine:latest
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_ENGINE: mysql
+      MYSQL_HOST: db
+      MYSQL_DATABASE: text_engine
+      MYSQL_USER: engine
+      MYSQL_PASSWORD: engine_password
+      DJANGO_SECRET_KEY: change-me-in-production
+      DJANGO_DEBUG: "0"
+    ports:
+      - "18027:8000"
+    restart: unless-stopped
+
+  worker:
+    build: .
+    image: text27b-engine:latest
+    command: >
+      sh -c "python manage.py migrate --noinput &&
+             python manage.py seed_demo || true &&
+             python manage.py run_worker --lease-seconds 60 --poll-interval 2"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_ENGINE: mysql
+      MYSQL_HOST: db
+      MYSQL_DATABASE: text_engine
+      MYSQL_USER: engine
+      MYSQL_PASSWORD: engine_password
+    deploy:
+      replicas: 2
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+
+networks:
+  default:
+    # 显式子网，规避宿主机默认地址池被其他容器占满的情况
+    ipam:
+      config:
+        - subnet: 10.77.27.0/24

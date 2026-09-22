@@ -1,0 +1,102 @@
+任务结果：succeeded
+======================================================================
+submission_id=1 result_version=1 algorithm=local-style-v1 input_hash=e0c84650d30e4d90…
+======================================================================
+{
+  "paragraph_length": {
+    "paragraph_count": 2,
+    "words_per_paragraph": {
+      "min": 75,
+      "max": 84,
+      "mean": 79.5,
+      "median": 79.5,
+      "stdev": 4.5,
+      "hist": [
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  },
+  "sentence_length": {
+    "sentence_count": 13,
+    "words_per_sentence": {
+      "min": 10,
+      "max": 15,
+      "mean": 12.23,
+      "median": 12.0,
+      "stdev": 1.42,
+      "hist": [
+        4,
+        5,
+        2,
+        0,
+        2
+      ]
+    }
+  },
+  "lexical_diversity": {
+    "word_count": 159,
+    "type_count": 99,
+    "ttr": 0.6226,
+    "mtld": 73.3,
+    "hapax_legomena_ratio": 0.6869
+  },
+  "repeated_fragments": {
+    "repeated_5gram_share": 0.4717,
+    "repeated_10gram_share": 0.3145,
+    "longest_repeat_span_words": 12,
+    "examples": [
+      "i learned that octopuses can change both color and texture very quickly",
+      "to speak loudly so everyone",
+      "speak loudly so everyone whispered"
+    ]
+  },
+  "repeated_sentences": {
+    "sentence_count": 13,
+    "repeated_sentence_ratio": 0.1538
+  },
+  "style_similarity": {
+    "mean": 0.9897,
+    "max": 0.9958,
+    "nearest": {
+      "sample_id": 1,
+      "name": "student-01-my-hometown.txt",
+      "label": "student",
+      "similarity": 0.9958
+    },
+    "top3": [
+      {
+        "sample_id": 1,
+        "name": "student-01-my-hometown.txt",
+        "label": "student",
+        "similarity": 0.9958
+      },
+      {
+        "sample_id": 4,
+        "name": "student-04-school-trip.txt",
+        "label": "student",
+        "similarity": 0.9952
+      },
+      {
+        "sample_id": 2,
+        "name": "student-02-weekend-market.txt",
+        "label": "student",
+        "similarity": 0.9936
+      }
+    ],
+    "mean_by_label": {
+      "student": 0.9935,
+      "reference": 0.9846
+    },
+    "comparison_count": 7,
+    "interpretation_hint": "相似度高仅表示统计风格接近（可能来自同一作者、同题材或共同模板），不代表抄袭或 AI 生成。"
+  },
+  "style_eligible_sample_count": 7,
+  "disclaimer": "本结果仅为线索性统计指标，不构成“AI 生成”或学术不端的确定性结论。",
+  "warnings": [],
+  "nlp_backend": "spacy",
+  "char_count": 877
+}

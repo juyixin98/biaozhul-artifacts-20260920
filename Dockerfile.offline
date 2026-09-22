@@ -1,0 +1,21 @@
+# 离线构建镜像：先在联网机器运行 bash scripts/vendor_offline.sh
+# 然后：docker build -f Dockerfile.offline -t text-engine:offline .
+FROM python:3.12-slim AS base
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        curl build-essential && rm -rf /var/lib/apt/lists/*
+
+COPY offline/wheels /tmp/wheels
+# 离线安装 wheels 目录中的全部 wheel（含依赖与 en_core_web_sm 模型）
+RUN pip install --no-index --find-links=/tmp/wheels/ /tmp/wheels/*.whl
+
+COPY . /app
+ENV NLTK_DATA=/app/offline/nltk_data
+
+EXPOSE 8000
+CMD ["sh", "-c", "python manage.py migrate --noinput && gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3"]
