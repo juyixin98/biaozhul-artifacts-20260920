@@ -1,0 +1,15 @@
+# Binaries
+/server
+/simtimedemo
+/bin/
+
+# Test/coverage artifacts
+*.out
+*.test
+
+# Local env
+.env
+
+# Editor/OS
+.DS_Store
+*.swp
