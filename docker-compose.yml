@@ -1,0 +1,36 @@
+name: stagevault
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: stagevault
+      POSTGRES_PASSWORD: stagevault
+      POSTGRES_DB: stagevault
+    ports:
+      - "55455:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U stagevault -d stagevault"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PORT: "3000"
+      DATABASE_URL: postgres://stagevault:stagevault@db:5432/stagevault
+      SESSION_IDLE_TIMEOUT_MS: "1800000"
+      TIMEOUT_SWEEP_MS: "10000"
+    ports:
+      - "55300:3000"
+
+volumes:
+  pgdata:
