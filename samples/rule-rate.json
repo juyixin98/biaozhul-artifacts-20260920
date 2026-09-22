@@ -1,0 +1,6 @@
+{
+  "kind": "rate",
+  "name": "500 events / 5 minutes per user",
+  "window_seconds": 300,
+  "max_events": 500
+}

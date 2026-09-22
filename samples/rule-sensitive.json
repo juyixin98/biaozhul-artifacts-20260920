@@ -1,0 +1,7 @@
+{
+  "kind": "sensitive",
+  "name": "off-hours sensitive tables (org timezone)",
+  "tables": ["public.customer_pii", "public.employee_salary"],
+  "hour_start": 6,
+  "hour_end": 20
+}

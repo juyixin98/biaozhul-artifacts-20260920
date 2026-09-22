@@ -1,0 +1,33 @@
+{
+  "source": "prod-db-1",
+  "events": [
+    {
+      "event_id": "evt-0001",
+      "db_user": "app_svc",
+      "occurred_at": "2026-09-22T10:00:00+08:00",
+      "action": "select",
+      "schema": "public",
+      "table": "orders",
+      "row_count": 12
+    },
+    {
+      "event_id": "evt-0002",
+      "db_user": "app_svc",
+      "occurred_at": "2026-09-22T10:00:05+08:00",
+      "action": "update",
+      "schema": "public",
+      "table": "orders",
+      "row_count": 1
+    },
+    {
+      "event_id": "evt-0003",
+      "source": "prod-db-2",
+      "db_user": "etl",
+      "occurred_at": "2026-09-22T03:15:00+08:00",
+      "action": "select",
+      "schema": "public",
+      "table": "customer_pii",
+      "row_count": 50000
+    }
+  ]
+}
