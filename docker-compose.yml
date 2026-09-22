@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: communityvault-db
+    environment:
+      POSTGRES_USER: cv
+      POSTGRES_PASSWORD: cv
+      POSTGRES_DB: communityvault
+    # Host port 55440 to avoid clashing with a local PostgreSQL on 5432;
+    # change to "5432:5432" if your host has none.
+    ports:
+      - "55440:5432"
+    volumes:
+      - cv_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cv -d communityvault"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: communityvault-app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://cv:cv@db:5432/communityvault?sslmode=disable
+      ADDR: ":8080"
+      CLAIM_TTL: "2m"
+      RUN_MIGRATIONS: "true"
+      RUN_SEED: "true"
+    ports:
+      - "8080:8080"
+
+volumes:
+  cv_pgdata:
