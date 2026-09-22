@@ -1,0 +1,44 @@
+services:
+  db:
+    image: mysql:8.0
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --transaction-isolation=REPEATABLE-READ
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-fieldsnap}
+      MYSQL_USER: ${MYSQL_USER:-fieldsnap}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-fieldsnap_pass}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_pass}
+    volumes:
+      - fieldsnap_mysql_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${MYSQL_ROOT_PASSWORD:-root_pass}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+    image: fieldsnap-text28a-web:latest
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-dev-insecure-change-me}
+      DJANGO_DEBUG: ${DJANGO_DEBUG:-False}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-*}
+      MYSQL_HOST: db
+      MYSQL_PORT: "3306"
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-fieldsnap}
+      MYSQL_USER: ${MYSQL_USER:-fieldsnap}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-fieldsnap_pass}
+    ports:
+      - "${WEB_PORT:-8000}:8000"
+    restart: unless-stopped
+
+volumes:
+  fieldsnap_mysql_data:
