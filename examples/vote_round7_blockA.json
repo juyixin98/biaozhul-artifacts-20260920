@@ -1,0 +1,7 @@
+{
+  "chain_id": "test-chain-1",
+  "validator_pubkey": "e8ebcaae6ed9d555cf108753b50cc253ff9374e8c697ce9251aeefa44792566f",
+  "round": 7,
+  "block_hash": "a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1",
+  "signature": "bf721c4ea4c247bcf328545df605c521ecb077d83112faec47a760f890ca14bb08362f8bc6de7ad7590b3c92ce600e18ce915ef6d4077fc545077b26573cbe06"
+}
