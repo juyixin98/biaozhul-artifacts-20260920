@@ -1,0 +1,4 @@
+# Dev/test extras (online or offline from vendor/wheels too).
+-r requirements.txt
+pytest==8.3.3
+pytest-django==4.9.0

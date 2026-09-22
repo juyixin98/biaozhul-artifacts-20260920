@@ -1,0 +1,12 @@
+Demand describes the quantity of a good that consumers are willing and able
+to purchase at various prices during a given period. The demand curve slopes
+downward because, for most goods, a lower price encourages greater
+consumption. Supply reflects the decisions of producers, who are generally
+willing to offer more for sale as the price rises. Where the two curves
+intersect, the market reaches an equilibrium price and quantity.
+
+Elasticity measures how strongly quantity responds to a change in price.
+Necessities tend to have inelastic demand, because buyers cannot easily do
+without them. Luxury goods, by contrast, often display elastic demand.
+Governments consider these relationships when designing taxes and subsidies,
+since intervention can shift either curve and alter the equilibrium.

@@ -1,0 +1,13 @@
+Photosynthesis is the process by which green plants convert light energy
+into chemical energy. The reactions take place inside chloroplasts, which
+contain the green pigment chlorophyll. During the light-dependent reactions,
+water molecules are split and oxygen is released. The energy carriers ATP
+and NADPH then drive the Calvin cycle, in which carbon dioxide is fixed into
+glucose. Environmental factors such as light intensity, temperature and the
+concentration of carbon dioxide all influence the rate at which glucose is
+produced.
+
+Plants that live in dry environments have evolved several adaptations. Their
+leaves may be reduced to spines, and stomata often open only at night. These
+features reduce water loss while still permitting carbon dioxide to enter
+the leaf tissues for photosynthesis.

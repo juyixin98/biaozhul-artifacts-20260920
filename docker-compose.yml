@@ -1,0 +1,71 @@
+services:
+  db:
+    image: mysql:8.4
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-textengine}
+      MYSQL_USER: ${MYSQL_USER:-textengine}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-textengine-pass}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root-pass}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${MYSQL_ROOT_PASSWORD:-root-pass}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    ports:
+      - "3306:3306"
+
+  web:
+    build:
+      context: .
+      args:
+        OFFLINE: ${OFFLINE_BUILD:-0}
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-textengine}
+      MYSQL_USER: ${MYSQL_USER:-textengine}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-textengine-pass}
+      MYSQL_HOST: ${MYSQL_HOST:-db}
+      MYSQL_PORT: ${MYSQL_PORT:-3306}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-dev-insecure-change-me}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-*}
+      NLTK_DATA: /app/vendor/nltk_data
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c "python manage.py migrate --noinput &&
+             gunicorn textengine.wsgi:application --bind 0.0.0.0:8000 --workers 3"
+
+  worker:
+    build:
+      context: .
+      args:
+        OFFLINE: ${OFFLINE_BUILD:-0}
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-textengine}
+      MYSQL_USER: ${MYSQL_USER:-textengine}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-textengine-pass}
+      MYSQL_HOST: ${MYSQL_HOST:-db}
+      MYSQL_PORT: ${MYSQL_PORT:-3306}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-dev-insecure-change-me}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-*}
+      NLTK_DATA: /app/vendor/nltk_data
+      WORKER_POLL_INTERVAL: "2"
+      WORKER_LEASE_SECONDS: "120"
+      WORKER_HEARTBEAT_SECONDS: "30"
+    depends_on:
+      db:
+        condition: service_healthy
+    # Scale horizontally with `docker compose up --scale worker=N`.
+    command: >
+      sh -c "python manage.py wait_for_db &&
+             python manage.py run_worker"
+
+volumes:
+  mysql_data:

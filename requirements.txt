@@ -1,0 +1,15 @@
+# Local-only text analysis engine — pinned direct dependencies.
+# All NLP models/data are shipped as local files from vendor/
+# (see scripts/download_offline_deps.sh); the engine never calls an
+# external model service.
+Django==5.0.14
+djangorestframework==3.15.2
+djangorestframework-simplejwt==5.3.1
+mysqlclient==2.2.4
+gunicorn==22.0.0
+spacy==3.7.5
+# English small pipeline, installed from the local wheel in vendor/wheels:
+#   en_core_web_sm @ file:///app/vendor/models/en_core_web_sm-3.7.1-py3-none-any.whl
+nltk==3.8.1
+python-docx==1.1.2
+numpy==1.26.4
