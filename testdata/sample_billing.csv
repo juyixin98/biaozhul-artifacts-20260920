@@ -1,0 +1,9 @@
+resource_id,service,date,currency,amount
+i-0f1a2b3c,compute,2026-08-01,USD,42.175000
+i-0f1a2b3c,compute,2026-08-02,USD,41.900000
+i-0f1a2b3d,compute,2026-08-01,USD,13.050000
+vol-77aa,storage,2026-08-01,USD,2.400000
+vol-77aa,storage,2026-08-02,USD,2.400000
+bucket-reports,object-storage,2026-08-01,EUR,0.820000
+bucket-reports,object-storage,2026-08-02,EUR,0.790000
+sq-queue,messaging,2026-09-01,USD,5.000000

@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: costlens
+      POSTGRES_PASSWORD: costlens
+      POSTGRES_DB: costlens
+    ports:
+      - "5432:5432"
+    volumes:
+      - costlens_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U costlens -d costlens"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://costlens:costlens@db:5432/costlens?sslmode=disable
+      COSTLENS_HTTP_ADDR: ":8080"
+      COSTLENS_AUTOMIGRATE: "true"
+      # Seed demo organizations, accounts, users and 90 days of billing.
+      # Tokens are printed to the api logs on first boot.
+      COSTLENS_SEED: "true"
+    ports:
+      - "8080:8080"
+
+volumes:
+  costlens_pgdata:
