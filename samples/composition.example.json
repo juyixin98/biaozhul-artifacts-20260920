@@ -1,0 +1,29 @@
+{
+  "canvas_width": 320,
+  "canvas_height": 240,
+  "frame_count": 12,
+  "layers": [
+    {
+      "id": "background",
+      "asset_id": "<asset-id-returned-when-bg.png-is-uploaded>",
+      "x": 0,
+      "y": 0
+    },
+    {
+      "id": "overlay",
+      "asset_id": "<asset-id-returned-when-circle.png-is-uploaded>",
+      "x": 60,
+      "y": 50,
+      "deps": ["background"]
+    },
+    {
+      "id": "badge",
+      "asset_id": "<asset-id-returned-when-badge.png-is-uploaded>",
+      "x": 220,
+      "y": 16,
+      "frame_start": 0,
+      "frame_end": 11,
+      "deps": ["overlay"]
+    }
+  ]
+}

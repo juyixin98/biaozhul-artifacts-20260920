@@ -1,0 +1,11 @@
+# local data directories (asset blobs and rendered frames)
+/data/
+*.tmp-*
+
+# test artifacts
+/tmp/
+
+# editor/OS
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: vfx
+      POSTGRES_PASSWORD: vfx
+      POSTGRES_DB: vfxqueue
+    ports:
+      - "${PGPORT:-5433}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vfx -d vfxqueue"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://vfx:vfx@postgres:5432/vfxqueue?sslmode=disable
+      HTTP_ADDR: ":8080"
+      DATA_DIR: /data
+      WORKER_CONCURRENCY: "2"
+      LEASE_TTL_SECONDS: "20"
+      HEARTBEAT_INTERVAL_SECONDS: "7"
+      SEED: "1"
+    ports:
+      - "${APIPORT:-8080}:8080"
+    volumes:
+      - vfxdata:/data
+
+volumes:
+  pgdata:
+  vfxdata:
