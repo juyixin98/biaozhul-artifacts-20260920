@@ -1,0 +1,10 @@
+# 本地环境
+.env
+
+# Go
+*.test
+*.out
+
+# 编辑器
+.idea/
+.vscode/

@@ -1,0 +1,54 @@
+{
+  "description": "固定规则演示样例。occurred_at 支持 RFC3339、now-15m（相对当前）以及 local:HH:MM（按员工时区解释）。重复推送本文件：相同内容全部幂等去重；修改某条 metadata 后重推会得到 409 conflict。",
+  "events": [
+    {
+      "event_id": "sample-bob-night-login-01",
+      "event_type": "login",
+      "employee_email": "bob.li@example.com",
+      "occurred_at": "local:2026-09-20T22:15:00",
+      "metadata": {"source_ip": "10.20.30.40", "method": "password", "note": "Asia/Shanghai 22:15，夜间规则"}
+    },
+    {
+      "event_id": "sample-bob-night-download-01",
+      "event_type": "file_download",
+      "employee_email": "bob.li@example.com",
+      "occurred_at": "local:2026-09-20T23:05:00",
+      "metadata": {"file": "forecast_q3.xlsx", "size_bytes": 845213}
+    },
+    {
+      "event_id": "sample-bob-first-usb-01",
+      "event_type": "usb",
+      "employee_email": "bob.li@example.com",
+      "occurred_at": "local:2026-09-20T23:40:00",
+      "metadata": {"action": "mount", "vendor": "Kingston", "serial": "SN-DEMO-0001", "volume": "BACKUP"}
+    },
+    {
+      "event_id": "sample-alice-night-01",
+      "event_type": "login",
+      "employee_email": "alice.chen@example.com",
+      "occurred_at": "local:2026-09-20T02:10:00",
+      "metadata": {"source_ip": "10.20.30.41", "note": "America/New_York 凌晨 02:10，夜间规则"}
+    },
+    {
+      "event_id": "sample-frank-usb-noon-01",
+      "event_type": "usb",
+      "employee_email": "frank.zhao@example.com",
+      "occurred_at": "2026-09-18T12:00:00Z",
+      "metadata": {"action": "mount", "vendor": "SanDisk", "serial": "SN-DEMO-0002"}
+    },
+    {
+      "event_id": "sample-recent-login-01",
+      "event_type": "login",
+      "employee_email": "carla.rossi@example.com",
+      "occurred_at": "now-5m",
+      "metadata": {"source_ip": "10.20.30.42", "note": "相对当前时间，用于验证延迟上报"}
+    },
+    {
+      "event_id": "sample-recent-download-01",
+      "event_type": "file_download",
+      "employee_email": "carla.rossi@example.com",
+      "occurred_at": "now-4m",
+      "metadata": {"file": "design_v2.sketch", "size_bytes": 1533221}
+    }
+  ]
+}
