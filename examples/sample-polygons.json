@@ -1,0 +1,59 @@
+{
+  "_comment": "Sample polygons for GeoTerritory. Rings are OPEN: vertices only, no repeated closing point. Order: counterclockwise as written, but the API accepts either orientation. lng in [-180,180], lat in [-90,90]. Edges must not span more than 180 degrees of longitude (antimeridian crossing is rejected; split such a shape into two polygons).",
+  "simple_square_beijing": {
+    "name": "beijing-core",
+    "priority": 1,
+    "polygon": [
+      {"lng": 116.20, "lat": 39.80},
+      {"lng": 116.60, "lat": 39.80},
+      {"lng": 116.60, "lat": 40.05},
+      {"lng": 116.20, "lat": 40.05}
+    ]
+  },
+  "overlapping_lower_priority": {
+    "name": "beijing-metro",
+    "priority": 3,
+    "polygon": [
+      {"lng": 116.00, "lat": 39.65},
+      {"lng": 116.90, "lat": 39.65},
+      {"lng": 116.90, "lat": 40.30},
+      {"lng": 116.00, "lat": 40.30}
+    ],
+    "_note": "Overlaps beijing-core; points in the overlap resolve to beijing-core because priority 1 < 3."
+  },
+  "pentagon": {
+    "name": "five-sided-demo",
+    "priority": 2,
+    "polygon": [
+      {"lng": 0.0, "lat": 2.0},
+      {"lng": 1.902, "lat": 0.618},
+      {"lng": 1.176, "lat": -1.618},
+      {"lng": -1.176, "lat": -1.618},
+      {"lng": -1.902, "lat": 0.618}
+    ]
+  },
+  "boundary_demo_points": {
+    "_comment": "Points illustrating the inclusive boundary rule against simple_square_beijing.",
+    "on_top_edge":    {"lng": 116.4, "lat": 40.05},
+    "on_corner":      {"lng": 116.2, "lat": 39.8},
+    "just_outside":   {"lng": 116.4, "lat": 40.0501},
+    "well_inside":    {"lng": 116.4, "lat": 39.9}
+  },
+  "invalid_examples": {
+    "bowtie_self_intersection": [
+      {"lng": 0, "lat": 0}, {"lng": 10, "lat": 10}, {"lng": 10, "lat": 0}, {"lng": 0, "lat": 10}
+    ],
+    "collinear_degenerate": [
+      {"lng": 0, "lat": 0}, {"lng": 5, "lat": 0}, {"lng": 10, "lat": 0}
+    ],
+    "antimeridian_crossing_REJECTED": [
+      {"lng": 179, "lat": 10}, {"lng": -179, "lat": 10}, {"lng": -179, "lat": 20}, {"lng": 179, "lat": 20}
+    ],
+    "antimeridian_split_part_east": [
+      {"lng": 178, "lat": 10}, {"lng": 180, "lat": 10}, {"lng": 180, "lat": 20}, {"lng": 178, "lat": 20}
+    ],
+    "antimeridian_split_part_west": [
+      {"lng": -180, "lat": 10}, {"lng": -178, "lat": 10}, {"lng": -178, "lat": 20}, {"lng": -180, "lat": 20}
+    ]
+  }
+}

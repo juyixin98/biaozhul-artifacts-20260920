@@ -1,0 +1,12 @@
+# binaries
+/server
+*.test
+*.out
+
+# local env overrides
+.env
+
+# editor/OS
+.idea/
+.vscode/
+.DS_Store
