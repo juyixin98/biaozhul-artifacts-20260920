@@ -1,0 +1,12 @@
+{
+  "tokenName": "Vesting Token",
+  "tokenSymbol": "VST",
+  "amount": 1000003,
+  "start": 1000,
+  "cliff": 1500,
+  "end": 2000,
+  "withdrawAt": 1750,
+  "topUpAt": 1600,
+  "topUpExtra": 500000,
+  "cancelAt": 1800
+}
