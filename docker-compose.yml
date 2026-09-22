@@ -1,0 +1,54 @@
+services:
+  db:
+    image: mysql:8.4
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --transaction-isolation=REPEATABLE-READ
+      - --innodb-lock-wait-timeout=10
+    environment:
+      MYSQL_DATABASE: cryptolaunch
+      MYSQL_USER: cryptolaunch
+      MYSQL_PASSWORD: cryptolaunch
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "${MYSQL_PORT_PUBLISHED:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost",
+             "-ucryptolaunch", "-pcryptolaunch"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build: .
+    # 1 worker + threads: the single in-memory order book registry lives in
+    # this process.  Correctness does not depend on that (every critical
+    # section takes the market row lock and rebuilds from the DB on miss),
+    # but running more workers would simply rebuild books more often.
+    command: >
+      gunicorn config.wsgi:application
+      --bind 0.0.0.0:8000
+      --workers 1
+      --threads 8
+      --timeout 60
+      --graceful-timeout 30
+    environment:
+      DB_ENGINE: mysql
+      MYSQL_DATABASE: cryptolaunch
+      MYSQL_USER: cryptolaunch
+      MYSQL_PASSWORD: cryptolaunch
+      MYSQL_HOST: db
+      MYSQL_PORT: "3306"
+      DJANGO_DEBUG: "0"
+      DJANGO_SECRET_KEY: change-me-in-production
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${API_PORT:-8000}:8000"
+
+volumes:
+  mysql_data:
