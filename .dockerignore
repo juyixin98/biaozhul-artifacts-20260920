@@ -1,0 +1,8 @@
+.git
+*.md
+internal/integration
+.dockerignore
+Dockerfile
+docker-compose.yml
+Makefile
+docs

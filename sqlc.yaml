@@ -1,0 +1,24 @@
+version: "2"
+sql:
+  - engine: "postgresql"
+    schema: "internal/migrate/sql"
+    queries: "internal/dbquery"
+    gen:
+      go:
+        package: "database"
+        out: "internal/database"
+        sql_package: "pgx/v5"
+        emit_json_tags: true
+        emit_interface: true
+        emit_empty_slices: true
+        overrides:
+          - db_type: "uuid"
+            go_type: "github.com/google/uuid.UUID"
+          - db_type: "timestamptz"
+            go_type: "time.Time"
+            nullable: false
+          - db_type: "timestamptz"
+            go_type:
+              import: "github.com/jackc/pgx/v5/pgtype"
+              type: "Timestamptz"
+            nullable: true

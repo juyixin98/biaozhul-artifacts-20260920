@@ -1,0 +1,55 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: gov
+      POSTGRES_PASSWORD: gov
+      POSTGRES_DB: gov
+    ports:
+      - "55432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gov -d gov"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    volumes:
+      - gov_pgdata:/var/lib/postgresql/data
+
+  migrate:
+    build:
+      context: .
+    entrypoint: ["/app/migrate"]
+    environment:
+      DATABASE_URL: postgres://gov:gov@db:5432/gov?sslmode=disable
+    depends_on:
+      db:
+        condition: service_healthy
+
+  seed:
+    build:
+      context: .
+    entrypoint: ["/app/seed"]
+    environment:
+      DATABASE_URL: postgres://gov:gov@db:5432/gov?sslmode=disable
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    profiles: ["seed"]
+
+  api:
+    build:
+      context: .
+    environment:
+      DATABASE_URL: postgres://gov:gov@db:5432/gov?sslmode=disable
+      HTTP_ADDR: ":8080"
+      # Synthetic platform-admin token used only to create the first community.
+      # Change this for real deployments (or remove it once bootstrapped).
+      PLATFORM_BOOTSTRAP_TOKEN: "tok_platform_bootstrap"
+    ports:
+      - "18080:8080"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+volumes:
+  gov_pgdata:
