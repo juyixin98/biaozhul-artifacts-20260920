@@ -1,0 +1,37 @@
+name: text39b-domainengine
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: domains
+    ports:
+      - "25432:5432" # host port 25432 -> container 5432 (avoids clashing with a local Postgres)
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d domains"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PORT: "8080"
+      DATABASE_URL: postgres://postgres:postgres@db:5432/domains?sslmode=disable
+      # 32-byte hex key for encrypting transfer auth codes at rest.
+      AUTH_CODE_KEY: "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
+      # Enables POST /api/admin/clock/advance for local time-travel demos.
+      ENABLE_CLOCK_CONTROL: "true"
+      MAINTENANCE_INTERVAL_SECONDS: "10"
+    ports:
+      - "18086:8080" # host port 18086 -> container 8080
+
+volumes:
+  pgdata:
