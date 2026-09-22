@@ -1,0 +1,40 @@
+name: videoforge
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: videoforge
+      POSTGRES_PASSWORD: videoforge
+      POSTGRES_DB: videoforge
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U videoforge -d videoforge"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build:
+      context: .
+      dockerfile: src/VideoForge.Api/Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      ConnectionStrings__Postgres: "Host=db;Port=5432;Database=videoforge;Username=videoforge;Password=videoforge"
+      VideoForge__DataDirectory: "/var/lib/videoforge"
+      VideoForge__MaxParallelJobs: "3"
+      VideoForge__StaleJobSeconds: "45"
+      VideoForge__MaxAttempts: "3"
+    volumes:
+      - vfdata:/var/lib/videoforge
+
+volumes:
+  pgdata:
+  vfdata:
