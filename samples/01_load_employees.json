@@ -1,0 +1,18 @@
+{
+  "action": "load",
+  "table": "employees",
+  "columns": [
+    {"name": "id",     "type": "INTEGER"},
+    {"name": "dept",   "type": "STRING"},
+    {"name": "age",    "type": "INTEGER"},
+    {"name": "active", "type": "BOOLEAN"},
+    {"name": "mgr_id", "type": "INTEGER"}
+  ],
+  "rows": [
+    {"id": 1, "dept": "eng",   "age": 30,   "active": true,  "mgr_id": 10},
+    {"id": 2, "dept": "eng",   "age": 25,   "active": false, "mgr_id": 10},
+    {"id": 3, "dept": "sales", "age": 40,   "active": true,  "mgr_id": null},
+    {"id": 4, "dept": "sales", "age": null, "active": true,  "mgr_id": null},
+    {"id": 5, "dept": "eng",   "age": 50,   "active": null,  "mgr_id": 20}
+  ]
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "action": "load",
+    "table": "nums",
+    "columns": [{"name": "x", "type": "INTEGER"}],
+    "rows": [{"x": 1}, {"x": 2}, {"x": 3}, {"x": null}]
+  },
+  {
+    "action": "query",
+    "table": "nums",
+    "where": "x IS NOT NULL AND x >= 2"
+  },
+  {
+    "action": "query",
+    "table": "nums",
+    "where": "NOT (x < 3)"
+  },
+  {
+    "action": "export",
+    "table": "nums"
+  }
+]

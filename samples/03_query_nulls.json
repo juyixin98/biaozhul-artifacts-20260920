@@ -1,0 +1,6 @@
+{
+  "action": "query",
+  "table": "employees",
+  "where": "age IS NULL OR active IS NULL",
+  "select": ["id", "age", "active"]
+}

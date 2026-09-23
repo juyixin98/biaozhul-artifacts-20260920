@@ -1,0 +1,6 @@
+{
+  "action": "query",
+  "table": "employees",
+  "where": "age > '30'",
+  "select": ["id"]
+}

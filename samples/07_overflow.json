@@ -1,0 +1,6 @@
+{
+  "action": "query",
+  "table": "employees",
+  "where": "9223372036854775807 + id > 0",
+  "select": ["id"]
+}

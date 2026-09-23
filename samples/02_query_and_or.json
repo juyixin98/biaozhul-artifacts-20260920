@@ -1,0 +1,7 @@
+{
+  "action": "query",
+  "table": "employees",
+  "where": "dept = 'eng' AND (age >= 30 OR mgr_id IS NULL)",
+  "select": ["id", "dept", "age", "mgr_id"],
+  "limit": 10
+}

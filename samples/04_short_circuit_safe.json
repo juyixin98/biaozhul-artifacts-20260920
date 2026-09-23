@@ -1,0 +1,6 @@
+{
+  "action": "query",
+  "table": "employees",
+  "where": "id = 999 AND (1 / (id - id) = 1)",
+  "select": ["id"]
+}
