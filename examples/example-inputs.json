@@ -1,0 +1,75 @@
+{
+  "_comment": "Example inputs for the CPMM pool. Amounts are in raw token wei (18 decimals). All of these are executed by scripts/demo.sh against a local Anvil node and cross-checked against reference/fixtures/scenarios.json.",
+
+  "tokens": {
+    "TKA": "mintable test asset A (TestERC20, decimals=18)",
+    "TKB": "mintable test asset B (TestERC20, decimals=18)"
+  },
+
+  "poolParameters": {
+    "feeBps": 30,
+    "feeNumerator": 997,
+    "feeDenominator": 1000,
+    "minimumLiquidityLocked": 1000,
+    "lockedTo": "0x0000000000000000000000000000000000000000",
+    "reserveType": "uint112 per side"
+  },
+
+  "operations": [
+    {
+      "step": "bootstrap",
+      "actor": "alice",
+      "tokenA_in_wei": "100000000000000000000",
+      "tokenB_in_wei": "100000000000000000000",
+      "lpSharesToActor": "99999999999999999000",
+      "lpSharesLockedForever": "1000",
+      "note": "sqrt(100e18*100e18) - 1000 = 100e18 - 1000"
+    },
+    {
+      "step": "secondDeposit",
+      "actor": "bob",
+      "tokenA_in_wei": "50000000000000000000",
+      "tokenB_in_wei": "50000000000000000000",
+      "expectedLpShares_wei": "50000000000000000000",
+      "note": "deposits at the existing 1:1 ratio; min-ratio rule, floor"
+    },
+    {
+      "step": "swap",
+      "actor": "bob",
+      "direction": "A -> B",
+      "amountIn_wei": "10000000000000000000",
+      "reservesBefore": ["150000000000000000000", "150000000000000000000"],
+      "formula": "out = floor(in*997*Rout / (Rin*1000 + in*997))",
+      "amountOutMin_wei": "9348627867725198474",
+      "deadline": "unix ts, must be >= block.timestamp",
+      "reservesAfter": ["160000000000000000000", "140651372132274801526"]
+    },
+    {
+      "step": "withdrawHalf",
+      "actor": "bob",
+      "lpSharesBurned": "half of bob's balance (floor)",
+      "note": "receives floor(shares*reserveA/totalSupply) of each token; locked 1000 untouched"
+    },
+    {
+      "step": "withdrawRest",
+      "actor": "bob",
+      "lpSharesBurned": "bob's entire remaining balance",
+      "invariantAfter": {
+        "bobLpShares": "0",
+        "lockedSharesRemaining": "1000",
+        "reservesStillPositive": true,
+        "reservesEqualTokenBalances": true
+      }
+    }
+  ],
+
+  "rejectCases": [
+    {"name": "feeOnTransferToken", "reason": "realized pair balance delta != declared amount -> TransferFailed / FeeOnTransferDetected"},
+    {"name": "swapAfterDeadline", "reason": "Expired()"},
+    {"name": "slippage", "reason": "amountOut < amountOutMin -> Slippage()"},
+    {"name": "reentrancy", "reason": "shared lock -> Locked() for swap/mint/burn/skim/sync reentry"},
+    {"name": "flashSwapNotRepaid", "reason": "x*y=k decreases -> KInvariant(), whole tx rolls back"},
+    {"name": "dustZeroOutput", "reason": "input so small output floors to 0 -> InsufficientOutputAmount"},
+    {"name": "firstLiquidityTooSmall", "reason": "sqrt(a0*a1) <= 1000 -> InsufficientFirstLiquidity"}
+  ]
+}

@@ -1,0 +1,15 @@
+# Foundry
+out/
+cache/
+broadcast/
+
+# Dependencies (pinned via lib/forge-std; uncomment to ignore vendored copy)
+# lib/
+
+# Python
+__pycache__/
+*.pyc
+
+# Local node / logs
+*.log
+.env

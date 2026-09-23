@@ -1,0 +1,25 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+test = "test"
+script = "script"
+solc_version = "0.8.26"
+evm_version = "cancun"
+optimizer = true
+optimizer_runs = 200
+via_ir = true
+# Deterministic build metadata for reproducible bytecode
+bytecode_hash = "none"
+
+# Tests replay the Python reference fixtures from reference/.
+fs_permissions = [{ access = "read", path = "./reference" }]
+
+[invariant]
+runs = 256
+depth = 32
+fail_on_revert = false
+
+# Gas-fat fuzzing
+[fuzz]
+runs = 512
