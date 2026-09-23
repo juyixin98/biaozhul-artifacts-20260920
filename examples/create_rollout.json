@@ -1,0 +1,9 @@
+{
+  "name": "checkout-v2",
+  "service": "checkout",
+  "min_samples": 100,
+  "observation_window_seconds": 4,
+  "max_error_rate": 0.05,
+  "max_p95_latency_ms": 500,
+  "note": "thresholds v1 frozen at rollout start"
+}

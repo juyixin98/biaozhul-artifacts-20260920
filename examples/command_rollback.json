@@ -1,0 +1,5 @@
+{
+  "type": "rollback",
+  "idempotency_key": "checkout-v2-rollback-2026-09-23",
+  "expected_generation": 1
+}

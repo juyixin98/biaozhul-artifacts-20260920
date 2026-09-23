@@ -1,0 +1,6 @@
+{
+  "service": "checkout",
+  "name": "transient_spike",
+  "bucket_seconds": 1,
+  "correction_delay_seconds": 45
+}
