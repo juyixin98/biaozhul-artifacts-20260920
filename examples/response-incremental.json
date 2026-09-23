@@ -1,0 +1,77 @@
+{
+  "success": true,
+  "dry_run": false,
+  "work_dir": "/tmp/tmp.EDgdeN0ohM/work",
+  "cache_dir": "/tmp/tmp.EDgdeN0ohM/cache",
+  "order": [
+    "gen_header",
+    "gen_source",
+    "merge",
+    "hash_merged"
+  ],
+  "nodes": [
+    {
+      "name": "gen_header",
+      "status": "cached",
+      "cache_key": "aea26098c763909c2487a4e8997f9a3c21a37eda8a4bdc070e64e641b4889825",
+      "reasons": [
+        "缓存命中：键 aea26098c763… 存在且键内全部因子未变",
+        "与本工作目录上次成功构建的缓存键一致",
+        "因子：工具=write@1.0.0，参数={content=HEADER v1\n}，声明环境变量={}，输入=0 项，依赖=0 个"
+      ],
+      "outputs": [
+        "out/header.txt"
+      ],
+      "started_at": "2026-09-24T02:29:24.702491367+08:00"
+    },
+    {
+      "name": "gen_source",
+      "status": "built",
+      "cache_key": "3f1c427b972137c6c01399a64fcf1d033f24ff0d495a23300c4305c8df334392",
+      "reasons": [
+        "缓存失效：本次键 3f1c427b9721… 与上次键 6944dd6a23b8… 不同",
+        "新键在缓存仓库中不存在（对应条目可能已被清理）",
+        "渲染后参数变化：[out/source.txt hello cdbg\n] → [out/source.txt hello cdbg v2\n]",
+        "参数变化：content hello cdbg\n → hello cdbg v2\n",
+        "构建成功，已发布缓存条目 3f1c427b9721…"
+      ],
+      "outputs": [
+        "out/source.txt"
+      ],
+      "duration": "3ms",
+      "started_at": "2026-09-24T02:29:24.702865252+08:00"
+    },
+    {
+      "name": "merge",
+      "status": "built",
+      "cache_key": "00fd518a5ca51d671e25ba0d1201bb0a5c3597b26631ccc1c2b8ba5da204f7e8",
+      "reasons": [
+        "缓存失效：本次键 00fd518a5ca5… 与上次键 0cdf6f4d1ad0… 不同",
+        "新键在缓存仓库中不存在（对应条目可能已被清理）",
+        "依赖缓存键变化（传递依赖变更沿 DAG 传播）：gen_source 6944dd6a23b8… → 3f1c427b9721…",
+        "构建成功，已发布缓存条目 00fd518a5ca5…"
+      ],
+      "outputs": [
+        "out/merged.txt"
+      ],
+      "duration": "2ms",
+      "started_at": "2026-09-24T02:29:24.706319797+08:00"
+    },
+    {
+      "name": "hash_merged",
+      "status": "built",
+      "cache_key": "ba0d1ee104e97ad3c74136d1d5e809b1884613bee1714d8a494547990cce77bb",
+      "reasons": [
+        "缓存失效：本次键 ba0d1ee104e9… 与上次键 b33823a846ea… 不同",
+        "新键在缓存仓库中不存在（对应条目可能已被清理）",
+        "依赖缓存键变化（传递依赖变更沿 DAG 传播）：merge 0cdf6f4d1ad0… → 00fd518a5ca5…",
+        "构建成功，已发布缓存条目 ba0d1ee104e9…"
+      ],
+      "outputs": [
+        "out/merged.sha256"
+      ],
+      "duration": "2ms",
+      "started_at": "2026-09-24T02:29:24.708502922+08:00"
+    }
+  ]
+}

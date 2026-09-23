@@ -1,0 +1,27 @@
+{
+  "work_dir": "/tmp/cdbg-demo/inline",
+  "targets": ["greet"],
+  "spec": {
+    "version": "1",
+    "tools": {
+      "greet": {
+        "name": "greet",
+        "tool_version": "3.1.0",
+        "shell": true,
+        "command": ["printf 'GREETING=%s\\n' \"$1\" > \"$2\""],
+        "declared_env": ["LANG"],
+        "env": {"FIXED_VAR": "fixed-value"}
+      }
+    },
+    "nodes": [
+      {
+        "name": "greet",
+        "tool": "greet",
+        "outputs": ["greeting.txt"],
+        "params": {"who": "cdbg"},
+        "args": ["hello {{.who}}", "greeting.txt"],
+        "timeout_sec": 30
+      }
+    ]
+  }
+}

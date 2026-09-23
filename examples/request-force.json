@@ -1,0 +1,6 @@
+{
+  "work_dir": "/tmp/cdbg-demo/work",
+  "spec_file": "/home/admin/Downloads/biaozhul/opp101/b/examples/spec.json",
+  "force": true,
+  "targets": ["gen_source"]
+}

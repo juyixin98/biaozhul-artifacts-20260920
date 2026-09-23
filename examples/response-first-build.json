@@ -1,0 +1,70 @@
+{
+  "success": true,
+  "dry_run": false,
+  "work_dir": "/tmp/tmp.EDgdeN0ohM/work",
+  "cache_dir": "/tmp/tmp.EDgdeN0ohM/cache",
+  "order": [
+    "gen_header",
+    "gen_source",
+    "merge",
+    "hash_merged"
+  ],
+  "nodes": [
+    {
+      "name": "gen_header",
+      "status": "built",
+      "cache_key": "aea26098c763909c2487a4e8997f9a3c21a37eda8a4bdc070e64e641b4889825",
+      "reasons": [
+        "缓存失效：本工作目录中该节点从未成功构建过（首次构建）",
+        "构建成功，已发布缓存条目 aea26098c763…"
+      ],
+      "outputs": [
+        "out/header.txt"
+      ],
+      "duration": "3ms",
+      "started_at": "2026-09-24T02:29:24.683913032+08:00"
+    },
+    {
+      "name": "gen_source",
+      "status": "built",
+      "cache_key": "6944dd6a23b8d2a2acc265effaeeacbb673f2db0070279e29b1ae83d4bb9c362",
+      "reasons": [
+        "缓存失效：本工作目录中该节点从未成功构建过（首次构建）",
+        "构建成功，已发布缓存条目 6944dd6a23b8…"
+      ],
+      "outputs": [
+        "out/source.txt"
+      ],
+      "duration": "3ms",
+      "started_at": "2026-09-24T02:29:24.687935897+08:00"
+    },
+    {
+      "name": "merge",
+      "status": "built",
+      "cache_key": "0cdf6f4d1ad047b58e87cbf688277a81f71052e847642800c33ffa50e2ab7c73",
+      "reasons": [
+        "缓存失效：本工作目录中该节点从未成功构建过（首次构建）",
+        "构建成功，已发布缓存条目 0cdf6f4d1ad0…"
+      ],
+      "outputs": [
+        "out/merged.txt"
+      ],
+      "duration": "2ms",
+      "started_at": "2026-09-24T02:29:24.69127371+08:00"
+    },
+    {
+      "name": "hash_merged",
+      "status": "built",
+      "cache_key": "b33823a846eaa0da46a31300229a7a3f8f97aa0627fc2826450603dcb360449d",
+      "reasons": [
+        "缓存失效：本工作目录中该节点从未成功构建过（首次构建）",
+        "构建成功，已发布缓存条目 b33823a846ea…"
+      ],
+      "outputs": [
+        "out/merged.sha256"
+      ],
+      "duration": "3ms",
+      "started_at": "2026-09-24T02:29:24.69344156+08:00"
+    }
+  ]
+}

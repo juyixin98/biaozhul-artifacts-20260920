@@ -1,0 +1,66 @@
+{
+  "version": "1",
+  "tools": {
+    "write": {
+      "name": "write",
+      "tool_version": "1.0.0",
+      "command": ["mkdir -p \"$(dirname \"$1\")\" && printf '%s' \"$2\" > \"$1\""],
+      "shell": true,
+      "declared_env": []
+    },
+    "sha256sum": {
+      "name": "sha256sum",
+      "tool_version": "1.0.0",
+      "command": ["sha256sum \"$1\" > \"$2\""],
+      "shell": true,
+      "declared_env": ["LANG"]
+    },
+    "concat": {
+      "name": "concat",
+      "tool_version": "2.0.0",
+      "command": ["cat \"$1\" \"$2\" > \"$3\""],
+      "shell": true,
+      "declared_env": []
+    },
+    "fail": {
+      "name": "fail",
+      "tool_version": "1.0.0",
+      "command": ["echo \"$1\" >&2; exit 7"],
+      "shell": true,
+      "declared_env": []
+    }
+  },
+  "nodes": [
+    {
+      "name": "gen_source",
+      "tool": "write",
+      "inputs": [],
+      "deps": [],
+      "outputs": ["out/source.txt"],
+      "params": {"content": "hello cdbg\n"},
+      "args": ["out/source.txt", "{{.content}}"]
+    },
+    {
+      "name": "gen_header",
+      "tool": "write",
+      "outputs": ["out/header.txt"],
+      "params": {"content": "HEADER v1\n"},
+      "args": ["out/header.txt", "{{.content}}"]
+    },
+    {
+      "name": "merge",
+      "tool": "concat",
+      "inputs": [],
+      "deps": ["gen_header", "gen_source"],
+      "outputs": ["out/merged.txt"],
+      "args": ["out/header.txt", "out/source.txt", "out/merged.txt"]
+    },
+    {
+      "name": "hash_merged",
+      "tool": "sha256sum",
+      "deps": ["merge"],
+      "outputs": ["out/merged.sha256"],
+      "args": ["out/merged.txt", "out/merged.sha256"]
+    }
+  ]
+}

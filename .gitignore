@@ -1,0 +1,13 @@
+# 构建产物
+/cdbg
+*.test
+.out
+
+# 本地运行目录
+.cdbg-cache/
+.cdbg-state/
+.cdbg/
+
+# 编辑器/系统
+.DS_Store
+*.swp
