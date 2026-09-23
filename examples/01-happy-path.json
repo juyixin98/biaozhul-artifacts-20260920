@@ -1,0 +1,17 @@
+{
+  "name": "01-happy-path",
+  "seed": 42,
+  "maxTick": 200,
+  "fresh": true,
+  "network": {
+    "lossRate": 0.0,
+    "duplicateRate": 0.0,
+    "reorderRate": 0.0,
+    "minDelay": 1,
+    "maxDelay": 4
+  },
+  "timings": { "voteTimeout": 40, "resend": 15, "query": 10 },
+  "transactions": [
+    { "id": "txn-A", "beginTick": 5 }
+  ]
+}

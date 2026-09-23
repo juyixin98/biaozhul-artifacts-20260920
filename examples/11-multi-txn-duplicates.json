@@ -1,0 +1,12 @@
+{
+  "name": "11-multi-txn-duplicates",
+  "seed": 99,
+  "maxTick": 320,
+  "fresh": true,
+  "network": { "lossRate": 0.0, "duplicateRate": 0.35, "reorderRate": 0.2, "minDelay": 1, "maxDelay": 3, "reorderDelay": 6 },
+  "timings": { "voteTimeout": 80, "resend": 12, "query": 8 },
+  "transactions": [
+    { "id": "txn-A", "beginTick": 5 },
+    { "id": "txn-B", "beginTick": 30, "voteNo": ["participant-3"] }
+  ]
+}

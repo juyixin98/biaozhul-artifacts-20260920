@@ -1,0 +1,18 @@
+{
+  "name": "02-lossy-network",
+  "seed": 7,
+  "maxTick": 300,
+  "fresh": true,
+  "network": {
+    "lossRate": 0.25,
+    "duplicateRate": 0.1,
+    "reorderRate": 0.15,
+    "minDelay": 1,
+    "maxDelay": 4,
+    "reorderDelay": 8
+  },
+  "timings": { "voteTimeout": 40, "resend": 12, "query": 8 },
+  "transactions": [
+    { "id": "txn-A", "beginTick": 5 }
+  ]
+}

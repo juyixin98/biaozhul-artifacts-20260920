@@ -1,0 +1,12 @@
+{
+  "name": "04-coord-crash-after-commit",
+  "seed": 1,
+  "maxTick": 300,
+  "fresh": true,
+  "network": { "lossRate": 0.0, "duplicateRate": 0.0, "reorderRate": 0.0, "minDelay": 1, "maxDelay": 3 },
+  "timings": { "voteTimeout": 60, "resend": 12, "query": 8 },
+  "transactions": [ { "id": "txn-A", "beginTick": 5 } ],
+  "crashes": [
+    { "nodeId": "coordinator", "hook": "coordinator.commit.appended", "restartTick": 120 }
+  ]
+}
