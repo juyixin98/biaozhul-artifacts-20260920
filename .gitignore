@@ -1,0 +1,9 @@
+# 编译产物
+/depscanner
+*.test
+*.out
+
+# 本地缓存/临时目录（实际使用时应放在项目目录之外）
+/.cache/
+/cache/
+*.tmp

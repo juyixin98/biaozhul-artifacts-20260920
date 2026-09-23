@@ -1,0 +1,7 @@
+{
+  "root": "/home/admin/Downloads/biaozhul/opp104/b/testdata/demo",
+  "targets": ["app/main.c"],
+  "quote_include_dirs": [],
+  "system_include_dirs": ["sysinc"],
+  "cache_dir": "/tmp/depscanner-cache-demo"
+}
