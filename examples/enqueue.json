@@ -1,0 +1,17 @@
+{
+  "channel_id": "channel-demo",
+  "commits": [
+    {
+      "id": "commit-0001",
+      "payload": { "action": "mint", "to": "0xabc", "amount": 100 }
+    },
+    {
+      "id": "commit-0002",
+      "payload": { "action": "transfer", "to": "0xdef", "amount": 7 }
+    },
+    {
+      "id": "commit-0003",
+      "payload": { "action": "burn", "from": "0xabc", "amount": 3 }
+    }
+  ]
+}
