@@ -1,0 +1,5 @@
+[submodule "lib/forge-std"]
+	path = lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+	# Pinned commit (byte-identical vendored copy; see script/verify_deps.sh)
+	commit = 7239323e35487ba4339c93fe591065a63ce122aa

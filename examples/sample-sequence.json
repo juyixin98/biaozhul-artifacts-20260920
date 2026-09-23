@@ -1,0 +1,124 @@
+{
+  "description": "Human-readable lifecycle; integers are in wei (18 decimals). Same math as vectors.json.",
+  "feeBps": 30,
+  "steps": [
+    {
+      "op": "alice addLiquidity 1000/1000",
+      "sharesMinted": 999999999999999999000,
+      "locked": 1000,
+      "state": {
+        "accountList": [
+          {
+            "bal0": 0,
+            "bal1": 0,
+            "key": "LOCK",
+            "shares": 1000
+          },
+          {
+            "bal0": 1000000000000000000000,
+            "bal1": 1000000000000000000000,
+            "key": "alice",
+            "shares": 999999999999999999000
+          },
+          {
+            "bal0": 100000000000000000000,
+            "bal1": 100000000000000000000,
+            "key": "bob",
+            "shares": 0
+          }
+        ],
+        "lockedShares": 1000,
+        "reserve0": 1000000000000000000000,
+        "reserve1": 1000000000000000000000,
+        "totalShares": 1000000000000000000000
+      }
+    },
+    {
+      "op": "bob swap 10 TKN0 -> TKN1 (0.3% fee)",
+      "amountOut": 9871580343970612988,
+      "continuousOut": "9871580343970612988.5046090477934988167965385110448825212630078121132310860718635",
+      "state": {
+        "accountList": [
+          {
+            "bal0": 0,
+            "bal1": 0,
+            "key": "LOCK",
+            "shares": 1000
+          },
+          {
+            "bal0": 1000000000000000000000,
+            "bal1": 1000000000000000000000,
+            "key": "alice",
+            "shares": 999999999999999999000
+          },
+          {
+            "bal0": 90000000000000000000,
+            "bal1": 109871580343970612988,
+            "key": "bob",
+            "shares": 0
+          }
+        ],
+        "lockedShares": 1000,
+        "reserve0": 1010000000000000000000,
+        "reserve1": 990128419656029387012,
+        "totalShares": 1000000000000000000000
+      }
+    },
+    {
+      "op": "bob addLiquidity 50/50-ish proportional",
+      "sharesMinted": 49504950495049504949,
+      "state": {
+        "accountList": [
+          {
+            "bal0": 0,
+            "bal1": 0,
+            "key": "LOCK",
+            "shares": 1000
+          },
+          {
+            "bal0": 1000000000000000000000,
+            "bal1": 1000000000000000000000,
+            "key": "alice",
+            "shares": 999999999999999999000
+          },
+          {
+            "bal0": 40000000000000000000,
+            "bal1": 60855321945157276998,
+            "key": "bob",
+            "shares": 49504950495049504949
+          }
+        ],
+        "lockedShares": 1000,
+        "reserve0": 1060000000000000000000,
+        "reserve1": 1039144678054842723002,
+        "totalShares": 1049504950495049504949
+      }
+    }
+  ],
+  "finalState": {
+    "accountList": [
+      {
+        "bal0": 0,
+        "bal1": 0,
+        "key": "LOCK",
+        "shares": 1000
+      },
+      {
+        "bal0": 1000000000000000000000,
+        "bal1": 1000000000000000000000,
+        "key": "alice",
+        "shares": 999999999999999999000
+      },
+      {
+        "bal0": 40000000000000000000,
+        "bal1": 60855321945157276998,
+        "key": "bob",
+        "shares": 49504950495049504949
+      }
+    ],
+    "lockedShares": 1000,
+    "reserve0": 1060000000000000000000,
+    "reserve1": 1039144678054842723002,
+    "totalShares": 1049504950495049504949
+  }
+}

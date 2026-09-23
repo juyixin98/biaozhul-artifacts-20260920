@@ -1,0 +1,22 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+solc = "0.8.26"
+evm_version = "cancun"
+optimizer = true
+optimizer_runs = 200
+via_ir = true
+# Deterministic fuzz/invariant settings so runs are replayable.
+fuzz = { runs = 500, seed = "0x1337" }
+invariant = { runs = 64, depth = 48, fail_on_revert = false }
+# The reference-model vector tests only need to read generated vectors.
+fs_permissions = [{ access = "read", path = "./test/vectors" }]
+
+[profile.ci]
+fuzz = { runs = 5000, seed = "0x1337" }
+invariant = { runs = 256, depth = 96, fail_on_revert = false }
+
+[fmt]
+line_length = 120
+tab_width = 4

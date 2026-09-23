@@ -1,0 +1,58 @@
+{
+  "_comment": "Hand-written example inputs for the pool. All amounts are in wei (18 decimals). These mirror script/replay.sh and are cross-checked by test/ReferenceVectors.t.sol against the Python model output.",
+  "feeBps": 30,
+  "feeNumerator": 997,
+  "feeDenominator": 1000,
+  "minimumLiquidity": 1000,
+  "initialLiquidity": {
+    "token0": "1000000000000000000000",
+    "token1": "1000000000000000000000",
+    "expectedSharesToLp": "999999999999999999000",
+    "expectedLockedShares": "1000",
+    "expectedTotalShares": "1000000000000000000000"
+  },
+  "swaps": [
+    {
+      "name": "10 TKN0 -> TKN1 at 1000/1000 reserves",
+      "tokenIn": "token0",
+      "amountIn": "10000000000000000000",
+      "minAmountOut": "0",
+      "expectedAmountOut": "9871580343970612988",
+      "expectedReserve0After": "1010000000000000000000",
+      "expectedReserve1After": "990128419656029387012",
+      "expectedKGrows": true
+    },
+    {
+      "name": "dust input 1 wei -> rejected, fee cannot be bypassed",
+      "tokenIn": "token0",
+      "amountIn": "1",
+      "minAmountOut": "0",
+      "expectedRevert": "ZeroOutput"
+    },
+    {
+      "name": "expired deadline -> rejected",
+      "tokenIn": "token0",
+      "amountIn": "10000000000000000000",
+      "deadline": "1",
+      "expectedRevert": "Expired"
+    },
+    {
+      "name": "slippage bound above fair output -> rejected",
+      "tokenIn": "token0",
+      "amountIn": "10000000000000000000",
+      "minAmountOut": "9871580343970612989",
+      "expectedRevert": "MinOutputNotMet"
+    }
+  ],
+  "secondLp": {
+    "token0Desired": "50000000000000000000",
+    "token1Desired": "50000000000000000000",
+    "expectedShares": "49504950495049504949",
+    "note": "Pool pulls <= desired on each side and floors shares to min of the two proportional claims."
+  },
+  "removal": {
+    "sharesToBurn": "all",
+    "expectedRemainingSharesForLp": "0",
+    "note": "Burning all LP shares redeems the proportional slice; floor dust remains covered by the permanent 1000-share lock."
+  }
+}

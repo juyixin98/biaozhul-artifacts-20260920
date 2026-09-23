@@ -1,0 +1,17 @@
+# Foundry
+out/
+cache/
+broadcast/
+forge-cache/
+
+# Python reference model
+reference/__pycache__/
+
+# Anvil / local
+*.log
+examples/replay-output.txt
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
