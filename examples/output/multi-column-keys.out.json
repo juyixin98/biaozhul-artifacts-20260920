@@ -1,0 +1,157 @@
+{
+  "ok": true,
+  "result": {
+    "columns": [
+      "id",
+      "ka",
+      "kb",
+      "cid",
+      "kra",
+      "krb"
+    ],
+    "rowCount": 3,
+    "rows": [
+      {
+        "values": [
+          2,
+          "x",
+          11,
+          102,
+          "x",
+          11
+        ],
+        "asObject": {
+          "id": 2,
+          "ka": "x",
+          "kb": 11,
+          "cid": 102,
+          "kra": "x",
+          "krb": 11
+        }
+      },
+      {
+        "values": [
+          1,
+          "x",
+          10,
+          100,
+          "x",
+          10
+        ],
+        "asObject": {
+          "id": 1,
+          "ka": "x",
+          "kb": 10,
+          "cid": 100,
+          "kra": "x",
+          "krb": 10
+        }
+      },
+      {
+        "values": [
+          1,
+          "x",
+          10,
+          101,
+          "x",
+          10
+        ],
+        "asObject": {
+          "id": 1,
+          "ka": "x",
+          "kb": 10,
+          "cid": 101,
+          "kra": "x",
+          "krb": 10
+        }
+      }
+    ]
+  },
+  "executionPlan": {
+    "plan": {
+      "operator": "partitionedHashJoin",
+      "joinType": "INNER",
+      "keyColumns": [
+        "ka=kra",
+        "kb=krb"
+      ],
+      "buildSide": "right",
+      "buildRowsInput": 4,
+      "probeRowsInput": 5,
+      "options": {
+        "memoryThresholdRows": 2,
+        "partitions": 3,
+        "diskQuotaBytes": -1,
+        "spillDir": "/tmp",
+        "keepSpillFiles": false,
+        "maxRecursiveLevels": 16
+      },
+      "initialPartitions": 3,
+      "stats": {
+        "outputRows": 3,
+        "nullKeyBuildRowsDropped": 1,
+        "nullKeyProbeRows": 2,
+        "inMemoryPartitions": 2,
+        "spillWaves": 1,
+        "boundedFallbacks": 0,
+        "hotKeyFallbacks": 0,
+        "spillPeakBytes": 72,
+        "spillLiveBytesAtEnd": 0,
+        "diskQuotaBytes": -1,
+        "warnings": []
+      },
+      "children": [
+        {
+          "operator": "partitionStage",
+          "level": 0,
+          "partitions": 3,
+          "seed": 4028701401546325202,
+          "maxBuildPartitionRows": 2
+        },
+        {
+          "operator": "partitionProcess",
+          "partitionId": 0,
+          "buildRows": 1,
+          "probeRows": 1,
+          "strategy": "inMemoryHashJoin",
+          "buildDistinctKeys": 1,
+          "spillBytesBuild": 13,
+          "spillBytesProbe": 11,
+          "matchedPairs": 1
+        },
+        {
+          "operator": "partitionProcess",
+          "partitionId": 1,
+          "buildRows": 0,
+          "probeRows": 1,
+          "strategy": "emptyBuild"
+        },
+        {
+          "operator": "partitionProcess",
+          "partitionId": 2,
+          "buildRows": 2,
+          "probeRows": 1,
+          "strategy": "inMemoryHashJoin",
+          "buildDistinctKeys": 1,
+          "spillBytesBuild": 26,
+          "spillBytesProbe": 11,
+          "matchedPairs": 2
+        }
+      ]
+    },
+    "stats": {
+      "outputRows": 3,
+      "nullKeyBuildRowsDropped": 1,
+      "nullKeyProbeRows": 2,
+      "inMemoryPartitions": 2,
+      "spillWaves": 1,
+      "boundedFallbacks": 0,
+      "hotKeyFallbacks": 0,
+      "spillPeakBytes": 72,
+      "spillLiveBytesAtEnd": 0,
+      "diskQuotaBytes": -1,
+      "warnings": []
+    }
+  }
+}
+

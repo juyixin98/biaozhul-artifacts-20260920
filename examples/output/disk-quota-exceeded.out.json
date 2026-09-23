@@ -1,0 +1,9 @@
+{
+  "ok": false,
+  "diskQuotaBytes": 60,
+  "usedBytes": 60,
+  "errorType": "DISK_QUOTA_EXCEEDED",
+  "errorCode": 507,
+  "error": "磁盘溢写额度耗尽，无法写入分区 'L0-probe-1'（本次需要 8 字节）（额度 60 字节，已用 60 字节）"
+}
+

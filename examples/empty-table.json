@@ -1,0 +1,11 @@
+{
+  "joinType": "INNER",
+  "keys": ["k"],
+  "left":  { "name": "L", "columns": ["id", "k"], "rows": [] },
+  "right": { "name": "R", "columns": ["cid", "k"], "rows": [[10, "a"], [11, "b"]] },
+  "options": {
+    "memoryThresholdRows": 4,
+    "partitions": 4,
+    "diskQuotaBytes": -1
+  }
+}

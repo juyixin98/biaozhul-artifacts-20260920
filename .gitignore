@@ -1,0 +1,12 @@
+# 编译产物
+out/
+*.class
+
+# 溢写临时文件
+phj-spill-*
+*.jsonl
+*.mark
+
+# 系统/编辑器
+.DS_Store
+*.log

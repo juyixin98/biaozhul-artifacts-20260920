@@ -1,0 +1,445 @@
+{
+  "ok": true,
+  "result": {
+    "columns": [
+      "id",
+      "k",
+      "cid",
+      "k"
+    ],
+    "rowCount": 24,
+    "rows": [
+      {
+        "values": [
+          1,
+          0,
+          10,
+          0
+        ],
+        "asObject": {
+          "id": 1,
+          "k#1": 0,
+          "cid": 10,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          1,
+          0,
+          11,
+          0
+        ],
+        "asObject": {
+          "id": 1,
+          "k#1": 0,
+          "cid": 11,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          2,
+          0,
+          10,
+          0
+        ],
+        "asObject": {
+          "id": 2,
+          "k#1": 0,
+          "cid": 10,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          2,
+          0,
+          11,
+          0
+        ],
+        "asObject": {
+          "id": 2,
+          "k#1": 0,
+          "cid": 11,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          3,
+          0,
+          10,
+          0
+        ],
+        "asObject": {
+          "id": 3,
+          "k#1": 0,
+          "cid": 10,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          3,
+          0,
+          11,
+          0
+        ],
+        "asObject": {
+          "id": 3,
+          "k#1": 0,
+          "cid": 11,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          4,
+          0,
+          10,
+          0
+        ],
+        "asObject": {
+          "id": 4,
+          "k#1": 0,
+          "cid": 10,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          4,
+          0,
+          11,
+          0
+        ],
+        "asObject": {
+          "id": 4,
+          "k#1": 0,
+          "cid": 11,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          5,
+          0,
+          10,
+          0
+        ],
+        "asObject": {
+          "id": 5,
+          "k#1": 0,
+          "cid": 10,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          5,
+          0,
+          11,
+          0
+        ],
+        "asObject": {
+          "id": 5,
+          "k#1": 0,
+          "cid": 11,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          6,
+          0,
+          10,
+          0
+        ],
+        "asObject": {
+          "id": 6,
+          "k#1": 0,
+          "cid": 10,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          6,
+          0,
+          11,
+          0
+        ],
+        "asObject": {
+          "id": 6,
+          "k#1": 0,
+          "cid": 11,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          1,
+          0,
+          12,
+          0
+        ],
+        "asObject": {
+          "id": 1,
+          "k#1": 0,
+          "cid": 12,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          1,
+          0,
+          13,
+          0
+        ],
+        "asObject": {
+          "id": 1,
+          "k#1": 0,
+          "cid": 13,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          2,
+          0,
+          12,
+          0
+        ],
+        "asObject": {
+          "id": 2,
+          "k#1": 0,
+          "cid": 12,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          2,
+          0,
+          13,
+          0
+        ],
+        "asObject": {
+          "id": 2,
+          "k#1": 0,
+          "cid": 13,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          3,
+          0,
+          12,
+          0
+        ],
+        "asObject": {
+          "id": 3,
+          "k#1": 0,
+          "cid": 12,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          3,
+          0,
+          13,
+          0
+        ],
+        "asObject": {
+          "id": 3,
+          "k#1": 0,
+          "cid": 13,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          4,
+          0,
+          12,
+          0
+        ],
+        "asObject": {
+          "id": 4,
+          "k#1": 0,
+          "cid": 12,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          4,
+          0,
+          13,
+          0
+        ],
+        "asObject": {
+          "id": 4,
+          "k#1": 0,
+          "cid": 13,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          5,
+          0,
+          12,
+          0
+        ],
+        "asObject": {
+          "id": 5,
+          "k#1": 0,
+          "cid": 12,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          5,
+          0,
+          13,
+          0
+        ],
+        "asObject": {
+          "id": 5,
+          "k#1": 0,
+          "cid": 13,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          6,
+          0,
+          12,
+          0
+        ],
+        "asObject": {
+          "id": 6,
+          "k#1": 0,
+          "cid": 12,
+          "k#3": 0
+        }
+      },
+      {
+        "values": [
+          6,
+          0,
+          13,
+          0
+        ],
+        "asObject": {
+          "id": 6,
+          "k#1": 0,
+          "cid": 13,
+          "k#3": 0
+        }
+      }
+    ]
+  },
+  "executionPlan": {
+    "plan": {
+      "operator": "partitionedHashJoin",
+      "joinType": "INNER",
+      "keyColumns": [
+        "k=k"
+      ],
+      "buildSide": "right",
+      "buildRowsInput": 4,
+      "probeRowsInput": 6,
+      "options": {
+        "memoryThresholdRows": 2,
+        "partitions": 4,
+        "diskQuotaBytes": -1,
+        "spillDir": "/tmp/phj-hot",
+        "keepSpillFiles": true,
+        "maxRecursiveLevels": 16
+      },
+      "initialPartitions": 4,
+      "stats": {
+        "outputRows": 24,
+        "nullKeyBuildRowsDropped": 0,
+        "nullKeyProbeRows": 0,
+        "inMemoryPartitions": 0,
+        "spillWaves": 1,
+        "boundedFallbacks": 1,
+        "hotKeyFallbacks": 1,
+        "spillPeakBytes": 64,
+        "spillLiveBytesAtEnd": -64,
+        "diskQuotaBytes": -1,
+        "warnings": [
+          "分区 L0-build-0 触发有界回退：分区为单一热点键 [0]（4 行），再分区无法打散"
+        ]
+      },
+      "children": [
+        {
+          "operator": "partitionStage",
+          "level": 0,
+          "partitions": 4,
+          "seed": 4028701401546325202,
+          "maxBuildPartitionRows": 4
+        },
+        {
+          "operator": "partitionProcess",
+          "partitionId": 0,
+          "buildRows": 4,
+          "probeRows": 6,
+          "distinctKeysSampled": 1,
+          "maxKeyFrequency": 4,
+          "strategy": "boundedBlockNestedLoop",
+          "fallbackReason": "分区为单一热点键 [0]（4 行），再分区无法打散",
+          "blocks": 2,
+          "matchedPairs": 24
+        },
+        {
+          "operator": "partitionProcess",
+          "partitionId": 1,
+          "buildRows": 0,
+          "probeRows": 0,
+          "strategy": "emptyBuild"
+        },
+        {
+          "operator": "partitionProcess",
+          "partitionId": 2,
+          "buildRows": 0,
+          "probeRows": 0,
+          "strategy": "emptyBuild"
+        },
+        {
+          "operator": "partitionProcess",
+          "partitionId": 3,
+          "buildRows": 0,
+          "probeRows": 0,
+          "strategy": "emptyBuild"
+        }
+      ]
+    },
+    "stats": {
+      "outputRows": 24,
+      "nullKeyBuildRowsDropped": 0,
+      "nullKeyProbeRows": 0,
+      "inMemoryPartitions": 0,
+      "spillWaves": 1,
+      "boundedFallbacks": 1,
+      "hotKeyFallbacks": 1,
+      "spillPeakBytes": 64,
+      "spillLiveBytesAtEnd": -64,
+      "diskQuotaBytes": -1,
+      "warnings": [
+        "分区 L0-build-0 触发有界回退：分区为单一热点键 [0]（4 行），再分区无法打散"
+      ]
+    },
+    "spillDir": "/tmp/phj-hot/phj-spill-320f9b4947ef-1"
+  }
+}
+

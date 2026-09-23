@@ -1,0 +1,31 @@
+{
+  "joinType": "LEFT",
+  "keys": ["k"],
+  "left": {
+    "name": "orders",
+    "columns": ["oid", "k", "amt"],
+    "rows": [
+      [1, "a", 10],
+      [2, "b", 20],
+      [3, null, 30],
+      [4, "a", 40],
+      [5, "z", 50]
+    ]
+  },
+  "right": {
+    "name": "customers",
+    "columns": ["cid", "k", "city"],
+    "rows": [
+      [10, "a", "BJ"],
+      [11, "a", "SH"],
+      [12, "b", "GZ"],
+      [13, null, "SZ"]
+    ]
+  },
+  "options": {
+    "memoryThresholdRows": 2,
+    "partitions": 4,
+    "diskQuotaBytes": -1,
+    "exportPlan": true
+  }
+}

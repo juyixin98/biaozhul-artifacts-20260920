@@ -1,0 +1,78 @@
+{
+  "joinType": "INNER",
+  "keys": [
+    "k"
+  ],
+  "left": {
+    "name": "L",
+    "columns": [
+      "id",
+      "k"
+    ],
+    "rows": [
+      [
+        1,
+        "a"
+      ],
+      [
+        2,
+        "b"
+      ],
+      [
+        3,
+        "c"
+      ],
+      [
+        4,
+        "d"
+      ],
+      [
+        5,
+        "e"
+      ],
+      [
+        6,
+        "f"
+      ],
+      [
+        7,
+        "g"
+      ],
+      [
+        8,
+        "h"
+      ]
+    ]
+  },
+  "right": {
+    "name": "R",
+    "columns": [
+      "cid",
+      "k"
+    ],
+    "rows": [
+      [
+        10,
+        "a"
+      ],
+      [
+        11,
+        "c"
+      ],
+      [
+        12,
+        "e"
+      ],
+      [
+        13,
+        "g"
+      ]
+    ]
+  },
+  "options": {
+    "memoryThresholdRows": 2,
+    "partitions": 4,
+    "diskQuotaBytes": 60,
+    "exportPlan": true
+  }
+}

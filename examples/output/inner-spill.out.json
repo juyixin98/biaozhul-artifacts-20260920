@@ -1,0 +1,196 @@
+{
+  "ok": true,
+  "result": {
+    "columns": [
+      "oid",
+      "k",
+      "amt",
+      "cid",
+      "k",
+      "city"
+    ],
+    "rowCount": 5,
+    "rows": [
+      {
+        "values": [
+          1,
+          "a",
+          10,
+          10,
+          "a",
+          "BJ"
+        ],
+        "asObject": {
+          "oid": 1,
+          "k#1": "a",
+          "amt": 10,
+          "cid": 10,
+          "k#4": "a",
+          "city": "BJ"
+        }
+      },
+      {
+        "values": [
+          1,
+          "a",
+          10,
+          11,
+          "a",
+          "SH"
+        ],
+        "asObject": {
+          "oid": 1,
+          "k#1": "a",
+          "amt": 10,
+          "cid": 11,
+          "k#4": "a",
+          "city": "SH"
+        }
+      },
+      {
+        "values": [
+          4,
+          "a",
+          40,
+          10,
+          "a",
+          "BJ"
+        ],
+        "asObject": {
+          "oid": 4,
+          "k#1": "a",
+          "amt": 40,
+          "cid": 10,
+          "k#4": "a",
+          "city": "BJ"
+        }
+      },
+      {
+        "values": [
+          4,
+          "a",
+          40,
+          11,
+          "a",
+          "SH"
+        ],
+        "asObject": {
+          "oid": 4,
+          "k#1": "a",
+          "amt": 40,
+          "cid": 11,
+          "k#4": "a",
+          "city": "SH"
+        }
+      },
+      {
+        "values": [
+          2,
+          "b",
+          20,
+          12,
+          "b",
+          "GZ"
+        ],
+        "asObject": {
+          "oid": 2,
+          "k#1": "b",
+          "amt": 20,
+          "cid": 12,
+          "k#4": "b",
+          "city": "GZ"
+        }
+      }
+    ]
+  },
+  "executionPlan": {
+    "plan": {
+      "operator": "partitionedHashJoin",
+      "joinType": "INNER",
+      "keyColumns": [
+        "k=k"
+      ],
+      "buildSide": "right",
+      "buildRowsInput": 5,
+      "probeRowsInput": 5,
+      "options": {
+        "memoryThresholdRows": 2,
+        "partitions": 3,
+        "diskQuotaBytes": -1,
+        "spillDir": "/tmp",
+        "keepSpillFiles": false,
+        "maxRecursiveLevels": 16
+      },
+      "initialPartitions": 3,
+      "stats": {
+        "outputRows": 5,
+        "nullKeyBuildRowsDropped": 1,
+        "nullKeyProbeRows": 1,
+        "inMemoryPartitions": 3,
+        "spillWaves": 1,
+        "boundedFallbacks": 0,
+        "hotKeyFallbacks": 0,
+        "spillPeakBytes": 100,
+        "spillLiveBytesAtEnd": 0,
+        "diskQuotaBytes": -1,
+        "warnings": []
+      },
+      "children": [
+        {
+          "operator": "partitionStage",
+          "level": 0,
+          "partitions": 3,
+          "seed": 4028701401546325202,
+          "maxBuildPartitionRows": 2
+        },
+        {
+          "operator": "partitionProcess",
+          "partitionId": 0,
+          "buildRows": 2,
+          "probeRows": 3,
+          "strategy": "inMemoryHashJoin",
+          "buildDistinctKeys": 1,
+          "spillBytesBuild": 28,
+          "spillBytesProbe": 33,
+          "matchedPairs": 4
+        },
+        {
+          "operator": "partitionProcess",
+          "partitionId": 1,
+          "buildRows": 1,
+          "probeRows": 1,
+          "strategy": "inMemoryHashJoin",
+          "buildDistinctKeys": 1,
+          "spillBytesBuild": 14,
+          "spillBytesProbe": 11,
+          "matchedPairs": 1
+        },
+        {
+          "operator": "partitionProcess",
+          "partitionId": 2,
+          "buildRows": 1,
+          "probeRows": 0,
+          "strategy": "inMemoryHashJoin",
+          "buildDistinctKeys": 1,
+          "spillBytesBuild": 14,
+          "spillBytesProbe": 0,
+          "matchedPairs": 0
+        }
+      ]
+    },
+    "stats": {
+      "outputRows": 5,
+      "nullKeyBuildRowsDropped": 1,
+      "nullKeyProbeRows": 1,
+      "inMemoryPartitions": 3,
+      "spillWaves": 1,
+      "boundedFallbacks": 0,
+      "hotKeyFallbacks": 0,
+      "spillPeakBytes": 100,
+      "spillLiveBytesAtEnd": 0,
+      "diskQuotaBytes": -1,
+      "warnings": []
+    }
+  }
+}
+

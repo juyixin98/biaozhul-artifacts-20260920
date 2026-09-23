@@ -1,0 +1,70 @@
+{
+  "ok": true,
+  "result": {
+    "columns": [
+      "id",
+      "k",
+      "cid",
+      "k"
+    ],
+    "rowCount": 0,
+    "rows": []
+  },
+  "executionPlan": {
+    "plan": {
+      "operator": "partitionedHashJoin",
+      "joinType": "INNER",
+      "keyColumns": [
+        "k=k"
+      ],
+      "buildSide": "left",
+      "buildRowsInput": 0,
+      "probeRowsInput": 2,
+      "options": {
+        "memoryThresholdRows": 4,
+        "partitions": 4,
+        "diskQuotaBytes": -1,
+        "spillDir": "/tmp",
+        "keepSpillFiles": false,
+        "maxRecursiveLevels": 16
+      },
+      "stats": {
+        "outputRows": 0,
+        "nullKeyBuildRowsDropped": 0,
+        "nullKeyProbeRows": 0,
+        "inMemoryPartitions": 1,
+        "spillWaves": 0,
+        "boundedFallbacks": 0,
+        "hotKeyFallbacks": 0,
+        "spillPeakBytes": 0,
+        "spillLiveBytesAtEnd": 0,
+        "diskQuotaBytes": -1,
+        "warnings": []
+      },
+      "children": [
+        {
+          "operator": "inMemoryHashJoin",
+          "buildRows": 0,
+          "probeRows": 2,
+          "buildDistinctKeys": 0,
+          "matchedPairs": 0,
+          "unmatchedProbeRows": 0
+        }
+      ]
+    },
+    "stats": {
+      "outputRows": 0,
+      "nullKeyBuildRowsDropped": 0,
+      "nullKeyProbeRows": 0,
+      "inMemoryPartitions": 1,
+      "spillWaves": 0,
+      "boundedFallbacks": 0,
+      "hotKeyFallbacks": 0,
+      "spillPeakBytes": 0,
+      "spillLiveBytesAtEnd": 0,
+      "diskQuotaBytes": -1,
+      "warnings": []
+    }
+  }
+}
+
