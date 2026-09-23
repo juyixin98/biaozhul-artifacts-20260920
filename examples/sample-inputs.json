@@ -1,0 +1,41 @@
+{
+  "_comment": "哈希时间锁兑换示例输入。preimage 每次演示由 openssl 随机生成；此处给出一个固定样本供手工演练。hashlock = keccak256(abi.encodePacked(preimage))，可用 `cast keccak 0x...` 真实验证。",
+  "chains": {
+    "chainA": {
+      "rpcUrl": "http://127.0.0.1:8545",
+      "chainId": 31337,
+      "htlcAddress": "由部署脚本输出，例如 0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "tokenAddress": "由部署脚本输出，例如 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "tokenSymbol": "TKNA"
+    },
+    "chainB": {
+      "rpcUrl": "http://127.0.0.1:8546",
+      "chainId": 31338,
+      "htlcAddress": "由部署脚本输出",
+      "tokenAddress": "由部署脚本输出",
+      "tokenSymbol": "TKNB"
+    }
+  },
+  "participants": {
+    "alice_sender_on_chainA": "0xf39Fd6e51aad88F6F4ce6ab8827279cfffb92266",
+    "bob_sender_on_chainB": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+  },
+  "order": {
+    "preimage_hex32_sample": "0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+    "hashlock": "对该 preimage 执行 cast keccak 得到，例如 0x...（以本地实算为准）",
+    "amountA": "100000000000000000000",
+    "amountB": "100000000000000000000",
+    "ttlA_seconds": 120,
+    "safety_gap_seconds": 60,
+    "ttlB_seconds": 180,
+    "_ttl_note": "ttlB 必须 = ttlA + safety_gap：后手腿的退款窗口严格晚于先手腿，保证先手在最坏时刻暴露原像，后手仍有完整间隔领取。",
+    "deadline_boundary_rule": "claim 要求 block.timestamp < timelock；refund 要求 block.timestamp >= timelock。timestamp == timelock 时领取必败、退款可成。"
+  },
+  "negative_cases": [
+    "重复 claim 同一把锁 → NotLocked（终态不可逆）",
+    "错误原像 claim → WrongPreimage，状态保持 LOCKED",
+    "恰好到期 claim → TooLate；同刻 refund 成功",
+    "到期前 refund → TooEarly",
+    "恶意 ERC-20 回调中重入 claim/refund → ReentrantCall（forge 测试实跑）"
+  ]
+}

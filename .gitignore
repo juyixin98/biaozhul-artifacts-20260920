@@ -1,0 +1,17 @@
+# Foundry 构建产物
+out/
+cache/
+broadcast/
+
+# 依赖（forge-std 已以源码形式固定在 lib/forge-std，提交入库；如需联网重装见 README）
+# lib/ 不忽略——本项目把固定版本的 forge-std 源码纳入版本库以锁定依赖
+
+# 密钥/环境（本地演示私钥是 anvil 公开测试密钥，仍不入库真实密钥）
+.env
+*.env.local
+
+# 编辑器/系统
+.DS_Store
+.idea/
+.vscode/
+*.swp

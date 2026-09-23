@@ -1,0 +1,37 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+test = "test"
+script = "script"
+# 固定编译器版本，保证构建可复现（无任何第三方 Solidity 依赖，无需 forge install）
+solc = "0.8.26"
+optimizer = true
+optimizer_runs = 200
+evm_version = "cancun"
+
+[profile.default.lint]
+# 时间锁本体必须使用 block.timestamp；重入由 CEI + nonReentrant 双重防护，
+# 并在 test/Reentrancy.t.sol 以真实攻击实证（另含 UnsafeHTLC 对照）。
+# 测试中跨 vm.warp 读取 block.timestamp 是时间模拟的必要写法。
+exclude_lints = [
+    "block-timestamp",
+    "reentrancy-no-eth",
+    "reentrancy-events",
+    "reentrancy",
+    "environment-read-across-mutation",
+]
+
+[lint]
+exclude_lints = [
+    "block-timestamp",
+    "reentrancy-no-eth",
+    "reentrancy-events",
+    "reentrancy",
+    "environment-read-across-mutation",
+]
+
+[fmt]
+line_length = 120
+tab_width = 4
+int_types = "long"
