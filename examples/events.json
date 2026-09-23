@@ -1,0 +1,9 @@
+{
+  "events": [
+    "plain-string-event",
+    {"item": "apple", "count": 50},
+    {"item": "pear", "count": 30},
+    {"item": "banana"},
+    {"item": "kiwi", "count": 5, "timestampMillis": 1000}
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "demo",
+  "width": 256,
+  "depth": 5,
+  "seed": 42,
+  "candidateCapacity": 10,
+  "windowMillis": 0,
+  "trackExact": true
+}

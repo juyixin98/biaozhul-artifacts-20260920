@@ -1,0 +1,8 @@
+{
+  "id": "sized",
+  "epsilon": 0.01,
+  "delta": 0.01,
+  "candidateCapacity": 10,
+  "windowMillis": 10000,
+  "trackExact": false
+}

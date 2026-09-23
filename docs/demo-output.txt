@@ -1,0 +1,146 @@
+Using port 32885
+== 1. health ==
+{
+    "status": "ok",
+    "timeMillis": 0
+}
+== 2. create engine (epsilon/delta sizing, 1000ms windows, exact on) ==
+{
+    "created": "demo",
+    "config": {
+        "id": "demo",
+        "width": 55,
+        "depth": 5,
+        "seed": 0,
+        "candidateCapacity": 5,
+        "windowMillis": 1000,
+        "trackExact": true
+    }
+}
+== 3. send a skewed batch into window 0 ==
+{
+    "engine": "demo",
+    "accepted": 87,
+    "droppedLate": 0,
+    "activeWindowTotal": 87,
+    "activeCandidates": 5
+}
+== 4. point query: apple (estimate + declared bound + true count) ==
+{
+    "item": "apple",
+    "estimate": 50,
+    "trueCount": 50,
+    "errorUpperBound": 5,
+    "epsilon": 0.04942330597198264,
+    "delta": 0.006737946999085467,
+    "totalCount": 87,
+    "retainedCandidate": true
+}
+== 5. candidate top-K (coverage NOT guaranteed, count bound declared) ==
+{
+    "engine": "demo",
+    "k": 5,
+    "items": [
+        {
+            "item": "apple",
+            "estimate": 50
+        },
+        {
+            "item": "pear",
+            "estimate": 30
+        },
+        {
+            "item": "kiwi",
+            "estimate": 5
+        },
+        {
+            "item": "banana",
+            "estimate": 1
+        },
+        {
+            "item": "plain-string-event",
+            "estimate": 1
+        }
+    ],
+    "estimateErrorUpperBound": 5,
+    "coverageGuarantee": "none: items are a projection of the bounded candidate set; a true top-K item may have been evicted. Point counts carry the bound above."
+}
+== 6. advance virtual time past the window boundary ==
+{
+    "nowMillis": 2000
+}
+== 7. inspect the closed window (ground truth via exactTopK) ==
+{
+    "windowStartMillis": 0,
+    "windowEndMillis": 1000,
+    "totalCount": 87,
+    "distinctCandidates": 5,
+    "estimateErrorUpperBound": 5,
+    "candidateTopK": [
+        {
+            "item": "apple",
+            "estimate": 50
+        },
+        {
+            "item": "pear",
+            "estimate": 30
+        },
+        {
+            "item": "kiwi",
+            "estimate": 5
+        },
+        {
+            "item": "banana",
+            "estimate": 1
+        },
+        {
+            "item": "plain-string-event",
+            "estimate": 1
+        }
+    ],
+    "exactTopK": [
+        {
+            "item": "apple",
+            "estimate": 50
+        },
+        {
+            "item": "pear",
+            "estimate": 30
+        },
+        {
+            "item": "kiwi",
+            "estimate": 5
+        },
+        {
+            "item": "banana",
+            "estimate": 1
+        },
+        {
+            "item": "plain-string-event",
+            "estimate": 1
+        }
+    ],
+    "coverageGuarantee": "candidateTopK is not guaranteed to cover the true top-K; use exactTopK/trackExact for ground truth."
+}
+== 8. merge: export another engine's sketch and merge the compatible one ==
+{
+    "engine": "other",
+    "merged": true,
+    "activeWindowTotal": 14,
+    "estimateErrorUpperBound": 1
+}
+== 9. incompatible merges are rejected (409) ==
+different seed -> HTTP 409
+{
+    "error": "sketch_incompatible",
+    "message": "sketch seed mismatch: engine=42 incoming=43 (different seeds hash items to different buckets)",
+    "status": 409
+}
+different width -> HTTP 409
+{
+    "error": "sketch_incompatible",
+    "message": "sketch layout mismatch: engine=55x5 incoming=56x5",
+    "status": 409
+}
+
+Demo complete. Server log: docs/server.log

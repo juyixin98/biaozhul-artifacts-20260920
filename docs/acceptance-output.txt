@@ -1,0 +1,66 @@
+# Acceptance experiment output
+# Generated: 2026-09-23T10:54:51Z
+# Command: java -cp build/classes:build/test-classes test.exp.AcceptanceExperiments
+
+=== Experiment 1: skewed (Zipf, s=1.0) stream, CMS vs exact ===
+sketch: width=272 depth=5 (epsilon~0.0100, delta~0.00674)
+stream per seed: 120000 events, 1000 distinct items, 20 seeds
+seed  maxError  meanError  queriesPastBound  fractionPastBound
+   1       332     59.572                 0            0.00000
+   2       400     61.305                 0            0.00000
+   3       425     59.096                 0            0.00000
+   7       382     60.513                 0            0.00000
+  11       303     60.964                 0            0.00000
+  13       288     62.370                 0            0.00000
+  17       752     61.648                 0            0.00000
+  19       318     63.391                 0            0.00000
+  23       402     60.635                 0            0.00000
+  29       273     59.734                 0            0.00000
+  31       426     60.273                 0            0.00000
+  37       661     60.305                 0            0.00000
+  41       734     60.149                 0            0.00000
+  43       286     60.575                 0            0.00000
+  47       299     59.808                 0            0.00000
+  53       362     59.542                 0            0.00000
+  59       532     62.314                 0            0.00000
+  61       367     63.550                 0            0.00000
+  67       388     62.465                 0            0.00000
+  71       425     60.254                 0            0.00000
+-- aggregate: queries=20000 underEstimates=0 maxError=752 (declared bound=1200) meanError=60.9232 fractionPastBound=0.00000
+Interpretation: zero under-estimates always; per-item probability of exceeding
+epsilon*N is about delta=0.0067 for any fixed item, here ~0 for the hottest
+items and small overall. The bound is a one-sided *count* guarantee only.
+
+=== Experiment 2: crafted hash collisions ===
+sketch width=64 depth=3 seed=1; found THREE distinct strings sharing
+the same bucket on every row (lexical order roles):
+  colliderA = item-00001278
+  colliderB = item-00006129
+  victim    = item-00010598
+stream: retained-heavy x30, victim x10, colliderA x80, colliderB x40
+victim true count = 10, CMS estimate = 130 (over-estimate 120)
+heavy-hitter eviction: genuinely heavy 'retained-heavy' retained after collision flood = false
+Interpretation: point queries are over-counts with the declared bound;
+candidate *membership* decisions based on estimates can therefore be wrong.
+
+=== Experiment 3: sketch merge compatibility ===
+same width/depth/seed merged: total=7 (3+4)
+different seed: REJECTED -> sketch seed mismatch: this=9 other=10 (different seeds hash items to different buckets)
+different width: REJECTED -> sketch layout mismatch: this=64x4 other=32x4
+different depth: REJECTED -> sketch layout mismatch: this=64x4 other=64x5
+Interpretation: merge requires provably identical hash placement; any
+difference in seed or layout is refused instead of corrupting estimates.
+
+=== Experiment 4: candidate-set coverage of the true top-K ===
+stream: 10 equally heavy items interleaved with one-off noise; wide sketch (4096x5) so counts are essentially exact
+candidateCapacity  retainedTrueTopK  recall
+               10                10  1.00
+                7                 7  0.70
+                5                 5  0.50
+                3                 3  0.30
+Interpretation: recall is structurally capped at capacity/K and depends on
+arrival order/churn even with perfect counts. The API therefore never claims
+top-K coverage; it answers point counts with an error bound instead.
+
+ALL ACCEPTANCE EXPERIMENTS COMPLETED
+Note: candidate recall may be < 1 by design; point-count bounds never fail.
