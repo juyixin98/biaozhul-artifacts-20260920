@@ -1,0 +1,5 @@
+{
+  "source": "fn sumto(int n): int {\n    var i = 1;\n    var acc = 0;\n    while (i <= n) {\n        acc = acc + i;\n        i = i + 1;\n    }\n    return acc;\n}\n\nfn main() {\n    print sumto(10);\n}\n",
+  "name": "sum_loop",
+  "encoding": "hex"
+}

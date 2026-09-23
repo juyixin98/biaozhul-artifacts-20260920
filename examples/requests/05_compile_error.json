@@ -1,0 +1,3 @@
+{
+  "source": "fn main() {\n    print 1\n}\n"
+}
