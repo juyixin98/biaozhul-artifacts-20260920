@@ -1,0 +1,16 @@
+# Dependency lock
+#
+# This project deliberately has ZERO third-party dependencies at every stage:
+#
+#   compile : JDK javac only (--release 17), invoked by build.sh / test.sh
+#   runtime : JDK standard library only
+#               - java.base (IO, NIO, collections, concurrency, java.net.http in tests)
+#               - jdk.httpserver (com.sun.net.httpserver.HttpServer)
+#   tests   : plain Java main() programs with hard assertions (no JUnit needed)
+#   shell   : POSIX sh/bash, coreutils find; curl only for the manual examples
+#
+# Verified toolchain (the environment used to produce the recorded results):
+#   Temurin OpenJDK 17.0.20.1+1 (build 17.0.20.1+1), Linux x86_64
+#
+# Any JDK >= 17 providing jdk.httpserver is expected to work unchanged.
+# There is no Maven/Gradle configuration, so no external artifact is ever fetched.

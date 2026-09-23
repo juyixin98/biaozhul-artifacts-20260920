@@ -1,0 +1,8 @@
+target/
+data/
+_tmp/
+results/
+*.class
+.idea/
+*.iml
+.vscode/

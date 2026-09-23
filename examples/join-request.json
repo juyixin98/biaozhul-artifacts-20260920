@@ -1,0 +1,7 @@
+{
+  "leftInput": "examples/users.jsonl",
+  "rightInput": "examples/orders.jsonl",
+  "leftKeyColumn": "k",
+  "rightKeyColumn": "k",
+  "memoryBudgetBytes": 65536
+}
