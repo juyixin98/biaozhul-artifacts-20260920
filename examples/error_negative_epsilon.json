@@ -1,0 +1,8 @@
+{
+  "_comment": "非法请求样例：epsilon 为负。预期 status=error、code=invalid_value、退出码 1。",
+  "epsilon": -1.0,
+  "points": [
+    {"x": 0, "y": 0},
+    {"x": 1, "y": 1}
+  ]
+}

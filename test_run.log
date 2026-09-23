@@ -1,0 +1,25 @@
+## 2026-09-23T17:14:43Z clean build + full test
+$ g++ --version | head -1
+g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+
+$ make clean && make test
+mkdir -p build
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -c src/geometry.cpp -o build/geometry.o
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -c src/simplification.cpp -o build/simplification.o
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -c src/json.cpp -o build/json.o
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic src/main.cpp build/geometry.o build/simplification.o build/json.o -o build/simplify 
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic tests/test_unit.cpp build/geometry.o build/simplification.o build/json.o -o build/test_unit 
+./build/test_unit
+Running unit tests...
+77 checks, 0 failures
+python3 tests/run_e2e.py --bin ./build/simplify
+Running end-to-end tests...
+519 checks, 0 failures
+
+--- examples ---
+examples/basic_zigzag.json -> ok kept=5/5 within=True bound=one_sided_original_to_simplified
+examples/duplicates_zero_threshold.json -> ok kept=2/6 within=True bound=one_sided_original_to_simplified
+examples/error_negative_epsilon.json -> error invalid_value
+examples/foldback.json -> ok kept=3/5 within=True bound=one_sided_original_to_simplified
+examples/self_intersect.json -> ok kept=4/4 within=True bound=one_sided_original_to_simplified
+examples/single_point.json -> ok kept=1/1 within=True bound=one_sided_original_to_simplified
