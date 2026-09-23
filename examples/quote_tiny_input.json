@@ -1,0 +1,9 @@
+{
+  "reserve_in_units": "100000000000000000000",
+  "reserve_out_units": "100000000000000000000",
+  "amount_in_units": "1000000000000",
+  "decimals_in": 18,
+  "decimals_out": 18,
+  "amp": 100,
+  "fee_bps": 4
+}

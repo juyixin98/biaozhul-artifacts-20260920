@@ -1,0 +1,8 @@
+{
+  "reserve_in_units": "0",
+  "reserve_out_units": "100000000",
+  "amount_in_units": "1000000",
+  "decimals_in": 6,
+  "decimals_out": 6,
+  "amp": 20
+}
