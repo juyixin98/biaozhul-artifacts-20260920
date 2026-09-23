@@ -1,0 +1,10 @@
+{
+  "samples": [
+    {"metric": "http_requests", "labels": {"route": "/ok", "request_id": "req-000001"}, "value": 1},
+    {"metric": "http_requests", "labels": {"route": "/ok", "request_id": "req-000002"}, "value": 1},
+    {"metric": "http_requests", "labels": {"route": "/ok", "request_id": "req-000003"}, "value": 1},
+    {"metric": "http_requests", "labels": {"blob": "这是一个故意超长的标签值用于演示截断行为-0123456789-ABCDEFGHIJKLMNOPQRSTUVWXYZ-abcdefghijklmnopqrstuvwxyz"}, "value": 1},
+    {"metric": "1-invalid-metric-name", "labels": {}, "value": 1},
+    {"metric": "http_requests", "labels": {"bad-key": "x"}, "value": 1}
+  ]
+}

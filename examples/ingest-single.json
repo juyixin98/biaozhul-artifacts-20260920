@@ -1,0 +1,10 @@
+{
+  "metric": "http_requests",
+  "labels": {
+    "route": "/api/v1/login",
+    "method": "POST",
+    "pod": "pod-0007",
+    "zone": "a"
+  },
+  "value": 1
+}

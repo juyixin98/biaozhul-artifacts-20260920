@@ -1,0 +1,5 @@
+# 二进制与本地数据
+/server
+/synthload
+/data/
+*.json.tmp

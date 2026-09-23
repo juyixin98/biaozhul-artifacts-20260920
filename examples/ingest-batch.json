@@ -1,0 +1,19 @@
+{
+  "samples": [
+    {
+      "metric": "http_requests",
+      "labels": {"route": "/api/v1/users", "method": "GET", "pod": "pod-0001", "status": "200"},
+      "value": 1
+    },
+    {
+      "metric": "http_requests",
+      "labels": {"route": "/api/v1/users", "method": "GET", "pod": "pod-0002", "status": "200"},
+      "value": 1
+    },
+    {
+      "metric": "queue_depth",
+      "labels": {"queue": "emails", "zone": "b"},
+      "value": 42.5
+    }
+  ]
+}
