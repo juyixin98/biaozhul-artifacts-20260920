@@ -1,0 +1,1 @@
+{"ok": false, "error": {"code": "non_symmetric_matrix", "message": "matrix not symmetric: |A[0,1] - A[1,0]| = 5.000000e-01 exceeds tolerance 1.010000e-10", "details": {"max_abs_diff": 0.5, "position": [0, 1]}}}

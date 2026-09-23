@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sparse-cg"
+version = "1.0.0"
+description = "Pure NumPy CSR matrices and preconditioned conjugate gradient (SPD) with a JSON interface"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]
+
+[project.scripts]
+sparse-cg = "sparse_cg.cli:main"
+
+[tool.setuptools]
+packages = ["sparse_cg"]

@@ -1,0 +1,18 @@
+case                                   status                      n    it   req.tol true rel.res   x rel.err  pass
+-------------------------------------------------------------------------------------------------------------------
+laplacian1d_smooth_none                converged                 500    14   1.0e-10    8.694e-11   2.515e-14    OK
+laplacian1d_smooth_jacobi              converged                 500    14   1.0e-10    8.694e-11   2.515e-14    OK
+massspring_random_none                 converged                1000    31   1.0e-09    5.002e-10   1.188e-09    OK
+massspring_random_jacobi               converged                1000    31   1.0e-09    5.002e-10   1.188e-09    OK
+scaledlaplacian_kappa1e8               converged                 400   398   1.0e-08    1.646e-09   1.109e-02    OK
+scaledlaplacian_kappa1e10              converged                 400   398   1.0e-08    1.635e-09   1.109e-02    OK
+zero_rhs                               zero_rhs                  200     0   1.0e-10    0.000e+00   0.000e+00    OK
+indefinite_curvature                   non_positive_curvature      2     1   1.0e-10    1.000e+00           -    OK
+illegal_csr_indptr_decrease            rejected(invalid_csr)       3     -         -            -           -    OK  row pointers must be non-decreasing
+illegal_csr_column_oor                 rejected(invalid_csr)       2     -         -            -           -    OK  column index >= n
+illegal_csr_indptr_end                 rejected(invalid_csr)       2     -         -            -           -    OK  indptr[-1] must equal nnz
+illegal_csr_nan_value                  rejected(invalid_csr)       1     -         -            -           -    OK  non-finite stored value
+non_symmetric_values                   rejected(non_symmetric_matrix)     3     -         -            -           -    OK  |A[0,1]-A[1,0]| = 0.5
+zero_diagonal_semidefinite             rejected(not_positive_definite)     2     -         -            -           -    OK  zero diagonal => not PD
+-------------------------------------------------------------------------------------------------------------------
+14/14 cases behaved as specified.

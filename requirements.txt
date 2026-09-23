@@ -1,0 +1,3 @@
+# The library and CLI use only Python's standard library and NumPy.
+# Tested with Python 3.12 and NumPy 2.5; any NumPy >= 1.24 should work.
+numpy>=1.24
