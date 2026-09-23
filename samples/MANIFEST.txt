@@ -1,0 +1,83 @@
+# TLS 记录观察器 —— 合成报文样例清单
+# 每个文件即按 TCP 发送顺序排列的裸字节，直接发给 server 即可复现。
+
+== 01_valid_single_record (samples/01_valid_single_record.bin)
+  报文: 一条 TLS 记录承载完整明文 ClientHello（SNI=example.com, ALPN=h2/http1.1, GREASE, 未知扩展）
+  预期: result=client_hello, sni=example.com, alpn=[h2,http/1.1]
+  字节: 152
+
+== 02_handshake_split_records (samples/02_handshake_split_records.bin)
+  报文: 同一个 ClientHello 被拆进 3 条 handshake 记录（切点跨 4 字节握手头与扩展块）
+  预期: result=client_hello（跨记录重组成功），sni=example.com
+  字节: 167
+
+== 03_duplicate_extension (samples/03_duplicate_extension.bin)
+  报文: 扩展块中 server_name(0x0000) 出现两次（非 GREASE 重复扩展）
+  预期: result=parse_error, DuplicateExtension ext_type=0x0000
+  字节: 128
+
+== 04_nested_length_mismatch_sni (samples/04_nested_length_mismatch_sni.bin)
+  报文: SNI 扩展内层 server_name_list 声明 100 字节，外层扩展数据仅 8 字节
+  预期: result=parse_error, LengthMismatch field=server_name_list
+  字节: 104
+
+== 05_grease_values (samples/05_grease_values.bin)
+  报文: GREASE 出现在扩展(两个不同值)/密码套件/supported_versions
+  预期: result=client_hello；GREASE 被过滤，无重复扩展错误，sni=grease.example
+  字节: 147
+
+== 06_truncated_record (samples/06_truncated_record.bin)
+  报文: 记录头声明的 fragment 长度比实际到齐字节多 40，随后连接结束
+  预期: result=parse_error, Truncated what=record
+  字节: 112
+
+== 07_ciphertext_after_hello (samples/07_ciphertext_after_hello.bin)
+  报文: ClientHello 后接 CCS 与 64 字节伪随机 app_data（模拟加密流量）
+  预期: result=client_hello；app_data 标记为非明文，绝不二次解析
+  字节: 227
+
+== 08_encrypted_only (samples/08_encrypted_only.bin)
+  报文: 无任何握手记录，直接一条 128 字节 app_data（随机字节中含 0x16/长度样式）
+  预期: result=no_client_hello, reason=encrypted_data_without_handshake
+  字节: 133
+
+== 09_record_too_large (samples/09_record_too_large.bin)
+  报文: 记录头声明 fragment=16385，仅给少量实际字节
+  预期: result=parse_error, RecordTooLarge max=16384
+  字节: 15
+
+== 10_bad_content_type (samples/10_bad_content_type.bin)
+  报文: 记录头 content_type=30（不在 20/21/22/23 支持子集内）
+  预期: result=parse_error, BadRecordContentType(30)
+  字节: 6
+
+== 11_first_message_server_hello (samples/11_first_message_server_hello.bin)
+  报文: 第一条握手消息 HandshakeType=2（ServerHello），后附 app_data
+  预期: result=no_client_hello, reason=first_handshake_not_client_hello
+  字节: 116
+
+== 12_bad_record_version (samples/12_bad_record_version.bin)
+  报文: 记录层 version=0x0002（不在 0x0301..=0x0304 内）
+  预期: result=parse_error, BadRecordVersion
+  字节: 5
+
+== 13_valid_for_tiny_tcp_segments (samples/13_valid_for_tiny_tcp_segments.bin)
+  报文: 完整 ClientHello（可按任意字节边界喂入，测试用每 3 字节一片）
+  预期: result=client_hello（任意增量切分下结论一致）
+  字节: 152
+
+== 14_empty_connection (samples/14_empty_connection.bin)
+  报文: 连接建立后立即关闭，无字节
+  预期: result=no_client_hello, reason=connection_ended
+  字节: 0
+
+== 15_truncated_handshake_header (samples/15_truncated_handshake_header.bin)
+  报文: 一个 handshake 记录的 fragment 只给了 3 字节（不足 4 字节握手头）即结束
+  预期: result=parse_error, Truncated what=handshake_header
+  字节: 8
+
+== 16_ccs_alert_then_hello (samples/16_ccs_alert_then_hello.bin)
+  报文: ClientHello 之前先出现 CCS 与 Alert（非致命杂项记录），随后正常 ClientHello
+  预期: result=client_hello（前两条记录视为非明文杂项）
+  字节: 165
+

@@ -1,0 +1,28 @@
+[package]
+name = "tls-record-observer"
+version = "0.1.0"
+edition = "2021"
+description = "Offline observer for TLS record headers and plaintext ClientHello (incremental byte parser, no decryption)"
+
+[lib]
+name = "tls_observer"
+path = "src/lib.rs"
+
+[[bin]]
+name = "tls-observer-server"
+path = "src/bin/server.rs"
+
+[[bin]]
+name = "gen-samples"
+path = "src/bin/gen_samples.rs"
+
+[[bin]]
+name = "observe-file"
+path = "src/bin/observe_file.rs"
+
+[dependencies]
+# 有意保持为空：TLS 记录层 / ClientHello 的解析全部在本 crate 内基于 std 手写，
+# 不使用任何现成的 TLS 协议解析库代做核心逻辑。
+
+[profile.release]
+opt-level = 2
