@@ -1,0 +1,25 @@
+{
+  "seed": 99,
+  "nodes": 3,
+  "ticks": 60,
+  "heartbeat": 3,
+  "node_windows": [
+    {"node": 0, "lo": 6, "hi": 7},
+    {"node": 1, "lo": 8, "hi": 9},
+    {"node": 2, "lo": 10, "hi": 11}
+  ],
+  "network": {"delay_ticks": 1, "jitter": 3, "loss_rate": 0.15, "dup_rate": 0.1},
+  "events": [
+    {"at": 12, "kind": "client_write", "client": "a", "data": "x1"},
+    {"at": 18, "kind": "client_write", "client": "b", "data": "x2"},
+    {"at": 24, "kind": "client_write", "client": "c", "data": "x3"},
+    {"at": 30, "kind": "client_write", "client": "d", "data": "x4"},
+    {"at": 36, "kind": "client_write", "client": "e", "data": "x5"},
+
+    {"at": 55, "kind": "committed", "client": "a", "data": "x1", "expect_index": 2},
+    {"at": 55, "kind": "committed", "client": "e", "data": "x5", "expect_index": 6},
+    {"at": 56, "kind": "log_match"},
+    {"at": 57, "kind": "log_contains", "target": 0, "data": "x1 x2 x3 x4 x5", "full_log": true},
+    {"at": 58, "kind": "commit_index", "expect_index": 6}
+  ]
+}

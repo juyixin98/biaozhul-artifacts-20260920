@@ -1,0 +1,9 @@
+{
+  "seed": 1,
+  "nodes": 3,
+  "ticks": 20,
+  "events": [
+    {"at": 5, "kind": "client_write", "client": "w", "data": "too-early"},
+    {"at": 6, "kind": "committed", "client": "w", "data": "too-early", "expect_index": 2}
+  ]
+}

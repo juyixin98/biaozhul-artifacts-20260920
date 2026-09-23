@@ -1,0 +1,28 @@
+{
+  "seed": 42,
+  "nodes": 3,
+  "ticks": 42,
+  "heartbeat": 3,
+  "node_windows": [
+    {"node": 0, "lo": 5, "hi": 6},
+    {"node": 1, "lo": 10, "hi": 11},
+    {"node": 2, "lo": 12, "hi": 13}
+  ],
+  "events": [
+    {"at": 8,  "kind": "client_write", "client": "c1", "data": "one"},
+
+    {"at": 10, "kind": "isolate", "isolated": 0},
+    {"at": 12, "kind": "client_write", "client": "c-lost", "data": "stale-write", "node": 0},
+    {"at": 16, "kind": "not_acked", "client": "c-lost"},
+
+    {"at": 24, "kind": "client_write", "client": "c2", "data": "two"},
+    {"at": 27, "kind": "not_acked", "client": "c-lost"},
+
+    {"at": 30, "kind": "isolate", "isolated": 0, "heal": true},
+    {"at": 35, "kind": "not_acked", "client": "c-lost"},
+    {"at": 38, "kind": "committed", "client": "c1", "data": "one", "expect_index": 2},
+    {"at": 38, "kind": "committed", "client": "c2", "data": "two", "expect_index": 4},
+    {"at": 39, "kind": "commit_index", "expect_index": 4},
+    {"at": 40, "kind": "log_contains", "target": 0, "data": "one two", "full_log": true}
+  ]
+}

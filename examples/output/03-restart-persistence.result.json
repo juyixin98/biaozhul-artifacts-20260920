@@ -1,0 +1,238 @@
+{
+  "ok": true,
+  "ticks_run": 95,
+  "term_history": [
+    {
+      "term": 1,
+      "leader": 0
+    },
+    {
+      "term": 3,
+      "leader": 2
+    },
+    {
+      "term": 6,
+      "leader": 1
+    }
+  ],
+  "acks": [
+    {
+      "client": "w1",
+      "data": "first",
+      "leader": 0,
+      "term": 1,
+      "applied_at": 9,
+      "index": 2
+    },
+    {
+      "client": "w2",
+      "data": "second",
+      "leader": 2,
+      "term": 3,
+      "applied_at": 48,
+      "index": 4
+    }
+  ],
+  "nodes": [
+    {
+      "id": 0,
+      "alive": true,
+      "role": "follower",
+      "term": 6,
+      "commit_index": 5,
+      "committed": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "first",
+          "client_id": "w1"
+        },
+        {
+          "index": 3,
+          "term": 3,
+          "data": ""
+        },
+        {
+          "index": 4,
+          "term": 3,
+          "data": "second",
+          "client_id": "w2"
+        },
+        {
+          "index": 5,
+          "term": 6,
+          "data": ""
+        }
+      ],
+      "full_log": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "first",
+          "client_id": "w1"
+        },
+        {
+          "index": 3,
+          "term": 3,
+          "data": ""
+        },
+        {
+          "index": 4,
+          "term": 3,
+          "data": "second",
+          "client_id": "w2"
+        },
+        {
+          "index": 5,
+          "term": 6,
+          "data": ""
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "alive": true,
+      "role": "leader",
+      "term": 6,
+      "commit_index": 5,
+      "committed": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "first",
+          "client_id": "w1"
+        },
+        {
+          "index": 3,
+          "term": 3,
+          "data": ""
+        },
+        {
+          "index": 4,
+          "term": 3,
+          "data": "second",
+          "client_id": "w2"
+        },
+        {
+          "index": 5,
+          "term": 6,
+          "data": ""
+        }
+      ],
+      "full_log": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "first",
+          "client_id": "w1"
+        },
+        {
+          "index": 3,
+          "term": 3,
+          "data": ""
+        },
+        {
+          "index": 4,
+          "term": 3,
+          "data": "second",
+          "client_id": "w2"
+        },
+        {
+          "index": 5,
+          "term": 6,
+          "data": ""
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "alive": true,
+      "role": "follower",
+      "term": 6,
+      "commit_index": 5,
+      "committed": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "first",
+          "client_id": "w1"
+        },
+        {
+          "index": 3,
+          "term": 3,
+          "data": ""
+        },
+        {
+          "index": 4,
+          "term": 3,
+          "data": "second",
+          "client_id": "w2"
+        },
+        {
+          "index": 5,
+          "term": 6,
+          "data": ""
+        }
+      ],
+      "full_log": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "first",
+          "client_id": "w1"
+        },
+        {
+          "index": 3,
+          "term": 3,
+          "data": ""
+        },
+        {
+          "index": 4,
+          "term": 3,
+          "data": "second",
+          "client_id": "w2"
+        },
+        {
+          "index": 5,
+          "term": 6,
+          "data": ""
+        }
+      ]
+    }
+  ],
+  "network": {
+    "dropped": 0,
+    "duplicated": 0
+  },
+  "failures": []
+}

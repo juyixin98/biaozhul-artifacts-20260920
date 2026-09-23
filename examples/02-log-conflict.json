@@ -1,0 +1,33 @@
+{
+  "seed": 7,
+  "nodes": 3,
+  "ticks": 76,
+  "heartbeat": 3,
+  "node_windows": [
+    {"node": 0, "lo": 5, "hi": 6},
+    {"node": 1, "lo": 6, "hi": 7},
+    {"node": 2, "lo": 7, "hi": 8}
+  ],
+  "events": [
+    {"at": 8,  "kind": "client_write", "client": "c1", "data": "alpha"},
+    {"at": 14, "kind": "committed", "client": "c1", "data": "alpha", "expect_index": 2},
+
+    {"at": 15, "kind": "crash", "target": 0},
+
+    {"at": 26, "kind": "client_write", "client": "c2", "data": "beta"},
+    {"at": 32, "kind": "committed", "client": "c2", "data": "beta", "expect_index": 4},
+
+    {"at": 34, "kind": "isolate", "isolated": 2},
+    {"at": 47, "kind": "client_write", "client": "c3", "data": "gamma"},
+    {"at": 51, "kind": "not_acked", "client": "c3"},
+
+    {"at": 53, "kind": "restart", "target": 0},
+    {"at": 56, "kind": "isolate", "isolated": 2, "heal": true},
+
+    {"at": 74, "kind": "committed", "client": "c1", "data": "alpha", "expect_index": 2},
+    {"at": 74, "kind": "committed", "client": "c2", "data": "beta", "expect_index": 4},
+    {"at": 74, "kind": "committed", "client": "c3", "data": "gamma", "expect_index": 5},
+    {"at": 75, "kind": "log_match"},
+    {"at": 75, "kind": "log_contains", "target": 2, "data": "alpha beta gamma", "full_log": true}
+  ]
+}

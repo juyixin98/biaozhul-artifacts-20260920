@@ -1,0 +1,87 @@
+{
+  "ok": false,
+  "ticks_run": 20,
+  "term_history": [
+    {
+      "term": 1,
+      "leader": 0
+    }
+  ],
+  "acks": [],
+  "nodes": [
+    {
+      "id": 0,
+      "alive": true,
+      "role": "leader",
+      "term": 1,
+      "commit_index": 1,
+      "committed": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        }
+      ],
+      "full_log": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "alive": true,
+      "role": "follower",
+      "term": 1,
+      "commit_index": 1,
+      "committed": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        }
+      ],
+      "full_log": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "alive": true,
+      "role": "follower",
+      "term": 1,
+      "commit_index": 1,
+      "committed": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        }
+      ],
+      "full_log": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        }
+      ]
+    }
+  ],
+  "network": {
+    "dropped": 0,
+    "duplicated": 0
+  },
+  "failures": [
+    {
+      "at": 6,
+      "kind": "committed",
+      "message": "写请求 \"w\" 尚未得到确认（acks=[]）"
+    }
+  ]
+}

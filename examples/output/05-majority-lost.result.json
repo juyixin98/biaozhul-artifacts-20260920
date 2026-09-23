@@ -1,0 +1,214 @@
+{
+  "ok": true,
+  "ticks_run": 64,
+  "term_history": [
+    {
+      "term": 1,
+      "leader": 0
+    }
+  ],
+  "acks": [
+    {
+      "client": "y1",
+      "data": "committed-before",
+      "leader": 0,
+      "term": 1,
+      "applied_at": 10,
+      "index": 2
+    },
+    {
+      "client": "y2",
+      "data": "waiting-for-quorum",
+      "leader": 0,
+      "term": 1,
+      "applied_at": 41,
+      "index": 3
+    },
+    {
+      "client": "y3",
+      "data": "after-recovery",
+      "leader": 0,
+      "term": 1,
+      "applied_at": 52,
+      "index": 4
+    }
+  ],
+  "nodes": [
+    {
+      "id": 0,
+      "alive": true,
+      "role": "leader",
+      "term": 1,
+      "commit_index": 4,
+      "committed": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "committed-before",
+          "client_id": "y1"
+        },
+        {
+          "index": 3,
+          "term": 1,
+          "data": "waiting-for-quorum",
+          "client_id": "y2"
+        },
+        {
+          "index": 4,
+          "term": 1,
+          "data": "after-recovery",
+          "client_id": "y3"
+        }
+      ],
+      "full_log": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "committed-before",
+          "client_id": "y1"
+        },
+        {
+          "index": 3,
+          "term": 1,
+          "data": "waiting-for-quorum",
+          "client_id": "y2"
+        },
+        {
+          "index": 4,
+          "term": 1,
+          "data": "after-recovery",
+          "client_id": "y3"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "alive": true,
+      "role": "follower",
+      "term": 1,
+      "commit_index": 4,
+      "committed": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "committed-before",
+          "client_id": "y1"
+        },
+        {
+          "index": 3,
+          "term": 1,
+          "data": "waiting-for-quorum",
+          "client_id": "y2"
+        },
+        {
+          "index": 4,
+          "term": 1,
+          "data": "after-recovery",
+          "client_id": "y3"
+        }
+      ],
+      "full_log": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "committed-before",
+          "client_id": "y1"
+        },
+        {
+          "index": 3,
+          "term": 1,
+          "data": "waiting-for-quorum",
+          "client_id": "y2"
+        },
+        {
+          "index": 4,
+          "term": 1,
+          "data": "after-recovery",
+          "client_id": "y3"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "alive": true,
+      "role": "follower",
+      "term": 1,
+      "commit_index": 4,
+      "committed": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "committed-before",
+          "client_id": "y1"
+        },
+        {
+          "index": 3,
+          "term": 1,
+          "data": "waiting-for-quorum",
+          "client_id": "y2"
+        },
+        {
+          "index": 4,
+          "term": 1,
+          "data": "after-recovery",
+          "client_id": "y3"
+        }
+      ],
+      "full_log": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "committed-before",
+          "client_id": "y1"
+        },
+        {
+          "index": 3,
+          "term": 1,
+          "data": "waiting-for-quorum",
+          "client_id": "y2"
+        },
+        {
+          "index": 4,
+          "term": 1,
+          "data": "after-recovery",
+          "client_id": "y3"
+        }
+      ]
+    }
+  ],
+  "network": {
+    "dropped": 0,
+    "duplicated": 0
+  },
+  "failures": []
+}

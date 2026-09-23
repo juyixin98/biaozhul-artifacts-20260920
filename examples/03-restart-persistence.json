@@ -1,0 +1,40 @@
+{
+  "seed": 123,
+  "nodes": 3,
+  "ticks": 95,
+  "heartbeat": 3,
+  "node_windows": [
+    {"node": 0, "lo": 4, "hi": 5},
+    {"node": 1, "lo": 7, "hi": 8},
+    {"node": 2, "lo": 9, "hi": 10}
+  ],
+  "storage": "file",
+  "state_dir": "/tmp/raftdemo-restart/run1",
+  "fresh_state": true,
+  "events": [
+    {"at": 7,  "kind": "client_write", "client": "w1", "data": "first"},
+    {"at": 12, "kind": "committed", "client": "w1", "data": "first", "expect_index": 2},
+
+    {"at": 13, "kind": "crash", "target": 0},
+    {"at": 13, "kind": "crash", "target": 1},
+
+    {"at": 20, "kind": "client_write", "client": "w-dead", "data": "no-quorum", "node": 2},
+    {"at": 30, "kind": "not_acked", "client": "w-dead"},
+
+    {"at": 32, "kind": "restart", "target": 1},
+    {"at": 46, "kind": "client_write", "client": "w2", "data": "second"},
+    {"at": 51, "kind": "committed", "client": "w2", "data": "second", "expect_index": 4},
+
+    {"at": 53, "kind": "crash", "target": 1},
+    {"at": 53, "kind": "crash", "target": 2},
+    {"at": 60, "kind": "restart", "target": 0},
+
+    {"at": 70, "kind": "restart", "target": 2},
+    {"at": 72, "kind": "restart", "target": 1},
+
+    {"at": 92, "kind": "committed", "client": "w1", "data": "first", "expect_index": 2},
+    {"at": 92, "kind": "committed", "client": "w2", "data": "second", "expect_index": 4},
+    {"at": 93, "kind": "not_acked", "client": "w-dead"},
+    {"at": 94, "kind": "log_match"}
+  ]
+}

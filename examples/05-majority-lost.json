@@ -1,0 +1,119 @@
+{
+  "seed": 555,
+  "nodes": 3,
+  "ticks": 64,
+  "heartbeat": 3,
+  "node_windows": [
+    {
+      "node": 0,
+      "lo": 5,
+      "hi": 6
+    },
+    {
+      "node": 1,
+      "lo": 8,
+      "hi": 9
+    },
+    {
+      "node": 2,
+      "lo": 10,
+      "hi": 11
+    }
+  ],
+  "events": [
+    {
+      "at": 8,
+      "kind": "client_write",
+      "client": "y1",
+      "data": "committed-before"
+    },
+    {
+      "at": 14,
+      "kind": "committed",
+      "client": "y1",
+      "data": "committed-before",
+      "expect_index": 2
+    },
+    {
+      "at": 15,
+      "kind": "crash",
+      "target": 1
+    },
+    {
+      "at": 15,
+      "kind": "crash",
+      "target": 2
+    },
+    {
+      "at": 18,
+      "kind": "client_write",
+      "client": "y2",
+      "data": "waiting-for-quorum",
+      "node": 0
+    },
+    {
+      "at": 25,
+      "kind": "not_acked",
+      "client": "y2"
+    },
+    {
+      "at": 35,
+      "kind": "not_acked",
+      "client": "y2"
+    },
+    {
+      "at": 35,
+      "kind": "commit_index",
+      "target": 0,
+      "expect_index": 2
+    },
+    {
+      "at": 38,
+      "kind": "restart",
+      "target": 1
+    },
+    {
+      "at": 38,
+      "kind": "restart",
+      "target": 2
+    },
+    {
+      "at": 48,
+      "kind": "committed",
+      "client": "y2",
+      "data": "waiting-for-quorum",
+      "expect_index": 3
+    },
+    {
+      "at": 50,
+      "kind": "client_write",
+      "client": "y3",
+      "data": "after-recovery"
+    },
+    {
+      "at": 58,
+      "kind": "committed",
+      "client": "y1",
+      "data": "committed-before",
+      "expect_index": 2
+    },
+    {
+      "at": 58,
+      "kind": "committed",
+      "client": "y2",
+      "data": "waiting-for-quorum",
+      "expect_index": 3
+    },
+    {
+      "at": 58,
+      "kind": "committed",
+      "client": "y3",
+      "data": "after-recovery",
+      "expect_index": 4
+    },
+    {
+      "at": 62,
+      "kind": "log_match"
+    }
+  ]
+}

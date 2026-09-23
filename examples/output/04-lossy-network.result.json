@@ -1,0 +1,302 @@
+{
+  "ok": true,
+  "ticks_run": 60,
+  "term_history": [
+    {
+      "term": 1,
+      "leader": 0
+    }
+  ],
+  "acks": [
+    {
+      "client": "a",
+      "data": "x1",
+      "leader": 0,
+      "term": 1,
+      "applied_at": 15,
+      "index": 2
+    },
+    {
+      "client": "b",
+      "data": "x2",
+      "leader": 0,
+      "term": 1,
+      "applied_at": 21,
+      "index": 3
+    },
+    {
+      "client": "c",
+      "data": "x3",
+      "leader": 0,
+      "term": 1,
+      "applied_at": 28,
+      "index": 4
+    },
+    {
+      "client": "d",
+      "data": "x4",
+      "leader": 0,
+      "term": 1,
+      "applied_at": 32,
+      "index": 5
+    },
+    {
+      "client": "e",
+      "data": "x5",
+      "leader": 0,
+      "term": 1,
+      "applied_at": 38,
+      "index": 6
+    }
+  ],
+  "nodes": [
+    {
+      "id": 0,
+      "alive": true,
+      "role": "leader",
+      "term": 1,
+      "commit_index": 6,
+      "committed": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "x1",
+          "client_id": "a"
+        },
+        {
+          "index": 3,
+          "term": 1,
+          "data": "x2",
+          "client_id": "b"
+        },
+        {
+          "index": 4,
+          "term": 1,
+          "data": "x3",
+          "client_id": "c"
+        },
+        {
+          "index": 5,
+          "term": 1,
+          "data": "x4",
+          "client_id": "d"
+        },
+        {
+          "index": 6,
+          "term": 1,
+          "data": "x5",
+          "client_id": "e"
+        }
+      ],
+      "full_log": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "x1",
+          "client_id": "a"
+        },
+        {
+          "index": 3,
+          "term": 1,
+          "data": "x2",
+          "client_id": "b"
+        },
+        {
+          "index": 4,
+          "term": 1,
+          "data": "x3",
+          "client_id": "c"
+        },
+        {
+          "index": 5,
+          "term": 1,
+          "data": "x4",
+          "client_id": "d"
+        },
+        {
+          "index": 6,
+          "term": 1,
+          "data": "x5",
+          "client_id": "e"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "alive": true,
+      "role": "follower",
+      "term": 1,
+      "commit_index": 6,
+      "committed": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "x1",
+          "client_id": "a"
+        },
+        {
+          "index": 3,
+          "term": 1,
+          "data": "x2",
+          "client_id": "b"
+        },
+        {
+          "index": 4,
+          "term": 1,
+          "data": "x3",
+          "client_id": "c"
+        },
+        {
+          "index": 5,
+          "term": 1,
+          "data": "x4",
+          "client_id": "d"
+        },
+        {
+          "index": 6,
+          "term": 1,
+          "data": "x5",
+          "client_id": "e"
+        }
+      ],
+      "full_log": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "x1",
+          "client_id": "a"
+        },
+        {
+          "index": 3,
+          "term": 1,
+          "data": "x2",
+          "client_id": "b"
+        },
+        {
+          "index": 4,
+          "term": 1,
+          "data": "x3",
+          "client_id": "c"
+        },
+        {
+          "index": 5,
+          "term": 1,
+          "data": "x4",
+          "client_id": "d"
+        },
+        {
+          "index": 6,
+          "term": 1,
+          "data": "x5",
+          "client_id": "e"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "alive": true,
+      "role": "follower",
+      "term": 1,
+      "commit_index": 6,
+      "committed": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "x1",
+          "client_id": "a"
+        },
+        {
+          "index": 3,
+          "term": 1,
+          "data": "x2",
+          "client_id": "b"
+        },
+        {
+          "index": 4,
+          "term": 1,
+          "data": "x3",
+          "client_id": "c"
+        },
+        {
+          "index": 5,
+          "term": 1,
+          "data": "x4",
+          "client_id": "d"
+        },
+        {
+          "index": 6,
+          "term": 1,
+          "data": "x5",
+          "client_id": "e"
+        }
+      ],
+      "full_log": [
+        {
+          "index": 1,
+          "term": 1,
+          "data": ""
+        },
+        {
+          "index": 2,
+          "term": 1,
+          "data": "x1",
+          "client_id": "a"
+        },
+        {
+          "index": 3,
+          "term": 1,
+          "data": "x2",
+          "client_id": "b"
+        },
+        {
+          "index": 4,
+          "term": 1,
+          "data": "x3",
+          "client_id": "c"
+        },
+        {
+          "index": 5,
+          "term": 1,
+          "data": "x4",
+          "client_id": "d"
+        },
+        {
+          "index": 6,
+          "term": 1,
+          "data": "x5",
+          "client_id": "e"
+        }
+      ]
+    }
+  ],
+  "network": {
+    "dropped": 17,
+    "duplicated": 9
+  },
+  "failures": []
+}
