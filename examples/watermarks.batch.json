@@ -1,0 +1,4 @@
+{"watermarks": [
+  {"partition": "a", "watermark": 10},
+  {"partition": "b", "watermark": 10}
+]}

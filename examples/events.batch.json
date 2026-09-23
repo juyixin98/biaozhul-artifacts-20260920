@@ -1,0 +1,5 @@
+{"events": [
+  {"partition": "sensor-A", "eventId": "evt-001", "eventTime": 1700000002000},
+  {"partition": "sensor-A", "eventId": "evt-002", "eventTime": 1700000007000},
+  {"partition": "sensor-A", "eventId": "evt-003", "eventTime": 1700000005000}
+]}

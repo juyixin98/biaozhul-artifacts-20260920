@@ -1,0 +1,22 @@
+# 依赖锁定文件
+#
+# 本项目刻意保持【零第三方依赖】：HTTP 服务端使用 JDK 自带的
+# com.sun.net.httpserver.HttpServer，JSON 解析/序列化为手写的 src/tumbling/Json.java，
+# 测试框架为 test/tumbling/TestRunner.java（反射 + 注解）。
+# 因此没有任何需要下载的 jar，不存在供应链版本漂移；编译与运行仅需一个 JDK。
+#
+# 编译目标级别   : 17（仅使用 JDK 17 标准 API；未使用任何 preview / incubating 特性）
+# 验证通过的 JDK : Temurin OpenJDK 17.0.20.1 (build 17.0.20.1+1, x86_64 Linux)
+# 兼容范围       : 任何 Java 17 及以上（17 / 21 / LTS）
+# 运行时第三方库 : 无
+# 编译期第三方库 : 无
+# 构建工具依赖   : 无（不依赖 Maven/Gradle；javac 直接编译，见 scripts/compile.sh）
+#
+# 如需复现验证环境（本仓库开发机上的免安装 JDK 位置）:
+#   JAVA_HOME=$HOME/jdk17   # Temurin 17.0.20.1，解压即用，无需 root
+#
+# 坐标形式的显式锁定清单（全部为 JDK 自带模块）:
+#   java.base/*                                  # JDK 内置（集合、网络、反射等）
+#   jdk.httpserver/com.sun.net.httpserver.*      # JDK 内置 HTTP Server
+#
+# SHA-256 校验不适用于平台模块；JDK 版本本身由上面的 "验证通过的 JDK" 固定。

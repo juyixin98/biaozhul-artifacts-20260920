@@ -1,0 +1,714 @@
+================ 事件时间滚动窗口 — 确定性演示 ================
+窗口=10  迟到容忍期=2  端口=18210
+
+────────────────────────────────────────────────────────────
+# 0. 健康检查
+$ curl -s http://localhost:18210/health
+
+{
+  "status": "ok"
+}
+
+────────────────────────────────────────────────────────────
+# 1. 批量乱序接入分区 a 的事件 t=2,7,5（均属 [0,10)）
+$ curl -s -X POST http://localhost:18210/events -H Content-Type: application/json -d {"events":[{"partition":"a","eventId":"e2","eventTime":2},{"partition":"a","eventId":"e7","eventTime":7},{"partition":"a","eventId":"e5","eventTime":5}]}
+
+{
+  "results": [
+    {
+      "partition": "a",
+      "eventId": "e2",
+      "eventTime": 2,
+      "wasIdle": false,
+      "globalWatermarkBefore": -9223372036854775808,
+      "windowStart": 0,
+      "windowEnd": 10,
+      "status": "on_time",
+      "emitted": [],
+      "count": 1,
+      "revision": 0,
+      "globalWatermarkAfter": -9223372036854775808
+    },
+    {
+      "partition": "a",
+      "eventId": "e7",
+      "eventTime": 7,
+      "wasIdle": false,
+      "globalWatermarkBefore": -9223372036854775808,
+      "windowStart": 0,
+      "windowEnd": 10,
+      "status": "on_time",
+      "emitted": [],
+      "count": 2,
+      "revision": 0,
+      "globalWatermarkAfter": -9223372036854775808
+    },
+    {
+      "partition": "a",
+      "eventId": "e5",
+      "eventTime": 5,
+      "wasIdle": false,
+      "globalWatermarkBefore": -9223372036854775808,
+      "windowStart": 0,
+      "windowEnd": 10,
+      "status": "on_time",
+      "emitted": [],
+      "count": 3,
+      "revision": 0,
+      "globalWatermarkAfter": -9223372036854775808
+    }
+  ],
+  "count": 3
+}
+
+────────────────────────────────────────────────────────────
+# 2. 分区 a 水位 → 10：[0,10) 到达窗口末端，触发 fire（计数 3，尚未 final）
+$ curl -s -X POST http://localhost:18210/watermarks -H Content-Type: application/json -d {"partition":"a","watermark":10}
+
+{
+  "partition": "a",
+  "requestedWatermark": 10,
+  "appliedWatermark": 10,
+  "clamped": false,
+  "wasIdle": false,
+  "globalWatermarkBefore": -9223372036854775808,
+  "globalWatermarkAfter": 10,
+  "advanced": true,
+  "emitted": [
+    {
+      "type": "fire",
+      "partition": "a",
+      "windowStart": 0,
+      "windowEnd": 10,
+      "count": 3,
+      "revision": 1,
+      "watermark": 10
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────
+# 3. 容忍期内晚到事件 t=6：产生 update（计数修订为 4，revision=2）
+$ curl -s -X POST http://localhost:18210/events -H Content-Type: application/json -d {"partition":"a","eventId":"e6","eventTime":6}
+
+{
+  "partition": "a",
+  "eventId": "e6",
+  "eventTime": 6,
+  "wasIdle": false,
+  "globalWatermarkBefore": 10,
+  "windowStart": 0,
+  "windowEnd": 10,
+  "status": "late_accepted",
+  "emitted": [
+    {
+      "type": "update",
+      "partition": "a",
+      "windowStart": 0,
+      "windowEnd": 10,
+      "count": 4,
+      "revision": 2,
+      "watermark": 10
+    }
+  ],
+  "count": 4,
+  "revision": 2,
+  "globalWatermarkAfter": 10
+}
+
+────────────────────────────────────────────────────────────
+# 4. 水位停在 10 时，a 再到一条未来事件 t=15（属 [10,20)，正常 on_time）
+$ curl -s -X POST http://localhost:18210/events -H Content-Type: application/json -d {"partition":"a","eventId":"e15","eventTime":15}
+
+{
+  "partition": "a",
+  "eventId": "e15",
+  "eventTime": 15,
+  "wasIdle": false,
+  "globalWatermarkBefore": 10,
+  "windowStart": 10,
+  "windowEnd": 20,
+  "status": "on_time",
+  "emitted": [],
+  "count": 1,
+  "revision": 0,
+  "globalWatermarkAfter": 10
+}
+
+────────────────────────────────────────────────────────────
+# 5. 分区 a 水位 → 12：[0,10) 容忍期结束，最终关闭 final（最终计数 4）
+$ curl -s -X POST http://localhost:18210/watermarks -H Content-Type: application/json -d {"partition":"a","watermark":12}
+
+{
+  "partition": "a",
+  "requestedWatermark": 12,
+  "appliedWatermark": 12,
+  "clamped": false,
+  "wasIdle": false,
+  "globalWatermarkBefore": 10,
+  "globalWatermarkAfter": 12,
+  "advanced": true,
+  "emitted": [
+    {
+      "type": "final",
+      "partition": "a",
+      "windowStart": 0,
+      "windowEnd": 10,
+      "count": 4,
+      "revision": 2,
+      "watermark": 12
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────
+# 6. 超过容忍期的事件 t=1：本分区水位 12 已满足 end+lat<=12，进入侧输出 late_dropped
+$ curl -s -X POST http://localhost:18210/events -H Content-Type: application/json -d {"partition":"a","eventId":"stale1","eventTime":1}
+
+{
+  "partition": "a",
+  "eventId": "stale1",
+  "eventTime": 1,
+  "wasIdle": false,
+  "globalWatermarkBefore": 12,
+  "windowStart": 0,
+  "windowEnd": 10,
+  "status": "late_dropped",
+  "globalWatermarkAfter": 12,
+  "emitted": []
+}
+
+────────────────────────────────────────────────────────────
+# 7. 重复事件 e7（即使原窗口已关闭仍可识别）：duplicate，不计数、不进侧输出
+$ curl -s -X POST http://localhost:18210/events -H Content-Type: application/json -d {"partition":"a","eventId":"e7","eventTime":999}
+
+{
+  "partition": "a",
+  "eventId": "e7",
+  "eventTime": 999,
+  "wasIdle": false,
+  "globalWatermarkBefore": 12,
+  "windowStart": 990,
+  "windowEnd": 1000,
+  "status": "duplicate",
+  "globalWatermarkAfter": 12,
+  "emitted": []
+}
+
+────────────────────────────────────────────────────────────
+# 8. 慢分区 b 接入：事件 t=103,115（尚未上报水位，不影响全局水位，也不被高水位误伤）
+$ bash -c curl -s -X POST 'http://localhost:18210/events' -H 'Content-Type: application/json' -d '{"partition":"b","eventId":"b103","eventTime":103}';            curl -s -X POST 'http://localhost:18210/events' -H 'Content-Type: application/json' -d '{"partition":"b","eventId":"b115","eventTime":115}'
+
+{
+  "partition": "b",
+  "eventId": "b103",
+  "eventTime": 103,
+  "wasIdle": false,
+  "globalWatermarkBefore": 12,
+  "windowStart": 100,
+  "windowEnd": 110,
+  "status": "on_time",
+  "emitted": [],
+  "count": 1,
+  "revision": 0,
+  "globalWatermarkAfter": 12
+}
+{
+  "partition": "b",
+  "eventId": "b115",
+  "eventTime": 115,
+  "wasIdle": false,
+  "globalWatermarkBefore": 12,
+  "windowStart": 110,
+  "windowEnd": 120,
+  "status": "on_time",
+  "emitted": [],
+  "count": 1,
+  "revision": 0,
+  "globalWatermarkAfter": 12
+}
+
+────────────────────────────────────────────────────────────
+# 9. b 水位 → 100：它的窗口按【自己的水位】推进，与 a 无关；[100,110) 末端 110 未到，无输出
+$ curl -s -X POST http://localhost:18210/watermarks -H Content-Type: application/json -d {"partition":"b","watermark":100}
+
+{
+  "partition": "b",
+  "requestedWatermark": 100,
+  "appliedWatermark": 100,
+  "clamped": false,
+  "wasIdle": false,
+  "globalWatermarkBefore": 12,
+  "globalWatermarkAfter": 12,
+  "advanced": false,
+  "emitted": []
+}
+
+────────────────────────────────────────────────────────────
+# 10. 快分区 a 继续前进到 22：全局水位 = min(a22,b100)=22（由更小的 a 决定）；a 的 [10,20) 按自身水位 final
+$ curl -s -X POST http://localhost:18210/watermarks -H Content-Type: application/json -d {"partition":"a","watermark":22}
+
+{
+  "partition": "a",
+  "requestedWatermark": 22,
+  "appliedWatermark": 22,
+  "clamped": false,
+  "wasIdle": false,
+  "globalWatermarkBefore": 12,
+  "globalWatermarkAfter": 22,
+  "advanced": true,
+  "emitted": [
+    {
+      "type": "final",
+      "partition": "a",
+      "windowStart": 10,
+      "windowEnd": 20,
+      "count": 1,
+      "revision": 1,
+      "watermark": 22
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────
+# 11. b 水位 → 110：b 的 [100,110) 此刻 fire（计数 1，容忍期内不 final）
+$ curl -s -X POST http://localhost:18210/watermarks -H Content-Type: application/json -d {"partition":"b","watermark":110}
+
+{
+  "partition": "b",
+  "requestedWatermark": 110,
+  "appliedWatermark": 110,
+  "clamped": false,
+  "wasIdle": false,
+  "globalWatermarkBefore": 22,
+  "globalWatermarkAfter": 22,
+  "advanced": false,
+  "emitted": [
+    {
+      "type": "fire",
+      "partition": "b",
+      "windowStart": 100,
+      "windowEnd": 110,
+      "count": 1,
+      "revision": 1,
+      "watermark": 110
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────
+# 12. b 被标记为空闲（不再参与全局 min）。空闲期间其迟到数据到达外部系统并被缓存； 全局水位解除阻挡：a 推进到 130，全局水位随之涨到 130
+$ bash -c curl -s -X POST 'http://localhost:18210/partitions/idle' -H 'Content-Type: application/json' -d '{"partition":"b","idle":true}';            curl -s -X POST 'http://localhost:18210/watermarks' -H 'Content-Type: application/json' -d '{"partition":"a","watermark":130}'
+
+{
+  "partition": "b",
+  "idle": true,
+  "wasIdle": false,
+  "globalWatermarkBefore": 22,
+  "globalWatermarkAfter": 22,
+  "emitted": []
+}
+{
+  "partition": "a",
+  "requestedWatermark": 130,
+  "appliedWatermark": 130,
+  "clamped": false,
+  "wasIdle": false,
+  "globalWatermarkBefore": 22,
+  "globalWatermarkAfter": 130,
+  "advanced": true,
+  "emitted": []
+}
+
+────────────────────────────────────────────────────────────
+# 13. 分区 b 恢复：先补一条空闲期缓存的事件 t=108（本分区水位 110、窗口 [100,110) 已 fire 但仍在容忍期） → late_accepted 修订，count 变 2、revision 变 2（空闲恢复后容忍期内数据不丢）
+$ curl -s -X POST http://localhost:18210/events -H Content-Type: application/json -d {"partition":"b","eventId":"b108","eventTime":108}
+
+{
+  "partition": "b",
+  "eventId": "b108",
+  "eventTime": 108,
+  "wasIdle": true,
+  "globalWatermarkBefore": 130,
+  "windowStart": 100,
+  "windowEnd": 110,
+  "status": "late_accepted",
+  "emitted": [
+    {
+      "type": "update",
+      "partition": "b",
+      "windowStart": 100,
+      "windowEnd": 110,
+      "count": 2,
+      "revision": 2,
+      "watermark": 110
+    }
+  ],
+  "count": 2,
+  "revision": 2,
+  "globalWatermarkAfter": 130
+}
+
+────────────────────────────────────────────────────────────
+# 14. b 显式水位 → 112：[100,110) 容忍期结束，以最终计数 2 final； 全局水位因单调性仍保持 130（恢复的慢分区不会把全局水位拉回去）
+$ curl -s -X POST http://localhost:18210/watermarks -H Content-Type: application/json -d {"partition":"b","watermark":112}
+
+{
+  "partition": "b",
+  "requestedWatermark": 112,
+  "appliedWatermark": 112,
+  "clamped": false,
+  "wasIdle": false,
+  "globalWatermarkBefore": 130,
+  "globalWatermarkAfter": 130,
+  "advanced": false,
+  "emitted": [
+    {
+      "type": "final",
+      "partition": "b",
+      "windowStart": 100,
+      "windowEnd": 110,
+      "count": 2,
+      "revision": 2,
+      "watermark": 112
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────
+# 15. 恢复后又一条更陈旧的缓存事件 t=105 到达：窗口 [100,110) 已最终关闭（本分区水位 112）→ late_dropped 侧输出
+$ curl -s -X POST http://localhost:18210/events -H Content-Type: application/json -d {"partition":"b","eventId":"b-stale105","eventTime":105}
+
+{
+  "partition": "b",
+  "eventId": "b-stale105",
+  "eventTime": 105,
+  "wasIdle": false,
+  "globalWatermarkBefore": 130,
+  "windowStart": 100,
+  "windowEnd": 110,
+  "status": "late_dropped",
+  "globalWatermarkAfter": 130,
+  "emitted": []
+}
+
+────────────────────────────────────────────────────────────
+# 16. b 追上到 130：[110,120) 的 fire/final 时刻（120/122）被一次跳过，直接输出一条 final count=1
+$ curl -s -X POST http://localhost:18210/watermarks -H Content-Type: application/json -d {"partition":"b","watermark":130}
+
+{
+  "partition": "b",
+  "requestedWatermark": 130,
+  "appliedWatermark": 130,
+  "clamped": false,
+  "wasIdle": false,
+  "globalWatermarkBefore": 130,
+  "globalWatermarkAfter": 130,
+  "advanced": false,
+  "emitted": [
+    {
+      "type": "final",
+      "partition": "b",
+      "windowStart": 110,
+      "windowEnd": 120,
+      "count": 1,
+      "revision": 1,
+      "watermark": 130
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────
+# 17. 查询侧输出（a 的 t=1 与 b 恢复后超期的 t=105，共 2 条）
+$ curl -s http://localhost:18210/side-output
+
+{
+  "sideOutput": [
+    {
+      "partition": "a",
+      "eventId": "stale1",
+      "eventTime": 1,
+      "windowStart": 0,
+      "atGlobalWatermark": 12,
+      "atPartitionWatermark": 12,
+      "reason": "window_finalized"
+    },
+    {
+      "partition": "b",
+      "eventId": "b-stale105",
+      "eventTime": 105,
+      "windowStart": 100,
+      "atGlobalWatermark": 130,
+      "atPartitionWatermark": 112,
+      "reason": "window_finalized"
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────
+# 18. 查询重复事件
+$ curl -s http://localhost:18210/duplicates
+
+{
+  "duplicates": [
+    {
+      "partition": "a",
+      "eventId": "e7",
+      "eventTime": 999,
+      "windowStart": 990,
+      "atGlobalWatermark": 12,
+      "atPartitionWatermark": 12
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────
+# 19. 查询全部窗口输出（排放日志，含触发/修订/最终关闭的确定顺序）
+$ curl -s http://localhost:18210/emissions
+
+{
+  "emissions": [
+    {
+      "type": "fire",
+      "partition": "a",
+      "windowStart": 0,
+      "windowEnd": 10,
+      "count": 3,
+      "revision": 1,
+      "watermark": 10
+    },
+    {
+      "type": "update",
+      "partition": "a",
+      "windowStart": 0,
+      "windowEnd": 10,
+      "count": 4,
+      "revision": 2,
+      "watermark": 10
+    },
+    {
+      "type": "final",
+      "partition": "a",
+      "windowStart": 0,
+      "windowEnd": 10,
+      "count": 4,
+      "revision": 2,
+      "watermark": 12
+    },
+    {
+      "type": "final",
+      "partition": "a",
+      "windowStart": 10,
+      "windowEnd": 20,
+      "count": 1,
+      "revision": 1,
+      "watermark": 22
+    },
+    {
+      "type": "fire",
+      "partition": "b",
+      "windowStart": 100,
+      "windowEnd": 110,
+      "count": 1,
+      "revision": 1,
+      "watermark": 110
+    },
+    {
+      "type": "update",
+      "partition": "b",
+      "windowStart": 100,
+      "windowEnd": 110,
+      "count": 2,
+      "revision": 2,
+      "watermark": 110
+    },
+    {
+      "type": "final",
+      "partition": "b",
+      "windowStart": 100,
+      "windowEnd": 110,
+      "count": 2,
+      "revision": 2,
+      "watermark": 112
+    },
+    {
+      "type": "final",
+      "partition": "b",
+      "windowStart": 110,
+      "windowEnd": 120,
+      "count": 1,
+      "revision": 1,
+      "watermark": 130
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────
+# 20. 全量状态快照
+$ curl -s http://localhost:18210/snapshot
+
+{
+  "config": {
+    "allowedLateness": 2,
+    "windowSize": 10
+  },
+  "globalWatermark": 130,
+  "partitions": [
+    {
+      "partition": "a",
+      "watermark": 130,
+      "initialized": true,
+      "idle": false,
+      "openWindows": [],
+      "closedWindows": [
+        {
+          "windowStart": 0,
+          "windowEnd": 10,
+          "count": 4,
+          "revision": 2,
+          "firedAt": 10,
+          "closedAt": 12
+        },
+        {
+          "windowStart": 10,
+          "windowEnd": 20,
+          "count": 1,
+          "revision": 1,
+          "firedAt": 22,
+          "closedAt": 22
+        }
+      ]
+    },
+    {
+      "partition": "b",
+      "watermark": 130,
+      "initialized": true,
+      "idle": false,
+      "openWindows": [],
+      "closedWindows": [
+        {
+          "windowStart": 100,
+          "windowEnd": 110,
+          "count": 2,
+          "revision": 2,
+          "firedAt": 110,
+          "closedAt": 112
+        },
+        {
+          "windowStart": 110,
+          "windowEnd": 120,
+          "count": 1,
+          "revision": 1,
+          "firedAt": 130,
+          "closedAt": 130
+        }
+      ]
+    }
+  ],
+  "sideOutput": [
+    {
+      "partition": "a",
+      "eventId": "stale1",
+      "eventTime": 1,
+      "windowStart": 0,
+      "atGlobalWatermark": 12,
+      "atPartitionWatermark": 12,
+      "reason": "window_finalized"
+    },
+    {
+      "partition": "b",
+      "eventId": "b-stale105",
+      "eventTime": 105,
+      "windowStart": 100,
+      "atGlobalWatermark": 130,
+      "atPartitionWatermark": 112,
+      "reason": "window_finalized"
+    }
+  ],
+  "duplicates": [
+    {
+      "partition": "a",
+      "eventId": "e7",
+      "eventTime": 999,
+      "windowStart": 990,
+      "atGlobalWatermark": 12,
+      "atPartitionWatermark": 12
+    }
+  ],
+  "emissionLog": [
+    {
+      "type": "fire",
+      "partition": "a",
+      "windowStart": 0,
+      "windowEnd": 10,
+      "count": 3,
+      "revision": 1,
+      "watermark": 10
+    },
+    {
+      "type": "update",
+      "partition": "a",
+      "windowStart": 0,
+      "windowEnd": 10,
+      "count": 4,
+      "revision": 2,
+      "watermark": 10
+    },
+    {
+      "type": "final",
+      "partition": "a",
+      "windowStart": 0,
+      "windowEnd": 10,
+      "count": 4,
+      "revision": 2,
+      "watermark": 12
+    },
+    {
+      "type": "final",
+      "partition": "a",
+      "windowStart": 10,
+      "windowEnd": 20,
+      "count": 1,
+      "revision": 1,
+      "watermark": 22
+    },
+    {
+      "type": "fire",
+      "partition": "b",
+      "windowStart": 100,
+      "windowEnd": 110,
+      "count": 1,
+      "revision": 1,
+      "watermark": 110
+    },
+    {
+      "type": "update",
+      "partition": "b",
+      "windowStart": 100,
+      "windowEnd": 110,
+      "count": 2,
+      "revision": 2,
+      "watermark": 110
+    },
+    {
+      "type": "final",
+      "partition": "b",
+      "windowStart": 100,
+      "windowEnd": 110,
+      "count": 2,
+      "revision": 2,
+      "watermark": 112
+    },
+    {
+      "type": "final",
+      "partition": "b",
+      "windowStart": 110,
+      "windowEnd": 120,
+      "count": 1,
+      "revision": 1,
+      "watermark": 130
+    }
+  ]
+}
+
+================ 演示结束（服务即将停止）================
