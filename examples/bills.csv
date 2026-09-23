@@ -1,0 +1,6 @@
+account_code,resource_code,service,cost_date,currency,amount
+acct-alpha-prod,res-ec2-web,EC2,2026-09-01,USD,120.50
+acct-alpha-prod,res-s3-data,S3,2026-09-01,USD,14.25
+acct-alpha-prod,res-rds-main,RDS,2026-09-01,EUR,80.000000
+acct-alpha-dev,res-ec2-web,EC2,2026-09-01,USD,5.00
+acct-alpha-prod,res-ec2-web,EC2,2026-09-02,USD,118.00

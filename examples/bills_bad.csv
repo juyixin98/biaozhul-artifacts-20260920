@@ -1,0 +1,2 @@
+account_code,resource_code,service,cost_date,currency,amount
+acct-alpha-prod,res-ec2-web,EC2,2026-09-01,USD,999.00
