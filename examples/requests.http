@@ -1,0 +1,57 @@
+# 可撤回精确 TopK —— HTTP 请求样例
+#
+# 启动（窗口 windowMs=10000）:
+#   scripts/run.sh 8080 10000
+#
+# 时间戳 ts 为“逻辑毫秒时间”，由调用方提供，便于确定性演示/测试；
+# 不传 ts 时使用服务器墙钟时间。窗口语义：ts > watermark - windowMs 的事件有效
+# （左边界为闭开边界：恰好等于左边界的事件视为过期）。
+
+BASE=http://127.0.0.1:8080
+G=$BASE/groups/leaderboard
+
+# 0. 健康检查
+curl -s $BASE/health
+
+# 1. 插入事件：eventId 幂等键，itemId 统计对象，delta 为整数增量（可负）
+curl -s -X POST $G/events -H 'Content-Type: application/json' \
+  --data '{"eventId":"e1","itemId":"bob","delta":5,"ts":1000}'
+curl -s -X POST $G/events -H 'Content-Type: application/json' \
+  --data '{"eventId":"e2","itemId":"ada","delta":5,"ts":1001}'
+curl -s -X POST $G/events -H 'Content-Type: application/json' \
+  --data '{"eventId":"e3","itemId":"cyb","delta":5,"ts":1002}'
+curl -s -X POST $G/events -H 'Content-Type: application/json' \
+  --data '{"eventId":"e4","itemId":"dan","delta":8,"ts":1003}'
+
+# 2. TopK 查询（ts 会先推进该组水位）
+#    dan=8 第一；ada/bob/cyb 同为 5 分，按 itemId 字典序，ada 第二
+curl -s "$G/topk?k=2&ts=2000"
+
+# 3. 负增量
+curl -s -X POST $G/events -H 'Content-Type: application/json' \
+  --data '{"eventId":"e5","itemId":"ada","delta":-9,"ts":2001}'
+# K 大于元素数：返回全部
+curl -s "$G/topk?k=100&ts=3000"
+
+# 4. 撤回（幂等）：撤回 e5，ada 恢复 5 分；再撤回一次返回 ALREADY_RETRACTED 且不二次扣减
+curl -s -X POST $G/retract -H 'Content-Type: application/json' \
+  --data '{"eventId":"e5","ts":4000}'
+curl -s -X POST $G/retract -H 'Content-Type: application/json' \
+  --data '{"eventId":"e5","ts":4001}'
+
+# 5. 窗口滑出：水位 11000 -> 左边界 1000 -> e1(bob, ts=1000) 滑出，分数恰好扣一次
+curl -s "$G/topk?k=10&ts=11000"
+
+# 6. 异常情形
+#    迟到事件（ts 已在窗口外）-> HTTP 422，status=LATE
+curl -s -i -X POST $G/events -H 'Content-Type: application/json' \
+  --data '{"eventId":"late","itemId":"x","delta":1,"ts":1}'
+#    重复 eventId -> HTTP 409，status=DUPLICATE
+curl -s -i -X POST $G/events -H 'Content-Type: application/json' \
+  --data '{"eventId":"e2","itemId":"ada","delta":5,"ts":2000}'
+#    撤回已过期/不存在事件 -> HTTP 404，status=EVENT_UNKNOWN
+curl -s -i -X POST $G/retract -H 'Content-Type: application/json' \
+  --data '{"eventId":"e1","ts":11000}'
+
+# 7. 内部快照（完整排序与计数）
+curl -s "$G/snapshot?ts=11000"

@@ -1,0 +1,271 @@
+### 1) 健康检查
+────────────────────────────────────────
+$ curl -X GET http://127.0.0.1:18080/health 
+{
+    "status": "ok",
+    "windowMs": 10000,
+    "groups": 0
+}
+### 2) 插入事件（窗口 10000ms，全部使用显式逻辑时间戳 ts）
+────────────────────────────────────────
+$ curl -X POST http://127.0.0.1:18080/groups/leaderboard/events --data '{"eventId":"e1","itemId":"bob","delta":5,"ts":1000}'
+{
+    "status": "INSERTED",
+    "eventId": "e1",
+    "itemId": "bob",
+    "delta": 5,
+    "ts": 1000,
+    "watermark": 1000,
+    "activeEvents": 1,
+    "activeItems": 1
+}
+────────────────────────────────────────
+$ curl -X POST http://127.0.0.1:18080/groups/leaderboard/events --data '{"eventId":"e2","itemId":"ada","delta":5,"ts":1001}'
+{
+    "status": "INSERTED",
+    "eventId": "e2",
+    "itemId": "ada",
+    "delta": 5,
+    "ts": 1001,
+    "watermark": 1001,
+    "activeEvents": 2,
+    "activeItems": 2
+}
+────────────────────────────────────────
+$ curl -X POST http://127.0.0.1:18080/groups/leaderboard/events --data '{"eventId":"e3","itemId":"cyb","delta":5,"ts":1002}'
+{
+    "status": "INSERTED",
+    "eventId": "e3",
+    "itemId": "cyb",
+    "delta": 5,
+    "ts": 1002,
+    "watermark": 1002,
+    "activeEvents": 3,
+    "activeItems": 3
+}
+────────────────────────────────────────
+$ curl -X POST http://127.0.0.1:18080/groups/leaderboard/events --data '{"eventId":"e4","itemId":"dan","delta":8,"ts":1003}'
+{
+    "status": "INSERTED",
+    "eventId": "e4",
+    "itemId": "dan",
+    "delta": 8,
+    "ts": 1003,
+    "watermark": 1003,
+    "activeEvents": 4,
+    "activeItems": 4
+}
+### 3) 查询 Top2（dan=8 第一；ada/bob/cyb 同为 5，按 ID 字典序 ada 第二）
+────────────────────────────────────────
+$ curl -X GET http://127.0.0.1:18080/groups/leaderboard/topk?k=2&ts=2000 
+{
+    "group": "leaderboard",
+    "k": 2,
+    "windowMs": 10000,
+    "count": 2,
+    "items": [
+        {
+            "rank": 1,
+            "itemId": "dan",
+            "score": 8
+        },
+        {
+            "rank": 2,
+            "itemId": "ada",
+            "score": 5
+        }
+    ],
+    "watermark": 2000,
+    "windowStart": -8000
+}
+### 4) 负增量：ada 再发一条 delta=-9 -> ada=-4 垫底；K=100 大于元素数，返回全部
+────────────────────────────────────────
+$ curl -X POST http://127.0.0.1:18080/groups/leaderboard/events --data '{"eventId":"e5","itemId":"ada","delta":-9,"ts":2001}'
+{
+    "status": "INSERTED",
+    "eventId": "e5",
+    "itemId": "ada",
+    "delta": -9,
+    "ts": 2001,
+    "watermark": 2001,
+    "activeEvents": 5,
+    "activeItems": 4
+}
+────────────────────────────────────────
+$ curl -X GET http://127.0.0.1:18080/groups/leaderboard/topk?k=100&ts=3000 
+{
+    "group": "leaderboard",
+    "k": 100,
+    "windowMs": 10000,
+    "count": 4,
+    "items": [
+        {
+            "rank": 1,
+            "itemId": "dan",
+            "score": 8
+        },
+        {
+            "rank": 2,
+            "itemId": "bob",
+            "score": 5
+        },
+        {
+            "rank": 3,
+            "itemId": "cyb",
+            "score": 5
+        },
+        {
+            "rank": 4,
+            "itemId": "ada",
+            "score": -4
+        }
+    ],
+    "watermark": 3000,
+    "windowStart": -7000
+}
+### 5) 撤回 e5（ada 恢复 5 分）
+────────────────────────────────────────
+$ curl -X POST http://127.0.0.1:18080/groups/leaderboard/retract --data '{"eventId":"e5","ts":4000}'
+{
+    "status": "RETRACTED",
+    "eventId": "e5",
+    "ts": 4000,
+    "watermark": 4000,
+    "activeEvents": 4,
+    "activeItems": 4
+}
+### 5b) 重复撤回：幂等，返回 ALREADY_RETRACTED，不二次扣减
+────────────────────────────────────────
+$ curl -X POST http://127.0.0.1:18080/groups/leaderboard/retract --data '{"eventId":"e5","ts":4001}'
+{
+    "status": "ALREADY_RETRACTED",
+    "eventId": "e5",
+    "ts": 4001,
+    "watermark": 4001,
+    "activeEvents": 4,
+    "activeItems": 4
+}
+────────────────────────────────────────
+$ curl -X GET http://127.0.0.1:18080/groups/leaderboard/topk?k=10&ts=4002 
+{
+    "group": "leaderboard",
+    "k": 10,
+    "windowMs": 10000,
+    "count": 4,
+    "items": [
+        {
+            "rank": 1,
+            "itemId": "dan",
+            "score": 8
+        },
+        {
+            "rank": 2,
+            "itemId": "ada",
+            "score": 5
+        },
+        {
+            "rank": 3,
+            "itemId": "bob",
+            "score": 5
+        },
+        {
+            "rank": 4,
+            "itemId": "cyb",
+            "score": 5
+        }
+    ],
+    "watermark": 4002,
+    "windowStart": -5998
+}
+### 6) 窗口滑出：水位推到 ts=11000，左边界=1000，e1(bob,ts=1000) 恰好滑出
+────────────────────────────────────────
+$ curl -X GET http://127.0.0.1:18080/groups/leaderboard/topk?k=10&ts=11000 
+{
+    "group": "leaderboard",
+    "k": 10,
+    "windowMs": 10000,
+    "count": 3,
+    "items": [
+        {
+            "rank": 1,
+            "itemId": "dan",
+            "score": 8
+        },
+        {
+            "rank": 2,
+            "itemId": "ada",
+            "score": 5
+        },
+        {
+            "rank": 3,
+            "itemId": "cyb",
+            "score": 5
+        }
+    ],
+    "watermark": 11000,
+    "windowStart": 1000
+}
+### 7) 迟到事件被拒（422 LATE）；重复 eventId 被拒（409 DUPLICATE）
+────────────────────────────────────────
+$ curl -X POST http://127.0.0.1:18080/groups/leaderboard/events --data '{"eventId":"late","itemId":"x","delta":1,"ts":1}'
+{
+    "status": "LATE",
+    "eventId": "late",
+    "itemId": "x",
+    "delta": 1,
+    "ts": 1,
+    "watermark": 11000,
+    "activeEvents": 3,
+    "activeItems": 3,
+    "error": "\u4e8b\u4ef6\u65f6\u95f4\u5df2\u6ed1\u51fa\u7a97\u53e3\uff08\u8fdf\u5230\u4e8b\u4ef6\uff09\uff0c\u672a\u88ab\u63a5\u53d7"
+}
+────────────────────────────────────────
+$ curl -X POST http://127.0.0.1:18080/groups/leaderboard/events --data '{"eventId":"e2","itemId":"ada","delta":5,"ts":2000}'
+{
+    "status": "DUPLICATE",
+    "eventId": "e2",
+    "itemId": "ada",
+    "delta": 5,
+    "ts": 2000,
+    "watermark": 11000,
+    "activeEvents": 3,
+    "activeItems": 3,
+    "error": "eventId \u5728\u7a97\u53e3\u5185\u5df2\u5b58\u5728\uff08\u6216\u5728\u64a4\u56de\u4fdd\u7559\u671f\u5185\uff09"
+}
+### 8) 撤回已过期事件（404 EVENT_UNKNOWN）
+────────────────────────────────────────
+$ curl -X POST http://127.0.0.1:18080/groups/leaderboard/retract --data '{"eventId":"e1","ts":11000}'
+{
+    "status": "EVENT_UNKNOWN",
+    "eventId": "e1",
+    "ts": 11000,
+    "watermark": 11000,
+    "activeEvents": 3,
+    "activeItems": 3,
+    "error": "\u4e8b\u4ef6\u4e0d\u5b58\u5728\u6216\u5df2\u8fc7\u671f\u6ed1\u51fa\u7a97\u53e3\uff0c\u65e0\u6cd5\u64a4\u56de"
+}
+### 9) 内部快照（完整排序 + 计数，便于排障）
+────────────────────────────────────────
+$ curl -X GET http://127.0.0.1:18080/groups/leaderboard/snapshot 
+{
+    "windowMs": 10000,
+    "watermark": 11000,
+    "activeEvents": 3,
+    "activeItems": 3,
+    "tombstones": 1,
+    "expiryQueue": 4,
+    "items": [
+        {
+            "itemId": "dan",
+            "score": 8
+        },
+        {
+            "itemId": "ada",
+            "score": 5
+        },
+        {
+            "itemId": "cyb",
+            "score": 5
+        }
+    ]
+}
