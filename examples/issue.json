@@ -1,0 +1,8 @@
+{
+  "issuer": "issuer-synth-1",
+  "subject": "subject-synth-1",
+  "purpose": "age-check",
+  "not_before": "2026-01-01T00:00:00Z",
+  "not_after": "2027-01-01T00:00:00Z",
+  "content": "synthetic credential content v1"
+}
