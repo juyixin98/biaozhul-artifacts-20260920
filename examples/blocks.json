@@ -1,0 +1,12 @@
+[
+  {"changes": {"alice": 100, "bob": 50}},
+  {"changes": {"alice": -30, "carol": 20}},
+  {"changes": {"bob": -10, "dave": 40}},
+  {"changes": {"alice": 5, "carol": 5}},
+  {"changes": {"dave": -15, "erin": 60}},
+  {"changes": {"bob": 25, "erin": -10}},
+  {"changes": {"alice": -20, "carol": 30}},
+  {"changes": {"dave": 10, "erin": 5}},
+  {"changes": {"bob": -5, "carol": -15}},
+  {"changes": {"alice": 40, "dave": -20}}
+]
