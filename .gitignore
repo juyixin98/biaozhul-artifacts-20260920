@@ -1,0 +1,9 @@
+# build output
+/consistent-hash
+
+# test/coverage artifacts
+*.out
+*.test
+
+# local logs
+*.log
