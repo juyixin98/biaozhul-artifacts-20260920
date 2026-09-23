@@ -1,0 +1,207 @@
+{
+  "summary": {
+    "tableCount": 4,
+    "seed": 99,
+    "estimatedBestOrder": [
+      "t2",
+      "t3",
+      "t1",
+      "t0"
+    ],
+    "estimatedBestCost": 207.9999999999996,
+    "trueBestOrder": [
+      "t0",
+      "t1",
+      "t2",
+      "t3"
+    ],
+    "trueBestCost": 87619,
+    "estimatedAndTrueBestAgree": false
+  },
+  "warnings": [
+    "Edge t0.k01 = t1.k10: missing statistics — both sides assumed unique: 1/max(120, 200)",
+    "Edge t1.k12 = t2.k21: missing statistics — both sides assumed unique: 1/max(200, 150)",
+    "Edge t2.k23 = t3.k32: missing statistics — both sides assumed unique: 1/max(150, 80)"
+  ],
+  "estimatedPlan": {
+    "dpJoinOrder": [
+      "t0",
+      "t1",
+      "t2",
+      "t3"
+    ],
+    "dpTotalCost": 207.9999999999996,
+    "note": "DP output is bushy; dpJoinOrder lists tree leaves. estimatedBestOrder is the best left-deep order under the model, which is directly comparable to trueBestOrder."
+  },
+  "reality": {
+    "method": "synthetic Zipf-skewed data; exact hash-join execution with multiset aggregation over all referenced join columns",
+    "trueCostModel": "sum of exact intermediate row counts over left-deep order"
+  },
+  "verdict": {
+    "outcome": "DIVERGE",
+    "message": "Estimator prefers [t2, t3, t1, t0] but measured execution says [t0, t1, t2, t3] is cheaper. Skew violates the uniform/independent-value assumption behind 1/NDV selectivity.",
+    "trueCostOfEstimatedBestOrder": 89562,
+    "trueCostOfTrueBestOrder": 87619,
+    "regretRatio": 1.0221755555301932
+  },
+  "subsetCardinalities": [
+    {
+      "subset": "t0",
+      "estimatedRows": 120,
+      "actualRows": 120,
+      "estimateOverActual": 1
+    },
+    {
+      "subset": "t1",
+      "estimatedRows": 200,
+      "actualRows": 200,
+      "estimateOverActual": 1
+    },
+    {
+      "subset": "t0⨝t1",
+      "estimatedRows": 120,
+      "actualRows": 1327,
+      "estimateOverActual": 0.09043
+    },
+    {
+      "subset": "t2",
+      "estimatedRows": 150,
+      "actualRows": 150,
+      "estimateOverActual": 1
+    },
+    {
+      "subset": "t1⨝t2",
+      "estimatedRows": 150,
+      "actualRows": 1343,
+      "estimateOverActual": 0.11169
+    },
+    {
+      "subset": "t0⨝t1⨝t2",
+      "estimatedRows": 90,
+      "actualRows": 9143,
+      "estimateOverActual": 0.009844
+    },
+    {
+      "subset": "t3",
+      "estimatedRows": 80,
+      "actualRows": 80,
+      "estimateOverActual": 1
+    },
+    {
+      "subset": "t2⨝t3",
+      "estimatedRows": 80,
+      "actualRows": 1045,
+      "estimateOverActual": 0.076555
+    },
+    {
+      "subset": "t1⨝t2⨝t3",
+      "estimatedRows": 80,
+      "actualRows": 11368,
+      "estimateOverActual": 0.007037
+    },
+    {
+      "subset": "t0⨝t1⨝t2⨝t3",
+      "estimatedRows": 48,
+      "actualRows": 77149,
+      "estimateOverActual": 6.22E-4
+    }
+  ],
+  "orderComparison": [
+    {
+      "order": [
+        "t0",
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "estimatedCost": 258,
+      "trueCost": 87619,
+      "estimatedRank": 3,
+      "trueRank": 1
+    },
+    {
+      "order": [
+        "t1",
+        "t0",
+        "t2",
+        "t3"
+      ],
+      "estimatedCost": 258,
+      "trueCost": 87619,
+      "estimatedRank": 3,
+      "trueRank": 1
+    },
+    {
+      "order": [
+        "t1",
+        "t2",
+        "t0",
+        "t3"
+      ],
+      "estimatedCost": 287.9999999999998,
+      "trueCost": 87635,
+      "estimatedRank": 7,
+      "trueRank": 3
+    },
+    {
+      "order": [
+        "t2",
+        "t1",
+        "t0",
+        "t3"
+      ],
+      "estimatedCost": 287.9999999999998,
+      "trueCost": 87635,
+      "estimatedRank": 7,
+      "trueRank": 3
+    },
+    {
+      "order": [
+        "t2",
+        "t3",
+        "t1",
+        "t0"
+      ],
+      "estimatedCost": 207.9999999999996,
+      "trueCost": 89562,
+      "estimatedRank": 1,
+      "trueRank": 5
+    },
+    {
+      "order": [
+        "t3",
+        "t2",
+        "t1",
+        "t0"
+      ],
+      "estimatedCost": 207.9999999999996,
+      "trueCost": 89562,
+      "estimatedRank": 1,
+      "trueRank": 5
+    },
+    {
+      "order": [
+        "t1",
+        "t2",
+        "t3",
+        "t0"
+      ],
+      "estimatedCost": 277.99999999999943,
+      "trueCost": 89860,
+      "estimatedRank": 5,
+      "trueRank": 7
+    },
+    {
+      "order": [
+        "t2",
+        "t1",
+        "t3",
+        "t0"
+      ],
+      "estimatedCost": 277.99999999999943,
+      "trueCost": 89860,
+      "estimatedRank": 5,
+      "trueRank": 7
+    }
+  ]
+}

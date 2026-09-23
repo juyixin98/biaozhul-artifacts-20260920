@@ -1,0 +1,15 @@
+{
+  "allowCrossProducts": true,
+  "tables": [
+    {"name": "orders",    "rows": 100000},
+    {"name": "customers", "rows": 10000},
+    {"name": "suppliers", "rows": 300},
+    {"name": "parts",     "rows": 8000}
+  ],
+  "edges": [
+    {"leftTable": "orders", "leftColumn": "cust_id",
+     "rightTable": "customers", "rightColumn": "id"},
+    {"leftTable": "suppliers", "leftColumn": "part_id",
+     "rightTable": "parts", "rightColumn": "id"}
+  ]
+}

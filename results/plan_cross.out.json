@@ -1,0 +1,124 @@
+{
+  "summary": {
+    "tableCount": 4,
+    "edgeCount": 2,
+    "totalCost": 3010299.999999985,
+    "costOverflow": false,
+    "costModel": "sum of estimated intermediate-result row counts (base scans cost 0)",
+    "cardinalityModel": "product of base cardinalities times product of edge selectivities (selectivity assumed constant per edge)"
+  },
+  "warnings": [
+    "Edge orders.cust_id = customers.id: missing statistics — both sides assumed unique: 1/max(100000, 10000)",
+    "Edge suppliers.part_id = parts.id: missing statistics — both sides assumed unique: 1/max(300, 8000)"
+  ],
+  "tables": [
+    {
+      "name": "orders",
+      "rows": 100000,
+      "unique": false
+    },
+    {
+      "name": "customers",
+      "rows": 10000,
+      "unique": false
+    },
+    {
+      "name": "suppliers",
+      "rows": 300,
+      "unique": false
+    },
+    {
+      "name": "parts",
+      "rows": 8000,
+      "unique": false
+    }
+  ],
+  "edges": [
+    {
+      "left": "orders.cust_id",
+      "right": "customers.id",
+      "selectivity": 1.0E-5,
+      "selectivitySource": "ASSUMED_UNIQUE",
+      "derivation": "1/max(100000, 10000); both sides assumed unique: 1/max(100000, 10000)"
+    },
+    {
+      "left": "suppliers.part_id",
+      "right": "parts.id",
+      "selectivity": 1.25E-4,
+      "selectivitySource": "ASSUMED_UNIQUE",
+      "derivation": "1/max(300, 8000); both sides assumed unique: 1/max(300, 8000)"
+    }
+  ],
+  "plan": {
+    "type": "CROSS_JOIN",
+    "estimatedRows": 2999999.999999986,
+    "nodeCost": 3010299.999999985,
+    "rowsOverflow": false,
+    "predicate": null,
+    "explanation": "cartesian product (join graph was disconnected)",
+    "left": {
+      "type": "INNER_JOIN",
+      "estimatedRows": 9999.99999999999,
+      "nodeCost": 9999.99999999999,
+      "rowsOverflow": false,
+      "predicate": {
+        "left": "orders.cust_id",
+        "right": "customers.id",
+        "selectivity": 1.0E-5,
+        "selectivitySource": "ASSUMED_UNIQUE"
+      },
+      "explanation": "inner join on orders.cust_id = customers.id (s=1.0E-5)",
+      "left": {
+        "type": "SCAN",
+        "table": "orders",
+        "estimatedRows": 100000.00000000001,
+        "nodeCost": 0
+      },
+      "right": {
+        "type": "SCAN",
+        "table": "customers",
+        "estimatedRows": 10000.00000000001,
+        "nodeCost": 0
+      }
+    },
+    "right": {
+      "type": "INNER_JOIN",
+      "estimatedRows": 299.99999999999994,
+      "nodeCost": 299.99999999999994,
+      "rowsOverflow": false,
+      "predicate": {
+        "left": "suppliers.part_id",
+        "right": "parts.id",
+        "selectivity": 1.25E-4,
+        "selectivitySource": "ASSUMED_UNIQUE"
+      },
+      "explanation": "inner join on suppliers.part_id = parts.id (s=1.25E-4)",
+      "left": {
+        "type": "SCAN",
+        "table": "suppliers",
+        "estimatedRows": 299.99999999999994,
+        "nodeCost": 0
+      },
+      "right": {
+        "type": "SCAN",
+        "table": "parts",
+        "estimatedRows": 8000,
+        "nodeCost": 0
+      }
+    }
+  },
+  "joinOrder": [
+    "orders",
+    "customers",
+    "suppliers",
+    "parts"
+  ],
+  "enumeration": {
+    "space": "left-deep permutations",
+    "permutationsConsidered": 24,
+    "legalOrders": 0,
+    "bestLeftDeepCost": null,
+    "note": "DP searches the full bushy space; this list ranks left-deep orders for verification. Costs are the estimator's.",
+    "orders": []
+  }
+}

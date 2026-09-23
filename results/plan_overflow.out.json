@@ -1,0 +1,206 @@
+{
+  "summary": {
+    "tableCount": 4,
+    "edgeCount": 3,
+    "totalCost": null,
+    "costOverflow": true,
+    "costModel": "sum of estimated intermediate-result row counts (base scans cost 0)",
+    "cardinalityModel": "product of base cardinalities times product of edge selectivities (selectivity assumed constant per edge)"
+  },
+  "warnings": [],
+  "tables": [
+    {
+      "name": "t1",
+      "rows": 1.0E150,
+      "unique": false
+    },
+    {
+      "name": "t2",
+      "rows": 1.0E150,
+      "unique": false
+    },
+    {
+      "name": "t3",
+      "rows": 1.0E150,
+      "unique": false
+    },
+    {
+      "name": "t4",
+      "rows": 1.0E150,
+      "unique": false
+    }
+  ],
+  "edges": [
+    {
+      "left": "t1.a",
+      "right": "t2.b",
+      "selectivity": 1,
+      "selectivitySource": "GIVEN",
+      "derivation": "selectivity given explicitly"
+    },
+    {
+      "left": "t2.c",
+      "right": "t3.d",
+      "selectivity": 1,
+      "selectivitySource": "GIVEN",
+      "derivation": "selectivity given explicitly"
+    },
+    {
+      "left": "t3.e",
+      "right": "t4.f",
+      "selectivity": 1,
+      "selectivitySource": "GIVEN",
+      "derivation": "selectivity given explicitly"
+    }
+  ],
+  "plan": {
+    "type": "INNER_JOIN",
+    "estimatedRows": null,
+    "nodeCost": null,
+    "rowsOverflow": true,
+    "predicate": {
+      "left": "t1.a",
+      "right": "t2.b",
+      "selectivity": 1,
+      "selectivitySource": "GIVEN"
+    },
+    "explanation": "inner join on t1.a = t2.b (s=1.00000)",
+    "left": {
+      "type": "SCAN",
+      "table": "t1",
+      "estimatedRows": 9.999999999999882E149,
+      "nodeCost": 0
+    },
+    "right": {
+      "type": "INNER_JOIN",
+      "estimatedRows": null,
+      "nodeCost": null,
+      "rowsOverflow": true,
+      "predicate": {
+        "left": "t2.c",
+        "right": "t3.d",
+        "selectivity": 1,
+        "selectivitySource": "GIVEN"
+      },
+      "explanation": "inner join on t2.c = t3.d (s=1.00000)",
+      "left": {
+        "type": "SCAN",
+        "table": "t2",
+        "estimatedRows": 9.999999999999882E149,
+        "nodeCost": 0
+      },
+      "right": {
+        "type": "INNER_JOIN",
+        "estimatedRows": 9.999999999999763E299,
+        "nodeCost": 9.999999999999763E299,
+        "rowsOverflow": false,
+        "predicate": {
+          "left": "t3.e",
+          "right": "t4.f",
+          "selectivity": 1,
+          "selectivitySource": "GIVEN"
+        },
+        "explanation": "inner join on t3.e = t4.f (s=1.00000)",
+        "left": {
+          "type": "SCAN",
+          "table": "t3",
+          "estimatedRows": 9.999999999999882E149,
+          "nodeCost": 0
+        },
+        "right": {
+          "type": "SCAN",
+          "table": "t4",
+          "estimatedRows": 9.999999999999882E149,
+          "nodeCost": 0
+        }
+      }
+    }
+  },
+  "joinOrder": [
+    "t1",
+    "t2",
+    "t3",
+    "t4"
+  ],
+  "enumeration": {
+    "space": "left-deep permutations",
+    "permutationsConsidered": 24,
+    "legalOrders": 8,
+    "bestLeftDeepCost": null,
+    "note": "DP searches the full bushy space; this list ranks left-deep orders for verification. Costs are the estimator's.",
+    "orders": [
+      {
+        "order": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ],
+        "estimatedCost": null
+      },
+      {
+        "order": [
+          "t2",
+          "t1",
+          "t3",
+          "t4"
+        ],
+        "estimatedCost": null
+      },
+      {
+        "order": [
+          "t2",
+          "t3",
+          "t1",
+          "t4"
+        ],
+        "estimatedCost": null
+      },
+      {
+        "order": [
+          "t2",
+          "t3",
+          "t4",
+          "t1"
+        ],
+        "estimatedCost": null
+      },
+      {
+        "order": [
+          "t3",
+          "t2",
+          "t1",
+          "t4"
+        ],
+        "estimatedCost": null
+      },
+      {
+        "order": [
+          "t3",
+          "t2",
+          "t4",
+          "t1"
+        ],
+        "estimatedCost": null
+      },
+      {
+        "order": [
+          "t3",
+          "t4",
+          "t2",
+          "t1"
+        ],
+        "estimatedCost": null
+      },
+      {
+        "order": [
+          "t4",
+          "t3",
+          "t2",
+          "t1"
+        ],
+        "estimatedCost": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "tables": [
+    {"name": "orders",    "rows": 2000000, "unique": true},
+    {"name": "customers", "rows": 50000,   "unique": true},
+    {"name": "products",  "rows": 10000,   "unique": true},
+    {"name": "regions",   "rows": 40,      "unique": true}
+  ],
+  "edges": [
+    {"leftTable": "orders", "leftColumn": "cust_id",
+     "rightTable": "customers", "rightColumn": "id",
+     "ndvLeft": 49000, "ndvRight": 50000},
+    {"leftTable": "orders", "leftColumn": "prod_id",
+     "rightTable": "products", "rightColumn": "id",
+     "ndvLeft": 9000, "ndvRight": 10000},
+    {"leftTable": "customers", "leftColumn": "region_id",
+     "rightTable": "regions", "rightColumn": "id",
+     "ndvLeft": 40, "ndvRight": 40}
+  ]
+}

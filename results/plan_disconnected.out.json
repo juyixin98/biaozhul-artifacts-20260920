@@ -1,0 +1,15 @@
+{
+  "error": "DISCONNECTED_GRAPH",
+  "message": "join graph is disconnected: 2 components; no single inner-join plan exists without Cartesian products",
+  "components": [
+    [
+      "orders",
+      "customers"
+    ],
+    [
+      "suppliers",
+      "parts"
+    ]
+  ],
+  "remedy": "add join predicates connecting the components, or resend with \"allowCrossProducts\": true to plan Cartesian products"
+}

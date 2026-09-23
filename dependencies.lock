@@ -1,0 +1,25 @@
+# Dependency lock — join-order-planner
+#
+# This project intentionally has ZERO third-party dependencies: it uses only
+# the Java 17 standard library (including com.sun.net.httpserver.HttpServer,
+# which ships with the JDK). There is therefore no Maven/Gradle dependency
+# graph to resolve; the only "locked" dependency is the JDK toolchain itself.
+#
+# Build/test toolchain used and verified:
+#
+#   tool:    Eclipse Temurin (Adoptium) OpenJDK 17.0.12+7 (HotSpot, x64 linux)
+#   date:    2024-07-16
+#   archive: OpenJDK17U-jdk_x64_linux_hotspot_17.0.12_7.tar.gz
+#   url:     https://github.com/adoptium/temurin17-binaries/releases/download/
+#            jdk-17.0.12%2B7/OpenJDK17U-jdk_x64_linux_hotspot_17.0.12_7.tar.gz
+#   sha256:  43790fdced1075f034a6c452b6cd5a8fbce424a450d31ed3bfa38121e7fc1c8b
+#
+# Any Java 17+ JDK (Temurin, Oracle, Amazon Corretto, distro OpenJDK) should
+# compile and run the project; no flags beyond plain `javac`/`java` are used.
+# The HTTP server uses JDK-internal API com.sun.net.httpserver, which is a
+# supported, public API of the JDK (it is exported by the jdk.httpserver
+# module and does not require --add-exports).
+#
+# Runtime libraries: JDK only (java.base, jdk.httpserver).
+# Test libraries:    none (custom assertions in src/joinplanner/test).
+# JSON library:      none (hand-written parser/serializer in joinplanner.json).

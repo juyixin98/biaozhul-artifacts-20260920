@@ -1,0 +1,16 @@
+{
+  "tables": [
+    {"name": "t1", "rows": 1e150},
+    {"name": "t2", "rows": 1e150},
+    {"name": "t3", "rows": 1e150},
+    {"name": "t4", "rows": 1e150}
+  ],
+  "edges": [
+    {"leftTable": "t1", "leftColumn": "a", "rightTable": "t2", "rightColumn": "b",
+     "selectivity": 1.0},
+    {"leftTable": "t2", "leftColumn": "c", "rightTable": "t3", "rightColumn": "d",
+     "selectivity": 1.0},
+    {"leftTable": "t3", "leftColumn": "e", "rightTable": "t4", "rightColumn": "f",
+     "selectivity": 1.0}
+  ]
+}

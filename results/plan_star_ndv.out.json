@@ -1,0 +1,206 @@
+{
+  "summary": {
+    "tableCount": 4,
+    "edgeCount": 3,
+    "totalCost": 4050000.0000000056,
+    "costOverflow": false,
+    "costModel": "sum of estimated intermediate-result row counts (base scans cost 0)",
+    "cardinalityModel": "product of base cardinalities times product of edge selectivities (selectivity assumed constant per edge)"
+  },
+  "warnings": [],
+  "tables": [
+    {
+      "name": "orders",
+      "rows": 2000000,
+      "unique": true
+    },
+    {
+      "name": "customers",
+      "rows": 50000,
+      "unique": true
+    },
+    {
+      "name": "products",
+      "rows": 10000,
+      "unique": true
+    },
+    {
+      "name": "regions",
+      "rows": 40,
+      "unique": true
+    }
+  ],
+  "edges": [
+    {
+      "left": "orders.cust_id",
+      "right": "customers.id",
+      "selectivity": 2.0E-5,
+      "selectivitySource": "DERIVED",
+      "derivation": "1/max(ndvLeft=49000, ndvRight=50000)"
+    },
+    {
+      "left": "orders.prod_id",
+      "right": "products.id",
+      "selectivity": 1.0E-4,
+      "selectivitySource": "DERIVED",
+      "derivation": "1/max(ndvLeft=9000, ndvRight=10000)"
+    },
+    {
+      "left": "customers.region_id",
+      "right": "regions.id",
+      "selectivity": 0.025,
+      "selectivitySource": "DERIVED",
+      "derivation": "1/max(ndvLeft=40, ndvRight=40)"
+    }
+  ],
+  "plan": {
+    "type": "INNER_JOIN",
+    "estimatedRows": 2000000.0000000063,
+    "nodeCost": 4050000.0000000056,
+    "rowsOverflow": false,
+    "predicate": {
+      "left": "orders.cust_id",
+      "right": "customers.id",
+      "selectivity": 2.0E-5,
+      "selectivitySource": "DERIVED"
+    },
+    "explanation": "inner join on orders.cust_id = customers.id (s=2.0E-5)",
+    "left": {
+      "type": "INNER_JOIN",
+      "estimatedRows": 1999999.9999999993,
+      "nodeCost": 1999999.9999999993,
+      "rowsOverflow": false,
+      "predicate": {
+        "left": "orders.prod_id",
+        "right": "products.id",
+        "selectivity": 1.0E-4,
+        "selectivitySource": "DERIVED"
+      },
+      "explanation": "inner join on orders.prod_id = products.id (s=1.0E-4)",
+      "left": {
+        "type": "SCAN",
+        "table": "orders",
+        "estimatedRows": 1999999.9999999993,
+        "nodeCost": 0
+      },
+      "right": {
+        "type": "SCAN",
+        "table": "products",
+        "estimatedRows": 10000.00000000001,
+        "nodeCost": 0
+      }
+    },
+    "right": {
+      "type": "INNER_JOIN",
+      "estimatedRows": 50000.00000000001,
+      "nodeCost": 50000.00000000001,
+      "rowsOverflow": false,
+      "predicate": {
+        "left": "customers.region_id",
+        "right": "regions.id",
+        "selectivity": 0.025,
+        "selectivitySource": "DERIVED"
+      },
+      "explanation": "inner join on customers.region_id = regions.id (s=0.0250000)",
+      "left": {
+        "type": "SCAN",
+        "table": "customers",
+        "estimatedRows": 50000.00000000001,
+        "nodeCost": 0
+      },
+      "right": {
+        "type": "SCAN",
+        "table": "regions",
+        "estimatedRows": 40,
+        "nodeCost": 0
+      }
+    }
+  },
+  "joinOrder": [
+    "orders",
+    "products",
+    "customers",
+    "regions"
+  ],
+  "enumeration": {
+    "space": "left-deep permutations",
+    "permutationsConsidered": 24,
+    "legalOrders": 8,
+    "bestLeftDeepCost": 4050000.0000000126,
+    "note": "DP searches the full bushy space; this list ranks left-deep orders for verification. Costs are the estimator's.",
+    "orders": [
+      {
+        "order": [
+          "customers",
+          "regions",
+          "orders",
+          "products"
+        ],
+        "estimatedCost": 4050000.0000000126
+      },
+      {
+        "order": [
+          "regions",
+          "customers",
+          "orders",
+          "products"
+        ],
+        "estimatedCost": 4050000.0000000126
+      },
+      {
+        "order": [
+          "customers",
+          "orders",
+          "products",
+          "regions"
+        ],
+        "estimatedCost": 6000000.000000005
+      },
+      {
+        "order": [
+          "orders",
+          "customers",
+          "products",
+          "regions"
+        ],
+        "estimatedCost": 6000000.000000005
+      },
+      {
+        "order": [
+          "orders",
+          "products",
+          "customers",
+          "regions"
+        ],
+        "estimatedCost": 6000000.000000005
+      },
+      {
+        "order": [
+          "products",
+          "orders",
+          "customers",
+          "regions"
+        ],
+        "estimatedCost": 6000000.000000005
+      },
+      {
+        "order": [
+          "customers",
+          "orders",
+          "regions",
+          "products"
+        ],
+        "estimatedCost": 6000000.000000016
+      },
+      {
+        "order": [
+          "orders",
+          "customers",
+          "regions",
+          "products"
+        ],
+        "estimatedCost": 6000000.000000016
+      }
+    ]
+  }
+}

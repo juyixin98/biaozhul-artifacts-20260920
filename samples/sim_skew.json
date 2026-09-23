@@ -1,0 +1,28 @@
+{
+  "seed": 99,
+  "maxRows": 5000000,
+  "problem": {
+    "tables": [
+      {"name": "t0", "rows": 120},
+      {"name": "t1", "rows": 200},
+      {"name": "t2", "rows": 150},
+      {"name": "t3", "rows": 80}
+    ],
+    "edges": [
+      {"leftTable": "t0", "leftColumn": "k01",
+       "rightTable": "t1", "rightColumn": "k10"},
+      {"leftTable": "t1", "leftColumn": "k12",
+       "rightTable": "t2", "rightColumn": "k21"},
+      {"leftTable": "t2", "leftColumn": "k23",
+       "rightTable": "t3", "rightColumn": "k32"}
+    ]
+  },
+  "columns": [
+    {"table": "t0", "column": "k01", "ndv": 15, "zipf": 1.4},
+    {"table": "t1", "column": "k10", "ndv": 25, "zipf": 0.3},
+    {"table": "t1", "column": "k12", "ndv": 12, "zipf": 1.5},
+    {"table": "t2", "column": "k21", "ndv": 30, "zipf": 0.2},
+    {"table": "t2", "column": "k23", "ndv": 20, "zipf": 0.4},
+    {"table": "t3", "column": "k32", "ndv": 8,  "zipf": 1.3}
+  ]
+}

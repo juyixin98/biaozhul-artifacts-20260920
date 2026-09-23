@@ -1,0 +1,134 @@
+{
+  "summary": {
+    "tableCount": 3,
+    "edgeCount": 2,
+    "totalCost": 599999.9999999998,
+    "costOverflow": false,
+    "costModel": "sum of estimated intermediate-result row counts (base scans cost 0)",
+    "cardinalityModel": "product of base cardinalities times product of edge selectivities (selectivity assumed constant per edge)"
+  },
+  "warnings": [],
+  "tables": [
+    {
+      "name": "orders",
+      "rows": 100000,
+      "unique": false
+    },
+    {
+      "name": "customers",
+      "rows": 10000,
+      "unique": true
+    },
+    {
+      "name": "lineitems",
+      "rows": 500000,
+      "unique": false
+    }
+  ],
+  "edges": [
+    {
+      "left": "orders.cust_id",
+      "right": "customers.id",
+      "selectivity": 1.0E-4,
+      "selectivitySource": "GIVEN",
+      "derivation": "selectivity given explicitly"
+    },
+    {
+      "left": "lineitems.order_id",
+      "right": "orders.id",
+      "selectivity": 1.0E-5,
+      "selectivitySource": "DERIVED",
+      "derivation": "1/max(ndvLeft=100000, ndvRight=100000)"
+    }
+  ],
+  "plan": {
+    "type": "INNER_JOIN",
+    "estimatedRows": 499999.9999999997,
+    "nodeCost": 599999.9999999998,
+    "rowsOverflow": false,
+    "predicate": {
+      "left": "lineitems.order_id",
+      "right": "orders.id",
+      "selectivity": 1.0E-5,
+      "selectivitySource": "DERIVED"
+    },
+    "explanation": "inner join on lineitems.order_id = orders.id (s=1.0E-5)",
+    "left": {
+      "type": "INNER_JOIN",
+      "estimatedRows": 100000.00000000001,
+      "nodeCost": 100000.00000000001,
+      "rowsOverflow": false,
+      "predicate": {
+        "left": "orders.cust_id",
+        "right": "customers.id",
+        "selectivity": 1.0E-4,
+        "selectivitySource": "GIVEN"
+      },
+      "explanation": "inner join on orders.cust_id = customers.id (s=1.0E-4)",
+      "left": {
+        "type": "SCAN",
+        "table": "orders",
+        "estimatedRows": 100000.00000000001,
+        "nodeCost": 0
+      },
+      "right": {
+        "type": "SCAN",
+        "table": "customers",
+        "estimatedRows": 10000.00000000001,
+        "nodeCost": 0
+      }
+    },
+    "right": {
+      "type": "SCAN",
+      "table": "lineitems",
+      "estimatedRows": 499999.9999999997,
+      "nodeCost": 0
+    }
+  },
+  "joinOrder": [
+    "orders",
+    "customers",
+    "lineitems"
+  ],
+  "enumeration": {
+    "space": "left-deep permutations",
+    "permutationsConsidered": 6,
+    "legalOrders": 4,
+    "bestLeftDeepCost": 599999.9999999998,
+    "note": "DP searches the full bushy space; this list ranks left-deep orders for verification. Costs are the estimator's.",
+    "orders": [
+      {
+        "order": [
+          "customers",
+          "orders",
+          "lineitems"
+        ],
+        "estimatedCost": 599999.9999999998
+      },
+      {
+        "order": [
+          "orders",
+          "customers",
+          "lineitems"
+        ],
+        "estimatedCost": 599999.9999999998
+      },
+      {
+        "order": [
+          "lineitems",
+          "orders",
+          "customers"
+        ],
+        "estimatedCost": 999999.9999999995
+      },
+      {
+        "order": [
+          "orders",
+          "lineitems",
+          "customers"
+        ],
+        "estimatedCost": 999999.9999999995
+      }
+    ]
+  }
+}

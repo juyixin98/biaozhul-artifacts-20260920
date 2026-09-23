@@ -1,0 +1,15 @@
+{
+  "tables": [
+    {"name": "orders", "rows": 100000},
+    {"name": "customers", "rows": 10000, "unique": true},
+    {"name": "lineitems", "rows": 500000}
+  ],
+  "edges": [
+    {"leftTable": "orders", "leftColumn": "cust_id",
+     "rightTable": "customers", "rightColumn": "id",
+     "selectivity": 0.0001},
+    {"leftTable": "lineitems", "leftColumn": "order_id",
+     "rightTable": "orders", "rightColumn": "id",
+     "ndvLeft": 100000, "ndvRight": 100000}
+  ]
+}
