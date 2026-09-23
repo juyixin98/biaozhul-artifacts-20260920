@@ -1,0 +1,7 @@
+{
+  "global":  { "rate": "10",   "burst": "10" },
+  "default": { "rate": "2",    "burst": "5" },
+  "tenants": {
+    "vip": { "rate": "1/3", "burst": "3" }
+  }
+}
