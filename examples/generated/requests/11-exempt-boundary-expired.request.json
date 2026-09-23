@@ -1,0 +1,57 @@
+{
+  "allowlist_version": "allowlist-2026.09.24",
+  "attestation": {
+    "payload_type": "mirrorad.verifier_result/v1",
+    "payload": {
+      "kind": "mirrorad.verifier_result/v1",
+      "signer_key_id": "ed25519:9a358c81c5e0b8634f3cf36454c397468cc9d7d76b7961841dea775fde293784",
+      "image_digest": "sha256:d20111c6f2a8d3bd72dbfa2a185efaaf79a2582feb5fced51df3e4eed5aba3b5",
+      "sbom_digest": "sha256:0e92531619cb27ec0218cefb77e728dc4dfd6a1748fadccc692a964548eb437f",
+      "result": "pass",
+      "checks": [
+        "root",
+        "privileged",
+        "baseimage",
+        "snapshot"
+      ],
+      "generated_at": "2026-09-24T12:00:00Z"
+    },
+    "signature": "ELQ44xCqics8sxBRQc1Vt/CByZTs29lHgoSf1UQx4AfE/1lhzMJFuu+fCobB7Z7v3nH1WpBOrAMDQgLPCQDBCw=="
+  },
+  "exemptions": [
+    {
+      "payload_type": "mirrorad.exemption/v1",
+      "payload": {
+        "kind": "mirrorad.exemption/v1",
+        "id": "ex-root-boundary-expired",
+        "signer_key_id": "ed25519:6c234e5190c910ed7e18ed36ed7d7180c321f2dfd6e24470bc8d732c5b5a79f8",
+        "image_digest": "sha256:d20111c6f2a8d3bd72dbfa2a185efaaf79a2582feb5fced51df3e4eed5aba3b5",
+        "rule": "no_root_user",
+        "not_after": "2026-10-01T00:00:00Z",
+        "reason": "expires exactly at the boundary instant",
+        "granted_at": "2026-09-01T00:00:00Z"
+      },
+      "signature": "kNpQBy7MS1U2zybYKBBjWQ1OrfVoDojnxgnVDF3sZV6WN4lUKFeOn/kfSJi6BfA9K1+ECv31JEsTSJD5XXMnCA=="
+    }
+  ],
+  "image_config": {
+    "architecture": "amd64",
+    "config": {
+      "Privileged": false,
+      "User": "root"
+    },
+    "created": "2026-09-20T00:00:00Z",
+    "history": [],
+    "os": "linux",
+    "rootfs": {
+      "diff_ids": [],
+      "type": "layers"
+    }
+  },
+  "sbom": {
+    "base_image_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "distro": "mirror-offline 1.0",
+    "image_digest": "sha256:d20111c6f2a8d3bd72dbfa2a185efaaf79a2582feb5fced51df3e4eed5aba3b5",
+    "packages": []
+  }
+}

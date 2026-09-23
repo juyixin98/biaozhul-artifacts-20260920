@@ -1,0 +1,18 @@
+{
+  "payload_type": "mirrorad.verifier_result/v1",
+  "payload": {
+    "kind": "mirrorad.verifier_result/v1",
+    "signer_key_id": "ed25519:9a358c81c5e0b8634f3cf36454c397468cc9d7d76b7961841dea775fde293784",
+    "image_digest": "sha256:b420ca4c552a2e8997c77643d29c15c7e2e64d72e411674350e0289db5c82c90",
+    "sbom_digest": "sha256:33de50cf09701cb591609aeb682d8abf1a1d633d4bc18e9414157efb3c581b52",
+    "result": "fail",
+    "checks": [
+      "root",
+      "privileged",
+      "baseimage",
+      "snapshot"
+    ],
+    "generated_at": "2026-09-24T12:00:00Z"
+  },
+  "signature": "niR6NPBSK316n6dE8iu4rmiWqPyEQPoR/fh6ErDs6LqR3KHZkgQrNiPdRdbg629vSYnd2FrJu1YIQow+DrJ0CQ=="
+}

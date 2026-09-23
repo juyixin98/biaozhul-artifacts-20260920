@@ -1,0 +1,41 @@
+{
+  "allowlist_version": "allowlist-2026.09.24",
+  "attestation": {
+    "payload_type": "mirrorad.verifier_result/v1",
+    "payload": {
+      "kind": "mirrorad.verifier_result/v1",
+      "signer_key_id": "ed25519:9a358c81c5e0b8634f3cf36454c397468cc9d7d76b7961841dea775fde293784",
+      "image_digest": "sha256:eba944e33ce5b1cdb45039419b322bbb5f63a9835d02aaa4e7634d198b5db251",
+      "sbom_digest": "sha256:0d8617a3effca3d497db7157e90d2b17dfe72064fa8a7074dfcaf8b750918d4b",
+      "result": "pass",
+      "checks": [
+        "root",
+        "privileged",
+        "baseimage",
+        "snapshot"
+      ],
+      "generated_at": "2026-09-24T12:00:00Z"
+    },
+    "signature": "Wa3j4PzAmqUsTTNIuQCX2wyFQVI5nqfjXxaq2sOLXo+ayBp/9GkMszJm7xBxtEjlsjR3Qon4lFu8qpVBmZv5Cg=="
+  },
+  "image_config": {
+    "architecture": "amd64",
+    "config": {
+      "Privileged": true,
+      "User": "10001"
+    },
+    "created": "2026-09-20T00:00:00Z",
+    "history": [],
+    "os": "linux",
+    "rootfs": {
+      "diff_ids": [],
+      "type": "layers"
+    }
+  },
+  "sbom": {
+    "base_image_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "distro": "mirror-offline 1.0",
+    "image_digest": "sha256:eba944e33ce5b1cdb45039419b322bbb5f63a9835d02aaa4e7634d198b5db251",
+    "packages": []
+  }
+}

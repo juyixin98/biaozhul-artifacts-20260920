@@ -1,0 +1,14 @@
+{
+  "payload_type": "mirrorad.exemption/v1",
+  "payload": {
+    "kind": "mirrorad.exemption/v1",
+    "id": "ex-root-valid-0001",
+    "signer_key_id": "ed25519:6c234e5190c910ed7e18ed36ed7d7180c321f2dfd6e24470bc8d732c5b5a79f8",
+    "image_digest": "sha256:d20111c6f2a8d3bd72dbfa2a185efaaf79a2582feb5fced51df3e4eed5aba3b5",
+    "rule": "no_root_user",
+    "not_after": "2026-10-02T00:00:00Z",
+    "reason": "break-glass legacy job scheduled for migration",
+    "granted_at": "2026-09-20T09:00:00Z"
+  },
+  "signature": "caN+UkJCGAr3qFn5JERDxa+i/4AQbkINcQlvxA18hUeu2fnYbGIDm7smqKgdkiuz7Fk2mYnrIS675ttxLSHDBQ=="
+}

@@ -1,0 +1,6 @@
+{
+  "base_image_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "distro": "mirror-offline 1.0",
+  "image_digest": "sha256:eba944e33ce5b1cdb45039419b322bbb5f63a9835d02aaa4e7634d198b5db251",
+  "packages": []
+}

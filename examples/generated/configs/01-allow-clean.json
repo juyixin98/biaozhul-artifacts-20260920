@@ -1,0 +1,14 @@
+{
+  "architecture": "amd64",
+  "config": {
+    "Privileged": false,
+    "User": "10001:10001"
+  },
+  "created": "2026-09-20T00:00:00Z",
+  "history": [],
+  "os": "linux",
+  "rootfs": {
+    "diff_ids": [],
+    "type": "layers"
+  }
+}

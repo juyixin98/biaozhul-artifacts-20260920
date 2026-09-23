@@ -1,0 +1,23 @@
+{
+  "allowlist_version": "allowlist-2026.09.24",
+  "image_config": {
+    "architecture": "amd64",
+    "config": {
+      "Privileged": false,
+      "User": "10001"
+    },
+    "created": "2026-09-20T00:00:00Z",
+    "history": [],
+    "os": "linux",
+    "rootfs": {
+      "diff_ids": [],
+      "type": "layers"
+    }
+  },
+  "sbom": {
+    "base_image_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "distro": "mirror-offline 1.0",
+    "image_digest": "sha256:7dec9f18d44ab6ffb2b58747a5657fc2dac0cfa18934fd0e4abcbe537bf33b41",
+    "packages": []
+  }
+}

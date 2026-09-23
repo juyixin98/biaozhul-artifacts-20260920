@@ -1,0 +1,6 @@
+{
+  "version": "allowlist-2026.09.24",
+  "allowed_base_images": [
+    "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  ]
+}

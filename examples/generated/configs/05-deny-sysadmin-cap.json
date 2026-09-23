@@ -1,0 +1,20 @@
+{
+  "architecture": "amd64",
+  "config": {
+    "Capabilities": {
+      "Add": [
+        "CAP_SYS_ADMIN",
+        "CAP_NET_RAW"
+      ]
+    },
+    "Privileged": false,
+    "User": "10001"
+  },
+  "created": "2026-09-20T00:00:00Z",
+  "history": [],
+  "os": "linux",
+  "rootfs": {
+    "diff_ids": [],
+    "type": "layers"
+  }
+}

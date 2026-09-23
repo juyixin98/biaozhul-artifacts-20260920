@@ -1,0 +1,6 @@
+{
+  "policy_version": "1.4.0",
+  "policy_path": "policy/admission.rego",
+  "sha256": "ef20a2612a730f1d1d3bfc20b677250de8fa345c38d54df0c7eb72424214400c",
+  "rego_package": "mirrorad.admission"
+}
