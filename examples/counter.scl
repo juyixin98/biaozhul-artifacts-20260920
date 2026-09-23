@@ -1,0 +1,19 @@
+# Counter: escaping closure with shared mutable state.
+# `inc` escapes the factory call; the captured `c` lives in one heap Cell,
+# so repeated calls observe (and share) the updates. Two factory calls give
+# two independent counters.
+fn make_counter() {
+  let c = 0;
+  fn inc() { c = c + 1; return c; }
+  fn get() { return c; }
+  return inc;
+}
+
+let a = make_counter();
+print(a());   # 1
+print(a());   # 2
+print(a());   # 3
+
+let b = make_counter();
+print(b());   # 1   (fresh cell, does not see a's state)
+print(a());   # 4   (a's cell is untouched by creating b)

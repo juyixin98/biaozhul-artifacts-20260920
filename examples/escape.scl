@@ -1,0 +1,26 @@
+# Transitive capture and an escaping closure.
+#
+# `inner` references `secret`, which is two lexical levels up and is never
+# named by `middle`. The resolver forwards the binding through `middle`'s
+# environment, so `outer()()()` still reads the original Cell.
+fn outer() {
+  let secret = 42;
+  fn middle() {
+    fn inner() { return secret; }
+    return inner;
+  }
+  return middle;
+}
+
+let m = outer();
+let i = m();
+print(i());    # 42
+
+# Adder factory: each invocation isolates its captured parameter `n`.
+fn adder(n) {
+  return fn(x) { return x + n; };
+}
+let add5 = adder(5);
+let add10 = adder(10);
+print(add5(3), add10(3));    # 8, 13
+print(add5(100));            # 105

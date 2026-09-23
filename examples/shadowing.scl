@@ -1,0 +1,25 @@
+# Lexical shadowing: the nearest binding of a name wins, and closures
+# capture the exact binding that was in scope where they were defined.
+let x = 1;
+{
+  let x = 2;
+  print(x);          # 2
+  {
+    let x = 3;
+    print(x);        # 3
+  }
+  print(x);          # 2 (inner binding is gone)
+}
+print(x);            # 1
+
+# Parameter vs body-local shadowing
+fn f(x) {
+  let x = x + 10;
+  {
+    let x = 99;
+    print(x);        # 99
+  }
+  print(x);          # 15
+  return x;
+}
+print(f(5));         # 15

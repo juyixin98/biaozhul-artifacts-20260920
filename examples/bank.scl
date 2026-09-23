@@ -1,0 +1,16 @@
+# Two mutator closures and one reader all share the same balance Cell.
+fn bank(initial) {
+  let bal = initial;
+  fn deposit(x)  { bal = bal + x; return bal; }
+  fn withdraw(x) { bal = bal - x; return bal; }
+  fn balance()   { return bal; }
+
+  print(deposit(30));    # 130
+  print(withdraw(50));   # 80
+  print(balance());      # 80
+  print(deposit(10));    # 90
+  return withdraw;
+}
+
+let wd = bank(100);
+print(wd(5));   # 85  — the returned closure keeps the cell alive
