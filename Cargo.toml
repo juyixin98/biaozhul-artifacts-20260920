@@ -1,0 +1,18 @@
+[package]
+name = "extsort"
+version = "0.1.0"
+edition = "2021"
+description = "Bounded-memory external sort with file-backed storage and HTTP validation endpoint"
+license = "MIT"
+
+[lib]
+name = "extsort"
+path = "src/lib.rs"
+
+[[bin]]
+name = "extsort"
+path = "src/main.rs"
+
+[profile.release]
+panic = "unwind"
+opt-level = 3
