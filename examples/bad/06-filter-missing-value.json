@@ -1,0 +1,1 @@
+{"op": "query", "plan": {"dataset": "events", "filter": {"op": "eq", "field": "country"}}}

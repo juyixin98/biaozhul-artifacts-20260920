@@ -1,0 +1,23 @@
+{
+  "op": "batch",
+  "requests": [
+    {"op": "createSketch", "name": "shard-a", "precision": 12},
+    {"op": "createSketch", "name": "shard-b", "precision": 12},
+    {"op": "createSketch", "name": "shard-c", "precision": 12},
+    {"op": "createSketch", "name": "global",  "precision": 12},
+
+    {"op": "addAll", "sketch": "shard-a",
+     "values": ["u1", "u2", "u3", "u4", "u5"]},
+    {"op": "addAll", "sketch": "shard-b",
+     "values": ["u4", "u5", "u6", "u7"]},
+    {"op": "addAll", "sketch": "shard-c",
+     "values": ["u7", "u8", "u9"]},
+
+    {"op": "mergeSketches", "target": "global",
+     "sources": ["shard-a", "shard-b", "shard-c"]},
+
+    {"op": "estimate", "sketch": "global"},
+
+    {"op": "exportSketch", "sketch": "global"}
+  ]
+}

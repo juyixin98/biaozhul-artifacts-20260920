@@ -1,0 +1,50 @@
+{
+  "op": "batch",
+  "requests": [
+    {"op": "createDataset", "name": "events",
+     "columns": ["uid", "country", "event", "age"]},
+
+    {"op": "appendRows", "dataset": "events", "rows": [
+      {"uid": "u1", "country": "CN", "event": "login", "age": 22},
+      {"uid": "u1", "country": "CN", "event": "login", "age": 22},
+      {"uid": "u2", "country": "CN", "event": "purchase", "age": 31},
+      {"uid": "u3", "country": "US", "event": "login", "age": 40},
+      {"uid": "u3", "country": "US", "event": "purchase", "age": 40},
+      {"uid": "u4", "country": "US", "event": "login", "age": 55},
+      {"uid": "u5", "country": "DE", "event": "login", "age": 19}
+    ]},
+
+    {"op": "explain", "plan": {
+      "dataset": "events",
+      "filter": {"op": "ge", "field": "age", "value": 18},
+      "aggregate": {
+        "groupBy": ["country"],
+        "aggregates": [
+          {"fn": "count", "alias": "events"},
+          {"fn": "count_distinct", "field": "uid", "alias": "uv_exact"},
+          {"fn": "hll_distinct", "field": "uid", "precision": 12, "alias": "uv_hll"}
+        ]
+      }
+    }},
+
+    {"op": "query", "plan": {
+      "dataset": "events",
+      "filter": {"op": "ge", "field": "age", "value": 18},
+      "aggregate": {
+        "groupBy": ["country"],
+        "aggregates": [
+          {"fn": "count", "alias": "events"},
+          {"fn": "count_distinct", "field": "uid", "alias": "uv_exact"},
+          {"fn": "hll_distinct", "field": "uid", "precision": 12, "alias": "uv_hll"}
+        ]
+      }
+    }},
+
+    {"op": "query", "plan": {
+      "dataset": "events",
+      "project": ["uid", "country"],
+      "filter": {"op": "eq", "field": "event", "value": "purchase"},
+      "limit": 10
+    }}
+  ]
+}

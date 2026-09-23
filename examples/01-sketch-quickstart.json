@@ -1,0 +1,15 @@
+{
+  "op": "batch",
+  "requests": [
+    {"op": "createSketch", "name": "uv", "precision": 12, "seed": 0},
+
+    {"op": "addAll", "sketch": "uv",
+     "values": ["u1", "u2", "u3", "u1", "u2", "u1"]},
+
+    {"op": "estimate", "sketch": "uv"},
+
+    {"op": "exportSketch", "sketch": "uv"},
+
+    {"op": "listSketches"}
+  ]
+}

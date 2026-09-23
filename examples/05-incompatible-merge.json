@@ -1,0 +1,15 @@
+{
+  "op": "batch",
+  "requests": [
+    {"op": "createSketch", "name": "p12", "precision": 12, "seed": 0},
+    {"op": "createSketch", "name": "p10", "precision": 10, "seed": 0},
+    {"op": "createSketch", "name": "other-seed", "precision": 12, "seed": 99},
+
+    {"op": "addAll", "sketch": "p12", "values": ["a", "b"]},
+    {"op": "addAll", "sketch": "p10", "values": ["c", "d"]},
+    {"op": "addAll", "sketch": "other-seed", "values": ["e", "f"]},
+
+    {"op": "mergeSketches", "target": "p12", "sources": ["p10"]},
+    {"op": "mergeSketches", "target": "p12", "sources": ["other-seed"]}
+  ]
+}
