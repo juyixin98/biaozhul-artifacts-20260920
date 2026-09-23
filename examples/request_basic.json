@@ -1,0 +1,5 @@
+{
+  "id": "req-basic-1",
+  "model": "llm-demo-a",
+  "prompt": "你好，请用一句话介绍合批调度。"
+}

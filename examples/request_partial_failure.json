@@ -1,0 +1,6 @@
+{
+  "id": "req-partial-fail",
+  "model": "llm-demo-a",
+  "prompt": "这一条会模拟单项失败，不影响同批其它请求。",
+  "simulate_error": "model_error"
+}

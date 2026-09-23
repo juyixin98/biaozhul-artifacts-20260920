@@ -1,0 +1,6 @@
+{
+  "id": "req-rate-limited",
+  "model": "llm-demo-b",
+  "prompt": "模拟限流失败的请求（不同 model 即不同合批键）。",
+  "simulate_error": "rate_limited"
+}

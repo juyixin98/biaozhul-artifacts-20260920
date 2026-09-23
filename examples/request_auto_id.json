@@ -1,0 +1,4 @@
+{
+  "model": "llm-demo-a",
+  "prompt": "未提供 id 的请求，服务端会自动分配 auto-N。"
+}
