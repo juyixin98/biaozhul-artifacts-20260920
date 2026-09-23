@@ -1,0 +1,12 @@
+{
+  "name": "minimal_single_triangle",
+  "description": "最小请求：一个三角形，三条边均为边界边。可用 `./build/meshcheck examples/minimal_request.json` 或管道 stdin 运行。",
+  "points": [
+    [0.0, 0.0, 0.0],
+    [1.0, 0.0, 0.0],
+    [0.0, 1.0, 0.0]
+  ],
+  "faces": [
+    [0, 1, 2]
+  ]
+}

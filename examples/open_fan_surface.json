@@ -1,0 +1,26 @@
+{
+  "name": "open_fan_surface",
+  "description": "Open fan surface with one missing wedge (a hole): center 0, ring 1..8, 7 of 8 sectors triangulated. Expected: 1 component, not closed, 7 boundary edges forming the hole + outer rim.",
+  "coordinate_system": "right-handed Cartesian, metres (local, no datum)",
+  "points": [
+    [0.0, 0.0, 0.0],
+    [1.0, 0.0, 0.0],
+    [0.7071067811865476, 0.7071067811865475, 0.0],
+    [0.0, 1.0, 0.0],
+    [-0.7071067811865475, 0.7071067811865476, 0.0],
+    [-1.0, 0.0, 0.0],
+    [-0.7071067811865477, -0.7071067811865475, 0.0],
+    [0.0, -1.0, 0.0],
+    [0.7071067811865475, -0.7071067811865477, 0.0],
+    [5.0, 5.0, 5.0]
+  ],
+  "faces": [
+    [0, 1, 2],
+    [0, 2, 3],
+    [0, 3, 4],
+    [0, 4, 5],
+    [0, 5, 6],
+    [0, 6, 7],
+    [0, 7, 8]
+  ]
+}

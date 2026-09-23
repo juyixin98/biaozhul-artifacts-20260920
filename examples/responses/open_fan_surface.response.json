@@ -1,0 +1,143 @@
+{
+  "ok": true,
+  "coordinate_system": {
+    "name": "right-handed Cartesian (local/metres, no datum transform)",
+    "axes": "XYZ, right-handed; winding follows right-hand rule",
+    "eps_abs": 1.0000000000000001e-09,
+    "eps_rel": 1.0000000000000001e-09,
+    "arithmetic": "IEEE-754 double precision"
+  },
+  "summary": {
+    "vertices_input": 10,
+    "faces_input": 7,
+    "faces_accepted": 7,
+    "faces_analyzed": 7,
+    "component_count": 1,
+    "non_manifold_edge_count": 0,
+    "orientation_conflict_count": 0,
+    "duplicate_face_count": 0,
+    "degenerate_face_count": 0,
+    "duplicate_vertex_count": 0,
+    "boundary_edge_count": 9,
+    "isolated_vertex_count": 1,
+    "manifold": true,
+    "orientable": true,
+    "closed": false
+  },
+  "errors": {
+    "request_errors": [],
+    "duplicate_faces": [],
+    "isolated_vertices": [
+      9
+    ],
+    "non_manifold_edges": [],
+    "orientation_conflicts": []
+  },
+  "boundary_edges": [
+    {
+      "edge": [
+        0,
+        1
+      ],
+      "face_ids": [
+        0
+      ],
+      "component": 0
+    },
+    {
+      "edge": [
+        0,
+        8
+      ],
+      "face_ids": [
+        6
+      ],
+      "component": 0
+    },
+    {
+      "edge": [
+        1,
+        2
+      ],
+      "face_ids": [
+        0
+      ],
+      "component": 0
+    },
+    {
+      "edge": [
+        2,
+        3
+      ],
+      "face_ids": [
+        1
+      ],
+      "component": 0
+    },
+    {
+      "edge": [
+        3,
+        4
+      ],
+      "face_ids": [
+        2
+      ],
+      "component": 0
+    },
+    {
+      "edge": [
+        4,
+        5
+      ],
+      "face_ids": [
+        3
+      ],
+      "component": 0
+    },
+    {
+      "edge": [
+        5,
+        6
+      ],
+      "face_ids": [
+        4
+      ],
+      "component": 0
+    },
+    {
+      "edge": [
+        6,
+        7
+      ],
+      "face_ids": [
+        5
+      ],
+      "component": 0
+    },
+    {
+      "edge": [
+        7,
+        8
+      ],
+      "face_ids": [
+        6
+      ],
+      "component": 0
+    }
+  ],
+  "geometric_degeneracies": {
+    "degenerate_faces": [],
+    "duplicate_vertices": []
+  },
+  "duplicate_face_groups": [],
+  "components": [
+    {
+      "component": 0,
+      "face_count": 7,
+      "vertex_count": 9,
+      "boundary_edges": 9,
+      "non_manifold_edges": 0,
+      "closed": false
+    }
+  ]
+}

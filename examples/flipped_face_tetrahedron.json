@@ -1,0 +1,17 @@
+{
+  "name": "flipped_face_tetrahedron",
+  "description": "Same geometry as closed_tetrahedron but face index 3 is wound the wrong way. Expected: watertight (every edge has 2 incidences) but 3 orientation conflicts, not orientable.",
+  "coordinate_system": "right-handed Cartesian, metres (local, no datum)",
+  "points": [
+    [0.0, 0.0, 0.0],
+    [1.0, 0.0, 0.0],
+    [0.5, 0.8660254037844386, 0.0],
+    [0.5, 0.2886751345948129, 0.816496580927726]
+  ],
+  "faces": [
+    [0, 1, 2],
+    [0, 3, 1],
+    [0, 2, 3],
+    [1, 2, 3]
+  ]
+}
