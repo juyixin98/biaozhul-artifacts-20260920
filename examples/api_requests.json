@@ -1,0 +1,73 @@
+{
+  "_comment": "Example request bodies for the replay REST API. Send with the Content-Type: application/json header.",
+
+  "bag_info": {
+    "method": "POST",
+    "path": "/bags/info",
+    "body": { "uri": "demo" }
+  },
+
+  "create_session_play_all": {
+    "method": "POST",
+    "path": "/sessions",
+    "body": {
+      "uri": "demo",
+      "rate": 1.0,
+      "play": true
+    }
+  },
+
+  "create_session_filtered": {
+    "method": "POST",
+    "path": "/sessions",
+    "body": {
+      "uri": "demo",
+      "topics": ["/tick", "/tock"],
+      "rate": 0.5,
+      "play": false
+    }
+  },
+
+  "pause":  { "method": "POST", "path": "/sessions/SESSION_ID/pause",  "body": {} },
+  "resume": { "method": "POST", "path": "/sessions/SESSION_ID/resume", "body": {} },
+
+  "set_rate": {
+    "method": "POST",
+    "path": "/sessions/SESSION_ID/rate",
+    "body": { "rate": 4.0 }
+  },
+
+  "seek_by_sequence": {
+    "method": "POST",
+    "path": "/sessions/SESSION_ID/seek",
+    "body": { "seq": 20, "play": true }
+  },
+
+  "seek_by_timestamp": {
+    "method": "POST",
+    "path": "/sessions/SESSION_ID/seek",
+    "body": { "timestamp_ns": 1300000000, "play": true }
+  },
+
+  "seek_to_tail": {
+    "method": "POST",
+    "path": "/sessions/SESSION_ID/seek",
+    "body": { "seq": 43, "play": false }
+  },
+
+  "save_checkpoint": {
+    "method": "POST",
+    "path": "/sessions/SESSION_ID/checkpoints",
+    "body": { "checkpoint_id": "my_checkpoint" }
+  },
+
+  "restore_checkpoint": {
+    "method": "POST",
+    "path": "/checkpoints/restore",
+    "body": { "checkpoint_id": "my_checkpoint", "play": false }
+  },
+
+  "list_checkpoints": { "method": "GET", "path": "/checkpoints" },
+  "status":            { "method": "GET", "path": "/sessions/SESSION_ID/status" },
+  "published":         { "method": "GET", "path": "/sessions/SESSION_ID/published" }
+}

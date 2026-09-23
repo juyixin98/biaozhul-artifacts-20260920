@@ -1,0 +1,22 @@
+# Locked to the versions verified in the development/test environment.
+# Install after sourcing ROS (rclpy / rosbag2_py come from ROS, not pip):
+#     source /opt/ros/jazzy/setup.bash
+#     python3 -m pip install -r requirements.txt
+
+# --- Web framework / server ---
+fastapi==0.141.1
+uvicorn[standard]==0.53.0
+pydantic==2.13.5
+pydantic-core==2.46.5
+starlette==1.6.0
+anyio==4.15.1
+typing-extensions==4.16.0
+
+# --- Test / client deps ---
+pytest==9.1.1
+httpx==0.28.1
+
+# NOTE: rosbag2_py and rclpy are provided by the installed ROS 2 distribution
+# (Jazzy) and are intentionally NOT pip-installed. Message packages used by the
+# bundled generator / verifier (std_msgs, example_interfaces) ship with
+# ros-jazzy-ros-base.
