@@ -1,0 +1,5 @@
+{
+  "sample_id": "frame_protocol",
+  "input_base64": "AwAAAAoAYWI=",
+  "_comment": "截断帧（声明 10 字节只给 2 字节）；预期 module_abort，不提交"
+}

@@ -1,0 +1,35 @@
+[package]
+name = "gas-meter"
+version = "0.1.0"
+edition = "2021"
+description = "Versioned deterministic offline WASM metering sandbox"
+
+[dependencies]
+wasmtime = "24"
+axum = "0.8"
+tokio = { version = "1", features = ["full"] }
+wat = "1"
+anyhow = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+base64 = "0.22"
+sha2 = "0.10"
+hex = "0.4"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[dev-dependencies]
+tower = { version = "0.5", features = ["util"] }
+http = "1"
+wat = "1"
+base64 = "0.22"
+serde_json = "1"
+sha2 = "0.10"
+hex = "0.4"
+
+[profile.release]
+lto = "thin"
+
+# Rust guest 是独立的 wasm32 构件，有自己的 Cargo.lock，不纳入宿主工作区。
+[workspace]
+exclude = ["wasm_modules/sha256guest"]

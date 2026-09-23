@@ -1,0 +1,6 @@
+{
+  "sample_id": "finite_loop",
+  "input_base64": "Cg==",
+  "metering_version": 1,
+  "_comment": "n=10; 输出 sum=55, sqsum=385；成功提交 n/trace 两个 KV 键"
+}

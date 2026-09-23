@@ -1,0 +1,6 @@
+{
+  "sample_id": "sha256guest",
+  "input_base64": "AQAAAGFiYw==",
+  "metering_version": 1,
+  "_comment": "真实 SHA-256('abc')=ba7816bf...015ad"
+}

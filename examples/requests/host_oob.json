@@ -1,0 +1,4 @@
+{
+  "sample_id": "host_oob",
+  "_comment": "向宿主传 0x7FFFFFFF 越界指针；预期 status=trap，写入回滚"
+}

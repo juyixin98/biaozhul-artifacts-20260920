@@ -1,0 +1,6 @@
+{
+  "sample_id": "memory_grow",
+  "input_base64": "QAAAAA==",
+  "memory_limit_bytes": 1048576,
+  "_comment": "增长 64 页=4MiB 超过 1MiB 限制；预期 status=memory_limit_exceeded"
+}

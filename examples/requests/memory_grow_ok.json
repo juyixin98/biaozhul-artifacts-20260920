@@ -1,0 +1,6 @@
+{
+  "sample_id": "memory_grow",
+  "input_base64": "AwAAAA==",
+  "memory_limit_bytes": 1048576,
+  "_comment": "增长 3 页，限制 1MiB，成功；输出总页数 4"
+}

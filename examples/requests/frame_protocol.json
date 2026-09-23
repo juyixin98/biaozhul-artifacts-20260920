@@ -1,0 +1,6 @@
+{
+  "sample_id": "frame_protocol",
+  "input_base64": "HgAAAAQAcGluZw8AcG9uZy0xMjM0NTY3ODkwBQAAAQID/w==",
+  "metering_version": 1,
+  "_comment": "3 个长度前缀帧；输出每帧追加 CRC-32；KV proto=3"
+}

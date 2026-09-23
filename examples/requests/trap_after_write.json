@@ -1,0 +1,5 @@
+{
+  "sample_id": "trap_after_write",
+  "input_base64": "Qg==",
+  "_comment": "kv_put 后立即 unreachable；预期 status=trap，poisoned 键不出现"
+}

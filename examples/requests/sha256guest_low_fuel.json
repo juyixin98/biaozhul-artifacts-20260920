@@ -1,0 +1,6 @@
+{
+  "sample_id": "sha256guest",
+  "input_base64": "6AMAAHg=",
+  "fuel_limit": 100000,
+  "_comment": "1000 轮迭代但燃料仅 100k；预期 out_of_fuel，不提交"
+}

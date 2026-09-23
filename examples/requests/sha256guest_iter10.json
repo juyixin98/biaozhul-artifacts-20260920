@@ -1,0 +1,6 @@
+{
+  "sample_id": "sha256guest",
+  "input_base64": "CgAAAGNoYWlu",
+  "metering_version": 2,
+  "_comment": "链式 10 轮 SHA-256，v2 计价"
+}

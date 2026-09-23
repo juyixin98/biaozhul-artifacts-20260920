@@ -1,0 +1,6 @@
+{
+  "sample_id": "infinite_loop",
+  "fuel_limit": 200000,
+  "metering_version": 1,
+  "_comment": "无条件死循环；预期 status=out_of_fuel，不提交任何状态"
+}
