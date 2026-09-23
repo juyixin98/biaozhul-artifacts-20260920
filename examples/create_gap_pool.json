@@ -1,0 +1,11 @@
+{
+  "pool_id": "demo-gap-0",
+  "token0": "A",
+  "token1": "B",
+  "fee_ppm": 3000,
+  "sqrt_price_x96": "79228162514264337593543950336",
+  "positions": [
+    {"lower_tick": -100, "upper_tick": -1, "liquidity": "1000000000000"},
+    {"lower_tick": 1,    "upper_tick": 100, "liquidity": "1000000000000"}
+  ]
+}

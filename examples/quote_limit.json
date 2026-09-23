@@ -1,0 +1,6 @@
+{
+  "pool_id": "demo-pool-0",
+  "zero_for_one": false,
+  "amount_in": "999999999999999999999",
+  "limit_tick": 50
+}

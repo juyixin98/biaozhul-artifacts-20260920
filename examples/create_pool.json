@@ -1,0 +1,12 @@
+{
+  "pool_id": "demo-pool-0",
+  "token0": "USDC",
+  "token1": "WETH",
+  "fee_ppm": 3000,
+  "sqrt_price_x96": "79228162514264337593543950336",
+  "positions": [
+    {"lower_tick": -100, "upper_tick": 0,    "liquidity": "1000000000000000000"},
+    {"lower_tick": 0,    "upper_tick": 100,  "liquidity": "3000000000000000000"},
+    {"lower_tick": 100,  "upper_tick": 200,  "liquidity": "9000000000000000000"}
+  ]
+}

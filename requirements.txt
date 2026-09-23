@@ -1,0 +1,4 @@
+# 直接运行时依赖（精确锁定版本；完整传递依赖见 requirements.lock.txt）
+fastapi==0.141.1
+uvicorn[standard]==0.53.0
+pydantic==2.13.5

@@ -1,0 +1,5 @@
+{
+  "pool_id": "demo-pool-0",
+  "zero_for_one": false,
+  "amount_in": "1000000000000000000"
+}
