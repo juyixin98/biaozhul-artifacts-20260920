@@ -1,0 +1,7 @@
+{
+  "samples": [
+    {"symbol": "BTC/USD", "ts_us": 1735689600000000, "price": 95000},
+    {"symbol": "BTC/USD", "ts_us": 1735689620000000, "price": 95120},
+    {"symbol": "BTC/USD", "ts_us": 1735689650000000, "price": 95200}
+  ]
+}
