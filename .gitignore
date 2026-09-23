@@ -1,0 +1,8 @@
+# binaries
+/agingd
+*.out
+coverage.txt
+
+# local event logs / run artifacts
+*.jsonl
+events*.log
