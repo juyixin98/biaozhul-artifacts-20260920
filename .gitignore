@@ -1,0 +1,9 @@
+# local mail spool
+/data/
+
+# built binary
+/loopmail
+
+# go test/coverage artifacts
+*.out
+coverage.txt
