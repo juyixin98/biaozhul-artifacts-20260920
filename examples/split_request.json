@@ -1,0 +1,5 @@
+{
+  "secret_text": "这是一个需要被阈值分享保护的秘密",
+  "threshold": 3,
+  "total": 5
+}

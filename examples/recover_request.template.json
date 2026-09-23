@@ -1,0 +1,8 @@
+{
+  "_comment": "恢复请求模板：把 split 响应中任意 >=threshold 个份额字符串填入 shares。可多不可少；多给的份额用于交叉一致性诊断。",
+  "shares": [
+    "PASTE_SHARE_1_HERE",
+    "PASTE_SHARE_2_HERE",
+    "PASTE_SHARE_3_HERE"
+  ]
+}
