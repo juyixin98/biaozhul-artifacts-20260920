@@ -1,0 +1,467 @@
+{
+ "name": "crossing",
+ "description": "Two diagonal trajectories crossing near the middle.",
+ "tracker": {
+  "q": 0.5,
+  "r": 0.0001,
+  "gate_pvalue": 0.99,
+  "gate_threshold": 7.0,
+  "hits_to_confirm": 3,
+  "max_misses": 4,
+  "tentative_max_misses": 2,
+  "duplicate_eps": 0.05,
+  "init_vel_var": 25.0
+ },
+ "frames": [
+  {
+   "frame_id": 0,
+   "timestamp": 0.0,
+   "detections": [
+    {
+     "x": 0.0,
+     "y": 0.0,
+     "label": "f0-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 20.0,
+     "y": 0.0,
+     "label": "f0-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 1,
+   "timestamp": 0.1,
+   "detections": [
+    {
+     "x": 0.8,
+     "y": 0.4,
+     "label": "f1-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 19.2,
+     "y": 0.4,
+     "label": "f1-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 2,
+   "timestamp": 0.2,
+   "detections": [
+    {
+     "x": 1.6,
+     "y": 0.8,
+     "label": "f2-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 18.4,
+     "y": 0.8,
+     "label": "f2-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 3,
+   "timestamp": 0.3,
+   "detections": [
+    {
+     "x": 2.4,
+     "y": 1.2,
+     "label": "f3-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 17.6,
+     "y": 1.2,
+     "label": "f3-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 4,
+   "timestamp": 0.4,
+   "detections": [
+    {
+     "x": 3.2,
+     "y": 1.6,
+     "label": "f4-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 16.8,
+     "y": 1.6,
+     "label": "f4-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 5,
+   "timestamp": 0.5,
+   "detections": [
+    {
+     "x": 4.0,
+     "y": 2.0,
+     "label": "f5-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 16.0,
+     "y": 2.0,
+     "label": "f5-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 6,
+   "timestamp": 0.6,
+   "detections": [
+    {
+     "x": 4.8,
+     "y": 2.4,
+     "label": "f6-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 15.2,
+     "y": 2.4,
+     "label": "f6-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 7,
+   "timestamp": 0.7,
+   "detections": [
+    {
+     "x": 5.6,
+     "y": 2.8,
+     "label": "f7-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 14.4,
+     "y": 2.8,
+     "label": "f7-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 8,
+   "timestamp": 0.8,
+   "detections": [
+    {
+     "x": 6.4,
+     "y": 3.2,
+     "label": "f8-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 13.6,
+     "y": 3.2,
+     "label": "f8-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 9,
+   "timestamp": 0.9,
+   "detections": [
+    {
+     "x": 7.2,
+     "y": 3.6,
+     "label": "f9-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 12.8,
+     "y": 3.6,
+     "label": "f9-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 10,
+   "timestamp": 1.0,
+   "detections": [
+    {
+     "x": 8.0,
+     "y": 4.0,
+     "label": "f10-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 12.0,
+     "y": 4.0,
+     "label": "f10-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 11,
+   "timestamp": 1.1,
+   "detections": [
+    {
+     "x": 8.8,
+     "y": 4.4,
+     "label": "f11-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 11.2,
+     "y": 4.4,
+     "label": "f11-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 12,
+   "timestamp": 1.2,
+   "detections": [
+    {
+     "x": 9.6,
+     "y": 4.8,
+     "label": "f12-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 10.4,
+     "y": 4.8,
+     "label": "f12-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 13,
+   "timestamp": 1.3,
+   "detections": [
+    {
+     "x": 10.4,
+     "y": 5.2,
+     "label": "f13-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 9.6,
+     "y": 5.2,
+     "label": "f13-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 14,
+   "timestamp": 1.4,
+   "detections": [
+    {
+     "x": 11.2,
+     "y": 5.6,
+     "label": "f14-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 8.8,
+     "y": 5.6,
+     "label": "f14-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 15,
+   "timestamp": 1.5,
+   "detections": [
+    {
+     "x": 12.0,
+     "y": 6.0,
+     "label": "f15-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 8.0,
+     "y": 6.0,
+     "label": "f15-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 16,
+   "timestamp": 1.6,
+   "detections": [
+    {
+     "x": 12.8,
+     "y": 6.4,
+     "label": "f16-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 7.2,
+     "y": 6.4,
+     "label": "f16-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 17,
+   "timestamp": 1.7,
+   "detections": [
+    {
+     "x": 13.6,
+     "y": 6.8,
+     "label": "f17-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 6.4,
+     "y": 6.8,
+     "label": "f17-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 18,
+   "timestamp": 1.8,
+   "detections": [
+    {
+     "x": 14.4,
+     "y": 7.2,
+     "label": "f18-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 5.6,
+     "y": 7.2,
+     "label": "f18-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 19,
+   "timestamp": 1.9,
+   "detections": [
+    {
+     "x": 15.2,
+     "y": 7.6,
+     "label": "f19-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 4.8,
+     "y": 7.6,
+     "label": "f19-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 20,
+   "timestamp": 2.0,
+   "detections": [
+    {
+     "x": 16.0,
+     "y": 8.0,
+     "label": "f20-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 4.0,
+     "y": 8.0,
+     "label": "f20-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 21,
+   "timestamp": 2.1,
+   "detections": [
+    {
+     "x": 16.8,
+     "y": 8.4,
+     "label": "f21-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 3.2,
+     "y": 8.4,
+     "label": "f21-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 22,
+   "timestamp": 2.2,
+   "detections": [
+    {
+     "x": 17.6,
+     "y": 8.8,
+     "label": "f22-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 2.4,
+     "y": 8.8,
+     "label": "f22-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 23,
+   "timestamp": 2.3,
+   "detections": [
+    {
+     "x": 18.4,
+     "y": 9.2,
+     "label": "f23-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 1.6,
+     "y": 9.2,
+     "label": "f23-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 24,
+   "timestamp": 2.4,
+   "detections": [
+    {
+     "x": 19.2,
+     "y": 9.6,
+     "label": "f24-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 0.8,
+     "y": 9.6,
+     "label": "f24-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  }
+ ]
+}

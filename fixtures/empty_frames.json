@@ -1,0 +1,253 @@
+{
+ "name": "empty_frames",
+ "description": "4 consecutive empty frames delete the tracks; objects restart later.",
+ "tracker": {
+  "q": 0.5,
+  "r": 0.0001,
+  "gate_pvalue": 0.99,
+  "gate_threshold": 7.0,
+  "hits_to_confirm": 3,
+  "max_misses": 4,
+  "tentative_max_misses": 2,
+  "duplicate_eps": 0.05,
+  "init_vel_var": 25.0
+ },
+ "frames": [
+  {
+   "frame_id": 0,
+   "timestamp": 0.0,
+   "detections": [
+    {
+     "x": 0.0,
+     "y": 0.5,
+     "label": "f0-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 0.0,
+     "y": 5.0,
+     "label": "f0-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 1,
+   "timestamp": 0.1,
+   "detections": [
+    {
+     "x": 0.4,
+     "y": 0.5,
+     "label": "f1-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 0.4,
+     "y": 5.0,
+     "label": "f1-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 2,
+   "timestamp": 0.2,
+   "detections": [
+    {
+     "x": 0.8,
+     "y": 0.5,
+     "label": "f2-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 0.8,
+     "y": 5.0,
+     "label": "f2-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 3,
+   "timestamp": 0.3,
+   "detections": [
+    {
+     "x": 1.2,
+     "y": 0.5,
+     "label": "f3-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 1.2,
+     "y": 5.0,
+     "label": "f3-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 4,
+   "timestamp": 0.4,
+   "detections": [
+    {
+     "x": 1.6,
+     "y": 0.5,
+     "label": "f4-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 1.6,
+     "y": 5.0,
+     "label": "f4-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 5,
+   "timestamp": 0.5,
+   "detections": [
+    {
+     "x": 2.0,
+     "y": 0.5,
+     "label": "f5-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 2.0,
+     "y": 5.0,
+     "label": "f5-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 6,
+   "timestamp": 0.6,
+   "detections": []
+  },
+  {
+   "frame_id": 7,
+   "timestamp": 0.7,
+   "detections": []
+  },
+  {
+   "frame_id": 8,
+   "timestamp": 0.8,
+   "detections": []
+  },
+  {
+   "frame_id": 9,
+   "timestamp": 0.9,
+   "detections": []
+  },
+  {
+   "frame_id": 10,
+   "timestamp": 1.0,
+   "detections": [
+    {
+     "x": 4.0,
+     "y": 0.5,
+     "label": "f10-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 4.0,
+     "y": 5.0,
+     "label": "f10-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 11,
+   "timestamp": 1.1,
+   "detections": [
+    {
+     "x": 4.4,
+     "y": 0.5,
+     "label": "f11-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 4.4,
+     "y": 5.0,
+     "label": "f11-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 12,
+   "timestamp": 1.2,
+   "detections": [
+    {
+     "x": 4.8,
+     "y": 0.5,
+     "label": "f12-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 4.8,
+     "y": 5.0,
+     "label": "f12-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 13,
+   "timestamp": 1.3,
+   "detections": [
+    {
+     "x": 5.2,
+     "y": 0.5,
+     "label": "f13-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 5.2,
+     "y": 5.0,
+     "label": "f13-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 14,
+   "timestamp": 1.4,
+   "detections": [
+    {
+     "x": 5.6,
+     "y": 0.5,
+     "label": "f14-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 5.6,
+     "y": 5.0,
+     "label": "f14-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 15,
+   "timestamp": 1.5,
+   "detections": [
+    {
+     "x": 6.0,
+     "y": 0.5,
+     "label": "f15-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 6.0,
+     "y": 5.0,
+     "label": "f15-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  }
+ ]
+}

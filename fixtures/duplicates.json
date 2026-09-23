@@ -1,0 +1,305 @@
+{
+ "name": "duplicates",
+ "description": "Each frame contains a duplicated A detection (~2cm offset).",
+ "tracker": {
+  "q": 0.5,
+  "r": 0.0001,
+  "gate_pvalue": 0.99,
+  "gate_threshold": 7.0,
+  "hits_to_confirm": 3,
+  "max_misses": 4,
+  "tentative_max_misses": 2,
+  "duplicate_eps": 0.05,
+  "init_vel_var": 25.0
+ },
+ "frames": [
+  {
+   "frame_id": 0,
+   "timestamp": 0.0,
+   "detections": [
+    {
+     "x": 2.0,
+     "y": 2.0,
+     "label": "f0-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 2.0,
+     "y": 1.985,
+     "label": "f0-oA-c1",
+     "object_id": "A"
+    },
+    {
+     "x": 8.0,
+     "y": 2.0,
+     "label": "f0-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 1,
+   "timestamp": 0.1,
+   "detections": [
+    {
+     "x": 2.4,
+     "y": 2.4,
+     "label": "f1-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 2.4,
+     "y": 2.385,
+     "label": "f1-oA-c1",
+     "object_id": "A"
+    },
+    {
+     "x": 8.0,
+     "y": 2.3,
+     "label": "f1-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 2,
+   "timestamp": 0.2,
+   "detections": [
+    {
+     "x": 2.8,
+     "y": 2.8,
+     "label": "f2-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 2.8,
+     "y": 2.785,
+     "label": "f2-oA-c1",
+     "object_id": "A"
+    },
+    {
+     "x": 8.0,
+     "y": 2.6,
+     "label": "f2-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 3,
+   "timestamp": 0.3,
+   "detections": [
+    {
+     "x": 3.2,
+     "y": 3.2,
+     "label": "f3-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 3.2,
+     "y": 3.185,
+     "label": "f3-oA-c1",
+     "object_id": "A"
+    },
+    {
+     "x": 8.0,
+     "y": 2.9,
+     "label": "f3-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 4,
+   "timestamp": 0.4,
+   "detections": [
+    {
+     "x": 3.6,
+     "y": 3.6,
+     "label": "f4-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 3.6,
+     "y": 3.585,
+     "label": "f4-oA-c1",
+     "object_id": "A"
+    },
+    {
+     "x": 8.0,
+     "y": 3.2,
+     "label": "f4-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 5,
+   "timestamp": 0.5,
+   "detections": [
+    {
+     "x": 4.0,
+     "y": 4.0,
+     "label": "f5-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 4.0,
+     "y": 3.985,
+     "label": "f5-oA-c1",
+     "object_id": "A"
+    },
+    {
+     "x": 8.0,
+     "y": 3.5,
+     "label": "f5-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 6,
+   "timestamp": 0.6,
+   "detections": [
+    {
+     "x": 4.4,
+     "y": 4.4,
+     "label": "f6-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 4.4,
+     "y": 4.385,
+     "label": "f6-oA-c1",
+     "object_id": "A"
+    },
+    {
+     "x": 8.0,
+     "y": 3.8,
+     "label": "f6-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 7,
+   "timestamp": 0.7,
+   "detections": [
+    {
+     "x": 4.8,
+     "y": 4.8,
+     "label": "f7-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 4.8,
+     "y": 4.785,
+     "label": "f7-oA-c1",
+     "object_id": "A"
+    },
+    {
+     "x": 8.0,
+     "y": 4.1,
+     "label": "f7-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 8,
+   "timestamp": 0.8,
+   "detections": [
+    {
+     "x": 5.2,
+     "y": 5.2,
+     "label": "f8-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 5.2,
+     "y": 5.185,
+     "label": "f8-oA-c1",
+     "object_id": "A"
+    },
+    {
+     "x": 8.0,
+     "y": 4.4,
+     "label": "f8-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 9,
+   "timestamp": 0.9,
+   "detections": [
+    {
+     "x": 5.6,
+     "y": 5.6,
+     "label": "f9-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 5.6,
+     "y": 5.585,
+     "label": "f9-oA-c1",
+     "object_id": "A"
+    },
+    {
+     "x": 8.0,
+     "y": 4.7,
+     "label": "f9-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 10,
+   "timestamp": 1.0,
+   "detections": [
+    {
+     "x": 6.0,
+     "y": 6.0,
+     "label": "f10-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 6.0,
+     "y": 5.985,
+     "label": "f10-oA-c1",
+     "object_id": "A"
+    },
+    {
+     "x": 8.0,
+     "y": 5.0,
+     "label": "f10-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  },
+  {
+   "frame_id": 11,
+   "timestamp": 1.1,
+   "detections": [
+    {
+     "x": 6.4,
+     "y": 6.4,
+     "label": "f11-oA-c0",
+     "object_id": "A"
+    },
+    {
+     "x": 6.4,
+     "y": 6.385,
+     "label": "f11-oA-c1",
+     "object_id": "A"
+    },
+    {
+     "x": 8.0,
+     "y": 5.3,
+     "label": "f11-oB-c0",
+     "object_id": "B"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+{
+  "frames": [
+    {"frame_id": 0, "timestamp": 0.0, "detections": [
+      {"x": 0.0, "y": 0.0, "label": "A0"}, {"x": 10.0, "y": 0.0, "label": "B0"}
+    ]},
+    {"frame_id": 1, "timestamp": 0.1, "detections": [
+      {"x": 0.5, "y": 0.0, "label": "A1"}, {"x": 9.5, "y": 0.0, "label": "B1"}
+    ]},
+    {"frame_id": 2, "timestamp": 0.2, "detections": [
+      {"x": 1.0, "y": 0.0, "label": "A2"}, {"x": 9.0, "y": 0.0, "label": "B2"}
+    ]},
+    {"frame_id": 3, "timestamp": 0.3, "detections": [
+      {"x": 1.5, "y": 0.0, "label": "A3"},
+      {"x": 1.51, "y": 0.01, "label": "A3-duplicate"},
+      {"x": 8.5, "y": 0.0, "label": "B3"}
+    ]},
+    {"frame_id": 4, "timestamp": 0.4, "detections": []},
+    {"frame_id": 5, "timestamp": 0.5, "detections": [
+      {"x": 2.5, "y": 0.0, "label": "A5"}, {"x": 7.5, "y": 0.0, "label": "B5"}
+    ]}
+  ],
+  "notes": "Two objects moving toward each other at 5 m/s; frame 3 contains a duplicated A detection, frame 4 is empty. Send frames one at a time to POST /sessions/{id}/frames with HMAC headers (see examples/client_demo.py)."
+}
