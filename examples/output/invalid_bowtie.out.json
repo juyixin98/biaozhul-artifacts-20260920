@@ -1,0 +1,8 @@
+{
+  "status": "error",
+  "error": "invalid_ring",
+  "where": "outer",
+  "message": "outer ring invalid: self-intersecting ring — non-adjacent edges cross or touch",
+  "ring_error": "self_intersection",
+  "edge_index": 0
+}

@@ -1,0 +1,6 @@
+{
+  "status": "error",
+  "error": "hole_outside_outer",
+  "where": "holes[0]",
+  "message": "hole crosses the outer ring boundary (some vertices inside, some outside)"
+}

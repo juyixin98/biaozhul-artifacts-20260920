@@ -1,0 +1,20 @@
+{
+  "comment": "INVALID: hole is not fully inside the outer ring.",
+  "polygon": {
+    "outer": [
+      {"x": 0, "y": 0},
+      {"x": 20, "y": 0},
+      {"x": 20, "y": 20},
+      {"x": 0, "y": 20}
+    ],
+    "holes": [
+      [
+        {"x": 15, "y": 15},
+        {"x": 25, "y": 15},
+        {"x": 25, "y": 25},
+        {"x": 15, "y": 25}
+      ]
+    ]
+  },
+  "queries": [{"x": 20, "y": 20}]
+}

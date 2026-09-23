@@ -1,0 +1,12 @@
+{
+  "comment": "INVALID: hourglass outer ring self-intersects -> error code invalid_ring / self_intersection.",
+  "polygon": {
+    "outer": [
+      {"x": 0, "y": 0},
+      {"x": 10, "y": 10},
+      {"x": 10, "y": 0},
+      {"x": 0, "y": 10}
+    ]
+  },
+  "queries": [{"x": 5, "y": 5}]
+}

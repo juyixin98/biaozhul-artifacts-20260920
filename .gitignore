@@ -1,0 +1,4 @@
+build/
+pointloc
+unit_tests
+*.o

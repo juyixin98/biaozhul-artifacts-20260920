@@ -1,0 +1,60 @@
+{
+  "status": "ok",
+  "method": "indexed",
+  "meta": {
+    "crs": "Cartesian plane; coordinates are abstract dimensionless units, not lon/lat",
+    "arithmetic": "exact integer predicates (__int128); input decimals scaled by 10^scale",
+    "scale": 0,
+    "vertex_rule": "half-open edges: lower endpoint inclusive, upper exclusive; a ray through a vertex counts a local minimum twice, a maximum zero times"
+  },
+  "results": [
+    {
+      "query": {
+        "x": 2,
+        "y": 2
+      },
+      "location": "inside",
+      "location_code": 1
+    },
+    {
+      "query": {
+        "x": 7,
+        "y": 7
+      },
+      "location": "outside",
+      "location_code": -1
+    },
+    {
+      "query": {
+        "x": 7,
+        "y": 5
+      },
+      "location": "boundary",
+      "location_code": 0
+    },
+    {
+      "query": {
+        "x": 0,
+        "y": 10
+      },
+      "location": "boundary",
+      "location_code": 0
+    },
+    {
+      "query": {
+        "x": -3,
+        "y": 10
+      },
+      "location": "outside",
+      "location_code": -1
+    }
+  ],
+  "stats": {
+    "query_count": 5,
+    "index_build_us": 3,
+    "total_query_us": 13,
+    "avg_query_us": 2.600000,
+    "bands": 3,
+    "edge_slots": 14
+  }
+}
