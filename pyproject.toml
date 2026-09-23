@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "maskcompiler"
+version = "0.1.0"
+description = "Structured JSON data-masking rule compiler (local, backend-only)"
+requires-python = ">=3.9"
+dependencies = [
+    "cryptography>=41",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+maskcompiler = "maskcompiler.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

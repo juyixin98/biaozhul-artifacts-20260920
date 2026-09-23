@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "id": "pan-mask",
+      "path": "$.orders[*].payments[*].card_number",
+      "transform": "mask",
+      "params": { "keep_last": 4 },
+      "priority": 100
+    },
+    {
+      "id": "phone-mask",
+      "path": "$..phone",
+      "transform": "mask",
+      "params": { "keep_first": 3, "keep_last": 4 },
+      "priority": 90
+    },
+    {
+      "id": "employee-pseudonym",
+      "path": "$.employees[*].staff_id",
+      "transform": "hash",
+      "params": { "algo": "sha256", "encoding": "hex" },
+      "priority": 80
+    },
+    {
+      "id": "secret-note-encrypt",
+      "path": "$.note",
+      "transform": "encrypt",
+      "priority": 70
+    },
+    {
+      "id": "internal-memo-redact",
+      "path": "$.internal",
+      "transform": "redact",
+      "params": { "replacement": null },
+      "priority": 10
+    },
+    {
+      "id": "internal-keep-contact",
+      "path": "$.internal.contact",
+      "transform": "mask",
+      "params": { "keep_last": 2 },
+      "priority": 200
+    },
+    {
+      "id": "audit-required-field",
+      "path": "$.audit_id",
+      "transform": "redact",
+      "priority": 50,
+      "on_missing": "error"
+    }
+  ]
+}

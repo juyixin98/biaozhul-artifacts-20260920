@@ -1,0 +1,30 @@
+{
+  "audit_id": "AUDIT-2026-0001",
+  "note": "本字段可逆加密演示 / reversible demo",
+  "internal": {
+    "budget": 99999,
+    "contact": "北京-张三"
+  },
+  "orders": [
+    {
+      "id": 1001,
+      "payments": [
+        { "method": "card", "card_number": "4111111111111234" }
+      ]
+    },
+    {
+      "id": 1002,
+      "payments": [
+        { "method": "card", "card_number": "4222222222222345" },
+        { "method": "card", "card_number": "4333333333333456" }
+      ]
+    }
+  ],
+  "employees": [
+    { "staff_id": "E-0001", "phone": "13812345678" },
+    { "staff_id": "E-0002", "phone": "13987654321" }
+  ],
+  "legacy": {
+    "phone": "010-12345678"
+  }
+}
