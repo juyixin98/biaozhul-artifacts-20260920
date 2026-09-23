@@ -1,0 +1,193 @@
+{
+  "status": "ok",
+  "seed": 2026,
+  "nodes": [
+    "n1",
+    "n2",
+    "n3"
+  ],
+  "deliveries": [
+    {
+      "time": 0,
+      "node": "n1",
+      "origin": {
+        "node": "n1",
+        "seq": 1
+      },
+      "payload": "late-predecessor-for-n3",
+      "clock_after": {
+        "n1": 1
+      }
+    },
+    {
+      "time": 1,
+      "node": "n1",
+      "origin": {
+        "node": "n1",
+        "seq": 2
+      },
+      "payload": "held-in-n3-buffer",
+      "clock_after": {
+        "n1": 2
+      }
+    },
+    {
+      "time": 2,
+      "node": "n1",
+      "origin": {
+        "node": "n1",
+        "seq": 3
+      },
+      "payload": "permanently-lost-root",
+      "clock_after": {
+        "n1": 3
+      }
+    },
+    {
+      "time": 2,
+      "node": "n2",
+      "origin": {
+        "node": "n1",
+        "seq": 1
+      },
+      "payload": "late-predecessor-for-n3",
+      "clock_after": {
+        "n1": 1
+      }
+    },
+    {
+      "time": 3,
+      "node": "n2",
+      "origin": {
+        "node": "n1",
+        "seq": 2
+      },
+      "payload": "held-in-n3-buffer",
+      "clock_after": {
+        "n1": 2
+      }
+    }
+  ],
+  "duplicates_suppressed_per_node": {
+    "n3": 1
+  },
+  "backpressure_events": [],
+  "retry_events": [],
+  "network_decisions": [
+    {
+      "time": 0,
+      "from": "n1",
+      "to": "n2",
+      "origin": "n1:1",
+      "action": "delivered",
+      "delay_ms": 2,
+      "reason": "random"
+    },
+    {
+      "time": 0,
+      "from": "n1",
+      "to": "n3",
+      "origin": "n1:1",
+      "action": "delivered",
+      "delay_ms": 500,
+      "reason": "fault"
+    },
+    {
+      "time": 1,
+      "from": "n1",
+      "to": "n2",
+      "origin": "n1:2",
+      "action": "delivered",
+      "delay_ms": 2,
+      "reason": "fault"
+    },
+    {
+      "time": 1,
+      "from": "n1",
+      "to": "n3",
+      "origin": "n1:2",
+      "action": "delivered",
+      "delay_ms": 3,
+      "reason": "fault"
+    },
+    {
+      "time": 2,
+      "from": "n1",
+      "to": "n2",
+      "origin": "n1:3",
+      "action": "dropped",
+      "reason": "fault"
+    },
+    {
+      "time": 2,
+      "from": "n1",
+      "to": "n3",
+      "origin": "n1:3",
+      "action": "dropped",
+      "reason": "fault"
+    },
+    {
+      "time": 2,
+      "from": "n2",
+      "to": "n3",
+      "origin": "n1:1",
+      "action": "dropped",
+      "reason": "fault"
+    },
+    {
+      "time": 3,
+      "from": "n2",
+      "to": "n3",
+      "origin": "n1:2",
+      "action": "delivered",
+      "delay_ms": 4,
+      "reason": "random"
+    }
+  ],
+  "retransmits": [],
+  "final_report": {
+    "end_time_ms": 100,
+    "buffered_per_node": {
+      "n3": [
+        {
+          "node": "n1",
+          "seq": 2
+        }
+      ]
+    },
+    "missing_for_buffered": {
+      "n3": {
+        "n1:2": [
+          {
+            "node": "n1",
+            "seq": 1
+          }
+        ]
+      }
+    },
+    "root_missing_blockers": [
+      {
+        "node": "n1",
+        "seq": 3
+      }
+    ],
+    "undelivered_origins": [
+      {
+        "node": "n1",
+        "seq": 1
+      },
+      {
+        "node": "n1",
+        "seq": 2
+      },
+      {
+        "node": "n1",
+        "seq": 3
+      }
+    ],
+    "diagnostics": [
+      "PERMANENT LOSS: only the originating node holds these messages; no receiver can repair them by retransmission within end_time_ms: n1:3",
+      "NODE n3: n1:2 waits on [n1:1]"
+    ]
+  }
+}

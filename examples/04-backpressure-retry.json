@@ -1,0 +1,30 @@
+{
+  "seed": 123,
+  "nodes": ["n1", "n2", "n3"],
+  "topology": {
+    "n1": ["n2", "n3"],
+    "n2": [],
+    "n3": []
+  },
+  "end_time_ms": 100,
+  "buffer_capacity": 1,
+  "network": {
+    "loss_rate": 0,
+    "duplicate_rate": 0,
+    "min_delay_ms": 1,
+    "max_delay_ms": 3
+  },
+  "faults": [
+    {"origin_node": "n1", "origin_seq": 1, "from": "n1", "to": "n2", "action": "deliver", "delay_ms": 40},
+    {"origin_node": "n1", "origin_seq": 2, "from": "n1", "to": "n2", "action": "deliver", "delay_ms": 5},
+    {"origin_node": "n1", "origin_seq": 3, "from": "n1", "to": "n2", "action": "deliver", "delay_ms": 8}
+  ],
+  "broadcasts": [
+    {"at_ms": 0, "node": "n1", "payload": "bp-1"},
+    {"at_ms": 1, "node": "n1", "payload": "bp-2"},
+    {"at_ms": 2, "node": "n1", "payload": "bp-3"}
+  ],
+  "triggers": [],
+  "retransmits": [],
+  "backpressure_retry": {"delay_ms": 5, "max_attempts": -1}
+}

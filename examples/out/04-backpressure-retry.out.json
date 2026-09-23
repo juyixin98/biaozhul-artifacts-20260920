@@ -1,0 +1,291 @@
+{
+  "status": "ok",
+  "seed": 123,
+  "nodes": [
+    "n1",
+    "n2",
+    "n3"
+  ],
+  "deliveries": [
+    {
+      "time": 0,
+      "node": "n1",
+      "origin": {
+        "node": "n1",
+        "seq": 1
+      },
+      "payload": "bp-1",
+      "clock_after": {
+        "n1": 1
+      }
+    },
+    {
+      "time": 1,
+      "node": "n1",
+      "origin": {
+        "node": "n1",
+        "seq": 2
+      },
+      "payload": "bp-2",
+      "clock_after": {
+        "n1": 2
+      }
+    },
+    {
+      "time": 1,
+      "node": "n3",
+      "origin": {
+        "node": "n1",
+        "seq": 1
+      },
+      "payload": "bp-1",
+      "clock_after": {
+        "n1": 1
+      }
+    },
+    {
+      "time": 2,
+      "node": "n1",
+      "origin": {
+        "node": "n1",
+        "seq": 3
+      },
+      "payload": "bp-3",
+      "clock_after": {
+        "n1": 3
+      }
+    },
+    {
+      "time": 2,
+      "node": "n3",
+      "origin": {
+        "node": "n1",
+        "seq": 2
+      },
+      "payload": "bp-2",
+      "clock_after": {
+        "n1": 2
+      }
+    },
+    {
+      "time": 5,
+      "node": "n3",
+      "origin": {
+        "node": "n1",
+        "seq": 3
+      },
+      "payload": "bp-3",
+      "clock_after": {
+        "n1": 3
+      }
+    },
+    {
+      "time": 40,
+      "node": "n2",
+      "origin": {
+        "node": "n1",
+        "seq": 1
+      },
+      "payload": "bp-1",
+      "clock_after": {
+        "n1": 2
+      }
+    },
+    {
+      "time": 40,
+      "node": "n2",
+      "origin": {
+        "node": "n1",
+        "seq": 2
+      },
+      "payload": "bp-2",
+      "clock_after": {
+        "n1": 2
+      }
+    },
+    {
+      "time": 40,
+      "node": "n2",
+      "origin": {
+        "node": "n1",
+        "seq": 3
+      },
+      "payload": "bp-3",
+      "clock_after": {
+        "n1": 3
+      }
+    }
+  ],
+  "duplicates_suppressed_per_node": {},
+  "backpressure_events": [
+    {
+      "time": 10,
+      "node": "n2",
+      "origin": {
+        "node": "n1",
+        "seq": 3
+      },
+      "capacity": 1,
+      "waiting_on": [
+        {
+          "node": "n1",
+          "seq": 2
+        }
+      ]
+    },
+    {
+      "time": 15,
+      "node": "n2",
+      "origin": {
+        "node": "n1",
+        "seq": 3
+      },
+      "capacity": 1,
+      "waiting_on": [
+        {
+          "node": "n1",
+          "seq": 2
+        }
+      ]
+    },
+    {
+      "time": 20,
+      "node": "n2",
+      "origin": {
+        "node": "n1",
+        "seq": 3
+      },
+      "capacity": 1,
+      "waiting_on": [
+        {
+          "node": "n1",
+          "seq": 2
+        }
+      ]
+    },
+    {
+      "time": 25,
+      "node": "n2",
+      "origin": {
+        "node": "n1",
+        "seq": 3
+      },
+      "capacity": 1,
+      "waiting_on": [
+        {
+          "node": "n1",
+          "seq": 2
+        }
+      ]
+    },
+    {
+      "time": 30,
+      "node": "n2",
+      "origin": {
+        "node": "n1",
+        "seq": 3
+      },
+      "capacity": 1,
+      "waiting_on": [
+        {
+          "node": "n1",
+          "seq": 2
+        }
+      ]
+    },
+    {
+      "time": 35,
+      "node": "n2",
+      "origin": {
+        "node": "n1",
+        "seq": 3
+      },
+      "capacity": 1,
+      "waiting_on": [
+        {
+          "node": "n1",
+          "seq": 2
+        }
+      ]
+    }
+  ],
+  "retry_events": [
+    {
+      "time": 40,
+      "node": "n2",
+      "origin": {
+        "node": "n1",
+        "seq": 3
+      },
+      "attempt": 6,
+      "result": "delivered"
+    }
+  ],
+  "network_decisions": [
+    {
+      "time": 0,
+      "from": "n1",
+      "to": "n2",
+      "origin": "n1:1",
+      "action": "delivered",
+      "delay_ms": 40,
+      "reason": "fault"
+    },
+    {
+      "time": 0,
+      "from": "n1",
+      "to": "n3",
+      "origin": "n1:1",
+      "action": "delivered",
+      "delay_ms": 1,
+      "reason": "random"
+    },
+    {
+      "time": 1,
+      "from": "n1",
+      "to": "n2",
+      "origin": "n1:2",
+      "action": "delivered",
+      "delay_ms": 5,
+      "reason": "fault"
+    },
+    {
+      "time": 1,
+      "from": "n1",
+      "to": "n3",
+      "origin": "n1:2",
+      "action": "delivered",
+      "delay_ms": 1,
+      "reason": "random"
+    },
+    {
+      "time": 2,
+      "from": "n1",
+      "to": "n2",
+      "origin": "n1:3",
+      "action": "delivered",
+      "delay_ms": 8,
+      "reason": "fault"
+    },
+    {
+      "time": 2,
+      "from": "n1",
+      "to": "n3",
+      "origin": "n1:3",
+      "action": "delivered",
+      "delay_ms": 3,
+      "reason": "random"
+    }
+  ],
+  "retransmits": [],
+  "final_report": {
+    "end_time_ms": 100,
+    "buffered_per_node": {},
+    "missing_for_buffered": {},
+    "root_missing_blockers": [],
+    "undelivered_origins": [],
+    "diagnostics": [
+      "all broadcasts delivered to all nodes in causal order"
+    ]
+  }
+}

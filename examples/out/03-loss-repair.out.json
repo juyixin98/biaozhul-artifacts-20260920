@@ -1,0 +1,100 @@
+{
+  "status": "ok",
+  "seed": 99,
+  "nodes": [
+    "n1",
+    "n2",
+    "n3"
+  ],
+  "deliveries": [
+    {
+      "time": 0,
+      "node": "n1",
+      "origin": {
+        "node": "n1",
+        "seq": 1
+      },
+      "payload": "lost-then-repaired",
+      "clock_after": {
+        "n1": 1
+      }
+    },
+    {
+      "time": 42,
+      "node": "n2",
+      "origin": {
+        "node": "n1",
+        "seq": 1
+      },
+      "payload": "lost-then-repaired",
+      "clock_after": {
+        "n1": 1
+      }
+    },
+    {
+      "time": 42,
+      "node": "n3",
+      "origin": {
+        "node": "n1",
+        "seq": 1
+      },
+      "payload": "lost-then-repaired",
+      "clock_after": {
+        "n1": 1
+      }
+    }
+  ],
+  "duplicates_suppressed_per_node": {},
+  "backpressure_events": [],
+  "retry_events": [],
+  "network_decisions": [
+    {
+      "time": 0,
+      "from": "n1",
+      "to": "n2",
+      "origin": "n1:1",
+      "action": "dropped",
+      "reason": "fault"
+    },
+    {
+      "time": 0,
+      "from": "n1",
+      "to": "n3",
+      "origin": "n1:1",
+      "action": "dropped",
+      "reason": "fault"
+    }
+  ],
+  "retransmits": [
+    {
+      "time": 40,
+      "from": "n1",
+      "to": "n2",
+      "origin": {
+        "node": "n1",
+        "seq": 1
+      },
+      "arrival_at_ms": 42
+    },
+    {
+      "time": 40,
+      "from": "n1",
+      "to": "n3",
+      "origin": {
+        "node": "n1",
+        "seq": 1
+      },
+      "arrival_at_ms": 42
+    }
+  ],
+  "final_report": {
+    "end_time_ms": 100,
+    "buffered_per_node": {},
+    "missing_for_buffered": {},
+    "root_missing_blockers": [],
+    "undelivered_origins": [],
+    "diagnostics": [
+      "all broadcasts delivered to all nodes in causal order"
+    ]
+  }
+}
