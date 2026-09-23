@@ -1,0 +1,23 @@
+{
+  "seed": 2026,
+  "vnodes": 128,
+  "nodes": [
+    {"id": "n1", "weight": 1},
+    {"id": "n2", "weight": 1},
+    {"id": "n3", "weight": 1}
+  ],
+  "network": {"base_delay_ms": 3, "jitter_ms": 15, "drop_rate": 0.25, "dup_rate": 0.12},
+  "transfer": {"batch_size": 16, "concurrency": 4, "fetch_timeout_ms": 80},
+  "op_timeout_ms": 200,
+  "clients": [
+    {"id": "c1", "start_ms": 0, "ops": 250, "interval_ms": 4, "keys": 50, "read_every": 5},
+    {"id": "c2", "start_ms": 2, "ops": 250, "interval_ms": 4, "keys": 50, "read_every": 5},
+    {"id": "c3", "start_ms": 3, "ops": 250, "interval_ms": 4, "keys": 50, "read_every": 5}
+  ],
+  "ops": [
+    {"t": 400, "op": "add_node", "node_id": "n4", "weight": 1},
+    {"t": 420, "op": "pause_migration"},
+    {"t": 800, "op": "resume_migration"},
+    {"t": 1300, "op": "remove_node", "node_id": "n2"}
+  ]
+}
