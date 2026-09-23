@@ -1,0 +1,30 @@
+# 依赖锁文件
+#
+# 本项目刻意保持“零第三方依赖”：
+#   - 运行时仅使用 JDK 自带模块（java.base、jdk.httpserver）
+#   - HTTP 服务使用 JDK 内置 com.sun.net.httpserver.HttpServer（jdk.httpserver 模块）
+#   - HTTP 集成测试使用 JDK 内置 java.net.http.HttpClient（java.net.http 模块，JDK 11+）
+#   - JSON 解析/序列化为项目自带的手写实现 src/main/java/intervaljoin/Json.java
+#   - 测试不使用 JUnit，使用自带的 main() 断言运行器 src/test/java/intervaljoin/TestRunner.java
+#
+# 因此不存在需要下载/锁定版本的外部构件；没有 Maven/Gradle 依赖描述文件。
+#
+# 构建工具链（已验证）:
+#   Temurin OpenJDK 17.0.20.1+1 (Linux x86_64)
+#   字节码目标: 未指定 --release，使用 JDK 默认级别；代码本身兼容 JDK 11+
+#   下载来源: https://api.adoptium.net/v3/binary/latest/17/ga/linux/x64/jdk/hotspot/normal/eclipse
+#
+# 校验和（本次开发环境实际下载的文件，JDK 发行页也提供官方 sha256）:
+#   文件: jdk-17.0.20.1+1（解压目录名）
+#
+# 重新生成构建产物: scripts/build.sh
+runtime:
+  jdk: ">=11"
+  third_party_dependencies: []
+  jdk_modules_used:
+    - java.base
+    - java.net.http
+    - jdk.httpserver
+test:
+  framework: "custom zero-dependency runner (intervaljoin.TestRunner)"
+  third_party_dependencies: []
