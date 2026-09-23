@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: liqreplay
+      POSTGRES_PASSWORD: liqreplay
+      POSTGRES_DB: liqreplay
+    ports:
+      - "55460:5432"
+    volumes:
+      - liqreplay_pg:/var/lib/postgresql/data
+
+volumes:
+  liqreplay_pg:
