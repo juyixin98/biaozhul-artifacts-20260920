@@ -1,0 +1,19 @@
+# Dependency lock file
+#
+# This project has ZERO third-party dependencies. The only requirement is a JDK.
+# Everything (HTTP server, JSON, tests) is built on the JDK itself.
+#
+# Locked toolchain (verified with `java -version` / `javac -version`):
+
+runtime: openjdk 17.0.20.1 2026-08-18
+         OpenJDK Runtime Environment (build 17.0.20.1+1-1-24.04-Ubuntu)
+         OpenJDK 64-Bit Server VM (build 17.0.20.1+1-1-24.04-Ubuntu, mixed mode, sharing)
+compiler: javac 17.0.20.1
+
+# Minimum supported version: JDK 17 (uses records, switch expressions, java.net.http).
+# JDK modules used (all part of the standard JDK):
+#   java.base            — collections, NIO file channels, CRC32
+#   jdk.httpserver       — com.sun.net.httpserver.HttpServer (the HTTP API)
+#   java.net.http        — HttpClient (tests only)
+#
+# third-party dependencies: NONE
