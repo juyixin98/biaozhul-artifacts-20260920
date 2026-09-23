@@ -1,0 +1,29 @@
+{
+  "types": {
+    "EIP712Domain": [
+      { "name": "name", "type": "string" },
+      { "name": "version", "type": "string" },
+      { "name": "chainId", "type": "uint256" },
+      { "name": "verifyingContract", "type": "address" }
+    ],
+    "PaymentState": [
+      { "name": "channelId", "type": "bytes32" },
+      { "name": "chainId", "type": "uint256" },
+      { "name": "sequence", "type": "uint64" },
+      { "name": "cumulativePaid", "type": "uint256" }
+    ]
+  },
+  "primaryType": "PaymentState",
+  "domain": {
+    "name": "PaymentAdjudicator",
+    "version": "1",
+    "chainId": "31337",
+    "verifyingContract": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
+  },
+  "message": {
+    "channelId": "0x74afabf6a8fed53115c46332e31865abf4396ae8d054884507fd40a12dc54dcf",
+    "chainId": "31337",
+    "sequence": 1,
+    "cumulativePaid": "100000000000000000000"
+  }
+}

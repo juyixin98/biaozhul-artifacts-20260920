@@ -1,0 +1,17 @@
+# Foundry build artifacts
+out/
+cache/
+artifacts/
+broadcast/
+
+# Anvil / local logs
+*.log
+/tmp/
+
+# Dependencies (none are fetched; lib/forge-vm is hand-authored local source)
+node_modules/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
