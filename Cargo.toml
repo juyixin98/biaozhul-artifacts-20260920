@@ -1,0 +1,23 @@
+[package]
+name = "bptree-index"
+version = "0.1.0"
+edition = "2021"
+description = "磁盘型 B+ 树整数键索引服务（Axum HTTP 接口，支持页式分裂、借位、合并与叶链维护）"
+
+[lib]
+name = "bptree_index"
+path = "src/lib.rs"
+
+[[bin]]
+name = "bptree-server"
+path = "src/main.rs"
+
+[dependencies]
+axum = "0.7.5"
+tokio = { version = "1.36", features = ["rt-multi-thread", "macros", "net"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[profile.release]
+# 小项目，开箱即用即可；保留默认优化，不做特殊 LTO。
+opt-level = 3
