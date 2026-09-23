@@ -1,0 +1,9 @@
+// P5: negative indices.
+// i ranges over [-2, 2], array size 3. Concrete runs with i < 0 fault with a
+// negative-index OOB; runs with i >= 3 do not occur here.  The analysis must
+// report the negative-index possibility (interval unknown is not safe) and
+// must not claim an always-too-large index.
+input i;
+arr a[3] = [7, 8, 9];
+var x = 0;
+x = a[i];

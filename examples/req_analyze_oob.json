@@ -1,0 +1,1 @@
+{"op": "analyze", "source": "input n;\narr a[3] = [1,2,3];\nvar i = 0;\nwhile (i < n) {\n  a[i] = i;\n  i = i + 1;\n}\n", "input_bounds": {"n": {"lo": "0", "hi": "5"}}, "include_points": false}

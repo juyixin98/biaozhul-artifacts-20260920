@@ -1,0 +1,10 @@
+// P1: loop index provably in bounds.
+// For every n in [0, 5] the body executes only while i < n <= 5, hence
+// i <= 4 < size 5.  The analysis must prove this safe (no false alarm).
+input n;
+arr a[5] = [0, 0, 0, 0, 0];
+var i = 0;
+while (i < n) {
+  a[i] = i;
+  i = i + 1;
+}

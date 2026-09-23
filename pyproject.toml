@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "intervalai"
+version = "0.1.0"
+description = "Interval abstract interpretation backend for the Imp language (from-scratch lexer/parser/IR/analyzer + JSON service)"
+requires-python = ">=3.10"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "intervalai"}]
+dependencies = []
+
+[project.scripts]
+intervalai = "intervalai.cli:main"
+
+[tool.setuptools]
+packages = ["intervalai"]

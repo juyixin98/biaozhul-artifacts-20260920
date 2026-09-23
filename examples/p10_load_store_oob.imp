@@ -1,0 +1,13 @@
+// P10: loop containing both an array store and an array load at distinct
+// source positions.  Array size 3, n in [0, 5]: for n >= 3 both a[i]
+// accesses (store line, load line) see i = 3 or 4 and really go out of
+// bounds.  The analyzer must report a possible OOB at BOTH locations.
+input n;
+arr a[3] = [1, 2, 3];
+var i = 0;
+var s = 0;
+while (i < n) {
+  a[i] = s;
+  s = a[i] + s;
+  i = i + 1;
+}

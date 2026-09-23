@@ -1,0 +1,13 @@
+// P2: loop index that can exceed the array size.
+// Array of size 3, n in [0, 5]; when n is 3, 4 or 5 the store a[i] runs with
+// i = 3 or i = 4, so an out-of-bounds fault really occurs.  The analysis
+// reports a possible upper-bound OOB at the store (line of a[i]), and the
+// concrete interpreter faults for n >= 3.  This is an "exact" case: every
+// alarm matches a real fault and every real fault is caught.
+input n;
+arr a[3] = [1, 2, 3];
+var i = 0;
+while (i < n) {
+  a[i] = i;
+  i = i + 1;
+}

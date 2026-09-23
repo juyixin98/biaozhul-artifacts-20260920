@@ -1,0 +1,1 @@
+{"op": "parse", "source": "input d;\nvar q = 0;\nif (d > 0) { q = 100 / d; }\n", "include_cfg": true}

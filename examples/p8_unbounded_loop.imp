@@ -1,0 +1,14 @@
+// P8: genuinely unbounded input (analyzed WITHOUT any input bound).
+// n starts as [-oo, +oo]; after widening the induction variable i also has an
+// infinite upper bound.  The analysis is forbidden from treating the unknown
+// interval as safe and must report possible OOB.  The differential harness
+// additionally runs every concrete n in a bounded window [0, 7] to check
+// soundness (those faults are real for n >= 3); the static result without
+// bounds demonstrates "unknown is not safe" directly.
+input n;
+arr a[3] = [1, 2, 3];
+var i = 0;
+while (i < n) {
+  a[i] = i;
+  i = i + 1;
+}

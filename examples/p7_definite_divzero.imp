@@ -1,0 +1,6 @@
+// P7: division by a value that is always zero.
+// The divisor is exactly 0 on every path, so every concrete run faults and
+// the analysis must report a *definite* (not merely possible) division by
+// zero.
+var z = 0;
+var q = 10 / z;

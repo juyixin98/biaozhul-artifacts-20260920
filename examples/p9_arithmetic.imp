@@ -1,0 +1,14 @@
+// P9: straight-line arithmetic with exact interval arithmetic.
+// a in [2,5], b in [1,4].  a/b is floor division by a strictly positive
+// divisor; a % b is always in [0,3]; the array index a + b is in [3,9], so
+// the store into an array of size 10 at index a+b is safe, but the store at
+// index a*b (range [2,20]) may exceed size 10.  One real OOB, one alarm.
+input a;
+input b;
+arr t[10] = [0,0,0,0,0,0,0,0,0,0];
+var q = 0;
+var r = 0;
+q = a / b;
+r = a % b;
+t[a + b] = q;
+t[a * b] = r;

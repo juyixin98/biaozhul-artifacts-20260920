@@ -1,0 +1,24 @@
+// P11: nested loops and selective widening.
+// The outer loop runs for n iterations; the inner loop runs for i iterations.
+// The analyzer must (a) widen only variables each loop actually modifies (so
+// the outer induction variable i is not spuriously widened while passing
+// through the inner header), and (b) narrow it back to its real range.
+//
+// Bounded analysis (n in [0, 4]): i ends in [0, 4] and the stores a[j] are
+// in bounds because j < i <= 4 < size 5.  Unbounded analysis (no bound):
+// i and j may grow without limit and the stores may go out of bounds — the
+// unknown case must alarm, never be silently treated as safe.
+input n;
+arr a[5] = [0, 0, 0, 0, 0];
+var i = 0;
+var j = 0;
+var s = 0;
+while (i < n) {
+  j = 0;
+  while (j < i) {
+    a[j] = s;
+    s = s + j;
+    j = j + 1;
+  }
+  i = i + 1;
+}

@@ -1,0 +1,12 @@
+// P3: division guarded by a disequality test.
+// d ranges over [-2, 2]; the program divides only when d != 0, so no
+// concrete run ever divides by zero.  A plain interval domain cannot exploit
+// the "hole" left in d by d != 0 (interval [ -2, 2 ] is unchanged after
+// removing the interior point 0), so it still reports a possible division by
+// zero.  This is the classic *relational/set-of-intervals* precision loss and
+// is documented as an intentional conservativity boundary (false positive).
+input d;
+var q = 0;
+if (d != 0) {
+  q = 100 / d;
+}

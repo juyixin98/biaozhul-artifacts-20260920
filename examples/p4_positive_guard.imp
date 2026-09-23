@@ -1,0 +1,9 @@
+// P4: positive lower-bound guard proves division safety.
+// The condition d > 0 leaves d in [1, 3], which the interval domain CAN
+// represent; the division is then provably safe (no alarm, no concrete
+// fault).  Contrast with p3: the form of the guard matters for intervals.
+input d;
+var q = 0;
+if (d > 0) {
+  q = 100 / d;
+}
