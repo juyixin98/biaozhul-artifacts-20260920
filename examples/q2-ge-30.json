@@ -1,0 +1,8 @@
+{
+  "table": "sales",
+  "filter": { "column": "price", "op": ">=", "value": 30 },
+  "aggregates": [
+    { "fn": "COUNT_ROWS" },
+    { "fn": "SUM", "column": "price", "alias": "sum_price" }
+  ]
+}

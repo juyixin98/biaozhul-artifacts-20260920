@@ -1,0 +1,12 @@
+# build output
+out/
+*.class
+
+# runtime data
+data/
+data-demo/
+*.csc
+
+# misc
+sources.txt
+*.log

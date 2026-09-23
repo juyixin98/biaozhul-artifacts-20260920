@@ -1,0 +1,12 @@
+{
+  "table": "sales",
+  "filter": { "op": "AND", "predicates": [
+    { "column": "price", "op": ">=", "value": 15 },
+    { "column": "price", "op": "<=", "value": 25 }
+  ]},
+  "aggregates": [
+    { "fn": "MIN", "column": "price", "alias": "min_price" },
+    { "fn": "MAX", "column": "price", "alias": "max_price" }
+  ],
+  "includeRows": true
+}

@@ -1,0 +1,7 @@
+{
+  "missingStats": ["price", "qty"],
+  "rows": [
+    { "id": 13, "price": 99, "qty": 9 },
+    { "id": 14, "price": 100, "qty": 9 }
+  ]
+}

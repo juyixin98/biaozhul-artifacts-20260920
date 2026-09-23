@@ -1,0 +1,7 @@
+{
+  "rows": [
+    { "id": 7, "price": 10, "qty": 2 },
+    { "id": 8, "price": 15, "qty": null },
+    { "id": 9, "price": 20, "qty": 2 }
+  ]
+}

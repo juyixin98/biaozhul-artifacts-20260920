@@ -1,0 +1,835 @@
+demo server started on http://localhost:18700 (pid 291076, data /home/admin/Downloads/biaozhul/text19/b/data-demo, log /tmp/colscan-demo.log)
+
+== ingest: 5 shards ==
+  s1-all-null      : price/qty ALL NULL
+  s2-price-10      : price = 10,10,10 (boundary)
+  s3-price-10-20   : price = 10,15,20 (boundary, one NULL qty)
+  s4-price-20-30   : price = 20,25,30 (boundary)
+  s5-no-stats      : price = 99,100 but stats MISSING -> always scanned
+{
+  "shard": "s1-all-null",
+  "stats": {
+    "id": {
+      "min": 1,
+      "max": 3,
+      "nullCount": 0,
+      "statsPresent": true
+    },
+    "price": {
+      "min": null,
+      "max": null,
+      "nullCount": 3,
+      "statsPresent": true
+    },
+    "qty": {
+      "min": null,
+      "max": null,
+      "nullCount": 3,
+      "statsPresent": true
+    }
+  }
+}
+{
+  "shard": "s2-price-10",
+  "stats": {
+    "id": {
+      "min": 4,
+      "max": 6,
+      "nullCount": 0,
+      "statsPresent": true
+    },
+    "price": {
+      "min": 10,
+      "max": 10,
+      "nullCount": 0,
+      "statsPresent": true
+    },
+    "qty": {
+      "min": 1,
+      "max": 1,
+      "nullCount": 0,
+      "statsPresent": true
+    }
+  }
+}
+{
+  "shard": "s3-price-10-20",
+  "stats": {
+    "id": {
+      "min": 7,
+      "max": 9,
+      "nullCount": 0,
+      "statsPresent": true
+    },
+    "price": {
+      "min": 10,
+      "max": 20,
+      "nullCount": 0,
+      "statsPresent": true
+    },
+    "qty": {
+      "min": 2,
+      "max": 2,
+      "nullCount": 1,
+      "statsPresent": true
+    }
+  }
+}
+{
+  "shard": "s4-price-20-30",
+  "stats": {
+    "id": {
+      "min": 10,
+      "max": 12,
+      "nullCount": 0,
+      "statsPresent": true
+    },
+    "price": {
+      "min": 20,
+      "max": 30,
+      "nullCount": 0,
+      "statsPresent": true
+    },
+    "qty": {
+      "min": 3,
+      "max": 3,
+      "nullCount": 0,
+      "statsPresent": true
+    }
+  }
+}
+{
+  "shard": "s5-no-stats",
+  "stats": {
+    "id": {
+      "min": 13,
+      "max": 14,
+      "nullCount": 0,
+      "statsPresent": true
+    },
+    "price": {
+      "min": null,
+      "max": null,
+      "nullCount": null,
+      "statsPresent": false
+    },
+    "qty": {
+      "min": null,
+      "max": null,
+      "nullCount": null,
+      "statsPresent": false
+    }
+  }
+}
+
+== Q1: price = 20 (boundary equality; NULL never equals 20) ==
+-- request (examples/q1-eq-20.json) --
+{
+  "table": "sales",
+  "filter": {
+    "column": "price",
+    "op": "=",
+    "value": 20
+  },
+  "aggregates": [
+    {
+      "fn": "COUNT_ROWS"
+    },
+    {
+      "fn": "SUM",
+      "column": "price",
+      "alias": "sum_price"
+    },
+    {
+      "fn": "AVG",
+      "column": "price",
+      "alias": "avg_price"
+    },
+    {
+      "fn": "SUM",
+      "column": "qty",
+      "alias": "sum_qty"
+    }
+  ]
+}
+-- /verify (pruned vs full scan) --
+{
+  "correct": true,
+  "differences": [],
+  "pruned": {
+    "mode": "PRUNED",
+    "scanned": [
+      "s3-price-10-20",
+      "s4-price-20-30",
+      "s5-no-stats"
+    ],
+    "pruned": [
+      "s1-all-null",
+      "s2-price-10"
+    ],
+    "pruneReasons": [
+      {
+        "shardId": "s1-all-null",
+        "reason": "column price is all NULL (3/3); NULL never satisfies =",
+        "rowCount": 3,
+        "stats": {
+          "id": {
+            "min": 1,
+            "max": 3,
+            "nullCount": 0,
+            "present": true
+          },
+          "price": {
+            "min": null,
+            "max": null,
+            "nullCount": 3,
+            "present": true
+          },
+          "qty": {
+            "min": null,
+            "max": null,
+            "nullCount": 3,
+            "present": true
+          }
+        }
+      },
+      {
+        "shardId": "s2-price-10",
+        "reason": "price 20 outside [10,10]",
+        "rowCount": 3,
+        "stats": {
+          "id": {
+            "min": 4,
+            "max": 6,
+            "nullCount": 0,
+            "present": true
+          },
+          "price": {
+            "min": 10,
+            "max": 10,
+            "nullCount": 0,
+            "present": true
+          },
+          "qty": {
+            "min": 1,
+            "max": 1,
+            "nullCount": 0,
+            "present": true
+          }
+        }
+      }
+    ],
+    "matchedRowsCount": 2,
+    "aggregates": {
+      "count_rows": 2,
+      "sum_price": 40,
+      "avg_price": 20.0,
+      "sum_qty": 5
+    },
+    "bytesRead": 822,
+    "metadataBytes": 704,
+    "dataBytes": 118
+  },
+  "fullScan": {
+    "scanned": [
+      "s1-all-null",
+      "s2-price-10",
+      "s3-price-10-20",
+      "s4-price-20-30",
+      "s5-no-stats"
+    ],
+    "matchedRowsCount": 2,
+    "aggregates": {
+      "count_rows": 2,
+      "sum_price": 40,
+      "avg_price": 20.0,
+      "sum_qty": 5
+    },
+    "bytesRead": 1312
+  },
+  "bytesSaved": 490,
+  "bytesReadRatio": 0.6265243902439024,
+  "shardsSkipped": 2
+}
+
+== Q2: price >= 30 (inclusive boundary; missing-stats shard still scanned) ==
+-- request (examples/q2-ge-30.json) --
+{
+  "table": "sales",
+  "filter": {
+    "column": "price",
+    "op": ">=",
+    "value": 30
+  },
+  "aggregates": [
+    {
+      "fn": "COUNT_ROWS"
+    },
+    {
+      "fn": "SUM",
+      "column": "price",
+      "alias": "sum_price"
+    }
+  ]
+}
+-- /verify (pruned vs full scan) --
+{
+  "correct": true,
+  "differences": [],
+  "pruned": {
+    "mode": "PRUNED",
+    "scanned": [
+      "s4-price-20-30",
+      "s5-no-stats"
+    ],
+    "pruned": [
+      "s1-all-null",
+      "s2-price-10",
+      "s3-price-10-20"
+    ],
+    "pruneReasons": [
+      {
+        "shardId": "s1-all-null",
+        "reason": "column price is all NULL (3/3); NULL never satisfies >=",
+        "rowCount": 3,
+        "stats": {
+          "id": {
+            "min": 1,
+            "max": 3,
+            "nullCount": 0,
+            "present": true
+          },
+          "price": {
+            "min": null,
+            "max": null,
+            "nullCount": 3,
+            "present": true
+          },
+          "qty": {
+            "min": null,
+            "max": null,
+            "nullCount": 3,
+            "present": true
+          }
+        }
+      },
+      {
+        "shardId": "s2-price-10",
+        "reason": "price max 10 < 30, nothing >= 30",
+        "rowCount": 3,
+        "stats": {
+          "id": {
+            "min": 4,
+            "max": 6,
+            "nullCount": 0,
+            "present": true
+          },
+          "price": {
+            "min": 10,
+            "max": 10,
+            "nullCount": 0,
+            "present": true
+          },
+          "qty": {
+            "min": 1,
+            "max": 1,
+            "nullCount": 0,
+            "present": true
+          }
+        }
+      },
+      {
+        "shardId": "s3-price-10-20",
+        "reason": "price max 20 < 30, nothing >= 30",
+        "rowCount": 3,
+        "stats": {
+          "id": {
+            "min": 7,
+            "max": 9,
+            "nullCount": 0,
+            "present": true
+          },
+          "price": {
+            "min": 10,
+            "max": 20,
+            "nullCount": 0,
+            "present": true
+          },
+          "qty": {
+            "min": 2,
+            "max": 2,
+            "nullCount": 1,
+            "present": true
+          }
+        }
+      }
+    ],
+    "matchedRowsCount": 3,
+    "aggregates": {
+      "count_rows": 3,
+      "sum_price": 229
+    },
+    "bytesRead": 541,
+    "metadataBytes": 475,
+    "dataBytes": 66
+  },
+  "fullScan": {
+    "scanned": [
+      "s1-all-null",
+      "s2-price-10",
+      "s3-price-10-20",
+      "s4-price-20-30",
+      "s5-no-stats"
+    ],
+    "matchedRowsCount": 3,
+    "aggregates": {
+      "count_rows": 3,
+      "sum_price": 229
+    },
+    "bytesRead": 1283
+  },
+  "bytesSaved": 742,
+  "bytesReadRatio": 0.421667965705378,
+  "shardsSkipped": 3
+}
+
+== Q3: price IS NULL (only the all-NULL shard can hold NULLs) ==
+-- request (examples/q3-is-null.json) --
+{
+  "table": "sales",
+  "filter": {
+    "column": "price",
+    "op": "IS NULL"
+  },
+  "aggregates": [
+    {
+      "fn": "COUNT_ROWS"
+    }
+  ]
+}
+-- /verify (pruned vs full scan) --
+{
+  "correct": true,
+  "differences": [],
+  "pruned": {
+    "mode": "PRUNED",
+    "scanned": [
+      "s1-all-null",
+      "s5-no-stats"
+    ],
+    "pruned": [
+      "s2-price-10",
+      "s3-price-10-20",
+      "s4-price-20-30"
+    ],
+    "pruneReasons": [
+      {
+        "shardId": "s2-price-10",
+        "reason": "price nullCount=0, IS NULL matches nothing",
+        "rowCount": 3,
+        "stats": {
+          "id": {
+            "min": 4,
+            "max": 6,
+            "nullCount": 0,
+            "present": true
+          },
+          "price": {
+            "min": 10,
+            "max": 10,
+            "nullCount": 0,
+            "present": true
+          },
+          "qty": {
+            "min": 1,
+            "max": 1,
+            "nullCount": 0,
+            "present": true
+          }
+        }
+      },
+      {
+        "shardId": "s3-price-10-20",
+        "reason": "price nullCount=0, IS NULL matches nothing",
+        "rowCount": 3,
+        "stats": {
+          "id": {
+            "min": 7,
+            "max": 9,
+            "nullCount": 0,
+            "present": true
+          },
+          "price": {
+            "min": 10,
+            "max": 20,
+            "nullCount": 0,
+            "present": true
+          },
+          "qty": {
+            "min": 2,
+            "max": 2,
+            "nullCount": 1,
+            "present": true
+          }
+        }
+      },
+      {
+        "shardId": "s4-price-20-30",
+        "reason": "price nullCount=0, IS NULL matches nothing",
+        "rowCount": 3,
+        "stats": {
+          "id": {
+            "min": 10,
+            "max": 12,
+            "nullCount": 0,
+            "present": true
+          },
+          "price": {
+            "min": 20,
+            "max": 30,
+            "nullCount": 0,
+            "present": true
+          },
+          "qty": {
+            "min": 3,
+            "max": 3,
+            "nullCount": 0,
+            "present": true
+          }
+        }
+      }
+    ],
+    "matchedRowsCount": 3,
+    "aggregates": {
+      "count_rows": 3
+    },
+    "bytesRead": 498,
+    "metadataBytes": 480,
+    "dataBytes": 18
+  },
+  "fullScan": {
+    "scanned": [
+      "s1-all-null",
+      "s2-price-10",
+      "s3-price-10-20",
+      "s4-price-20-30",
+      "s5-no-stats"
+    ],
+    "matchedRowsCount": 3,
+    "aggregates": {
+      "count_rows": 3
+    },
+    "bytesRead": 1259
+  },
+  "bytesSaved": 761,
+  "bytesReadRatio": 0.39555202541699763,
+  "shardsSkipped": 3
+}
+
+== Q4: price = 15 AND qty IS NULL (NULL qty must not count as 0) ==
+-- request (examples/q4-null-qty.json) --
+{
+  "table": "sales",
+  "filter": {
+    "op": "AND",
+    "predicates": [
+      {
+        "column": "price",
+        "op": "=",
+        "value": 15
+      },
+      {
+        "column": "qty",
+        "op": "IS NULL"
+      }
+    ]
+  },
+  "aggregates": [
+    {
+      "fn": "COUNT_ROWS"
+    },
+    {
+      "fn": "COUNT",
+      "column": "qty",
+      "alias": "cnt_qty"
+    },
+    {
+      "fn": "SUM",
+      "column": "qty",
+      "alias": "sum_qty"
+    },
+    {
+      "fn": "AVG",
+      "column": "qty",
+      "alias": "avg_qty"
+    }
+  ]
+}
+-- /verify (pruned vs full scan) --
+{
+  "correct": true,
+  "differences": [],
+  "pruned": {
+    "mode": "PRUNED",
+    "scanned": [
+      "s3-price-10-20",
+      "s5-no-stats"
+    ],
+    "pruned": [
+      "s1-all-null",
+      "s2-price-10",
+      "s4-price-20-30"
+    ],
+    "pruneReasons": [
+      {
+        "shardId": "s1-all-null",
+        "reason": "AND: column price is all NULL (3/3); NULL never satisfies =",
+        "rowCount": 3,
+        "stats": {
+          "id": {
+            "min": 1,
+            "max": 3,
+            "nullCount": 0,
+            "present": true
+          },
+          "price": {
+            "min": null,
+            "max": null,
+            "nullCount": 3,
+            "present": true
+          },
+          "qty": {
+            "min": null,
+            "max": null,
+            "nullCount": 3,
+            "present": true
+          }
+        }
+      },
+      {
+        "shardId": "s2-price-10",
+        "reason": "AND: price 15 outside [10,10]",
+        "rowCount": 3,
+        "stats": {
+          "id": {
+            "min": 4,
+            "max": 6,
+            "nullCount": 0,
+            "present": true
+          },
+          "price": {
+            "min": 10,
+            "max": 10,
+            "nullCount": 0,
+            "present": true
+          },
+          "qty": {
+            "min": 1,
+            "max": 1,
+            "nullCount": 0,
+            "present": true
+          }
+        }
+      },
+      {
+        "shardId": "s4-price-20-30",
+        "reason": "AND: price 15 outside [20,30]",
+        "rowCount": 3,
+        "stats": {
+          "id": {
+            "min": 10,
+            "max": 12,
+            "nullCount": 0,
+            "present": true
+          },
+          "price": {
+            "min": 20,
+            "max": 30,
+            "nullCount": 0,
+            "present": true
+          },
+          "qty": {
+            "min": 3,
+            "max": 3,
+            "nullCount": 0,
+            "present": true
+          }
+        }
+      }
+    ],
+    "matchedRowsCount": 1,
+    "aggregates": {
+      "count_rows": 1,
+      "cnt_qty": 0,
+      "sum_qty": null,
+      "avg_qty": null
+    },
+    "bytesRead": 517,
+    "metadataBytes": 473,
+    "dataBytes": 44
+  },
+  "fullScan": {
+    "scanned": [
+      "s1-all-null",
+      "s2-price-10",
+      "s3-price-10-20",
+      "s4-price-20-30",
+      "s5-no-stats"
+    ],
+    "matchedRowsCount": 1,
+    "aggregates": {
+      "count_rows": 1,
+      "cnt_qty": 0,
+      "sum_qty": null,
+      "avg_qty": null
+    },
+    "bytesRead": 1264
+  },
+  "bytesSaved": 747,
+  "bytesReadRatio": 0.40901898734177217,
+  "shardsSkipped": 3
+}
+
+== Q5: 15 <= price <= 25 with rows projected ==
+-- request (examples/q5-range-rows.json) --
+{
+  "table": "sales",
+  "filter": {
+    "op": "AND",
+    "predicates": [
+      {
+        "column": "price",
+        "op": ">=",
+        "value": 15
+      },
+      {
+        "column": "price",
+        "op": "<=",
+        "value": 25
+      }
+    ]
+  },
+  "aggregates": [
+    {
+      "fn": "MIN",
+      "column": "price",
+      "alias": "min_price"
+    },
+    {
+      "fn": "MAX",
+      "column": "price",
+      "alias": "max_price"
+    }
+  ],
+  "includeRows": true
+}
+-- /verify (pruned vs full scan) --
+{
+  "correct": true,
+  "differences": [],
+  "pruned": {
+    "mode": "PRUNED",
+    "scanned": [
+      "s3-price-10-20",
+      "s4-price-20-30",
+      "s5-no-stats"
+    ],
+    "pruned": [
+      "s1-all-null",
+      "s2-price-10"
+    ],
+    "pruneReasons": [
+      {
+        "shardId": "s1-all-null",
+        "reason": "AND: column price is all NULL (3/3); NULL never satisfies >=",
+        "rowCount": 3,
+        "stats": {
+          "id": {
+            "min": 1,
+            "max": 3,
+            "nullCount": 0,
+            "present": true
+          },
+          "price": {
+            "min": null,
+            "max": null,
+            "nullCount": 3,
+            "present": true
+          },
+          "qty": {
+            "min": null,
+            "max": null,
+            "nullCount": 3,
+            "present": true
+          }
+        }
+      },
+      {
+        "shardId": "s2-price-10",
+        "reason": "AND: price max 10 < 15, nothing >= 15",
+        "rowCount": 3,
+        "stats": {
+          "id": {
+            "min": 4,
+            "max": 6,
+            "nullCount": 0,
+            "present": true
+          },
+          "price": {
+            "min": 10,
+            "max": 10,
+            "nullCount": 0,
+            "present": true
+          },
+          "qty": {
+            "min": 1,
+            "max": 1,
+            "nullCount": 0,
+            "present": true
+          }
+        }
+      }
+    ],
+    "matchedRowsCount": 4,
+    "aggregates": {
+      "min_price": 15,
+      "max_price": 25
+    },
+    "bytesRead": 929,
+    "metadataBytes": 704,
+    "dataBytes": 225
+  },
+  "fullScan": {
+    "scanned": [
+      "s1-all-null",
+      "s2-price-10",
+      "s3-price-10-20",
+      "s4-price-20-30",
+      "s5-no-stats"
+    ],
+    "matchedRowsCount": 4,
+    "aggregates": {
+      "min_price": 15,
+      "max_price": 25
+    },
+    "bytesRead": 1421
+  },
+  "bytesSaved": 492,
+  "bytesReadRatio": 0.6537649542575651,
+  "shardsSkipped": 2
+}
+
+== Q6: forced FULL_SCAN of price = 20 (reference numbers) ==
+{
+  "mode": "FULL_SCAN",
+  "shardsTotal": 5,
+  "shardsScanned": 5,
+  "matchedRowsCount": 2,
+  "bytesRead": 1312,
+  "dataBytes": 146,
+  "metadataBytes": 1166
+}
+
+demo complete.
+
+stopping demo server (pid 291076) ...

@@ -1,0 +1,5 @@
+{
+  "table": "sales",
+  "filter": { "column": "price", "op": "IS NULL" },
+  "aggregates": [ { "fn": "COUNT_ROWS" } ]
+}
