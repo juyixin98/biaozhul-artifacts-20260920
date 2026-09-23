@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Optional Maven descriptor for environments that standardise on Maven (IDE
+  import, dependency scanners, CI). The runtime dependency set is locked to
+  exactly ZERO external artifacts: the application uses only the java.base
+  module, including the built-in com.sun.net.httpserver HTTP server and
+  javax.crypto HMAC. The canonical, fully offline build/test/run path is plain
+  javac+java via build.sh / test.sh / run.sh (Maven is NOT required).
+
+  `mvn compile` works offline. The test suite is a plain main() class; run it
+  with ./test.sh rather than `mvn test` (no surefire/JUnit dependency is pulled
+  in, keeping the dependency tree empty).
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>stable-pager</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.release>17</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- Locked dependency set: nothing beyond the JDK. -->
+    <dependencies />
+
+    <build>
+        <sourceDirectory>${project.basedir}/src</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/test</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <!-- Pinned so the build never silently depends on a plugin
+                     version resolved from remote metadata. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
