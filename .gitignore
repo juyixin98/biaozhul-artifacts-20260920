@@ -1,0 +1,12 @@
+# binaries
+/forkindexer
+*.test
+*.out
+
+# local env
+.env
+*.local
+
+# generated examples can be regenerated with `make examples`,
+# but keep them tracked for offline review; uncomment to ignore:
+# /examples/
