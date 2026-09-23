@@ -1,0 +1,11 @@
+{
+  "nodes": [
+    {"id": "n1", "weight": 1, "domain": "d1"},
+    {"id": "n2", "weight": 1, "domain": "d2"},
+    {"id": "n3", "weight": 1, "domain": "d3"},
+    {"id": "n4", "weight": 1, "domain": "d4"}
+  ],
+  "read_threshold": 2,
+  "write_threshold": 2,
+  "max_failed_domains": 0
+}
