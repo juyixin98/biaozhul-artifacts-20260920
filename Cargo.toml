@@ -1,0 +1,16 @@
+[package]
+name = "extsort"
+version = "0.1.0"
+edition = "2021"
+description = "Bounded-memory, file-backed stable external sort with injectable I/O and local HTTP validation endpoint"
+
+[lib]
+name = "extsort"
+path = "src/lib.rs"
+
+[[bin]]
+name = "extsort"
+path = "src/main.rs"
+
+[profile.release]
+lto = true

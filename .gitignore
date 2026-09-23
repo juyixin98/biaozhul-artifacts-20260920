@@ -1,0 +1,11 @@
+/target
+**/*.rs.bk
+Cargo.lock.bak
+
+# Local working data for the server / CLI (not source).
+/extsort-data
+/httproot
+/repo
+/repo2
+/repo3
+*.local
