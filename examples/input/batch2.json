@@ -1,0 +1,6 @@
+{
+  "writes": [
+    {"key": "carol", "delete": true},
+    {"key": "frank", "value": "500"}
+  ]
+}

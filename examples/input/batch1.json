@@ -1,0 +1,10 @@
+{
+  "writes": [
+    {"key": "alice",   "value": "100"},
+    {"key": "bob",     "value": "200"},
+    {"key": "carol",   "value": "300"},
+    {"key": "dave",    "value": ""},
+    {"key": "erin",    "value_hex": "03e8"},
+    {"key": "bob",     "value": "201"}
+  ]
+}
