@@ -1,0 +1,23 @@
+{
+  "_comment": "Example write-batch request bodies for POST /v1/batches. Keys and values are hex. An empty value is \"\"; deletes use {\"op\":\"delete\"}.",
+  "01_first_batch": {
+    "ops": [
+      {"op": "put", "key": "616c706861", "value": "313030"},
+      {"op": "put", "key": "626f62", "value": "323030"},
+      {"op": "put", "key": "6361726f6c", "value": "333030"},
+      {"op": "put", "key": "64656c7461", "value": ""},
+      {"op": "put", "key": "647570", "value": "6669727374"},
+      {"op": "put", "key": "647570", "value": "6c6173742d77696e73"}
+    ]
+  },
+  "02_update_and_delete": {
+    "ops": [
+      {"op": "put", "key": "616c706861", "value": "313031"},
+      {"op": "delete", "key": "6361726f6c"},
+      {"op": "delete", "key": "6e657665722d65786973746564"}
+    ]
+  },
+  "03_empty_batch": {
+    "ops": []
+  }
+}

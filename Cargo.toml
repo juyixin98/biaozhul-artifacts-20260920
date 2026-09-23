@@ -1,0 +1,38 @@
+[package]
+name = "merkle-proof-service"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.98"
+
+[dependencies]
+axum = "=0.8.9"
+tokio = { version = "=1.53.1", features = ["rt-multi-thread", "macros", "net", "sync", "time"] }
+serde = { version = "=1.0.229", features = ["derive"] }
+serde_json = "=1.0.151"
+sha2 = "=0.10.9"
+hex = "=0.4.3"
+rocksdb = "=0.22.0"
+parking_lot = "=0.12.5"
+thiserror = "=2.0.20"
+tracing = "=0.1.44"
+tracing-subscriber = { version = "=0.3.23", features = ["env-filter"] }
+
+[dev-dependencies]
+tempfile = "=3.27.0"
+http-body-util = "=0.1.5"
+
+[[bin]]
+name = "merkle-proof-service"
+path = "src/main.rs"
+
+[lib]
+name = "merkle_proof_service"
+path = "src/lib.rs"
+
+[profile.dev]
+# librocksdb-sys is a large C++ build; keep debug builds honest but lean.
+opt-level = 0
+
+[profile.release]
+opt-level = 3
+lto = "thin"
