@@ -1,0 +1,8 @@
+{
+  "_comment": "Example batch ingest. ts accepts integer unix MICROSECONDS or RFC3339Nano strings. Prices are integers. Replace the timestamps with values inside the current 5-minute late window before POSTing:  bash scripts/acceptance.sh  generates such timestamps automatically.",
+  "batch": [
+    {"ts": "REPLACE_WITH_RFC3339_IN_LAST_CLOSED_MINUTE", "price": 100, "source": "exchange-a"},
+    {"ts": "REPLACE_WITH_RFC3339_5s_LATER",             "price": 102, "source": "exchange-b"},
+    {"ts": "REPLACE_WITH_RFC3339_30s_LATER",            "price": 200, "source": "exchange-a"}
+  ]
+}
