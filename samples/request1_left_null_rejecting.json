@@ -1,0 +1,25 @@
+{
+  "tables": {
+    "T": {"columns": ["A", "B"], "rows": [[1, 1], [2, 2], [3, null]]},
+    "U": {"columns": ["B", "C"], "rows": [[1, 10], [2, null]]}
+  },
+  "plan": {
+    "type": "project",
+    "items": [
+      {"expr": {"col": "T.A"}, "alias": "a"},
+      {"expr": {"col": "T.B"}, "alias": "t_b"},
+      {"expr": {"col": "U.B"}, "alias": "u_b"},
+      {"expr": {"col": "U.C"}, "alias": "c"}
+    ],
+    "child": {
+      "type": "filter",
+      "pred": {"op": "=", "args": [{"col": "U.C"}, {"lit": 10}]},
+      "child": {
+        "type": "join", "joinType": "left",
+        "left": {"type": "scan", "table": "T"},
+        "right": {"type": "scan", "table": "U"},
+        "on": {"op": "=", "args": [{"col": "T.B"}, {"col": "U.B"}]}
+      }
+    }
+  }
+}

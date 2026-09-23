@@ -1,0 +1,16 @@
+{
+  "tables": {
+    "T": {"columns": ["A", "B"], "rows": [[1, 1], [2, 2], [3, null]]},
+    "U": {"columns": ["B", "C"], "rows": [[1, 10], [2, null]]}
+  },
+  "plan": {
+    "type": "filter",
+    "pred": {"op": "isnull", "args": [{"col": "U.C"}]},
+    "child": {
+      "type": "join", "joinType": "left",
+      "left": {"type": "scan", "table": "T"},
+      "right": {"type": "scan", "table": "U"},
+      "on": {"op": "=", "args": [{"col": "T.B"}, {"col": "U.B"}]}
+    }
+  }
+}
