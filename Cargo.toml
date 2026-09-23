@@ -1,0 +1,15 @@
+[package]
+name = "cow-snapstore"
+version = "0.1.0"
+edition = "2021"
+description = "Page-level copy-on-write snapshot storage service (branchable snapshots, crash-safe root pointer updates)"
+
+[dependencies]
+axum = "0.8"
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[dev-dependencies]
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls"] }
+tempfile = "3"
