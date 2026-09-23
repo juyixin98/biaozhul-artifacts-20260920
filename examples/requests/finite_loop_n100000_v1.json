@@ -1,0 +1,6 @@
+{
+  "module_ref": "sample:finite_loop",
+  "input_base64": "oIYBAAAAAAA=",
+  "metering_version": 1,
+  "idempotency_key": "finite-100000-v1"
+}
