@@ -1,0 +1,14 @@
+{
+  "_comment": "溢出验收样例：9223372036854775807 + 1 超出 long，应返回 ok:false / WINDOW_ERROR（退出码 1）",
+  "includePlan": false,
+  "input": {
+    "columns": [{"name": "v", "type": "LONG"}],
+    "rows": [[9223372036854775807], [1]]
+  },
+  "window": {
+    "orderBy": [{"column": "v", "ascending": true}],
+    "functions": [
+      {"type": "SUM", "outputColumn": "s", "argument": "v"}
+    ]
+  }
+}

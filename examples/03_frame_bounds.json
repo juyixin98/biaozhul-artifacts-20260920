@@ -1,0 +1,26 @@
+{
+  "_comment": "窗口帧边界全覆盖：UNBOUNDED / 偏移 PRECEDING-FOLLOWING，以及整体移出分区的前向空帧",
+  "includePlan": false,
+  "input": {
+    "columns": [{"name": "v", "type": "LONG"}],
+    "rows": [[1], [2], [3], [4], [5]]
+  },
+  "window": {
+    "orderBy": [{"column": "v", "ascending": true}],
+    "functions": [
+      {"type": "ROW_NUMBER", "outputColumn": "rn"},
+      {"type": "SUM", "outputColumn": "whole", "argument": "v",
+       "frame": {"mode": "ROWS",
+                 "start": {"kind": "UNBOUNDED_PRECEDING"},
+                 "end":   {"kind": "UNBOUNDED_FOLLOWING"}}},
+      {"type": "SUM", "outputColumn": "back_2", "argument": "v",
+       "frame": {"mode": "ROWS",
+                 "start": {"kind": "PRECEDING", "offset": 2},
+                 "end":   {"kind": "CURRENT_ROW"}}},
+      {"type": "SUM", "outputColumn": "lead_2", "argument": "v",
+       "frame": {"mode": "ROWS",
+                 "start": {"kind": "FOLLOWING", "offset": 1},
+                 "end":   {"kind": "FOLLOWING", "offset": 2}}}
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "_comment": "并列键与 NULL 顺序：ASC 默认 NULLS LAST；RANK 有跳跃，ROW_NUMBER 不重复",
+  "includePlan": true,
+  "input": {
+    "columns": [
+      {"name": "grp", "type": "STRING"},
+      {"name": "v",   "type": "LONG"}
+    ],
+    "rows": [
+      ["a", 20],
+      ["a", 10],
+      ["a", 10],
+      ["a", null],
+      ["a", 30],
+      ["b", 10],
+      ["b", null]
+    ]
+  },
+  "window": {
+    "partitionBy": ["grp"],
+    "orderBy": [{"column": "v", "ascending": true}],
+    "functions": [
+      {"type": "ROW_NUMBER", "outputColumn": "rn"},
+      {"type": "RANK",       "outputColumn": "rk"},
+      {"type": "SUM", "outputColumn": "cum_v", "argument": "v"}
+    ]
+  }
+}

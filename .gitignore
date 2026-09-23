@@ -1,0 +1,8 @@
+# 编译产物
+out/classes/
+out/test-classes/
+# 导出的响应（可用 bin/run.sh 重新生成）
+out/exports/*
+!out/exports/.gitkeep
+*.class
+.DS_Store

@@ -1,0 +1,39 @@
+{
+  "_comment": "综合样例：分区排序后的 ROW_NUMBER / RANK / 滑动 ROWS 求和（含并列键、NULL、负值）",
+  "includePlan": true,
+  "input": {
+    "columns": [
+      {"name": "dept",  "type": "STRING"},
+      {"name": "emp",   "type": "STRING"},
+      {"name": "score", "type": "LONG"}
+    ],
+    "rows": [
+      ["eng",   "alice", 90],
+      ["eng",   "bob",   80],
+      ["eng",   "carol", 80],
+      ["sales", "dave",  70],
+      ["sales", "erin",  null],
+      ["eng",   "frank", 90],
+      ["ops",   "gina",  -5],
+      ["eng",   "heidi", null]
+    ]
+  },
+  "window": {
+    "partitionBy": ["dept"],
+    "orderBy": [
+      {"column": "score", "ascending": false, "nullOrder": "NULLS_LAST"}
+    ],
+    "functions": [
+      {"type": "ROW_NUMBER", "outputColumn": "rn"},
+      {"type": "RANK",       "outputColumn": "rk"},
+      {"type": "SUM", "outputColumn": "cum_sum", "argument": "score",
+       "frame": {"mode": "ROWS",
+                 "start": {"kind": "UNBOUNDED_PRECEDING"},
+                 "end":   {"kind": "CURRENT_ROW"}}},
+      {"type": "SUM", "outputColumn": "moving_3", "argument": "score",
+       "frame": {"mode": "ROWS",
+                 "start": {"kind": "PRECEDING", "offset": 1},
+                 "end":   {"kind": "FOLLOWING", "offset": 1}}}
+    ]
+  }
+}

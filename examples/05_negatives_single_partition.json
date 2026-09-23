@@ -1,0 +1,32 @@
+{
+  "_comment": "负值与单行/空边界：单行分区（dept=c）帧截断到自身；负值累计和围绕 0 波动",
+  "includePlan": true,
+  "input": {
+    "columns": [
+      {"name": "dept", "type": "STRING"},
+      {"name": "v", "type": "LONG"}
+    ],
+    "rows": [
+      ["a", -10],
+      ["a", 4],
+      ["a", -6],
+      ["c", 42]
+    ]
+  },
+  "window": {
+    "partitionBy": ["dept"],
+    "orderBy": [{"column": "v", "ascending": true}],
+    "functions": [
+      {"type": "ROW_NUMBER", "outputColumn": "rn"},
+      {"type": "RANK",       "outputColumn": "rk"},
+      {"type": "SUM", "outputColumn": "cum", "argument": "v",
+       "frame": {"mode": "ROWS",
+                 "start": {"kind": "UNBOUNDED_PRECEDING"},
+                 "end":   {"kind": "CURRENT_ROW"}}},
+      {"type": "SUM", "outputColumn": "around", "argument": "v",
+       "frame": {"mode": "ROWS",
+                 "start": {"kind": "PRECEDING", "offset": 1},
+                 "end":   {"kind": "FOLLOWING", "offset": 1}}}
+    ]
+  }
+}

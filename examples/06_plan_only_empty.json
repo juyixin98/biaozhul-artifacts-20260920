@@ -1,0 +1,20 @@
+{
+  "_comment": "空数据导出执行计划：0 行输入，只导出计划（includeData=false）",
+  "includePlan": true,
+  "includeData": false,
+  "input": {
+    "columns": [
+      {"name": "p", "type": "STRING"},
+      {"name": "v", "type": "LONG"}
+    ],
+    "rows": []
+  },
+  "window": {
+    "partitionBy": ["p"],
+    "orderBy": [{"column": "v", "ascending": true, "nullOrder": "NULLS_FIRST"}],
+    "functions": [
+      {"type": "ROW_NUMBER", "outputColumn": "rn"},
+      {"type": "RANK",       "outputColumn": "rk"}
+    ]
+  }
+}
