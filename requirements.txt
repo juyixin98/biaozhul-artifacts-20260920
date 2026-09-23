@@ -1,0 +1,9 @@
+# tinyinfer 只使用 Python 标准库，无第三方运行时依赖。
+# 需要 Python 3.10+（使用了 PEP 604 的 X | Y 类型注解与 match 友好语法）。
+#
+# 开发/运行均无需 pip install。
+#
+# 运行测试：
+#   python3 -m unittest discover -s tests
+# 启动服务：
+#   python3 -m tinyinfer.server --port 8000

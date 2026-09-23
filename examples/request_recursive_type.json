@@ -1,0 +1,3 @@
+{
+  "source": "let loop = fun f -> f f in loop loop"
+}

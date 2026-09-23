@@ -1,0 +1,5 @@
+// 验收二：递归类型必须被 occurs-check 拒绝
+// 试图把 f 应用到自身，会得到 ?a ~ ?a -> ?t 的统一约束；
+// 变量 ?a 出现在右侧函数类型中，occurs-check 失败。
+let loop = fun f -> f f
+in loop loop

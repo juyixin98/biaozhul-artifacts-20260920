@@ -1,0 +1,10 @@
+// 可变状态的*健全*用法：值限制下 r 是单态 int ref，
+// 多次读写与递归结合没有问题。
+let sum_to = fun n ->
+  let acc = ref 0 in
+  let rec loop k =
+    if k <= 0 then deref acc
+    else (acc <- deref acc + k; loop (k - 1))
+  in loop n
+
+in sum_to 100

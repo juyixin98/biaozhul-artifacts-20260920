@@ -1,0 +1,5 @@
+{
+  "source": "let r = new_ref unit in r <- true; deref r + 1",
+  "value_restriction": true,
+  "evaluate": true
+}

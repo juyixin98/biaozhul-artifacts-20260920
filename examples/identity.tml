@@ -1,0 +1,9 @@
+// 验收一：恒等函数的多次独立实例化
+// id 被一般化为 forall 'a. 'a -> 'a；
+// 同一个 id 分别用于 int 和 bool，还能作为自身的参数。
+let id = fun x -> x
+in
+  let a = id 1 in        (* id 实例化为 int -> int *)
+  let b = id true in     (* id 实例化为 bool -> bool *)
+  let c = id id 7 in     (* id 实例化两次：(int->int)->(int->int) 与 int->int *)
+  if b then a + c else 0

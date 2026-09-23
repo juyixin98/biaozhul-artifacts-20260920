@@ -1,0 +1,12 @@
+// 递归与多态组合：fact 是 int -> int 的单态递归；
+// twice 是多态高阶函数，在不同类型上独立实例化。
+// 多个绑定用行内 let ... in 串接，保证函数体与分支中的
+// 行内 let...in 边界清晰。
+let rec fact (n: int): int =
+  if n <= 1 then 1 else n * fact (n - 1)
+in
+let twice f x = f (f x)
+in
+  let n = twice (fun y -> y + 1) 10 in   (* int 实例化：10+2=12 *)
+  let b = twice not true in             (* bool 实例化：not(not true)=true *)
+  if b then fact 5 + n else 0           (* 120 + 12 = 132 *)

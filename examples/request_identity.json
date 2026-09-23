@@ -1,0 +1,3 @@
+{
+  "source": "let id = fun x -> x in\nlet a = id 1 in\nlet b = id true in\nif b then a + id 41 else 0"
+}

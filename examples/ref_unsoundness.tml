@@ -1,0 +1,18 @@
+// 验收三：可变引用的多态不健全反例（Wright 1994 的经典例子形态）
+//
+// new_ref : forall 'a. unit -> 'a ref 是多态原语，产生一个内容
+// 类型尚未确定的空引用。
+//
+//   naive 算法 W（无值限制）：let r = new_ref unit 是一次函数应用
+//   （计算式表达式），但 naive W 仍把结果一般化为 forall 'a. 'a ref。
+//   于是 r 先被当作 bool ref 使用（存 true），又被当作 int ref
+//   使用（按 int 取出做加法）——类型检查通过，运行到 true + 1 时
+//   必然崩溃，证明该类型系统不健全。
+//
+//   开启值限制（默认）：应用不是语法值，r 保持单态（一个待定的
+//   单态变量），第二次以 int 使用时产生 bool/int 冲突，检查阶段
+//   即拒绝该程序。
+let r = new_ref unit
+in
+  r <- true;
+  deref r + 1
