@@ -1,0 +1,16 @@
+[package]
+name = "dual-sb-recovery"
+version = "0.1.0"
+edition = "2021"
+description = "Append-only log store with alternating dual superblocks, crash-injectable I/O and a local HTTP validation entrypoint"
+
+[[bin]]
+name = "dual-sb"
+path = "src/main.rs"
+
+[profile.dev]
+# determinism matters more than speed for the crash tests
+opt-level = 0
+
+[profile.release]
+opt-level = 3

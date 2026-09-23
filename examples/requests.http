@@ -1,0 +1,71 @@
+### dual-sb HTTP request samples (REST Client / editor .http format)
+### Start: ./target/release/dual-sb serve --dir ./mystore --addr 127.0.0.1:8080
+@base = http://127.0.0.1:8080
+
+### health
+GET {{base}}/health
+
+### put name=alice  -> committed generation 1
+POST {{base}}/kv/put
+Content-Type: application/json
+
+{"key":"name","value":"alice"}
+
+### put city=paris  -> generation 2
+POST {{base}}/kv/put
+Content-Type: application/json
+
+{"key":"city","value":"paris"}
+
+### overwrite name=bob -> generation 3
+POST {{base}}/kv/put
+Content-Type: application/json
+
+{"key":"name","value":"bob"}
+
+### read one key
+GET {{base}}/kv/get?key=name
+
+### list everything (generation, data_len, entries)
+GET {{base}}/kv
+
+### delete city -> generation 4
+POST {{base}}/kv/delete
+Content-Type: application/json
+
+{"key":"city"}
+
+### delete via query string (same effect, alternative form)
+POST {{base}}/kv/delete?key=name
+
+### missing key -> HTTP 404 {"error":"key not found"}
+GET {{base}}/kv/get?key=ghost
+
+### ---- crash-injection demos (in-memory; do NOT touch ./mystore) ----
+
+### full matrix: crash during commit 3 at 8 points x 3 torn variants
+GET {{base}}/demo/matrix
+
+### first rollback: crash during commit 2, half-page torn
+GET {{base}}/demo/matrix2
+
+### single crash point: data fully synced, new root page torn in half
+POST {{base}}/demo/crash
+Content-Type: application/json
+
+{"point":"RootWriteEnd","torn":"Half","round":3}
+
+### crash before the data fsync, nothing survives
+POST {{base}}/demo/crash
+Content-Type: application/json
+
+{"point":"DataWriteEnd","torn":"None","round":3}
+
+### crash after the final root barrier: commit survives
+POST {{base}}/demo/crash
+Content-Type: application/json
+
+{"point":"RootSyncEnd","torn":"None","round":3}
+
+### three named acceptance scenarios with detailed reports
+GET {{base}}/demo/scenarios
