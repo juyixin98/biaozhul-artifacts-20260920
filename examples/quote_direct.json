@@ -1,0 +1,8 @@
+{
+  "snapshot_id": 1,
+  "token_in": "USDC",
+  "token_out": "WETH",
+  "amount_in": "1000000000",
+  "slippage_bps": 50,
+  "max_hops": 1
+}

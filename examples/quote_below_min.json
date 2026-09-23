@@ -1,0 +1,9 @@
+{
+  "snapshot_id": 1,
+  "token_in": "USDT",
+  "token_out": "WBTC",
+  "amount_in": "100000000000",
+  "cost_per_hop": "0",
+  "min_output": "999999999999999999999999",
+  "max_hops": 3
+}
