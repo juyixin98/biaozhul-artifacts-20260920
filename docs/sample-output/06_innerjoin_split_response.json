@@ -1,0 +1,412 @@
+{
+  "ok": true,
+  "result": {
+    "equivalent": true,
+    "rowCountBefore": 1,
+    "rowCountAfter": 1,
+    "planBefore": {
+      "op": "Filter",
+      "outputColumns": [
+        {
+          "name": "l.id",
+          "nullable": true
+        },
+        {
+          "name": "l.a",
+          "nullable": true
+        },
+        {
+          "name": "r.id",
+          "nullable": true
+        },
+        {
+          "name": "r.b",
+          "nullable": true
+        }
+      ],
+      "predicate": "(((l.a > 5) AND (r.b < 200)) AND (l.a = r.b))",
+      "child": {
+        "op": "InnerJoin",
+        "outputColumns": [
+          {
+            "name": "l.id",
+            "nullable": true
+          },
+          {
+            "name": "l.a",
+            "nullable": true
+          },
+          {
+            "name": "r.id",
+            "nullable": true
+          },
+          {
+            "name": "r.b",
+            "nullable": true
+          }
+        ],
+        "joinType": "inner",
+        "on": [
+          "(l.id = r.id)"
+        ],
+        "left": {
+          "op": "Scan",
+          "outputColumns": [
+            {
+              "name": "l.id",
+              "nullable": true
+            },
+            {
+              "name": "l.a",
+              "nullable": true
+            }
+          ],
+          "table": "l"
+        },
+        "right": {
+          "op": "Scan",
+          "outputColumns": [
+            {
+              "name": "r.id",
+              "nullable": true
+            },
+            {
+              "name": "r.b",
+              "nullable": true
+            }
+          ],
+          "table": "r"
+        }
+      }
+    },
+    "planAfter": {
+      "op": "InnerJoin",
+      "outputColumns": [
+        {
+          "name": "l.id",
+          "nullable": true
+        },
+        {
+          "name": "l.a",
+          "nullable": true
+        },
+        {
+          "name": "r.id",
+          "nullable": true
+        },
+        {
+          "name": "r.b",
+          "nullable": true
+        }
+      ],
+      "joinType": "inner",
+      "on": [
+        "(l.id = r.id)",
+        "(l.a = r.b)"
+      ],
+      "left": {
+        "op": "Filter",
+        "outputColumns": [
+          {
+            "name": "l.id",
+            "nullable": true
+          },
+          {
+            "name": "l.a",
+            "nullable": true
+          }
+        ],
+        "predicate": "(l.a > 5)",
+        "child": {
+          "op": "Scan",
+          "outputColumns": [
+            {
+              "name": "l.id",
+              "nullable": true
+            },
+            {
+              "name": "l.a",
+              "nullable": true
+            }
+          ],
+          "table": "l"
+        }
+      },
+      "right": {
+        "op": "Filter",
+        "outputColumns": [
+          {
+            "name": "r.id",
+            "nullable": true
+          },
+          {
+            "name": "r.b",
+            "nullable": true
+          }
+        ],
+        "predicate": "(r.b < 200)",
+        "child": {
+          "op": "Scan",
+          "outputColumns": [
+            {
+              "name": "r.id",
+              "nullable": true
+            },
+            {
+              "name": "r.b",
+              "nullable": true
+            }
+          ],
+          "table": "r"
+        }
+      }
+    },
+    "planBeforeText": "Filter((((l.a > 5) AND (r.b < 200)) AND (l.a = r.b)))\n  InnerJoin(on=(l.id = r.id))\n    Scan(l)\n    Scan(r)",
+    "planAfterText": "InnerJoin(on=(l.id = r.id) AND (l.a = r.b))\n  Filter((l.a > 5))\n    Scan(l)\n  Filter((r.b < 200))\n    Scan(r)",
+    "rewriteDecisions": [
+      {
+        "predicate": "(l.a > 5)",
+        "action": "PUSH_TO_LEFT_SIDE",
+        "reason": "谓词只引用内连接左表列，先过滤左表减少连接探测行数，不改变内连接结果"
+      },
+      {
+        "predicate": "(r.b < 200)",
+        "action": "PUSH_TO_RIGHT_SIDE",
+        "reason": "谓词只引用内连接右表列，先过滤右表不改变内连接结果"
+      },
+      {
+        "predicate": "(l.a = r.b)",
+        "action": "MERGE_INTO_ON",
+        "reason": "谓词引用连接两侧列，无法单侧下推，并入内连接 ON 条件（与连接后过滤等价）"
+      },
+      {
+        "predicate": "(l.a > 5)",
+        "action": "PUSH_TO_SCAN",
+        "reason": "谓词仅引用表 l 的列，下推为基表过滤，提前丢弃不满足行"
+      },
+      {
+        "predicate": "(r.b < 200)",
+        "action": "PUSH_TO_SCAN",
+        "reason": "谓词仅引用表 r 的列，下推为基表过滤，提前丢弃不满足行"
+      }
+    ],
+    "outputColumns": [
+      "l.id",
+      "l.a",
+      "r.id",
+      "r.b"
+    ],
+    "rowsBefore": [
+      {
+        "l.id": 2,
+        "l.a": 20,
+        "r.id": 2,
+        "r.b": 20
+      }
+    ],
+    "rowsAfter": [
+      {
+        "l.id": 2,
+        "l.a": 20,
+        "r.id": 2,
+        "r.b": 20
+      }
+    ],
+    "dataExport": {
+      "tables": [
+        {
+          "name": "l",
+          "columns": [
+            "id",
+            "a"
+          ],
+          "rows": [
+            [
+              1,
+              10
+            ],
+            [
+              2,
+              20
+            ]
+          ]
+        },
+        {
+          "name": "r",
+          "columns": [
+            "id",
+            "b"
+          ],
+          "rows": [
+            [
+              1,
+              100
+            ],
+            [
+              2,
+              20
+            ]
+          ]
+        }
+      ],
+      "planBefore": {
+        "op": "Filter",
+        "outputColumns": [
+          {
+            "name": "l.id",
+            "nullable": true
+          },
+          {
+            "name": "l.a",
+            "nullable": true
+          },
+          {
+            "name": "r.id",
+            "nullable": true
+          },
+          {
+            "name": "r.b",
+            "nullable": true
+          }
+        ],
+        "predicate": "(((l.a > 5) AND (r.b < 200)) AND (l.a = r.b))",
+        "child": {
+          "op": "InnerJoin",
+          "outputColumns": [
+            {
+              "name": "l.id",
+              "nullable": true
+            },
+            {
+              "name": "l.a",
+              "nullable": true
+            },
+            {
+              "name": "r.id",
+              "nullable": true
+            },
+            {
+              "name": "r.b",
+              "nullable": true
+            }
+          ],
+          "joinType": "inner",
+          "on": [
+            "(l.id = r.id)"
+          ],
+          "left": {
+            "op": "Scan",
+            "outputColumns": [
+              {
+                "name": "l.id",
+                "nullable": true
+              },
+              {
+                "name": "l.a",
+                "nullable": true
+              }
+            ],
+            "table": "l"
+          },
+          "right": {
+            "op": "Scan",
+            "outputColumns": [
+              {
+                "name": "r.id",
+                "nullable": true
+              },
+              {
+                "name": "r.b",
+                "nullable": true
+              }
+            ],
+            "table": "r"
+          }
+        }
+      },
+      "planAfter": {
+        "op": "InnerJoin",
+        "outputColumns": [
+          {
+            "name": "l.id",
+            "nullable": true
+          },
+          {
+            "name": "l.a",
+            "nullable": true
+          },
+          {
+            "name": "r.id",
+            "nullable": true
+          },
+          {
+            "name": "r.b",
+            "nullable": true
+          }
+        ],
+        "joinType": "inner",
+        "on": [
+          "(l.id = r.id)",
+          "(l.a = r.b)"
+        ],
+        "left": {
+          "op": "Filter",
+          "outputColumns": [
+            {
+              "name": "l.id",
+              "nullable": true
+            },
+            {
+              "name": "l.a",
+              "nullable": true
+            }
+          ],
+          "predicate": "(l.a > 5)",
+          "child": {
+            "op": "Scan",
+            "outputColumns": [
+              {
+                "name": "l.id",
+                "nullable": true
+              },
+              {
+                "name": "l.a",
+                "nullable": true
+              }
+            ],
+            "table": "l"
+          }
+        },
+        "right": {
+          "op": "Filter",
+          "outputColumns": [
+            {
+              "name": "r.id",
+              "nullable": true
+            },
+            {
+              "name": "r.b",
+              "nullable": true
+            }
+          ],
+          "predicate": "(r.b < 200)",
+          "child": {
+            "op": "Scan",
+            "outputColumns": [
+              {
+                "name": "r.id",
+                "nullable": true
+              },
+              {
+                "name": "r.b",
+                "nullable": true
+              }
+            ],
+            "table": "r"
+          }
+        }
+      }
+    }
+  }
+}
+

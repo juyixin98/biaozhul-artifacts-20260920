@@ -1,0 +1,18 @@
+{
+  "_comment": "例6：内连接多合取。l.a>5 只引左列下推左表；r.b<200 只引右列下推右表；l.a=r.b 跨两侧，无法单侧下推，并入 ON 条件。三者都不改变内连接结果。",
+  "tables": [
+    {"name": "l", "columns": ["id", "a"], "rows": [[1, 10], [2, 20]]},
+    {"name": "r", "columns": ["id", "b"], "rows": [[1, 100], [2, 20]]}
+  ],
+  "plan": {
+    "op": "filter",
+    "predicate": "l.a > 5 AND r.b < 200 AND l.a = r.b",
+    "child": {
+      "op": "join",
+      "joinType": "inner",
+      "on": ["l.id = r.id"],
+      "left": {"op": "scan", "table": "l"},
+      "right": {"op": "scan", "table": "r"}
+    }
+  }
+}

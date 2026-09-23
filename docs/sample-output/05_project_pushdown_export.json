@@ -1,0 +1,246 @@
+{
+  "tables": [
+    {
+      "name": "l",
+      "columns": [
+        "id",
+        "a"
+      ],
+      "rows": [
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          20
+        ]
+      ]
+    },
+    {
+      "name": "r",
+      "columns": [
+        "id",
+        "b"
+      ],
+      "rows": [
+        [
+          1,
+          100
+        ],
+        [
+          2,
+          null
+        ]
+      ]
+    }
+  ],
+  "planBefore": {
+    "op": "Filter",
+    "outputColumns": [
+      {
+        "name": "l.id",
+        "nullable": true,
+        "origin": "l.id"
+      },
+      {
+        "name": "l.a",
+        "nullable": true,
+        "origin": "l.a"
+      },
+      {
+        "name": "r.id",
+        "nullable": true,
+        "origin": "r.id"
+      },
+      {
+        "name": "r.b",
+        "nullable": true,
+        "origin": "r.b"
+      }
+    ],
+    "predicate": "(r.b IS NOT NULL)",
+    "child": {
+      "op": "Project",
+      "outputColumns": [
+        {
+          "name": "l.id",
+          "nullable": true,
+          "origin": "l.id"
+        },
+        {
+          "name": "l.a",
+          "nullable": true,
+          "origin": "l.a"
+        },
+        {
+          "name": "r.id",
+          "nullable": true,
+          "origin": "r.id"
+        },
+        {
+          "name": "r.b",
+          "nullable": true,
+          "origin": "r.b"
+        }
+      ],
+      "items": [
+        "l.id",
+        "l.a",
+        "r.id",
+        "r.b"
+      ],
+      "child": {
+        "op": "LeftJoin",
+        "outputColumns": [
+          {
+            "name": "l.id",
+            "nullable": true
+          },
+          {
+            "name": "l.a",
+            "nullable": true
+          },
+          {
+            "name": "r.id",
+            "nullable": true
+          },
+          {
+            "name": "r.b",
+            "nullable": true
+          }
+        ],
+        "joinType": "left",
+        "on": [
+          "(l.id = r.id)"
+        ],
+        "left": {
+          "op": "Scan",
+          "outputColumns": [
+            {
+              "name": "l.id",
+              "nullable": true
+            },
+            {
+              "name": "l.a",
+              "nullable": true
+            }
+          ],
+          "table": "l"
+        },
+        "right": {
+          "op": "Scan",
+          "outputColumns": [
+            {
+              "name": "r.id",
+              "nullable": true
+            },
+            {
+              "name": "r.b",
+              "nullable": true
+            }
+          ],
+          "table": "r"
+        }
+      }
+    }
+  },
+  "planAfter": {
+    "op": "Project",
+    "outputColumns": [
+      {
+        "name": "l.id",
+        "nullable": true,
+        "origin": "l.id"
+      },
+      {
+        "name": "l.a",
+        "nullable": true,
+        "origin": "l.a"
+      },
+      {
+        "name": "r.id",
+        "nullable": true,
+        "origin": "r.id"
+      },
+      {
+        "name": "r.b",
+        "nullable": true,
+        "origin": "r.b"
+      }
+    ],
+    "items": [
+      "l.id",
+      "l.a",
+      "r.id",
+      "r.b"
+    ],
+    "child": {
+      "op": "InnerJoin",
+      "outputColumns": [
+        {
+          "name": "l.id",
+          "nullable": true
+        },
+        {
+          "name": "l.a",
+          "nullable": true
+        },
+        {
+          "name": "r.id",
+          "nullable": true
+        },
+        {
+          "name": "r.b",
+          "nullable": true
+        }
+      ],
+      "joinType": "inner",
+      "on": [
+        "(l.id = r.id)"
+      ],
+      "left": {
+        "op": "Scan",
+        "outputColumns": [
+          {
+            "name": "l.id",
+            "nullable": true
+          },
+          {
+            "name": "l.a",
+            "nullable": true
+          }
+        ],
+        "table": "l"
+      },
+      "right": {
+        "op": "Filter",
+        "outputColumns": [
+          {
+            "name": "r.id",
+            "nullable": true
+          },
+          {
+            "name": "r.b",
+            "nullable": true
+          }
+        ],
+        "predicate": "(r.b IS NOT NULL)",
+        "child": {
+          "op": "Scan",
+          "outputColumns": [
+            {
+              "name": "r.id",
+              "nullable": true
+            },
+            {
+              "name": "r.b",
+              "nullable": true
+            }
+          ],
+          "table": "r"
+        }
+      }
+    }
+  }
+}

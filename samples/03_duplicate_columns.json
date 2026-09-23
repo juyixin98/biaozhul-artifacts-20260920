@@ -1,0 +1,18 @@
+{
+  "_comment": "例3：重名列（l.x 与 r.x 同名）。必须用限定名消歧：l.x=1 下推到保留侧，r.x IS NULL 不拒绝 NULL 而留在左外连接上方。裸列名 x 会报歧义错误。",
+  "tables": [
+    {"name": "l", "columns": ["id", "x"], "rows": [[1, 1], [2, null]]},
+    {"name": "r", "columns": ["id", "x"], "rows": [[1, null], [2, 2]]}
+  ],
+  "plan": {
+    "op": "filter",
+    "predicate": "l.x = 1 AND r.x IS NULL",
+    "child": {
+      "op": "join",
+      "joinType": "left",
+      "on": ["l.id = r.id"],
+      "left": {"op": "scan", "table": "l"},
+      "right": {"op": "scan", "table": "r"}
+    }
+  }
+}

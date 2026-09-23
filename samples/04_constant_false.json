@@ -1,0 +1,18 @@
+{
+  "_comment": "例4：常量假谓词 FALSE。位于左外连接上方时只能下推到保留侧（左表为空 => 结果为空）；绝不允许下推到 NULL 补充侧——否则右表为空反而会让每个左行变成补 NULL 保留行，语义完全改变。",
+  "tables": [
+    {"name": "l", "columns": ["id", "a"], "rows": [[1, 10], [2, 20]]},
+    {"name": "r", "columns": ["id", "b"], "rows": [[1, 100]]}
+  ],
+  "plan": {
+    "op": "filter",
+    "predicate": "FALSE",
+    "child": {
+      "op": "join",
+      "joinType": "left",
+      "on": ["l.id = r.id"],
+      "left": {"op": "scan", "table": "l"},
+      "right": {"op": "scan", "table": "r"}
+    }
+  }
+}

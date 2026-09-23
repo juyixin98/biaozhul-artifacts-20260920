@@ -1,0 +1,18 @@
+{
+  "_comment": "例1：左外连接 + 右表普通比较谓词。r.b 为 NULL 补充侧列，谓词拒绝 NULL，重写器把 LeftJoin 降级为 InnerJoin 并将谓词下推到右表扫描。",
+  "tables": [
+    {"name": "l", "columns": ["id", "a"], "rows": [[1, 10], [2, 20], [3, null]]},
+    {"name": "r", "columns": ["id", "b"], "rows": [[1, 100], [2, null]]}
+  ],
+  "plan": {
+    "op": "filter",
+    "predicate": "r.b > 50",
+    "child": {
+      "op": "join",
+      "joinType": "left",
+      "on": ["l.id = r.id"],
+      "left": {"op": "scan", "table": "l"},
+      "right": {"op": "scan", "table": "r"}
+    }
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "tables": [
+    {
+      "name": "l",
+      "columns": [
+        "id",
+        "x"
+      ],
+      "rows": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          null
+        ]
+      ]
+    },
+    {
+      "name": "r",
+      "columns": [
+        "id",
+        "x"
+      ],
+      "rows": [
+        [
+          1,
+          null
+        ],
+        [
+          2,
+          2
+        ]
+      ]
+    }
+  ],
+  "planBefore": {
+    "op": "Filter",
+    "outputColumns": [
+      {
+        "name": "l.id",
+        "nullable": true
+      },
+      {
+        "name": "l.x",
+        "nullable": true
+      },
+      {
+        "name": "r.id",
+        "nullable": true
+      },
+      {
+        "name": "r.x",
+        "nullable": true
+      }
+    ],
+    "predicate": "((l.x = 1) AND (r.x IS NULL))",
+    "child": {
+      "op": "LeftJoin",
+      "outputColumns": [
+        {
+          "name": "l.id",
+          "nullable": true
+        },
+        {
+          "name": "l.x",
+          "nullable": true
+        },
+        {
+          "name": "r.id",
+          "nullable": true
+        },
+        {
+          "name": "r.x",
+          "nullable": true
+        }
+      ],
+      "joinType": "left",
+      "on": [
+        "(l.id = r.id)"
+      ],
+      "left": {
+        "op": "Scan",
+        "outputColumns": [
+          {
+            "name": "l.id",
+            "nullable": true
+          },
+          {
+            "name": "l.x",
+            "nullable": true
+          }
+        ],
+        "table": "l"
+      },
+      "right": {
+        "op": "Scan",
+        "outputColumns": [
+          {
+            "name": "r.id",
+            "nullable": true
+          },
+          {
+            "name": "r.x",
+            "nullable": true
+          }
+        ],
+        "table": "r"
+      }
+    }
+  },
+  "planAfter": {
+    "op": "Filter",
+    "outputColumns": [
+      {
+        "name": "l.id",
+        "nullable": true
+      },
+      {
+        "name": "l.x",
+        "nullable": true
+      },
+      {
+        "name": "r.id",
+        "nullable": true
+      },
+      {
+        "name": "r.x",
+        "nullable": true
+      }
+    ],
+    "predicate": "(r.x IS NULL)",
+    "child": {
+      "op": "LeftJoin",
+      "outputColumns": [
+        {
+          "name": "l.id",
+          "nullable": true
+        },
+        {
+          "name": "l.x",
+          "nullable": true
+        },
+        {
+          "name": "r.id",
+          "nullable": true
+        },
+        {
+          "name": "r.x",
+          "nullable": true
+        }
+      ],
+      "joinType": "left",
+      "on": [
+        "(l.id = r.id)"
+      ],
+      "left": {
+        "op": "Filter",
+        "outputColumns": [
+          {
+            "name": "l.id",
+            "nullable": true
+          },
+          {
+            "name": "l.x",
+            "nullable": true
+          }
+        ],
+        "predicate": "(l.x = 1)",
+        "child": {
+          "op": "Scan",
+          "outputColumns": [
+            {
+              "name": "l.id",
+              "nullable": true
+            },
+            {
+              "name": "l.x",
+              "nullable": true
+            }
+          ],
+          "table": "l"
+        }
+      },
+      "right": {
+        "op": "Scan",
+        "outputColumns": [
+          {
+            "name": "r.id",
+            "nullable": true
+          },
+          {
+            "name": "r.x",
+            "nullable": true
+          }
+        ],
+        "table": "r"
+      }
+    }
+  }
+}

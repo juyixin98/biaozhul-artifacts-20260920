@@ -1,0 +1,195 @@
+{
+  "tables": [
+    {
+      "name": "l",
+      "columns": [
+        "id",
+        "a"
+      ],
+      "rows": [
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          20
+        ]
+      ]
+    },
+    {
+      "name": "r",
+      "columns": [
+        "id",
+        "b"
+      ],
+      "rows": [
+        [
+          1,
+          100
+        ],
+        [
+          2,
+          20
+        ]
+      ]
+    }
+  ],
+  "planBefore": {
+    "op": "Filter",
+    "outputColumns": [
+      {
+        "name": "l.id",
+        "nullable": true
+      },
+      {
+        "name": "l.a",
+        "nullable": true
+      },
+      {
+        "name": "r.id",
+        "nullable": true
+      },
+      {
+        "name": "r.b",
+        "nullable": true
+      }
+    ],
+    "predicate": "(((l.a > 5) AND (r.b < 200)) AND (l.a = r.b))",
+    "child": {
+      "op": "InnerJoin",
+      "outputColumns": [
+        {
+          "name": "l.id",
+          "nullable": true
+        },
+        {
+          "name": "l.a",
+          "nullable": true
+        },
+        {
+          "name": "r.id",
+          "nullable": true
+        },
+        {
+          "name": "r.b",
+          "nullable": true
+        }
+      ],
+      "joinType": "inner",
+      "on": [
+        "(l.id = r.id)"
+      ],
+      "left": {
+        "op": "Scan",
+        "outputColumns": [
+          {
+            "name": "l.id",
+            "nullable": true
+          },
+          {
+            "name": "l.a",
+            "nullable": true
+          }
+        ],
+        "table": "l"
+      },
+      "right": {
+        "op": "Scan",
+        "outputColumns": [
+          {
+            "name": "r.id",
+            "nullable": true
+          },
+          {
+            "name": "r.b",
+            "nullable": true
+          }
+        ],
+        "table": "r"
+      }
+    }
+  },
+  "planAfter": {
+    "op": "InnerJoin",
+    "outputColumns": [
+      {
+        "name": "l.id",
+        "nullable": true
+      },
+      {
+        "name": "l.a",
+        "nullable": true
+      },
+      {
+        "name": "r.id",
+        "nullable": true
+      },
+      {
+        "name": "r.b",
+        "nullable": true
+      }
+    ],
+    "joinType": "inner",
+    "on": [
+      "(l.id = r.id)",
+      "(l.a = r.b)"
+    ],
+    "left": {
+      "op": "Filter",
+      "outputColumns": [
+        {
+          "name": "l.id",
+          "nullable": true
+        },
+        {
+          "name": "l.a",
+          "nullable": true
+        }
+      ],
+      "predicate": "(l.a > 5)",
+      "child": {
+        "op": "Scan",
+        "outputColumns": [
+          {
+            "name": "l.id",
+            "nullable": true
+          },
+          {
+            "name": "l.a",
+            "nullable": true
+          }
+        ],
+        "table": "l"
+      }
+    },
+    "right": {
+      "op": "Filter",
+      "outputColumns": [
+        {
+          "name": "r.id",
+          "nullable": true
+        },
+        {
+          "name": "r.b",
+          "nullable": true
+        }
+      ],
+      "predicate": "(r.b < 200)",
+      "child": {
+        "op": "Scan",
+        "outputColumns": [
+          {
+            "name": "r.id",
+            "nullable": true
+          },
+          {
+            "name": "r.b",
+            "nullable": true
+          }
+        ],
+        "table": "r"
+      }
+    }
+  }
+}

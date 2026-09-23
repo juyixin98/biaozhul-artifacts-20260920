@@ -1,0 +1,416 @@
+{
+  "ok": true,
+  "result": {
+    "equivalent": true,
+    "rowCountBefore": 1,
+    "rowCountAfter": 1,
+    "planBefore": {
+      "op": "Filter",
+      "outputColumns": [
+        {
+          "name": "l.id",
+          "nullable": true
+        },
+        {
+          "name": "l.x",
+          "nullable": true
+        },
+        {
+          "name": "r.id",
+          "nullable": true
+        },
+        {
+          "name": "r.x",
+          "nullable": true
+        }
+      ],
+      "predicate": "((l.x = 1) AND (r.x IS NULL))",
+      "child": {
+        "op": "LeftJoin",
+        "outputColumns": [
+          {
+            "name": "l.id",
+            "nullable": true
+          },
+          {
+            "name": "l.x",
+            "nullable": true
+          },
+          {
+            "name": "r.id",
+            "nullable": true
+          },
+          {
+            "name": "r.x",
+            "nullable": true
+          }
+        ],
+        "joinType": "left",
+        "on": [
+          "(l.id = r.id)"
+        ],
+        "left": {
+          "op": "Scan",
+          "outputColumns": [
+            {
+              "name": "l.id",
+              "nullable": true
+            },
+            {
+              "name": "l.x",
+              "nullable": true
+            }
+          ],
+          "table": "l"
+        },
+        "right": {
+          "op": "Scan",
+          "outputColumns": [
+            {
+              "name": "r.id",
+              "nullable": true
+            },
+            {
+              "name": "r.x",
+              "nullable": true
+            }
+          ],
+          "table": "r"
+        }
+      }
+    },
+    "planAfter": {
+      "op": "Filter",
+      "outputColumns": [
+        {
+          "name": "l.id",
+          "nullable": true
+        },
+        {
+          "name": "l.x",
+          "nullable": true
+        },
+        {
+          "name": "r.id",
+          "nullable": true
+        },
+        {
+          "name": "r.x",
+          "nullable": true
+        }
+      ],
+      "predicate": "(r.x IS NULL)",
+      "child": {
+        "op": "LeftJoin",
+        "outputColumns": [
+          {
+            "name": "l.id",
+            "nullable": true
+          },
+          {
+            "name": "l.x",
+            "nullable": true
+          },
+          {
+            "name": "r.id",
+            "nullable": true
+          },
+          {
+            "name": "r.x",
+            "nullable": true
+          }
+        ],
+        "joinType": "left",
+        "on": [
+          "(l.id = r.id)"
+        ],
+        "left": {
+          "op": "Filter",
+          "outputColumns": [
+            {
+              "name": "l.id",
+              "nullable": true
+            },
+            {
+              "name": "l.x",
+              "nullable": true
+            }
+          ],
+          "predicate": "(l.x = 1)",
+          "child": {
+            "op": "Scan",
+            "outputColumns": [
+              {
+                "name": "l.id",
+                "nullable": true
+              },
+              {
+                "name": "l.x",
+                "nullable": true
+              }
+            ],
+            "table": "l"
+          }
+        },
+        "right": {
+          "op": "Scan",
+          "outputColumns": [
+            {
+              "name": "r.id",
+              "nullable": true
+            },
+            {
+              "name": "r.x",
+              "nullable": true
+            }
+          ],
+          "table": "r"
+        }
+      }
+    },
+    "planBeforeText": "Filter(((l.x = 1) AND (r.x IS NULL)))\n  LeftJoin(on=(l.id = r.id))\n    Scan(l)\n    Scan(r)",
+    "planAfterText": "Filter((r.x IS NULL))\n  LeftJoin(on=(l.id = r.id))\n    Filter((l.x = 1))\n      Scan(l)\n    Scan(r)",
+    "rewriteDecisions": [
+      {
+        "predicate": "(l.x = 1)",
+        "action": "PUSH_TO_PRESERVED_SIDE",
+        "reason": "谓词只引用保留侧（左表）列：保留行左列永不为补 NULL，连接前过滤与连接后过滤等价"
+      },
+      {
+        "predicate": "(r.x IS NULL)",
+        "action": "STAY_ABOVE_OUTER_JOIN",
+        "reason": "谓词引用 NULL 补充侧（右表）列但不拒绝 NULL，下推会删除/改变外连接保留行（例如保留行右列全为 NULL），必须保留在左外连接上方"
+      },
+      {
+        "predicate": "(l.x = 1)",
+        "action": "PUSH_TO_SCAN",
+        "reason": "谓词仅引用表 l 的列，下推为基表过滤，提前丢弃不满足行"
+      }
+    ],
+    "outputColumns": [
+      "l.id",
+      "l.x",
+      "r.id",
+      "r.x"
+    ],
+    "rowsBefore": [
+      {
+        "l.id": 1,
+        "l.x": 1,
+        "r.id": 1,
+        "r.x": null
+      }
+    ],
+    "rowsAfter": [
+      {
+        "l.id": 1,
+        "l.x": 1,
+        "r.id": 1,
+        "r.x": null
+      }
+    ],
+    "dataExport": {
+      "tables": [
+        {
+          "name": "l",
+          "columns": [
+            "id",
+            "x"
+          ],
+          "rows": [
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              null
+            ]
+          ]
+        },
+        {
+          "name": "r",
+          "columns": [
+            "id",
+            "x"
+          ],
+          "rows": [
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              2
+            ]
+          ]
+        }
+      ],
+      "planBefore": {
+        "op": "Filter",
+        "outputColumns": [
+          {
+            "name": "l.id",
+            "nullable": true
+          },
+          {
+            "name": "l.x",
+            "nullable": true
+          },
+          {
+            "name": "r.id",
+            "nullable": true
+          },
+          {
+            "name": "r.x",
+            "nullable": true
+          }
+        ],
+        "predicate": "((l.x = 1) AND (r.x IS NULL))",
+        "child": {
+          "op": "LeftJoin",
+          "outputColumns": [
+            {
+              "name": "l.id",
+              "nullable": true
+            },
+            {
+              "name": "l.x",
+              "nullable": true
+            },
+            {
+              "name": "r.id",
+              "nullable": true
+            },
+            {
+              "name": "r.x",
+              "nullable": true
+            }
+          ],
+          "joinType": "left",
+          "on": [
+            "(l.id = r.id)"
+          ],
+          "left": {
+            "op": "Scan",
+            "outputColumns": [
+              {
+                "name": "l.id",
+                "nullable": true
+              },
+              {
+                "name": "l.x",
+                "nullable": true
+              }
+            ],
+            "table": "l"
+          },
+          "right": {
+            "op": "Scan",
+            "outputColumns": [
+              {
+                "name": "r.id",
+                "nullable": true
+              },
+              {
+                "name": "r.x",
+                "nullable": true
+              }
+            ],
+            "table": "r"
+          }
+        }
+      },
+      "planAfter": {
+        "op": "Filter",
+        "outputColumns": [
+          {
+            "name": "l.id",
+            "nullable": true
+          },
+          {
+            "name": "l.x",
+            "nullable": true
+          },
+          {
+            "name": "r.id",
+            "nullable": true
+          },
+          {
+            "name": "r.x",
+            "nullable": true
+          }
+        ],
+        "predicate": "(r.x IS NULL)",
+        "child": {
+          "op": "LeftJoin",
+          "outputColumns": [
+            {
+              "name": "l.id",
+              "nullable": true
+            },
+            {
+              "name": "l.x",
+              "nullable": true
+            },
+            {
+              "name": "r.id",
+              "nullable": true
+            },
+            {
+              "name": "r.x",
+              "nullable": true
+            }
+          ],
+          "joinType": "left",
+          "on": [
+            "(l.id = r.id)"
+          ],
+          "left": {
+            "op": "Filter",
+            "outputColumns": [
+              {
+                "name": "l.id",
+                "nullable": true
+              },
+              {
+                "name": "l.x",
+                "nullable": true
+              }
+            ],
+            "predicate": "(l.x = 1)",
+            "child": {
+              "op": "Scan",
+              "outputColumns": [
+                {
+                  "name": "l.id",
+                  "nullable": true
+                },
+                {
+                  "name": "l.x",
+                  "nullable": true
+                }
+              ],
+              "table": "l"
+            }
+          },
+          "right": {
+            "op": "Scan",
+            "outputColumns": [
+              {
+                "name": "r.id",
+                "nullable": true
+              },
+              {
+                "name": "r.x",
+                "nullable": true
+              }
+            ],
+            "table": "r"
+          }
+        }
+      }
+    }
+  }
+}
+
