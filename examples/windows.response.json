@@ -1,0 +1,159 @@
+{
+  "sessionId": "standalone",
+  "snapshot": {
+    "globalWatermark": 1100,
+    "processingTimeMillis": 1200,
+    "partitions": {
+      "p1": {
+        "state": "ACTIVE",
+        "localWatermark": 2000,
+        "lastEventTime": 1200
+      },
+      "p2": {
+        "state": "ACTIVE",
+        "localWatermark": 1100,
+        "lastEventTime": 1000
+      }
+    },
+    "lateEventCount": 1
+  },
+  "lateEvents": [
+    {
+      "timestamp": 50,
+      "key": "p1",
+      "value": "late-v6",
+      "globalWatermark": 1100,
+      "arrivalProcessingTimeMillis": 1200,
+      "fromResumedPartition": false
+    }
+  ],
+  "windows": [
+    {
+      "partition": "p1",
+      "windowStart": 0,
+      "windowEnd": 1000,
+      "eventCount": 2,
+      "payloads": [
+        "v1",
+        "v2"
+      ]
+    },
+    {
+      "partition": "p2",
+      "windowStart": 0,
+      "windowEnd": 1000,
+      "eventCount": 1,
+      "payloads": [
+        "v3"
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "op": "event",
+      "onTime": true,
+      "late": false,
+      "processingTime": 0,
+      "globalWatermark": null,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "p1": "ACTIVE",
+        "p2": "WAITING"
+      }
+    },
+    {
+      "op": "event",
+      "onTime": true,
+      "late": false,
+      "processingTime": 0,
+      "globalWatermark": null,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "p1": "ACTIVE",
+        "p2": "WAITING"
+      }
+    },
+    {
+      "op": "event",
+      "onTime": true,
+      "late": false,
+      "processingTime": 0,
+      "globalWatermark": null,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "p1": "ACTIVE",
+        "p2": "ACTIVE"
+      }
+    },
+    {
+      "op": "advance",
+      "advancedTo": 1000,
+      "processingTime": 1000,
+      "globalWatermark": 100,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "p1": "ACTIVE",
+        "p2": "ACTIVE"
+      }
+    },
+    {
+      "op": "event",
+      "onTime": true,
+      "late": false,
+      "processingTime": 1000,
+      "globalWatermark": 100,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "p1": "ACTIVE",
+        "p2": "ACTIVE"
+      }
+    },
+    {
+      "op": "advance",
+      "advancedTo": 1100,
+      "processingTime": 1100,
+      "globalWatermark": 900,
+      "watermarkAdvanced": true,
+      "partitionStates": {
+        "p1": "ACTIVE",
+        "p2": "ACTIVE"
+      }
+    },
+    {
+      "op": "event",
+      "onTime": true,
+      "late": false,
+      "processingTime": 1100,
+      "globalWatermark": 900,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "p1": "ACTIVE",
+        "p2": "ACTIVE"
+      }
+    },
+    {
+      "op": "advance",
+      "advancedTo": 1200,
+      "processingTime": 1200,
+      "globalWatermark": 1100,
+      "watermarkAdvanced": true,
+      "partitionStates": {
+        "p1": "ACTIVE",
+        "p2": "ACTIVE"
+      }
+    },
+    {
+      "op": "event",
+      "onTime": false,
+      "late": true,
+      "processingTime": 1200,
+      "globalWatermark": 1100,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "p1": "ACTIVE",
+        "p2": "ACTIVE"
+      }
+    }
+  ]
+}
+

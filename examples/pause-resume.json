@@ -1,0 +1,22 @@
+{
+  "config": {
+    "maxOutOfOrdernessMillis": 0,
+    "autoWatermarkIntervalMillis": 100,
+    "idleTimeoutMillis": 300,
+    "partitions": ["p1", "p2"]
+  },
+  "steps": [
+    {"op": "event", "key": "p1", "timestamp": 1000},
+    {"op": "event", "key": "p2", "timestamp": 1000},
+    {"op": "advance", "time": 100},
+    {"op": "event", "key": "p1", "timestamp": 2000},
+    {"op": "advance", "time": 200},
+    {"op": "event", "key": "p1", "timestamp": 3000},
+    {"op": "advance", "time": 300},
+    {"op": "event", "key": "p2", "timestamp": 500},
+    {"op": "advance", "time": 400},
+    {"op": "event", "key": "p1", "timestamp": 4000},
+    {"op": "event", "key": "p2", "timestamp": 3500},
+    {"op": "advance", "time": 500}
+  ]
+}

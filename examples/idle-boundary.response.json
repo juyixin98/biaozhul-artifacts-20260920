@@ -1,0 +1,161 @@
+{
+  "sessionId": "standalone",
+  "snapshot": {
+    "globalWatermark": 1800,
+    "processingTimeMillis": 500,
+    "partitions": {
+      "a": {
+        "state": "ACTIVE",
+        "localWatermark": 1800,
+        "lastEventTime": 300
+      },
+      "b": {
+        "state": "ACTIVE",
+        "localWatermark": 9899,
+        "lastEventTime": 400
+      }
+    },
+    "lateEventCount": 0
+  },
+  "lateEvents": [],
+  "steps": [
+    {
+      "op": "event",
+      "onTime": true,
+      "late": false,
+      "processingTime": 0,
+      "globalWatermark": null,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "a": "ACTIVE",
+        "b": "WAITING"
+      }
+    },
+    {
+      "op": "event",
+      "onTime": true,
+      "late": false,
+      "processingTime": 0,
+      "globalWatermark": null,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "a": "ACTIVE",
+        "b": "ACTIVE"
+      }
+    },
+    {
+      "op": "advance",
+      "advancedTo": 100,
+      "processingTime": 100,
+      "globalWatermark": 900,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "a": "ACTIVE",
+        "b": "ACTIVE"
+      }
+    },
+    {
+      "op": "event",
+      "onTime": true,
+      "late": false,
+      "processingTime": 100,
+      "globalWatermark": 900,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "a": "ACTIVE",
+        "b": "ACTIVE"
+      }
+    },
+    {
+      "op": "advance",
+      "advancedTo": 200,
+      "processingTime": 200,
+      "globalWatermark": 900,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "a": "ACTIVE",
+        "b": "ACTIVE"
+      }
+    },
+    {
+      "op": "event",
+      "onTime": true,
+      "late": false,
+      "processingTime": 200,
+      "globalWatermark": 900,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "a": "ACTIVE",
+        "b": "ACTIVE"
+      }
+    },
+    {
+      "op": "advance",
+      "advancedTo": 300,
+      "processingTime": 300,
+      "globalWatermark": 1500,
+      "watermarkAdvanced": true,
+      "partitionStates": {
+        "a": "ACTIVE",
+        "b": "IDLE"
+      }
+    },
+    {
+      "op": "event",
+      "onTime": true,
+      "late": false,
+      "processingTime": 300,
+      "globalWatermark": 1500,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "a": "ACTIVE",
+        "b": "IDLE"
+      }
+    },
+    {
+      "op": "advance",
+      "advancedTo": 400,
+      "processingTime": 400,
+      "globalWatermark": 1800,
+      "watermarkAdvanced": true,
+      "partitionStates": {
+        "a": "ACTIVE",
+        "b": "IDLE"
+      }
+    },
+    {
+      "op": "snapshot",
+      "processingTime": 400,
+      "globalWatermark": 1800,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "a": "ACTIVE",
+        "b": "IDLE"
+      }
+    },
+    {
+      "op": "event",
+      "onTime": true,
+      "late": false,
+      "processingTime": 400,
+      "globalWatermark": 1800,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "a": "ACTIVE",
+        "b": "ACTIVE"
+      }
+    },
+    {
+      "op": "advance",
+      "advancedTo": 500,
+      "processingTime": 500,
+      "globalWatermark": 1800,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "a": "ACTIVE",
+        "b": "ACTIVE"
+      }
+    }
+  ]
+}
+

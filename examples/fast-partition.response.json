@@ -1,0 +1,117 @@
+{
+  "sessionId": "standalone",
+  "snapshot": {
+    "globalWatermark": 30,
+    "processingTimeMillis": 300,
+    "partitions": {
+      "fast": {
+        "state": "ACTIVE",
+        "localWatermark": 2000000000000,
+        "lastEventTime": 100
+      },
+      "slow": {
+        "state": "ACTIVE",
+        "localWatermark": 30,
+        "lastEventTime": 200
+      }
+    },
+    "lateEventCount": 0
+  },
+  "lateEvents": [],
+  "steps": [
+    {
+      "op": "event",
+      "onTime": true,
+      "late": false,
+      "processingTime": 0,
+      "globalWatermark": null,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "fast": "ACTIVE",
+        "slow": "WAITING"
+      }
+    },
+    {
+      "op": "event",
+      "onTime": true,
+      "late": false,
+      "processingTime": 0,
+      "globalWatermark": null,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "fast": "ACTIVE",
+        "slow": "ACTIVE"
+      }
+    },
+    {
+      "op": "advance",
+      "advancedTo": 100,
+      "processingTime": 100,
+      "globalWatermark": 10,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "fast": "ACTIVE",
+        "slow": "ACTIVE"
+      }
+    },
+    {
+      "op": "event",
+      "onTime": true,
+      "late": false,
+      "processingTime": 100,
+      "globalWatermark": 10,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "fast": "ACTIVE",
+        "slow": "ACTIVE"
+      }
+    },
+    {
+      "op": "event",
+      "onTime": true,
+      "late": false,
+      "processingTime": 100,
+      "globalWatermark": 10,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "fast": "ACTIVE",
+        "slow": "ACTIVE"
+      }
+    },
+    {
+      "op": "advance",
+      "advancedTo": 200,
+      "processingTime": 200,
+      "globalWatermark": 20,
+      "watermarkAdvanced": true,
+      "partitionStates": {
+        "fast": "ACTIVE",
+        "slow": "ACTIVE"
+      }
+    },
+    {
+      "op": "event",
+      "onTime": true,
+      "late": false,
+      "processingTime": 200,
+      "globalWatermark": 20,
+      "watermarkAdvanced": false,
+      "partitionStates": {
+        "fast": "ACTIVE",
+        "slow": "ACTIVE"
+      }
+    },
+    {
+      "op": "advance",
+      "advancedTo": 300,
+      "processingTime": 300,
+      "globalWatermark": 30,
+      "watermarkAdvanced": true,
+      "partitionStates": {
+        "fast": "ACTIVE",
+        "slow": "ACTIVE"
+      }
+    }
+  ]
+}
+
