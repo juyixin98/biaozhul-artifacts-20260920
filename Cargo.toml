@@ -1,0 +1,25 @@
+[package]
+name = "quota-reserve"
+version = "0.1.0"
+edition = "2021"
+description = "Multi-tenant file-block quota reservation service (reserve / commit / cancel)"
+
+[dependencies]
+axum = "0.8"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+rusqlite = { version = "0.32", features = ["bundled"] }
+uuid = { version = "1", features = ["v4"] }
+
+[dev-dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "time"] }
+tower = { version = "0.5", features = ["util"] }
+
+[[bin]]
+name = "quota-reserve"
+path = "src/main.rs"
+
+[profile.release]
+# small self-contained service binary
+strip = true
