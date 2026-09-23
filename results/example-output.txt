@@ -1,0 +1,19 @@
+== health ==
+{"status":"ok"}
+== batch insert (L2) ==
+{"insertedCount":4,"replacedCount":0,"inserted":["a1","a2","a3","a4"],"replaced":[],"size":4}
+== exact L2 search, top 3 ==
+{"mode":"exact","metric":"L2","k":3,"count":3,"hits":[{"id":"a1","distance":0.0024999999999999988,"metadata":{"cat":"red"}},{"id":"a2","distance":0.04250000000000001,"metadata":{"cat":"red"}},{"id":"a4","distance":0.11250000000000002,"metadata":{"cat":"blue"}}],"vectorDistanceCalculations":4,"centroidDistanceCalculations":0,"totalDistanceCalculations":4}
+== filtered exact search (cat=red) ==
+{"mode":"exact","metric":"L2","k":3,"count":2,"hits":[{"id":"a1","distance":0.0024999999999999988,"metadata":{"cat":"red"}},{"id":"a2","distance":0.04250000000000001,"metadata":{"cat":"red"}}],"vectorDistanceCalculations":2,"centroidDistanceCalculations":0,"totalDistanceCalculations":2}
+== delete a1, then search again ==
+{"size":3,"id":"a1","deleted":true}
+{"mode":"exact","metric":"L2","k":3,"count":3,"hits":[{"id":"a2","distance":0.04250000000000001,"metadata":{"cat":"red"}},{"id":"a4","distance":0.11250000000000002,"metadata":{"cat":"blue"}},{"id":"a3","distance":69.61250000000001,"metadata":{"cat":"blue"}}],"vectorDistanceCalculations":3,"centroidDistanceCalculations":0,"totalDistanceCalculations":3}
+== cosine batch + approximate search (reset first: fresh 3-D space) ==
+{"reset":true}
+{"insertedCount":3,"replacedCount":0,"inserted":["d1","d2","d3"],"replaced":[],"size":3}
+{"mode":"approx","metric":"COSINE","k":2,"count":2,"hits":[{"id":"d1","distance":0,"metadata":{"g":1}},{"id":"d2","distance":0.006116265326381098,"metadata":{"g":1}}],"vectorDistanceCalculations":3,"centroidDistanceCalculations":3,"totalDistanceCalculations":6,"nprobe":3,"indexBuiltThisRequest":true}
+== zero vector rejected under COSINE ==
+{"error":"zero vector is not allowed under COSINE (cosine distance is undefined)"}
+== stats ==
+{"vectors":3,"dimension":3,"nlist":32,"indexDirty":false,"indexTrained":true,"indexClusters":3}

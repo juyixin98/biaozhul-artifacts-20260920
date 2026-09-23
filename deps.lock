@@ -1,0 +1,31 @@
+# Dependency lock / provenance
+#
+# This project has ZERO third-party dependencies at compile and run time.
+# It uses only the Java standard library, including the built-in
+# com.sun.net.httpserver.HttpServer and java.net.http.HttpClient.
+# There is nothing to download and no package manager resolution step;
+# scripts/build.sh invokes javac directly.
+#
+# Toolchain the project was built and verified with (reproducibility record):
+
+jdk_distribution = Eclipse Temurin (Adoptium) OpenJDK 21
+jdk_version      = 21.0.5+11-LTS
+jdk_arch         = linux-x64
+jdk_archive      = OpenJDK21U-jdk_x64_linux_hotspot_21.0.5_11.tar.gz
+jdk_url          = https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.5%2B11/OpenJDK21U-jdk_x64_linux_hotspot_21.0.5_11.tar.gz
+jdk_sha256       = 3c654d98404c073b8a7e66bffb27f4ae3e7ede47d13284c132d40a83144bfd8c
+jdk_source_sha   = official Adoptium GitHub release jdk-21.0.5+11 (.sha256.txt fetched at setup time)
+
+# Language level: Java 17+ features only in spirit (record / switch expressions);
+# actually compiled and tested on the JDK above without --release flags.
+
+runtime_dependencies   = none (JDK standard library only)
+compile_dependencies   = none
+test_dependencies      = none (custom assert harness + JDK HttpClient)
+build_dependencies     = none (plain javac; no Maven/Gradle/ant required)
+
+# Verify:
+#   java -version   -> openjdk version "21.0.5" 2024-10-15 LTS
+# After extraction, the JDK can be made available to the scripts via:
+#   export JAVA_HOME=$HOME/tools/jdk-21.0.5+11
+# or any system javac >= 17 on PATH is accepted automatically.

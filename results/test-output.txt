@@ -1,0 +1,92 @@
+
+== distance math ==
+  PASS L2 squared distance of (0,0)-(3,4) is 25 (got 25.0, expected 25.0)
+  PASS one L2 call counted as one vector distance
+  PASS cosine distance of orthogonal unit vectors is 1 (got 1.0, expected 1.0)
+  PASS cosine distance of identical-direction vectors is 0 (got 0.0, expected 0.0)
+  PASS cosine distance of opposite vectors is 2 (got 2.0, expected 2.0)
+
+== dimension validation on insert / upsert ==
+  PASS inserting a 2-D vector into a 3-D store is rejected (got status 400, expected 400: dimension mismatch: expected 3 but got 2)
+  PASS upserting an existing id with a different dimension is rejected (got status 400, expected 400: dimension mismatch: expected 3 but got 4)
+  PASS same-dimension upsert replaces and reports replaced=true
+  PASS upsert does not grow the store
+
+== exact L2 search correctness ==
+  PASS top-3 returned in distance order, got [p1, p4, p2]
+  PASS exact search computes one distance per live vector (4), got 4
+  PASS hit distances are non-decreasing
+
+== exact cosine search correctness ==
+  PASS cosine ranks by direction (same-direction first), got [same, orth]
+  PASS closest cosine distance is 0 regardless of magnitude (got 2.220446049250313E-16, expected 0.0)
+
+== cosine rejects zero vectors ==
+  PASS inserting a zero vector under COSINE is rejected (got status 400, expected 400: zero vector is not allowed under COSINE (cosine distance is undefined))
+  PASS querying with a zero vector under COSINE is rejected (got status 400, expected 400: zero query vector is not allowed under COSINE (cosine distance is undefined))
+  PASS zero vectors are stored and matched under L2
+
+== delete semantics ==
+  PASS deleting an existing id returns true
+  PASS deleting the same id again returns false
+  PASS deleting a never-existing id returns false
+  PASS exact search never returns a deleted id
+  PASS approx search never returns a deleted id
+  PASS a re-inserted deleted id is searchable again
+
+== metadata filters ==
+  PASS single-key equality filter, got [a, b]
+  PASS multiple conditions are ANDed
+  PASS a condition on a missing key matches nothing
+  PASS filter short-circuits before distance work: 2 red vectors cost 2 distance calculations (not 3), got 2
+  PASS approx search honors filters, got [c]
+
+== search budget caps distance calculations ==
+  PASS exact search stops at budget 20, got 20
+  PASS at most k hits returned
+  PASS approx search respects vector distance budget, got 10
+
+== IVF approximate search sanity on clustered data ==
+  PASS IVF with nprobe=nlist has perfect recall (10/10), got 10
+  PASS centroid distances are counted separately, got 32
+  PASS probing every cluster scans every live vector exactly once (approx=180, exact=180)
+Vector search server listening on http://0.0.0.0:45447
+
+== HTTP: health and stats ==
+  PASS GET /health -> 200
+  PASS health body reports ok
+  PASS GET /stats -> 200
+  PASS fresh server reports 0 vectors
+
+== HTTP: insert and exact search ==
+  PASS insert first vector -> 200
+  PASS insert second vector with metadata -> 200
+  PASS dimension mismatch over HTTP -> 400, got 400
+  PASS error body explains the mismatch
+  PASS zero vector under COSINE over HTTP -> 400, got 400
+  PASS exact search -> 200
+  PASS k=1 returns exactly one hit
+  PASS nearest neighbour over HTTP is "a"
+  PASS search response reports distance calculation count (2)
+
+== HTTP: malformed requests ==
+  PASS malformed JSON -> 400
+  PASS search without metric -> 400
+  PASS unknown route -> 404
+  PASS GET on a POST-only route -> 405
+
+== HTTP: deleted ids never come back, with and without filter ==
+  PASS delete d1 -> {deleted: true}
+  PASS exact search after delete does not return d1
+  PASS approx search after delete does not return d1 (rebuilt index)
+  PASS filtered exact search returns only live red vectors (d3), never deleted d1
+  PASS filtered approx search returns only live red vectors, never deleted d1
+
+== HTTP: batch insert + cosine approx counters ==
+  PASS batch insert -> 200
+  PASS cosine approx finds x1 as nearest
+  PASS approx response includes centroid distance count
+  PASS first approx request reports a freshly built index
+  PASS follow-up approx request reuses the trained index
+
+RESULT: all 61 checks passed
