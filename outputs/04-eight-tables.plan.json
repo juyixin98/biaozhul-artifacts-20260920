@@ -1,0 +1,199 @@
+{
+  "query": "eight-tables-stats-only",
+  "strategy": "bushy",
+  "plan": {
+    "type": "hash-join",
+    "tables": [
+      "t0",
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5",
+      "t6",
+      "t7"
+    ],
+    "estimated": {
+      "rowCount": 320000,
+      "cost": 952000
+    },
+    "predicates": [
+      "t1.c2 = t2.c1"
+    ],
+    "left": {
+      "type": "hash-join",
+      "tables": [
+        "t0",
+        "t1"
+      ],
+      "estimated": {
+        "rowCount": 160000,
+        "cost": 340000
+      },
+      "predicates": [
+        "t0.c1 = t1.c0"
+      ],
+      "left": {
+        "type": "scan",
+        "tables": [
+          "t0"
+        ],
+        "estimated": {
+          "rowCount": 100000,
+          "cost": 100000
+        }
+      },
+      "right": {
+        "type": "scan",
+        "tables": [
+          "t1"
+        ],
+        "estimated": {
+          "rowCount": 80000,
+          "cost": 80000
+        }
+      }
+    },
+    "right": {
+      "type": "hash-join",
+      "tables": [
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6",
+        "t7"
+      ],
+      "estimated": {
+        "rowCount": 80000,
+        "cost": 292000
+      },
+      "predicates": [
+        "t2.c3 = t3.c2"
+      ],
+      "left": {
+        "type": "scan",
+        "tables": [
+          "t2"
+        ],
+        "estimated": {
+          "rowCount": 60000,
+          "cost": 60000
+        }
+      },
+      "right": {
+        "type": "hash-join",
+        "tables": [
+          "t3",
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "estimated": {
+          "rowCount": 40000,
+          "cost": 152000
+        },
+        "predicates": [
+          "t3.c4 = t4.c3"
+        ],
+        "left": {
+          "type": "scan",
+          "tables": [
+            "t3"
+          ],
+          "estimated": {
+            "rowCount": 40000,
+            "cost": 40000
+          }
+        },
+        "right": {
+          "type": "hash-join",
+          "tables": [
+            "t4",
+            "t5",
+            "t6",
+            "t7"
+          ],
+          "estimated": {
+            "rowCount": 20000,
+            "cost": 72000
+          },
+          "predicates": [
+            "t4.c5 = t5.c4"
+          ],
+          "left": {
+            "type": "scan",
+            "tables": [
+              "t4"
+            ],
+            "estimated": {
+              "rowCount": 20000,
+              "cost": 20000
+            }
+          },
+          "right": {
+            "type": "hash-join",
+            "tables": [
+              "t5",
+              "t6",
+              "t7"
+            ],
+            "estimated": {
+              "rowCount": 10000,
+              "cost": 32000
+            },
+            "predicates": [
+              "t5.c6 = t6.c5"
+            ],
+            "left": {
+              "type": "scan",
+              "tables": [
+                "t5"
+              ],
+              "estimated": {
+                "rowCount": 10000,
+                "cost": 10000
+              }
+            },
+            "right": {
+              "type": "hash-join",
+              "tables": [
+                "t6",
+                "t7"
+              ],
+              "estimated": {
+                "rowCount": 5000,
+                "cost": 12000
+              },
+              "predicates": [
+                "t6.c7 = t7.c6"
+              ],
+              "left": {
+                "type": "scan",
+                "tables": [
+                  "t6"
+                ],
+                "estimated": {
+                  "rowCount": 5000,
+                  "cost": 5000
+                }
+              },
+              "right": {
+                "type": "scan",
+                "tables": [
+                  "t7"
+                ],
+                "estimated": {
+                  "rowCount": 2000,
+                  "cost": 2000
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "planText": "└─ HashJoin [t1.c2 = t2.c1]  [est rows=320000.0, cost=952000.0]\n   ├─ HashJoin [t0.c1 = t1.c0]  [est rows=160000.0, cost=340000.0]\n   │  ├─ Scan t0  [est rows=100000.0, cost=100000.0]\n   │  └─ Scan t1  [est rows=80000.0, cost=80000.0]\n   └─ HashJoin [t2.c3 = t3.c2]  [est rows=80000.0, cost=292000.0]\n      ├─ Scan t2  [est rows=60000.0, cost=60000.0]\n      └─ HashJoin [t3.c4 = t4.c3]  [est rows=40000.0, cost=152000.0]\n         ├─ Scan t3  [est rows=40000.0, cost=40000.0]\n         └─ HashJoin [t4.c5 = t5.c4]  [est rows=20000.0, cost=72000.0]\n            ├─ Scan t4  [est rows=20000.0, cost=20000.0]\n            └─ HashJoin [t5.c6 = t6.c5]  [est rows=10000.0, cost=32000.0]\n               ├─ Scan t5  [est rows=10000.0, cost=10000.0]\n               └─ HashJoin [t6.c7 = t7.c6]  [est rows=5000.0, cost=12000.0]\n                  ├─ Scan t6  [est rows=5000.0, cost=5000.0]\n                  └─ Scan t7  [est rows=2000.0, cost=2000.0]"
+}

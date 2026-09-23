@@ -1,0 +1,116 @@
+{
+  "query": "disconnected-cartesian",
+  "strategy": "bushy",
+  "plan": {
+    "type": "cartesian-join",
+    "tables": [
+      "orders",
+      "customers",
+      "products",
+      "suppliers"
+    ],
+    "cartesian": true,
+    "estimated": {
+      "rowCount": 18,
+      "cost": 37
+    },
+    "actual": {
+      "rowCount": 18,
+      "cost": 37
+    },
+    "predicates": [],
+    "left": {
+      "type": "cartesian-join",
+      "tables": [
+        "orders",
+        "customers",
+        "products"
+      ],
+      "cartesian": true,
+      "estimated": {
+        "rowCount": 6,
+        "cost": 16
+      },
+      "actual": {
+        "rowCount": 6,
+        "cost": 16
+      },
+      "predicates": [],
+      "left": {
+        "type": "hash-join",
+        "tables": [
+          "orders",
+          "customers"
+        ],
+        "estimated": {
+          "rowCount": 3,
+          "cost": 8
+        },
+        "actual": {
+          "rowCount": 3,
+          "cost": 8
+        },
+        "predicates": [
+          "orders.cust_id = customers.id"
+        ],
+        "left": {
+          "type": "scan",
+          "tables": [
+            "orders"
+          ],
+          "estimated": {
+            "rowCount": 3,
+            "cost": 3
+          },
+          "actual": {
+            "rowCount": 3,
+            "cost": 3
+          }
+        },
+        "right": {
+          "type": "scan",
+          "tables": [
+            "customers"
+          ],
+          "estimated": {
+            "rowCount": 2,
+            "cost": 2
+          },
+          "actual": {
+            "rowCount": 2,
+            "cost": 2
+          }
+        }
+      },
+      "right": {
+        "type": "scan",
+        "tables": [
+          "products"
+        ],
+        "estimated": {
+          "rowCount": 2,
+          "cost": 2
+        },
+        "actual": {
+          "rowCount": 2,
+          "cost": 2
+        }
+      }
+    },
+    "right": {
+      "type": "scan",
+      "tables": [
+        "suppliers"
+      ],
+      "estimated": {
+        "rowCount": 3,
+        "cost": 3
+      },
+      "actual": {
+        "rowCount": 3,
+        "cost": 3
+      }
+    }
+  },
+  "planText": "└─ CartesianJoin  [est rows=18.0, cost=37.0 | actual rows=18, cost=37.0]\n   ├─ CartesianJoin  [est rows=6.0, cost=16.0 | actual rows=6, cost=16.0]\n   │  ├─ HashJoin [orders.cust_id = customers.id]  [est rows=3.0, cost=8.0 | actual rows=3, cost=8.0]\n   │  │  ├─ Scan orders  [est rows=3.0, cost=3.0 | actual rows=3, cost=3.0]\n   │  │  └─ Scan customers  [est rows=2.0, cost=2.0 | actual rows=2, cost=2.0]\n   │  └─ Scan products  [est rows=2.0, cost=2.0 | actual rows=2, cost=2.0]\n   └─ Scan suppliers  [est rows=3.0, cost=3.0 | actual rows=3, cost=3.0]"
+}

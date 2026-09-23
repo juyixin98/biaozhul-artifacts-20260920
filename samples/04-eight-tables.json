@@ -1,0 +1,35 @@
+{
+  "name": "eight-tables-stats-only",
+  "strategy": "bushy",
+  "statsSource": "provided",
+  "execute": false,
+  "verifyBruteForce": true,
+  "bruteForceMaxTrees": 50000000,
+  "tables": [
+    { "name": "t0", "columns": ["c1", "c2", "c3", "c4", "c5", "c6", "c7"],
+      "stats": { "rowCount": 100000, "ndv": { "t0.c1": 50000, "t0.c2": 40000, "t0.c3": 30000, "t0.c4": 20000, "t0.c5": 10000, "t0.c6": 5000, "t0.c7": 2000 } } },
+    { "name": "t1", "columns": ["c0", "c2", "c3", "c4", "c5", "c6", "c7"],
+      "stats": { "rowCount": 80000,  "ndv": { "t1.c0": 50000, "t1.c2": 40000, "t1.c3": 30000, "t1.c4": 20000, "t1.c5": 10000, "t1.c6": 5000, "t1.c7": 2000 } } },
+    { "name": "t2", "columns": ["c0", "c1", "c3", "c4", "c5", "c6", "c7"],
+      "stats": { "rowCount": 60000,  "ndv": { "t2.c0": 40000, "t2.c1": 40000, "t2.c3": 30000, "t2.c4": 20000, "t2.c5": 10000, "t2.c6": 5000, "t2.c7": 2000 } } },
+    { "name": "t3", "columns": ["c0", "c1", "c2", "c4", "c5", "c6", "c7"],
+      "stats": { "rowCount": 40000,  "ndv": { "t3.c0": 30000, "t3.c1": 30000, "t3.c2": 30000, "t3.c4": 20000, "t3.c5": 10000, "t3.c6": 5000, "t3.c7": 2000 } } },
+    { "name": "t4", "columns": ["c0", "c1", "c2", "c3", "c5", "c6", "c7"],
+      "stats": { "rowCount": 20000,  "ndv": { "t4.c0": 20000, "t4.c1": 20000, "t4.c2": 20000, "t4.c3": 20000, "t4.c5": 10000, "t4.c6": 5000, "t4.c7": 2000 } } },
+    { "name": "t5", "columns": ["c0", "c1", "c2", "c3", "c4", "c6", "c7"],
+      "stats": { "rowCount": 10000,  "ndv": { "t5.c0": 10000, "t5.c1": 10000, "t5.c2": 10000, "t5.c3": 10000, "t5.c4": 10000, "t5.c6": 5000, "t5.c7": 2000 } } },
+    { "name": "t6", "columns": ["c0", "c1", "c2", "c3", "c4", "c5", "c7"],
+      "stats": { "rowCount": 5000,   "ndv": { "t6.c0": 5000, "t6.c1": 5000, "t6.c2": 5000, "t6.c3": 5000, "t6.c4": 5000, "t6.c5": 5000, "t6.c7": 2000 } } },
+    { "name": "t7", "columns": ["c0", "c1", "c2", "c3", "c4", "c5", "c6"],
+      "stats": { "rowCount": 2000,   "ndv": { "t7.c0": 2000, "t7.c1": 2000, "t7.c2": 2000, "t7.c3": 2000, "t7.c4": 2000, "t7.c5": 2000, "t7.c6": 2000 } } }
+  ],
+  "joins": [
+    { "on": [ { "left": "t0.c1", "right": "t1.c0" } ] },
+    { "on": [ { "left": "t1.c2", "right": "t2.c1" } ] },
+    { "on": [ { "left": "t2.c3", "right": "t3.c2" } ] },
+    { "on": [ { "left": "t3.c4", "right": "t4.c3" } ] },
+    { "on": [ { "left": "t4.c5", "right": "t5.c4" } ] },
+    { "on": [ { "left": "t5.c6", "right": "t6.c5" } ] },
+    { "on": [ { "left": "t6.c7", "right": "t7.c6" } ] }
+  ]
+}

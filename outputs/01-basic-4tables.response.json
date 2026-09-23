@@ -1,0 +1,454 @@
+{
+  "engine": "join-order-optimizer",
+  "version": "1.0.0",
+  "query": "tpch-like-4tables",
+  "strategy": "bushy",
+  "statsSource": "actual",
+  "tableCount": 4,
+  "edgeCount": 3,
+  "connectedComponents": 1,
+  "optimizerElapsedMicros": 3663,
+  "candidatesConsidered": 25,
+  "maxCandidatesPerSubproblem": 1,
+  "plan": {
+    "type": "hash-join",
+    "tables": [
+      "customers",
+      "orders",
+      "lineitem",
+      "parts"
+    ],
+    "estimated": {
+      "rowCount": 7,
+      "cost": 43
+    },
+    "actual": {
+      "rowCount": 7,
+      "cost": 42
+    },
+    "predicates": [
+      "lineitem.part_id = parts.id"
+    ],
+    "left": {
+      "type": "hash-join",
+      "tables": [
+        "customers",
+        "orders",
+        "lineitem"
+      ],
+      "estimated": {
+        "rowCount": 7,
+        "cost": 32
+      },
+      "actual": {
+        "rowCount": 7,
+        "cost": 31
+      },
+      "predicates": [
+        "orders.id = lineitem.order_id"
+      ],
+      "left": {
+        "type": "hash-join",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "estimated": {
+          "rowCount": 7,
+          "cost": 18
+        },
+        "actual": {
+          "rowCount": 6,
+          "cost": 17
+        },
+        "predicates": [
+          "customers.id = orders.cust_id"
+        ],
+        "left": {
+          "type": "scan",
+          "tables": [
+            "customers"
+          ],
+          "estimated": {
+            "rowCount": 4,
+            "cost": 4
+          },
+          "actual": {
+            "rowCount": 4,
+            "cost": 4
+          }
+        },
+        "right": {
+          "type": "scan",
+          "tables": [
+            "orders"
+          ],
+          "estimated": {
+            "rowCount": 7,
+            "cost": 7
+          },
+          "actual": {
+            "rowCount": 7,
+            "cost": 7
+          }
+        }
+      },
+      "right": {
+        "type": "scan",
+        "tables": [
+          "lineitem"
+        ],
+        "estimated": {
+          "rowCount": 7,
+          "cost": 7
+        },
+        "actual": {
+          "rowCount": 7,
+          "cost": 7
+        }
+      }
+    },
+    "right": {
+      "type": "scan",
+      "tables": [
+        "parts"
+      ],
+      "estimated": {
+        "rowCount": 4,
+        "cost": 4
+      },
+      "actual": {
+        "rowCount": 4,
+        "cost": 4
+      }
+    }
+  },
+  "planText": "└─ HashJoin [lineitem.part_id = parts.id]  [est rows=7.0, cost=43.0 | actual rows=7, cost=42.0]\n   ├─ HashJoin [orders.id = lineitem.order_id]  [est rows=7.0, cost=32.0 | actual rows=7, cost=31.0]\n   │  ├─ HashJoin [customers.id = orders.cust_id]  [est rows=7.0, cost=18.0 | actual rows=6, cost=17.0]\n   │  │  ├─ Scan customers  [est rows=4.0, cost=4.0 | actual rows=4, cost=4.0]\n   │  │  └─ Scan orders  [est rows=7.0, cost=7.0 | actual rows=7, cost=7.0]\n   │  └─ Scan lineitem  [est rows=7.0, cost=7.0 | actual rows=7, cost=7.0]\n   └─ Scan parts  [est rows=4.0, cost=4.0 | actual rows=4, cost=4.0]",
+  "dpTable": {
+    "kind": "bushy-dp (subset)",
+    "entries": [
+      {
+        "tables": [
+          "customers"
+        ],
+        "connected": true,
+        "estimatedRows": 4,
+        "cost": 4,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "orders"
+        ],
+        "connected": true,
+        "estimatedRows": 7,
+        "cost": 7,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "lineitem"
+        ],
+        "connected": true,
+        "estimatedRows": 7,
+        "cost": 7,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "parts"
+        ],
+        "connected": true,
+        "estimatedRows": 4,
+        "cost": 4,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "connected": true,
+        "estimatedRows": 7,
+        "cost": 18,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "customers",
+          "lineitem"
+        ],
+        "connected": false,
+        "estimatedRows": 28,
+        "cost": 39,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "orders",
+          "lineitem"
+        ],
+        "connected": true,
+        "estimatedRows": 7,
+        "cost": 21,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "customers",
+          "orders",
+          "lineitem"
+        ],
+        "connected": true,
+        "estimatedRows": 7,
+        "cost": 32,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "customers",
+          "parts"
+        ],
+        "connected": false,
+        "estimatedRows": 16,
+        "cost": 24,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "orders",
+          "parts"
+        ],
+        "connected": false,
+        "estimatedRows": 28,
+        "cost": 39,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "customers",
+          "orders",
+          "parts"
+        ],
+        "connected": false,
+        "estimatedRows": 28,
+        "cost": 50,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "lineitem",
+          "parts"
+        ],
+        "connected": true,
+        "estimatedRows": 7,
+        "cost": 18,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "customers",
+          "lineitem",
+          "parts"
+        ],
+        "connected": false,
+        "estimatedRows": 28,
+        "cost": 50,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "orders",
+          "lineitem",
+          "parts"
+        ],
+        "connected": true,
+        "estimatedRows": 7,
+        "cost": 32,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "customers",
+          "orders",
+          "lineitem",
+          "parts"
+        ],
+        "connected": true,
+        "estimatedRows": 7,
+        "cost": 43,
+        "rootType": "hash-join"
+      }
+    ],
+    "entryCount": 15
+  },
+  "strategyComparison": {
+    "bushyCost": 43,
+    "leftDeepCost": 43,
+    "bushyWinsBy": 0
+  },
+  "bruteForceVerification": {
+    "performed": true,
+    "capped": false,
+    "legalPlanCount": 33,
+    "maxTrees": 200000,
+    "bruteForceMinCost": 43,
+    "dpCost": 43,
+    "costDifference": 0,
+    "matchesMinimum": true,
+    "optimalTopSplits": [
+      "[customers, orders, lineitem]  ⋈  [parts]",
+      "[customers, orders]  ⋈  [lineitem, parts]",
+      "[customers]  ⋈  [orders, lineitem, parts]"
+    ],
+    "bruteForceTopRows": 7
+  },
+  "execution": {
+    "executed": true,
+    "elapsedMicros": 2146,
+    "resultRowCount": 7,
+    "estimateVsActual": [
+      {
+        "node": "scan",
+        "tables": [
+          "customers"
+        ],
+        "estimatedRows": 4,
+        "actualRows": 4,
+        "ratio": 1,
+        "cartesian": false
+      },
+      {
+        "node": "scan",
+        "tables": [
+          "orders"
+        ],
+        "estimatedRows": 7,
+        "actualRows": 7,
+        "ratio": 1,
+        "cartesian": false
+      },
+      {
+        "node": "hash-join",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "estimatedRows": 7,
+        "actualRows": 6,
+        "ratio": 1.167,
+        "cartesian": false
+      },
+      {
+        "node": "scan",
+        "tables": [
+          "lineitem"
+        ],
+        "estimatedRows": 7,
+        "actualRows": 7,
+        "ratio": 1,
+        "cartesian": false
+      },
+      {
+        "node": "hash-join",
+        "tables": [
+          "customers",
+          "orders",
+          "lineitem"
+        ],
+        "estimatedRows": 7,
+        "actualRows": 7,
+        "ratio": 1,
+        "cartesian": false
+      },
+      {
+        "node": "scan",
+        "tables": [
+          "parts"
+        ],
+        "estimatedRows": 4,
+        "actualRows": 4,
+        "ratio": 1,
+        "cartesian": false
+      },
+      {
+        "node": "hash-join",
+        "tables": [
+          "customers",
+          "orders",
+          "lineitem",
+          "parts"
+        ],
+        "estimatedRows": 7,
+        "actualRows": 7,
+        "ratio": 1,
+        "cartesian": false
+      }
+    ],
+    "root": {
+      "estimatedRows": 7,
+      "actualRows": 7,
+      "estimatedCost": 43,
+      "actualCost": 42,
+      "rowRatio": 1
+    },
+    "preview": [
+      {
+        "id": 1001,
+        "name": "Alice",
+        "city": "BJ",
+        "cust_id": 1,
+        "order_id": 101,
+        "part_id": 90
+      },
+      {
+        "id": 1002,
+        "name": "Alice",
+        "city": "BJ",
+        "cust_id": 1,
+        "order_id": 102,
+        "part_id": 91
+      },
+      {
+        "id": 1003,
+        "name": "Bob",
+        "city": "SH",
+        "cust_id": 2,
+        "order_id": 103,
+        "part_id": 90
+      },
+      {
+        "id": 1004,
+        "name": "Carol",
+        "city": "BJ",
+        "cust_id": 3,
+        "order_id": 104,
+        "part_id": 92
+      },
+      {
+        "id": 1005,
+        "name": "Carol",
+        "city": "BJ",
+        "cust_id": 3,
+        "order_id": 105,
+        "part_id": 90
+      },
+      {
+        "id": 1006,
+        "name": "Carol",
+        "city": "BJ",
+        "cust_id": 3,
+        "order_id": 106,
+        "part_id": 91
+      },
+      {
+        "id": 1007,
+        "name": "Carol",
+        "city": "BJ",
+        "cust_id": 3,
+        "order_id": 106,
+        "part_id": 90
+      }
+    ]
+  }
+}

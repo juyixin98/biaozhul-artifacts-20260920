@@ -1,0 +1,118 @@
+{
+  "query": "tpch-like-4tables",
+  "strategy": "bushy",
+  "plan": {
+    "type": "hash-join",
+    "tables": [
+      "customers",
+      "orders",
+      "lineitem",
+      "parts"
+    ],
+    "estimated": {
+      "rowCount": 7,
+      "cost": 43
+    },
+    "actual": {
+      "rowCount": 7,
+      "cost": 42
+    },
+    "predicates": [
+      "lineitem.part_id = parts.id"
+    ],
+    "left": {
+      "type": "hash-join",
+      "tables": [
+        "customers",
+        "orders",
+        "lineitem"
+      ],
+      "estimated": {
+        "rowCount": 7,
+        "cost": 32
+      },
+      "actual": {
+        "rowCount": 7,
+        "cost": 31
+      },
+      "predicates": [
+        "orders.id = lineitem.order_id"
+      ],
+      "left": {
+        "type": "hash-join",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "estimated": {
+          "rowCount": 7,
+          "cost": 18
+        },
+        "actual": {
+          "rowCount": 6,
+          "cost": 17
+        },
+        "predicates": [
+          "customers.id = orders.cust_id"
+        ],
+        "left": {
+          "type": "scan",
+          "tables": [
+            "customers"
+          ],
+          "estimated": {
+            "rowCount": 4,
+            "cost": 4
+          },
+          "actual": {
+            "rowCount": 4,
+            "cost": 4
+          }
+        },
+        "right": {
+          "type": "scan",
+          "tables": [
+            "orders"
+          ],
+          "estimated": {
+            "rowCount": 7,
+            "cost": 7
+          },
+          "actual": {
+            "rowCount": 7,
+            "cost": 7
+          }
+        }
+      },
+      "right": {
+        "type": "scan",
+        "tables": [
+          "lineitem"
+        ],
+        "estimated": {
+          "rowCount": 7,
+          "cost": 7
+        },
+        "actual": {
+          "rowCount": 7,
+          "cost": 7
+        }
+      }
+    },
+    "right": {
+      "type": "scan",
+      "tables": [
+        "parts"
+      ],
+      "estimated": {
+        "rowCount": 4,
+        "cost": 4
+      },
+      "actual": {
+        "rowCount": 4,
+        "cost": 4
+      }
+    }
+  },
+  "planText": "└─ HashJoin [lineitem.part_id = parts.id]  [est rows=7.0, cost=43.0 | actual rows=7, cost=42.0]\n   ├─ HashJoin [orders.id = lineitem.order_id]  [est rows=7.0, cost=32.0 | actual rows=7, cost=31.0]\n   │  ├─ HashJoin [customers.id = orders.cust_id]  [est rows=7.0, cost=18.0 | actual rows=6, cost=17.0]\n   │  │  ├─ Scan customers  [est rows=4.0, cost=4.0 | actual rows=4, cost=4.0]\n   │  │  └─ Scan orders  [est rows=7.0, cost=7.0 | actual rows=7, cost=7.0]\n   │  └─ Scan lineitem  [est rows=7.0, cost=7.0 | actual rows=7, cost=7.0]\n   └─ Scan parts  [est rows=4.0, cost=4.0 | actual rows=4, cost=4.0]"
+}

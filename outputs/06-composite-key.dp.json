@@ -1,0 +1,37 @@
+{
+  "query": "multi-column-equi-join",
+  "dpTable": {
+    "kind": "bushy-dp (subset)",
+    "entries": [
+      {
+        "tables": [
+          "events"
+        ],
+        "connected": true,
+        "estimatedRows": 5,
+        "cost": 5,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "users"
+        ],
+        "connected": true,
+        "estimatedRows": 4,
+        "cost": 4,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "events",
+          "users"
+        ],
+        "connected": true,
+        "estimatedRows": 3.333,
+        "cost": 12.333,
+        "rootType": "hash-join"
+      }
+    ],
+    "entryCount": 3
+  }
+}

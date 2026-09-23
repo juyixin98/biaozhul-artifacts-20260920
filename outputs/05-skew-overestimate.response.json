@@ -1,0 +1,163 @@
+{
+  "engine": "join-order-optimizer",
+  "version": "1.0.0",
+  "query": "skew-overestimate-disjoint-keys",
+  "strategy": "bushy",
+  "statsSource": "provided",
+  "tableCount": 2,
+  "edgeCount": 1,
+  "connectedComponents": 1,
+  "optimizerElapsedMicros": 2480,
+  "candidatesConsidered": 1,
+  "maxCandidatesPerSubproblem": 1,
+  "plan": {
+    "type": "hash-join",
+    "tables": [
+      "orders",
+      "customers"
+    ],
+    "estimated": {
+      "rowCount": 20,
+      "cost": 60
+    },
+    "actual": {
+      "rowCount": 0,
+      "cost": 10
+    },
+    "predicates": [
+      "orders.cust_id = customers.id"
+    ],
+    "left": {
+      "type": "scan",
+      "tables": [
+        "orders"
+      ],
+      "estimated": {
+        "rowCount": 20,
+        "cost": 20
+      },
+      "actual": {
+        "rowCount": 5,
+        "cost": 5
+      }
+    },
+    "right": {
+      "type": "scan",
+      "tables": [
+        "customers"
+      ],
+      "estimated": {
+        "rowCount": 20,
+        "cost": 20
+      },
+      "actual": {
+        "rowCount": 5,
+        "cost": 5
+      }
+    }
+  },
+  "planText": "└─ HashJoin [orders.cust_id = customers.id]  [est rows=20.0, cost=60.0 | actual rows=0, cost=10.0]\n   ├─ Scan orders  [est rows=20.0, cost=20.0 | actual rows=5, cost=5.0]\n   └─ Scan customers  [est rows=20.0, cost=20.0 | actual rows=5, cost=5.0]",
+  "dpTable": {
+    "kind": "bushy-dp (subset)",
+    "entries": [
+      {
+        "tables": [
+          "orders"
+        ],
+        "connected": true,
+        "estimatedRows": 20,
+        "cost": 20,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "customers"
+        ],
+        "connected": true,
+        "estimatedRows": 20,
+        "cost": 20,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "orders",
+          "customers"
+        ],
+        "connected": true,
+        "estimatedRows": 20,
+        "cost": 60,
+        "rootType": "hash-join"
+      }
+    ],
+    "entryCount": 3
+  },
+  "strategyComparison": {
+    "bushyCost": 60,
+    "leftDeepCost": 60,
+    "bushyWinsBy": 0
+  },
+  "bruteForceVerification": {
+    "performed": true,
+    "capped": false,
+    "legalPlanCount": 1,
+    "maxTrees": 200000,
+    "bruteForceMinCost": 60,
+    "dpCost": 60,
+    "costDifference": 0,
+    "matchesMinimum": true,
+    "optimalTopSplits": [
+      "[orders]  ⋈  [customers]"
+    ],
+    "bruteForceTopRows": 20
+  },
+  "execution": {
+    "executed": true,
+    "elapsedMicros": 1094,
+    "resultRowCount": 0,
+    "estimateVsActual": [
+      {
+        "node": "scan",
+        "tables": [
+          "orders"
+        ],
+        "estimatedRows": 20,
+        "actualRows": 5,
+        "ratio": 4,
+        "cartesian": false
+      },
+      {
+        "node": "scan",
+        "tables": [
+          "customers"
+        ],
+        "estimatedRows": 20,
+        "actualRows": 5,
+        "ratio": 4,
+        "cartesian": false
+      },
+      {
+        "node": "hash-join",
+        "tables": [
+          "orders",
+          "customers"
+        ],
+        "estimatedRows": 20,
+        "actualRows": 0,
+        "ratio": null,
+        "cartesian": false
+      }
+    ],
+    "root": {
+      "estimatedRows": 20,
+      "actualRows": 0,
+      "estimatedCost": 60,
+      "actualCost": 10,
+      "rowRatio": null
+    },
+    "preview": []
+  },
+  "warnings": [
+    "表 orders 的优化器使用了请求中提供的统计（可能与真实数据不同，用于演示估计偏差）；执行始终基于真实数据",
+    "表 customers 的优化器使用了请求中提供的统计（可能与真实数据不同，用于演示估计偏差）；执行始终基于真实数据"
+  ]
+}

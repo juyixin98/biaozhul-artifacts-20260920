@@ -1,0 +1,77 @@
+{
+  "query": "skew-underestimate",
+  "dpTable": {
+    "kind": "bushy-dp (subset)",
+    "entries": [
+      {
+        "tables": [
+          "orders"
+        ],
+        "connected": true,
+        "estimatedRows": 20,
+        "cost": 20,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "customers"
+        ],
+        "connected": true,
+        "estimatedRows": 20,
+        "cost": 20,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "regions"
+        ],
+        "connected": true,
+        "estimatedRows": 5,
+        "cost": 5,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "orders",
+          "customers"
+        ],
+        "connected": true,
+        "estimatedRows": 20,
+        "cost": 60,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "orders",
+          "regions"
+        ],
+        "connected": false,
+        "estimatedRows": 100,
+        "cost": 125,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "customers",
+          "regions"
+        ],
+        "connected": true,
+        "estimatedRows": 20,
+        "cost": 45,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "orders",
+          "customers",
+          "regions"
+        ],
+        "connected": true,
+        "estimatedRows": 20,
+        "cost": 85,
+        "rootType": "hash-join"
+      }
+    ],
+    "entryCount": 7
+  }
+}

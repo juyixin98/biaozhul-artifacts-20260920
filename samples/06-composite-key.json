@@ -1,0 +1,38 @@
+{
+  "name": "multi-column-equi-join",
+  "strategy": "bushy",
+  "statsSource": "actual",
+  "execute": true,
+  "previewLimit": 20,
+  "verifyBruteForce": true,
+  "_comment": "两表之间用两个等值条件（组合键 tenant_id + user_id）连接；基数估计分母为两个 max(NDV) 的乘积。",
+  "tables": [
+    {
+      "name": "events",
+      "rows": [
+        { "tenant_id": 1, "user_id": 10, "kind": "login"  },
+        { "tenant_id": 1, "user_id": 10, "kind": "click"  },
+        { "tenant_id": 1, "user_id": 11, "kind": "login"  },
+        { "tenant_id": 2, "user_id": 10, "kind": "login"  },
+        { "tenant_id": 2, "user_id": 12, "kind": "logout" }
+      ]
+    },
+    {
+      "name": "users",
+      "rows": [
+        { "tenant_id": 1, "user_id": 10, "email": "a@x" },
+        { "tenant_id": 1, "user_id": 11, "email": "b@x" },
+        { "tenant_id": 2, "user_id": 10, "email": "a@y" },
+        { "tenant_id": 2, "user_id": 12, "email": "c@y" }
+      ]
+    }
+  ],
+  "joins": [
+    {
+      "on": [
+        { "left": "events.tenant_id", "right": "users.tenant_id" },
+        { "left": "events.user_id",   "right": "users.user_id" }
+      ]
+    }
+  ]
+}

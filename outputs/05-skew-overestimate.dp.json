@@ -1,0 +1,37 @@
+{
+  "query": "skew-overestimate-disjoint-keys",
+  "dpTable": {
+    "kind": "bushy-dp (subset)",
+    "entries": [
+      {
+        "tables": [
+          "orders"
+        ],
+        "connected": true,
+        "estimatedRows": 20,
+        "cost": 20,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "customers"
+        ],
+        "connected": true,
+        "estimatedRows": 20,
+        "cost": 20,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "orders",
+          "customers"
+        ],
+        "connected": true,
+        "estimatedRows": 20,
+        "cost": 60,
+        "rootType": "hash-join"
+      }
+    ],
+    "entryCount": 3
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "disconnected-cartesian",
+  "strategy": "bushy",
+  "statsSource": "actual",
+  "execute": true,
+  "previewLimit": 5,
+  "verifyBruteForce": true,
+  "tables": [
+    {
+      "name": "orders",
+      "rows": [
+        { "id": 1, "cust_id": 1 },
+        { "id": 2, "cust_id": 2 },
+        { "id": 3, "cust_id": 2 }
+      ]
+    },
+    {
+      "name": "customers",
+      "rows": [
+        { "id": 1, "tier": "gold" },
+        { "id": 2, "tier": "silver" }
+      ]
+    },
+    {
+      "name": "products",
+      "rows": [
+        { "sku": "A" },
+        { "sku": "B" }
+      ]
+    },
+    {
+      "name": "suppliers",
+      "rows": [
+        { "code": "S1" },
+        { "code": "S2" },
+        { "code": "S3" }
+      ]
+    }
+  ],
+  "joins": [
+    { "on": [ { "left": "orders.cust_id", "right": "customers.id" } ] }
+  ]
+}

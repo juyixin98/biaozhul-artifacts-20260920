@@ -1,0 +1,3073 @@
+{
+  "query": "eight-tables-stats-only",
+  "dpTable": {
+    "kind": "bushy-dp (subset)",
+    "entries": [
+      {
+        "tables": [
+          "t0"
+        ],
+        "connected": true,
+        "estimatedRows": 100000,
+        "cost": 100000,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "t1"
+        ],
+        "connected": true,
+        "estimatedRows": 80000,
+        "cost": 80000,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "t2"
+        ],
+        "connected": true,
+        "estimatedRows": 60000,
+        "cost": 60000,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "t3"
+        ],
+        "connected": true,
+        "estimatedRows": 40000,
+        "cost": 40000,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "t4"
+        ],
+        "connected": true,
+        "estimatedRows": 20000,
+        "cost": 20000,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "t5"
+        ],
+        "connected": true,
+        "estimatedRows": 10000,
+        "cost": 10000,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "t6"
+        ],
+        "connected": true,
+        "estimatedRows": 5000,
+        "cost": 5000,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "t7"
+        ],
+        "connected": true,
+        "estimatedRows": 2000,
+        "cost": 2000,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1"
+        ],
+        "connected": true,
+        "estimatedRows": 160000,
+        "cost": 340000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2"
+        ],
+        "connected": false,
+        "estimatedRows": 6000000000,
+        "cost": 6000160000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2"
+        ],
+        "connected": true,
+        "estimatedRows": 120000,
+        "cost": 260000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2"
+        ],
+        "connected": true,
+        "estimatedRows": 240000,
+        "cost": 600000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t3"
+        ],
+        "connected": false,
+        "estimatedRows": 4000000000,
+        "cost": 4000140000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t3"
+        ],
+        "connected": false,
+        "estimatedRows": 3200000000,
+        "cost": 3200120000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t3"
+        ],
+        "connected": false,
+        "estimatedRows": 6400000000,
+        "cost": 6400380000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t3"
+        ],
+        "connected": true,
+        "estimatedRows": 80000,
+        "cost": 180000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t3"
+        ],
+        "connected": false,
+        "estimatedRows": 8000000000,
+        "cost": 8000280000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t3"
+        ],
+        "connected": true,
+        "estimatedRows": 160000,
+        "cost": 420000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t3"
+        ],
+        "connected": true,
+        "estimatedRows": 320000,
+        "cost": 840000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t4"
+        ],
+        "connected": false,
+        "estimatedRows": 2000000000,
+        "cost": 2000120000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t4"
+        ],
+        "connected": false,
+        "estimatedRows": 1600000000,
+        "cost": 1600100000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t4"
+        ],
+        "connected": false,
+        "estimatedRows": 3200000000,
+        "cost": 3200360000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t4"
+        ],
+        "connected": false,
+        "estimatedRows": 1200000000,
+        "cost": 1200080000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t4"
+        ],
+        "connected": false,
+        "estimatedRows": 120000000000000,
+        "cost": 120001200180000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t4"
+        ],
+        "connected": false,
+        "estimatedRows": 2400000000,
+        "cost": 2400280000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t4"
+        ],
+        "connected": false,
+        "estimatedRows": 4800000000,
+        "cost": 4800620000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t3",
+          "t4"
+        ],
+        "connected": true,
+        "estimatedRows": 40000,
+        "cost": 100000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t3",
+          "t4"
+        ],
+        "connected": false,
+        "estimatedRows": 4000000000,
+        "cost": 4000200000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t3",
+          "t4"
+        ],
+        "connected": false,
+        "estimatedRows": 3200000000,
+        "cost": 3200180000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t3",
+          "t4"
+        ],
+        "connected": false,
+        "estimatedRows": 6400000000,
+        "cost": 6400440000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t3",
+          "t4"
+        ],
+        "connected": true,
+        "estimatedRows": 80000,
+        "cost": 240000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t3",
+          "t4"
+        ],
+        "connected": false,
+        "estimatedRows": 8000000000,
+        "cost": 8000340000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ],
+        "connected": true,
+        "estimatedRows": 160000,
+        "cost": 480000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ],
+        "connected": true,
+        "estimatedRows": 320000,
+        "cost": 900000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 1000000000,
+        "cost": 1000110000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 800000000,
+        "cost": 800090000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 1600000000,
+        "cost": 1600350000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 600000000,
+        "cost": 600070000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 60000000000000,
+        "cost": 60000600170000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 1200000000,
+        "cost": 1200270000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 2400000000,
+        "cost": 2400610000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t3",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 400000000,
+        "cost": 400050000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t3",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 40000000000000,
+        "cost": 40000400150000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t3",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 32000000000000,
+        "cost": 32000400130000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t3",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 64000000000000,
+        "cost": 64000400390000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t3",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 800000000,
+        "cost": 800190000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t3",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 80000000000000,
+        "cost": 80000800290000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t3",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 1600000000,
+        "cost": 1600430000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t3",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 3200000000,
+        "cost": 3200850000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t4",
+          "t5"
+        ],
+        "connected": true,
+        "estimatedRows": 20000,
+        "cost": 50000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t4",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 2000000000,
+        "cost": 2000150000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t4",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 1600000000,
+        "cost": 1600130000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t4",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 3200000000,
+        "cost": 3200390000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t4",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 1200000000,
+        "cost": 1200110000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t4",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 120000000000000,
+        "cost": 120001200210000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t4",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 2400000000,
+        "cost": 2400310000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t4",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 4800000000,
+        "cost": 4800650000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t3",
+          "t4",
+          "t5"
+        ],
+        "connected": true,
+        "estimatedRows": 40000,
+        "cost": 130000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t3",
+          "t4",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 4000000000,
+        "cost": 4000230000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t3",
+          "t4",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 3200000000,
+        "cost": 3200210000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t3",
+          "t4",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 6400000000,
+        "cost": 6400470000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ],
+        "connected": true,
+        "estimatedRows": 80000,
+        "cost": 270000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ],
+        "connected": false,
+        "estimatedRows": 8000000000,
+        "cost": 8000370000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ],
+        "connected": true,
+        "estimatedRows": 160000,
+        "cost": 510000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ],
+        "connected": true,
+        "estimatedRows": 320000,
+        "cost": 930000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 500000000,
+        "cost": 500105000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 400000000,
+        "cost": 400085000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 800000000,
+        "cost": 800345000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 300000000,
+        "cost": 300065000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 30000000000000,
+        "cost": 30000300165000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 600000000,
+        "cost": 600265000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 1200000000,
+        "cost": 1200605000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t3",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 200000000,
+        "cost": 200045000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t3",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 20000000000000,
+        "cost": 20000200145000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t3",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 16000000000000,
+        "cost": 16000200125000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t3",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 32000000000000,
+        "cost": 32000200385000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t3",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 400000000,
+        "cost": 400185000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t3",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 40000000000000,
+        "cost": 40000400285000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t3",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 800000000,
+        "cost": 800425000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t3",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 1600000000,
+        "cost": 1600845000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t4",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 100000000,
+        "cost": 100025000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t4",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 10000000000000,
+        "cost": 10000100125000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t4",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 8000000000000,
+        "cost": 8000100105000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t4",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 16000000000000,
+        "cost": 16000100365000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t4",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 6000000000000,
+        "cost": 6000100085000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t4",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 6.0E17,
+        "cost": 6.00000001700185E17,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t4",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 12000000000000,
+        "cost": 12000100285000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t4",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 24000000000000,
+        "cost": 24000100625000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t3",
+          "t4",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 200000000,
+        "cost": 200105000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t3",
+          "t4",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 20000000000000,
+        "cost": 20000200205000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t3",
+          "t4",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 16000000000000,
+        "cost": 16000200185000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t3",
+          "t4",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 32000000000000,
+        "cost": 32000200445000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t3",
+          "t4",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 400000000,
+        "cost": 400245000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t3",
+          "t4",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 40000000000000,
+        "cost": 40000400345000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 800000000,
+        "cost": 800485000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 1600000000,
+        "cost": 1600905000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t5",
+          "t6"
+        ],
+        "connected": true,
+        "estimatedRows": 10000,
+        "cost": 25000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 1000000000,
+        "cost": 1000125000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 800000000,
+        "cost": 800105000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 1600000000,
+        "cost": 1600365000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 600000000,
+        "cost": 600085000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 60000000000000,
+        "cost": 60000600185000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 1200000000,
+        "cost": 1200285000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 2400000000,
+        "cost": 2400625000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t3",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 400000000,
+        "cost": 400065000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t3",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 40000000000000,
+        "cost": 40000400165000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t3",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 32000000000000,
+        "cost": 32000400145000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t3",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 64000000000000,
+        "cost": 64000400405000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t3",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 800000000,
+        "cost": 800205000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t3",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 80000000000000,
+        "cost": 80000800305000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t3",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 1600000000,
+        "cost": 1600445000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t3",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 3200000000,
+        "cost": 3200865000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "connected": true,
+        "estimatedRows": 20000,
+        "cost": 65000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 2000000000,
+        "cost": 2000165000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 1600000000,
+        "cost": 1600145000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 3200000000,
+        "cost": 3200405000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 1200000000,
+        "cost": 1200125000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 120000000000000,
+        "cost": 120001200225000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 2400000000,
+        "cost": 2400325000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 4800000000,
+        "cost": 4800665000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "connected": true,
+        "estimatedRows": 40000,
+        "cost": 145000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 4000000000,
+        "cost": 4000245000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 3200000000,
+        "cost": 3200225000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 6400000000,
+        "cost": 6400485000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "connected": true,
+        "estimatedRows": 80000,
+        "cost": 285000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "connected": false,
+        "estimatedRows": 8000000000,
+        "cost": 8000385000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "connected": true,
+        "estimatedRows": 160000,
+        "cost": 525000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6"
+        ],
+        "connected": true,
+        "estimatedRows": 320000,
+        "cost": 945000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 200000000,
+        "cost": 200102000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 160000000,
+        "cost": 160082000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 320000000,
+        "cost": 320342000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 120000000,
+        "cost": 120062000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 12000000000000,
+        "cost": 12000120162000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 240000000,
+        "cost": 240262000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 480000000,
+        "cost": 480602000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t3",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 80000000,
+        "cost": 80042000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t3",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 8000000000000,
+        "cost": 8000080142000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t3",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 6400000000000,
+        "cost": 6400080122000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t3",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 12800000000000,
+        "cost": 12800080382000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t3",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 160000000,
+        "cost": 160182000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t3",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 16000000000000,
+        "cost": 16000160282000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t3",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 320000000,
+        "cost": 320422000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t3",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 640000000,
+        "cost": 640842000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t4",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 40000000,
+        "cost": 40022000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t4",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 4000000000000,
+        "cost": 4000040122000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t4",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 3200000000000,
+        "cost": 3200040102000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t4",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 6400000000000,
+        "cost": 6400040362000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t4",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 2400000000000,
+        "cost": 2400040082000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t4",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 2.4E17,
+        "cost": 2.40000001400182E17,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t4",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 4800000000000,
+        "cost": 4800040282000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t4",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 9600000000000,
+        "cost": 9600040622000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t3",
+          "t4",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 80000000,
+        "cost": 80102000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t3",
+          "t4",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 8000000000000,
+        "cost": 8000080202000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t3",
+          "t4",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 6400000000000,
+        "cost": 6400080182000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t3",
+          "t4",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 12800000000000,
+        "cost": 12800080442000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t3",
+          "t4",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 160000000,
+        "cost": 160242000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t3",
+          "t4",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 16000000000000,
+        "cost": 16000160342000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 320000000,
+        "cost": 320482000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 640000000,
+        "cost": 640902000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 20000000,
+        "cost": 20012000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 2000000000000,
+        "cost": 2000020112000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 1600000000000,
+        "cost": 1600020092000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 3200000000000,
+        "cost": 3200020352000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 1200000000000,
+        "cost": 1200020072000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 1.2E17,
+        "cost": 1.20000000800172E17,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 2400000000000,
+        "cost": 2400020272000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 4800000000000,
+        "cost": 4800020612000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t3",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 800000000000,
+        "cost": 800020052000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t3",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 8.0E16,
+        "cost": 8.0000000600152E16,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t3",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 6.4E16,
+        "cost": 6.4000000560132E16,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t3",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 1.28E17,
+        "cost": 1.28000000720392E17,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t3",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 1600000000000,
+        "cost": 1600020192000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t3",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 1.6E17,
+        "cost": 1.60000001000292E17,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t3",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 3200000000000,
+        "cost": 3200020432000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t3",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 6400000000000,
+        "cost": 6400020852000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t4",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 40000000,
+        "cost": 40052000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t4",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 4000000000000,
+        "cost": 4000040152000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t4",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 3200000000000,
+        "cost": 3200040132000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t4",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 6400000000000,
+        "cost": 6400040392000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t4",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 2400000000000,
+        "cost": 2400040112000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t4",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 2.4E17,
+        "cost": 2.40000001400212E17,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t4",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 4800000000000,
+        "cost": 4800040312000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t4",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 9600000000000,
+        "cost": 9600040652000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t3",
+          "t4",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 80000000,
+        "cost": 80132000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t3",
+          "t4",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 8000000000000,
+        "cost": 8000080232000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t3",
+          "t4",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 6400000000000,
+        "cost": 6400080212000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t3",
+          "t4",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 12800000000000,
+        "cost": 12800080472000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 160000000,
+        "cost": 160272000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 16000000000000,
+        "cost": 16000160372000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 320000000,
+        "cost": 320512000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 640000000,
+        "cost": 640932000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t6",
+          "t7"
+        ],
+        "connected": true,
+        "estimatedRows": 5000,
+        "cost": 12000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 500000000,
+        "cost": 500112000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 400000000,
+        "cost": 400092000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 800000000,
+        "cost": 800352000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 300000000,
+        "cost": 300072000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 30000000000000,
+        "cost": 30000300172000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 600000000,
+        "cost": 600272000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 1200000000,
+        "cost": 1200612000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t3",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 200000000,
+        "cost": 200052000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t3",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 20000000000000,
+        "cost": 20000200152000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t3",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 16000000000000,
+        "cost": 16000200132000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t3",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 32000000000000,
+        "cost": 32000200392000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t3",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 400000000,
+        "cost": 400192000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t3",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 40000000000000,
+        "cost": 40000400292000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t3",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 800000000,
+        "cost": 800432000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t3",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 1600000000,
+        "cost": 1600852000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t4",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 100000000,
+        "cost": 100032000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t4",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 10000000000000,
+        "cost": 10000100132000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t4",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 8000000000000,
+        "cost": 8000100112000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t4",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 16000000000000,
+        "cost": 16000100372000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t4",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 6000000000000,
+        "cost": 6000100092000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t4",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 6.0E17,
+        "cost": 6.00000001700192E17,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t4",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 12000000000000,
+        "cost": 12000100292000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t4",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 24000000000000,
+        "cost": 24000100632000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t3",
+          "t4",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 200000000,
+        "cost": 200112000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t3",
+          "t4",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 20000000000000,
+        "cost": 20000200212000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t3",
+          "t4",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 16000000000000,
+        "cost": 16000200192000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t3",
+          "t4",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 32000000000000,
+        "cost": 32000200452000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t3",
+          "t4",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 400000000,
+        "cost": 400252000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t3",
+          "t4",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 40000000000000,
+        "cost": 40000400352000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 800000000,
+        "cost": 800492000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 1600000000,
+        "cost": 1600912000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": true,
+        "estimatedRows": 10000,
+        "cost": 32000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 1000000000,
+        "cost": 1000132000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 800000000,
+        "cost": 800112000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 1600000000,
+        "cost": 1600372000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 600000000,
+        "cost": 600092000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 60000000000000,
+        "cost": 60000600192000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 1200000000,
+        "cost": 1200292000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 2400000000,
+        "cost": 2400632000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t3",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 400000000,
+        "cost": 400072000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t3",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 40000000000000,
+        "cost": 40000400172000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t3",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 32000000000000,
+        "cost": 32000400152000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t3",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 64000000000000,
+        "cost": 64000400412000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t3",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 800000000,
+        "cost": 800212000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t3",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 80000000000000,
+        "cost": 80000800312000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t3",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 1600000000,
+        "cost": 1600452000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t3",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 3200000000,
+        "cost": 3200872000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": true,
+        "estimatedRows": 20000,
+        "cost": 72000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 2000000000,
+        "cost": 2000172000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 1600000000,
+        "cost": 1600152000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 3200000000,
+        "cost": 3200412000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 1200000000,
+        "cost": 1200132000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 120000000000000,
+        "cost": 120001200232000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 2400000000,
+        "cost": 2400332000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 4800000000,
+        "cost": 4800672000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t3",
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": true,
+        "estimatedRows": 40000,
+        "cost": 152000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t3",
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 4000000000,
+        "cost": 4000252000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t3",
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 3200000000,
+        "cost": 3200232000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t3",
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 6400000000,
+        "cost": 6400492000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": true,
+        "estimatedRows": 80000,
+        "cost": 292000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": false,
+        "estimatedRows": 8000000000,
+        "cost": 8000392000,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": true,
+        "estimatedRows": 160000,
+        "cost": 532000,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "t0",
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5",
+          "t6",
+          "t7"
+        ],
+        "connected": true,
+        "estimatedRows": 320000,
+        "cost": 952000,
+        "rootType": "hash-join"
+      }
+    ],
+    "entryCount": 255
+  }
+}

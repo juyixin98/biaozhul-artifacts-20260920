@@ -1,0 +1,293 @@
+{
+  "engine": "join-order-optimizer",
+  "version": "1.0.0",
+  "query": "skew-underestimate",
+  "strategy": "bushy",
+  "statsSource": "provided",
+  "tableCount": 3,
+  "edgeCount": 2,
+  "connectedComponents": 1,
+  "optimizerElapsedMicros": 3007,
+  "candidatesConsidered": 6,
+  "maxCandidatesPerSubproblem": 1,
+  "plan": {
+    "type": "hash-join",
+    "tables": [
+      "orders",
+      "customers",
+      "regions"
+    ],
+    "estimated": {
+      "rowCount": 20,
+      "cost": 85
+    },
+    "actual": {
+      "rowCount": 400,
+      "cost": 841
+    },
+    "predicates": [
+      "customers.region_id = regions.id"
+    ],
+    "left": {
+      "type": "hash-join",
+      "tables": [
+        "orders",
+        "customers"
+      ],
+      "estimated": {
+        "rowCount": 20,
+        "cost": 60
+      },
+      "actual": {
+        "rowCount": 400,
+        "cost": 440
+      },
+      "predicates": [
+        "orders.cust_id = customers.id"
+      ],
+      "left": {
+        "type": "scan",
+        "tables": [
+          "orders"
+        ],
+        "estimated": {
+          "rowCount": 20,
+          "cost": 20
+        },
+        "actual": {
+          "rowCount": 20,
+          "cost": 20
+        }
+      },
+      "right": {
+        "type": "scan",
+        "tables": [
+          "customers"
+        ],
+        "estimated": {
+          "rowCount": 20,
+          "cost": 20
+        },
+        "actual": {
+          "rowCount": 20,
+          "cost": 20
+        }
+      }
+    },
+    "right": {
+      "type": "scan",
+      "tables": [
+        "regions"
+      ],
+      "estimated": {
+        "rowCount": 5,
+        "cost": 5
+      },
+      "actual": {
+        "rowCount": 1,
+        "cost": 1
+      }
+    }
+  },
+  "planText": "└─ HashJoin [customers.region_id = regions.id]  [est rows=20.0, cost=85.0 | actual rows=400, cost=841.0]\n   ├─ HashJoin [orders.cust_id = customers.id]  [est rows=20.0, cost=60.0 | actual rows=400, cost=440.0]\n   │  ├─ Scan orders  [est rows=20.0, cost=20.0 | actual rows=20, cost=20.0]\n   │  └─ Scan customers  [est rows=20.0, cost=20.0 | actual rows=20, cost=20.0]\n   └─ Scan regions  [est rows=5.0, cost=5.0 | actual rows=1, cost=1.0]",
+  "dpTable": {
+    "kind": "bushy-dp (subset)",
+    "entries": [
+      {
+        "tables": [
+          "orders"
+        ],
+        "connected": true,
+        "estimatedRows": 20,
+        "cost": 20,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "customers"
+        ],
+        "connected": true,
+        "estimatedRows": 20,
+        "cost": 20,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "regions"
+        ],
+        "connected": true,
+        "estimatedRows": 5,
+        "cost": 5,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "orders",
+          "customers"
+        ],
+        "connected": true,
+        "estimatedRows": 20,
+        "cost": 60,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "orders",
+          "regions"
+        ],
+        "connected": false,
+        "estimatedRows": 100,
+        "cost": 125,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "customers",
+          "regions"
+        ],
+        "connected": true,
+        "estimatedRows": 20,
+        "cost": 45,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "orders",
+          "customers",
+          "regions"
+        ],
+        "connected": true,
+        "estimatedRows": 20,
+        "cost": 85,
+        "rootType": "hash-join"
+      }
+    ],
+    "entryCount": 7
+  },
+  "strategyComparison": {
+    "bushyCost": 85,
+    "leftDeepCost": 85,
+    "bushyWinsBy": 0
+  },
+  "bruteForceVerification": {
+    "performed": true,
+    "capped": false,
+    "legalPlanCount": 6,
+    "maxTrees": 200000,
+    "bruteForceMinCost": 85,
+    "dpCost": 85,
+    "costDifference": 0,
+    "matchesMinimum": true,
+    "optimalTopSplits": [
+      "[orders, customers]  ⋈  [regions]",
+      "[orders]  ⋈  [customers, regions]"
+    ],
+    "bruteForceTopRows": 20
+  },
+  "execution": {
+    "executed": true,
+    "elapsedMicros": 6782,
+    "resultRowCount": 400,
+    "estimateVsActual": [
+      {
+        "node": "scan",
+        "tables": [
+          "orders"
+        ],
+        "estimatedRows": 20,
+        "actualRows": 20,
+        "ratio": 1,
+        "cartesian": false
+      },
+      {
+        "node": "scan",
+        "tables": [
+          "customers"
+        ],
+        "estimatedRows": 20,
+        "actualRows": 20,
+        "ratio": 1,
+        "cartesian": false
+      },
+      {
+        "node": "hash-join",
+        "tables": [
+          "orders",
+          "customers"
+        ],
+        "estimatedRows": 20,
+        "actualRows": 400,
+        "ratio": 0.05,
+        "cartesian": false
+      },
+      {
+        "node": "scan",
+        "tables": [
+          "regions"
+        ],
+        "estimatedRows": 5,
+        "actualRows": 1,
+        "ratio": 5,
+        "cartesian": false
+      },
+      {
+        "node": "hash-join",
+        "tables": [
+          "orders",
+          "customers",
+          "regions"
+        ],
+        "estimatedRows": 20,
+        "actualRows": 400,
+        "ratio": 0.05,
+        "cartesian": false
+      }
+    ],
+    "root": {
+      "estimatedRows": 20,
+      "actualRows": 400,
+      "estimatedCost": 85,
+      "actualCost": 841,
+      "rowRatio": 0.05
+    },
+    "preview": [
+      {
+        "id": 1,
+        "name": "north",
+        "cust_id": 1,
+        "region_id": 7
+      },
+      {
+        "id": 1,
+        "name": "north",
+        "cust_id": 1,
+        "region_id": 7
+      },
+      {
+        "id": 1,
+        "name": "north",
+        "cust_id": 1,
+        "region_id": 7
+      },
+      {
+        "id": 1,
+        "name": "north",
+        "cust_id": 1,
+        "region_id": 7
+      },
+      {
+        "id": 1,
+        "name": "north",
+        "cust_id": 1,
+        "region_id": 7
+      }
+    ],
+    "previewTruncated": true
+  },
+  "warnings": [
+    "表 orders 的优化器使用了请求中提供的统计（可能与真实数据不同，用于演示估计偏差）；执行始终基于真实数据",
+    "表 customers 的优化器使用了请求中提供的统计（可能与真实数据不同，用于演示估计偏差）；执行始终基于真实数据",
+    "表 regions 的优化器使用了请求中提供的统计（可能与真实数据不同，用于演示估计偏差）；执行始终基于真实数据",
+    "结果共 400 行，仅预览前 5 行"
+  ]
+}

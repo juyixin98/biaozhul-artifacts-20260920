@@ -1,0 +1,32 @@
+{
+  "name": "skew-overestimate-disjoint-keys",
+  "strategy": "bushy",
+  "statsSource": "provided",
+  "execute": true,
+  "previewLimit": 5,
+  "verifyBruteForce": true,
+  "_comment": "高估（零匹配）场景：两边统计声称 NDV=20，优化器估计 20*20/20=20 行；但两侧键值范围完全不相交（900+ 对 0..），真实结果 0 行。独立性/含值假设无法察觉键值不相交。",
+  "tables": [
+    {
+      "name": "orders",
+      "stats": { "rowCount": 20, "ndv": { "orders.cust_id": 20 } },
+      "rows": [
+        { "id": 1, "cust_id": 900 }, { "id": 2, "cust_id": 901 },
+        { "id": 3, "cust_id": 902 }, { "id": 4, "cust_id": 903 },
+        { "id": 5, "cust_id": 904 }
+      ]
+    },
+    {
+      "name": "customers",
+      "stats": { "rowCount": 20, "ndv": { "customers.id": 20 } },
+      "rows": [
+        { "id": 0, "name": "a" }, { "id": 1, "name": "b" },
+        { "id": 2, "name": "c" }, { "id": 3, "name": "d" },
+        { "id": 4, "name": "e" }
+      ]
+    }
+  ],
+  "joins": [
+    { "on": [ { "left": "orders.cust_id", "right": "customers.id" } ] }
+  ]
+}

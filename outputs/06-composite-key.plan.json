@@ -1,0 +1,52 @@
+{
+  "query": "multi-column-equi-join",
+  "strategy": "bushy",
+  "plan": {
+    "type": "hash-join",
+    "tables": [
+      "events",
+      "users"
+    ],
+    "estimated": {
+      "rowCount": 3.333,
+      "cost": 12.333
+    },
+    "actual": {
+      "rowCount": 5,
+      "cost": 14
+    },
+    "predicates": [
+      "events.tenant_id = users.tenant_id",
+      "events.user_id = users.user_id"
+    ],
+    "left": {
+      "type": "scan",
+      "tables": [
+        "events"
+      ],
+      "estimated": {
+        "rowCount": 5,
+        "cost": 5
+      },
+      "actual": {
+        "rowCount": 5,
+        "cost": 5
+      }
+    },
+    "right": {
+      "type": "scan",
+      "tables": [
+        "users"
+      ],
+      "estimated": {
+        "rowCount": 4,
+        "cost": 4
+      },
+      "actual": {
+        "rowCount": 4,
+        "cost": 4
+      }
+    }
+  },
+  "planText": "└─ HashJoin [events.tenant_id = users.tenant_id, events.user_id = users.user_id]  [est rows=3.333, cost=12.333 | actual rows=5, cost=14.0]\n   ├─ Scan events  [est rows=5.0, cost=5.0 | actual rows=5, cost=5.0]\n   └─ Scan users  [est rows=4.0, cost=4.0 | actual rows=4, cost=4.0]"
+}

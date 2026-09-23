@@ -1,0 +1,84 @@
+{
+  "query": "skew-underestimate",
+  "strategy": "bushy",
+  "plan": {
+    "type": "hash-join",
+    "tables": [
+      "orders",
+      "customers",
+      "regions"
+    ],
+    "estimated": {
+      "rowCount": 20,
+      "cost": 85
+    },
+    "actual": {
+      "rowCount": 400,
+      "cost": 841
+    },
+    "predicates": [
+      "customers.region_id = regions.id"
+    ],
+    "left": {
+      "type": "hash-join",
+      "tables": [
+        "orders",
+        "customers"
+      ],
+      "estimated": {
+        "rowCount": 20,
+        "cost": 60
+      },
+      "actual": {
+        "rowCount": 400,
+        "cost": 440
+      },
+      "predicates": [
+        "orders.cust_id = customers.id"
+      ],
+      "left": {
+        "type": "scan",
+        "tables": [
+          "orders"
+        ],
+        "estimated": {
+          "rowCount": 20,
+          "cost": 20
+        },
+        "actual": {
+          "rowCount": 20,
+          "cost": 20
+        }
+      },
+      "right": {
+        "type": "scan",
+        "tables": [
+          "customers"
+        ],
+        "estimated": {
+          "rowCount": 20,
+          "cost": 20
+        },
+        "actual": {
+          "rowCount": 20,
+          "cost": 20
+        }
+      }
+    },
+    "right": {
+      "type": "scan",
+      "tables": [
+        "regions"
+      ],
+      "estimated": {
+        "rowCount": 5,
+        "cost": 5
+      },
+      "actual": {
+        "rowCount": 1,
+        "cost": 1
+      }
+    }
+  },
+  "planText": "└─ HashJoin [customers.region_id = regions.id]  [est rows=20.0, cost=85.0 | actual rows=400, cost=841.0]\n   ├─ HashJoin [orders.cust_id = customers.id]  [est rows=20.0, cost=60.0 | actual rows=400, cost=440.0]\n   │  ├─ Scan orders  [est rows=20.0, cost=20.0 | actual rows=20, cost=20.0]\n   │  └─ Scan customers  [est rows=20.0, cost=20.0 | actual rows=20, cost=20.0]\n   └─ Scan regions  [est rows=5.0, cost=5.0 | actual rows=1, cost=1.0]"
+}

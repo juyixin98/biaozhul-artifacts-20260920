@@ -1,0 +1,191 @@
+{
+  "engine": "join-order-optimizer",
+  "version": "1.0.0",
+  "query": "multi-column-equi-join",
+  "strategy": "bushy",
+  "statsSource": "actual",
+  "tableCount": 2,
+  "edgeCount": 1,
+  "connectedComponents": 1,
+  "optimizerElapsedMicros": 2555,
+  "candidatesConsidered": 1,
+  "maxCandidatesPerSubproblem": 1,
+  "plan": {
+    "type": "hash-join",
+    "tables": [
+      "events",
+      "users"
+    ],
+    "estimated": {
+      "rowCount": 3.333,
+      "cost": 12.333
+    },
+    "actual": {
+      "rowCount": 5,
+      "cost": 14
+    },
+    "predicates": [
+      "events.tenant_id = users.tenant_id",
+      "events.user_id = users.user_id"
+    ],
+    "left": {
+      "type": "scan",
+      "tables": [
+        "events"
+      ],
+      "estimated": {
+        "rowCount": 5,
+        "cost": 5
+      },
+      "actual": {
+        "rowCount": 5,
+        "cost": 5
+      }
+    },
+    "right": {
+      "type": "scan",
+      "tables": [
+        "users"
+      ],
+      "estimated": {
+        "rowCount": 4,
+        "cost": 4
+      },
+      "actual": {
+        "rowCount": 4,
+        "cost": 4
+      }
+    }
+  },
+  "planText": "└─ HashJoin [events.tenant_id = users.tenant_id, events.user_id = users.user_id]  [est rows=3.333, cost=12.333 | actual rows=5, cost=14.0]\n   ├─ Scan events  [est rows=5.0, cost=5.0 | actual rows=5, cost=5.0]\n   └─ Scan users  [est rows=4.0, cost=4.0 | actual rows=4, cost=4.0]",
+  "dpTable": {
+    "kind": "bushy-dp (subset)",
+    "entries": [
+      {
+        "tables": [
+          "events"
+        ],
+        "connected": true,
+        "estimatedRows": 5,
+        "cost": 5,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "users"
+        ],
+        "connected": true,
+        "estimatedRows": 4,
+        "cost": 4,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "events",
+          "users"
+        ],
+        "connected": true,
+        "estimatedRows": 3.333,
+        "cost": 12.333,
+        "rootType": "hash-join"
+      }
+    ],
+    "entryCount": 3
+  },
+  "strategyComparison": {
+    "bushyCost": 12.333,
+    "leftDeepCost": 12.333,
+    "bushyWinsBy": 0
+  },
+  "bruteForceVerification": {
+    "performed": true,
+    "capped": false,
+    "legalPlanCount": 1,
+    "maxTrees": 200000,
+    "bruteForceMinCost": 12.333,
+    "dpCost": 12.333,
+    "costDifference": 0,
+    "matchesMinimum": true,
+    "optimalTopSplits": [
+      "[events]  ⋈  [users]"
+    ],
+    "bruteForceTopRows": 3.333
+  },
+  "execution": {
+    "executed": true,
+    "elapsedMicros": 1618,
+    "resultRowCount": 5,
+    "estimateVsActual": [
+      {
+        "node": "scan",
+        "tables": [
+          "events"
+        ],
+        "estimatedRows": 5,
+        "actualRows": 5,
+        "ratio": 1,
+        "cartesian": false
+      },
+      {
+        "node": "scan",
+        "tables": [
+          "users"
+        ],
+        "estimatedRows": 4,
+        "actualRows": 4,
+        "ratio": 1,
+        "cartesian": false
+      },
+      {
+        "node": "hash-join",
+        "tables": [
+          "events",
+          "users"
+        ],
+        "estimatedRows": 3.333,
+        "actualRows": 5,
+        "ratio": 0.667,
+        "cartesian": false
+      }
+    ],
+    "root": {
+      "estimatedRows": 3.333,
+      "actualRows": 5,
+      "estimatedCost": 12.333,
+      "actualCost": 14,
+      "rowRatio": 0.667
+    },
+    "preview": [
+      {
+        "tenant_id": 1,
+        "user_id": 10,
+        "email": "a@x",
+        "kind": "login"
+      },
+      {
+        "tenant_id": 1,
+        "user_id": 10,
+        "email": "a@x",
+        "kind": "click"
+      },
+      {
+        "tenant_id": 1,
+        "user_id": 11,
+        "email": "b@x",
+        "kind": "login"
+      },
+      {
+        "tenant_id": 2,
+        "user_id": 10,
+        "email": "a@y",
+        "kind": "login"
+      },
+      {
+        "tenant_id": 2,
+        "user_id": 12,
+        "email": "c@y",
+        "kind": "logout"
+      }
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "name": "tpch-like-4tables",
+  "strategy": "bushy",
+  "statsSource": "actual",
+  "execute": true,
+  "previewLimit": 10,
+  "verifyBruteForce": true,
+  "tables": [
+    {
+      "name": "customers",
+      "rows": [
+        { "id": 1, "name": "Alice", "city": "BJ" },
+        { "id": 2, "name": "Bob",   "city": "SH" },
+        { "id": 3, "name": "Carol", "city": "BJ" },
+        { "id": 4, "name": "Dan",   "city": "SZ" }
+      ]
+    },
+    {
+      "name": "orders",
+      "rows": [
+        { "id": 101, "cust_id": 1 },
+        { "id": 102, "cust_id": 1 },
+        { "id": 103, "cust_id": 2 },
+        { "id": 104, "cust_id": 3 },
+        { "id": 105, "cust_id": 3 },
+        { "id": 106, "cust_id": 3 },
+        { "id": 107, "cust_id": 9 }
+      ]
+    },
+    {
+      "name": "lineitem",
+      "rows": [
+        { "id": 1001, "order_id": 101, "part_id": 90 },
+        { "id": 1002, "order_id": 102, "part_id": 91 },
+        { "id": 1003, "order_id": 103, "part_id": 90 },
+        { "id": 1004, "order_id": 104, "part_id": 92 },
+        { "id": 1005, "order_id": 105, "part_id": 90 },
+        { "id": 1006, "order_id": 106, "part_id": 91 },
+        { "id": 1007, "order_id": 106, "part_id": 90 }
+      ]
+    },
+    {
+      "name": "parts",
+      "rows": [
+        { "id": 90, "name": "bolt" },
+        { "id": 91, "name": "nut" },
+        { "id": 92, "name": "screw" },
+        { "id": 93, "name": "washer" }
+      ]
+    }
+  ],
+  "joins": [
+    { "on": [ { "left": "customers.id", "right": "orders.cust_id" } ] },
+    { "on": [ { "left": "orders.id", "right": "lineitem.order_id" } ] },
+    { "on": [ { "left": "lineitem.part_id", "right": "parts.id" } ] }
+  ]
+}

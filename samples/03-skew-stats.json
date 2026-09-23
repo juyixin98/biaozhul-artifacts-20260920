@@ -1,0 +1,54 @@
+{
+  "name": "skew-underestimate",
+  "strategy": "bushy",
+  "statsSource": "provided",
+  "execute": true,
+  "previewLimit": 5,
+  "verifyBruteForce": true,
+  "_comment": "低估场景：提供统计声称每个键 NDV=20（均匀），但真实数据全部聚集在同一个键上。优化器估计 20 行/连接，实际连接结果膨胀到 400 行（20 倍）。",
+  "tables": [
+    {
+      "name": "orders",
+      "stats": { "rowCount": 20, "ndv": { "orders.cust_id": 20 } },
+      "rows": [
+        { "id": 1,  "cust_id": 1 }, { "id": 2,  "cust_id": 1 },
+        { "id": 3,  "cust_id": 1 }, { "id": 4,  "cust_id": 1 },
+        { "id": 5,  "cust_id": 1 }, { "id": 6,  "cust_id": 1 },
+        { "id": 7,  "cust_id": 1 }, { "id": 8,  "cust_id": 1 },
+        { "id": 9,  "cust_id": 1 }, { "id": 10, "cust_id": 1 },
+        { "id": 11, "cust_id": 1 }, { "id": 12, "cust_id": 1 },
+        { "id": 13, "cust_id": 1 }, { "id": 14, "cust_id": 1 },
+        { "id": 15, "cust_id": 1 }, { "id": 16, "cust_id": 1 },
+        { "id": 17, "cust_id": 1 }, { "id": 18, "cust_id": 1 },
+        { "id": 19, "cust_id": 1 }, { "id": 20, "cust_id": 1 }
+      ]
+    },
+    {
+      "name": "customers",
+      "stats": { "rowCount": 20, "ndv": { "customers.id": 20, "customers.region_id": 5 } },
+      "rows": [
+        { "id": 1, "region_id": 7 }, { "id": 1, "region_id": 7 },
+        { "id": 1, "region_id": 7 }, { "id": 1, "region_id": 7 },
+        { "id": 1, "region_id": 7 }, { "id": 1, "region_id": 7 },
+        { "id": 1, "region_id": 7 }, { "id": 1, "region_id": 7 },
+        { "id": 1, "region_id": 7 }, { "id": 1, "region_id": 7 },
+        { "id": 1, "region_id": 7 }, { "id": 1, "region_id": 7 },
+        { "id": 1, "region_id": 7 }, { "id": 1, "region_id": 7 },
+        { "id": 1, "region_id": 7 }, { "id": 1, "region_id": 7 },
+        { "id": 1, "region_id": 7 }, { "id": 1, "region_id": 7 },
+        { "id": 1, "region_id": 7 }, { "id": 1, "region_id": 7 }
+      ]
+    },
+    {
+      "name": "regions",
+      "stats": { "rowCount": 5, "ndv": { "regions.id": 5 } },
+      "rows": [
+        { "id": 7, "name": "north" }
+      ]
+    }
+  ],
+  "joins": [
+    { "on": [ { "left": "orders.cust_id", "right": "customers.id" } ] },
+    { "on": [ { "left": "customers.region_id", "right": "regions.id" } ] }
+  ]
+}

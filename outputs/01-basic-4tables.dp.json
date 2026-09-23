@@ -1,0 +1,161 @@
+{
+  "query": "tpch-like-4tables",
+  "dpTable": {
+    "kind": "bushy-dp (subset)",
+    "entries": [
+      {
+        "tables": [
+          "customers"
+        ],
+        "connected": true,
+        "estimatedRows": 4,
+        "cost": 4,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "orders"
+        ],
+        "connected": true,
+        "estimatedRows": 7,
+        "cost": 7,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "lineitem"
+        ],
+        "connected": true,
+        "estimatedRows": 7,
+        "cost": 7,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "parts"
+        ],
+        "connected": true,
+        "estimatedRows": 4,
+        "cost": 4,
+        "rootType": "scan"
+      },
+      {
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "connected": true,
+        "estimatedRows": 7,
+        "cost": 18,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "customers",
+          "lineitem"
+        ],
+        "connected": false,
+        "estimatedRows": 28,
+        "cost": 39,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "orders",
+          "lineitem"
+        ],
+        "connected": true,
+        "estimatedRows": 7,
+        "cost": 21,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "customers",
+          "orders",
+          "lineitem"
+        ],
+        "connected": true,
+        "estimatedRows": 7,
+        "cost": 32,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "customers",
+          "parts"
+        ],
+        "connected": false,
+        "estimatedRows": 16,
+        "cost": 24,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "orders",
+          "parts"
+        ],
+        "connected": false,
+        "estimatedRows": 28,
+        "cost": 39,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "customers",
+          "orders",
+          "parts"
+        ],
+        "connected": false,
+        "estimatedRows": 28,
+        "cost": 50,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "lineitem",
+          "parts"
+        ],
+        "connected": true,
+        "estimatedRows": 7,
+        "cost": 18,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "customers",
+          "lineitem",
+          "parts"
+        ],
+        "connected": false,
+        "estimatedRows": 28,
+        "cost": 50,
+        "rootType": "cartesian-join"
+      },
+      {
+        "tables": [
+          "orders",
+          "lineitem",
+          "parts"
+        ],
+        "connected": true,
+        "estimatedRows": 7,
+        "cost": 32,
+        "rootType": "hash-join"
+      },
+      {
+        "tables": [
+          "customers",
+          "orders",
+          "lineitem",
+          "parts"
+        ],
+        "connected": true,
+        "estimatedRows": 7,
+        "cost": 43,
+        "rootType": "hash-join"
+      }
+    ],
+    "entryCount": 15
+  }
+}
