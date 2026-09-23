@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "regex-automata"
+version = "1.0.0"
+description = "A small regex language tool-chain (lexer/parser/Thompson NFA) with a JSON service"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "regex-automata" }]
+keywords = ["regex", "nfa", "thompson", "automata", "lexer", "parser"]
+# Intentionally no runtime dependencies: the project uses only the
+# Python standard library so the tool-chain is self-contained.
+dependencies = []
+
+[project.scripts]
+regex-automata = "regex_automata.__main__:main"
+
+[tool.setuptools]
+packages = ["regex_automata"]

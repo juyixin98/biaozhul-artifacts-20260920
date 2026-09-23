@@ -1,0 +1,5 @@
+{
+  "pattern": "(ab|a)*b",
+  "text": "aab",
+  "mode": "fullmatch"
+}

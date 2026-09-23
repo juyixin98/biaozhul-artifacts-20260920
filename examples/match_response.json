@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "pattern": "(ab|a)*b",
+  "mode": "fullmatch",
+  "matched": true,
+  "match": {"start": 0, "end": 3, "matched": "aab"},
+  "nfa_states": 14
+}

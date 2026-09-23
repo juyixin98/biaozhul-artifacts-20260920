@@ -1,0 +1,10 @@
+{
+  "ok": false,
+  "error": {
+    "type": "LexError",
+    "message": "quantifier range out of order: {2,1} requires min <= max",
+    "line": 1,
+    "column": 2,
+    "span": [1, 6]
+  }
+}

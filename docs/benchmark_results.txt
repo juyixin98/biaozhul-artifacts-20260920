@@ -1,0 +1,30 @@
+pattern            n   thompson(s)    python re(s)
+(a+)+b            10      0.000409        0.000481
+(a+)+b            15      0.000835        0.003265
+(a+)+b            20      0.001459        0.108747
+(a+)+b            22      0.002656        0.385159
+(a+)+b            24      0.002096        1.551828
+(a+)+b            26      0.002672 > 2.0 (timeout)
+(a+)+b            28      0.002909 > 2.0 (timeout)
+(a+)+b            30      0.003214 > 2.0 (timeout)
+
+(a|aa)*b          10      0.000375        0.000448
+(a|aa)*b          15      0.000746        0.000668
+(a|aa)*b          20      0.001228        0.003758
+(a|aa)*b          22      0.001509        0.009077
+(a|aa)*b          24      0.001902        0.023610
+(a|aa)*b          26      0.002024        0.060407
+(a|aa)*b          28      0.002344        0.161720
+(a|aa)*b          30      0.002732        0.440109
+
+(a|a)*b           10      0.000330        0.000628
+(a|a)*b           15      0.000691        0.006521
+(a|a)*b           20      0.001391        0.185070
+(a|a)*b           22      0.001253        0.744443
+(a|a)*b           24      0.001480 > 2.0 (timeout)
+(a|a)*b           26      0.001765 > 2.0 (timeout)
+(a|a)*b           28      0.001983 > 2.0 (timeout)
+(a|a)*b           30      0.002240 > 2.0 (timeout)
+
+A 'timeout' cell means Python's backtracking re was killed after 2s;
+the Thompson engine finishes the same case in milliseconds.

@@ -1,0 +1,12 @@
+## GET /health
+{"ok": true, "status": "ok", "version": "1.0.0"}
+## POST /match  (fullmatch)
+{"ok": true, "pattern": "(ab|a)*b", "mode": "fullmatch", "matched": true, "match": {"start": 0, "end": 3, "matched": "aab"}, "nfa_states": 14}
+## POST /match  (search, default mode)
+{"ok": true, "pattern": "\\bfoo\\b", "mode": "search", "matched": true, "match": {"start": 2, "end": 5, "matched": "foo"}, "nfa_states": 11}
+## POST /match  (Unicode, code-point semantics)
+{"ok": true, "pattern": "😀+", "mode": "search", "matched": true, "match": {"start": 1, "end": 3, "matched": "😀😀"}, "nfa_states": 8}
+## POST /compile (AST + NFA dump)
+{"ok": true, "pattern": "a|b", "ast": {"kind": "alt", "branches": [{"kind": "char", "cp": 97, "char": "a", "span": [0, 1]}, {"kind": "char", "cp": 98, "char": "b", "span": [2, 3]}], "span": [0, 3]}, "nfa": {"states": [{"id": 0, "edges": []}, {"id": 1, "edges": [{"type": "char", "cp": 97, "target": 2}]}, {"id": 2, "edges": [{"type": "eps", "target": 6}]}, {"id": 3, "edges": [{"type": "char", "cp": 98, "target": 4}]}, {"id": 4, "edges": [{"type": "eps", "target": 6}]}, {"id": 5, "edges": [{"type": "eps", "target": 1}, {"type": "eps", "target": 3}]}, {"id": 6, "edges": []}], "start": 5, "accept": 6, "state_count": 7}, "assertions": {}}
+## POST /compile (positioned error)
+{"ok": false, "error": {"type": "LexError", "message": "quantifier range out of order: {2,1} requires min <= max", "line": 1, "column": 2, "span": [1, 6]}}
