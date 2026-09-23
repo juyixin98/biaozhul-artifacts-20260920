@@ -1,0 +1,258 @@
+=== 0. health / endpoint map ===
+>>> GET / 
+{
+    "description": "single-process in-memory MVCC key-value store: snapshot reads, first-committer-wins commits, tombstones, version GC",
+    "endpoints": {
+        "DELETE /kv/:key": "autocommit: delete in a fresh one-shot transaction",
+        "DELETE /txn/:id/kv/:key": "buffer a delete (tombstone at commit)",
+        "GET  /debug/versions/:key": "full committed version chain of a key",
+        "GET  /kv/:key": "autocommit: read latest committed value (?as_of=TS for a one-shot snapshot read)",
+        "GET  /snapshot/:id/kv/:key": "read a key as of the snapshot timestamp",
+        "GET  /snapshot/:id/status": "snapshot info",
+        "GET  /stats": "timestamps, live readers, version counts, watermark",
+        "GET  /txn/:id/kv/:key": "snapshot read inside a transaction (read-your-writes)",
+        "GET  /txn/:id/status": "transaction info",
+        "POST /gc": "reclaim versions older than the reader watermark",
+        "POST /snapshot/:id/close": "close snapshot (pinned versions become GC-able)",
+        "POST /snapshot/open": "open a read-only snapshot, body {\"ts\": <optional>}",
+        "POST /txn/:id/abort": "abort and discard buffered writes",
+        "POST /txn/:id/commit": "commit (409 on write-write conflict)",
+        "POST /txn/begin": "start a transaction -> {txn_id, start_ts}",
+        "PUT  /kv/:key": "autocommit: write in a fresh one-shot transaction",
+        "PUT  /txn/:id/kv/:key": "buffer a write (body is the JSON value)"
+    },
+    "service": "mvcc-kv"
+}
+=== 1. seed k="v0" (commit ts=1) ===
+>>> PUT /kv/k <"v0">
+{
+    "commit_ts": 1,
+    "committed": true,
+    "key": "k"
+}
+=== 2. open the LONG read transaction at ts=1 ===
+(long txn id = 2)
+=== 3. open an explicit read-only snapshot at ts=1 ===
+(snapshot id = 1)
+=== 4. three overwrites v1,v2,v3 and a delete (commit ts=2..5) ===
+>>> PUT /kv/k <"v1">
+{
+    "commit_ts": 2,
+    "committed": true,
+    "key": "k"
+}
+>>> PUT /kv/k <"v2">
+{
+    "commit_ts": 3,
+    "committed": true,
+    "key": "k"
+}
+>>> PUT /kv/k <"v3">
+{
+    "commit_ts": 4,
+    "committed": true,
+    "key": "k"
+}
+>>> DELETE /kv/k 
+{
+    "commit_ts": 5,
+    "deleted": true,
+    "key": "k"
+}
+=== 5. old readers still see v0; a new reader sees deleted ===
+>>> GET /txn/2/kv/k 
+{
+    "key": "k",
+    "value": "v0",
+    "found": true
+}
+>>> GET /snapshot/1/kv/k 
+{
+    "key": "k",
+    "value": "v0",
+    "found": true
+}
+>>> GET /kv/k 
+{
+    "key": "k",
+    "value": null,
+    "found": false
+}
+>>> GET /kv/k?as_of=4 
+{
+    "key": "k",
+    "value": "v3",
+    "found": true
+}
+=== 6. version chain: all 5 versions present ===
+>>> GET /debug/versions/k 
+{
+    "key": "k",
+    "versions": [
+        {
+            "deleted": false,
+            "ts": 1,
+            "value": "v0"
+        },
+        {
+            "deleted": false,
+            "ts": 2,
+            "value": "v1"
+        },
+        {
+            "deleted": false,
+            "ts": 3,
+            "value": "v2"
+        },
+        {
+            "deleted": false,
+            "ts": 4,
+            "value": "v3"
+        },
+        {
+            "deleted": true,
+            "ts": 5,
+            "value": null
+        }
+    ]
+}
+=== 7. GC with readers open: watermark pinned at 1, nothing removed ===
+>>> POST /gc 
+{
+    "versions_removed": 0,
+    "tombstones_removed": 0,
+    "keys_removed": 0,
+    "watermark": 1,
+    "active_txns": 1,
+    "active_snapshots": 1
+}
+=== 8. close the ts1 snapshot; long txn still pins the watermark ===
+>>> POST /snapshot/1/close 
+{
+    "closed": true,
+    "snapshot_id": 1
+}
+>>> POST /gc 
+{
+    "versions_removed": 0,
+    "tombstones_removed": 0,
+    "keys_removed": 0,
+    "watermark": 1,
+    "active_txns": 1,
+    "active_snapshots": 0
+}
+=== 9. record the post-delete view in a snapshot at ts=5 ===
+(snapshot id = 3)
+=== 10. abort the long reader; GC reclaims v0..v3, tombstone@5 stays pinned by the snapshot ===
+>>> POST /txn/2/abort 
+{
+    "aborted": true,
+    "txn_id": 2
+}
+>>> POST /gc 
+{
+    "versions_removed": 4,
+    "tombstones_removed": 0,
+    "keys_removed": 0,
+    "watermark": 5,
+    "active_txns": 0,
+    "active_snapshots": 1
+}
+>>> GET /debug/versions/k 
+{
+    "key": "k",
+    "versions": [
+        {
+            "deleted": true,
+            "ts": 5,
+            "value": null
+        }
+    ]
+}
+=== 11. reads are identical before/after reclamation ===
+>>> GET /snapshot/3/kv/k 
+{
+    "key": "k",
+    "value": null,
+    "found": false
+}
+>>> GET /kv/k 
+{
+    "key": "k",
+    "value": null,
+    "found": false
+}
+>>> GET /kv/k?as_of=5 
+{
+    "key": "k",
+    "value": null,
+    "found": false
+}
+=== 12. close the snapshot; the tombstone-only chain is now fully reclaimed ===
+>>> POST /snapshot/3/close 
+{
+    "closed": true,
+    "snapshot_id": 3
+}
+>>> POST /gc 
+{
+    "versions_removed": 1,
+    "tombstones_removed": 1,
+    "keys_removed": 1,
+    "watermark": 5,
+    "active_txns": 0,
+    "active_snapshots": 0
+}
+>>> GET /debug/versions/k 
+{
+    "key": "k",
+    "versions": []
+}
+>>> GET /kv/k 
+{
+    "key": "k",
+    "value": null,
+    "found": false
+}
+=== 13. concurrent writers on a fresh key: tA and tB buffer writes, both try to commit ===
+>>> PUT /txn/10/kv/c <"A-wins">
+{
+    "buffered": "put",
+    "key": "c",
+    "txn_id": 10
+}
+>>> PUT /txn/11/kv/c <"B-loses">
+{
+    "buffered": "put",
+    "key": "c",
+    "txn_id": 11
+}
+>>> POST /txn/10/commit 
+{
+    "txn_id": 10,
+    "committed": true,
+    "commit_ts": 6
+}
+--- the second commit must fail with HTTP 409 write_conflict:
+>>> POST /txn/11/commit 
+{
+    "code": "write_conflict",
+    "error": "write-write conflict on key \"c\": a concurrent transaction committed a newer version"
+}
+>>> GET /kv/c 
+{
+    "key": "c",
+    "value": "A-wins",
+    "found": true
+}
+>>> GET /stats 
+{
+    "last_commit_ts": 6,
+    "active_txns": 0,
+    "active_snapshots": 0,
+    "keys": 1,
+    "total_versions": 1,
+    "total_tombstones": 0,
+    "watermark": 6
+}
+=== demo finished ===
