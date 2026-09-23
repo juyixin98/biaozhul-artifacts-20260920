@@ -1,0 +1,11 @@
+{
+  "description": "配置库地址未通过 EIP-55 校验（请求直接 400 拒绝）",
+  "expected_verdict": "HTTP_400",
+  "files": [
+    "config.json",
+    "compilerOutput.json",
+    "target_deployed.hex",
+    "sources.zip",
+    "sources.tar.gz"
+  ]
+}

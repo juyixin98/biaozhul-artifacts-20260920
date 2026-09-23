@@ -1,0 +1,11 @@
+{
+  "description": "配置声称 runs=200，产物实际按 runs=999999 生成（规范化不得掩盖）",
+  "expected_verdict": "MISMATCH",
+  "files": [
+    "config.json",
+    "compilerOutput.json",
+    "target_deployed.hex",
+    "sources.zip",
+    "sources.tar.gz"
+  ]
+}

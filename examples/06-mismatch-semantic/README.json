@@ -1,0 +1,11 @@
+{
+  "description": "字节码主体被改动（无法解释的差异，必须失败）",
+  "expected_verdict": "MISMATCH",
+  "files": [
+    "config.json",
+    "compilerOutput.json",
+    "target_deployed.hex",
+    "sources.zip",
+    "sources.tar.gz"
+  ]
+}

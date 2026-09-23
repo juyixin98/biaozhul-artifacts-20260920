@@ -1,0 +1,11 @@
+{
+  "description": "无库、标准优化，部署字节码完全一致",
+  "expected_verdict": "EXACT",
+  "files": [
+    "config.json",
+    "compilerOutput.json",
+    "target_deployed.hex",
+    "sources.zip",
+    "sources.tar.gz"
+  ]
+}

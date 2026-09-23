@@ -1,0 +1,11 @@
+{
+  "description": "含链接库，仅库地址不同（规则内匹配）",
+  "expected_verdict": "RULE_MATCH",
+  "files": [
+    "config.json",
+    "compilerOutput.json",
+    "target_deployed.hex",
+    "sources.zip",
+    "sources.tar.gz"
+  ]
+}

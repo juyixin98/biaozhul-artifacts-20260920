@@ -1,0 +1,11 @@
+# 直接运行依赖（完整锁定版本见 requirements.lock）
+fastapi==0.141.1
+uvicorn[standard]==0.53.0
+pydantic==2.13.5
+cbor2==6.1.4
+pycryptodome==3.23.0
+python-multipart==0.0.32
+
+# 测试 / 本地验收
+httpx==0.28.1
+pytest==9.1.1

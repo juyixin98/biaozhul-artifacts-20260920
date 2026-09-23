@@ -1,0 +1,11 @@
+{
+  "description": "仅 CBOR 元数据尾不同（规则内匹配，代码语义一致）",
+  "expected_verdict": "RULE_MATCH",
+  "files": [
+    "config.json",
+    "compilerOutput.json",
+    "target_deployed.hex",
+    "sources.zip",
+    "sources.tar.gz"
+  ]
+}

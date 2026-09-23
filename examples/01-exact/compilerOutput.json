@@ -1,0 +1,43 @@
+{
+  "contracts": {
+    "src/Vault.sol": {
+      "Vault": {
+        "abi": [
+          {
+            "type": "function",
+            "name": "deposit",
+            "inputs": [
+              {
+                "name": "v",
+                "type": "uint256"
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+          },
+          {
+            "type": "constructor",
+            "inputs": [],
+            "stateMutability": "nonpayable"
+          }
+        ],
+        "metadata": "{\"compiler\":{\"version\":\"0.8.24+commit.e11b9ed9\"},\"language\":\"Solidity\",\"outputSelection\":{\"*\":{\"*\":[\"abi\",\"evm.bytecode\",\"evm.deployedBytecode\",\"metadata\"]}},\"settings\":{\"evmVersion\":\"cancun\",\"optimizer\":{\"enabled\":true,\"runs\":200},\"outputSelection\":{\"*\":{\"*\":[\"abi\",\"evm.bytecode\",\"evm.deployedBytecode\",\"metadata\"]}}},\"sources\":{\"src/Vault.sol\":{\"keccak256\":\"0xa58bbda56831322f21314dc7e854fabb4adcf15174888a8f5e4ae4f82733e5ba\"}},\"version\":1}",
+        "evm": {
+          "bytecode": {
+            "object": "0x8d09196595e6f561034e0103a3b4c0fc613ba1f2f5af4307feadb4ccc64b1e7af1d2fd204bc45a334df9845ab8d7490643a38717b721673c2fb911b12dbed9e23ca285fc504531bff656adc9940f52f5c60360497b05412af476e36f7b3de436b65d34d173d05729b66b534dd1a6dbae6af9086c2151a65b9d34af39fb351ddf52eb23480c7189244b269e4c543f08232938848288f8bfd4fb613890308d9c0a57f301b7f814e413476dc298c4fae203de3ce8f677477c86095784d0851779e9ecff1dd76e77ec0231b39b7e37271857ca4b17df47f7d73deb719f34de2421984a1ce898117693be57cdb8b02a4d4274a264697066735820d13009ee0165aae7878c4ef0ab942f5219c3e8af3a4a3a469424ca854ee6b9c464736f6c63430008180031",
+            "opcodes": "",
+            "sourceMap": "",
+            "linkReferences": {}
+          },
+          "deployedBytecode": {
+            "object": "0x38c585c54411799e09466341348838cfb078ec630952ee1975c8a0e3af09d8e71275ad1205eec71b31aacac66365b0c1ebe117e43f8b008ba7643fc602a0c7cf7c7307dc731b0a3b0c8f405850e1dd67ad50f2dd06f64e21a5f27d6569a5428aa1313a2ad82be058fd796e08aa4bf8b065e0698081d3aae2e8999f90c3866e07d195f6242c8691d9c8e250e72b6bbdfbd8652820a3aeaf38383868ad0edbc279f9c8c77dc11cd74fac730ecb0f755bf02931f013bfc0b77ad940ab28ddd48f0959847ed7b8b2780eb6bd949d80873d3b49f475d99567ffdbfbc94a53ba7405b277df467750a7c2794c741a313571ca8da264697066735820d13009ee0165aae7878c4ef0ab942f5219c3e8af3a4a3a469424ca854ee6b9c464736f6c63430008180031",
+            "opcodes": "",
+            "sourceMap": "",
+            "linkReferences": {}
+          }
+        }
+      }
+    }
+  },
+  "version": "0.8.24+commit.e11b9ed9"
+}

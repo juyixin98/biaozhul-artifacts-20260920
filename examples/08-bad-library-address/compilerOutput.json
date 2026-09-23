@@ -1,0 +1,61 @@
+{
+  "contracts": {
+    "src/Vault.sol": {
+      "Vault": {
+        "abi": [
+          {
+            "type": "function",
+            "name": "deposit",
+            "inputs": [
+              {
+                "name": "v",
+                "type": "uint256"
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+          },
+          {
+            "type": "constructor",
+            "inputs": [],
+            "stateMutability": "nonpayable"
+          }
+        ],
+        "metadata": "{\"compiler\":{\"version\":\"0.8.24+commit.e11b9ed9\"},\"language\":\"Solidity\",\"outputSelection\":{\"*\":{\"*\":[\"abi\",\"evm.bytecode\",\"evm.deployedBytecode\",\"metadata\"]}},\"settings\":{\"evmVersion\":\"cancun\",\"optimizer\":{\"enabled\":true,\"runs\":200},\"outputSelection\":{\"*\":{\"*\":[\"abi\",\"evm.bytecode\",\"evm.deployedBytecode\",\"metadata\"]}}},\"sources\":{\"src/SafeMath.sol\":{\"keccak256\":\"0x3df2b272745aa4f708339cba57cb83d2058521ca323bd79dec3b57f3d254de50\"},\"src/Vault.sol\":{\"keccak256\":\"0xf7a9ebfe05378a3e2171fe82bc71f552913d518791292bfc6b02ae0cd7dd1805\"}},\"version\":1}",
+        "evm": {
+          "bytecode": {
+            "object": "0x67d85663d99e76fa8f9227e651b05060b5c50535da2894a55abc3ca39986acf731c1e7461bd3ac3fc63dd1e6283fad225aef8c36295fdb5c69db26158f9634b680db3e89de9995ee11d8354b25b7109b5ad8f0bf06dce099102c45457d613821a1e474e9__$7c1b94290a09823458310f08f02c3121d6$__1a23a5d9eea893a36b923a6c3511fe31abdd90ff05b349e2bdc6b87a749a6b5b79000477c6d48ad4fe8730246dbc8d072e55183ef5b47ae9ddfe9ff867dd9fcb42a002046d91556183c04f975d2d180b05df37353eea937969ece82435fcefd45b2ff1c53cc7871301f5eb01862e22d0182079ec447d474da2646970667358201fe5edec6b121d48fbe2b7eef90fba22be56ae9af4ed6991ff3d6551af25851564736f6c63430008180031",
+            "opcodes": "",
+            "sourceMap": "",
+            "linkReferences": {
+              "src/SafeMath.sol": {
+                "SafeMath": [
+                  {
+                    "start": 200,
+                    "length": 40
+                  }
+                ]
+              }
+            }
+          },
+          "deployedBytecode": {
+            "object": "0xc244c4ec9755936ea70cf49a5005083df65e4407b3de5d98c30ae26aa325d7f44b88d4ee9f3256f8b15eac87b9dc16ab63378ae56567d1937cc4fa0b3b7df82f0f1057a34993d158291c0d8427131f7da791958030c95163360751cd5aff9c2880d80717__$7c1b94290a09823458310f08f02c3121d6$__cc42fe4b9c896ab483429340ffac8defda9042f29fa7b4d291c0968796fd473074d4068e3aeab203a787ca05e8fb60c9ebb277a86597cbc5d002bfa370cce419c1526f2bcb3515a5ab08db8faf0990fa0412aef61791a65073c17f6209891093e857e795d342f4390ea63a84ddccbc2814896e0144727fcaa2646970667358201fe5edec6b121d48fbe2b7eef90fba22be56ae9af4ed6991ff3d6551af25851564736f6c63430008180031",
+            "opcodes": "",
+            "sourceMap": "",
+            "linkReferences": {
+              "src/SafeMath.sol": {
+                "SafeMath": [
+                  {
+                    "start": 200,
+                    "length": 40
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "version": "0.8.24+commit.e11b9ed9"
+}

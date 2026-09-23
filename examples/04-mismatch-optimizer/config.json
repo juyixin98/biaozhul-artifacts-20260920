@@ -1,0 +1,11 @@
+{
+  "compilerVersion": "0.8.24+commit.e11b9ed9",
+  "source": "src/Vault.sol",
+  "name": "Vault",
+  "optimizer": {
+    "enabled": true,
+    "runs": 200
+  },
+  "viaIR": false,
+  "evmVersion": "cancun"
+}

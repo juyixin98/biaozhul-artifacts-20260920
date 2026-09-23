@@ -1,0 +1,12 @@
+{
+  "description": "源码包缺失被编译文件（缺源码必须失败）",
+  "expected_verdict": "MISMATCH",
+  "files": [
+    "config.json",
+    "compilerOutput.json",
+    "target_deployed.hex",
+    "sources.zip",
+    "sources.tar.gz"
+  ],
+  "dropped_from_package": "src/Vault.sol"
+}

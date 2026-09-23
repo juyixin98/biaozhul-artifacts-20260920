@@ -1,0 +1,11 @@
+{
+  "description": "配置版本 0.8.24 与产物记录版本 0.8.20 不一致",
+  "expected_verdict": "MISMATCH",
+  "files": [
+    "config.json",
+    "compilerOutput.json",
+    "target_deployed.hex",
+    "sources.zip",
+    "sources.tar.gz"
+  ]
+}

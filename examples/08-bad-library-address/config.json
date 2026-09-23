@@ -1,0 +1,16 @@
+{
+  "compilerVersion": "0.8.24+commit.e11b9ed9",
+  "source": "src/Vault.sol",
+  "name": "Vault",
+  "optimizer": {
+    "enabled": true,
+    "runs": 200
+  },
+  "viaIR": false,
+  "evmVersion": "cancun",
+  "libraries": {
+    "src/SafeMath.sol": {
+      "SafeMath": "0x5AAeB6053F3E94C9B9A09F33669435E7EF1BEAE"
+    }
+  }
+}
