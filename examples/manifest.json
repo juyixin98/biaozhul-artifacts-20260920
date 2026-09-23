@@ -1,0 +1,12 @@
+{
+  "tokenId": "demo-token-42",
+  "imageCidV1": "bafkreife3uunw3tnh7anipg354pi54lbwnj44z6sp2a5iahxs26hobc24y",
+  "imageCidV2": "bafkreigectgq4icn5f2pon2ty7ri25ry46zwsg5ywgrlvnvslo375v6oo4",
+  "linkCidV1": "bagaaierayy6fp6k25srtbkogqv4nmalb6o447xsedtzrdapvz6f3uqmhkzgq",
+  "rootCidV1": "bagaaieraz5qp4fvauk4konq5pes2ljgrsmpzi3pf6ae7mvqrphy6qhbjaxma",
+  "rootCidV2": "bagaaierarvkp7gajox5fjxiipf55qhwiioepownuqtky7ds7bzlzxb4iv3fa",
+  "nonUtf8Cid": "bagaaierapbwfy52jk3tunx47hfvborhd455lw4jnwqckroiawsvxigpum73a",
+  "imageBytesV1": 70,
+  "imageBytesV2": 70,
+  "notes": "All CIDs are sha2-256 content addresses computed over the actual file bytes. put-tampered.json reuses imageCidV1 but flips one byte, so it must be refused."
+}
