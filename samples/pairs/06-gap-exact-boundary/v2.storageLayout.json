@@ -1,0 +1,29 @@
+{
+  "storage": [
+    {
+      "label": "x",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_uint256"
+    },
+    {
+      "label": "y",
+      "offset": 0,
+      "slot": "1",
+      "type": "t_uint256"
+    },
+    {
+      "label": "z",
+      "offset": 0,
+      "slot": "2",
+      "type": "t_uint256"
+    }
+  ],
+  "types": {
+    "t_uint256": {
+      "label": "uint256",
+      "encoding": "inplace",
+      "numberOfBytes": "32"
+    }
+  }
+}

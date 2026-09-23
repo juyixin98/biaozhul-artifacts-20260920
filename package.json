@@ -1,0 +1,38 @@
+{
+  "name": "storage-layout-compat",
+  "version": "1.0.0",
+  "description": "Offline Solidity storage-layout compatibility checker (library + Fastify HTTP service)",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "storage-layout-compat": "dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.check.json",
+    "start": "tsx src/server.ts",
+    "start:dist": "node dist/server.js",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "gen-samples": "tsx samples/generate.ts",
+    "acceptance": "tsx scripts/acceptance.ts"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "fastify": "^4.28.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.0",
+    "tsx": "^4.19.2",
+    "typescript": "~5.6.3"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "storage": [
+    {
+      "label": "vals",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_array(t_uint256)3_storage"
+    }
+  ],
+  "types": {
+    "t_array(t_uint256)3_storage": {
+      "label": "uint256[3]",
+      "encoding": "inplace",
+      "numberOfBytes": "96",
+      "base": "t_uint256",
+      "length": "3"
+    },
+    "t_uint256": {
+      "label": "uint256",
+      "encoding": "inplace",
+      "numberOfBytes": "32"
+    }
+  }
+}

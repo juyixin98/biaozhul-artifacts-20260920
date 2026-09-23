@@ -1,0 +1,39 @@
+{
+  "storage": [
+    {
+      "label": "owner",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_address"
+    },
+    {
+      "label": "x",
+      "offset": 20,
+      "slot": "0",
+      "type": "t_bool"
+    },
+    {
+      "label": "y",
+      "offset": 0,
+      "slot": "1",
+      "type": "t_uint256"
+    }
+  ],
+  "types": {
+    "t_address": {
+      "label": "address",
+      "encoding": "inplace",
+      "numberOfBytes": "20"
+    },
+    "t_bool": {
+      "label": "bool",
+      "encoding": "inplace",
+      "numberOfBytes": "1"
+    },
+    "t_uint256": {
+      "label": "uint256",
+      "encoding": "inplace",
+      "numberOfBytes": "32"
+    }
+  }
+}

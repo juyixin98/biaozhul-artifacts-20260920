@@ -1,0 +1,42 @@
+{
+  "storage": [
+    {
+      "label": "x",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_uint256"
+    },
+    {
+      "label": "y",
+      "offset": 0,
+      "slot": "1",
+      "type": "t_uint256"
+    },
+    {
+      "label": "z",
+      "offset": 0,
+      "slot": "2",
+      "type": "t_uint256"
+    },
+    {
+      "label": "__gap",
+      "offset": 0,
+      "slot": "3",
+      "type": "t_array(t_uint256)0_storage"
+    }
+  ],
+  "types": {
+    "t_uint256": {
+      "label": "uint256",
+      "encoding": "inplace",
+      "numberOfBytes": "32"
+    },
+    "t_array(t_uint256)0_storage": {
+      "label": "uint256[0]",
+      "encoding": "inplace",
+      "numberOfBytes": "0",
+      "base": "t_uint256",
+      "length": "0"
+    }
+  }
+}

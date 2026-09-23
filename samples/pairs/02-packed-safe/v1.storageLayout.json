@@ -1,0 +1,17 @@
+{
+  "storage": [
+    {
+      "label": "a",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_uint128"
+    }
+  ],
+  "types": {
+    "t_uint128": {
+      "label": "uint128",
+      "encoding": "inplace",
+      "numberOfBytes": "16"
+    }
+  }
+}

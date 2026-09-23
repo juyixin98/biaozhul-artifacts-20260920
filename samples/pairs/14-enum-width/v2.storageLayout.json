@@ -1,0 +1,17 @@
+{
+  "storage": [
+    {
+      "label": "state",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_enum(contracts/Sample.sol:0:State)"
+    }
+  ],
+  "types": {
+    "t_enum(contracts/Sample.sol:0:State)": {
+      "label": "State",
+      "encoding": "inplace",
+      "numberOfBytes": "2"
+    }
+  }
+}

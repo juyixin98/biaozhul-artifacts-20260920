@@ -1,0 +1,191 @@
+{
+  "01-safe-append": {
+    "expect": "compatible",
+    "sol": "// V1: { address owner; uint256 x; }\n// V2: 追加 uint256 y（末端追加，安全）",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "02-packed-safe": {
+    "expect": "compatible",
+    "sol": "// V1: uint128 a;  V2: uint128 a; uint128 b; —— b 装入同一 slot 剩余 16 字节",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "03-packed-insert": {
+    "expect": "incompatible",
+    "sol": "// V1: uint64 a,b 打包在 slot0; V2 在中间插入 c，b 的 offset 8->16",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "04-gap-shrink": {
+    "expect": "compatible",
+    "sol": "// OpenZeppelin 模式：__gap 原地缩小 1，释放 slot 承接新变量 y\n// V1: uint256 x; uint256[49] __gap;\n// V2: uint256 x; uint256 y; uint256[48] __gap;",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "05-gap-partial-overflow": {
+    "expect": "unknown",
+    "sol": "// gap 只有 2 个 slot：y,z 吃掉储备，w 越过旧区域末端。\n// 平坦追加本身可工作，但 gap 储备已耗尽 -> gap-overflow 警告（结论 unknown）。\n// V1: uint256 x; uint256[2] __gap;\n// V2: uint256 x,y,z,w; uint256[0] __gap;（声明顺序 x,y,z,w,__gap）",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "06-gap-exact-boundary": {
+    "expect": "unknown",
+    "sol": "// gap 边界但安全标记消失：旧 __gap[2] 在新版本中被整体删除，\n// y,z 虽然精确落在释放区间，但检查器无法确认“删除 gap”是有意为之，\n// 报 gap-removed 警告，结论 unknown（推荐写法见 06b：保留同名 gap 缩到 0）。",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "06b-gap-shrink-to-zero": {
+    "expect": "compatible",
+    "sol": "// 纯兼容边界：__gap 同标签由 2 缩到 0，y,z 精确填满释放区间",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "07-nested-struct-tail": {
+    "expect": "compatible",
+    "sol": "// Inner 位于 Outer 末端：给 Inner 尾部追加 c 不改变任何既有成员位置\n// 且 Outer 是合约末端变量，整体追加安全",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "08-nested-struct-mid": {
+    "expect": "incompatible",
+    "sol": "// Inner 后面还有 Outer.x：给 Inner 尾部追加 c（新 slot）会把 Outer.x 整体后移 1 slot",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "09-mapping-value-struct-append": {
+    "expect": "compatible",
+    "sol": "// mapping 值由 keccak(key,slot) 独立寻址：值结构体尾部追加总是安全",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "10-dynarray-element-append": {
+    "expect": "compatible",
+    "sol": "// 变长数组元素位于 keccak(slot) 区：元素结构体追加成员安全",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "11-fixed-array-length": {
+    "expect": "incompatible",
+    "sol": "// 定长数组长度变化 3 -> 4",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "12-mapping-key-change": {
+    "expect": "incompatible",
+    "sol": "// mapping 键 address -> uint256：槽位派生完全不同",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "13-width-change": {
+    "expect": "incompatible",
+    "sol": "// uint128 -> uint256 位宽变化",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "14-enum-width": {
+    "expect": "incompatible",
+    "sol": "// enum 成员数从 2 增到 300：底层宽度 1B -> 2B",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "15-field-removed": {
+    "expect": "incompatible",
+    "sol": "// 删除中间字段 x（y 虽位置未变，x 本身删除即破坏性变化）",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "16-inheritance-insert": {
+    "expect": "incompatible",
+    "sol": "// Base: uint256 a; Derived is Base + uint256 b\n// V2 在 Base 与 Derived 之间插入 Middle(uint256 m)，b 被推移 1 slot",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "17-gap-in-struct": {
+    "expect": "compatible",
+    "sol": "// 结构体内 __gap 原地缩小 1 个 slot，承接尾部新成员 c（末端结构体，可增长）\n// V1: struct Cfg { uint256 a; uint256[3] __gap; }\n// V2: struct Cfg { uint256 a; uint256 c; uint256[2] __gap; }",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "18-unknown-type": {
+    "expect": "unknown",
+    "sol": "// V2 的 t_futuristic 使用编译器未来编码 future_encoding，检查器无法判定",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "19-type-swap": {
+    "expect": "incompatible",
+    "sol": "// 同宽不同种类：bytes32 -> uint256",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  },
+  "20-string-bytes-ok": {
+    "expect": "compatible",
+    "sol": "// string 保持 string，bytes 保持 bytes（同编码稳定）",
+    "files": [
+      "v1.storageLayout.json",
+      "v2.storageLayout.json",
+      "contracts.sol"
+    ]
+  }
+}

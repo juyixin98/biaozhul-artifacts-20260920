@@ -1,0 +1,24 @@
+{
+  "storage": [
+    {
+      "label": "m",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_mapping(t_uint256 => t_uint256)"
+    }
+  ],
+  "types": {
+    "t_mapping(t_uint256 => t_uint256)": {
+      "label": "mapping(uint256 => uint256)",
+      "encoding": "mapping",
+      "numberOfBytes": "32",
+      "key": "t_uint256",
+      "value": "t_uint256"
+    },
+    "t_uint256": {
+      "label": "uint256",
+      "encoding": "inplace",
+      "numberOfBytes": "32"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "storage": [
+    {
+      "label": "outer",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_struct(Outer)_storage_contracts_Sample.sol_Outer"
+    }
+  ],
+  "types": {
+    "t_struct(Outer)_storage_contracts_Sample.sol_Outer": {
+      "label": "struct Outer",
+      "encoding": "inplace",
+      "numberOfBytes": "96",
+      "members": [
+        {
+          "label": "inner",
+          "offset": 0,
+          "slot": "0",
+          "type": "t_struct(Inner)_storage_contracts_Sample.sol_Inner"
+        },
+        {
+          "label": "x",
+          "offset": 0,
+          "slot": "2",
+          "type": "t_uint256"
+        }
+      ]
+    },
+    "t_struct(Inner)_storage_contracts_Sample.sol_Inner": {
+      "label": "struct Inner",
+      "encoding": "inplace",
+      "numberOfBytes": "64",
+      "members": [
+        {
+          "label": "a",
+          "offset": 0,
+          "slot": "0",
+          "type": "t_uint64"
+        },
+        {
+          "label": "b",
+          "offset": 8,
+          "slot": "0",
+          "type": "t_uint64"
+        },
+        {
+          "label": "c",
+          "offset": 0,
+          "slot": "1",
+          "type": "t_uint256"
+        }
+      ]
+    },
+    "t_uint64": {
+      "label": "uint64",
+      "encoding": "inplace",
+      "numberOfBytes": "8"
+    },
+    "t_uint256": {
+      "label": "uint256",
+      "encoding": "inplace",
+      "numberOfBytes": "32"
+    }
+  }
+}

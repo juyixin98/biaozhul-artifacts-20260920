@@ -1,0 +1,53 @@
+{
+  "storage": [
+    {
+      "label": "items",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_array(t_struct(Inner)_storage_contracts_Sample.sol_Inner)dyn_storage"
+    }
+  ],
+  "types": {
+    "t_array(t_struct(Inner)_storage_contracts_Sample.sol_Inner)dyn_storage": {
+      "label": "struct Inner[]",
+      "encoding": "dynamic_array",
+      "numberOfBytes": "32",
+      "base": "t_struct(Inner)_storage_contracts_Sample.sol_Inner"
+    },
+    "t_struct(Inner)_storage_contracts_Sample.sol_Inner": {
+      "label": "struct Inner",
+      "encoding": "inplace",
+      "numberOfBytes": "32",
+      "members": [
+        {
+          "label": "a",
+          "offset": 0,
+          "slot": "0",
+          "type": "t_uint64"
+        },
+        {
+          "label": "b",
+          "offset": 8,
+          "slot": "0",
+          "type": "t_uint64"
+        },
+        {
+          "label": "c",
+          "offset": 16,
+          "slot": "0",
+          "type": "t_uint128"
+        }
+      ]
+    },
+    "t_uint64": {
+      "label": "uint64",
+      "encoding": "inplace",
+      "numberOfBytes": "8"
+    },
+    "t_uint128": {
+      "label": "uint128",
+      "encoding": "inplace",
+      "numberOfBytes": "16"
+    }
+  }
+}

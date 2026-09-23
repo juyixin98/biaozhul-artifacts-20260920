@@ -1,0 +1,23 @@
+{
+  "storage": [
+    {
+      "label": "a",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_uint64"
+    },
+    {
+      "label": "b",
+      "offset": 8,
+      "slot": "0",
+      "type": "t_uint64"
+    }
+  ],
+  "types": {
+    "t_uint64": {
+      "label": "uint64",
+      "encoding": "inplace",
+      "numberOfBytes": "8"
+    }
+  }
+}

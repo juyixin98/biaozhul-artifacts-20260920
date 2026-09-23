@@ -1,0 +1,32 @@
+{
+  "storage": [
+    {
+      "label": "a",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_uint256",
+      "contract": "Base"
+    },
+    {
+      "label": "m",
+      "offset": 0,
+      "slot": "1",
+      "type": "t_uint256",
+      "contract": "Middle"
+    },
+    {
+      "label": "b",
+      "offset": 0,
+      "slot": "2",
+      "type": "t_uint256",
+      "contract": "Derived"
+    }
+  ],
+  "types": {
+    "t_uint256": {
+      "label": "uint256",
+      "encoding": "inplace",
+      "numberOfBytes": "32"
+    }
+  }
+}
