@@ -1,0 +1,17 @@
+[package]
+name = "mvcc-gc"
+version = "0.1.0"
+edition = "2021"
+description = "File-backed single-node key/value store with snapshot-isolation MVCC transactions, monotonic commit versions and snapshot-aware version reclamation (compaction)"
+
+[lib]
+name = "mvcc_gc"
+path = "src/lib.rs"
+
+[[bin]]
+name = "mvcc-gc"
+path = "src/main.rs"
+
+[profile.release]
+lto = true
+panic = "abort"
