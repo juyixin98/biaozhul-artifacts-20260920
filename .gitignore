@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+.mypy_cache/
+
+# Runtime data (SQLite DB, WAL, signing key)
+data/*.db
+data/*.db-wal
+data/*.db-shm
+data/*.pem
+data/*.log
+data/server.log
+
+# Keep generated examples tracked; ignore transient uploads
+*.upload

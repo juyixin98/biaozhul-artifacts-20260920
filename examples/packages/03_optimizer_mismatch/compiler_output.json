@@ -1,0 +1,70 @@
+{
+  "contracts": {
+    "src/Token.sol": {
+      "Token": {
+        "abi": [
+          {
+            "inputs": [
+              {
+                "internalType": "address",
+                "name": "_mathLib",
+                "type": "address"
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+          }
+        ],
+        "metadata": "{\"compiler\":{\"version\":\"0.8.24+commit.e11b9ed9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_mathLib\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"src/Token.sol\":\"Token\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"src/SafeMath.sol\":{\"keccak256\":\"0x3f130e72f85331527a7fa7c679ede0afad7d538aaf1b5a2e6f886373fe0d9c31\",\"urls\":[\"bzzr://0000000000000000000000000000000000000000000000000000000000000000\"]},\"src/Token.sol\":{\"keccak256\":\"0x25ec417f942787dddc58b8524ee02e2a84b320c3a9e013c1735bc93dd7651199\",\"urls\":[\"bzzr://0000000000000000000000000000000000000000000000000000000000000000\"]}},\"version\":1}",
+        "storageLayout": {
+          "storage": [],
+          "types": {}
+        },
+        "evm": {
+          "bytecode": {
+            "object": "0x60806040526080604052348015600f57600080fd5b50fac3f7232cff9e8481673c0aa589187a5f2ac8f48dc0436daf258aa537e8975db55ed7405622fc0fa738c4c49319b7afeb662bed143199407015da4bb0b4268e8e79b33322110351fba24a72bcd1bdb58657e1047f2f46ed179200b36d49d0e9__$7c1b94290a09823458310f08f02c3121d6$__3de3ba45d43cf1ed5c760dbb5d16257b32ca7e998ad0270965bd3b1bbb0b36838a5c9ff58d075dbf7881431a3aaf3e2f86cf6ad814caecf461e247aaee5fba5ca264697066735820d6064e32f7566b74f31f99bae4bcbbe70701e25410db4fa41a1842363297d90564736f6c634300081800310033",
+            "opcodes": "",
+            "sourceMap": "",
+            "linkReferences": {
+              "src/SafeMath.sol": {
+                "SafeMath": [
+                  {
+                    "start": 113,
+                    "length": 20
+                  }
+                ]
+              }
+            }
+          },
+          "deployedBytecode": {
+            "object": "0x6080604052348015600f57600080fd5b50fac3f7232cff9e8481673c0aa589187a5f2ac8f48dc0436daf258aa537e8975db55ed7405622fc0fa738c4c49319b7afeb662bed143199407015da4bb0b4268e8e79b33322110351fba24a72bcd1bdb58657e1047f2f46ed179200b36d49d0e9__$7c1b94290a09823458310f08f02c3121d6$__3de3ba45d43cf1ed5c760dbb5d16257b32ca7e998ad0270965bd3b1bbb0b36838a5c9ff58d075dbf7881431a3aaf3e2f86cf6ad814caecf461e247aaee5fba5ca264697066735820d6064e32f7566b74f31f99bae4bcbbe70701e25410db4fa41a1842363297d90564736f6c634300081800310033",
+            "opcodes": "PUSH1 0x80 ... (offline fixture)",
+            "sourceMap": "",
+            "linkReferences": {
+              "src/SafeMath.sol": {
+                "SafeMath": [
+                  {
+                    "start": 113,
+                    "length": 20
+                  }
+                ]
+              }
+            },
+            "immutableReferences": {}
+          }
+        }
+      }
+    }
+  },
+  "version": "0.8.24+commit.e11b9ed9",
+  "sources": {
+    "src/SafeMath.sol": {
+      "id": 0,
+      "keccak256": "0x3f130e72f85331527a7fa7c679ede0afad7d538aaf1b5a2e6f886373fe0d9c31"
+    },
+    "src/Token.sol": {
+      "id": 1,
+      "keccak256": "0x25ec417f942787dddc58b8524ee02e2a84b320c3a9e013c1735bc93dd7651199"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "compiler_version": "0.8.24+commit.e11b9ed9",
+  "optimizer": {
+    "enabled": true,
+    "runs": 200
+  },
+  "evm_version": "paris",
+  "libraries": {
+    "src/SafeMath.sol:SafeMath": "0x8ba1f109551bD432803012645Ac136ddd64DBA72"
+  }
+}
