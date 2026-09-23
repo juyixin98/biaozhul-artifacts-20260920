@@ -1,0 +1,6 @@
+{
+  "asset_in": "WETH",
+  "asset_out": "USDT",
+  "amount_in": "1000000000000000000",
+  "slippage_bps": 100
+}

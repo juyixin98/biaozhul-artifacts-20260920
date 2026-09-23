@@ -1,0 +1,60 @@
+{
+  "assets": [
+    { "id": "USDC", "decimals": 6 },
+    { "id": "WETH", "decimals": 18 },
+    { "id": "DAI", "decimals": 18 },
+    { "id": "USDT", "decimals": 6 }
+  ],
+  "pools": [
+    {
+      "id": "weth_usdc",
+      "token0": "WETH",
+      "token1": "USDC",
+      "reserve0": "1000000000000000000000",
+      "reserve1": "3000000000000",
+      "fee_bps": 30,
+      "cost_token0_out": "0",
+      "cost_token1_out": "0"
+    },
+    {
+      "id": "weth_dai",
+      "token0": "WETH",
+      "token1": "DAI",
+      "reserve0": "500000000000000000000",
+      "reserve1": "1500000000000000000000000",
+      "fee_bps": 30,
+      "cost_token0_out": "0",
+      "cost_token1_out": "0"
+    },
+    {
+      "id": "dai_usdc",
+      "token0": "DAI",
+      "token1": "USDC",
+      "reserve0": "1000000000000000000000000",
+      "reserve1": "999000000000",
+      "fee_bps": 5,
+      "cost_token0_out": "0",
+      "cost_token1_out": "1000"
+    },
+    {
+      "id": "usdc_usdt",
+      "token0": "USDC",
+      "token1": "USDT",
+      "reserve0": "5000000000000",
+      "reserve1": "5000000000000",
+      "fee_bps": 1,
+      "cost_token0_out": "0",
+      "cost_token1_out": "0"
+    },
+    {
+      "id": "weth_usdt",
+      "token0": "WETH",
+      "token1": "USDT",
+      "reserve0": "200000000000000000000",
+      "reserve1": "620000000000",
+      "fee_bps": 30,
+      "cost_token0_out": "0",
+      "cost_token1_out": "0"
+    }
+  ]
+}

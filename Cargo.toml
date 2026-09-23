@@ -1,0 +1,25 @@
+[package]
+name = "p016-quote-router"
+version = "0.1.0"
+edition = "2021"
+description = "Single-chain offline swap router with exact integer multi-hop quotes (Axum + SQLite)"
+
+[[bin]]
+name = "quote-router"
+path = "src/main.rs"
+
+[dependencies]
+axum = "0.7.9"
+tokio = { version = "1.40", features = ["rt-multi-thread", "macros", "net", "signal"] }
+rusqlite = { version = "0.31.0", features = ["bundled"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha2 = "0.10.8"
+hex = "0.4.3"
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+uint = "0.9.5"
+
+[dev-dependencies]
+tower = { version = "0.5.1", features = ["util"] }
+tempfile = "3.12"

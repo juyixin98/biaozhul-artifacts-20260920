@@ -1,0 +1,18 @@
+{
+  "assets": [
+    { "id": "A", "decimals": 18 },
+    { "id": "B", "decimals": 18 }
+  ],
+  "pools": [
+    {
+      "id": "bad_zero_reserve",
+      "token0": "A",
+      "token1": "B",
+      "reserve0": "1000",
+      "reserve1": "0",
+      "fee_bps": 30,
+      "cost_token0_out": "0",
+      "cost_token1_out": "0"
+    }
+  ]
+}
