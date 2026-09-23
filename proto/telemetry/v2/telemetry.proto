@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package telemetry.v2;
+
+option go_package = "github.com/p079/telegw/gen/telemetry/v2;telemetryv2";
+
+import "google/protobuf/timestamp.proto";
+
+// Current telemetry schema (v2).
+// Temperature is an integer in millikelvin (mK).
+message Reading {
+  string device_uid = 1;
+  optional int64 temperature_millikelvin = 2;
+  Condition condition = 3;
+  google.protobuf.Timestamp observed_at = 4;
+  uint64 seq_no = 5;
+  // New in v2: has no v1 counterpart. Dropped (and reported) on v2 -> v1.
+  string firmware_rev = 6;
+}
+
+enum Condition {
+  CONDITION_UNSPECIFIED = 0;
+  OK = 1;
+  DEGRADED = 2;
+  FAILED = 3;
+  // Extended in v2: not expressible in v1.
+  MAINTENANCE = 4;
+  CALIBRATING = 5;
+}

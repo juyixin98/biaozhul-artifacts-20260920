@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package telemetry.v1;
+
+option go_package = "github.com/p079/telegw/gen/telemetry/v1;telemetryv1";
+
+// Legacy telemetry schema (v1).
+// Temperature is an integer in centi-degrees Celsius (0.01 °C).
+message Reading {
+  string device_id = 1;
+  // Presence-tracked so an explicit 0 is distinguishable from "unset".
+  optional int32 temp_celsius_e2 = 2;
+  Condition condition = 3;
+  int64 observed_at_unix_ms = 4;
+  uint64 seq_no = 5;
+}
+
+enum Condition {
+  CONDITION_UNSPECIFIED = 0;
+  OK = 1;
+  DEGRADED = 2;
+  FAILED = 3;
+}

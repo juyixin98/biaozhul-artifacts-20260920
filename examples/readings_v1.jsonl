@@ -1,0 +1,4 @@
+{"deviceId":"dev-001","tempCelsiusE2":2150,"condition":"OK","observedAtUnixMs":"1758614400000","seqNo":"1"}
+{"deviceId":"dev-001","tempCelsiusE2":0,"condition":"DEGRADED","observedAtUnixMs":"1758614401000","seqNo":"2"}
+{"deviceId":"dev-002","condition":"FAILED","observedAtUnixMs":"1758614402000","seqNo":"3"}
+{"deviceId":"dev-003","tempCelsiusE2":-4000,"condition":"OK","observedAtUnixMs":"1758614403000","seqNo":"4"}

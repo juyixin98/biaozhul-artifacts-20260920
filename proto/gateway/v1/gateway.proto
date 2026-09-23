@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package gateway.v1;
+
+option go_package = "github.com/p079/telegw/gen/gateway/v1;gatewayv1";
+
+import "telemetry/v1/telemetry.proto";
+import "telemetry/v2/telemetry.proto";
+
+// Protocol-version compatibility gateway.
+service Gateway {
+  // Client streams v1 readings; server streams back converted v2 envelopes.
+  rpc ConvertV1ToV2(stream telemetry.v1.Reading) returns (stream Envelope);
+  // Client streams v2 readings; server streams back converted v1 envelopes.
+  rpc ConvertV2ToV1(stream telemetry.v2.Reading) returns (stream Envelope);
+  // Hot-swap the active mapping at runtime (must be one of the loaded
+  // mapping versions; see mappings.json). Empty version reloads the file.
+  rpc ReloadMapping(ReloadMappingRequest) returns (ReloadMappingResponse);
+  rpc GetStats(GetStatsRequest) returns (GetStatsResponse);
+}
+
+// Provenance attached to every output record.
+message Meta {
+  string record_id = 1;
+  int64 seq = 2;
+  string source_version = 3;   // e.g. "telemetry/v1"
+  string target_version = 4;   // e.g. "telemetry/v2"
+  string converter_version = 5;
+  string mapping_version = 6;
+  // Extra conversion notes: dropped fields, rounding, carried raw enum, ...
+  map<string, string> attributes = 7;
+}
+
+// Locatable per-record conversion failure. Never a silent zero.
+message ConversionError {
+  string field_path = 1; // e.g. "condition", "temperature_millikelvin"
+  string reason = 2;
+  string raw_value = 3; // original value, preserved verbatim
+}
+
+message Envelope {
+  Meta meta = 1;
+  oneof result {
+    telemetry.v1.Reading v1 = 2;
+    telemetry.v2.Reading v2 = 3;
+    ConversionError error = 4;
+  }
+}
+
+message ReloadMappingRequest {
+  string mapping_version = 1;
+}
+
+message ReloadMappingResponse {
+  string active_mapping_version = 1;
+  repeated string available_versions = 2;
+}
+
+message GetStatsRequest {}
+
+message GetStatsResponse {
+  int64 converted_ok = 1;
+  int64 conversion_errors = 2;
+  int64 in_flight = 3;
+  int64 unknown_fields_dropped = 4;
+  int64 audit_failures = 5;
+}

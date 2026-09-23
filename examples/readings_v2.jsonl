@@ -1,0 +1,4 @@
+{"deviceUid":"dev-101","temperatureMillikelvin":"2946500","condition":"OK","observedAt":"2026-09-23T08:00:00Z","seqNo":"1","firmwareRev":"2.4.1"}
+{"deviceUid":"dev-101","temperatureMillikelvin":"2731500","condition":"MAINTENANCE","observedAt":"2026-09-23T08:00:01Z","seqNo":"2","firmwareRev":"2.4.1"}
+{"deviceUid":"dev-102","temperatureMillikelvin":"2731503","condition":"CALIBRATING","observedAt":"2026-09-23T08:00:02Z","seqNo":"3"}
+{"deviceUid":"dev-103","condition":"DEGRADED","observedAt":"2026-09-23T08:00:03Z","seqNo":"4"}

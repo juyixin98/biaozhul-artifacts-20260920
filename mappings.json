@@ -1,0 +1,14 @@
+{
+  "mappings": [
+    {
+      "version": "strict-v1",
+      "enum_policy": "error",
+      "rounding_policy": "strict"
+    },
+    {
+      "version": "carry-v1",
+      "enum_policy": "carry",
+      "rounding_policy": "half_even"
+    }
+  ]
+}
