@@ -1,0 +1,20 @@
+[
+  {
+    "epoch": 1,
+    "validator_id": "alice",
+    "block_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "signature": "c1b4a5122be704f8fe1ee21ca78452382f31a348d5f488d370e6f6d0b6f8c88281ec3711fbf81043873bdcc063776bd18ab0755dfe9e7e71f6d77bd3ada0c500"
+  },
+  {
+    "epoch": 1,
+    "validator_id": "bob",
+    "block_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "signature": "fe8ec35329978cd97aafff12232e411e66a2968626088730d09ddc2402133c0511be558c41765fb958835ec8a977dd09dc8701259dc58db41a1353fb05b0a608"
+  },
+  {
+    "epoch": 1,
+    "validator_id": "carol",
+    "block_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "signature": "2afc626fca2ed579ba0bba350c0aa3039d988046ab7114e30521301cc86fbec420241bc957a1420ceadaa580ef6cda1b51fab25514978a2d608e191f165dc806"
+  }
+]

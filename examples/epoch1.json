@@ -1,0 +1,20 @@
+{
+  "epoch": 1,
+  "validators": [
+    {
+      "id": "alice",
+      "weight": 1,
+      "public_key": "c6f3d0066dbe9d0915602fd2a752dbf219a9339681969f7deb084cc53f477b19"
+    },
+    {
+      "id": "bob",
+      "weight": 1,
+      "public_key": "891aa3ed18a0f2cd30548f1f83dc763630105f5a6e5b710e273f80a30986adb4"
+    },
+    {
+      "id": "carol",
+      "weight": 1,
+      "public_key": "6f8e3e102a831e1f97f04ea91e7d1b57d8a4110e14464a454030d7da1c63265f"
+    }
+  ]
+}

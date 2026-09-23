@@ -1,0 +1,20 @@
+{
+  "epoch": 3,
+  "validators": [
+    {
+      "id": "whale1",
+      "weight": 10,
+      "public_key": "bdda936a293217944a1c33a079d2b55cce153298dc9294858a18288f02dbf2db"
+    },
+    {
+      "id": "whale2",
+      "weight": 10,
+      "public_key": "7634cf3b38f8b92e017a723b39b18e82b07e2a318e69be4ec1c6947e7460b1a6"
+    },
+    {
+      "id": "observer",
+      "weight": 0,
+      "public_key": "b5bd6b73e25f7704292e29f7a6067decf61ca10e4ead9b0132e72eab29032290"
+    }
+  ]
+}

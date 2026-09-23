@@ -1,0 +1,20 @@
+[
+  {
+    "epoch": 3,
+    "validator_id": "observer",
+    "block_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "signature": "8ab248d8b72ac46e3411c0a657da8df219b647576fc0319a6d1af519319874ee41cc232ba14aa91604573a6591f952a3dfa48d422f2ede10c9e28d732451840f"
+  },
+  {
+    "epoch": 3,
+    "validator_id": "whale1",
+    "block_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "signature": "c8769298f3e6234ba8cc1ec5c2f9d673957ed1fc81c66f85f59b91936861d76310027629799cf12ac79ade172dcfd524014199aee822e6d7dd268878011d310d"
+  },
+  {
+    "epoch": 3,
+    "validator_id": "whale2",
+    "block_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "signature": "4d0946f975318eee3afcbb58bd29595d58ba70e5a7d9bcb23277e065ea7069c2b5f289efa0bc99deb4d70dedf054a27061e6926935befcaadbf8076479027009"
+  }
+]

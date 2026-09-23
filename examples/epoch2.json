@@ -1,0 +1,25 @@
+{
+  "epoch": 2,
+  "validators": [
+    {
+      "id": "n1",
+      "weight": 1,
+      "public_key": "1bdc7a5b281e50ff4ba5b2dfbc21f06733bb6aa8091538d82d48e70480d46080"
+    },
+    {
+      "id": "n2",
+      "weight": 1,
+      "public_key": "d3a0de205232cb516f54d30eee31b8baca7612e4cdd9b38a1df3e7a145dde011"
+    },
+    {
+      "id": "n3",
+      "weight": 1,
+      "public_key": "564871e4ff377e8d1135d3d587cdede5deaaea1deb1f217a39983621b4f81aee"
+    },
+    {
+      "id": "n4",
+      "weight": 1,
+      "public_key": "d32f0eb03e62c9513553f2397a9ab36aa2b9938c0e292a26acbe031e46d0a98a"
+    }
+  ]
+}
