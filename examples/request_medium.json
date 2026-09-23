@@ -1,0 +1,12 @@
+{
+  "strip_width": 20,
+  "rectangles": [
+    {"id": "r1", "width": 7, "height": 4},
+    {"id": "r2", "width": 9, "height": 3},
+    {"id": "r3", "width": 5, "height": 6},
+    {"id": "r4", "width": 8, "height": 5},
+    {"id": "r5", "width": 4, "height": 4},
+    {"id": "r6", "width": 6, "height": 2}
+  ],
+  "exact": false
+}

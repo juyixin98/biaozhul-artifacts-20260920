@@ -1,0 +1,11 @@
+{
+  "strip_width": 10,
+  "rectangles": [
+    {"id": "A", "width": 6, "height": 6},
+    {"id": "B", "width": 6, "height": 4},
+    {"id": "C", "width": 4, "height": 4},
+    {"id": "D", "width": 4, "height": 4}
+  ],
+  "exact": "auto",
+  "tolerance": {"atol": 1e-9, "rtol": 1e-9}
+}

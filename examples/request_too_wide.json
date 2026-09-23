@@ -1,0 +1,8 @@
+{
+  "_comment": "超宽拒绝样例：r2 宽度 12 > 条带宽度 10，且不允许旋转",
+  "strip_width": 10,
+  "rectangles": [
+    {"id": "r1", "width": 4, "height": 3},
+    {"id": "r2", "width": 12, "height": 2}
+  ]
+}
