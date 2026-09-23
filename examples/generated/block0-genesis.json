@@ -1,0 +1,24 @@
+{
+  "height": 0,
+  "merkle_root": "495e5f49155456a6f0a6552a4fd05b20d3e07df8b0083bb886594808d6a49fac",
+  "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "timestamp": 0,
+  "txs": [
+    {
+      "inputs": [
+        {
+          "coinbase_tag": "0000000000000000",
+          "prev": null,
+          "pubkey": "",
+          "signature": ""
+        }
+      ],
+      "outputs": [
+        {
+          "address": "32d3fd6fba90462dda9b109442dc1e2bffbbb5928d611d29f14303ead2ec69a0",
+          "value": 50
+        }
+      ]
+    }
+  ]
+}

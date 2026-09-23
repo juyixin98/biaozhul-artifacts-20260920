@@ -1,0 +1,14 @@
+{
+  "alice": {
+    "address": "9c9ddba487bf98b28159c1a205051b4ce81affcaba68c7e34f398dc761b7279d",
+    "secret": "1fe07c1bf209de72308f088d45a7ab66fb65fc7d37b0d47a1939a0679882a3199c9ddba487bf98b28159c1a205051b4ce81affcaba68c7e34f398dc761b7279d"
+  },
+  "bob": {
+    "address": "76e0a3ab38346d3df947dba651a366f80f7281a3e4b5368775cbed04a76cd517",
+    "secret": "d8fb384fd1de886f9a2b31bee60e27cddd5e4fd7b587ae905be2fa0aedcee39476e0a3ab38346d3df947dba651a366f80f7281a3e4b5368775cbed04a76cd517"
+  },
+  "miner": {
+    "address": "32d3fd6fba90462dda9b109442dc1e2bffbbb5928d611d29f14303ead2ec69a0",
+    "secret": "b1eea1fcb8c7a1cfaec5437b6511de191dca28b3861081adba410f2fe84fdf5432d3fd6fba90462dda9b109442dc1e2bffbbb5928d611d29f14303ead2ec69a0"
+  }
+}

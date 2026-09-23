@@ -1,0 +1,47 @@
+{
+  "block": {
+    "height": 1,
+    "merkle_root": "1db3762cf19248f73703c97c6b6d51a7427b06cfa0b31dded82f4c42ad096b82",
+    "prev_hash": "f2a91f64be60b123d91bbac38e2e59158fb9b261ef52e7e67d42c58db474be4e",
+    "timestamp": 1,
+    "txs": [
+      {
+        "inputs": [
+          {
+            "coinbase_tag": "0100000000000000",
+            "prev": null,
+            "pubkey": "",
+            "signature": ""
+          }
+        ],
+        "outputs": [
+          {
+            "address": "32d3fd6fba90462dda9b109442dc1e2bffbbb5928d611d29f14303ead2ec69a0",
+            "value": 56
+          }
+        ]
+      },
+      {
+        "inputs": [
+          {
+            "coinbase_tag": "",
+            "prev": {
+              "txid": "495e5f49155456a6f0a6552a4fd05b20d3e07df8b0083bb886594808d6a49fac",
+              "vout": 0
+            },
+            "pubkey": "32d3fd6fba90462dda9b109442dc1e2bffbbb5928d611d29f14303ead2ec69a0",
+            "signature": "7eef64632bef47f1561fe440c4ab5ba733c19289cd8b3bf14b4db810a3a8fe0865d561715962642b128357506cb75343e891130ed9e41a85e7015c4d732b6007"
+          }
+        ],
+        "outputs": [
+          {
+            "address": "32d3fd6fba90462dda9b109442dc1e2bffbbb5928d611d29f14303ead2ec69a0",
+            "value": 45
+          }
+        ]
+      }
+    ]
+  },
+  "expect_error_contains": "coinbase creates",
+  "expect_status": 409
+}
