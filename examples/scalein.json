@@ -1,0 +1,36 @@
+{
+  "seed": 7,
+  "vnodesPerWeight": 64,
+  "preload": true,
+  "lossRate": 0.04,
+  "duplicateRate": 0.02,
+  "reorderRate": 0.02,
+  "minLinkDelay": 1,
+  "maxLinkDelay": 3,
+  "retryTicks": 20,
+  "migrationConcurrency": 8,
+  "barrierTicks": 30,
+  "drainTicks": 400,
+  "initialNodes": [
+    {"id": "n1", "weight": 1},
+    {"id": "n2", "weight": 1},
+    {"id": "n3", "weight": 2},
+    {"id": "n4", "weight": 2}
+  ],
+  "keys": [
+    "user:0001", "user:0002", "user:0003", "user:0004",
+    "user:0005", "user:0006", "user:0007", "user:0008",
+    "user:0009", "user:0010", "user:0011", "user:0012",
+    "user:0013", "user:0014", "user:0015", "user:0016",
+    "user:0017", "user:0018", "user:0019", "user:0020",
+    "user:0021", "user:0022", "user:0023", "user:0024"
+  ],
+  "clients": [
+    {"id": "c1", "writes": 150, "startTick": 5, "endTick": 260, "readEvery": 5},
+    {"id": "c2", "writes": 150, "startTick": 8, "endTick": 280, "readEvery": 6}
+  ],
+  "operations": [
+    {"kind": "scaleIn", "tick": 80, "remove": ["n2"]},
+    {"kind": "interrupt", "tick": 110, "endTick": 150}
+  ]
+}

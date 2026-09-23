@@ -1,0 +1,185 @@
+{
+  "seed": 42,
+  "stopTick": 530,
+  "finalRing": [
+    {
+      "id": "n1",
+      "weight": 1,
+      "keys": [
+        "user:0001",
+        "user:0022"
+      ]
+    },
+    {
+      "id": "n2",
+      "weight": 1,
+      "keys": [
+        "user:0003",
+        "user:0010",
+        "user:0012",
+        "user:0014",
+        "user:0015",
+        "user:0017",
+        "user:0020",
+        "user:0021"
+      ]
+    },
+    {
+      "id": "n3",
+      "weight": 2,
+      "keys": [
+        "user:0002",
+        "user:0004",
+        "user:0005",
+        "user:0006",
+        "user:0007",
+        "user:0008",
+        "user:0009",
+        "user:0011",
+        "user:0013",
+        "user:0016",
+        "user:0018",
+        "user:0019",
+        "user:0023",
+        "user:0024"
+      ]
+    },
+    {
+      "id": "n4",
+      "weight": 2,
+      "keys": [
+        "user:0005",
+        "user:0006",
+        "user:0018",
+        "user:0021",
+        "user:0022"
+      ]
+    }
+  ],
+  "removedNodes": [],
+  "interruption": {
+    "startTick": 90,
+    "endTick": 130
+  },
+  "topologyEpochs": [
+    {
+      "version": 0,
+      "nodes": [
+        "n1",
+        "n2",
+        "n3"
+      ],
+      "beganAt": 0,
+      "commitAt": 0
+    },
+    {
+      "version": 1,
+      "nodes": [
+        "n1",
+        "n2",
+        "n3",
+        "n4"
+      ],
+      "beganAt": 60,
+      "commitAt": 166
+    }
+  ],
+  "stats": {
+    "messagesSent": 856,
+    "messagesDelivered": 821,
+    "messagesDropped": 57,
+    "messagesDuplicated": 22,
+    "messagesReordered": 41,
+    "bytesDelivered": 30713,
+    "writesIssued": 264,
+    "writesConfirmed": 264,
+    "writesFailed": 0,
+    "readsIssued": 52,
+    "readsSucceeded": 52,
+    "readsFailed": 0
+  },
+  "migration": {
+    "keysMoved": 5,
+    "keysSwitched": 5,
+    "epochsCommitted": 1,
+    "recordVersionsTransferred": 11,
+    "bytesTransferred": 82,
+    "bytesMoved": 36,
+    "overheadBytes": 46,
+    "barriersPassed": 5,
+    "movements": [
+      {
+        "key": "user:0021",
+        "from": "n2",
+        "to": "n4",
+        "ringVersion": 1,
+        "committed": true,
+        "beganAt": 63,
+        "switchedAt": 136
+      },
+      {
+        "key": "user:0005",
+        "from": "n3",
+        "to": "n4",
+        "ringVersion": 1,
+        "committed": true,
+        "beganAt": 63,
+        "switchedAt": 135
+      },
+      {
+        "key": "user:0018",
+        "from": "n3",
+        "to": "n4",
+        "ringVersion": 1,
+        "committed": true,
+        "beganAt": 63,
+        "switchedAt": 136
+      },
+      {
+        "key": "user:0022",
+        "from": "n1",
+        "to": "n4",
+        "ringVersion": 1,
+        "committed": true,
+        "beganAt": 63,
+        "switchedAt": 139
+      },
+      {
+        "key": "user:0006",
+        "from": "n3",
+        "to": "n4",
+        "ringVersion": 1,
+        "committed": true,
+        "beganAt": 69,
+        "switchedAt": 138
+      }
+    ]
+  },
+  "verifications": {
+    "ownership": {
+      "name": "ownership",
+      "pass": true,
+      "details": "24/24 keys ever written; each present on its ring-v1 owner"
+    },
+    "version": {
+      "name": "version",
+      "pass": true,
+      "details": "owner record must equal latest applied record for every key"
+    },
+    "confirmedWritesSurvive": {
+      "name": "confirmedWritesSurvive",
+      "pass": true,
+      "details": "264 confirmed writes verified at final owners"
+    },
+    "removalSafety": {
+      "name": "removalSafety",
+      "pass": true,
+      "details": "0 nodes removed; decommission gate plus post-check"
+    },
+    "noStaleReadAccepted": {
+      "name": "noStaleReadAccepted",
+      "pass": true,
+      "details": "52 successful reads validated (monotonic reads + single-value winner)"
+    }
+  }
+}

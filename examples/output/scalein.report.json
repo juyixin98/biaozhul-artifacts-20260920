@@ -1,0 +1,194 @@
+{
+  "seed": 7,
+  "stopTick": 550,
+  "finalRing": [
+    {
+      "id": "n1",
+      "weight": 1,
+      "keys": [
+        "user:0001"
+      ]
+    },
+    {
+      "id": "n3",
+      "weight": 2,
+      "keys": [
+        "user:0002",
+        "user:0003",
+        "user:0004",
+        "user:0007",
+        "user:0008",
+        "user:0009",
+        "user:0010",
+        "user:0011",
+        "user:0012",
+        "user:0013",
+        "user:0014",
+        "user:0016",
+        "user:0017",
+        "user:0019",
+        "user:0023",
+        "user:0024"
+      ]
+    },
+    {
+      "id": "n4",
+      "weight": 2,
+      "keys": [
+        "user:0005",
+        "user:0006",
+        "user:0015",
+        "user:0018",
+        "user:0020",
+        "user:0021",
+        "user:0022"
+      ]
+    }
+  ],
+  "removedNodes": [
+    "n2"
+  ],
+  "interruption": {
+    "startTick": 110,
+    "endTick": 150
+  },
+  "topologyEpochs": [
+    {
+      "version": 0,
+      "nodes": [
+        "n1",
+        "n2",
+        "n3",
+        "n4"
+      ],
+      "beganAt": 0,
+      "commitAt": 0
+    },
+    {
+      "version": 1,
+      "nodes": [
+        "n1",
+        "n3",
+        "n4"
+      ],
+      "beganAt": 80,
+      "commitAt": 176
+    }
+  ],
+  "stats": {
+    "messagesSent": 1048,
+    "messagesDelivered": 1001,
+    "messagesDropped": 68,
+    "messagesDuplicated": 21,
+    "messagesReordered": 37,
+    "bytesDelivered": 37343,
+    "writesIssued": 324,
+    "writesConfirmed": 324,
+    "writesFailed": 0,
+    "readsIssued": 53,
+    "readsSucceeded": 53,
+    "readsFailed": 0
+  },
+  "migration": {
+    "keysMoved": 7,
+    "keysSwitched": 7,
+    "epochsCommitted": 1,
+    "recordVersionsTransferred": 15,
+    "bytesTransferred": 110,
+    "bytesMoved": 55,
+    "overheadBytes": 55,
+    "barriersPassed": 7,
+    "movements": [
+      {
+        "key": "user:0012",
+        "from": "n2",
+        "to": "n3",
+        "ringVersion": 1,
+        "committed": true,
+        "beganAt": 82,
+        "switchedAt": 159
+      },
+      {
+        "key": "user:0017",
+        "from": "n2",
+        "to": "n3",
+        "ringVersion": 1,
+        "committed": true,
+        "beganAt": 82,
+        "switchedAt": 155
+      },
+      {
+        "key": "user:0003",
+        "from": "n2",
+        "to": "n3",
+        "ringVersion": 1,
+        "committed": true,
+        "beganAt": 82,
+        "switchedAt": 156
+      },
+      {
+        "key": "user:0014",
+        "from": "n2",
+        "to": "n3",
+        "ringVersion": 1,
+        "committed": true,
+        "beganAt": 82,
+        "switchedAt": 154
+      },
+      {
+        "key": "user:0020",
+        "from": "n2",
+        "to": "n4",
+        "ringVersion": 1,
+        "committed": true,
+        "beganAt": 82,
+        "switchedAt": 161
+      },
+      {
+        "key": "user:0010",
+        "from": "n2",
+        "to": "n3",
+        "ringVersion": 1,
+        "committed": true,
+        "beganAt": 83,
+        "switchedAt": 157
+      },
+      {
+        "key": "user:0015",
+        "from": "n2",
+        "to": "n4",
+        "ringVersion": 1,
+        "committed": true,
+        "beganAt": 101,
+        "switchedAt": 156
+      }
+    ]
+  },
+  "verifications": {
+    "ownership": {
+      "name": "ownership",
+      "pass": true,
+      "details": "24/24 keys ever written; each present on its ring-v1 owner"
+    },
+    "version": {
+      "name": "version",
+      "pass": true,
+      "details": "owner record must equal latest applied record for every key"
+    },
+    "confirmedWritesSurvive": {
+      "name": "confirmedWritesSurvive",
+      "pass": true,
+      "details": "324 confirmed writes verified at final owners"
+    },
+    "removalSafety": {
+      "name": "removalSafety",
+      "pass": true,
+      "details": "1 nodes removed; decommission gate plus post-check"
+    },
+    "noStaleReadAccepted": {
+      "name": "noStaleReadAccepted",
+      "pass": true,
+      "details": "53 successful reads validated (monotonic reads + single-value winner)"
+    }
+  }
+}
