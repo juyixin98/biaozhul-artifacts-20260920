@@ -1,0 +1,31 @@
+{
+  "windowSizeMillis": 10,
+  "windowSlideMillis": 10,
+  "allowedLatenessMillis": 0,
+  "quantiles": [
+    0.5
+  ],
+  "eventCount": 7,
+  "lateDroppedCount": 0,
+  "windowCount": 2,
+  "results": [
+    {
+      "windowStartMillis": 0,
+      "windowEndMillis": 10,
+      "count": 4,
+      "empty": false,
+      "values": [
+        2.5
+      ]
+    },
+    {
+      "windowStartMillis": 10,
+      "windowEndMillis": 20,
+      "count": 3,
+      "empty": false,
+      "values": [
+        20
+      ]
+    }
+  ]
+}

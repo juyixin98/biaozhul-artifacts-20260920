@@ -1,0 +1,16 @@
+{
+  "windowSizeMillis": 100,
+  "windowSlideMillis": 100,
+  "quantiles": [0.5],
+  "events": [
+    {"timestampMillis": 0, "value": 7},
+    {"timestampMillis": 0, "value": 7},
+    {"timestampMillis": 0, "value": 7},
+    {"timestampMillis": 0, "value": 7},
+
+    {"timestampMillis": 250, "value": 1},
+    {"timestampMillis": 250, "value": 2},
+
+    {"timestampMillis": 401, "value": 42}
+  ]
+}

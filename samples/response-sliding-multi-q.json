@@ -1,0 +1,79 @@
+{
+  "windowSizeMillis": 10,
+  "windowSlideMillis": 5,
+  "allowedLatenessMillis": 0,
+  "quantiles": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    0.9,
+    0.99,
+    1.0
+  ],
+  "eventCount": 10,
+  "lateDroppedCount": 0,
+  "windowCount": 4,
+  "results": [
+    {
+      "windowStartMillis": -5,
+      "windowEndMillis": 5,
+      "count": 6,
+      "empty": false,
+      "values": [
+        -5,
+        -1.5,
+        0,
+        0,
+        2,
+        3.8,
+        4
+      ]
+    },
+    {
+      "windowStartMillis": 0,
+      "windowEndMillis": 10,
+      "count": 8,
+      "empty": false,
+      "values": [
+        -5,
+        -0.5,
+        0,
+        4,
+        5.5,
+        8.65,
+        9
+      ]
+    },
+    {
+      "windowStartMillis": 5,
+      "windowEndMillis": 15,
+      "count": 4,
+      "empty": false,
+      "values": [
+        -100,
+        -22,
+        6.5,
+        31.75,
+        72.7,
+        97.27,
+        100
+      ]
+    },
+    {
+      "windowStartMillis": 10,
+      "windowEndMillis": 20,
+      "count": 2,
+      "empty": false,
+      "values": [
+        -100,
+        -50,
+        0,
+        50,
+        80,
+        98,
+        100
+      ]
+    }
+  ]
+}

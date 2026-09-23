@@ -1,0 +1,9 @@
+# 编译产物
+target/
+*.class
+
+# JUnit standalone（test.sh 会按需自动下载）
+lib/*.jar
+
+# 日志
+*.log

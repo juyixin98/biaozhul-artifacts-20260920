@@ -1,0 +1,6 @@
+{
+  "windowSizeMillis": 10,
+  "windowSlideMillis": 10,
+  "quantiles": [0.5],
+  "events": []
+}

@@ -1,0 +1,12 @@
+{
+  "windowSizeMillis": 10,
+  "windowSlideMillis": 10,
+  "allowedLatenessMillis": 0,
+  "quantiles": [
+    0.5
+  ],
+  "eventCount": 0,
+  "lateDroppedCount": 0,
+  "windowCount": 0,
+  "results": []
+}

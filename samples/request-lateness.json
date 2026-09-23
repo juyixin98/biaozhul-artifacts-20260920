@@ -1,0 +1,12 @@
+{
+  "windowSizeMillis": 10,
+  "windowSlideMillis": 10,
+  "quantiles": [0.5, 0.9],
+  "allowedLatenessMillis": 5,
+  "sortByTimestamp": false,
+  "events": [
+    {"timestampMillis": 1, "value": 10},
+    {"timestampMillis": 18, "value": 80},
+    {"timestampMillis": 3, "value": 20}
+  ]
+}
