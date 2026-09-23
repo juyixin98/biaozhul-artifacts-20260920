@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "bytes_in": 102,
+  "encrypted": true,
+  "counts": {
+    "records": 3,
+    "handshake": 3,
+    "change_cipher_spec": 0,
+    "alert": 0,
+    "application_data": 0
+  },
+  "records": [
+    {"index": 0, "content_type": 22, "content_type_name": "handshake", "legacy_version": "3.1", "fragment_length": 14},
+    {"index": 1, "content_type": 22, "content_type_name": "handshake", "legacy_version": "3.1", "fragment_length": 50},
+    {"index": 2, "content_type": 22, "content_type_name": "handshake", "legacy_version": "3.1", "fragment_length": 23}
+  ],
+  "client_hello": {
+    "client_version": "3.3",
+    "random_hex": "4242424242424242424242424242424242424242424242424242424242424242",
+    "session_id_hex": "",
+    "cipher_suites": ["0x1301"],
+    "grease_cipher_suites": [],
+    "compression_methods": [0],
+    "sni": "fragmented.example.net",
+    "alpn": ["h2"],
+    "unknown_extensions": []
+  },
+  "warnings": [],
+  "error": null
+}
+

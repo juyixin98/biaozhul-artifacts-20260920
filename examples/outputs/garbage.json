@@ -1,0 +1,21 @@
+{
+  "ok": false,
+  "bytes_in": 8,
+  "encrypted": false,
+  "counts": {
+    "records": 0,
+    "handshake": 0,
+    "change_cipher_spec": 0,
+    "alert": 0,
+    "application_data": 0
+  },
+  "records": [],
+  "client_hello": null,
+  "warnings": [],
+  "error": {
+    "type": "truncated",
+    "layer": "record",
+    "message": "truncated input at layer record (while reading length_prefixed)"
+  }
+}
+

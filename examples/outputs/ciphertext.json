@@ -1,0 +1,32 @@
+{
+  "ok": true,
+  "bytes_in": 270,
+  "encrypted": true,
+  "counts": {
+    "records": 4,
+    "handshake": 1,
+    "change_cipher_spec": 1,
+    "alert": 0,
+    "application_data": 2
+  },
+  "records": [
+    {"index": 0, "content_type": 22, "content_type_name": "handshake", "legacy_version": "3.1", "fragment_length": 89},
+    {"index": 1, "content_type": 23, "content_type_name": "application_data", "legacy_version": "3.1", "fragment_length": 120},
+    {"index": 2, "content_type": 20, "content_type_name": "change_cipher_spec", "legacy_version": "3.1", "fragment_length": 1},
+    {"index": 3, "content_type": 23, "content_type_name": "application_data", "legacy_version": "3.1", "fragment_length": 40}
+  ],
+  "client_hello": {
+    "client_version": "3.3",
+    "random_hex": "4242424242424242424242424242424242424242424242424242424242424242",
+    "session_id_hex": "",
+    "cipher_suites": ["0x1301", "0x1302", "0xc02f"],
+    "grease_cipher_suites": [],
+    "compression_methods": [0],
+    "sni": "example.com",
+    "alpn": ["h2", "http/1.1"],
+    "unknown_extensions": []
+  },
+  "warnings": [],
+  "error": null
+}
+

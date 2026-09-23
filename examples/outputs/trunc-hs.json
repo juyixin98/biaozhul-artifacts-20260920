@@ -1,0 +1,23 @@
+{
+  "ok": false,
+  "bytes_in": 42,
+  "encrypted": false,
+  "counts": {
+    "records": 1,
+    "handshake": 1,
+    "change_cipher_spec": 0,
+    "alert": 0,
+    "application_data": 0
+  },
+  "records": [
+    {"index": 0, "content_type": 22, "content_type_name": "handshake", "legacy_version": "3.1", "fragment_length": 37}
+  ],
+  "client_hello": null,
+  "warnings": [],
+  "error": {
+    "type": "truncated",
+    "layer": "handshake_body",
+    "message": "truncated input at layer handshake_body (while reading reassembly)"
+  }
+}
+

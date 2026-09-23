@@ -1,0 +1,21 @@
+{
+  "ok": false,
+  "bytes_in": 7,
+  "encrypted": false,
+  "counts": {
+    "records": 0,
+    "handshake": 0,
+    "change_cipher_spec": 0,
+    "alert": 0,
+    "application_data": 0
+  },
+  "records": [],
+  "client_hello": null,
+  "warnings": [],
+  "error": {
+    "type": "bad_content_type",
+    "layer": "record_header",
+    "message": "record content_type 99 is outside the accepted subset (20/21/22/23)"
+  }
+}
+

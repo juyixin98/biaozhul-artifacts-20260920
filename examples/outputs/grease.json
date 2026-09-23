@@ -1,0 +1,34 @@
+{
+  "ok": true,
+  "bytes_in": 96,
+  "encrypted": true,
+  "counts": {
+    "records": 1,
+    "handshake": 1,
+    "change_cipher_spec": 0,
+    "alert": 0,
+    "application_data": 0
+  },
+  "records": [
+    {"index": 0, "content_type": 22, "content_type_name": "handshake", "legacy_version": "3.1", "fragment_length": 91}
+  ],
+  "client_hello": {
+    "client_version": "3.3",
+    "random_hex": "4242424242424242424242424242424242424242424242424242424242424242",
+    "session_id_hex": "",
+    "cipher_suites": ["0x1301"],
+    "grease_cipher_suites": ["0x0a0a"],
+    "compression_methods": [0],
+    "sni": "grease.test",
+    "alpn": ["h2"],
+    "unknown_extensions": [
+      {"type": "0x00ab", "data_len": 2, "data_hex": "9999"}
+    ]
+  },
+  "warnings": [
+    "GREASE cipher_suite 0x0a0a classified",
+    "GREASE extension 0x2a2a classified"
+  ],
+  "error": null
+}
+

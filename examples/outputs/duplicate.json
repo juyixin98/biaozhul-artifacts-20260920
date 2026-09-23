@@ -1,0 +1,32 @@
+{
+  "ok": true,
+  "bytes_in": 125,
+  "encrypted": true,
+  "counts": {
+    "records": 1,
+    "handshake": 1,
+    "change_cipher_spec": 0,
+    "alert": 0,
+    "application_data": 0
+  },
+  "records": [
+    {"index": 0, "content_type": 22, "content_type_name": "handshake", "legacy_version": "3.1", "fragment_length": 120}
+  ],
+  "client_hello": {
+    "client_version": "3.3",
+    "random_hex": "4242424242424242424242424242424242424242424242424242424242424242",
+    "session_id_hex": "",
+    "cipher_suites": ["0x1301", "0x1302", "0xc02f"],
+    "grease_cipher_suites": [],
+    "compression_methods": [0],
+    "sni": "first.example",
+    "alpn": ["h2"],
+    "unknown_extensions": []
+  },
+  "warnings": [
+    "duplicate extension_type 0x0000 ignored (first wins)",
+    "duplicate extension_type 0x0010 ignored (first wins)"
+  ],
+  "error": null
+}
+

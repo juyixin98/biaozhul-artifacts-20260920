@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "bytes_in": 12,
+  "encrypted": true,
+  "counts": {
+    "records": 1,
+    "handshake": 0,
+    "change_cipher_spec": 0,
+    "alert": 0,
+    "application_data": 1
+  },
+  "records": [
+    {"index": 0, "content_type": 23, "content_type_name": "application_data", "legacy_version": "3.1", "fragment_length": 7}
+  ],
+  "client_hello": null,
+  "warnings": [],
+  "error": null
+}
+

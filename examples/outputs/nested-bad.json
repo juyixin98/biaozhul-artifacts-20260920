@@ -1,0 +1,23 @@
+{
+  "ok": false,
+  "bytes_in": 56,
+  "encrypted": false,
+  "counts": {
+    "records": 1,
+    "handshake": 1,
+    "change_cipher_spec": 0,
+    "alert": 0,
+    "application_data": 0
+  },
+  "records": [
+    {"index": 0, "content_type": 22, "content_type_name": "handshake", "legacy_version": "3.1", "fragment_length": 51}
+  ],
+  "client_hello": null,
+  "warnings": [],
+  "error": {
+    "type": "length_mismatch",
+    "layer": "handshake_body",
+    "message": "nested length mismatch in handshake_body (client_hello.extensions): declared 100, actual 4"
+  }
+}
+
