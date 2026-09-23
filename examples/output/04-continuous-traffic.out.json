@@ -1,0 +1,1026 @@
+{
+  "seed": 2026,
+  "now": 94,
+  "deadline": 200,
+  "initial_total": 2000,
+  "final_balances": [
+    {
+      "node": 0,
+      "balance": 546
+    },
+    {
+      "node": 1,
+      "balance": 462
+    },
+    {
+      "node": 2,
+      "balance": 447
+    },
+    {
+      "node": 3,
+      "balance": 545
+    }
+  ],
+  "final_total": 2000,
+  "snapshots": [
+    {
+      "snapshot": {
+        "id": 1,
+        "complete": true,
+        "complete_at": 43,
+        "nodes": [
+          {
+            "node": 0,
+            "state": {
+              "balance": 487
+            },
+            "taken_at": 36
+          },
+          {
+            "node": 1,
+            "state": {
+              "balance": 566
+            },
+            "taken_at": 30
+          },
+          {
+            "node": 2,
+            "state": {
+              "balance": 455
+            },
+            "taken_at": 34
+          },
+          {
+            "node": 3,
+            "state": {
+              "balance": 468
+            },
+            "taken_at": 36
+          }
+        ],
+        "channels": [
+          {
+            "from": 0,
+            "to": 3,
+            "msgs": [
+              {
+                "kind": 0,
+                "from": 0,
+                "to": 3,
+                "amount": 24,
+                "txn_id": 2,
+                "msg_id": 3,
+                "sent_at": 31
+              }
+            ],
+            "closed": true
+          }
+        ]
+      },
+      "node_sum": 1976,
+      "in_flight": 24,
+      "total": 2000,
+      "expected": 2000,
+      "conserved": true
+    }
+  ],
+  "network": [
+    {
+      "from": 0,
+      "to": 1,
+      "stats": {
+        "sent": 6,
+        "delivered": 6,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 0,
+      "to": 2,
+      "stats": {
+        "sent": 7,
+        "delivered": 7,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 0,
+      "to": 3,
+      "stats": {
+        "sent": 6,
+        "delivered": 6,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 1,
+      "to": 0,
+      "stats": {
+        "sent": 6,
+        "delivered": 6,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "stats": {
+        "sent": 8,
+        "delivered": 8,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 1,
+      "to": 3,
+      "stats": {
+        "sent": 8,
+        "delivered": 8,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 2,
+      "to": 0,
+      "stats": {
+        "sent": 7,
+        "delivered": 7,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 2,
+      "to": 1,
+      "stats": {
+        "sent": 8,
+        "delivered": 8,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "stats": {
+        "sent": 4,
+        "delivered": 4,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 3,
+      "to": 0,
+      "stats": {
+        "sent": 6,
+        "delivered": 6,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 3,
+      "to": 1,
+      "stats": {
+        "sent": 8,
+        "delivered": 8,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 3,
+      "to": 2,
+      "stats": {
+        "sent": 4,
+        "delivered": 4,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    }
+  ],
+  "events": [
+    {
+      "at": 10,
+      "kind": "schedule_transfer",
+      "to": 3,
+      "amount": 27
+    },
+    {
+      "at": 10,
+      "kind": "send",
+      "to": 3,
+      "amount": 27,
+      "txn_id": 1
+    },
+    {
+      "at": 13,
+      "kind": "schedule_transfer",
+      "from": 3,
+      "to": 1,
+      "amount": 36
+    },
+    {
+      "at": 13,
+      "kind": "send",
+      "from": 3,
+      "to": 1,
+      "amount": 36,
+      "txn_id": 1
+    },
+    {
+      "at": 13,
+      "kind": "deliver",
+      "to": 3,
+      "amount": 27,
+      "txn_id": 1,
+      "send_id": 1
+    },
+    {
+      "at": 16,
+      "kind": "schedule_transfer",
+      "from": 2,
+      "to": 1,
+      "amount": 38
+    },
+    {
+      "at": 16,
+      "kind": "send",
+      "from": 2,
+      "to": 1,
+      "amount": 38,
+      "txn_id": 1
+    },
+    {
+      "at": 19,
+      "kind": "schedule_transfer",
+      "from": 3,
+      "amount": 21
+    },
+    {
+      "at": 19,
+      "kind": "send",
+      "from": 3,
+      "amount": 21,
+      "txn_id": 2
+    },
+    {
+      "at": 19,
+      "kind": "deliver",
+      "from": 2,
+      "to": 1,
+      "amount": 38,
+      "txn_id": 1,
+      "send_id": 1
+    },
+    {
+      "at": 21,
+      "kind": "deliver",
+      "from": 3,
+      "to": 1,
+      "amount": 36,
+      "txn_id": 1,
+      "send_id": 1
+    },
+    {
+      "at": 22,
+      "kind": "schedule_transfer",
+      "from": 1,
+      "to": 2,
+      "amount": 8
+    },
+    {
+      "at": 22,
+      "kind": "send",
+      "from": 1,
+      "to": 2,
+      "amount": 8,
+      "txn_id": 1
+    },
+    {
+      "at": 25,
+      "kind": "schedule_transfer",
+      "from": 2,
+      "amount": 17
+    },
+    {
+      "at": 25,
+      "kind": "send",
+      "from": 2,
+      "amount": 17,
+      "txn_id": 2
+    },
+    {
+      "at": 25,
+      "kind": "deliver",
+      "from": 3,
+      "amount": 21,
+      "txn_id": 2,
+      "send_id": 2
+    },
+    {
+      "at": 27,
+      "kind": "deliver",
+      "from": 1,
+      "to": 2,
+      "amount": 8,
+      "txn_id": 1,
+      "send_id": 2
+    },
+    {
+      "at": 28,
+      "kind": "schedule_transfer",
+      "from": 3,
+      "to": 2,
+      "amount": 2
+    },
+    {
+      "at": 28,
+      "kind": "send",
+      "from": 3,
+      "to": 2,
+      "amount": 2,
+      "txn_id": 3
+    },
+    {
+      "at": 28,
+      "kind": "deliver",
+      "from": 2,
+      "amount": 17,
+      "txn_id": 2,
+      "send_id": 1
+    },
+    {
+      "at": 30,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "from": 1
+    },
+    {
+      "at": 30,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "from": 1,
+      "to": 2
+    },
+    {
+      "at": 30,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "from": 1,
+      "to": 3
+    },
+    {
+      "at": 30,
+      "kind": "snap_initiate",
+      "snap_id": 1,
+      "from": 1,
+      "note": "快照发起"
+    },
+    {
+      "at": 31,
+      "kind": "schedule_transfer",
+      "to": 3,
+      "amount": 24
+    },
+    {
+      "at": 31,
+      "kind": "send",
+      "to": 3,
+      "amount": 24,
+      "txn_id": 2
+    },
+    {
+      "at": 31,
+      "kind": "deliver",
+      "from": 3,
+      "to": 2,
+      "amount": 2,
+      "txn_id": 3,
+      "send_id": 1
+    },
+    {
+      "at": 34,
+      "kind": "schedule_transfer",
+      "from": 1,
+      "amount": 28
+    },
+    {
+      "at": 34,
+      "kind": "send",
+      "from": 1,
+      "amount": 28,
+      "txn_id": 2
+    },
+    {
+      "at": 34,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "from": 1,
+      "to": 2,
+      "send_id": 3
+    },
+    {
+      "at": 34,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "from": 2
+    },
+    {
+      "at": 34,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "from": 2,
+      "to": 1
+    },
+    {
+      "at": 34,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "from": 2,
+      "to": 3
+    },
+    {
+      "at": 36,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "from": 1,
+      "send_id": 1
+    },
+    {
+      "at": 36,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "to": 1
+    },
+    {
+      "at": 36,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "to": 2
+    },
+    {
+      "at": 36,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "to": 3
+    },
+    {
+      "at": 36,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "from": 1,
+      "to": 3,
+      "send_id": 2
+    },
+    {
+      "at": 36,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "from": 3
+    },
+    {
+      "at": 36,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "from": 3,
+      "to": 1
+    },
+    {
+      "at": 36,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "from": 3,
+      "to": 2
+    },
+    {
+      "at": 37,
+      "kind": "schedule_transfer",
+      "from": 1,
+      "to": 2,
+      "amount": 5
+    },
+    {
+      "at": 37,
+      "kind": "send",
+      "from": 1,
+      "to": 2,
+      "amount": 5,
+      "txn_id": 3
+    },
+    {
+      "at": 38,
+      "kind": "deliver",
+      "to": 3,
+      "amount": 24,
+      "txn_id": 2,
+      "send_id": 3
+    },
+    {
+      "at": 38,
+      "kind": "snap_captured",
+      "snap_id": 1,
+      "to": 3,
+      "amount": 24,
+      "txn_id": 2
+    },
+    {
+      "at": 38,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "from": 2,
+      "to": 1,
+      "send_id": 4
+    },
+    {
+      "at": 38,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "from": 2,
+      "to": 3,
+      "send_id": 2
+    },
+    {
+      "at": 40,
+      "kind": "schedule_transfer",
+      "from": 3,
+      "to": 1,
+      "amount": 18
+    },
+    {
+      "at": 40,
+      "kind": "send",
+      "from": 3,
+      "to": 1,
+      "amount": 18,
+      "txn_id": 4
+    },
+    {
+      "at": 40,
+      "kind": "deliver",
+      "from": 1,
+      "amount": 28,
+      "txn_id": 2,
+      "send_id": 2
+    },
+    {
+      "at": 41,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "from": 3,
+      "to": 1,
+      "send_id": 3
+    },
+    {
+      "at": 41,
+      "kind": "deliver",
+      "from": 1,
+      "to": 2,
+      "amount": 5,
+      "txn_id": 3,
+      "send_id": 5
+    },
+    {
+      "at": 42,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "from": 2,
+      "send_id": 2
+    },
+    {
+      "at": 42,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "to": 1,
+      "send_id": 3
+    },
+    {
+      "at": 42,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "to": 3,
+      "send_id": 4
+    },
+    {
+      "at": 43,
+      "kind": "schedule_transfer",
+      "to": 2,
+      "amount": 6
+    },
+    {
+      "at": 43,
+      "kind": "send",
+      "to": 2,
+      "amount": 6,
+      "txn_id": 3
+    },
+    {
+      "at": 43,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "to": 2,
+      "send_id": 3
+    },
+    {
+      "at": 43,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "from": 3,
+      "send_id": 5
+    },
+    {
+      "at": 43,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "from": 3,
+      "to": 2,
+      "send_id": 3
+    },
+    {
+      "at": 43,
+      "kind": "snap_complete",
+      "snap_id": 1,
+      "balances": [
+        509,
+        533,
+        460,
+        474
+      ]
+    },
+    {
+      "at": 45,
+      "kind": "deliver",
+      "from": 3,
+      "to": 1,
+      "amount": 18,
+      "txn_id": 4,
+      "send_id": 4
+    },
+    {
+      "at": 46,
+      "kind": "schedule_transfer",
+      "from": 1,
+      "to": 2,
+      "amount": 1
+    },
+    {
+      "at": 46,
+      "kind": "send",
+      "from": 1,
+      "to": 2,
+      "amount": 1,
+      "txn_id": 4
+    },
+    {
+      "at": 48,
+      "kind": "deliver",
+      "to": 2,
+      "amount": 6,
+      "txn_id": 3,
+      "send_id": 4
+    },
+    {
+      "at": 49,
+      "kind": "schedule_transfer",
+      "from": 3,
+      "to": 1,
+      "amount": 12
+    },
+    {
+      "at": 49,
+      "kind": "send",
+      "from": 3,
+      "to": 1,
+      "amount": 12,
+      "txn_id": 5
+    },
+    {
+      "at": 49,
+      "kind": "deliver",
+      "from": 1,
+      "to": 2,
+      "amount": 1,
+      "txn_id": 4,
+      "send_id": 6
+    },
+    {
+      "at": 52,
+      "kind": "schedule_transfer",
+      "from": 2,
+      "to": 1,
+      "amount": 13
+    },
+    {
+      "at": 52,
+      "kind": "send",
+      "from": 2,
+      "to": 1,
+      "amount": 13,
+      "txn_id": 3
+    },
+    {
+      "at": 55,
+      "kind": "schedule_transfer",
+      "from": 1,
+      "amount": 1
+    },
+    {
+      "at": 55,
+      "kind": "send",
+      "from": 1,
+      "amount": 1,
+      "txn_id": 5
+    },
+    {
+      "at": 55,
+      "kind": "deliver",
+      "from": 3,
+      "to": 1,
+      "amount": 12,
+      "txn_id": 5,
+      "send_id": 5
+    },
+    {
+      "at": 57,
+      "kind": "deliver",
+      "from": 2,
+      "to": 1,
+      "amount": 13,
+      "txn_id": 3,
+      "send_id": 7
+    },
+    {
+      "at": 58,
+      "kind": "schedule_transfer",
+      "from": 1,
+      "to": 2,
+      "amount": 13
+    },
+    {
+      "at": 58,
+      "kind": "send",
+      "from": 1,
+      "to": 2,
+      "amount": 13,
+      "txn_id": 6
+    },
+    {
+      "at": 60,
+      "kind": "deliver",
+      "from": 1,
+      "amount": 1,
+      "txn_id": 5,
+      "send_id": 4
+    },
+    {
+      "at": 61,
+      "kind": "schedule_transfer",
+      "to": 2,
+      "amount": 3
+    },
+    {
+      "at": 61,
+      "kind": "send",
+      "to": 2,
+      "amount": 3,
+      "txn_id": 4
+    },
+    {
+      "at": 64,
+      "kind": "schedule_transfer",
+      "from": 1,
+      "to": 3,
+      "amount": 27
+    },
+    {
+      "at": 64,
+      "kind": "send",
+      "from": 1,
+      "to": 3,
+      "amount": 27,
+      "txn_id": 7
+    },
+    {
+      "at": 64,
+      "kind": "deliver",
+      "from": 1,
+      "to": 2,
+      "amount": 13,
+      "txn_id": 6,
+      "send_id": 8
+    },
+    {
+      "at": 66,
+      "kind": "deliver",
+      "to": 2,
+      "amount": 3,
+      "txn_id": 4,
+      "send_id": 5
+    },
+    {
+      "at": 67,
+      "kind": "schedule_transfer",
+      "from": 2,
+      "amount": 22
+    },
+    {
+      "at": 67,
+      "kind": "send",
+      "from": 2,
+      "amount": 22,
+      "txn_id": 4
+    },
+    {
+      "at": 70,
+      "kind": "schedule_transfer",
+      "to": 3,
+      "amount": 9
+    },
+    {
+      "at": 70,
+      "kind": "send",
+      "to": 3,
+      "amount": 9,
+      "txn_id": 5
+    },
+    {
+      "at": 72,
+      "kind": "deliver",
+      "from": 1,
+      "to": 3,
+      "amount": 27,
+      "txn_id": 7,
+      "send_id": 6
+    },
+    {
+      "at": 73,
+      "kind": "schedule_transfer",
+      "from": 1,
+      "to": 3,
+      "amount": 30
+    },
+    {
+      "at": 73,
+      "kind": "send",
+      "from": 1,
+      "to": 3,
+      "amount": 30,
+      "txn_id": 8
+    },
+    {
+      "at": 74,
+      "kind": "deliver",
+      "to": 3,
+      "amount": 9,
+      "txn_id": 5,
+      "send_id": 6
+    },
+    {
+      "at": 75,
+      "kind": "deliver",
+      "from": 2,
+      "amount": 22,
+      "txn_id": 4,
+      "send_id": 6
+    },
+    {
+      "at": 76,
+      "kind": "schedule_transfer",
+      "from": 3,
+      "to": 2,
+      "amount": 6
+    },
+    {
+      "at": 76,
+      "kind": "send",
+      "from": 3,
+      "to": 2,
+      "amount": 6,
+      "txn_id": 6
+    },
+    {
+      "at": 78,
+      "kind": "deliver",
+      "from": 1,
+      "to": 3,
+      "amount": 30,
+      "txn_id": 8,
+      "send_id": 7
+    },
+    {
+      "at": 79,
+      "kind": "schedule_transfer",
+      "from": 2,
+      "amount": 7
+    },
+    {
+      "at": 79,
+      "kind": "send",
+      "from": 2,
+      "amount": 7,
+      "txn_id": 5
+    },
+    {
+      "at": 82,
+      "kind": "schedule_transfer",
+      "from": 1,
+      "to": 3,
+      "amount": 23
+    },
+    {
+      "at": 82,
+      "kind": "send",
+      "from": 1,
+      "to": 3,
+      "amount": 23,
+      "txn_id": 9
+    },
+    {
+      "at": 84,
+      "kind": "deliver",
+      "from": 3,
+      "to": 2,
+      "amount": 6,
+      "txn_id": 6,
+      "send_id": 4
+    },
+    {
+      "at": 84,
+      "kind": "deliver",
+      "from": 2,
+      "amount": 7,
+      "txn_id": 5,
+      "send_id": 7
+    },
+    {
+      "at": 85,
+      "kind": "schedule_transfer",
+      "from": 1,
+      "amount": 13
+    },
+    {
+      "at": 85,
+      "kind": "send",
+      "from": 1,
+      "amount": 13,
+      "txn_id": 10
+    },
+    {
+      "at": 88,
+      "kind": "schedule_transfer",
+      "from": 1,
+      "amount": 6
+    },
+    {
+      "at": 88,
+      "kind": "send",
+      "from": 1,
+      "amount": 6,
+      "txn_id": 11
+    },
+    {
+      "at": 88,
+      "kind": "deliver",
+      "from": 1,
+      "to": 3,
+      "amount": 23,
+      "txn_id": 9,
+      "send_id": 8
+    },
+    {
+      "at": 88,
+      "kind": "deliver",
+      "from": 1,
+      "amount": 13,
+      "txn_id": 10,
+      "send_id": 5
+    },
+    {
+      "at": 94,
+      "kind": "deliver",
+      "from": 1,
+      "amount": 6,
+      "txn_id": 11,
+      "send_id": 6
+    }
+  ]
+}

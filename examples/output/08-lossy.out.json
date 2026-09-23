@@ -1,0 +1,97 @@
+{
+  "seed": 1,
+  "now": 2,
+  "deadline": 40,
+  "initial_total": 200,
+  "final_balances": [
+    {
+      "node": 0,
+      "balance": 70
+    },
+    {
+      "node": 1,
+      "balance": 100
+    }
+  ],
+  "final_total": 170,
+  "snapshots": [
+    {
+      "snapshot": {
+        "id": 1,
+        "complete": false,
+        "nodes": [
+          {
+            "node": 0,
+            "state": {
+              "balance": 70
+            },
+            "taken_at": 2
+          }
+        ],
+        "channels": null,
+        "open_channels": [
+          [
+            1,
+            0
+          ]
+        ]
+      },
+      "node_sum": 70,
+      "in_flight": 0,
+      "total": 70,
+      "expected": 200,
+      "conserved": false
+    }
+  ],
+  "network": [
+    {
+      "from": 0,
+      "to": 1,
+      "stats": {
+        "sent": 2,
+        "delivered": 0,
+        "lost": 2,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 1,
+      "to": 0,
+      "stats": {
+        "sent": 2,
+        "delivered": 0,
+        "lost": 2,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    }
+  ],
+  "events": [
+    {
+      "at": 1,
+      "kind": "schedule_transfer",
+      "to": 1,
+      "amount": 30
+    },
+    {
+      "at": 1,
+      "kind": "send",
+      "to": 1,
+      "amount": 30,
+      "txn_id": 1
+    },
+    {
+      "at": 2,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "to": 1
+    },
+    {
+      "at": 2,
+      "kind": "snap_initiate",
+      "snap_id": 1,
+      "note": "快照发起"
+    }
+  ]
+}

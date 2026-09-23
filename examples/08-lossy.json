@@ -1,0 +1,13 @@
+{
+  "_comment": "丢包信道（loss_pct=100）：标记永远无法到达对端，快照无法完成——用于验证模拟器能如实报告 complete=false 及 open_channels，也直观说明 CL 算法依赖可靠信道。最终余额少于初始总额（资金随丢失的 REQ 消失）。",
+  "seed": 1,
+  "balances": [100, 100],
+  "default_policy": {"min_delay": 2, "max_delay": 5, "loss_pct": 100, "fifo": true},
+  "transfers": [
+    {"at": 1, "from": 0, "to": 1, "amount": 30}
+  ],
+  "snapshots": [
+    {"at": 2, "id": 1, "initiator": 0}
+  ],
+  "deadline": 40
+}

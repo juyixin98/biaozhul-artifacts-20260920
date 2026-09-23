@@ -1,0 +1,12 @@
+{
+  "_comment": "持续流量 + 多快照交叠：在持续随机转账期间先后发起两个快照（t=20、t=33），第二个在第一个完成前启动。",
+  "seed": 77,
+  "balances": [300, 300, 300],
+  "default_policy": {"min_delay": 4, "max_delay": 12, "fifo": true},
+  "snapshots": [
+    {"at": 20, "id": 100, "initiator": 0},
+    {"at": 33, "id": 200, "initiator": 2}
+  ],
+  "traffic": {"from": 5, "until": 80, "every": 4, "max_amount": 25},
+  "deadline": 200
+}

@@ -1,0 +1,14 @@
+{
+  "_comment": "空信道：转账业务在 t=1 发起、约 t=30 全部落定，t=50 才拍快照，此时所有信道为空，在途金额必须为 0，余额和即总额。",
+  "seed": 7,
+  "balances": [100, 100],
+  "default_policy": {"min_delay": 5, "max_delay": 10, "fifo": true},
+  "transfers": [
+    {"at": 1, "from": 0, "to": 1, "amount": 30},
+    {"at": 2, "from": 1, "to": 0, "amount": 12}
+  ],
+  "snapshots": [
+    {"at": 50, "id": 1, "initiator": 1}
+  ],
+  "deadline": 80
+}

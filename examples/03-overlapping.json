@@ -1,0 +1,19 @@
+{
+  "_comment": "标记交错：4 节点全互联，3 个快照在 t=4/5/7 由不同节点发起，标记在网内交错传播。每个快照独立守恒，互不串台。",
+  "seed": 99,
+  "balances": [100, 100, 100, 100],
+  "default_policy": {"min_delay": 4, "max_delay": 9, "fifo": true},
+  "transfers": [
+    {"at": 1,  "from": 0, "to": 3, "amount": 10},
+    {"at": 3,  "from": 1, "to": 2, "amount": 20},
+    {"at": 6,  "from": 2, "to": 0, "amount": 15},
+    {"at": 8,  "from": 3, "to": 1, "amount": 5},
+    {"at": 10, "from": 0, "to": 2, "amount": 8}
+  ],
+  "snapshots": [
+    {"at": 4, "id": 1, "initiator": 0},
+    {"at": 5, "id": 2, "initiator": 2},
+    {"at": 7, "id": 3, "initiator": 1}
+  ],
+  "deadline": 120
+}

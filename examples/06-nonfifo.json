@@ -1,0 +1,16 @@
+{
+  "_comment": "非 FIFO 信道：延迟抖动 1..30，消息必然乱序（统计 reordered>0）。Chandy-Lamport 的标记语义不成立，快照 open_channels 与归类可能异常——用于反面对照（可靠 FIFO 是算法前提）。系统无丢包时最终总量仍守恒。",
+  "seed": 555,
+  "balances": [200, 200, 200],
+  "default_policy": {"min_delay": 1, "max_delay": 30, "fifo": false},
+  "transfers": [
+    {"at": 1, "from": 0, "to": 1, "amount": 10},
+    {"at": 2, "from": 0, "to": 1, "amount": 10},
+    {"at": 3, "from": 0, "to": 2, "amount": 10},
+    {"at": 4, "from": 1, "to": 2, "amount": 10}
+  ],
+  "snapshots": [
+    {"at": 2, "id": 1, "initiator": 0}
+  ],
+  "deadline": 200
+}

@@ -1,0 +1,298 @@
+{
+  "seed": 42,
+  "now": 43,
+  "deadline": 80,
+  "initial_total": 200,
+  "final_balances": [
+    {
+      "node": 0,
+      "balance": 75
+    },
+    {
+      "node": 1,
+      "balance": 95
+    },
+    {
+      "node": 2,
+      "balance": 30
+    }
+  ],
+  "final_total": 200,
+  "snapshots": [
+    {
+      "snapshot": {
+        "id": 1,
+        "complete": true,
+        "complete_at": 43,
+        "nodes": [
+          {
+            "node": 0,
+            "state": {
+              "balance": 100
+            },
+            "taken_at": 2
+          },
+          {
+            "node": 1,
+            "state": {
+              "balance": 60
+            },
+            "taken_at": 22
+          },
+          {
+            "node": 2,
+            "state": {
+              "balance": 30
+            },
+            "taken_at": 22
+          }
+        ],
+        "channels": [
+          {
+            "from": 2,
+            "to": 1,
+            "msgs": [
+              {
+                "kind": 0,
+                "from": 2,
+                "to": 1,
+                "amount": 10,
+                "txn_id": 1,
+                "msg_id": 1,
+                "sent_at": 4
+              }
+            ],
+            "closed": true
+          }
+        ]
+      },
+      "node_sum": 190,
+      "in_flight": 10,
+      "total": 200,
+      "expected": 200,
+      "conserved": true
+    }
+  ],
+  "network": [
+    {
+      "from": 0,
+      "to": 1,
+      "stats": {
+        "sent": 3,
+        "delivered": 3,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 0,
+      "to": 2,
+      "stats": {
+        "sent": 2,
+        "delivered": 2,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 1,
+      "to": 0,
+      "stats": {
+        "sent": 3,
+        "delivered": 3,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "stats": {
+        "sent": 3,
+        "delivered": 3,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 2,
+      "to": 0,
+      "stats": {
+        "sent": 2,
+        "delivered": 2,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 2,
+      "to": 1,
+      "stats": {
+        "sent": 3,
+        "delivered": 3,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    }
+  ],
+  "events": [
+    {
+      "at": 2,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "to": 1
+    },
+    {
+      "at": 2,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "to": 2
+    },
+    {
+      "at": 2,
+      "kind": "snap_initiate",
+      "snap_id": 1,
+      "note": "快照发起"
+    },
+    {
+      "at": 4,
+      "kind": "schedule_transfer",
+      "to": 1,
+      "amount": 25
+    },
+    {
+      "at": 4,
+      "kind": "send",
+      "to": 1,
+      "amount": 25,
+      "txn_id": 1
+    },
+    {
+      "at": 4,
+      "kind": "schedule_transfer",
+      "from": 2,
+      "to": 1,
+      "amount": 10
+    },
+    {
+      "at": 4,
+      "kind": "send",
+      "from": 2,
+      "to": 1,
+      "amount": 10,
+      "txn_id": 1
+    },
+    {
+      "at": 22,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "to": 1,
+      "send_id": 1
+    },
+    {
+      "at": 22,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "from": 1
+    },
+    {
+      "at": 22,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "from": 1,
+      "to": 2
+    },
+    {
+      "at": 22,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "to": 2,
+      "send_id": 1
+    },
+    {
+      "at": 22,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "from": 2
+    },
+    {
+      "at": 22,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "from": 2,
+      "to": 1
+    },
+    {
+      "at": 24,
+      "kind": "deliver",
+      "to": 1,
+      "amount": 25,
+      "txn_id": 1,
+      "send_id": 2
+    },
+    {
+      "at": 24,
+      "kind": "deliver",
+      "from": 2,
+      "to": 1,
+      "amount": 10,
+      "txn_id": 1,
+      "send_id": 1
+    },
+    {
+      "at": 24,
+      "kind": "snap_captured",
+      "snap_id": 1,
+      "from": 2,
+      "to": 1,
+      "amount": 10,
+      "txn_id": 1
+    },
+    {
+      "at": 42,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "from": 1,
+      "send_id": 3
+    },
+    {
+      "at": 42,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "from": 1,
+      "to": 2,
+      "send_id": 2
+    },
+    {
+      "at": 42,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "from": 2,
+      "send_id": 2
+    },
+    {
+      "at": 43,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "from": 2,
+      "to": 1,
+      "send_id": 3
+    },
+    {
+      "at": 43,
+      "kind": "snap_complete",
+      "snap_id": 1,
+      "balances": [
+        75,
+        95,
+        30
+      ]
+    }
+  ]
+}

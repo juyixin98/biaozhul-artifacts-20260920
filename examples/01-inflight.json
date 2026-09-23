@@ -1,0 +1,14 @@
+{
+  "_comment": "基础守恒（在途消息）：3 节点，可靠 FIFO，固定 20 拍延迟。t=2 发起快照（节点记录状态、标记入网），t=4 转账——FIFO 保证标记排在消息前面，消息 t=24 到达对端时落在『已记录状态、尚未收到标记』窗口，必被记为在途。验证 记录余额和 + 在途金额 = 初始总额。",
+  "seed": 42,
+  "balances": [100, 60, 40],
+  "default_policy": {"min_delay": 20, "max_delay": 20, "fifo": true},
+  "transfers": [
+    {"at": 4, "from": 0, "to": 1, "amount": 25},
+    {"at": 4, "from": 2, "to": 1, "amount": 10}
+  ],
+  "snapshots": [
+    {"at": 2, "id": 1, "initiator": 0}
+  ],
+  "deadline": 80
+}

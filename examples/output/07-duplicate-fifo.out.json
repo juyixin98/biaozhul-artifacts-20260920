@@ -1,0 +1,157 @@
+{
+  "seed": 313,
+  "now": 18,
+  "deadline": 120,
+  "initial_total": 300,
+  "final_balances": [
+    {
+      "node": 0,
+      "balance": 130
+    },
+    {
+      "node": 1,
+      "balance": 170
+    }
+  ],
+  "final_total": 300,
+  "snapshots": [
+    {
+      "snapshot": {
+        "id": 1,
+        "complete": true,
+        "complete_at": 15,
+        "nodes": [
+          {
+            "node": 0,
+            "state": {
+              "balance": 110
+            },
+            "taken_at": 4
+          },
+          {
+            "node": 1,
+            "state": {
+              "balance": 190
+            },
+            "taken_at": 8
+          }
+        ],
+        "channels": null
+      },
+      "node_sum": 300,
+      "in_flight": 0,
+      "total": 300,
+      "expected": 300,
+      "conserved": true
+    }
+  ],
+  "network": [
+    {
+      "from": 0,
+      "to": 1,
+      "stats": {
+        "sent": 4,
+        "delivered": 4,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    },
+    {
+      "from": 1,
+      "to": 0,
+      "stats": {
+        "sent": 4,
+        "delivered": 4,
+        "lost": 0,
+        "duplicated": 0,
+        "reordered": 0
+      }
+    }
+  ],
+  "events": [
+    {
+      "at": 1,
+      "kind": "schedule_transfer",
+      "to": 1,
+      "amount": 40
+    },
+    {
+      "at": 1,
+      "kind": "send",
+      "to": 1,
+      "amount": 40,
+      "txn_id": 1
+    },
+    {
+      "at": 4,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "to": 1
+    },
+    {
+      "at": 4,
+      "kind": "snap_initiate",
+      "snap_id": 1,
+      "note": "快照发起"
+    },
+    {
+      "at": 7,
+      "kind": "deliver",
+      "to": 1,
+      "amount": 40,
+      "txn_id": 1,
+      "send_id": 1
+    },
+    {
+      "at": 8,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "to": 1,
+      "send_id": 2
+    },
+    {
+      "at": 8,
+      "kind": "marker_send",
+      "snap_id": 1,
+      "from": 1
+    },
+    {
+      "at": 12,
+      "kind": "schedule_transfer",
+      "from": 1,
+      "amount": 20
+    },
+    {
+      "at": 12,
+      "kind": "send",
+      "from": 1,
+      "amount": 20,
+      "txn_id": 1
+    },
+    {
+      "at": 15,
+      "kind": "marker_deliver",
+      "snap_id": 1,
+      "from": 1,
+      "send_id": 3
+    },
+    {
+      "at": 15,
+      "kind": "snap_complete",
+      "snap_id": 1,
+      "balances": [
+        110,
+        170
+      ]
+    },
+    {
+      "at": 18,
+      "kind": "deliver",
+      "from": 1,
+      "amount": 20,
+      "txn_id": 1,
+      "send_id": 4
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "_comment": "可靠 FIFO 但有重复投递（dup_pct=50）：信道仍可靠有序，Chandy-Lamport 仍成立；业务层靠 TxnID 幂等去重，金额不重复入账（drop_dup 事件）。快照把每个重复副本都计入在途消息（网络视角如实呈现），入账仍只一次。",
+  "seed": 313,
+  "balances": [150, 150],
+  "default_policy": {"min_delay": 3, "max_delay": 8, "dup_pct": 50, "fifo": true},
+  "transfers": [
+    {"at": 1, "from": 0, "to": 1, "amount": 40},
+    {"at": 12, "from": 1, "to": 0, "amount": 20}
+  ],
+  "snapshots": [
+    {"at": 4, "id": 1, "initiator": 0}
+  ],
+  "deadline": 120
+}

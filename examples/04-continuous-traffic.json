@@ -1,0 +1,11 @@
+{
+  "_comment": "快照期间持续发送：t=10..90 每 3 拍随机一笔转账（种子 2026 可复现），t=30 发起快照。快照窗口内业务消息仍在持续产生，全部被正确归类为'记录前/在途/记录后'，总量守恒。",
+  "seed": 2026,
+  "balances": [500, 500, 500, 500],
+  "default_policy": {"min_delay": 3, "max_delay": 8, "fifo": true},
+  "snapshots": [
+    {"at": 30, "id": 1, "initiator": 1}
+  ],
+  "traffic": {"from": 10, "until": 90, "every": 3, "max_amount": 40},
+  "deadline": 200
+}
