@@ -1,0 +1,28 @@
+{
+  "name": "anonymous-eligibility-circuit",
+  "version": "1.0.0",
+  "main": "src/cli.ts",
+  "scripts": {
+    "setup": "bash scripts/setup.sh",
+    "prove": "tsx src/cli.ts prove",
+    "verify": "tsx src/cli.ts verify",
+    "demo": "tsx src/cli.ts demo",
+    "test": "npm run setup && tsx --test test/eligibility.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "description": "Local anonymous eligibility proof: age range + Merkle membership + nullifier (Circom/Groth16/TypeScript)",
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "circom2": "^0.2.23",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "circomlib": "^2.0.5",
+    "circomlibjs": "^0.1.7",
+    "snarkjs": "^0.7.6"
+  }
+}
