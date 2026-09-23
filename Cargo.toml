@@ -1,0 +1,28 @@
+[package]
+name = "dns_compress"
+version = "0.1.0"
+edition = "2021"
+description = "DNS 报文压缩名字（RFC 1035 §4.1.4）增量解码 / 有限编码库，附带本地 TCP 测试服务"
+license = "MIT"
+
+[lib]
+name = "dns_compress"
+path = "src/lib.rs"
+
+[[bin]]
+name = "dns-tcp-server"
+path = "src/bin/server.rs"
+
+[[example]]
+name = "client"
+path = "examples/client.rs"
+
+[[example]]
+name = "gen_samples"
+path = "examples/gen_samples.rs"
+
+[profile.release]
+lto = true
+
+# 纯标准库实现，故意不引入任何第三方协议解析库。
+[dependencies]
