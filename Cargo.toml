@@ -1,0 +1,24 @@
+[package]
+name = "resp-incremental"
+version = "0.1.0"
+edition = "2021"
+description = "Hand-written incremental RESP2 byte parser with a local TCP echo test server"
+license = "MIT"
+
+[lib]
+name = "resp_incremental"
+path = "src/lib.rs"
+
+[[bin]]
+name = "resp-server"
+path = "src/bin/server.rs"
+
+[[bin]]
+name = "resp-dump"
+path = "src/bin/dump.rs"
+
+[profile.release]
+opt-level = 3
+
+[profile.dev]
+opt-level = 0
