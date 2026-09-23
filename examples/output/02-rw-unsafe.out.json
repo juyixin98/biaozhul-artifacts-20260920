@@ -1,0 +1,1777 @@
+{
+  "action": "all",
+  "ok": true,
+  "report": {
+    "valid": true,
+    "nodes": [
+      "n1",
+      "n2",
+      "n3"
+    ],
+    "domains": [
+      "az-1",
+      "az-2",
+      "az-3"
+    ],
+    "num_nodes": 3,
+    "num_domains": 3,
+    "total_weight": 6,
+    "read_quorum": 2,
+    "write_quorum": 4,
+    "exhaustive": true,
+    "exhaustive_limit": 20,
+    "num_read_quorums": 6,
+    "num_write_quorums": 3,
+    "read_quorums": [
+      [
+        "n2"
+      ],
+      [
+        "n1"
+      ],
+      [
+        "n2",
+        "n3"
+      ],
+      [
+        "n1",
+        "n3"
+      ],
+      [
+        "n1",
+        "n2"
+      ],
+      [
+        "n1",
+        "n2",
+        "n3"
+      ]
+    ],
+    "write_quorums": [
+      [
+        "n1",
+        "n3"
+      ],
+      [
+        "n1",
+        "n2"
+      ],
+      [
+        "n1",
+        "n2",
+        "n3"
+      ]
+    ],
+    "ww_safe": true,
+    "rw_safe": false,
+    "minimal_rw_counterexample": {
+      "kind": "rw",
+      "quorum_a": [
+        "n2"
+      ],
+      "weight_a": 2,
+      "quorum_b": [
+        "n1",
+        "n3"
+      ],
+      "weight_b": 4,
+      "explanation": "a read quorum (read_quorum=2) and a write quorum (write_quorum=4) are node-disjoint; a read can miss a committed write entirely (stale read)",
+      "witness": {
+        "input": {
+          "nodes": [
+            {
+              "id": "n1",
+              "weight": 3,
+              "domain": "az-1"
+            },
+            {
+              "id": "n2",
+              "weight": 2,
+              "domain": "az-2"
+            },
+            {
+              "id": "n3",
+              "weight": 1,
+              "domain": "az-3"
+            }
+          ],
+          "read_quorum": 2,
+          "write_quorum": 4,
+          "sim": {
+            "seed": 1,
+            "runs": 1,
+            "horizon": 30,
+            "client_timeout": 1000,
+            "max_attempts": 1,
+            "operations": 2,
+            "kind": "rw",
+            "rules": [
+              {
+                "to": "n2",
+                "role": "A",
+                "msg_type": "request",
+                "action": "deliver",
+                "delay": 1
+              },
+              {
+                "from": "n2",
+                "role": "A",
+                "msg_type": "response",
+                "action": "deliver",
+                "delay": 1
+              },
+              {
+                "to": "n1",
+                "role": "B",
+                "msg_type": "request",
+                "action": "deliver",
+                "delay": 1
+              },
+              {
+                "from": "n1",
+                "role": "B",
+                "msg_type": "response",
+                "action": "deliver",
+                "delay": 1
+              },
+              {
+                "to": "n3",
+                "role": "B",
+                "msg_type": "request",
+                "action": "deliver",
+                "delay": 1
+              },
+              {
+                "from": "n3",
+                "role": "B",
+                "msg_type": "response",
+                "action": "deliver",
+                "delay": 1
+              },
+              {
+                "role": "A",
+                "msg_type": "request",
+                "action": "drop"
+              },
+              {
+                "role": "A",
+                "msg_type": "response",
+                "action": "drop"
+              },
+              {
+                "role": "B",
+                "msg_type": "request",
+                "action": "drop"
+              },
+              {
+                "role": "B",
+                "msg_type": "response",
+                "action": "drop"
+              },
+              {
+                "action": "deliver",
+                "delay": 1
+              }
+            ]
+          }
+        },
+        "result": {
+          "runs": 1,
+          "scripted": true,
+          "completed_total": 2,
+          "timed_out_total": 0,
+          "violation_runs": 1,
+          "violations": [
+            {
+              "op_a": "op1-read",
+              "op_b": "op2-write",
+              "kind": "rw",
+              "responders_a": [
+                "n2"
+              ],
+              "responders_b": [
+                "n1",
+                "n3"
+              ]
+            }
+          ],
+          "run_results": [
+            {
+              "seed": 1,
+              "completed": 2,
+              "timed_out": 0,
+              "requests_sent": 6,
+              "responses_delivered": 3,
+              "dropped": 3,
+              "duplicated": 0,
+              "max_time": 1000,
+              "violations": [
+                {
+                  "op_a": "op1-read",
+                  "op_b": "op2-write",
+                  "kind": "rw",
+                  "responders_a": [
+                    "n2"
+                  ],
+                  "responders_b": [
+                    "n1",
+                    "n3"
+                  ]
+                }
+              ],
+              "completed_ops": [
+                {
+                  "op": "op1-read",
+                  "kind": "read",
+                  "responders": [
+                    "n2"
+                  ],
+                  "weight": 2,
+                  "completed_at": 2
+                },
+                {
+                  "op": "op2-write",
+                  "kind": "write",
+                  "responders": [
+                    "n1",
+                    "n3"
+                  ],
+                  "weight": 4,
+                  "completed_at": 2
+                }
+              ],
+              "trace": [
+                {
+                  "t": 0,
+                  "type": "attempt",
+                  "detail": "op1-read attempt=1 role=A"
+                },
+                {
+                  "t": 0,
+                  "type": "drop",
+                  "detail": "client -\u003e n1 (op1-read)"
+                },
+                {
+                  "t": 0,
+                  "type": "drop",
+                  "detail": "client -\u003e n3 (op1-read)"
+                },
+                {
+                  "t": 0,
+                  "type": "attempt",
+                  "detail": "op2-write attempt=1 role=B"
+                },
+                {
+                  "t": 0,
+                  "type": "drop",
+                  "detail": "client -\u003e n2 (op2-write)"
+                },
+                {
+                  "t": 2,
+                  "type": "quorum",
+                  "detail": "op1-read weight=2"
+                },
+                {
+                  "t": 2,
+                  "type": "quorum",
+                  "detail": "op2-write weight=4"
+                }
+              ]
+            }
+          ],
+          "all_complete": true,
+          "safe": false
+        }
+      }
+    },
+    "minimal_counterexample": {
+      "kind": "rw",
+      "quorum_a": [
+        "n2"
+      ],
+      "weight_a": 2,
+      "quorum_b": [
+        "n1",
+        "n3"
+      ],
+      "weight_b": 4,
+      "explanation": "a read quorum (read_quorum=2) and a write quorum (write_quorum=4) are node-disjoint; a read can miss a committed write entirely (stale read)",
+      "witness": {
+        "input": {
+          "nodes": [
+            {
+              "id": "n1",
+              "weight": 3,
+              "domain": "az-1"
+            },
+            {
+              "id": "n2",
+              "weight": 2,
+              "domain": "az-2"
+            },
+            {
+              "id": "n3",
+              "weight": 1,
+              "domain": "az-3"
+            }
+          ],
+          "read_quorum": 2,
+          "write_quorum": 4,
+          "sim": {
+            "seed": 1,
+            "runs": 1,
+            "horizon": 30,
+            "client_timeout": 1000,
+            "max_attempts": 1,
+            "operations": 2,
+            "kind": "rw",
+            "rules": [
+              {
+                "to": "n2",
+                "role": "A",
+                "msg_type": "request",
+                "action": "deliver",
+                "delay": 1
+              },
+              {
+                "from": "n2",
+                "role": "A",
+                "msg_type": "response",
+                "action": "deliver",
+                "delay": 1
+              },
+              {
+                "to": "n1",
+                "role": "B",
+                "msg_type": "request",
+                "action": "deliver",
+                "delay": 1
+              },
+              {
+                "from": "n1",
+                "role": "B",
+                "msg_type": "response",
+                "action": "deliver",
+                "delay": 1
+              },
+              {
+                "to": "n3",
+                "role": "B",
+                "msg_type": "request",
+                "action": "deliver",
+                "delay": 1
+              },
+              {
+                "from": "n3",
+                "role": "B",
+                "msg_type": "response",
+                "action": "deliver",
+                "delay": 1
+              },
+              {
+                "role": "A",
+                "msg_type": "request",
+                "action": "drop"
+              },
+              {
+                "role": "A",
+                "msg_type": "response",
+                "action": "drop"
+              },
+              {
+                "role": "B",
+                "msg_type": "request",
+                "action": "drop"
+              },
+              {
+                "role": "B",
+                "msg_type": "response",
+                "action": "drop"
+              },
+              {
+                "action": "deliver",
+                "delay": 1
+              }
+            ]
+          }
+        },
+        "result": {
+          "runs": 1,
+          "scripted": true,
+          "completed_total": 2,
+          "timed_out_total": 0,
+          "violation_runs": 1,
+          "violations": [
+            {
+              "op_a": "op1-read",
+              "op_b": "op2-write",
+              "kind": "rw",
+              "responders_a": [
+                "n2"
+              ],
+              "responders_b": [
+                "n1",
+                "n3"
+              ]
+            }
+          ],
+          "run_results": [
+            {
+              "seed": 1,
+              "completed": 2,
+              "timed_out": 0,
+              "requests_sent": 6,
+              "responses_delivered": 3,
+              "dropped": 3,
+              "duplicated": 0,
+              "max_time": 1000,
+              "violations": [
+                {
+                  "op_a": "op1-read",
+                  "op_b": "op2-write",
+                  "kind": "rw",
+                  "responders_a": [
+                    "n2"
+                  ],
+                  "responders_b": [
+                    "n1",
+                    "n3"
+                  ]
+                }
+              ],
+              "completed_ops": [
+                {
+                  "op": "op1-read",
+                  "kind": "read",
+                  "responders": [
+                    "n2"
+                  ],
+                  "weight": 2,
+                  "completed_at": 2
+                },
+                {
+                  "op": "op2-write",
+                  "kind": "write",
+                  "responders": [
+                    "n1",
+                    "n3"
+                  ],
+                  "weight": 4,
+                  "completed_at": 2
+                }
+              ],
+              "trace": [
+                {
+                  "t": 0,
+                  "type": "attempt",
+                  "detail": "op1-read attempt=1 role=A"
+                },
+                {
+                  "t": 0,
+                  "type": "drop",
+                  "detail": "client -\u003e n1 (op1-read)"
+                },
+                {
+                  "t": 0,
+                  "type": "drop",
+                  "detail": "client -\u003e n3 (op1-read)"
+                },
+                {
+                  "t": 0,
+                  "type": "attempt",
+                  "detail": "op2-write attempt=1 role=B"
+                },
+                {
+                  "t": 0,
+                  "type": "drop",
+                  "detail": "client -\u003e n2 (op2-write)"
+                },
+                {
+                  "t": 2,
+                  "type": "quorum",
+                  "detail": "op1-read weight=2"
+                },
+                {
+                  "t": 2,
+                  "type": "quorum",
+                  "detail": "op2-write weight=4"
+                }
+              ]
+            }
+          ],
+          "all_complete": true,
+          "safe": false
+        }
+      }
+    },
+    "tolerate_domains": 1,
+    "num_scenarios": 4,
+    "available": false,
+    "minimal_availability_failure": [
+      "az-1"
+    ],
+    "availability_witness": {
+      "input": {
+        "nodes": [
+          {
+            "id": "n1",
+            "weight": 3,
+            "domain": "az-1"
+          },
+          {
+            "id": "n2",
+            "weight": 2,
+            "domain": "az-2"
+          },
+          {
+            "id": "n3",
+            "weight": 1,
+            "domain": "az-3"
+          }
+        ],
+        "read_quorum": 2,
+        "write_quorum": 4,
+        "sim": {
+          "seed": 1,
+          "runs": 1,
+          "horizon": 30,
+          "client_timeout": 1000,
+          "max_attempts": 1,
+          "operations": 1,
+          "kind": "ww",
+          "failed_domains": [
+            "az-1"
+          ],
+          "rules": [
+            {
+              "action": "deliver",
+              "delay": 1
+            }
+          ]
+        }
+      },
+      "result": {
+        "runs": 1,
+        "scripted": true,
+        "completed_total": 0,
+        "timed_out_total": 1,
+        "violation_runs": 0,
+        "run_results": [
+          {
+            "seed": 1,
+            "completed": 0,
+            "timed_out": 1,
+            "requests_sent": 3,
+            "responses_delivered": 2,
+            "dropped": 1,
+            "duplicated": 0,
+            "max_time": 1000,
+            "trace": [
+              {
+                "t": 0,
+                "type": "attempt",
+                "detail": "op1-write attempt=1 role=A"
+              },
+              {
+                "t": 0,
+                "type": "drop",
+                "detail": "client -\u003e n1 (domain down)"
+              }
+            ]
+          }
+        ],
+        "all_complete": false,
+        "safe": true
+      }
+    },
+    "scenarios": [
+      {
+        "failed_domains": [],
+        "survivors": [
+          "n1",
+          "n2",
+          "n3"
+        ],
+        "survivor_weight": 6,
+        "read_possible": true,
+        "write_possible": true,
+        "num_read_quorums": 6,
+        "num_write_quorums": 3,
+        "read_quorums": [
+          [
+            "n2"
+          ],
+          [
+            "n1"
+          ],
+          [
+            "n2",
+            "n3"
+          ],
+          [
+            "n1",
+            "n3"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n1",
+            "n2",
+            "n3"
+          ]
+        ],
+        "write_quorums": [
+          [
+            "n1",
+            "n3"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n1",
+            "n2",
+            "n3"
+          ]
+        ],
+        "ww_safe": true,
+        "rw_safe": false,
+        "counterexample": {
+          "kind": "rw",
+          "quorum_a": [
+            "n2"
+          ],
+          "weight_a": 2,
+          "quorum_b": [
+            "n1",
+            "n3"
+          ],
+          "weight_b": 4,
+          "explanation": "a read quorum (read_quorum=2) and a write quorum (write_quorum=4) are node-disjoint; a read can miss a committed write entirely (stale read)",
+          "witness": {
+            "input": {
+              "nodes": [
+                {
+                  "id": "n1",
+                  "weight": 3,
+                  "domain": "az-1"
+                },
+                {
+                  "id": "n2",
+                  "weight": 2,
+                  "domain": "az-2"
+                },
+                {
+                  "id": "n3",
+                  "weight": 1,
+                  "domain": "az-3"
+                }
+              ],
+              "read_quorum": 2,
+              "write_quorum": 4,
+              "sim": {
+                "seed": 1,
+                "runs": 1,
+                "horizon": 30,
+                "client_timeout": 1000,
+                "max_attempts": 1,
+                "operations": 2,
+                "kind": "rw",
+                "rules": [
+                  {
+                    "to": "n2",
+                    "role": "A",
+                    "msg_type": "request",
+                    "action": "deliver",
+                    "delay": 1
+                  },
+                  {
+                    "from": "n2",
+                    "role": "A",
+                    "msg_type": "response",
+                    "action": "deliver",
+                    "delay": 1
+                  },
+                  {
+                    "to": "n1",
+                    "role": "B",
+                    "msg_type": "request",
+                    "action": "deliver",
+                    "delay": 1
+                  },
+                  {
+                    "from": "n1",
+                    "role": "B",
+                    "msg_type": "response",
+                    "action": "deliver",
+                    "delay": 1
+                  },
+                  {
+                    "to": "n3",
+                    "role": "B",
+                    "msg_type": "request",
+                    "action": "deliver",
+                    "delay": 1
+                  },
+                  {
+                    "from": "n3",
+                    "role": "B",
+                    "msg_type": "response",
+                    "action": "deliver",
+                    "delay": 1
+                  },
+                  {
+                    "role": "A",
+                    "msg_type": "request",
+                    "action": "drop"
+                  },
+                  {
+                    "role": "A",
+                    "msg_type": "response",
+                    "action": "drop"
+                  },
+                  {
+                    "role": "B",
+                    "msg_type": "request",
+                    "action": "drop"
+                  },
+                  {
+                    "role": "B",
+                    "msg_type": "response",
+                    "action": "drop"
+                  },
+                  {
+                    "action": "deliver",
+                    "delay": 1
+                  }
+                ]
+              }
+            },
+            "result": {
+              "runs": 1,
+              "scripted": true,
+              "completed_total": 2,
+              "timed_out_total": 0,
+              "violation_runs": 1,
+              "violations": [
+                {
+                  "op_a": "op1-read",
+                  "op_b": "op2-write",
+                  "kind": "rw",
+                  "responders_a": [
+                    "n2"
+                  ],
+                  "responders_b": [
+                    "n1",
+                    "n3"
+                  ]
+                }
+              ],
+              "run_results": [
+                {
+                  "seed": 1,
+                  "completed": 2,
+                  "timed_out": 0,
+                  "requests_sent": 6,
+                  "responses_delivered": 3,
+                  "dropped": 3,
+                  "duplicated": 0,
+                  "max_time": 1000,
+                  "violations": [
+                    {
+                      "op_a": "op1-read",
+                      "op_b": "op2-write",
+                      "kind": "rw",
+                      "responders_a": [
+                        "n2"
+                      ],
+                      "responders_b": [
+                        "n1",
+                        "n3"
+                      ]
+                    }
+                  ],
+                  "completed_ops": [
+                    {
+                      "op": "op1-read",
+                      "kind": "read",
+                      "responders": [
+                        "n2"
+                      ],
+                      "weight": 2,
+                      "completed_at": 2
+                    },
+                    {
+                      "op": "op2-write",
+                      "kind": "write",
+                      "responders": [
+                        "n1",
+                        "n3"
+                      ],
+                      "weight": 4,
+                      "completed_at": 2
+                    }
+                  ],
+                  "trace": [
+                    {
+                      "t": 0,
+                      "type": "attempt",
+                      "detail": "op1-read attempt=1 role=A"
+                    },
+                    {
+                      "t": 0,
+                      "type": "drop",
+                      "detail": "client -\u003e n1 (op1-read)"
+                    },
+                    {
+                      "t": 0,
+                      "type": "drop",
+                      "detail": "client -\u003e n3 (op1-read)"
+                    },
+                    {
+                      "t": 0,
+                      "type": "attempt",
+                      "detail": "op2-write attempt=1 role=B"
+                    },
+                    {
+                      "t": 0,
+                      "type": "drop",
+                      "detail": "client -\u003e n2 (op2-write)"
+                    },
+                    {
+                      "t": 2,
+                      "type": "quorum",
+                      "detail": "op1-read weight=2"
+                    },
+                    {
+                      "t": 2,
+                      "type": "quorum",
+                      "detail": "op2-write weight=4"
+                    }
+                  ]
+                }
+              ],
+              "all_complete": true,
+              "safe": false
+            }
+          }
+        }
+      },
+      {
+        "failed_domains": [
+          "az-1"
+        ],
+        "survivors": [
+          "n2",
+          "n3"
+        ],
+        "survivor_weight": 3,
+        "read_possible": true,
+        "write_possible": false,
+        "num_read_quorums": 2,
+        "num_write_quorums": 0,
+        "read_quorums": [
+          [
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ],
+        "ww_safe": true,
+        "rw_safe": true
+      },
+      {
+        "failed_domains": [
+          "az-2"
+        ],
+        "survivors": [
+          "n1",
+          "n3"
+        ],
+        "survivor_weight": 4,
+        "read_possible": true,
+        "write_possible": true,
+        "num_read_quorums": 2,
+        "num_write_quorums": 1,
+        "read_quorums": [
+          [
+            "n1"
+          ],
+          [
+            "n1",
+            "n3"
+          ]
+        ],
+        "write_quorums": [
+          [
+            "n1",
+            "n3"
+          ]
+        ],
+        "ww_safe": true,
+        "rw_safe": true
+      },
+      {
+        "failed_domains": [
+          "az-3"
+        ],
+        "survivors": [
+          "n1",
+          "n2"
+        ],
+        "survivor_weight": 5,
+        "read_possible": true,
+        "write_possible": true,
+        "num_read_quorums": 3,
+        "num_write_quorums": 1,
+        "read_quorums": [
+          [
+            "n2"
+          ],
+          [
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ]
+        ],
+        "write_quorums": [
+          [
+            "n1",
+            "n2"
+          ]
+        ],
+        "ww_safe": true,
+        "rw_safe": true
+      },
+      {
+        "failed_domains": [
+          "az-1",
+          "az-2",
+          "az-3"
+        ],
+        "survivors": [],
+        "survivor_weight": 0,
+        "read_possible": false,
+        "write_possible": false,
+        "num_read_quorums": 0,
+        "num_write_quorums": 0,
+        "ww_safe": true,
+        "rw_safe": true,
+        "beyond_tolerance": true
+      }
+    ]
+  },
+  "simulation": {
+    "runs": 8,
+    "scripted": false,
+    "completed_total": 32,
+    "timed_out_total": 0,
+    "violation_runs": 2,
+    "violations": [
+      {
+        "op_a": "op1-write",
+        "op_b": "op2-read",
+        "kind": "rw",
+        "responders_a": [
+          "n1",
+          "n3"
+        ],
+        "responders_b": [
+          "n2"
+        ]
+      },
+      {
+        "op_a": "op1-write",
+        "op_b": "op4-read",
+        "kind": "rw",
+        "responders_a": [
+          "n1",
+          "n3"
+        ],
+        "responders_b": [
+          "n2"
+        ]
+      }
+    ],
+    "run_results": [
+      {
+        "seed": 13679457532755275413,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 12,
+        "responses_delivered": 6,
+        "dropped": 0,
+        "duplicated": 0,
+        "max_time": 15,
+        "completed_ops": [
+          {
+            "op": "op1-write",
+            "kind": "write",
+            "responders": [
+              "n1",
+              "n2"
+            ],
+            "weight": 5,
+            "completed_at": 4
+          },
+          {
+            "op": "op2-read",
+            "kind": "read",
+            "responders": [
+              "n1"
+            ],
+            "weight": 3,
+            "completed_at": 2
+          },
+          {
+            "op": "op3-write",
+            "kind": "write",
+            "responders": [
+              "n1",
+              "n2"
+            ],
+            "weight": 5,
+            "completed_at": 2
+          },
+          {
+            "op": "op4-read",
+            "kind": "read",
+            "responders": [
+              "n1"
+            ],
+            "weight": 3,
+            "completed_at": 4
+          }
+        ],
+        "trace": [
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op1-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op2-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op3-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op4-read attempt=1 role=B"
+          },
+          {
+            "t": 2,
+            "type": "quorum",
+            "detail": "op2-read weight=3"
+          },
+          {
+            "t": 2,
+            "type": "quorum",
+            "detail": "op3-write weight=5"
+          },
+          {
+            "t": 4,
+            "type": "quorum",
+            "detail": "op1-write weight=5"
+          },
+          {
+            "t": 4,
+            "type": "quorum",
+            "detail": "op4-read weight=3"
+          }
+        ]
+      },
+      {
+        "seed": 2949826092126892291,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 12,
+        "responses_delivered": 7,
+        "dropped": 0,
+        "duplicated": 0,
+        "max_time": 15,
+        "completed_ops": [
+          {
+            "op": "op1-write",
+            "kind": "write",
+            "responders": [
+              "n1",
+              "n3"
+            ],
+            "weight": 4,
+            "completed_at": 4
+          },
+          {
+            "op": "op2-read",
+            "kind": "read",
+            "responders": [
+              "n2",
+              "n3"
+            ],
+            "weight": 3,
+            "completed_at": 3
+          },
+          {
+            "op": "op3-write",
+            "kind": "write",
+            "responders": [
+              "n1",
+              "n2"
+            ],
+            "weight": 5,
+            "completed_at": 3
+          },
+          {
+            "op": "op4-read",
+            "kind": "read",
+            "responders": [
+              "n1"
+            ],
+            "weight": 3,
+            "completed_at": 3
+          }
+        ],
+        "trace": [
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op1-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op2-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op3-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op4-read attempt=1 role=B"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op3-write weight=5"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op4-read weight=3"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op2-read weight=3"
+          },
+          {
+            "t": 4,
+            "type": "quorum",
+            "detail": "op1-write weight=4"
+          }
+        ]
+      },
+      {
+        "seed": 5139283748462763858,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 12,
+        "responses_delivered": 6,
+        "dropped": 0,
+        "duplicated": 0,
+        "max_time": 15,
+        "violations": [
+          {
+            "op_a": "op1-write",
+            "op_b": "op2-read",
+            "kind": "rw",
+            "responders_a": [
+              "n1",
+              "n3"
+            ],
+            "responders_b": [
+              "n2"
+            ]
+          }
+        ],
+        "completed_ops": [
+          {
+            "op": "op1-write",
+            "kind": "write",
+            "responders": [
+              "n1",
+              "n3"
+            ],
+            "weight": 4,
+            "completed_at": 3
+          },
+          {
+            "op": "op2-read",
+            "kind": "read",
+            "responders": [
+              "n2"
+            ],
+            "weight": 2,
+            "completed_at": 3
+          },
+          {
+            "op": "op3-write",
+            "kind": "write",
+            "responders": [
+              "n1",
+              "n2"
+            ],
+            "weight": 5,
+            "completed_at": 4
+          },
+          {
+            "op": "op4-read",
+            "kind": "read",
+            "responders": [
+              "n1"
+            ],
+            "weight": 3,
+            "completed_at": 3
+          }
+        ],
+        "trace": [
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op1-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op2-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op3-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op4-read attempt=1 role=B"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op2-read weight=2"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op4-read weight=3"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op1-write weight=4"
+          },
+          {
+            "t": 4,
+            "type": "quorum",
+            "detail": "op3-write weight=5"
+          }
+        ]
+      },
+      {
+        "seed": 6349198060258255764,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 12,
+        "responses_delivered": 7,
+        "dropped": 0,
+        "duplicated": 0,
+        "max_time": 15,
+        "completed_ops": [
+          {
+            "op": "op1-write",
+            "kind": "write",
+            "responders": [
+              "n1",
+              "n2"
+            ],
+            "weight": 5,
+            "completed_at": 3
+          },
+          {
+            "op": "op2-read",
+            "kind": "read",
+            "responders": [
+              "n2"
+            ],
+            "weight": 2,
+            "completed_at": 3
+          },
+          {
+            "op": "op3-write",
+            "kind": "write",
+            "responders": [
+              "n1",
+              "n2",
+              "n3"
+            ],
+            "weight": 6,
+            "completed_at": 3
+          },
+          {
+            "op": "op4-read",
+            "kind": "read",
+            "responders": [
+              "n2"
+            ],
+            "weight": 2,
+            "completed_at": 3
+          }
+        ],
+        "trace": [
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op1-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op2-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op3-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op4-read attempt=1 role=B"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op1-write weight=5"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op2-read weight=2"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op4-read weight=2"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op3-write weight=6"
+          }
+        ]
+      },
+      {
+        "seed": 701532786141963250,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 12,
+        "responses_delivered": 7,
+        "dropped": 0,
+        "duplicated": 0,
+        "max_time": 15,
+        "violations": [
+          {
+            "op_a": "op1-write",
+            "op_b": "op4-read",
+            "kind": "rw",
+            "responders_a": [
+              "n1",
+              "n3"
+            ],
+            "responders_b": [
+              "n2"
+            ]
+          }
+        ],
+        "completed_ops": [
+          {
+            "op": "op1-write",
+            "kind": "write",
+            "responders": [
+              "n1",
+              "n3"
+            ],
+            "weight": 4,
+            "completed_at": 3
+          },
+          {
+            "op": "op2-read",
+            "kind": "read",
+            "responders": [
+              "n1"
+            ],
+            "weight": 3,
+            "completed_at": 3
+          },
+          {
+            "op": "op3-write",
+            "kind": "write",
+            "responders": [
+              "n1",
+              "n2",
+              "n3"
+            ],
+            "weight": 6,
+            "completed_at": 4
+          },
+          {
+            "op": "op4-read",
+            "kind": "read",
+            "responders": [
+              "n2"
+            ],
+            "weight": 2,
+            "completed_at": 3
+          }
+        ],
+        "trace": [
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op1-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op2-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op3-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op4-read attempt=1 role=B"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op2-read weight=3"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op1-write weight=4"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op4-read weight=2"
+          },
+          {
+            "t": 4,
+            "type": "quorum",
+            "detail": "op3-write weight=6"
+          }
+        ]
+      },
+      {
+        "seed": 16015981125662989062,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 12,
+        "responses_delivered": 6,
+        "dropped": 0,
+        "duplicated": 0,
+        "max_time": 15,
+        "completed_ops": [
+          {
+            "op": "op1-write",
+            "kind": "write",
+            "responders": [
+              "n1",
+              "n2"
+            ],
+            "weight": 5,
+            "completed_at": 3
+          },
+          {
+            "op": "op2-read",
+            "kind": "read",
+            "responders": [
+              "n1"
+            ],
+            "weight": 3,
+            "completed_at": 3
+          },
+          {
+            "op": "op3-write",
+            "kind": "write",
+            "responders": [
+              "n1",
+              "n3"
+            ],
+            "weight": 4,
+            "completed_at": 3
+          },
+          {
+            "op": "op4-read",
+            "kind": "read",
+            "responders": [
+              "n1"
+            ],
+            "weight": 3,
+            "completed_at": 2
+          }
+        ],
+        "trace": [
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op1-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op2-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op3-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op4-read attempt=1 role=B"
+          },
+          {
+            "t": 2,
+            "type": "quorum",
+            "detail": "op4-read weight=3"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op1-write weight=5"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op2-read weight=3"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op3-write weight=4"
+          }
+        ]
+      },
+      {
+        "seed": 4028864712777624925,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 12,
+        "responses_delivered": 7,
+        "dropped": 0,
+        "duplicated": 0,
+        "max_time": 15,
+        "completed_ops": [
+          {
+            "op": "op1-write",
+            "kind": "write",
+            "responders": [
+              "n1",
+              "n2",
+              "n3"
+            ],
+            "weight": 6,
+            "completed_at": 3
+          },
+          {
+            "op": "op2-read",
+            "kind": "read",
+            "responders": [
+              "n1"
+            ],
+            "weight": 3,
+            "completed_at": 3
+          },
+          {
+            "op": "op3-write",
+            "kind": "write",
+            "responders": [
+              "n1",
+              "n3"
+            ],
+            "weight": 4,
+            "completed_at": 4
+          },
+          {
+            "op": "op4-read",
+            "kind": "read",
+            "responders": [
+              "n1"
+            ],
+            "weight": 3,
+            "completed_at": 2
+          }
+        ],
+        "trace": [
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op1-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op2-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op3-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op4-read attempt=1 role=B"
+          },
+          {
+            "t": 2,
+            "type": "quorum",
+            "detail": "op4-read weight=3"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op1-write weight=6"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op2-read weight=3"
+          },
+          {
+            "t": 4,
+            "type": "quorum",
+            "detail": "op3-write weight=4"
+          }
+        ]
+      },
+      {
+        "seed": 14769051326987775908,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 12,
+        "responses_delivered": 7,
+        "dropped": 0,
+        "duplicated": 0,
+        "max_time": 15,
+        "completed_ops": [
+          {
+            "op": "op1-write",
+            "kind": "write",
+            "responders": [
+              "n1",
+              "n2"
+            ],
+            "weight": 5,
+            "completed_at": 4
+          },
+          {
+            "op": "op2-read",
+            "kind": "read",
+            "responders": [
+              "n1"
+            ],
+            "weight": 3,
+            "completed_at": 2
+          },
+          {
+            "op": "op3-write",
+            "kind": "write",
+            "responders": [
+              "n1",
+              "n2"
+            ],
+            "weight": 5,
+            "completed_at": 3
+          },
+          {
+            "op": "op4-read",
+            "kind": "read",
+            "responders": [
+              "n1",
+              "n3"
+            ],
+            "weight": 4,
+            "completed_at": 3
+          }
+        ],
+        "trace": [
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op1-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op2-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op3-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op4-read attempt=1 role=B"
+          },
+          {
+            "t": 2,
+            "type": "quorum",
+            "detail": "op2-read weight=3"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op3-write weight=5"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op4-read weight=4"
+          },
+          {
+            "t": 4,
+            "type": "quorum",
+            "detail": "op1-write weight=5"
+          }
+        ]
+      }
+    ],
+    "all_complete": true,
+    "safe": false
+  }
+}

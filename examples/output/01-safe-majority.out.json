@@ -1,0 +1,234 @@
+{
+  "action": "analyze",
+  "ok": true,
+  "report": {
+    "valid": true,
+    "warnings": [
+      {
+        "code": "zero_weight_nodes",
+        "message": "1 node(s) have weight 0 and can never contribute to a quorum: [observer]"
+      }
+    ],
+    "nodes": [
+      "n1",
+      "n2",
+      "n3",
+      "observer"
+    ],
+    "domains": [
+      "rack-a",
+      "rack-b",
+      "rack-c"
+    ],
+    "num_nodes": 4,
+    "num_domains": 3,
+    "total_weight": 3,
+    "read_quorum": 2,
+    "write_quorum": 2,
+    "exhaustive": true,
+    "exhaustive_limit": 20,
+    "num_read_quorums": 4,
+    "num_write_quorums": 4,
+    "read_quorums": [
+      [
+        "n1",
+        "n2"
+      ],
+      [
+        "n1",
+        "n3"
+      ],
+      [
+        "n2",
+        "n3"
+      ],
+      [
+        "n1",
+        "n2",
+        "n3"
+      ]
+    ],
+    "write_quorums": [
+      [
+        "n1",
+        "n2"
+      ],
+      [
+        "n1",
+        "n3"
+      ],
+      [
+        "n2",
+        "n3"
+      ],
+      [
+        "n1",
+        "n2",
+        "n3"
+      ]
+    ],
+    "ww_safe": true,
+    "rw_safe": true,
+    "tolerate_domains": 1,
+    "num_scenarios": 4,
+    "available": true,
+    "scenarios": [
+      {
+        "failed_domains": [],
+        "survivors": [
+          "n1",
+          "n2",
+          "n3",
+          "observer"
+        ],
+        "survivor_weight": 3,
+        "read_possible": true,
+        "write_possible": true,
+        "num_read_quorums": 4,
+        "num_write_quorums": 4,
+        "read_quorums": [
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n1",
+            "n3"
+          ],
+          [
+            "n2",
+            "n3"
+          ],
+          [
+            "n1",
+            "n2",
+            "n3"
+          ]
+        ],
+        "write_quorums": [
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n1",
+            "n3"
+          ],
+          [
+            "n2",
+            "n3"
+          ],
+          [
+            "n1",
+            "n2",
+            "n3"
+          ]
+        ],
+        "ww_safe": true,
+        "rw_safe": true
+      },
+      {
+        "failed_domains": [
+          "rack-a"
+        ],
+        "survivors": [
+          "n2",
+          "n3"
+        ],
+        "survivor_weight": 2,
+        "read_possible": true,
+        "write_possible": true,
+        "num_read_quorums": 1,
+        "num_write_quorums": 1,
+        "read_quorums": [
+          [
+            "n2",
+            "n3"
+          ]
+        ],
+        "write_quorums": [
+          [
+            "n2",
+            "n3"
+          ]
+        ],
+        "ww_safe": true,
+        "rw_safe": true
+      },
+      {
+        "failed_domains": [
+          "rack-b"
+        ],
+        "survivors": [
+          "n1",
+          "n3",
+          "observer"
+        ],
+        "survivor_weight": 2,
+        "read_possible": true,
+        "write_possible": true,
+        "num_read_quorums": 1,
+        "num_write_quorums": 1,
+        "read_quorums": [
+          [
+            "n1",
+            "n3"
+          ]
+        ],
+        "write_quorums": [
+          [
+            "n1",
+            "n3"
+          ]
+        ],
+        "ww_safe": true,
+        "rw_safe": true
+      },
+      {
+        "failed_domains": [
+          "rack-c"
+        ],
+        "survivors": [
+          "n1",
+          "n2",
+          "observer"
+        ],
+        "survivor_weight": 2,
+        "read_possible": true,
+        "write_possible": true,
+        "num_read_quorums": 1,
+        "num_write_quorums": 1,
+        "read_quorums": [
+          [
+            "n1",
+            "n2"
+          ]
+        ],
+        "write_quorums": [
+          [
+            "n1",
+            "n2"
+          ]
+        ],
+        "ww_safe": true,
+        "rw_safe": true
+      },
+      {
+        "failed_domains": [
+          "rack-a",
+          "rack-b",
+          "rack-c"
+        ],
+        "survivors": [],
+        "survivor_weight": 0,
+        "read_possible": false,
+        "write_possible": false,
+        "num_read_quorums": 0,
+        "num_write_quorums": 0,
+        "ww_safe": true,
+        "rw_safe": true,
+        "beyond_tolerance": true
+      }
+    ]
+  }
+}

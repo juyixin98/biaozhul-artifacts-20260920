@@ -1,0 +1,560 @@
+{
+  "action": "analyze",
+  "ok": true,
+  "report": {
+    "valid": true,
+    "nodes": [
+      "n1",
+      "n2",
+      "n3",
+      "n4",
+      "n5"
+    ],
+    "domains": [
+      "az-1",
+      "az-2",
+      "az-3"
+    ],
+    "num_nodes": 5,
+    "num_domains": 3,
+    "total_weight": 5,
+    "read_quorum": 3,
+    "write_quorum": 3,
+    "exhaustive": true,
+    "exhaustive_limit": 20,
+    "num_read_quorums": 16,
+    "num_write_quorums": 16,
+    "read_quorums": [
+      [
+        "n1",
+        "n2",
+        "n3"
+      ],
+      [
+        "n1",
+        "n2",
+        "n4"
+      ],
+      [
+        "n1",
+        "n3",
+        "n4"
+      ],
+      [
+        "n2",
+        "n3",
+        "n4"
+      ],
+      [
+        "n1",
+        "n2",
+        "n5"
+      ],
+      [
+        "n1",
+        "n3",
+        "n5"
+      ],
+      [
+        "n2",
+        "n3",
+        "n5"
+      ],
+      [
+        "n1",
+        "n4",
+        "n5"
+      ],
+      [
+        "n2",
+        "n4",
+        "n5"
+      ],
+      [
+        "n3",
+        "n4",
+        "n5"
+      ],
+      [
+        "n1",
+        "n2",
+        "n3",
+        "n4"
+      ],
+      [
+        "n1",
+        "n2",
+        "n3",
+        "n5"
+      ],
+      [
+        "n1",
+        "n2",
+        "n4",
+        "n5"
+      ],
+      [
+        "n1",
+        "n3",
+        "n4",
+        "n5"
+      ],
+      [
+        "n2",
+        "n3",
+        "n4",
+        "n5"
+      ],
+      [
+        "n1",
+        "n2",
+        "n3",
+        "n4",
+        "n5"
+      ]
+    ],
+    "write_quorums": [
+      [
+        "n1",
+        "n2",
+        "n3"
+      ],
+      [
+        "n1",
+        "n2",
+        "n4"
+      ],
+      [
+        "n1",
+        "n3",
+        "n4"
+      ],
+      [
+        "n2",
+        "n3",
+        "n4"
+      ],
+      [
+        "n1",
+        "n2",
+        "n5"
+      ],
+      [
+        "n1",
+        "n3",
+        "n5"
+      ],
+      [
+        "n2",
+        "n3",
+        "n5"
+      ],
+      [
+        "n1",
+        "n4",
+        "n5"
+      ],
+      [
+        "n2",
+        "n4",
+        "n5"
+      ],
+      [
+        "n3",
+        "n4",
+        "n5"
+      ],
+      [
+        "n1",
+        "n2",
+        "n3",
+        "n4"
+      ],
+      [
+        "n1",
+        "n2",
+        "n3",
+        "n5"
+      ],
+      [
+        "n1",
+        "n2",
+        "n4",
+        "n5"
+      ],
+      [
+        "n1",
+        "n3",
+        "n4",
+        "n5"
+      ],
+      [
+        "n2",
+        "n3",
+        "n4",
+        "n5"
+      ],
+      [
+        "n1",
+        "n2",
+        "n3",
+        "n4",
+        "n5"
+      ]
+    ],
+    "ww_safe": true,
+    "rw_safe": true,
+    "tolerate_domains": 1,
+    "num_scenarios": 4,
+    "available": true,
+    "scenarios": [
+      {
+        "failed_domains": [],
+        "survivors": [
+          "n1",
+          "n2",
+          "n3",
+          "n4",
+          "n5"
+        ],
+        "survivor_weight": 5,
+        "read_possible": true,
+        "write_possible": true,
+        "num_read_quorums": 16,
+        "num_write_quorums": 16,
+        "read_quorums": [
+          [
+            "n1",
+            "n2",
+            "n3"
+          ],
+          [
+            "n1",
+            "n2",
+            "n4"
+          ],
+          [
+            "n1",
+            "n3",
+            "n4"
+          ],
+          [
+            "n2",
+            "n3",
+            "n4"
+          ],
+          [
+            "n1",
+            "n2",
+            "n5"
+          ],
+          [
+            "n1",
+            "n3",
+            "n5"
+          ],
+          [
+            "n2",
+            "n3",
+            "n5"
+          ],
+          [
+            "n1",
+            "n4",
+            "n5"
+          ],
+          [
+            "n2",
+            "n4",
+            "n5"
+          ],
+          [
+            "n3",
+            "n4",
+            "n5"
+          ],
+          [
+            "n1",
+            "n2",
+            "n3",
+            "n4"
+          ],
+          [
+            "n1",
+            "n2",
+            "n3",
+            "n5"
+          ],
+          [
+            "n1",
+            "n2",
+            "n4",
+            "n5"
+          ],
+          [
+            "n1",
+            "n3",
+            "n4",
+            "n5"
+          ],
+          [
+            "n2",
+            "n3",
+            "n4",
+            "n5"
+          ],
+          [
+            "n1",
+            "n2",
+            "n3",
+            "n4",
+            "n5"
+          ]
+        ],
+        "write_quorums": [
+          [
+            "n1",
+            "n2",
+            "n3"
+          ],
+          [
+            "n1",
+            "n2",
+            "n4"
+          ],
+          [
+            "n1",
+            "n3",
+            "n4"
+          ],
+          [
+            "n2",
+            "n3",
+            "n4"
+          ],
+          [
+            "n1",
+            "n2",
+            "n5"
+          ],
+          [
+            "n1",
+            "n3",
+            "n5"
+          ],
+          [
+            "n2",
+            "n3",
+            "n5"
+          ],
+          [
+            "n1",
+            "n4",
+            "n5"
+          ],
+          [
+            "n2",
+            "n4",
+            "n5"
+          ],
+          [
+            "n3",
+            "n4",
+            "n5"
+          ],
+          [
+            "n1",
+            "n2",
+            "n3",
+            "n4"
+          ],
+          [
+            "n1",
+            "n2",
+            "n3",
+            "n5"
+          ],
+          [
+            "n1",
+            "n2",
+            "n4",
+            "n5"
+          ],
+          [
+            "n1",
+            "n3",
+            "n4",
+            "n5"
+          ],
+          [
+            "n2",
+            "n3",
+            "n4",
+            "n5"
+          ],
+          [
+            "n1",
+            "n2",
+            "n3",
+            "n4",
+            "n5"
+          ]
+        ],
+        "ww_safe": true,
+        "rw_safe": true
+      },
+      {
+        "failed_domains": [
+          "az-1"
+        ],
+        "survivors": [
+          "n3",
+          "n4",
+          "n5"
+        ],
+        "survivor_weight": 3,
+        "read_possible": true,
+        "write_possible": true,
+        "num_read_quorums": 1,
+        "num_write_quorums": 1,
+        "read_quorums": [
+          [
+            "n3",
+            "n4",
+            "n5"
+          ]
+        ],
+        "write_quorums": [
+          [
+            "n3",
+            "n4",
+            "n5"
+          ]
+        ],
+        "ww_safe": true,
+        "rw_safe": true
+      },
+      {
+        "failed_domains": [
+          "az-2"
+        ],
+        "survivors": [
+          "n1",
+          "n2",
+          "n5"
+        ],
+        "survivor_weight": 3,
+        "read_possible": true,
+        "write_possible": true,
+        "num_read_quorums": 1,
+        "num_write_quorums": 1,
+        "read_quorums": [
+          [
+            "n1",
+            "n2",
+            "n5"
+          ]
+        ],
+        "write_quorums": [
+          [
+            "n1",
+            "n2",
+            "n5"
+          ]
+        ],
+        "ww_safe": true,
+        "rw_safe": true
+      },
+      {
+        "failed_domains": [
+          "az-3"
+        ],
+        "survivors": [
+          "n1",
+          "n2",
+          "n3",
+          "n4"
+        ],
+        "survivor_weight": 4,
+        "read_possible": true,
+        "write_possible": true,
+        "num_read_quorums": 5,
+        "num_write_quorums": 5,
+        "read_quorums": [
+          [
+            "n1",
+            "n2",
+            "n3"
+          ],
+          [
+            "n1",
+            "n2",
+            "n4"
+          ],
+          [
+            "n1",
+            "n3",
+            "n4"
+          ],
+          [
+            "n2",
+            "n3",
+            "n4"
+          ],
+          [
+            "n1",
+            "n2",
+            "n3",
+            "n4"
+          ]
+        ],
+        "write_quorums": [
+          [
+            "n1",
+            "n2",
+            "n3"
+          ],
+          [
+            "n1",
+            "n2",
+            "n4"
+          ],
+          [
+            "n1",
+            "n3",
+            "n4"
+          ],
+          [
+            "n2",
+            "n3",
+            "n4"
+          ],
+          [
+            "n1",
+            "n2",
+            "n3",
+            "n4"
+          ]
+        ],
+        "ww_safe": true,
+        "rw_safe": true
+      },
+      {
+        "failed_domains": [
+          "az-1",
+          "az-2",
+          "az-3"
+        ],
+        "survivors": [],
+        "survivor_weight": 0,
+        "read_possible": false,
+        "write_possible": false,
+        "num_read_quorums": 0,
+        "num_write_quorums": 0,
+        "ww_safe": true,
+        "rw_safe": true,
+        "beyond_tolerance": true
+      }
+    ]
+  }
+}

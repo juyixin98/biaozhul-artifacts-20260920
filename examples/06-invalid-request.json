@@ -1,0 +1,13 @@
+{
+  "action": "analyze",
+  "config": {
+    "nodes": [
+      {"id": "n1", "weight": 1, "domain": "a"},
+      {"id": "n1", "weight": 1, "domain": "b"},
+      {"id": "n3", "weight": -1, "domain": "c"}
+    ],
+    "read_quorum": 5,
+    "write_quorum": 5,
+    "tolerate_domains": 1
+  }
+}

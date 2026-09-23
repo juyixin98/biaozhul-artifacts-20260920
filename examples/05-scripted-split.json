@@ -1,0 +1,32 @@
+{
+  "action": "simulate",
+  "config": {
+    "nodes": [
+      {"id": "n1", "weight": 1, "domain": "a"},
+      {"id": "n2", "weight": 1, "domain": "b"},
+      {"id": "n3", "weight": 1, "domain": "c"}
+    ],
+    "read_quorum": 1,
+    "write_quorum": 1
+  },
+  "sim": {
+    "seed": 1,
+    "runs": 1,
+    "operations": 2,
+    "kind": "ww",
+    "horizon": 40,
+    "client_timeout": 50,
+    "max_attempts": 1,
+    "rules": [
+      {"role": "A", "to": "n1", "msg_type": "request", "action": "deliver", "delay": 1},
+      {"role": "A", "from": "n1", "msg_type": "response", "action": "deliver", "delay": 1},
+      {"role": "B", "to": "n2", "msg_type": "request", "action": "deliver", "delay": 1},
+      {"role": "B", "from": "n2", "msg_type": "response", "action": "deliver", "delay": 1},
+      {"role": "A", "msg_type": "request", "action": "drop"},
+      {"role": "A", "msg_type": "response", "action": "drop"},
+      {"role": "B", "msg_type": "request", "action": "drop"},
+      {"role": "B", "msg_type": "response", "action": "drop"},
+      {"action": "deliver", "delay": 1}
+    ]
+  }
+}

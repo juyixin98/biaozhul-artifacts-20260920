@@ -1,0 +1,28 @@
+{
+  "action": "simulate",
+  "config": {
+    "nodes": [
+      {"id": "n1", "weight": 1, "domain": "rack-a"},
+      {"id": "n2", "weight": 1, "domain": "rack-b"},
+      {"id": "n3", "weight": 1, "domain": "rack-c"}
+    ],
+    "read_quorum": 1,
+    "write_quorum": 1
+  },
+  "sim": {
+    "seed": 7,
+    "runs": 12,
+    "operations": 4,
+    "kind": "mixed",
+    "horizon": 120,
+    "client_timeout": 12,
+    "max_attempts": 6,
+    "network": {
+      "loss_rate": 0.5,
+      "duplicate_rate": 0.2,
+      "min_delay": 1,
+      "max_delay": 5,
+      "reorder_window": 2
+    }
+  }
+}

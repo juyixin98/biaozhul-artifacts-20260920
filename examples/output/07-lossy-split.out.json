@@ -1,0 +1,2428 @@
+{
+  "action": "simulate",
+  "ok": true,
+  "report": {
+    "valid": true,
+    "nodes": [
+      "n1",
+      "n2",
+      "n3"
+    ],
+    "domains": [
+      "rack-a",
+      "rack-b",
+      "rack-c"
+    ],
+    "num_nodes": 3,
+    "num_domains": 3,
+    "total_weight": 3,
+    "read_quorum": 1,
+    "write_quorum": 1,
+    "exhaustive": true,
+    "exhaustive_limit": 20,
+    "num_read_quorums": 7,
+    "num_write_quorums": 7,
+    "read_quorums": [
+      [
+        "n1"
+      ],
+      [
+        "n2"
+      ],
+      [
+        "n3"
+      ],
+      [
+        "n1",
+        "n2"
+      ],
+      [
+        "n1",
+        "n3"
+      ],
+      [
+        "n2",
+        "n3"
+      ],
+      [
+        "n1",
+        "n2",
+        "n3"
+      ]
+    ],
+    "write_quorums": [
+      [
+        "n1"
+      ],
+      [
+        "n2"
+      ],
+      [
+        "n3"
+      ],
+      [
+        "n1",
+        "n2"
+      ],
+      [
+        "n1",
+        "n3"
+      ],
+      [
+        "n2",
+        "n3"
+      ],
+      [
+        "n1",
+        "n2",
+        "n3"
+      ]
+    ],
+    "ww_safe": false,
+    "rw_safe": false,
+    "minimal_ww_counterexample": {
+      "kind": "ww",
+      "quorum_a": [
+        "n1"
+      ],
+      "weight_a": 1,
+      "quorum_b": [
+        "n2"
+      ],
+      "weight_b": 1,
+      "explanation": "two write quorums (each reaching write_quorum=1) are node-disjoint; concurrent writes can both commit without a common node, so their ordering is undecidable"
+    },
+    "minimal_rw_counterexample": {
+      "kind": "rw",
+      "quorum_a": [
+        "n1"
+      ],
+      "weight_a": 1,
+      "quorum_b": [
+        "n2"
+      ],
+      "weight_b": 1,
+      "explanation": "a read quorum (read_quorum=1) and a write quorum (write_quorum=1) are node-disjoint; a read can miss a committed write entirely (stale read)"
+    },
+    "minimal_counterexample": {
+      "kind": "ww",
+      "quorum_a": [
+        "n1"
+      ],
+      "weight_a": 1,
+      "quorum_b": [
+        "n2"
+      ],
+      "weight_b": 1,
+      "explanation": "two write quorums (each reaching write_quorum=1) are node-disjoint; concurrent writes can both commit without a common node, so their ordering is undecidable"
+    },
+    "tolerate_domains": 0,
+    "num_scenarios": 1,
+    "available": true,
+    "scenarios": [
+      {
+        "failed_domains": [],
+        "survivors": [
+          "n1",
+          "n2",
+          "n3"
+        ],
+        "survivor_weight": 3,
+        "read_possible": true,
+        "write_possible": true,
+        "num_read_quorums": 7,
+        "num_write_quorums": 7,
+        "read_quorums": [
+          [
+            "n1"
+          ],
+          [
+            "n2"
+          ],
+          [
+            "n3"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n1",
+            "n3"
+          ],
+          [
+            "n2",
+            "n3"
+          ],
+          [
+            "n1",
+            "n2",
+            "n3"
+          ]
+        ],
+        "write_quorums": [
+          [
+            "n1"
+          ],
+          [
+            "n2"
+          ],
+          [
+            "n3"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n1",
+            "n3"
+          ],
+          [
+            "n2",
+            "n3"
+          ],
+          [
+            "n1",
+            "n2",
+            "n3"
+          ]
+        ],
+        "ww_safe": false,
+        "rw_safe": false,
+        "counterexample": {
+          "kind": "ww",
+          "quorum_a": [
+            "n1"
+          ],
+          "weight_a": 1,
+          "quorum_b": [
+            "n2"
+          ],
+          "weight_b": 1,
+          "explanation": "two write quorums (each reaching write_quorum=1) are node-disjoint; concurrent writes can both commit without a common node, so their ordering is undecidable"
+        }
+      },
+      {
+        "failed_domains": [
+          "rack-a",
+          "rack-b",
+          "rack-c"
+        ],
+        "survivors": [],
+        "survivor_weight": 0,
+        "read_possible": false,
+        "write_possible": false,
+        "num_read_quorums": 0,
+        "num_write_quorums": 0,
+        "ww_safe": true,
+        "rw_safe": true,
+        "beyond_tolerance": true
+      }
+    ]
+  },
+  "simulation": {
+    "runs": 12,
+    "scripted": false,
+    "completed_total": 48,
+    "timed_out_total": 0,
+    "violation_runs": 12,
+    "violations": [
+      {
+        "op_a": "op1-write",
+        "op_b": "op3-write",
+        "kind": "ww",
+        "responders_a": [
+          "n1"
+        ],
+        "responders_b": [
+          "n3"
+        ]
+      },
+      {
+        "op_a": "op1-write",
+        "op_b": "op4-read",
+        "kind": "rw",
+        "responders_a": [
+          "n1"
+        ],
+        "responders_b": [
+          "n3"
+        ]
+      },
+      {
+        "op_a": "op2-read",
+        "op_b": "op3-write",
+        "kind": "rw",
+        "responders_a": [
+          "n1"
+        ],
+        "responders_b": [
+          "n3"
+        ]
+      },
+      {
+        "op_a": "op1-write",
+        "op_b": "op3-write",
+        "kind": "ww",
+        "responders_a": [
+          "n1"
+        ],
+        "responders_b": [
+          "n2"
+        ]
+      },
+      {
+        "op_a": "op1-write",
+        "op_b": "op4-read",
+        "kind": "rw",
+        "responders_a": [
+          "n1"
+        ],
+        "responders_b": [
+          "n3"
+        ]
+      },
+      {
+        "op_a": "op2-read",
+        "op_b": "op3-write",
+        "kind": "rw",
+        "responders_a": [
+          "n1"
+        ],
+        "responders_b": [
+          "n2"
+        ]
+      },
+      {
+        "op_a": "op3-write",
+        "op_b": "op4-read",
+        "kind": "rw",
+        "responders_a": [
+          "n2"
+        ],
+        "responders_b": [
+          "n3"
+        ]
+      },
+      {
+        "op_a": "op1-write",
+        "op_b": "op2-read",
+        "kind": "rw",
+        "responders_a": [
+          "n1"
+        ],
+        "responders_b": [
+          "n3"
+        ]
+      },
+      {
+        "op_a": "op1-write",
+        "op_b": "op3-write",
+        "kind": "ww",
+        "responders_a": [
+          "n1"
+        ],
+        "responders_b": [
+          "n3"
+        ]
+      },
+      {
+        "op_a": "op1-write",
+        "op_b": "op4-read",
+        "kind": "rw",
+        "responders_a": [
+          "n1"
+        ],
+        "responders_b": [
+          "n3"
+        ]
+      },
+      {
+        "op_a": "op1-write",
+        "op_b": "op2-read",
+        "kind": "rw",
+        "responders_a": [
+          "n3"
+        ],
+        "responders_b": [
+          "n1"
+        ]
+      },
+      {
+        "op_a": "op1-write",
+        "op_b": "op3-write",
+        "kind": "ww",
+        "responders_a": [
+          "n3"
+        ],
+        "responders_b": [
+          "n2"
+        ]
+      },
+      {
+        "op_a": "op1-write",
+        "op_b": "op4-read",
+        "kind": "rw",
+        "responders_a": [
+          "n3"
+        ],
+        "responders_b": [
+          "n2"
+        ]
+      },
+      {
+        "op_a": "op2-read",
+        "op_b": "op3-write",
+        "kind": "rw",
+        "responders_a": [
+          "n1"
+        ],
+        "responders_b": [
+          "n2"
+        ]
+      },
+      {
+        "op_a": "op1-write",
+        "op_b": "op3-write",
+        "kind": "ww",
+        "responders_a": [
+          "n1"
+        ],
+        "responders_b": [
+          "n2"
+        ]
+      },
+      {
+        "op_a": "op2-read",
+        "op_b": "op3-write",
+        "kind": "rw",
+        "responders_a": [
+          "n1"
+        ],
+        "responders_b": [
+          "n2"
+        ]
+      },
+      {
+        "op_a": "op3-write",
+        "op_b": "op4-read",
+        "kind": "rw",
+        "responders_a": [
+          "n2"
+        ],
+        "responders_b": [
+          "n1"
+        ]
+      },
+      {
+        "op_a": "op1-write",
+        "op_b": "op3-write",
+        "kind": "ww",
+        "responders_a": [
+          "n3"
+        ],
+        "responders_b": [
+          "n1"
+        ]
+      },
+      {
+        "op_a": "op1-write",
+        "op_b": "op4-read",
+        "kind": "rw",
+        "responders_a": [
+          "n3"
+        ],
+        "responders_b": [
+          "n2"
+        ]
+      },
+      {
+        "op_a": "op2-read",
+        "op_b": "op3-write",
+        "kind": "rw",
+        "responders_a": [
+          "n3"
+        ],
+        "responders_b": [
+          "n1"
+        ]
+      },
+      {
+        "op_a": "op3-write",
+        "op_b": "op4-read",
+        "kind": "rw",
+        "responders_a": [
+          "n1"
+        ],
+        "responders_b": [
+          "n2"
+        ]
+      }
+    ],
+    "run_results": [
+      {
+        "seed": 7191089600892374487,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 18,
+        "responses_delivered": 4,
+        "dropped": 14,
+        "duplicated": 1,
+        "max_time": 36,
+        "violations": [
+          {
+            "op_a": "op1-write",
+            "op_b": "op3-write",
+            "kind": "ww",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n3"
+            ]
+          },
+          {
+            "op_a": "op1-write",
+            "op_b": "op4-read",
+            "kind": "rw",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n3"
+            ]
+          },
+          {
+            "op_a": "op2-read",
+            "op_b": "op3-write",
+            "kind": "rw",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n3"
+            ]
+          }
+        ],
+        "completed_ops": [
+          {
+            "op": "op1-write",
+            "kind": "write",
+            "responders": [
+              "n1"
+            ],
+            "weight": 1,
+            "completed_at": 30
+          },
+          {
+            "op": "op2-read",
+            "kind": "read",
+            "responders": [
+              "n1"
+            ],
+            "weight": 1,
+            "completed_at": 6
+          },
+          {
+            "op": "op3-write",
+            "kind": "write",
+            "responders": [
+              "n3"
+            ],
+            "weight": 1,
+            "completed_at": 1
+          },
+          {
+            "op": "op4-read",
+            "kind": "read",
+            "responders": [
+              "n3"
+            ],
+            "weight": 1,
+            "completed_at": 5
+          }
+        ],
+        "trace": [
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op1-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op1-write)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op1-write)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op2-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op2-read)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op2-read)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op3-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op3-write)"
+          },
+          {
+            "t": 0,
+            "type": "duplicate",
+            "detail": "client -\u003e n3 (op3-write)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op4-read attempt=1 role=B"
+          },
+          {
+            "t": 1,
+            "type": "quorum",
+            "detail": "op3-write weight=1"
+          },
+          {
+            "t": 2,
+            "type": "drop",
+            "detail": "n1 -\u003e client (op4-read)"
+          },
+          {
+            "t": 3,
+            "type": "drop",
+            "detail": "n1 -\u003e client (op1-write)"
+          },
+          {
+            "t": 4,
+            "type": "drop",
+            "detail": "n2 -\u003e client (op3-write)"
+          },
+          {
+            "t": 5,
+            "type": "quorum",
+            "detail": "op4-read weight=1"
+          },
+          {
+            "t": 6,
+            "type": "quorum",
+            "detail": "op2-read weight=1"
+          },
+          {
+            "t": 7,
+            "type": "drop",
+            "detail": "n2 -\u003e client (op4-read)"
+          },
+          {
+            "t": 12,
+            "type": "attempt",
+            "detail": "op1-write attempt=2 role=A"
+          },
+          {
+            "t": 12,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op1-write)"
+          },
+          {
+            "t": 12,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op1-write)"
+          },
+          {
+            "t": 14,
+            "type": "drop",
+            "detail": "n3 -\u003e client (op1-write)"
+          },
+          {
+            "t": 24,
+            "type": "attempt",
+            "detail": "op1-write attempt=3 role=A"
+          },
+          {
+            "t": 24,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op1-write)"
+          },
+          {
+            "t": 24,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op1-write)"
+          },
+          {
+            "t": 30,
+            "type": "quorum",
+            "detail": "op1-write weight=1"
+          }
+        ]
+      },
+      {
+        "seed": 309689372594955804,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 12,
+        "responses_delivered": 4,
+        "dropped": 8,
+        "duplicated": 3,
+        "max_time": 12,
+        "violations": [
+          {
+            "op_a": "op1-write",
+            "op_b": "op3-write",
+            "kind": "ww",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n2"
+            ]
+          },
+          {
+            "op_a": "op1-write",
+            "op_b": "op4-read",
+            "kind": "rw",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n3"
+            ]
+          },
+          {
+            "op_a": "op2-read",
+            "op_b": "op3-write",
+            "kind": "rw",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n2"
+            ]
+          },
+          {
+            "op_a": "op3-write",
+            "op_b": "op4-read",
+            "kind": "rw",
+            "responders_a": [
+              "n2"
+            ],
+            "responders_b": [
+              "n3"
+            ]
+          }
+        ],
+        "completed_ops": [
+          {
+            "op": "op1-write",
+            "kind": "write",
+            "responders": [
+              "n1"
+            ],
+            "weight": 1,
+            "completed_at": 5
+          },
+          {
+            "op": "op2-read",
+            "kind": "read",
+            "responders": [
+              "n1"
+            ],
+            "weight": 1,
+            "completed_at": 1
+          },
+          {
+            "op": "op3-write",
+            "kind": "write",
+            "responders": [
+              "n2"
+            ],
+            "weight": 1,
+            "completed_at": 9
+          },
+          {
+            "op": "op4-read",
+            "kind": "read",
+            "responders": [
+              "n3"
+            ],
+            "weight": 1,
+            "completed_at": 8
+          }
+        ],
+        "trace": [
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op1-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op1-write)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op1-write)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op2-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "duplicate",
+            "detail": "client -\u003e n1 (op2-read)"
+          },
+          {
+            "t": 0,
+            "type": "duplicate",
+            "detail": "client -\u003e n2 (op2-read)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op2-read)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op3-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "duplicate",
+            "detail": "client -\u003e n2 (op3-write)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op3-write)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op4-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op4-read)"
+          },
+          {
+            "t": 1,
+            "type": "drop",
+            "detail": "n1 -\u003e client (op2-read)"
+          },
+          {
+            "t": 1,
+            "type": "drop",
+            "detail": "n1 -\u003e client (op3-write)"
+          },
+          {
+            "t": 1,
+            "type": "quorum",
+            "detail": "op2-read weight=1"
+          },
+          {
+            "t": 4,
+            "type": "drop",
+            "detail": "n1 -\u003e client (op4-read)"
+          },
+          {
+            "t": 5,
+            "type": "quorum",
+            "detail": "op1-write weight=1"
+          },
+          {
+            "t": 8,
+            "type": "quorum",
+            "detail": "op4-read weight=1"
+          },
+          {
+            "t": 9,
+            "type": "quorum",
+            "detail": "op3-write weight=1"
+          }
+        ]
+      },
+      {
+        "seed": 16616101746815609346,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 15,
+        "responses_delivered": 4,
+        "dropped": 11,
+        "duplicated": 4,
+        "max_time": 24,
+        "violations": [
+          {
+            "op_a": "op1-write",
+            "op_b": "op2-read",
+            "kind": "rw",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n3"
+            ]
+          },
+          {
+            "op_a": "op1-write",
+            "op_b": "op3-write",
+            "kind": "ww",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n3"
+            ]
+          },
+          {
+            "op_a": "op1-write",
+            "op_b": "op4-read",
+            "kind": "rw",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n3"
+            ]
+          }
+        ],
+        "completed_ops": [
+          {
+            "op": "op1-write",
+            "kind": "write",
+            "responders": [
+              "n1"
+            ],
+            "weight": 1,
+            "completed_at": 6
+          },
+          {
+            "op": "op2-read",
+            "kind": "read",
+            "responders": [
+              "n3"
+            ],
+            "weight": 1,
+            "completed_at": 5
+          },
+          {
+            "op": "op3-write",
+            "kind": "write",
+            "responders": [
+              "n3"
+            ],
+            "weight": 1,
+            "completed_at": 8
+          },
+          {
+            "op": "op4-read",
+            "kind": "read",
+            "responders": [
+              "n3"
+            ],
+            "weight": 1,
+            "completed_at": 17
+          }
+        ],
+        "trace": [
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op1-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "duplicate",
+            "detail": "client -\u003e n2 (op1-write)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op2-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op2-read)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op3-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "duplicate",
+            "detail": "client -\u003e n3 (op3-write)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op4-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "duplicate",
+            "detail": "client -\u003e n1 (op4-read)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op4-read)"
+          },
+          {
+            "t": 1,
+            "type": "drop",
+            "detail": "n1 -\u003e client (op4-read)"
+          },
+          {
+            "t": 2,
+            "type": "drop",
+            "detail": "n2 -\u003e client (op1-write)"
+          },
+          {
+            "t": 2,
+            "type": "drop",
+            "detail": "n3 -\u003e client (op1-write)"
+          },
+          {
+            "t": 2,
+            "type": "drop",
+            "detail": "n2 -\u003e client (op3-write)"
+          },
+          {
+            "t": 3,
+            "type": "drop",
+            "detail": "n2 -\u003e client (op1-write)"
+          },
+          {
+            "t": 3,
+            "type": "drop",
+            "detail": "n3 -\u003e client (op4-read)"
+          },
+          {
+            "t": 4,
+            "type": "drop",
+            "detail": "n1 -\u003e client (op4-read)"
+          },
+          {
+            "t": 5,
+            "type": "drop",
+            "detail": "n1 -\u003e client (op3-write)"
+          },
+          {
+            "t": 5,
+            "type": "quorum",
+            "detail": "op2-read weight=1"
+          },
+          {
+            "t": 6,
+            "type": "quorum",
+            "detail": "op1-write weight=1"
+          },
+          {
+            "t": 8,
+            "type": "quorum",
+            "detail": "op3-write weight=1"
+          },
+          {
+            "t": 12,
+            "type": "attempt",
+            "detail": "op4-read attempt=2 role=B"
+          },
+          {
+            "t": 16,
+            "type": "drop",
+            "detail": "n1 -\u003e client (op4-read)"
+          },
+          {
+            "t": 16,
+            "type": "duplicate",
+            "detail": "n3 -\u003e client (op4-read)"
+          },
+          {
+            "t": 17,
+            "type": "quorum",
+            "detail": "op4-read weight=1"
+          }
+        ]
+      },
+      {
+        "seed": 10753165928301472203,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 15,
+        "responses_delivered": 4,
+        "dropped": 11,
+        "duplicated": 3,
+        "max_time": 24,
+        "violations": [
+          {
+            "op_a": "op1-write",
+            "op_b": "op2-read",
+            "kind": "rw",
+            "responders_a": [
+              "n3"
+            ],
+            "responders_b": [
+              "n1"
+            ]
+          },
+          {
+            "op_a": "op1-write",
+            "op_b": "op3-write",
+            "kind": "ww",
+            "responders_a": [
+              "n3"
+            ],
+            "responders_b": [
+              "n2"
+            ]
+          },
+          {
+            "op_a": "op1-write",
+            "op_b": "op4-read",
+            "kind": "rw",
+            "responders_a": [
+              "n3"
+            ],
+            "responders_b": [
+              "n2"
+            ]
+          },
+          {
+            "op_a": "op2-read",
+            "op_b": "op3-write",
+            "kind": "rw",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n2"
+            ]
+          }
+        ],
+        "completed_ops": [
+          {
+            "op": "op1-write",
+            "kind": "write",
+            "responders": [
+              "n3"
+            ],
+            "weight": 1,
+            "completed_at": 5
+          },
+          {
+            "op": "op2-read",
+            "kind": "read",
+            "responders": [
+              "n1"
+            ],
+            "weight": 1,
+            "completed_at": 4
+          },
+          {
+            "op": "op3-write",
+            "kind": "write",
+            "responders": [
+              "n2"
+            ],
+            "weight": 1,
+            "completed_at": 12
+          },
+          {
+            "op": "op4-read",
+            "kind": "read",
+            "responders": [
+              "n2"
+            ],
+            "weight": 1,
+            "completed_at": 4
+          }
+        ],
+        "trace": [
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op1-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op1-write)"
+          },
+          {
+            "t": 0,
+            "type": "duplicate",
+            "detail": "client -\u003e n3 (op1-write)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op2-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "duplicate",
+            "detail": "client -\u003e n1 (op2-read)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op2-read)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op3-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op3-write)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op3-write)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op4-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op4-read)"
+          },
+          {
+            "t": 1,
+            "type": "drop",
+            "detail": "n3 -\u003e client (op1-write)"
+          },
+          {
+            "t": 2,
+            "type": "drop",
+            "detail": "n1 -\u003e client (op1-write)"
+          },
+          {
+            "t": 2,
+            "type": "drop",
+            "detail": "n1 -\u003e client (op4-read)"
+          },
+          {
+            "t": 2,
+            "type": "duplicate",
+            "detail": "n2 -\u003e client (op4-read)"
+          },
+          {
+            "t": 4,
+            "type": "quorum",
+            "detail": "op2-read weight=1"
+          },
+          {
+            "t": 4,
+            "type": "quorum",
+            "detail": "op4-read weight=1"
+          },
+          {
+            "t": 5,
+            "type": "drop",
+            "detail": "n2 -\u003e client (op2-read)"
+          },
+          {
+            "t": 5,
+            "type": "quorum",
+            "detail": "op1-write weight=1"
+          },
+          {
+            "t": 12,
+            "type": "attempt",
+            "detail": "op3-write attempt=2 role=A"
+          },
+          {
+            "t": 12,
+            "type": "quorum",
+            "detail": "op3-write weight=1"
+          },
+          {
+            "t": 13,
+            "type": "drop",
+            "detail": "n2 -\u003e client (op3-write)"
+          },
+          {
+            "t": 13,
+            "type": "drop",
+            "detail": "n3 -\u003e client (op3-write)"
+          }
+        ]
+      },
+      {
+        "seed": 8346079845500723674,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 15,
+        "responses_delivered": 4,
+        "dropped": 10,
+        "duplicated": 1,
+        "max_time": 24,
+        "violations": [
+          {
+            "op_a": "op1-write",
+            "op_b": "op3-write",
+            "kind": "ww",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n2"
+            ]
+          },
+          {
+            "op_a": "op2-read",
+            "op_b": "op3-write",
+            "kind": "rw",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n2"
+            ]
+          },
+          {
+            "op_a": "op3-write",
+            "op_b": "op4-read",
+            "kind": "rw",
+            "responders_a": [
+              "n2"
+            ],
+            "responders_b": [
+              "n1"
+            ]
+          }
+        ],
+        "completed_ops": [
+          {
+            "op": "op1-write",
+            "kind": "write",
+            "responders": [
+              "n1"
+            ],
+            "weight": 1,
+            "completed_at": 7
+          },
+          {
+            "op": "op2-read",
+            "kind": "read",
+            "responders": [
+              "n1"
+            ],
+            "weight": 1,
+            "completed_at": 6
+          },
+          {
+            "op": "op3-write",
+            "kind": "write",
+            "responders": [
+              "n2"
+            ],
+            "weight": 1,
+            "completed_at": 18
+          },
+          {
+            "op": "op4-read",
+            "kind": "read",
+            "responders": [
+              "n1"
+            ],
+            "weight": 1,
+            "completed_at": 3
+          }
+        ],
+        "trace": [
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op1-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op1-write)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op2-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op2-read)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op3-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op3-write)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op3-write)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op3-write)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op4-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op4-read)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op4-read)"
+          },
+          {
+            "t": 3,
+            "type": "drop",
+            "detail": "n3 -\u003e client (op2-read)"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op4-read weight=1"
+          },
+          {
+            "t": 6,
+            "type": "quorum",
+            "detail": "op2-read weight=1"
+          },
+          {
+            "t": 7,
+            "type": "quorum",
+            "detail": "op1-write weight=1"
+          },
+          {
+            "t": 12,
+            "type": "attempt",
+            "detail": "op3-write attempt=2 role=A"
+          },
+          {
+            "t": 12,
+            "type": "duplicate",
+            "detail": "client -\u003e n3 (op3-write)"
+          },
+          {
+            "t": 14,
+            "type": "drop",
+            "detail": "n1 -\u003e client (op3-write)"
+          },
+          {
+            "t": 18,
+            "type": "drop",
+            "detail": "n3 -\u003e client (op3-write)"
+          },
+          {
+            "t": 18,
+            "type": "quorum",
+            "detail": "op3-write weight=1"
+          }
+        ]
+      },
+      {
+        "seed": 4601199455465548305,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 30,
+        "responses_delivered": 4,
+        "dropped": 27,
+        "duplicated": 1,
+        "max_time": 48,
+        "violations": [
+          {
+            "op_a": "op1-write",
+            "op_b": "op3-write",
+            "kind": "ww",
+            "responders_a": [
+              "n3"
+            ],
+            "responders_b": [
+              "n1"
+            ]
+          },
+          {
+            "op_a": "op1-write",
+            "op_b": "op4-read",
+            "kind": "rw",
+            "responders_a": [
+              "n3"
+            ],
+            "responders_b": [
+              "n2"
+            ]
+          },
+          {
+            "op_a": "op2-read",
+            "op_b": "op3-write",
+            "kind": "rw",
+            "responders_a": [
+              "n3"
+            ],
+            "responders_b": [
+              "n1"
+            ]
+          },
+          {
+            "op_a": "op3-write",
+            "op_b": "op4-read",
+            "kind": "rw",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n2"
+            ]
+          }
+        ],
+        "completed_ops": [
+          {
+            "op": "op1-write",
+            "kind": "write",
+            "responders": [
+              "n3"
+            ],
+            "weight": 1,
+            "completed_at": 41
+          },
+          {
+            "op": "op2-read",
+            "kind": "read",
+            "responders": [
+              "n3"
+            ],
+            "weight": 1,
+            "completed_at": 23
+          },
+          {
+            "op": "op3-write",
+            "kind": "write",
+            "responders": [
+              "n1"
+            ],
+            "weight": 1,
+            "completed_at": 19
+          },
+          {
+            "op": "op4-read",
+            "kind": "read",
+            "responders": [
+              "n2"
+            ],
+            "weight": 1,
+            "completed_at": 22
+          }
+        ],
+        "trace": [
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op1-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op1-write)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op1-write)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op1-write)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op2-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op2-read)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op2-read)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op3-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op3-write)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op3-write)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op4-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op4-read)"
+          },
+          {
+            "t": 2,
+            "type": "drop",
+            "detail": "n1 -\u003e client (op2-read)"
+          },
+          {
+            "t": 2,
+            "type": "drop",
+            "detail": "n3 -\u003e client (op3-write)"
+          },
+          {
+            "t": 4,
+            "type": "drop",
+            "detail": "n1 -\u003e client (op4-read)"
+          },
+          {
+            "t": 4,
+            "type": "drop",
+            "detail": "n2 -\u003e client (op4-read)"
+          },
+          {
+            "t": 12,
+            "type": "attempt",
+            "detail": "op1-write attempt=2 role=A"
+          },
+          {
+            "t": 12,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op1-write)"
+          },
+          {
+            "t": 12,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op1-write)"
+          },
+          {
+            "t": 12,
+            "type": "attempt",
+            "detail": "op2-read attempt=2 role=B"
+          },
+          {
+            "t": 12,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op2-read)"
+          },
+          {
+            "t": 12,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op2-read)"
+          },
+          {
+            "t": 12,
+            "type": "duplicate",
+            "detail": "client -\u003e n3 (op2-read)"
+          },
+          {
+            "t": 12,
+            "type": "attempt",
+            "detail": "op3-write attempt=2 role=A"
+          },
+          {
+            "t": 12,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op3-write)"
+          },
+          {
+            "t": 12,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op3-write)"
+          },
+          {
+            "t": 12,
+            "type": "attempt",
+            "detail": "op4-read attempt=2 role=B"
+          },
+          {
+            "t": 12,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op4-read)"
+          },
+          {
+            "t": 12,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op4-read)"
+          },
+          {
+            "t": 13,
+            "type": "drop",
+            "detail": "n2 -\u003e client (op1-write)"
+          },
+          {
+            "t": 14,
+            "type": "drop",
+            "detail": "n3 -\u003e client (op2-read)"
+          },
+          {
+            "t": 19,
+            "type": "quorum",
+            "detail": "op3-write weight=1"
+          },
+          {
+            "t": 22,
+            "type": "quorum",
+            "detail": "op4-read weight=1"
+          },
+          {
+            "t": 23,
+            "type": "quorum",
+            "detail": "op2-read weight=1"
+          },
+          {
+            "t": 24,
+            "type": "attempt",
+            "detail": "op1-write attempt=3 role=A"
+          },
+          {
+            "t": 24,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op1-write)"
+          },
+          {
+            "t": 24,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op1-write)"
+          },
+          {
+            "t": 25,
+            "type": "drop",
+            "detail": "n1 -\u003e client (op1-write)"
+          },
+          {
+            "t": 36,
+            "type": "attempt",
+            "detail": "op1-write attempt=4 role=A"
+          },
+          {
+            "t": 36,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op1-write)"
+          },
+          {
+            "t": 36,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op1-write)"
+          },
+          {
+            "t": 41,
+            "type": "quorum",
+            "detail": "op1-write weight=1"
+          }
+        ]
+      },
+      {
+        "seed": 8632209307422871798,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 21,
+        "responses_delivered": 4,
+        "dropped": 16,
+        "duplicated": 1,
+        "max_time": 36,
+        "violations": [
+          {
+            "op_a": "op1-write",
+            "op_b": "op3-write",
+            "kind": "ww",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n3"
+            ]
+          },
+          {
+            "op_a": "op1-write",
+            "op_b": "op4-read",
+            "kind": "rw",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n3"
+            ]
+          },
+          {
+            "op_a": "op2-read",
+            "op_b": "op3-write",
+            "kind": "rw",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n3"
+            ]
+          }
+        ],
+        "completed_ops": [
+          {
+            "op": "op1-write",
+            "kind": "write",
+            "responders": [
+              "n1"
+            ],
+            "weight": 1,
+            "completed_at": 26
+          },
+          {
+            "op": "op2-read",
+            "kind": "read",
+            "responders": [
+              "n1"
+            ],
+            "weight": 1,
+            "completed_at": 4
+          },
+          {
+            "op": "op3-write",
+            "kind": "write",
+            "responders": [
+              "n3"
+            ],
+            "weight": 1,
+            "completed_at": 5
+          },
+          {
+            "op": "op4-read",
+            "kind": "read",
+            "responders": [
+              "n3"
+            ],
+            "weight": 1,
+            "completed_at": 20
+          }
+        ],
+        "trace": [
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op1-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op1-write)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op1-write)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op2-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op2-read)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op3-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op3-write)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op3-write)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op4-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op4-read)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op4-read)"
+          },
+          {
+            "t": 3,
+            "type": "drop",
+            "detail": "n1 -\u003e client (op1-write)"
+          },
+          {
+            "t": 4,
+            "type": "drop",
+            "detail": "n3 -\u003e client (op4-read)"
+          },
+          {
+            "t": 4,
+            "type": "quorum",
+            "detail": "op2-read weight=1"
+          },
+          {
+            "t": 5,
+            "type": "quorum",
+            "detail": "op3-write weight=1"
+          },
+          {
+            "t": 12,
+            "type": "attempt",
+            "detail": "op1-write attempt=2 role=A"
+          },
+          {
+            "t": 12,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op1-write)"
+          },
+          {
+            "t": 12,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op1-write)"
+          },
+          {
+            "t": 12,
+            "type": "attempt",
+            "detail": "op4-read attempt=2 role=B"
+          },
+          {
+            "t": 12,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op4-read)"
+          },
+          {
+            "t": 12,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op4-read)"
+          },
+          {
+            "t": 16,
+            "type": "drop",
+            "detail": "n2 -\u003e client (op1-write)"
+          },
+          {
+            "t": 20,
+            "type": "quorum",
+            "detail": "op4-read weight=1"
+          },
+          {
+            "t": 24,
+            "type": "attempt",
+            "detail": "op1-write attempt=3 role=A"
+          },
+          {
+            "t": 24,
+            "type": "duplicate",
+            "detail": "client -\u003e n2 (op1-write)"
+          },
+          {
+            "t": 26,
+            "type": "quorum",
+            "detail": "op1-write weight=1"
+          },
+          {
+            "t": 29,
+            "type": "drop",
+            "detail": "n2 -\u003e client (op1-write)"
+          },
+          {
+            "t": 30,
+            "type": "drop",
+            "detail": "n3 -\u003e client (op1-write)"
+          }
+        ]
+      },
+      {
+        "seed": 6051947643683389182,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 18,
+        "responses_delivered": 4,
+        "dropped": 13,
+        "duplicated": 5,
+        "max_time": 36,
+        "violations": [
+          {
+            "op_a": "op1-write",
+            "op_b": "op2-read",
+            "kind": "rw",
+            "responders_a": [
+              "n3"
+            ],
+            "responders_b": [
+              "n2"
+            ]
+          },
+          {
+            "op_a": "op1-write",
+            "op_b": "op3-write",
+            "kind": "ww",
+            "responders_a": [
+              "n3"
+            ],
+            "responders_b": [
+              "n2"
+            ]
+          },
+          {
+            "op_a": "op1-write",
+            "op_b": "op4-read",
+            "kind": "rw",
+            "responders_a": [
+              "n3"
+            ],
+            "responders_b": [
+              "n2"
+            ]
+          }
+        ],
+        "completed_ops": [
+          {
+            "op": "op1-write",
+            "kind": "write",
+            "responders": [
+              "n3"
+            ],
+            "weight": 1,
+            "completed_at": 1
+          },
+          {
+            "op": "op2-read",
+            "kind": "read",
+            "responders": [
+              "n2"
+            ],
+            "weight": 1,
+            "completed_at": 3
+          },
+          {
+            "op": "op3-write",
+            "kind": "write",
+            "responders": [
+              "n2"
+            ],
+            "weight": 1,
+            "completed_at": 29
+          },
+          {
+            "op": "op4-read",
+            "kind": "read",
+            "responders": [
+              "n2"
+            ],
+            "weight": 1,
+            "completed_at": 9
+          }
+        ],
+        "trace": [
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op1-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op2-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op2-read)"
+          },
+          {
+            "t": 0,
+            "type": "duplicate",
+            "detail": "client -\u003e n2 (op2-read)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op2-read)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op3-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op3-write)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op4-read attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op4-read)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op4-read)"
+          },
+          {
+            "t": 1,
+            "type": "duplicate",
+            "detail": "n2 -\u003e client (op1-write)"
+          },
+          {
+            "t": 1,
+            "type": "quorum",
+            "detail": "op1-write weight=1"
+          },
+          {
+            "t": 2,
+            "type": "drop",
+            "detail": "n2 -\u003e client (op3-write)"
+          },
+          {
+            "t": 3,
+            "type": "drop",
+            "detail": "n2 -\u003e client (op2-read)"
+          },
+          {
+            "t": 3,
+            "type": "drop",
+            "detail": "n3 -\u003e client (op3-write)"
+          },
+          {
+            "t": 3,
+            "type": "quorum",
+            "detail": "op2-read weight=1"
+          },
+          {
+            "t": 4,
+            "type": "drop",
+            "detail": "n1 -\u003e client (op1-write)"
+          },
+          {
+            "t": 5,
+            "type": "duplicate",
+            "detail": "n2 -\u003e client (op4-read)"
+          },
+          {
+            "t": 9,
+            "type": "quorum",
+            "detail": "op4-read weight=1"
+          },
+          {
+            "t": 12,
+            "type": "attempt",
+            "detail": "op3-write attempt=2 role=A"
+          },
+          {
+            "t": 12,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op3-write)"
+          },
+          {
+            "t": 12,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op3-write)"
+          },
+          {
+            "t": 14,
+            "type": "drop",
+            "detail": "n3 -\u003e client (op3-write)"
+          },
+          {
+            "t": 24,
+            "type": "attempt",
+            "detail": "op3-write attempt=3 role=A"
+          },
+          {
+            "t": 24,
+            "type": "duplicate",
+            "detail": "client -\u003e n2 (op3-write)"
+          },
+          {
+            "t": 26,
+            "type": "drop",
+            "detail": "n2 -\u003e client (op3-write)"
+          },
+          {
+            "t": 26,
+            "type": "duplicate",
+            "detail": "n3 -\u003e client (op3-write)"
+          },
+          {
+            "t": 29,
+            "type": "quorum",
+            "detail": "op3-write weight=1"
+          }
+        ]
+      },
+      {
+        "seed": 2476628477891077985,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 18,
+        "responses_delivered": 4,
+        "dropped": 15,
+        "duplicated": 2,
+        "max_time": 24,
+        "violations": [
+          {
+            "op_a": "op1-write",
+            "op_b": "op2-read",
+            "kind": "rw",
+            "responders_a": [
+              "n2"
+            ],
+            "responders_b": [
+              "n1"
+            ]
+          },
+          {
+            "op_a": "op1-write",
+            "op_b": "op3-write",
+            "kind": "ww",
+            "responders_a": [
+              "n2"
+            ],
+            "responders_b": [
+              "n3"
+            ]
+          },
+          {
+            "op_a": "op1-write",
+            "op_b": "op4-read",
+            "kind": "rw",
+            "responders_a": [
+              "n2"
+            ],
+            "responders_b": [
+              "n1"
+            ]
+          },
+          {
+            "op_a": "op2-read",
+            "op_b": "op3-write",
+            "kind": "rw",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n3"
+            ]
+          },
+          {
+            "op_a": "op3-write",
+            "op_b": "op4-read",
+            "kind": "rw",
+            "responders_a": [
+              "n3"
+            ],
+            "responders_b": [
+              "n1"
+            ]
+          }
+        ]
+      },
+      {
+        "seed": 7621113624420504425,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 12,
+        "responses_delivered": 4,
+        "dropped": 5,
+        "duplicated": 7,
+        "max_time": 12,
+        "violations": [
+          {
+            "op_a": "op1-write",
+            "op_b": "op4-read",
+            "kind": "rw",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n2"
+            ]
+          },
+          {
+            "op_a": "op3-write",
+            "op_b": "op4-read",
+            "kind": "rw",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n2"
+            ]
+          }
+        ]
+      },
+      {
+        "seed": 1910343844960271083,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 30,
+        "responses_delivered": 4,
+        "dropped": 29,
+        "duplicated": 4,
+        "max_time": 48,
+        "violations": [
+          {
+            "op_a": "op1-write",
+            "op_b": "op3-write",
+            "kind": "ww",
+            "responders_a": [
+              "n3"
+            ],
+            "responders_b": [
+              "n1"
+            ]
+          },
+          {
+            "op_a": "op2-read",
+            "op_b": "op3-write",
+            "kind": "rw",
+            "responders_a": [
+              "n3"
+            ],
+            "responders_b": [
+              "n1"
+            ]
+          },
+          {
+            "op_a": "op3-write",
+            "op_b": "op4-read",
+            "kind": "rw",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n3"
+            ]
+          }
+        ]
+      },
+      {
+        "seed": 17706551433532105516,
+        "completed": 4,
+        "timed_out": 0,
+        "requests_sent": 12,
+        "responses_delivered": 4,
+        "dropped": 8,
+        "duplicated": 2,
+        "max_time": 12,
+        "violations": [
+          {
+            "op_a": "op1-write",
+            "op_b": "op2-read",
+            "kind": "rw",
+            "responders_a": [
+              "n2"
+            ],
+            "responders_b": [
+              "n1"
+            ]
+          },
+          {
+            "op_a": "op1-write",
+            "op_b": "op3-write",
+            "kind": "ww",
+            "responders_a": [
+              "n2"
+            ],
+            "responders_b": [
+              "n3"
+            ]
+          },
+          {
+            "op_a": "op1-write",
+            "op_b": "op4-read",
+            "kind": "rw",
+            "responders_a": [
+              "n2"
+            ],
+            "responders_b": [
+              "n3"
+            ]
+          },
+          {
+            "op_a": "op2-read",
+            "op_b": "op3-write",
+            "kind": "rw",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n3"
+            ]
+          }
+        ]
+      }
+    ],
+    "all_complete": true,
+    "safe": false
+  }
+}

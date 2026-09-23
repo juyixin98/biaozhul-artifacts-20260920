@@ -1,0 +1,9 @@
+{
+  "errors": [
+    "nodes[1]: duplicate node id \"n1\"",
+    "nodes[2] (n3): weight must be non-negative, got -1",
+    "read_quorum 5 exceeds total node weight 1: no read quorum can ever form",
+    "write_quorum 5 exceeds total node weight 1: no write quorum can ever form"
+  ],
+  "ok": false
+}

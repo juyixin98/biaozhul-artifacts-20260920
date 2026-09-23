@@ -1,0 +1,15 @@
+{
+  "action": "analyze",
+  "config": {
+    "nodes": [
+      {"id": "n1", "weight": 1, "domain": "az-1"},
+      {"id": "n2", "weight": 1, "domain": "az-1"},
+      {"id": "n3", "weight": 1, "domain": "az-2"},
+      {"id": "n4", "weight": 1, "domain": "az-2"},
+      {"id": "n5", "weight": 1, "domain": "az-3"}
+    ],
+    "read_quorum": 3,
+    "write_quorum": 3,
+    "tolerate_domains": 1
+  }
+}

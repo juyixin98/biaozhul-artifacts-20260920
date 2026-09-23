@@ -1,0 +1,14 @@
+{
+  "action": "analyze",
+  "config": {
+    "nodes": [
+      {"id": "n1", "weight": 1, "domain": "rack-a"},
+      {"id": "n2", "weight": 1, "domain": "rack-b"},
+      {"id": "n3", "weight": 1, "domain": "rack-c"},
+      {"id": "observer", "weight": 0, "domain": "rack-a"}
+    ],
+    "read_quorum": 2,
+    "write_quorum": 2,
+    "tolerate_domains": 1
+  }
+}

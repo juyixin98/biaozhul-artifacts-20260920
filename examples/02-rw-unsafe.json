@@ -1,0 +1,13 @@
+{
+  "action": "all",
+  "config": {
+    "nodes": [
+      {"id": "n1", "weight": 3, "domain": "az-1"},
+      {"id": "n2", "weight": 2, "domain": "az-2"},
+      {"id": "n3", "weight": 1, "domain": "az-3"}
+    ],
+    "read_quorum": 2,
+    "write_quorum": 4,
+    "tolerate_domains": 1
+  }
+}

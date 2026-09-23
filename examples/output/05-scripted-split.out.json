@@ -1,0 +1,333 @@
+{
+  "action": "simulate",
+  "ok": true,
+  "report": {
+    "valid": true,
+    "nodes": [
+      "n1",
+      "n2",
+      "n3"
+    ],
+    "domains": [
+      "a",
+      "b",
+      "c"
+    ],
+    "num_nodes": 3,
+    "num_domains": 3,
+    "total_weight": 3,
+    "read_quorum": 1,
+    "write_quorum": 1,
+    "exhaustive": true,
+    "exhaustive_limit": 20,
+    "num_read_quorums": 7,
+    "num_write_quorums": 7,
+    "read_quorums": [
+      [
+        "n1"
+      ],
+      [
+        "n2"
+      ],
+      [
+        "n3"
+      ],
+      [
+        "n1",
+        "n2"
+      ],
+      [
+        "n1",
+        "n3"
+      ],
+      [
+        "n2",
+        "n3"
+      ],
+      [
+        "n1",
+        "n2",
+        "n3"
+      ]
+    ],
+    "write_quorums": [
+      [
+        "n1"
+      ],
+      [
+        "n2"
+      ],
+      [
+        "n3"
+      ],
+      [
+        "n1",
+        "n2"
+      ],
+      [
+        "n1",
+        "n3"
+      ],
+      [
+        "n2",
+        "n3"
+      ],
+      [
+        "n1",
+        "n2",
+        "n3"
+      ]
+    ],
+    "ww_safe": false,
+    "rw_safe": false,
+    "minimal_ww_counterexample": {
+      "kind": "ww",
+      "quorum_a": [
+        "n1"
+      ],
+      "weight_a": 1,
+      "quorum_b": [
+        "n2"
+      ],
+      "weight_b": 1,
+      "explanation": "two write quorums (each reaching write_quorum=1) are node-disjoint; concurrent writes can both commit without a common node, so their ordering is undecidable"
+    },
+    "minimal_rw_counterexample": {
+      "kind": "rw",
+      "quorum_a": [
+        "n1"
+      ],
+      "weight_a": 1,
+      "quorum_b": [
+        "n2"
+      ],
+      "weight_b": 1,
+      "explanation": "a read quorum (read_quorum=1) and a write quorum (write_quorum=1) are node-disjoint; a read can miss a committed write entirely (stale read)"
+    },
+    "minimal_counterexample": {
+      "kind": "ww",
+      "quorum_a": [
+        "n1"
+      ],
+      "weight_a": 1,
+      "quorum_b": [
+        "n2"
+      ],
+      "weight_b": 1,
+      "explanation": "two write quorums (each reaching write_quorum=1) are node-disjoint; concurrent writes can both commit without a common node, so their ordering is undecidable"
+    },
+    "tolerate_domains": 0,
+    "num_scenarios": 1,
+    "available": true,
+    "scenarios": [
+      {
+        "failed_domains": [],
+        "survivors": [
+          "n1",
+          "n2",
+          "n3"
+        ],
+        "survivor_weight": 3,
+        "read_possible": true,
+        "write_possible": true,
+        "num_read_quorums": 7,
+        "num_write_quorums": 7,
+        "read_quorums": [
+          [
+            "n1"
+          ],
+          [
+            "n2"
+          ],
+          [
+            "n3"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n1",
+            "n3"
+          ],
+          [
+            "n2",
+            "n3"
+          ],
+          [
+            "n1",
+            "n2",
+            "n3"
+          ]
+        ],
+        "write_quorums": [
+          [
+            "n1"
+          ],
+          [
+            "n2"
+          ],
+          [
+            "n3"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n1",
+            "n3"
+          ],
+          [
+            "n2",
+            "n3"
+          ],
+          [
+            "n1",
+            "n2",
+            "n3"
+          ]
+        ],
+        "ww_safe": false,
+        "rw_safe": false,
+        "counterexample": {
+          "kind": "ww",
+          "quorum_a": [
+            "n1"
+          ],
+          "weight_a": 1,
+          "quorum_b": [
+            "n2"
+          ],
+          "weight_b": 1,
+          "explanation": "two write quorums (each reaching write_quorum=1) are node-disjoint; concurrent writes can both commit without a common node, so their ordering is undecidable"
+        }
+      },
+      {
+        "failed_domains": [
+          "a",
+          "b",
+          "c"
+        ],
+        "survivors": [],
+        "survivor_weight": 0,
+        "read_possible": false,
+        "write_possible": false,
+        "num_read_quorums": 0,
+        "num_write_quorums": 0,
+        "ww_safe": true,
+        "rw_safe": true,
+        "beyond_tolerance": true
+      }
+    ]
+  },
+  "simulation": {
+    "runs": 1,
+    "scripted": true,
+    "completed_total": 2,
+    "timed_out_total": 0,
+    "violation_runs": 1,
+    "violations": [
+      {
+        "op_a": "op1-write",
+        "op_b": "op2-write",
+        "kind": "ww",
+        "responders_a": [
+          "n1"
+        ],
+        "responders_b": [
+          "n2"
+        ]
+      }
+    ],
+    "run_results": [
+      {
+        "seed": 1,
+        "completed": 2,
+        "timed_out": 0,
+        "requests_sent": 6,
+        "responses_delivered": 2,
+        "dropped": 4,
+        "duplicated": 0,
+        "max_time": 50,
+        "violations": [
+          {
+            "op_a": "op1-write",
+            "op_b": "op2-write",
+            "kind": "ww",
+            "responders_a": [
+              "n1"
+            ],
+            "responders_b": [
+              "n2"
+            ]
+          }
+        ],
+        "completed_ops": [
+          {
+            "op": "op1-write",
+            "kind": "write",
+            "responders": [
+              "n1"
+            ],
+            "weight": 1,
+            "completed_at": 2
+          },
+          {
+            "op": "op2-write",
+            "kind": "write",
+            "responders": [
+              "n2"
+            ],
+            "weight": 1,
+            "completed_at": 2
+          }
+        ],
+        "trace": [
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op1-write attempt=1 role=A"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n2 (op1-write)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op1-write)"
+          },
+          {
+            "t": 0,
+            "type": "attempt",
+            "detail": "op2-write attempt=1 role=B"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n1 (op2-write)"
+          },
+          {
+            "t": 0,
+            "type": "drop",
+            "detail": "client -\u003e n3 (op2-write)"
+          },
+          {
+            "t": 2,
+            "type": "quorum",
+            "detail": "op1-write weight=1"
+          },
+          {
+            "t": 2,
+            "type": "quorum",
+            "detail": "op2-write weight=1"
+          }
+        ]
+      }
+    ],
+    "all_complete": true,
+    "safe": false
+  }
+}
