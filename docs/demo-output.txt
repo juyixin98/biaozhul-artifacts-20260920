@@ -1,0 +1,593 @@
+dual-stream interval join service started
+listen: http://127.0.0.1:18123
+health: GET /health
+================ 1) 创建会话，区间 [-2, +2] ================
+### POST /sessions
+{
+    "sessionId": "demo",
+    "lowerBound": -2,
+    "upperBound": 2,
+    "watermarkLeft": null,
+    "watermarkRight": null,
+    "leftReceived": 0,
+    "rightReceived": 0,
+    "leftDroppedLate": 0,
+    "rightDroppedLate": 0,
+    "leftStateEvents": 0,
+    "rightStateEvents": 0,
+    "leftStateKeys": 0,
+    "rightStateKeys": 0,
+    "leftReclaimed": 0,
+    "rightReclaimed": 0,
+    "totalReclaimed": 0,
+    "pairsEmitted": 0
+}
+
+================ 2) 灌入左流（普通 key + 热键 HOT） ================
+### POST /sessions/demo/events/left
+{
+    "stats": {
+        "sessionId": "demo",
+        "lowerBound": -2,
+        "upperBound": 2,
+        "watermarkLeft": null,
+        "watermarkRight": null,
+        "leftReceived": 7,
+        "rightReceived": 0,
+        "leftDroppedLate": 0,
+        "rightDroppedLate": 0,
+        "leftStateEvents": 7,
+        "rightStateEvents": 0,
+        "leftStateKeys": 2,
+        "rightStateKeys": 0,
+        "leftReclaimed": 0,
+        "rightReclaimed": 0,
+        "totalReclaimed": 0,
+        "pairsEmitted": 0
+    },
+    "results": [
+        {
+            "eventId": "L1",
+            "droppedLate": false,
+            "newPairs": 0
+        },
+        {
+            "eventId": "L2",
+            "droppedLate": false,
+            "newPairs": 0
+        },
+        {
+            "eventId": "LH1",
+            "droppedLate": false,
+            "newPairs": 0
+        },
+        {
+            "eventId": "LH2",
+            "droppedLate": false,
+            "newPairs": 0
+        },
+        {
+            "eventId": "LH3",
+            "droppedLate": false,
+            "newPairs": 0
+        },
+        {
+            "eventId": "LH4",
+            "droppedLate": false,
+            "newPairs": 0
+        },
+        {
+            "eventId": "LH5",
+            "droppedLate": false,
+            "newPairs": 0
+        }
+    ]
+}
+
+================ 3) 灌入右流（含时间边界 ±2、超界 8） ================
+### POST /sessions/demo/events/right
+{
+    "stats": {
+        "sessionId": "demo",
+        "lowerBound": -2,
+        "upperBound": 2,
+        "watermarkLeft": null,
+        "watermarkRight": null,
+        "leftReceived": 7,
+        "rightReceived": 8,
+        "leftDroppedLate": 0,
+        "rightDroppedLate": 0,
+        "leftStateEvents": 7,
+        "rightStateEvents": 8,
+        "leftStateKeys": 2,
+        "rightStateKeys": 2,
+        "leftReclaimed": 0,
+        "rightReclaimed": 0,
+        "totalReclaimed": 0,
+        "pairsEmitted": 22
+    },
+    "results": [
+        {
+            "eventId": "R1",
+            "droppedLate": false,
+            "newPairs": 1
+        },
+        {
+            "eventId": "R2",
+            "droppedLate": false,
+            "newPairs": 1
+        },
+        {
+            "eventId": "R3",
+            "droppedLate": false,
+            "newPairs": 1
+        },
+        {
+            "eventId": "RH1",
+            "droppedLate": false,
+            "newPairs": 3
+        },
+        {
+            "eventId": "RH2",
+            "droppedLate": false,
+            "newPairs": 4
+        },
+        {
+            "eventId": "RH3",
+            "droppedLate": false,
+            "newPairs": 5
+        },
+        {
+            "eventId": "RH4",
+            "droppedLate": false,
+            "newPairs": 4
+        },
+        {
+            "eventId": "RH5",
+            "droppedLate": false,
+            "newPairs": 3
+        }
+    ]
+}
+
+================ 4) 查看全部配对（携带 payload） ================
+### GET /sessions/demo/pairs?includePayload=true
+{
+    "pairs": [
+        {
+            "key": "u",
+            "leftId": "L1",
+            "leftTs": 5,
+            "rightId": "R1",
+            "rightTs": 3,
+            "tsDiff": -2,
+            "leftPayload": {
+                "src": "sensor-A"
+            },
+            "rightPayload": {
+                "note": "\u4e0b\u754c r=l-2\uff0c\u547d\u4e2d"
+            }
+        },
+        {
+            "key": "u",
+            "leftId": "L1",
+            "leftTs": 5,
+            "rightId": "R2",
+            "rightTs": 7,
+            "tsDiff": 2,
+            "leftPayload": {
+                "src": "sensor-A"
+            },
+            "rightPayload": {
+                "note": "\u4e0a\u754c r=l+2\uff0c\u547d\u4e2d"
+            }
+        },
+        {
+            "key": "u",
+            "leftId": "L2",
+            "leftTs": 10,
+            "rightId": "R3",
+            "rightTs": 8,
+            "tsDiff": -2,
+            "leftPayload": {
+                "src": "sensor-A"
+            },
+            "rightPayload": {
+                "note": "\u5dee 3\uff0c\u8d85\u51fa\u533a\u95f4"
+            }
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH1",
+            "leftTs": 1,
+            "rightId": "RH1",
+            "rightTs": 1,
+            "tsDiff": 0,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH2",
+            "leftTs": 2,
+            "rightId": "RH1",
+            "rightTs": 1,
+            "tsDiff": -1,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH3",
+            "leftTs": 3,
+            "rightId": "RH1",
+            "rightTs": 1,
+            "tsDiff": -2,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH1",
+            "leftTs": 1,
+            "rightId": "RH2",
+            "rightTs": 2,
+            "tsDiff": 1,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH2",
+            "leftTs": 2,
+            "rightId": "RH2",
+            "rightTs": 2,
+            "tsDiff": 0,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH3",
+            "leftTs": 3,
+            "rightId": "RH2",
+            "rightTs": 2,
+            "tsDiff": -1,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH4",
+            "leftTs": 4,
+            "rightId": "RH2",
+            "rightTs": 2,
+            "tsDiff": -2,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH1",
+            "leftTs": 1,
+            "rightId": "RH3",
+            "rightTs": 3,
+            "tsDiff": 2,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH2",
+            "leftTs": 2,
+            "rightId": "RH3",
+            "rightTs": 3,
+            "tsDiff": 1,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH3",
+            "leftTs": 3,
+            "rightId": "RH3",
+            "rightTs": 3,
+            "tsDiff": 0,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH4",
+            "leftTs": 4,
+            "rightId": "RH3",
+            "rightTs": 3,
+            "tsDiff": -1,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH5",
+            "leftTs": 5,
+            "rightId": "RH3",
+            "rightTs": 3,
+            "tsDiff": -2,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH2",
+            "leftTs": 2,
+            "rightId": "RH4",
+            "rightTs": 4,
+            "tsDiff": 2,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH3",
+            "leftTs": 3,
+            "rightId": "RH4",
+            "rightTs": 4,
+            "tsDiff": 1,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH4",
+            "leftTs": 4,
+            "rightId": "RH4",
+            "rightTs": 4,
+            "tsDiff": 0,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH5",
+            "leftTs": 5,
+            "rightId": "RH4",
+            "rightTs": 4,
+            "tsDiff": -1,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH3",
+            "leftTs": 3,
+            "rightId": "RH5",
+            "rightTs": 5,
+            "tsDiff": 2,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH4",
+            "leftTs": 4,
+            "rightId": "RH5",
+            "rightTs": 5,
+            "tsDiff": 1,
+            "leftPayload": null,
+            "rightPayload": null
+        },
+        {
+            "key": "HOT",
+            "leftId": "LH5",
+            "leftTs": 5,
+            "rightId": "RH5",
+            "rightTs": 5,
+            "tsDiff": 0,
+            "leftPayload": null,
+            "rightPayload": null
+        }
+    ],
+    "count": 22
+}
+
+================ 5) 仅推进左水位=100：单侧水位不得回收任何状态 ================
+### POST /sessions/demo/watermarks/left
+{
+    "side": "left",
+    "reclaimedThisCall": 0,
+    "stats": {
+        "sessionId": "demo",
+        "lowerBound": -2,
+        "upperBound": 2,
+        "watermarkLeft": 100,
+        "watermarkRight": null,
+        "leftReceived": 7,
+        "rightReceived": 8,
+        "leftDroppedLate": 0,
+        "rightDroppedLate": 0,
+        "leftStateEvents": 7,
+        "rightStateEvents": 8,
+        "leftStateKeys": 2,
+        "rightStateKeys": 2,
+        "leftReclaimed": 0,
+        "rightReclaimed": 0,
+        "totalReclaimed": 0,
+        "pairsEmitted": 22
+    }
+}
+
+================ 6) 推进右水位=100：双方水位齐备，输出被回收状态量 ================
+### POST /sessions/demo/watermarks/right
+{
+    "side": "right",
+    "reclaimedThisCall": 15,
+    "stats": {
+        "sessionId": "demo",
+        "lowerBound": -2,
+        "upperBound": 2,
+        "watermarkLeft": 100,
+        "watermarkRight": 100,
+        "leftReceived": 7,
+        "rightReceived": 8,
+        "leftDroppedLate": 0,
+        "rightDroppedLate": 0,
+        "leftStateEvents": 0,
+        "rightStateEvents": 0,
+        "leftStateKeys": 0,
+        "rightStateKeys": 0,
+        "leftReclaimed": 7,
+        "rightReclaimed": 8,
+        "totalReclaimed": 15,
+        "pairsEmitted": 22
+    }
+}
+
+================ 7) 水位之后的迟到事件应被丢弃 ================
+### POST /sessions/demo/events/left
+{
+    "stats": {
+        "sessionId": "demo",
+        "lowerBound": -2,
+        "upperBound": 2,
+        "watermarkLeft": 100,
+        "watermarkRight": 100,
+        "leftReceived": 8,
+        "rightReceived": 8,
+        "leftDroppedLate": 1,
+        "rightDroppedLate": 0,
+        "leftStateEvents": 0,
+        "rightStateEvents": 0,
+        "leftStateKeys": 0,
+        "rightStateKeys": 0,
+        "leftReclaimed": 7,
+        "rightReclaimed": 8,
+        "totalReclaimed": 15,
+        "pairsEmitted": 22
+    },
+    "results": [
+        {
+            "eventId": "LATE1",
+            "droppedLate": true,
+            "newPairs": 0
+        }
+    ]
+}
+
+================ 8) 最终 stats（回收累计量/丢弃量/配对量） ================
+### GET /sessions/demo/stats
+{
+    "sessionId": "demo",
+    "lowerBound": -2,
+    "upperBound": 2,
+    "watermarkLeft": 100,
+    "watermarkRight": 100,
+    "leftReceived": 8,
+    "rightReceived": 8,
+    "leftDroppedLate": 1,
+    "rightDroppedLate": 0,
+    "leftStateEvents": 0,
+    "rightStateEvents": 0,
+    "leftStateKeys": 0,
+    "rightStateKeys": 0,
+    "leftReclaimed": 7,
+    "rightReclaimed": 8,
+    "totalReclaimed": 15,
+    "pairsEmitted": 22
+}
+
+================ 9) /actions 批量编排（事件+水位顺序执行） ================
+### POST /sessions
+{
+    "sessionId": "batch",
+    "lowerBound": -1,
+    "upperBound": 1,
+    "watermarkLeft": null,
+    "watermarkRight": null,
+    "leftReceived": 0,
+    "rightReceived": 0,
+    "leftDroppedLate": 0,
+    "rightDroppedLate": 0,
+    "leftStateEvents": 0,
+    "rightStateEvents": 0,
+    "leftStateKeys": 0,
+    "rightStateKeys": 0,
+    "leftReclaimed": 0,
+    "rightReclaimed": 0,
+    "totalReclaimed": 0,
+    "pairsEmitted": 0
+}
+
+### POST /sessions/batch/actions
+{
+    "actions": [
+        {
+            "type": "event",
+            "eventId": "A1",
+            "droppedLate": false,
+            "newPairs": []
+        },
+        {
+            "type": "event",
+            "eventId": "B1",
+            "droppedLate": false,
+            "newPairs": [
+                {
+                    "key": "k1",
+                    "leftId": "A1",
+                    "leftTs": 20,
+                    "rightId": "B1",
+                    "rightTs": 21,
+                    "tsDiff": 1
+                }
+            ]
+        },
+        {
+            "type": "event",
+            "eventId": "B2",
+            "droppedLate": false,
+            "newPairs": []
+        },
+        {
+            "type": "watermark",
+            "side": "left",
+            "reclaimedThisCall": 0
+        },
+        {
+            "type": "watermark",
+            "side": "right",
+            "reclaimedThisCall": 3
+        }
+    ],
+    "newPairs": [
+        {
+            "key": "k1",
+            "leftId": "A1",
+            "leftTs": 20,
+            "rightId": "B1",
+            "rightTs": 21,
+            "tsDiff": 1
+        }
+    ],
+    "stats": {
+        "sessionId": "batch",
+        "lowerBound": -1,
+        "upperBound": 1,
+        "watermarkLeft": 50,
+        "watermarkRight": 50,
+        "leftReceived": 1,
+        "rightReceived": 2,
+        "leftDroppedLate": 0,
+        "rightDroppedLate": 0,
+        "leftStateEvents": 0,
+        "rightStateEvents": 0,
+        "leftStateKeys": 0,
+        "rightStateKeys": 0,
+        "leftReclaimed": 1,
+        "rightReclaimed": 2,
+        "totalReclaimed": 3,
+        "pairsEmitted": 1
+    }
+}
+
+demo finished.
+shutting down...

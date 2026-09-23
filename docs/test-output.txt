@@ -1,0 +1,15 @@
+>> compiling main...
+>> compiling tests...
+>> running tests...
+== JsonTest
+   29.0 ms
+== JoinSessionTest
+   10.4 ms
+== AcceptanceTest
+    [info] hot key: n=800, pairs=1600, offline cross-check=39ms
+   95.4 ms
+== ApiServerTest
+   1014.9 ms
+
+checks: 140, failures: 0
+RESULT: PASS

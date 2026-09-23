@@ -1,0 +1,9 @@
+{
+  "actions": [
+    {"type": "event", "side": "left",  "key": "k1", "ts": 20, "id": "A1"},
+    {"type": "event", "side": "right", "key": "k1", "ts": 21, "id": "B1"},
+    {"type": "event", "side": "right", "key": "k1", "ts": 25, "id": "B2"},
+    {"type": "watermark", "side": "left",  "watermark": 50},
+    {"type": "watermark", "side": "right", "watermark": 50}
+  ]
+}

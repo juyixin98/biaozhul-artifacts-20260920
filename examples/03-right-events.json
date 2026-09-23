@@ -1,0 +1,10 @@
+[
+  {"id": "R1", "key": "u", "ts": 3,  "payload": {"note": "下界 r=l-2，命中"}},
+  {"id": "R2", "key": "u", "ts": 7,  "payload": {"note": "上界 r=l+2，命中"}},
+  {"id": "R3", "key": "u", "ts": 8,  "payload": {"note": "差 3，超出区间"}},
+  {"id": "RH1", "key": "HOT", "ts": 1},
+  {"id": "RH2", "key": "HOT", "ts": 2},
+  {"id": "RH3", "key": "HOT", "ts": 3},
+  {"id": "RH4", "key": "HOT", "ts": 4},
+  {"id": "RH5", "key": "HOT", "ts": 5}
+]
