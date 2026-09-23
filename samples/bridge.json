@@ -1,0 +1,14 @@
+{
+  "description": "Out-of-order event that bridges two already sealed session windows (gap=10). Events at t=0 and t=15 are 15ms apart (>gap) so they form two sessions; watermark 25 seals them; the late event at t=10 has window [10,20] touching both spans and bridges them into [0,25].",
+  "gap": 10,
+  "allowedLateness": 20,
+  "flushAtEnd": true,
+  "items": [
+    {"key": "u1", "timestamp": 0,  "value": 1.0},
+    {"key": "u1", "timestamp": 15, "value": 4.0},
+    {"key": "u2", "timestamp": 100},
+    {"watermark": 25},
+    {"key": "u1", "timestamp": 10, "value": 9.0},
+    {"watermark": 200}
+  ]
+}

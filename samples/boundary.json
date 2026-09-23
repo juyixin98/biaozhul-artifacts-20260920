@@ -1,0 +1,12 @@
+{
+  "description": "Boundary case: consecutive events whose distance is exactly the gap stay in one session; a distance of gap+1 splits. gap=5 -> (1,6) together, then t=12 opens a new session (distance 6).",
+  "gap": 5,
+  "allowedLateness": 0,
+  "flushAtEnd": true,
+  "items": [
+    {"key": "k", "timestamp": 1},
+    {"key": "k", "timestamp": 6},
+    {"key": "k", "timestamp": 12},
+    {"watermark": 100}
+  ]
+}

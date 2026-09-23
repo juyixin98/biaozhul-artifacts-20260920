@@ -1,0 +1,14 @@
+{
+  "description": "Events after sealing. gap=10, allowedLateness=10: watermark 20 seals [0,10] but keeps it reopenable (purge needs watermark-end >= 10, i.e. wm >= 30); the event at t=6 is late yet within allowed lateness and REOPENS the sealed session (RETRACT old -> ADD merged -> re-SEALED, because end 16 <= wm 20). Watermark 30 then purges it, and the later event at t=9 is too late (9 < 30-10) and is DROPPED.",
+  "gap": 10,
+  "allowedLateness": 10,
+  "flushAtEnd": true,
+  "items": [
+    {"key": "u1", "timestamp": 0, "value": 2.0},
+    {"watermark": 20},
+    {"key": "u1", "timestamp": 6, "value": 3.0},
+    {"watermark": 30},
+    {"key": "u1", "timestamp": 9, "value": 1.0},
+    {"watermark": 100}
+  ]
+}
