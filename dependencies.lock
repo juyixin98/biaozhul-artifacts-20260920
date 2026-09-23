@@ -1,0 +1,30 @@
+# Dependency lock — ordered-event-service
+#
+# This project intentionally has ZERO third-party dependencies: only the JDK
+# standard library is used (HTTP transport is the built-in
+# com.sun.net.httpserver.HttpServer; tests use a tiny in-repo test runner and
+# the JDK java.net.http client). There is therefore no Maven/Gradle artifact
+# list to lock; this file pins the toolchain and JDK modules instead.
+
+toolchain:
+  language: Java
+  sourceLevel: 17
+  # Build and test verified against this exact JDK (Temurin/Adoptium 17.0.13+11).
+  verifiedJdk: "temurin-17.0.13+11"
+  # Any Java 17+ LTS JDK (OpenJDK/Temurin/Corretto/Zulu) is expected to work.
+  compatible: ">=17"
+
+thirdPartyDependencies: []   # none at compile, test or runtime
+
+# Derived from: jdeps --print-module-deps target/classes
+jdkModules:
+  - java.base
+  - jdk.httpserver
+
+buildArtifacts:
+  # Everything is produced by javac/jar from the JDK itself.
+  compiler: javac
+  packaging: jar
+  output: target/ordered-events.jar
+
+testDependencies: []          # tests only use java.base (java.net.http included there)
