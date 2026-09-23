@@ -1,0 +1,20 @@
+[package]
+name = "dual-superblock"
+version = "0.1.0"
+edition = "2021"
+description = "Append-only key/value store with alternating dual superblocks, crash-injectable I/O and a local HTTP validation endpoint"
+license = "MIT"
+
+[lib]
+name = "dual_superblock"
+path = "src/lib.rs"
+
+[[bin]]
+name = "dual-superblock"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3
+
+# 纯标准库实现，无任何第三方依赖，断网环境可直接构建。
+[dependencies]

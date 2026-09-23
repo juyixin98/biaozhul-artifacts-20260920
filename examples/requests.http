@@ -1,0 +1,66 @@
+### 双页超级块恢复 —— HTTP 请求样例
+###
+### 用法：
+###   1) ./target/release/dual-superblock serve --addr 127.0.0.1:8080 --dir ./storedata
+###   2) 在支持 .http 的 IDE 中逐条发送；或参考 demo.sh 用 curl 执行。
+###
+### 约定：所有写/删响应都返回提交后的 generation；generation 单调递增，
+###      每次 PUT/DELETE 都是一个新代次。
+
+### 存活检查
+GET http://127.0.0.1:8080/health
+
+### 当前快照（代次、根指针、条目数）
+GET http://127.0.0.1:8080/snapshot
+
+### 写单键（请求体原样作为值）
+PUT http://127.0.0.1:8080/kv/user:1
+Content-Type: text/plain
+
+alice
+
+### 再写一个键（代次 +1）
+PUT http://127.0.0.1:8080/kv/color
+Content-Type: text/plain
+
+blue
+
+### 覆盖写（旧 LEAF 留在 data.log 中成为不可达垃圾，新 ROOT 只指向最新值）
+PUT http://127.0.0.1:8080/kv/color
+Content-Type: text/plain
+
+red
+
+### 批量写（一次请求 = 一个代次；要么整批可见，要么整批不可见）
+PUT http://127.0.0.1:8080/kv
+Content-Type: application/json
+
+{"items":[{"key":"a","value":"1"},{"key":"b","value":"2"},{"key":"名字","value":"值-中文"}]}
+
+### 读单键：默认返回原始字节
+GET http://127.0.0.1:8080/kv/color
+
+### 读单键：JSON 形式（键名做百分号编码）
+GET http://127.0.0.1:8080/kv/%E5%90%8D%E5%AD%97?format=json
+
+### 列出全部
+GET http://127.0.0.1:8080/kv
+
+### 删除（也是一次新代次提交）
+DELETE http://127.0.0.1:8080/kv/a
+
+### 读取已删除键 → 404 {"ok":false,"error":"键不存在"}
+GET http://127.0.0.1:8080/kv/a
+
+### 写二进制值（base64，头 X-Value-Base64: 1）；AA== 表示单字节 0x00
+PUT http://127.0.0.1:8080/kv/bin
+X-Value-Base64: 1
+
+AA==
+
+### 重新格式化（危险：截断两个文件，代次归零）
+POST http://127.0.0.1:8080/format
+
+### 崩溃恢复自检：在模拟磁盘上穷举 6 个故障点 + 半页写/双根损坏/旧根回退/越界指针
+### 全部通过返回 200；任一失败返回 500。
+GET http://127.0.0.1:8080/admin/selftest
