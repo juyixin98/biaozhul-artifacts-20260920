@@ -1,0 +1,100 @@
+{
+  "_comment": "Real Ed25519 keys/signatures for chain_id 'demo-chain'. POST each body to the noted endpoint.",
+  "create_epoch_0": {
+    "endpoint": "POST /epochs",
+    "body": {
+      "epoch_id": 0,
+      "height": 100,
+      "validators": [
+        {
+          "validator_id": "validator-1",
+          "weight": 40,
+          "public_key": "EUjzJUhuT289K5cAj3zn5xzDwyC2F7KXV4TVqkjfguM="
+        },
+        {
+          "validator_id": "validator-2",
+          "weight": 30,
+          "public_key": "fH0U5znCoUnCOFvJ+fh81wqM7FbRxDtrL57XtZTygZ0="
+        },
+        {
+          "validator_id": "validator-3",
+          "weight": 20,
+          "public_key": "0Olt8aqzhxqqnedEo+cBYVEluEgInH3JWc039JF6yVU="
+        },
+        {
+          "validator_id": "validator-4",
+          "weight": 10,
+          "public_key": "hqGnbxyztYGK5X6v19JbjKJMLomQ6V1D/ukn3KxCifU="
+        }
+      ]
+    }
+  },
+  "vote_1_of_2": {
+    "endpoint": "POST /votes",
+    "body": {
+      "epoch_id": 0,
+      "height": 100,
+      "validator_id": "validator-1",
+      "value": "block-A",
+      "signature": "Ij9s74v8oLIu5QFol7JqAPT/MNNxAHvZp4FGCrVmxVvBumoaI0mwm9lUk+KHezkW828nPK4AtjvhSHyUL9KNCQ=="
+    }
+  },
+  "vote_2_of_2_finalizes": {
+    "endpoint": "POST /votes",
+    "body": {
+      "epoch_id": 0,
+      "height": 100,
+      "validator_id": "validator-2",
+      "value": "block-A",
+      "signature": "qk3TGgVZIt7oSO90IiiDx4PH9S7aTor3uLJv/v76VlcfkNSSBAiI24M5dfEokqM0GriylmulKzse4tCoxZwCDg=="
+    }
+  },
+  "double_vote_first": {
+    "endpoint": "POST /votes",
+    "body": {
+      "epoch_id": 0,
+      "height": 100,
+      "validator_id": "validator-3",
+      "value": "block-B",
+      "signature": "KSLtsEMWKUtBoFM82HgmA6x3S7jPwVDPpVSJDYJxC6y+FkcC4lzNOWO0KfGEueJXq6i8WkJ5hJVaF46aTNH5Dg=="
+    }
+  },
+  "double_vote_second_equivocation": {
+    "endpoint": "POST /votes",
+    "body": {
+      "epoch_id": 0,
+      "height": 100,
+      "validator_id": "validator-3",
+      "value": "block-A",
+      "signature": "lGBaa0sAcu+Exayv1Cdmf7CU5lNa5uVaZw404LKvpjnvp+XBj/3UNpj7VfW0GvXF8+xNiDhtLYZJsMq+Pqc0Bw=="
+    }
+  },
+  "conflicting_certificate": {
+    "endpoint": "POST /certificates",
+    "body": {
+      "epoch_id": 0,
+      "height": 100,
+      "value": "block-B",
+      "signatures": [
+        {
+          "validator_id": "validator-1",
+          "signature": "IsIfc90/zfbMGlc1EPBCpzh/QLstNMwkKXdoQaAhl2vzsQRG0yuNLFG+nSrG2oWWGWem31hk/W24QkO06HQ0Aw=="
+        },
+        {
+          "validator_id": "validator-2",
+          "signature": "QDlCKWTQBo7LjkXx77L9RroGIIN96v7RJQ/zA1qZEQyhQEXMGXmeFu275+GWTCanH5yBMJq4kjrtHcImqBr8Bw=="
+        },
+        {
+          "validator_id": "validator-4",
+          "signature": "WaJtmYh+vXuiACnVZjxzVxbUzD8d6+WwtKnjkGNYCo1c8FHIkGGW1xpAiR5mTY/OfZFM62jybPeLxsioSGEpCQ=="
+        }
+      ]
+    }
+  },
+  "private_keys_DO_NOT_COMMIT_IN_REAL_USE": {
+    "validator-1": "7KEnD1S4zcXtbPtmfbI21P7TvGo13VxSu9FAwHl4UQc=",
+    "validator-2": "1L+i0xIDhzVSf1RWF8XR+SJw3kFcUqR0F2fsHuO8Sbw=",
+    "validator-3": "pW/Q6YWsME385GbtKFB8QYgqlPD1qTD/C4fsy6Fe1t4=",
+    "validator-4": "dllHUAEaGvLoap5cmkU8bW5D1cHAO3m+bWkKxxcJbI0="
+  }
+}
