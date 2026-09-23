@@ -1,0 +1,12 @@
+[package]
+name = "sst"
+version = "0.1.0"
+edition = "2021"
+description = "Prefix-compressed sorted table (SSTable-like) read-only storage with strict format validation"
+
+[dependencies]
+# Intentionally zero external dependencies: varint, CRC32 and the HTTP
+# front-end are implemented in-crate so the project builds offline.
+
+[profile.test]
+opt-level = 1
