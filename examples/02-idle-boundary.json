@@ -1,0 +1,19 @@
+{
+  "description": "空闲判定边界：idleTimeoutMs=100，规则含等于（now-lastEvent>=100 即 IDLE）。t=99 仍 ACTIVE；t=100 恰好边界，a/b 同时 IDLE；IDLE 分区退出 min 聚合后全局水位线由剩余活跃分区决定，全部空闲时保留既有值不清空",
+  "boundMs": 0,
+  "idleTimeoutMs": 100,
+  "startTimeMs": 0,
+  "actions": [
+    {"type": "event", "time": 0,  "partition": "a", "eventTime": 100},
+    {"type": "event", "time": 10, "partition": "b", "eventTime": 500},
+
+    {"type": "tick", "time": 99},
+    {"type": "tick", "time": 100},
+
+    {"type": "event", "time": 105, "partition": "b", "eventTime": 900},
+    {"type": "tick", "time": 109},
+    {"type": "tick", "time": 110},
+
+    {"type": "event", "time": 200, "partition": "a", "eventTime": 200, "payload": "a-resumes"}
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "ok": true,
+  "processingTimeMs": 4,
+  "snapshot": {
+    "processingTimeMs": 4,
+    "globalWatermark": 190,
+    "activeCount": 1,
+    "idleCount": 0,
+    "pausedCount": 0,
+    "partitions": [
+      {
+        "partition": "p",
+        "status": "ACTIVE",
+        "lastEventTimeMs": 4,
+        "maxEventTimeMs": 200,
+        "localWatermarkMs": 190,
+        "effectiveWatermarkMs": 190,
+        "seenEvents": 5,
+        "lateEvents": 2
+      }
+    ],
+    "lateEventCount": 2
+  },
+  "globalWatermark": 190,
+  "steps": [
+    {
+      "index": 0,
+      "type": "event",
+      "processingTimeMs": 0,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": null,
+      "globalWatermark": 90,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 1,
+      "type": "event",
+      "processingTimeMs": 1,
+      "accepted": false,
+      "classification": "LATE",
+      "reason": "NORMAL",
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": 90,
+      "globalWatermark": 90,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 2,
+      "type": "event",
+      "processingTimeMs": 2,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": 90,
+      "globalWatermark": 90,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 3,
+      "type": "event",
+      "processingTimeMs": 3,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": 90,
+      "globalWatermark": 190,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 4,
+      "type": "event",
+      "processingTimeMs": 4,
+      "accepted": false,
+      "classification": "LATE",
+      "reason": "NORMAL",
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": 190,
+      "globalWatermark": 190,
+      "timedOutPartitions": []
+    }
+  ],
+  "lateEvents": [
+    {
+      "partition": "p",
+      "eventTimeMs": 90,
+      "payload": "equal-to-watermark=LATE",
+      "reason": "NORMAL",
+      "globalWatermarkMs": 90,
+      "detectedAtProcessingMs": 1
+    },
+    {
+      "partition": "p",
+      "eventTimeMs": 190,
+      "payload": "equal-to-new-watermark=LATE",
+      "reason": "NORMAL",
+      "globalWatermarkMs": 190,
+      "detectedAtProcessingMs": 4
+    }
+  ]
+}

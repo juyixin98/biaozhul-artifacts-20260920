@@ -1,0 +1,21 @@
+{
+  "description": "验收主场景：分区 a 暂停后，快分区 b 独自推进全局水位线；a 恢复时先重放旧事件（进入迟到通道 RECOVERED_OLD），全局水位线保持 4900 不倒退；a 追上后重新参与 min 聚合",
+  "boundMs": 100,
+  "idleTimeoutMs": 500,
+  "startTimeMs": 0,
+  "actions": [
+    {"type": "event", "time": 0,  "partition": "a", "eventTime": 1000, "payload": "a-1000"},
+    {"type": "event", "time": 10, "partition": "b", "eventTime": 1020, "payload": "b-1020"},
+
+    {"type": "pause", "time": 20, "partition": "a"},
+
+    {"type": "event", "time": 30, "partition": "b", "eventTime": 2000, "payload": "b-2000"},
+    {"type": "event", "time": 35, "partition": "b", "eventTime": 5000, "payload": "b-5000"},
+
+    {"type": "event", "time": 40, "partition": "a", "eventTime": 1500, "payload": "a-replayed-old"},
+
+    {"type": "event", "time": 50, "partition": "a", "eventTime": 6000, "payload": "a-6000"},
+    {"type": "event", "time": 60, "partition": "b", "eventTime": 7000, "payload": "b-7000"},
+    {"type": "event", "time": 70, "partition": "a", "eventTime": 7100, "payload": "a-7100"}
+  ]
+}

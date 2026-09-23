@@ -1,0 +1,125 @@
+{
+  "ok": true,
+  "processingTimeMs": 101,
+  "snapshot": {
+    "processingTimeMs": 101,
+    "globalWatermark": 100000,
+    "activeCount": 1,
+    "idleCount": 0,
+    "pausedCount": 1,
+    "partitions": [
+      {
+        "partition": "fast",
+        "status": "ACTIVE",
+        "lastEventTimeMs": 101,
+        "maxEventTimeMs": 100000,
+        "localWatermarkMs": 100000,
+        "effectiveWatermarkMs": 100000,
+        "seenEvents": 5,
+        "lateEvents": 1
+      },
+      {
+        "partition": "slow",
+        "status": "PAUSED",
+        "lastEventTimeMs": 0,
+        "maxEventTimeMs": 10,
+        "localWatermarkMs": 10,
+        "effectiveWatermarkMs": 10,
+        "seenEvents": 1,
+        "lateEvents": 0
+      }
+    ],
+    "lateEventCount": 1
+  },
+  "globalWatermark": 100000,
+  "steps": [
+    {
+      "index": 0,
+      "type": "event",
+      "processingTimeMs": 0,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": null,
+      "globalWatermark": 10,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 1,
+      "type": "event",
+      "processingTimeMs": 1,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": 10,
+      "globalWatermark": 10,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 2,
+      "type": "event",
+      "processingTimeMs": 2,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": 10,
+      "globalWatermark": 10,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 3,
+      "type": "event",
+      "processingTimeMs": 3,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": 10,
+      "globalWatermark": 10,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 4,
+      "type": "event",
+      "processingTimeMs": 4,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": 10,
+      "globalWatermark": 10,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 5,
+      "type": "pause",
+      "processingTimeMs": 100,
+      "globalWatermark": 100000
+    },
+    {
+      "index": 6,
+      "type": "event",
+      "processingTimeMs": 101,
+      "accepted": false,
+      "classification": "LATE",
+      "reason": "NORMAL",
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": 100000,
+      "globalWatermark": 100000,
+      "timedOutPartitions": []
+    }
+  ],
+  "lateEvents": [
+    {
+      "partition": "fast",
+      "eventTimeMs": 100000,
+      "payload": null,
+      "reason": "NORMAL",
+      "globalWatermarkMs": 100000,
+      "detectedAtProcessingMs": 101
+    }
+  ]
+}

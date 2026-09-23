@@ -1,0 +1,16 @@
+{
+  "description": "极端快分区：slow 停在事件时间 10，fast 的事件时间冲到 10 万，全局水位线始终被 slow 钉在 10（min 聚合）；显式暂停 slow 后，fast 才把全局水位线顶到 100000",
+  "boundMs": 0,
+  "idleTimeoutMs": 1000000,
+  "startTimeMs": 0,
+  "actions": [
+    {"type": "event", "time": 0,    "partition": "slow", "eventTime": 10},
+    {"type": "event", "time": 1,    "partition": "fast", "eventTime": 1000},
+    {"type": "event", "time": 2,    "partition": "fast", "eventTime": 10000},
+    {"type": "event", "time": 3,    "partition": "fast", "eventTime": 50000},
+    {"type": "event", "time": 4,    "partition": "fast", "eventTime": 100000},
+
+    {"type": "pause", "time": 100,  "partition": "slow"},
+    {"type": "event", "time": 101,  "partition": "fast", "eventTime": 100000}
+  ]
+}

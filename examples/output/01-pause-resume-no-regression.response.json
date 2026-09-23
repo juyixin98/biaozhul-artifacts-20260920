@@ -1,0 +1,149 @@
+{
+  "ok": true,
+  "processingTimeMs": 70,
+  "snapshot": {
+    "processingTimeMs": 70,
+    "globalWatermark": 6900,
+    "activeCount": 2,
+    "idleCount": 0,
+    "pausedCount": 0,
+    "partitions": [
+      {
+        "partition": "a",
+        "status": "ACTIVE",
+        "lastEventTimeMs": 70,
+        "maxEventTimeMs": 7100,
+        "localWatermarkMs": 7000,
+        "effectiveWatermarkMs": 7000,
+        "seenEvents": 4,
+        "lateEvents": 1
+      },
+      {
+        "partition": "b",
+        "status": "ACTIVE",
+        "lastEventTimeMs": 60,
+        "maxEventTimeMs": 7000,
+        "localWatermarkMs": 6900,
+        "effectiveWatermarkMs": 6900,
+        "seenEvents": 4,
+        "lateEvents": 0
+      }
+    ],
+    "lateEventCount": 1
+  },
+  "globalWatermark": 6900,
+  "steps": [
+    {
+      "index": 0,
+      "type": "event",
+      "processingTimeMs": 0,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": null,
+      "globalWatermark": 900,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 1,
+      "type": "event",
+      "processingTimeMs": 10,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": 900,
+      "globalWatermark": 900,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 2,
+      "type": "pause",
+      "processingTimeMs": 20,
+      "globalWatermark": 920
+    },
+    {
+      "index": 3,
+      "type": "event",
+      "processingTimeMs": 30,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": 920,
+      "globalWatermark": 1900,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 4,
+      "type": "event",
+      "processingTimeMs": 35,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": 1900,
+      "globalWatermark": 4900,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 5,
+      "type": "event",
+      "processingTimeMs": 40,
+      "accepted": false,
+      "classification": "LATE",
+      "reason": "RECOVERED_OLD",
+      "resumedFromIdle": true,
+      "previousGlobalWatermark": 4900,
+      "globalWatermark": 4900,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 6,
+      "type": "event",
+      "processingTimeMs": 50,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": 4900,
+      "globalWatermark": 4900,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 7,
+      "type": "event",
+      "processingTimeMs": 60,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": 4900,
+      "globalWatermark": 5900,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 8,
+      "type": "event",
+      "processingTimeMs": 70,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": 5900,
+      "globalWatermark": 6900,
+      "timedOutPartitions": []
+    }
+  ],
+  "lateEvents": [
+    {
+      "partition": "a",
+      "eventTimeMs": 1500,
+      "payload": "a-replayed-old",
+      "reason": "RECOVERED_OLD",
+      "globalWatermarkMs": 4900,
+      "detectedAtProcessingMs": 40
+    }
+  ]
+}

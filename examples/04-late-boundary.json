@@ -1,0 +1,13 @@
+{
+  "description": "迟到边界与乱序宽度 B：水位线 = maxEventTime - B；事件时间 t <= 全局水位线 w 即迟到（含等于），t = w+1 准时。B=10 时首事件 100 使水位线为 90",
+  "boundMs": 10,
+  "idleTimeoutMs": 1000000,
+  "startTimeMs": 0,
+  "actions": [
+    {"type": "event", "time": 0, "partition": "p", "eventTime": 100},
+    {"type": "event", "time": 1, "partition": "p", "eventTime": 90,  "payload": "equal-to-watermark=LATE"},
+    {"type": "event", "time": 2, "partition": "p", "eventTime": 91,  "payload": "watermark+1=ON_TIME"},
+    {"type": "event", "time": 3, "partition": "p", "eventTime": 200},
+    {"type": "event", "time": 4, "partition": "p", "eventTime": 190, "payload": "equal-to-new-watermark=LATE"}
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "ok": true,
+  "processingTimeMs": 200,
+  "snapshot": {
+    "processingTimeMs": 200,
+    "globalWatermark": 900,
+    "activeCount": 2,
+    "idleCount": 0,
+    "pausedCount": 0,
+    "partitions": [
+      {
+        "partition": "a",
+        "status": "ACTIVE",
+        "lastEventTimeMs": 200,
+        "maxEventTimeMs": 200,
+        "localWatermarkMs": 200,
+        "effectiveWatermarkMs": 900,
+        "seenEvents": 2,
+        "lateEvents": 1
+      },
+      {
+        "partition": "b",
+        "status": "ACTIVE",
+        "lastEventTimeMs": 105,
+        "maxEventTimeMs": 900,
+        "localWatermarkMs": 900,
+        "effectiveWatermarkMs": 900,
+        "seenEvents": 2,
+        "lateEvents": 0
+      }
+    ],
+    "lateEventCount": 1
+  },
+  "globalWatermark": 900,
+  "steps": [
+    {
+      "index": 0,
+      "type": "event",
+      "processingTimeMs": 0,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": null,
+      "globalWatermark": 100,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 1,
+      "type": "event",
+      "processingTimeMs": 10,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": 100,
+      "globalWatermark": 100,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 2,
+      "type": "tick",
+      "processingTimeMs": 99,
+      "timedOutPartitions": [],
+      "previousGlobalWatermark": 100,
+      "globalWatermark": 100
+    },
+    {
+      "index": 3,
+      "type": "tick",
+      "processingTimeMs": 100,
+      "timedOutPartitions": [
+        "a"
+      ],
+      "previousGlobalWatermark": 100,
+      "globalWatermark": 500
+    },
+    {
+      "index": 4,
+      "type": "event",
+      "processingTimeMs": 105,
+      "accepted": true,
+      "classification": "ON_TIME",
+      "reason": null,
+      "resumedFromIdle": false,
+      "previousGlobalWatermark": 500,
+      "globalWatermark": 900,
+      "timedOutPartitions": []
+    },
+    {
+      "index": 5,
+      "type": "tick",
+      "processingTimeMs": 109,
+      "timedOutPartitions": [],
+      "previousGlobalWatermark": 900,
+      "globalWatermark": 900
+    },
+    {
+      "index": 6,
+      "type": "tick",
+      "processingTimeMs": 110,
+      "timedOutPartitions": [],
+      "previousGlobalWatermark": 900,
+      "globalWatermark": 900
+    },
+    {
+      "index": 7,
+      "type": "event",
+      "processingTimeMs": 200,
+      "accepted": false,
+      "classification": "LATE",
+      "reason": "RECOVERED_OLD",
+      "resumedFromIdle": true,
+      "previousGlobalWatermark": 900,
+      "globalWatermark": 900,
+      "timedOutPartitions": []
+    }
+  ],
+  "lateEvents": [
+    {
+      "partition": "a",
+      "eventTimeMs": 200,
+      "payload": "a-resumes",
+      "reason": "RECOVERED_OLD",
+      "globalWatermarkMs": 900,
+      "detectedAtProcessingMs": 200
+    }
+  ]
+}
