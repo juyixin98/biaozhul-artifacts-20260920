@@ -1,0 +1,38 @@
+---
+# Example input: a ConfigMap payload that gets packed and hashed for real.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-config
+  namespace: snapshot-demo
+data:
+  app.conf: |
+    listen=8080
+    mode=production
+  greeting.txt: |
+    hello from the resumable snapshot controller demo
+  values.json: |
+    {"answer":42,"ok":true}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: demo-secret
+  namespace: snapshot-demo
+type: Opaque
+stringData:
+  token.txt: "super-secret-token-value-1234567890"
+---
+# Snapshot driven by the ConfigMap source.
+apiVersion: snapshot.example.com/v1alpha1
+kind: Snapshot
+metadata:
+  name: demo
+  namespace: snapshot-demo
+spec:
+  source:
+    kind: ConfigMap
+    name: demo-config
+  outputName: demo.tar.gz
+  backoffLimit: 2
+  ttlSecondsAfterFinished: 3600

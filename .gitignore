@@ -1,0 +1,15 @@
+# Binaries and local toolchain
+/bin/
+*.test
+*.out
+
+# Envtest assets
+/bin/envtest/
+
+# Local kubeconfig
+/bin/kubeconfig-e2e
+
+# Editor/OS
+.idea/
+.vscode/
+.DS_Store

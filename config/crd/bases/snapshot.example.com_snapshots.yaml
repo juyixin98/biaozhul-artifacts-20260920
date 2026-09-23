@@ -1,0 +1,245 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.16.5
+  name: snapshots.snapshot.example.com
+spec:
+  group: snapshot.example.com
+  names:
+    kind: Snapshot
+    listKind: SnapshotList
+    plural: snapshots
+    shortNames:
+    - snap
+    singular: snapshot
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.phase
+      name: Phase
+      type: string
+    - jsonPath: .status.observedGeneration
+      name: Observed Gen
+      type: integer
+    - jsonPath: .status.sha256
+      name: SHA256
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: Age
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Snapshot is the Schema for the snapshots API.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: SnapshotSpec defines the desired state of Snapshot.
+            properties:
+              backoffLimit:
+                default: 2
+                description: |-
+                  BackoffLimit mirrors Job.spec.backoffLimit: number of retries before the
+                  Job is considered Failed.
+                format: int32
+                minimum: 0
+                type: integer
+              outputName:
+                default: snapshot.tar.gz
+                description: |-
+                  OutputName is the base file name of the produced tar archive
+                  (e.g. "data.tar.gz"). A .gz suffix enables gzip compression.
+                minLength: 1
+                type: string
+              source:
+                description: |-
+                  Source selects the ConfigMap/Secret payload that the snapshot Job packs
+                  and hashes.
+                properties:
+                  kind:
+                    default: ConfigMap
+                    description: 'Kind of the source object: ConfigMap or Secret.'
+                    enum:
+                    - ConfigMap
+                    - Secret
+                    type: string
+                  name:
+                    description: Name of the source object in the Snapshot's namespace.
+                    minLength: 1
+                    type: string
+                required:
+                - kind
+                - name
+                type: object
+              ttlSecondsAfterFinished:
+                default: 3600
+                description: |-
+                  TTLSecondsAfterFinished keeps the produced Job around for inspection
+                  after completion; Kubernetes GC deletes it afterwards.
+                format: int32
+                minimum: 0
+                type: integer
+            required:
+            - source
+            type: object
+          status:
+            description: SnapshotStatus defines the observed state of Snapshot.
+            properties:
+              completedAt:
+                description: CompletedAt is when the current generation reached Ready
+                  or Failed.
+                format: date-time
+                type: string
+              conditions:
+                description: Conditions holds standard k8s conditions; Ready summarizes
+                  phase.
+                items:
+                  description: Condition contains details for one aspect of the current
+                    state of this API Resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        lastTransitionTime is the last time the condition transitioned from one status to another.
+                        This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        message is a human readable message indicating details about the transition.
+                        This may be an empty string.
+                      maxLength: 32768
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        observedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      minimum: 0
+                      type: integer
+                    reason:
+                      description: |-
+                        reason contains a programmatic identifier indicating the reason for the condition's last transition.
+                        Producers of specific condition types may define expected values and meanings for this field,
+                        and whether the values are considered a guaranteed API.
+                        The value should be a CamelCase string.
+                        This field may not be empty.
+                      maxLength: 1024
+                      minLength: 1
+                      pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                      type: string
+                    status:
+                      description: status of the condition, one of True, False, Unknown.
+                      enum:
+                      - "True"
+                      - "False"
+                      - Unknown
+                      type: string
+                    type:
+                      description: type of condition in CamelCase or in foo.example.com/CamelCase.
+                      maxLength: 316
+                      pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - message
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              failureMessage:
+                description: FailureMessage is a human-readable failure detail.
+                type: string
+              failureReason:
+                description: FailureReason is a short machine-readable failure code.
+                type: string
+              files:
+                description: Files lists the packed input files and their individual
+                  digests.
+                items:
+                  description: ResultFile describes one file that was packed into
+                    the snapshot archive.
+                  properties:
+                    path:
+                      description: Path is the file name inside the archive.
+                      type: string
+                    sha256:
+                      description: SHA256 is the hex-encoded SHA-256 digest of the
+                        file content.
+                      type: string
+                    size:
+                      description: Size is the uncompressed size in bytes.
+                      format: int64
+                      type: integer
+                  required:
+                  - path
+                  - sha256
+                  - size
+                  type: object
+                type: array
+              jobRef:
+                description: JobRef names the Job owned by the current generation.
+                type: string
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the .metadata.generation that the status
+                  (including digest and phase) reflects. A stale Job reporting its result
+                  back is discarded when its generation label does not equal this value.
+                format: int64
+                type: integer
+              phase:
+                description: Phase is the current state of the Snapshot (Pending/Running/Ready/Failed).
+                enum:
+                - Pending
+                - Running
+                - Ready
+                - Failed
+                type: string
+              resultConfigMap:
+                description: |-
+                  ResultConfigMap names the ConfigMap published by the worker holding
+                  result.json (digest, file list).
+                type: string
+              sha256:
+                description: |-
+                  SHA256 is the hex-encoded SHA-256 digest of the produced archive file.
+                  It is only populated once the real archive was produced by the Job.
+                type: string
+              sizeBytes:
+                description: SizeBytes is the archive size in bytes.
+                format: int64
+                type: integer
+              startedAt:
+                description: |-
+                  StartedAt is when the controller first observed the Job for the current
+                  generation.
+                format: date-time
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

@@ -1,0 +1,41 @@
+---
+# Per-namespace RBAC the worker Jobs use at runtime. The e2e script renders
+# this template into the test namespace with sed.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: snapshot-worker
+  namespace: PLACEHOLDER_NAMESPACE
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: snapshot-worker
+  namespace: PLACEHOLDER_NAMESPACE
+rules:
+  # Read the real source payload.
+  - apiGroups: [""]
+    resources: ["configmaps", "secrets"]
+    verbs: ["get", "list"]
+  # Read owner Snapshot for its UID.
+  - apiGroups: ["snapshot.example.com"]
+    resources: ["snapshots"]
+    verbs: ["get"]
+  # Publish the result artifact.
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["create", "get", "update", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: snapshot-worker
+  namespace: PLACEHOLDER_NAMESPACE
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: snapshot-worker
+subjects:
+  - kind: ServiceAccount
+    name: snapshot-worker
+    namespace: PLACEHOLDER_NAMESPACE
