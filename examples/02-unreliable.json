@@ -1,0 +1,28 @@
+{
+  "name": "02-unreliable-mesh",
+  "seed": 42,
+  "replicas": ["r1", "r2", "r3"],
+  "network": {
+    "drop_prob": 0.3,
+    "duplicate_prob": 0.3,
+    "reorder_prob": 0.3,
+    "min_delay": 1,
+    "max_delay": 5
+  },
+  "events": [
+    {"at": 1, "kind": "add",    "replica": "r1", "value": "x"},
+    {"at": 1, "kind": "add",    "replica": "r2", "value": "y"},
+    {"at": 1, "kind": "add",    "replica": "r3", "value": "z"},
+    {"at": 2, "kind": "remove", "replica": "r2", "value": "y"},
+    {"at": 5,  "kind": "gossip", "replica": "r1"},
+    {"at": 5,  "kind": "gossip", "replica": "r2"},
+    {"at": 5,  "kind": "gossip", "replica": "r3"},
+    {"at": 12, "kind": "gossip", "replica": "r1"},
+    {"at": 12, "kind": "gossip", "replica": "r2"},
+    {"at": 12, "kind": "gossip", "replica": "r3"},
+    {"at": 20, "kind": "gossip", "replica": "r1"},
+    {"at": 20, "kind": "gossip", "replica": "r2"},
+    {"at": 20, "kind": "gossip", "replica": "r3"}
+  ],
+  "expected_values": ["x", "z"]
+}

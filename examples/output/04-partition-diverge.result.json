@@ -1,0 +1,71 @@
+{
+  "name": "04-partition-diverge",
+  "seed": 99,
+  "replicas": [
+    "r1",
+    "r2"
+  ],
+  "final_tick": 2,
+  "converged": false,
+  "values_converged": false,
+  "matches_expected": false,
+  "expected_given": false,
+  "stats": {
+    "local_adds": 2,
+    "local_removes": 0,
+    "messages_sent": 0,
+    "messages_dropped": 0,
+    "duplicates_made": 0,
+    "messages_delivered": 0,
+    "redundant_merges": 0,
+    "reorders": 0,
+    "forced_reorders": 0,
+    "final_tick": 2
+  },
+  "nodes": {
+    "r1": {
+      "values": [
+        "x"
+      ],
+      "a": {
+        "x": [
+          "r1#1"
+        ]
+      },
+      "r": {}
+    },
+    "r2": {
+      "values": [
+        "y"
+      ],
+      "a": {
+        "y": [
+          "r2#1"
+        ]
+      },
+      "r": {}
+    }
+  },
+  "trace": [
+    {
+      "at": 1,
+      "kind": "add",
+      "replica": "r1",
+      "value": "x",
+      "tag": "r1#1",
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 2,
+      "kind": "add",
+      "replica": "r2",
+      "value": "y",
+      "tag": "r2#1",
+      "values": [
+        "y"
+      ]
+    }
+  ]
+}

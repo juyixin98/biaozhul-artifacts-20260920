@@ -1,0 +1,158 @@
+{
+  "name": "05-heal-after-partition",
+  "seed": 11,
+  "replicas": [
+    "r1",
+    "r2"
+  ],
+  "final_tick": 12,
+  "converged": true,
+  "values_converged": true,
+  "expected_values": [
+    "x",
+    "y"
+  ],
+  "matches_expected": true,
+  "expected_given": true,
+  "stats": {
+    "local_adds": 3,
+    "local_removes": 1,
+    "messages_sent": 2,
+    "messages_dropped": 0,
+    "duplicates_made": 0,
+    "messages_delivered": 2,
+    "redundant_merges": 0,
+    "reorders": 0,
+    "forced_reorders": 0,
+    "final_tick": 12
+  },
+  "nodes": {
+    "r1": {
+      "values": [
+        "x",
+        "y"
+      ],
+      "a": {
+        "x": [
+          "r1#1"
+        ],
+        "y": [
+          "r2#1"
+        ],
+        "z": [
+          "r1#2"
+        ]
+      },
+      "r": {
+        "z": [
+          "r1#2"
+        ]
+      }
+    },
+    "r2": {
+      "values": [
+        "x",
+        "y"
+      ],
+      "a": {
+        "x": [
+          "r1#1"
+        ],
+        "y": [
+          "r2#1"
+        ],
+        "z": [
+          "r1#2"
+        ]
+      },
+      "r": {
+        "z": [
+          "r1#2"
+        ]
+      }
+    }
+  },
+  "trace": [
+    {
+      "at": 1,
+      "kind": "add",
+      "replica": "r1",
+      "value": "x",
+      "tag": "r1#1",
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 2,
+      "kind": "add",
+      "replica": "r2",
+      "value": "y",
+      "tag": "r2#1",
+      "values": [
+        "y"
+      ]
+    },
+    {
+      "at": 3,
+      "kind": "add",
+      "replica": "r1",
+      "value": "z",
+      "tag": "r1#2",
+      "values": [
+        "x",
+        "z"
+      ]
+    },
+    {
+      "at": 4,
+      "kind": "remove",
+      "replica": "r1",
+      "value": "z",
+      "removed_tags": [
+        "r1#2"
+      ],
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 10,
+      "kind": "send",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 1
+    },
+    {
+      "at": 10,
+      "kind": "send",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 2
+    },
+    {
+      "at": 11,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 2,
+      "delay": 1,
+      "values": [
+        "x",
+        "y"
+      ]
+    },
+    {
+      "at": 12,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 1,
+      "delay": 2,
+      "values": [
+        "x",
+        "y"
+      ]
+    }
+  ]
+}

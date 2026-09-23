@@ -1,0 +1,28 @@
+{
+  "name": "03-concurrent-add-vs-remove",
+  "seed": 7,
+  "replicas": ["r1", "r2", "r3"],
+  "network": {
+    "drop_prob": 0.0,
+    "duplicate_prob": 0.0,
+    "reorder_prob": 0.8,
+    "min_delay": 1,
+    "max_delay": 4
+  },
+  "events": [
+    {"at": 1, "kind": "add",    "replica": "r1", "value": "x"},
+    {"at": 2, "kind": "sync",   "replica": "r1", "to": "r2"},
+    {"at": 8, "kind": "remove", "replica": "r2", "value": "x"},
+    {"at": 8, "kind": "add",    "replica": "r3", "value": "x"},
+    {"at": 12, "kind": "gossip", "replica": "r1"},
+    {"at": 12, "kind": "gossip", "replica": "r2"},
+    {"at": 12, "kind": "gossip", "replica": "r3"},
+    {"at": 14, "kind": "gossip", "replica": "r1"},
+    {"at": 14, "kind": "gossip", "replica": "r2"},
+    {"at": 14, "kind": "gossip", "replica": "r3"},
+    {"at": 20, "kind": "gossip", "replica": "r1"},
+    {"at": 20, "kind": "gossip", "replica": "r2"},
+    {"at": 20, "kind": "gossip", "replica": "r3"}
+  ],
+  "expected_values": ["x"]
+}

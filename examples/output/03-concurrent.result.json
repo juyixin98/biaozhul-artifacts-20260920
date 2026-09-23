@@ -1,0 +1,475 @@
+{
+  "name": "03-concurrent-add-vs-remove",
+  "seed": 7,
+  "replicas": [
+    "r1",
+    "r2",
+    "r3"
+  ],
+  "final_tick": 24,
+  "converged": true,
+  "values_converged": true,
+  "expected_values": [
+    "x"
+  ],
+  "matches_expected": true,
+  "expected_given": true,
+  "stats": {
+    "local_adds": 2,
+    "local_removes": 1,
+    "messages_sent": 19,
+    "messages_dropped": 0,
+    "duplicates_made": 0,
+    "messages_delivered": 19,
+    "redundant_merges": 14,
+    "reorders": 2,
+    "forced_reorders": 2,
+    "final_tick": 24
+  },
+  "nodes": {
+    "r1": {
+      "values": [
+        "x"
+      ],
+      "a": {
+        "x": [
+          "r1#1",
+          "r3#1"
+        ]
+      },
+      "r": {
+        "x": [
+          "r1#1"
+        ]
+      }
+    },
+    "r2": {
+      "values": [
+        "x"
+      ],
+      "a": {
+        "x": [
+          "r1#1",
+          "r3#1"
+        ]
+      },
+      "r": {
+        "x": [
+          "r1#1"
+        ]
+      }
+    },
+    "r3": {
+      "values": [
+        "x"
+      ],
+      "a": {
+        "x": [
+          "r1#1",
+          "r3#1"
+        ]
+      },
+      "r": {
+        "x": [
+          "r1#1"
+        ]
+      }
+    }
+  },
+  "trace": [
+    {
+      "at": 1,
+      "kind": "add",
+      "replica": "r1",
+      "value": "x",
+      "tag": "r1#1",
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 2,
+      "kind": "send",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 1,
+      "reordered": true
+    },
+    {
+      "at": 6,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 1,
+      "delay": 4,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 8,
+      "kind": "remove",
+      "replica": "r2",
+      "value": "x",
+      "removed_tags": [
+        "r1#1"
+      ]
+    },
+    {
+      "at": 8,
+      "kind": "add",
+      "replica": "r3",
+      "value": "x",
+      "tag": "r3#1",
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 12,
+      "kind": "send",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 2
+    },
+    {
+      "at": 12,
+      "kind": "send",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 3,
+      "reordered": true
+    },
+    {
+      "at": 12,
+      "kind": "send",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 4
+    },
+    {
+      "at": 12,
+      "kind": "send",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 5,
+      "reordered": true
+    },
+    {
+      "at": 12,
+      "kind": "send",
+      "from": "r3",
+      "to": "r1",
+      "send_seq": 6,
+      "reordered": true
+    },
+    {
+      "at": 12,
+      "kind": "send",
+      "from": "r3",
+      "to": "r2",
+      "send_seq": 7,
+      "reordered": true
+    },
+    {
+      "at": 13,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 2,
+      "delay": 1,
+      "redundant": true
+    },
+    {
+      "at": 13,
+      "kind": "deliver",
+      "from": "r3",
+      "to": "r2",
+      "send_seq": 7,
+      "delay": 1,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 14,
+      "kind": "send",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 8
+    },
+    {
+      "at": 14,
+      "kind": "send",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 9
+    },
+    {
+      "at": 14,
+      "kind": "send",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 10,
+      "reordered": true
+    },
+    {
+      "at": 14,
+      "kind": "send",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 11,
+      "reordered": true
+    },
+    {
+      "at": 14,
+      "kind": "send",
+      "from": "r3",
+      "to": "r1",
+      "send_seq": 12,
+      "reordered": true
+    },
+    {
+      "at": 14,
+      "kind": "send",
+      "from": "r3",
+      "to": "r2",
+      "send_seq": 13,
+      "reordered": true
+    },
+    {
+      "at": 14,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 4,
+      "delay": 2
+    },
+    {
+      "at": 14,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 11,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 15,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 5,
+      "delay": 3,
+      "reordered": true,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 15,
+      "kind": "deliver",
+      "from": "r3",
+      "to": "r1",
+      "send_seq": 12,
+      "delay": 1,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 16,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 3,
+      "delay": 4,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 16,
+      "kind": "deliver",
+      "from": "r3",
+      "to": "r1",
+      "send_seq": 6,
+      "delay": 4,
+      "reordered": true,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 16,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 8,
+      "delay": 2,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 18,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 9,
+      "delay": 4,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 18,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 10,
+      "delay": 4,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 18,
+      "kind": "deliver",
+      "from": "r3",
+      "to": "r2",
+      "send_seq": 13,
+      "delay": 4,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 14,
+      "reordered": true
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 15,
+      "reordered": true
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 16
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 17,
+      "reordered": true
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r3",
+      "to": "r1",
+      "send_seq": 18,
+      "reordered": true
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r3",
+      "to": "r2",
+      "send_seq": 19,
+      "reordered": true
+    },
+    {
+      "at": 21,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 14,
+      "delay": 1,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 21,
+      "kind": "deliver",
+      "from": "r3",
+      "to": "r1",
+      "send_seq": 18,
+      "delay": 1,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 22,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 17,
+      "delay": 2,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 22,
+      "kind": "deliver",
+      "from": "r3",
+      "to": "r2",
+      "send_seq": 19,
+      "delay": 2,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 23,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 15,
+      "delay": 3,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 24,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 16,
+      "delay": 4,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    }
+  ]
+}

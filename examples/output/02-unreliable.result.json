@@ -1,0 +1,479 @@
+{
+  "name": "02-unreliable-mesh",
+  "seed": 42,
+  "replicas": [
+    "r1",
+    "r2",
+    "r3"
+  ],
+  "final_tick": 25,
+  "converged": true,
+  "values_converged": true,
+  "expected_values": [
+    "x",
+    "z"
+  ],
+  "matches_expected": true,
+  "expected_given": true,
+  "stats": {
+    "local_adds": 3,
+    "local_removes": 1,
+    "messages_sent": 18,
+    "messages_dropped": 6,
+    "duplicates_made": 4,
+    "messages_delivered": 16,
+    "redundant_merges": 10,
+    "reorders": 0,
+    "forced_reorders": 0,
+    "final_tick": 25
+  },
+  "nodes": {
+    "r1": {
+      "values": [
+        "x",
+        "z"
+      ],
+      "a": {
+        "x": [
+          "r1#1"
+        ],
+        "y": [
+          "r2#1"
+        ],
+        "z": [
+          "r3#1"
+        ]
+      },
+      "r": {
+        "y": [
+          "r2#1"
+        ]
+      }
+    },
+    "r2": {
+      "values": [
+        "x",
+        "z"
+      ],
+      "a": {
+        "x": [
+          "r1#1"
+        ],
+        "y": [
+          "r2#1"
+        ],
+        "z": [
+          "r3#1"
+        ]
+      },
+      "r": {
+        "y": [
+          "r2#1"
+        ]
+      }
+    },
+    "r3": {
+      "values": [
+        "x",
+        "z"
+      ],
+      "a": {
+        "x": [
+          "r1#1"
+        ],
+        "y": [
+          "r2#1"
+        ],
+        "z": [
+          "r3#1"
+        ]
+      },
+      "r": {
+        "y": [
+          "r2#1"
+        ]
+      }
+    }
+  },
+  "trace": [
+    {
+      "at": 1,
+      "kind": "add",
+      "replica": "r1",
+      "value": "x",
+      "tag": "r1#1",
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 1,
+      "kind": "add",
+      "replica": "r2",
+      "value": "y",
+      "tag": "r2#1",
+      "values": [
+        "y"
+      ]
+    },
+    {
+      "at": 1,
+      "kind": "add",
+      "replica": "r3",
+      "value": "z",
+      "tag": "r3#1",
+      "values": [
+        "z"
+      ]
+    },
+    {
+      "at": 2,
+      "kind": "remove",
+      "replica": "r2",
+      "value": "y",
+      "removed_tags": [
+        "r2#1"
+      ]
+    },
+    {
+      "at": 5,
+      "kind": "send",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 1,
+      "duplicated": true
+    },
+    {
+      "at": 5,
+      "kind": "send",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 2
+    },
+    {
+      "at": 5,
+      "kind": "send",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 3,
+      "dropped": true
+    },
+    {
+      "at": 5,
+      "kind": "send",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 4,
+      "duplicated": true,
+      "reordered": true
+    },
+    {
+      "at": 5,
+      "kind": "send",
+      "from": "r3",
+      "to": "r1",
+      "send_seq": 5
+    },
+    {
+      "at": 5,
+      "kind": "send",
+      "from": "r3",
+      "to": "r2",
+      "send_seq": 6,
+      "duplicated": true
+    },
+    {
+      "at": 7,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 1,
+      "delay": 2,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 7,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 2,
+      "delay": 2,
+      "values": [
+        "x",
+        "z"
+      ]
+    },
+    {
+      "at": 7,
+      "kind": "deliver",
+      "from": "r3",
+      "to": "r2",
+      "send_seq": 6,
+      "delay": 2,
+      "values": [
+        "x",
+        "z"
+      ]
+    },
+    {
+      "at": 8,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 4,
+      "delay": 3,
+      "values": [
+        "x",
+        "z"
+      ]
+    },
+    {
+      "at": 8,
+      "kind": "deliver",
+      "from": "r3",
+      "to": "r1",
+      "send_seq": 5,
+      "delay": 3,
+      "values": [
+        "x",
+        "z"
+      ]
+    },
+    {
+      "at": 9,
+      "kind": "deliver",
+      "from": "r3",
+      "to": "r2",
+      "send_seq": 6,
+      "delay": 4,
+      "redundant": true,
+      "values": [
+        "x",
+        "z"
+      ]
+    },
+    {
+      "at": 10,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 1,
+      "delay": 5,
+      "redundant": true,
+      "values": [
+        "x",
+        "z"
+      ]
+    },
+    {
+      "at": 10,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 4,
+      "delay": 5,
+      "redundant": true,
+      "values": [
+        "x",
+        "z"
+      ]
+    },
+    {
+      "at": 12,
+      "kind": "send",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 7
+    },
+    {
+      "at": 12,
+      "kind": "send",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 8,
+      "dropped": true
+    },
+    {
+      "at": 12,
+      "kind": "send",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 9
+    },
+    {
+      "at": 12,
+      "kind": "send",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 10
+    },
+    {
+      "at": 12,
+      "kind": "send",
+      "from": "r3",
+      "to": "r1",
+      "send_seq": 11,
+      "dropped": true
+    },
+    {
+      "at": 12,
+      "kind": "send",
+      "from": "r3",
+      "to": "r2",
+      "send_seq": 12,
+      "dropped": true
+    },
+    {
+      "at": 13,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 9,
+      "delay": 1,
+      "values": [
+        "x",
+        "z"
+      ]
+    },
+    {
+      "at": 16,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 10,
+      "delay": 4,
+      "redundant": true,
+      "values": [
+        "x",
+        "z"
+      ]
+    },
+    {
+      "at": 17,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 7,
+      "delay": 5,
+      "redundant": true,
+      "values": [
+        "x",
+        "z"
+      ]
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 13
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 14,
+      "duplicated": true,
+      "reordered": true
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 15,
+      "reordered": true
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 16
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r3",
+      "to": "r1",
+      "send_seq": 17,
+      "dropped": true
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r3",
+      "to": "r2",
+      "send_seq": 18,
+      "dropped": true
+    },
+    {
+      "at": 21,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 15,
+      "delay": 1,
+      "redundant": true,
+      "values": [
+        "x",
+        "z"
+      ]
+    },
+    {
+      "at": 23,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 13,
+      "delay": 3,
+      "redundant": true,
+      "values": [
+        "x",
+        "z"
+      ]
+    },
+    {
+      "at": 23,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 14,
+      "delay": 3,
+      "redundant": true,
+      "values": [
+        "x",
+        "z"
+      ]
+    },
+    {
+      "at": 23,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 14,
+      "delay": 3,
+      "redundant": true,
+      "values": [
+        "x",
+        "z"
+      ]
+    },
+    {
+      "at": 25,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 16,
+      "delay": 5,
+      "redundant": true,
+      "values": [
+        "x",
+        "z"
+      ]
+    }
+  ]
+}

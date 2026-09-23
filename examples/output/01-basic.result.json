@@ -1,0 +1,542 @@
+{
+  "name": "01-basic-add-sync",
+  "seed": 1,
+  "replicas": [
+    "r1",
+    "r2",
+    "r3"
+  ],
+  "final_tick": 23,
+  "converged": true,
+  "values_converged": true,
+  "expected_values": [
+    "x"
+  ],
+  "matches_expected": true,
+  "expected_given": true,
+  "stats": {
+    "local_adds": 2,
+    "local_removes": 1,
+    "messages_sent": 22,
+    "messages_dropped": 0,
+    "duplicates_made": 0,
+    "messages_delivered": 22,
+    "redundant_merges": 16,
+    "reorders": 0,
+    "forced_reorders": 0,
+    "final_tick": 23
+  },
+  "nodes": {
+    "r1": {
+      "values": [
+        "x"
+      ],
+      "a": {
+        "x": [
+          "r1#1"
+        ],
+        "y": [
+          "r2#1"
+        ]
+      },
+      "r": {
+        "y": [
+          "r2#1"
+        ]
+      }
+    },
+    "r2": {
+      "values": [
+        "x"
+      ],
+      "a": {
+        "x": [
+          "r1#1"
+        ],
+        "y": [
+          "r2#1"
+        ]
+      },
+      "r": {
+        "y": [
+          "r2#1"
+        ]
+      }
+    },
+    "r3": {
+      "values": [
+        "x"
+      ],
+      "a": {
+        "x": [
+          "r1#1"
+        ],
+        "y": [
+          "r2#1"
+        ]
+      },
+      "r": {
+        "y": [
+          "r2#1"
+        ]
+      }
+    }
+  },
+  "trace": [
+    {
+      "at": 1,
+      "kind": "add",
+      "replica": "r1",
+      "value": "x",
+      "tag": "r1#1",
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 1,
+      "kind": "add",
+      "replica": "r2",
+      "value": "y",
+      "tag": "r2#1",
+      "values": [
+        "y"
+      ]
+    },
+    {
+      "at": 3,
+      "kind": "send",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 1
+    },
+    {
+      "at": 3,
+      "kind": "send",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 2
+    },
+    {
+      "at": 3,
+      "kind": "send",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 3
+    },
+    {
+      "at": 3,
+      "kind": "send",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 4
+    },
+    {
+      "at": 4,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 1,
+      "delay": 1,
+      "values": [
+        "x",
+        "y"
+      ]
+    },
+    {
+      "at": 5,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 2,
+      "delay": 2,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 5,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 3,
+      "delay": 2,
+      "values": [
+        "x",
+        "y"
+      ]
+    },
+    {
+      "at": 6,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 4,
+      "delay": 3,
+      "values": [
+        "x",
+        "y"
+      ]
+    },
+    {
+      "at": 8,
+      "kind": "send",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 5
+    },
+    {
+      "at": 8,
+      "kind": "send",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 6
+    },
+    {
+      "at": 8,
+      "kind": "send",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 7
+    },
+    {
+      "at": 8,
+      "kind": "send",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 8
+    },
+    {
+      "at": 8,
+      "kind": "send",
+      "from": "r3",
+      "to": "r1",
+      "send_seq": 9
+    },
+    {
+      "at": 8,
+      "kind": "send",
+      "from": "r3",
+      "to": "r2",
+      "send_seq": 10
+    },
+    {
+      "at": 9,
+      "kind": "deliver",
+      "from": "r3",
+      "to": "r2",
+      "send_seq": 10,
+      "delay": 1,
+      "redundant": true,
+      "values": [
+        "x",
+        "y"
+      ]
+    },
+    {
+      "at": 10,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 6,
+      "delay": 2,
+      "redundant": true,
+      "values": [
+        "x",
+        "y"
+      ]
+    },
+    {
+      "at": 10,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 7,
+      "delay": 2,
+      "redundant": true,
+      "values": [
+        "x",
+        "y"
+      ]
+    },
+    {
+      "at": 10,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 8,
+      "delay": 2,
+      "redundant": true,
+      "values": [
+        "x",
+        "y"
+      ]
+    },
+    {
+      "at": 11,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 5,
+      "delay": 3,
+      "redundant": true,
+      "values": [
+        "x",
+        "y"
+      ]
+    },
+    {
+      "at": 11,
+      "kind": "deliver",
+      "from": "r3",
+      "to": "r1",
+      "send_seq": 9,
+      "delay": 3,
+      "redundant": true,
+      "values": [
+        "x",
+        "y"
+      ]
+    },
+    {
+      "at": 12,
+      "kind": "remove",
+      "replica": "r3",
+      "value": "y",
+      "removed_tags": [
+        "r2#1"
+      ],
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 15,
+      "kind": "send",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 11
+    },
+    {
+      "at": 15,
+      "kind": "send",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 12
+    },
+    {
+      "at": 15,
+      "kind": "send",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 13
+    },
+    {
+      "at": 15,
+      "kind": "send",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 14
+    },
+    {
+      "at": 15,
+      "kind": "send",
+      "from": "r3",
+      "to": "r1",
+      "send_seq": 15
+    },
+    {
+      "at": 15,
+      "kind": "send",
+      "from": "r3",
+      "to": "r2",
+      "send_seq": 16
+    },
+    {
+      "at": 16,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 11,
+      "delay": 1,
+      "redundant": true,
+      "values": [
+        "x",
+        "y"
+      ]
+    },
+    {
+      "at": 16,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 12,
+      "delay": 1,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 17,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 13,
+      "delay": 2,
+      "redundant": true,
+      "values": [
+        "x",
+        "y"
+      ]
+    },
+    {
+      "at": 17,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 14,
+      "delay": 2,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 17,
+      "kind": "deliver",
+      "from": "r3",
+      "to": "r1",
+      "send_seq": 15,
+      "delay": 2,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 17,
+      "kind": "deliver",
+      "from": "r3",
+      "to": "r2",
+      "send_seq": 16,
+      "delay": 2,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 17
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 18
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 19
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 20
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r3",
+      "to": "r1",
+      "send_seq": 21
+    },
+    {
+      "at": 20,
+      "kind": "send",
+      "from": "r3",
+      "to": "r2",
+      "send_seq": 22
+    },
+    {
+      "at": 22,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r2",
+      "send_seq": 17,
+      "delay": 2,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 22,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r1",
+      "send_seq": 19,
+      "delay": 2,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 22,
+      "kind": "deliver",
+      "from": "r2",
+      "to": "r3",
+      "send_seq": 20,
+      "delay": 2,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 22,
+      "kind": "deliver",
+      "from": "r3",
+      "to": "r1",
+      "send_seq": 21,
+      "delay": 2,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 22,
+      "kind": "deliver",
+      "from": "r3",
+      "to": "r2",
+      "send_seq": 22,
+      "delay": 2,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "at": 23,
+      "kind": "deliver",
+      "from": "r1",
+      "to": "r3",
+      "send_seq": 18,
+      "delay": 3,
+      "redundant": true,
+      "values": [
+        "x"
+      ]
+    }
+  ]
+}

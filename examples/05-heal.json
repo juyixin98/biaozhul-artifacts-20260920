@@ -1,0 +1,21 @@
+{
+  "name": "05-heal-after-partition",
+  "seed": 11,
+  "replicas": ["r1", "r2"],
+  "network": {
+    "drop_prob": 0.0,
+    "duplicate_prob": 0.0,
+    "reorder_prob": 0.0,
+    "min_delay": 1,
+    "max_delay": 2
+  },
+  "events": [
+    {"at": 1, "kind": "add", "replica": "r1", "value": "x"},
+    {"at": 2, "kind": "add", "replica": "r2", "value": "y"},
+    {"at": 3, "kind": "add", "replica": "r1", "value": "z"},
+    {"at": 4, "kind": "remove", "replica": "r1", "value": "z"},
+    {"at": 10, "kind": "sync", "replica": "r1", "to": "r2"},
+    {"at": 10, "kind": "sync", "replica": "r2", "to": "r1"}
+  ],
+  "expected_values": ["x", "y"]
+}

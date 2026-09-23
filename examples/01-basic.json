@@ -1,0 +1,29 @@
+{
+  "name": "01-basic-add-sync",
+  "seed": 1,
+  "replicas": ["r1", "r2", "r3"],
+  "network": {
+    "drop_prob": 0.0,
+    "duplicate_prob": 0.0,
+    "reorder_prob": 0.0,
+    "min_delay": 1,
+    "max_delay": 3
+  },
+  "events": [
+    {"at": 1,  "kind": "add",    "replica": "r1", "value": "x"},
+    {"at": 1,  "kind": "add",    "replica": "r2", "value": "y"},
+    {"at": 3,  "kind": "gossip", "replica": "r1"},
+    {"at": 3,  "kind": "gossip", "replica": "r2"},
+    {"at": 8,  "kind": "gossip", "replica": "r1"},
+    {"at": 8,  "kind": "gossip", "replica": "r2"},
+    {"at": 8,  "kind": "gossip", "replica": "r3"},
+    {"at": 12, "kind": "remove", "replica": "r3", "value": "y"},
+    {"at": 15, "kind": "gossip", "replica": "r1"},
+    {"at": 15, "kind": "gossip", "replica": "r2"},
+    {"at": 15, "kind": "gossip", "replica": "r3"},
+    {"at": 20, "kind": "gossip", "replica": "r1"},
+    {"at": 20, "kind": "gossip", "replica": "r2"},
+    {"at": 20, "kind": "gossip", "replica": "r3"}
+  ],
+  "expected_values": ["x"]
+}
