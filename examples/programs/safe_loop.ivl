@@ -1,0 +1,10 @@
+// safe_loop.ivl -- bounded loop provably free of division-by-zero.
+// i is narrowed to [0,10] at the loop header, to [0,9] inside the body,
+// so (10 - i) ranges over [1,10] and the division never sees a zero.
+var i = 0;
+var acc = 0;
+while (i < 10) {
+    var q = 100 / (10 - i);
+    acc = acc + q;
+    i = i + 1;
+}

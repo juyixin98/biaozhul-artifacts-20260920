@@ -1,0 +1,14 @@
+// spurious_correlation.ivl -- a genuinely spurious alarm.
+// Two variables are kept equal (y == x), and the program guards the
+// division with (x - y != 0).  Concretely the guard can never be true, so
+// the division is unreachable and nothing ever crashes.  The non-
+// relational interval domain, however, tracks x and y independently as
+// Top, so on the "then" edge it cannot narrow either of them and reports a
+// *possible* division by zero.  Over any bounded input region the
+// exhaustive checker finds zero concrete crashes: this alarm is the
+// precision boundary, not a real bug.
+input var x;
+var y = x;
+if (x - y != 0) {
+    var z = 1 / (x - y);
+}

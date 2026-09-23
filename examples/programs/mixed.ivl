@@ -1,0 +1,14 @@
+// mixed.ivl -- one genuinely safe site, one really crashing site, and one
+// spurious (correlation) site, all in one program.
+input var k;
+input array a[4];
+
+// SAFE: the two guards pin k into [0,3].
+if (k >= 0) {
+    if (k <= 3) {
+        a[k] = 1;
+    }
+}
+
+// REALLY CRASHES for some inputs (k == 0 is reachable on the else path).
+var q = 1 / k;

@@ -1,0 +1,9 @@
+// correlation_loss.ivl -- interval domain loses relational information.
+// x is any integer, y is assigned from x, so x and y are always equal.
+// The expression (x - y) is therefore always exactly 0, but independent
+// intervals only know x in Top and y in Top, hence the analyzer reports a
+// *possible* division by zero.  This is a true (unavoidable) false alarm of
+// the non-relational domain; exhaustive execution confirms zero real crash.
+input var x;
+var y = x;
+var z = 1 / (x - y);

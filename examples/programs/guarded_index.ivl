@@ -1,0 +1,10 @@
+// guarded_index.ivl -- two one-sided guards exactly bound an unknown index.
+// k starts Top, but the nested ifs restrict it to [0,3] at the store, so
+// the analyzer proves a[k] in bounds with no alarm.
+input var k;
+input array a[4];
+if (k >= 0) {
+    if (k < 4) {
+        a[k] = 9;
+    }
+}

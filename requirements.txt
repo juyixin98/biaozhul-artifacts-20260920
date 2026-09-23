@@ -1,0 +1,2 @@
+# Interval AI has no third-party dependencies.
+# Python 3.10+ standard library only (developed and tested on Python 3.12).

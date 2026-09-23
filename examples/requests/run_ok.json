@@ -1,0 +1,4 @@
+{
+  "source": "input var k;\nvar z = 9 / k;\n",
+  "inputs": [3]
+}

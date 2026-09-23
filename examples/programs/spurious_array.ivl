@@ -1,0 +1,10 @@
+// spurious_array.ivl -- spurious alarm from non-relational array contents.
+// The analyzer models array *contents* with a single Top abstraction (it
+// only bounds-checks indices).  Here a[0] is provably 5 concretely, so the
+// division 100/a[0] always succeeds; but the load yields Top, hence a
+// *possible* division-by-zero that no execution in the bounded region
+// realizes.
+input array a[4];
+a[0] = 5;
+var c = a[0];
+var q = 100 / c;

@@ -1,0 +1,13 @@
+// unknown_loop.ivl -- loop bound is an unknown input.
+// Widening sends i to [0,+inf); narrowing cannot recover a finite high
+// bound from the unknown n, so the array access is reported *possibly* out
+// of bounds.  Exhaustive execution over a bounded n-range shows where the
+// real crashes occur (n > 4) and where the analyzer's "possible" alarm is
+// conservative (n in 0..4).
+input var n;
+input array a[4];
+var i = 0;
+while (i < n) {
+    a[i] = i;
+    i = i + 1;
+}

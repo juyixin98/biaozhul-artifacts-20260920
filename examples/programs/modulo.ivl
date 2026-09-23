@@ -1,0 +1,14 @@
+// modulo.ivl -- truncated remainder semantics and modulo-by-zero check.
+// When m is constrained to [2,5], r = a % m is bounded by [-(m-1),m-1];
+// here a >= 0 inside the guard so r in [0,4].  The second modulo uses an
+// unguarded input and is reported possible modulo-by-zero.
+input var a;
+input var m;
+if (a >= 0) {
+    if (m >= 2) {
+        if (m <= 5) {
+            var r = a % m;
+        }
+    }
+}
+var s = 7 % a;
