@@ -1,0 +1,19 @@
+{
+  "comment": "4 张表链式连接 a-b-c-d（全外键匹配，仅统计，用于展示 DP 选顺序）",
+  "tables": [
+    { "name": "a", "columns": ["id", "b_id"], "rowCount": 100000,
+      "ndv": { "id": 100000, "b_id": 1000 } },
+    { "name": "b", "columns": ["id", "c_id"], "rowCount": 1000,
+      "ndv": { "id": 1000, "c_id": 100 } },
+    { "name": "c", "columns": ["id", "d_id"], "rowCount": 100,
+      "ndv": { "id": 100, "d_id": 10 } },
+    { "name": "d", "columns": ["id"], "rowCount": 10,
+      "ndv": { "id": 10 } }
+  ],
+  "joins": [
+    ["a", "b_id", "b", "id"],
+    ["b", "c_id", "c", "id"],
+    ["c", "d_id", "d", "id"]
+  ],
+  "options": { "execute": false, "enumerate": true }
+}

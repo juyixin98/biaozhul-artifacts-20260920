@@ -1,0 +1,5 @@
+# 编译产物
+build/classes/
+build/out/
+build/responses/
+*.class

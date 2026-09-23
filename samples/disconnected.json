@@ -1,0 +1,30 @@
+{
+  "comment": "断开的连接图：{a,b} 与 {c,d} 两个连通分量 + 孤立表 e，必有笛卡尔积",
+  "tables": [
+    { "name": "orders", "columns": ["id", "cust_id"],
+      "rows": [
+        [1, 1], [2, 1], [3, 2], [4, 3], [5, 3]
+      ] },
+    { "name": "customers", "columns": ["id", "city"],
+      "rows": [
+        [1, "BJ"], [2, "SH"], [3, "GZ"]
+      ] },
+    { "name": "products", "columns": ["pid", "cat"],
+      "rows": [
+        [10, "x"], [11, "y"]
+      ] },
+    { "name": "categories", "columns": ["cat", "name"],
+      "rows": [
+        ["x", "X"], ["y", "Y"]
+      ] },
+    { "name": "numbers", "columns": ["n"],
+      "rows": [
+        [1], [2]
+      ] }
+  ],
+  "joins": [
+    ["orders", "cust_id", "customers", "id"],
+    ["products", "cat", "categories", "cat"]
+  ],
+  "options": { "execute": true, "enumerate": true, "resultLimit": 5 }
+}

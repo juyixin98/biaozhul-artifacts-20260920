@@ -1,0 +1,148 @@
+{
+  "comment": "8 表星型连接（上限）：事实表 f(1,000,000) + 7 个维度表，仅统计",
+  "tables": [
+    {
+      "name": "f",
+      "columns": [
+        "id",
+        "d1_id",
+        "d2_id",
+        "d3_id",
+        "d4_id",
+        "d5_id",
+        "d6_id",
+        "d7_id"
+      ],
+      "rowCount": 1000000,
+      "ndv": {
+        "id": 1000000,
+        "d1_id": 10,
+        "d2_id": 50,
+        "d3_id": 100,
+        "d4_id": 500,
+        "d5_id": 1000,
+        "d6_id": 5000,
+        "d7_id": 10000
+      }
+    },
+    {
+      "name": "d1",
+      "columns": [
+        "id"
+      ],
+      "rowCount": 10,
+      "ndv": {
+        "id": 10
+      }
+    },
+    {
+      "name": "d2",
+      "columns": [
+        "id"
+      ],
+      "rowCount": 50,
+      "ndv": {
+        "id": 50
+      }
+    },
+    {
+      "name": "d3",
+      "columns": [
+        "id"
+      ],
+      "rowCount": 100,
+      "ndv": {
+        "id": 100
+      }
+    },
+    {
+      "name": "d4",
+      "columns": [
+        "id"
+      ],
+      "rowCount": 500,
+      "ndv": {
+        "id": 500
+      }
+    },
+    {
+      "name": "d5",
+      "columns": [
+        "id"
+      ],
+      "rowCount": 1000,
+      "ndv": {
+        "id": 1000
+      }
+    },
+    {
+      "name": "d6",
+      "columns": [
+        "id"
+      ],
+      "rowCount": 5000,
+      "ndv": {
+        "id": 5000
+      }
+    },
+    {
+      "name": "d7",
+      "columns": [
+        "id"
+      ],
+      "rowCount": 10000,
+      "ndv": {
+        "id": 10000
+      }
+    }
+  ],
+  "joins": [
+    [
+      "f",
+      "d1_id",
+      "d1",
+      "id"
+    ],
+    [
+      "f",
+      "d2_id",
+      "d2",
+      "id"
+    ],
+    [
+      "f",
+      "d3_id",
+      "d3",
+      "id"
+    ],
+    [
+      "f",
+      "d4_id",
+      "d4",
+      "id"
+    ],
+    [
+      "f",
+      "d5_id",
+      "d5",
+      "id"
+    ],
+    [
+      "f",
+      "d6_id",
+      "d6",
+      "id"
+    ],
+    [
+      "f",
+      "d7_id",
+      "d7",
+      "id"
+    ]
+  ],
+  "options": {
+    "execute": false,
+    "enumerate": false,
+    "resultLimit": 0
+  }
+}
