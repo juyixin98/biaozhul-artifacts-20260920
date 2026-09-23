@@ -1,0 +1,23 @@
+# Dependency lock for "incremental join-aggregation view"
+#
+# This project deliberately depends on ZERO third-party artifacts.
+# There is no Maven/Gradle resolution; reproduce with plain javac.
+#
+# Verify:  grep -RhoE '^import [a-z0-9_.]+;' src | sort -u
+# Every imported package starts with "java." / "javax." / "com.sun.net.httpserver".
+
+runtime = JDK
+jdk_version_pinned = 17
+jdk_verified_build = OpenJDK 17.0.20.1 (build 17.0.20.1+1-1~24.04, amd64)
+source_compatibility = 17
+
+# Third-party artifacts (Maven coordinates / jars): NONE
+#   - HTTP server:  com.sun.net.httpserver.HttpServer  (JDK)
+#   - HTTP client:  java.net.http.HttpClient           (JDK, tests)
+#   - JSON:         hand-written parser/writer (src/com/example/iview/json/Json.java)
+#   - unit tests:   hand-written assertion kit (test/com/example/iview/TestKit.java)
+#   - fixed point:  java.math.BigDecimal (scale=2, RoundingMode.HALF_UP)
+
+[[artifacts]]
+# intentionally empty - no resolved third-party versions to pin
+count = 0

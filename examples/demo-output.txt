@@ -1,0 +1,459 @@
+=== 0. reset to a known-empty state ===
+{
+  "reset": true
+}
+
+=== 1. bilateral inserts: 2 products (both 'books'), 2 order lines ===
+{
+  "result": {
+    "eventId": "e-p1",
+    "duplicate": false,
+    "side": "product",
+    "op": "upsert",
+    "changed": false,
+    "notFound": false,
+    "categoryTo": "books",
+    "migratedOrderLines": 0,
+    "unmatchedOrderLines": 0
+  },
+  "view": {
+    "aggregates": [],
+    "productCount": 1,
+    "orderLineCount": 0,
+    "distinctSeenEventIds": 1,
+    "appliedEvents": 1,
+    "matchesFullRecompute": true
+  },
+  "verified": true
+}
+
+{
+  "result": {
+    "eventId": "e-p2",
+    "duplicate": false,
+    "side": "product",
+    "op": "upsert",
+    "changed": false,
+    "notFound": false,
+    "categoryTo": "books",
+    "migratedOrderLines": 0,
+    "unmatchedOrderLines": 0
+  },
+  "view": {
+    "aggregates": [],
+    "productCount": 2,
+    "orderLineCount": 0,
+    "distinctSeenEventIds": 2,
+    "appliedEvents": 2,
+    "matchesFullRecompute": true
+  },
+  "verified": true
+}
+
+{
+  "result": {
+    "eventId": "e-l1",
+    "duplicate": false,
+    "side": "order_line",
+    "op": "upsert",
+    "changed": true,
+    "notFound": false,
+    "categoryTo": "books",
+    "migratedOrderLines": 0,
+    "unmatchedOrderLines": 0
+  },
+  "view": {
+    "aggregates": [
+      {
+        "category": "books",
+        "totalQty": 2,
+        "totalAmount": "10.00"
+      }
+    ],
+    "productCount": 2,
+    "orderLineCount": 1,
+    "distinctSeenEventIds": 3,
+    "appliedEvents": 3,
+    "matchesFullRecompute": true
+  },
+  "verified": true
+}
+
+{
+  "result": {
+    "eventId": "e-l2",
+    "duplicate": false,
+    "side": "order_line",
+    "op": "upsert",
+    "changed": true,
+    "notFound": false,
+    "categoryTo": "books",
+    "migratedOrderLines": 0,
+    "unmatchedOrderLines": 0
+  },
+  "view": {
+    "aggregates": [
+      {
+        "category": "books",
+        "totalQty": 3,
+        "totalAmount": "15.00"
+      }
+    ],
+    "productCount": 2,
+    "orderLineCount": 2,
+    "distinctSeenEventIds": 4,
+    "appliedEvents": 4,
+    "matchesFullRecompute": true
+  },
+  "verified": true
+}
+
+=== 2. duplicate business event: same eventId e-l1 replayed verbatim ===
+{
+  "result": {
+    "eventId": "e-l1",
+    "duplicate": true,
+    "side": "order_line",
+    "op": "upsert",
+    "changed": false,
+    "notFound": false,
+    "migratedOrderLines": 0,
+    "unmatchedOrderLines": 0
+  },
+  "view": {
+    "aggregates": [
+      {
+        "category": "books",
+        "totalQty": 3,
+        "totalAmount": "15.00"
+      }
+    ],
+    "productCount": 2,
+    "orderLineCount": 2,
+    "distinctSeenEventIds": 4,
+    "appliedEvents": 4,
+    "matchesFullRecompute": true
+  },
+  "verified": true
+}
+
+=== 3. duplicate eventId carrying a *different* payload (still ignored) ===
+{
+  "result": {
+    "eventId": "e-l1",
+    "duplicate": true,
+    "side": "order_line",
+    "op": "upsert",
+    "changed": false,
+    "notFound": false,
+    "migratedOrderLines": 0,
+    "unmatchedOrderLines": 0
+  },
+  "view": {
+    "aggregates": [
+      {
+        "category": "books",
+        "totalQty": 3,
+        "totalAmount": "15.00"
+      }
+    ],
+    "productCount": 2,
+    "orderLineCount": 2,
+    "distinctSeenEventIds": 4,
+    "appliedEvents": 4,
+    "matchesFullRecompute": true
+  },
+  "verified": true
+}
+
+=== 4. dimension category change: P1 books -> media (L1 migrates, L2 stays) ===
+{
+  "result": {
+    "eventId": "e-p1-recat",
+    "duplicate": false,
+    "side": "product",
+    "op": "upsert",
+    "changed": true,
+    "notFound": false,
+    "categoryFrom": "books",
+    "categoryTo": "media",
+    "migratedOrderLines": 1,
+    "unmatchedOrderLines": 0
+  },
+  "view": {
+    "aggregates": [
+      {
+        "category": "books",
+        "totalQty": 1,
+        "totalAmount": "5.00"
+      },
+      {
+        "category": "media",
+        "totalQty": 2,
+        "totalAmount": "10.00"
+      }
+    ],
+    "productCount": 2,
+    "orderLineCount": 2,
+    "distinctSeenEventIds": 5,
+    "appliedEvents": 5,
+    "matchesFullRecompute": true
+  },
+  "verified": true
+}
+
+=== 5. delete non-existent rows (safe no-op; notFound=true, eventId still consumed) ===
+{
+  "result": {
+    "eventId": "e-del-ghost-line",
+    "duplicate": false,
+    "side": "order_line",
+    "op": "delete",
+    "changed": false,
+    "notFound": true,
+    "migratedOrderLines": 0,
+    "unmatchedOrderLines": 0
+  },
+  "view": {
+    "aggregates": [
+      {
+        "category": "books",
+        "totalQty": 1,
+        "totalAmount": "5.00"
+      },
+      {
+        "category": "media",
+        "totalQty": 2,
+        "totalAmount": "10.00"
+      }
+    ],
+    "productCount": 2,
+    "orderLineCount": 2,
+    "distinctSeenEventIds": 6,
+    "appliedEvents": 6,
+    "matchesFullRecompute": true
+  },
+  "verified": true
+}
+
+{
+  "result": {
+    "eventId": "e-del-ghost-prod",
+    "duplicate": false,
+    "side": "product",
+    "op": "delete",
+    "changed": false,
+    "notFound": true,
+    "migratedOrderLines": 0,
+    "unmatchedOrderLines": 0
+  },
+  "view": {
+    "aggregates": [
+      {
+        "category": "books",
+        "totalQty": 1,
+        "totalAmount": "5.00"
+      },
+      {
+        "category": "media",
+        "totalQty": 2,
+        "totalAmount": "10.00"
+      }
+    ],
+    "productCount": 2,
+    "orderLineCount": 2,
+    "distinctSeenEventIds": 7,
+    "appliedEvents": 7,
+    "matchesFullRecompute": true
+  },
+  "verified": true
+}
+
+=== 6. incremental view vs independent full recompute ===
+{
+  "matches": true,
+  "comparison": [
+    {
+      "category": "books",
+      "incremental": {
+        "qty": 1,
+        "amount": "5.00"
+      },
+      "fullRecompute": {
+        "qty": 1,
+        "amount": "5.00"
+      },
+      "equal": true
+    },
+    {
+      "category": "media",
+      "incremental": {
+        "qty": 2,
+        "amount": "10.00"
+      },
+      "fullRecompute": {
+        "qty": 2,
+        "amount": "10.00"
+      },
+      "equal": true
+    }
+  ]
+}
+
+=== 7. real delete: remove L2 -> books bucket must disappear ===
+{
+  "result": {
+    "eventId": "e-del-l2",
+    "duplicate": false,
+    "side": "order_line",
+    "op": "delete",
+    "changed": true,
+    "notFound": false,
+    "categoryFrom": "books",
+    "migratedOrderLines": 0,
+    "unmatchedOrderLines": 0
+  },
+  "view": {
+    "aggregates": [
+      {
+        "category": "media",
+        "totalQty": 2,
+        "totalAmount": "10.00"
+      }
+    ],
+    "productCount": 2,
+    "orderLineCount": 1,
+    "distinctSeenEventIds": 8,
+    "appliedEvents": 8,
+    "matchesFullRecompute": true
+  },
+  "verified": true
+}
+
+=== 8. final view and raw tables ===
+{
+  "aggregates": [
+    {
+      "category": "media",
+      "totalQty": 2,
+      "totalAmount": "10.00"
+    }
+  ],
+  "productCount": 2,
+  "orderLineCount": 1,
+  "distinctSeenEventIds": 8,
+  "appliedEvents": 8,
+  "matchesFullRecompute": true
+}
+
+{
+  "products": [
+    {
+      "productId": "P1",
+      "category": "media"
+    },
+    {
+      "productId": "P2",
+      "category": "books"
+    }
+  ],
+  "orderLines": [
+    {
+      "orderLineId": "L1",
+      "productId": "P1",
+      "qty": 2,
+      "amount": "10.00"
+    }
+  ]
+}
+
+=== 9. batch with an embedded duplicate eventId (b-2 appears twice) ===
+{
+  "results": [
+    {
+      "eventId": "b-1",
+      "duplicate": false,
+      "side": "product",
+      "op": "upsert",
+      "changed": false,
+      "notFound": false,
+      "categoryTo": "food",
+      "migratedOrderLines": 0,
+      "unmatchedOrderLines": 0
+    },
+    {
+      "eventId": "b-2",
+      "duplicate": false,
+      "side": "order_line",
+      "op": "upsert",
+      "changed": true,
+      "notFound": false,
+      "categoryTo": "food",
+      "migratedOrderLines": 0,
+      "unmatchedOrderLines": 0
+    },
+    {
+      "eventId": "b-2",
+      "duplicate": true,
+      "side": "order_line",
+      "op": "upsert",
+      "changed": false,
+      "notFound": false,
+      "migratedOrderLines": 0,
+      "unmatchedOrderLines": 0
+    },
+    {
+      "eventId": "b-3",
+      "duplicate": false,
+      "side": "order_line",
+      "op": "upsert",
+      "changed": true,
+      "notFound": false,
+      "categoryTo": "food",
+      "migratedOrderLines": 0,
+      "unmatchedOrderLines": 0
+    }
+  ],
+  "view": {
+    "aggregates": [
+      {
+        "category": "food",
+        "totalQty": 2,
+        "totalAmount": "0.30"
+      },
+      {
+        "category": "media",
+        "totalQty": 2,
+        "totalAmount": "10.00"
+      }
+    ],
+    "productCount": 3,
+    "orderLineCount": 3,
+    "distinctSeenEventIds": 11,
+    "appliedEvents": 11,
+    "matchesFullRecompute": true
+  },
+  "verified": true
+}
+
+=== food total must be exactly 0.30 (fixed point), qty 2 ===
+{
+  "aggregates": [
+    {
+      "category": "food",
+      "totalQty": 2,
+      "totalAmount": "0.30"
+    },
+    {
+      "category": "media",
+      "totalQty": 2,
+      "totalAmount": "10.00"
+    }
+  ],
+  "productCount": 3,
+  "orderLineCount": 3,
+  "distinctSeenEventIds": 11,
+  "appliedEvents": 11,
+  "matchesFullRecompute": true
+}
+

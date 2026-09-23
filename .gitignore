@@ -1,0 +1,4 @@
+out/
+build-main.txt
+build-test.txt
+*.class
