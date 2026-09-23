@@ -1,0 +1,26 @@
+{
+  "snapshot_id": "no-replacement-capacity-demo",
+  "nodes": [
+    {
+      "name": "node-a",
+      "schedulable": true,
+      "capacity": 10,
+      "pods": [
+        {"name": "worker-1", "uid": "pod-w-1", "namespace": "default", "node": "node-a", "phase": "Running", "ready": true, "labels": {"app": "worker"}, "owner_kind": "Deployment", "owner_name": "worker"},
+        {"name": "worker-2", "uid": "pod-w-2", "namespace": "default", "node": "node-a", "phase": "Running", "ready": true, "labels": {"app": "worker"}, "owner_kind": "Deployment", "owner_name": "worker"}
+      ]
+    },
+    {
+      "name": "node-b",
+      "schedulable": false,
+      "capacity": 1,
+      "pods": [
+        {"name": "other-1", "uid": "pod-o-1", "namespace": "default", "node": "node-b", "phase": "Running", "ready": true, "labels": {"app": "other"}, "owner_kind": "Deployment", "owner_name": "other"}
+      ]
+    }
+  ],
+  "deployments": [
+    {"name": "worker", "namespace": "default", "replicas": 2, "ready_replicas": 2, "selector": {"app": "worker"}, "delay_ready_ticks": 1}
+  ],
+  "pdbs": []
+}

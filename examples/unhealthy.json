@@ -1,0 +1,22 @@
+{
+  "snapshot_id": "unhealthy-replicas-demo",
+  "nodes": [
+    {
+      "name": "node-a",
+      "schedulable": true,
+      "capacity": 10,
+      "pods": [
+        {"name": "pay-1", "uid": "pod-pay-1", "namespace": "prod", "node": "node-a", "phase": "Running", "ready": true, "labels": {"app": "pay"}, "owner_kind": "Deployment", "owner_name": "pay"},
+        {"name": "pay-2", "uid": "pod-pay-2", "namespace": "prod", "node": "node-a", "phase": "Running", "ready": false, "labels": {"app": "pay"}, "owner_kind": "Deployment", "owner_name": "pay"},
+        {"name": "pay-3", "uid": "pod-pay-3", "namespace": "prod", "node": "node-a", "phase": "Pending", "ready": false, "labels": {"app": "pay"}, "owner_kind": "Deployment", "owner_name": "pay"}
+      ]
+    },
+    {"name": "node-b", "schedulable": true, "capacity": 10, "pods": []}
+  ],
+  "deployments": [
+    {"name": "pay", "namespace": "prod", "replicas": 3, "ready_replicas": 1, "selector": {"app": "pay"}, "delay_ready_ticks": 1}
+  ],
+  "pdbs": [
+    {"name": "pdb-pay", "namespace": "prod", "selector": {"app": "pay"}, "min_available": 2}
+  ]
+}

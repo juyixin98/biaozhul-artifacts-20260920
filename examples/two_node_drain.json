@@ -1,0 +1,43 @@
+{
+  "snapshot_id": "two-node-drain-demo",
+  "nodes": [
+    {
+      "name": "node-a",
+      "schedulable": true,
+      "capacity": 10,
+      "pods": [
+        {"name": "web-aaa1", "uid": "pod-web-1", "namespace": "default", "node": "node-a", "phase": "Running", "ready": true, "labels": {"app": "web"}, "owner_kind": "Deployment", "owner_name": "web"},
+        {"name": "web-aaa2", "uid": "pod-web-2", "namespace": "default", "node": "node-a", "phase": "Running", "ready": true, "labels": {"app": "web"}, "owner_kind": "Deployment", "owner_name": "web"},
+        {"name": "web-aaa3", "uid": "pod-web-3", "namespace": "default", "node": "node-a", "phase": "Running", "ready": true, "labels": {"app": "web"}, "owner_kind": "Deployment", "owner_name": "web"},
+        {"name": "web-aaa4", "uid": "pod-web-4", "namespace": "default", "node": "node-a", "phase": "Running", "ready": true, "labels": {"app": "web"}, "owner_kind": "Deployment", "owner_name": "web"},
+        {"name": "job-done-1", "uid": "pod-job-1", "namespace": "batch", "node": "node-a", "phase": "Succeeded", "ready": false, "labels": {"job": "etl"}, "owner_kind": null},
+        {"name": "ds-agent", "uid": "pod-ds-1", "namespace": "kube-system", "node": "node-a", "phase": "Running", "ready": true, "labels": {"app": "agent"}, "owner_kind": "DaemonSet", "owner_name": "agent-ds"},
+        {"name": "orphan-bare", "uid": "pod-bare-1", "namespace": "default", "node": "node-a", "phase": "Running", "ready": true, "labels": {"app": "debug"}, "owner_kind": null}
+      ]
+    },
+    {
+      "name": "node-b",
+      "schedulable": true,
+      "capacity": 10,
+      "pods": [
+        {"name": "web-bbb1", "uid": "pod-web-5", "namespace": "default", "node": "node-b", "phase": "Running", "ready": true, "labels": {"app": "web"}, "owner_kind": "Deployment", "owner_name": "web"},
+        {"name": "api-bbb1", "uid": "pod-api-1", "namespace": "default", "node": "node-b", "phase": "Running", "ready": true, "labels": {"app": "api", "tier": "backend"}, "owner_kind": "Deployment", "owner_name": "api"},
+        {"name": "api-bbb2", "uid": "pod-api-2", "namespace": "default", "node": "node-b", "phase": "Running", "ready": true, "labels": {"app": "api", "tier": "backend"}, "owner_kind": "Deployment", "owner_name": "api"}
+      ]
+    },
+    {
+      "name": "node-c",
+      "schedulable": true,
+      "capacity": 10,
+      "pods": []
+    }
+  ],
+  "deployments": [
+    {"name": "web", "namespace": "default", "replicas": 5, "ready_replicas": 5, "selector": {"app": "web"}, "delay_ready_ticks": 1},
+    {"name": "api", "namespace": "default", "replicas": 2, "ready_replicas": 2, "selector": {"app": "api", "tier": "backend"}, "template_labels": {"app": "api", "tier": "backend"}, "delay_ready_ticks": 1}
+  ],
+  "pdbs": [
+    {"name": "pdb-web", "namespace": "default", "selector": {"app": "web"}, "min_available": 4},
+    {"name": "pdb-api", "namespace": "default", "selector": {"app": "api"}, "max_unavailable": 1}
+  ]
+}

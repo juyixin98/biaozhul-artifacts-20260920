@@ -1,0 +1,24 @@
+{
+  "snapshot_id": "multi-pdb-intersection-demo",
+  "nodes": [
+    {
+      "name": "node-a",
+      "schedulable": true,
+      "capacity": 10,
+      "pods": [
+        {"name": "checkout-1", "uid": "pod-co-1", "namespace": "prod", "node": "node-a", "phase": "Running", "ready": true, "labels": {"app": "checkout", "tier": "critical"}, "owner_kind": "Deployment", "owner_name": "checkout"},
+        {"name": "checkout-2", "uid": "pod-co-2", "namespace": "prod", "node": "node-a", "phase": "Running", "ready": true, "labels": {"app": "checkout", "tier": "critical"}, "owner_kind": "Deployment", "owner_name": "checkout"},
+        {"name": "checkout-3", "uid": "pod-co-3", "namespace": "prod", "node": "node-a", "phase": "Running", "ready": true, "labels": {"app": "checkout", "tier": "critical"}, "owner_kind": "Deployment", "owner_name": "checkout"},
+        {"name": "checkout-4", "uid": "pod-co-4", "namespace": "prod", "node": "node-a", "phase": "Running", "ready": true, "labels": {"app": "checkout", "tier": "critical"}, "owner_kind": "Deployment", "owner_name": "checkout"}
+      ]
+    },
+    {"name": "node-b", "schedulable": true, "capacity": 10, "pods": []}
+  ],
+  "deployments": [
+    {"name": "checkout", "namespace": "prod", "replicas": 4, "ready_replicas": 4, "selector": {"app": "checkout"}, "template_labels": {"app": "checkout", "tier": "critical"}, "delay_ready_ticks": 1}
+  ],
+  "pdbs": [
+    {"name": "pdb-by-app", "namespace": "prod", "selector": {"app": "checkout"}, "max_unavailable": 2},
+    {"name": "pdb-critical-tier", "namespace": "prod", "selector": {"tier": "critical"}, "min_available": 3}
+  ]
+}
