@@ -1,0 +1,58 @@
+{
+  "name": "3-late-and-duplicate-messages",
+  "seed": 303,
+  "ttl_ms": 2000,
+  "heartbeat_ms": 700,
+  "retry_gap_ms": 200,
+  "end_ms": 6000,
+  "network": {
+    "min_latency_ms": 10,
+    "max_latency_ms": 10,
+    "rules": [
+      {
+        "type": "drop",
+        "src": "A",
+        "dst": "L",
+        "req_type": "renew",
+        "from": 710,
+        "until": 1430,
+        "_comment": "two consecutive renewals (720, 1420) are lost; lease 1 expires at 2010"
+      },
+      {
+        "type": "duplicate",
+        "src": "A",
+        "dst": "L",
+        "req_type": "renew",
+        "from": 2110,
+        "until": 2130,
+        "delay_ms": 700,
+        "_comment": "A's next renewal is held late and duplicated; it arrives at 2830 (after expiry) and is answered expired; the copy adds no effect"
+      },
+      {
+        "type": "duplicate",
+        "src": "A",
+        "dst": "R",
+        "req_type": "submit",
+        "from": 3440,
+        "until": 3470,
+        "_comment": "the deposed holder's stale write is itself duplicated: both copies must be rejected"
+      }
+    ]
+  },
+  "clients": [
+    {"id": "A"},
+    {"id": "B"}
+  ],
+  "actions": [
+    {"at_ms": 0,    "client": "A", "op": "acquire"},
+    {"at_ms": 400,  "client": "A", "op": "submit", "value": "a-write-fence-1", "resource": "R"},
+
+    {"at_ms": 1800, "client": "B", "op": "acquire", "retry": true, "_comment": "busy while lease 1 is live; granted after its expiry at 2007"},
+    {"at_ms": 2600, "client": "B", "op": "submit", "value": "b-write-fence-2", "resource": "R"},
+    {"at_ms": 3100, "client": "B", "op": "release"},
+
+    {"at_ms": 3450, "client": "A", "op": "submit", "value": "a-late-stale-fence-1", "resource": "R", "force_submit": true, "_comment": "late message from the deposed holder: fence 1 < epoch 2, rejected twice"},
+    {"at_ms": 4200, "client": "A", "op": "acquire", "_comment": "A takes a fresh lease and gets a strictly higher fence 3"},
+    {"at_ms": 4800, "client": "A", "op": "submit", "value": "a-write-fence-3", "resource": "R"}
+  ]
+}

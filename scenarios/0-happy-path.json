@@ -1,0 +1,36 @@
+{
+  "name": "0-happy-path",
+  "seed": 42,
+  "ttl_ms": 2000,
+  "heartbeat_ms": 600,
+  "retry_gap_ms": 200,
+  "end_ms": 3500,
+  "network": {
+    "min_latency_ms": 10,
+    "max_latency_ms": 10,
+    "rules": [
+      {
+        "type": "duplicate",
+        "src": "A",
+        "dst": "L",
+        "req_type": "renew",
+        "from": 610,
+        "until": 625,
+        "_comment": "one heartbeat is duplicated by the network; the lock service dedupes it and does not extend the lease twice"
+      }
+    ]
+  },
+  "clients": [
+    {"id": "A"},
+    {"id": "B"}
+  ],
+  "actions": [
+    {"at_ms": 0,    "client": "A", "op": "acquire"},
+    {"at_ms": 300,  "client": "A", "op": "submit", "value": "a-1", "resource": "R"},
+    {"at_ms": 900,  "client": "B", "op": "acquire", "_comment": "B tries while A holds: one busy response, no retry"},
+    {"at_ms": 1500, "client": "A", "op": "renew", "_comment": "explicit renew rides alongside heartbeats"},
+    {"at_ms": 2400, "client": "A", "op": "release"},
+    {"at_ms": 2500, "client": "B", "op": "acquire"},
+    {"at_ms": 3000, "client": "B", "op": "submit", "value": "b-1", "resource": "R"}
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "2-pause-longer-than-ttl",
+  "seed": 202,
+  "ttl_ms": 1000,
+  "heartbeat_ms": 400,
+  "retry_gap_ms": 200,
+  "end_ms": 4500,
+  "network": {
+    "min_latency_ms": 5,
+    "max_latency_ms": 15,
+    "rules": []
+  },
+  "clients": [
+    {"id": "A"},
+    {"id": "B"}
+  ],
+  "actions": [
+    {"at_ms": 0,    "client": "A", "op": "acquire"},
+    {"at_ms": 300,  "client": "A", "op": "submit", "value": "a-before-pause", "resource": "R"},
+
+    {"at_ms": 500,  "client": "A", "op": "pause", "duration_ms": 2500, "_comment": "freeze A well beyond the 1000ms TTL: no heartbeats escape"},
+
+    {"at_ms": 800,  "client": "B", "op": "acquire", "retry": true, "_comment": "busy while lease 1 is live, granted after 1500"},
+    {"at_ms": 2200, "client": "B", "op": "submit", "value": "b-write-fence-2", "resource": "R"},
+    {"at_ms": 2700, "client": "B", "op": "release", "_comment": "B finishes and releases before A wakes"},
+
+    {"at_ms": 3100, "client": "A", "op": "submit", "value": "a-zombie-after-pause", "resource": "R", "force_submit": true, "_comment": "old holder resumes, still presents fence 1: MUST be rejected"},
+    {"at_ms": 3300, "client": "A", "op": "submit", "value": "a-normal-write", "resource": "R", "_comment": "client locally knows the lease is gone: refuses itself"},
+    {"at_ms": 3500, "client": "A", "op": "acquire"},
+    {"at_ms": 4100, "client": "A", "op": "submit", "value": "a-write-fence-3", "resource": "R", "_comment": "re-acquired with fence 3: commits"}
+  ]
+}

@@ -1,0 +1,362 @@
+{
+  "scenario": "0-happy-path",
+  "seed": 42,
+  "end_time_ms": 3230,
+  "events_processed": 40,
+  "network_stats": {
+    "sent": 23,
+    "delivered": 24,
+    "dropped": 0,
+    "duplicated": 1,
+    "delayed": 0,
+    "paused_sender_dropped": 0
+  },
+  "lock": {
+    "node": "L",
+    "next_fence": 3,
+    "grants": 2,
+    "expirations": 0,
+    "current_lease": {
+      "id": "lease-2",
+      "holder": "B",
+      "fence": 2,
+      "granted_at": 2510,
+      "expire_at": 5130
+    },
+    "history": [
+      {
+        "id": "lease-1",
+        "holder": "A",
+        "fence": 1,
+        "granted_at": 10,
+        "expire_at": 2010
+      },
+      {
+        "id": "lease-2",
+        "holder": "B",
+        "fence": 2,
+        "granted_at": 2510,
+        "expire_at": 4510
+      }
+    ]
+  },
+  "resource": {
+    "node": "R",
+    "commits": [
+      {
+        "at": 310,
+        "client": "A",
+        "fence": 1,
+        "req_id": "A:submit:2",
+        "value": "a-1"
+      },
+      {
+        "at": 3010,
+        "client": "B",
+        "fence": 2,
+        "req_id": "B:submit:3",
+        "value": "b-1"
+      }
+    ],
+    "rejected": [],
+    "max_fence": 2,
+    "holder_fence": 2
+  },
+  "clients": [
+    {
+      "id": "A",
+      "state": "released",
+      "lease_id": "",
+      "fence": 0,
+      "granted": 1,
+      "renewed": 5,
+      "renew_failures": 0,
+      "acquire_busy": 0,
+      "commits": 1,
+      "rejected": 0,
+      "deduped": 0,
+      "pauses": 0,
+      "paused_ms_total": 0,
+      "heartbeats_sent": 4
+    },
+    {
+      "id": "B",
+      "state": "has_lease",
+      "lease_id": "lease-2",
+      "fence": 2,
+      "granted": 1,
+      "renewed": 1,
+      "renew_failures": 0,
+      "acquire_busy": 1,
+      "commits": 1,
+      "rejected": 0,
+      "deduped": 0,
+      "pauses": 0,
+      "paused_ms_total": 0,
+      "heartbeats_sent": 1
+    }
+  ],
+  "invariants": [
+    {
+      "name": "fence_tokens_strictly_increasing",
+      "pass": true,
+      "detail": "2 tokens issued, fences 1..2"
+    },
+    {
+      "name": "committed_fences_never_decrease",
+      "pass": true,
+      "detail": "2 commits"
+    },
+    {
+      "name": "rejections_only_for_stale_or_fenceless",
+      "pass": true,
+      "detail": "0 stale/fenceless writes rejected"
+    },
+    {
+      "name": "every_commit_has_fence",
+      "pass": true
+    },
+    {
+      "name": "lease_not_overgranted_while_alive",
+      "pass": true,
+      "detail": "2 grants, 0 expirations"
+    },
+    {
+      "name": "no_stale_fence_ever_committed",
+      "pass": true,
+      "detail": "max committed fence = 2"
+    }
+  ],
+  "all_invariants_pass": true,
+  "trace": [
+    {
+      "seq": 1,
+      "time_ms": 10,
+      "event": "lock.grant",
+      "detail": {
+        "client": "A",
+        "expire_at": 2010,
+        "fence": 1,
+        "lease_id": "lease-1"
+      }
+    },
+    {
+      "seq": 2,
+      "time_ms": 20,
+      "event": "client.granted",
+      "detail": {
+        "expire_at": 2010,
+        "fence": 1,
+        "lease_id": "lease-1"
+      }
+    },
+    {
+      "seq": 3,
+      "time_ms": 310,
+      "event": "resource.commit",
+      "detail": {
+        "client": "A",
+        "fence": 1,
+        "req_id": "A:submit:2",
+        "value": "a-1"
+      }
+    },
+    {
+      "seq": 4,
+      "time_ms": 620,
+      "event": "net.duplicate",
+      "detail": {
+        "copy_at": 680,
+        "copy_gap": 50,
+        "msg": 18,
+        "original_at": 630,
+        "rule": "duplicate"
+      }
+    },
+    {
+      "seq": 5,
+      "time_ms": 630,
+      "event": "lock.renew",
+      "detail": {
+        "client": "A",
+        "expire_at": 2630,
+        "fence": 1,
+        "lease_id": "lease-1"
+      }
+    },
+    {
+      "seq": 6,
+      "time_ms": 640,
+      "event": "client.renewed",
+      "detail": {
+        "expire_at": 2630,
+        "fence": 1
+      }
+    },
+    {
+      "seq": 7,
+      "time_ms": 680,
+      "event": "lock.renew.dedup",
+      "detail": {
+        "client": "A",
+        "fence": 1,
+        "req_id": "A:renew:3"
+      }
+    },
+    {
+      "seq": 8,
+      "time_ms": 690,
+      "event": "client.renewed",
+      "detail": {
+        "expire_at": 2630,
+        "fence": 1
+      }
+    },
+    {
+      "seq": 9,
+      "time_ms": 910,
+      "event": "lock.acquire.busy",
+      "detail": {
+        "client": "B",
+        "fence": 1,
+        "holder": "A"
+      }
+    },
+    {
+      "seq": 10,
+      "time_ms": 920,
+      "event": "client.acquire.busy",
+      "detail": {
+        "fence": 1,
+        "holder_expire": 2630
+      }
+    },
+    {
+      "seq": 11,
+      "time_ms": 1230,
+      "event": "lock.renew",
+      "detail": {
+        "client": "A",
+        "expire_at": 3230,
+        "fence": 1,
+        "lease_id": "lease-1"
+      }
+    },
+    {
+      "seq": 12,
+      "time_ms": 1240,
+      "event": "client.renewed",
+      "detail": {
+        "expire_at": 3230,
+        "fence": 1
+      }
+    },
+    {
+      "seq": 13,
+      "time_ms": 1510,
+      "event": "lock.renew",
+      "detail": {
+        "client": "A",
+        "expire_at": 3510,
+        "fence": 1,
+        "lease_id": "lease-1"
+      }
+    },
+    {
+      "seq": 14,
+      "time_ms": 1520,
+      "event": "client.renewed",
+      "detail": {
+        "expire_at": 3510,
+        "fence": 1
+      }
+    },
+    {
+      "seq": 15,
+      "time_ms": 2110,
+      "event": "lock.renew",
+      "detail": {
+        "client": "A",
+        "expire_at": 4110,
+        "fence": 1,
+        "lease_id": "lease-1"
+      }
+    },
+    {
+      "seq": 16,
+      "time_ms": 2120,
+      "event": "client.renewed",
+      "detail": {
+        "expire_at": 4110,
+        "fence": 1
+      }
+    },
+    {
+      "seq": 17,
+      "time_ms": 2410,
+      "event": "lock.release",
+      "detail": {
+        "client": "A",
+        "fence": 1,
+        "lease_id": "lease-1"
+      }
+    },
+    {
+      "seq": 18,
+      "time_ms": 2420,
+      "event": "client.released"
+    },
+    {
+      "seq": 19,
+      "time_ms": 2510,
+      "event": "lock.grant",
+      "detail": {
+        "client": "B",
+        "expire_at": 4510,
+        "fence": 2,
+        "lease_id": "lease-2"
+      }
+    },
+    {
+      "seq": 20,
+      "time_ms": 2520,
+      "event": "client.granted",
+      "detail": {
+        "expire_at": 4510,
+        "fence": 2,
+        "lease_id": "lease-2"
+      }
+    },
+    {
+      "seq": 21,
+      "time_ms": 3010,
+      "event": "resource.commit",
+      "detail": {
+        "client": "B",
+        "fence": 2,
+        "req_id": "B:submit:3",
+        "value": "b-1"
+      }
+    },
+    {
+      "seq": 22,
+      "time_ms": 3130,
+      "event": "lock.renew",
+      "detail": {
+        "client": "B",
+        "expire_at": 5130,
+        "fence": 2,
+        "lease_id": "lease-2"
+      }
+    },
+    {
+      "seq": 23,
+      "time_ms": 3140,
+      "event": "client.renewed",
+      "detail": {
+        "expire_at": 5130,
+        "fence": 2
+      }
+    }
+  ]
+}

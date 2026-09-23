@@ -1,0 +1,40 @@
+{
+  "name": "1-renewal-lost",
+  "seed": 101,
+  "ttl_ms": 2000,
+  "heartbeat_ms": 700,
+  "retry_gap_ms": 250,
+  "end_ms": 4500,
+  "network": {
+    "min_latency_ms": 5,
+    "max_latency_ms": 15,
+    "drop_prob": 0,
+    "duplicate_prob": 0,
+    "duplicate_gap_ms": 0,
+    "rules": [
+      {
+        "type": "drop",
+        "src": "A",
+        "dst": "L",
+        "req_type": "renew",
+        "from": 1380,
+        "until": 2150,
+        "_comment": "partition: every renewal from A is lost around lease expiry"
+      }
+    ]
+  },
+  "clients": [
+    {"id": "A"},
+    {"id": "B"}
+  ],
+  "actions": [
+    {"at_ms": 0,    "client": "A", "op": "acquire"},
+    {"at_ms": 500,  "client": "A", "op": "submit", "value": "a-write-1", "resource": "R"},
+
+    {"at_ms": 1500, "client": "B", "op": "acquire", "retry": true, "_comment": "B contests the lock; busy until A's lease expires"},
+
+    {"at_ms": 3300, "client": "A", "op": "submit", "value": "a-stale-after-loss", "resource": "R", "_comment": "A already received renew.err; well-behaved local refusal"},
+    {"at_ms": 3450, "client": "A", "op": "submit", "value": "a-zombie-fence-1", "resource": "R", "force_submit": true, "_comment": "zombie write with stale fence 1: resource MUST reject"},
+    {"at_ms": 3000, "client": "B", "op": "submit", "value": "b-write-fence-2", "resource": "R"}
+  ]
+}

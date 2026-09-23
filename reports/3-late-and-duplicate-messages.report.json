@@ -1,0 +1,491 @@
+{
+  "scenario": "3-late-and-duplicate-messages",
+  "seed": 303,
+  "end_time_ms": 5640,
+  "events_processed": 53,
+  "network_stats": {
+    "sent": 32,
+    "delivered": 32,
+    "dropped": 2,
+    "duplicated": 2,
+    "delayed": 0,
+    "paused_sender_dropped": 0
+  },
+  "lock": {
+    "node": "L",
+    "next_fence": 4,
+    "grants": 3,
+    "expirations": 1,
+    "current_lease": {
+      "id": "lease-3",
+      "holder": "A",
+      "fence": 3,
+      "granted_at": 4210,
+      "expire_at": 7630
+    },
+    "history": [
+      {
+        "id": "lease-1",
+        "holder": "A",
+        "fence": 1,
+        "granted_at": 10,
+        "expire_at": 2010
+      },
+      {
+        "id": "lease-2",
+        "holder": "B",
+        "fence": 2,
+        "granted_at": 2030,
+        "expire_at": 4030
+      },
+      {
+        "id": "lease-3",
+        "holder": "A",
+        "fence": 3,
+        "granted_at": 4210,
+        "expire_at": 6210
+      }
+    ]
+  },
+  "resource": {
+    "node": "R",
+    "commits": [
+      {
+        "at": 410,
+        "client": "A",
+        "fence": 1,
+        "req_id": "A:submit:2",
+        "value": "a-write-fence-1"
+      },
+      {
+        "at": 2610,
+        "client": "B",
+        "fence": 2,
+        "req_id": "B:submit:3",
+        "value": "b-write-fence-2"
+      },
+      {
+        "at": 4810,
+        "client": "A",
+        "fence": 3,
+        "req_id": "A:submit:9",
+        "value": "a-write-fence-3"
+      }
+    ],
+    "rejected": [
+      {
+        "at": 3460,
+        "client": "A",
+        "fence": 1,
+        "req_id": "A:submit:7",
+        "reason": "stale_fence",
+        "epoch_fence": 2
+      },
+      {
+        "at": 3510,
+        "client": "A",
+        "fence": 1,
+        "req_id": "A:submit:7",
+        "reason": "stale_fence",
+        "epoch_fence": 2
+      }
+    ],
+    "max_fence": 3,
+    "holder_fence": 3
+  },
+  "clients": [
+    {
+      "id": "A",
+      "state": "has_lease",
+      "lease_id": "lease-3",
+      "fence": 3,
+      "granted": 2,
+      "renewed": 2,
+      "renew_failures": 3,
+      "acquire_busy": 0,
+      "commits": 2,
+      "rejected": 2,
+      "deduped": 0,
+      "pauses": 0,
+      "paused_ms_total": 0,
+      "heartbeats_sent": 6
+    },
+    {
+      "id": "B",
+      "state": "released",
+      "lease_id": "",
+      "fence": 0,
+      "granted": 1,
+      "renewed": 1,
+      "renew_failures": 0,
+      "acquire_busy": 1,
+      "commits": 1,
+      "rejected": 0,
+      "deduped": 0,
+      "pauses": 0,
+      "paused_ms_total": 0,
+      "heartbeats_sent": 1
+    }
+  ],
+  "invariants": [
+    {
+      "name": "fence_tokens_strictly_increasing",
+      "pass": true,
+      "detail": "3 tokens issued, fences 1..3"
+    },
+    {
+      "name": "committed_fences_never_decrease",
+      "pass": true,
+      "detail": "3 commits"
+    },
+    {
+      "name": "rejections_only_for_stale_or_fenceless",
+      "pass": true,
+      "detail": "2 stale/fenceless writes rejected"
+    },
+    {
+      "name": "every_commit_has_fence",
+      "pass": true
+    },
+    {
+      "name": "lease_not_overgranted_while_alive",
+      "pass": true,
+      "detail": "3 grants, 1 expirations"
+    },
+    {
+      "name": "no_stale_fence_ever_committed",
+      "pass": true,
+      "detail": "max committed fence = 3"
+    }
+  ],
+  "all_invariants_pass": true,
+  "trace": [
+    {
+      "seq": 1,
+      "time_ms": 10,
+      "event": "lock.grant",
+      "detail": {
+        "client": "A",
+        "expire_at": 2010,
+        "fence": 1,
+        "lease_id": "lease-1"
+      }
+    },
+    {
+      "seq": 2,
+      "time_ms": 20,
+      "event": "client.granted",
+      "detail": {
+        "expire_at": 2010,
+        "fence": 1,
+        "lease_id": "lease-1"
+      }
+    },
+    {
+      "seq": 3,
+      "time_ms": 410,
+      "event": "resource.commit",
+      "detail": {
+        "client": "A",
+        "fence": 1,
+        "req_id": "A:submit:2",
+        "value": "a-write-fence-1"
+      }
+    },
+    {
+      "seq": 4,
+      "time_ms": 720,
+      "event": "net.drop",
+      "detail": {
+        "dst": "L",
+        "msg": 19,
+        "rule": "drop",
+        "src": "A",
+        "type": "renew.req"
+      }
+    },
+    {
+      "seq": 5,
+      "time_ms": 1420,
+      "event": "net.drop",
+      "detail": {
+        "dst": "L",
+        "msg": 21,
+        "rule": "drop",
+        "src": "A",
+        "type": "renew.req"
+      }
+    },
+    {
+      "seq": 6,
+      "time_ms": 1810,
+      "event": "lock.acquire.busy",
+      "detail": {
+        "client": "B",
+        "fence": 1,
+        "holder": "A"
+      }
+    },
+    {
+      "seq": 7,
+      "time_ms": 1820,
+      "event": "client.acquire.busy",
+      "detail": {
+        "fence": 1,
+        "holder_expire": 2010
+      }
+    },
+    {
+      "seq": 8,
+      "time_ms": 2010,
+      "event": "lock.expire",
+      "detail": {
+        "at": 2010,
+        "expire_at": 2010,
+        "fence": 1,
+        "holder": "A",
+        "lease_id": "lease-1"
+      }
+    },
+    {
+      "seq": 9,
+      "time_ms": 2030,
+      "event": "lock.grant",
+      "detail": {
+        "client": "B",
+        "expire_at": 4030,
+        "fence": 2,
+        "lease_id": "lease-2"
+      }
+    },
+    {
+      "seq": 10,
+      "time_ms": 2040,
+      "event": "client.granted",
+      "detail": {
+        "expire_at": 4030,
+        "fence": 2,
+        "lease_id": "lease-2"
+      }
+    },
+    {
+      "seq": 11,
+      "time_ms": 2120,
+      "event": "net.duplicate",
+      "detail": {
+        "copy_at": 2880,
+        "copy_gap": 50,
+        "msg": 34,
+        "original_at": 2830,
+        "rule": "duplicate"
+      }
+    },
+    {
+      "seq": 12,
+      "time_ms": 2610,
+      "event": "resource.commit",
+      "detail": {
+        "client": "B",
+        "fence": 2,
+        "req_id": "B:submit:3",
+        "value": "b-write-fence-2"
+      }
+    },
+    {
+      "seq": 13,
+      "time_ms": 2750,
+      "event": "lock.renew",
+      "detail": {
+        "client": "B",
+        "expire_at": 4750,
+        "fence": 2,
+        "lease_id": "lease-2"
+      }
+    },
+    {
+      "seq": 14,
+      "time_ms": 2760,
+      "event": "client.renewed",
+      "detail": {
+        "expire_at": 4750,
+        "fence": 2
+      }
+    },
+    {
+      "seq": 15,
+      "time_ms": 2830,
+      "event": "lock.renew.expired",
+      "detail": {
+        "client": "A",
+        "lease_id": "lease-1"
+      }
+    },
+    {
+      "seq": 16,
+      "time_ms": 2830,
+      "event": "lock.renew.expired",
+      "detail": {
+        "client": "A",
+        "lease_id": "lease-1"
+      }
+    },
+    {
+      "seq": 17,
+      "time_ms": 2840,
+      "event": "client.lost_lease",
+      "detail": {
+        "reason": "lease expired or unknown"
+      }
+    },
+    {
+      "seq": 18,
+      "time_ms": 2880,
+      "event": "lock.renew.expired",
+      "detail": {
+        "client": "A",
+        "lease_id": "lease-1"
+      }
+    },
+    {
+      "seq": 19,
+      "time_ms": 3110,
+      "event": "lock.release",
+      "detail": {
+        "client": "B",
+        "fence": 2,
+        "lease_id": "lease-2"
+      }
+    },
+    {
+      "seq": 20,
+      "time_ms": 3120,
+      "event": "client.released"
+    },
+    {
+      "seq": 21,
+      "time_ms": 3450,
+      "event": "net.duplicate",
+      "detail": {
+        "copy_at": 3510,
+        "copy_gap": 50,
+        "msg": 61,
+        "original_at": 3460,
+        "rule": "duplicate"
+      }
+    },
+    {
+      "seq": 22,
+      "time_ms": 3460,
+      "event": "resource.reject",
+      "detail": {
+        "client": "A",
+        "fence": 1,
+        "max_fence": 2,
+        "reason": "stale_fence",
+        "req_id": "A:submit:7"
+      }
+    },
+    {
+      "seq": 23,
+      "time_ms": 3470,
+      "event": "client.submit.rejected",
+      "detail": {
+        "max_fence": 2,
+        "reason": "stale_fence"
+      }
+    },
+    {
+      "seq": 24,
+      "time_ms": 3510,
+      "event": "resource.reject",
+      "detail": {
+        "client": "A",
+        "fence": 1,
+        "max_fence": 2,
+        "reason": "stale_fence",
+        "req_id": "A:submit:7"
+      }
+    },
+    {
+      "seq": 25,
+      "time_ms": 3520,
+      "event": "client.submit.rejected",
+      "detail": {
+        "max_fence": 2,
+        "reason": "stale_fence"
+      }
+    },
+    {
+      "seq": 26,
+      "time_ms": 4210,
+      "event": "lock.grant",
+      "detail": {
+        "client": "A",
+        "expire_at": 6210,
+        "fence": 3,
+        "lease_id": "lease-3"
+      }
+    },
+    {
+      "seq": 27,
+      "time_ms": 4220,
+      "event": "client.granted",
+      "detail": {
+        "expire_at": 6210,
+        "fence": 3,
+        "lease_id": "lease-3"
+      }
+    },
+    {
+      "seq": 28,
+      "time_ms": 4810,
+      "event": "resource.commit",
+      "detail": {
+        "client": "A",
+        "fence": 3,
+        "req_id": "A:submit:9",
+        "value": "a-write-fence-3"
+      }
+    },
+    {
+      "seq": 29,
+      "time_ms": 4930,
+      "event": "lock.renew",
+      "detail": {
+        "client": "A",
+        "expire_at": 6930,
+        "fence": 3,
+        "lease_id": "lease-3"
+      }
+    },
+    {
+      "seq": 30,
+      "time_ms": 4940,
+      "event": "client.renewed",
+      "detail": {
+        "expire_at": 6930,
+        "fence": 3
+      }
+    },
+    {
+      "seq": 31,
+      "time_ms": 5630,
+      "event": "lock.renew",
+      "detail": {
+        "client": "A",
+        "expire_at": 7630,
+        "fence": 3,
+        "lease_id": "lease-3"
+      }
+    },
+    {
+      "seq": 32,
+      "time_ms": 5640,
+      "event": "client.renewed",
+      "detail": {
+        "expire_at": 7630,
+        "fence": 3
+      }
+    }
+  ]
+}
