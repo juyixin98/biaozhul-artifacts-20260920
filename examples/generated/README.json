@@ -1,0 +1,7 @@
+{
+  "validator_address": "388fc01a200ed3aac4f7c58cc44d0edb5c2fb49d",
+  "public_key": "d5c985832aa00cd6a4557dcc4582686ea75ea168823e5271f06a1aac0ce8929d",
+  "chain_id": "chain-a-1",
+  "evidence_round": 3,
+  "note": "votes 10+11 (and 12+13) canonicalize to the SAME evidence id"
+}

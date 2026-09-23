@@ -1,0 +1,10 @@
+{
+  "chain_id": "chain-a-1",
+  "validator_address": "388fc01a200ed3aac4f7c58cc44d0edb5c2fb49d",
+  "height": 42,
+  "round": 3,
+  "vote_type": "prevote",
+  "block_hash": "b859b7bf80855e298d973ab37ae3f2a9ebbafe556dbb628c4d78fa0c5dba0f27",
+  "public_key": "d5c985832aa00cd6a4557dcc4582686ea75ea168823e5271f06a1aac0ce8929d",
+  "signature": "15e71b53039fbee54b770809edc110de375aa85817c5408629f452bef0c9dcfcaa738b4481576322c03ac095d1f0842df6ffbf748e91b12a3ff687ad3fff2809"
+}

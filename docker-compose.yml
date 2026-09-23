@@ -1,0 +1,21 @@
+# Optional: a throwaway PostgreSQL for a clean-machine run.
+# Usage: docker compose up -d db
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: epe
+      POSTGRES_PASSWORD: epe_dev_pw
+      POSTGRES_DB: epe
+    ports:
+      - "5432:5432"
+    volumes:
+      - epe_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U epe -d epe"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  epe_pgdata:
