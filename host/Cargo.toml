@@ -1,0 +1,39 @@
+[package]
+name = "batch-median-host"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+publish = false
+description = "Host: execute/prove a batch-median zkVM computation and only return verified results"
+
+[[bin]]
+name = "batch-median"
+path = "src/main.rs"
+
+[lib]
+name = "batch_median_host"
+path = "src/lib.rs"
+
+[dependencies]
+batch-median-core = { path = "../core" }
+batch-median-methods = { path = "../methods" }
+risc0-zkvm = { workspace = true, default-features = false, features = ["std", "client", "prove"] }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+clap = { version = "4", features = ["derive"] }
+hex = "0.4"
+bincode = "1.3"
+tempfile = "3"
+
+[dev-dependencies]
+assert_cmd = "2"
+predicates = "3"
+serde_json = { workspace = true, features = ["std", "alloc"] }
+
+[features]
+# Compile-time kill switch for development receipts. With this feature the
+# verifier is built with risc0's own `disable-dev-mode`; the default build
+# enforces the same policy at runtime (see verifier.rs).
+strict = ["risc0-zkvm/disable-dev-mode"]

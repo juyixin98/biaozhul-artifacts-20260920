@@ -1,0 +1,26 @@
+[workspace]
+resolver = "2"
+members = [
+    "core",
+    "methods",
+    "host",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+rust-version = "1.84"
+
+# RISC Zero 3.0.6 — must match the locally installed rzup/r0vm/cargo-risczero 3.0.6.
+[workspace.dependencies]
+risc0-zkvm = { version = "3.0.6", default-features = false }
+risc0-build = "3.0.6"
+serde = { version = "1", features = ["derive"], default-features = false }
+serde_json = { version = "1", default-features = false, features = ["std", "alloc"] }
+anyhow = "1"
+
+[profile.release-client-lto]
+inherits = "release"
+lto = "thin"
+codegen-units = 1

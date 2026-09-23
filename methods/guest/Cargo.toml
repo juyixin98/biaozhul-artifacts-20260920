@@ -1,0 +1,28 @@
+[package]
+name = "batch-median-guest"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+rust-version = "1.84"
+publish = false
+
+# Pin the binary name so risc0-build emits BATCH_MEDIAN_ELF / BATCH_MEDIAN_ID.
+[[bin]]
+name = "batch-median"
+path = "src/main.rs"
+
+[target.riscv32im-risc0-zkvm-elf.dependencies]
+risc0-zkvm = { version = "3.0.6", default-features = false, features = ["std"] }
+serde = { version = "1", default-features = false, features = ["alloc", "derive"] }
+
+[target.riscv32im-risc0-zkvm-elf.dependencies.batch-median-core]
+path = "../../core"
+default-features = false
+
+# risc0-build invokes a fresh `cargo` (rzup toolchain) on this directory; mark
+# it as its own workspace root so it is not folded into the host workspace.
+[workspace]
+
+# Keep the guest build reproducible and offline once locked.
+[profile.release]
+lto = "thin"

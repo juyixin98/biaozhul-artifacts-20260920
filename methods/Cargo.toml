@@ -1,0 +1,19 @@
+[package]
+name = "batch-median-methods"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+publish = false
+description = "Build-time build of the batch-median zkVM guest, embedding ELF and image ID"
+
+[dependencies]
+risc0-zkvm = { workspace = true, default-features = false, features = ["std", "client"] }
+
+[build-dependencies]
+risc0-build = { workspace = true }
+
+[package.metadata.risc0]
+# risc0-build compiles every crate under these directories for the zkVM target
+# using the locally installed rzup Rust toolchain, and emits methods.rs.
+methods = ["guest"]
