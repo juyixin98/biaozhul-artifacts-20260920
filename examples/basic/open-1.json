@@ -1,0 +1,7 @@
+{
+  "chain_id": "chain-a",
+  "channel_id": "orders",
+  "sender_pub_hex": [
+    "1ed0afa641446bbe87c5bffe11cab2ad599e0a674bf9f708a44874bd91250e39"
+  ]
+}

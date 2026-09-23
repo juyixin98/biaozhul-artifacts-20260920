@@ -1,0 +1,17 @@
+# Ordered playbook (relative request files)
+1. POST open-1.json    -> /v1/chains/chain-a/channels
+2. POST header-1.json  -> /headers (tip=1)
+3. POST header-2.json  -> /headers (tip=2)
+4. POST header-3.json  -> /headers (tip=3: block1 confirmed, block2..3 unconfirmed)
+5. POST message-1.json -> /messages (nonce1, confirmed)
+6. POST message-3.json -> /messages (nonce3, candidate, staged AHEAD of watermark)
+7. POST process       -> /v1/process (delivers nonce1 only; gap at 2 stops the prefix)
+8. POST message-2.json -> /messages (fills the gap; nonce2 still candidate until tip advances)
+9. POST process       -> /v1/process (still only nonce1 delivered: block2 unconfirmed)
+10. POST header-4.json -> /headers (tip=4: block2 confirmed)
+11. POST process      -> /v1/process (delivers nonce2; nonce3 still unconfirmed)
+12. POST header-5.json -> /headers (tip=5: block3 confirmed -> prefix 1,2,3 contiguous)
+13. POST process      -> /v1/process (delivers nonce3)
+14. POST message-1.json -> /messages (identical duplicate: idempotent, no second delivery)
+15. GET deliveries    -> /v1/chains/chain-a/channels/orders/deliveries (exactly 3 rows, attempts=1)
+

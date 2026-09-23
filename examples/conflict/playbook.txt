@@ -1,0 +1,11 @@
+# Ordered playbook (relative request files)
+1. POST open-1.json      -> /v1/chains/chain-a/channels
+2. POST header-1.json    -> /headers (block1, body A)
+3. POST header-2.json    -> /headers (A confirmed)
+4. POST message-A-1.json -> /messages
+5. POST header-3.json    -> /headers (A finalized; block3 also contains nonce1 body B)
+6. POST process         -> /v1/process (A executed: nonce 1 delivered)
+7. POST message-B-1.json -> /messages (CONFLICT vs executed body -> 409, channel FROZEN, critical alert; history NOT rewritten)
+8. GET  /v1/alerts      -> inspect the message_conflict_executed incident
+9. POST message-A-1.json -> /messages (now rejected: channel locked)
+

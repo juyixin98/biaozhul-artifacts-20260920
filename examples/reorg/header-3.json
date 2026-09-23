@@ -1,0 +1,9 @@
+{
+  "chain_id": "chain-b",
+  "height": 2,
+  "parent_hex": "b2f7edee144685d87dbc9274da81d42d757df602ea5f6ccfab5d236a6c5a62e7",
+  "msg_root_hex": "a450f39c0d1441c2e6386809270634fd275fccd2fa42198337877b69138f3ecf",
+  "timestamp": 1767225602,
+  "validator_pub_hex": "c933e64ff78db7f4e553576ed33aa1f7202370fc3b49e6fc0f0e41a16d10ae67",
+  "signature_hex": "b5b166d623a2a198c8e02e984bdaee8de96af8732675e4ffdc979c35bcda65786f6a18ccafe75698a13b6eb53e6a36a03d44163ae82daa9f6eb41b0733aa8706"
+}

@@ -1,0 +1,10 @@
+{
+  "chain_id": "chain-a",
+  "channel_id": "settle",
+  "nonce": 1,
+  "payload_hex": "626f64792d412070617920616c696365203130",
+  "sender_pub_hex": "27663f4dbf4082b539a0068c6a254b25cb0eef40d3ee1eea5d2c5409bef643a8",
+  "sender_sig_hex": "a6675c9d136c961cf195d01d89026754e03a2601e02f8d2584b8afbc1c84141140f77a2d594ec97e7f3ac17565ef56889960f77d005fcb2d02b1d5d48db31b03",
+  "block_hex": "c00a24f98fddcae6e838b79999362e46b89bed5d20f3941733ddd8f4c871b038",
+  "proof": []
+}

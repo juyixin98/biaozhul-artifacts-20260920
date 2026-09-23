@@ -1,0 +1,7 @@
+{
+  "chain_id": "chain-a",
+  "channel_id": "settle",
+  "sender_pub_hex": [
+    "27663f4dbf4082b539a0068c6a254b25cb0eef40d3ee1eea5d2c5409bef643a8"
+  ]
+}

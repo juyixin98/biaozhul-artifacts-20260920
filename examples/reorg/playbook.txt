@@ -1,0 +1,13 @@
+# Ordered playbook (relative request files)
+1. POST open-1.json        -> /v1/chains/chain-b/channels
+2. POST header-1.json      -> /headers (block1)
+3. POST header-2.json      -> /headers (block2 = unconfirmed tip, old nonce1)
+4. POST message-old-1.json -> /messages (candidate under unconfirmed tip)
+5. POST revoke-1.json      -> /revocations (tip revoked; candidate -> cancelled)
+6. POST message-old-1.json -> /messages (rejected: its block is no longer canonical)
+7. POST header-3.json      -> /headers (replacement block2 with new nonce1)
+8. POST message-new-1.json -> /messages (accepted under canonical block)
+9. POST header-4.json      -> /headers (extension; replacement still depth 1)
+10. POST header-5.json      -> /headers (replacement confirmed at depth 2)
+11. POST process           -> /v1/process (delivers the NEW nonce1 once; old stays cancelled)
+

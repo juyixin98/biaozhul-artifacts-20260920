@@ -1,0 +1,10 @@
+{
+  "chain_id": "chain-b",
+  "channel_id": "payments",
+  "nonce": 1,
+  "payload_hex": "6f6c642d7469702d7061796d656e74",
+  "sender_pub_hex": "17c9f433428cde27880aaa36c3d9acd75cf2318af44bc0f53190a0caddc38152",
+  "sender_sig_hex": "c4fc5e74712a1d0c3e882495d3e31c871d20116843f74eccb790c471785f7900d0b7ab22901a02a7cb6a9dad2d97532b68b7dcaf482caf9184eee39ba6c56600",
+  "block_hex": "f401a2ef6e7595ce0d2b879e40b76b9cabedb329b85c9bf7f67ce96143378ba9",
+  "proof": []
+}

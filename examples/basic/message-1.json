@@ -1,0 +1,10 @@
+{
+  "chain_id": "chain-a",
+  "channel_id": "orders",
+  "nonce": 1,
+  "payload_hex": "7b226f72646572223a226275792d31227d",
+  "sender_pub_hex": "1ed0afa641446bbe87c5bffe11cab2ad599e0a674bf9f708a44874bd91250e39",
+  "sender_sig_hex": "0f7642207df86bb43f83d4163ef7fd777f10a170a6fe1aa5e43dd0ac5851c35c8a04bed625d57ba84a0f688224e05f4179d077110612b1dcb72f1975df1bb70a",
+  "block_hex": "c505070d83880aea2eee168c6a015cb4e71167acac82c98d121a1217baf0130a",
+  "proof": []
+}

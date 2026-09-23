@@ -1,0 +1,7 @@
+{
+  "chain_id": "chain-b",
+  "channel_id": "payments",
+  "sender_pub_hex": [
+    "17c9f433428cde27880aaa36c3d9acd75cf2318af44bc0f53190a0caddc38152"
+  ]
+}
