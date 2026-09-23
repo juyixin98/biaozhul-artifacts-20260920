@@ -1,0 +1,6 @@
+# 编译产物
+build/
+*.class
+
+# JDK 压缩包（若下载到仓库内）
+jdk*.tar.gz

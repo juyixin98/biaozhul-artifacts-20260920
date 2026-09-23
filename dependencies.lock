@@ -1,0 +1,29 @@
+# 依赖锁定清单（dependencies lock）
+#
+# 本项目刻意保持“零第三方依赖”：不依赖 JUnit、Maven、Gradle 或任何外部 jar，
+# 因此不存在需要下载/锁定版本的外部构件。构建仅使用 JDK 自带的 javac，
+# HTTP 服务仅使用 JDK 内置的 com.sun.net.httpserver.HttpServer
+# （JDK 模块 jdk.httpserver，随 JDK 提供）。
+#
+# 唯一的工具链依赖：
+toolchain:
+  name: JDK
+  minimum_version: "17"
+  tested_version: "Temurin OpenJDK 17.0.20.1 (build 17.0.20.1+1)"
+  vendor_lock_note: >
+    任意兼容 Java SE 17 的发行版均可（Temurin/Oracle/OpenJDK…）；
+    本仓库实际测试使用 Temurin 17.0.20.1。
+  language_features:
+    - records
+    - switch expressions (JEP 361)
+    - text blocks (JEP 378)
+  modules_used:
+    - java.base
+    - jdk.httpserver   # com.sun.net.httpserver.HttpServer
+    - java.net.http    # 仅测试端到端 HTTP 调用时使用
+
+runtime_dependencies: []   # 运行时无任何外部 jar
+build_dependencies: []     # 编译期无任何外部 jar
+test_dependencies: []      # 测试使用自带的极简断言框架（test/intervalindex/Check.java）
+
+lockfile_generated_for: "text16/b interval-overlap-index"
