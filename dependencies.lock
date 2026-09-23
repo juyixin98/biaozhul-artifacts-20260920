@@ -1,0 +1,22 @@
+# 锁定依赖（Dependency Lockfile）
+#
+# 本项目刻意做到“零第三方依赖”：除 JDK 外不下载、不引用任何库，
+# 因此没有 Maven/Gradle 坐标需要锁定，也不存在供应链上的可变版本。
+# JSON 编解码、HTTP 服务、持久化全部使用 JDK 自带 API。
+#
+# 唯一受版本约束的运行条件如下（在本机实际验证通过）：
+
+java == 17
+# 验证命令: java -version
+# 实际版本: openjdk 17.0.20.1 (build 17.0.20.1+1-1-24.04-Ubuntu)
+# 兼容范围: Java 17+（源码仅使用 17 标准 API；未使用预览/孵化特性）
+
+# 仅使用的 JDK 模块（均为 java.base，无需 --add-modules）：
+jdk-module = java.base
+#   - com.sun.net.httpserver.HttpServer   (内置 HTTP 服务)
+#   - java.nio.channels.FileChannel       (WAL 追加 + force/fsync)
+#   - java.net.http.HttpClient            (仅测试使用)
+#   - 集合 / 并发 / 正则等基础类
+
+# 第三方依赖：无（0 个 jar）
+third-party-jars = 0
