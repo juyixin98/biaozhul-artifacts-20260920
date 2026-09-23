@@ -1,0 +1,1 @@
+{"channel_id": "payments", "payload": {"kind": "transfer", "from": "carol", "to": "dave", "amount": 42, "currency": "EUR"}}
