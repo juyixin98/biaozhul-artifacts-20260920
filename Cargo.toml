@@ -1,0 +1,22 @@
+[package]
+name = "cas-repo"
+version = "0.1.0"
+edition = "2021"
+description = "Content-addressable block repository with file-backed storage and local HTTP verification entry"
+license = "MIT"
+
+[[bin]]
+name = "cas-repo"
+path = "src/main.rs"
+
+[lib]
+name = "cas_repo"
+path = "src/lib.rs"
+
+[profile.release]
+panic = "unwind"
+
+# Zero third-party dependencies on purpose: the HTTP server, JSON, base64 and
+# SHA-256 implementations in this crate are all hand-rolled so the project can
+# be built and audited offline.
+[dependencies]

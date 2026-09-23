@@ -1,0 +1,130 @@
+### cas-repo HTTP 请求样例
+###
+### 约定：服务器在 127.0.0.1:8080，块大小上限 32 MiB。
+### 同时给出等价 curl（以 # 开头的行不是 HTTP 报文，仅作说明）。
+### <sha...> 形式的占位符请替换为上一步返回的真实摘要。
+
+### ── 健康检查 ──────────────────────────────────────────────
+# curl -s http://127.0.0.1:8080/health
+GET /health HTTP/1.1
+Host: 127.0.0.1:8080
+
+### ── 上传块（原始字节）────────────────────────────────────
+# printf 'hello from leaf one' | curl -s -X POST --data-binary @- \
+#   http://127.0.0.1:8080/blocks
+POST /blocks HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/octet-stream
+Content-Length: 19
+
+hello from leaf one
+
+### 上传同一块 → deduplicated:true（响应里同一摘要）
+POST /blocks HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/octet-stream
+Content-Length: 19
+
+hello from leaf one
+
+### 上传块并声明期望摘要（不符返回 422 hash_mismatch，块不落盘）
+POST /blocks HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/octet-stream
+X-Content-Sha256: 0000000000000000000000000000000000000000000000000000000000000000
+Content-Length: 19
+
+hello from leaf one
+
+### ── JSON 信封上传（base64 + 声明哈希 + 引用）──────────────
+# 下面 data_b64 是 "manifest payload" 的标准 base64。
+# hash 可选；refs 为被引用块摘要数组（允许前向引用）。
+# MANIFEST_B64=$(printf '%s' 'manifest payload' | base64 -w0)
+POST /blocks HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+Content-Length: 132
+
+{"data_b64":"bWFuaWZlc3QgcGF5bG9hZA==","hash":"2f1bdba6a60e22ce593bee4251ae31a9c1d053c3d8a3d5d6777d947f9462a26a","refs":["<leaf1-sha256>","<leaf2-sha256>"]}
+
+### 期望成功响应（hash 以实算为准）：
+### {"hash":"<sha256>","deduplicated":false,"refs_count":2,"size":16}
+
+### ── 读取块（原始字节；响应头回带 X-Content-Sha256，服务端重新校验）──
+# curl -s http://127.0.0.1:8080/blocks/<sha256>
+GET /blocks/<sha256> HTTP/1.1
+Host: 127.0.0.1:8080
+
+### 磁盘字节与地址不符时：
+### HTTP/1.1 409 Conflict
+### {"error":"corrupt_block","message":"<hash>: stored bytes do not hash to their address"}
+
+### ── 块元信息（是否存在 + 引用列表）────────────────────────
+GET /blocks/<sha256>/info HTTP/1.1
+Host: 127.0.0.1:8080
+
+### {"hash":"<sha256>","present":true,"refs":["<leaf1-sha256>"]}
+
+### ── 原子发布根 main（JSON）──────────────────────────────
+PUT /roots/main HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+Content-Length: 39
+
+{"hash":"<manifest-sha256>"}
+
+### 目标块必须存在，否则：
+### HTTP/1.1 404 Not Found
+### {"error":"not_found","message":"block <hash> referenced by new root main"}
+
+### 也可以直接放裸摘要：
+# curl -s -X PUT --data-binary '<manifest-sha256>' http://127.0.0.1:8080/roots/main
+
+### ── 乐观并发：带 If-Match，版本不符返回 409 ───────────────
+# 第一次：当前版本 1，条件匹配成功，升到版本 2
+PUT /roots/main HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+If-Match: 1
+Content-Length: 39
+
+{"hash":"<other-block-sha256>"}
+
+# 同样的 If-Match:1 再发一次（现在当前版本是 2）→
+# HTTP/1.1 409 Conflict
+# {"error":"version_conflict","message":"root main: expected 1, actual 2"}
+
+### ── 列出根 / 读单个根 / 删除根 ────────────────────────────
+GET /roots HTTP/1.1
+Host: 127.0.0.1:8080
+
+GET /roots/main HTTP/1.1
+Host: 127.0.0.1:8080
+
+# curl -s -X DELETE http://127.0.0.1:8080/roots/main
+DELETE /roots/main HTTP/1.1
+Host: 127.0.0.1:8080
+
+### ── 造一个孤儿块，然后 GC ────────────────────────────────
+# 1) 上传一块但不挂到任何根；2) POST /gc
+POST /gc HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Length: 0
+
+### 期望（孤儿被回收，可达块保留）：
+### {"roots_scanned":1,"blocks_before":4,"blocks_live":3,"blocks_removed":1,
+###  "bytes_removed":34,"removed":["<orphan-sha256>"],
+###  "missing_references":[],"corrupt_blocks":[],"warnings":[]}
+
+### ── 缺失引用：父块引用从未上传的幽灵块，父块仍可达 ───────
+# 上传 {"data_b64":"...","refs":["<ghost-sha256>"]} 并把父块挂到根 other，
+# 再 POST /gc：
+### {"blocks_live":4,"blocks_removed":0,
+###  "missing_references":[{"parent":"<parent-sha256>","missing":"<ghost-sha256>"}],
+###  "corrupt_blocks":[]}
+
+### ── 统计信息 ────────────────────────────────────────────
+GET /stats HTTP/1.1
+Host: 127.0.0.1:8080
+
+### {"roots":2,"blocks":5,"block_bytes":242}
