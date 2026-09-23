@@ -1,0 +1,11 @@
+{
+  "_comment": "零方向分量：dir=(0,1,0)，x/z 坐标恒定且在 slab 内，沿 y 轴穿入盒；t_enter=3, t_exit=4",
+  "mode": "nearest",
+  "ray": {
+    "origin": [0.5, -3, 0.5],
+    "direction": [0, 1, 0]
+  },
+  "boxes": [
+    { "id": 1, "min": [0, 0, 0], "max": [1, 1, 1] }
+  ]
+}

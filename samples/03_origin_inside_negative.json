@@ -1,0 +1,11 @@
+{
+  "_comment": "起点在盒内（1,1,1），朝负方向；应 inside=true、t_enter=0、t_exit=1",
+  "mode": "nearest",
+  "ray": {
+    "origin": [1, 1, 1],
+    "direction": [-1, 0, 0]
+  },
+  "boxes": [
+    { "id": 7, "min": [0, 0, 0], "max": [2, 2, 2] }
+  ]
+}

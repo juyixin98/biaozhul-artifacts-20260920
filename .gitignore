@@ -1,0 +1,11 @@
+# 构建产物
+/build/
+/ray_box_backend
+/test_ray_box
+
+# 编辑器/系统
+*.o
+*.a
+*.so
+.DS_Store
+*~

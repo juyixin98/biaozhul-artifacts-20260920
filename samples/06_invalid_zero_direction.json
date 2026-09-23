@@ -1,0 +1,11 @@
+{
+  "_comment": "非法请求示例：射线方向为零向量。预期退出码 2，响应 ok=false。",
+  "mode": "nearest",
+  "ray": {
+    "origin": [0, 0, 0],
+    "direction": [0, 0, 0]
+  },
+  "boxes": [
+    { "id": 1, "min": [0, 0, 0], "max": [1, 1, 1] }
+  ]
+}
