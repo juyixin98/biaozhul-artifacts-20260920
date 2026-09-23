@@ -1,0 +1,28 @@
+{
+  "description": "滑动 ROWS 窗口求和：每行取前 1 行到后 1 行；含负值与 NULL，首末行自动按分区边界裁剪",
+  "data": {
+    "columns": [
+      {"name": "day", "type": "STRING"},
+      {"name": "balance_delta", "type": "LONG"}
+    ],
+    "rows": [
+      ["d1", 100],
+      ["d2", -30],
+      ["d3", -70],
+      ["d4", null],
+      ["d5", 25]
+    ]
+  },
+  "plan": {
+    "window": {
+      "orderBy": [
+        {"column": "day", "direction": "ASC", "nullOrder": "FIRST"}
+      ],
+      "frame": "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING"
+    },
+    "functions": [
+      {"function": "ROW_NUMBER", "alias": "rn"},
+      {"function": "SUM", "column": "balance_delta", "alias": "moving_sum"}
+    ]
+  }
+}

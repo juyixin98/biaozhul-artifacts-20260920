@@ -1,0 +1,20 @@
+{
+  "description": "错误样例：累计和超出 64 位有符号整数范围，引擎应返回 ok=false 与 OVERFLOW 错误码（退出码 2）",
+  "data": {
+    "columns": [
+      {"name": "v", "type": "LONG"}
+    ],
+    "rows": [
+      [9223372036854775807],
+      [1]
+    ]
+  },
+  "plan": {
+    "window": {
+      "orderBy": [{"column": "v", "direction": "ASC", "nullOrder": "FIRST"}]
+    },
+    "functions": [
+      {"function": "SUM", "column": "v", "alias": "overflow_sum"}
+    ]
+  }
+}

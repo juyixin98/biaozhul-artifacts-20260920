@@ -1,0 +1,28 @@
+{
+  "description": "累计求和（默认帧 UNBOUNDED PRECEDING .. CURRENT ROW）+ 结果导出到 build/sample-export/",
+  "export": "build/sample-export",
+  "data": {
+    "columns": [
+      {"name": "region", "type": "STRING"},
+      {"name": "amount", "type": "LONG"}
+    ],
+    "rows": [
+      ["east", 5],
+      ["west", -2],
+      ["east", 3],
+      ["west", 10],
+      ["east", -8]
+    ]
+  },
+  "plan": {
+    "window": {
+      "partitionBy": ["region"],
+      "orderBy": [{"column": "amount", "direction": "ASC", "nullOrder": "FIRST"}]
+    },
+    "functions": [
+      {"function": "ROW_NUMBER", "alias": "rn"},
+      {"function": "RANK", "alias": "rk"},
+      {"function": "SUM", "column": "amount", "alias": "cumulative_sum"}
+    ]
+  }
+}

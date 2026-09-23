@@ -1,0 +1,30 @@
+{
+  "description": "ROW_NUMBER / RANK：部门内按销售额降序排名，含并列与 NULL",
+  "data": {
+    "columns": [
+      {"name": "name", "type": "STRING"},
+      {"name": "dept", "type": "STRING"},
+      {"name": "sales", "type": "LONG"}
+    ],
+    "rows": [
+      ["张伟", "华东", 100],
+      ["李娜", "华东", 100],
+      ["王强", "华东", 80],
+      ["赵敏", "华北", 90],
+      ["陈杰", "华北", null],
+      ["刘洋", "华北", 90]
+    ]
+  },
+  "plan": {
+    "window": {
+      "partitionBy": ["dept"],
+      "orderBy": [
+        {"column": "sales", "direction": "DESC", "nullOrder": "LAST"}
+      ]
+    },
+    "functions": [
+      {"function": "ROW_NUMBER", "alias": "rn"},
+      {"function": "RANK", "alias": "rk"}
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+# 编译产物
+build/
+out/
+*.class
+
+# 临时文件
+*.log
+*.tmp
