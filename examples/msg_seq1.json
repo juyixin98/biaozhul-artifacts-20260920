@@ -1,0 +1,14 @@
+{
+  "source_chain": "chainA",
+  "channel": "demo",
+  "sequence": 1,
+  "block_hash": "0x8f87b2c2813028e921eb13db48d86358a984b58e73155f10086784388d95af48",
+  "body": {
+    "amount": 25,
+    "to": "bob",
+    "type": "transfer"
+  },
+  "body_digest": "0x132fca954a18455d1ec4c8c581ea83fb0506bc12761315fa4b36f31dcf5773f2",
+  "signer": "0xc4d0caf001ce7f204ec8116935db6997e50c3a03da8568690c6b9ce35267c7a3",
+  "signature": "0x9153321701586770d2705430259c154093df2815a83d355d70c88101e271e9b3ca9b043189a949c8c9fcce7f83cea5c6bca52eaa383446248553370afaf25707"
+}

@@ -1,0 +1,14 @@
+{
+  "source_chain": "chainA",
+  "channel": "demo",
+  "sequence": 0,
+  "block_hash": "0x083bbb64f7728ab29f69569443c967623a3fb1af2ddf5b5c953e3e6a197c257e",
+  "body": {
+    "amount": 999,
+    "to": "mallory",
+    "type": "transfer"
+  },
+  "body_digest": "0xc5e379c69a3dd205d974b69070b32a21de0149442904c5c335e74b6deaaddc8c",
+  "signer": "0xc4d0caf001ce7f204ec8116935db6997e50c3a03da8568690c6b9ce35267c7a3",
+  "signature": "0x5ac606be03e45ba40c62e3db4ccec1c907a10ba7096d58c1205b9940b8583abdf3c6f659a5f4beb0c29e25a71e950f9799b950db98fac698b52d9393bf8d070c"
+}

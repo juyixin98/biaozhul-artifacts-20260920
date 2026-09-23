@@ -1,0 +1,14 @@
+{
+  "source_chain": "chainA",
+  "channel": "demo",
+  "sequence": 0,
+  "block_hash": "0x083bbb64f7728ab29f69569443c967623a3fb1af2ddf5b5c953e3e6a197c257e",
+  "body": {
+    "amount": 100,
+    "to": "alice",
+    "type": "transfer"
+  },
+  "body_digest": "0x7d9e732bffa997a0c08f2d9126f675ab4d2ec427bb7be5f967016e660a8a2f2f",
+  "signer": "0xc4d0caf001ce7f204ec8116935db6997e50c3a03da8568690c6b9ce35267c7a3",
+  "signature": "0x71c93a147c8a13c5de020eb88e7c56b464343d620ad9d36284eb800c786fbd87c6028e27348447c32c88466772c110998736ed1cd35d20bd4d134e7947c64202"
+}
