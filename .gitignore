@@ -1,0 +1,13 @@
+# Build output
+build/
+*.class
+
+# Logs / scratch
+*.log
+/tmp/
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
+*.iml

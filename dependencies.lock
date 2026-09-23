@@ -1,0 +1,21 @@
+# Dependency lock file
+#
+# This project intentionally has ZERO third-party dependencies.
+#
+# Build tool : none (plain `javac` driven by scripts/build.sh)
+# Runtime    : JDK only — com.sun.net.httpserver.HttpServer, java.net.http,
+#              java.util.concurrent, java.nio (all standard modules)
+# JSON       : hand-written minimal parser/writer in src/main/java/qsummary/Json.java
+#
+# Toolchain (tested / pinned):
+#   OpenJDK 17.0.20 (build 17.0.20.1+1-1-24.04-Ubuntu), Linux x86_64
+#
+# Reproducibility: no artifacts are downloaded; any JDK 17+ toolchain builds
+# and runs the project offline. There is therefore no checksum list because
+# there are no external artifacts.
+#
+# To introduce a dependency later, add it here with an exact version and a
+# SHA-256 checksum, and wire it into scripts/build.sh with an explicit
+# classpath (no implicit/version-range resolution).
+runtime-jdk: 17+
+third-party-dependencies: []

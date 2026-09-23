@@ -1,0 +1,102 @@
+
+=== health ===
+{"status":"ok"}
+
+=== create three shards with the SAME epsilon (required for merge) ===
+
+=== stream 1..300000 into shard-eu ===
+{"id":"shard-eu","count":300000,"storedTuples":121,"errorBoundRank":3000}
+
+=== batch JSON observations into shard-us (heavy tail) and shard-ap (ties) ===
+{"id":"shard-us","count":200000,"storedTuples":266,"errorBoundRank":2000}
+{"id":"shard-ap","count":150000,"storedTuples":670,"errorBoundRank":1500}
+
+=== quantiles of the EU shard ===
+[
+  {
+    "q": 0.5,
+    "value": 149950.0,
+    "estimatedRank": 149950,
+    "errorBoundRank": 3000
+  },
+  {
+    "q": 0.9,
+    "value": 268550.0,
+    "estimatedRank": 268550,
+    "errorBoundRank": 3000
+  },
+  {
+    "q": 0.99,
+    "value": 296950.0,
+    "estimatedRank": 296950,
+    "errorBoundRank": 3000
+  },
+  {
+    "q": 0.999,
+    "value": 299950.0,
+    "estimatedRank": 299950,
+    "errorBoundRank": 3000
+  }
+]
+
+=== rank / CDF of a value on the US shard ===
+{"value":3.0,"estimatedRank":139881,"cdf":0.699405,"errorBoundRank":2000,"count":200000}
+
+=== export the EU snapshot and re-import it under a new id ===
+{"id":"shard-eu-copy","count":300000,"storedTuples":121}
+
+=== merge the three shards into a NEW summary ===
+{"id":"orders-all","count":650000,"storedTuples":472,"errorBoundRank":6500}
+
+=== quantiles of the merged union ===
+[
+  {
+    "q": 0.5,
+    "value": 9.0,
+    "estimatedRank": 328777,
+    "errorBoundRank": 6500
+  },
+  {
+    "q": 0.9,
+    "value": 228550.0,
+    "estimatedRank": 582050,
+    "errorBoundRank": 6500
+  },
+  {
+    "q": 0.99,
+    "value": 291050.0,
+    "estimatedRank": 644550,
+    "errorBoundRank": 6500
+  },
+  {
+    "q": 0.999,
+    "value": 296950.0,
+    "estimatedRank": 648475,
+    "errorBoundRank": 6500
+  },
+  {
+    "q": 1.0,
+    "value": 300000.0,
+    "estimatedRank": 650000,
+    "errorBoundRank": 6500
+  }
+]
+
+=== min/max are preserved exactly through merge ===
+{"q":0.0,"value":0.0,"estimatedRank":27083,"errorBoundRank":6500}
+{"q":1.0,"value":300000.0,"estimatedRank":650000,"errorBoundRank":6500}
+
+=== merge with a DIFFERENT epsilon is rejected (HTTP 422) ===
+HTTP 422
+{"status":422,"error":"cannot merge: epsilon mismatch at position 1 (0.0200000 vs 0.0100000)"}
+
+=== list all summaries ===
+{"id":"shard-eu-copy","count":300000,"storedTuples":121}
+{"id":"shard-ap","count":150000,"storedTuples":670}
+{"id":"shard-us","count":200000,"storedTuples":266}
+{"id":"wrong-eps","count":3,"storedTuples":3}
+{"id":"shard-eu","count":300000,"storedTuples":121}
+{"id":"orders-all","count":650000,"storedTuples":472}
+
+=== cleanup ===
+deleted example summaries
