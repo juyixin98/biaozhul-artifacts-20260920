@@ -1,0 +1,309 @@
+{
+  "ok": true,
+  "enumeration": {
+    "tracesRun": 583,
+    "maxDepth": 3,
+    "statesSeen": 114,
+    "exhausted": true
+  },
+  "figure8": {
+    "buggy": {
+      "ok": false,
+      "result": {
+        "violation": {
+          "kind": "committed-prefix-conflict",
+          "tick": 83,
+          "step": 105,
+          "message": "committed entries conflict at index 1: node 1 committed (t1,\"SET k x\") but other nodes committed different entries: {node 1: term=1 cmd=\"SET k x\"} {node 5: term=2 cmd=\"SET k y\"} ",
+          "index": 1,
+          "prefixes": {
+            "1": [
+              {
+                "term": 1,
+                "command": "SET k x"
+              }
+            ],
+            "5": [
+              {
+                "term": 2,
+                "command": "SET k y"
+              },
+              {
+                "term": 4,
+                "command": "SET k z"
+              }
+            ]
+          }
+        },
+        "finalTick": 83,
+        "leader": -1
+      },
+      "traceLength": 116
+    },
+    "correct": {
+      "ok": true,
+      "result": {
+        "finalTick": 92,
+        "leader": 5
+      },
+      "traceLength": 118
+    },
+    "replay": {
+      "ok": true,
+      "reproducedIndex": 1,
+      "reproducedKind": "committed-prefix-conflict"
+    },
+    "shrunk": {
+      "ok": true,
+      "originalLen": 116,
+      "shrunkLen": 74,
+      "trace": [
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "propose",
+          "node": 1,
+          "command": "SET k x"
+        },
+        {
+          "op": "setGroup",
+          "node": 3,
+          "group": "R"
+        },
+        {
+          "op": "setGroup",
+          "node": 4,
+          "group": "R"
+        },
+        {
+          "op": "setGroup",
+          "node": 5,
+          "group": "R"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "propose",
+          "node": 5,
+          "command": "SET k y"
+        },
+        {
+          "op": "setGroup",
+          "node": 1,
+          "group": "L"
+        },
+        {
+          "op": "setGroup",
+          "node": 2,
+          "group": "L"
+        },
+        {
+          "op": "setGroup",
+          "node": 4,
+          "group": "L"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "setGroup",
+          "node": 3,
+          "group": "A"
+        },
+        {
+          "op": "setGroup",
+          "node": 4,
+          "group": "A"
+        },
+        {
+          "op": "setGroup",
+          "node": 5,
+          "group": "A"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "releaseStale",
+          "note": "deliver all messages delayed by partitions"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        },
+        {
+          "op": "tick"
+        }
+      ]
+    }
+  }
+}

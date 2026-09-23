@@ -1,0 +1,6 @@
+# local run artifacts
+/tmp/
+tmp/
+*.test
+*.out
+raft-data/

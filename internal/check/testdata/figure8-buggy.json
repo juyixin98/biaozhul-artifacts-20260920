@@ -1,0 +1,395 @@
+[
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "propose",
+    "node": 1,
+    "command": "SET k x"
+  },
+  {
+    "op": "setGroup",
+    "node": 1,
+    "group": "L"
+  },
+  {
+    "op": "setGroup",
+    "node": 2,
+    "group": "L"
+  },
+  {
+    "op": "setGroup",
+    "node": 3,
+    "group": "R"
+  },
+  {
+    "op": "setGroup",
+    "node": 4,
+    "group": "R"
+  },
+  {
+    "op": "setGroup",
+    "node": 5,
+    "group": "R"
+  },
+  {
+    "op": "stop",
+    "node": 1
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "setGroup",
+    "node": 4,
+    "group": "X"
+  },
+  {
+    "op": "propose",
+    "node": 5,
+    "command": "SET k y"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "stop",
+    "node": 5
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "setGroup",
+    "node": 1,
+    "group": "L"
+  },
+  {
+    "op": "setGroup",
+    "node": 2,
+    "group": "L"
+  },
+  {
+    "op": "setGroup",
+    "node": 4,
+    "group": "L"
+  },
+  {
+    "op": "setGroup",
+    "node": 3,
+    "group": "Z"
+  },
+  {
+    "op": "start",
+    "node": 1
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "stop",
+    "node": 1
+  },
+  {
+    "op": "setGroup",
+    "node": 1,
+    "group": "P1"
+  },
+  {
+    "op": "setGroup",
+    "node": 2,
+    "group": "A"
+  },
+  {
+    "op": "setGroup",
+    "node": 3,
+    "group": "A"
+  },
+  {
+    "op": "setGroup",
+    "node": 4,
+    "group": "A"
+  },
+  {
+    "op": "setGroup",
+    "node": 5,
+    "group": "A"
+  },
+  {
+    "op": "start",
+    "node": 5
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "propose",
+    "node": 5,
+    "command": "SET k z"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "setGroup",
+    "node": 1,
+    "group": "A"
+  },
+  {
+    "op": "start",
+    "node": 1
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "releaseStale",
+    "note": "deliver all messages delayed by partitions"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  },
+  {
+    "op": "tick"
+  }
+]

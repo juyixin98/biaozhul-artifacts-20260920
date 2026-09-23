@@ -1,0 +1,29 @@
+# 软件版本
+go version go1.23.4 linux/amd64
+
+# go test -race -count=1 ./...
+?   	raftlab/cmd/tracegen	[no test files]
+?   	raftlab/cmd/verify	[no test files]
+ok  	raftlab/cmd/server	1.064s
+ok  	raftlab/internal/check	1.447s
+ok  	raftlab/internal/raft	1.017s
+ok  	raftlab/internal/sim	1.017s
+
+# go vet ./...
+vet OK
+
+# gofmt -l .
+gofmt clean
+
+# go run ./cmd/verify
+Raft lab — acceptance run
+=========================
+enumeration: 583 traces, 114 distinct states, exhausted=true, violations=0
+figure-8 correct implementation: ok=true (final tick 92, leader 5)
+figure-8 buggy implementation: counterexample found
+  violation: committed-prefix-conflict @ tick 83 index 1
+  detail: committed entries conflict at index 1: node 1 committed (t1,"SET k x") but other nodes committed different entries: {node 1: term=1 cmd="SET k x"} {node 5: term=2 cmd="SET k y"} 
+counterexample JSON replay: ok=true kind=committed-prefix-conflict index=1
+counterexample shrink: ok=true (116 -> 74 actions)
+
+RESULT: PASS — all acceptance criteria met
