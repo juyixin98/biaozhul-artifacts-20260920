@@ -1,0 +1,29 @@
+{
+  "events": [
+    {
+      "id": "evt-b1",
+      "type": "payment",
+      "eventTime": "2026-09-23T09:30:00Z",
+      "data": { "amount": 150, "currency": "USD", "region": "us-east-1" }
+    },
+    {
+      "id": "evt-b2",
+      "type": "payment",
+      "eventTime": "2026-09-23T10:30:00Z",
+      "data": { "amount": 250, "currency": "EUR", "region": "eu-central-1" }
+    },
+    {
+      "id": "evt-b3",
+      "type": "payment",
+      "eventTime": "2026-09-23T10:30:00Z",
+      "data": { "amount": 90, "currency": "GBP", "region": "eu-west-2",
+                "flags": { "whitelisted": true } }
+    },
+    {
+      "id": "evt-b4",
+      "type": "payment",
+      "eventTime": "2026-09-23T10:30:00Z",
+      "data": { "amount": 500, "currency": "JPY" }
+    }
+  ]
+}

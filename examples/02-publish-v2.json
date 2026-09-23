@@ -1,0 +1,36 @@
+{
+  "versionId": "v2",
+  "effectiveFrom": "2026-09-23T10:00:00Z",
+  "description": "hot update: relax amount threshold from 100 to 200",
+  "rules": [
+    {
+      "id": "big-amount",
+      "name": "amount-above-threshold",
+      "eventType": "payment",
+      "action": "BLOCK",
+      "enabled": true,
+      "condition": {
+        "op": "all",
+        "conditions": [
+          { "op": "gte", "field": "amount", "value": 200 },
+          {
+            "op": "any",
+            "conditions": [
+              { "op": "eq", "field": "currency", "value": "USD" },
+              { "op": "in", "field": "currency", "values": ["EUR", "GBP"] }
+            ]
+          },
+          { "op": "notExists", "field": "flags.whitelisted" }
+        ]
+      }
+    },
+    {
+      "id": "eu-region",
+      "name": "eu-region-review",
+      "eventType": "payment",
+      "action": "REVIEW",
+      "enabled": true,
+      "condition": { "op": "startsWith", "field": "region", "value": "eu" }
+    }
+  ]
+}

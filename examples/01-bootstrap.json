@@ -1,0 +1,35 @@
+{
+  "versionId": "v1",
+  "description": "initial rule set: block payments with amount >= 100",
+  "rules": [
+    {
+      "id": "big-amount",
+      "name": "amount-above-threshold",
+      "eventType": "payment",
+      "action": "BLOCK",
+      "enabled": true,
+      "condition": {
+        "op": "all",
+        "conditions": [
+          { "op": "gte", "field": "amount", "value": 100 },
+          {
+            "op": "any",
+            "conditions": [
+              { "op": "eq", "field": "currency", "value": "USD" },
+              { "op": "in", "field": "currency", "values": ["EUR", "GBP"] }
+            ]
+          },
+          { "op": "notExists", "field": "flags.whitelisted" }
+        ]
+      }
+    },
+    {
+      "id": "eu-region",
+      "name": "eu-region-review",
+      "eventType": "payment",
+      "action": "REVIEW",
+      "enabled": true,
+      "condition": { "op": "startsWith", "field": "region", "value": "eu" }
+    }
+  ]
+}
