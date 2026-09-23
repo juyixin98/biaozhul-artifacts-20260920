@@ -1,0 +1,1 @@
+{"source": "fn make(start) {\n  return fn() { start = start + 1; return start; };\n}\nlet a = make(10);\nprint(a());\nprint(a());", "filename": "escape.slang"}

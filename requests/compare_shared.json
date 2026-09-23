@@ -1,0 +1,1 @@
+{"source": "fn make_pair() {\n  let n = 0;\n  let inc = fn() { n = n + 1; return n; };\n  let dec = fn() { n = n - 1; return n; };\n  return fn(op) {\n    if (op == 0) { return inc(); }\n    return dec();\n  };\n}\nlet p = make_pair();\nprint(p(0));\nprint(p(0));\nprint(p(1));\nprint(p(1));\nprint(p(0));", "filename": "shared_closure.slang"}

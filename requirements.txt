@@ -1,0 +1,2 @@
+# Slang toolchain has no third-party dependencies.
+# Python 3.10+ standard library only (developed on 3.12).
