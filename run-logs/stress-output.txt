@@ -1,0 +1,2 @@
+committed count=100 expected=100
+STRESS PASS: exactly-once, gapless, per-seq id/status correct

@@ -1,0 +1,90 @@
+
+[test] health + partitions listing
+  PASS health 200
+  PASS health status ok
+  PASS list partitions 200
+
+[test] ordered commit: settled later events wait behind a slow head
+  PASS no results while head unsettled (got 0)
+  PASS long-poll stayed blocked until the slow head settled (unblocked 414ms after submit, e2/e3 settled ~50-100ms)
+  PASS commit order = input order (seqs expected [0, 1, 2] got [0, 1, 2])
+  PASS entry[0] is the slow first event
+  PASS entry[1] is second
+  PASS entry[2] is third
+  PASS head committed SUCCEEDED
+  PASS head value echoed
+  PASS head committed only after its 500ms work
+  PASS second committed no earlier than head
+    (e2/e3 settled early but waited behind e1; barrier opened at +510ms)
+
+[test] acceptance: first event TIMES OUT while later ones finish first
+  PASS timeout head still commits in seq order (seqs expected [0, 1, 2] got [0, 1, 2])
+  PASS exhausted head committed as TIMED_OUT placeholder
+  PASS placeholder carries an error detail
+  PASS placeholder records 2 attempts
+  PASS fast-1 success behind placeholder
+  PASS fast-2 success behind placeholder
+  PASS timeout retried across the full budget (elapsed=576ms)
+  PASS hung attempt was cut off by the deadline, not run to 5000ms
+    (head placeholder committed after 576ms; later events had settled long before)
+
+[test] acceptance: retry-exhausted failure placeholder keeps position
+  PASS placeholders and success in input order (seqs expected [0, 1, 2] got [0, 1, 2])
+  PASS seq0 FAILED placeholder
+  PASS placeholder error preserved
+  PASS seq0 used both attempts
+  PASS seq1 FAILED placeholder
+  PASS seq1 had no retries
+  PASS seq2 SUCCEEDED despite earlier failures
+
+[test] acceptance: in-flight buffer cap rejects overflow with 503
+  PASS 503 explains the cap
+  PASS 503 explains the cap
+  PASS exactly maxInFlight=3 admitted (got 3)
+  PASS overflowing submits rejected (got 2)
+  PASS status exposes inFlightLimit
+  PASS status exposes concurrencyLimit
+  PASS status admitted=3 while busy
+  PASS capacity freed after commit
+
+[test] acceptance: buffered cancel -> event never submits a result
+  PASS buffered event seen as PENDING pre-cancel
+  PASS cancel buffered returns 200
+  PASS cancel snapshot CANCELLED
+  PASS repeat cancel is idempotent
+  PASS only the two occupants commit; seq=2 skipped (seqs expected [0, 1] got [0, 1])
+  PASS cancelled event produced no result entry
+  PASS capacity freed by cancellation admits new work
+  PASS new work commits after the cancelled gap; lastSeq tracks the gap
+  PASS new event keeps its own input seq=3
+
+[test] acceptance: cancel a running attempt -> abandoned, no result submitted
+  PASS cancel running returns 200
+  PASS only seq=1 commits; cancelled seq=0 leaves a gap (seqs expected [1] got [1])
+  PASS the later event is what committed
+  PASS no admitted slots linger after cancel
+
+[test] acceptance: cancel after commit refused (results can't be un-submitted)
+  PASS cancel of committed event -> 409
+  PASS the committed result stays exactly once
+
+[test] partitions order independently and enforce independent caps
+  PASS partition B commits without waiting on A's slow head (seqs expected [0, 1] got [0, 1])
+  PASS partition A still ordered (seqs expected [0, 1] got [0, 1])
+  PASS partition A accepts its own 3-event cap independently
+
+[test] retry: a failing first attempt succeeds on retry and commits SUCCEEDED
+  PASS retry success -> SUCCEEDED
+  PASS succeeded on attempt 2
+  PASS no error on eventual success
+
+[test] input validation: bad bodies rejected with 400, unknown routes 404
+  PASS malformed JSON -> 400
+  PASS bad behavior -> 400
+  PASS maxAttempts 0 -> 400
+  PASS timeout over cap -> 400
+  PASS illegal partition name -> 400
+  PASS missing partition -> 404
+  PASS unknown route -> 404
+
+checks=64 failures=0

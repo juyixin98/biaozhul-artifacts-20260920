@@ -1,0 +1,104 @@
+===================================================================
+1) ORDERED COMMIT — head hangs past its deadline; later events win
+   the race to finish but cannot be committed before the head.
+===================================================================
+submit head : {"id":"8b523cbb-4451-407b-8138-db4ca8fc1df5","partition":"demo-order","seq":0,"state":"PENDING","attemptsPlanned":1,"attemptsPerformed":0,"timeout
+submit middle (50ms, succeeds early)
+submit tail   (80ms, succeeds early)
+
+waiting on ordered output (long-poll) ...
+{
+  "seq": 0,
+  "status": "TIMED_OUT",
+  "value": null,
+  "error": "attempt timed out after 400ms",
+  "attempts": 1,
+  "durationMillis": 405
+}
+{
+  "seq": 1,
+  "status": "SUCCEEDED",
+  "value": "middle",
+  "error": null,
+  "attempts": 1,
+  "durationMillis": 52
+}
+{
+  "seq": 2,
+  "status": "SUCCEEDED",
+  "value": "tail",
+  "error": null,
+  "attempts": 1,
+  "durationMillis": 123
+}
+
+===================================================================
+2) RETRY EXHAUSTION — 2 failing attempts commit a FAILED placeholder
+   exactly at the event's input position; success behind it follows.
+===================================================================
+{
+  "seq": 0,
+  "status": "FAILED",
+  "value": null,
+  "error": "boom",
+  "attempts": 2
+}
+{
+  "seq": 1,
+  "status": "SUCCEEDED",
+  "value": "y",
+  "error": null,
+  "attempts": 1
+}
+
+===================================================================
+3) BUFFER CAP — maxInFlight=3; the 4th and 5th submits get HTTP 503
+===================================================================
+submit #1 -> HTTP 202 
+submit #2 -> HTTP 202 
+submit #3 -> HTTP 202 
+submit #4 -> HTTP 503 "partition 'demo-cap' in-flight buffer is full (limit 3)"
+submit #5 -> HTTP 503 "partition 'demo-cap' in-flight buffer is full (limit 3)"
+{
+  "partition": "demo-cap",
+  "nextSeq": 3,
+  "committed": 0,
+  "admitted": 3,
+  "bufferedOrRunning": 3,
+  "inFlightLimit": 3,
+  "concurrencyLimit": 2,
+  "runningAttempts": 2
+}
+
+===================================================================
+4) CANCELLATION — occupy both concurrency slots; cancel the buffered
+   3rd event; only the two occupants commit, the cancelled seq=2 is
+   skipped and never appears in the output.
+===================================================================
+buffered event: 61dc1c9f-a3b0-4c76-a69c-dda8c14d91df (state before cancel: PENDING)
+cancel ->
+{
+  "id": "61dc1c9f-a3b0-4c76-a69c-dda8c14d91df",
+  "state": "CANCELLED",
+  "seq": 2,
+  "error": "cancelled"
+}
+ordered output after occupants finish (note the seq gap 0,1 and no 61dc1c9f-a3b0-4c76-a69c-dda8c14d91df):
+{
+  "count": 2,
+  "lastSeq": 1,
+  "results": [
+    {
+      "seq": 0,
+      "status": "SUCCEEDED",
+      "value": "occupy-1"
+    },
+    {
+      "seq": 1,
+      "status": "SUCCEEDED",
+      "value": "occupy-2"
+    }
+  ]
+}
+
+demo finished; server log saved to target/demo-server.log
