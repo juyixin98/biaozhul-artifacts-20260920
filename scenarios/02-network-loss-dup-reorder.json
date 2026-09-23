@@ -1,0 +1,14 @@
+{
+  "name": "network faults only — loss, duplication and reordering, no crashes; commit must still complete",
+  "seed": 7,
+  "horizon": 400,
+  "network": { "baseDelay": 1, "jitter": 3, "loss": 0.3, "duplicate": 0.2 },
+  "requests": [
+    {
+      "txnId": "T1",
+      "at": 10,
+      "writes": [ { "key": "balance", "value": "200" } ]
+    }
+  ],
+  "crashes": []
+}

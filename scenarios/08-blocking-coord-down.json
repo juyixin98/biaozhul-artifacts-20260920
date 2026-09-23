@@ -1,0 +1,16 @@
+{
+  "name": "BLOCKING EVIDENCE: coordinator crashes after durable COMMIT before sending it, and NEVER restarts (downTicks=0). Participants hold durable PREPARED, keep polling QUERY (dropped because coord is down), and block. They must not abort unilaterally.",
+  "seed": 8,
+  "horizon": 300,
+  "network": { "baseDelay": 1, "jitter": 1, "loss": 0, "duplicate": 0 },
+  "requests": [
+    {
+      "txnId": "T1",
+      "at": 10,
+      "writes": [ { "key": "balance", "value": "700" } ]
+    }
+  ],
+  "crashes": [
+    { "node": "coord", "milestone": "c-decision-wal:T1", "downTicks": 0 }
+  ]
+}

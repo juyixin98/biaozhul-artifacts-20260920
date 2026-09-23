@@ -1,0 +1,16 @@
+{
+  "name": "coordinator crashes after all votes collected but before the decision is durable; on restart it aborts this undecided transaction (presumed-abort, safe: no decision was ever sent)",
+  "seed": 5,
+  "horizon": 400,
+  "network": { "baseDelay": 1, "jitter": 1, "loss": 0, "duplicate": 0 },
+  "requests": [
+    {
+      "txnId": "T1",
+      "at": 10,
+      "writes": [ { "key": "balance", "value": "500" } ]
+    }
+  ],
+  "crashes": [
+    { "node": "coord", "milestone": "c-votes-complete:T1", "downTicks": 40 }
+  ]
+}

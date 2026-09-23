@@ -1,0 +1,16 @@
+{
+  "name": "BLOCKING EVIDENCE (phase 2, participant side): p1 durably prepares, votes YES, then crashes and NEVER restarts (downTicks=0). The coordinator reaches durable COMMIT and delivers it to p2/p3 (they commit), but p1 stays forever PREPARED: it cannot apply COMMIT. Without the coordinator's decision record p1 cannot safely resolve by itself. No abort ever occurs.",
+  "seed": 10,
+  "horizon": 300,
+  "network": { "baseDelay": 1, "jitter": 1, "loss": 0, "duplicate": 0 },
+  "requests": [
+    {
+      "txnId": "T1",
+      "at": 10,
+      "writes": [ { "key": "balance", "value": "1000" } ]
+    }
+  ],
+  "crashes": [
+    { "node": "p1", "milestone": "p-vote-sent:T1", "downTicks": 0 }
+  ]
+}

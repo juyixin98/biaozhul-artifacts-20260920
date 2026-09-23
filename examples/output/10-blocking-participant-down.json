@@ -1,0 +1,906 @@
+{
+  "spec": {
+    "seed": 10,
+    "horizon": 300,
+    "network": {
+      "baseDelay": 1,
+      "jitter": 1,
+      "loss": 0,
+      "duplicate": 0
+    },
+    "requests": [
+      {
+        "txnId": "T1",
+        "at": 10,
+        "writes": [
+          {
+            "key": "balance",
+            "value": "1000"
+          }
+        ]
+      }
+    ],
+    "crashes": [
+      {
+        "node": "p1",
+        "milestone": "p-vote-sent:T1",
+        "downTicks": 0,
+        "repeat": 0
+      }
+    ]
+  },
+  "trace": [
+    {
+      "tick": 10,
+      "kind": "durable",
+      "node": "coord",
+      "detail": "record=begin txn=T1"
+    },
+    {
+      "tick": 10,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Prepare"
+    },
+    {
+      "tick": 10,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p2 type=twopc.Prepare"
+    },
+    {
+      "tick": 10,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p3 type=twopc.Prepare"
+    },
+    {
+      "tick": 11,
+      "kind": "deliver",
+      "node": "p1",
+      "detail": "from=coord type=twopc.Prepare"
+    },
+    {
+      "tick": 11,
+      "kind": "durable",
+      "node": "p1",
+      "detail": "record=prepared txn=T1"
+    },
+    {
+      "tick": 11,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Vote"
+    },
+    {
+      "tick": 11,
+      "kind": "crash",
+      "node": "p1",
+      "detail": "downTicks=0"
+    },
+    {
+      "tick": 11,
+      "kind": "deliver",
+      "node": "p3",
+      "detail": "from=coord type=twopc.Prepare"
+    },
+    {
+      "tick": 11,
+      "kind": "durable",
+      "node": "p3",
+      "detail": "record=prepared txn=T1"
+    },
+    {
+      "tick": 11,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Vote"
+    },
+    {
+      "tick": 12,
+      "kind": "deliver",
+      "node": "p2",
+      "detail": "from=coord type=twopc.Prepare"
+    },
+    {
+      "tick": 12,
+      "kind": "durable",
+      "node": "p2",
+      "detail": "record=prepared txn=T1"
+    },
+    {
+      "tick": 12,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Vote"
+    },
+    {
+      "tick": 12,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p1 type=twopc.Vote"
+    },
+    {
+      "tick": 12,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p3 type=twopc.Vote"
+    },
+    {
+      "tick": 14,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p2 type=twopc.Vote"
+    },
+    {
+      "tick": 14,
+      "kind": "durable",
+      "node": "coord",
+      "detail": "record=commit txn=T1"
+    },
+    {
+      "tick": 14,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 14,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 14,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p2 type=twopc.Commit"
+    },
+    {
+      "tick": 14,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p3 type=twopc.Commit"
+    },
+    {
+      "tick": 15,
+      "kind": "deliver",
+      "node": "p2",
+      "detail": "from=coord type=twopc.Commit"
+    },
+    {
+      "tick": 15,
+      "kind": "durable",
+      "node": "p2",
+      "detail": "record=commit txn=T1"
+    },
+    {
+      "tick": 15,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Ack"
+    },
+    {
+      "tick": 15,
+      "kind": "deliver",
+      "node": "p3",
+      "detail": "from=coord type=twopc.Commit"
+    },
+    {
+      "tick": 15,
+      "kind": "durable",
+      "node": "p3",
+      "detail": "record=commit txn=T1"
+    },
+    {
+      "tick": 15,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Ack"
+    },
+    {
+      "tick": 16,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 17,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p2 type=twopc.Ack"
+    },
+    {
+      "tick": 17,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p3 type=twopc.Ack"
+    },
+    {
+      "tick": 18,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 18,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 20,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 26,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 26,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 27,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 34,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 34,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 35,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 42,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 42,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 44,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 50,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 50,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 51,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 58,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 58,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 60,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 66,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 66,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 67,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 74,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 74,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 76,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 82,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 82,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 84,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 90,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 90,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 92,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 98,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 98,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 100,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 106,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 106,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 108,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 114,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 114,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 115,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 122,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 122,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 124,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 130,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 130,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 131,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 138,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 138,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 140,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 146,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 146,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 147,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 154,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 154,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 155,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 162,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 162,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 164,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 170,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 170,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 172,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 178,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 178,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 179,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 186,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 186,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 188,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 194,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 194,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 195,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 202,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 202,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 203,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 210,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 210,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 212,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 218,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 218,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 219,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 226,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 226,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 227,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 234,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 234,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 235,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 242,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 242,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 243,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 250,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 250,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 252,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 258,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 258,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 259,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 266,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 266,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 268,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 274,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 274,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 276,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 282,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 282,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 284,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 290,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 290,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 291,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    },
+    {
+      "tick": 298,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 298,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 300,
+      "kind": "drop",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit reason=node-down"
+    }
+  ],
+  "transactions": [
+    {
+      "txnId": "T1",
+      "status": "blocked",
+      "committedNodes": [
+        "p2",
+        "p3"
+      ],
+      "preparedNodes": [
+        "p1"
+      ],
+      "coordinatorUp": true
+    }
+  ],
+  "blocked": [
+    {
+      "txnId": "T1",
+      "preparedNodes": [
+        "p1"
+      ],
+      "coordinatorUp": true,
+      "reason": "COMMIT is global: [p2 p3] already durable-committed, [p1] still hold PREPARED and cannot finish",
+      "queryCount": 0
+    }
+  ],
+  "finalKv": {
+    "p1": {
+      "__state": "CRASHED-DOWN (durable WAL on disk, volatile state unavailable)"
+    },
+    "p2": {
+      "balance": "1000"
+    },
+    "p3": {
+      "balance": "1000"
+    }
+  },
+  "invariantErrors": null,
+  "dataDir": "/tmp/twopc-2845354913"
+}

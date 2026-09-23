@@ -1,0 +1,16 @@
+{
+  "name": "coordinator crashes AFTER durable COMMIT but before sending it; restart re-drives COMMIT from the WAL. All participants commit.",
+  "seed": 6,
+  "horizon": 400,
+  "network": { "baseDelay": 1, "jitter": 1, "loss": 0, "duplicate": 0 },
+  "requests": [
+    {
+      "txnId": "T1",
+      "at": 10,
+      "writes": [ { "key": "balance", "value": "600" } ]
+    }
+  ],
+  "crashes": [
+    { "node": "coord", "milestone": "c-decision-wal:T1", "downTicks": 40 }
+  ]
+}

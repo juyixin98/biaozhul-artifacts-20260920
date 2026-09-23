@@ -1,0 +1,16 @@
+{
+  "name": "participant p1 crashes when PREPARE arrives, BEFORE the prepared record is durable, then restarts. Nothing survived the crash; the coordinator retransmits PREPARE, p1 prepares again and the transaction commits.",
+  "seed": 3,
+  "horizon": 400,
+  "network": { "baseDelay": 1, "jitter": 1, "loss": 0, "duplicate": 0 },
+  "requests": [
+    {
+      "txnId": "T1",
+      "at": 10,
+      "writes": [ { "key": "balance", "value": "300" } ]
+    }
+  ],
+  "crashes": [
+    { "node": "p1", "milestone": "p-prepare-recv:T1", "downTicks": 40 }
+  ]
+}

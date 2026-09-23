@@ -1,0 +1,10 @@
+
+=== summary ===
+txn T1   status=blocked   coordUp=false client=-
+BLOCKED txn T1 prepared=[p1 p2 p3] coordUp=false queries=108
+  reason: coordinator is DOWN; prepared participants cannot learn the decision and must not abort unilaterally
+invariants: OK (no partial commit; decision durable before send)
+
+=== summary ===
+txn T1   status=committed coordUp=true  client=committed
+invariants: OK (no partial commit; decision durable before send)

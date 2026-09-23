@@ -1,0 +1,16 @@
+{
+  "name": "participant p1 crashes AFTER its prepared record is durable; coordinator waits, p1 restarts, polls QUERY, and commits — no unilateral abort",
+  "seed": 4,
+  "horizon": 400,
+  "network": { "baseDelay": 1, "jitter": 1, "loss": 0, "duplicate": 0 },
+  "requests": [
+    {
+      "txnId": "T1",
+      "at": 10,
+      "writes": [ { "key": "balance", "value": "400" } ]
+    }
+  ],
+  "crashes": [
+    { "node": "p1", "milestone": "p-prepared-wal:T1", "downTicks": 50 }
+  ]
+}

@@ -1,0 +1,474 @@
+{
+  "spec": {
+    "seed": 6,
+    "horizon": 400,
+    "network": {
+      "baseDelay": 1,
+      "jitter": 1,
+      "loss": 0,
+      "duplicate": 0
+    },
+    "requests": [
+      {
+        "txnId": "T1",
+        "at": 10,
+        "writes": [
+          {
+            "key": "balance",
+            "value": "600"
+          }
+        ]
+      }
+    ],
+    "crashes": [
+      {
+        "node": "coord",
+        "milestone": "c-decision-wal:T1",
+        "downTicks": 40,
+        "repeat": 0
+      }
+    ]
+  },
+  "trace": [
+    {
+      "tick": 10,
+      "kind": "durable",
+      "node": "coord",
+      "detail": "record=begin txn=T1"
+    },
+    {
+      "tick": 10,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Prepare"
+    },
+    {
+      "tick": 10,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p2 type=twopc.Prepare"
+    },
+    {
+      "tick": 10,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p3 type=twopc.Prepare"
+    },
+    {
+      "tick": 11,
+      "kind": "deliver",
+      "node": "p1",
+      "detail": "from=coord type=twopc.Prepare"
+    },
+    {
+      "tick": 11,
+      "kind": "durable",
+      "node": "p1",
+      "detail": "record=prepared txn=T1"
+    },
+    {
+      "tick": 11,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Vote"
+    },
+    {
+      "tick": 11,
+      "kind": "deliver",
+      "node": "p2",
+      "detail": "from=coord type=twopc.Prepare"
+    },
+    {
+      "tick": 11,
+      "kind": "durable",
+      "node": "p2",
+      "detail": "record=prepared txn=T1"
+    },
+    {
+      "tick": 11,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Vote"
+    },
+    {
+      "tick": 11,
+      "kind": "deliver",
+      "node": "p3",
+      "detail": "from=coord type=twopc.Prepare"
+    },
+    {
+      "tick": 11,
+      "kind": "durable",
+      "node": "p3",
+      "detail": "record=prepared txn=T1"
+    },
+    {
+      "tick": 11,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Vote"
+    },
+    {
+      "tick": 13,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p1 type=twopc.Vote"
+    },
+    {
+      "tick": 13,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p2 type=twopc.Vote"
+    },
+    {
+      "tick": 13,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p3 type=twopc.Vote"
+    },
+    {
+      "tick": 13,
+      "kind": "durable",
+      "node": "coord",
+      "detail": "record=commit txn=T1"
+    },
+    {
+      "tick": 13,
+      "kind": "crash",
+      "node": "coord",
+      "detail": "downTicks=40"
+    },
+    {
+      "tick": 19,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 19,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 19,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 20,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 20,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 20,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 27,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 27,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 27,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 28,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 29,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 29,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 35,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 35,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 35,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 36,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 37,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 37,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 43,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 43,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 43,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 44,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 44,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 45,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 51,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 51,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 51,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 52,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 52,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 53,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 53,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 53,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p2 type=twopc.Commit"
+    },
+    {
+      "tick": 53,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p3 type=twopc.Commit"
+    },
+    {
+      "tick": 53,
+      "kind": "restart",
+      "node": "coord"
+    },
+    {
+      "tick": 53,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p3 type=twopc.Query"
+    },
+    {
+      "tick": 53,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p3 type=twopc.QueryReply"
+    },
+    {
+      "tick": 54,
+      "kind": "deliver",
+      "node": "p2",
+      "detail": "from=coord type=twopc.Commit"
+    },
+    {
+      "tick": 54,
+      "kind": "durable",
+      "node": "p2",
+      "detail": "record=commit txn=T1"
+    },
+    {
+      "tick": 54,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Ack"
+    },
+    {
+      "tick": 54,
+      "kind": "deliver",
+      "node": "p3",
+      "detail": "from=coord type=twopc.QueryReply"
+    },
+    {
+      "tick": 54,
+      "kind": "durable",
+      "node": "p3",
+      "detail": "record=commit txn=T1"
+    },
+    {
+      "tick": 54,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Ack"
+    },
+    {
+      "tick": 55,
+      "kind": "deliver",
+      "node": "p1",
+      "detail": "from=coord type=twopc.Commit"
+    },
+    {
+      "tick": 55,
+      "kind": "durable",
+      "node": "p1",
+      "detail": "record=commit txn=T1"
+    },
+    {
+      "tick": 55,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Ack"
+    },
+    {
+      "tick": 55,
+      "kind": "deliver",
+      "node": "p3",
+      "detail": "from=coord type=twopc.Commit"
+    },
+    {
+      "tick": 55,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Ack"
+    },
+    {
+      "tick": 55,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p2 type=twopc.Ack"
+    },
+    {
+      "tick": 55,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p3 type=twopc.Ack"
+    },
+    {
+      "tick": 56,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p1 type=twopc.Ack"
+    },
+    {
+      "tick": 57,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p3 type=twopc.Ack"
+    }
+  ],
+  "transactions": [
+    {
+      "txnId": "T1",
+      "status": "committed",
+      "committedNodes": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "coordinatorUp": true,
+      "clientReported": "committed"
+    }
+  ],
+  "blocked": null,
+  "finalKv": {
+    "p1": {
+      "balance": "600"
+    },
+    "p2": {
+      "balance": "600"
+    },
+    "p3": {
+      "balance": "600"
+    }
+  },
+  "invariantErrors": null,
+  "dataDir": "/tmp/twopc-910300366"
+}

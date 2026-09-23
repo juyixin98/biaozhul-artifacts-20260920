@@ -1,0 +1,252 @@
+{
+  "spec": {
+    "seed": 1,
+    "horizon": 120,
+    "network": {
+      "baseDelay": 1,
+      "jitter": 1,
+      "loss": 0,
+      "duplicate": 0
+    },
+    "requests": [
+      {
+        "txnId": "T1",
+        "at": 10,
+        "writes": [
+          {
+            "key": "balance",
+            "value": "100"
+          }
+        ]
+      }
+    ],
+    "crashes": []
+  },
+  "trace": [
+    {
+      "tick": 10,
+      "kind": "durable",
+      "node": "coord",
+      "detail": "record=begin txn=T1"
+    },
+    {
+      "tick": 10,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Prepare"
+    },
+    {
+      "tick": 10,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p2 type=twopc.Prepare"
+    },
+    {
+      "tick": 10,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p3 type=twopc.Prepare"
+    },
+    {
+      "tick": 11,
+      "kind": "deliver",
+      "node": "p3",
+      "detail": "from=coord type=twopc.Prepare"
+    },
+    {
+      "tick": 11,
+      "kind": "durable",
+      "node": "p3",
+      "detail": "record=prepared txn=T1"
+    },
+    {
+      "tick": 11,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Vote"
+    },
+    {
+      "tick": 12,
+      "kind": "deliver",
+      "node": "p1",
+      "detail": "from=coord type=twopc.Prepare"
+    },
+    {
+      "tick": 12,
+      "kind": "durable",
+      "node": "p1",
+      "detail": "record=prepared txn=T1"
+    },
+    {
+      "tick": 12,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Vote"
+    },
+    {
+      "tick": 12,
+      "kind": "deliver",
+      "node": "p2",
+      "detail": "from=coord type=twopc.Prepare"
+    },
+    {
+      "tick": 12,
+      "kind": "durable",
+      "node": "p2",
+      "detail": "record=prepared txn=T1"
+    },
+    {
+      "tick": 12,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Vote"
+    },
+    {
+      "tick": 12,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p3 type=twopc.Vote"
+    },
+    {
+      "tick": 13,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p1 type=twopc.Vote"
+    },
+    {
+      "tick": 13,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p2 type=twopc.Vote"
+    },
+    {
+      "tick": 13,
+      "kind": "durable",
+      "node": "coord",
+      "detail": "record=commit txn=T1"
+    },
+    {
+      "tick": 13,
+      "kind": "decision-send",
+      "node": "coord",
+      "detail": "txn=T1 decision=commit"
+    },
+    {
+      "tick": 13,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Commit"
+    },
+    {
+      "tick": 13,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p2 type=twopc.Commit"
+    },
+    {
+      "tick": 13,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p3 type=twopc.Commit"
+    },
+    {
+      "tick": 15,
+      "kind": "deliver",
+      "node": "p1",
+      "detail": "from=coord type=twopc.Commit"
+    },
+    {
+      "tick": 15,
+      "kind": "durable",
+      "node": "p1",
+      "detail": "record=commit txn=T1"
+    },
+    {
+      "tick": 15,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Ack"
+    },
+    {
+      "tick": 15,
+      "kind": "deliver",
+      "node": "p2",
+      "detail": "from=coord type=twopc.Commit"
+    },
+    {
+      "tick": 15,
+      "kind": "durable",
+      "node": "p2",
+      "detail": "record=commit txn=T1"
+    },
+    {
+      "tick": 15,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Ack"
+    },
+    {
+      "tick": 15,
+      "kind": "deliver",
+      "node": "p3",
+      "detail": "from=coord type=twopc.Commit"
+    },
+    {
+      "tick": 15,
+      "kind": "durable",
+      "node": "p3",
+      "detail": "record=commit txn=T1"
+    },
+    {
+      "tick": 15,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Ack"
+    },
+    {
+      "tick": 16,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p1 type=twopc.Ack"
+    },
+    {
+      "tick": 17,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p2 type=twopc.Ack"
+    },
+    {
+      "tick": 17,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p3 type=twopc.Ack"
+    }
+  ],
+  "transactions": [
+    {
+      "txnId": "T1",
+      "status": "committed",
+      "committedNodes": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "coordinatorUp": true,
+      "clientReported": "committed"
+    }
+  ],
+  "blocked": null,
+  "finalKv": {
+    "p1": {
+      "balance": "100"
+    },
+    "p2": {
+      "balance": "100"
+    },
+    "p3": {
+      "balance": "100"
+    }
+  },
+  "invariantErrors": null,
+  "dataDir": "/tmp/twopc-1680551390"
+}

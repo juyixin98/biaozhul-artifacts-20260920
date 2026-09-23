@@ -1,0 +1,1452 @@
+{
+  "spec": {
+    "seed": 8,
+    "horizon": 300,
+    "network": {
+      "baseDelay": 1,
+      "jitter": 1,
+      "loss": 0,
+      "duplicate": 0
+    },
+    "requests": [
+      {
+        "txnId": "T1",
+        "at": 10,
+        "writes": [
+          {
+            "key": "balance",
+            "value": "700"
+          }
+        ]
+      }
+    ],
+    "crashes": [
+      {
+        "node": "coord",
+        "milestone": "c-decision-wal:T1",
+        "downTicks": 0,
+        "repeat": 0
+      }
+    ]
+  },
+  "trace": [
+    {
+      "tick": 10,
+      "kind": "durable",
+      "node": "coord",
+      "detail": "record=begin txn=T1"
+    },
+    {
+      "tick": 10,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p1 type=twopc.Prepare"
+    },
+    {
+      "tick": 10,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p2 type=twopc.Prepare"
+    },
+    {
+      "tick": 10,
+      "kind": "send",
+      "node": "coord",
+      "detail": "to=p3 type=twopc.Prepare"
+    },
+    {
+      "tick": 11,
+      "kind": "deliver",
+      "node": "p3",
+      "detail": "from=coord type=twopc.Prepare"
+    },
+    {
+      "tick": 11,
+      "kind": "durable",
+      "node": "p3",
+      "detail": "record=prepared txn=T1"
+    },
+    {
+      "tick": 11,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Vote"
+    },
+    {
+      "tick": 12,
+      "kind": "deliver",
+      "node": "p1",
+      "detail": "from=coord type=twopc.Prepare"
+    },
+    {
+      "tick": 12,
+      "kind": "durable",
+      "node": "p1",
+      "detail": "record=prepared txn=T1"
+    },
+    {
+      "tick": 12,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Vote"
+    },
+    {
+      "tick": 12,
+      "kind": "deliver",
+      "node": "p2",
+      "detail": "from=coord type=twopc.Prepare"
+    },
+    {
+      "tick": 12,
+      "kind": "durable",
+      "node": "p2",
+      "detail": "record=prepared txn=T1"
+    },
+    {
+      "tick": 12,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Vote"
+    },
+    {
+      "tick": 12,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p3 type=twopc.Vote"
+    },
+    {
+      "tick": 14,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p1 type=twopc.Vote"
+    },
+    {
+      "tick": 14,
+      "kind": "deliver",
+      "node": "coord",
+      "detail": "from=p2 type=twopc.Vote"
+    },
+    {
+      "tick": 14,
+      "kind": "durable",
+      "node": "coord",
+      "detail": "record=commit txn=T1"
+    },
+    {
+      "tick": 14,
+      "kind": "crash",
+      "node": "coord",
+      "detail": "downTicks=0"
+    },
+    {
+      "tick": 19,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 20,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 20,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 20,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 21,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 21,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 27,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 28,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 28,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 28,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 30,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 30,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 35,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 36,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 36,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 36,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 38,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 38,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 43,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 44,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 44,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 44,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 45,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 46,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 51,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 52,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 52,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 52,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 53,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 53,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 59,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 60,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 60,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 60,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 62,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 62,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 67,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 68,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 68,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 68,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 69,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 70,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 75,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 76,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 76,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 77,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 78,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 78,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 83,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 84,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 84,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 85,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 85,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 86,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 91,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 92,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 92,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 92,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 93,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 94,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 99,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 100,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 100,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 100,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 102,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 102,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 107,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 108,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 108,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 109,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 109,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 110,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 115,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 116,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 116,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 116,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 117,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 117,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 123,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 124,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 124,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 125,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 126,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 126,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 131,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 132,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 132,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 133,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 133,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 133,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 139,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 140,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 140,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 140,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 141,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 142,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 147,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 148,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 148,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 148,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 149,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 150,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 155,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 156,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 156,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 157,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 157,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 158,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 163,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 164,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 164,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 164,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 165,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 166,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 171,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 172,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 172,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 173,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 173,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 173,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 179,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 180,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 180,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 180,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 181,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 182,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 187,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 188,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 188,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 188,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 189,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 189,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 195,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 196,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 196,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 196,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 197,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 198,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 203,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 204,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 204,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 205,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 205,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 205,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 211,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 212,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 212,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 212,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 214,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 214,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 219,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 220,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 220,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 220,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 221,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 222,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 227,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 228,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 228,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 229,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 229,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 229,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 235,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 236,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 236,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 237,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 237,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 237,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 243,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 244,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 244,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 244,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 245,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 245,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 251,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 252,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 252,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 252,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 253,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 253,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 259,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 260,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 260,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 261,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 261,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 261,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 267,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 268,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 268,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 269,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 269,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 270,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 275,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 276,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 276,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 276,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 277,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 278,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 283,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 284,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 284,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 285,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 285,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 286,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 291,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 292,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 292,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 293,
+      "kind": "drop",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 293,
+      "kind": "drop",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 294,
+      "kind": "drop",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query reason=node-down"
+    },
+    {
+      "tick": 299,
+      "kind": "send",
+      "node": "p3",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 300,
+      "kind": "send",
+      "node": "p1",
+      "detail": "to=coord type=twopc.Query"
+    },
+    {
+      "tick": 300,
+      "kind": "send",
+      "node": "p2",
+      "detail": "to=coord type=twopc.Query"
+    }
+  ],
+  "transactions": [
+    {
+      "txnId": "T1",
+      "status": "blocked",
+      "preparedNodes": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "coordinatorUp": false
+    }
+  ],
+  "blocked": [
+    {
+      "txnId": "T1",
+      "preparedNodes": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "coordinatorUp": false,
+      "reason": "coordinator is DOWN; prepared participants cannot learn the decision and must not abort unilaterally",
+      "queryCount": 108
+    }
+  ],
+  "finalKv": {
+    "p1": {},
+    "p2": {},
+    "p3": {}
+  },
+  "invariantErrors": null,
+  "dataDir": "/tmp/twopc-204106340"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "one participant votes NO (value @@NO); global abort, no participant commits",
+  "seed": 2,
+  "horizon": 200,
+  "network": { "baseDelay": 1, "jitter": 1, "loss": 0, "duplicate": 0 },
+  "requests": [
+    {
+      "txnId": "T1",
+      "at": 10,
+      "writes": [ { "key": "balance", "value": "@@NO" } ]
+    }
+  ],
+  "crashes": []
+}

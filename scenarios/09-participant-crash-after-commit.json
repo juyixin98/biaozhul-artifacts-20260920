@@ -1,0 +1,16 @@
+{
+  "name": "participant p1 crashes AFTER its durable commit record (before ACK); restart leaves it committed; repeated COMMIT is answered idempotently and the client gets committed.",
+  "seed": 9,
+  "horizon": 400,
+  "network": { "baseDelay": 1, "jitter": 1, "loss": 0, "duplicate": 0 },
+  "requests": [
+    {
+      "txnId": "T1",
+      "at": 10,
+      "writes": [ { "key": "balance", "value": "900" } ]
+    }
+  ],
+  "crashes": [
+    { "node": "p1", "milestone": "p-commit-wal:T1", "downTicks": 50 }
+  ]
+}
