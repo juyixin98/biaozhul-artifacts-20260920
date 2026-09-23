@@ -1,0 +1,6 @@
+[toolchain]
+# Host builds use stable. The rv32im guest toolchain is selected automatically
+# by `risc0-build` via the rzup-managed toolchain in ~/.risc0 (see README).
+channel = "stable"
+components = ["rustfmt", "rust-src"]
+profile = "minimal"

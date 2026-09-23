@@ -1,0 +1,15 @@
+[package]
+name = "decoy_guest"
+version = "0.1.0"
+edition = "2021"
+
+# A deliberately different guest program with a different image ID.
+# It produces a perfectly valid receipt for its OWN image ID, which the host
+# must reject when it is expecting MEDIAN_GUEST_ID. Used by the "wrong program
+# ID" security test.
+[workspace]
+
+[dependencies]
+risc0-zkvm = { version = "^3.0.6", default-features = false, features = ["std"] }
+serde = { version = "1.0", default-features = false, features = ["derive", "alloc"] }
+shared = { path = "../../../shared" }

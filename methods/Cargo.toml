@@ -1,0 +1,12 @@
+[package]
+name = "methods"
+version = "0.1.0"
+edition = "2021"
+
+[build-dependencies]
+risc0-build = { version = "^3.0.6" }
+
+# Each directory listed here is a guest crate built for the rv32im zkVM
+# target. `embed_methods` exposes `<NAME>_ELF` and `<NAME>_ID` constants.
+[package.metadata.risc0]
+methods = ["guest/median_guest", "guest/decoy_guest"]

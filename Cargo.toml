@@ -1,0 +1,15 @@
+[workspace]
+resolver = "2"
+members = ["host", "methods", "shared"]
+
+# Guests are built out-of-tree by risc0-build for the rv32im target; they are
+# not workspace members (their [workspace] table points here instead).
+
+# Always optimize: the guest is heavily optimized and proving is much slower
+# without it.
+[profile.dev]
+opt-level = 3
+
+[profile.release]
+debug = 1
+lto = true
