@@ -1,0 +1,17 @@
+[package]
+name = "wsframe"
+version = "0.1.0"
+edition = "2021"
+description = "Incremental WebSocket (RFC 6455) frame parser and message reassembler, plus a local echo test server"
+license = "MIT"
+
+[lib]
+name = "wsframe"
+path = "src/lib.rs"
+
+[[bin]]
+name = "wsecho"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 2
