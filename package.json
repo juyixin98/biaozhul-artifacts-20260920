@@ -1,0 +1,24 @@
+{
+  "name": "storage-layout-compat-checker",
+  "version": "1.0.0",
+  "description": "Offline compatibility checker for Solidity compiler storageLayout JSON, as a library and an HTTP service",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "tsx src/server.ts",
+    "start:dist": "node dist/server.js",
+    "test": "vitest run",
+    "check:samples": "tsx scripts/check-samples.ts"
+  },
+  "dependencies": {
+    "fastify": "^4.28.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3",
+    "vitest": "^2.0.5"
+  }
+}
