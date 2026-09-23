@@ -1,0 +1,19 @@
+{
+  "height": 3,
+  "prevHash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "timestamp": 1700000003,
+  "txs": [
+    {
+      "txid": "d09ee22659961c49acbcd1a6fdf1d9d1bbe13b9cc9f31000d976054d1f9c31f5",
+      "version": 1,
+      "vin": [],
+      "vout": [
+        {
+          "address": "addr_miner",
+          "value": 5000
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

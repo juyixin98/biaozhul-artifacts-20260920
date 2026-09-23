@@ -1,0 +1,53 @@
+{
+  "height": 3,
+  "prevHash": "229e9ccd03d55df10159fd7ff9b9d9ff3003c909a663a3ecd172a48ee60babab",
+  "timestamp": 1700000003,
+  "txs": [
+    {
+      "txid": "d09ee22659961c49acbcd1a6fdf1d9d1bbe13b9cc9f31000d976054d1f9c31f5",
+      "version": 1,
+      "vin": [],
+      "vout": [
+        {
+          "address": "addr_miner",
+          "value": 5000
+        }
+      ]
+    },
+    {
+      "txid": "105e2137b3d74a571b0b0666f7cf7249a7ba9971c2ca1d116aa9bee94bc6a655",
+      "version": 1,
+      "vin": [
+        {
+          "scriptSig": "64732d61",
+          "txid": "2892fddf78e81a8a5136e21c81ab6ad8b302d805905afe49c3aeece6756b5273",
+          "vout": 1
+        }
+      ],
+      "vout": [
+        {
+          "address": "addr_bob",
+          "value": 4900
+        }
+      ]
+    },
+    {
+      "txid": "34b436b6d6f5ec7e060199bc7cc156bccf4a9fa92e3ac0ef8b0ed9fca3aab0f4",
+      "version": 1,
+      "vin": [
+        {
+          "scriptSig": "64732d62",
+          "txid": "2892fddf78e81a8a5136e21c81ab6ad8b302d805905afe49c3aeece6756b5273",
+          "vout": 1
+        }
+      ],
+      "vout": [
+        {
+          "address": "addr_carol",
+          "value": 4900
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

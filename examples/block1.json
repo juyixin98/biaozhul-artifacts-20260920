@@ -1,0 +1,19 @@
+{
+  "height": 1,
+  "prevHash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "timestamp": 1700000001,
+  "txs": [
+    {
+      "txid": "d3be03d97c410af0e130e9db3d6b1c30b28b9587f0141924b9e3c9986bd69062",
+      "version": 1,
+      "vin": [],
+      "vout": [
+        {
+          "address": "addr_alice",
+          "value": 5000
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

@@ -1,0 +1,40 @@
+{
+  "height": 3,
+  "prevHash": "229e9ccd03d55df10159fd7ff9b9d9ff3003c909a663a3ecd172a48ee60babab",
+  "timestamp": 1700000003,
+  "txs": [
+    {
+      "txid": "c26a08381690fe78390990773314fe1f2199effddf6113d07105ece202a706c9",
+      "version": 1,
+      "vin": [],
+      "vout": [
+        {
+          "address": "addr_miner",
+          "value": 5001
+        }
+      ]
+    },
+    {
+      "txid": "0cc27f67ced7bf67a94c038265499a58275c62bb0d52b01c92564ef0d5b2c85f",
+      "version": 1,
+      "vin": [
+        {
+          "scriptSig": "616c6963652d73706c6974",
+          "txid": "2892fddf78e81a8a5136e21c81ab6ad8b302d805905afe49c3aeece6756b5273",
+          "vout": 1
+        }
+      ],
+      "vout": [
+        {
+          "address": "addr_bob",
+          "value": 1000
+        },
+        {
+          "address": "addr_alice",
+          "value": 3899
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

@@ -1,0 +1,36 @@
+{
+  "height": 3,
+  "prevHash": "229e9ccd03d55df10159fd7ff9b9d9ff3003c909a663a3ecd172a48ee60babab",
+  "timestamp": 1700000003,
+  "txs": [
+    {
+      "txid": "d09ee22659961c49acbcd1a6fdf1d9d1bbe13b9cc9f31000d976054d1f9c31f5",
+      "version": 1,
+      "vin": [],
+      "vout": [
+        {
+          "address": "addr_miner",
+          "value": 5000
+        }
+      ]
+    },
+    {
+      "txid": "76e7363571932003e1dd3de2df2b00d2f6550a789e9d1b63f4b41b9fb7527fbf",
+      "version": 1,
+      "vin": [
+        {
+          "scriptSig": "6f73",
+          "txid": "2892fddf78e81a8a5136e21c81ab6ad8b302d805905afe49c3aeece6756b5273",
+          "vout": 1
+        }
+      ],
+      "vout": [
+        {
+          "address": "addr_bob",
+          "value": 5000
+        }
+      ]
+    }
+  ],
+  "version": 1
+}
