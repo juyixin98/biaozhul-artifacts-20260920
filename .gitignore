@@ -1,0 +1,11 @@
+# Compiler / build artifacts
+out/
+cache/
+broadcast/
+
+# Local demo runtime (anvil pid, logs, generated state)
+.run/
+
+# OS / editor
+.DS_Store
+*.swp
