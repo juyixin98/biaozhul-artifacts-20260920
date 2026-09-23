@@ -1,0 +1,11 @@
+{
+  "metric": "out_of_order_total",
+  "labels": {"service": "demo", "host": "synthetic-2"},
+  "samples": [
+    {"t": 120, "value": 3},
+    {"t": 0,   "value": 0},
+    {"t": 180, "value": 6},
+    {"t": 60,  "value": 2},
+    {"t": 240, "value": 1}
+  ]
+}

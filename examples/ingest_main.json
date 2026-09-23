@@ -1,0 +1,16 @@
+{
+  "metric": "requests_total",
+  "labels": {"service": "demo", "host": "synthetic-1"},
+  "samples": [
+    {"t": 0,   "value": 10},
+    {"t": 60,  "value": 20},
+    {"t": 120, "value": 30},
+    {"t": 180, "value": 40},
+    {"t": 300, "value": 70},
+    {"t": 360, "value": 80},
+    {"t": 420, "value": 90},
+    {"t": 480, "value": 100},
+    {"t": 540, "value": 5},
+    {"t": 600, "value": 15}
+  ]
+}
