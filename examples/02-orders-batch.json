@@ -1,0 +1,7 @@
+{
+  "events": [
+    {"eventId": "evt-0002", "type": "ORDER_UPSERT", "orderLineId": 101, "productId": 1, "qty": 2, "amount": 10.00},
+    {"eventId": "evt-0003", "type": "ORDER_UPSERT", "orderLineId": 102, "productId": 1, "qty": 3, "amount": 5.50},
+    {"eventId": "evt-0004", "type": "ORDER_UPSERT", "orderLineId": 103, "productId": 2, "qty": 1, "amount": 99.00}
+  ]
+}

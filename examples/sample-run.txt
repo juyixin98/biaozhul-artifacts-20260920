@@ -1,0 +1,45 @@
+$ # 0. 重置
+$ curl -s -X POST http://localhost:19092/admin/reset
+{"status":"RESET"}
+
+$ # 1. 商品维表 productId=1 -> BOOKS
+$ curl -s -X POST http://localhost:19092/events -d @examples/01-product-upsert.json
+{"results":[{"eventId":"evt-0001","type":"PRODUCT_UPSERT","status":"APPLIED","ignored":false,"conflict":false,"detail":"商品 1 已插入到类别 BOOKS，0 条既有订单行由孤儿加入聚合"}],"view":{"categories":[],"orphan":{"qty":0,"amount":0.00},"orderCount":0,"productCount":1,"appliedEventCount":1}}
+
+$ # 2. 批量订单：101/102 指向商品1；103 指向不存在的商品2（孤儿）
+$ curl -s -X POST http://localhost:19092/events/batch -d @examples/02-orders-batch.json
+{"results":[{"eventId":"evt-0002","type":"ORDER_UPSERT","status":"APPLIED","ignored":false,"conflict":false,"detail":"订单行 101 已插入"},{"eventId":"evt-0003","type":"ORDER_UPSERT","status":"APPLIED","ignored":false,"conflict":false,"detail":"订单行 102 已插入"},{"eventId":"evt-0004","type":"ORDER_UPSERT","status":"APPLIED","ignored":false,"conflict":false,"detail":"订单行 103 已插入"}],"view":{"categories":[{"category":"BOOKS","qty":5,"amount":15.50}],"orphan":{"qty":1,"amount":99.00},"orderCount":3,"productCount":1,"appliedEventCount":4}}
+
+$ # 3. 增量视图
+$ curl -s http://localhost:19092/view
+{"categories":[{"category":"BOOKS","qty":5,"amount":15.50}],"orphan":{"qty":1,"amount":99.00},"orderCount":3,"productCount":1,"appliedEventCount":4}
+
+$ # 4. 维表分类变更 BOOKS -> MEDIA
+$ curl -s -X POST http://localhost:19092/events -d @examples/03-category-change.json
+{"results":[{"eventId":"evt-0005","type":"PRODUCT_UPSERT","status":"APPLIED","ignored":false,"conflict":false,"detail":"商品 1 类别 BOOKS -> MEDIA，迁移数量 5、金额 15.50"}],"view":{"categories":[{"category":"MEDIA","qty":5,"amount":15.50}],"orphan":{"qty":1,"amount":99.00},"orderCount":3,"productCount":1,"appliedEventCount":5}}
+
+$ # 5. 变更后视图
+$ curl -s http://localhost:19092/view
+{"categories":[{"category":"MEDIA","qty":5,"amount":15.50}],"orphan":{"qty":1,"amount":99.00},"orderCount":3,"productCount":1,"appliedEventCount":5}
+
+$ # 6. 与全量重算比对
+$ curl -s http://localhost:19092/view/diff
+{"consistent":true,"diffs":[]}
+
+$ # 7. 重复事件（同 eventId 同载荷）
+$ curl -s -X POST http://localhost:19092/events -d @examples/04-duplicate-same-payload.json
+{"results":[{"eventId":"evt-0002","type":"ORDER_UPSERT","status":"DUPLICATE","ignored":true,"conflict":false,"detail":"eventId 已应用，跳过"}],"view":{"categories":[{"category":"MEDIA","qty":5,"amount":15.50}],"orphan":{"qty":1,"amount":99.00},"orderCount":3,"productCount":1,"appliedEventCount":5}}
+
+$ # 8. 重复事件（同 eventId 冲突载荷，首达获胜）
+$ curl -s -X POST http://localhost:19092/events -d @examples/05-duplicate-conflict-payload.json
+{"results":[{"eventId":"evt-0002","type":"ORDER_UPSERT","status":"DUPLICATE","ignored":true,"conflict":true,"detail":"eventId 已应用且载荷不同，仍按首达事件跳过"}],"view":{"categories":[{"category":"MEDIA","qty":5,"amount":15.50}],"orphan":{"qty":1,"amount":99.00},"orderCount":3,"productCount":1,"appliedEventCount":5}}
+
+$ # 9. 删除不存在的订单行（幂等空操作）
+$ curl -s -X POST http://localhost:19092/events -d @examples/06-delete-missing.json
+{"results":[{"eventId":"evt-0006","type":"ORDER_DELETE","status":"APPLIED","ignored":true,"conflict":false,"detail":"订单行 404 不存在，删除为空操作（幂等）"}],"view":{"categories":[{"category":"MEDIA","qty":5,"amount":15.50}],"orphan":{"qty":1,"amount":99.00},"orderCount":3,"productCount":1,"appliedEventCount":6}}
+
+$ # 10. 最终视图 + 再比对（应与第 5 步一致）
+$ curl -s http://localhost:19092/view
+{"categories":[{"category":"MEDIA","qty":5,"amount":15.50}],"orphan":{"qty":1,"amount":99.00},"orderCount":3,"productCount":1,"appliedEventCount":6}
+$ curl -s http://localhost:19092/view/diff
+{"consistent":true,"diffs":[]}

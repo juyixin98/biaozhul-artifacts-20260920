@@ -1,0 +1,6 @@
+{
+  "eventId": "evt-0001",
+  "type": "PRODUCT_UPSERT",
+  "productId": 1,
+  "category": "BOOKS"
+}

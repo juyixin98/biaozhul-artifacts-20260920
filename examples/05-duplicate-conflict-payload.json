@@ -1,0 +1,8 @@
+{
+  "eventId": "evt-0002",
+  "type": "ORDER_UPSERT",
+  "orderLineId": 101,
+  "productId": 999,
+  "qty": 88,
+  "amount": 8888.00
+}

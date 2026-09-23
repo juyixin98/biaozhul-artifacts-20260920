@@ -1,0 +1,5 @@
+{
+  "eventId": "evt-0006",
+  "type": "ORDER_DELETE",
+  "orderLineId": 404
+}

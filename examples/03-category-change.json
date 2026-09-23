@@ -1,0 +1,6 @@
+{
+  "eventId": "evt-0005",
+  "type": "PRODUCT_UPSERT",
+  "productId": 1,
+  "category": "MEDIA"
+}
