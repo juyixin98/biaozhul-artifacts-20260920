@@ -1,0 +1,12 @@
+# Build artifacts
+/build/
+build-*/
+*.o
+*.a
+
+# Local run databases and generated outputs
+*.db
+*.db-wal
+*.db-shm
+*.out.json
+results/
