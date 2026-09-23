@@ -1,0 +1,28 @@
+# 依赖锁定文件（dependency lock）
+#
+# 本项目刻意保持零第三方依赖：构建与运行只使用 JDK 标准库，
+# 不需要 Maven/Gradle，也不会从网络拉取任何 jar。
+#
+# 构建与运行环境：
+java.version: 17                # 最低要求 JDK 17（实测 OpenJDK 17.0.20.1）；更新的 LTS 亦可
+
+# 编译期 / 运行期第三方制品：
+runtime_dependencies: []       # 无
+compile_dependencies: []       # 无（JSON、HTTP、日志持久化均为 JDK API 自研封装）
+test_dependencies: []          # 无（自研迷你断言框架，见 src/test/java/cdcrebuild/test/TestRunner.java）
+
+# 实际使用到的 JDK 模块（均为内置）：
+jdk_modules_used:
+  - java.base                   # java.io / java.nio / java.util / java.util.zip(CRC32) / java.net.http(测试)
+  - jdk.httpserver              # com.sun.net.httpserver.HttpServer（JDK 自带的 HTTP 服务）
+
+# 构建工具链（无需安装，系统自带即可）：
+build_tools:
+  compiler: javac               # JDK 自带
+  launcher: java                # JDK 自带
+  scripts: [build.sh, test.sh, run.sh, examples/demo.sh]
+
+# 可复现构建：
+#   ./build.sh   # 等价于 javac -d build/classes $(find src/main/java -name '*.java')
+# 由于没有任何外部制品，classpath 中除本项目编译产物外不含其他内容，
+# 不存在版本漂移或供应链依赖。
