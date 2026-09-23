@@ -1,0 +1,13 @@
+{
+  "pool_id": "weth-usdc-30bp",
+  "token0": "USDC",
+  "token1": "WETH",
+  "fee_numerator": 3000,
+  "fee_denominator": 1000000,
+  "current_tick": 1000,
+  "positions": [
+    {"lower_tick": 900, "upper_tick": 1000, "liquidity": "1000000000000000000000000000000"},
+    {"lower_tick": 1000, "upper_tick": 1100, "liquidity": "2000000000000000000000000000000"},
+    {"lower_tick": 1100, "upper_tick": 1200, "liquidity": "500000000000000000000000000000"}
+  ]
+}
