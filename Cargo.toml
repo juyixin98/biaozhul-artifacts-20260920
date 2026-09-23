@@ -1,0 +1,13 @@
+[package]
+name = "psst"
+version = "0.1.0"
+edition = "2021"
+description = "File-backed prefix-compressed sorted table with block checksums, sparse index and strict format validation"
+license = "MIT"
+
+[[bin]]
+name = "psst"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3
