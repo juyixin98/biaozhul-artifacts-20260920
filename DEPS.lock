@@ -1,0 +1,37 @@
+# PGO-SE2 dependency lockfile
+#
+# All dependencies are resolved from the local system only; the build never
+# downloads anything. scripts/check-env.sh verifies that the installed
+# versions satisfy the locked ranges below and refuses to proceed otherwise.
+#
+# Verified environment: Ubuntu 24.04, x86_64
+# Install (exact verified package set):
+#   sudo apt-get install -y \
+#     build-essential=12.10ubuntu1 \
+#     cmake=3.28.3-1build7 \
+#     g++=4:13.2.0-7ubuntu1 \
+#     libceres-dev=2.2.0+dfsg-4.1ubuntu2 \
+#     libeigen3-dev=3.4.0-4build0.24.04.1 \
+#     libsqlite3-dev=3.45.1-1ubuntu2.8 \
+#     libssl-dev=3.0.13-0ubuntu3.15 \
+#     nlohmann-json3-dev=3.11.3-1
+# (apt package patch suffixes may differ slightly on mirror snapshots;
+#  check-env.sh enforces the API/ABI-safe ranges below, not the exact suffix.)
+
+component    min_version  max_exclusive  verified_version
+cmake        3.16         4.0            3.28.3
+gcc          10           15             13.3.0
+ceres        2.1.0        3.0.0          2.2.0
+eigen        3.4.0        4.0.0          3.4.0
+sqlite3      3.30.0       4.0.0          3.45.1
+openssl      3.0.0        4.0.0          3.0.13
+nlohmann_json 3.9.0       4.0.0          3.11.3
+
+# Language standard: C++17 (no compiler extensions).
+# Linear algebra backend for Ceres: SPARSE_NORMAL_CHOLESKY + CHOLMOD
+# (libsuitesparse-dev pulled in transitively by libceres-dev on Ubuntu).
+#
+# Protocol versions implemented by this binary:
+#   input  : pgo-input/1.0
+#   result : pgo-result/1.0
+# Tool version: 1.0.0

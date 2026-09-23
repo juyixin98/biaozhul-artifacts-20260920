@@ -1,0 +1,24 @@
+{
+  "protocol": "pgo-input/1.0",
+  "version": "1.0",
+  "graph_version": "text48-angle-wrap-v1",
+  "name": "headings and measurements crossing +/- pi",
+  "options": {
+    "anchor_mode": "single",
+    "loss_type": "none",
+    "max_iterations": 50
+  },
+  "nodes": [
+    {"id": "w0", "init": [0.0, 0.0, 3.141592653589793], "fixed": true},
+    {"id": "w1", "init": [-0.11, 0.0, -3.0]},
+    {"id": "w2", "init": [-0.11, 1.1, 3.141592653589793]}
+  ],
+  "edges": [
+    {"id": "wrap-turn", "from": "w0", "to": "w1",
+     "measurement": [0.11, 0.0, 0.14159265358979312],
+     "information": [30, 0, 0, 0, 30, 0, 0, 0, 30]},
+    {"id": "wrap-straight", "from": "w1", "to": "w2",
+     "measurement": [0.0, 1.0, 0.0],
+     "information": [30, 0, 0, 0, 30, 0, 0, 0, 30]}
+  ]
+}

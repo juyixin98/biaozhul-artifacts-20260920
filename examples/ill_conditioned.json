@@ -1,0 +1,26 @@
+{
+  "protocol": "pgo-input/1.0",
+  "version": "1.0",
+  "graph_version": "text48-ill-conditioned-v1",
+  "name": "ill-conditioned but positive-definite weights",
+  "options": {
+    "anchor_mode": "single",
+    "loss_type": "huber",
+    "max_iterations": 100
+  },
+  "nodes": [
+    {"id": "p0", "init": [0.0, 0.0, 0.0], "fixed": true},
+    {"id": "p1", "init": [1.05, 0.03, 0.01]},
+    {"id": "p2", "init": [2.1, 0.0, 0.0]}
+  ],
+  "edges": [
+    {"id": "tight01", "from": "p0", "to": "p1",
+     "measurement": [1.0, 0.0, 0.0],
+     "information": [10000000000000.0, 0, 0,
+                     0, 9999999999999.0, 0,
+                     0, 0, 1.0]},
+    {"id": "loose12", "from": "p1", "to": "p2",
+     "measurement": [1.0, 0.0, 0.0],
+     "information": [0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001]}
+  ]
+}

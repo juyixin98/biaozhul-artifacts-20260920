@@ -1,0 +1,214 @@
+{
+  "protocol": "pgo-input/1.0",
+  "version": "1.0",
+  "graph_version": "text48-bad-loop-v3",
+  "name": "consistent chain plus a square loop, with one false closure",
+  "options": {
+    "anchor_mode": "single",
+    "loss_type": "huber",
+    "loss_param": 1.0,
+    "max_iterations": 100
+  },
+  "nodes": [
+    {
+      "id": "a",
+      "init": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "fixed": true
+    },
+    {
+      "id": "p",
+      "init": [
+        1.02,
+        0.03,
+        0.02
+      ]
+    },
+    {
+      "id": "e",
+      "init": [
+        2.05,
+        -0.04,
+        -0.03
+      ]
+    },
+    {
+      "id": "b",
+      "init": [
+        1.03,
+        0.02,
+        1.59
+      ]
+    },
+    {
+      "id": "c",
+      "init": [
+        0.96,
+        1.03,
+        3.16
+      ]
+    },
+    {
+      "id": "d",
+      "init": [
+        -0.04,
+        0.97,
+        -1.55
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "ap",
+      "from": "a",
+      "to": "p",
+      "measurement": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "information": [
+        60,
+        0,
+        0,
+        0,
+        60,
+        0,
+        0,
+        0,
+        90
+      ]
+    },
+    {
+      "id": "pe",
+      "from": "p",
+      "to": "e",
+      "measurement": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "information": [
+        60,
+        0,
+        0,
+        0,
+        60,
+        0,
+        0,
+        0,
+        90
+      ]
+    },
+    {
+      "id": "ab",
+      "from": "a",
+      "to": "b",
+      "measurement": [
+        1.0,
+        0.0,
+        1.5707963267948966
+      ],
+      "information": [
+        60,
+        0,
+        0,
+        0,
+        60,
+        0,
+        0,
+        0,
+        90
+      ]
+    },
+    {
+      "id": "bc",
+      "from": "b",
+      "to": "c",
+      "measurement": [
+        1.0,
+        0.0,
+        1.5707963267948966
+      ],
+      "information": [
+        60,
+        0,
+        0,
+        0,
+        60,
+        0,
+        0,
+        0,
+        90
+      ]
+    },
+    {
+      "id": "cd",
+      "from": "c",
+      "to": "d",
+      "measurement": [
+        1.0,
+        0.0,
+        1.5707963267948966
+      ],
+      "information": [
+        60,
+        0,
+        0,
+        0,
+        60,
+        0,
+        0,
+        0,
+        90
+      ]
+    },
+    {
+      "id": "da",
+      "from": "d",
+      "to": "a",
+      "measurement": [
+        1.0,
+        0.0,
+        1.5707963267948966
+      ],
+      "information": [
+        60,
+        0,
+        0,
+        0,
+        60,
+        0,
+        0,
+        0,
+        90
+      ]
+    },
+    {
+      "id": "false-loop-e-d",
+      "from": "e",
+      "to": "d",
+      "measurement": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "information": [
+        60,
+        0,
+        0,
+        0,
+        60,
+        0,
+        0,
+        0,
+        60
+      ],
+      "loss_type": "huber",
+      "loss_param": 0.1
+    }
+  ]
+}

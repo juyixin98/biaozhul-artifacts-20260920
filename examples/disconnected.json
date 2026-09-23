@@ -1,0 +1,192 @@
+{
+  "protocol": "pgo-input/1.0",
+  "version": "1.0",
+  "graph_version": "text48-disconnected-v2",
+  "name": "two disconnected equilateral triangles",
+  "options": {
+    "anchor_mode": "per_component",
+    "loss_type": "huber",
+    "loss_param": 1.0,
+    "max_iterations": 100
+  },
+  "nodes": [
+    {
+      "id": "a0",
+      "init": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "fixed": true
+    },
+    {
+      "id": "a1",
+      "init": [
+        1.02,
+        0.03,
+        0.02
+      ]
+    },
+    {
+      "id": "a2",
+      "init": [
+        0.45,
+        0.9,
+        0.05
+      ]
+    },
+    {
+      "id": "b0",
+      "init": [
+        10.0,
+        10.0,
+        0.5
+      ],
+      "fixed": true
+    },
+    {
+      "id": "b1",
+      "init": [
+        11.0,
+        10.1,
+        0.55
+      ]
+    },
+    {
+      "id": "b2",
+      "init": [
+        10.4,
+        11.0,
+        0.6
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "a01",
+      "from": "a0",
+      "to": "a1",
+      "measurement": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "information": [
+        30,
+        0,
+        0,
+        0,
+        30,
+        0,
+        0,
+        0,
+        40
+      ]
+    },
+    {
+      "id": "a12",
+      "from": "a1",
+      "to": "a2",
+      "measurement": [
+        -0.5,
+        0.8660254037844386,
+        0.0
+      ],
+      "information": [
+        30,
+        0,
+        0,
+        0,
+        30,
+        0,
+        0,
+        0,
+        40
+      ]
+    },
+    {
+      "id": "a20",
+      "from": "a2",
+      "to": "a0",
+      "measurement": [
+        -0.5,
+        -0.8660254037844386,
+        0.0
+      ],
+      "information": [
+        30,
+        0,
+        0,
+        0,
+        30,
+        0,
+        0,
+        0,
+        40
+      ]
+    },
+    {
+      "id": "b01",
+      "from": "b0",
+      "to": "b1",
+      "measurement": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "information": [
+        30,
+        0,
+        0,
+        0,
+        30,
+        0,
+        0,
+        0,
+        40
+      ]
+    },
+    {
+      "id": "b12",
+      "from": "b1",
+      "to": "b2",
+      "measurement": [
+        -0.5,
+        0.8660254037844386,
+        0.0
+      ],
+      "information": [
+        30,
+        0,
+        0,
+        0,
+        30,
+        0,
+        0,
+        0,
+        40
+      ]
+    },
+    {
+      "id": "b20",
+      "from": "b2",
+      "to": "b0",
+      "measurement": [
+        -0.5,
+        -0.8660254037844386,
+        0.0
+      ],
+      "information": [
+        30,
+        0,
+        0,
+        0,
+        30,
+        0,
+        0,
+        0,
+        40
+      ]
+    }
+  ]
+}

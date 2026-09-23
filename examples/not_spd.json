@@ -1,0 +1,21 @@
+{
+  "protocol": "pgo-input/1.0",
+  "version": "1.0",
+  "graph_version": "text48-not-spd-v1",
+  "name": "negative eigenvalue in information matrix (must be rejected)",
+  "options": {
+    "anchor_mode": "single",
+    "max_iterations": 50
+  },
+  "nodes": [
+    {"id": "x0", "init": [0.0, 0.0, 0.0], "fixed": true},
+    {"id": "x1", "init": [1.0, 0.0, 0.0]}
+  ],
+  "edges": [
+    {"id": "bad-edge", "from": "x0", "to": "x1",
+     "measurement": [1.0, 0.0, 0.0],
+     "information": [10, 0, 0,
+                     0, -5, 0,
+                     0, 0, 10]}
+  ]
+}

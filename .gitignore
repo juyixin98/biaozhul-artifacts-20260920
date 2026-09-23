@@ -1,0 +1,16 @@
+# build artifacts
+build/
+*.o
+*.a
+*.so
+
+# local run databases and results
+*.db
+*.db-wal
+*.db-shm
+pgo_runs.db*
+
+# temp/scratch
+/tmp/
+*.tmp-*
+compile_commands.json
