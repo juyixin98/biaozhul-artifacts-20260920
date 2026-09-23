@@ -1,0 +1,43 @@
+# SSE 帧字节样例（离线，可直接被本库 Decoder 解析）
+#
+# 本文件用于人工对照规范。真实线上的 SSE 流由 id/event/retry/data 字段行和
+# 空行（派发事件）组成；以冒号开头的是注释（心跳），不产生事件。
+#
+# 字段含义：
+#   id:     设置 last event id；断线重连用它（裸 `id` 或 `id:` 会清空为 ""）
+#   event:  事件类型，默认 message；派发后复位
+#   retry:  重连等待毫秒数（必须全 ASCII 数字才生效）
+#   data:   数据行；多行 data 用 LF 拼接，派发时去掉末尾 LF
+#
+# 本样例统一用 LF。CRLF / CR 的等价写法见文件末尾注释。
+
+retry: 3000
+: connected
+
+id: 100
+event: order.created
+data: {"orderId":"A-1","total":42}
+
+id: 101
+event: patch
+data: 第一行
+data: 第二行
+data: 第三行
+
+: heartbeat
+id: 102
+data: 单行消息，没有显式 event，类型为默认的 message
+
+# --- 下面这行是“空 id”：裸 id 字段把 last event id 清空为 ""（注意没有冒号）---
+id
+data: cursor-cleared
+
+# ---------------------------------------------------------------------------
+# 行终止符等价写法（规范允许混用；本解析器逐字节处理，允许落在 TCP 块边界）：
+#
+#   LF   : data: a\n\n
+#   CRLF : data: a\r\n\r\n
+#   CR   : data: a\r\r
+#   跨块 : 第 N 个 TCP 段以 \r 结尾，第 N+1 段以 \n 开头 —— 视为同一个 CRLF，
+#          不会多派发一个空事件。
+# ---------------------------------------------------------------------------

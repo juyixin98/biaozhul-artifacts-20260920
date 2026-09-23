@@ -1,0 +1,27 @@
+[package]
+name = "sse-resume"
+version = "0.1.0"
+edition = "2021"
+description = "从零实现的 SSE 增量字节解析库与断线续流测试服务（纯标准库）"
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "sse-server"
+path = "src/bin/sse-server.rs"
+
+[[bin]]
+name = "sse-client"
+path = "src/bin/sse-client.rs"
+
+[[bin]]
+name = "demo-reconnect"
+path = "src/bin/demo-reconnect.rs"
+
+[profile.dev]
+# 便于测试运行，不影响调试信息
+opt-level = 0
+
+[profile.release]
+opt-level = 2

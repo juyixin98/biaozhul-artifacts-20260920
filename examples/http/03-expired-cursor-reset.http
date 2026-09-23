@@ -1,0 +1,33 @@
+# 过期 / 非法 / 超前游标 → 明确 reset
+#
+# 当 Last-Event-ID 指向的事件已经滚出服务端的有限历史窗口、格式不是数字、
+# 或比服务端最新 id 还大时，服务端不会假装“无缺口”，而是先投递一个
+# event: reset 事件，再转入实时流。客户端必须据此做全量再同步。
+#
+# 三种情形分别用下面三个请求头之一（三选一改值即可）：
+#   Last-Event-ID: 2          # 已过期（窗口里最旧的 id 都比它大）
+#   Last-Event-ID: abc        # 非法（不是纯 ASCII 数字）
+#   Last-Event-ID: 999999     # 超前（比最新 id 还大）
+#
+# curl:
+#   curl -N -H 'Last-Event-ID: 2' http://127.0.0.1:18080/events
+#
+# reset 事件示例：
+#   id: 33
+#   event: reset
+#   data: {"reason":"cursor-expired","yourLastEventId":"2","earliestId":14,"latestId":33,"resumeAfter":33}
+#
+# reason 取值：
+#   cursor-expired  游标早于历史窗口最旧 id（事件永久丢失）
+#   cursor-invalid  游标不是合法数字（含空值）
+#   cursor-ahead    游标比服务端最新 id 还大
+#
+# earliestId 为 null 表示服务端当前没有任何历史（例如历史容量为 0）。
+# 客户端应把本地游标对齐到帧 id（= resumeAfter），再继续消费实时事件。
+
+GET /events HTTP/1.1
+Host: 127.0.0.1:18080
+Accept: text/event-stream
+Last-Event-ID: 2
+Connection: close
+

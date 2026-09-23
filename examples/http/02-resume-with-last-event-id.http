@@ -1,0 +1,33 @@
+# 断线续流：携带最后已知的事件 id
+#
+# 客户端在断线前收到的最后一个事件 id 为 42，重连时通过 Last-Event-ID 告知服务端。
+# 若 42 仍在服务端有限历史窗口内，服务端会重放 id 严格大于 42 的事件，
+# 然后无缝转入实时推送。
+#
+# curl:
+#   curl -N -H 'Last-Event-ID: 42' http://127.0.0.1:18080/events
+#
+# 响应开头示例（重放 + 实时）：
+#   HTTP/1.1 200 OK
+#   Content-Type: text/event-stream;charset=utf-8
+#
+#   retry: 3000
+#   : connected
+#   : resume replay 2 event(s)
+#   id: 43
+#   event: tick
+#   data: {"ts":1790147514127}
+#
+#   id: 44
+#   event: tick
+#   data: {"ts":1790147514327}
+#
+# 注意：游标对应事件本身（id=42）不会重发；只有 id > 42 的事件被重放。
+# “游标落后 1 个事件”的 at-least-once 重复边界见 README 与集成测试。
+
+GET /events HTTP/1.1
+Host: 127.0.0.1:18080
+Accept: text/event-stream
+Last-Event-ID: 42
+Connection: close
+

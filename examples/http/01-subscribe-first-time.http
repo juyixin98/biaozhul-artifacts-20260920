@@ -1,0 +1,14 @@
+# 首次订阅（无 Last-Event-ID）
+#
+# 服务端只投递“建立连接之后”发布的实时事件；历史不会重放。
+#
+# 用 curl 发送（-N 关闭缓冲，便于实时观察）：
+#   curl -N --http1.1 http://127.0.0.1:18080/events
+#
+# 裸 HTTP/1.1 请求报文如下（可用 `nc 127.0.0.1 18080 < 本文件` 发送）：
+
+GET /events HTTP/1.1
+Host: 127.0.0.1:18080
+Accept: text/event-stream
+Connection: close
+
