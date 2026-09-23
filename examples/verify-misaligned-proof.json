@@ -1,0 +1,33 @@
+{
+  "_comment": "Two sibling proof nodes are swapped, leaving level/index tags intact. Rejected structurally with MisalignedNode before any hash comparison.",
+  "block_size": 4,
+  "blocks": [
+    {
+      "data": "YWJjZA==",
+      "index": 0,
+      "length": 4
+    }
+  ],
+  "data_len": 11,
+  "end": 1,
+  "n": 3,
+  "proof": [
+    {
+      "hash": "hUOlfPqRg0f9uuoewHCCO9vcfOLv9bkzS8OG0zJyb0E=",
+      "index": 0,
+      "level": 0
+    },
+    {
+      "hash": "rKXr7A40+Ws+Weox8HzNjfGoZTR/33zvRD2lJV30xfc=",
+      "index": 1,
+      "level": 1
+    },
+    {
+      "hash": "LCYEKGME9YzV6hPf/RnYEn0MqvtEHWEQt6ljMbkMU1w=",
+      "index": 1,
+      "level": 0
+    }
+  ],
+  "root": "8o17QRYFIiuME9lRW5szSeHoLhM79Jp50lbkLzkcR3g=",
+  "start": 0
+}
