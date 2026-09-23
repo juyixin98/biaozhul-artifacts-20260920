@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+keyvault-data/
+.pytest_cache/
