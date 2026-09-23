@@ -1,0 +1,29 @@
+{
+  "name": "nft-metadata-consistency",
+  "version": "1.0.0",
+  "description": "Local NFT metadata content-addressing consistency verification service (TypeScript/Fastify/SQLite, no public gateways)",
+  "type": "module",
+  "engines": {
+    "node": ">=18.17"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "tsx src/server.ts",
+    "start:prod": "node dist/src/server.js",
+    "dev": "tsx watch src/server.ts",
+    "test": "tsx --test test/*.test.ts",
+    "gen-fixtures": "tsx src/scripts/gen-fixtures.ts",
+    "demo": "bash examples/demo.sh"
+  },
+  "dependencies": {
+    "better-sqlite3": "11.3.0",
+    "fastify": "4.28.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "7.6.11",
+    "@types/node": "20.14.15",
+    "multiformats": "^13.3.2",
+    "tsx": "4.19.1",
+    "typescript": "5.5.4"
+  }
+}

@@ -1,0 +1,275 @@
+{
+  "ok": true,
+  "report": {
+    "ok": true,
+    "cid": "bafybeia7j5bioii6xrfmzprrpkwsy3wm3pu6ena7ys6z37bkqgoy54gseq",
+    "layers": [
+      {
+        "depth": 0,
+        "role": "root",
+        "cid": "bafybeia7j5bioii6xrfmzprrpkwsy3wm3pu6ena7ys6z37bkqgoy54gseq",
+        "codec": "dag-pb",
+        "blockBytes": 750,
+        "hashCheck": {
+          "name": "sha256-content-address",
+          "ok": true,
+          "basis": "SHA-256(750 bytes) = 1f4f4287211ebc4accbe… matches multihash 0x12"
+        },
+        "encodingCheck": {
+          "name": "dag-pb-canonical",
+          "ok": true,
+          "basis": "strict protobuf decode + canonical re-encode equality; 0 link(s)"
+        },
+        "links": [],
+        "unixfsCheck": {
+          "name": "unixfs-file-shape",
+          "ok": true,
+          "basis": "UnixFS file: 0 chunk link(s), 739 logical bytes; blocksizes/filesize agree with resolved payloads"
+        },
+        "inlinePayloadBytes": 739
+      }
+    ],
+    "metadataJsonBytes": 739,
+    "parsedFields": {
+      "name": "Consistency Demo Token #123",
+      "description": "Generated locally; every reference resolves through content-addressed blocks. No gateway.",
+      "image": "ipfs://bafybeigqiurqgh4w6gx4u77memvpsol22mt5ljxau3jhpg4pmqr2p6bbg4/image.png",
+      "animation_url": "ipfs://bafybeidkcqjgfetm63zeuubvsvo3unvynsyaaa6d35uodkku6s544r7vfm",
+      "external_url": "https://example.invalid/optional-declared-only",
+      "attributes": [
+        {
+          "traitType": "generation",
+          "value": 1,
+          "displayType": null
+        },
+        {
+          "traitType": "palette",
+          "value": "transparent",
+          "displayType": null
+        },
+        {
+          "traitType": "rarity",
+          "value": 99.5,
+          "displayType": "boost_number"
+        }
+      ],
+      "properties": {
+        "origin": "local-fixture",
+        "hash": "sha2-256"
+      }
+    },
+    "media": [
+      {
+        "field": "image",
+        "uri": "ipfs://bafybeigqiurqgh4w6gx4u77memvpsol22mt5ljxau3jhpg4pmqr2p6bbg4/image.png",
+        "ok": true,
+        "path": [
+          "image.png"
+        ],
+        "rootCid": "bafybeigqiurqgh4w6gx4u77memvpsol22mt5ljxau3jhpg4pmqr2p6bbg4",
+        "resolvedFileCid": "bafybeigimxpy2moykrvmfimofmwd2kkqo4255p77xjmzebases4b4aisl4",
+        "layers": [
+          {
+            "depth": 0,
+            "role": "directory",
+            "cid": "bafybeigqiurqgh4w6gx4u77memvpsol22mt5ljxau3jhpg4pmqr2p6bbg4",
+            "codec": "dag-pb",
+            "blockBytes": 57,
+            "hashCheck": {
+              "name": "sha256-content-address",
+              "ok": true,
+              "basis": "SHA-256(57 bytes) = d04523031f96f1afca7f… matches multihash 0x12"
+            },
+            "encodingCheck": {
+              "name": "dag-pb-canonical",
+              "ok": true,
+              "basis": "strict protobuf decode + canonical re-encode equality; 1 link(s)"
+            },
+            "unixfsCheck": {
+              "name": "unixfs-directory",
+              "ok": true,
+              "basis": "UnixFS directory, 1 named entries, sorted"
+            }
+          },
+          {
+            "depth": 1,
+            "role": "root",
+            "cid": "bafybeigimxpy2moykrvmfimofmwd2kkqo4255p77xjmzebases4b4aisl4",
+            "codec": "dag-pb",
+            "blockBytes": 76,
+            "hashCheck": {
+              "name": "sha256-content-address",
+              "ok": true,
+              "basis": "SHA-256(76 bytes) = c865df8d31d8546ac2a1… matches multihash 0x12"
+            },
+            "encodingCheck": {
+              "name": "dag-pb-canonical",
+              "ok": true,
+              "basis": "strict protobuf decode + canonical re-encode equality; 0 link(s)"
+            },
+            "links": [],
+            "unixfsCheck": {
+              "name": "unixfs-file-shape",
+              "ok": true,
+              "basis": "UnixFS file: 0 chunk link(s), 68 logical bytes; blocksizes/filesize agree with resolved payloads"
+            },
+            "inlinePayloadBytes": 68
+          }
+        ],
+        "media": {
+          "mime": "image/png",
+          "ext": "png",
+          "basis": "8-byte PNG signature 89504e470d0a1a0a; IHDR 1x1"
+        },
+        "payloadBytes": 68,
+        "sizeLimit": 2097152,
+        "checks": [
+          {
+            "name": "dag-traversal",
+            "ok": true,
+            "basis": "resolved 1 path segment(s) through UnixFS directory link names"
+          },
+          {
+            "name": "payload-size-limit",
+            "ok": true,
+            "basis": "assembled payload is 68 bytes; limit 2097152"
+          },
+          {
+            "name": "media-encoding",
+            "ok": true,
+            "basis": "recognized image/png from content: 8-byte PNG signature 89504e470d0a1a0a; IHDR 1x1"
+          }
+        ]
+      },
+      {
+        "field": "animation_url",
+        "uri": "ipfs://bafybeidkcqjgfetm63zeuubvsvo3unvynsyaaa6d35uodkku6s544r7vfm",
+        "ok": true,
+        "path": [],
+        "rootCid": "bafybeidkcqjgfetm63zeuubvsvo3unvynsyaaa6d35uodkku6s544r7vfm",
+        "resolvedFileCid": "bafybeidkcqjgfetm63zeuubvsvo3unvynsyaaa6d35uodkku6s544r7vfm",
+        "layers": [
+          {
+            "depth": 0,
+            "role": "root",
+            "cid": "bafybeidkcqjgfetm63zeuubvsvo3unvynsyaaa6d35uodkku6s544r7vfm",
+            "codec": "dag-pb",
+            "blockBytes": 99,
+            "hashCheck": {
+              "name": "sha256-content-address",
+              "ok": true,
+              "basis": "SHA-256(99 bytes) = 6a141262926cf6f24a50… matches multihash 0x12"
+            },
+            "encodingCheck": {
+              "name": "dag-pb-canonical",
+              "ok": true,
+              "basis": "strict protobuf decode + canonical re-encode equality; 2 link(s)"
+            },
+            "links": [
+              {
+                "name": "chunk-0",
+                "cid": "bafkreidu4hepc324j46an2ourgxhd2epnmkl6mgyto7x5qkmsmvs23i3jq",
+                "found": true,
+                "tsizeDeclared": "178",
+                "tsizeComputed": "178",
+                "tsizeMatches": true,
+                "basis": "declared Tsize 178 vs cumulative block+payload size 178"
+              },
+              {
+                "name": "chunk-1",
+                "cid": "bafkreigkvvfs7o4db6suaavbm5prlgozwcjm2omk2353qfv75d4urtowea",
+                "found": true,
+                "tsizeDeclared": "178",
+                "tsizeComputed": "178",
+                "tsizeMatches": true,
+                "basis": "declared Tsize 178 vs cumulative block+payload size 178"
+              }
+            ],
+            "unixfsCheck": {
+              "name": "unixfs-file-shape",
+              "ok": true,
+              "basis": "UnixFS file: 2 chunk link(s), 356 logical bytes; blocksizes/filesize agree with resolved payloads"
+            }
+          },
+          {
+            "depth": 1,
+            "role": "raw",
+            "cid": "bafkreidu4hepc324j46an2ourgxhd2epnmkl6mgyto7x5qkmsmvs23i3jq",
+            "codec": "raw",
+            "blockBytes": 178,
+            "hashCheck": {
+              "name": "sha256-content-address",
+              "ok": true,
+              "basis": "SHA-256(178 bytes) = 74e1c8f16f5c4f3c06e9… matches multihash 0x12"
+            },
+            "encodingCheck": {
+              "name": "raw-block",
+              "ok": true,
+              "basis": "raw codec leaf block"
+            },
+            "inlinePayloadBytes": 178
+          },
+          {
+            "depth": 1,
+            "role": "raw",
+            "cid": "bafkreigkvvfs7o4db6suaavbm5prlgozwcjm2omk2353qfv75d4urtowea",
+            "codec": "raw",
+            "blockBytes": 178,
+            "hashCheck": {
+              "name": "sha256-content-address",
+              "ok": true,
+              "basis": "SHA-256(178 bytes) = caad4b2fbb830fa54002… matches multihash 0x12"
+            },
+            "encodingCheck": {
+              "name": "raw-block",
+              "ok": true,
+              "basis": "raw codec leaf block"
+            },
+            "inlinePayloadBytes": 178
+          }
+        ],
+        "media": {
+          "mime": "video/mp4",
+          "ext": "mp4",
+          "basis": "ISO-BMFF ftyp box, major brand \"isom\""
+        },
+        "payloadBytes": 356,
+        "sizeLimit": 2097152,
+        "checks": [
+          {
+            "name": "dag-traversal",
+            "ok": true,
+            "basis": "reference points directly at the file root"
+          },
+          {
+            "name": "payload-size-limit",
+            "ok": true,
+            "basis": "assembled payload is 356 bytes; limit 2097152"
+          },
+          {
+            "name": "media-encoding",
+            "ok": true,
+            "basis": "recognized video/mp4 from content: ISO-BMFF ftyp box, major brand \"isom\""
+          }
+        ]
+      }
+    ],
+    "checks": [
+      {
+        "name": "json-utf8-grammar",
+        "ok": true,
+        "basis": "strict UTF-8 decode + JSON grammar parse of 739 bytes succeeded; duplicate keys rejected"
+      },
+      {
+        "name": "metadata-model",
+        "ok": true,
+        "basis": "ERC-style metadata model valid: name, image + 3 attribute(s), whitelist fields only"
+      },
+      {
+        "name": "media-references",
+        "ok": true,
+        "basis": "all 2 ipfs:// reference(s) resolved locally to typed, size-checked file payloads"
+      }
+    ]
+  }
+}

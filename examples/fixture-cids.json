@@ -1,0 +1,15 @@
+{
+  "metadataCid": "bafybeia7j5bioii6xrfmzprrpkwsy3wm3pu6ena7ys6z37bkqgoy54gseq",
+  "imageDirectoryCid": "bafybeigqiurqgh4w6gx4u77memvpsol22mt5ljxau3jhpg4pmqr2p6bbg4",
+  "imageLeafCid": "bafybeigimxpy2moykrvmfimofmwd2kkqo4255p77xjmzebases4b4aisl4",
+  "animationCid": "bafybeidkcqjgfetm63zeuubvsvo3unvynsyaaa6d35uodkku6s544r7vfm",
+  "rawLeafCids": [
+    "bafkreidu4hepc324j46an2ourgxhd2epnmkl6mgyto7x5qkmsmvs23i3jq",
+    "bafkreigkvvfs7o4db6suaavbm5prlgozwcjm2omk2353qfv75d4urtowea"
+  ],
+  "pngBytes": 68,
+  "pngSha256Prefix": "0de74bd73ba4c0ba",
+  "mp4Bytes": 356,
+  "blockCount": 6,
+  "verificationOk": true
+}

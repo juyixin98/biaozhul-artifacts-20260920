@@ -1,0 +1,26 @@
+{
+  "name": "Consistency Demo Token #123",
+  "description": "Generated locally; every reference resolves through content-addressed blocks. No gateway.",
+  "image": "ipfs://bafybeigqiurqgh4w6gx4u77memvpsol22mt5ljxau3jhpg4pmqr2p6bbg4/image.png",
+  "animation_url": "ipfs://bafybeidkcqjgfetm63zeuubvsvo3unvynsyaaa6d35uodkku6s544r7vfm",
+  "external_url": "https://example.invalid/optional-declared-only",
+  "attributes": [
+    {
+      "trait_type": "generation",
+      "value": 1
+    },
+    {
+      "trait_type": "palette",
+      "value": "transparent"
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "rarity",
+      "value": 99.5
+    }
+  ],
+  "properties": {
+    "origin": "local-fixture",
+    "hash": "sha2-256"
+  }
+}
