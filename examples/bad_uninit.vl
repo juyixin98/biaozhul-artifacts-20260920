@@ -1,0 +1,9 @@
+// 无效示例 1：局部量可能未初始化就在分支合流后读取
+void main() {
+    int x;
+    bool c = true;
+    if (c) {
+        x = 10;
+    }
+    print_int(x);   // else 路径上 x 未初始化
+}

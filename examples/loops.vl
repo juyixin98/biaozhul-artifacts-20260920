@@ -1,0 +1,14 @@
+// 有效示例：典型回边场景 —— 嵌套循环与循环头处的局部量合流
+void main() {
+    int i = 1;
+    while (i <= 3) {
+        int j = 1;
+        int row = 0;
+        while (j <= 3) {
+            row = row + i * j;
+            j = j + 1;
+        }
+        print_int(row);     // 6, 12, 18
+        i = i + 1;
+    }
+}

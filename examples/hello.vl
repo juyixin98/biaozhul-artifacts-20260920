@@ -1,0 +1,20 @@
+// 有效示例：循环求和 + 递归阶乘 + bool
+int fact(int n) {
+    if (n < 2) {
+        return 1;
+    }
+    return n * fact(n - 1);
+}
+
+void main() {
+    int sum = 0;
+    int i = 1;
+    while (i <= 5) {
+        sum = sum + i;
+        i = i + 1;
+    }
+    print_int(sum);            // 15
+    print_int(fact(6));        // 720
+    bool ok = sum == 15;
+    print_bool(ok);            // true
+}

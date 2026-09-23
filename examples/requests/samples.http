@@ -1,0 +1,45 @@
+### byteverifier JSON 服务请求样例
+### 先启动:  python -m byteverifier serve --port 8080
+
+### 健康检查
+GET http://127.0.0.1:8080/health
+
+### 编译一个合法程序，拿回 module_hex（供 verify/mutate 使用）
+POST http://127.0.0.1:8080/compile
+Content-Type: application/json
+
+{
+  "source": "int fact(int n) { if (n < 2) { return 1; } return n * fact(n-1); } void main() { print_int(fact(5)); }"
+}
+
+### 直接运行源码
+POST http://127.0.0.1:8080/run
+Content-Type: application/json
+
+{
+  "source": "void main() { int s=0; int i=1; while (i<=10) { s=s+i; i=i+1; } print_int(s); }",
+  "fuel": 100000
+}
+
+### 验证一个未初始化局部量的模块（应 ok=false，local.uninit + shortest_path）
+### module_hex 由 compile "void main() { int x; print_int(x); }" 得到
+POST http://127.0.0.1:8080/verify
+Content-Type: application/json
+
+{
+  "module_hex": "4256010001046d61696e0300010101070011000050f0ff520000"
+}
+
+### 单字节变异：把模块第 19 字节整字节替换为 0xFF
+POST http://127.0.0.1:8080/mutate
+Content-Type: application/json
+
+{
+  "module_hex": "4256010001046d61696e0300010101070011000050f0ff520000",
+  "byte": 19,
+  "value": 255
+}
+
+### 等价的 curl 命令：
+###   curl -s -X POST localhost:8080/run -H 'Content-Type: application/json' \
+###        -d '{"source":"void main(){ print_int(6*7); }"}'

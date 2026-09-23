@@ -1,0 +1,24 @@
+{
+  "ok": false,
+  "error": {
+    "phase": "verifier",
+    "kind": "local.uninit",
+    "message": "读取局部量 'x'，但存在未对其初始化即到达此处的路径",
+    "function": "main",
+    "offset": 18,
+    "location": {"file": "<input>", "line": 3, "col": 15},
+    "shortest_path": {
+      "function": "main",
+      "error_offset": 18,
+      "length": 5,
+      "steps": [
+        {"offset": 0,  "kind": "entry",       "source_line": 2, "instruction": "LOAD_CONST 0"},
+        {"offset": 3,  "kind": "fallthrough", "source_line": 2, "instruction": "STORE_LOCAL 1"},
+        {"offset": 6,  "kind": "fallthrough", "source_line": 3, "instruction": "LOAD_LOCAL 1"},
+        {"offset": 9,  "kind": "fallthrough", "source_line": 3, "instruction": "JIF 18"},
+        {"offset": 18, "kind": "branch",      "source_line": 4, "instruction": "LOAD_LOCAL 0"}
+      ],
+      "note": "路径为控制流图上按边数（回边权重更高）计算的最短可达路径；不代表具体运行时输入。"
+    }
+  }
+}

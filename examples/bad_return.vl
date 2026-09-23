@@ -1,0 +1,11 @@
+// 无效示例 2：非 void 函数存在缺少返回值的路径（异常返回）
+int maybe(bool c) {
+    if (c) {
+        return 1;
+    }
+    // c 为 false 时走到函数末尾，没有 RETV
+}
+
+void main() {
+    print_int(maybe(false));
+}

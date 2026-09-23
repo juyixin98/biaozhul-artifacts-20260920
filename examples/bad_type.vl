@@ -1,0 +1,15 @@
+// 无效示例 3：分支合流时栈上类型不一致（int vs bool）
+int id(int a) { return a; }
+
+void main() {
+    int r;
+    bool c = true;
+    if (c) {
+        r = id(3);
+    } else {
+        r = 5;
+    }
+    // 下面故意制造 int/bool 的算术类型冲突
+    bool b = !c;
+    print_int(r + b);   // int + bool
+}

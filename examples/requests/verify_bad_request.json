@@ -1,0 +1,3 @@
+{
+  "source": "void main() { int x; if (true) { x = 1; } print_int(x); }"
+}
