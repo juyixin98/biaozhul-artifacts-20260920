@@ -1,0 +1,7 @@
+{
+  "ok": false,
+  "error": {
+    "code": "DIVISION_BY_ZERO",
+    "message": "整数除以零（被除数 10）"
+  }
+}

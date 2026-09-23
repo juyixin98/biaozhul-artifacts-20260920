@@ -1,0 +1,234 @@
+{
+  "ok": true,
+  "expression": "name >= 'c' AND active",
+  "ast": {
+    "node": "Binary",
+    "pos": {
+      "offset": 0,
+      "line": 1,
+      "column": 1
+    },
+    "length": 22,
+    "resolvedType": "BOOLEAN",
+    "op": "AND",
+    "opPos": {
+      "offset": 12,
+      "line": 1,
+      "column": 13
+    },
+    "left": {
+      "node": "Binary",
+      "pos": {
+        "offset": 0,
+        "line": 1,
+        "column": 1
+      },
+      "length": 11,
+      "resolvedType": "BOOLEAN",
+      "op": ">=",
+      "opPos": {
+        "offset": 5,
+        "line": 1,
+        "column": 6
+      },
+      "left": {
+        "node": "Column",
+        "pos": {
+          "offset": 0,
+          "line": 1,
+          "column": 1
+        },
+        "length": 4,
+        "resolvedType": "STRING",
+        "name": "name"
+      },
+      "right": {
+        "node": "Literal",
+        "pos": {
+          "offset": 8,
+          "line": 1,
+          "column": 9
+        },
+        "length": 3,
+        "resolvedType": "STRING",
+        "literalKind": "STRING",
+        "raw": "c",
+        "value": "c"
+      }
+    },
+    "right": {
+      "node": "Column",
+      "pos": {
+        "offset": 16,
+        "line": 1,
+        "column": 17
+      },
+      "length": 6,
+      "resolvedType": "BOOLEAN",
+      "name": "active"
+    }
+  },
+  "plan": {
+    "operator": "Filter",
+    "predicate": {
+      "node": "Binary",
+      "pos": {
+        "offset": 0,
+        "line": 1,
+        "column": 1
+      },
+      "length": 22,
+      "resolvedType": "BOOLEAN",
+      "op": "AND",
+      "opPos": {
+        "offset": 12,
+        "line": 1,
+        "column": 13
+      },
+      "left": {
+        "node": "Binary",
+        "pos": {
+          "offset": 0,
+          "line": 1,
+          "column": 1
+        },
+        "length": 11,
+        "resolvedType": "BOOLEAN",
+        "op": ">=",
+        "opPos": {
+          "offset": 5,
+          "line": 1,
+          "column": 6
+        },
+        "left": {
+          "node": "Column",
+          "pos": {
+            "offset": 0,
+            "line": 1,
+            "column": 1
+          },
+          "length": 4,
+          "resolvedType": "STRING",
+          "name": "name"
+        },
+        "right": {
+          "node": "Literal",
+          "pos": {
+            "offset": 8,
+            "line": 1,
+            "column": 9
+          },
+          "length": 3,
+          "resolvedType": "STRING",
+          "literalKind": "STRING",
+          "raw": "c",
+          "value": "c"
+        }
+      },
+      "right": {
+        "node": "Column",
+        "pos": {
+          "offset": 16,
+          "line": 1,
+          "column": 17
+        },
+        "length": 6,
+        "resolvedType": "BOOLEAN",
+        "name": "active"
+      }
+    },
+    "input": {
+      "operator": "TableScan",
+      "table": "users",
+      "columns": [
+        "name",
+        "active"
+      ],
+      "estimatedRows": 4
+    }
+  },
+  "result": {
+    "selectedCount": 1,
+    "selectedRows": [
+      [
+        "dave",
+        true
+      ]
+    ],
+    "evaluatedRows": [
+      {
+        "rowIndex": 0,
+        "triValue": "FALSE",
+        "selected": false,
+        "row": [
+          "alice",
+          true
+        ]
+      },
+      {
+        "rowIndex": 1,
+        "triValue": "TRUE",
+        "selected": true,
+        "row": [
+          "dave",
+          true
+        ]
+      },
+      {
+        "rowIndex": 2,
+        "triValue": "FALSE",
+        "selected": false,
+        "row": [
+          "zoe",
+          false
+        ]
+      },
+      {
+        "rowIndex": 3,
+        "triValue": "UNKNOWN",
+        "selected": false,
+        "row": [
+          null,
+          true
+        ]
+      }
+    ],
+    "triStats": {
+      "TRUE": 1,
+      "FALSE": 2,
+      "UNKNOWN": 1
+    }
+  },
+  "table": {
+    "name": "users",
+    "columns": [
+      {
+        "name": "name",
+        "type": "STRING"
+      },
+      {
+        "name": "active",
+        "type": "BOOLEAN"
+      }
+    ],
+    "rowCount": 4,
+    "rows": [
+      [
+        "alice",
+        true
+      ],
+      [
+        "dave",
+        true
+      ],
+      [
+        "zoe",
+        false
+      ],
+      [
+        null,
+        true
+      ]
+    ]
+  }
+}

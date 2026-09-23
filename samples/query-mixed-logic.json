@@ -1,0 +1,17 @@
+{
+  "expression": "a > 0 AND b > 0 AND NOT c",
+  "table": {
+    "name": "t",
+    "columns": [
+      { "name": "a", "type": "INTEGER" },
+      { "name": "b", "type": "INTEGER" },
+      { "name": "c", "type": "BOOLEAN" }
+    ],
+    "rows": [
+      [3, 4, false],
+      [0, 9, false],
+      [7, null, true],
+      [null, null, null]
+    ]
+  }
+}

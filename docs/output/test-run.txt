@@ -1,0 +1,22 @@
+==> 清理 build/
+==> 编译主代码 -> build/classes
+==> 编译测试代码 -> build/test-classes
+==> 编译完成
+
+运行测试：    ./run-tests.sh   或  bash run-tests.sh
+执行查询：    java -cp build/classes tvl.cli.Main query samples/query-basic.json
+查看真值表：  java -cp build/classes tvl.cli.Main truth-table
+[穷举三值真值表]   (39 通过)
+[NULL 参与比较]   (132 通过)
+[运算符优先级]   (49 通过)
+[短路求值]   (32 通过)
+[整数溢出与除零]   (56 通过)
+[错误位置]   (59 通过)
+[类型检查]   (30 通过)
+[JSON 解析器]   (23 通过)
+[JSON 请求端到端]   (54 通过)
+===================================
+合计通过：474，失败：0，耗时 113 ms
+
+-----------------------------------
+测试通过：474，失败：0

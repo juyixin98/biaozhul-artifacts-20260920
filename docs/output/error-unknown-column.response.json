@@ -1,0 +1,13 @@
+{
+  "ok": false,
+  "error": {
+    "code": "UNKNOWN_COLUMN",
+    "message": "未知列名 'amount'；可用列：[price]",
+    "position": {
+      "offset": 0,
+      "line": 1,
+      "column": 1
+    },
+    "length": 6
+  }
+}

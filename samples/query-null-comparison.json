@@ -1,0 +1,14 @@
+{
+  "expression": "a = 1 OR a IS NULL",
+  "table": {
+    "name": "three_value",
+    "columns": [
+      { "name": "a", "type": "INTEGER" }
+    ],
+    "rows": [
+      [1],
+      [2],
+      [null]
+    ]
+  }
+}

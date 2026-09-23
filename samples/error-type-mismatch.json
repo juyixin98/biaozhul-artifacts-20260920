@@ -1,0 +1,10 @@
+{
+  "expression": "x + 'oops' > 1",
+  "table": {
+    "name": "t",
+    "columns": [
+      { "name": "x", "type": "INTEGER" }
+    ],
+    "rows": []
+  }
+}

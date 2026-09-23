@@ -1,0 +1,10 @@
+{
+  "expression": "amount > 1000",
+  "table": {
+    "name": "t",
+    "columns": [
+      { "name": "price", "type": "INTEGER" }
+    ],
+    "rows": [[1500]]
+  }
+}

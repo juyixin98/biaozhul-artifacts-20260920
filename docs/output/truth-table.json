@@ -1,0 +1,112 @@
+{
+  "logic": "Kleene SQL 3VL (TRUE/FALSE/UNKNOWN)",
+  "NOT": [
+    {
+      "a": "TRUE",
+      "NOT_a": "FALSE"
+    },
+    {
+      "a": "UNKNOWN",
+      "NOT_a": "UNKNOWN"
+    },
+    {
+      "a": "FALSE",
+      "NOT_a": "TRUE"
+    }
+  ],
+  "AND": [
+    {
+      "a": "TRUE",
+      "b": "TRUE",
+      "a_AND_b": "TRUE"
+    },
+    {
+      "a": "TRUE",
+      "b": "UNKNOWN",
+      "a_AND_b": "UNKNOWN"
+    },
+    {
+      "a": "TRUE",
+      "b": "FALSE",
+      "a_AND_b": "FALSE"
+    },
+    {
+      "a": "UNKNOWN",
+      "b": "TRUE",
+      "a_AND_b": "UNKNOWN"
+    },
+    {
+      "a": "UNKNOWN",
+      "b": "UNKNOWN",
+      "a_AND_b": "UNKNOWN"
+    },
+    {
+      "a": "UNKNOWN",
+      "b": "FALSE",
+      "a_AND_b": "FALSE"
+    },
+    {
+      "a": "FALSE",
+      "b": "TRUE",
+      "a_AND_b": "FALSE"
+    },
+    {
+      "a": "FALSE",
+      "b": "UNKNOWN",
+      "a_AND_b": "FALSE"
+    },
+    {
+      "a": "FALSE",
+      "b": "FALSE",
+      "a_AND_b": "FALSE"
+    }
+  ],
+  "OR": [
+    {
+      "a": "TRUE",
+      "b": "TRUE",
+      "a_OR_b": "TRUE"
+    },
+    {
+      "a": "TRUE",
+      "b": "UNKNOWN",
+      "a_OR_b": "TRUE"
+    },
+    {
+      "a": "TRUE",
+      "b": "FALSE",
+      "a_OR_b": "TRUE"
+    },
+    {
+      "a": "UNKNOWN",
+      "b": "TRUE",
+      "a_OR_b": "TRUE"
+    },
+    {
+      "a": "UNKNOWN",
+      "b": "UNKNOWN",
+      "a_OR_b": "UNKNOWN"
+    },
+    {
+      "a": "UNKNOWN",
+      "b": "FALSE",
+      "a_OR_b": "UNKNOWN"
+    },
+    {
+      "a": "FALSE",
+      "b": "TRUE",
+      "a_OR_b": "TRUE"
+    },
+    {
+      "a": "FALSE",
+      "b": "UNKNOWN",
+      "a_OR_b": "UNKNOWN"
+    },
+    {
+      "a": "FALSE",
+      "b": "FALSE",
+      "a_OR_b": "FALSE"
+    }
+  ]
+}
+

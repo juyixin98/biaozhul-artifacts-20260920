@@ -1,0 +1,17 @@
+{
+  "expression": "name >= 'c' AND active",
+  "includeTable": true,
+  "table": {
+    "name": "users",
+    "columns": [
+      { "name": "name", "type": "STRING" },
+      { "name": "active", "type": "BOOLEAN" }
+    ],
+    "rows": [
+      ["alice", true],
+      ["dave", true],
+      ["zoe", false],
+      [null, true]
+    ]
+  }
+}

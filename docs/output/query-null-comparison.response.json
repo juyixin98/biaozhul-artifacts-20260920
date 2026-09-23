@@ -1,0 +1,211 @@
+{
+  "ok": true,
+  "expression": "a = 1 OR a IS NULL",
+  "ast": {
+    "node": "Binary",
+    "pos": {
+      "offset": 0,
+      "line": 1,
+      "column": 1
+    },
+    "length": 18,
+    "resolvedType": "BOOLEAN",
+    "op": "OR",
+    "opPos": {
+      "offset": 6,
+      "line": 1,
+      "column": 7
+    },
+    "left": {
+      "node": "Binary",
+      "pos": {
+        "offset": 0,
+        "line": 1,
+        "column": 1
+      },
+      "length": 5,
+      "resolvedType": "BOOLEAN",
+      "op": "=",
+      "opPos": {
+        "offset": 2,
+        "line": 1,
+        "column": 3
+      },
+      "left": {
+        "node": "Column",
+        "pos": {
+          "offset": 0,
+          "line": 1,
+          "column": 1
+        },
+        "length": 1,
+        "resolvedType": "INTEGER",
+        "name": "a"
+      },
+      "right": {
+        "node": "Literal",
+        "pos": {
+          "offset": 4,
+          "line": 1,
+          "column": 5
+        },
+        "length": 1,
+        "resolvedType": "INTEGER",
+        "literalKind": "INTEGER",
+        "raw": "1",
+        "value": 1
+      }
+    },
+    "right": {
+      "node": "IsNull",
+      "pos": {
+        "offset": 9,
+        "line": 1,
+        "column": 10
+      },
+      "length": 9,
+      "resolvedType": "BOOLEAN",
+      "operand": {
+        "node": "Column",
+        "pos": {
+          "offset": 9,
+          "line": 1,
+          "column": 10
+        },
+        "length": 1,
+        "resolvedType": "INTEGER",
+        "name": "a"
+      }
+    }
+  },
+  "plan": {
+    "operator": "Filter",
+    "predicate": {
+      "node": "Binary",
+      "pos": {
+        "offset": 0,
+        "line": 1,
+        "column": 1
+      },
+      "length": 18,
+      "resolvedType": "BOOLEAN",
+      "op": "OR",
+      "opPos": {
+        "offset": 6,
+        "line": 1,
+        "column": 7
+      },
+      "left": {
+        "node": "Binary",
+        "pos": {
+          "offset": 0,
+          "line": 1,
+          "column": 1
+        },
+        "length": 5,
+        "resolvedType": "BOOLEAN",
+        "op": "=",
+        "opPos": {
+          "offset": 2,
+          "line": 1,
+          "column": 3
+        },
+        "left": {
+          "node": "Column",
+          "pos": {
+            "offset": 0,
+            "line": 1,
+            "column": 1
+          },
+          "length": 1,
+          "resolvedType": "INTEGER",
+          "name": "a"
+        },
+        "right": {
+          "node": "Literal",
+          "pos": {
+            "offset": 4,
+            "line": 1,
+            "column": 5
+          },
+          "length": 1,
+          "resolvedType": "INTEGER",
+          "literalKind": "INTEGER",
+          "raw": "1",
+          "value": 1
+        }
+      },
+      "right": {
+        "node": "IsNull",
+        "pos": {
+          "offset": 9,
+          "line": 1,
+          "column": 10
+        },
+        "length": 9,
+        "resolvedType": "BOOLEAN",
+        "operand": {
+          "node": "Column",
+          "pos": {
+            "offset": 9,
+            "line": 1,
+            "column": 10
+          },
+          "length": 1,
+          "resolvedType": "INTEGER",
+          "name": "a"
+        }
+      }
+    },
+    "input": {
+      "operator": "TableScan",
+      "table": "three_value",
+      "columns": [
+        "a"
+      ],
+      "estimatedRows": 3
+    }
+  },
+  "result": {
+    "selectedCount": 2,
+    "selectedRows": [
+      [
+        1
+      ],
+      [
+        null
+      ]
+    ],
+    "evaluatedRows": [
+      {
+        "rowIndex": 0,
+        "triValue": "TRUE",
+        "selected": true,
+        "row": [
+          1
+        ]
+      },
+      {
+        "rowIndex": 1,
+        "triValue": "FALSE",
+        "selected": false,
+        "row": [
+          2
+        ]
+      },
+      {
+        "rowIndex": 2,
+        "triValue": "TRUE",
+        "selected": true,
+        "row": [
+          null
+        ]
+      }
+    ],
+    "triStats": {
+      "TRUE": 2,
+      "FALSE": 1,
+      "UNKNOWN": 0
+    }
+  }
+}

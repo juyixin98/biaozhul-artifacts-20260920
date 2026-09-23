@@ -1,0 +1,13 @@
+{
+  "ok": false,
+  "error": {
+    "code": "TYPE_MISMATCH",
+    "message": "算术运算 '+' 要求 INTEGER 操作数，右侧为 STRING",
+    "position": {
+      "offset": 2,
+      "line": 1,
+      "column": 3
+    },
+    "length": 1
+  }
+}

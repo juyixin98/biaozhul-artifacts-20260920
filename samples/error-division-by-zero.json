@@ -1,0 +1,13 @@
+{
+  "expression": "10 / den = 1",
+  "table": {
+    "name": "t",
+    "columns": [
+      { "name": "den", "type": "INTEGER" }
+    ],
+    "rows": [
+      [5],
+      [0]
+    ]
+  }
+}

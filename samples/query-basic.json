@@ -1,0 +1,17 @@
+{
+  "expression": "x > 1 AND y IS NOT NULL",
+  "table": {
+    "name": "nums",
+    "columns": [
+      { "name": "x", "type": "INTEGER" },
+      { "name": "y", "type": "INTEGER" }
+    ],
+    "rows": [
+      [2, 10],
+      [1, 10],
+      [5, null],
+      [null, 3],
+      [9, 0]
+    ]
+  }
+}

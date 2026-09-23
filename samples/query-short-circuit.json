@@ -1,0 +1,15 @@
+{
+  "expression": "flag OR (10 / den = 2)",
+  "table": {
+    "name": "short_circuit",
+    "columns": [
+      { "name": "flag", "type": "BOOLEAN" },
+      { "name": "den", "type": "INTEGER" }
+    ],
+    "rows": [
+      [true, 0],
+      [false, 5],
+      [false, 10]
+    ]
+  }
+}
