@@ -1,0 +1,25 @@
+# 依赖锁定（deps.lock）
+#
+# 本项目不使用任何第三方库（运行时与测试时均只用 JDK 标准库），
+# 不依赖 Maven/Gradle，也没有需要拉取的 jar/镜像，因此不存在传递依赖漂移。
+# 本文件锁定构建所基于的 JDK 版本与来源。
+#
+# 实际验证环境（2026-09-23）：
+runtime:
+  name: Eclipse Temurin (Adoptium) OpenJDK 17, HotSpot, linux x64
+  version: 17.0.20.1+1
+  download_url: https://api.adoptium.net/v3/binary/latest/17/ga/linux/x64/jdk/hotspot/normal/eclipse
+  archive: jdk-17.0.20.1+1.tar.gz (约 185 MiB)
+  sha256: 3808d1d15e3ec6bd5b84057fb5d84c33d8a1536a258146bcea2e603fc726e08e
+
+# 仅使用的 JDK 模块/包（全部为 JDK 自带，无外部坐标）：
+jdk_packages_used:
+  - com.sun.net.httpserver        # 内置 HTTP 服务（JDK 自带，非第三方）
+  - java.net.http                 # 测试中作为 HTTP 客户端
+  - java.nio.file / java.nio.channels   # WAL 文件与 fsync
+  - java.util.concurrent          # HTTP 工作线程
+  - java.lang / java.util / java.io     # 基础类库
+
+third_party_dependencies: none
+build_tool_dependencies: none
+test_framework_dependencies: none   # test/cep/TestRunner.java 为自带迷你框架

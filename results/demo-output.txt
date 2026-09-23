@@ -1,0 +1,77 @@
+== 启动服务（开启测试端点）数据目录: /tmp/tmp.7v1E6wYu7a ==
+等待端口就绪...
+[cep] 故障恢复: 重放 0 个批次 / 0 个事件，重建匹配 0 个，耗时 3 ms
+[cep] 监听 http://127.0.0.1:37277  (数据目录 /tmp/tmp.7v1E6wYu7a, 测试端点 开启, 组合上限 100000)
+
+########## 验收 1: A,A,B,C -> 期望 2 个匹配 ##########
+$ curl -sS -X POST http://127.0.0.1:37277/events -H 'Content-Type: application/json' -d '[{"type":"A","entityId":"e1","timestamp":1000},
+              {"type":"A","entityId":"e1","timestamp":1000},
+              {"type":"B","entityId":"e1","timestamp":2000},
+              {"type":"C","entityId":"e1","timestamp":3000}]'
+{"accepted":4,"created":2,"totalMatches":2,"events":[{"type":"A","entityId":"e1","timestamp":1000,"seq":0},{"type":"A","entityId":"e1","timestamp":1000,"seq":1},{"type":"B","entityId":"e1","timestamp":2000,"seq":2},{"type":"C","entityId":"e1","timestamp":3000,"seq":3}],"newMatches":[{"entityId":"e1","a":{"type":"A","entityId":"e1","timestamp":1000,"seq":0},"b":{"type":"B","entityId":"e1","timestamp":2000,"seq":2},"c":{"type":"C","entityId":"e1","timestamp":3000,"seq":3},"spanMs":2000},{"entityId":"e1","a":{"type":"A","entityId":"e1","timestamp":1000,"seq":1},"b":{"type":"B","entityId":"e1","timestamp":2000,"seq":2},"c":{"type":"C","entityId":"e1","timestamp":3000,"seq":3},"spanMs":2000}]}
+$ curl -sS http://127.0.0.1:37277/matches?entityId=e1
+{"count":2,"matches":[{"entityId":"e1","a":{"type":"A","entityId":"e1","timestamp":1000,"seq":0},"b":{"type":"B","entityId":"e1","timestamp":2000,"seq":2},"c":{"type":"C","entityId":"e1","timestamp":3000,"seq":3},"spanMs":2000},{"entityId":"e1","a":{"type":"A","entityId":"e1","timestamp":1000,"seq":1},"b":{"type":"B","entityId":"e1","timestamp":2000,"seq":2},"c":{"type":"C","entityId":"e1","timestamp":3000,"seq":3},"spanMs":2000}]}
+
+########## 验收 2: A,B,超时(>10s),C -> 期望 0 个匹配 ##########
+$ curl -sS -X POST http://127.0.0.1:37277/events -H 'Content-Type: application/json' -d '[{"type":"A","entityId":"e2","timestamp":0},
+              {"type":"B","entityId":"e2","timestamp":1000}]'
+{"accepted":2,"created":0,"totalMatches":2,"events":[{"type":"A","entityId":"e2","timestamp":0,"seq":4},{"type":"B","entityId":"e2","timestamp":1000,"seq":5}],"newMatches":[]}
+$ curl -sS -X POST http://127.0.0.1:37277/events -H 'Content-Type: application/json' -d '[{"type":"C","entityId":"e2","timestamp":11000}]'
+{"accepted":1,"created":0,"totalMatches":2,"events":[{"type":"C","entityId":"e2","timestamp":11000,"seq":6}],"newMatches":[]}
+$ curl -sS http://127.0.0.1:37277/state?entityId=e2
+{"entities":[{"entityId":"e2","watermark":11000,"waitingA":[],"waitingAB":[]}]}
+$ curl -sS http://127.0.0.1:37277/matches
+{"count":2,"matches":[{"entityId":"e1","a":{"type":"A","entityId":"e1","timestamp":1000,"seq":0},"b":{"type":"B","entityId":"e1","timestamp":2000,"seq":2},"c":{"type":"C","entityId":"e1","timestamp":3000,"seq":3},"spanMs":2000},{"entityId":"e1","a":{"type":"A","entityId":"e1","timestamp":1000,"seq":1},"b":{"type":"B","entityId":"e1","timestamp":2000,"seq":2},"c":{"type":"C","entityId":"e1","timestamp":3000,"seq":3},"spanMs":2000}]}
+
+########## 验收 3: 硬崩溃 -> 重启 -> 状态一致 ##########
+-- 崩溃前留下一个未完成的部分匹配 A,B（实体 e3）--
+$ curl -sS -X POST http://127.0.0.1:37277/events -H 'Content-Type: application/json' -d '[{"type":"A","entityId":"e3","timestamp":50000},
+              {"type":"B","entityId":"e3","timestamp":50500}]'
+{"accepted":2,"created":0,"totalMatches":2,"events":[{"type":"A","entityId":"e3","timestamp":50000,"seq":7},{"type":"B","entityId":"e3","timestamp":50500,"seq":8}],"newMatches":[]}
+$ curl -sS http://127.0.0.1:37277/state?entityId=e3
+{"entities":[{"entityId":"e3","watermark":50500,"waitingA":[{"type":"A","entityId":"e3","timestamp":50000,"seq":7}],"waitingAB":[{"a":{"type":"A","entityId":"e3","timestamp":50000,"seq":7},"b":{"type":"B","entityId":"e3","timestamp":50500,"seq":8}}]}]}
+-- 触发硬崩溃（Runtime.halt，不执行优雅退出）--
+$ curl -sS -X POST http://127.0.0.1:37277/test/crash -H 'Content-Type: application/json' -d '{}'
+{"status":"crashing"}
+[test-crash] 模拟硬崩溃 Runtime.getRuntime().halt(1)
+-- 旧进程已退出（exit code 见下）--
+旧进程退出码: 1
+-- 用同一数据目录重新启动 --
+[cep] 故障恢复: 重放 4 个批次 / 9 个事件，重建匹配 2 个，耗时 8 ms
+[cep] 监听 http://127.0.0.1:37277  (数据目录 /tmp/tmp.7v1E6wYu7a, 测试端点 开启, 组合上限 100000)
+-- 重启后查询：已完成匹配仍是 2；e2 超时未误配 --
+$ curl -sS http://127.0.0.1:37277/matches
+{"count":2,"matches":[{"entityId":"e1","a":{"type":"A","entityId":"e1","timestamp":1000,"seq":0},"b":{"type":"B","entityId":"e1","timestamp":2000,"seq":2},"c":{"type":"C","entityId":"e1","timestamp":3000,"seq":3},"spanMs":2000},{"entityId":"e1","a":{"type":"A","entityId":"e1","timestamp":1000,"seq":1},"b":{"type":"B","entityId":"e1","timestamp":2000,"seq":2},"c":{"type":"C","entityId":"e1","timestamp":3000,"seq":3},"spanMs":2000}]}
+-- e3 的部分匹配 A->B 必须仍在 --
+$ curl -sS http://127.0.0.1:37277/state?entityId=e3
+{"entities":[{"entityId":"e3","watermark":50500,"waitingA":[{"type":"A","entityId":"e3","timestamp":50000,"seq":7}],"waitingAB":[{"a":{"type":"A","entityId":"e3","timestamp":50000,"seq":7},"b":{"type":"B","entityId":"e3","timestamp":50500,"seq":8}}]}]}
+-- 给 e3 补 C（窗口内），恢复后的部分匹配成功命中 --
+$ curl -sS -X POST http://127.0.0.1:37277/events -H 'Content-Type: application/json' -d '[{"type":"C","entityId":"e3","timestamp":50900}]'
+{"accepted":1,"created":1,"totalMatches":3,"events":[{"type":"C","entityId":"e3","timestamp":50900,"seq":9}],"newMatches":[{"entityId":"e3","a":{"type":"A","entityId":"e3","timestamp":50000,"seq":7},"b":{"type":"B","entityId":"e3","timestamp":50500,"seq":8},"c":{"type":"C","entityId":"e3","timestamp":50900,"seq":9},"spanMs":900}]}
+$ curl -sS http://127.0.0.1:37277/matches?entityId=e3
+{"count":1,"matches":[{"entityId":"e3","a":{"type":"A","entityId":"e3","timestamp":50000,"seq":7},"b":{"type":"B","entityId":"e3","timestamp":50500,"seq":8},"c":{"type":"C","entityId":"e3","timestamp":50900,"seq":9},"spanMs":900}]}
+
+########## 附加: 相同时间戳按输入序号排序 ##########
+$ curl -sS -X POST http://127.0.0.1:37277/events -H 'Content-Type: application/json' -d '[{"type":"B","entityId":"e4","timestamp":70000},
+              {"type":"A","entityId":"e4","timestamp":70000},
+              {"type":"C","entityId":"e4","timestamp":70000}]'
+{"accepted":3,"created":0,"totalMatches":3,"events":[{"type":"B","entityId":"e4","timestamp":70000,"seq":10},{"type":"A","entityId":"e4","timestamp":70000,"seq":11},{"type":"C","entityId":"e4","timestamp":70000,"seq":12}],"newMatches":[]}
+$ curl -sS http://127.0.0.1:37277/matches?entityId=e4
+{"count":0,"matches":[]}
+
+########## 附加: 组合超上限显式 422（不静默截断）##########
+-- 用 --max-combines=1 重启服务，再发 A,A,B,C（单个 C 有 2 个候选）--
+[cep] 收到退出信号，关闭中...
+[cep] 故障恢复: 重放 6 个批次 / 13 个事件，重建匹配 3 个，耗时 12 ms
+[cep] 监听 http://127.0.0.1:37277  (数据目录 /tmp/tmp.7v1E6wYu7a, 测试端点 关闭, 组合上限 1)
+$ curl -sS -X POST http://127.0.0.1:37277/events -H 'Content-Type: application/json' -d '[{"type":"A","entityId":"cap","timestamp":0},
+              {"type":"A","entityId":"cap","timestamp":1},
+              {"type":"B","entityId":"cap","timestamp":2},
+              {"type":"C","entityId":"cap","timestamp":3}]'
+{"error":"combination_limit","message":"单个 C 事件可组成 2 个匹配，超过上限 1。拒绝本批次以避免静默截断组合；如需放宽，可通过 --max-combines 调整上限"}
+-- 该批次整体未生效：匹配总数不增加 --
+$ curl -sS http://127.0.0.1:37277/matches?entityId=cap
+{"count":0,"matches":[]}
+
+演示结束。
+[cep] 收到退出信号，关闭中...
