@@ -1,0 +1,10 @@
+# 本地编译产物
+/wsserver
+/wsclient
+*.exe
+*.test
+
+# 覆盖率/性能产物
+*.out
+*.prof
+coverage.txt
