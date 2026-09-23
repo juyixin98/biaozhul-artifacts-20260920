@@ -1,0 +1,11 @@
+{
+  "config": {"lowerBound": -10, "upperBound": 10},
+  "steps": [
+    {"type": "event", "side": "LEFT",  "id": "L1", "key": "k", "ts": 10, "value": "same-value"},
+    {"type": "event", "side": "LEFT",  "id": "L2", "key": "k", "ts": 10, "value": "same-value", "_comment": "允许值重复：不同ID即不同事件"},
+    {"type": "event", "side": "RIGHT", "id": "R1", "key": "k", "ts": 10, "value": "same-value"},
+
+    {"type": "event", "side": "RIGHT", "id": "R1", "key": "k", "ts": 10, "_comment": "重复投递：忽略，不产生重复配对"},
+    {"type": "event", "side": "LEFT",  "id": "L1", "key": "k", "ts": 10, "_comment": "重复投递：忽略"}
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "config": {
+    "lowerBound": -2,
+    "upperBound": 2,
+    "lowerInclusive": true,
+    "upperInclusive": true
+  },
+  "left": [
+    {"id": "L1", "key": "user-1", "ts": 10, "value": {"action": "click", "page": "/a"}},
+    {"id": "L2", "key": "user-1", "ts": 11, "value": {"action": "click", "page": "/b"}},
+    {"id": "L3", "key": "user-2", "ts": 10, "value": {"action": "click", "page": "/a"}}
+  ],
+  "right": [
+    {"id": "R1", "key": "user-1", "ts": 10, "value": {"campaign": "spring"}},
+    {"id": "R2", "key": "user-1", "ts": 13, "value": {"campaign": "summer"}},
+    {"id": "R3", "key": "user-2", "ts": 12, "value": {"campaign": "spring"}}
+  ],
+  "outOfOrderness": 0,
+  "advanceSide": "RIGHT",
+  "advanceWatermarkTo": 100
+}

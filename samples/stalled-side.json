@@ -1,0 +1,15 @@
+{
+  "config": {"lowerBound": 0, "upperBound": 5, "maxBufferedPerSide": 100},
+  "steps": [
+    {"type": "event", "side": "LEFT",  "id": "L1", "key": "k", "ts": 10, "value": "v10"},
+    {"type": "event", "side": "LEFT",  "id": "L2", "key": "k", "ts": 12, "value": "v12"},
+
+    {"type": "watermark", "side": "LEFT", "watermark": 1000, "_comment": "左流跑很快；右流完全停滞，左状态必须全部保留"},
+
+    {"type": "event", "side": "RIGHT", "id": "R1", "key": "k", "ts": 15, "value": "v15"},
+
+    {"type": "watermark", "side": "RIGHT", "watermark": 15, "_comment": "右恢复到15：闭区间上界，L1(10)+5=15 仍保留"},
+    {"type": "watermark", "side": "RIGHT", "watermark": 16, "_comment": "右到16：L1 上界15<16，过期；L2 上界17保留"},
+    {"type": "watermark", "side": "RIGHT", "watermark": 1000, "_comment": "最终追平，全部清理"}
+  ]
+}

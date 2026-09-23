@@ -1,0 +1,9 @@
+{
+  "config": {"lowerBound": 0, "upperBound": 100, "maxBufferedPerSide": 3},
+  "steps": [
+    {"type": "event", "side": "LEFT", "id": "L1", "key": "k", "ts": 1},
+    {"type": "event", "side": "LEFT", "id": "L2", "key": "k", "ts": 2},
+    {"type": "event", "side": "LEFT", "id": "L3", "key": "k", "ts": 3},
+    {"type": "event", "side": "LEFT", "id": "L4", "key": "k", "ts": 4, "_comment": "右流停滞且达到每键上限3 -> HTTP 422"}
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "config": {
+    "lowerBound": -2,
+    "upperBound": 2,
+    "lowerInclusive": false,
+    "upperInclusive": false
+  },
+  "steps": [
+    {"type": "event", "side": "LEFT",  "id": "L",   "key": "k", "ts": 10},
+    {"type": "event", "side": "RIGHT", "id": "Rlo", "key": "k", "ts": 8,  "_comment": "diff=-2 恰好下界，开区间 -> 不匹配"},
+    {"type": "event", "side": "RIGHT", "id": "Rmid", "key": "k", "ts": 10, "_comment": "diff=0 -> 匹配"},
+    {"type": "event", "side": "RIGHT", "id": "Rhi", "key": "k", "ts": 12, "_comment": "diff=+2 恰好上界，开区间 -> 不匹配"}
+  ]
+}
