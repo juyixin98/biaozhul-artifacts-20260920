@@ -1,0 +1,479 @@
+{
+  "name": "renewal-lost",
+  "seed": 1,
+  "ok": true,
+  "end_time": 69,
+  "checks": [
+    {
+      "kind": "fence_monotonic",
+      "pass": true,
+      "detail": "resource acct: 2 commits, fences strictly increasing"
+    },
+    {
+      "kind": "records_exist",
+      "pass": true,
+      "detail": "network/net.delay found=1"
+    },
+    {
+      "kind": "records_exist",
+      "pass": true,
+      "detail": "lockserver/lock.renew_rejected found=1"
+    },
+    {
+      "kind": "accepted",
+      "pass": true,
+      "detail": "accepted by resource=acct node=A: 1 (fences [1])"
+    },
+    {
+      "kind": "accepted",
+      "pass": true,
+      "detail": "accepted by resource=acct node=B: 1 (fences [2])"
+    },
+    {
+      "kind": "rejected",
+      "pass": true,
+      "detail": "rejections resource=acct node=A reason=\"fence_too_old\": 1 [fence_too_old]"
+    },
+    {
+      "kind": "last_water",
+      "pass": true,
+      "detail": "resource acct high-water=2 expected=2"
+    }
+  ],
+  "commits": [
+    {
+      "time": 7,
+      "resource": "acct",
+      "node": "A",
+      "fence": 1,
+      "value": "a-while-held"
+    },
+    {
+      "time": 21,
+      "resource": "acct",
+      "node": "B",
+      "fence": 2,
+      "value": "b-wins"
+    }
+  ],
+  "traces": [
+    {
+      "time": 0,
+      "node": "A",
+      "type": "client.acquire_sent",
+      "fields": {
+        "resource": "acct",
+        "ttl": 15
+      }
+    },
+    {
+      "time": 1,
+      "node": "lockserver",
+      "type": "lock.granted",
+      "fields": {
+        "expiry": 16,
+        "fence": 1,
+        "holder": "A",
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 2,
+      "node": "A",
+      "type": "client.acquired",
+      "fields": {
+        "expiry": 16,
+        "fence": 1,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 6,
+      "node": "A",
+      "type": "client.submit_sent",
+      "fields": {
+        "fence": 1,
+        "resource": "acct",
+        "value": "a-while-held"
+      }
+    },
+    {
+      "time": 7,
+      "node": "res-1",
+      "type": "resource.accepted",
+      "fields": {
+        "fence": 1,
+        "high_water": 1,
+        "node": "A",
+        "resource": "acct",
+        "value": "a-while-held"
+      }
+    },
+    {
+      "time": 8,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": true,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 1,
+        "reason": "",
+        "value": "a-while-held"
+      }
+    },
+    {
+      "time": 9,
+      "node": "A",
+      "type": "client.renew_sent",
+      "fields": {
+        "attempt": 1,
+        "fence": 1,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 9,
+      "node": "network",
+      "type": "net.delay",
+      "fields": {
+        "deliver_at": 21,
+        "method": "lock.renew",
+        "rule": "lose-first-renew"
+      }
+    },
+    {
+      "time": 16,
+      "node": "B",
+      "type": "client.acquire_sent",
+      "fields": {
+        "resource": "acct",
+        "ttl": 15
+      }
+    },
+    {
+      "time": 16,
+      "node": "A",
+      "type": "client.lock_lost",
+      "fields": {
+        "fence": 1,
+        "reason": "local_deadline_reached",
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 17,
+      "node": "lockserver",
+      "type": "lock.granted",
+      "fields": {
+        "expiry": 32,
+        "fence": 2,
+        "holder": "B",
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 18,
+      "node": "B",
+      "type": "client.acquired",
+      "fields": {
+        "expiry": 32,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 20,
+      "node": "B",
+      "type": "client.submit_sent",
+      "fields": {
+        "fence": 2,
+        "resource": "acct",
+        "value": "b-wins"
+      }
+    },
+    {
+      "time": 21,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-zombie"
+      }
+    },
+    {
+      "time": 21,
+      "node": "lockserver",
+      "type": "lock.renew_rejected",
+      "fields": {
+        "current_fence": 2,
+        "fence": 1,
+        "reason": "fencing_token_stale",
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 21,
+      "node": "res-1",
+      "type": "resource.accepted",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "resource": "acct",
+        "value": "b-wins"
+      }
+    },
+    {
+      "time": 22,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-zombie"
+      }
+    },
+    {
+      "time": 22,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": true,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "",
+        "value": "b-wins"
+      }
+    },
+    {
+      "time": 23,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-zombie"
+      }
+    },
+    {
+      "time": 25,
+      "node": "B",
+      "type": "client.renew_sent",
+      "fields": {
+        "attempt": 1,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 26,
+      "node": "lockserver",
+      "type": "lock.renewed",
+      "fields": {
+        "expiry": 41,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 27,
+      "node": "B",
+      "type": "client.renewed",
+      "fields": {
+        "expiry": 41,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 32,
+      "node": "B",
+      "type": "client.renew_sent",
+      "fields": {
+        "attempt": 2,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 33,
+      "node": "lockserver",
+      "type": "lock.renewed",
+      "fields": {
+        "expiry": 48,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 34,
+      "node": "B",
+      "type": "client.renewed",
+      "fields": {
+        "expiry": 48,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 39,
+      "node": "B",
+      "type": "client.renew_sent",
+      "fields": {
+        "attempt": 3,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 40,
+      "node": "lockserver",
+      "type": "lock.renewed",
+      "fields": {
+        "expiry": 55,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 41,
+      "node": "B",
+      "type": "client.renewed",
+      "fields": {
+        "expiry": 55,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 46,
+      "node": "B",
+      "type": "client.renew_sent",
+      "fields": {
+        "attempt": 4,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 47,
+      "node": "lockserver",
+      "type": "lock.renewed",
+      "fields": {
+        "expiry": 62,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 48,
+      "node": "B",
+      "type": "client.renewed",
+      "fields": {
+        "expiry": 62,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 53,
+      "node": "B",
+      "type": "client.renew_sent",
+      "fields": {
+        "attempt": 5,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 54,
+      "node": "lockserver",
+      "type": "lock.renewed",
+      "fields": {
+        "expiry": 69,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 55,
+      "node": "B",
+      "type": "client.renewed",
+      "fields": {
+        "expiry": 69,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 60,
+      "node": "B",
+      "type": "client.renew_sent",
+      "fields": {
+        "attempt": 6,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 61,
+      "node": "lockserver",
+      "type": "lock.renewed",
+      "fields": {
+        "expiry": 76,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 62,
+      "node": "B",
+      "type": "client.renewed",
+      "fields": {
+        "expiry": 76,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 67,
+      "node": "B",
+      "type": "client.renew_sent",
+      "fields": {
+        "attempt": 7,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 68,
+      "node": "lockserver",
+      "type": "lock.renewed",
+      "fields": {
+        "expiry": 83,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 69,
+      "node": "B",
+      "type": "client.renewed",
+      "fields": {
+        "expiry": 83,
+        "fence": 2,
+        "resource": "acct"
+      }
+    }
+  ]
+}

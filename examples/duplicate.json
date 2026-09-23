@@ -1,0 +1,72 @@
+{
+  "name": "duplicate-renew",
+  "seed": 1,
+  "max_time": 30,
+  "network": {
+    "min_delay": 1,
+    "max_delay": 0,
+    "loss_prob": 0,
+    "duplicate_prob": 0,
+    "reorder_prob": 0
+  },
+  "resources": [
+    {
+      "name": "acct",
+      "node_id": "res-1",
+      "fenced": true
+    }
+  ],
+  "nodes": [
+    "A"
+  ],
+  "actions": [
+    {
+      "time": 0,
+      "type": "acquire",
+      "node": "A",
+      "resource": "acct",
+      "ttl": 10
+    },
+    {
+      "time": 12,
+      "type": "submit",
+      "node": "A",
+      "resource": "acct",
+      "value": "a-ok"
+    },
+    {
+      "time": 2,
+      "type": "add_rule",
+      "rule": {
+        "name": "dup-renew",
+        "match": {
+          "from": "A",
+          "to": "lockserver",
+          "method": "lock.renew",
+          "nth": 1
+        },
+        "action": "duplicate",
+        "duplicate_delay": 2
+      }
+    }
+  ],
+  "expect": [
+    {
+      "kind": "records_exist",
+      "node": "lockserver",
+      "type": "lock.served_from_cache"
+    },
+    {
+      "kind": "accepted",
+      "node": "A",
+      "min": 1,
+      "resource": "acct"
+    },
+    {
+      "kind": "rejected",
+      "min": 0,
+      "max": 0,
+      "resource": "acct"
+    }
+  ]
+}

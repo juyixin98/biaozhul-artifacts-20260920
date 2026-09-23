@@ -1,0 +1,94 @@
+{
+  "name": "late-message",
+  "seed": 1,
+  "max_time": 60,
+  "network": {
+    "min_delay": 1,
+    "max_delay": 0,
+    "loss_prob": 0,
+    "duplicate_prob": 0,
+    "reorder_prob": 0
+  },
+  "resources": [
+    {
+      "name": "acct",
+      "node_id": "res-1",
+      "fenced": true
+    }
+  ],
+  "nodes": [
+    "A",
+    "B"
+  ],
+  "actions": [
+    {
+      "time": 0,
+      "type": "acquire",
+      "node": "A",
+      "resource": "acct",
+      "ttl": 10
+    },
+    {
+      "time": 2,
+      "type": "add_rule",
+      "rule": {
+        "name": "hold-renew",
+        "match": {
+          "from": "A",
+          "to": "lockserver",
+          "method": "lock.renew",
+          "nth": 1
+        },
+        "action": "delay",
+        "delay": 8
+      }
+    },
+    {
+      "time": 11,
+      "type": "acquire",
+      "node": "B",
+      "resource": "acct",
+      "ttl": 10
+    },
+    {
+      "time": 15,
+      "type": "submit",
+      "node": "B",
+      "resource": "acct",
+      "value": "b-new-holder"
+    },
+    {
+      "time": 17,
+      "type": "submit",
+      "node": "A",
+      "resource": "acct",
+      "value": "a-late"
+    }
+  ],
+  "expect": [
+    {
+      "kind": "records_exist",
+      "node": "lockserver",
+      "type": "lock.renew_rejected"
+    },
+    {
+      "kind": "accepted",
+      "node": "B",
+      "min": 1,
+      "resource": "acct"
+    },
+    {
+      "kind": "rejected",
+      "node": "A",
+      "field": "fence_too_old",
+      "min": 1,
+      "resource": "acct"
+    },
+    {
+      "kind": "accepted",
+      "node": "A",
+      "max": 0,
+      "resource": "acct"
+    }
+  ]
+}

@@ -1,0 +1,3202 @@
+{
+  "name": "fuzz-lossy-network",
+  "seed": 7,
+  "ok": true,
+  "end_time": 199,
+  "checks": [
+    {
+      "kind": "fence_monotonic",
+      "pass": true,
+      "detail": "resource acct: 2 commits, fences strictly increasing"
+    }
+  ],
+  "commits": [
+    {
+      "time": 11,
+      "resource": "acct",
+      "node": "A",
+      "fence": 1,
+      "value": "a-2"
+    },
+    {
+      "time": 36,
+      "resource": "acct",
+      "node": "B",
+      "fence": 2,
+      "value": "b-3"
+    }
+  ],
+  "traces": [
+    {
+      "time": 0,
+      "node": "A",
+      "type": "client.acquire_sent",
+      "fields": {
+        "resource": "acct",
+        "ttl": 18
+      }
+    },
+    {
+      "time": 1,
+      "node": "lockserver",
+      "type": "lock.granted",
+      "fields": {
+        "expiry": 19,
+        "fence": 1,
+        "holder": "A",
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 1,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "lock.acquire.resp"
+      }
+    },
+    {
+      "time": 3,
+      "node": "A",
+      "type": "client.acquire_sent",
+      "fields": {
+        "resource": "acct",
+        "ttl": 18
+      }
+    },
+    {
+      "time": 5,
+      "node": "A",
+      "type": "client.acquired",
+      "fields": {
+        "expiry": 19,
+        "fence": 1,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 6,
+      "node": "A",
+      "type": "client.submit_sent",
+      "fields": {
+        "fence": 1,
+        "resource": "acct",
+        "value": "a-1"
+      }
+    },
+    {
+      "time": 6,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit"
+      }
+    },
+    {
+      "time": 10,
+      "node": "A",
+      "type": "client.submit_sent",
+      "fields": {
+        "fence": 1,
+        "resource": "acct",
+        "value": "a-2"
+      }
+    },
+    {
+      "time": 11,
+      "node": "res-1",
+      "type": "resource.accepted",
+      "fields": {
+        "fence": 1,
+        "high_water": 1,
+        "node": "A",
+        "resource": "acct",
+        "value": "a-2"
+      }
+    },
+    {
+      "time": 12,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": true,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 1,
+        "reason": "",
+        "value": "a-2"
+      }
+    },
+    {
+      "time": 14,
+      "node": "A",
+      "type": "client.renew_sent",
+      "fields": {
+        "attempt": 1,
+        "fence": 1,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 14,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "lock.renew"
+      }
+    },
+    {
+      "time": 14,
+      "node": "A",
+      "type": "client.submit_sent",
+      "fields": {
+        "fence": 1,
+        "resource": "acct",
+        "value": "a-3"
+      }
+    },
+    {
+      "time": 18,
+      "node": "A",
+      "type": "client.submit_sent",
+      "fields": {
+        "fence": 1,
+        "resource": "acct",
+        "value": "a-4"
+      }
+    },
+    {
+      "time": 18,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit"
+      }
+    },
+    {
+      "time": 19,
+      "node": "A",
+      "type": "client.lock_lost",
+      "fields": {
+        "fence": 1,
+        "reason": "local_deadline_reached",
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 19,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 1,
+        "node": "A",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "a-3"
+      }
+    },
+    {
+      "time": 20,
+      "node": "B",
+      "type": "client.acquire_sent",
+      "fields": {
+        "resource": "acct",
+        "ttl": 18
+      }
+    },
+    {
+      "time": 20,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "lock.acquire"
+      }
+    },
+    {
+      "time": 22,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-5"
+      }
+    },
+    {
+      "time": 22,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 1,
+        "reason": "duplicate_fence",
+        "value": "a-3"
+      }
+    },
+    {
+      "time": 23,
+      "node": "B",
+      "type": "client.acquire_sent",
+      "fields": {
+        "resource": "acct",
+        "ttl": 18
+      }
+    },
+    {
+      "time": 24,
+      "node": "lockserver",
+      "type": "lock.granted",
+      "fields": {
+        "expiry": 42,
+        "fence": 2,
+        "holder": "B",
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 25,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 1,
+        "node": "A",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "a-5"
+      }
+    },
+    {
+      "time": 26,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-6"
+      }
+    },
+    {
+      "time": 27,
+      "node": "B",
+      "type": "client.acquired",
+      "fields": {
+        "expiry": 42,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 27,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 1,
+        "reason": "duplicate_fence",
+        "value": "a-5"
+      }
+    },
+    {
+      "time": 27,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 1,
+        "node": "A",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "a-6"
+      }
+    },
+    {
+      "time": 29,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 1,
+        "reason": "duplicate_fence",
+        "value": "a-6"
+      }
+    },
+    {
+      "time": 30,
+      "node": "B",
+      "type": "client.submit_sent",
+      "fields": {
+        "fence": 2,
+        "resource": "acct",
+        "value": "b-2"
+      }
+    },
+    {
+      "time": 30,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit"
+      }
+    },
+    {
+      "time": 30,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-7"
+      }
+    },
+    {
+      "time": 34,
+      "node": "B",
+      "type": "client.submit_sent",
+      "fields": {
+        "fence": 2,
+        "resource": "acct",
+        "value": "b-3"
+      }
+    },
+    {
+      "time": 34,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-8"
+      }
+    },
+    {
+      "time": 35,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 1,
+        "node": "A",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "a-7"
+      }
+    },
+    {
+      "time": 36,
+      "node": "B",
+      "type": "client.renew_sent",
+      "fields": {
+        "attempt": 1,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 36,
+      "node": "res-1",
+      "type": "resource.accepted",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "resource": "acct",
+        "value": "b-3"
+      }
+    },
+    {
+      "time": 36,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-8"
+      }
+    },
+    {
+      "time": 37,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 1,
+        "reason": "duplicate_fence",
+        "value": "a-7"
+      }
+    },
+    {
+      "time": 38,
+      "node": "B",
+      "type": "client.submit_sent",
+      "fields": {
+        "fence": 2,
+        "resource": "acct",
+        "value": "b-4"
+      }
+    },
+    {
+      "time": 38,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-9"
+      }
+    },
+    {
+      "time": 38,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": true,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "",
+        "value": "b-3"
+      }
+    },
+    {
+      "time": 39,
+      "node": "lockserver",
+      "type": "lock.renewed",
+      "fields": {
+        "expiry": 57,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 39,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-8"
+      }
+    },
+    {
+      "time": 40,
+      "node": "C",
+      "type": "client.acquire_sent",
+      "fields": {
+        "resource": "acct",
+        "ttl": 18
+      }
+    },
+    {
+      "time": 40,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-9"
+      }
+    },
+    {
+      "time": 40,
+      "node": "B",
+      "type": "client.renewed",
+      "fields": {
+        "expiry": 57,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 41,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-9"
+      }
+    },
+    {
+      "time": 42,
+      "node": "B",
+      "type": "client.submit_sent",
+      "fields": {
+        "fence": 2,
+        "resource": "acct",
+        "value": "b-5"
+      }
+    },
+    {
+      "time": 42,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-9"
+      }
+    },
+    {
+      "time": 42,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-10"
+      }
+    },
+    {
+      "time": 42,
+      "node": "lockserver",
+      "type": "lock.acquire_rejected",
+      "fields": {
+        "fence": 2,
+        "holder": "B",
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 43,
+      "node": "C",
+      "type": "client.acquire_sent",
+      "fields": {
+        "resource": "acct",
+        "ttl": 18
+      }
+    },
+    {
+      "time": 43,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-4"
+      }
+    },
+    {
+      "time": 43,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-9"
+      }
+    },
+    {
+      "time": 43,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-10"
+      }
+    },
+    {
+      "time": 44,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-5"
+      }
+    },
+    {
+      "time": 44,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-4"
+      }
+    },
+    {
+      "time": 45,
+      "node": "B",
+      "type": "client.renew_sent",
+      "fields": {
+        "attempt": 2,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 45,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "lock.renew"
+      }
+    },
+    {
+      "time": 45,
+      "node": "C",
+      "type": "client.acquire_denied",
+      "fields": {
+        "reason": "conflict",
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 45,
+      "node": "lockserver",
+      "type": "lock.acquire_rejected",
+      "fields": {
+        "fence": 2,
+        "holder": "B",
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 46,
+      "node": "B",
+      "type": "client.submit_sent",
+      "fields": {
+        "fence": 2,
+        "resource": "acct",
+        "value": "b-6"
+      }
+    },
+    {
+      "time": 46,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit"
+      }
+    },
+    {
+      "time": 46,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-11"
+      }
+    },
+    {
+      "time": 46,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-5"
+      }
+    },
+    {
+      "time": 48,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-10"
+      }
+    },
+    {
+      "time": 48,
+      "node": "C",
+      "type": "client.acquire_denied",
+      "fields": {
+        "reason": "conflict",
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 48,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-11"
+      }
+    },
+    {
+      "time": 50,
+      "node": "B",
+      "type": "client.submit_sent",
+      "fields": {
+        "fence": 2,
+        "resource": "acct",
+        "value": "b-7"
+      }
+    },
+    {
+      "time": 50,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-12"
+      }
+    },
+    {
+      "time": 51,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-11"
+      }
+    },
+    {
+      "time": 51,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-12"
+      }
+    },
+    {
+      "time": 53,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-7"
+      }
+    },
+    {
+      "time": 54,
+      "node": "B",
+      "type": "client.renew_sent",
+      "fields": {
+        "attempt": 3,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 54,
+      "node": "B",
+      "type": "client.submit_sent",
+      "fields": {
+        "fence": 2,
+        "resource": "acct",
+        "value": "b-8"
+      }
+    },
+    {
+      "time": 54,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-13"
+      }
+    },
+    {
+      "time": 55,
+      "node": "lockserver",
+      "type": "lock.renewed",
+      "fields": {
+        "expiry": 73,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 56,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-7"
+      }
+    },
+    {
+      "time": 56,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-7"
+      }
+    },
+    {
+      "time": 56,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-13"
+      }
+    },
+    {
+      "time": 57,
+      "node": "B",
+      "type": "client.lock_lost",
+      "fields": {
+        "fence": 2,
+        "reason": "local_deadline_reached",
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 57,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-12"
+      }
+    },
+    {
+      "time": 57,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-8"
+      }
+    },
+    {
+      "time": 58,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-9"
+      }
+    },
+    {
+      "time": 58,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-14"
+      }
+    },
+    {
+      "time": 58,
+      "node": "B",
+      "type": "client.lock_recovered",
+      "fields": {
+        "expiry": 73,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 58,
+      "node": "B",
+      "type": "client.renewed",
+      "fields": {
+        "expiry": 73,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 58,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-7"
+      }
+    },
+    {
+      "time": 58,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-8"
+      }
+    },
+    {
+      "time": 59,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-13"
+      }
+    },
+    {
+      "time": 60,
+      "node": "A",
+      "type": "node.paused",
+      "fields": {
+        "duration": 30,
+        "until": 90
+      }
+    },
+    {
+      "time": 60,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-9"
+      }
+    },
+    {
+      "time": 61,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-14"
+      }
+    },
+    {
+      "time": 62,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 2,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-7"
+      }
+    },
+    {
+      "time": 62,
+      "node": "B",
+      "type": "client.submit_sent",
+      "fields": {
+        "fence": 2,
+        "resource": "acct",
+        "value": "b-10"
+      }
+    },
+    {
+      "time": 63,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-9"
+      }
+    },
+    {
+      "time": 63,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-10"
+      }
+    },
+    {
+      "time": 64,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-10"
+      }
+    },
+    {
+      "time": 66,
+      "node": "B",
+      "type": "client.submit_sent",
+      "fields": {
+        "fence": 2,
+        "resource": "acct",
+        "value": "b-11"
+      }
+    },
+    {
+      "time": 67,
+      "node": "B",
+      "type": "client.renew_sent",
+      "fields": {
+        "attempt": 4,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 68,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-11"
+      }
+    },
+    {
+      "time": 68,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit.resp"
+      }
+    },
+    {
+      "time": 69,
+      "node": "lockserver",
+      "type": "lock.renewed",
+      "fields": {
+        "expiry": 87,
+        "fence": 2,
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 69,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "lock.renew.resp"
+      }
+    },
+    {
+      "time": 70,
+      "node": "B",
+      "type": "client.submit_sent",
+      "fields": {
+        "fence": 2,
+        "resource": "acct",
+        "value": "b-12"
+      }
+    },
+    {
+      "time": 73,
+      "node": "B",
+      "type": "client.lock_lost",
+      "fields": {
+        "fence": 2,
+        "reason": "local_deadline_reached",
+        "resource": "acct"
+      }
+    },
+    {
+      "time": 73,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-12"
+      }
+    },
+    {
+      "time": 74,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-13"
+      }
+    },
+    {
+      "time": 75,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-12"
+      }
+    },
+    {
+      "time": 77,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-13"
+      }
+    },
+    {
+      "time": 78,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-14"
+      }
+    },
+    {
+      "time": 79,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-13"
+      }
+    },
+    {
+      "time": 81,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 2,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-13"
+      }
+    },
+    {
+      "time": 81,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-14"
+      }
+    },
+    {
+      "time": 82,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-15"
+      }
+    },
+    {
+      "time": 84,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-14"
+      }
+    },
+    {
+      "time": 85,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-15"
+      }
+    },
+    {
+      "time": 85,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit.resp"
+      }
+    },
+    {
+      "time": 86,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-16"
+      }
+    },
+    {
+      "time": 89,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-16"
+      }
+    },
+    {
+      "time": 89,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit.resp"
+      }
+    },
+    {
+      "time": 90,
+      "node": "A",
+      "type": "node.resumed",
+      "fields": {
+        "held_events": 2
+      }
+    },
+    {
+      "time": 90,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-17"
+      }
+    },
+    {
+      "time": 90,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-14"
+      }
+    },
+    {
+      "time": 90,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-15"
+      }
+    },
+    {
+      "time": 91,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-15"
+      }
+    },
+    {
+      "time": 92,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-15"
+      }
+    },
+    {
+      "time": 94,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-18"
+      }
+    },
+    {
+      "time": 94,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-16"
+      }
+    },
+    {
+      "time": 95,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-17"
+      }
+    },
+    {
+      "time": 96,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-16"
+      }
+    },
+    {
+      "time": 96,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-17"
+      }
+    },
+    {
+      "time": 97,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-18"
+      }
+    },
+    {
+      "time": 97,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit.resp"
+      }
+    },
+    {
+      "time": 98,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-19"
+      }
+    },
+    {
+      "time": 98,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-17"
+      }
+    },
+    {
+      "time": 99,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-16"
+      }
+    },
+    {
+      "time": 99,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-17"
+      }
+    },
+    {
+      "time": 99,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit.resp"
+      }
+    },
+    {
+      "time": 101,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-19"
+      }
+    },
+    {
+      "time": 102,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-20"
+      }
+    },
+    {
+      "time": 102,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-18"
+      }
+    },
+    {
+      "time": 103,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-19"
+      }
+    },
+    {
+      "time": 104,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-20"
+      }
+    },
+    {
+      "time": 104,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit.resp"
+      }
+    },
+    {
+      "time": 104,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-18"
+      }
+    },
+    {
+      "time": 106,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-21"
+      }
+    },
+    {
+      "time": 106,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-19"
+      }
+    },
+    {
+      "time": 107,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-21"
+      }
+    },
+    {
+      "time": 107,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-19"
+      }
+    },
+    {
+      "time": 108,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 2,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-18"
+      }
+    },
+    {
+      "time": 109,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-19"
+      }
+    },
+    {
+      "time": 110,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-22"
+      }
+    },
+    {
+      "time": 110,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit"
+      }
+    },
+    {
+      "time": 110,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-20"
+      }
+    },
+    {
+      "time": 110,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-21"
+      }
+    },
+    {
+      "time": 111,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-18"
+      }
+    },
+    {
+      "time": 112,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-20"
+      }
+    },
+    {
+      "time": 114,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-23"
+      }
+    },
+    {
+      "time": 114,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-21"
+      }
+    },
+    {
+      "time": 114,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-20"
+      }
+    },
+    {
+      "time": 116,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-21"
+      }
+    },
+    {
+      "time": 117,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-23"
+      }
+    },
+    {
+      "time": 118,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-24"
+      }
+    },
+    {
+      "time": 118,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-22"
+      }
+    },
+    {
+      "time": 118,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-23"
+      }
+    },
+    {
+      "time": 119,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-21"
+      }
+    },
+    {
+      "time": 119,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-21"
+      }
+    },
+    {
+      "time": 119,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-22"
+      }
+    },
+    {
+      "time": 121,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-24"
+      }
+    },
+    {
+      "time": 121,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-21"
+      }
+    },
+    {
+      "time": 121,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-22"
+      }
+    },
+    {
+      "time": 122,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-25"
+      }
+    },
+    {
+      "time": 122,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-23"
+      }
+    },
+    {
+      "time": 122,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit"
+      }
+    },
+    {
+      "time": 124,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-24"
+      }
+    },
+    {
+      "time": 125,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-25"
+      }
+    },
+    {
+      "time": 126,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-26"
+      }
+    },
+    {
+      "time": 126,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit"
+      }
+    },
+    {
+      "time": 126,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-24"
+      }
+    },
+    {
+      "time": 127,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-25"
+      }
+    },
+    {
+      "time": 127,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-24"
+      }
+    },
+    {
+      "time": 127,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit.resp"
+      }
+    },
+    {
+      "time": 130,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-27"
+      }
+    },
+    {
+      "time": 130,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit"
+      }
+    },
+    {
+      "time": 130,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-25"
+      }
+    },
+    {
+      "time": 133,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-25"
+      }
+    },
+    {
+      "time": 134,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-28"
+      }
+    },
+    {
+      "time": 134,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-26"
+      }
+    },
+    {
+      "time": 135,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-28"
+      }
+    },
+    {
+      "time": 136,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-25"
+      }
+    },
+    {
+      "time": 137,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-28"
+      }
+    },
+    {
+      "time": 137,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-26"
+      }
+    },
+    {
+      "time": 138,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-29"
+      }
+    },
+    {
+      "time": 138,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-27"
+      }
+    },
+    {
+      "time": 138,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit"
+      }
+    },
+    {
+      "time": 138,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-28"
+      }
+    },
+    {
+      "time": 139,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-28"
+      }
+    },
+    {
+      "time": 141,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-29"
+      }
+    },
+    {
+      "time": 142,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-30"
+      }
+    },
+    {
+      "time": 142,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-28"
+      }
+    },
+    {
+      "time": 142,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-29"
+      }
+    },
+    {
+      "time": 143,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-26"
+      }
+    },
+    {
+      "time": 144,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-30"
+      }
+    },
+    {
+      "time": 144,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-28"
+      }
+    },
+    {
+      "time": 145,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-30"
+      }
+    },
+    {
+      "time": 146,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-31"
+      }
+    },
+    {
+      "time": 146,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-29"
+      }
+    },
+    {
+      "time": 147,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-31"
+      }
+    },
+    {
+      "time": 149,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-29"
+      }
+    },
+    {
+      "time": 150,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-32"
+      }
+    },
+    {
+      "time": 150,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-30"
+      }
+    },
+    {
+      "time": 150,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit"
+      }
+    },
+    {
+      "time": 150,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-31"
+      }
+    },
+    {
+      "time": 151,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-28"
+      }
+    },
+    {
+      "time": 151,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-32"
+      }
+    },
+    {
+      "time": 152,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-29"
+      }
+    },
+    {
+      "time": 152,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-32"
+      }
+    },
+    {
+      "time": 154,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-33"
+      }
+    },
+    {
+      "time": 154,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-31"
+      }
+    },
+    {
+      "time": 155,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-33"
+      }
+    },
+    {
+      "time": 155,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit.resp"
+      }
+    },
+    {
+      "time": 156,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-31"
+      }
+    },
+    {
+      "time": 158,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-34"
+      }
+    },
+    {
+      "time": 158,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit"
+      }
+    },
+    {
+      "time": 158,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-32"
+      }
+    },
+    {
+      "time": 159,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-31"
+      }
+    },
+    {
+      "time": 159,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-32"
+      }
+    },
+    {
+      "time": 161,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-32"
+      }
+    },
+    {
+      "time": 162,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-35"
+      }
+    },
+    {
+      "time": 162,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-33"
+      }
+    },
+    {
+      "time": 163,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-35"
+      }
+    },
+    {
+      "time": 164,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-33"
+      }
+    },
+    {
+      "time": 165,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-35"
+      }
+    },
+    {
+      "time": 166,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-36"
+      }
+    },
+    {
+      "time": 166,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-34"
+      }
+    },
+    {
+      "time": 166,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-33"
+      }
+    },
+    {
+      "time": 167,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-34"
+      }
+    },
+    {
+      "time": 168,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-36"
+      }
+    },
+    {
+      "time": 168,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit.resp"
+      }
+    },
+    {
+      "time": 170,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-37"
+      }
+    },
+    {
+      "time": 170,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit"
+      }
+    },
+    {
+      "time": 170,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-35"
+      }
+    },
+    {
+      "time": 170,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-34"
+      }
+    },
+    {
+      "time": 173,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-35"
+      }
+    },
+    {
+      "time": 174,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-38"
+      }
+    },
+    {
+      "time": 174,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-36"
+      }
+    },
+    {
+      "time": 175,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-38"
+      }
+    },
+    {
+      "time": 175,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-36"
+      }
+    },
+    {
+      "time": 175,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit.resp"
+      }
+    },
+    {
+      "time": 176,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-35"
+      }
+    },
+    {
+      "time": 177,
+      "node": "B",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 2,
+        "high_water": 2,
+        "reason": "duplicate_fence",
+        "value": "b-38"
+      }
+    },
+    {
+      "time": 178,
+      "node": "B",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 2,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "b-39"
+      }
+    },
+    {
+      "time": 178,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-37"
+      }
+    },
+    {
+      "time": 179,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 2,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-35"
+      }
+    },
+    {
+      "time": 179,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-37"
+      }
+    },
+    {
+      "time": 179,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit.resp"
+      }
+    },
+    {
+      "time": 181,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 2,
+        "high_water": 2,
+        "node": "B",
+        "reason": "duplicate_fence",
+        "resource": "acct",
+        "value": "b-39"
+      }
+    },
+    {
+      "time": 181,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit.resp"
+      }
+    },
+    {
+      "time": 182,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-38"
+      }
+    },
+    {
+      "time": 183,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-37"
+      }
+    },
+    {
+      "time": 183,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-38"
+      }
+    },
+    {
+      "time": 186,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-39"
+      }
+    },
+    {
+      "time": 186,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-37"
+      }
+    },
+    {
+      "time": 186,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-38"
+      }
+    },
+    {
+      "time": 188,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-39"
+      }
+    },
+    {
+      "time": 190,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-40"
+      }
+    },
+    {
+      "time": 190,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-39"
+      }
+    },
+    {
+      "time": 191,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-40"
+      }
+    },
+    {
+      "time": 192,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 1,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-40"
+      }
+    },
+    {
+      "time": 193,
+      "node": "A",
+      "type": "client.submit_result",
+      "fields": {
+        "accepted": false,
+        "attempt": 2,
+        "fence": 1,
+        "high_water": 2,
+        "reason": "fence_too_old",
+        "value": "a-40"
+      }
+    },
+    {
+      "time": 194,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-41"
+      }
+    },
+    {
+      "time": 194,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit"
+      }
+    },
+    {
+      "time": 198,
+      "node": "A",
+      "type": "client.submit_stale",
+      "fields": {
+        "fence": 1,
+        "reason": "node_continues_after_loss",
+        "resource": "acct",
+        "value": "a-42"
+      }
+    },
+    {
+      "time": 199,
+      "node": "res-1",
+      "type": "resource.rejected",
+      "fields": {
+        "fence": 1,
+        "high_water": 2,
+        "node": "A",
+        "reason": "fence_too_old",
+        "resource": "acct",
+        "value": "a-40"
+      }
+    },
+    {
+      "time": 199,
+      "node": "network",
+      "type": "net.random_drop",
+      "fields": {
+        "method": "resource.submit.resp"
+      }
+    }
+  ]
+}

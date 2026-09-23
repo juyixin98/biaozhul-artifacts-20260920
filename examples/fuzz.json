@@ -1,0 +1,29 @@
+{
+  "name": "fuzz-lossy-network",
+  "seed": 7,
+  "max_time": 200,
+  "network": {
+    "min_delay": 1,
+    "max_delay": 2,
+    "loss_prob": 0.15,
+    "duplicate_prob": 0.08,
+    "reorder_prob": 0.08
+  },
+  "resources": [
+    { "name": "acct", "node_id": "res-1", "fenced": true }
+  ],
+  "nodes": ["A", "B", "C"],
+  "actions": [
+    { "time": 0,  "type": "acquire", "node": "A", "resource": "acct", "ttl": 18 },
+    { "time": 3,  "type": "acquire", "node": "A", "resource": "acct", "ttl": 18 },
+    { "time": 20, "type": "acquire", "node": "B", "resource": "acct", "ttl": 18 },
+    { "time": 23, "type": "acquire", "node": "B", "resource": "acct", "ttl": 18 },
+    { "time": 40, "type": "acquire", "node": "C", "resource": "acct", "ttl": 18 },
+    { "time": 43, "type": "acquire", "node": "C", "resource": "acct", "ttl": 18 },
+    { "time": 2,  "type": "compete", "node": "A", "resource": "acct", "steps": 45, "every": 4, "prefix": "a" },
+    { "time": 22, "type": "compete", "node": "B", "resource": "acct", "steps": 40, "every": 4, "prefix": "b" },
+    { "time": 42, "type": "compete", "node": "C", "resource": "acct", "steps": 35, "every": 4, "prefix": "c" },
+    { "time": 60, "type": "pause", "node": "A", "until": 90 }
+  ],
+  "expect": []
+}

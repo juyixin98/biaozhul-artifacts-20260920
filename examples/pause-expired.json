@@ -1,0 +1,91 @@
+{
+  "name": "pause-longer-than-lease",
+  "seed": 1,
+  "max_time": 60,
+  "network": {
+    "min_delay": 1,
+    "max_delay": 0,
+    "loss_prob": 0,
+    "duplicate_prob": 0,
+    "reorder_prob": 0
+  },
+  "resources": [
+    {
+      "name": "acct",
+      "node_id": "res-1",
+      "fenced": true
+    }
+  ],
+  "nodes": [
+    "A",
+    "B"
+  ],
+  "actions": [
+    {
+      "time": 0,
+      "type": "acquire",
+      "node": "A",
+      "resource": "acct",
+      "ttl": 10
+    },
+    {
+      "time": 4,
+      "type": "pause",
+      "node": "A",
+      "until": 22
+    },
+    {
+      "time": 12,
+      "type": "acquire",
+      "node": "B",
+      "resource": "acct",
+      "ttl": 10
+    },
+    {
+      "time": 16,
+      "type": "submit",
+      "node": "B",
+      "resource": "acct",
+      "value": "b-after-pause"
+    },
+    {
+      "time": 24,
+      "type": "submit",
+      "node": "A",
+      "resource": "acct",
+      "value": "a-zombie"
+    }
+  ],
+  "expect": [
+    {
+      "kind": "records_exist",
+      "node": "A",
+      "type": "client.lock_lost"
+    },
+    {
+      "kind": "accepted",
+      "node": "B",
+      "min": 1,
+      "resource": "acct"
+    },
+    {
+      "kind": "rejected",
+      "node": "A",
+      "field": "fence_too_old",
+      "min": 1,
+      "resource": "acct"
+    },
+    {
+      "kind": "last_water",
+      "equals": 2,
+      "resource": "acct"
+    },
+    {
+      "kind": "accepted_order",
+      "resource": "acct",
+      "order": [
+        "B"
+      ]
+    }
+  ]
+}

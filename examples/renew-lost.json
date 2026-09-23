@@ -1,0 +1,111 @@
+{
+  "name": "renewal-lost",
+  "seed": 1,
+  "max_time": 70,
+  "network": {
+    "min_delay": 1,
+    "max_delay": 0,
+    "loss_prob": 0,
+    "duplicate_prob": 0,
+    "reorder_prob": 0
+  },
+  "resources": [
+    {
+      "name": "acct",
+      "node_id": "res-1",
+      "fenced": true
+    }
+  ],
+  "nodes": [
+    "A",
+    "B"
+  ],
+  "actions": [
+    {
+      "time": 0,
+      "type": "acquire",
+      "node": "A",
+      "resource": "acct",
+      "ttl": 15
+    },
+    {
+      "time": 6,
+      "type": "submit",
+      "node": "A",
+      "resource": "acct",
+      "value": "a-while-held"
+    },
+    {
+      "time": 2,
+      "type": "add_rule",
+      "rule": {
+        "name": "lose-first-renew",
+        "match": {
+          "from": "A",
+          "to": "lockserver",
+          "method": "lock.renew",
+          "nth": 1
+        },
+        "action": "delay",
+        "delay": 12
+      }
+    },
+    {
+      "time": 16,
+      "type": "acquire",
+      "node": "B",
+      "resource": "acct",
+      "ttl": 15
+    },
+    {
+      "time": 20,
+      "type": "submit",
+      "node": "B",
+      "resource": "acct",
+      "value": "b-wins"
+    },
+    {
+      "time": 21,
+      "type": "submit",
+      "node": "A",
+      "resource": "acct",
+      "value": "a-zombie"
+    }
+  ],
+  "expect": [
+    {
+      "kind": "records_exist",
+      "node": "network",
+      "type": "net.delay"
+    },
+    {
+      "kind": "records_exist",
+      "node": "lockserver",
+      "type": "lock.renew_rejected"
+    },
+    {
+      "kind": "accepted",
+      "node": "A",
+      "min": 1,
+      "resource": "acct"
+    },
+    {
+      "kind": "accepted",
+      "node": "B",
+      "min": 1,
+      "resource": "acct"
+    },
+    {
+      "kind": "rejected",
+      "node": "A",
+      "field": "fence_too_old",
+      "min": 1,
+      "resource": "acct"
+    },
+    {
+      "kind": "last_water",
+      "equals": 2,
+      "resource": "acct"
+    }
+  ]
+}
