@@ -1,0 +1,12 @@
+{
+  "sql": "SELECT id FROM t WHERE name > 3",
+  "schema": {
+    "columns": [
+      { "name": "id", "type": "INTEGER" },
+      { "name": "name", "type": "TEXT" }
+    ]
+  },
+  "batches": [
+    { "rows": [[1, "alice"]] }
+  ]
+}

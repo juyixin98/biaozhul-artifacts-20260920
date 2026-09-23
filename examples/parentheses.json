@@ -1,0 +1,24 @@
+{
+  "sql": "SELECT * FROM t WHERE NOT ((a = ? OR b < ?) AND c <> ?)",
+  "schema": {
+    "columns": [
+      { "name": "a", "type": "INTEGER" },
+      { "name": "b", "type": "FLOAT" },
+      { "name": "c", "type": "TEXT" }
+    ]
+  },
+  "params": [
+    { "type": "INTEGER", "value": 1 },
+    { "type": "FLOAT", "value": 2.5 },
+    { "type": "TEXT", "value": "x" }
+  ],
+  "batches": [
+    {
+      "rows": [
+        [1, 1.0, "x"],
+        [null, 3.0, "y"],
+        [2, null, null]
+      ]
+    }
+  ]
+}

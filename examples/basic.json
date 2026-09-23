@@ -1,0 +1,29 @@
+{
+  "sql": "SELECT id, name FROM people WHERE score >= ? AND name IS NOT NULL",
+  "schema": {
+    "columns": [
+      { "name": "id",    "type": "INTEGER" },
+      { "name": "score", "type": "FLOAT" },
+      { "name": "name",  "type": "TEXT" }
+    ]
+  },
+  "params": [
+    { "type": "FLOAT", "value": 8.0 }
+  ],
+  "batches": [
+    {
+      "rows": [
+        [1, 9.5, "alice"],
+        [2, null, "bob"],
+        [3, 7.0, null]
+      ]
+    },
+    {
+      "rows": [
+        [4, 6.0, "dave"],
+        [5, 8.25, "erin"]
+      ]
+    }
+  ],
+  "includeTvl": true
+}

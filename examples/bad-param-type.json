@@ -1,0 +1,15 @@
+{
+  "sql": "SELECT id FROM t WHERE score > ?",
+  "schema": {
+    "columns": [
+      { "name": "id", "type": "INTEGER" },
+      { "name": "score", "type": "FLOAT" }
+    ]
+  },
+  "params": [
+    { "type": "FLOAT", "value": "8.0" }
+  ],
+  "batches": [
+    { "rows": [[1, 9.0]] }
+  ]
+}
