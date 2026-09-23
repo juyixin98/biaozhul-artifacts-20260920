@@ -1,0 +1,68 @@
+>> Compiling main...
+>> Compiling tests...
+>> Running tests...
+== SessionAggregator unit tests ==
+  PASS  pure splitter: one session when adjacent gaps <= gap
+  PASS  pure splitter: splits when adjacent gap > gap
+  PASS  acceptance: 0 then 20 emits two sessions
+  PASS  acceptance: late t=10 bridges, retracts k@20, extends k@0
+  PASS  acceptance: final view has exactly one session, no double count
+  PASS  acceptance: changelog net effect counts each event once
+  PASS  recovery: replay yields identical sessions, ids and versions
+  PASS  watermark: event exactly at watermark is kept (<= semantics)
+  PASS  watermark: event below watermark is rejected and not counted
+  PASS  watermark: zero lateness rejects anything earlier than max
+  PASS  gap boundary: difference exactly gap stays merged
+  PASS  gap boundary: difference gap+1 splits
+  PASS  multiple keys aggregate independently
+  PASS  duplicate eventId+timestamp is idempotent
+  PASS  same eventId with changed timestamp conflicts
+  PASS  unchanged session emits no messages on unrelated ingest
+  PASS  three-way bridge: late middle event joins three sessions
+  PASS  sessions sorted by (key, startTs)
+-- SessionAggregator unit tests: 18/18 passed --
+== Json unit tests ==
+  PASS  round-trips nested object/array
+  PASS  integers serialize without decimal point
+  PASS  escapes quotes, backslashes and control chars
+  PASS  rejects malformed json
+  PASS  rejects trailing characters
+  PASS  preserves insertion order on output
+  PASS  empty containers serialize and parse
+-- Json unit tests: 7/7 passed --
+== HTTP integration tests ==
+Sep 23, 2026 8:52:22 PM sessionwindow.ServerMain start
+INFO: Session-window server on http://localhost:34025 (gap=10ms, allowedLateness=10ms, recovered 0 events)
+  PASS  health responds ok
+Sep 23, 2026 8:52:22 PM sessionwindow.ServerMain start
+INFO: Session-window server on http://localhost:34951 (gap=10ms, allowedLateness=10ms, recovered 0 events)
+  PASS  unknown route -> 404 json
+Sep 23, 2026 8:52:22 PM sessionwindow.ServerMain start
+INFO: Session-window server on http://localhost:46141 (gap=10ms, allowedLateness=10ms, recovered 0 events)
+  PASS  acceptance over HTTP: bridge emits retract+upsert, final view stable
+Sep 23, 2026 8:52:23 PM sessionwindow.ServerMain start
+INFO: Session-window server on http://localhost:40875 (gap=10ms, allowedLateness=10ms, recovered 0 events)
+  PASS  watermark rejection returns 422 and is listed under /rejected
+Sep 23, 2026 8:52:23 PM sessionwindow.ServerMain start
+INFO: Session-window server on http://localhost:40679 (gap=10ms, allowedLateness=10ms, recovered 0 events)
+  PASS  duplicate event is idempotent (200, duplicate:true, no new changes)
+Sep 23, 2026 8:52:23 PM sessionwindow.ServerMain start
+INFO: Session-window server on http://localhost:45673 (gap=10ms, allowedLateness=10ms, recovered 0 events)
+  PASS  eventId reused with different timestamp -> 409
+Sep 23, 2026 8:52:23 PM sessionwindow.ServerMain start
+INFO: Session-window server on http://localhost:34619 (gap=10ms, allowedLateness=10ms, recovered 0 events)
+  PASS  batch ingest accepts an array and reports per-item results
+Sep 23, 2026 8:52:23 PM sessionwindow.ServerMain start
+INFO: Session-window server on http://localhost:45383 (gap=10ms, allowedLateness=10ms, recovered 0 events)
+  PASS  malformed json -> 400
+Sep 23, 2026 8:52:23 PM sessionwindow.ServerMain start
+INFO: Session-window server on http://localhost:43271 (gap=10ms, allowedLateness=10ms, recovered 0 events)
+  PASS  changelog ?since pagination
+Sep 23, 2026 8:52:23 PM sessionwindow.ServerMain start
+INFO: Session-window server on http://localhost:41615 (gap=10ms, allowedLateness=10ms, recovered 0 events)
+Sep 23, 2026 8:52:23 PM sessionwindow.ServerMain start
+INFO: Session-window server on http://localhost:42193 (gap=10ms, allowedLateness=10ms, recovered 4 events)
+  PASS  recovery after restart: same sessions, ids and versions
+-- HTTP integration tests: 10/10 passed --
+
+ALL SUITES GREEN

@@ -1,0 +1,589 @@
+
+==================== health ====================
+{
+  "status": "ok"
+}
+
+
+==================== 1) event t=0  -> creates session k@0 v1 ====================
+{
+  "eventId": "e0",
+  "key": "k",
+  "timestamp": 0,
+  "watermark": -10,
+  "accepted": true,
+  "durable": true,
+  "changes": [
+    {
+      "seq": 1,
+      "type": "UPSERT",
+      "sessionId": "k@0",
+      "key": "k",
+      "version": 1,
+      "startTs": 0,
+      "endTs": 0,
+      "eventIds": [
+        "e0"
+      ],
+      "eventTimestamp": 0,
+      "reason": "new session"
+    }
+  ]
+}
+
+
+==================== 2) event t=20 -> 20-0=20 > gap 10, creates session k@20 v1 ====================
+{
+  "eventId": "e20",
+  "key": "k",
+  "timestamp": 20,
+  "watermark": 10,
+  "accepted": true,
+  "durable": true,
+  "changes": [
+    {
+      "seq": 2,
+      "type": "UPSERT",
+      "sessionId": "k@20",
+      "key": "k",
+      "version": 1,
+      "startTs": 20,
+      "endTs": 20,
+      "eventIds": [
+        "e20"
+      ],
+      "eventTimestamp": 20,
+      "reason": "new session"
+    }
+  ]
+}
+
+
+==================== sessions BEFORE bridge (expect two: k@0, k@20) ====================
+{
+  "sessions": [
+    {
+      "sessionId": "k@0",
+      "key": "k",
+      "startTs": 0,
+      "endTs": 0,
+      "durationMs": 0,
+      "eventCount": 1,
+      "eventIds": [
+        "e0"
+      ],
+      "version": 1
+    },
+    {
+      "sessionId": "k@20",
+      "key": "k",
+      "startTs": 20,
+      "endTs": 20,
+      "durationMs": 0,
+      "eventCount": 1,
+      "eventIds": [
+        "e20"
+      ],
+      "version": 1
+    }
+  ],
+  "count": 2
+}
+
+
+==================== 3) LATE event t=10 -> bridges both (10-0=10 and 20-10=10, <= gap) ====================
+{
+  "eventId": "e10",
+  "key": "k",
+  "timestamp": 10,
+  "watermark": 10,
+  "accepted": true,
+  "durable": true,
+  "changes": [
+    {
+      "seq": 3,
+      "type": "RETRACT",
+      "sessionId": "k@20",
+      "key": "k",
+      "version": 1,
+      "startTs": 20,
+      "endTs": 20,
+      "eventIds": [
+        "e20"
+      ],
+      "eventTimestamp": 10,
+      "reason": "bridged into a later session"
+    },
+    {
+      "seq": 4,
+      "type": "RETRACT",
+      "sessionId": "k@0",
+      "key": "k",
+      "version": 1,
+      "startTs": 0,
+      "endTs": 0,
+      "eventIds": [
+        "e0"
+      ],
+      "eventTimestamp": 10,
+      "reason": "superseded by version 2"
+    },
+    {
+      "seq": 5,
+      "type": "UPSERT",
+      "sessionId": "k@0",
+      "key": "k",
+      "version": 2,
+      "startTs": 0,
+      "endTs": 20,
+      "eventIds": [
+        "e0",
+        "e10",
+        "e20"
+      ],
+      "eventTimestamp": 10,
+      "reason": "late event extended/merged the session"
+    }
+  ]
+}
+
+
+==================== sessions AFTER bridge (expect ONE session k@0 v2 [e0,e10,e20]) ====================
+{
+  "sessions": [
+    {
+      "sessionId": "k@0",
+      "key": "k",
+      "startTs": 0,
+      "endTs": 20,
+      "durationMs": 20,
+      "eventCount": 3,
+      "eventIds": [
+        "e0",
+        "e10",
+        "e20"
+      ],
+      "version": 2
+    }
+  ],
+  "count": 1
+}
+
+
+==================== changelog (expect upsert k@0, upsert k@20, retract k@20, retract k@0v1, upsert k@0v2) ====================
+{
+  "changes": [
+    {
+      "seq": 1,
+      "type": "UPSERT",
+      "sessionId": "k@0",
+      "key": "k",
+      "version": 1,
+      "startTs": 0,
+      "endTs": 0,
+      "eventIds": [
+        "e0"
+      ],
+      "eventTimestamp": 0,
+      "reason": "new session"
+    },
+    {
+      "seq": 2,
+      "type": "UPSERT",
+      "sessionId": "k@20",
+      "key": "k",
+      "version": 1,
+      "startTs": 20,
+      "endTs": 20,
+      "eventIds": [
+        "e20"
+      ],
+      "eventTimestamp": 20,
+      "reason": "new session"
+    },
+    {
+      "seq": 3,
+      "type": "RETRACT",
+      "sessionId": "k@20",
+      "key": "k",
+      "version": 1,
+      "startTs": 20,
+      "endTs": 20,
+      "eventIds": [
+        "e20"
+      ],
+      "eventTimestamp": 10,
+      "reason": "bridged into a later session"
+    },
+    {
+      "seq": 4,
+      "type": "RETRACT",
+      "sessionId": "k@0",
+      "key": "k",
+      "version": 1,
+      "startTs": 0,
+      "endTs": 0,
+      "eventIds": [
+        "e0"
+      ],
+      "eventTimestamp": 10,
+      "reason": "superseded by version 2"
+    },
+    {
+      "seq": 5,
+      "type": "UPSERT",
+      "sessionId": "k@0",
+      "key": "k",
+      "version": 2,
+      "startTs": 0,
+      "endTs": 20,
+      "eventIds": [
+        "e0",
+        "e10",
+        "e20"
+      ],
+      "eventTimestamp": 10,
+      "reason": "late event extended/merged the session"
+    }
+  ],
+  "count": 5
+}
+
+
+==================== accounting (materializedEventRows=3, noDoubleCount=true) ====================
+{
+  "acceptedEvents": 3,
+  "rejectedEvents": 0,
+  "distinctStoredEvents": 3,
+  "materializedSessions": 1,
+  "materializedEventRows": 3,
+  "upsertMessages": 3,
+  "retractMessages": 2,
+  "noDoubleCount": true,
+  "watermark": 10
+}
+
+
+==================== watermark snapshot (maxObservedTs=20, watermark=10) ====================
+{
+  "gapMillis": 10,
+  "allowedLatenessMillis": 10,
+  "watermark": 10,
+  "maxObservedTs": 20,
+  "acceptedCount": 3,
+  "rejectedCount": 0,
+  "materializedSessionCount": 1,
+  "materializedEventRows": 3
+}
+
+
+==================== 4) idempotent replay of e10 (expect 200, duplicate:true, no new changes) ====================
+{
+  "eventId": "e10",
+  "key": "k",
+  "timestamp": 10,
+  "watermark": 10,
+  "accepted": true,
+  "duplicate": true,
+  "durable": true,
+  "changes": []
+}
+
+
+==================== 5) same eventId with a DIFFERENT timestamp (expect HTTP 409) ====================
+HTTP 409
+
+==================== 6) batch ingest on ANOTHER key (watermark is 10; events must be >= 10) ====================
+   grp@10 and grp@15 merge (gap 5<=10); grp@50 is its own session.
+{
+  "results": [
+    {
+      "eventId": "b1",
+      "key": "grp",
+      "timestamp": 10,
+      "watermark": 10,
+      "accepted": true,
+      "durable": true,
+      "changes": [
+        {
+          "seq": 6,
+          "type": "UPSERT",
+          "sessionId": "grp@10",
+          "key": "grp",
+          "version": 1,
+          "startTs": 10,
+          "endTs": 10,
+          "eventIds": [
+            "b1"
+          ],
+          "eventTimestamp": 10,
+          "reason": "new session"
+        }
+      ]
+    },
+    {
+      "eventId": "b2",
+      "key": "grp",
+      "timestamp": 15,
+      "watermark": 10,
+      "accepted": true,
+      "durable": true,
+      "changes": [
+        {
+          "seq": 7,
+          "type": "RETRACT",
+          "sessionId": "grp@10",
+          "key": "grp",
+          "version": 1,
+          "startTs": 10,
+          "endTs": 10,
+          "eventIds": [
+            "b1"
+          ],
+          "eventTimestamp": 15,
+          "reason": "superseded by version 2"
+        },
+        {
+          "seq": 8,
+          "type": "UPSERT",
+          "sessionId": "grp@10",
+          "key": "grp",
+          "version": 2,
+          "startTs": 10,
+          "endTs": 15,
+          "eventIds": [
+            "b1",
+            "b2"
+          ],
+          "eventTimestamp": 15,
+          "reason": "late event extended/merged the session"
+        }
+      ]
+    },
+    {
+      "eventId": "b3",
+      "key": "grp",
+      "timestamp": 50,
+      "watermark": 40,
+      "accepted": true,
+      "durable": true,
+      "changes": [
+        {
+          "seq": 9,
+          "type": "UPSERT",
+          "sessionId": "grp@50",
+          "key": "grp",
+          "version": 1,
+          "startTs": 50,
+          "endTs": 50,
+          "eventIds": [
+            "b3"
+          ],
+          "eventTimestamp": 50,
+          "reason": "new session"
+        }
+      ]
+    }
+  ],
+  "count": 3
+}
+
+
+==================== 7) push max event time to 100 (GLOBAL watermark -> 90) ====================
+{
+  "eventId": "hi",
+  "key": "k",
+  "timestamp": 100,
+  "watermark": 90,
+  "accepted": true,
+  "durable": true,
+  "changes": [
+    {
+      "seq": 10,
+      "type": "UPSERT",
+      "sessionId": "k@100",
+      "key": "k",
+      "version": 1,
+      "startTs": 100,
+      "endTs": 100,
+      "eventIds": [
+        "hi"
+      ],
+      "eventTimestamp": 100,
+      "reason": "new session"
+    }
+  ]
+}
+
+
+==================== 8) event t=5 is BELOW watermark 90 (expect HTTP 422, rejected) ====================
+{
+  "eventId": "tooLate",
+  "key": "k",
+  "timestamp": 5,
+  "watermark": 90,
+  "accepted": false,
+  "rejected": true,
+  "reason": "timestamp 5 is below watermark 90"
+}
+
+HTTP 422
+
+==================== 9) event t=90 is EXACTLY at the watermark (accepted; bridges k@100 into k@90) ====================
+{
+  "eventId": "edge",
+  "key": "k",
+  "timestamp": 90,
+  "watermark": 90,
+  "accepted": true,
+  "durable": true,
+  "changes": [
+    {
+      "seq": 11,
+      "type": "RETRACT",
+      "sessionId": "k@100",
+      "key": "k",
+      "version": 1,
+      "startTs": 100,
+      "endTs": 100,
+      "eventIds": [
+        "hi"
+      ],
+      "eventTimestamp": 90,
+      "reason": "bridged into a later session"
+    },
+    {
+      "seq": 12,
+      "type": "UPSERT",
+      "sessionId": "k@90",
+      "key": "k",
+      "version": 1,
+      "startTs": 90,
+      "endTs": 100,
+      "eventIds": [
+        "edge",
+        "hi"
+      ],
+      "eventTimestamp": 90,
+      "reason": "new session"
+    }
+  ]
+}
+
+
+==================== rejected list (expect exactly one: tooLate@5) ====================
+{
+  "rejected": [
+    {
+      "eventId": "tooLate",
+      "key": "k",
+      "timestamp": 5,
+      "watermark": 90,
+      "reason": "timestamp 5 < watermark 90",
+      "arrivalSeq": 10
+    }
+  ],
+  "count": 1
+}
+
+
+==================== batch ingest on another key ====================
+{
+  "results": [
+    {
+      "eventId": "b1",
+      "accepted": false,
+      "reason": "eventId 'b1' already exists with timestamp 10; cannot reinsert with timestamp 0"
+    },
+    {
+      "eventId": "b2",
+      "accepted": false,
+      "reason": "eventId 'b2' already exists with timestamp 15; cannot reinsert with timestamp 5"
+    },
+    {
+      "eventId": "b3",
+      "key": "grp",
+      "timestamp": 50,
+      "watermark": 90,
+      "accepted": true,
+      "duplicate": true,
+      "durable": true,
+      "changes": []
+    }
+  ],
+  "count": 3
+}
+
+
+==================== final state ====================
+{
+  "gapMillis": 10,
+  "allowedLatenessMillis": 10,
+  "watermark": 90,
+  "maxObservedTs": 100,
+  "acceptedCount": 8,
+  "rejectedCount": 1,
+  "materializedSessionCount": 4,
+  "materializedEventRows": 8,
+  "sessions": [
+    {
+      "sessionId": "grp@10",
+      "key": "grp",
+      "startTs": 10,
+      "endTs": 15,
+      "durationMs": 5,
+      "eventCount": 2,
+      "eventIds": [
+        "b1",
+        "b2"
+      ],
+      "version": 2
+    },
+    {
+      "sessionId": "grp@50",
+      "key": "grp",
+      "startTs": 50,
+      "endTs": 50,
+      "durationMs": 0,
+      "eventCount": 1,
+      "eventIds": [
+        "b3"
+      ],
+      "version": 1
+    },
+    {
+      "sessionId": "k@0",
+      "key": "k",
+      "startTs": 0,
+      "endTs": 20,
+      "durationMs": 20,
+      "eventCount": 3,
+      "eventIds": [
+        "e0",
+        "e10",
+        "e20"
+      ],
+      "version": 2
+    },
+    {
+      "sessionId": "k@90",
+      "key": "k",
+      "startTs": 90,
+      "endTs": 100,
+      "durationMs": 10,
+      "eventCount": 2,
+      "eventIds": [
+        "edge",
+        "hi"
+      ],
+      "version": 1
+    }
+  ]
+}
+
+
+Recovery check:
+  1. Stop the server (Ctrl-C in its terminal).
+  2. Start it again with the same DATA_DIR:   ./scripts/run.sh
+  3. curl http://localhost:8080/sessions
+     -> session ids, versions and event memberships are identical.
