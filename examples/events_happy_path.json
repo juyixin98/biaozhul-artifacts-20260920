@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "chain": "chainA", "tx_hash": "0xlock001", "log_index": 0, "block_number": 100,
+      "event_type": "LOCK", "message_id": "msg-0001",
+      "source_chain": "chainA", "origin_contract": "0xGoldToken", "token_id": "42",
+      "amount": 500, "sender": "0xAlice", "recipient": "0xAliceOnB", "dest_chain": "chainB"
+    },
+    {
+      "chain": "chainB", "tx_hash": "0xmint001", "log_index": 1, "block_number": 210,
+      "event_type": "MINT", "message_id": "msg-0001",
+      "source_chain": "chainA", "origin_contract": "0xGoldToken", "token_id": "42",
+      "amount": 500, "sender": "0xBridge", "recipient": "0xAliceOnB"
+    },
+    {
+      "chain": "chainB", "tx_hash": "0xburn001", "log_index": 0, "block_number": 320,
+      "event_type": "BURN", "message_id": "msg-0002",
+      "source_chain": "chainA", "origin_contract": "0xGoldToken", "token_id": "42",
+      "amount": 200, "sender": "0xAliceOnB", "recipient": "0xAlice", "dest_chain": "chainA"
+    },
+    {
+      "chain": "chainA", "tx_hash": "0xrelease001", "log_index": 2, "block_number": 430,
+      "event_type": "RELEASE", "message_id": "msg-0002",
+      "source_chain": "chainA", "origin_contract": "0xGoldToken", "token_id": "42",
+      "amount": 200, "sender": "0xBridge", "recipient": "0xAlice"
+    }
+  ]
+}

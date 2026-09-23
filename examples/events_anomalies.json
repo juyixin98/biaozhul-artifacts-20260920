@@ -1,0 +1,34 @@
+{
+  "events": [
+    {
+      "chain": "chainA", "tx_hash": "0xlock100", "log_index": 0, "block_number": 500,
+      "event_type": "LOCK", "message_id": "msg-dup",
+      "source_chain": "chainA", "origin_contract": "0xSilverToken", "token_id": "7",
+      "amount": 100, "sender": "0xBob", "recipient": "0xBobOnB", "dest_chain": "chainB"
+    },
+    {
+      "chain": "chainB", "tx_hash": "0xmint100a", "log_index": 0, "block_number": 610,
+      "event_type": "MINT", "message_id": "msg-dup",
+      "source_chain": "chainA", "origin_contract": "0xSilverToken", "token_id": "7",
+      "amount": 100, "sender": "0xBridge", "recipient": "0xBobOnB"
+    },
+    {
+      "chain": "chainB", "tx_hash": "0xmint100b", "log_index": 3, "block_number": 611,
+      "event_type": "MINT", "message_id": "msg-dup",
+      "source_chain": "chainA", "origin_contract": "0xSilverToken", "token_id": "7",
+      "amount": 100, "sender": "0xBridge", "recipient": "0xBobOnB"
+    },
+    {
+      "chain": "chainB", "tx_hash": "0xmint200", "log_index": 0, "block_number": 620,
+      "event_type": "MINT", "message_id": "msg-ghost",
+      "source_chain": "chainA", "origin_contract": "0xSilverToken", "token_id": "9",
+      "amount": 777, "sender": "0xBridge", "recipient": "0xMallory"
+    },
+    {
+      "chain": "chainA", "tx_hash": "0xlock300", "log_index": 1, "block_number": 700,
+      "event_type": "LOCK", "message_id": "msg-stuck",
+      "source_chain": "chainA", "origin_contract": "0xSilverToken", "token_id": "11",
+      "amount": 50, "sender": "0xCarol", "recipient": "0xCarolOnB", "dest_chain": "chainB"
+    }
+  ]
+}
