@@ -1,0 +1,25 @@
+{
+  "status": "ok",
+  "kind": "constant",
+  "polynomial": {
+    "coefficients_low_to_high": [
+      "7"
+    ],
+    "degree": 0
+  },
+  "summary": {
+    "distinct_real_roots": 0,
+    "real_roots_with_multiplicity": 0,
+    "degree": 0,
+    "root_count_basis": "非零常数 7 处处不为零，实根数为 0。"
+  },
+  "roots": [],
+  "search_bounds": {},
+  "parameters": {
+    "decimal_digits_requested": 10,
+    "max_refinement_iterations": 2000,
+    "max_isolation_depth": 10000,
+    "target_width": null,
+    "arithmetic": "exact rational (fractions.Fraction); no floating point in the core algorithm"
+  }
+}

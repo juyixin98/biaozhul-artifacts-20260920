@@ -1,0 +1,26 @@
+{
+  "status": "ok",
+  "kind": "zero_polynomial",
+  "polynomial": {
+    "coefficients_low_to_high": [
+      "0"
+    ],
+    "degree": -1
+  },
+  "summary": {
+    "distinct_real_roots": 0,
+    "real_roots_with_multiplicity": 0,
+    "degree": -1,
+    "root_count_basis": "零多项式在每个实数处为零，实根有无穷多个，不进行隔离；按约定 distinct_real_roots=0。",
+    "note": "infinitely many real roots"
+  },
+  "roots": [],
+  "search_bounds": {},
+  "parameters": {
+    "decimal_digits_requested": 10,
+    "max_refinement_iterations": 2000,
+    "max_isolation_depth": 10000,
+    "target_width": null,
+    "arithmetic": "exact rational (fractions.Fraction); no floating point in the core algorithm"
+  }
+}

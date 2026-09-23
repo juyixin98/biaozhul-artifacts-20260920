@@ -1,0 +1,101 @@
+{
+  "status": "ok",
+  "kind": "polynomial",
+  "polynomial": {
+    "coefficients_low_to_high": [
+      "-2",
+      "5",
+      "-4",
+      "1"
+    ],
+    "degree": 3
+  },
+  "summary": {
+    "degree": 3,
+    "distinct_real_roots": 2,
+    "real_roots_with_multiplicity": 3,
+    "nonreal_complex_roots_with_multiplicity": 0,
+    "all_roots_simple": false,
+    "root_count_basis": "对每个无平方因子分量用 Sturm 定理：实根数 = V(-B) - V(B)，B 为 Cauchy 根界；每个隔离区间满足 V(a)-V(b)=1（开区间内恰一根）。重数由无平方因子分解 gcd(p,p') 确定。",
+    "square_free_factors": [
+      {
+        "index": 0,
+        "degree": 1,
+        "multiplicity": 1
+      },
+      {
+        "index": 1,
+        "degree": 1,
+        "multiplicity": 2
+      }
+    ]
+  },
+  "roots": [
+    {
+      "index": 1,
+      "multiplicity": 2,
+      "interval": {
+        "lower": "1",
+        "upper": "1",
+        "width": "0",
+        "width_decimal": "0",
+        "exact": true,
+        "lower_is_root": true,
+        "upper_is_root": true
+      },
+      "decimal_enclosure": {
+        "digits_after_point": 10,
+        "lower_bracket": "1.0000000000",
+        "upper_bracket": "1.0000000000",
+        "guaranteed_digits": 10,
+        "note": "该根为精确有理数，值完全确定，无精度损失；小数仅为该有理数在指定位数处的有界显示。"
+      },
+      "refinement_iterations": 0,
+      "evidence": {
+        "method": "rational_root_theorem",
+        "square_free_factor_index": 1,
+        "factor_degree": 1,
+        "statement": "由有理根定理枚举候选 p/q（p 整除常数项、q 整除首项系数），精确代入命中 p(r)=0，r 为精确有理根，区间退化为点 (r,r)；其重数由无平方因子分解 gcd(p,p') 给出。"
+      }
+    },
+    {
+      "index": 2,
+      "multiplicity": 1,
+      "interval": {
+        "lower": "2",
+        "upper": "2",
+        "width": "0",
+        "width_decimal": "0",
+        "exact": true,
+        "lower_is_root": true,
+        "upper_is_root": true
+      },
+      "decimal_enclosure": {
+        "digits_after_point": 10,
+        "lower_bracket": "2.0000000000",
+        "upper_bracket": "2.0000000000",
+        "guaranteed_digits": 10,
+        "note": "该根为精确有理数，值完全确定，无精度损失；小数仅为该有理数在指定位数处的有界显示。"
+      },
+      "refinement_iterations": 0,
+      "evidence": {
+        "method": "rational_root_theorem",
+        "square_free_factor_index": 0,
+        "factor_degree": 1,
+        "statement": "由有理根定理枚举候选 p/q（p 整除常数项、q 整除首项系数），精确代入命中 p(r)=0，r 为精确有理根，区间退化为点 (r,r)；其重数由无平方因子分解 gcd(p,p') 给出。"
+      }
+    }
+  ],
+  "search_bounds": {
+    "lower": "-3",
+    "upper": "3",
+    "basis": "各无平方因子分量 Cauchy 根界 B=1+max|a_k/a_n| 的并；所有实根严格位于内部，已验证 p(±B) ≠ 0。"
+  },
+  "parameters": {
+    "decimal_digits_requested": 10,
+    "max_refinement_iterations": 2000,
+    "max_isolation_depth": 10000,
+    "target_width": null,
+    "arithmetic": "exact rational (fractions.Fraction); no floating point in the core algorithm"
+  }
+}
