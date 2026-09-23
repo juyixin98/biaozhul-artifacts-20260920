@@ -1,0 +1,16 @@
+{
+  "input": {
+    "type": "pcm_file",
+    "sample_rate": 44100,
+    "path": "input_example.s16le",
+    "format": "s16le"
+  },
+  "resample": {"target_sample_rate": 48000},
+  "boundary": {"pad_mode": "reflect"},
+  "processing": {"block_size": 4096},
+  "output": {
+    "path": "output/pcm_44k1_to_48k.s16le",
+    "format": "s16le",
+    "report_path": "output/pcm_44k1_to_48k.report.json"
+  }
+}

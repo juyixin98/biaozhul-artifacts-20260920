@@ -1,0 +1,16 @@
+{
+  "input": {
+    "type": "impulse",
+    "sample_rate": 48000,
+    "duration": 0.05,
+    "index": 600
+  },
+  "resample": {"up": 3, "down": 1},
+  "boundary": {"pad_mode": "reflect"},
+  "processing": {"block_size": 512},
+  "output": {
+    "path": "output/impulse_x3.npy",
+    "format": "npy",
+    "report_path": "output/impulse_x3.report.json"
+  }
+}

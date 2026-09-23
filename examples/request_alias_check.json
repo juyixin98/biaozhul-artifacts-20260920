@@ -1,0 +1,15 @@
+{
+  "input": {
+    "type": "multitone",
+    "sample_rate": 48000,
+    "components": [[4000.0, 1.0], [20000.0, 1.0]],
+    "duration": 0.25
+  },
+  "resample": {"up": 2, "down": 3},
+  "filter": {"atten_db": 80.0},
+  "output": {
+    "path": "output/alias_check_32k.f64le",
+    "format": "f64le",
+    "report_path": "output/alias_check_32k.report.json"
+  }
+}
