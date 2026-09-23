@@ -1,0 +1,7 @@
+{
+  "spans": [
+    {"span_id": "a", "parent_id": "c", "name": "a", "start_us": 0, "end_us": 10},
+    {"span_id": "b", "parent_id": "a", "name": "b", "start_us": 1, "end_us": 9},
+    {"span_id": "c", "parent_id": "b", "name": "c", "start_us": 2, "end_us": 8}
+  ]
+}

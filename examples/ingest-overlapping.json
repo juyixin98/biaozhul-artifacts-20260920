@@ -1,0 +1,7 @@
+{
+  "spans": [
+    {"span_id": "r", "name": "root",   "start_us": 0,   "end_us": 100},
+    {"span_id": "a", "parent_id": "r", "name": "sync-a", "start_us": 10, "end_us": 60},
+    {"span_id": "b", "parent_id": "r", "name": "sync-b", "start_us": 40, "end_us": 90}
+  ]
+}

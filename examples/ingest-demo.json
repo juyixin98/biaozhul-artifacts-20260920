@@ -1,0 +1,10 @@
+{
+  "spans": [
+    {"span_id": "root",    "name": "request",       "start_us": 0,   "end_us": 300},
+    {"span_id": "write",   "parent_id": "root",     "name": "db.write",   "start_us": 10,  "end_us": 200},
+    {"span_id": "shard-a", "parent_id": "write",    "name": "db.shard-a", "start_us": 50,  "end_us": 130},
+    {"span_id": "wal",     "parent_id": "shard-a",  "name": "db.wal-fsync", "start_us": 60, "end_us": 90},
+    {"span_id": "shard-b", "parent_id": "write",    "name": "db.shard-b", "start_us": 100, "end_us": 180, "async": true},
+    {"span_id": "gc",      "parent_id": "root",     "name": "bg.gc",      "start_us": 210, "end_us": 260, "async": true}
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "spans": [
+    {"span_id": "r",     "name": "root",    "start_us": 0,   "end_us": 100},
+    {"span_id": "ghost", "parent_id": "does-not-exist", "name": "orphan", "start_us": 200, "end_us": 250},
+    {"span_id": "late",  "parent_id": "r",  "name": "overrun-child", "start_us": 80, "end_us": 140}
+  ]
+}
