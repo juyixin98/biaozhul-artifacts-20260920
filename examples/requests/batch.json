@@ -1,0 +1,7 @@
+{
+  "events": [
+    {"id": "evt-1", "key": "user-a", "eventTime": 10000, "payload": {"v": 1}},
+    {"id": "evt-2", "key": "user-a", "eventTime": 10000, "payload": {"v": 2}},
+    {"id": "evt-1", "key": "user-a", "eventTime": 10000, "payload": {"v": 999}}
+  ]
+}

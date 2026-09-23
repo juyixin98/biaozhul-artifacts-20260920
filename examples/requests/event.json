@@ -1,0 +1,9 @@
+{
+  "id": "evt-1",
+  "key": "user-a",
+  "eventTime": 10000,
+  "payload": {
+    "amount": 100,
+    "currency": "CNY"
+  }
+}

@@ -1,0 +1,339 @@
+
+[1;36m==== 启动服务 (allowedLateness=5000ms, manual 水位线, 端口 19092) ====[0m
+
+[1;36m==== 1) 首次事件 evt-1 @10000（载荷 v=1） -> 期望 ACCEPT ====[0m
+{
+  "result": {
+    "decision": "ACCEPT",
+    "emitted": true,
+    "dedupGuaranteed": true,
+    "payloadMismatch": false,
+    "key": "user-a",
+    "id": "evt-1",
+    "eventTime": 10000,
+    "watermark": null,
+    "reason": "首次事件，写入墓碑"
+  }
+}
+
+[1;36m==== 2) 同 ID 重复但载荷不同 v=2 -> 期望 SUPPRESS + payloadMismatch=true ====[0m
+{
+  "result": {
+    "decision": "SUPPRESS",
+    "emitted": false,
+    "dedupGuaranteed": true,
+    "payloadMismatch": true,
+    "key": "user-a",
+    "id": "evt-1",
+    "eventTime": 10000,
+    "watermark": null,
+    "reason": "承诺范围内重复，且载荷与首次副本不同"
+  }
+}
+
+[1;36m==== 3) 乱序到达：更晚事件 evt-2 @12000 ====[0m
+{
+  "result": {
+    "decision": "ACCEPT",
+    "emitted": true,
+    "dedupGuaranteed": true,
+    "payloadMismatch": false,
+    "key": "user-a",
+    "id": "evt-2",
+    "eventTime": 12000,
+    "watermark": null,
+    "reason": "首次事件，写入墓碑"
+  }
+}
+
+[1;36m==== 4) evt-1 副本带着更晚的 eventTime=11000（乱序、在窗口内） -> 仍 SUPPRESS ====[0m
+{
+  "result": {
+    "decision": "SUPPRESS",
+    "emitted": false,
+    "dedupGuaranteed": true,
+    "payloadMismatch": false,
+    "key": "user-a",
+    "id": "evt-1",
+    "eventTime": 11000,
+    "watermark": null,
+    "reason": "承诺范围内重复，载荷一致"
+  }
+}
+
+[1;36m==== 5) 推进水位线到 12000（承诺下界 7000，旧墓碑仍保留） ====[0m
+{
+  "advanced": true,
+  "watermark": 12000
+}
+
+[1;36m==== 6) evt-1 @10000 仍在窗口内 -> SUPPRESS ====[0m
+{
+  "result": {
+    "decision": "SUPPRESS",
+    "emitted": false,
+    "dedupGuaranteed": true,
+    "payloadMismatch": false,
+    "key": "user-a",
+    "id": "evt-1",
+    "eventTime": 10000,
+    "watermark": 12000,
+    "reason": "承诺范围内重复，载荷一致"
+  }
+}
+
+[1;36m==== 7) 时钟回退：尝试把水位线回退到 1 -> 期望 advanced=false ====[0m
+{
+  "advanced": false,
+  "watermark": 12000,
+  "note": "水位线必须单调不减：回退被忽略（时钟回退安全）"
+}
+
+[1;36m==== 8) 推进水位线到 15001（下界 10001）：evt-1 锚点已在步骤4延长到11000，仍存活 ====[0m
+{
+  "advanced": true,
+  "watermark": 15001
+}
+
+[1;36m==== 8b) evt-1 @11000 锚点仍在窗口内 -> SUPPRESS（墓碑未释放） ====[0m
+{
+  "result": {
+    "decision": "SUPPRESS",
+    "emitted": false,
+    "dedupGuaranteed": true,
+    "payloadMismatch": false,
+    "key": "user-a",
+    "id": "evt-1",
+    "eventTime": 11000,
+    "watermark": 15001,
+    "reason": "承诺范围内重复，载荷一致"
+  }
+}
+
+[1;36m==== 8c) 注意：eventTime=10000 的极迟副本按其自身时间判定已在窗口外 -> UNGUARANTEED ====[0m
+{
+  "result": {
+    "decision": "UNGUARANTEED",
+    "emitted": true,
+    "dedupGuaranteed": false,
+    "payloadMismatch": false,
+    "key": "user-a",
+    "id": "evt-1",
+    "eventTime": 10000,
+    "watermark": 15001,
+    "reason": "eventTime 早于水位线承诺窗口下界 (watermark=15001, allowedLateness=5000)"
+  }
+}
+
+[1;36m==== 8d) 推进水位线到 16001（下界 11001 > 锚点11000），墓碑真正释放，timeEvicted+1 ====[0m
+{
+  "advanced": true,
+  "watermark": 16001
+}
+
+[1;36m==== 9) 此时 evt-1 @11000 再到 -> UNGUARANTEED + dedupGuaranteed=false（透传） ====[0m
+{
+  "result": {
+    "decision": "UNGUARANTEED",
+    "emitted": true,
+    "dedupGuaranteed": false,
+    "payloadMismatch": false,
+    "key": "user-a",
+    "id": "evt-1",
+    "eventTime": 11000,
+    "watermark": 16001,
+    "reason": "eventTime 早于水位线承诺窗口下界 (watermark=16001, allowedLateness=5000)"
+  }
+}
+
+[1;36m==== 10) 读取全部已发射输出（drain=false 不删除） ====[0m
+{
+  "count": 4,
+  "outputs": [
+    {
+      "seq": 1,
+      "event": {
+        "key": "user-a",
+        "id": "evt-1",
+        "eventTime": 10000,
+        "payload": {
+          "v": 1
+        }
+      },
+      "decision": {
+        "decision": "ACCEPT",
+        "emitted": true,
+        "dedupGuaranteed": true,
+        "payloadMismatch": false,
+        "key": "user-a",
+        "id": "evt-1",
+        "eventTime": 10000,
+        "watermark": null,
+        "reason": "首次事件，写入墓碑"
+      }
+    },
+    {
+      "seq": 2,
+      "event": {
+        "key": "user-a",
+        "id": "evt-2",
+        "eventTime": 12000,
+        "payload": {}
+      },
+      "decision": {
+        "decision": "ACCEPT",
+        "emitted": true,
+        "dedupGuaranteed": true,
+        "payloadMismatch": false,
+        "key": "user-a",
+        "id": "evt-2",
+        "eventTime": 12000,
+        "watermark": null,
+        "reason": "首次事件，写入墓碑"
+      }
+    },
+    {
+      "seq": 3,
+      "event": {
+        "key": "user-a",
+        "id": "evt-1",
+        "eventTime": 10000,
+        "payload": {
+          "v": 1
+        }
+      },
+      "decision": {
+        "decision": "UNGUARANTEED",
+        "emitted": true,
+        "dedupGuaranteed": false,
+        "payloadMismatch": false,
+        "key": "user-a",
+        "id": "evt-1",
+        "eventTime": 10000,
+        "watermark": 15001,
+        "reason": "eventTime 早于水位线承诺窗口下界 (watermark=15001, allowedLateness=5000)"
+      }
+    },
+    {
+      "seq": 4,
+      "event": {
+        "key": "user-a",
+        "id": "evt-1",
+        "eventTime": 11000,
+        "payload": {
+          "v": 1
+        }
+      },
+      "decision": {
+        "decision": "UNGUARANTEED",
+        "emitted": true,
+        "dedupGuaranteed": false,
+        "payloadMismatch": false,
+        "key": "user-a",
+        "id": "evt-1",
+        "eventTime": 11000,
+        "watermark": 16001,
+        "reason": "eventTime 早于水位线承诺窗口下界 (watermark=16001, allowedLateness=5000)"
+      }
+    }
+  ]
+}
+
+[1;36m==== 11) 统计计数 ====[0m
+{
+  "seen": 8,
+  "accepted": 2,
+  "suppressed": 4,
+  "unguarded": 2,
+  "payloadMismatch": 1,
+  "timeEvicted": 1,
+  "forcedEvicted": 0,
+  "activeTombstonesPeak": 2,
+  "bufferedOutputs": 4,
+  "droppedOutputs": 0,
+  "emittedTotal": 4,
+  "activeTombstones": 1,
+  "maxTombstones": 100000,
+  "allowedLateness": 5000,
+  "watermarkMode": "manual",
+  "watermark": 16001,
+  "forcedEvictionHorizon": null
+}
+
+[1;36m==== 12) 优雅关闭（收到 SIGTERM 后落盘） ====[0m
+服务已停止，快照文件：build/demo-state/snapshot.json
+--- 快照内容 ---
+{
+  "formatVersion": 1,
+  "savedAtMillis": 1790159698562,
+  "watermark": 16001,
+  "forcedHorizon": null,
+  "seqCounter": 2,
+  "watermarkGenerator": {
+    "mode": "manual",
+    "maxTimestamp": null
+  },
+  "tombstones": [
+    {
+      "key": "user-a",
+      "id": "evt-2",
+      "eventTime": 12000,
+      "seq": 2,
+      "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  ],
+  "stats": {
+    "seen": 8,
+    "accepted": 2,
+    "suppressed": 4,
+    "unguarded": 2,
+    "payloadMismatch": 1,
+    "timeEvicted": 1,
+    "forcedEvicted": 0,
+    "activeTombstonesPeak": 2
+  }
+}
+
+[1;36m==== 13) 重启服务（同一快照），evt-2@12000 的状态应延续 ====[0m
+
+[1;36m==== 14) 重启后统计：suppressed/unguarded 等计数延续 ====[0m
+{
+  "seen": 8,
+  "accepted": 2,
+  "suppressed": 4,
+  "unguarded": 2,
+  "payloadMismatch": 1,
+  "timeEvicted": 1,
+  "forcedEvicted": 0,
+  "activeTombstonesPeak": 2,
+  "bufferedOutputs": 0,
+  "droppedOutputs": 0,
+  "emittedTotal": 0,
+  "activeTombstones": 1,
+  "maxTombstones": 100000,
+  "allowedLateness": 5000,
+  "watermarkMode": "manual",
+  "watermark": 16001,
+  "forcedEvictionHorizon": null
+}
+
+[1;36m==== 15) 重启后一条全新窗口内事件 evt-3 @20000 -> ACCEPT ====[0m
+{
+  "result": {
+    "decision": "ACCEPT",
+    "emitted": true,
+    "dedupGuaranteed": true,
+    "payloadMismatch": false,
+    "key": "user-a",
+    "id": "evt-3",
+    "eventTime": 20000,
+    "watermark": 16001,
+    "reason": "首次事件，写入墓碑"
+  }
+}
+
+[1;36m==== 16) 清理 ====[0m
+{
+  "reset": true
+}
+演示完成

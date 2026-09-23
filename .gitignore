@@ -1,0 +1,13 @@
+# 构建产物
+build/classes/
+build/test-classes/
+build/*.txt
+build/dedup.jar
+build/demo-state/
+
+# 运行时状态
+state/
+
+# 临时文件
+*.tmp
+*.log
