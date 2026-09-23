@@ -1,0 +1,7 @@
+# local build/runtime state
+/state/
+*.json.tmp
+
+# compiled binaries
+/bin/
+*.test
