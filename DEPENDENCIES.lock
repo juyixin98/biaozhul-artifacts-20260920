@@ -1,0 +1,24 @@
+# Locked dependencies / toolchain
+
+## Runtime
+- Language: Java 17 (features used: records, switch expressions/patterns, text-free stdlib only)
+- JDK used during development and test execution:
+  OpenJDK 17.0.2 (GPL v2 + CE), linux-x64
+  source: https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
+  sha256: 0022753d0cceecacdd3a795dd4cea2bd7ffdf9dc06e22ffd1be98411742fbb44
+  (verified locally; any JDK >= 17 from any vendor works)
+
+## Libraries
+- Third-party Java dependencies: NONE.
+- Only JDK modules are used:
+  - jdk.httpserver (com.sun.net.httpserver.HttpServer) — built into the JDK
+  - java.net.http (HttpClient used by the test harness) — built into the JDK
+  - java.base (collections, nio file APIs)
+- There is intentionally no Maven/Gradle dependency file to resolve:
+  `./scripts/build.sh` compiles with plain `javac`, so the build cannot
+  download or drift to different library versions — the classpath contains
+  only the project's own compiled classes.
+
+## Tool versions
+- Build/test shell scripts: bash 4+, curl (demo only), coreutils
+- OS validated: Ubuntu 24.04.4 LTS, Linux 6.8 x86_64

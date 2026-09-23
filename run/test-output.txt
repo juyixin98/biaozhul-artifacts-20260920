@@ -1,0 +1,16 @@
+PASS new session starts at version 1
+PASS distance exactly == gap connects, transitively (0,10,20)
+PASS distance gap+1 splits into two sessions
+PASS ACCEPTANCE: late event ts=10 bridges sessions from ts=0 and ts=20
+PASS folding the changelog never double counts (acceptance)
+PASS auto watermark = maxTs - lateness; event AT the watermark still accepted
+PASS events strictly behind a defined watermark are rejected, not counted
+PASS same clientId is processed once (DUPLICATE, never counted twice)
+PASS RECOVERY: new engine on same log restores sessions, changelog, ids, watermark
+PASS RECOVERY: logged watermark still rejects late events after restart
+PASS id stability under interleaved keys and multi-session bridges
+PASS HTTP: events, batch, output, sessions, watermark rejection, reset
+PASS unrelated keys aggregate independently
+
+============================================
+Tests: 13, passed: 13, failed: 0

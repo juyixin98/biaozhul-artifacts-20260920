@@ -1,0 +1,44 @@
+>> server starting (pid 291314, port 18084, data run/demo-data)
+>> server is up
+==========================================================
+Step 1: event ts=0
+{"status":"ACCEPTED","revision":1,"watermark":-10,"changes":[{"seq":1,"revision":1,"kind":"UPSERT","sessionId":"userA#1","key":"userA","version":1,"startTs":0,"endTs":0,"count":1,"watermark":-10}]}
+Step 2: event ts=20  (gap 10 => two separate sessions)
+{"status":"ACCEPTED","revision":2,"watermark":10,"changes":[{"seq":2,"revision":2,"kind":"UPSERT","sessionId":"userA#2","key":"userA","version":1,"startTs":20,"endTs":20,"count":1,"watermark":10}]}
+Sessions now:
+{"key":"userA","sessions":[{"sessionId":"userA#1","key":"userA","version":1,"startTs":0,"endTs":0,"count":1},{"sessionId":"userA#2","key":"userA","version":1,"startTs":20,"endTs":20,"count":1}]}
+
+==========================================================
+Step 3: LATE event ts=10 bridges the two sessions
+{"status":"ACCEPTED","revision":3,"watermark":10,"changes":[{"seq":3,"revision":3,"kind":"RETRACT","sessionId":"userA#2","key":"userA","version":1,"startTs":20,"endTs":20,"count":1,"watermark":10},{"seq":4,"revision":3,"kind":"UPSERT","sessionId":"userA#1","key":"userA","version":3,"startTs":0,"endTs":20,"count":3,"watermark":10}]}
+Sessions after bridge (expect one session userA#1, count 3, 0..20):
+{"key":"userA","sessions":[{"sessionId":"userA#1","key":"userA","version":3,"startTs":0,"endTs":20,"count":3}]}
+
+==========================================================
+Step 4: full changelog (/output); retract + versions are visible
+{"changes":[{"seq":1,"revision":1,"kind":"UPSERT","sessionId":"userA#1","key":"userA","version":1,"startTs":0,"endTs":0,"count":1,"watermark":-10},{"seq":2,"revision":2,"kind":"UPSERT","sessionId":"userA#2","key":"userA","version":1,"startTs":20,"endTs":20,"count":1,"watermark":10},{"seq":3,"revision":3,"kind":"RETRACT","sessionId":"userA#2","key":"userA","version":1,"startTs":20,"endTs":20,"count":1,"watermark":10},{"seq":4,"revision":3,"kind":"UPSERT","sessionId":"userA#1","key":"userA","version":3,"startTs":0,"endTs":20,"count":3,"watermark":10}]}
+
+==========================================================
+Step 5: watermark  -> reject a too-late event (ts=19, wm=20)
+{"watermark":20,"revision":4}
+submit ts=19 (expect REJECTED):
+{"status":"REJECTED","revision":4,"watermark":20,"reason":"event ts 19 < watermark 20","changes":[]}
+submit ts=25 (expect ACCEPTED):
+{"status":"ACCEPTED","revision":5,"watermark":20,"changes":[{"seq":5,"revision":5,"kind":"UPSERT","sessionId":"userA#1","key":"userA","version":4,"startTs":0,"endTs":25,"count":4,"watermark":20}]}
+duplicate clientId e-10 (expect DUPLICATE):
+{"status":"DUPLICATE","revision":5,"watermark":20,"reason":"clientId already processed","changes":[]}
+Stats:
+{"received":6,"accepted":4,"rejected":1,"duplicates":1,"lastSeq":5,"lastRevision":5,"watermark":20,"gap":10,"allowedLateness":10,"activeSessions":1}
+
+==========================================================
+Step 6: restart from event log and verify recovery
+>> server stopped
+>> server starting (pid 291365, port 18084, data run/demo-data)
+>> server is up
+Sessions after recovery (id userA#1, range 0..25, count 4 must be stable):
+{"key":"userA","sessions":[{"sessionId":"userA#1","key":"userA","version":4,"startTs":0,"endTs":25,"count":4}]}
+Stats after recovery:
+{"received":4,"accepted":4,"rejected":0,"duplicates":0,"lastSeq":5,"lastRevision":5,"watermark":20,"gap":10,"allowedLateness":10,"activeSessions":1}
+Watermark after recovery (expect 20):
+{"watermark":20}
+>> acceptance demo finished OK

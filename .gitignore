@@ -1,0 +1,8 @@
+# build output
+out/
+*.class
+
+# runtime data (event log), except committed transcripts
+run/data/
+run/demo-data/
+run/demo-server.log
