@@ -1,0 +1,259 @@
+{
+  "now": 14,
+  "complete": true,
+  "Names": [
+    "A",
+    "B",
+    "C"
+  ],
+  "deliveries": [
+    {
+      "time": 0,
+      "node": "A",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 1,
+      "node": "A",
+      "msgId": "A2",
+      "clock": {
+        "A": 2
+      }
+    },
+    {
+      "time": 1,
+      "node": "B",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 2,
+      "node": "A",
+      "msgId": "A3",
+      "clock": {
+        "A": 3
+      }
+    },
+    {
+      "time": 2,
+      "node": "B",
+      "msgId": "A2",
+      "clock": {
+        "A": 2
+      }
+    },
+    {
+      "time": 3,
+      "node": "B",
+      "msgId": "A3",
+      "clock": {
+        "A": 3
+      }
+    },
+    {
+      "time": 10,
+      "node": "C",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 10,
+      "node": "C",
+      "msgId": "A2",
+      "clock": {
+        "A": 2
+      }
+    },
+    {
+      "time": 14,
+      "node": "C",
+      "msgId": "A3",
+      "clock": {
+        "A": 3
+      }
+    }
+  ],
+  "trace": [
+    {
+      "time": 0,
+      "type": "broadcast",
+      "node": "A",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 0,
+      "type": "deliver-local",
+      "node": "A",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 1,
+      "type": "broadcast",
+      "node": "A",
+      "msgId": "A2",
+      "clock": {
+        "A": 2
+      }
+    },
+    {
+      "time": 1,
+      "type": "deliver-local",
+      "node": "A",
+      "msgId": "A2",
+      "clock": {
+        "A": 2
+      }
+    },
+    {
+      "time": 1,
+      "type": "deliver",
+      "node": "B",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 2,
+      "type": "broadcast",
+      "node": "A",
+      "msgId": "A3",
+      "clock": {
+        "A": 3
+      }
+    },
+    {
+      "time": 2,
+      "type": "deliver-local",
+      "node": "A",
+      "msgId": "A3",
+      "clock": {
+        "A": 3
+      }
+    },
+    {
+      "time": 2,
+      "type": "deliver",
+      "node": "B",
+      "msgId": "A2",
+      "clock": {
+        "A": 2
+      }
+    },
+    {
+      "time": 3,
+      "type": "buffered",
+      "node": "C",
+      "msgId": "A2",
+      "bufferSize": 1,
+      "bufferCap": 1
+    },
+    {
+      "time": 3,
+      "type": "deliver",
+      "node": "B",
+      "msgId": "A3",
+      "clock": {
+        "A": 3
+      }
+    },
+    {
+      "time": 7,
+      "type": "backpressure",
+      "node": "C",
+      "msgId": "A3",
+      "reason": "buffer-full",
+      "bufferSize": 1,
+      "bufferCap": 1
+    },
+    {
+      "time": 10,
+      "type": "deliver",
+      "node": "C",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 10,
+      "type": "deliver",
+      "node": "C",
+      "msgId": "A2",
+      "reason": "cascade",
+      "clock": {
+        "A": 2
+      }
+    },
+    {
+      "time": 14,
+      "type": "deliver",
+      "node": "C",
+      "msgId": "A3",
+      "clock": {
+        "A": 3
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "name": "A",
+      "clock": {
+        "A": 3
+      },
+      "deliveredCount": 3,
+      "buffered": null,
+      "bufferHighWater": 0
+    },
+    {
+      "name": "B",
+      "clock": {
+        "A": 3
+      },
+      "deliveredCount": 3,
+      "buffered": null,
+      "bufferHighWater": 0
+    },
+    {
+      "name": "C",
+      "clock": {
+        "A": 3
+      },
+      "deliveredCount": 3,
+      "buffered": null,
+      "bufferHighWater": 1
+    }
+  ],
+  "pendingArrivals": 0,
+  "stats": {
+    "broadcasts": 3,
+    "arrivals": 7,
+    "deliveredNew": 9,
+    "duplicates": 0,
+    "bufferedTotal": 1,
+    "releasedFromBuffer": 1,
+    "backpressure": 1,
+    "forcedDropped": 0,
+    "networkDropped": 0,
+    "inFlightAtCutoff": 0
+  },
+  "diagnostics": {
+    "permanentMissing": null,
+    "blocked": null,
+    "causalOrderOk": true,
+    "violations": null
+  }
+}

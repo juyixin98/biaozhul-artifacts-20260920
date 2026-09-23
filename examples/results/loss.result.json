@@ -1,0 +1,224 @@
+{
+  "now": 3,
+  "complete": true,
+  "Names": [
+    "A",
+    "B",
+    "C"
+  ],
+  "deliveries": [
+    {
+      "time": 0,
+      "node": "A",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 1,
+      "node": "B",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 2,
+      "node": "B",
+      "msgId": "B1",
+      "clock": {
+        "A": 1,
+        "B": 1
+      }
+    },
+    {
+      "time": 3,
+      "node": "A",
+      "msgId": "B1",
+      "clock": {
+        "A": 1,
+        "B": 1
+      }
+    }
+  ],
+  "trace": [
+    {
+      "time": 0,
+      "type": "broadcast",
+      "node": "A",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 0,
+      "type": "deliver-local",
+      "node": "A",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 0,
+      "type": "drop",
+      "node": "A",
+      "dst": "C",
+      "msgId": "A1",
+      "reason": "forced"
+    },
+    {
+      "time": 1,
+      "type": "deliver",
+      "node": "B",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 2,
+      "type": "broadcast",
+      "node": "B",
+      "msgId": "B1",
+      "clock": {
+        "A": 1,
+        "B": 1
+      }
+    },
+    {
+      "time": 2,
+      "type": "deliver-local",
+      "node": "B",
+      "msgId": "B1",
+      "clock": {
+        "A": 1,
+        "B": 1
+      }
+    },
+    {
+      "time": 3,
+      "type": "deliver",
+      "node": "A",
+      "msgId": "B1",
+      "clock": {
+        "A": 1,
+        "B": 1
+      }
+    },
+    {
+      "time": 3,
+      "type": "buffered",
+      "node": "C",
+      "msgId": "B1",
+      "bufferSize": 1,
+      "bufferCap": 16
+    }
+  ],
+  "nodes": [
+    {
+      "name": "A",
+      "clock": {
+        "A": 1,
+        "B": 1
+      },
+      "deliveredCount": 2,
+      "buffered": null,
+      "bufferHighWater": 0
+    },
+    {
+      "name": "B",
+      "clock": {
+        "A": 1,
+        "B": 1
+      },
+      "deliveredCount": 2,
+      "buffered": null,
+      "bufferHighWater": 0
+    },
+    {
+      "name": "C",
+      "clock": {},
+      "deliveredCount": 0,
+      "buffered": [
+        {
+          "msgId": "B1",
+          "sender": "B",
+          "clock": {
+            "A": 1,
+            "B": 1
+          },
+          "missing": [
+            {
+              "from": "A",
+              "have": 0,
+              "need": 1
+            }
+          ]
+        }
+      ],
+      "bufferHighWater": 1
+    }
+  ],
+  "pendingArrivals": 0,
+  "stats": {
+    "broadcasts": 2,
+    "arrivals": 3,
+    "deliveredNew": 4,
+    "duplicates": 0,
+    "bufferedTotal": 1,
+    "releasedFromBuffer": 0,
+    "backpressure": 0,
+    "forcedDropped": 1,
+    "networkDropped": 0,
+    "inFlightAtCutoff": 0
+  },
+  "diagnostics": {
+    "permanentMissing": [
+      {
+        "node": "C",
+        "msgId": "A1",
+        "sender": "A",
+        "state": "never-arrived",
+        "clock": {
+          "A": 1
+        },
+        "rootCauses": [
+          "A1@C"
+        ],
+        "rootChain": [
+          "A1"
+        ]
+      },
+      {
+        "node": "C",
+        "msgId": "B1",
+        "sender": "B",
+        "state": "buffered",
+        "clock": {
+          "A": 1,
+          "B": 1
+        },
+        "missing": [
+          {
+            "from": "A",
+            "have": 0,
+            "need": 1
+          }
+        ],
+        "rootCauses": [
+          "A1@C"
+        ],
+        "rootChain": [
+          "B1",
+          "A1"
+        ]
+      }
+    ],
+    "blocked": null,
+    "causalOrderOk": true,
+    "violations": null
+  }
+}

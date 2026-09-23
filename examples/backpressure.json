@@ -1,0 +1,26 @@
+{
+  "nodes": ["A", "B", "C"],
+  "bufferCap": 16,
+  "nodeBuffer": {"C": 1},
+  "network": {
+    "seed": 1,
+    "default": {"baseDelay": 1.0},
+    "links": [
+      {"from": "A", "to": "B", "link": {"baseDelay": 1.0}},
+      {"from": "A", "to": "C", "link": {"baseDelay": 2.0}},
+      {"from": "B", "to": "A", "link": {"baseDelay": 1.0}},
+      {"from": "B", "to": "C", "link": {"baseDelay": 1.0}},
+      {"from": "C", "to": "A", "link": {"baseDelay": 1.0}},
+      {"from": "C", "to": "B", "link": {"baseDelay": 1.0}}
+    ],
+    "delayedIds": [
+      {"msgId": "A1", "dst": ["C"], "delay": 10.0},
+      {"msgId": "A3", "dst": ["C"], "delay": [5.0, 12.0]}
+    ]
+  },
+  "broadcasts": [
+    {"time": 0.0, "from": "A", "body": "A1 predecessor: only copy to C arrives late (t=10)"},
+    {"time": 1.0, "from": "A", "body": "A2 reaches C at t=3, before A1 -> buffered"},
+    {"time": 2.0, "from": "A", "body": "A3 first copy reaches C at t=7 with the cap=1 buffer full -> backpressure; its second copy arrives at t=14 and succeeds"}
+  ]
+}

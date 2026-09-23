@@ -1,0 +1,24 @@
+{
+  "nodes": ["A", "B", "C"],
+  "bufferCap": 16,
+  "network": {
+    "seed": 11,
+    "default": {"baseDelay": 3.0, "jitter": 1.0, "reorderJitter": 1.0},
+    "links": [
+      {"from": "A", "to": "B", "link": {"baseDelay": 3.0}},
+      {"from": "A", "to": "C", "link": {"baseDelay": 5.0}},
+      {"from": "B", "to": "A", "link": {"baseDelay": 4.0}},
+      {"from": "B", "to": "C", "link": {"baseDelay": 2.5}},
+      {"from": "C", "to": "A", "link": {"baseDelay": 2.5}},
+      {"from": "C", "to": "B", "link": {"baseDelay": 4.5}}
+    ],
+    "holdIds": [
+      {"msgId": "A1", "delay": 15.0}
+    ]
+  },
+  "broadcasts": [
+    {"time": 0.0, "from": "A", "body": "concurrent A1"},
+    {"time": 0.05, "from": "B", "body": "concurrent B1"},
+    {"time": 0.1, "from": "C", "body": "concurrent C1"}
+  ]
+}

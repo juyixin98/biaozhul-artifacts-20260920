@@ -1,0 +1,463 @@
+{
+  "now": 10,
+  "complete": true,
+  "Names": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "deliveries": [
+    {
+      "time": 0,
+      "node": "A",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 1,
+      "node": "B",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 1,
+      "node": "D",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 3,
+      "node": "B",
+      "msgId": "B1",
+      "clock": {
+        "A": 1,
+        "B": 1
+      }
+    },
+    {
+      "time": 4,
+      "node": "A",
+      "msgId": "B1",
+      "clock": {
+        "A": 1,
+        "B": 1
+      }
+    },
+    {
+      "time": 5,
+      "node": "C",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 5,
+      "node": "C",
+      "msgId": "B1",
+      "clock": {
+        "A": 1,
+        "B": 1
+      }
+    },
+    {
+      "time": 6,
+      "node": "C",
+      "msgId": "C1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 7,
+      "node": "A",
+      "msgId": "C1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 7,
+      "node": "B",
+      "msgId": "C1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 8,
+      "node": "D",
+      "msgId": "B1",
+      "clock": {
+        "A": 1,
+        "B": 1
+      }
+    },
+    {
+      "time": 8,
+      "node": "D",
+      "msgId": "C1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 9,
+      "node": "D",
+      "msgId": "D1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      }
+    },
+    {
+      "time": 10,
+      "node": "A",
+      "msgId": "D1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      }
+    },
+    {
+      "time": 10,
+      "node": "B",
+      "msgId": "D1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      }
+    },
+    {
+      "time": 10,
+      "node": "C",
+      "msgId": "D1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      }
+    }
+  ],
+  "trace": [
+    {
+      "time": 0,
+      "type": "broadcast",
+      "node": "A",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 0,
+      "type": "deliver-local",
+      "node": "A",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 1,
+      "type": "deliver",
+      "node": "B",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 1,
+      "type": "deliver",
+      "node": "D",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 3,
+      "type": "broadcast",
+      "node": "B",
+      "msgId": "B1",
+      "clock": {
+        "A": 1,
+        "B": 1
+      }
+    },
+    {
+      "time": 3,
+      "type": "deliver-local",
+      "node": "B",
+      "msgId": "B1",
+      "clock": {
+        "A": 1,
+        "B": 1
+      }
+    },
+    {
+      "time": 4,
+      "type": "deliver",
+      "node": "A",
+      "msgId": "B1",
+      "clock": {
+        "A": 1,
+        "B": 1
+      }
+    },
+    {
+      "time": 4,
+      "type": "buffered",
+      "node": "C",
+      "msgId": "B1",
+      "bufferSize": 1,
+      "bufferCap": 16
+    },
+    {
+      "time": 5,
+      "type": "deliver",
+      "node": "C",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 5,
+      "type": "deliver",
+      "node": "C",
+      "msgId": "B1",
+      "reason": "cascade",
+      "clock": {
+        "A": 1,
+        "B": 1
+      }
+    },
+    {
+      "time": 6,
+      "type": "broadcast",
+      "node": "C",
+      "msgId": "C1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 6,
+      "type": "deliver-local",
+      "node": "C",
+      "msgId": "C1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 7,
+      "type": "deliver",
+      "node": "A",
+      "msgId": "C1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 7,
+      "type": "deliver",
+      "node": "B",
+      "msgId": "C1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 7,
+      "type": "buffered",
+      "node": "D",
+      "msgId": "C1",
+      "bufferSize": 1,
+      "bufferCap": 16
+    },
+    {
+      "time": 8,
+      "type": "deliver",
+      "node": "D",
+      "msgId": "B1",
+      "clock": {
+        "A": 1,
+        "B": 1
+      }
+    },
+    {
+      "time": 8,
+      "type": "deliver",
+      "node": "D",
+      "msgId": "C1",
+      "reason": "cascade",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 9,
+      "type": "broadcast",
+      "node": "D",
+      "msgId": "D1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      }
+    },
+    {
+      "time": 9,
+      "type": "deliver-local",
+      "node": "D",
+      "msgId": "D1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      }
+    },
+    {
+      "time": 10,
+      "type": "deliver",
+      "node": "A",
+      "msgId": "D1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      }
+    },
+    {
+      "time": 10,
+      "type": "deliver",
+      "node": "B",
+      "msgId": "D1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      }
+    },
+    {
+      "time": 10,
+      "type": "deliver",
+      "node": "C",
+      "msgId": "D1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "name": "A",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      },
+      "deliveredCount": 4,
+      "buffered": null,
+      "bufferHighWater": 0
+    },
+    {
+      "name": "B",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      },
+      "deliveredCount": 4,
+      "buffered": null,
+      "bufferHighWater": 0
+    },
+    {
+      "name": "C",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      },
+      "deliveredCount": 4,
+      "buffered": null,
+      "bufferHighWater": 1
+    },
+    {
+      "name": "D",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1,
+        "D": 1
+      },
+      "deliveredCount": 4,
+      "buffered": null,
+      "bufferHighWater": 1
+    }
+  ],
+  "pendingArrivals": 0,
+  "stats": {
+    "broadcasts": 4,
+    "arrivals": 12,
+    "deliveredNew": 16,
+    "duplicates": 0,
+    "bufferedTotal": 2,
+    "releasedFromBuffer": 2,
+    "backpressure": 0,
+    "forcedDropped": 0,
+    "networkDropped": 0,
+    "inFlightAtCutoff": 0
+  },
+  "diagnostics": {
+    "permanentMissing": null,
+    "blocked": null,
+    "causalOrderOk": true,
+    "violations": null
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "nodes": ["A", "B", "C", "D"],
+  "bufferCap": 16,
+  "network": {
+    "seed": 7,
+    "default": {"baseDelay": 1.0},
+    "delayedIds": [
+      {"msgId": "A1", "dst": ["C"], "delay": 5.0},
+      {"msgId": "B1", "dst": ["D"], "delay": 5.0}
+    ]
+  },
+  "broadcasts": [
+    {"time": 0.0, "from": "A", "body": "chain-1: A1"},
+    {"time": 3.0, "from": "B", "body": "chain-2: B1 (clock A1,B1); A1 is late to C"},
+    {"time": 6.0, "from": "C", "body": "chain-3: C1 (clock A1,B1,C1)"},
+    {"time": 9.0, "from": "D", "body": "chain-4: D1 (clock A1,B1,C1,D1); B1 is late to D"}
+  ]
+}

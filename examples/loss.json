@@ -1,0 +1,23 @@
+{
+  "nodes": ["A", "B", "C"],
+  "bufferCap": 16,
+  "network": {
+    "seed": 1,
+    "default": {"baseDelay": 1.0},
+    "links": [
+      {"from": "A", "to": "B", "link": {"baseDelay": 1.0}},
+      {"from": "A", "to": "C", "link": {"baseDelay": 8.0}},
+      {"from": "B", "to": "A", "link": {"baseDelay": 1.0}},
+      {"from": "B", "to": "C", "link": {"baseDelay": 1.0}},
+      {"from": "C", "to": "A", "link": {"baseDelay": 1.0}},
+      {"from": "C", "to": "B", "link": {"baseDelay": 1.0}}
+    ],
+    "dropIds": [
+      {"msgId": "A1", "dst": ["C"]}
+    ]
+  },
+  "broadcasts": [
+    {"time": 0.0, "from": "A", "body": "predecessor A1"},
+    {"time": 2.0, "from": "B", "body": "successor B1 depends on A1"}
+  ]
+}

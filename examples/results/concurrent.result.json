@@ -1,0 +1,281 @@
+{
+  "now": 15,
+  "complete": true,
+  "Names": [
+    "A",
+    "B",
+    "C"
+  ],
+  "deliveries": [
+    {
+      "time": 0,
+      "node": "A",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 0.05,
+      "node": "B",
+      "msgId": "B1",
+      "clock": {
+        "B": 1
+      }
+    },
+    {
+      "time": 0.1,
+      "node": "C",
+      "msgId": "C1",
+      "clock": {
+        "C": 1
+      }
+    },
+    {
+      "time": 2.1690592149585664,
+      "node": "A",
+      "msgId": "C1",
+      "clock": {
+        "A": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 2.792813941750489,
+      "node": "B",
+      "msgId": "A1",
+      "clock": {
+        "A": 1,
+        "B": 1
+      }
+    },
+    {
+      "time": 3.21046983962029,
+      "node": "B",
+      "msgId": "C1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 3.627890515225645,
+      "node": "A",
+      "msgId": "B1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 3.9572084247414985,
+      "node": "C",
+      "msgId": "B1",
+      "clock": {
+        "B": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 5.768878126520076,
+      "node": "C",
+      "msgId": "A1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      }
+    }
+  ],
+  "trace": [
+    {
+      "time": 0,
+      "type": "broadcast",
+      "node": "A",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 0,
+      "type": "deliver-local",
+      "node": "A",
+      "msgId": "A1",
+      "clock": {
+        "A": 1
+      }
+    },
+    {
+      "time": 0.05,
+      "type": "broadcast",
+      "node": "B",
+      "msgId": "B1",
+      "clock": {
+        "B": 1
+      }
+    },
+    {
+      "time": 0.05,
+      "type": "deliver-local",
+      "node": "B",
+      "msgId": "B1",
+      "clock": {
+        "B": 1
+      }
+    },
+    {
+      "time": 0.1,
+      "type": "broadcast",
+      "node": "C",
+      "msgId": "C1",
+      "clock": {
+        "C": 1
+      }
+    },
+    {
+      "time": 0.1,
+      "type": "deliver-local",
+      "node": "C",
+      "msgId": "C1",
+      "clock": {
+        "C": 1
+      }
+    },
+    {
+      "time": 2.1690592149585664,
+      "type": "deliver",
+      "node": "A",
+      "msgId": "C1",
+      "clock": {
+        "A": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 2.792813941750489,
+      "type": "deliver",
+      "node": "B",
+      "msgId": "A1",
+      "clock": {
+        "A": 1,
+        "B": 1
+      }
+    },
+    {
+      "time": 3.21046983962029,
+      "type": "deliver",
+      "node": "B",
+      "msgId": "C1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 3.627890515225645,
+      "type": "deliver",
+      "node": "A",
+      "msgId": "B1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 3.9572084247414985,
+      "type": "deliver",
+      "node": "C",
+      "msgId": "B1",
+      "clock": {
+        "B": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 5.768878126520076,
+      "type": "deliver",
+      "node": "C",
+      "msgId": "A1",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      }
+    },
+    {
+      "time": 15,
+      "type": "duplicate",
+      "node": "B",
+      "msgId": "A1",
+      "arrivedAt": 15,
+      "scheduledAt": 15
+    },
+    {
+      "time": 15,
+      "type": "duplicate",
+      "node": "C",
+      "msgId": "A1",
+      "arrivedAt": 15,
+      "scheduledAt": 15
+    }
+  ],
+  "nodes": [
+    {
+      "name": "A",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      },
+      "deliveredCount": 3,
+      "buffered": null,
+      "bufferHighWater": 0
+    },
+    {
+      "name": "B",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      },
+      "deliveredCount": 3,
+      "buffered": null,
+      "bufferHighWater": 0
+    },
+    {
+      "name": "C",
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      },
+      "deliveredCount": 3,
+      "buffered": null,
+      "bufferHighWater": 0
+    }
+  ],
+  "pendingArrivals": 0,
+  "stats": {
+    "broadcasts": 3,
+    "arrivals": 8,
+    "deliveredNew": 9,
+    "duplicates": 2,
+    "bufferedTotal": 0,
+    "releasedFromBuffer": 0,
+    "backpressure": 0,
+    "forcedDropped": 0,
+    "networkDropped": 0,
+    "inFlightAtCutoff": 0
+  },
+  "diagnostics": {
+    "permanentMissing": null,
+    "blocked": null,
+    "causalOrderOk": true,
+    "violations": null
+  }
+}
