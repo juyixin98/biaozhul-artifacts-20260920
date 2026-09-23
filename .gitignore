@@ -1,0 +1,14 @@
+# dependencies
+node_modules/
+
+# circuit build artifacts (regenerate with `npm run setup`)
+build/
+ptau/
+
+# misc
+*.log
+.DS_Store
+examples/sample-proof.json
+
+# keep bin/ ignored? no — the committed circom binary makes `npm run setup`
+# work out of the box; intentionally tracked.

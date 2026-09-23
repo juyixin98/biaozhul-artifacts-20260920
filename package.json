@@ -1,0 +1,31 @@
+{
+  "name": "anonymous-eligibility-circuit",
+  "version": "1.0.0",
+  "description": "Anonymous eligibility zkSNARK: age 18-120 + depth-8 Merkle membership + per-event nullifier (Circom/snarkjs/Groth16)",
+  "type": "module",
+  "scripts": {
+    "setup": "bash scripts/setup.sh",
+    "demo": "tsx src/demo.ts",
+    "prove": "tsx src/prove-from-input.ts examples/sample-input.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf build dist"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "circom_runtime": "0.1.28",
+    "circomlib": "2.0.5",
+    "circomlibjs": "0.1.7",
+    "snarkjs": "0.7.5"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.10",
+    "tsx": "4.19.2",
+    "typescript": "5.5.3",
+    "vitest": "2.1.8"
+  }
+}
