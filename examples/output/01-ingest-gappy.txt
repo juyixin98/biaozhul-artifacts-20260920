@@ -1,0 +1,8 @@
+density=gappy seed=42 样本数=360 时间范围=2026-09-23T17:00:00Z ~ 2026-09-23T19:59:59Z
+HTTP 200
+{
+  "inserted": 360,
+  "revised": 0,
+  "duplicate": 0
+}
+

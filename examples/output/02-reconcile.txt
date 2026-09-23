@@ -1,0 +1,10 @@
+host=dense   分钟层 桶数=180 空桶=  0 与原始重算一致(eps=1e-9): True
+host=dense   小时层 桶数=  3 空桶=  0 与原始重算一致(eps=1e-9): True
+host=sparse  分钟层 桶数=180 空桶= 60 与原始重算一致(eps=1e-9): True
+host=sparse  小时层 桶数=  3 空桶=  0 与原始重算一致(eps=1e-9): True
+host=ragged  分钟层 桶数=180 空桶= 88 与原始重算一致(eps=1e-9): True
+host=ragged  小时层 桶数=  3 空桶=  0 与原始重算一致(eps=1e-9): True
+host=gappy   分钟层 桶数=180 空桶= 60 与原始重算一致(eps=1e-9): True
+host=gappy   小时层 桶数=  3 空桶=  1 与原始重算一致(eps=1e-9): True
+
+总体: 全部一致 ✅

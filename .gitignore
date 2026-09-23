@@ -1,0 +1,6 @@
+# 运行期数据与构建产物
+/data/
+/server
+/seed
+*.test
+*.out
