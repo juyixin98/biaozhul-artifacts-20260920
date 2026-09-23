@@ -1,0 +1,24 @@
+[package]
+name = "mqtt-session-subset"
+version = "0.1.0"
+edition = "2021"
+description = "MQTT 3.1.1 会话子集：从零实现的增量字节解析库与本地 TCP 测试服务（CONNECT/SUBSCRIBE/QoS1 PUBLISH）"
+license = "MIT"
+
+[lib]
+name = "mqtt_subset"
+path = "src/lib.rs"
+
+[[bin]]
+name = "mqtt-subset-broker"
+path = "src/bin/broker.rs"
+
+[[example]]
+name = "client_demo"
+path = "examples/client_demo.rs"
+
+[profile.release]
+panic = "unwind"
+
+[profile.dev]
+opt-level = 0
