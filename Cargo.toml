@@ -1,0 +1,22 @@
+[package]
+name = "quota-reservation"
+version = "0.1.0"
+edition = "2021"
+description = "多租户文件块存储配额预留服务（预留 / 提交 / 取消 / 超时，Axum + 仅文件持久化）"
+
+[dependencies]
+axum = "0.7.5"
+async-trait = "0.1"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "time", "sync"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tower = { version = "0.4", features = ["util"] }
+http-body-util = "0.1"
+
+[dev-dependencies]
+tower = { version = "0.4", features = ["util"] }
+http-body-util = "0.1"
+
+[profile.release]
+# 小服务，发布构建保留常规优化即可
+opt-level = 2
