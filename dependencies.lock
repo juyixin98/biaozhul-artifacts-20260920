@@ -1,0 +1,19 @@
+# 依赖锁定 / Dependency Lock
+#
+# 本项目【零第三方依赖】：仅使用 JDK 自带 API
+#   - com.sun.net.httpserver.HttpServer（JDK 内置 HTTP 服务）
+#   - java.nio.file / java.nio.channels（原子 rename、fsync、append）
+#   - java.security.MessageDigest（SHA-256）
+#   - java.net.http.HttpClient（仅测试使用，JDK 11+ 内置）
+#
+# 构建与测试不需要 Maven/Gradle，不需要联网下载任何 jar。
+#
+# 唯一工具链要求：
+openjdk=17
+# 已验证版本：
+#   OpenJDK 17.0.20.1 (build 17.0.20.1+1-1~24.04, amd64, Ubuntu 24.04 apt)
+# 语言级别：Java 17（HexFormat、HttpClient、var 等；代码未用更高版本特性）
+#
+# 无运行时第三方依赖：
+runtime_dependencies=none
+test_dependencies=none

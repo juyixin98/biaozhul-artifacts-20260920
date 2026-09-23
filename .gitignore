@@ -1,0 +1,4 @@
+out/
+test-classes/
+txflow-data/
+*.class
