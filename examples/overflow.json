@@ -1,0 +1,28 @@
+{
+  "name": "overflow_example",
+  "state_vars": [
+    {"name": "alice", "type": "int", "init": 100},
+    {"name": "bob", "type": "int", "init": 9223372036854775757}
+  ],
+  "actions": [
+    {
+      "name": "send",
+      "params": [{"name": "amount", "type": "int", "min": 0, "max": 1000}],
+      "guards": [
+        {"expr": {"t": "cmp", "op": ">=",
+                  "lhs": {"t": "var", "name": "alice"},
+                  "rhs": {"t": "var", "name": "amount"}}}
+      ],
+      "effects": [
+        {"kind": "assign", "target": "alice",
+         "expr": {"t": "arith", "op": "-",
+                  "args": [{"t": "var", "name": "alice"},
+                           {"t": "var", "name": "amount"}]}},
+        {"kind": "assign", "target": "bob",
+         "expr": {"t": "arith", "op": "+",
+                  "args": [{"t": "var", "name": "bob"},
+                           {"t": "var", "name": "amount"}]}}
+      ]
+    }
+  ]
+}

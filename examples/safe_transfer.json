@@ -1,0 +1,39 @@
+{
+  "name": "safe_transfer_example",
+  "state_vars": [
+    {"name": "alice", "type": "int", "init": 100},
+    {"name": "bob", "type": "int", "init": 50},
+    {"name": "locked", "type": "bool", "init": false}
+  ],
+  "actions": [
+    {
+      "name": "transfer",
+      "params": [{"name": "amount", "type": "int", "min": 0, "max": 1000}],
+      "guards": [
+        {"expr": {"t": "cmp", "op": ">=",
+                  "lhs": {"t": "var", "name": "alice"},
+                  "rhs": {"t": "var", "name": "amount"}}},
+        {"expr": {"t": "cmp", "op": "==",
+                  "lhs": {"t": "var", "name": "locked"},
+                  "rhs": {"t": "bool", "value": false}}}
+      ],
+      "effects": [
+        {"kind": "assign", "target": "alice",
+         "expr": {"t": "arith", "op": "-",
+                  "args": [{"t": "var", "name": "alice"},
+                           {"t": "var", "name": "amount"}]}},
+        {"kind": "assign", "target": "bob",
+         "expr": {"t": "arith", "op": "+",
+                  "args": [{"t": "var", "name": "bob"},
+                           {"t": "var", "name": "amount"}]}},
+        {"kind": "lock", "target": "locked"}
+      ]
+    },
+    {
+      "name": "unlock",
+      "params": [],
+      "guards": [{"expr": {"t": "var", "name": "locked"}}],
+      "effects": [{"kind": "unlock", "target": "locked"}]
+    }
+  ]
+}

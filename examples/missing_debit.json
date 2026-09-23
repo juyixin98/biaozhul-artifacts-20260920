@@ -1,0 +1,20 @@
+{
+  "name": "missing_debit_example",
+  "state_vars": [
+    {"name": "treasury", "type": "int", "init": 100},
+    {"name": "attacker", "type": "int", "init": 0}
+  ],
+  "actions": [
+    {
+      "name": "withdraw",
+      "params": [{"name": "amount", "type": "int", "min": 1, "max": 1000}],
+      "guards": [],
+      "effects": [
+        {"kind": "assign", "target": "attacker",
+         "expr": {"t": "arith", "op": "+",
+                  "args": [{"t": "var", "name": "attacker"},
+                           {"t": "var", "name": "amount"}]}}
+      ]
+    }
+  ]
+}
