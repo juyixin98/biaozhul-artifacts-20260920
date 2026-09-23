@@ -1,0 +1,13 @@
+# Compiled binaries
+/bin/
+*.exe
+*.test
+
+# Go coverage / profiling artifacts
+*.out
+*.prof
+
+# Editor/OS noise
+.vscode/
+.idea/
+.DS_Store
