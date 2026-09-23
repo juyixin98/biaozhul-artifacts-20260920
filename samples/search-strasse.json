@@ -1,0 +1,47 @@
+{
+    "query": "strasse",
+    "normalizedQuery": "strasse",
+    "count": 4,
+    "hits": [
+        {
+            "docId": "doc-german",
+            "startUtf16": 0,
+            "endUtf16": 6,
+            "startCodePoint": 0,
+            "endCodePoint": 6,
+            "startUtf8": 0,
+            "endUtf8": 7,
+            "matchedOriginal": "Stra\u00dfe"
+        },
+        {
+            "docId": "doc-german",
+            "startUtf16": 29,
+            "endUtf16": 36,
+            "startCodePoint": 29,
+            "endCodePoint": 36,
+            "startUtf8": 30,
+            "endUtf8": 37,
+            "matchedOriginal": "STRASSE"
+        },
+        {
+            "docId": "doc-german",
+            "startUtf16": 41,
+            "endUtf16": 48,
+            "startCodePoint": 41,
+            "endCodePoint": 48,
+            "startUtf8": 42,
+            "endUtf8": 49,
+            "matchedOriginal": "strasse"
+        },
+        {
+            "docId": "doc-german",
+            "startUtf16": 59,
+            "endUtf16": 65,
+            "startCodePoint": 59,
+            "endCodePoint": 65,
+            "startUtf8": 60,
+            "endUtf8": 67,
+            "matchedOriginal": "Stra\u00dfe"
+        }
+    ]
+}

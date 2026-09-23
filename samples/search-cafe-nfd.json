@@ -1,0 +1,57 @@
+{
+    "query": "Cafe\u0301",
+    "normalizedQuery": "cafe\u0301",
+    "count": 5,
+    "hits": [
+        {
+            "docId": "doc-french",
+            "startUtf16": 0,
+            "endUtf16": 4,
+            "startCodePoint": 0,
+            "endCodePoint": 4,
+            "startUtf8": 0,
+            "endUtf8": 5,
+            "matchedOriginal": "Caf\u00e9"
+        },
+        {
+            "docId": "doc-french",
+            "startUtf16": 18,
+            "endUtf16": 22,
+            "startCodePoint": 18,
+            "endCodePoint": 22,
+            "startUtf8": 19,
+            "endUtf8": 24,
+            "matchedOriginal": "caf\u00e9"
+        },
+        {
+            "docId": "doc-french",
+            "startUtf16": 30,
+            "endUtf16": 34,
+            "startCodePoint": 30,
+            "endCodePoint": 34,
+            "startUtf8": 32,
+            "endUtf8": 37,
+            "matchedOriginal": "caf\u00e9"
+        },
+        {
+            "docId": "doc-french",
+            "startUtf16": 44,
+            "endUtf16": 48,
+            "startCodePoint": 44,
+            "endCodePoint": 48,
+            "startUtf8": 47,
+            "endUtf8": 52,
+            "matchedOriginal": "CAF\u00c9"
+        },
+        {
+            "docId": "doc-french",
+            "startUtf16": 53,
+            "endUtf16": 58,
+            "startCodePoint": 53,
+            "endCodePoint": 58,
+            "startUtf8": 57,
+            "endUtf8": 63,
+            "matchedOriginal": "cafe\u0301"
+        }
+    ]
+}

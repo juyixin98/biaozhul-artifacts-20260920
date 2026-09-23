@@ -1,0 +1,27 @@
+{
+    "query": "abc",
+    "normalizedQuery": "abc",
+    "count": 2,
+    "hits": [
+        {
+            "docId": "doc-cjk-fullwidth",
+            "startUtf16": 0,
+            "endUtf16": 3,
+            "startCodePoint": 0,
+            "endCodePoint": 3,
+            "startUtf8": 0,
+            "endUtf8": 9,
+            "matchedOriginal": "\uff21\uff22\uff23"
+        },
+        {
+            "docId": "doc-emoji-math",
+            "startUtf16": 28,
+            "endUtf16": 34,
+            "startCodePoint": 25,
+            "endCodePoint": 28,
+            "startUtf8": 34,
+            "endUtf8": 46,
+            "matchedOriginal": "\ud835\udc00\ud835\udc01\ud835\udc02"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "query": "\ufb01le",
+    "normalizedQuery": "file",
+    "count": 1,
+    "hits": [
+        {
+            "docId": "doc-ligature",
+            "startUtf16": 4,
+            "endUtf16": 7,
+            "startCodePoint": 4,
+            "endCodePoint": 7,
+            "startUtf8": 4,
+            "endUtf8": 9,
+            "matchedOriginal": "\ufb01le"
+        }
+    ]
+}
