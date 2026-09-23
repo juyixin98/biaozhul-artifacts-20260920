@@ -1,0 +1,51 @@
+{
+  "name": "03-stale-context-merge",
+  "seed": 99,
+  "nodes": ["A", "B"],
+  "network": { "base_delay": 1 },
+  "max_time": 100,
+  "events": [
+    { "type": "write", "time": 0, "node": "A", "key": "k", "value": "a" },
+    { "type": "send",  "time": 1, "from": "A", "to": "B", "key": "k" },
+
+    { "type": "write", "time": 3, "node": "B", "key": "k", "value": "b-after-a" },
+    { "type": "write", "time": 4, "node": "A", "key": "k", "value": "a2" },
+    { "type": "send",  "time": 5, "from": "A", "to": "B", "key": "k" },
+
+    {
+      "type": "inspect", "time": 7, "node": "B", "key": "k",
+      "expect_siblings": 2, "expect_ids": ["A:2", "B:1"]
+    },
+
+    {
+      "type": "client_merge", "time": 8, "node": "B", "key": "k",
+      "value": "clobber-only-saw-B",
+      "context": [ { "id": "B:1", "vc": {"A": 1, "B": 1} } ]
+    },
+
+    {
+      "type": "client_merge", "time": 9, "node": "B", "key": "k",
+      "value": "write-from-old-read",
+      "context": [ { "id": "A:1", "vc": {"A": 1} } ]
+    },
+
+    {
+      "type": "inspect", "time": 10, "node": "B", "key": "k",
+      "expect_siblings": 2, "expect_ids": ["A:2", "B:1"]
+    },
+
+    {
+      "type": "client_merge", "time": 11, "node": "B", "key": "k",
+      "value": "merged-ab",
+      "context": [
+        { "id": "B:1", "vc": {"A": 1, "B": 1} },
+        { "id": "A:2", "vc": {"A": 2} }
+      ]
+    },
+
+    {
+      "type": "inspect", "time": 12, "node": "B", "key": "k",
+      "expect_siblings": 1
+    }
+  ]
+}

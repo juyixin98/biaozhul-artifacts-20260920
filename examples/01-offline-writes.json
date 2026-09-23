@@ -1,0 +1,23 @@
+{
+  "name": "01-offline-writes",
+  "seed": 42,
+  "nodes": ["A", "B"],
+  "network": { "base_delay": 1 },
+  "max_time": 100,
+  "events": [
+    { "type": "offline", "time": 0, "node": "B" },
+    { "type": "write",   "time": 1, "node": "A", "key": "cart", "value": {"items": ["a-choice"]} },
+    { "type": "write",   "time": 2, "node": "B", "key": "cart", "value": {"items": ["b-choice"]} },
+    { "type": "online",  "time": 3, "node": "B" },
+    { "type": "send",    "time": 4, "from": "A", "to": "B", "key": "cart" },
+    { "type": "send",    "time": 4, "from": "B", "to": "A", "key": "cart" },
+    {
+      "type": "inspect", "time": 6, "node": "B", "key": "cart",
+      "expect_siblings": 2, "expect_ids": ["A:1", "B:1"]
+    },
+    {
+      "type": "inspect", "time": 6, "node": "A", "key": "cart",
+      "expect_siblings": 2, "expect_ids": ["A:1", "B:1"]
+    }
+  ]
+}

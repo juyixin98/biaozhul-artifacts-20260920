@@ -1,0 +1,161 @@
+{
+  "name": "02-duplicate-drop-reorder",
+  "seed": 7,
+  "trace": [
+    {
+      "time": 0,
+      "kind": "write",
+      "node": "A",
+      "key": "k",
+      "version_id": "A:1",
+      "value": "v1",
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "v1",
+          "vc": {
+            "A": 1
+          }
+        }
+      ]
+    },
+    {
+      "time": 1,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "duplicated": true,
+      "delay": 1
+    },
+    {
+      "time": 2,
+      "kind": "receive",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "version_id": "A:1",
+      "accepted": true,
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "v1",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "ingested"
+    },
+    {
+      "time": 2,
+      "kind": "receive",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "version_id": "A:1",
+      "duplicated": true,
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "v1",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 3,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "dropped": true,
+      "delay": 1
+    },
+    {
+      "time": 5,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "reordered": true,
+      "delay": 1
+    },
+    {
+      "time": 9,
+      "kind": "receive",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "version_id": "A:1",
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "v1",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 10,
+      "kind": "inspect",
+      "node": "B",
+      "key": "k",
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "v1",
+          "vc": {
+            "A": 1
+          }
+        }
+      ]
+    }
+  ],
+  "final": [
+    {
+      "node": "A",
+      "online": true,
+      "clock": {
+        "A": 1
+      },
+      "keys": {
+        "k": [
+          {
+            "id": "A:1",
+            "value": "v1",
+            "vc": {
+              "A": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "node": "B",
+      "online": true,
+      "clock": {
+        "A": 1
+      },
+      "keys": {
+        "k": [
+          {
+            "id": "A:1",
+            "value": "v1",
+            "vc": {
+              "A": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "assertions_ok": true
+}

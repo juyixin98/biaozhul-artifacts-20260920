@@ -1,0 +1,21 @@
+{
+  "name": "02-duplicate-drop-reorder",
+  "seed": 7,
+  "nodes": ["A", "B"],
+  "network": { "base_delay": 1, "reorder_delay": 4 },
+  "max_time": 100,
+  "events": [
+    { "type": "write", "time": 0, "node": "A", "key": "k", "value": "v1" },
+
+    { "type": "send", "time": 1, "from": "A", "to": "B", "key": "k", "force_dup": true },
+
+    { "type": "send", "time": 3, "from": "A", "to": "B", "key": "k", "force_drop": true },
+
+    { "type": "send", "time": 5, "from": "A", "to": "B", "key": "k", "force_reorder": true },
+
+    {
+      "type": "inspect", "time": 10, "node": "B", "key": "k",
+      "expect_siblings": 1, "expect_ids": ["A:1"]
+    }
+  ]
+}

@@ -1,0 +1,292 @@
+{
+  "name": "03-stale-context-merge",
+  "seed": 99,
+  "trace": [
+    {
+      "time": 0,
+      "kind": "write",
+      "node": "A",
+      "key": "k",
+      "version_id": "A:1",
+      "value": "a",
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "a",
+          "vc": {
+            "A": 1
+          }
+        }
+      ]
+    },
+    {
+      "time": 1,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "delay": 1
+    },
+    {
+      "time": 2,
+      "kind": "receive",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "version_id": "A:1",
+      "accepted": true,
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "a",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "ingested"
+    },
+    {
+      "time": 3,
+      "kind": "write",
+      "node": "B",
+      "key": "k",
+      "version_id": "B:1",
+      "value": "b-after-a",
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "b-after-a",
+          "vc": {
+            "A": 1,
+            "B": 1
+          }
+        }
+      ]
+    },
+    {
+      "time": 4,
+      "kind": "write",
+      "node": "A",
+      "key": "k",
+      "version_id": "A:2",
+      "value": "a2",
+      "siblings": [
+        {
+          "id": "A:2",
+          "value": "a2",
+          "vc": {
+            "A": 2
+          }
+        }
+      ]
+    },
+    {
+      "time": 5,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "delay": 1
+    },
+    {
+      "time": 6,
+      "kind": "receive",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "version_id": "A:2",
+      "accepted": true,
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "b-after-a",
+          "vc": {
+            "A": 1,
+            "B": 1
+          }
+        },
+        {
+          "id": "A:2",
+          "value": "a2",
+          "vc": {
+            "A": 2
+          }
+        }
+      ],
+      "detail": "ingested"
+    },
+    {
+      "time": 7,
+      "kind": "inspect",
+      "node": "B",
+      "key": "k",
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "b-after-a",
+          "vc": {
+            "A": 1,
+            "B": 1
+          }
+        },
+        {
+          "id": "A:2",
+          "value": "a2",
+          "vc": {
+            "A": 2
+          }
+        }
+      ]
+    },
+    {
+      "time": 8,
+      "kind": "client_merge",
+      "node": "B",
+      "key": "k",
+      "error": "context does not cover concurrent siblings: [A:2]",
+      "value": "clobber-only-saw-B",
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "b-after-a",
+          "vc": {
+            "A": 1,
+            "B": 1
+          }
+        },
+        {
+          "id": "A:2",
+          "value": "a2",
+          "vc": {
+            "A": 2
+          }
+        }
+      ]
+    },
+    {
+      "time": 9,
+      "kind": "client_merge",
+      "node": "B",
+      "key": "k",
+      "error": "stale context: read state was superseded",
+      "value": "write-from-old-read",
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "b-after-a",
+          "vc": {
+            "A": 1,
+            "B": 1
+          }
+        },
+        {
+          "id": "A:2",
+          "value": "a2",
+          "vc": {
+            "A": 2
+          }
+        }
+      ]
+    },
+    {
+      "time": 10,
+      "kind": "inspect",
+      "node": "B",
+      "key": "k",
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "b-after-a",
+          "vc": {
+            "A": 1,
+            "B": 1
+          }
+        },
+        {
+          "id": "A:2",
+          "value": "a2",
+          "vc": {
+            "A": 2
+          }
+        }
+      ]
+    },
+    {
+      "time": 11,
+      "kind": "client_merge",
+      "node": "B",
+      "key": "k",
+      "version_id": "B:2",
+      "accepted": true,
+      "value": "merged-ab",
+      "siblings": [
+        {
+          "id": "B:2",
+          "value": "merged-ab",
+          "vc": {
+            "A": 2,
+            "B": 2
+          }
+        }
+      ]
+    },
+    {
+      "time": 12,
+      "kind": "inspect",
+      "node": "B",
+      "key": "k",
+      "siblings": [
+        {
+          "id": "B:2",
+          "value": "merged-ab",
+          "vc": {
+            "A": 2,
+            "B": 2
+          }
+        }
+      ]
+    }
+  ],
+  "final": [
+    {
+      "node": "A",
+      "online": true,
+      "clock": {
+        "A": 2
+      },
+      "keys": {
+        "k": [
+          {
+            "id": "A:2",
+            "value": "a2",
+            "vc": {
+              "A": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "node": "B",
+      "online": true,
+      "clock": {
+        "A": 2,
+        "B": 2
+      },
+      "keys": {
+        "k": [
+          {
+            "id": "B:2",
+            "value": "merged-ab",
+            "vc": {
+              "A": 2,
+              "B": 2
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "assertions_ok": true
+}

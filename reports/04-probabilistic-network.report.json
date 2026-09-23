@@ -1,0 +1,1876 @@
+{
+  "name": "04-probabilistic-network",
+  "seed": 100,
+  "trace": [
+    {
+      "time": 0,
+      "kind": "write",
+      "node": "A",
+      "key": "k",
+      "version_id": "A:1",
+      "value": "from-A",
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        }
+      ]
+    },
+    {
+      "time": 0,
+      "kind": "write",
+      "node": "B",
+      "key": "k",
+      "version_id": "B:1",
+      "value": "from-B",
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ]
+    },
+    {
+      "time": 0,
+      "kind": "write",
+      "node": "C",
+      "key": "k",
+      "version_id": "C:1",
+      "value": "from-C",
+      "siblings": [
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        }
+      ]
+    },
+    {
+      "time": 2,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "reordered": true,
+      "delay": 1.3119381425807128
+    },
+    {
+      "time": 2,
+      "kind": "send",
+      "from": "A",
+      "to": "C",
+      "key": "k",
+      "duplicated": true,
+      "delay": 1.4420409580807785
+    },
+    {
+      "time": 2,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "key": "k",
+      "reordered": true,
+      "delay": 1.2215569942432072
+    },
+    {
+      "time": 2,
+      "kind": "send",
+      "from": "B",
+      "to": "C",
+      "key": "k",
+      "delay": 1.8258984294655285
+    },
+    {
+      "time": 2,
+      "kind": "send",
+      "from": "C",
+      "to": "A",
+      "key": "k",
+      "delay": 1.8451073558326132
+    },
+    {
+      "time": 2,
+      "kind": "send",
+      "from": "C",
+      "to": "B",
+      "key": "k",
+      "delay": 1.528625305973755
+    },
+    {
+      "time": 3.4420409580807787,
+      "kind": "receive",
+      "from": "A",
+      "to": "C",
+      "key": "k",
+      "version_id": "A:1",
+      "accepted": true,
+      "siblings": [
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "ingested"
+    },
+    {
+      "time": 3.4420409580807787,
+      "kind": "receive",
+      "from": "A",
+      "to": "C",
+      "key": "k",
+      "version_id": "A:1",
+      "duplicated": true,
+      "siblings": [
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 3.5286253059737547,
+      "kind": "receive",
+      "from": "C",
+      "to": "B",
+      "key": "k",
+      "version_id": "C:1",
+      "accepted": true,
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        }
+      ],
+      "detail": "ingested"
+    },
+    {
+      "time": 3.8258984294655285,
+      "kind": "receive",
+      "from": "B",
+      "to": "C",
+      "key": "k",
+      "version_id": "B:1",
+      "accepted": true,
+      "siblings": [
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "ingested"
+    },
+    {
+      "time": 3.845107355832613,
+      "kind": "receive",
+      "from": "C",
+      "to": "A",
+      "key": "k",
+      "version_id": "C:1",
+      "accepted": true,
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        }
+      ],
+      "detail": "ingested"
+    },
+    {
+      "time": 5,
+      "kind": "receive",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "version_id": "A:1",
+      "reordered": true,
+      "accepted": true,
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "ingested"
+    },
+    {
+      "time": 5,
+      "kind": "receive",
+      "from": "B",
+      "to": "A",
+      "key": "k",
+      "version_id": "B:1",
+      "reordered": true,
+      "accepted": true,
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "ingested"
+    },
+    {
+      "time": 8,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "reordered": true,
+      "delay": 1.8635466194511308
+    },
+    {
+      "time": 8,
+      "kind": "send",
+      "from": "A",
+      "to": "C",
+      "key": "k",
+      "delay": 1.9576542949405997
+    },
+    {
+      "time": 8,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "key": "k",
+      "delay": 1.146902258570051
+    },
+    {
+      "time": 8,
+      "kind": "send",
+      "from": "B",
+      "to": "C",
+      "key": "k",
+      "delay": 1.3746321791285299
+    },
+    {
+      "time": 8,
+      "kind": "send",
+      "from": "C",
+      "to": "A",
+      "key": "k",
+      "reordered": true,
+      "delay": 1.0361205461499945
+    },
+    {
+      "time": 8,
+      "kind": "send",
+      "from": "C",
+      "to": "B",
+      "key": "k",
+      "reordered": true,
+      "delay": 1.697119332980532
+    },
+    {
+      "time": 9.146902258570051,
+      "kind": "receive",
+      "from": "B",
+      "to": "A",
+      "key": "k",
+      "version_id": "B:1",
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 9.146902258570051,
+      "kind": "receive",
+      "from": "B",
+      "to": "A",
+      "key": "k",
+      "version_id": "C:1",
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 9.146902258570051,
+      "kind": "receive",
+      "from": "B",
+      "to": "A",
+      "key": "k",
+      "version_id": "A:1",
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 9.374632179128529,
+      "kind": "receive",
+      "from": "B",
+      "to": "C",
+      "key": "k",
+      "version_id": "B:1",
+      "siblings": [
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 9.374632179128529,
+      "kind": "receive",
+      "from": "B",
+      "to": "C",
+      "key": "k",
+      "version_id": "C:1",
+      "siblings": [
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 9.374632179128529,
+      "kind": "receive",
+      "from": "B",
+      "to": "C",
+      "key": "k",
+      "version_id": "A:1",
+      "siblings": [
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 9.9576542949406,
+      "kind": "receive",
+      "from": "A",
+      "to": "C",
+      "key": "k",
+      "version_id": "A:1",
+      "siblings": [
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 9.9576542949406,
+      "kind": "receive",
+      "from": "A",
+      "to": "C",
+      "key": "k",
+      "version_id": "C:1",
+      "siblings": [
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 9.9576542949406,
+      "kind": "receive",
+      "from": "A",
+      "to": "C",
+      "key": "k",
+      "version_id": "B:1",
+      "siblings": [
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 11,
+      "kind": "receive",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "version_id": "A:1",
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 11,
+      "kind": "receive",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "version_id": "C:1",
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 11,
+      "kind": "receive",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "version_id": "B:1",
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 11,
+      "kind": "receive",
+      "from": "C",
+      "to": "A",
+      "key": "k",
+      "version_id": "C:1",
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 11,
+      "kind": "receive",
+      "from": "C",
+      "to": "A",
+      "key": "k",
+      "version_id": "A:1",
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 11,
+      "kind": "receive",
+      "from": "C",
+      "to": "A",
+      "key": "k",
+      "version_id": "B:1",
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 11,
+      "kind": "receive",
+      "from": "C",
+      "to": "B",
+      "key": "k",
+      "version_id": "C:1",
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 11,
+      "kind": "receive",
+      "from": "C",
+      "to": "B",
+      "key": "k",
+      "version_id": "A:1",
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 11,
+      "kind": "receive",
+      "from": "C",
+      "to": "B",
+      "key": "k",
+      "version_id": "B:1",
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 14,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "reordered": true,
+      "delay": 1.0834726948772844
+    },
+    {
+      "time": 14,
+      "kind": "send",
+      "from": "A",
+      "to": "C",
+      "key": "k",
+      "delay": 1.2762338023810975
+    },
+    {
+      "time": 14,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "key": "k",
+      "delay": 1.2034398626418126
+    },
+    {
+      "time": 14,
+      "kind": "send",
+      "from": "B",
+      "to": "C",
+      "key": "k",
+      "delay": 1.1212407234026898
+    },
+    {
+      "time": 14,
+      "kind": "send",
+      "from": "C",
+      "to": "A",
+      "key": "k",
+      "duplicated": true,
+      "reordered": true,
+      "delay": 1.3969098475486426
+    },
+    {
+      "time": 14,
+      "kind": "send",
+      "from": "C",
+      "to": "B",
+      "key": "k",
+      "delay": 1.1388471697741296
+    },
+    {
+      "time": 15.121240723402689,
+      "kind": "receive",
+      "from": "B",
+      "to": "C",
+      "key": "k",
+      "version_id": "B:1",
+      "siblings": [
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 15.121240723402689,
+      "kind": "receive",
+      "from": "B",
+      "to": "C",
+      "key": "k",
+      "version_id": "C:1",
+      "siblings": [
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 15.121240723402689,
+      "kind": "receive",
+      "from": "B",
+      "to": "C",
+      "key": "k",
+      "version_id": "A:1",
+      "siblings": [
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 15.13884716977413,
+      "kind": "receive",
+      "from": "C",
+      "to": "B",
+      "key": "k",
+      "version_id": "C:1",
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 15.13884716977413,
+      "kind": "receive",
+      "from": "C",
+      "to": "B",
+      "key": "k",
+      "version_id": "A:1",
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 15.13884716977413,
+      "kind": "receive",
+      "from": "C",
+      "to": "B",
+      "key": "k",
+      "version_id": "B:1",
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 15.203439862641812,
+      "kind": "receive",
+      "from": "B",
+      "to": "A",
+      "key": "k",
+      "version_id": "B:1",
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 15.203439862641812,
+      "kind": "receive",
+      "from": "B",
+      "to": "A",
+      "key": "k",
+      "version_id": "C:1",
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 15.203439862641812,
+      "kind": "receive",
+      "from": "B",
+      "to": "A",
+      "key": "k",
+      "version_id": "A:1",
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 15.276233802381098,
+      "kind": "receive",
+      "from": "A",
+      "to": "C",
+      "key": "k",
+      "version_id": "A:1",
+      "siblings": [
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 15.276233802381098,
+      "kind": "receive",
+      "from": "A",
+      "to": "C",
+      "key": "k",
+      "version_id": "C:1",
+      "siblings": [
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 15.276233802381098,
+      "kind": "receive",
+      "from": "A",
+      "to": "C",
+      "key": "k",
+      "version_id": "B:1",
+      "siblings": [
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 17,
+      "kind": "receive",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "version_id": "A:1",
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 17,
+      "kind": "receive",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "version_id": "C:1",
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 17,
+      "kind": "receive",
+      "from": "A",
+      "to": "B",
+      "key": "k",
+      "version_id": "B:1",
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 17,
+      "kind": "receive",
+      "from": "C",
+      "to": "A",
+      "key": "k",
+      "version_id": "C:1",
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 17,
+      "kind": "receive",
+      "from": "C",
+      "to": "A",
+      "key": "k",
+      "version_id": "C:1",
+      "duplicated": true,
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 17,
+      "kind": "receive",
+      "from": "C",
+      "to": "A",
+      "key": "k",
+      "version_id": "A:1",
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 17,
+      "kind": "receive",
+      "from": "C",
+      "to": "A",
+      "key": "k",
+      "version_id": "A:1",
+      "duplicated": true,
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 17,
+      "kind": "receive",
+      "from": "C",
+      "to": "A",
+      "key": "k",
+      "version_id": "B:1",
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 17,
+      "kind": "receive",
+      "from": "C",
+      "to": "A",
+      "key": "k",
+      "version_id": "B:1",
+      "duplicated": true,
+      "reordered": true,
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ],
+      "detail": "duplicate or obsolete"
+    },
+    {
+      "time": 20,
+      "kind": "inspect",
+      "node": "A",
+      "key": "k",
+      "siblings": [
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ]
+    },
+    {
+      "time": 20,
+      "kind": "inspect",
+      "node": "B",
+      "key": "k",
+      "siblings": [
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        },
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        }
+      ]
+    },
+    {
+      "time": 20,
+      "kind": "inspect",
+      "node": "C",
+      "key": "k",
+      "siblings": [
+        {
+          "id": "C:1",
+          "value": "from-C",
+          "vc": {
+            "C": 1
+          }
+        },
+        {
+          "id": "A:1",
+          "value": "from-A",
+          "vc": {
+            "A": 1
+          }
+        },
+        {
+          "id": "B:1",
+          "value": "from-B",
+          "vc": {
+            "B": 1
+          }
+        }
+      ]
+    }
+  ],
+  "final": [
+    {
+      "node": "A",
+      "online": true,
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      },
+      "keys": {
+        "k": [
+          {
+            "id": "A:1",
+            "value": "from-A",
+            "vc": {
+              "A": 1
+            }
+          },
+          {
+            "id": "C:1",
+            "value": "from-C",
+            "vc": {
+              "C": 1
+            }
+          },
+          {
+            "id": "B:1",
+            "value": "from-B",
+            "vc": {
+              "B": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "node": "B",
+      "online": true,
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      },
+      "keys": {
+        "k": [
+          {
+            "id": "B:1",
+            "value": "from-B",
+            "vc": {
+              "B": 1
+            }
+          },
+          {
+            "id": "C:1",
+            "value": "from-C",
+            "vc": {
+              "C": 1
+            }
+          },
+          {
+            "id": "A:1",
+            "value": "from-A",
+            "vc": {
+              "A": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "node": "C",
+      "online": true,
+      "clock": {
+        "A": 1,
+        "B": 1,
+        "C": 1
+      },
+      "keys": {
+        "k": [
+          {
+            "id": "C:1",
+            "value": "from-C",
+            "vc": {
+              "C": 1
+            }
+          },
+          {
+            "id": "A:1",
+            "value": "from-A",
+            "vc": {
+              "A": 1
+            }
+          },
+          {
+            "id": "B:1",
+            "value": "from-B",
+            "vc": {
+              "B": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "assertions_ok": true
+}
