@@ -1,0 +1,88 @@
+converged=true equal=true final=[a b c] ticks=87 counts=map[add:3 deliver:22 drop:14 duplicate:6 reorder:11 send:30]
+--- trace ---
+t=1    add     n1 ADD a tag=[n1:1] values=[a]
+t=2    add     n2 ADD b tag=[n2:1] values=[b]
+t=3    add     n3 ADD c tag=[n3:1] values=[c]
+t=4    send    n1 -> n2 (msg 1)
+t=4    reorder message held back, delivery at t=10
+t=4    send    n1 -> n3 (msg 2)
+t=4    drop    n1 -> n3 (msg 2) DROPPED
+t=5    send    n2 -> n1 (msg 3)
+t=5    drop    n2 -> n1 (msg 3) DROPPED
+t=5    send    n2 -> n3 (msg 4)
+t=5    reorder message held back, delivery at t=10
+t=5    dup     n2 -> n3 (msg 4) message duplicated, second delivery at t=10
+t=6    send    n3 -> n1 (msg 5)
+t=6    drop    n3 -> n1 (msg 5) DROPPED
+t=6    send    n3 -> n2 (msg 6)
+t=6    drop    n3 -> n2 (msg 6) DROPPED
+t=10   deliver n2 <- n1 (msg 1) values=[a b] [values [b] -> [a b]]
+t=10   deliver n3 <- n2 (msg 4) values=[b c] [values [c] -> [b c]]
+t=10   deliver n3 <- n2 (msg 4) values=[b c] [no local change]
+t=20   send    n1 -> n2 (msg 7)
+t=20   drop    n1 -> n2 (msg 7) DROPPED
+t=20   send    n1 -> n3 (msg 8)
+t=20   drop    n1 -> n3 (msg 8) DROPPED
+t=22   send    n2 -> n1 (msg 9)
+t=22   drop    n2 -> n1 (msg 9) DROPPED
+t=22   send    n2 -> n3 (msg 10)
+t=22   dup     n2 -> n3 (msg 10) message duplicated, second delivery at t=28
+t=24   send    n3 -> n1 (msg 11)
+t=24   reorder message held back, delivery at t=28
+t=24   send    n3 -> n2 (msg 12)
+t=24   drop    n3 -> n2 (msg 12) DROPPED
+t=24   deliver n3 <- n2 (msg 10) values=[a b c] [values [b c] -> [a b c]]
+t=28   deliver n3 <- n2 (msg 10) values=[a b c] [no local change]
+t=28   deliver n1 <- n3 (msg 11) values=[a b c] [values [a] -> [a b c]]
+t=40   send    n1 -> n2 (msg 13)
+t=40   drop    n1 -> n2 (msg 13) DROPPED
+t=40   send    n1 -> n3 (msg 14)
+t=40   drop    n1 -> n3 (msg 14) DROPPED
+t=42   send    n2 -> n1 (msg 15)
+t=42   reorder message held back, delivery at t=46
+t=42   send    n2 -> n3 (msg 16)
+t=42   dup     n2 -> n3 (msg 16) message duplicated, second delivery at t=46
+t=44   send    n3 -> n1 (msg 17)
+t=44   reorder message held back, delivery at t=48
+t=44   send    n3 -> n2 (msg 18)
+t=44   drop    n3 -> n2 (msg 18) DROPPED
+t=44   deliver n3 <- n2 (msg 16) values=[a b c] [no local change]
+t=46   deliver n1 <- n2 (msg 15) values=[a b c] [no local change]
+t=46   deliver n3 <- n2 (msg 16) values=[a b c] [no local change]
+t=48   deliver n1 <- n3 (msg 17) values=[a b c] [no local change]
+t=60   send    n1 -> n2 (msg 19)
+t=60   reorder message held back, delivery at t=64
+t=60   send    n1 -> n3 (msg 20)
+t=60   drop    n1 -> n3 (msg 20) DROPPED
+t=62   send    n2 -> n1 (msg 21)
+t=62   send    n2 -> n3 (msg 22)
+t=62   reorder message held back, delivery at t=67
+t=62   dup     n2 -> n3 (msg 22) message duplicated, second delivery at t=66
+t=64   send    n3 -> n1 (msg 23)
+t=64   reorder message held back, delivery at t=70
+t=64   send    n3 -> n2 (msg 24)
+t=64   drop    n3 -> n2 (msg 24) DROPPED
+t=64   deliver n2 <- n1 (msg 19) values=[a b c] [values [a b] -> [a b c]]
+t=65   deliver n1 <- n2 (msg 21) values=[a b c] [no local change]
+t=66   deliver n3 <- n2 (msg 22) values=[a b c] [no local change]
+t=67   deliver n3 <- n2 (msg 22) values=[a b c] [no local change]
+t=70   deliver n1 <- n3 (msg 23) values=[a b c] [no local change]
+t=80   send    n1 -> n2 (msg 25)
+t=80   reorder message held back, delivery at t=86
+t=80   dup     n1 -> n2 (msg 25) message duplicated, second delivery at t=86
+t=80   send    n1 -> n3 (msg 26)
+t=81   deliver n3 <- n1 (msg 26) values=[a b c] [no local change]
+t=82   send    n2 -> n1 (msg 27)
+t=82   reorder message held back, delivery at t=86
+t=82   send    n2 -> n3 (msg 28)
+t=82   reorder message held back, delivery at t=86
+t=82   dup     n2 -> n3 (msg 28) message duplicated, second delivery at t=86
+t=84   send    n3 -> n1 (msg 29)
+t=84   drop    n3 -> n1 (msg 29) DROPPED
+t=84   send    n3 -> n2 (msg 30)
+t=86   deliver n2 <- n1 (msg 25) values=[a b c] [no local change]
+t=86   deliver n2 <- n1 (msg 25) values=[a b c] [no local change]
+t=86   deliver n1 <- n2 (msg 27) values=[a b c] [no local change]
+t=86   deliver n3 <- n2 (msg 28) values=[a b c] [no local change]
+t=86   deliver n3 <- n2 (msg 28) values=[a b c] [no local change]
+t=87   deliver n2 <- n3 (msg 30) values=[a b c] [no local change]

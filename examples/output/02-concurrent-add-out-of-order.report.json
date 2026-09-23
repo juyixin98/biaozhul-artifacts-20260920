@@ -1,0 +1,429 @@
+{
+  "seed": 7,
+  "converged": true,
+  "all_states_equal": true,
+  "final_values": [
+    "x"
+  ],
+  "ticks": 34,
+  "counts": {
+    "add": 2,
+    "deliver": 12,
+    "remove": 1,
+    "reorder": 11,
+    "send": 12
+  },
+  "nodes": [
+    {
+      "node": "n1",
+      "values": [
+        "x"
+      ],
+      "state": {
+        "adds": {
+          "x": [
+            "n1:1",
+            "n2:1"
+          ]
+        },
+        "removed": [
+          "n1:1"
+        ]
+      }
+    },
+    {
+      "node": "n2",
+      "values": [
+        "x"
+      ],
+      "state": {
+        "adds": {
+          "x": [
+            "n2:1",
+            "n1:1"
+          ]
+        },
+        "removed": [
+          "n1:1"
+        ]
+      }
+    },
+    {
+      "node": "n3",
+      "values": [
+        "x"
+      ],
+      "state": {
+        "adds": {
+          "x": [
+            "n1:1",
+            "n2:1"
+          ]
+        },
+        "removed": [
+          "n1:1"
+        ]
+      }
+    }
+  ],
+  "trace": [
+    {
+      "time": 1,
+      "node": "n1",
+      "kind": "add",
+      "element": "x",
+      "tags": [
+        "n1:1"
+      ],
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "time": 1,
+      "node": "n2",
+      "kind": "add",
+      "element": "x",
+      "tags": [
+        "n2:1"
+      ],
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "time": 3,
+      "node": "n1",
+      "kind": "remove",
+      "element": "x",
+      "tags": [
+        "n1:1"
+      ]
+    },
+    {
+      "time": 5,
+      "node": "n1",
+      "kind": "send",
+      "from": "n1",
+      "target": "n2",
+      "msg_id": 1
+    },
+    {
+      "time": 5,
+      "kind": "reorder",
+      "from": "n1",
+      "target": "n2",
+      "msg_id": 1,
+      "detail": "message held back, delivery at t=9"
+    },
+    {
+      "time": 5,
+      "node": "n1",
+      "kind": "send",
+      "from": "n1",
+      "target": "n3",
+      "msg_id": 2
+    },
+    {
+      "time": 5,
+      "kind": "reorder",
+      "from": "n1",
+      "target": "n3",
+      "msg_id": 2,
+      "detail": "message held back, delivery at t=8"
+    },
+    {
+      "time": 7,
+      "node": "n2",
+      "kind": "send",
+      "from": "n2",
+      "target": "n1",
+      "msg_id": 3
+    },
+    {
+      "time": 7,
+      "kind": "reorder",
+      "from": "n2",
+      "target": "n1",
+      "msg_id": 3,
+      "detail": "message held back, delivery at t=10"
+    },
+    {
+      "time": 7,
+      "node": "n2",
+      "kind": "send",
+      "from": "n2",
+      "target": "n3",
+      "msg_id": 4
+    },
+    {
+      "time": 7,
+      "kind": "reorder",
+      "from": "n2",
+      "target": "n3",
+      "msg_id": 4,
+      "detail": "message held back, delivery at t=11"
+    },
+    {
+      "time": 8,
+      "node": "n3",
+      "kind": "deliver",
+      "from": "n1",
+      "target": "n3",
+      "msg_id": 2,
+      "detail": "no local change"
+    },
+    {
+      "time": 9,
+      "node": "n3",
+      "kind": "send",
+      "from": "n3",
+      "target": "n2",
+      "msg_id": 5
+    },
+    {
+      "time": 9,
+      "kind": "reorder",
+      "from": "n3",
+      "target": "n2",
+      "msg_id": 5,
+      "detail": "message held back, delivery at t=13"
+    },
+    {
+      "time": 9,
+      "node": "n2",
+      "kind": "deliver",
+      "from": "n1",
+      "target": "n2",
+      "msg_id": 1,
+      "values": [
+        "x"
+      ],
+      "detail": "no local change"
+    },
+    {
+      "time": 10,
+      "node": "n1",
+      "kind": "deliver",
+      "from": "n2",
+      "target": "n1",
+      "msg_id": 3,
+      "values": [
+        "x"
+      ],
+      "detail": "values [] -\u003e [x]"
+    },
+    {
+      "time": 11,
+      "node": "n3",
+      "kind": "send",
+      "from": "n3",
+      "target": "n1",
+      "msg_id": 6
+    },
+    {
+      "time": 11,
+      "kind": "reorder",
+      "from": "n3",
+      "target": "n1",
+      "msg_id": 6,
+      "detail": "message held back, delivery at t=14"
+    },
+    {
+      "time": 11,
+      "node": "n3",
+      "kind": "deliver",
+      "from": "n2",
+      "target": "n3",
+      "msg_id": 4,
+      "values": [
+        "x"
+      ],
+      "detail": "values [] -\u003e [x]"
+    },
+    {
+      "time": 13,
+      "node": "n2",
+      "kind": "deliver",
+      "from": "n3",
+      "target": "n2",
+      "msg_id": 5,
+      "values": [
+        "x"
+      ],
+      "detail": "no local change"
+    },
+    {
+      "time": 14,
+      "node": "n1",
+      "kind": "deliver",
+      "from": "n3",
+      "target": "n1",
+      "msg_id": 6,
+      "values": [
+        "x"
+      ],
+      "detail": "no local change"
+    },
+    {
+      "time": 30,
+      "node": "n1",
+      "kind": "send",
+      "from": "n1",
+      "target": "n2",
+      "msg_id": 7
+    },
+    {
+      "time": 30,
+      "kind": "reorder",
+      "from": "n1",
+      "target": "n2",
+      "msg_id": 7,
+      "detail": "message held back, delivery at t=34"
+    },
+    {
+      "time": 30,
+      "node": "n1",
+      "kind": "send",
+      "from": "n1",
+      "target": "n3",
+      "msg_id": 8
+    },
+    {
+      "time": 30,
+      "node": "n2",
+      "kind": "send",
+      "from": "n2",
+      "target": "n1",
+      "msg_id": 9
+    },
+    {
+      "time": 30,
+      "kind": "reorder",
+      "from": "n2",
+      "target": "n1",
+      "msg_id": 9,
+      "detail": "message held back, delivery at t=33"
+    },
+    {
+      "time": 30,
+      "node": "n2",
+      "kind": "send",
+      "from": "n2",
+      "target": "n3",
+      "msg_id": 10
+    },
+    {
+      "time": 30,
+      "kind": "reorder",
+      "from": "n2",
+      "target": "n3",
+      "msg_id": 10,
+      "detail": "message held back, delivery at t=34"
+    },
+    {
+      "time": 30,
+      "node": "n3",
+      "kind": "send",
+      "from": "n3",
+      "target": "n1",
+      "msg_id": 11
+    },
+    {
+      "time": 30,
+      "kind": "reorder",
+      "from": "n3",
+      "target": "n1",
+      "msg_id": 11,
+      "detail": "message held back, delivery at t=33"
+    },
+    {
+      "time": 30,
+      "node": "n3",
+      "kind": "send",
+      "from": "n3",
+      "target": "n2",
+      "msg_id": 12
+    },
+    {
+      "time": 30,
+      "kind": "reorder",
+      "from": "n3",
+      "target": "n2",
+      "msg_id": 12,
+      "detail": "message held back, delivery at t=33"
+    },
+    {
+      "time": 31,
+      "node": "n3",
+      "kind": "deliver",
+      "from": "n1",
+      "target": "n3",
+      "msg_id": 8,
+      "values": [
+        "x"
+      ],
+      "detail": "no local change"
+    },
+    {
+      "time": 33,
+      "node": "n1",
+      "kind": "deliver",
+      "from": "n2",
+      "target": "n1",
+      "msg_id": 9,
+      "values": [
+        "x"
+      ],
+      "detail": "no local change"
+    },
+    {
+      "time": 33,
+      "node": "n1",
+      "kind": "deliver",
+      "from": "n3",
+      "target": "n1",
+      "msg_id": 11,
+      "values": [
+        "x"
+      ],
+      "detail": "no local change"
+    },
+    {
+      "time": 33,
+      "node": "n2",
+      "kind": "deliver",
+      "from": "n3",
+      "target": "n2",
+      "msg_id": 12,
+      "values": [
+        "x"
+      ],
+      "detail": "no local change"
+    },
+    {
+      "time": 34,
+      "node": "n2",
+      "kind": "deliver",
+      "from": "n1",
+      "target": "n2",
+      "msg_id": 7,
+      "values": [
+        "x"
+      ],
+      "detail": "no local change"
+    },
+    {
+      "time": 34,
+      "node": "n3",
+      "kind": "deliver",
+      "from": "n2",
+      "target": "n3",
+      "msg_id": 10,
+      "values": [
+        "x"
+      ],
+      "detail": "no local change"
+    }
+  ]
+}

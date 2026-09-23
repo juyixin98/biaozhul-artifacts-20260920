@@ -1,0 +1,35 @@
+{
+  "seed": 2024,
+  "nodes": ["n1", "n2", "n3"],
+  "network": {
+    "loss_prob": 0.35,
+    "duplicate_prob": 0.30,
+    "reorder_prob": 0.60,
+    "min_delay": 1,
+    "max_delay": 3
+  },
+  "events": [
+    {"time": 1,  "node": "n1", "op": "add", "element": "a"},
+    {"time": 2,  "node": "n2", "op": "add", "element": "b"},
+    {"time": 3,  "node": "n3", "op": "add", "element": "c"},
+    {"time": 4,  "node": "n1", "op": "sync"},
+    {"time": 5,  "node": "n2", "op": "sync"},
+    {"time": 6,  "node": "n3", "op": "sync"},
+
+    {"time": 20, "node": "n1", "op": "sync"},
+    {"time": 22, "node": "n2", "op": "sync"},
+    {"time": 24, "node": "n3", "op": "sync"},
+
+    {"time": 40, "node": "n1", "op": "sync"},
+    {"time": 42, "node": "n2", "op": "sync"},
+    {"time": 44, "node": "n3", "op": "sync"},
+
+    {"time": 60, "node": "n1", "op": "sync"},
+    {"time": 62, "node": "n2", "op": "sync"},
+    {"time": 64, "node": "n3", "op": "sync"},
+
+    {"time": 80, "node": "n1", "op": "sync"},
+    {"time": 82, "node": "n2", "op": "sync"},
+    {"time": 84, "node": "n3", "op": "sync"}
+  ]
+}

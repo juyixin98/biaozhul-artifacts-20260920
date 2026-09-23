@@ -1,0 +1,313 @@
+{
+  "seed": 99,
+  "converged": true,
+  "all_states_equal": true,
+  "final_values": null,
+  "ticks": 30,
+  "counts": {
+    "add": 1,
+    "deliver": 14,
+    "gc": 1,
+    "remove": 1,
+    "send": 14
+  },
+  "nodes": [
+    {
+      "node": "n1",
+      "values": null,
+      "state": {
+        "adds": {},
+        "removed": null
+      }
+    },
+    {
+      "node": "n2",
+      "values": null,
+      "state": {
+        "adds": {},
+        "removed": null
+      }
+    },
+    {
+      "node": "n3",
+      "values": null,
+      "state": {
+        "adds": {},
+        "removed": null
+      }
+    }
+  ],
+  "trace": [
+    {
+      "time": 1,
+      "node": "n1",
+      "kind": "add",
+      "element": "x",
+      "tags": [
+        "n1:1"
+      ],
+      "values": [
+        "x"
+      ]
+    },
+    {
+      "time": 2,
+      "node": "n1",
+      "kind": "send",
+      "from": "n1",
+      "target": "n2",
+      "msg_id": 1
+    },
+    {
+      "time": 2,
+      "node": "n1",
+      "kind": "send",
+      "from": "n1",
+      "target": "n3",
+      "msg_id": 2
+    },
+    {
+      "time": 3,
+      "node": "n2",
+      "kind": "deliver",
+      "from": "n1",
+      "target": "n2",
+      "msg_id": 1,
+      "values": [
+        "x"
+      ],
+      "detail": "values [] -\u003e [x]"
+    },
+    {
+      "time": 3,
+      "node": "n3",
+      "kind": "deliver",
+      "from": "n1",
+      "target": "n3",
+      "msg_id": 2,
+      "values": [
+        "x"
+      ],
+      "detail": "values [] -\u003e [x]"
+    },
+    {
+      "time": 5,
+      "node": "n1",
+      "kind": "remove",
+      "element": "x",
+      "tags": [
+        "n1:1"
+      ]
+    },
+    {
+      "time": 6,
+      "node": "n1",
+      "kind": "send",
+      "from": "n1",
+      "target": "n2",
+      "msg_id": 3
+    },
+    {
+      "time": 6,
+      "node": "n1",
+      "kind": "send",
+      "from": "n1",
+      "target": "n3",
+      "msg_id": 4
+    },
+    {
+      "time": 7,
+      "node": "n2",
+      "kind": "deliver",
+      "from": "n1",
+      "target": "n2",
+      "msg_id": 3,
+      "detail": "values [x] -\u003e []"
+    },
+    {
+      "time": 7,
+      "node": "n3",
+      "kind": "deliver",
+      "from": "n1",
+      "target": "n3",
+      "msg_id": 4,
+      "detail": "values [x] -\u003e []"
+    },
+    {
+      "time": 8,
+      "node": "n2",
+      "kind": "send",
+      "from": "n2",
+      "target": "n1",
+      "msg_id": 5
+    },
+    {
+      "time": 8,
+      "node": "n2",
+      "kind": "send",
+      "from": "n2",
+      "target": "n3",
+      "msg_id": 6
+    },
+    {
+      "time": 9,
+      "node": "n1",
+      "kind": "deliver",
+      "from": "n2",
+      "target": "n1",
+      "msg_id": 5,
+      "detail": "no local change"
+    },
+    {
+      "time": 9,
+      "node": "n3",
+      "kind": "deliver",
+      "from": "n2",
+      "target": "n3",
+      "msg_id": 6,
+      "detail": "no local change"
+    },
+    {
+      "time": 10,
+      "node": "n3",
+      "kind": "send",
+      "from": "n3",
+      "target": "n1",
+      "msg_id": 7
+    },
+    {
+      "time": 10,
+      "node": "n3",
+      "kind": "send",
+      "from": "n3",
+      "target": "n2",
+      "msg_id": 8
+    },
+    {
+      "time": 11,
+      "node": "n1",
+      "kind": "deliver",
+      "from": "n3",
+      "target": "n1",
+      "msg_id": 7,
+      "detail": "no local change"
+    },
+    {
+      "time": 11,
+      "node": "n2",
+      "kind": "deliver",
+      "from": "n3",
+      "target": "n2",
+      "msg_id": 8,
+      "detail": "no local change"
+    },
+    {
+      "time": 20,
+      "node": "n1",
+      "kind": "send",
+      "from": "n1",
+      "target": "n2",
+      "msg_id": 9
+    },
+    {
+      "time": 20,
+      "node": "n1",
+      "kind": "send",
+      "from": "n1",
+      "target": "n3",
+      "msg_id": 10
+    },
+    {
+      "time": 20,
+      "node": "n2",
+      "kind": "send",
+      "from": "n2",
+      "target": "n1",
+      "msg_id": 11
+    },
+    {
+      "time": 20,
+      "node": "n2",
+      "kind": "send",
+      "from": "n2",
+      "target": "n3",
+      "msg_id": 12
+    },
+    {
+      "time": 20,
+      "node": "n3",
+      "kind": "send",
+      "from": "n3",
+      "target": "n1",
+      "msg_id": 13
+    },
+    {
+      "time": 20,
+      "node": "n3",
+      "kind": "send",
+      "from": "n3",
+      "target": "n2",
+      "msg_id": 14
+    },
+    {
+      "time": 21,
+      "node": "n2",
+      "kind": "deliver",
+      "from": "n1",
+      "target": "n2",
+      "msg_id": 9,
+      "detail": "no local change"
+    },
+    {
+      "time": 21,
+      "node": "n3",
+      "kind": "deliver",
+      "from": "n1",
+      "target": "n3",
+      "msg_id": 10,
+      "detail": "no local change"
+    },
+    {
+      "time": 21,
+      "node": "n1",
+      "kind": "deliver",
+      "from": "n2",
+      "target": "n1",
+      "msg_id": 11,
+      "detail": "no local change"
+    },
+    {
+      "time": 21,
+      "node": "n3",
+      "kind": "deliver",
+      "from": "n2",
+      "target": "n3",
+      "msg_id": 12,
+      "detail": "no local change"
+    },
+    {
+      "time": 21,
+      "node": "n1",
+      "kind": "deliver",
+      "from": "n3",
+      "target": "n1",
+      "msg_id": 13,
+      "detail": "no local change"
+    },
+    {
+      "time": 21,
+      "node": "n2",
+      "kind": "deliver",
+      "from": "n3",
+      "target": "n2",
+      "msg_id": 14,
+      "detail": "no local change"
+    },
+    {
+      "time": 30,
+      "kind": "gc",
+      "count": 3,
+      "detail": "coordinated GC across 3 nodes reclaimed 3 tag entries"
+    }
+  ]
+}

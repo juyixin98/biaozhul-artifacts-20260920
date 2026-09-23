@@ -1,0 +1,33 @@
+converged=true equal=true final=[] ticks=30 counts=map[add:1 deliver:14 gc:1 remove:1 send:14]
+--- trace ---
+t=1    add     n1 ADD x tag=[n1:1] values=[x]
+t=2    send    n1 -> n2 (msg 1)
+t=2    send    n1 -> n3 (msg 2)
+t=3    deliver n2 <- n1 (msg 1) values=[x] [values [] -> [x]]
+t=3    deliver n3 <- n1 (msg 2) values=[x] [values [] -> [x]]
+t=5    remove  n1 REMOVE x tags=[n1:1] values=[]
+t=6    send    n1 -> n2 (msg 3)
+t=6    send    n1 -> n3 (msg 4)
+t=7    deliver n2 <- n1 (msg 3) values=[] [values [x] -> []]
+t=7    deliver n3 <- n1 (msg 4) values=[] [values [x] -> []]
+t=8    send    n2 -> n1 (msg 5)
+t=8    send    n2 -> n3 (msg 6)
+t=9    deliver n1 <- n2 (msg 5) values=[] [no local change]
+t=9    deliver n3 <- n2 (msg 6) values=[] [no local change]
+t=10   send    n3 -> n1 (msg 7)
+t=10   send    n3 -> n2 (msg 8)
+t=11   deliver n1 <- n3 (msg 7) values=[] [no local change]
+t=11   deliver n2 <- n3 (msg 8) values=[] [no local change]
+t=20   send    n1 -> n2 (msg 9)
+t=20   send    n1 -> n3 (msg 10)
+t=20   send    n2 -> n1 (msg 11)
+t=20   send    n2 -> n3 (msg 12)
+t=20   send    n3 -> n1 (msg 13)
+t=20   send    n3 -> n2 (msg 14)
+t=21   deliver n2 <- n1 (msg 9) values=[] [no local change]
+t=21   deliver n3 <- n1 (msg 10) values=[] [no local change]
+t=21   deliver n1 <- n2 (msg 11) values=[] [no local change]
+t=21   deliver n3 <- n2 (msg 12) values=[] [no local change]
+t=21   deliver n1 <- n3 (msg 13) values=[] [no local change]
+t=21   deliver n2 <- n3 (msg 14) values=[] [no local change]
+t=30   gc      GC coordinated GC across 3 nodes reclaimed 3 tag entries

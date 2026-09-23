@@ -1,0 +1,40 @@
+converged=true equal=true final=[x] ticks=34 counts=map[add:2 deliver:12 remove:1 reorder:11 send:12]
+--- trace ---
+t=1    add     n1 ADD x tag=[n1:1] values=[x]
+t=1    add     n2 ADD x tag=[n2:1] values=[x]
+t=3    remove  n1 REMOVE x tags=[n1:1] values=[]
+t=5    send    n1 -> n2 (msg 1)
+t=5    reorder message held back, delivery at t=9
+t=5    send    n1 -> n3 (msg 2)
+t=5    reorder message held back, delivery at t=8
+t=7    send    n2 -> n1 (msg 3)
+t=7    reorder message held back, delivery at t=10
+t=7    send    n2 -> n3 (msg 4)
+t=7    reorder message held back, delivery at t=11
+t=8    deliver n3 <- n1 (msg 2) values=[] [no local change]
+t=9    send    n3 -> n2 (msg 5)
+t=9    reorder message held back, delivery at t=13
+t=9    deliver n2 <- n1 (msg 1) values=[x] [no local change]
+t=10   deliver n1 <- n2 (msg 3) values=[x] [values [] -> [x]]
+t=11   send    n3 -> n1 (msg 6)
+t=11   reorder message held back, delivery at t=14
+t=11   deliver n3 <- n2 (msg 4) values=[x] [values [] -> [x]]
+t=13   deliver n2 <- n3 (msg 5) values=[x] [no local change]
+t=14   deliver n1 <- n3 (msg 6) values=[x] [no local change]
+t=30   send    n1 -> n2 (msg 7)
+t=30   reorder message held back, delivery at t=34
+t=30   send    n1 -> n3 (msg 8)
+t=30   send    n2 -> n1 (msg 9)
+t=30   reorder message held back, delivery at t=33
+t=30   send    n2 -> n3 (msg 10)
+t=30   reorder message held back, delivery at t=34
+t=30   send    n3 -> n1 (msg 11)
+t=30   reorder message held back, delivery at t=33
+t=30   send    n3 -> n2 (msg 12)
+t=30   reorder message held back, delivery at t=33
+t=31   deliver n3 <- n1 (msg 8) values=[x] [no local change]
+t=33   deliver n1 <- n2 (msg 9) values=[x] [no local change]
+t=33   deliver n1 <- n3 (msg 11) values=[x] [no local change]
+t=33   deliver n2 <- n3 (msg 12) values=[x] [no local change]
+t=34   deliver n2 <- n1 (msg 7) values=[x] [no local change]
+t=34   deliver n3 <- n2 (msg 10) values=[x] [no local change]

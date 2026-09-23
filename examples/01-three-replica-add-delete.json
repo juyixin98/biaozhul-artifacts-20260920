@@ -1,0 +1,23 @@
+{
+  "seed": 42,
+  "nodes": ["n1", "n2", "n3"],
+  "network": {
+    "loss_prob": 0.0,
+    "duplicate_prob": 0.0,
+    "reorder_prob": 0.0,
+    "min_delay": 1,
+    "max_delay": 2
+  },
+  "events": [
+    {"time": 1,  "node": "n1", "op": "add",    "element": "a"},
+    {"time": 2,  "node": "n1", "op": "sync"},
+    {"time": 4,  "node": "n2", "op": "add",    "element": "b"},
+    {"time": 5,  "node": "n1", "op": "remove", "element": "a"},
+    {"time": 6,  "node": "n1", "op": "sync"},
+    {"time": 8,  "node": "n2", "op": "sync"},
+    {"time": 10, "node": "n3", "op": "sync"},
+    {"time": 20, "node": "n1", "op": "sync"},
+    {"time": 20, "node": "n2", "op": "sync"},
+    {"time": 20, "node": "n3", "op": "sync"}
+  ]
+}
