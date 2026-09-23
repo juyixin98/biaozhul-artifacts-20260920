@@ -1,0 +1,43 @@
+== compiling main sources ==
+== compiling test sources ==
+build OK
+
+== running tests ==
+== TokenizerTest ==
+  PASS emptyAndNullTextYieldNoTokens
+  PASS punctuationOnlyYieldsNoTokens
+  PASS lowercasesAndSplitsOnNonAlphanumeric
+  PASS repeatedTokensArePreserved
+== BM25Test ==
+  PASS scoresMatchHandComputedReference
+  PASS idfFormula
+  PASS repeatedTermInDocumentIncreasesScore
+  PASS repeatedTermInQueryCountsOnce
+  PASS emptyDocumentsNeverMatch
+  PASS equalScoresBrokenByDocIdAscending
+  PASS unknownTermYieldsEmptyPage
+  PASS multiTermQuerySumsScores
+== PaginationTest ==
+  PASS consecutivePagesHaveNoGapsOrDuplicates
+  PASS tiedScoresAreStablyOrderedAcrossPageBoundary
+  PASS pageSequenceMatchesSingleBigPage
+  PASS cursorBindsQueryAndPageSize
+  PASS malformedCursorRejected
+  PASS invalidParametersRejected
+  PASS cursorRoundTrip
+== SnapshotTest ==
+  PASS updatesDoNotAffectInFlightPagination
+  PASS expiredSnapshotYields410Semantics
+  PASS retainedSnapshotsAreBounded
+  PASS noOpWritesDoNotCreateSnapshots
+  PASS deleteAffectsOnlyNewSearches
+== HttpApiTest ==
+  PASS healthCheck
+  PASS endToEndPaginationNoGapsNoDuplicates
+  PASS snapshotIsolationOverHttp
+  PASS expiredCursorReturns410
+  PASS errorCasesOverHttp
+  PASS snapshotsListing
+  PASS queryOnlyPunctuationReturnsEmptyPage
+
+passed=31 failed=0

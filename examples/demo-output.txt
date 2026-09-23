@@ -1,0 +1,198 @@
+############ 0. 启动服务（合成语料，21 篇） ############
+
+############ 1. 健康检查 ############
+{"status":"ok","version":1,"docCount":21}
+
+############ 2. 首页检索 q=apple pageSize=2（同分时 docId 小的在前） ############
+{
+    "snapshotVersion": 1,
+    "totalHits": 5,
+    "offset": 0,
+    "pageSize": 2,
+    "hits": [
+        {
+            "docId": "case-1",
+            "score": 2.2667786175068487,
+            "text": "Apple APPLE aPpLe"
+        },
+        {
+            "docId": "doc-01",
+            "score": 2.2667786175068487,
+            "text": "apple apple apple"
+        }
+    ],
+    "nextCursor": "eyJxIjoiYXBwbGUiLCJzIjoyLjI2Njc3ODYxNzUwNjg0ODcsImlkIjoiZG9jLTAxIiwidiI6MSwicHMiOjIsIm9mZiI6Mn0",
+    "hasMore": true
+}
+
+############ 3. 用 nextCursor 取第 2 页（不漏不重；offset=2） ############
+{
+    "snapshotVersion": 1,
+    "totalHits": 5,
+    "offset": 2,
+    "pageSize": 2,
+    "hits": [
+        {
+            "docId": "doc-02",
+            "score": 1.7029605857411854,
+            "text": "apple banana"
+        },
+        {
+            "docId": "doc-03",
+            "score": 1.4976930151384533,
+            "text": "apple orange grape"
+        }
+    ],
+    "nextCursor": "eyJxIjoiYXBwbGUiLCJzIjoxLjQ5NzY5MzAxNTEzODQ1MzMsImlkIjoiZG9jLTAzIiwidiI6MSwicHMiOjIsIm9mZiI6NH0",
+    "hasMore": true
+}
+
+############ 4. 继续取第 3 页（末页 hasMore=false，无 nextCursor） ############
+{
+    "snapshotVersion": 1,
+    "totalHits": 5,
+    "offset": 4,
+    "pageSize": 2,
+    "hits": [
+        {
+            "docId": "doc-05",
+            "score": 1.3527549814153772,
+            "text": "the apple pie recipe uses fresh apple and cinnamon"
+        }
+    ],
+    "nextCursor": null,
+    "hasMore": false
+}
+
+############ 5. 同分决胜：q=cherry，三篇文档内容完全相同，按 docId 升序 ############
+{
+    "snapshotVersion": 1,
+    "totalHits": 3,
+    "offset": 0,
+    "pageSize": 10,
+    "hits": [
+        {
+            "docId": "dup-1",
+            "score": 2.8981344321617812,
+            "text": "cherry cherry"
+        },
+        {
+            "docId": "dup-2",
+            "score": 2.8981344321617812,
+            "text": "cherry cherry"
+        },
+        {
+            "docId": "dup-3",
+            "score": 2.8981344321617812,
+            "text": "cherry cherry"
+        }
+    ],
+    "nextCursor": null,
+    "hasMore": false
+}
+
+############ 6. 空文档 / 仅标点不会命中：q=apple 时 empty-1、punct-1 不出现 ############
+punctuation-only 查询 '!!! ???' 的结果：
+{
+    "snapshotVersion": 1,
+    "totalHits": 0,
+    "offset": 0,
+    "pageSize": 10,
+    "hits": [],
+    "nextCursor": null,
+    "hasMore": false
+}
+
+############ 7. 快照隔离：翻页途中修改语料，旧游标页面不受影响 ############
+-- 新增 new-apple、删除 doc-01 --
+{"ok":true,"id":"new-apple","version":2}
+{"ok":true,"deleted":true,"version":3}
+-- 重新从头取一个第 1 页游标（此时为 version 3）--
+-- 再制造 2 次变更 --
+bulk upsert done
+-- 旧游标取第 2 页：snapshotVersion 仍为 3，totalHits 仍为 5 --
+{
+    "snapshotVersion": 3,
+    "totalHits": 5,
+    "offset": 2,
+    "pageSize": 2,
+    "hits": [
+        {
+            "docId": "new-apple",
+            "score": 1.696840535719222,
+            "text": "apple crisp"
+        },
+        {
+            "docId": "doc-03",
+            "score": 1.4906007535642811,
+            "text": "apple orange grape"
+        }
+    ],
+    "nextCursor": "eyJxIjoiYXBwbGUiLCJzIjoxLjQ5MDYwMDc1MzU2NDI4MTEsImlkIjoiZG9jLTAzIiwidiI6MywicHMiOjIsIm9mZiI6NH0",
+    "hasMore": true
+}
+-- 不带游标的新搜索看到新文档、看不到已删除文档 --
+version: 4 totalHits: 5
+['case-1', 'doc-02', 'new-apple', 'doc-03', 'doc-05']
+
+############ 8. 快照过期：制造 8 次变更淘汰旧快照后，旧游标返回 410 ############
+retained snapshots:
+{
+    "currentVersion": 12,
+    "maxRetained": 8,
+    "snapshots": [
+        {
+            "version": 5,
+            "docCount": 24,
+            "createdAtMillis": 1790197286738
+        },
+        {
+            "version": 6,
+            "docCount": 25,
+            "createdAtMillis": 1790197286748
+        },
+        {
+            "version": 7,
+            "docCount": 26,
+            "createdAtMillis": 1790197286757
+        },
+        {
+            "version": 8,
+            "docCount": 27,
+            "createdAtMillis": 1790197286766
+        },
+        {
+            "version": 9,
+            "docCount": 28,
+            "createdAtMillis": 1790197286774
+        },
+        {
+            "version": 10,
+            "docCount": 29,
+            "createdAtMillis": 1790197286783
+        },
+        {
+            "version": 11,
+            "docCount": 30,
+            "createdAtMillis": 1790197286791
+        },
+        {
+            "version": 12,
+            "docCount": 31,
+            "createdAtMillis": 1790197286800
+        }
+    ]
+}
+reuse old cursor:
+{"error":{"code":"SNAPSHOT_EXPIRED","message":"snapshot version 3 has been evicted (retained: [5, 6, 7, 8, 9, 10, 11, 12]); restart pagination from the first page"}}
+HTTP 410
+
+############ 9. 错误处理（400 / 404 / 405） ############
+missing q:        {"error":{"code":"BAD_REQUEST","message":"missing required parameter: q"}} [400]
+pageSize out range:{"error":{"code":"BAD_REQUEST","message":"pageSize must be between 1 and 100, got 999"}} [400]
+garbage cursor:   {"error":{"code":"INVALID_CURSOR","message":"cursor is not valid base64url: Illegal base64 character 21"}} [400]
+cursor mismatch:  {"error":{"code":"CURSOR_MISMATCH","message":"cursor was issued for query 'cherry' but request query is 'apple'"}} [400]
+unknown route:    {"error":{"code":"NOT_FOUND","message":"no route for GET /no-such-route"}} [404]
+bad json body:    {"error":{"code":"BAD_REQUEST","message":"expected object key string at position 1"}} [400]
+
+演示完成，服务将被自动停止。
