@@ -1,0 +1,12 @@
+>> compiling main sources
+>> compiling tests
+>> packaging build/bitmap-index.jar
+>> running tests
+RoaringBitmap                passed=627 failed=0
+BitMapIndex acceptance       passed=1046 failed=0
+Bitmap index service listening on http://127.0.0.1:35433
+Endpoints: POST /load, POST /query, POST /delete, POST /restore, GET /stats, GET /row/{id}, GET /health
+HTTP end-to-end              passed=25 failed=0
+------------------------------------------------------------
+TOTAL: 1698 passed, 0 failed
+ALL TESTS PASSED

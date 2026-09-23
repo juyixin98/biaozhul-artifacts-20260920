@@ -1,0 +1,34 @@
+# Locked dependencies for multi-dimensional-bitmap-index
+#
+# This project intentionally has ZERO third-party dependencies. Everything it
+# needs ships inside the JDK:
+#   - com.sun.net.httpserver.HttpServer   (built-in HTTP service, JDK module jdk.httpserver)
+#   - java.net.http.HttpClient            (used only by the end-to-end tests)
+#   - java.base primitives                (threads, collections, arrays)
+#
+# JSON parsing/serialization and the compressed (Roaring-style) bitmap are
+# implemented in-tree (src/bitmapindex/Json.java, RoaringBitmap.java), so there
+# is no Maven/Gradle dependency resolution and no artifact to pin beyond the
+# JDK itself. No network access is required to build or run.
+#
+# Build toolchain used for development and verification (pinned record):
+#
+#   name:    Eclipse Temurin OpenJDK (HotSpot)
+#   version: 17.0.20.1+1 (LTS)
+#   arch:    linux x86_64
+#   source:  https://api.adoptium.net/v3/binary/latest/17/ga/linux/x64/jdk/hotspot/normal/eclipse
+#   vendor:  Eclipse Adoptium
+#
+# Any JDK >= 17 that provides the modules above should work; the code uses no
+# incubator modules and no preview features. Language level: Java 17.
+#
+# Reproducibility:
+#   sources  : all application + test sources are vendored under src/
+#   checksum : see SHA256SUMS (generated for the tagged source snapshot)
+#   build    : ./build.sh all        (javac + junit-free test runner + jar)
+#
+# Dependency manifest (resolved):
+#
+#   group/artifact        version     scope      source
+#   --------------------  ----------  ---------  -----------------------------
+#   (none)                -           -          only JDK 17 standard modules

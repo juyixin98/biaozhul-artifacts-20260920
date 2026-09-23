@@ -1,0 +1,17 @@
+{
+  "columns": ["city", "color", "active", "sku"],
+  "rows": [
+    {"city": "Beijing",   "color": "red",    "active": "yes", "sku": "SKU-00001"},
+    {"city": "Beijing",   "color": "blue",   "active": "no",  "sku": "SKU-00002"},
+    {"city": "Shanghai",  "color": "red",    "active": "yes", "sku": "SKU-00003"},
+    {"city": "Shenzhen",  "color": "green",  "active": "yes", "sku": "SKU-00004"},
+    {"city": "Hangzhou",  "color": "red",    "active": "no",  "sku": "SKU-00005"},
+    {"city": "Chengdu",   "color": "amber",  "active": "yes", "sku": "SKU-00006"},
+    {"city": "Xi'an",     "color": "violet", "active": "yes", "sku": "SKU-00007"},
+    {"city": "Shanghai",  "color": "blue",   "active": "yes", "sku": "SKU-00008"},
+    {"city": "Beijing",   "color": "green",  "active": "yes", "sku": "SKU-00009"},
+    {"city": "Shenzhen",  "color": "red",    "active": "no",  "sku": "SKU-00010"},
+    {"city": "Hangzhou",  "color": "blue",   "active": "yes", "sku": "SKU-00011"},
+    {"city": "Chengdu",   "color": "red",    "active": "yes", "sku": "SKU-00012"}
+  ]
+}

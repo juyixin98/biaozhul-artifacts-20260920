@@ -1,0 +1,258 @@
+
+### 1) health (empty service)
+{
+  "status": "ok",
+  "totalRows": 0,
+  "liveRows": 0
+}
+
+
+### 2) load offline dataset
+{
+  "loaded": true,
+  "rows": 12,
+  "columns": ["city", "color", "active", "sku"]
+}
+
+
+### 3) query: city=Beijing AND (color=red OR active=yes) AND NOT(color=blue)
+{
+  "count": 2,
+  "liveRows": 12,
+  "offset": 0,
+  "limit": 5,
+  "returned": 2,
+  "hasMore": false,
+  "rowIds": [0, 8],
+  "rows": [
+    {
+      "rowId": 0,
+      "data": {
+        "city": "Beijing",
+        "color": "red",
+        "active": "yes",
+        "sku": "SKU-00001"
+      }
+    },
+    {
+      "rowId": 8,
+      "data": {
+        "city": "Beijing",
+        "color": "green",
+        "active": "yes",
+        "sku": "SKU-00009"
+      }
+    }
+  ]
+}
+
+
+### 4) NOT only complements within the LIVE universe: delete rows 0 and 1
+{
+  "deletedCount": 2,
+  "deleted": [0, 1],
+  "alreadyDeleted": [],
+  "liveRows": 10,
+  "totalRows": 12
+}
+
+
+### 5) NOT(city=Beijing) after deletion — rows 0/1 must NOT come back
+{
+  "count": 9,
+  "liveRows": 10,
+  "offset": 0,
+  "limit": 1000,
+  "returned": 9,
+  "hasMore": false,
+  "rowIds": [2, 3, 4, 5, 6, 7, 9, 10, 11],
+  "rows": [
+    {
+      "rowId": 2,
+      "data": {
+        "city": "Shanghai",
+        "color": "red",
+        "active": "yes",
+        "sku": "SKU-00003"
+      }
+    },
+    {
+      "rowId": 3,
+      "data": {
+        "city": "Shenzhen",
+        "color": "green",
+        "active": "yes",
+        "sku": "SKU-00004"
+      }
+    },
+    {
+      "rowId": 4,
+      "data": {
+        "city": "Hangzhou",
+        "color": "red",
+        "active": "no",
+        "sku": "SKU-00005"
+      }
+    },
+    {
+      "rowId": 5,
+      "data": {
+        "city": "Chengdu",
+        "color": "amber",
+        "active": "yes",
+        "sku": "SKU-00006"
+      }
+    },
+    {
+      "rowId": 6,
+      "data": {
+        "city": "Xi'an",
+        "color": "violet",
+        "active": "yes",
+        "sku": "SKU-00007"
+      }
+    },
+    {
+      "rowId": 7,
+      "data": {
+        "city": "Shanghai",
+        "color": "blue",
+        "active": "yes",
+        "sku": "SKU-00008"
+      }
+    },
+    {
+      "rowId": 9,
+      "data": {
+        "city": "Shenzhen",
+        "color": "red",
+        "active": "no",
+        "sku": "SKU-00010"
+      }
+    },
+    {
+      "rowId": 10,
+      "data": {
+        "city": "Hangzhou",
+        "color": "blue",
+        "active": "yes",
+        "sku": "SKU-00011"
+      }
+    },
+    {
+      "rowId": 11,
+      "data": {
+        "city": "Chengdu",
+        "color": "red",
+        "active": "yes",
+        "sku": "SKU-00012"
+      }
+    }
+  ]
+}
+
+
+### 6) ids are stable: Beijing survivors are still ids 8 (row 1 was deleted)
+{
+  "count": 1,
+  "liveRows": 10,
+  "offset": 0,
+  "limit": 1000,
+  "returned": 1,
+  "hasMore": false,
+  "rowIds": [8],
+  "rows": [
+    {
+      "rowId": 8,
+      "data": {
+        "city": "Beijing",
+        "color": "green",
+        "active": "yes",
+        "sku": "SKU-00009"
+      }
+    }
+  ]
+}
+
+
+### 7) delete by expression (every red row)
+{
+  "deletedCount": 4,
+  "deleted": [2, 4, 9, 11],
+  "alreadyDeleted": [],
+  "liveRows": 6,
+  "totalRows": 12
+}
+
+
+### 8) restore rows 0 and 1
+{
+  "restored": [0, 1],
+  "liveRows": 8
+}
+
+
+### 9) index space statistics
+{
+  "totalRows": 12,
+  "liveRows": 8,
+  "deletedRows": 4,
+  "columns": 4,
+  "totalDistinctValues": 25,
+  "liveMaskBytes": 32,
+  "indexBytes": 496,
+  "uncompressedBitmapBytes": 38,
+  "compressionRatioVsUncompressed": 13.053,
+  "perColumn": [
+    {
+      "column": "city",
+      "distinctValues": 6,
+      "setBits": 12,
+      "arrayContainers": 6,
+      "bitmapContainers": 0,
+      "indexBytes": 120,
+      "uncompressedBytes": 9
+    },
+    {
+      "column": "color",
+      "distinctValues": 5,
+      "setBits": 12,
+      "arrayContainers": 5,
+      "bitmapContainers": 0,
+      "indexBytes": 104,
+      "uncompressedBytes": 8
+    },
+    {
+      "column": "active",
+      "distinctValues": 2,
+      "setBits": 12,
+      "arrayContainers": 2,
+      "bitmapContainers": 0,
+      "indexBytes": 56,
+      "uncompressedBytes": 3
+    },
+    {
+      "column": "sku",
+      "distinctValues": 12,
+      "setBits": 12,
+      "arrayContainers": 12,
+      "bitmapContainers": 0,
+      "indexBytes": 216,
+      "uncompressedBytes": 18
+    }
+  ]
+}
+
+
+### 10) fetch a row by its stable id
+{
+  "rowId": 0,
+  "live": true,
+  "data": {
+    "city": "Beijing",
+    "color": "red",
+    "active": "yes",
+    "sku": "SKU-00001"
+  }
+}
+

@@ -1,0 +1,11 @@
+# build output
+build/
+*.class
+
+# JDK / OS cruft
+*.jar
+nohup.out
+*.log
+.idea/
+.vscode/
+.DS_Store

@@ -1,0 +1,11 @@
+{
+  "op": "and",
+  "args": [
+    {"op": "eq", "column": "city", "value": "Beijing"},
+    {"op": "or", "args": [
+      {"op": "eq", "column": "color", "value": "red"},
+      {"op": "eq", "column": "active", "value": "yes"}
+    ]},
+    {"op": "not", "arg": {"op": "eq", "column": "color", "value": "blue"}}
+  ]
+}

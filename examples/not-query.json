@@ -1,0 +1,4 @@
+{
+  "op": "not",
+  "arg": {"op": "eq", "column": "city", "value": "Beijing"}
+}

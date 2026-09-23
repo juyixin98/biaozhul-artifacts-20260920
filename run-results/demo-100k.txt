@@ -1,0 +1,58 @@
+== Built index for 100000 rows in 157 ms ==
+{
+  "totalRows": 100000,
+  "liveRows": 100000,
+  "deletedRows": 0,
+  "columns": 4,
+  "totalDistinctValues": 63324,
+  "liveMaskBytes": 16416,
+  "indexBytes": 1649040,
+  "uncompressedBitmapBytes": 791550000,
+  "compressionRatioVsUncompressed": 0.002,
+  "perColumn": [
+    {
+      "column": "city",
+      "distinctValues": 6,
+      "setBits": 100000,
+      "arrayContainers": 0,
+      "bitmapContainers": 12,
+      "indexBytes": 98496,
+      "uncompressedBytes": 75000
+    },
+    {
+      "column": "color",
+      "distinctValues": 5,
+      "setBits": 100000,
+      "arrayContainers": 0,
+      "bitmapContainers": 10,
+      "indexBytes": 82080,
+      "uncompressedBytes": 62500
+    },
+    {
+      "column": "active",
+      "distinctValues": 2,
+      "setBits": 100000,
+      "arrayContainers": 0,
+      "bitmapContainers": 4,
+      "indexBytes": 32832,
+      "uncompressedBytes": 25000
+    },
+    {
+      "column": "userId",
+      "distinctValues": 63311,
+      "setBits": 100000,
+      "arrayContainers": 77227,
+      "bitmapContainers": 0,
+      "indexBytes": 1435632,
+      "uncompressedBytes": 791387500
+    }
+  ]
+}
+
+nested AND/OR/NOT query: index=16751 rows, scan=16751 rows, index query 829 us, match=true
+first 10 hit ids: [2, 4, 8, 13, 15, 16, 27, 33, 38, 44, ...]
+
+== After deletions: live=85617 / total=100000 ==
+same query after deletion: index=14275 scan=14275 match=true
+NOT(red)=68580 + red(live)=17037 = 85617 == liveRows 85617 -> true
+NOT(red) contains no deleted id: true
