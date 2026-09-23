@@ -1,0 +1,16 @@
+{
+  "rows": [
+    {"group": "alpha", "value": 50},
+    {"group": "beta",  "value": 12},
+    {"group": "alpha", "value": 90},
+    {"group": "gamma", "value": 77},
+    {"group": "beta",  "value": 12},
+    {"group": "alpha", "value": 90},
+    {"group": "gamma", "value": 3},
+    {"group": "beta",  "value": 41},
+    {"group": "alpha", "value": 7},
+    {"group": "gamma", "value": 77},
+    {"group": "beta",  "value": 60},
+    {"group": "alpha", "value": 33}
+  ]
+}
