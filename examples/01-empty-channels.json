@@ -1,0 +1,16 @@
+{
+  "_comment": "样例1：空信道快照。两个节点、双向可靠FIFO链路，系统完全空闲时 A 发起快照，期望总量=150，在途消息为空。",
+  "seed": 1,
+  "tick_limit": 20,
+  "nodes": [
+    {"name": "A", "balance": 100},
+    {"name": "B", "balance": 50}
+  ],
+  "links": [
+    {"from": "A", "to": "B", "policy": "fifo", "base_delay": 1},
+    {"from": "B", "to": "A", "policy": "fifo", "base_delay": 1}
+  ],
+  "events": [
+    {"kind": "marker", "tick": 5, "from": "A", "snapshot_id": "empty"}
+  ]
+}

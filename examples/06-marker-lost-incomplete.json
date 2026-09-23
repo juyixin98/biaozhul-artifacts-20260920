@@ -1,0 +1,17 @@
+{
+  "_comment": "样例6：标记确定性丢失导致快照无法完成。A->B 链路 100% 丢包（连同 Chandy-Lamport 标记一起丢失），B 永远记录不了状态；t=5 A 发起 broken，结果中 complete=false，missing 列出 state:B 与全部入信道。这表明：可靠 FIFO 是算法成立的前提，而非实现缺陷。",
+  "seed": 1,
+  "tick_limit": 30,
+  "nodes": [
+    {"name": "A", "balance": 1000},
+    {"name": "B", "balance": 1000}
+  ],
+  "links": [
+    {"from": "A", "to": "B", "policy": "best_effort", "base_delay": 1, "loss_pct": 100},
+    {"from": "B", "to": "A", "policy": "fifo", "base_delay": 1}
+  ],
+  "events": [
+    {"kind": "transfer", "tick": 0, "from": "A", "to": "B", "amount": 100, "repeat_to": 5, "repeat_every": 1},
+    {"kind": "marker", "tick": 5, "from": "A", "snapshot_id": "broken"}
+  ]
+}

@@ -1,0 +1,358 @@
+{
+  "seed": 1,
+  "last_tick": 4,
+  "final_balances": {
+    "A": 80,
+    "B": 120,
+    "C": 100
+  },
+  "snapshots": [
+    {
+      "id": "s1",
+      "complete": true,
+      "initiator": "A",
+      "states": {
+        "A": 100,
+        "B": 100,
+        "C": 100
+      },
+      "in_flight": [],
+      "states_sum": 300,
+      "in_flight_sum": 0,
+      "total": 300
+    },
+    {
+      "id": "s2",
+      "complete": true,
+      "initiator": "B",
+      "states": {
+        "A": 80,
+        "B": 100,
+        "C": 100
+      },
+      "in_flight": [
+        {
+          "from": "A",
+          "to": "B",
+          "count": 1,
+          "sum": 20,
+          "amounts": [
+            20
+          ]
+        }
+      ],
+      "states_sum": 280,
+      "in_flight_sum": 20,
+      "total": 300
+    }
+  ],
+  "channel_stats": [
+    {
+      "from": "A",
+      "to": "B",
+      "policy": "fifo",
+      "sent": 3,
+      "delivered": 3,
+      "lost": 0,
+      "duplicated": 0,
+      "reordered": 0
+    },
+    {
+      "from": "A",
+      "to": "C",
+      "policy": "fifo",
+      "sent": 2,
+      "delivered": 2,
+      "lost": 0,
+      "duplicated": 0,
+      "reordered": 0
+    },
+    {
+      "from": "B",
+      "to": "A",
+      "policy": "fifo",
+      "sent": 2,
+      "delivered": 2,
+      "lost": 0,
+      "duplicated": 0,
+      "reordered": 0
+    },
+    {
+      "from": "B",
+      "to": "C",
+      "policy": "fifo",
+      "sent": 2,
+      "delivered": 2,
+      "lost": 0,
+      "duplicated": 0,
+      "reordered": 0
+    },
+    {
+      "from": "C",
+      "to": "A",
+      "policy": "fifo",
+      "sent": 2,
+      "delivered": 2,
+      "lost": 0,
+      "duplicated": 0,
+      "reordered": 0
+    },
+    {
+      "from": "C",
+      "to": "B",
+      "policy": "fifo",
+      "sent": 2,
+      "delivered": 2,
+      "lost": 0,
+      "duplicated": 0,
+      "reordered": 0
+    }
+  ],
+  "log": [
+    {
+      "tick": 1,
+      "kind": "snapshot",
+      "from": "A",
+      "snapshot_id": "s1",
+      "detail": "recorded state balance=100"
+    },
+    {
+      "tick": 1,
+      "kind": "marker",
+      "from": "A",
+      "to": "B",
+      "snapshot_id": "s1"
+    },
+    {
+      "tick": 1,
+      "kind": "marker",
+      "from": "A",
+      "to": "C",
+      "snapshot_id": "s1"
+    },
+    {
+      "tick": 2,
+      "kind": "snapshot",
+      "from": "B",
+      "snapshot_id": "s1",
+      "detail": "recorded state balance=100"
+    },
+    {
+      "tick": 2,
+      "kind": "marker",
+      "from": "B",
+      "to": "A",
+      "snapshot_id": "s1"
+    },
+    {
+      "tick": 2,
+      "kind": "marker",
+      "from": "B",
+      "to": "C",
+      "snapshot_id": "s1"
+    },
+    {
+      "tick": 2,
+      "kind": "marker",
+      "from": "A",
+      "to": "B",
+      "snapshot_id": "s1",
+      "detail": "channel closed"
+    },
+    {
+      "tick": 2,
+      "kind": "snapshot",
+      "from": "C",
+      "snapshot_id": "s1",
+      "detail": "recorded state balance=100"
+    },
+    {
+      "tick": 2,
+      "kind": "marker",
+      "from": "C",
+      "to": "A",
+      "snapshot_id": "s1"
+    },
+    {
+      "tick": 2,
+      "kind": "marker",
+      "from": "C",
+      "to": "B",
+      "snapshot_id": "s1"
+    },
+    {
+      "tick": 2,
+      "kind": "marker",
+      "from": "A",
+      "to": "C",
+      "snapshot_id": "s1",
+      "detail": "channel closed"
+    },
+    {
+      "tick": 2,
+      "kind": "snapshot",
+      "from": "B",
+      "snapshot_id": "s2",
+      "detail": "recorded state balance=100"
+    },
+    {
+      "tick": 2,
+      "kind": "marker",
+      "from": "B",
+      "to": "A",
+      "snapshot_id": "s2"
+    },
+    {
+      "tick": 2,
+      "kind": "marker",
+      "from": "B",
+      "to": "C",
+      "snapshot_id": "s2"
+    },
+    {
+      "tick": 2,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 20
+    },
+    {
+      "tick": 3,
+      "kind": "marker",
+      "from": "B",
+      "to": "A",
+      "snapshot_id": "s1",
+      "detail": "channel closed"
+    },
+    {
+      "tick": 3,
+      "kind": "marker",
+      "from": "B",
+      "to": "C",
+      "snapshot_id": "s1",
+      "detail": "channel closed"
+    },
+    {
+      "tick": 3,
+      "kind": "marker",
+      "from": "C",
+      "to": "A",
+      "snapshot_id": "s1",
+      "detail": "channel closed"
+    },
+    {
+      "tick": 3,
+      "kind": "marker",
+      "from": "C",
+      "to": "B",
+      "snapshot_id": "s1",
+      "detail": "channel closed"
+    },
+    {
+      "tick": 3,
+      "kind": "snapshot",
+      "from": "A",
+      "snapshot_id": "s2",
+      "detail": "recorded state balance=80"
+    },
+    {
+      "tick": 3,
+      "kind": "marker",
+      "from": "A",
+      "to": "B",
+      "snapshot_id": "s2"
+    },
+    {
+      "tick": 3,
+      "kind": "marker",
+      "from": "A",
+      "to": "C",
+      "snapshot_id": "s2"
+    },
+    {
+      "tick": 3,
+      "kind": "marker",
+      "from": "B",
+      "to": "A",
+      "snapshot_id": "s2",
+      "detail": "channel closed"
+    },
+    {
+      "tick": 3,
+      "kind": "snapshot",
+      "from": "C",
+      "snapshot_id": "s2",
+      "detail": "recorded state balance=100"
+    },
+    {
+      "tick": 3,
+      "kind": "marker",
+      "from": "C",
+      "to": "A",
+      "snapshot_id": "s2"
+    },
+    {
+      "tick": 3,
+      "kind": "marker",
+      "from": "C",
+      "to": "B",
+      "snapshot_id": "s2"
+    },
+    {
+      "tick": 3,
+      "kind": "marker",
+      "from": "B",
+      "to": "C",
+      "snapshot_id": "s2",
+      "detail": "channel closed"
+    },
+    {
+      "tick": 3,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 20,
+      "snapshot_id": "s2",
+      "detail": "recorded in-flight"
+    },
+    {
+      "tick": 3,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 20
+    },
+    {
+      "tick": 4,
+      "kind": "marker",
+      "from": "A",
+      "to": "B",
+      "snapshot_id": "s2",
+      "detail": "channel closed"
+    },
+    {
+      "tick": 4,
+      "kind": "marker",
+      "from": "A",
+      "to": "C",
+      "snapshot_id": "s2",
+      "detail": "channel closed"
+    },
+    {
+      "tick": 4,
+      "kind": "marker",
+      "from": "C",
+      "to": "A",
+      "snapshot_id": "s2",
+      "detail": "channel closed"
+    },
+    {
+      "tick": 4,
+      "kind": "marker",
+      "from": "C",
+      "to": "B",
+      "snapshot_id": "s2",
+      "detail": "channel closed"
+    }
+  ]
+}

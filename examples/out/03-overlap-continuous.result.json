@@ -1,0 +1,774 @@
+{
+  "seed": 7,
+  "last_tick": 42,
+  "final_balances": {
+    "A": 120,
+    "B": 80
+  },
+  "snapshots": [
+    {
+      "id": "k1",
+      "complete": true,
+      "initiator": "A",
+      "states": {
+        "A": 118,
+        "B": 80
+      },
+      "in_flight": [
+        {
+          "from": "B",
+          "to": "A",
+          "count": 1,
+          "sum": 2,
+          "amounts": [
+            2
+          ]
+        }
+      ],
+      "states_sum": 198,
+      "in_flight_sum": 2,
+      "total": 200
+    },
+    {
+      "id": "k2",
+      "complete": true,
+      "initiator": "B",
+      "states": {
+        "A": 118,
+        "B": 80
+      },
+      "in_flight": [
+        {
+          "from": "A",
+          "to": "B",
+          "count": 1,
+          "sum": 2,
+          "amounts": [
+            2
+          ]
+        }
+      ],
+      "states_sum": 198,
+      "in_flight_sum": 2,
+      "total": 200
+    }
+  ],
+  "channel_stats": [
+    {
+      "from": "A",
+      "to": "B",
+      "policy": "fifo",
+      "sent": 23,
+      "delivered": 23,
+      "lost": 0,
+      "duplicated": 0,
+      "reordered": 0
+    },
+    {
+      "from": "B",
+      "to": "A",
+      "policy": "fifo",
+      "sent": 23,
+      "delivered": 23,
+      "lost": 0,
+      "duplicated": 0,
+      "reordered": 0
+    }
+  ],
+  "log": [
+    {
+      "tick": 0,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 1,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 1,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 2,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 2,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 3,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 3,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 4,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 4,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 5,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 5,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 5,
+      "kind": "snapshot",
+      "from": "A",
+      "snapshot_id": "k1",
+      "detail": "recorded state balance=118"
+    },
+    {
+      "tick": 5,
+      "kind": "marker",
+      "from": "A",
+      "to": "B",
+      "snapshot_id": "k1"
+    },
+    {
+      "tick": 6,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 6,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2,
+      "snapshot_id": "k1",
+      "detail": "recorded in-flight"
+    },
+    {
+      "tick": 6,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 6,
+      "kind": "snapshot",
+      "from": "B",
+      "snapshot_id": "k1",
+      "detail": "recorded state balance=80"
+    },
+    {
+      "tick": 6,
+      "kind": "marker",
+      "from": "B",
+      "to": "A",
+      "snapshot_id": "k1"
+    },
+    {
+      "tick": 6,
+      "kind": "marker",
+      "from": "A",
+      "to": "B",
+      "snapshot_id": "k1",
+      "detail": "channel closed"
+    },
+    {
+      "tick": 7,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 7,
+      "kind": "marker",
+      "from": "B",
+      "to": "A",
+      "snapshot_id": "k1",
+      "detail": "channel closed"
+    },
+    {
+      "tick": 7,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 8,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 8,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 9,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 9,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 10,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 10,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 11,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 11,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 12,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 12,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 12,
+      "kind": "snapshot",
+      "from": "B",
+      "snapshot_id": "k2",
+      "detail": "recorded state balance=80"
+    },
+    {
+      "tick": 12,
+      "kind": "marker",
+      "from": "B",
+      "to": "A",
+      "snapshot_id": "k2"
+    },
+    {
+      "tick": 13,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2,
+      "snapshot_id": "k2",
+      "detail": "recorded in-flight"
+    },
+    {
+      "tick": 13,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 13,
+      "kind": "snapshot",
+      "from": "A",
+      "snapshot_id": "k2",
+      "detail": "recorded state balance=118"
+    },
+    {
+      "tick": 13,
+      "kind": "marker",
+      "from": "A",
+      "to": "B",
+      "snapshot_id": "k2"
+    },
+    {
+      "tick": 13,
+      "kind": "marker",
+      "from": "B",
+      "to": "A",
+      "snapshot_id": "k2",
+      "detail": "channel closed"
+    },
+    {
+      "tick": 13,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 14,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 14,
+      "kind": "marker",
+      "from": "A",
+      "to": "B",
+      "snapshot_id": "k2",
+      "detail": "channel closed"
+    },
+    {
+      "tick": 14,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 15,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 15,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 16,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 16,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 17,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 17,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 18,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 18,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 19,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 19,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 20,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 20,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 21,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 21,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 22,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 22,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 23,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 23,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 24,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 24,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 25,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 25,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 26,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 26,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 27,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 27,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 28,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 28,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 29,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 29,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 30,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 30,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 31,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 31,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 32,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 32,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 33,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 33,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 34,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 34,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 35,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 35,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 36,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 36,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 37,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 37,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 38,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 38,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 39,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 39,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 40,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 40,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 41,
+      "kind": "send",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    },
+    {
+      "tick": 41,
+      "kind": "deliver",
+      "from": "A",
+      "to": "B",
+      "amount": 2
+    },
+    {
+      "tick": 42,
+      "kind": "deliver",
+      "from": "B",
+      "to": "A",
+      "amount": 2
+    }
+  ]
+}

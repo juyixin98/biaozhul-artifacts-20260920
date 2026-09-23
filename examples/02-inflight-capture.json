@@ -1,0 +1,22 @@
+{
+  "_comment": "样例2：在途消息捕获。A->B 是延迟5的慢链路，其余链路延迟1。t=1 A 转 30 给 B（钱在慢链路上），t=3 A 发起快照。标记经 A->C->B 抢先到达 B，30 元必须作为 A->B 在途消息计入快照，总量仍为 200。",
+  "seed": 1,
+  "tick_limit": 30,
+  "nodes": [
+    {"name": "A", "balance": 100},
+    {"name": "B", "balance": 50},
+    {"name": "C", "balance": 50}
+  ],
+  "links": [
+    {"from": "A", "to": "B", "policy": "fifo", "base_delay": 5},
+    {"from": "B", "to": "A", "policy": "fifo", "base_delay": 1},
+    {"from": "A", "to": "C", "policy": "fifo", "base_delay": 1},
+    {"from": "C", "to": "A", "policy": "fifo", "base_delay": 1},
+    {"from": "B", "to": "C", "policy": "fifo", "base_delay": 1},
+    {"from": "C", "to": "B", "policy": "fifo", "base_delay": 1}
+  ],
+  "events": [
+    {"kind": "transfer", "tick": 1, "from": "A", "to": "B", "amount": 30},
+    {"kind": "marker", "tick": 3, "from": "A", "snapshot_id": "inflight"}
+  ]
+}

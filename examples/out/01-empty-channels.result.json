@@ -1,0 +1,91 @@
+{
+  "seed": 1,
+  "last_tick": 7,
+  "final_balances": {
+    "A": 100,
+    "B": 50
+  },
+  "snapshots": [
+    {
+      "id": "empty",
+      "complete": true,
+      "initiator": "A",
+      "states": {
+        "A": 100,
+        "B": 50
+      },
+      "in_flight": [],
+      "states_sum": 150,
+      "in_flight_sum": 0,
+      "total": 150
+    }
+  ],
+  "channel_stats": [
+    {
+      "from": "A",
+      "to": "B",
+      "policy": "fifo",
+      "sent": 1,
+      "delivered": 1,
+      "lost": 0,
+      "duplicated": 0,
+      "reordered": 0
+    },
+    {
+      "from": "B",
+      "to": "A",
+      "policy": "fifo",
+      "sent": 1,
+      "delivered": 1,
+      "lost": 0,
+      "duplicated": 0,
+      "reordered": 0
+    }
+  ],
+  "log": [
+    {
+      "tick": 5,
+      "kind": "snapshot",
+      "from": "A",
+      "snapshot_id": "empty",
+      "detail": "recorded state balance=100"
+    },
+    {
+      "tick": 5,
+      "kind": "marker",
+      "from": "A",
+      "to": "B",
+      "snapshot_id": "empty"
+    },
+    {
+      "tick": 6,
+      "kind": "snapshot",
+      "from": "B",
+      "snapshot_id": "empty",
+      "detail": "recorded state balance=50"
+    },
+    {
+      "tick": 6,
+      "kind": "marker",
+      "from": "B",
+      "to": "A",
+      "snapshot_id": "empty"
+    },
+    {
+      "tick": 6,
+      "kind": "marker",
+      "from": "A",
+      "to": "B",
+      "snapshot_id": "empty",
+      "detail": "channel closed"
+    },
+    {
+      "tick": 7,
+      "kind": "marker",
+      "from": "B",
+      "to": "A",
+      "snapshot_id": "empty",
+      "detail": "channel closed"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "_comment": "样例4：标记交错（不同快照 ID 的标记在同一条 FIFO 信道上交错通过）。t=1 A 发起 s1；t=2 B 发起 s2，同 tick A 向 B 转 20。s1 不收这笔钱（它排在 B 的 s1 标记之后），s2 收这笔钱（它排在 B 的 s2 标记之前）。两个快照总量都是 300。",
+  "seed": 1,
+  "tick_limit": 30,
+  "nodes": [
+    {"name": "A", "balance": 100},
+    {"name": "B", "balance": 100},
+    {"name": "C", "balance": 100}
+  ],
+  "links": [
+    {"from": "A", "to": "B", "policy": "fifo", "base_delay": 1},
+    {"from": "B", "to": "A", "policy": "fifo", "base_delay": 1},
+    {"from": "A", "to": "C", "policy": "fifo", "base_delay": 1},
+    {"from": "C", "to": "A", "policy": "fifo", "base_delay": 1},
+    {"from": "B", "to": "C", "policy": "fifo", "base_delay": 1},
+    {"from": "C", "to": "B", "policy": "fifo", "base_delay": 1}
+  ],
+  "events": [
+    {"kind": "marker", "tick": 1, "from": "A", "snapshot_id": "s1"},
+    {"kind": "marker", "tick": 2, "from": "B", "snapshot_id": "s2"},
+    {"kind": "transfer", "tick": 2, "from": "A", "to": "B", "amount": 20}
+  ]
+}

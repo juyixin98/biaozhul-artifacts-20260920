@@ -1,0 +1,19 @@
+{
+  "_comment": "样例3：快照交叠 + 快照期间持续转账。两节点双向周期转账流（A 偶数 tick、B 奇数 tick 各转 2 元到 t=40/41），t=5 A 发起 k1、t=12 B 发起 k2，两个快照交叠。每个快照各自独立，总量均为 200。",
+  "seed": 7,
+  "tick_limit": 60,
+  "nodes": [
+    {"name": "A", "balance": 120},
+    {"name": "B", "balance": 80}
+  ],
+  "links": [
+    {"from": "A", "to": "B", "policy": "fifo", "base_delay": 1},
+    {"from": "B", "to": "A", "policy": "fifo", "base_delay": 1}
+  ],
+  "events": [
+    {"kind": "transfer", "tick": 0, "from": "A", "to": "B", "amount": 2, "repeat_to": 40, "repeat_every": 2},
+    {"kind": "transfer", "tick": 1, "from": "B", "to": "A", "amount": 2, "repeat_to": 41, "repeat_every": 2},
+    {"kind": "marker", "tick": 5, "from": "A", "snapshot_id": "k1"},
+    {"kind": "marker", "tick": 12, "from": "B", "snapshot_id": "k2"}
+  ]
+}

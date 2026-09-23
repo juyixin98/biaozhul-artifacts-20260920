@@ -1,0 +1,107 @@
+{
+  "seed": 1,
+  "last_tick": 5,
+  "final_balances": {
+    "A": 400,
+    "B": 1000
+  },
+  "snapshots": [
+    {
+      "id": "broken",
+      "complete": false,
+      "initiator": "A",
+      "states": {
+        "A": 400
+      },
+      "in_flight": [],
+      "states_sum": 400,
+      "in_flight_sum": 0,
+      "total": 400,
+      "missing_channels": [
+        "A-\u003eB",
+        "B-\u003eA",
+        "state:B"
+      ]
+    }
+  ],
+  "channel_stats": [
+    {
+      "from": "A",
+      "to": "B",
+      "policy": "best_effort",
+      "sent": 7,
+      "delivered": 0,
+      "lost": 7,
+      "duplicated": 0,
+      "reordered": 0
+    },
+    {
+      "from": "B",
+      "to": "A",
+      "policy": "fifo",
+      "sent": 0,
+      "delivered": 0,
+      "lost": 0,
+      "duplicated": 0,
+      "reordered": 0
+    }
+  ],
+  "log": [
+    {
+      "tick": 0,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 100
+    },
+    {
+      "tick": 1,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 100
+    },
+    {
+      "tick": 2,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 100
+    },
+    {
+      "tick": 3,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 100
+    },
+    {
+      "tick": 4,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 100
+    },
+    {
+      "tick": 5,
+      "kind": "send",
+      "from": "A",
+      "to": "B",
+      "amount": 100
+    },
+    {
+      "tick": 5,
+      "kind": "snapshot",
+      "from": "A",
+      "snapshot_id": "broken",
+      "detail": "recorded state balance=400"
+    },
+    {
+      "tick": 5,
+      "kind": "marker",
+      "from": "A",
+      "to": "B",
+      "snapshot_id": "broken"
+    }
+  ]
+}

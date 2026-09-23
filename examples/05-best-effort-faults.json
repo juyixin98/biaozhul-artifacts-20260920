@@ -1,0 +1,17 @@
+{
+  "_comment": "样例5：best_effort 信道故障演示（注意：Chandy-Lamport 要求可靠 FIFO，此样例刻意展示违反前提时的现象）。A->B 30% 丢包、20% 重复、抖动+可能乱序；B->A 50% 丢标记。seed=42 时：发送 21 笔被丢 10、重复 2、乱序 4 次，快照 snap 的标记恰好全部到达（complete=true），但总量=199800 != 200000——丢包/重复破坏了转账守恒，这与算法正确性无关。把 seed 换大或提高丢包率即可观察到 complete=false（样例6是确定性版本）。",
+  "seed": 42,
+  "tick_limit": 50,
+  "nodes": [
+    {"name": "A", "balance": 100000},
+    {"name": "B", "balance": 100000}
+  ],
+  "links": [
+    {"from": "A", "to": "B", "policy": "best_effort", "base_delay": 2, "jitter": 2, "loss_pct": 30, "dup_pct": 20, "reorder": true},
+    {"from": "B", "to": "A", "policy": "best_effort", "base_delay": 2, "jitter": 2, "loss_pct": 50}
+  ],
+  "events": [
+    {"kind": "transfer", "tick": 0, "from": "A", "to": "B", "amount": 100, "repeat_to": 20, "repeat_every": 1},
+    {"kind": "marker", "tick": 5, "from": "A", "snapshot_id": "snap"}
+  ]
+}
