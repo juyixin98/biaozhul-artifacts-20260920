@@ -1,0 +1,5 @@
+{
+  "endpoint": "run",
+  "filename": "divzero.l0",
+  "source": "print 1;\na = 10;\nb = a - a;\nprint 2;\nc = 3 / b;\nprint c;\n"
+}

@@ -1,0 +1,14 @@
+// 示例 6：未初始化变量 —— undefined-variable 错误行为保持
+//
+// 从未赋值的名字在 SSA 构造时解析为 undef 哨兵；SCCP 对 undef
+// 使用乐观地按 top 合流（这样后面的赋值仍能把变量变成常量），
+// 但优化器*绝不*会把一个 undef 使用替换成字面量。若运行期真的
+// 读到它，IR 解释器抛 undefined-variable。
+
+print 1;
+a = never_assigned + 1;     // 运行期在此报错（undef 被保留）
+print a;
+
+// 可观察行为：
+// 1
+// runtime error: undefined-variable

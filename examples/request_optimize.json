@@ -1,0 +1,6 @@
+{
+  "endpoint": "optimize",
+  "filename": "demo.l0",
+  "source": "x = 40;\nx = x + 2;\nif (1) {\n  print x;\n} else {\n  print 999;\n  z = 7 / 0;\n  print z;\n}\nprint 10;\n",
+  "step_limit": 2000000
+}
