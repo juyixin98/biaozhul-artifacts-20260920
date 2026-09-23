@@ -1,0 +1,20 @@
+[package]
+name = "lsm-kv"
+version = "0.1.0"
+edition = "2021"
+description = "Simplified LSM-tree KV service: memtable, immutable sorted segments, versioned compaction with tombstones, atomic manifest publish"
+
+[dependencies]
+anyhow = "1"
+axum = "0.8"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "signal"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[dev-dependencies]
+serde_json = "1"
+tempfile = "3"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "test-util"] }
+tower = { version = "0.5", features = ["util"] }
