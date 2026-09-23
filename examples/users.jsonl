@@ -1,6 +1,0 @@
-{"id":1,"k":10,"name":"alice"}
-{"id":2,"k":10,"name":"bob"}
-{"id":3,"k":20,"name":"carol"}
-{"id":4,"k":30,"name":"dave"}
-{"id":5,"k":null,"name":"erin"}
-{"id":6,"name":"frank (no key field -> NULL)"}
