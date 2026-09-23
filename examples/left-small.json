@@ -1,0 +1,23 @@
+{
+  "joinType": "LEFT",
+  "left": {
+    "name": "accounts",
+    "columns": ["id", "segment"],
+    "rows": [
+      [1, "a"], [2, "b"], [3, "a"], [4, "c"]
+    ]
+  },
+  "right": {
+    "name": "segments",
+    "columns": ["sid", "segment", "discount"],
+    "rows": [
+      [10, "a", 0.1],
+      [11, "b", 0.2]
+    ]
+  },
+  "leftKeys": ["segment"],
+  "rightKeys": ["segment"],
+  "options": {
+    "inMemoryRows": 1024
+  }
+}

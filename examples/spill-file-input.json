@@ -1,0 +1,27 @@
+{
+  "joinType": "INNER",
+  "left": {
+    "name": "events",
+    "columns": ["seq", "user_id", "payload"],
+    "file": {"path": "examples/data/events.jsonl", "format": "jsonl"}
+  },
+  "right": {
+    "name": "users",
+    "columns": ["uid", "user_id", "tier"],
+    "rows": [
+      [0, 0, "free"],
+      [1, 1, "pro"],
+      [2, 2, "pro"]
+    ]
+  },
+  "leftKeys": ["user_id"],
+  "rightKeys": ["user_id"],
+  "options": {
+    "inMemoryRows": 8,
+    "maxRepartitionDepth": 2,
+    "spillDir": "/tmp/partjoin-demo-spill",
+    "output": {"path": "out/events-joined.jsonl", "format": "jsonl"},
+    "planOutput": {"path": "out/events-plan.json"},
+    "maxInlineRows": 5
+  }
+}

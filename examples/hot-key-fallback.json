@@ -1,0 +1,27 @@
+{
+  "joinType": "INNER",
+  "left": {
+    "name": "hot_left",
+    "columns": ["id", "k", "tag"],
+    "rows": [
+      [1, 7, "a"], [2, 7, "b"], [3, 7, "c"], [4, 7, "d"],
+      [5, 7, "e"], [6, 7, "f"], [7, 7, "g"], [8, 7, "h"],
+      [9, 1, "i"], [10, 2, "j"]
+    ]
+  },
+  "right": {
+    "name": "hot_right",
+    "columns": ["rid", "k", "note"],
+    "rows": [
+      [100, 7, "A"], [101, 7, "B"], [102, 7, "C"], [103, 7, "D"],
+      [104, 7, "E"], [105, 7, "F"], [106, 7, "G"], [107, 7, "H"],
+      [108, 1, "I"], [109, 3, "J"]
+    ]
+  },
+  "leftKeys": ["k"],
+  "rightKeys": ["k"],
+  "options": {
+    "inMemoryRows": 3,
+    "maxRepartitionDepth": 1
+  }
+}

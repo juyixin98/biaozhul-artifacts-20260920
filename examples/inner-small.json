@@ -1,0 +1,27 @@
+{
+  "joinType": "INNER",
+  "left": {
+    "name": "orders",
+    "columns": ["order_id", "customer_id", "amount"],
+    "rows": [
+      [1, 10, 99.50],
+      [2, 20, 12.00],
+      [3, null, 7.25],
+      [4, 20, 40.00]
+    ]
+  },
+  "right": {
+    "name": "customers",
+    "columns": ["cid", "customer_id", "name"],
+    "rows": [
+      [100, 10, "Alice"],
+      [101, 20, "Bob"],
+      [102, 30, "Carol"]
+    ]
+  },
+  "leftKeys": ["customer_id"],
+  "rightKeys": ["customer_id"],
+  "options": {
+    "inMemoryRows": 1024
+  }
+}

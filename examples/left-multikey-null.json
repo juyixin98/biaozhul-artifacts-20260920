@@ -1,0 +1,29 @@
+{
+  "joinType": "LEFT",
+  "left": {
+    "name": "employees",
+    "columns": ["emp_id", "dept", "region", "name"],
+    "rows": [
+      [1, "eng", "us", "Ada"],
+      [2, "eng", null, "Lin"],
+      [3, null, "eu", "Mae"],
+      [4, "sales", "us", "Noah"],
+      [5, "hr", "ap", "Ivy"]
+    ]
+  },
+  "right": {
+    "name": "departments",
+    "columns": ["did", "dept", "region", "building"],
+    "rows": [
+      [10, "eng", "us", "A1"],
+      [11, "eng", "us", "A2"],
+      [12, "eng", null, "??"],
+      [13, "sales", "us", "B1"]
+    ]
+  },
+  "leftKeys": ["dept", "region"],
+  "rightKeys": ["dept", "region"],
+  "options": {
+    "inMemoryRows": 4
+  }
+}
