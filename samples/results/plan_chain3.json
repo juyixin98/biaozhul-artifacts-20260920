@@ -1,0 +1,162 @@
+{
+  "connected": true,
+  "tableCount": 3,
+  "searchSpace": "bushy",
+  "costModel": "TOTAL_INTERMEDIATE_ROWS",
+  "optimalPlan": {
+    "tree": {
+      "outputRows": 1000000,
+      "type": "join",
+      "nodeCost": 1000000,
+      "on": [
+        "B = C"
+      ],
+      "left": {
+        "outputRows": 10000,
+        "type": "join",
+        "nodeCost": 10000,
+        "on": [
+          "A = B"
+        ],
+        "left": {
+          "outputRows": 100,
+          "type": "scan",
+          "table": "A",
+          "estimatedRows": 100
+        },
+        "right": {
+          "outputRows": 1000,
+          "type": "scan",
+          "table": "B",
+          "estimatedRows": 1000
+        },
+        "expression": "(A ⋈ B)",
+        "tables": [
+          "A",
+          "B"
+        ]
+      },
+      "right": {
+        "outputRows": 10000,
+        "type": "scan",
+        "table": "C",
+        "estimatedRows": 10000
+      },
+      "expression": "((A ⋈ B) ⋈ C)",
+      "tables": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    "steps": [
+      {
+        "step": 0,
+        "operation": "inner join",
+        "left": {
+          "kind": "scan",
+          "table": "A",
+          "estimatedRows": 100
+        },
+        "right": {
+          "kind": "scan",
+          "table": "B",
+          "estimatedRows": 1000
+        },
+        "on": [
+          "A = B"
+        ],
+        "estimatedOutputRows": 10000,
+        "nodeCost": 10000,
+        "expression": "(A ⋈ B)"
+      },
+      {
+        "step": 1,
+        "operation": "inner join",
+        "left": {
+          "kind": "intermediate",
+          "step": 0,
+          "estimatedRows": 10000
+        },
+        "right": {
+          "kind": "scan",
+          "table": "C",
+          "estimatedRows": 10000
+        },
+        "on": [
+          "B = C"
+        ],
+        "estimatedOutputRows": 1000000,
+        "nodeCost": 1000000,
+        "expression": "((A ⋈ B) ⋈ C)"
+      }
+    ],
+    "expression": "((A ⋈ B) ⋈ C)",
+    "leftDeepOrder": [
+      "A",
+      "B",
+      "C"
+    ],
+    "isLeftDeep": true,
+    "totalCost": 1010000,
+    "finalRows": 1000000,
+    "costOverflow": false
+  },
+  "edgeSelectivity": [
+    {
+      "left": "A",
+      "right": "B",
+      "selectivity": 0.1,
+      "derivedFrom": "explicit selectivity in request"
+    },
+    {
+      "left": "B",
+      "right": "C",
+      "selectivity": 0.01,
+      "derivedFrom": "explicit selectivity in request"
+    }
+  ],
+  "subsetCardinalities": [
+    {
+      "tables": [
+        "A"
+      ],
+      "estimatedRows": 100
+    },
+    {
+      "tables": [
+        "B"
+      ],
+      "estimatedRows": 1000
+    },
+    {
+      "tables": [
+        "A",
+        "B"
+      ],
+      "estimatedRows": 10000
+    },
+    {
+      "tables": [
+        "C"
+      ],
+      "estimatedRows": 10000
+    },
+    {
+      "tables": [
+        "B",
+        "C"
+      ],
+      "estimatedRows": 100000
+    },
+    {
+      "tables": [
+        "A",
+        "B",
+        "C"
+      ],
+      "estimatedRows": 1000000
+    }
+  ],
+  "estimateCap": 1.0E15
+}

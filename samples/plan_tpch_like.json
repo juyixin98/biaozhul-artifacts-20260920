@@ -1,0 +1,20 @@
+{
+  "tables": [
+    {"name": "orders",      "rows": 1000000},
+    {"name": "customers",   "rows":   50000},
+    {"name": "order_items", "rows": 3000000},
+    {"name": "products",    "rows":   20000},
+    {"name": "categories",  "rows":      40}
+  ],
+  "edges": [
+    {"left": "orders", "right": "customers", "on": "o_customer = c_id",
+     "rightUnique": true, "rightNdv": 50000, "leftNdv": 48000},
+    {"left": "order_items", "right": "orders", "on": "oi_order = o_id",
+     "rightUnique": true, "leftNdv": 900000, "rightNdv": 1000000},
+    {"left": "order_items", "right": "products", "on": "oi_product = p_id",
+     "rightUnique": true, "rightNdv": 20000, "leftNdv": 19000},
+    {"left": "products", "right": "categories", "on": "p_category = cat_id",
+     "rightUnique": true, "rightNdv": 40, "leftNdv": 40}
+  ],
+  "options": {"costModel": "TOTAL_INTERMEDIATE_ROWS"}
+}

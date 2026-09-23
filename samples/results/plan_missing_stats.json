@@ -1,0 +1,163 @@
+{
+  "connected": true,
+  "tableCount": 3,
+  "searchSpace": "bushy",
+  "costModel": "TOTAL_INTERMEDIATE_ROWS",
+  "optimalPlan": {
+    "tree": {
+      "outputRows": 2500000000,
+      "type": "join",
+      "nodeCost": 2500000000,
+      "on": [
+        "login_user = u_id"
+      ],
+      "left": {
+        "outputRows": 5000000,
+        "type": "scan",
+        "table": "logins",
+        "estimatedRows": 5000000
+      },
+      "right": {
+        "outputRows": 10000,
+        "type": "join",
+        "nodeCost": 10000,
+        "on": [
+          "u_team = t_id"
+        ],
+        "left": {
+          "outputRows": 10000,
+          "type": "scan",
+          "table": "users",
+          "estimatedRows": 10000
+        },
+        "right": {
+          "outputRows": 200,
+          "type": "scan",
+          "table": "teams",
+          "estimatedRows": 200
+        },
+        "expression": "(users ⋈ teams)",
+        "tables": [
+          "users",
+          "teams"
+        ]
+      },
+      "expression": "(logins ⋈ (users ⋈ teams))",
+      "tables": [
+        "logins",
+        "users",
+        "teams"
+      ]
+    },
+    "steps": [
+      {
+        "step": 0,
+        "operation": "inner join",
+        "left": {
+          "kind": "scan",
+          "table": "users",
+          "estimatedRows": 10000
+        },
+        "right": {
+          "kind": "scan",
+          "table": "teams",
+          "estimatedRows": 200
+        },
+        "on": [
+          "u_team = t_id"
+        ],
+        "estimatedOutputRows": 10000,
+        "nodeCost": 10000,
+        "expression": "(users ⋈ teams)"
+      },
+      {
+        "step": 1,
+        "operation": "inner join",
+        "left": {
+          "kind": "scan",
+          "table": "logins",
+          "estimatedRows": 5000000
+        },
+        "right": {
+          "kind": "intermediate",
+          "step": 0,
+          "estimatedRows": 10000
+        },
+        "on": [
+          "login_user = u_id"
+        ],
+        "estimatedOutputRows": 2500000000,
+        "nodeCost": 2500000000,
+        "expression": "(logins ⋈ (users ⋈ teams))"
+      }
+    ],
+    "expression": "(logins ⋈ (users ⋈ teams))",
+    "leftDeepOrder": null,
+    "isLeftDeep": false,
+    "totalCost": 2500010000,
+    "finalRows": 2500000000,
+    "costOverflow": false
+  },
+  "edgeSelectivity": [
+    {
+      "left": "logins",
+      "right": "users",
+      "selectivity": 0.05,
+      "derivedFrom": "default 0.05 — no selectivity/NDV/uniqueness supplied (pure guess)",
+      "on": "login_user = u_id"
+    },
+    {
+      "left": "users",
+      "right": "teams",
+      "selectivity": 0.005,
+      "derivedFrom": "1 / max(leftNdv=198, rightNdv=200) under containment + uniformity",
+      "on": "u_team = t_id"
+    }
+  ],
+  "subsetCardinalities": [
+    {
+      "tables": [
+        "logins"
+      ],
+      "estimatedRows": 5000000
+    },
+    {
+      "tables": [
+        "users"
+      ],
+      "estimatedRows": 10000
+    },
+    {
+      "tables": [
+        "logins",
+        "users"
+      ],
+      "estimatedRows": 2500000000
+    },
+    {
+      "tables": [
+        "teams"
+      ],
+      "estimatedRows": 200
+    },
+    {
+      "tables": [
+        "users",
+        "teams"
+      ],
+      "estimatedRows": 10000
+    },
+    {
+      "tables": [
+        "logins",
+        "users",
+        "teams"
+      ],
+      "estimatedRows": 2500000000
+    }
+  ],
+  "estimateCap": 1.0E15,
+  "warnings": [
+    "Edge logins–users has no selectivity information; using default 0.05. Plan quality depends on this guess."
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "tableCount": 4,
+  "costModel": "TOTAL_INTERMEDIATE_ROWS",
+  "legalLeftDeepOrders": [
+    {
+      "order": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "cost": 44.869
+    },
+    {
+      "order": [
+        "A",
+        "B",
+        "D",
+        "C"
+      ],
+      "cost": 54.469
+    },
+    {
+      "order": [
+        "A",
+        "C",
+        "B",
+        "D"
+      ],
+      "cost": 124.869
+    },
+    {
+      "order": [
+        "A",
+        "C",
+        "D",
+        "B"
+      ],
+      "cost": 177.669
+    },
+    {
+      "order": [
+        "A",
+        "D",
+        "B",
+        "C"
+      ],
+      "cost": 614.469
+    },
+    {
+      "order": [
+        "A",
+        "D",
+        "C",
+        "B"
+      ],
+      "cost": 657.669
+    },
+    {
+      "order": [
+        "B",
+        "A",
+        "C",
+        "D"
+      ],
+      "cost": 44.869
+    },
+    {
+      "order": [
+        "B",
+        "A",
+        "D",
+        "C"
+      ],
+      "cost": 54.469
+    },
+    {
+      "order": [
+        "B",
+        "C",
+        "A",
+        "D"
+      ],
+      "cost": 484.869
+    },
+    {
+      "order": [
+        "B",
+        "C",
+        "D",
+        "A"
+      ],
+      "cost": 595.269
+    },
+    {
+      "order": [
+        "B",
+        "D",
+        "A",
+        "C"
+      ],
+      "cost": 494.469
+    },
+    {
+      "order": [
+        "B",
+        "D",
+        "C",
+        "A"
+      ],
+      "cost": 595.269
+    },
+    {
+      "order": [
+        "C",
+        "A",
+        "B",
+        "D"
+      ],
+      "cost": 124.869
+    },
+    {
+      "order": [
+        "C",
+        "A",
+        "D",
+        "B"
+      ],
+      "cost": 177.669
+    },
+    {
+      "order": [
+        "C",
+        "B",
+        "A",
+        "D"
+      ],
+      "cost": 484.869
+    },
+    {
+      "order": [
+        "C",
+        "B",
+        "D",
+        "A"
+      ],
+      "cost": 595.269
+    },
+    {
+      "order": [
+        "C",
+        "D",
+        "A",
+        "B"
+      ],
+      "cost": 1017.669
+    },
+    {
+      "order": [
+        "C",
+        "D",
+        "B",
+        "A"
+      ],
+      "cost": 1075.269
+    },
+    {
+      "order": [
+        "D",
+        "A",
+        "B",
+        "C"
+      ],
+      "cost": 614.469
+    },
+    {
+      "order": [
+        "D",
+        "A",
+        "C",
+        "B"
+      ],
+      "cost": 657.669
+    },
+    {
+      "order": [
+        "D",
+        "B",
+        "A",
+        "C"
+      ],
+      "cost": 494.469
+    },
+    {
+      "order": [
+        "D",
+        "B",
+        "C",
+        "A"
+      ],
+      "cost": 595.269
+    },
+    {
+      "order": [
+        "D",
+        "C",
+        "A",
+        "B"
+      ],
+      "cost": 1017.669
+    },
+    {
+      "order": [
+        "D",
+        "C",
+        "B",
+        "A"
+      ],
+      "cost": 1075.269
+    }
+  ],
+  "legalLeftDeepOrderCount": 24,
+  "verification": {
+    "dpCost": 44.869,
+    "minEnumeratedLeftDeepCost": 44.869,
+    "bruteForceBushyCost": 44.869,
+    "dpMatchesBruteForce": true,
+    "dpBeatsOrEqualsLeftDeep": true
+  },
+  "dpPlan": "(((A ⋈ B) ⋈ C) ⋈ D)"
+}

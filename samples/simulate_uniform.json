@@ -1,0 +1,18 @@
+{
+  "seed": 7,
+  "tables": [
+    {"name": "A", "rows": 5000,
+     "columns": [{"distribution": "uniform", "ndv": 500}]},
+    {"name": "B", "rows": 8000,
+     "columns": [
+       {"distribution": "uniform", "ndv": 500},
+       {"distribution": "uniform", "ndv": 200}
+     ]},
+    {"name": "C", "rows": 4000,
+     "columns": [{"distribution": "uniform", "ndv": 200}]}
+  ],
+  "edges": [
+    {"left": "A", "right": "B", "leftColumn": 0, "rightColumn": 0},
+    {"left": "B", "right": "C", "leftColumn": 1, "rightColumn": 0}
+  ]
+}

@@ -1,0 +1,325 @@
+{
+  "connected": true,
+  "tableCount": 5,
+  "searchSpace": "bushy",
+  "costModel": "TOTAL_INTERMEDIATE_ROWS",
+  "optimalPlan": {
+    "tree": {
+      "outputRows": 3000000,
+      "type": "join",
+      "nodeCost": 3000000,
+      "on": [
+        "oi_product = p_id"
+      ],
+      "left": {
+        "outputRows": 3000000,
+        "type": "join",
+        "nodeCost": 3000000,
+        "on": [
+          "oi_order = o_id"
+        ],
+        "left": {
+          "outputRows": 1000000,
+          "type": "join",
+          "nodeCost": 1000000,
+          "on": [
+            "o_customer = c_id"
+          ],
+          "left": {
+            "outputRows": 1000000,
+            "type": "scan",
+            "table": "orders",
+            "estimatedRows": 1000000
+          },
+          "right": {
+            "outputRows": 50000,
+            "type": "scan",
+            "table": "customers",
+            "estimatedRows": 50000
+          },
+          "expression": "(orders ⋈ customers)",
+          "tables": [
+            "orders",
+            "customers"
+          ]
+        },
+        "right": {
+          "outputRows": 3000000,
+          "type": "scan",
+          "table": "order_items",
+          "estimatedRows": 3000000
+        },
+        "expression": "((orders ⋈ customers) ⋈ order_items)",
+        "tables": [
+          "orders",
+          "customers",
+          "order_items"
+        ]
+      },
+      "right": {
+        "outputRows": 20000,
+        "type": "join",
+        "nodeCost": 20000,
+        "on": [
+          "p_category = cat_id"
+        ],
+        "left": {
+          "outputRows": 20000,
+          "type": "scan",
+          "table": "products",
+          "estimatedRows": 20000
+        },
+        "right": {
+          "outputRows": 40,
+          "type": "scan",
+          "table": "categories",
+          "estimatedRows": 40
+        },
+        "expression": "(products ⋈ categories)",
+        "tables": [
+          "products",
+          "categories"
+        ]
+      },
+      "expression": "(((orders ⋈ customers) ⋈ order_items) ⋈ (products ⋈ categories))",
+      "tables": [
+        "orders",
+        "customers",
+        "order_items",
+        "products",
+        "categories"
+      ]
+    },
+    "steps": [
+      {
+        "step": 0,
+        "operation": "inner join",
+        "left": {
+          "kind": "scan",
+          "table": "orders",
+          "estimatedRows": 1000000
+        },
+        "right": {
+          "kind": "scan",
+          "table": "customers",
+          "estimatedRows": 50000
+        },
+        "on": [
+          "o_customer = c_id"
+        ],
+        "estimatedOutputRows": 1000000,
+        "nodeCost": 1000000,
+        "expression": "(orders ⋈ customers)"
+      },
+      {
+        "step": 1,
+        "operation": "inner join",
+        "left": {
+          "kind": "intermediate",
+          "step": 0,
+          "estimatedRows": 1000000
+        },
+        "right": {
+          "kind": "scan",
+          "table": "order_items",
+          "estimatedRows": 3000000
+        },
+        "on": [
+          "oi_order = o_id"
+        ],
+        "estimatedOutputRows": 3000000,
+        "nodeCost": 3000000,
+        "expression": "((orders ⋈ customers) ⋈ order_items)"
+      },
+      {
+        "step": 2,
+        "operation": "inner join",
+        "left": {
+          "kind": "scan",
+          "table": "products",
+          "estimatedRows": 20000
+        },
+        "right": {
+          "kind": "scan",
+          "table": "categories",
+          "estimatedRows": 40
+        },
+        "on": [
+          "p_category = cat_id"
+        ],
+        "estimatedOutputRows": 20000,
+        "nodeCost": 20000,
+        "expression": "(products ⋈ categories)"
+      },
+      {
+        "step": 3,
+        "operation": "inner join",
+        "left": {
+          "kind": "intermediate",
+          "step": 1,
+          "estimatedRows": 3000000
+        },
+        "right": {
+          "kind": "intermediate",
+          "step": 2,
+          "estimatedRows": 20000
+        },
+        "on": [
+          "oi_product = p_id"
+        ],
+        "estimatedOutputRows": 3000000,
+        "nodeCost": 3000000,
+        "expression": "(((orders ⋈ customers) ⋈ order_items) ⋈ (products ⋈ categories))"
+      }
+    ],
+    "expression": "(((orders ⋈ customers) ⋈ order_items) ⋈ (products ⋈ categories))",
+    "leftDeepOrder": null,
+    "isLeftDeep": false,
+    "totalCost": 7020000,
+    "finalRows": 3000000,
+    "costOverflow": false
+  },
+  "edgeSelectivity": [
+    {
+      "left": "orders",
+      "right": "customers",
+      "selectivity": 2.0E-5,
+      "derivedFrom": "1 / max(leftNdv=48000, rightNdv=50000) under containment + uniformity",
+      "on": "o_customer = c_id"
+    },
+    {
+      "left": "order_items",
+      "right": "orders",
+      "selectivity": 1.0E-6,
+      "derivedFrom": "1 / max(leftNdv=900000, rightNdv=1000000) under containment + uniformity",
+      "on": "oi_order = o_id"
+    },
+    {
+      "left": "order_items",
+      "right": "products",
+      "selectivity": 5.0E-5,
+      "derivedFrom": "1 / max(leftNdv=19000, rightNdv=20000) under containment + uniformity",
+      "on": "oi_product = p_id"
+    },
+    {
+      "left": "products",
+      "right": "categories",
+      "selectivity": 0.025,
+      "derivedFrom": "1 / max(leftNdv=40, rightNdv=40) under containment + uniformity",
+      "on": "p_category = cat_id"
+    }
+  ],
+  "subsetCardinalities": [
+    {
+      "tables": [
+        "orders"
+      ],
+      "estimatedRows": 1000000
+    },
+    {
+      "tables": [
+        "customers"
+      ],
+      "estimatedRows": 50000
+    },
+    {
+      "tables": [
+        "orders",
+        "customers"
+      ],
+      "estimatedRows": 1000000
+    },
+    {
+      "tables": [
+        "order_items"
+      ],
+      "estimatedRows": 3000000
+    },
+    {
+      "tables": [
+        "orders",
+        "order_items"
+      ],
+      "estimatedRows": 3000000
+    },
+    {
+      "tables": [
+        "orders",
+        "customers",
+        "order_items"
+      ],
+      "estimatedRows": 3000000
+    },
+    {
+      "tables": [
+        "products"
+      ],
+      "estimatedRows": 20000
+    },
+    {
+      "tables": [
+        "order_items",
+        "products"
+      ],
+      "estimatedRows": 3000000
+    },
+    {
+      "tables": [
+        "orders",
+        "order_items",
+        "products"
+      ],
+      "estimatedRows": 3000000
+    },
+    {
+      "tables": [
+        "orders",
+        "customers",
+        "order_items",
+        "products"
+      ],
+      "estimatedRows": 3000000
+    },
+    {
+      "tables": [
+        "categories"
+      ],
+      "estimatedRows": 40
+    },
+    {
+      "tables": [
+        "products",
+        "categories"
+      ],
+      "estimatedRows": 20000
+    },
+    {
+      "tables": [
+        "order_items",
+        "products",
+        "categories"
+      ],
+      "estimatedRows": 3000000
+    },
+    {
+      "tables": [
+        "orders",
+        "order_items",
+        "products",
+        "categories"
+      ],
+      "estimatedRows": 3000000
+    },
+    {
+      "tables": [
+        "orders",
+        "customers",
+        "order_items",
+        "products",
+        "categories"
+      ],
+      "estimatedRows": 3000000
+    }
+  ],
+  "estimateCap": 1.0E15
+}

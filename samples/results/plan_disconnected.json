@@ -1,0 +1,30 @@
+{
+  "connected": false,
+  "error": "DISCONNECTED_GRAPH",
+  "message": "The join graph has 2 connected components. An inner join across components would be a Cartesian product; connect them with edges or plan the components separately.",
+  "componentCount": 2,
+  "components": [
+    {
+      "tables": [
+        "A",
+        "B"
+      ],
+      "bestExpression": "(A ⋈ B)",
+      "totalCost": 2000,
+      "finalRows": 2000
+    },
+    {
+      "tables": [
+        "C",
+        "D"
+      ],
+      "bestExpression": "(C ⋈ D)",
+      "totalCost": 24000,
+      "finalRows": 24000
+    }
+  ],
+  "ifForcedCartesian": {
+    "crossProductRows": 2400000000,
+    "componentCostsSum": 26000
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "seed": 42,
+  "rowCap": 3000000,
+  "costModel": "TOTAL_INTERMEDIATE_ROWS",
+  "columnStatistics": [
+    {
+      "left": "A",
+      "right": "B",
+      "leftNdv": 100,
+      "rightNdv": 100
+    },
+    {
+      "left": "B",
+      "right": "C",
+      "leftNdv": 100,
+      "rightNdv": 100
+    }
+  ],
+  "estimatedOptimal": {
+    "plan": {
+      "outputRows": 5120000,
+      "type": "join",
+      "nodeCost": 5120000,
+      "on": [
+        "B = C"
+      ],
+      "left": {
+        "outputRows": 64000,
+        "type": "join",
+        "nodeCost": 64000,
+        "on": [
+          "A = B"
+        ],
+        "left": {
+          "outputRows": 8000,
+          "type": "scan",
+          "table": "A",
+          "estimatedRows": 8000
+        },
+        "right": {
+          "outputRows": 8000,
+          "type": "scan",
+          "table": "B",
+          "estimatedRows": 8000
+        },
+        "expression": "(A ⋈ B)",
+        "tables": [
+          "A",
+          "B"
+        ]
+      },
+      "right": {
+        "outputRows": 8000,
+        "type": "scan",
+        "table": "C",
+        "estimatedRows": 8000
+      },
+      "expression": "((A ⋈ B) ⋈ C)",
+      "tables": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    "steps": [
+      {
+        "step": 0,
+        "operation": "inner join",
+        "left": {
+          "kind": "scan",
+          "table": "A",
+          "estimatedRows": 8000
+        },
+        "right": {
+          "kind": "scan",
+          "table": "B",
+          "estimatedRows": 8000
+        },
+        "on": [
+          "A = B"
+        ],
+        "estimatedOutputRows": 64000,
+        "nodeCost": 64000,
+        "expression": "(A ⋈ B)"
+      },
+      {
+        "step": 1,
+        "operation": "inner join",
+        "left": {
+          "kind": "intermediate",
+          "step": 0,
+          "estimatedRows": 64000
+        },
+        "right": {
+          "kind": "scan",
+          "table": "C",
+          "estimatedRows": 8000
+        },
+        "on": [
+          "B = C"
+        ],
+        "estimatedOutputRows": 5120000,
+        "nodeCost": 5120000,
+        "expression": "((A ⋈ B) ⋈ C)"
+      }
+    ],
+    "estimatedTotalCost": 5184000,
+    "leftDeepOrder": [
+      "A",
+      "B",
+      "C"
+    ]
+  },
+  "actualOptimal": {
+    "plan": {
+      "actualRows": 3000000,
+      "type": "join",
+      "nodeCost": 3000000,
+      "on": [
+        "A = B"
+      ],
+      "left": {
+        "actualRows": 8000,
+        "type": "scan",
+        "table": "A"
+      },
+      "right": {
+        "actualRows": 0,
+        "type": "join",
+        "nodeCost": 0,
+        "on": [
+          "B = C"
+        ],
+        "left": {
+          "actualRows": 8000,
+          "type": "scan",
+          "table": "B"
+        },
+        "right": {
+          "actualRows": 8000,
+          "type": "scan",
+          "table": "C"
+        }
+      }
+    },
+    "steps": [
+      {
+        "step": 0,
+        "operation": "inner join",
+        "left": {
+          "kind": "scan",
+          "table": "B",
+          "rows": 8000
+        },
+        "right": {
+          "kind": "scan",
+          "table": "C",
+          "rows": 8000
+        },
+        "on": [
+          "B = C"
+        ],
+        "actualOutputRows": 0,
+        "nodeCost": 0
+      },
+      {
+        "step": 1,
+        "operation": "inner join",
+        "left": {
+          "kind": "scan",
+          "table": "A",
+          "rows": 8000
+        },
+        "right": {
+          "kind": "intermediate",
+          "step": 0,
+          "rows": 0
+        },
+        "on": [
+          "A = B"
+        ],
+        "actualOutputRows": 3000000,
+        "nodeCost": 3000000
+      }
+    ],
+    "actualTotalCost": 3000000,
+    "leftDeepOrder": null,
+    "cappedSubsets": true
+  },
+  "comparison": {
+    "plansAgree": false,
+    "estimatedPlanActualCost": 6000000,
+    "actualOptimalCost": 3000000,
+    "absoluteRegret": 3000000,
+    "relativeRegret": 1
+  },
+  "intermediateRows": [
+    {
+      "tables": [
+        "A"
+      ],
+      "estimatedRows": 8000,
+      "actualRows": 8000,
+      "ratioEstimatedOverActual": 1
+    },
+    {
+      "tables": [
+        "B"
+      ],
+      "estimatedRows": 8000,
+      "actualRows": 8000,
+      "ratioEstimatedOverActual": 1
+    },
+    {
+      "tables": [
+        "A",
+        "B"
+      ],
+      "estimatedRows": 64000,
+      "actualRows": 3000000,
+      "ratioEstimatedOverActual": 0.021333333,
+      "actualCapped": true
+    },
+    {
+      "tables": [
+        "C"
+      ],
+      "estimatedRows": 8000,
+      "actualRows": 8000,
+      "ratioEstimatedOverActual": 1
+    },
+    {
+      "tables": [
+        "B",
+        "C"
+      ],
+      "estimatedRows": 640000,
+      "actualRows": 0,
+      "ratioEstimatedOverActual": null
+    },
+    {
+      "tables": [
+        "A",
+        "B",
+        "C"
+      ],
+      "estimatedRows": 5120000,
+      "actualRows": 3000000,
+      "ratioEstimatedOverActual": 1.707,
+      "actualCapped": true
+    }
+  ]
+}

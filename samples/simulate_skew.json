@@ -1,0 +1,19 @@
+{
+  "seed": 42,
+  "maxIntermediateRows": 3000000,
+  "tables": [
+    {"name": "A", "rows": 8000,
+     "columns": [{"distribution": "zipf", "ndv": 100, "skew": 1.3}]},
+    {"name": "B", "rows": 8000,
+     "columns": [
+       {"distribution": "zipf", "ndv": 100, "skew": 1.3},
+       {"distribution": "zipf", "ndv": 100, "skew": 1.3, "offset": 100000}
+     ]},
+    {"name": "C", "rows": 8000,
+     "columns": [{"distribution": "zipf", "ndv": 100, "skew": 1.3}]}
+  ],
+  "edges": [
+    {"left": "A", "right": "B", "leftColumn": 0, "rightColumn": 0, "selectivity": 0.001},
+    {"left": "B", "right": "C", "leftColumn": 1, "rightColumn": 0, "selectivity": 0.01}
+  ]
+}

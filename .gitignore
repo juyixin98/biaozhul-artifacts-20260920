@@ -1,0 +1,9 @@
+# build output
+out/
+build-sources.txt
+build-test-sources.txt
+sources.txt
+test-sources.txt
+
+# server runtime log
+samples/results/server.log

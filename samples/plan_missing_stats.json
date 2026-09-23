@@ -1,0 +1,12 @@
+{
+  "tables": [
+    {"name": "logins", "rows": 5000000},
+    {"name": "users",  "rows":   10000},
+    {"name": "teams",  "rows":     200}
+  ],
+  "edges": [
+    {"left": "logins", "right": "users", "on": "login_user = u_id"},
+    {"left": "users", "right": "teams", "on": "u_team = t_id", "rightNdv": 200, "leftNdv": 198}
+  ],
+  "options": {"defaultSelectivity": 0.05}
+}

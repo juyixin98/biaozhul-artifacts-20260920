@@ -1,0 +1,16 @@
+{
+  "tables": [
+    {"name": "A", "rows": 50},
+    {"name": "B", "rows": 80},
+    {"name": "C", "rows": 120},
+    {"name": "D", "rows": 200}
+  ],
+  "edges": [
+    {"left": "A", "right": "B", "selectivity": 0.01},
+    {"left": "A", "right": "C", "selectivity": 0.02},
+    {"left": "B", "right": "D", "selectivity": 0.03},
+    {"left": "C", "right": "D", "selectivity": 0.04},
+    {"left": "B", "right": "C", "selectivity": 0.05},
+    {"left": "A", "right": "D", "selectivity": 0.06}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "tables": [
+    {"name": "A", "rows": 1000000000000},
+    {"name": "B", "rows": 1000000000000},
+    {"name": "C", "rows": 1000000000000}
+  ],
+  "edges": [
+    {"left": "A", "right": "B", "selectivity": 0.5},
+    {"left": "B", "right": "C", "selectivity": 0.5}
+  ]
+}
