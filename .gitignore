@@ -1,0 +1,6 @@
+# built binaries
+/bin/
+# local data directory
+/data/
+# local env
+*.env

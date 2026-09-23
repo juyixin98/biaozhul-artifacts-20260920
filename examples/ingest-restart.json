@@ -1,0 +1,22 @@
+[
+  {
+    "source": "svc-restart",
+    "pid": 7001,
+    "text": "2026-09-24T12:00:00 WARN request stalled before the crash"
+  },
+  {
+    "source": "svc-restart",
+    "pid": 7001,
+    "text": "    at doWork (worker.go:12)"
+  },
+  {
+    "source": "svc-restart",
+    "pid": 7002,
+    "text": "2026-09-24T12:00:02 INFO process restarted (new pid)"
+  },
+  {
+    "source": "svc-restart",
+    "pid": 7002,
+    "text": "    at main (main.go:40)"
+  }
+]
