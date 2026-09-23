@@ -1,0 +1,14 @@
+{
+  "table": "sales",
+  "filter": {"column": "amount", "op": "ge", "value": 100},
+  "aggregates": [
+    {"alias": "cnt", "func": "count"},
+    {"alias": "cnt_amount", "func": "count_col", "column": "amount"},
+    {"alias": "total", "func": "sum", "column": "amount"},
+    {"alias": "avg_amount", "func": "avg", "column": "amount"},
+    {"alias": "min_amount", "func": "min", "column": "amount"},
+    {"alias": "max_amount", "func": "max", "column": "amount"}
+  ],
+  "returnRows": true,
+  "rowLimit": 20
+}

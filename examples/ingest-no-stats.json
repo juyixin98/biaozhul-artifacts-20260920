@@ -1,0 +1,8 @@
+{
+  "types": {"id": "LONG", "amount": "LONG"},
+  "computeStats": false,
+  "rows": [
+    {"id": 9, "amount": 50},
+    {"id": 10, "amount": 60}
+  ]
+}

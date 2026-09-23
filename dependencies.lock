@@ -1,0 +1,25 @@
+# 依赖锁定（Dependency lockfile）
+#
+# 本项目刻意保持零第三方运行时/测试依赖：
+#   - HTTP 服务：JDK 自带 com.sun.net.httpserver.HttpServer
+#   - JSON：自写的极简解析/序列化（src/main/java/colscan/json/Json.java）
+#   - 测试：纯 main + 断言（src/test/java/colscan/Tests.java），用 JDK 自带
+#           java.net.http.HttpClient 做 HTTP 端到端测试
+#   - 构建：直接用 javac/java，不依赖 Maven/Gradle
+#
+# 因此本文件不列出任何外部构件（外部依赖数量 = 0，且不会发生传递依赖漂移）。
+#
+# 唯一的工具链要求：
+toolchain:
+  language: Java
+  minimumVersion: "17"   # 使用了 readNBytes、String.repeat、switch 表达式等
+  testedVersion: "17.0.20.1 (Temurin OpenJDK 17.0.20.1+1, x86_64 Linux)"
+  distributionAgnostic: true   # 任意合规 JDK17+ 均可（OpenJDK/Temurin/Corretto/Zulu）
+
+runtimeDependencies: []
+testDependencies: []
+buildDependencies: []
+
+# 校验方式（无需联网下载任何依赖）：
+#   scripts/build.sh   # javac 编译
+#   scripts/test.sh    # java colscan.Tests

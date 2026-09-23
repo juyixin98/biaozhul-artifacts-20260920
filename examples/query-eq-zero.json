@@ -1,0 +1,8 @@
+{
+  "table": "sales",
+  "filter": {"column": "amount", "op": "eq", "value": 0},
+  "aggregates": [
+    {"alias": "cnt", "func": "count"},
+    {"alias": "total", "func": "sum", "column": "amount"}
+  ]
+}
