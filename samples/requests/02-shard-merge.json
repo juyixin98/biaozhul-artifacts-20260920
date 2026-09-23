@@ -1,0 +1,22 @@
+{
+  "ops": [
+    {"op": "create", "name": "shard_eu", "precision": 12},
+    {"op": "create", "name": "shard_us", "precision": 12},
+    {"op": "create", "name": "shard_as", "precision": 12},
+    {"op": "add", "name": "shard_eu", "values": [
+      "u1", "u2", "u3", "u4", "u5", "u6", "u7", "u8", "u9", "u10",
+      "u11", "u12", "u13", "u14", "u15"
+    ]},
+    {"op": "add", "name": "shard_us", "values": [
+      "u8", "u9", "u10", "u11", "u12", "u16", "u17", "u18", "u19", "u20",
+      "u21", "u22", "u23", "u24", "u25"
+    ]},
+    {"op": "add", "name": "shard_as", "values": [
+      "u20", "u21", "u22", "u26", "u27", "u28", "u29", "u30",
+      "u31", "u32", "u33", "u34"
+    ]},
+    {"op": "merge", "name": "global_uv", "sources": ["shard_eu", "shard_us", "shard_as"]},
+    {"op": "estimate", "name": "global_uv"},
+    {"op": "estimate", "name": "shard_eu"}
+  ]
+}

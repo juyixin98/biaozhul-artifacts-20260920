@@ -1,0 +1,26 @@
+{
+  "planFormat": "HLL-EXECUTION-PLAN/v1",
+  "opCount": 4,
+  "steps": [
+    {
+      "index": 0,
+      "operator": "create",
+      "description": "新建空草图 name=persist_me，m=2048；内存占用 2048 字节寄存器"
+    },
+    {
+      "index": 1,
+      "operator": "add",
+      "description": "对 10 个值做类型规范化 -> Murmur3 128(固定种子) -> 取 h1 -> 高 11 位定位寄存器、剩余位算 rank 取最大值（重复插入幂等）"
+    },
+    {
+      "index": 2,
+      "operator": "export",
+      "description": "导出草图（格式=binary）：HLCD v1 二进制 + CRC32；可用 load 重新导入"
+    },
+    {
+      "index": 3,
+      "operator": "export",
+      "description": "导出草图（格式=json）：HLL-JSON v1，寄存器 Base64；可用 load 重新导入"
+    }
+  ]
+}

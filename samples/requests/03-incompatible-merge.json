@@ -1,0 +1,10 @@
+{
+  "ops": [
+    {"op": "create", "name": "p12", "precision": 12},
+    {"op": "create", "name": "p10", "precision": 10},
+    {"op": "add", "name": "p12", "values": ["a", "b", "c"]},
+    {"op": "add", "name": "p10", "values": ["a", "b"]},
+    {"op": "merge", "name": "bad_union", "sources": ["p12", "p10"]},
+    {"op": "estimate", "name": "bad_union"}
+  ]
+}

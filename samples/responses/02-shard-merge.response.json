@@ -1,0 +1,154 @@
+{
+  "ok": true,
+  "opsProcessed": 9,
+  "results": [
+    {
+      "op": "create",
+      "name": "shard_eu",
+      "created": true
+    },
+    {
+      "op": "create",
+      "name": "shard_us",
+      "created": true
+    },
+    {
+      "op": "create",
+      "name": "shard_as",
+      "created": true
+    },
+    {
+      "op": "add",
+      "name": "shard_eu",
+      "valuesSubmitted": 15,
+      "note": "已接受插入；HLL 不保留原值，无法给出精确去重计数"
+    },
+    {
+      "op": "add",
+      "name": "shard_us",
+      "valuesSubmitted": 15,
+      "note": "已接受插入；HLL 不保留原值，无法给出精确去重计数"
+    },
+    {
+      "op": "add",
+      "name": "shard_as",
+      "valuesSubmitted": 12,
+      "note": "已接受插入；HLL 不保留原值，无法给出精确去重计数"
+    },
+    {
+      "op": "merge",
+      "target": "global_uv",
+      "sources": [
+        "shard_eu",
+        "shard_us",
+        "shard_as"
+      ],
+      "merged": true
+    },
+    {
+      "op": "estimate",
+      "name": "global_uv",
+      "cardinalityEstimate": 34,
+      "cardinalityEstimateRaw": 34.141899,
+      "exact": false,
+      "estimationNote": "HLL 近似估计值，不是精确计数；空集时为 0",
+      "relativeStandardError": 0.01625,
+      "relativeStandardErrorPct": 1.625,
+      "confidenceIntervals": {
+        "note": "对称高斯近似区间，仅在大基数时近似有效；不覆盖哈希碰撞；覆盖率为名义值非保证值",
+        "68pct": {
+          "low": 34,
+          "high": 35
+        },
+        "95pct": {
+          "low": 33,
+          "high": 35
+        }
+      },
+      "zeroRegisters": 4062,
+      "nonzeroRegisters": 34
+    },
+    {
+      "op": "estimate",
+      "name": "shard_eu",
+      "cardinalityEstimate": 15,
+      "cardinalityEstimateRaw": 15.027533,
+      "exact": false,
+      "estimationNote": "HLL 近似估计值，不是精确计数；空集时为 0",
+      "relativeStandardError": 0.01625,
+      "relativeStandardErrorPct": 1.625,
+      "confidenceIntervals": {
+        "note": "对称高斯近似区间，仅在大基数时近似有效；不覆盖哈希碰撞；覆盖率为名义值非保证值",
+        "68pct": {
+          "low": 15,
+          "high": 15
+        },
+        "95pct": {
+          "low": 15,
+          "high": 16
+        }
+      },
+      "zeroRegisters": 4081,
+      "nonzeroRegisters": 15
+    }
+  ],
+  "executionPlan": {
+    "planFormat": "HLL-EXECUTION-PLAN/v1",
+    "opCount": 9,
+    "steps": [
+      {
+        "index": 0,
+        "operator": "create",
+        "description": "新建空草图 name=shard_eu，m=4096；内存占用 4096 字节寄存器"
+      },
+      {
+        "index": 1,
+        "operator": "create",
+        "description": "新建空草图 name=shard_us，m=4096；内存占用 4096 字节寄存器"
+      },
+      {
+        "index": 2,
+        "operator": "create",
+        "description": "新建空草图 name=shard_as，m=4096；内存占用 4096 字节寄存器"
+      },
+      {
+        "index": 3,
+        "operator": "add",
+        "description": "对 15 个值做类型规范化 -> Murmur3 128(固定种子) -> 取 h1 -> 高 12 位定位寄存器、剩余位算 rank 取最大值（重复插入幂等）"
+      },
+      {
+        "index": 4,
+        "operator": "add",
+        "description": "对 15 个值做类型规范化 -> Murmur3 128(固定种子) -> 取 h1 -> 高 12 位定位寄存器、剩余位算 rank 取最大值（重复插入幂等）"
+      },
+      {
+        "index": 5,
+        "operator": "add",
+        "description": "对 12 个值做类型规范化 -> Murmur3 128(固定种子) -> 取 h1 -> 高 12 位定位寄存器、剩余位算 rank 取最大值（重复插入幂等）"
+      },
+      {
+        "index": 6,
+        "operator": "merge",
+        "description": "兼容性检查(p 与 hashId 必须完全一致) -> 对 3 个草图逐寄存器取 max（分片可重叠，合并天然幂等）-> 写入 global_uv"
+      },
+      {
+        "index": 7,
+        "operator": "estimate",
+        "description": "读寄存器 -> 调和平均（零寄存器时按线性计数）-> 估计值 + RSE 置信区间；输出标注为估计值而非精确计数"
+      },
+      {
+        "index": 8,
+        "operator": "estimate",
+        "description": "读寄存器 -> 调和平均（零寄存器时按线性计数）-> 估计值 + RSE 置信区间；输出标注为估计值而非精确计数"
+      }
+    ]
+  },
+  "metadata": {
+    "engine": "single-jvm-in-memory-hll",
+    "hashAlgorithm": "MURMUR3_X64_128_SEED9747B28C_H1",
+    "hashSeedHex": "0x9747b28c",
+    "canonicalization": "类型标签前缀: null=0x00,false=0x01,true=0x02,int=0x03,float=0x04,string=0x05；整数按十进制文本；浮点 BigDecimal.stripTrailingZeros().toPlainString()；字符串按 UTF-8",
+    "sketchState": "仅内存；export/load 负责持久化",
+    "precisionRange": "4..18"
+  }
+}

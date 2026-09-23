@@ -1,0 +1,30 @@
+{
+  "ok": false,
+  "error": {
+    "code": "INCOMPATIBLE_SKETCH",
+    "message": "源草图 p12 与 p10：精度不一致: p=12 vs p=10（寄存器数 4096 vs 1024），禁止合并",
+    "failedOpIndex": 4
+  },
+  "executedStepsBeforeFailure": [
+    {
+      "index": 0,
+      "operator": "create",
+      "description": "新建空草图 name=p12，m=4096；内存占用 4096 字节寄存器"
+    },
+    {
+      "index": 1,
+      "operator": "create",
+      "description": "新建空草图 name=p10，m=1024；内存占用 1024 字节寄存器"
+    },
+    {
+      "index": 2,
+      "operator": "add",
+      "description": "对 3 个值做类型规范化 -> Murmur3 128(固定种子) -> 取 h1 -> 高 12 位定位寄存器、剩余位算 rank 取最大值（重复插入幂等）"
+    },
+    {
+      "index": 3,
+      "operator": "add",
+      "description": "对 2 个值做类型规范化 -> Murmur3 128(固定种子) -> 取 h1 -> 高 10 位定位寄存器、剩余位算 rank 取最大值（重复插入幂等）"
+    }
+  ]
+}

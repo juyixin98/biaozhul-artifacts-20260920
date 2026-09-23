@@ -1,0 +1,9 @@
+{
+  "ok": false,
+  "error": {
+    "code": "BAD_FORMAT",
+    "message": "CRC32 校验失败: 期望 af560028，实际 d85130be",
+    "failedOpIndex": 0
+  },
+  "executedStepsBeforeFailure": []
+}

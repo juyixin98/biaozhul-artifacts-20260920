@@ -1,0 +1,51 @@
+{
+  "planFormat": "HLL-EXECUTION-PLAN/v1",
+  "opCount": 9,
+  "steps": [
+    {
+      "index": 0,
+      "operator": "create",
+      "description": "新建空草图 name=shard_eu，m=4096；内存占用 4096 字节寄存器"
+    },
+    {
+      "index": 1,
+      "operator": "create",
+      "description": "新建空草图 name=shard_us，m=4096；内存占用 4096 字节寄存器"
+    },
+    {
+      "index": 2,
+      "operator": "create",
+      "description": "新建空草图 name=shard_as，m=4096；内存占用 4096 字节寄存器"
+    },
+    {
+      "index": 3,
+      "operator": "add",
+      "description": "对 15 个值做类型规范化 -> Murmur3 128(固定种子) -> 取 h1 -> 高 12 位定位寄存器、剩余位算 rank 取最大值（重复插入幂等）"
+    },
+    {
+      "index": 4,
+      "operator": "add",
+      "description": "对 15 个值做类型规范化 -> Murmur3 128(固定种子) -> 取 h1 -> 高 12 位定位寄存器、剩余位算 rank 取最大值（重复插入幂等）"
+    },
+    {
+      "index": 5,
+      "operator": "add",
+      "description": "对 12 个值做类型规范化 -> Murmur3 128(固定种子) -> 取 h1 -> 高 12 位定位寄存器、剩余位算 rank 取最大值（重复插入幂等）"
+    },
+    {
+      "index": 6,
+      "operator": "merge",
+      "description": "兼容性检查(p 与 hashId 必须完全一致) -> 对 3 个草图逐寄存器取 max（分片可重叠，合并天然幂等）-> 写入 global_uv"
+    },
+    {
+      "index": 7,
+      "operator": "estimate",
+      "description": "读寄存器 -> 调和平均（零寄存器时按线性计数）-> 估计值 + RSE 置信区间；输出标注为估计值而非精确计数"
+    },
+    {
+      "index": 8,
+      "operator": "estimate",
+      "description": "读寄存器 -> 调和平均（零寄存器时按线性计数）-> 估计值 + RSE 置信区间；输出标注为估计值而非精确计数"
+    }
+  ]
+}

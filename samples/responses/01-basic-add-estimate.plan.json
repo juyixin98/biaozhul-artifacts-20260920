@@ -1,0 +1,21 @@
+{
+  "planFormat": "HLL-EXECUTION-PLAN/v1",
+  "opCount": 3,
+  "steps": [
+    {
+      "index": 0,
+      "operator": "create",
+      "description": "新建空草图 name=page_uv，m=4096；内存占用 4096 字节寄存器"
+    },
+    {
+      "index": 1,
+      "operator": "add",
+      "description": "对 12 个值做类型规范化 -> Murmur3 128(固定种子) -> 取 h1 -> 高 12 位定位寄存器、剩余位算 rank 取最大值（重复插入幂等）"
+    },
+    {
+      "index": 2,
+      "operator": "estimate",
+      "description": "读寄存器 -> 调和平均（零寄存器时按线性计数）-> 估计值 + RSE 置信区间；输出标注为估计值而非精确计数"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "ops": [
+    {"op": "create", "name": "page_uv", "precision": 12},
+    {"op": "add", "name": "page_uv", "values": [
+      "user-0001", "user-0002", "user-0003", "user-0004", "user-0005",
+      "user-0001", "user-0002", 10086, 10086, true, null, "true"
+    ]},
+    {"op": "estimate", "name": "page_uv"}
+  ]
+}

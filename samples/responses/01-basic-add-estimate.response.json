@@ -1,0 +1,69 @@
+{
+  "ok": true,
+  "opsProcessed": 3,
+  "results": [
+    {
+      "op": "create",
+      "name": "page_uv",
+      "created": true
+    },
+    {
+      "op": "add",
+      "name": "page_uv",
+      "valuesSubmitted": 12,
+      "note": "已接受插入；HLL 不保留原值，无法给出精确去重计数"
+    },
+    {
+      "op": "estimate",
+      "name": "page_uv",
+      "cardinalityEstimate": 9,
+      "cardinalityEstimateRaw": 9.009902,
+      "exact": false,
+      "estimationNote": "HLL 近似估计值，不是精确计数；空集时为 0",
+      "relativeStandardError": 0.01625,
+      "relativeStandardErrorPct": 1.625,
+      "confidenceIntervals": {
+        "note": "对称高斯近似区间，仅在大基数时近似有效；不覆盖哈希碰撞；覆盖率为名义值非保证值",
+        "68pct": {
+          "low": 9,
+          "high": 9
+        },
+        "95pct": {
+          "low": 9,
+          "high": 9
+        }
+      },
+      "zeroRegisters": 4087,
+      "nonzeroRegisters": 9
+    }
+  ],
+  "executionPlan": {
+    "planFormat": "HLL-EXECUTION-PLAN/v1",
+    "opCount": 3,
+    "steps": [
+      {
+        "index": 0,
+        "operator": "create",
+        "description": "新建空草图 name=page_uv，m=4096；内存占用 4096 字节寄存器"
+      },
+      {
+        "index": 1,
+        "operator": "add",
+        "description": "对 12 个值做类型规范化 -> Murmur3 128(固定种子) -> 取 h1 -> 高 12 位定位寄存器、剩余位算 rank 取最大值（重复插入幂等）"
+      },
+      {
+        "index": 2,
+        "operator": "estimate",
+        "description": "读寄存器 -> 调和平均（零寄存器时按线性计数）-> 估计值 + RSE 置信区间；输出标注为估计值而非精确计数"
+      }
+    ]
+  },
+  "metadata": {
+    "engine": "single-jvm-in-memory-hll",
+    "hashAlgorithm": "MURMUR3_X64_128_SEED9747B28C_H1",
+    "hashSeedHex": "0x9747b28c",
+    "canonicalization": "类型标签前缀: null=0x00,false=0x01,true=0x02,int=0x03,float=0x04,string=0x05；整数按十进制文本；浮点 BigDecimal.stripTrailingZeros().toPlainString()；字符串按 UTF-8",
+    "sketchState": "仅内存；export/load 负责持久化",
+    "precisionRange": "4..18"
+  }
+}
