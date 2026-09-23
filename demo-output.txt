@@ -1,0 +1,593 @@
+========== 0. 健康检查 ==========
+
+$ curl http://localhost:18099/healthz
+# 服务状态与 TTL
+{"status":"ok","snapshotTtlSeconds":3,"retainedSnapshots":0,"items":57}
+# HTTP 200
+
+========== 1. 第一页（建立快照 v1，pageSize=5，按 name_asc）==========
+{"items":[{"id":1,"name":"alpha","category":"books","score":0},{"id":20,"name":"alpha","category":"music","score":50},{"id":39,"name":"alpha","category":"movies","score":40},{"id":2,"name":"beta","category":"books","score":10},{"id":21,"name":"beta","category":"music","score":0}],"nextCursor":"eyJ2IjoxLCJxIjoiMWRjMTY4ODdiOGZkZTkwZmMzZDRlZDIyMTgzNDU5NDMiLCJzIjoiOGJhMjI4ZGJiY2I5MDQzODliMTI2NDQzIiwiayI6ImJldGEiLCJpIjoyMX0.cWIq99VPqNaUfoxxtC_4oZ1JuEyQ8ztcvRWlwasJzGQ","hasMore":true,"snapshotId":"8ba228dbbcb904389b126443","snapshotVersion":1,"pageSize":5,"count":5,"query":{"sort":"name_asc","category":null,"q":null,"pageSize":5}}
+
+# 保存 snapshotId=8ba228dbbcb904389b126443 与 nextCursor（后续页复用同一快照）
+
+========== 2. 翻页途中制造变更（插入/删除/改排序键）==========
+
+$ curl -H Content-Type: application/json -d {"name":"zzz-injected","category":"books","score":999} -X POST http://localhost:18099/api/admin/items
+# 插入一条 zzz-injected（若进入结果集会排在 name 序末尾）
+{"item":{"id":1001,"name":"zzz-injected","category":"books","score":999}}
+# HTTP 201
+
+$ curl -X DELETE http://localhost:18099/api/admin/items/10
+# 删除 id=10（alpha 的重复项之一，属于尚未翻到的页）
+{"deleted":true,"id":10}
+# HTTP 200
+
+$ curl -H Content-Type: application/json -d {"name":"aaa-moved","score":5} -X PATCH http://localhost:18099/api/admin/items/50
+# 把 id=50 的排序键 name 改为 aaa-moved（新查询里会排到最前）
+{"item":{"id":50,"name":"aaa-moved","category":"movies","score":5}}
+# HTTP 200
+
+========== 3. 继续用旧游标翻页（仍是快照 v1 的内容，不重不漏）==========
+
+--- 第 2 页（快照 v1）---
+{
+    "items": [
+        {
+            "id": 40,
+            "name": "beta",
+            "category": "movies",
+            "score": 50
+        },
+        {
+            "id": 4,
+            "name": "delta",
+            "category": "books",
+            "score": 30
+        },
+        {
+            "id": 23,
+            "name": "delta",
+            "category": "music",
+            "score": 20
+        },
+        {
+            "id": 42,
+            "name": "delta",
+            "category": "movies",
+            "score": 10
+        },
+        {
+            "id": 5,
+            "name": "echo",
+            "category": "books",
+            "score": 40
+        }
+    ],
+    "nextCursor": "eyJ2IjoxLCJxIjoiMWRjMTY4ODdiOGZkZTkwZmMzZDRlZDIyMTgzNDU5NDMiLCJzIjoiOGJhMjI4ZGJiY2I5MDQzODliMTI2NDQzIiwiayI6ImVjaG8iLCJpIjo1fQ._Ni6VDErgJqp-9jTSBGKh7kOWCUUwU4-nAYWQhDJHTc",
+    "hasMore": true,
+    "snapshotId": "8ba228dbbcb904389b126443",
+    "snapshotVersion": 1,
+    "pageSize": 5,
+    "count": 5,
+    "query": {
+        "sort": "name_asc",
+        "category": null,
+        "q": null,
+        "pageSize": 5
+    }
+}
+
+--- 第 3 页（快照 v1）---
+{
+    "items": [
+        {
+            "id": 24,
+            "name": "echo",
+            "category": "music",
+            "score": 30
+        },
+        {
+            "id": 43,
+            "name": "echo",
+            "category": "movies",
+            "score": 20
+        },
+        {
+            "id": 6,
+            "name": "foxtrot",
+            "category": "books",
+            "score": 50
+        },
+        {
+            "id": 25,
+            "name": "foxtrot",
+            "category": "music",
+            "score": 40
+        },
+        {
+            "id": 44,
+            "name": "foxtrot",
+            "category": "movies",
+            "score": 30
+        }
+    ],
+    "nextCursor": "eyJ2IjoxLCJxIjoiMWRjMTY4ODdiOGZkZTkwZmMzZDRlZDIyMTgzNDU5NDMiLCJzIjoiOGJhMjI4ZGJiY2I5MDQzODliMTI2NDQzIiwiayI6ImZveHRyb3QiLCJpIjo0NH0.bCfU1PrAGtmjpT40uM6Ujn2sB1mo04d4Vp4ewZk9ZnQ",
+    "hasMore": true,
+    "snapshotId": "8ba228dbbcb904389b126443",
+    "snapshotVersion": 1,
+    "pageSize": 5,
+    "count": 5,
+    "query": {
+        "sort": "name_asc",
+        "category": null,
+        "q": null,
+        "pageSize": 5
+    }
+}
+
+--- 第 4 页（快照 v1）---
+{
+    "items": [
+        {
+            "id": 3,
+            "name": "gamma",
+            "category": "books",
+            "score": 20
+        },
+        {
+            "id": 22,
+            "name": "gamma",
+            "category": "music",
+            "score": 10
+        },
+        {
+            "id": 41,
+            "name": "gamma",
+            "category": "movies",
+            "score": 0
+        },
+        {
+            "id": 7,
+            "name": "golf",
+            "category": "books",
+            "score": 0
+        },
+        {
+            "id": 26,
+            "name": "golf",
+            "category": "music",
+            "score": 50
+        }
+    ],
+    "nextCursor": "eyJ2IjoxLCJxIjoiMWRjMTY4ODdiOGZkZTkwZmMzZDRlZDIyMTgzNDU5NDMiLCJzIjoiOGJhMjI4ZGJiY2I5MDQzODliMTI2NDQzIiwiayI6ImdvbGYiLCJpIjoyNn0.uSBz1mGbG6hikwW7s0eVYn4TbRtcV34Rhb-RZh8_P_k",
+    "hasMore": true,
+    "snapshotId": "8ba228dbbcb904389b126443",
+    "snapshotVersion": 1,
+    "pageSize": 5,
+    "count": 5,
+    "query": {
+        "sort": "name_asc",
+        "category": null,
+        "q": null,
+        "pageSize": 5
+    }
+}
+
+--- 第 5 页（快照 v1）---
+{
+    "items": [
+        {
+            "id": 45,
+            "name": "golf",
+            "category": "movies",
+            "score": 40
+        },
+        {
+            "id": 8,
+            "name": "hotel",
+            "category": "books",
+            "score": 10
+        },
+        {
+            "id": 27,
+            "name": "hotel",
+            "category": "music",
+            "score": 0
+        },
+        {
+            "id": 46,
+            "name": "hotel",
+            "category": "movies",
+            "score": 50
+        },
+        {
+            "id": 9,
+            "name": "india",
+            "category": "books",
+            "score": 20
+        }
+    ],
+    "nextCursor": "eyJ2IjoxLCJxIjoiMWRjMTY4ODdiOGZkZTkwZmMzZDRlZDIyMTgzNDU5NDMiLCJzIjoiOGJhMjI4ZGJiY2I5MDQzODliMTI2NDQzIiwiayI6ImluZGlhIiwiaSI6OX0.PCagDpN9d3kHR20BINqVtt5-Y3T4W5KRIk3mdVaROUI",
+    "hasMore": true,
+    "snapshotId": "8ba228dbbcb904389b126443",
+    "snapshotVersion": 1,
+    "pageSize": 5,
+    "count": 5,
+    "query": {
+        "sort": "name_asc",
+        "category": null,
+        "q": null,
+        "pageSize": 5
+    }
+}
+
+--- 第 6 页（快照 v1）---
+{
+    "items": [
+        {
+            "id": 28,
+            "name": "india",
+            "category": "music",
+            "score": 10
+        },
+        {
+            "id": 47,
+            "name": "india",
+            "category": "movies",
+            "score": 0
+        },
+        {
+            "id": 10,
+            "name": "juliet",
+            "category": "books",
+            "score": 30
+        },
+        {
+            "id": 29,
+            "name": "juliet",
+            "category": "music",
+            "score": 20
+        },
+        {
+            "id": 48,
+            "name": "juliet",
+            "category": "movies",
+            "score": 10
+        }
+    ],
+    "nextCursor": "eyJ2IjoxLCJxIjoiMWRjMTY4ODdiOGZkZTkwZmMzZDRlZDIyMTgzNDU5NDMiLCJzIjoiOGJhMjI4ZGJiY2I5MDQzODliMTI2NDQzIiwiayI6Imp1bGlldCIsImkiOjQ4fQ.MMxbjoyrADqc39JK4_d49caC8lE947t8jG8wg-V39Ks",
+    "hasMore": true,
+    "snapshotId": "8ba228dbbcb904389b126443",
+    "snapshotVersion": 1,
+    "pageSize": 5,
+    "count": 5,
+    "query": {
+        "sort": "name_asc",
+        "category": null,
+        "q": null,
+        "pageSize": 5
+    }
+}
+
+--- 第 7 页（快照 v1）---
+{
+    "items": [
+        {
+            "id": 11,
+            "name": "kilo",
+            "category": "books",
+            "score": 40
+        },
+        {
+            "id": 30,
+            "name": "kilo",
+            "category": "music",
+            "score": 30
+        },
+        {
+            "id": 49,
+            "name": "kilo",
+            "category": "movies",
+            "score": 20
+        },
+        {
+            "id": 12,
+            "name": "lima",
+            "category": "books",
+            "score": 50
+        },
+        {
+            "id": 31,
+            "name": "lima",
+            "category": "music",
+            "score": 40
+        }
+    ],
+    "nextCursor": "eyJ2IjoxLCJxIjoiMWRjMTY4ODdiOGZkZTkwZmMzZDRlZDIyMTgzNDU5NDMiLCJzIjoiOGJhMjI4ZGJiY2I5MDQzODliMTI2NDQzIiwiayI6ImxpbWEiLCJpIjozMX0.pmLcTPTPb_Cc8cZFlBzvo-PELcYYxCj5PSi6r6_QcU8",
+    "hasMore": true,
+    "snapshotId": "8ba228dbbcb904389b126443",
+    "snapshotVersion": 1,
+    "pageSize": 5,
+    "count": 5,
+    "query": {
+        "sort": "name_asc",
+        "category": null,
+        "q": null,
+        "pageSize": 5
+    }
+}
+
+--- 第 8 页（快照 v1）---
+{
+    "items": [
+        {
+            "id": 50,
+            "name": "lima",
+            "category": "movies",
+            "score": 30
+        },
+        {
+            "id": 13,
+            "name": "mike",
+            "category": "books",
+            "score": 0
+        },
+        {
+            "id": 32,
+            "name": "mike",
+            "category": "music",
+            "score": 50
+        },
+        {
+            "id": 51,
+            "name": "mike",
+            "category": "movies",
+            "score": 40
+        },
+        {
+            "id": 14,
+            "name": "november",
+            "category": "books",
+            "score": 10
+        }
+    ],
+    "nextCursor": "eyJ2IjoxLCJxIjoiMWRjMTY4ODdiOGZkZTkwZmMzZDRlZDIyMTgzNDU5NDMiLCJzIjoiOGJhMjI4ZGJiY2I5MDQzODliMTI2NDQzIiwiayI6Im5vdmVtYmVyIiwiaSI6MTR9.OdoNT-oBZv32UanjNgwNojazrXqY0ccOxRSiElS6Jhw",
+    "hasMore": true,
+    "snapshotId": "8ba228dbbcb904389b126443",
+    "snapshotVersion": 1,
+    "pageSize": 5,
+    "count": 5,
+    "query": {
+        "sort": "name_asc",
+        "category": null,
+        "q": null,
+        "pageSize": 5
+    }
+}
+
+--- 第 9 页（快照 v1）---
+{
+    "items": [
+        {
+            "id": 33,
+            "name": "november",
+            "category": "music",
+            "score": 0
+        },
+        {
+            "id": 52,
+            "name": "november",
+            "category": "movies",
+            "score": 50
+        },
+        {
+            "id": 15,
+            "name": "oscar",
+            "category": "books",
+            "score": 20
+        },
+        {
+            "id": 34,
+            "name": "oscar",
+            "category": "music",
+            "score": 10
+        },
+        {
+            "id": 53,
+            "name": "oscar",
+            "category": "movies",
+            "score": 0
+        }
+    ],
+    "nextCursor": "eyJ2IjoxLCJxIjoiMWRjMTY4ODdiOGZkZTkwZmMzZDRlZDIyMTgzNDU5NDMiLCJzIjoiOGJhMjI4ZGJiY2I5MDQzODliMTI2NDQzIiwiayI6Im9zY2FyIiwiaSI6NTN9.ly-7WbwxSECIuHRQWX0NmAJcQM7ECEg7IyiRc2qA2ZM",
+    "hasMore": true,
+    "snapshotId": "8ba228dbbcb904389b126443",
+    "snapshotVersion": 1,
+    "pageSize": 5,
+    "count": 5,
+    "query": {
+        "sort": "name_asc",
+        "category": null,
+        "q": null,
+        "pageSize": 5
+    }
+}
+
+--- 第 10 页（快照 v1）---
+{
+    "items": [
+        {
+            "id": 16,
+            "name": "papa",
+            "category": "books",
+            "score": 30
+        },
+        {
+            "id": 35,
+            "name": "papa",
+            "category": "music",
+            "score": 20
+        },
+        {
+            "id": 54,
+            "name": "papa",
+            "category": "movies",
+            "score": 10
+        },
+        {
+            "id": 17,
+            "name": "quebec",
+            "category": "books",
+            "score": 40
+        },
+        {
+            "id": 36,
+            "name": "quebec",
+            "category": "music",
+            "score": 30
+        }
+    ],
+    "nextCursor": "eyJ2IjoxLCJxIjoiMWRjMTY4ODdiOGZkZTkwZmMzZDRlZDIyMTgzNDU5NDMiLCJzIjoiOGJhMjI4ZGJiY2I5MDQzODliMTI2NDQzIiwiayI6InF1ZWJlYyIsImkiOjM2fQ.ltWbfyd_Z5U3XxJQklYe_pCJYdIALFrysUw2be75x5g",
+    "hasMore": true,
+    "snapshotId": "8ba228dbbcb904389b126443",
+    "snapshotVersion": 1,
+    "pageSize": 5,
+    "count": 5,
+    "query": {
+        "sort": "name_asc",
+        "category": null,
+        "q": null,
+        "pageSize": 5
+    }
+}
+
+--- 第 11 页（快照 v1）---
+{
+    "items": [
+        {
+            "id": 55,
+            "name": "quebec",
+            "category": "movies",
+            "score": 20
+        },
+        {
+            "id": 18,
+            "name": "romeo",
+            "category": "books",
+            "score": 50
+        },
+        {
+            "id": 37,
+            "name": "romeo",
+            "category": "music",
+            "score": 40
+        },
+        {
+            "id": 56,
+            "name": "romeo",
+            "category": "movies",
+            "score": 30
+        },
+        {
+            "id": 19,
+            "name": "sierra",
+            "category": "books",
+            "score": 0
+        }
+    ],
+    "nextCursor": "eyJ2IjoxLCJxIjoiMWRjMTY4ODdiOGZkZTkwZmMzZDRlZDIyMTgzNDU5NDMiLCJzIjoiOGJhMjI4ZGJiY2I5MDQzODliMTI2NDQzIiwiayI6InNpZXJyYSIsImkiOjE5fQ.RG0uCrj_aXVmmsnl_FHdzK_3Uq21NYYk8FSgw26RcxI",
+    "hasMore": true,
+    "snapshotId": "8ba228dbbcb904389b126443",
+    "snapshotVersion": 1,
+    "pageSize": 5,
+    "count": 5,
+    "query": {
+        "sort": "name_asc",
+        "category": null,
+        "q": null,
+        "pageSize": 5
+    }
+}
+
+--- 第 12 页（快照 v1）---
+{
+    "items": [
+        {
+            "id": 38,
+            "name": "sierra",
+            "category": "music",
+            "score": 50
+        },
+        {
+            "id": 57,
+            "name": "sierra",
+            "category": "movies",
+            "score": 40
+        }
+    ],
+    "nextCursor": null,
+    "hasMore": false,
+    "snapshotId": "8ba228dbbcb904389b126443",
+    "snapshotVersion": 1,
+    "pageSize": 5,
+    "count": 2,
+    "query": {
+        "sort": "name_asc",
+        "category": null,
+        "q": null,
+        "pageSize": 5
+    }
+}
+
+========== 4. 重新发起第一页（新快照 v2，反映全部变更）==========
+
+$ curl http://localhost:18099/api/items?sort=name_asc&pageSize=100
+# 新快照第一条应为 aaa-moved(id=50)，zzz-injected 在末尾，id=10 消失
+{"items":[{"id":50,"name":"aaa-moved","category":"movies","score":5},{"id":1,"name":"alpha","category":"books","score":0},{"id":20,"name":"alpha","category":"music","score":50},{"id":39,"name":"alpha","category":"movies","score":40},{"id":2,"name":"beta","category":"books","score":10},{"id":21,"name":"beta","category":"music","score":0},{"id":40,"name":"beta","category":"movies","score":50},{"id":4,"name":"delta","category":"books","score":30},{"id":23,"name":"delta","category":"music","score":20},{"id":42,"name":"delta","category":"movies","score":10},{"id":5,"name":"echo","category":"books","score":40},{"id":24,"name":"echo","category":"music","score":30},{"id":43,"name":"echo","category":"movies","score":20},{"id":6,"name":"foxtrot","category":"books","score":50},{"id":25,"name":"foxtrot","category":"music","score":40},{"id":44,"name":"foxtrot","category":"movies","score":30},{"id":3,"name":"gamma","category":"books","score":20},{"id":22,"name":"gamma","category":"music","score":10},{"id":41,"name":"gamma","category":"movies","score":0},{"id":7,"name":"golf","category":"books","score":0},{"id":26,"name":"golf","category":"music","score":50},{"id":45,"name":"golf","category":"movies","score":40},{"id":8,"name":"hotel","category":"books","score":10},{"id":27,"name":"hotel","category":"music","score":0},{"id":46,"name":"hotel","category":"movies","score":50},{"id":9,"name":"india","category":"books","score":20},{"id":28,"name":"india","category":"music","score":10},{"id":47,"name":"india","category":"movies","score":0},{"id":29,"name":"juliet","category":"music","score":20},{"id":48,"name":"juliet","category":"movies","score":10},{"id":11,"name":"kilo","category":"books","score":40},{"id":30,"name":"kilo","category":"music","score":30},{"id":49,"name":"kilo","category":"movies","score":20},{"id":12,"name":"lima","category":"books","score":50},{"id":31,"name":"lima","category":"music","score":40},{"id":13,"name":"mike","category":"books","score":0},{"id":32,"name":"mike","category":"music","score":50},{"id":51,"name":"mike","category":"movies","score":40},{"id":14,"name":"november","category":"books","score":10},{"id":33,"name":"november","category":"music","score":0},{"id":52,"name":"november","category":"movies","score":50},{"id":15,"name":"oscar","category":"books","score":20},{"id":34,"name":"oscar","category":"music","score":10},{"id":53,"name":"oscar","category":"movies","score":0},{"id":16,"name":"papa","category":"books","score":30},{"id":35,"name":"papa","category":"music","score":20},{"id":54,"name":"papa","category":"movies","score":10},{"id":17,"name":"quebec","category":"books","score":40},{"id":36,"name":"quebec","category":"music","score":30},{"id":55,"name":"quebec","category":"movies","score":20},{"id":18,"name":"romeo","category":"books","score":50},{"id":37,"name":"romeo","category":"music","score":40},{"id":56,"name":"romeo","category":"movies","score":30},{"id":19,"name":"sierra","category":"books","score":0},{"id":38,"name":"sierra","category":"music","score":50},{"id":57,"name":"sierra","category":"movies","score":40},{"id":1001,"name":"zzz-injected","category":"books","score":999}],"nextCursor":null,"hasMore":false,"snapshotId":"618b63b79e612c0695ae89d2","snapshotVersion":2,"pageSize":100,"count":57,"query":{"sort":"name_asc","category":null,"q":null,"pageSize":100}}
+# HTTP 200
+
+========== 5. 变更筛选/排序后复用旧游标 -> 400 cursor_query_mismatch ==========
+
+$ curl http://localhost:18099/api/items?sort=name_asc&category=books&pageSize=5
+# 第一页：category=books
+{"items":[{"id":1,"name":"alpha","category":"books","score":0},{"id":2,"name":"beta","category":"books","score":10},{"id":4,"name":"delta","category":"books","score":30},{"id":5,"name":"echo","category":"books","score":40},{"id":6,"name":"foxtrot","category":"books","score":50}],"nextCursor":"eyJ2IjoxLCJxIjoiOWVlZGYyODdlY2U4OWRkODllOWNhZjhmYjg5YWVkY2MiLCJzIjoiNTQ5NzAxMDAyYzQ3Nzk4NmFkYTI0NTk1IiwiayI6ImZveHRyb3QiLCJpIjo2fQ.I7Lf-FE_NIPVe4cGY8A31oq7tjwFG2kPaglCce7XC_0","hasMore":true,"snapshotId":"549701002c477986ada24595","snapshotVersion":3,"pageSize":5,"count":5,"query":{"sort":"name_asc","category":"books","q":null,"pageSize":5}}
+# HTTP 200
+
+$ curl http://localhost:18099/api/items?sort=name_asc&category=movies&pageSize=5&cursor=eyJ2IjoxLCJxIjoiOWVlZGYyODdlY2U4OWRkODllOWNhZjhmYjg5YWVkY2MiLCJzIjoiYzNkZmU1OTAzOWE0MWQ3MDEzZThiNWYxIiwiayI6ImZveHRyb3QiLCJpIjo2fQ.jHDtZLCYi3Ql79qrcP9hHVYdgkK0ilk-nAjgvgWyIjA
+# 同一游标改成 category=movies -> 拒绝
+{"error":"cursor_query_mismatch","message":"游标属于另一个查询（排序/筛选/页大小与当前请求不一致），不能复用"}
+# HTTP 400
+
+$ curl http://localhost:18099/api/items?sort=score_desc&category=books&pageSize=5&cursor=eyJ2IjoxLCJxIjoiOWVlZGYyODdlY2U4OWRkODllOWNhZjhmYjg5YWVkY2MiLCJzIjoiYzNkZmU1OTAzOWE0MWQ3MDEzZThiNWYxIiwiayI6ImZveHRyb3QiLCJpIjo2fQ.jHDtZLCYi3Ql79qrcP9hHVYdgkK0ilk-nAjgvgWyIjA
+# 同一游标改成 sort=score_desc -> 拒绝
+{"error":"cursor_query_mismatch","message":"游标属于另一个查询（排序/筛选/页大小与当前请求不一致），不能复用"}
+# HTTP 400
+
+========== 6. 伪造/篡改游标 -> 403 cursor_invalid ==========
+
+$ curl http://localhost:18099/api/items?sort=name_asc&pageSize=5&cursor=eyJ2IjoxLCJxIjoiMWRjMTY4ODdiOGZkZTkwZmMzZDRlZDIyMTgzNDU5NDMiLCJzIjoiYjM5NWFiNjYzODM5ZDYyN2JlZjRiY2FjIiwiayI6ImJldGEiLCJpIjoyfQ.m-NyOadyh65Q1BNlMxSGLYZCG-YMrbISFS88tlw6ZWM
+# 翻转游标一个字符 -> MAC 校验失败
+{"error":"cursor_invalid","message":"游标签名校验失败（游标被篡改或密钥已轮换）"}
+# HTTP 403
+
+$ curl http://localhost:18099/api/items?sort=name_asc&pageSize=5&cursor=forged.cursor
+# 完全编造的游标 -> MAC 校验失败
+{"error":"cursor_invalid","message":"游标签名校验失败（游标被篡改或密钥已轮换）"}
+# HTTP 403
+
+========== 7. 快照过期明确报错（TTL=3s）==========
+# 拿到游标后等待 4 秒……
+
+$ curl http://localhost:18099/api/items?sort=name_asc&pageSize=5&cursor=eyJ2IjoxLCJxIjoiMWRjMTY4ODdiOGZkZTkwZmMzZDRlZDIyMTgzNDU5NDMiLCJzIjoiZGIyZGZmZmU0MTlmYjY1MGNiZjk5MTIwIiwiayI6ImJldGEiLCJpIjoyfQ.dIGY9AaFl05TH3KBwH-YJTR1bYyALqqy6ZPk0qaaORw
+# 旧快照已过期 -> 410 snapshot_expired
+{"error":"snapshot_expired","message":"快照 db2dfffe419fb650cbf99120 已过期（TTL=3 秒，创建于 2026-09-23T11:36:52.890230465Z），请重新发起第一页查询"}
+# HTTP 410
+
+========== 8. 当前真实数据统计 ==========
+
+$ curl http://localhost:18099/api/admin/stats
+# 当前总数
+{"total":57}
+# HTTP 200
+
+演示完成，完整输出见 /home/admin/Downloads/biaozhul/text18/b/demo-output.txt

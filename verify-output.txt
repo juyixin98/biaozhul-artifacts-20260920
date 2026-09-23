@@ -1,0 +1,27 @@
+[PASS] 健康检查 200
+  变更前真实数据总数 = 57
+  -- 翻页途中：插入 zzz-verifier / 删除 id=21 / 把 id=33 改名为 aaa-verifier
+[PASS] 插入返回 201
+[PASS] 删除 id=21 返回 200
+[PASS] 修改 id=33 排序键返回 200
+[PASS] 旧快照所有页 HTTP 200
+[PASS] 旧快照遍历条数=57（不重不漏）
+[PASS] 旧快照遍历无重复 id
+[PASS] 新插入记录不出现在旧快照
+[PASS] 被删除的 id=21 仍由旧快照遍历到（快照已固定）
+[PASS] 被改名的 id=33 仍由旧快照遍历到（旧名字）
+[PASS] 全程绑定同一 snapshotId
+[PASS] 新快照条数 = 57（删 1 增 1 净值不变）
+[PASS] 新快照不含已删除 id=21
+[PASS] 新快照包含新插入记录
+[PASS] 新快照第一条为改名后的 id=33 (aaa-verifier)
+[PASS] 新旧快照 ID 不同（快照确实重新建立）
+[PASS] 换 category 复用游标 -> 400 cursor_query_mismatch
+[PASS] 换 sort 复用游标 -> 400 cursor_query_mismatch
+[PASS] 换 pageSize 复用游标 -> 400 cursor_query_mismatch
+[PASS] 篡改一个字符 -> 403 cursor_invalid
+[PASS] 完全伪造 -> 403 cursor_invalid
+  等待 4 秒让快照过期（TTL=3s）……
+[PASS] 过期游标 -> 410 snapshot_expired
+
+验收结果：通过 22，失败 0
