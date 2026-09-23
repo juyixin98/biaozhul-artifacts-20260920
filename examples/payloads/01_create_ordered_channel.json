@@ -1,0 +1,8 @@
+{
+  "ordering": "ordered",
+  "version": "v1",
+  "port_a": "port-a",
+  "port_b": "port-b",
+  "channel_a": "channel-0",
+  "channel_b": "channel-0"
+}

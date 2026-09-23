@@ -1,0 +1,9 @@
+{
+  "src_chain": "chain-a",
+  "src_port": "port-a",
+  "src_channel": "channel-0",
+  "timeout_height": 10,
+  "timeout_time_ns": 0,
+  "data_hex": "deadbeef",
+  "amount": 100
+}
