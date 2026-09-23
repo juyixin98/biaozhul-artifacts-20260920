@@ -1,0 +1,26 @@
+{
+  "mode": "live",
+  "messages": [
+    {
+      "device_id": "temp-room-a",
+      "type": "temperature",
+      "seq": 1,
+      "sample_time": "2026-09-23T10:00:00Z",
+      "value": 21.5
+    },
+    {
+      "device_id": "temp-room-a",
+      "type": "temperature",
+      "seq": 2,
+      "sample_time": "2026-09-23T10:00:01Z",
+      "value": 21.6
+    },
+    {
+      "device_id": "front-door",
+      "type": "door",
+      "seq": 1,
+      "sample_time": "2026-09-23T10:00:00Z",
+      "value": 0
+    }
+  ]
+}

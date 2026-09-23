@@ -1,0 +1,8 @@
+{
+  "stale_enter_sec": 10,
+  "stale_recover_sec": 3,
+  "fixed_window_count": 4,
+  "fixed_tolerance": 0.05,
+  "gap_recover_gapless": 2,
+  "clock_skew_tol_ms": 500
+}
