@@ -1,0 +1,44 @@
+// dlang 语法示例（合法）
+// 行注释以 // 开始；本文件可被 `python -m dl.cli parse` 无错误解析。
+
+// 变量声明：var 名字 [= 表达式];
+var width = 10;
+var height = 24;
+var area = width * height;
+var nothing;                       // 允许无初始化
+
+// 函数声明：fn 名字(参数, ...) { 语句 }
+fn square(x) {
+  return x * x;
+}
+
+// 控制流
+fn classify(n) {
+  if (n < 0) {
+    return -1;
+  } else if (n == 0) {
+    return 0;
+  } else {
+    return 1;
+  }
+}
+
+var i = 0;
+var sum = 0;
+while (i < 5) {
+  if (i == 2) {
+    i = i + 1;
+    continue;
+  }
+  sum = sum + i;
+  i = i + 1;
+}
+
+// 表达式：数字、字符串、布尔、null、数组、调用、下标、一元与二元运算
+var greeting = "hello, world; (symbols inside) { }";
+var single = '单引号也可以，内部可含 " 双引号';
+var escaped = "line1\nline2\ttab\"quoted";
+var nums = [1, 2 + 3, square(4), -area, !true];
+var chained = square(square(2));
+var logic = (a && b) || (!c == false);
+var assign_chain = width = height = 7;   // = 右结合

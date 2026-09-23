@@ -1,0 +1,67 @@
+### dlang JSON 服务请求样例（REST Client / .http 风格）
+### 在 VS Code REST Client、IntelliJ HTTP Client 等工具中可逐条发送。
+### 先启动：python -m dl.server --port 8000
+
+@base = http://127.0.0.1:8000
+
+### 健康检查
+GET {{base}}/health
+
+### 一次性全量解析（合法）
+# @name parseOk
+POST {{base}}/parse
+Content-Type: application/json
+
+{"source": "var x = 1 + 2 * 3;\nfn f(a) { return a; }"}
+
+### 全量解析（未闭合括号；错误位置为半开区间）
+POST {{base}}/parse
+Content-Type: application/json
+
+{"source": "var x = (1 + 2;"}
+
+### 字符串内符号不产生括号/分号令牌（附带 tokens）
+POST {{base}}/parse
+Content-Type: application/json
+
+{"source": "var s = \"(a; b){}\";", "include_tokens": true}
+
+### 创建增量文档
+# @name createDoc
+POST {{base}}/documents
+Content-Type: application/json
+
+{"source": "var a = 1;\nvar b = 2;\nvar c = 3;"}
+
+### 上面创建的文档 id（通常是 1）；在支持变量的客户端可自动引用
+@id = {{createDoc.response.body.$.id}}
+
+### 在中间插入声明：后面的声明应被复用（reuse_events > 0）
+POST {{base}}/documents/{{id}}/edits
+Content-Type: application/json
+
+{"edits": [{"start": 22, "end": 22, "text": "var mid = 99;\n"}]}
+
+### 连续编辑（顺序应用，中间每一步都做增量解析）
+POST {{base}}/documents/{{id}}/edits
+Content-Type: application/json
+
+{"edits": [
+  {"start": 0, "end": 3, "text": "var"},
+  {"start": 0, "end": 0, "text": "// edited\n"}
+]}
+
+### 单编辑简写：删除一个区间
+POST {{base}}/documents/{{id}}/edits
+Content-Type: application/json
+
+{"start": 40, "end": 46, "text": ""}
+
+### 查看当前文档
+GET {{base}}/documents/{{id}}
+
+### 列出全部文档
+GET {{base}}/documents
+
+### 删除文档
+DELETE {{base}}/documents/{{id}}
