@@ -1,0 +1,13 @@
+{
+  "table": {
+    "name": "sparse_in",
+    "columns": [
+      { "name": "id", "type": "int", "values": [1, 2, 3, 4, 5, 6, 7, 8] }
+    ]
+  },
+  "batchSize": 3,
+  "selection": [7, 2, 2, 4, 0],
+  "filter": { "column": "id", "op": ">", "value": 1 },
+  "projection": ["id"],
+  "aggregates": ["count(*)", "sum(id)"]
+}

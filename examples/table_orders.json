@@ -1,0 +1,9 @@
+{
+  "name": "orders",
+  "rowCount": 6,
+  "columns": [
+    { "name": "id", "type": "int", "values": [10, 20, 30, null, 50, 60] },
+    { "name": "amt", "type": "int", "values": [100, null, 300, 400, null, 600] },
+    { "name": "status", "type": "string", "values": ["NEW", "PAID", "NEW", null, "PAID", "NEW"] }
+  ]
+}

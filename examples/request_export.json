@@ -1,0 +1,20 @@
+{
+  "table": {
+    "name": "orders",
+    "columns": [
+      { "name": "id", "type": "int", "values": [10, 20, 30, null, 50, 60] },
+      { "name": "amt", "type": "int", "values": [100, null, 300, 400, null, 600] },
+      { "name": "status", "type": "string", "values": ["NEW", "PAID", "NEW", null, "PAID", "NEW"] }
+    ]
+  },
+  "batchSize": 2,
+  "filter": {
+    "op": "and",
+    "children": [
+      { "column": "id", "op": ">=", "value": 20 },
+      { "column": "amt", "op": "<", "value": 500 }
+    ]
+  },
+  "projection": ["id", "amt", "status"],
+  "exportDir": "out/export_demo"
+}

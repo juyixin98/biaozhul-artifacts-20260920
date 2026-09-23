@@ -1,0 +1,24 @@
+{
+  "table": {
+    "name": "orders",
+    "columns": [
+      { "name": "id", "type": "int", "values": [10, 20, 30, null, 50, 60] },
+      { "name": "amt", "type": "int", "values": [100, null, 300, 400, null, 600] },
+      { "name": "status", "type": "string", "values": ["NEW", "PAID", "NEW", null, "PAID", "NEW"] }
+    ]
+  },
+  "batchSize": 4,
+  "filter": {
+    "op": "and",
+    "children": [
+      { "op": "isNotNull", "column": "status" },
+      { "column": "id", "op": ">=", "value": 20 },
+      { "column": "status", "op": "!=", "value": "X" }
+    ]
+  },
+  "projection": ["id", "amt", "status"],
+  "aggregates": [
+    { "func": "count", "column": "*" },
+    { "func": "sum", "column": "amt", "alias": "amt_sum" }
+  ]
+}

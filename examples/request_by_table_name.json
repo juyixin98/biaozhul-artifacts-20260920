@@ -1,0 +1,7 @@
+{
+  "table": "orders",
+  "batchSize": 2,
+  "filter": { "column": "status", "op": "=", "value": "NEW" },
+  "projection": ["id", "amt", "status"],
+  "aggregates": ["count(*)"]
+}
