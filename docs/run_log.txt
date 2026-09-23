@@ -1,0 +1,105 @@
+### environment
+g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Python 3.12.3
+
+### make all
+mkdir -p build
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude -c src/json.cpp -o build/json.o
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude -c src/mesh.cpp -o build/mesh.o
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude -c src/topology.cpp -o build/topology.o
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude -c src/main.cpp -o build/main.o
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic build/json.o build/mesh.o build/topology.o build/main.o -o build/gridtopo_check
+
+### make test
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Iinclude -c tests/test_topology.cpp -o build/test_topology.o
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic build/json.o build/mesh.o build/topology.o build/test_topology.o -o build/gridtopo_tests
+build/gridtopo_tests
+PASS closed_tetrahedron
+PASS open_hole_surface
+PASS three_faces_one_edge
+PASS duplicate_faces_opposite_winding
+PASS duplicate_faces_same_winding
+PASS orientation_conflict
+PASS isolated_vertex
+PASS two_disconnected_components
+PASS zero_area_triangle
+PASS repeated_vertex_index
+PASS coincident_vertices
+PASS nonfinite_coordinate
+PASS json_roundtrip_preserves_ids
+All 13 test groups passed.
+python3 tests/run_e2e.py
+CASE request_tetrahedron_closed.json (expect exit 0)
+  PASS  exit_code
+  PASS  status=valid
+  PASS  no geometric issues
+  PASS  no topological issues
+  PASS  watertight
+  PASS  no boundary edges
+  PASS  1 component / 4 faces / 4 vertices
+
+CASE request_open_hole_surface.json (expect exit 0)
+  PASS  exit_code
+  PASS  status=valid
+  PASS  8 boundary edges (outer 4 + inner 4)
+  PASS  not watertight
+  PASS  1 component with 8 faces
+  PASS  no orientation conflict
+
+CASE request_three_faces_one_edge.json (expect exit 1)
+  PASS  exit_code
+  PASS  1 nonmanifold edge
+  PASS  incident face ids are f0,f1,f2
+  PASS  edge endpoints reported
+  PASS  metric incident_face_count=3
+
+CASE request_duplicate_face.json (expect exit 1)
+  PASS  exit_code
+  PASS  duplicate_face reported
+  PASS  detail opposite_winding
+  PASS  copies metric = 2
+  PASS  edges still manifold (incidence=2)
+
+CASE request_orientation_conflict.json (expect exit 1)
+  PASS  exit_code
+  PASS  nonmanifold_edge reported
+  PASS  conflict face ids f0,f1
+  PASS  orientation_conflict_count == 1
+  PASS  4 boundary edges
+
+CASE request_isolated_vertex.json (expect exit 1)
+  PASS  exit_code
+  PASS  isolated v3
+  PASS  component counts faces only via valid faces
+
+CASE request_geometric_degeneracy.json (expect exit 1)
+  PASS  exit_code
+  PASS  zero_area_triangle is geometric
+  PASS  coincident_vertices is geometric
+  PASS  zero-area face excluded, no components
+  PASS  area metric printed
+  PASS  isolated vertices kept as topological errors
+
+CASE request_bad_reference.json (expect exit 2)
+  PASS  exit_code
+  PASS  request_error/mesh_load
+
+CASE stdin pipe tetrahedron (expect exit 0)
+  PASS  exit_code
+  PASS  watertight via stdin
+
+CASE malformed JSON (expect exit 2)
+  PASS  exit_code
+  PASS  phase=json_parse with line/column
+
+All e2e cases passed.
+
+### 退出码抽样
+request_tetrahedron_closed.json -> exit 0
+request_open_hole_surface.json -> exit 0
+request_three_faces_one_edge.json -> exit 1
+request_duplicate_face.json -> exit 1
+request_orientation_conflict.json -> exit 1
+request_isolated_vertex.json -> exit 1
+request_geometric_degeneracy.json -> exit 1
+request_bad_reference.json -> exit 2

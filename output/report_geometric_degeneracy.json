@@ -1,0 +1,123 @@
+{
+  "status": "errors",
+  "coordinateSystem": "right-handed Cartesian (x, y, z)",
+  "lengthUnit": "metre",
+  "precision": {
+    "floating_point": "IEEE-754 double (53-bit mantissa)",
+    "output_format": "%.17g, round-trip exact",
+    "eps_position": 1.0000000000000001e-09,
+    "eps_area": 9.9999999999999998e-13
+  },
+  "summary": {
+    "vertex_count": 5,
+    "face_count": 1,
+    "non_degenerate_face_count": 0,
+    "geometric_degeneracy_count": 2,
+    "topological_error_count": 5,
+    "nonmanifold_edge_count": 0,
+    "duplicate_face_groups": 0,
+    "duplicate_face_extra": 0,
+    "orientation_conflict_count": 0,
+    "boundary_edge_count": 0,
+    "isolated_vertex_count": 5,
+    "connected_component_count": 0,
+    "watertight": false,
+    "orientation_consistent": true,
+    "valid": false
+  },
+  "geometric_degeneracies": [
+    {
+      "category": "geometric_degeneracy",
+      "type": "zero_area_triangle",
+      "message": "face 'f0' is a zero-area (degenerate) triangle; excluded from topology",
+      "face_ids": [
+        "f0"
+      ],
+      "vertex_ids": [
+        "v0",
+        "v1",
+        "v2"
+      ],
+      "metric": {
+        "name": "area",
+        "value": 0
+      }
+    },
+    {
+      "category": "geometric_degeneracy",
+      "type": "coincident_vertices",
+      "message": "3 vertices are coincident within eps (merged transitively; topology keeps original indices)",
+      "face_ids": [],
+      "vertex_ids": [
+        "v0",
+        "v3",
+        "v4"
+      ],
+      "metric": {
+        "name": "cluster_max_distance",
+        "value": 2e-12
+      }
+    }
+  ],
+  "topological_errors": [
+    {
+      "category": "topological_error",
+      "type": "isolated_vertex",
+      "message": "vertex 'v0' is not referenced by any non-degenerate face",
+      "face_ids": [],
+      "vertex_ids": [
+        "v0"
+      ],
+      "metric": null
+    },
+    {
+      "category": "topological_error",
+      "type": "isolated_vertex",
+      "message": "vertex 'v1' is not referenced by any non-degenerate face",
+      "face_ids": [],
+      "vertex_ids": [
+        "v1"
+      ],
+      "metric": null
+    },
+    {
+      "category": "topological_error",
+      "type": "isolated_vertex",
+      "message": "vertex 'v2' is not referenced by any non-degenerate face",
+      "face_ids": [],
+      "vertex_ids": [
+        "v2"
+      ],
+      "metric": null
+    },
+    {
+      "category": "topological_error",
+      "type": "isolated_vertex",
+      "message": "vertex 'v3' is not referenced by any non-degenerate face",
+      "face_ids": [],
+      "vertex_ids": [
+        "v3"
+      ],
+      "metric": null
+    },
+    {
+      "category": "topological_error",
+      "type": "isolated_vertex",
+      "message": "vertex 'v4' is not referenced by any non-degenerate face",
+      "face_ids": [],
+      "vertex_ids": [
+        "v4"
+      ],
+      "metric": null
+    }
+  ],
+  "boundary_edges": [],
+  "isolated_vertices": [
+    "v0",
+    "v1",
+    "v2",
+    "v3",
+    "v4"
+  ],
+  "connected_components": []
+}

@@ -1,0 +1,20 @@
+{
+  "config": {
+    "coordinateSystem": "right-handed Cartesian (x, y, z)",
+    "lengthUnit": "metre",
+    "eps": 1e-9,
+    "areaEps": 1e-12
+  },
+  "vertices": [
+    {"id": "v0", "coordinates": [0.0, 0.0, 0.0]},
+    {"id": "v1", "coordinates": [1.0, 0.0, 0.0]},
+    {"id": "v2", "coordinates": [0.0, 1.0, 0.0]},
+    {"id": "v3", "coordinates": [0.0, 0.0, 1.0]}
+  ],
+  "faces": [
+    {"id": "f0", "vertices": ["v0", "v2", "v1"]},
+    {"id": "f1", "vertices": ["v0", "v1", "v3"]},
+    {"id": "f2", "vertices": ["v1", "v2", "v3"]},
+    {"id": "f3", "vertices": ["v0", "v3", "v2"]}
+  ]
+}

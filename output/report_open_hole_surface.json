@@ -1,0 +1,77 @@
+{
+  "status": "valid",
+  "coordinateSystem": "right-handed Cartesian (x, y, z)",
+  "lengthUnit": "metre",
+  "precision": {
+    "floating_point": "IEEE-754 double (53-bit mantissa)",
+    "output_format": "%.17g, round-trip exact",
+    "eps_position": 1.0000000000000001e-09,
+    "eps_area": 9.9999999999999998e-13
+  },
+  "summary": {
+    "vertex_count": 8,
+    "face_count": 8,
+    "non_degenerate_face_count": 8,
+    "geometric_degeneracy_count": 0,
+    "topological_error_count": 0,
+    "nonmanifold_edge_count": 0,
+    "duplicate_face_groups": 0,
+    "duplicate_face_extra": 0,
+    "orientation_conflict_count": 0,
+    "boundary_edge_count": 8,
+    "isolated_vertex_count": 0,
+    "connected_component_count": 1,
+    "watertight": false,
+    "orientation_consistent": true,
+    "valid": true
+  },
+  "geometric_degeneracies": [],
+  "topological_errors": [],
+  "boundary_edges": [
+    [
+      "v0",
+      "v1"
+    ],
+    [
+      "v0",
+      "v3"
+    ],
+    [
+      "v1",
+      "v2"
+    ],
+    [
+      "v2",
+      "v3"
+    ],
+    [
+      "v4",
+      "v5"
+    ],
+    [
+      "v4",
+      "v7"
+    ],
+    [
+      "v5",
+      "v6"
+    ],
+    [
+      "v6",
+      "v7"
+    ]
+  ],
+  "isolated_vertices": [],
+  "connected_components": [
+    {
+      "component_id": 1,
+      "face_count": 8,
+      "vertex_count": 8,
+      "boundary_edge_count": 8,
+      "nonmanifold_edge_count": 0,
+      "orientation_conflict_count": 0,
+      "watertight": false,
+      "orientation_consistent": true
+    }
+  ]
+}

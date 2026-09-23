@@ -1,0 +1,18 @@
+{
+  "config": {
+    "coordinateSystem": "right-handed Cartesian (x, y, z)",
+    "lengthUnit": "metre",
+    "eps": 1e-9,
+    "areaEps": 1e-12
+  },
+  "_comment": "v3 不被任何面引用（孤立点）；两个分离三角面片属于两个连通分量。",
+  "vertices": [
+    [0.0, 0.0, 0.0],
+    [1.0, 0.0, 0.0],
+    [0.0, 1.0, 0.0],
+    [5.0, 5.0, 5.0]
+  ],
+  "faces": [
+    [0, 1, 2]
+  ]
+}

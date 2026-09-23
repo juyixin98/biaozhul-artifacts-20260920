@@ -1,0 +1,70 @@
+{
+  "status": "errors",
+  "coordinateSystem": "right-handed Cartesian (x, y, z)",
+  "lengthUnit": "metre",
+  "precision": {
+    "floating_point": "IEEE-754 double (53-bit mantissa)",
+    "output_format": "%.17g, round-trip exact",
+    "eps_position": 1.0000000000000001e-09,
+    "eps_area": 9.9999999999999998e-13
+  },
+  "summary": {
+    "vertex_count": 4,
+    "face_count": 1,
+    "non_degenerate_face_count": 1,
+    "geometric_degeneracy_count": 0,
+    "topological_error_count": 1,
+    "nonmanifold_edge_count": 0,
+    "duplicate_face_groups": 0,
+    "duplicate_face_extra": 0,
+    "orientation_conflict_count": 0,
+    "boundary_edge_count": 3,
+    "isolated_vertex_count": 1,
+    "connected_component_count": 1,
+    "watertight": false,
+    "orientation_consistent": true,
+    "valid": false
+  },
+  "geometric_degeneracies": [],
+  "topological_errors": [
+    {
+      "category": "topological_error",
+      "type": "isolated_vertex",
+      "message": "vertex 'v3' is not referenced by any non-degenerate face",
+      "face_ids": [],
+      "vertex_ids": [
+        "v3"
+      ],
+      "metric": null
+    }
+  ],
+  "boundary_edges": [
+    [
+      "v0",
+      "v1"
+    ],
+    [
+      "v0",
+      "v2"
+    ],
+    [
+      "v1",
+      "v2"
+    ]
+  ],
+  "isolated_vertices": [
+    "v3"
+  ],
+  "connected_components": [
+    {
+      "component_id": 1,
+      "face_count": 1,
+      "vertex_count": 3,
+      "boundary_edge_count": 3,
+      "nonmanifold_edge_count": 0,
+      "orientation_conflict_count": 0,
+      "watertight": false,
+      "orientation_consistent": true
+    }
+  ]
+}
