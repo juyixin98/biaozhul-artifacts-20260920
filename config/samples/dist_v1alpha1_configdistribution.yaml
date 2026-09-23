@@ -1,0 +1,15 @@
+apiVersion: dist.example.com/v1alpha1
+kind: ConfigDistribution
+metadata:
+  name: main
+spec:
+  # Immutable: changing this field is rejected by the API server (CEL).
+  # To roll out new content, create a new ConfigDistribution.
+  config:
+    app.conf: |
+      mode=fast
+      retries=3
+    flags: "a=1,b=2"
+  namespaceSelector:
+    matchLabels:
+      team: a

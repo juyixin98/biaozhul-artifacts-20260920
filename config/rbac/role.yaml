@@ -1,0 +1,50 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: config-distributor
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - dist.example.com
+  resources:
+  - configdistributions
+  verbs:
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - dist.example.com
+  resources:
+  - configdistributions/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - dist.example.com
+  resources:
+  - configdistributions/status
+  verbs:
+  - get
+  - patch
+  - update
