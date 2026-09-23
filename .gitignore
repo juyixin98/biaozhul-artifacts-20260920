@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+*.tmp
+*.enc.tmp
+*.rot.tmp
+*.part
+
+# 本地密钥与明文/密文演示产物绝不入库
+keys.json
+*.enc
