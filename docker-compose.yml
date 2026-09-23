@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: vc_test
+      POSTGRES_PASSWORD: vc_test
+      POSTGRES_DB: vc_index
+    ports:
+      - "55432:5432"
+    volumes:
+      - vc_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vc_test -d vc_index"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  vc_pgdata:

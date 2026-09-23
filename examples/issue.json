@@ -1,0 +1,12 @@
+{
+  "issuer_id": "set-after-creating-issuer",
+  "subject": "synthetic-subject-0001",
+  "purpose": "door-access",
+  "not_before": "2026-01-01T00:00:00Z",
+  "expires_at": "2030-01-01T00:00:00Z",
+  "content": {
+    "zone": "north",
+    "level": 4,
+    "note": "synthetic credential content — covered by content_hash"
+  }
+}

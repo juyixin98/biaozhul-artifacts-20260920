@@ -1,0 +1,9 @@
+{
+  "credential_id": "set-after-issuance",
+  "expected_purpose": "door-access",
+  "content": {
+    "zone": "north",
+    "level": 4,
+    "note": "synthetic credential content — covered by content_hash"
+  }
+}

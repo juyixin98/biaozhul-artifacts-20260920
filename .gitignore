@@ -1,0 +1,5 @@
+/bin/
+/bin/vci-server
+*.out
+*.test
+.DS_Store
