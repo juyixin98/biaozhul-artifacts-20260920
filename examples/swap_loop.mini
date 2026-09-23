@@ -1,0 +1,17 @@
+// Two loop-carried values swap each iteration.  The parallel copy on the
+// back edge contains a cycle (a=b, b=a), which phi elimination must
+// break with a temporary.
+func main(n) {
+  var a = 1;
+  var b = 7;
+  var i = 0;
+  while (i < n) {
+    var old = a;
+    a = b;
+    b = old;
+    i = i + 1;
+  }
+  print(a);
+  print(b);
+  return a + b;
+}

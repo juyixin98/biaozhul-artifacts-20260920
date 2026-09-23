@@ -1,0 +1,25 @@
+// Nested control flow plus a helper function and short-circuit logic.
+func abs(x) {
+  if (x < 0) {
+    return 0 - x;
+  } else {
+    return x;
+  }
+}
+
+func main(n) {
+  var total = 0;
+  var i = 0;
+  while (i < n) {
+    var v = i - 3;
+    // abs(v) only on the non-short-circuited branch
+    if (i > 0 && v < 0) {
+      total = total + abs(v);
+    } else {
+      total = total + i;
+    }
+    i = i + 1;
+  }
+  print(total);
+  return total;
+}

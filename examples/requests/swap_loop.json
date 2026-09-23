@@ -1,0 +1,5 @@
+{
+  "source": "func main(n) {\n  var a = 1;\n  var b = 7;\n  var i = 0;\n  while (i < n) {\n    var old = a;\n    a = b;\n    b = old;\n    i = i + 1;\n  }\n  return a + b;\n}\n",
+  "entry": "main",
+  "inputs": [17]
+}

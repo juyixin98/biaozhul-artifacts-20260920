@@ -1,0 +1,6 @@
+{
+  "source": "func main(n) {\n  var x = 10;\n  if (1 == 1) {\n    x = 20;\n  } else {\n    x = 999;\n  }\n  var y = 0;\n  while (0) {\n    y = y + 1;\n  }\n  return x + y;\n}\n",
+  "entry": "main",
+  "inputs": [0],
+  "include_ir": true
+}

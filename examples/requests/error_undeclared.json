@@ -1,0 +1,3 @@
+{
+  "source": "func main() { return y; }"
+}

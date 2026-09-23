@@ -1,0 +1,18 @@
+// Structurally present blocks that can never execute.  The condition
+// folds to a constant during lowering; the IR still contains both sides,
+// and the SSA pipeline must detect, report and prune the dead ones.
+func main(n) {
+  var x = 10;
+  if (1 == 1) {
+    x = 20;
+  } else {
+    x = 999;          // unreachable
+  }
+  var y = 0;
+  while (0) {
+    y = y + 1;        // whole loop body unreachable
+  }
+  print(x);
+  print(y);
+  return x + y;
+}

@@ -1,0 +1,5 @@
+{
+  "source": "func main(n) {\n  var sum = 0;\n  var i = 1;\n  while (i <= n) {\n    sum = sum + i;\n    i = i + 1;\n  }\n  return sum;\n}\n",
+  "entry": "main",
+  "inputs": [100]
+}

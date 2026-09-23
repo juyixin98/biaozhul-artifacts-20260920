@@ -1,0 +1,11 @@
+// Loop-carried variables: sum and i both need phis at the loop header.
+func main(n) {
+  var sum = 0;
+  var i = 1;
+  while (i <= n) {
+    sum = sum + i;
+    i = i + 1;
+  }
+  print(sum);
+  return sum;
+}

@@ -1,0 +1,5 @@
+{
+  "source": "// diamond control flow\nfunc main(n) {\n  var x = 0;\n  if (n > 0) {\n    x = n + 1;\n  } else {\n    x = n - 1;\n  }\n  print(x);\n  return x;\n}\n",
+  "entry": "main",
+  "inputs": [5]
+}
