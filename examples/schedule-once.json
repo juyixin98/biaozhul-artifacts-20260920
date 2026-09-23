@@ -1,0 +1,10 @@
+# 延迟 1 秒后执行一次 compute 任务。
+{
+  "name": "one-off-compute",
+  "after_ms": 1000,
+  "task": {
+    "type": "compute",
+    "name": "hash-burst",
+    "params": { "iters": 200000 }
+  }
+}

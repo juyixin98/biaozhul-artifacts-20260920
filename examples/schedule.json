@@ -1,0 +1,9 @@
+{
+  "name": "periodic-noop",
+  "every_ms": 200,
+  "task": {
+    "type": "noop",
+    "name": "tick",
+    "params": {}
+  }
+}
