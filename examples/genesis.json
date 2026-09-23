@@ -1,0 +1,17 @@
+{
+  "chain_id": "demo-1",
+  "allocations": [
+    {
+      "address": "0x65c8f3a7d946f901e515c1a3bc2a8b2e4e60fd6a",
+      "balance": 1000000
+    },
+    {
+      "address": "0x664ab31fc7fec49b0e7217e70b8d5359056f2d6b",
+      "balance": 1000000
+    },
+    {
+      "address": "0xe97c551c95ac519e5634b017ac99808609eccc53",
+      "balance": 1000000
+    }
+  ]
+}

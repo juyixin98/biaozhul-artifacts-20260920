@@ -1,0 +1,16 @@
+# local data
+/data
+*.pebble
+
+# built binaries (root-anchored so cmd/ source dirs are not ignored)
+/snapd
+/snapdemo
+
+# go
+/vendor/
+*.test
+*.out
+
+# editor/os
+.DS_Store
+*.swp
