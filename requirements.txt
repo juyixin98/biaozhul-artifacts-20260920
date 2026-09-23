@@ -1,0 +1,8 @@
+# Direct runtime/test dependencies. Exact transitive pins are in
+# requirements-lock.txt (install that for a reproducible environment).
+z3-solver==5.1.0.0
+fastapi==0.141.1
+uvicorn[standard]==0.53.0
+pydantic>=2.9
+httpx==0.28.1
+pytest==9.1.1

@@ -1,0 +1,39 @@
+{
+  "contract": {
+    "schema": "cbmc-contract/v1",
+    "name": "mini-mint",
+    "description": "Tiny two-account contract where 'buggy_transfer' credits the receiver but forgets to debit the sender.",
+    "state": {
+      "int": {"alice": 5, "bob": 5},
+      "bool": {}
+    },
+    "actions": [
+      {
+        "name": "ok_transfer",
+        "params": [{"name": "amount", "type": "int", "min": 0, "max": 5}],
+        "require": [{"op": "<=", "args": [{"var": "amount"}, {"var": "alice"}]}],
+        "assign": [
+          {"target": "alice", "expr": {"op": "-", "args": [{"var": "alice"}, {"var": "amount"}]}},
+          {"target": "bob", "expr": {"op": "+", "args": [{"var": "bob"}, {"var": "amount"}]}}
+        ]
+      },
+      {
+        "name": "buggy_transfer",
+        "params": [{"name": "amount", "type": "int", "min": 1, "max": 5}],
+        "require": [],
+        "assign": [
+          {"target": "bob", "expr": {"op": "+", "args": [{"var": "bob"}, {"var": "amount"}]}}
+        ]
+      }
+    ],
+    "properties": {
+      "balances": ["alice", "bob"],
+      "conservation": [["alice", "bob"]],
+      "targets": []
+    }
+  },
+  "steps": 5,
+  "timeout_ms": 10000,
+  "checks": ["nonnegative", "conservation", "targets"],
+  "replay": true
+}

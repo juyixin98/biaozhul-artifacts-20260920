@@ -1,0 +1,59 @@
+{
+  "schema": "cbmc-contract/v1",
+  "name": "safe-transfer",
+  "description": "Two accounts with a boolean re-entrancy-style lock and three guarded actions. transfer debits one side and credits the other under a balance-sufficiency guard; deposit moves coins from outside in; withdraw moves them out. Every action preserves the total alice+bob and never produces a negative balance.",
+  "state": {
+    "int": {
+      "alice": 10,
+      "bob": 10
+    },
+    "bool": {
+      "locked": false
+    }
+  },
+  "actions": [
+    {
+      "name": "alice_to_bob",
+      "params": [
+        {"name": "amount", "type": "int", "min": 0, "max": 10}
+      ],
+      "require": [
+        {"op": "not", "args": [{"var": "locked"}]},
+        {"op": "<=", "args": [{"var": "amount"}, {"var": "alice"}]}
+      ],
+      "assign": [
+        {"target": "alice", "expr": {"op": "-", "args": [{"var": "alice"}, {"var": "amount"}]}},
+        {"target": "bob", "expr": {"op": "+", "args": [{"var": "bob"}, {"var": "amount"}]}}
+      ]
+    },
+    {
+      "name": "bob_to_alice",
+      "params": [
+        {"name": "amount", "type": "int", "min": 0, "max": 10}
+      ],
+      "require": [
+        {"op": "not", "args": [{"var": "locked"}]},
+        {"op": "<=", "args": [{"var": "amount"}, {"var": "bob"}]}
+      ],
+      "assign": [
+        {"target": "bob", "expr": {"op": "-", "args": [{"var": "bob"}, {"var": "amount"}]}},
+        {"target": "alice", "expr": {"op": "+", "args": [{"var": "alice"}, {"var": "amount"}]}}
+      ]
+    },
+    {
+      "name": "set_lock",
+      "params": [
+        {"name": "value", "type": "bool"}
+      ],
+      "require": [],
+      "assign": [
+        {"target": "locked", "expr": {"var": "value"}}
+      ]
+    }
+  ],
+  "properties": {
+    "balances": ["alice", "bob"],
+    "conservation": [["alice", "bob"]],
+    "targets": []
+  }
+}

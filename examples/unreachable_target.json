@@ -1,0 +1,53 @@
+{
+  "schema": "cbmc-contract/v1",
+  "name": "guarded-vault",
+  "description": "Vault whose 'drained' state can never occur: draining requires the vault to be empty AND funded at the same time. Used to verify the checker reports a named target unreachable within the bound (bounded UNSAT), and that replay of an empty trace is rejected. No balance can go negative either.",
+  "state": {
+    "int": {
+      "vault": 5,
+      "cashier": 5
+    },
+    "bool": {}
+  },
+  "actions": [
+    {
+      "name": "fund",
+      "params": [{"name": "amount", "type": "int", "min": 0, "max": 5}],
+      "require": [
+        {"op": "<=", "args": [{"var": "amount"}, {"var": "cashier"}]}
+      ],
+      "assign": [
+        {"target": "vault", "expr": {"op": "+", "args": [{"var": "vault"}, {"var": "amount"}]}},
+        {"target": "cashier", "expr": {"op": "-", "args": [{"var": "cashier"}, {"var": "amount"}]}}
+      ]
+    },
+    {
+      "name": "withdraw",
+      "params": [{"name": "amount", "type": "int", "min": 0, "max": 10}],
+      "require": [
+        {"op": "<=", "args": [{"var": "amount"}, {"var": "vault"}]}
+      ],
+      "assign": [
+        {"target": "vault", "expr": {"op": "-", "args": [{"var": "vault"}, {"var": "amount"}]}},
+        {"target": "cashier", "expr": {"op": "+", "args": [{"var": "cashier"}, {"var": "amount"}]}}
+      ]
+    }
+  ],
+  "properties": {
+    "balances": ["vault", "cashier"],
+    "conservation": [["vault", "cashier"]],
+    "targets": [
+      {
+        "name": "drained_and_funded",
+        "expr": {"op": "and", "args": [
+          {"op": "==", "args": [{"var": "vault"}, {"lit": 0}]},
+          {"op": ">=", "args": [{"var": "vault"}, {"lit": 10}]}
+        ]}
+      },
+      {
+        "name": "cashier_holds_everything",
+        "expr": {"op": "==", "args": [{"var": "cashier"}, {"lit": 10}]}
+      }
+    ]
+  }
+}

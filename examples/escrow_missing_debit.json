@@ -1,0 +1,63 @@
+{
+  "schema": "cbmc-contract/v1",
+  "name": "escrow-missing-debit",
+  "description": "Buggy escrow: settle() credits the seller but forgets to debit the escrow balance. A deposit followed by a settle mints money, so total conservation is broken at step 2. The lock prevents re-entry but does not compensate for the missing debit.",
+  "state": {
+    "int": {
+      "buyer": 10,
+      "seller": 0,
+      "escrow": 0
+    },
+    "bool": {
+      "locked": false
+    }
+  },
+  "actions": [
+    {
+      "name": "deposit",
+      "params": [
+        {"name": "amount", "type": "int", "min": 0, "max": 10}
+      ],
+      "require": [
+        {"op": "not", "args": [{"var": "locked"}]},
+        {"op": "<=", "args": [{"var": "amount"}, {"var": "buyer"}]},
+        {"op": ">", "args": [{"var": "amount"}, {"lit": 0}]}
+      ],
+      "assign": [
+        {"target": "buyer", "expr": {"op": "-", "args": [{"var": "buyer"}, {"var": "amount"}]}},
+        {"target": "escrow", "expr": {"op": "+", "args": [{"var": "escrow"}, {"var": "amount"}]}},
+        {"target": "locked", "expr": {"bool": true}}
+      ]
+    },
+    {
+      "name": "settle",
+      "params": [],
+      "require": [
+        {"var": "locked"},
+        {"op": ">", "args": [{"var": "escrow"}, {"lit": 0}]}
+      ],
+      "assign": [
+        {"target": "seller", "expr": {"op": "+", "args": [{"var": "seller"}, {"var": "escrow"}]}},
+        {"target": "locked", "expr": {"bool": false}}
+      ]
+    },
+    {
+      "name": "refund",
+      "params": [],
+      "require": [
+        {"var": "locked"},
+        {"op": ">", "args": [{"var": "escrow"}, {"lit": 0}]}
+      ],
+      "assign": [
+        {"target": "buyer", "expr": {"op": "+", "args": [{"var": "buyer"}, {"var": "escrow"}]}},
+        {"target": "escrow", "expr": {"lit": 0}},
+        {"target": "locked", "expr": {"bool": false}}
+      ]
+    }
+  ],
+  "properties": {
+    "balances": ["buyer", "seller", "escrow"],
+    "conservation": [["buyer", "seller", "escrow"]],
+    "targets": []
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "cbmc-contract/v1",
+  "name": "uint8-pool-overflow",
+  "description": "A 'vault' using an unsigned 8-bit balance (like a uint8 under unchecked arithmetic). add() only checks the amount fits in staging; it never checks that vault + amount fits in 8 bits, so the addition wraps modulo 256 and destroys value. The widened-sum conservation check detects exactly this machine-integer wrap, which an in-width comparison could not see.",
+  "state": {
+    "int": {},
+    "bv": {
+      "vault": {"width": 8, "init": 240},
+      "staging": {"width": 8, "init": 20}
+    },
+    "bool": {
+      "open": true
+    }
+  },
+  "actions": [
+    {
+      "name": "add",
+      "params": [
+        {"name": "amount", "type": {"type": "int", "width": 8}, "min": 1, "max": 20}
+      ],
+      "require": [
+        {"var": "open"},
+        {"op": "<=", "args": [{"var": "amount"}, {"var": "staging"}]}
+      ],
+      "assign": [
+        {"target": "vault", "expr": {"op": "+", "args": [{"var": "vault"}, {"var": "amount"}]}},
+        {"target": "staging", "expr": {"op": "-", "args": [{"var": "staging"}, {"var": "amount"}]}}
+      ]
+    },
+    {
+      "name": "seal",
+      "params": [],
+      "require": [{"var": "open"}],
+      "assign": [
+        {"target": "open", "expr": {"bool": false}}
+      ]
+    }
+  ],
+  "properties": {
+    "balances": ["vault", "staging"],
+    "conservation": [["vault", "staging"]],
+    "targets": []
+  }
+}

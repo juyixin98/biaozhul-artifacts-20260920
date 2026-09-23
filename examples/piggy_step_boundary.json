@@ -1,0 +1,49 @@
+{
+  "schema": "cbmc-contract/v1",
+  "name": "piggy-step-boundary",
+  "description": "Piggy bank: deposit adds exactly one coin, smash is enabled only at 15 coins. The 'smashed' target has a unique shortest depth of 15 steps. Used to verify (a) bounds below the true depth report safe_within_bound, (b) the exact bound yields the shortest counterexample, and (c) result semantics are bounded, not a proof.",
+  "state": {
+    "int": {
+      "coins": 0,
+      "pocket": 100
+    },
+    "bool": {
+      "smashed": false
+    }
+  },
+  "actions": [
+    {
+      "name": "deposit",
+      "params": [],
+      "require": [
+        {"op": "not", "args": [{"var": "smashed"}]},
+        {"op": ">=", "args": [{"var": "pocket"}, {"lit": 1}]}
+      ],
+      "assign": [
+        {"target": "coins", "expr": {"op": "+", "args": [{"var": "coins"}, {"lit": 1}]}},
+        {"target": "pocket", "expr": {"op": "-", "args": [{"var": "pocket"}, {"lit": 1}]}}
+      ]
+    },
+    {
+      "name": "smash",
+      "params": [],
+      "require": [
+        {"op": "not", "args": [{"var": "smashed"}]},
+        {"op": ">=", "args": [{"var": "coins"}, {"lit": 15}]}
+      ],
+      "assign": [
+        {"target": "smashed", "expr": {"bool": true}}
+      ]
+    }
+  ],
+  "properties": {
+    "balances": ["coins", "pocket"],
+    "conservation": [],
+    "targets": [
+      {
+        "name": "smashed",
+        "expr": {"var": "smashed"}
+      }
+    ]
+  }
+}
