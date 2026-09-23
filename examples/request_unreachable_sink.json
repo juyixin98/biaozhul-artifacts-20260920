@@ -1,0 +1,10 @@
+{
+  "n": 4,
+  "source": 0,
+  "sink": 3,
+  "edges": [
+    {"u": 0, "v": 1, "capacity": 5, "cost": 2},
+    {"u": 1, "v": 0, "capacity": 5, "cost": -1},
+    {"u": 1, "v": 2, "capacity": 3, "cost": 4}
+  ]
+}

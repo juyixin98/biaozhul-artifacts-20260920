@@ -1,0 +1,12 @@
+{
+  "n": 3,
+  "source": 0,
+  "sink": 2,
+  "edges": [
+    {"u": 0, "v": 1, "capacity": 4, "cost": -3},
+    {"u": 0, "v": 1, "capacity": 2, "cost": 1},
+    {"u": 1, "v": 2, "capacity": 3, "cost": 10},
+    {"u": 1, "v": 2, "capacity": 5, "cost": 2}
+  ],
+  "max_flow_limit": 5
+}
