@@ -1,0 +1,26 @@
+[package]
+name = "ehindex"
+version = "0.1.0"
+edition = "2021"
+description = "磁盘可扩展哈希页索引服务 (Extendible Hashing page index) over HTTP"
+
+[lib]
+name = "ehindex"
+path = "src/lib.rs"
+
+[[bin]]
+name = "ehindex"
+path = "src/main.rs"
+
+[dependencies]
+axum = "0.7"
+tokio = { version = "1", features = ["rt-multi-thread", "net"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[profile.release]
+# 便于演示与压测；教学项目保留调试信息也无妨
+opt-level = 2
+
+[profile.dev]
+opt-level = 0
