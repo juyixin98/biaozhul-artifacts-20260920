@@ -1,0 +1,249 @@
+{
+  "name": "03-stale-context",
+  "ticks": 15,
+  "stats": {
+    "writes_accepted": 3,
+    "writes_rejected": 3,
+    "reads": 2,
+    "sends": 2,
+    "drops": 0,
+    "duplicates": 0,
+    "deliveries": 2,
+    "invalid_events": 0
+  },
+  "trace": [
+    {
+      "seq": 1,
+      "at": 1,
+      "kind": "write",
+      "node": "n1",
+      "key": "doc",
+      "value": "\"v1\"",
+      "new_version": {
+        "id": "n1#1",
+        "value": "\"v1\"",
+        "clock": {
+          "n1": 1
+        },
+        "author": "n1"
+      }
+    },
+    {
+      "seq": 2,
+      "at": 2,
+      "kind": "write",
+      "node": "n2",
+      "key": "doc",
+      "value": "\"v2 offline\"",
+      "new_version": {
+        "id": "n2#1",
+        "value": "\"v2 offline\"",
+        "clock": {
+          "n2": 1
+        },
+        "author": "n2"
+      }
+    },
+    {
+      "seq": 3,
+      "at": 3,
+      "kind": "send",
+      "node": "n1",
+      "to": "n2",
+      "message_id": "m1"
+    },
+    {
+      "seq": 4,
+      "at": 4,
+      "kind": "deliver",
+      "node": "n2",
+      "message_id": "m1",
+      "merge": {
+        "doc": {
+          "added": [
+            "n1#1"
+          ],
+          "duplicate": [],
+          "pruned": [],
+          "pruned_incoming": []
+        }
+      }
+    },
+    {
+      "seq": 5,
+      "at": 6,
+      "kind": "write_rejected",
+      "node": "n2",
+      "key": "doc",
+      "value": "\"blind overwrite\"",
+      "new_version": {
+        "id": "n1#1",
+        "value": "\"v1\"",
+        "clock": {
+          "n1": 1
+        },
+        "author": "n1"
+      },
+      "reason": "stale_context"
+    },
+    {
+      "seq": 6,
+      "at": 7,
+      "kind": "write_rejected",
+      "node": "n2",
+      "key": "doc",
+      "value": "\"clobber one sibling\"",
+      "context": [
+        "n2#1"
+      ],
+      "new_version": {
+        "id": "n1#1",
+        "value": "\"v1\"",
+        "clock": {
+          "n1": 1
+        },
+        "author": "n1"
+      },
+      "reason": "stale_context"
+    },
+    {
+      "seq": 7,
+      "at": 8,
+      "kind": "write_rejected",
+      "node": "n2",
+      "key": "doc",
+      "value": "\"ghost context\"",
+      "context": [
+        "n1#1",
+        "n2#1",
+        "n9#9"
+      ],
+      "reason": "unknown_context",
+      "missing": [
+        "n9#9"
+      ]
+    },
+    {
+      "seq": 8,
+      "at": 9,
+      "kind": "write",
+      "node": "n2",
+      "key": "doc",
+      "value": "\"resolved\"",
+      "context": [
+        "n1#1",
+        "n2#1"
+      ],
+      "new_version": {
+        "id": "n2#2",
+        "value": "\"resolved\"",
+        "clock": {
+          "n1": 1,
+          "n2": 2
+        },
+        "author": "n2"
+      },
+      "covered": [
+        "n1#1",
+        "n2#1"
+      ]
+    },
+    {
+      "seq": 9,
+      "at": 10,
+      "kind": "send",
+      "node": "n2",
+      "to": "n1",
+      "message_id": "m2"
+    },
+    {
+      "seq": 10,
+      "at": 11,
+      "kind": "deliver",
+      "node": "n1",
+      "message_id": "m2",
+      "merge": {
+        "doc": {
+          "added": [
+            "n2#2"
+          ],
+          "duplicate": [],
+          "pruned": [
+            "n1#1"
+          ],
+          "pruned_incoming": []
+        }
+      }
+    },
+    {
+      "seq": 11,
+      "at": 15,
+      "kind": "read",
+      "node": "n1",
+      "key": "doc",
+      "siblings": [
+        {
+          "id": "n2#2",
+          "value": "\"resolved\"",
+          "clock": {
+            "n1": 1,
+            "n2": 2
+          },
+          "author": "n2"
+        }
+      ]
+    },
+    {
+      "seq": 12,
+      "at": 15,
+      "kind": "read",
+      "node": "n2",
+      "key": "doc",
+      "siblings": [
+        {
+          "id": "n2#2",
+          "value": "\"resolved\"",
+          "clock": {
+            "n1": 1,
+            "n2": 2
+          },
+          "author": "n2"
+        }
+      ]
+    }
+  ],
+  "final_state": [
+    {
+      "node": "n1",
+      "keys": {
+        "doc": [
+          {
+            "id": "n2#2",
+            "value": "\"resolved\"",
+            "clock": {
+              "n1": 1,
+              "n2": 2
+            },
+            "author": "n2"
+          }
+        ]
+      }
+    },
+    {
+      "node": "n2",
+      "keys": {
+        "doc": [
+          {
+            "id": "n2#2",
+            "value": "\"resolved\"",
+            "clock": {
+              "n1": 1,
+              "n2": 2
+            },
+            "author": "n2"
+          }
+        ]
+      }
+    }
+  ]
+}

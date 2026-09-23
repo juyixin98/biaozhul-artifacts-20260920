@@ -1,0 +1,14 @@
+{
+  "name": "02-duplicate-delivery",
+  "description": "duplicate_prob=1 使每次发送都投递两份。重复快照合并是幂等的：第二次投递在 merge 中全部记为 duplicate，兄弟集合不膨胀。",
+  "nodes": ["n1", "n2"],
+  "seed": 7,
+  "network": { "duplicate_prob": 1.0, "min_delay": 1, "max_delay": 1 },
+  "events": [
+    { "at": 1, "type": "write", "node": "n1", "key": "k", "value": "{\"v\":1}", "context": [] },
+    { "at": 2, "type": "send", "node": "n1", "to": "n2" },
+    { "at": 10, "type": "write", "node": "n1", "key": "k", "value": "{\"v\":2}", "context": ["n1#1"] },
+    { "at": 11, "type": "send", "node": "n1", "to": "n2" },
+    { "at": 20, "type": "read", "node": "n2", "key": "k" }
+  ]
+}

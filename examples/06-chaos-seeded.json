@@ -1,0 +1,18 @@
+{
+  "name": "06-chaos-seeded",
+  "description": "随机故障场景：所有广播按种子概率丢包/重复/延迟。给定 seed，输出完全确定；测试用它验证多轮反熵后所有节点收敛到全局最大版本集合。",
+  "nodes": ["n1", "n2", "n3", "n4"],
+  "seed": 4242,
+  "network": { "drop_prob": 0.35, "duplicate_prob": 0.25, "min_delay": 1, "max_delay": 4 },
+  "events": [
+    { "at": 1,  "type": "write", "node": "n1", "key": "k", "value": "\"w1\"", "context": [] },
+    { "at": 2,  "type": "write", "node": "n2", "key": "k", "value": "\"w2\"", "context": [] },
+    { "at": 3,  "type": "broadcast", "node": "n1" },
+    { "at": 5,  "type": "write", "node": "n3", "key": "k", "value": "\"w3\"", "context": [] },
+    { "at": 6,  "type": "broadcast", "node": "n2" },
+    { "at": 8,  "type": "write", "node": "n4", "key": "k", "value": "\"w4\"", "context": [] },
+    { "at": 9,  "type": "broadcast", "node": "n3" },
+    { "at": 12, "type": "broadcast", "node": "n4" },
+    { "at": 14, "type": "broadcast", "node": "n1" }
+  ]
+}

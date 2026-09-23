@@ -1,0 +1,299 @@
+{
+  "name": "01-offline-writes",
+  "ticks": 20,
+  "stats": {
+    "writes_accepted": 3,
+    "writes_rejected": 1,
+    "reads": 4,
+    "sends": 3,
+    "drops": 0,
+    "duplicates": 0,
+    "deliveries": 3,
+    "invalid_events": 0
+  },
+  "trace": [
+    {
+      "seq": 1,
+      "at": 1,
+      "kind": "write",
+      "node": "n1",
+      "key": "profile",
+      "value": "\"A\"",
+      "new_version": {
+        "id": "n1#1",
+        "value": "\"A\"",
+        "clock": {
+          "n1": 1
+        },
+        "author": "n1"
+      }
+    },
+    {
+      "seq": 2,
+      "at": 2,
+      "kind": "write",
+      "node": "n2",
+      "key": "profile",
+      "value": "\"B\"",
+      "new_version": {
+        "id": "n2#1",
+        "value": "\"B\"",
+        "clock": {
+          "n2": 1
+        },
+        "author": "n2"
+      }
+    },
+    {
+      "seq": 3,
+      "at": 3,
+      "kind": "send",
+      "node": "n1",
+      "to": "n2",
+      "message_id": "m1"
+    },
+    {
+      "seq": 4,
+      "at": 4,
+      "kind": "deliver",
+      "node": "n2",
+      "message_id": "m1",
+      "merge": {
+        "profile": {
+          "added": [
+            "n1#1"
+          ],
+          "duplicate": [],
+          "pruned": [],
+          "pruned_incoming": []
+        }
+      }
+    },
+    {
+      "seq": 5,
+      "at": 4,
+      "kind": "read",
+      "node": "n2",
+      "key": "profile",
+      "siblings": [
+        {
+          "id": "n1#1",
+          "value": "\"A\"",
+          "clock": {
+            "n1": 1
+          },
+          "author": "n1"
+        },
+        {
+          "id": "n2#1",
+          "value": "\"B\"",
+          "clock": {
+            "n2": 1
+          },
+          "author": "n2"
+        }
+      ]
+    },
+    {
+      "seq": 6,
+      "at": 6,
+      "kind": "write_rejected",
+      "node": "n2",
+      "key": "profile",
+      "value": "\"clobber with old context\"",
+      "context": [
+        "n2#1"
+      ],
+      "new_version": {
+        "id": "n1#1",
+        "value": "\"A\"",
+        "clock": {
+          "n1": 1
+        },
+        "author": "n1"
+      },
+      "reason": "stale_context"
+    },
+    {
+      "seq": 7,
+      "at": 8,
+      "kind": "write",
+      "node": "n2",
+      "key": "profile",
+      "value": "\"A+B merged\"",
+      "context": [
+        "n1#1",
+        "n2#1"
+      ],
+      "new_version": {
+        "id": "n2#2",
+        "value": "\"A+B merged\"",
+        "clock": {
+          "n1": 1,
+          "n2": 2
+        },
+        "author": "n2"
+      },
+      "covered": [
+        "n1#1",
+        "n2#1"
+      ]
+    },
+    {
+      "seq": 8,
+      "at": 9,
+      "kind": "read",
+      "node": "n2",
+      "key": "profile",
+      "siblings": [
+        {
+          "id": "n2#2",
+          "value": "\"A+B merged\"",
+          "clock": {
+            "n1": 1,
+            "n2": 2
+          },
+          "author": "n2"
+        }
+      ]
+    },
+    {
+      "seq": 9,
+      "at": 10,
+      "kind": "send",
+      "node": "n2",
+      "to": "n1",
+      "message_id": "m2"
+    },
+    {
+      "seq": 10,
+      "at": 11,
+      "kind": "deliver",
+      "node": "n1",
+      "message_id": "m2",
+      "merge": {
+        "profile": {
+          "added": [
+            "n2#2"
+          ],
+          "duplicate": [],
+          "pruned": [
+            "n1#1"
+          ],
+          "pruned_incoming": []
+        }
+      }
+    },
+    {
+      "seq": 11,
+      "at": 11,
+      "kind": "send",
+      "node": "n2",
+      "to": "n3",
+      "message_id": "m3"
+    },
+    {
+      "seq": 12,
+      "at": 12,
+      "kind": "deliver",
+      "node": "n3",
+      "message_id": "m3",
+      "merge": {
+        "profile": {
+          "added": [
+            "n2#2"
+          ],
+          "duplicate": [],
+          "pruned": [],
+          "pruned_incoming": []
+        }
+      }
+    },
+    {
+      "seq": 13,
+      "at": 20,
+      "kind": "read",
+      "node": "n1",
+      "key": "profile",
+      "siblings": [
+        {
+          "id": "n2#2",
+          "value": "\"A+B merged\"",
+          "clock": {
+            "n1": 1,
+            "n2": 2
+          },
+          "author": "n2"
+        }
+      ]
+    },
+    {
+      "seq": 14,
+      "at": 20,
+      "kind": "read",
+      "node": "n3",
+      "key": "profile",
+      "siblings": [
+        {
+          "id": "n2#2",
+          "value": "\"A+B merged\"",
+          "clock": {
+            "n1": 1,
+            "n2": 2
+          },
+          "author": "n2"
+        }
+      ]
+    }
+  ],
+  "final_state": [
+    {
+      "node": "n1",
+      "keys": {
+        "profile": [
+          {
+            "id": "n2#2",
+            "value": "\"A+B merged\"",
+            "clock": {
+              "n1": 1,
+              "n2": 2
+            },
+            "author": "n2"
+          }
+        ]
+      }
+    },
+    {
+      "node": "n2",
+      "keys": {
+        "profile": [
+          {
+            "id": "n2#2",
+            "value": "\"A+B merged\"",
+            "clock": {
+              "n1": 1,
+              "n2": 2
+            },
+            "author": "n2"
+          }
+        ]
+      }
+    },
+    {
+      "node": "n3",
+      "keys": {
+        "profile": [
+          {
+            "id": "n2#2",
+            "value": "\"A+B merged\"",
+            "clock": {
+              "n1": 1,
+              "n2": 2
+            },
+            "author": "n2"
+          }
+        ]
+      }
+    }
+  ]
+}

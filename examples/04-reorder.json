@@ -1,0 +1,15 @@
+{
+  "name": "04-reorder",
+  "description": "同一对节点的两条消息用显式 delay 制造乱序：先发送的旧快照延迟 6 拍、后发送的新快照延迟 2 拍，新数据先到、旧数据后到。合并是可交换的，最终状态仍然是较新的 n1#2，旧版本在 pruned_incoming 中被丢弃。",
+  "nodes": ["n1", "n2"],
+  "seed": 3,
+  "network": { "min_delay": 1, "max_delay": 1 },
+  "events": [
+    { "at": 1, "type": "write", "node": "n1", "key": "k", "value": "\"old\"", "context": [] },
+    { "at": 2, "type": "send", "node": "n1", "to": "n2", "delay": 6 },
+    { "at": 3, "type": "write", "node": "n1", "key": "k", "value": "\"new\"", "context": ["n1#1"] },
+    { "at": 4, "type": "send", "node": "n1", "to": "n2", "delay": 2 },
+    { "at": 7, "type": "read", "node": "n2", "key": "k" },
+    { "at": 12, "type": "read", "node": "n2", "key": "k" }
+  ]
+}

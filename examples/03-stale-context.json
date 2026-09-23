@@ -1,0 +1,52 @@
+{
+  "name": "03-stale-context",
+  "description": "三类非法/合法客户端写入对比：(1) 空上下文盲写已存在的 key 被拒绝；(2) 上下文引用从未见过的版本被拒绝（unknown_context）；(3) 漏掉存活兄弟的旧上下文被拒绝（stale_context）；(4) 携带全部兄弟的完整上下文合并成功。任何被拒绝的写入都不改变状态。",
+  "nodes": ["n1", "n2"],
+  "seed": 2,
+  "network": { "min_delay": 1, "max_delay": 1 },
+  "events": [
+    { "at": 1, "type": "write", "node": "n1", "key": "doc", "value": "\"v1\"", "context": [] },
+    { "at": 2, "type": "write", "node": "n2", "key": "doc", "value": "\"v2 offline\"", "context": [] },
+    { "at": 3, "type": "send", "node": "n1", "to": "n2" },
+
+    {
+      "at": 6,
+      "type": "write",
+      "node": "n2",
+      "key": "doc",
+      "value": "\"blind overwrite\"",
+      "context": [],
+      "_comment": "空上下文但 key 已有两个存活兄弟 -> stale_context（漏覆盖）"
+    },
+    {
+      "at": 7,
+      "type": "write",
+      "node": "n2",
+      "key": "doc",
+      "value": "\"clobber one sibling\"",
+      "context": ["n2#1"],
+      "_comment": "部分上下文：漏掉 n1#1 -> stale_context"
+    },
+    {
+      "at": 8,
+      "type": "write",
+      "node": "n2",
+      "key": "doc",
+      "value": "\"ghost context\"",
+      "context": ["n1#1", "n2#1", "n9#9"],
+      "_comment": "引用本节点从未见过的 n9#9 -> unknown_context"
+    },
+    {
+      "at": 9,
+      "type": "write",
+      "node": "n2",
+      "key": "doc",
+      "value": "\"resolved\"",
+      "context": ["n1#1", "n2#1"],
+      "_comment": "完整上下文：合并成功，产生后继 n2#2"
+    },
+    { "at": 10, "type": "send", "node": "n2", "to": "n1" },
+    { "at": 15, "type": "read", "node": "n1", "key": "doc" },
+    { "at": 15, "type": "read", "node": "n2", "key": "doc" }
+  ]
+}

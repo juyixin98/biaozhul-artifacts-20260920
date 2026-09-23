@@ -1,0 +1,40 @@
+{
+  "name": "01-offline-writes",
+  "description": "两台节点在未同步时各自离线写入，gossip 后产生并发兄弟版本；只携带部分上下文的旧覆盖写入被拒绝（stale_context），完整上下文的合并写入成功并在再次 gossip 后收敛。验证并发版本不会被静默丢失。",
+  "nodes": ["n1", "n2", "n3"],
+  "seed": 1,
+  "network": { "min_delay": 1, "max_delay": 1 },
+  "events": [
+    { "at": 1, "type": "write", "node": "n1", "key": "profile", "value": "\"A\"", "context": [] },
+    { "at": 2, "type": "write", "node": "n2", "key": "profile", "value": "\"B\"", "context": [] },
+
+    { "at": 3, "type": "send", "node": "n1", "to": "n2" },
+    { "at": 4, "type": "read", "node": "n2", "key": "profile" },
+
+    {
+      "at": 6,
+      "type": "write",
+      "node": "n2",
+      "key": "profile",
+      "value": "\"clobber with old context\"",
+      "context": ["n2#1"],
+      "_comment": "旧上下文：只覆盖自己读过的 n2#1，漏掉存活兄弟 n1#1，拒绝且状态不变"
+    },
+
+    {
+      "at": 8,
+      "type": "write",
+      "node": "n2",
+      "key": "profile",
+      "value": "\"A+B merged\"",
+      "context": ["n1#1", "n2#1"],
+      "_comment": "完整上下文：两个兄弟都被后继 n2#2 取代"
+    },
+    { "at": 9, "type": "read", "node": "n2", "key": "profile" },
+
+    { "at": 10, "type": "send", "node": "n2", "to": "n1" },
+    { "at": 11, "type": "send", "node": "n2", "to": "n3" },
+    { "at": 20, "type": "read", "node": "n1", "key": "profile" },
+    { "at": 20, "type": "read", "node": "n3", "key": "profile" }
+  ]
+}

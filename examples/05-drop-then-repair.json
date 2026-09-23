@@ -1,0 +1,22 @@
+{
+  "name": "05-drop-then-repair",
+  "description": "drop_prob=1 阶段所有同步消息丢失，节点保持分叉；之后用 drop_prob=0 的重传完成反熵（anti-entropy），节点重新收敛。",
+  "nodes": ["n1", "n2"],
+  "seed": 11,
+  "network": { "min_delay": 1, "max_delay": 1 },
+  "events": [
+    { "at": 1, "type": "write", "node": "n1", "key": "cfg", "value": "\"x=1\"", "context": [] },
+    { "at": 2, "type": "send", "node": "n1", "to": "n2", "drop_prob": 1.0 },
+    { "at": 3, "type": "send", "node": "n1", "to": "n2", "drop_prob": 1.0 },
+
+    { "at": 4, "type": "write", "node": "n2", "key": "cfg", "value": "\"x=2 independent\"", "context": [] },
+
+    { "at": 10, "type": "read", "node": "n2", "key": "cfg" },
+
+    { "at": 12, "type": "send", "node": "n1", "to": "n2", "drop_prob": 0.0 },
+    { "at": 13, "type": "send", "node": "n2", "to": "n1", "drop_prob": 0.0 },
+
+    { "at": 20, "type": "read", "node": "n1", "key": "cfg" },
+    { "at": 20, "type": "read", "node": "n2", "key": "cfg" }
+  ]
+}
