@@ -1,0 +1,24 @@
+[package]
+name = "refcount-store"
+version = "0.1.0"
+edition = "2021"
+description = "Content-addressed object store with manifest reference counting and concurrent-safe garbage collection"
+
+[lib]
+name = "refcount_store"
+path = "src/lib.rs"
+
+[[bin]]
+name = "refcount-store"
+path = "src/main.rs"
+
+[dependencies]
+axum = "0.7"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "signal", "sync"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+hex = "0.4"
+
+[profile.release]
+lto = true
