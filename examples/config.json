@@ -1,0 +1,28 @@
+{
+  "global": {
+    "rate_num": 0,
+    "rate_den_ns": 0,
+    "capacity": 100,
+    "initial_tokens": 100
+  },
+  "default_tenant": {
+    "rate_num": 0,
+    "rate_den_ns": 0,
+    "capacity": 5,
+    "initial_tokens": 5
+  },
+  "tenants": {
+    "acme": {
+      "rate_num": 0,
+      "rate_den_ns": 0,
+      "capacity": 4,
+      "initial_tokens": 2
+    },
+    "beta": {
+      "rate_num": 0,
+      "rate_den_ns": 0,
+      "capacity": 3,
+      "initial_tokens": 3
+    }
+  }
+}

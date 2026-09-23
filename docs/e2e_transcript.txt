@@ -1,0 +1,152 @@
+
+================ health ================
+{"status":"ok"}
+
+[HTTP 200]
+
+================ INITIAL STATE ================
+global: stopped, 100 burst | acme: stopped, 2 burst | beta: stopped, 3 burst
+{"at_ns":1790170957668378002,"global":{"rate_num":0,"rate_den_ns":0,"capacity":100,"available":100,"frac_scaled_ns":0,"anchor_ns":1790170956652780531,"committed":false},"tenants":{"acme":{"rate_num":0,"rate_den_ns":0,"capacity":4,"available":2,"frac_scaled_ns":0,"anchor_ns":1790170956652781478,"committed":false},"beta":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":3,"frac_scaled_ns":0,"anchor_ns":1790170956652873878,"committed":false}}}
+
+[HTTP 200]
+
+================ LAYER-ATOMICITY via two tenants (global=3 burst, set below) ================
+{"at_ns":1790170957676044116,"global":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":3,"frac_scaled_ns":0,"anchor_ns":1790170957675986215,"committed":false},"tenants":{"acme":{"rate_num":0,"rate_den_ns":0,"capacity":4,"available":2,"frac_scaled_ns":0,"anchor_ns":1790170956652781478,"committed":false},"beta":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":3,"frac_scaled_ns":0,"anchor_ns":1790170956652873878,"committed":false}}}
+
+[HTTP 200]
+
+================ REQUEST acme x1 -> 200 (global 3->2, acme 2->1) ================
+{"allowed":true,"wait_ns":0,"state":{"at_ns":1790170957683375322,"global":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":2,"frac_scaled_ns":0,"anchor_ns":1790170957675986215,"committed":false},"tenants":{"acme":{"rate_num":0,"rate_den_ns":0,"capacity":4,"available":1,"frac_scaled_ns":0,"anchor_ns":1790170956652781478,"committed":false},"beta":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":3,"frac_scaled_ns":0,"anchor_ns":1790170956652873878,"committed":false}}}}
+
+[HTTP 200]
+
+================ REQUEST beta x1 -> 200 (global 2->1, beta 3->2) ================
+{"allowed":true,"wait_ns":0,"state":{"at_ns":1790170957691159953,"global":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":1,"frac_scaled_ns":0,"anchor_ns":1790170957675986215,"committed":false},"tenants":{"acme":{"rate_num":0,"rate_den_ns":0,"capacity":4,"available":1,"frac_scaled_ns":0,"anchor_ns":1790170956652781478,"committed":false},"beta":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":2,"frac_scaled_ns":0,"anchor_ns":1790170956652873878,"committed":false}}}}
+
+[HTTP 200]
+
+================ REQUEST acme x1 -> 200 (global 1->0, acme 1->0). Now global is EMPTY. ================
+{"allowed":true,"wait_ns":0,"state":{"at_ns":1790170957698562799,"global":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":0,"frac_scaled_ns":0,"anchor_ns":1790170957675986215,"committed":false},"tenants":{"acme":{"rate_num":0,"rate_den_ns":0,"capacity":4,"available":0,"frac_scaled_ns":0,"anchor_ns":1790170956652781478,"committed":false},"beta":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":2,"frac_scaled_ns":0,"anchor_ns":1790170956652873878,"committed":false}}}}
+
+[HTTP 200]
+
+================ REQUEST beta x1 -> 429 GLOBAL layer blocks. beta still has 2 -> MUST stay 2 (no partial). ================
+{"allowed":false,"reason":"insufficient_tokens","wait_ns":0,"state":{"at_ns":1790170957705665590,"global":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":0,"frac_scaled_ns":0,"anchor_ns":1790170957675986215,"committed":false},"tenants":{"acme":{"rate_num":0,"rate_den_ns":0,"capacity":4,"available":0,"frac_scaled_ns":0,"anchor_ns":1790170956652781478,"committed":false},"beta":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":2,"frac_scaled_ns":0,"anchor_ns":1790170956652873878,"committed":false}}}}
+
+[HTTP 429]
+
+================ REQUEST acme x1 -> 429 (both layers empty). Nothing changes. ================
+{"allowed":false,"reason":"insufficient_tokens","wait_ns":0,"state":{"at_ns":1790170957712911811,"global":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":0,"frac_scaled_ns":0,"anchor_ns":1790170957675986215,"committed":false},"tenants":{"acme":{"rate_num":0,"rate_den_ns":0,"capacity":4,"available":0,"frac_scaled_ns":0,"anchor_ns":1790170956652781478,"committed":false},"beta":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":2,"frac_scaled_ns":0,"anchor_ns":1790170956652873878,"committed":false}}}}
+
+[HTTP 429]
+
+================ STATE: expect global=0, acme=0, beta=2 ================
+{"at_ns":1790170957720009488,"global":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":0,"frac_scaled_ns":0,"anchor_ns":1790170957675986215,"committed":false},"tenants":{"acme":{"rate_num":0,"rate_den_ns":0,"capacity":4,"available":0,"frac_scaled_ns":0,"anchor_ns":1790170956652781478,"committed":false},"beta":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":2,"frac_scaled_ns":0,"anchor_ns":1790170956652873878,"committed":false}}}
+
+[HTTP 200]
+
+================ OVERSIZED x99 -> 422, and INVALID inputs -> 400 ================
+{"allowed":false,"reason":"tokens_exceed_capacity","wait_ns":0,"state":{"at_ns":1790170957727268443,"global":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":0,"frac_scaled_ns":0,"anchor_ns":1790170957675986215,"committed":false},"tenants":{"acme":{"rate_num":0,"rate_den_ns":0,"capacity":4,"available":0,"frac_scaled_ns":0,"anchor_ns":1790170956652781478,"committed":false},"beta":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":2,"frac_scaled_ns":0,"anchor_ns":1790170956652873878,"committed":false}}}}
+
+[HTTP 422]
+{"error":"tenant is required"}
+
+[HTTP 400]
+{"error":"invalid JSON: invalid character 'n' looking for beginning of object key string"}
+
+[HTTP 400]
+
+================ CONFIG SWITCH: grow global 3->50 grants NOTHING (still 0 available) ================
+{"at_ns":1790170957748601346,"global":{"rate_num":0,"rate_den_ns":0,"capacity":50,"available":0,"frac_scaled_ns":0,"anchor_ns":1790170957675986215,"committed":false},"tenants":{"acme":{"rate_num":0,"rate_den_ns":0,"capacity":4,"available":0,"frac_scaled_ns":0,"anchor_ns":1790170956652781478,"committed":false},"beta":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":2,"frac_scaled_ns":0,"anchor_ns":1790170956652873878,"committed":false}}}
+
+[HTTP 200]
+
+================ CONFIG SWITCH: shrink beta 3->1 clamps its stock 2->1 (never invents tokens) ================
+{"at_ns":1790170957755893597,"global":{"rate_num":0,"rate_den_ns":0,"capacity":50,"available":0,"frac_scaled_ns":0,"anchor_ns":1790170957675986215,"committed":false},"tenants":{"acme":{"rate_num":0,"rate_den_ns":0,"capacity":4,"available":0,"frac_scaled_ns":0,"anchor_ns":1790170956652781478,"committed":false},"beta":{"rate_num":0,"rate_den_ns":0,"capacity":1,"available":1,"frac_scaled_ns":0,"anchor_ns":1790170957755850592,"committed":false}}}
+
+[HTTP 200]
+
+================ CONFIG SWITCH: invalid (capacity 0) -> 400 ================
+{"error":"budget: invalid configuration: capacity must be in [1,1000000000]"}
+
+[HTTP 400]
+
+================ RESUME: set global to 10/s and acme to 1 token/s. Stock was 0; no backfill for stopped time. ================
+{"at_ns":1790170957769900940,"global":{"rate_num":10,"rate_den_ns":1000000000,"capacity":50,"available":0,"frac_scaled_ns":359150,"anchor_ns":1790170957769900940,"committed":false},"tenants":{"acme":{"rate_num":0,"rate_den_ns":0,"capacity":4,"available":0,"frac_scaled_ns":0,"anchor_ns":1790170956652781478,"committed":false},"beta":{"rate_num":0,"rate_den_ns":0,"capacity":1,"available":1,"frac_scaled_ns":0,"anchor_ns":1790170957755850592,"committed":false}}}
+
+[HTTP 200]
+{"at_ns":1790170957776911264,"global":{"rate_num":10,"rate_den_ns":1000000000,"capacity":50,"available":0,"frac_scaled_ns":70462390,"anchor_ns":1790170957776911264,"committed":false},"tenants":{"acme":{"rate_num":1,"rate_den_ns":1000000000,"capacity":4,"available":0,"frac_scaled_ns":30891,"anchor_ns":1790170957776911264,"committed":false},"beta":{"rate_num":0,"rate_den_ns":0,"capacity":1,"available":1,"frac_scaled_ns":0,"anchor_ns":1790170957755850592,"committed":false}}}
+
+[HTTP 200]
+
+================ REQUEST acme immediately -> still 429 (config change mints nothing instantly) ================
+{"allowed":false,"reason":"insufficient_tokens","wait_ns":992959991,"state":{"at_ns":1790170957783948067,"global":{"rate_num":10,"rate_den_ns":1000000000,"capacity":50,"available":0,"frac_scaled_ns":140830420,"anchor_ns":1790170957783948067,"committed":false},"tenants":{"acme":{"rate_num":1,"rate_den_ns":1000000000,"capacity":4,"available":0,"frac_scaled_ns":7067694,"anchor_ns":1790170957783948067,"committed":false},"beta":{"rate_num":0,"rate_den_ns":0,"capacity":1,"available":1,"frac_scaled_ns":0,"anchor_ns":1790170957755850592,"committed":false}}}}
+
+[HTTP 429]
+
+================ SCHEDULE acme x1 -> 202, ready in ~1s (tenant 1/s is the bottleneck; firm reservation) ================
+{"accepted":true,"job":{"id":"job-1","tenant":"acme","tokens":1,"name":"job-A","status":"queued","ready_at_ns":1790170958776880373,"wait_ns":986024769},"wait_ns":986024769}
+
+[HTTP 202]
+
+================ SCHEDULE acme x1 -> 202, queues behind, ready in ~2s ================
+{"accepted":true,"job":{"id":"job-2","tenant":"acme","tokens":1,"name":"job-B","status":"queued","ready_at_ns":1790170959776880373,"wait_ns":1978895486},"wait_ns":1978895486}
+
+[HTTP 202]
+
+================ SCHEDULE acme x99 -> 422 (over capacity 4, rejected, no consumption) ================
+{"accepted":false,"job":{"id":"job-3","tenant":"acme","tokens":99,"name":"too-big","status":"rejected","ready_at_ns":0,"wait_ns":0},"wait_ns":0,"reason":"tokens_exceed_capacity"}
+
+[HTTP 422]
+
+================ jobs immediately (2 queued, 1 rejected) ================
+{"jobs":[{"id":"job-1","tenant":"acme","tokens":1,"name":"job-A","status":"queued","ready_at_ns":1790170958776880373,"wait_ns":986024769},{"id":"job-2","tenant":"acme","tokens":1,"name":"job-B","status":"queued","ready_at_ns":1790170959776880373,"wait_ns":1978895486},{"id":"job-3","tenant":"acme","tokens":99,"name":"too-big","status":"rejected","ready_at_ns":0,"wait_ns":0}]}
+
+[HTTP 200]
+
+sleep 3s for real-time refill + deferred execution...
+
+================ jobs after 3s -> job-A / job-B succeeded ================
+{"jobs":[{"id":"job-1","tenant":"acme","tokens":1,"name":"job-A","status":"succeeded","ready_at_ns":1790170958776880373,"wait_ns":986024769},{"id":"job-2","tenant":"acme","tokens":1,"name":"job-B","status":"succeeded","ready_at_ns":1790170959776880373,"wait_ns":1978895486},{"id":"job-3","tenant":"acme","tokens":99,"name":"too-big","status":"rejected","ready_at_ns":0,"wait_ns":0}]}
+
+[HTTP 200]
+
+================ FINAL STATE (acme refilled to 4 cap; 2 reservations consumed) ================
+{"at_ns":1790170960829437115,"global":{"rate_num":10,"rate_den_ns":1000000000,"capacity":50,"available":28,"frac_scaled_ns":595720900,"anchor_ns":1790170960829437115,"committed":false},"tenants":{"acme":{"rate_num":1,"rate_den_ns":1000000000,"capacity":4,"available":1,"frac_scaled_ns":52556742,"anchor_ns":1790170960829437115,"committed":false},"beta":{"rate_num":0,"rate_den_ns":0,"capacity":1,"available":1,"frac_scaled_ns":0,"anchor_ns":1790170957755850592,"committed":false}}}
+
+[HTTP 200]
+
+================ STRUCTURED EVENT LOG ================
+total events: 32
+{"seq":1,"at_ns":1790170956652783501,"kind":"tenant_created","detail":{"scope":"tenant","tenant":"acme","name":"tenant:acme","after":{"rate_num":0,"rate_den_ns":0,"capacity":4,"available":2,"frac_ns":0}}}
+{"seq":2,"at_ns":1790170956652874712,"kind":"tenant_created","detail":{"scope":"tenant","tenant":"beta","name":"tenant:beta","after":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":3,"frac_ns":0}}}
+{"seq":3,"at_ns":1790170957675992142,"kind":"config_changed","detail":{"scope":"global","name":"global","before":{"rate_num":0,"rate_den_ns":0,"capacity":100,"available":100,"frac_ns":0},"after":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":3,"frac_ns":0}}}
+{"seq":4,"at_ns":1790170957683346140,"kind":"granted","detail":{"scope":"global","tenant":"acme","tokens":1,"remaining":2}}
+{"seq":5,"at_ns":1790170957683366748,"kind":"granted","detail":{"scope":"tenant","tenant":"acme","tokens":1,"remaining":1}}
+{"seq":6,"at_ns":1790170957691131869,"kind":"granted","detail":{"scope":"global","tenant":"beta","tokens":1,"remaining":1}}
+{"seq":7,"at_ns":1790170957691156269,"kind":"granted","detail":{"scope":"tenant","tenant":"beta","tokens":1,"remaining":2}}
+{"seq":8,"at_ns":1790170957698521127,"kind":"granted","detail":{"scope":"global","tenant":"acme","tokens":1}}
+{"seq":9,"at_ns":1790170957698555347,"kind":"granted","detail":{"scope":"tenant","tenant":"acme","tokens":1}}
+{"seq":10,"at_ns":1790170957705627069,"kind":"denied","detail":{"scope":"global","tenant":"beta","tokens":1,"reason":"insufficient_tokens"}}
+{"seq":11,"at_ns":1790170957705658193,"kind":"denied","detail":{"scope":"tenant","tenant":"beta","tokens":1,"remaining":2,"reason":"insufficient_tokens"}}
+{"seq":12,"at_ns":1790170957712887038,"kind":"denied","detail":{"scope":"global","tenant":"acme","tokens":1,"reason":"insufficient_tokens"}}
+{"seq":13,"at_ns":1790170957712908107,"kind":"denied","detail":{"scope":"tenant","tenant":"acme","tokens":1,"reason":"insufficient_tokens"}}
+{"seq":14,"at_ns":1790170957727231918,"kind":"denied","detail":{"scope":"global","tenant":"acme","tokens":99,"reason":"tokens_exceed_capacity"}}
+{"seq":15,"at_ns":1790170957727264455,"kind":"denied","detail":{"scope":"tenant","tenant":"acme","tokens":99,"reason":"tokens_exceed_capacity"}}
+{"seq":16,"at_ns":1790170957748568081,"kind":"config_changed","detail":{"scope":"global","name":"global","before":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":0,"frac_ns":0},"after":{"rate_num":0,"rate_den_ns":0,"capacity":50,"available":0,"frac_ns":0}}}
+{"seq":17,"at_ns":1790170957755853284,"kind":"config_changed","detail":{"scope":"tenant","tenant":"beta","name":"tenant:beta","before":{"rate_num":0,"rate_den_ns":0,"capacity":3,"available":2,"frac_ns":0},"after":{"rate_num":0,"rate_den_ns":0,"capacity":1,"available":1,"frac_ns":0}}}
+{"seq":18,"at_ns":1790170957769866784,"kind":"config_changed","detail":{"scope":"global","name":"global","before":{"rate_num":0,"rate_den_ns":0,"capacity":50,"available":0,"frac_ns":0},"after":{"rate_num":10,"rate_den_ns":1000000000,"capacity":50,"available":0,"frac_ns":0}}}
+{"seq":19,"at_ns":1790170957776882115,"kind":"config_changed","detail":{"scope":"tenant","tenant":"acme","name":"tenant:acme","before":{"rate_num":0,"rate_den_ns":0,"capacity":4,"available":0,"frac_ns":0},"after":{"rate_num":1,"rate_den_ns":1000000000,"capacity":4,"available":0,"frac_ns":0}}}
+{"seq":20,"at_ns":1790170957783923109,"kind":"denied","detail":{"scope":"global","tenant":"acme","tokens":1,"reason":"insufficient_tokens","wait_ns":992959991}}
+{"seq":21,"at_ns":1790170957783944235,"kind":"denied","detail":{"scope":"tenant","tenant":"acme","tokens":1,"reason":"insufficient_tokens","wait_ns":992959991}}
+{"seq":22,"at_ns":1790170957790858336,"kind":"reserved","detail":{"scope":"global","tenant":"acme","tokens":1,"remaining":9,"wait_ns":986024769}}
+{"seq":23,"at_ns":1790170957790895935,"kind":"reserved","detail":{"scope":"tenant","tenant":"acme","tokens":1,"wait_ns":986024769}}
+{"seq":24,"at_ns":1790170957790904951,"kind":"job_queued","detail":{"scope":"system","tenant":"acme","tokens":1,"wait_ns":986024769,"job_id":"job-1","name":"job-A"}}
+{"seq":25,"at_ns":1790170957797987052,"kind":"reserved","detail":{"scope":"global","tenant":"acme","tokens":1,"remaining":18,"wait_ns":1978895486}}
+{"seq":26,"at_ns":1790170957798016472,"kind":"reserved","detail":{"scope":"tenant","tenant":"acme","tokens":1,"wait_ns":1978895486}}
+{"seq":27,"at_ns":1790170957798022675,"kind":"job_queued","detail":{"scope":"system","tenant":"acme","tokens":1,"wait_ns":1978895486,"job_id":"job-2","name":"job-B"}}
+{"seq":28,"at_ns":1790170957805193846,"kind":"denied","detail":{"scope":"global","tenant":"acme","tokens":99,"remaining":18,"reason":"tokens_exceed_capacity"}}
+{"seq":29,"at_ns":1790170957805265578,"kind":"denied","detail":{"scope":"tenant","tenant":"acme","tokens":99,"reason":"tokens_exceed_capacity"}}
+{"seq":30,"at_ns":1790170957805289715,"kind":"job_rejected","detail":{"scope":"system","tenant":"acme","tokens":99,"reason":"tokens_exceed_capacity","job_id":"job-3","name":"too-big"}}
+{"seq":31,"at_ns":1790170958777196896,"kind":"job_executed","detail":{"scope":"system","tenant":"acme","job_id":"job-1","name":"job-A"}}
+{"seq":32,"at_ns":1790170959776919451,"kind":"job_executed","detail":{"scope":"system","tenant":"acme","job_id":"job-2","name":"job-B"}}

@@ -1,0 +1,9 @@
+# binaries
+/bin/
+*.exe
+
+# local event logs
+*.jsonl
+
+# os/editor
+.DS_Store
