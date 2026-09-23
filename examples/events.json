@@ -1,0 +1,291 @@
+{
+  "description": "示例输入：两条链 ethereum/polygon，确认深度2；包含正常配对、乱序(MINT先到)、重复铸造、无锁定铸造、两链同地址。所有签名为真实 Ed25519，公钥在 chains 段登记。",
+  "chains": [
+    {
+      "chain_id": "ethereum",
+      "name": "Ethereum (demo)",
+      "confirmation_depth": 2,
+      "message_timeout_seconds": 3600,
+      "feeder_public_key_hex": "e90de9ed983c6d7b25e4b96ac1cd7c692add570c8c46a77c3fdae3d5d28e6b14"
+    },
+    {
+      "chain_id": "polygon",
+      "name": "Polygon (demo)",
+      "confirmation_depth": 2,
+      "message_timeout_seconds": 3600,
+      "feeder_public_key_hex": "0d806fa2ead67005663a6b1c7abf303153be1ab0b5378f9c0a37142d119393b1"
+    }
+  ],
+  "blocks": {
+    "ethereum": {
+      "tip_block_hash": "0x0000000465746865000000000000000000000000000000000000000000000000",
+      "blocks": [
+        {
+          "block_height": 0,
+          "block_hash": "0x0000000065746865000000000000000000000000000000000000000000000000",
+          "parent_hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "block_time": "2026-09-01T12:00:00+00:00"
+        },
+        {
+          "block_height": 1,
+          "block_hash": "0x0000000165746865000000000000000000000000000000000000000000000000",
+          "parent_hash": "0x0000000065746865000000000000000000000000000000000000000000000000",
+          "block_time": "2026-09-01T12:00:12+00:00"
+        },
+        {
+          "block_height": 2,
+          "block_hash": "0x0000000265746865000000000000000000000000000000000000000000000000",
+          "parent_hash": "0x0000000165746865000000000000000000000000000000000000000000000000",
+          "block_time": "2026-09-01T12:00:24+00:00"
+        },
+        {
+          "block_height": 3,
+          "block_hash": "0x0000000365746865000000000000000000000000000000000000000000000000",
+          "parent_hash": "0x0000000265746865000000000000000000000000000000000000000000000000",
+          "block_time": "2026-09-01T12:00:36+00:00"
+        },
+        {
+          "block_height": 4,
+          "block_hash": "0x0000000465746865000000000000000000000000000000000000000000000000",
+          "parent_hash": "0x0000000365746865000000000000000000000000000000000000000000000000",
+          "block_time": "2026-09-01T12:00:48+00:00"
+        }
+      ]
+    },
+    "polygon": {
+      "tip_block_hash": "0x00000004706f6c79000000000000000000000000000000000000000000000000",
+      "blocks": [
+        {
+          "block_height": 0,
+          "block_hash": "0x00000000706f6c79000000000000000000000000000000000000000000000000",
+          "parent_hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "block_time": "2026-09-01T12:00:00+00:00"
+        },
+        {
+          "block_height": 1,
+          "block_hash": "0x00000001706f6c79000000000000000000000000000000000000000000000000",
+          "parent_hash": "0x00000000706f6c79000000000000000000000000000000000000000000000000",
+          "block_time": "2026-09-01T12:00:12+00:00"
+        },
+        {
+          "block_height": 2,
+          "block_hash": "0x00000002706f6c79000000000000000000000000000000000000000000000000",
+          "parent_hash": "0x00000001706f6c79000000000000000000000000000000000000000000000000",
+          "block_time": "2026-09-01T12:00:24+00:00"
+        },
+        {
+          "block_height": 3,
+          "block_hash": "0x00000003706f6c79000000000000000000000000000000000000000000000000",
+          "parent_hash": "0x00000002706f6c79000000000000000000000000000000000000000000000000",
+          "block_time": "2026-09-01T12:00:36+00:00"
+        },
+        {
+          "block_height": 4,
+          "block_hash": "0x00000004706f6c79000000000000000000000000000000000000000000000000",
+          "parent_hash": "0x00000003706f6c79000000000000000000000000000000000000000000000000",
+          "block_time": "2026-09-01T12:00:48+00:00"
+        }
+      ]
+    }
+  },
+  "events_batch": [
+    {
+      "payload": {
+        "chain_id": "ethereum",
+        "event_type": "LOCK",
+        "tx_hash": "0x1e69ce6d71a763e6335106047f66f63191ef2a99a3536df9550712a24b4f188b",
+        "log_index": 0,
+        "block_height": 1,
+        "block_hash": "0x0000000165746865000000000000000000000000000000000000000000000000",
+        "source_chain": "ethereum",
+        "original_contract": "0xTokenA",
+        "token_id": "",
+        "source_nonce": "msg-1",
+        "account": "0xUser",
+        "amount": "100"
+      },
+      "signature_hex": "34fc1f20b660ade0c06963a8b40af7a5947abbd6e4bded07b17cd03b468cb62c8ebb3f7edc5b44c5bffa19f664ce74cf551057028f6fc2f16fcff379fac47a06",
+      "feeder_public_key_hex": "e90de9ed983c6d7b25e4b96ac1cd7c692add570c8c46a77c3fdae3d5d28e6b14"
+    },
+    {
+      "payload": {
+        "chain_id": "polygon",
+        "event_type": "MINT",
+        "tx_hash": "0x5008e7f018ebc68fc37d8c8dc98709f1f10616b129a37e42933b6bb2f7f46123",
+        "log_index": 0,
+        "block_height": 1,
+        "block_hash": "0x00000001706f6c79000000000000000000000000000000000000000000000000",
+        "source_chain": "ethereum",
+        "original_contract": "0xTokenA",
+        "token_id": "",
+        "source_nonce": "msg-1",
+        "account": "0xUser",
+        "amount": "100"
+      },
+      "signature_hex": "13824f2db7a4c306932b57c53c7bd9154e70a43296684b9c530d7c189783cbeb9f12972f3f87cccc0bd24fe1637c308c7a8eb3564a581e523d4aee0230e64805",
+      "feeder_public_key_hex": "0d806fa2ead67005663a6b1c7abf303153be1ab0b5378f9c0a37142d119393b1"
+    },
+    {
+      "payload": {
+        "chain_id": "polygon",
+        "event_type": "MINT",
+        "tx_hash": "0x44d702812eb9c1aa8ca5533cfe22e8bedfcafa74a31699f2206b06000328e870",
+        "log_index": 0,
+        "block_height": 2,
+        "block_hash": "0x00000002706f6c79000000000000000000000000000000000000000000000000",
+        "source_chain": "ethereum",
+        "original_contract": "0xTokenB",
+        "token_id": "",
+        "source_nonce": "msg-2-arrives-first",
+        "account": "0xUser",
+        "amount": "25"
+      },
+      "signature_hex": "1e9276938e1b886055cf8d83e91884f6938f62f2e8cf6bececc5a91a369794a68c157ec88ab098a91f637b0f923157a44413f74cd477e312219e7b0e1ec1070c",
+      "feeder_public_key_hex": "0d806fa2ead67005663a6b1c7abf303153be1ab0b5378f9c0a37142d119393b1"
+    },
+    {
+      "payload": {
+        "chain_id": "ethereum",
+        "event_type": "LOCK",
+        "tx_hash": "0x5537df64577931f82c4f9b2702b0b227a24b07980c8a69fe9835b05d386684aa",
+        "log_index": 0,
+        "block_height": 1,
+        "block_hash": "0x0000000165746865000000000000000000000000000000000000000000000000",
+        "source_chain": "ethereum",
+        "original_contract": "0xTokenC",
+        "token_id": "",
+        "source_nonce": "msg-3-dup",
+        "account": "0xUser",
+        "amount": "10"
+      },
+      "signature_hex": "0c6b642a963b1063d0ee83d01ce4500b7cfaef70c29cf6145757c4938b915b70307ea168219b67f64f0e6d6845d7fda4a9ad0c4f063660a72c6098a6769d770b",
+      "feeder_public_key_hex": "e90de9ed983c6d7b25e4b96ac1cd7c692add570c8c46a77c3fdae3d5d28e6b14"
+    },
+    {
+      "payload": {
+        "chain_id": "polygon",
+        "event_type": "MINT",
+        "tx_hash": "0x90744844594602f97fb80d5baa8c236a0635758c93ce982de4f4672a04c8885b",
+        "log_index": 0,
+        "block_height": 1,
+        "block_hash": "0x00000001706f6c79000000000000000000000000000000000000000000000000",
+        "source_chain": "ethereum",
+        "original_contract": "0xTokenC",
+        "token_id": "",
+        "source_nonce": "msg-3-dup",
+        "account": "0xUser",
+        "amount": "10"
+      },
+      "signature_hex": "d1d835415acaaa2bcb49098ef32bc5e5d993aeeeb9c54089633cad6b72ce2743f58f8f71afb38736cb72853ed4029a5188ded6a3ef01e1311d02de1ad4e03f04",
+      "feeder_public_key_hex": "0d806fa2ead67005663a6b1c7abf303153be1ab0b5378f9c0a37142d119393b1"
+    },
+    {
+      "payload": {
+        "chain_id": "polygon",
+        "event_type": "MINT",
+        "tx_hash": "0xbc7b465ec4f8a121cbee317f9f371d1d144402c4d1d2c8c6ca62181f448eb729",
+        "log_index": 0,
+        "block_height": 2,
+        "block_hash": "0x00000002706f6c79000000000000000000000000000000000000000000000000",
+        "source_chain": "ethereum",
+        "original_contract": "0xTokenC",
+        "token_id": "",
+        "source_nonce": "msg-3-dup",
+        "account": "0xUser",
+        "amount": "10"
+      },
+      "signature_hex": "6f2b71a804e7f94f97b560dbf90d6481d328d31dbb5868aa413feabfc0185b37488dc7eacb491f5331d1b219dbe996c48460f5ef193ae1b773b4a1ae7dbcdb02",
+      "feeder_public_key_hex": "0d806fa2ead67005663a6b1c7abf303153be1ab0b5378f9c0a37142d119393b1"
+    },
+    {
+      "payload": {
+        "chain_id": "polygon",
+        "event_type": "MINT",
+        "tx_hash": "0x8a1a708909cd27a0552128acba261cee9c8df3fa1cc95d1af3c5df16f30616e1",
+        "log_index": 0,
+        "block_height": 3,
+        "block_hash": "0x00000003706f6c79000000000000000000000000000000000000000000000000",
+        "source_chain": "ethereum",
+        "original_contract": "0xTokenD",
+        "token_id": "",
+        "source_nonce": "msg-4-phantom",
+        "account": "0xUser",
+        "amount": "999"
+      },
+      "signature_hex": "448d7038c12353b5191204a568b19c08fbbc3edd55015bb1ec9ee610e07d3410066be35acfe53b9c9cb26fea38a59d6f70aca207d76ecc6b02f35e0814533302",
+      "feeder_public_key_hex": "0d806fa2ead67005663a6b1c7abf303153be1ab0b5378f9c0a37142d119393b1"
+    },
+    {
+      "payload": {
+        "chain_id": "ethereum",
+        "event_type": "LOCK",
+        "tx_hash": "0x5bb23ee92443103c6112c3347aa77d6965ba02ccd49a436806d9d449ca7810f6",
+        "log_index": 0,
+        "block_height": 2,
+        "block_hash": "0x0000000265746865000000000000000000000000000000000000000000000000",
+        "source_chain": "ethereum",
+        "original_contract": "0xSame",
+        "token_id": "",
+        "source_nonce": "msg-5",
+        "account": "0xUser",
+        "amount": "10"
+      },
+      "signature_hex": "7e3414a06d22469b8dd16f4276aac3e45189c71142d9e5848e4bc73f38851bc9fe125ba26d8ded5636c1b6d49bfbee047392252014b88d0a5f06b704a565aa00",
+      "feeder_public_key_hex": "e90de9ed983c6d7b25e4b96ac1cd7c692add570c8c46a77c3fdae3d5d28e6b14"
+    },
+    {
+      "payload": {
+        "chain_id": "polygon",
+        "event_type": "MINT",
+        "tx_hash": "0x0a573d69d4b389bdb8e4d4f514ab67003118c66c7a838e38297402cb8da980ad",
+        "log_index": 0,
+        "block_height": 2,
+        "block_hash": "0x00000002706f6c79000000000000000000000000000000000000000000000000",
+        "source_chain": "ethereum",
+        "original_contract": "0xSame",
+        "token_id": "",
+        "source_nonce": "msg-5",
+        "account": "0xUser",
+        "amount": "10"
+      },
+      "signature_hex": "3c8b57c2d54420578afa3c2949e94aec0240595be0c3d0c62ac2be07d7d75beb2f1225ec94dd2af2176b9b509fa78f13a695df710961ac953a9bf9cf9249aa03",
+      "feeder_public_key_hex": "0d806fa2ead67005663a6b1c7abf303153be1ab0b5378f9c0a37142d119393b1"
+    },
+    {
+      "payload": {
+        "chain_id": "polygon",
+        "event_type": "LOCK",
+        "tx_hash": "0xc483756e2b1a38bcdf3e83443784fc3b15557edfb3b2d6be3c5b35c4c6520e23",
+        "log_index": 0,
+        "block_height": 3,
+        "block_hash": "0x00000003706f6c79000000000000000000000000000000000000000000000000",
+        "source_chain": "polygon",
+        "original_contract": "0xSame",
+        "token_id": "",
+        "source_nonce": "msg-6",
+        "account": "0xUser",
+        "amount": "3"
+      },
+      "signature_hex": "eb2bd998deb2f5f792b367b07c8ba5d1277e333923f05ecd9b757ce763102c81df533e51e2e8edb3cc11441aa52a7401ee7799419bc57c5cf121b118d68b680f",
+      "feeder_public_key_hex": "0d806fa2ead67005663a6b1c7abf303153be1ab0b5378f9c0a37142d119393b1"
+    },
+    {
+      "payload": {
+        "chain_id": "ethereum",
+        "event_type": "MINT",
+        "tx_hash": "0x34de13b99643b97bc53206e24ebb73d9761898e0ad02031f1861f22fec13f113",
+        "log_index": 0,
+        "block_height": 3,
+        "block_hash": "0x0000000365746865000000000000000000000000000000000000000000000000",
+        "source_chain": "polygon",
+        "original_contract": "0xSame",
+        "token_id": "",
+        "source_nonce": "msg-6",
+        "account": "0xUser",
+        "amount": "3"
+      },
+      "signature_hex": "19cb31c81405b70c068cab688aef55569de120178a0b9a798c29fc454f46f9af2c233e62aab9cbb1b52f334bb8cb07bf4ad477202a3abb8c858043abb4357e05",
+      "feeder_public_key_hex": "e90de9ed983c6d7b25e4b96ac1cd7c692add570c8c46a77c3fdae3d5d28e6b14"
+    }
+  ]
+}

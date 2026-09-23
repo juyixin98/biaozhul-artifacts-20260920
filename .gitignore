@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# 运行期产物（快照与证据）；保留目录结构
+data/snapshots/*
+data/evidence/*
+!data/.gitkeep
+
+# 系统/编辑器
+.DS_Store
+*.swp
