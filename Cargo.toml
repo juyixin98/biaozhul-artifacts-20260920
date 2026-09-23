@@ -1,0 +1,17 @@
+[package]
+name = "mpstream"
+version = "0.1.0"
+edition = "2021"
+description = "Incremental streaming parser for a subset of multipart/form-data, plus a local TCP test server"
+license = "MIT"
+
+[lib]
+name = "mpstream"
+path = "src/lib.rs"
+
+[[bin]]
+name = "mpstream-server"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 2
