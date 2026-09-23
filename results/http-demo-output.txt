@@ -1,0 +1,35 @@
+(using ephemeral port 32987)
+### 1) 启动 L2 服务 (metric=L2, port=32987)
+
+### 2) 健康检查
+{"metric":"L2","status":"ok"}
+
+### 3) 批量插入 4 条二维向量（带标签）
+{"upserted":4,"created":4,"updated":0,"count":4}
+
+### 4) 精确基线检索 k=2
+{"exact":true,"distanceComputations":4,"returned":2,"hits":[{"id":"v0","distance":0.2,"filter":{"cat":"red","grp":"a"}},{"id":"v1","distance":0.8,"filter":{"cat":"blue","grp":"a"}}]}
+
+### 5) 近似检索（先训练 IVF，nlist=2）
+{"rebuilt":true,"index":{"type":"ivf","metric":"L2","nlist":2,"actualClusters":2,"indexedCount":4,"trainedOn":4,"maxIters":20,"seed":42,"postingSizes":[1,3]}}
+
+### 6) 近似检索 nprobe=1（低预算）与 nprobe=2（全预算）
+{"exact":false,"nprobe":1,"distanceComputations":5,"returned":2,"hits":[{"id":"v0","distance":0.2,"filter":{"cat":"red","grp":"a"}},{"id":"v1","distance":0.8,"filter":{"cat":"blue","grp":"a"}}]}
+{"exact":false,"nprobe":2,"distanceComputations":6,"returned":2,"hits":[{"id":"v0","distance":0.2,"filter":{"cat":"red","grp":"a"}},{"id":"v1","distance":0.8,"filter":{"cat":"blue","grp":"a"}}]}
+
+### 7) 标签过滤：只取 cat=red（AND 语义）
+{"exact":true,"distanceComputations":2,"returned":2,"hits":[{"id":"v0","distance":0.0,"filter":{"cat":"red","grp":"a"}},{"id":"v2","distance":2.0,"filter":{"cat":"red","grp":"b"}}]}
+
+### 8) 维度不一致 -> 期望 400
+http_status=400
+
+### 9) 删除 v1，再检索确认不返回
+{"count":3,"deleted":"v1"}
+{"exact":false,"nprobe":2,"distanceComputations":5,"returned":3,"hits":[{"id":"v0","distance":1.0,"filter":{"cat":"red","grp":"a"}},{"id":"v2","distance":1.0,"filter":{"cat":"red","grp":"b"}},{"id":"v3","distance":8.0,"filter":{"cat":"blue","grp":"b"}}]}
+
+### 10) 启动 COSINE 服务并验证零向量被拒绝（插入与检索各一次）
+insert zero vector -> {"error":"zero vector is not allowed under COSINE metric (undefined angle): id=z"}
+zero query         -> {"error":"zero query vector is not allowed under COSINE metric"}
+normal cosine query -> {"exact":true,"distanceComputations":1,"returned":1,"hits":[{"id":"a","distance":0.006116266,"filter":{}}]}
+
+### demo finished

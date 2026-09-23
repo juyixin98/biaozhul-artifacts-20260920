@@ -1,0 +1,27 @@
+================ Acceptance Evaluation ================
+
+[L2] seed=20260923 dim=24 n=1792 (clusters=16, outliers=32), queries=120 k=10 nlist=32
+  nprobe  recall@k   avgDistComps(ann/exact)  pointScanned/n         centroidShare 
+  1       0.9625     172/1792                 0.0783                 0.1857        
+  2       0.9817     329/1792                 0.1658                 0.0972        
+  4       0.9950     614/1792                 0.3252                 0.0520        
+  8       1.0000     1119/1792                0.6068                 0.0286        
+  16      1.0000     1807/1792                0.9910                 0.0177        
+  32      1.0000     1824/1792                1.0000                 0.0175        
+  filter always satisfied : true
+  deleted never returned  : true (violations=0)
+
+[COSINE] seed=20260923 dim=24 n=1792 (clusters=16, outliers=32), queries=120 k=10 nlist=32
+  nprobe  recall@k   avgDistComps(ann/exact)  pointScanned/n         centroidShare 
+  1       0.7700     109/1792                 0.0432                 0.2924        
+  2       0.9383     162/1792                 0.0728                 0.1969        
+  4       0.9858     273/1792                 0.1345                 0.1172        
+  8       0.9933     504/1792                 0.2638                 0.0634        
+  16      0.9992     950/1792                 0.5128                 0.0337        
+  32      1.0000     1824/1792                1.0000                 0.0175        
+  filter always satisfied : true
+  deleted never returned  : true (violations=0)
+
+-------- machine-readable JSON --------
+{"reports":[{"metric":"L2","dataset":{"seed":20260923,"dim":24,"clusters":16,"perCluster":110,"outliers":32,"queries":120,"n":1792,"k":10,"nlist":32,"clusterSpread":4.0,"pointNoise":1.1,"boundaryQueryFraction":0.4},"budgets":[{"nprobe":1,"recallAtK":0.9625,"avgDistanceComputations":172,"exactBaselineComputations":1792,"pointScanRatio":0.0783,"centroidShareOfComps":0.1857},{"nprobe":2,"recallAtK":0.9817,"avgDistanceComputations":329,"exactBaselineComputations":1792,"pointScanRatio":0.1658,"centroidShareOfComps":0.0972},{"nprobe":4,"recallAtK":0.995,"avgDistanceComputations":614,"exactBaselineComputations":1792,"pointScanRatio":0.3252,"centroidShareOfComps":0.052},{"nprobe":8,"recallAtK":1.0,"avgDistanceComputations":1119,"exactBaselineComputations":1792,"pointScanRatio":0.6068,"centroidShareOfComps":0.0286},{"nprobe":16,"recallAtK":1.0,"avgDistanceComputations":1807,"exactBaselineComputations":1792,"pointScanRatio":0.991,"centroidShareOfComps":0.0177},{"nprobe":32,"recallAtK":1.0,"avgDistanceComputations":1824,"exactBaselineComputations":1792,"pointScanRatio":1.0,"centroidShareOfComps":0.0175}],"filterAlwaysSatisfied":true,"deletedIdsNeverReturned":true,"violations":0},{"metric":"COSINE","dataset":{"seed":20260923,"dim":24,"clusters":16,"perCluster":110,"outliers":32,"queries":120,"n":1792,"k":10,"nlist":32,"clusterSpread":1.2,"pointNoise":0.22,"boundaryQueryFraction":0.4},"budgets":[{"nprobe":1,"recallAtK":0.77,"avgDistanceComputations":109,"exactBaselineComputations":1792,"pointScanRatio":0.0432,"centroidShareOfComps":0.2924},{"nprobe":2,"recallAtK":0.9383,"avgDistanceComputations":162,"exactBaselineComputations":1792,"pointScanRatio":0.0728,"centroidShareOfComps":0.1969},{"nprobe":4,"recallAtK":0.9858,"avgDistanceComputations":273,"exactBaselineComputations":1792,"pointScanRatio":0.1345,"centroidShareOfComps":0.1172},{"nprobe":8,"recallAtK":0.9933,"avgDistanceComputations":504,"exactBaselineComputations":1792,"pointScanRatio":0.2638,"centroidShareOfComps":0.0634},{"nprobe":16,"recallAtK":0.9992,"avgDistanceComputations":950,"exactBaselineComputations":1792,"pointScanRatio":0.5128,"centroidShareOfComps":0.0337},{"nprobe":32,"recallAtK":1.0,"avgDistanceComputations":1824,"exactBaselineComputations":1792,"pointScanRatio":1.0,"centroidShareOfComps":0.0175}],"filterAlwaysSatisfied":true,"deletedIdsNeverReturned":true,"violations":0}]}
+ACCEPTANCE CHECKS PASSED
