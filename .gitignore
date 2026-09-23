@@ -1,0 +1,10 @@
+# Durable session snapshot created by mqttd (-store)
+mqtt-sessions.json
+*.tmp
+
+# Compiled binaries
+/bin/
+*.exe
+
+# Local run artifacts
+/tmp/
