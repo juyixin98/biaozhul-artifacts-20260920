@@ -1,0 +1,53 @@
+{
+  "name": "standard-partition-pause-stale-old-leader",
+  "nodes": 3,
+  "variant": "standard",
+  "seed": 99,
+  "actions": [
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "propose-all",
+      "command": "SET k v1"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 40
+    },
+    {
+      "kind": "pause",
+      "node": 1
+    },
+    {
+      "kind": "partition",
+      "peers": [
+        1
+      ]
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "propose-all",
+      "command": "SET k v2"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "heal"
+    },
+    {
+      "kind": "resume",
+      "node": 1
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    }
+  ]
+}

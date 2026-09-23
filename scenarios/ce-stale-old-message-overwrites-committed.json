@@ -1,0 +1,54 @@
+{
+  "name": "ce-stale-old-message-overwrites-committed",
+  "nodes": 3,
+  "variant": "notermcheck",
+  "seed": 99,
+  "actions": [
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "pause-from",
+      "node": 2
+    },
+    {
+      "kind": "propose",
+      "node": 2,
+      "command": "SET k OLD"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 40
+    },
+    {
+      "kind": "partition",
+      "peers": [
+        2
+      ]
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "propose-all",
+      "command": "SET k term2"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 40
+    },
+    {
+      "kind": "heal"
+    },
+    {
+      "kind": "resume-from",
+      "node": 2
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    }
+  ]
+}

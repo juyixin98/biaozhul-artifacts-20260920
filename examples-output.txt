@@ -1,0 +1,37 @@
+
+===== 1. Create a 3-node standard Raft cluster (deterministic seed 99) =====
+session: s1
+
+===== 2. Advance virtual time 250ms -> exactly one leader is elected =====
+2
+
+===== 3. Propose SET k v1 (routed to the current leader) and replicate =====
+accepted: True
+leader node: 2
+node 1: role=follower term=1 commitIndex=2 kv={'k': 'v1'}
+node 2: role=leader term=1 commitIndex=2 kv={'k': 'v1'}
+node 3: role=follower term=1 commitIndex=2 kv={'k': 'v1'}
+
+===== 4. Partition the leader away; the majority elects a new-term leader =====
+leader: 1
+node 1: role=leader term=2
+node 2: role=leader term=1
+node 3: role=follower term=2
+
+===== 5. Heal the partition; the deposed leader steps down and catches up =====
+node 1: role=leader term=2 commitIndex=3 kv={'k': 'v1'}
+node 2: role=follower term=2 commitIndex=3 kv={'k': 'v1'}
+node 3: role=follower term=2 commitIndex=3 kv={'k': 'v1'}
+
+===== 6. Fetch and replay a counterexample: delayed stale message (buggy 'notermcheck') =====
+variant: notermcheck ok: False
+ VIOLATION: CommittedPrefixImmutable - node 1 index 2 changed from term=2 cmd="noop" to term=1 cmd="SET k OLD"
+ VIOLATION: CommittedPrefixAgreement - nodes 1 and 3 disagree at index 2: term=1 cmd="SET k OLD" vs term=2 cmd="noop"
+
+===== 7. Replay the SAME fault trace against standard Raft -> invariants hold =====
+True
+
+===== 8. Enumerate short fault traces against the standard implementation =====
+ran 207 exhaustive + 300 fuzz traces; counterexamples: 0; elapsed: 0.097s
+
+All demo steps completed.

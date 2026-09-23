@@ -1,0 +1,28 @@
+{
+  "name": "naive-happy-path",
+  "nodes": 3,
+  "variant": "naive",
+  "seed": 99,
+  "actions": [
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "propose-all",
+      "command": "SET k v1"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 40
+    },
+    {
+      "kind": "propose-all",
+      "command": "SET a b"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 40
+    }
+  ]
+}

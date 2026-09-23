@@ -1,0 +1,45 @@
+{
+  "name": "standard-leader-partition-heal",
+  "nodes": 3,
+  "variant": "standard",
+  "seed": 99,
+  "actions": [
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "propose-all",
+      "command": "SET k v1"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 40
+    },
+    {
+      "kind": "partition",
+      "peers": [
+        1
+      ]
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "propose-all",
+      "command": "SET k v2"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "heal"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    }
+  ]
+}

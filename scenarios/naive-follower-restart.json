@@ -1,0 +1,36 @@
+{
+  "name": "naive-follower-restart",
+  "nodes": 3,
+  "variant": "naive",
+  "seed": 99,
+  "actions": [
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "propose-all",
+      "command": "SET k v1"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 40
+    },
+    {
+      "kind": "restart",
+      "node": 3
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "propose-all",
+      "command": "SET k v2"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 40
+    }
+  ]
+}

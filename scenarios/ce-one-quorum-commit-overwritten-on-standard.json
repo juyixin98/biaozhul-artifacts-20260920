@@ -1,0 +1,59 @@
+{
+  "name": "ce-one-quorum-commit-overwritten-on-standard",
+  "nodes": 3,
+  "variant": "standard",
+  "seed": 99,
+  "actions": [
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "pause-from",
+      "node": 2
+    },
+    {
+      "kind": "propose",
+      "node": 2,
+      "command": "SET k frozen"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 40
+    },
+    {
+      "kind": "partition",
+      "peers": [
+        2
+      ]
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "propose-all",
+      "command": "SET k majority"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 40
+    },
+    {
+      "kind": "heal"
+    },
+    {
+      "kind": "resume-from",
+      "node": 2
+    },
+    {
+      "kind": "propose",
+      "node": 2,
+      "command": "SET k minority"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    }
+  ]
+}

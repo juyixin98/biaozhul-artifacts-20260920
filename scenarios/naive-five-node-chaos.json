@@ -1,0 +1,62 @@
+{
+  "name": "naive-five-node-chaos",
+  "nodes": 5,
+  "variant": "naive",
+  "seed": 99,
+  "actions": [
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "propose-all",
+      "command": "SET k v1"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 40
+    },
+    {
+      "kind": "partition",
+      "peers": [
+        4,
+        5
+      ]
+    },
+    {
+      "kind": "restart",
+      "node": 3
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "heal"
+    },
+    {
+      "kind": "pause",
+      "node": 2
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "resume",
+      "node": 2
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "propose-all",
+      "command": "SET k v2"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 40
+    }
+  ]
+}

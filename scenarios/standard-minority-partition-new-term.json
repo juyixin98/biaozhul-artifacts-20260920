@@ -1,0 +1,45 @@
+{
+  "name": "standard-minority-partition-new-term",
+  "nodes": 3,
+  "variant": "standard",
+  "seed": 99,
+  "actions": [
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "propose-all",
+      "command": "SET x 1"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 40
+    },
+    {
+      "kind": "partition",
+      "peers": [
+        3
+      ]
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "heal"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "propose-all",
+      "command": "SET x 2"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 40
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "naive-split-then-restart-quorum",
+  "nodes": 3,
+  "variant": "naive",
+  "seed": 99,
+  "actions": [
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "propose-all",
+      "command": "SET k v1"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 40
+    },
+    {
+      "kind": "partition",
+      "peers": [
+        1
+      ]
+    },
+    {
+      "kind": "restart",
+      "node": 2
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    },
+    {
+      "kind": "heal"
+    },
+    {
+      "kind": "advance",
+      "advanceMs": 220
+    }
+  ]
+}

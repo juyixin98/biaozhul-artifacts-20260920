@@ -1,0 +1,7 @@
+# built binaries
+/raftlab
+*.test
+*.out
+
+# local temp files
+/tmp/
