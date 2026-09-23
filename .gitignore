@@ -1,0 +1,6 @@
+build/
+deps/*.jar
+.idea/
+.vscode/
+*.iml
+.DS_Store

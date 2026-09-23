@@ -1,0 +1,3 @@
+# Locked test-only dependencies. Runtime service requires NO third-party jars.
+# Format: <sha-256>  <filename>  <download-url>
+a1de557821293ce903c213c694165fff532cf92081bac4238b9e05b35f04f43f  junit-platform-console-standalone-1.10.2.jar  https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.10.2/junit-platform-console-standalone-1.10.2.jar
