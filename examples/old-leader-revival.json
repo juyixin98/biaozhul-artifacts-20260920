@@ -1,0 +1,36 @@
+{
+  "name": "old-leader-revival",
+  "nodeCount": 3,
+  "seed": 7,
+  "tick": 1,
+  "endTime": 3000,
+  "heartbeat": 50,
+  "electionTimeout": { "min": 150, "max": 300 },
+  "network": {
+    "baseDelay": 5,
+    "jitterPct": 0.1,
+    "lossPct": 0.0,
+    "dupPct": 0.0
+  },
+  "dataDir": "tmp/run/revival",
+  "nodes": {
+    "1": { "electionMin": 120, "electionMax": 120 },
+    "2": { "electionMin": 260, "electionMax": 280 },
+    "3": { "electionMin": 280, "electionMax": 300 }
+  },
+  "trace": true,
+  "events": [
+    { "time": 300, "type": "client", "node": "leader", "client": "c1-before-partition", "command": "SET x committed-1" },
+
+    { "time": 500, "type": "partition", "groups": [[1], [2, 3]] },
+
+    { "time": 900, "type": "client", "node": 1, "client": "c2-on-isolated-old-leader", "command": "SET y stale-uncommitted" },
+
+    { "time": 1100, "type": "client", "node": "leader", "client": "c3-on-new-leader", "command": "SET z committed-2" },
+
+    { "time": 1600, "type": "heal" },
+
+    { "time": 1900, "type": "client", "node": "leader", "client": "c4-after-heal", "command": "SET w committed-3" },
+    { "time": 2100, "type": "client", "node": "leader", "client": "c5-after-heal", "command": "SET q committed-4" }
+  ]
+}

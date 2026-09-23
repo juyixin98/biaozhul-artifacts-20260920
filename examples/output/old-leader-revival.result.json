@@ -1,0 +1,103 @@
+{
+  "name": "old-leader-revival",
+  "endTime": 2989,
+  "aliveNodes": {
+    "1": true,
+    "2": true,
+    "3": true
+  },
+  "proposals": [
+    {
+      "client": "c1-before-partition",
+      "node": 1,
+      "command": "SET x committed-1",
+      "status": "committed",
+      "index": 1,
+      "term": 1
+    },
+    {
+      "client": "c2-on-isolated-old-leader",
+      "node": 1,
+      "command": "SET y stale-uncommitted",
+      "status": "accepted",
+      "index": 2,
+      "term": 1
+    },
+    {
+      "client": "c3-on-new-leader",
+      "node": 2,
+      "command": "SET z committed-2",
+      "status": "committed",
+      "index": 2,
+      "term": 2
+    },
+    {
+      "client": "c4-after-heal",
+      "node": 2,
+      "command": "SET w committed-3",
+      "status": "committed",
+      "index": 3,
+      "term": 2
+    },
+    {
+      "client": "c5-after-heal",
+      "node": 2,
+      "command": "SET q committed-4",
+      "status": "committed",
+      "index": 4,
+      "term": 2
+    }
+  ],
+  "committed": [
+    {
+      "index": 1,
+      "term": 1,
+      "command": "SET x committed-1",
+      "client": "c1-before-partition"
+    },
+    {
+      "index": 2,
+      "term": 2,
+      "command": "SET z committed-2",
+      "client": "c3-on-new-leader"
+    },
+    {
+      "index": 3,
+      "term": 2,
+      "command": "SET w committed-3",
+      "client": "c4-after-heal"
+    },
+    {
+      "index": 4,
+      "term": 2,
+      "command": "SET q committed-4",
+      "client": "c5-after-heal"
+    }
+  ],
+  "nodeCommitIndex": {
+    "1": 4,
+    "2": 4,
+    "3": 4
+  },
+  "nodeLogLength": {
+    "1": 4,
+    "2": 4,
+    "3": 4
+  },
+  "leaderChanges": [
+    {
+      "time": 128,
+      "term": 1,
+      "node": 1
+    },
+    {
+      "time": 765,
+      "term": 2,
+      "node": 2
+    }
+  ],
+  "invariantCheck": {
+    "passed": true,
+    "errors": null
+  }
+}

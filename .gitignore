@@ -1,0 +1,7 @@
+# 编译产物
+/raftrun
+/tmp/
+
+# 场景运行时写出的持久化状态与结果（可重新生成）
+tmp/
+*.state.json.tmp

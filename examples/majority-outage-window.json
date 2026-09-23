@@ -1,0 +1,30 @@
+{
+  "name": "majority-outage-window",
+  "nodeCount": 3,
+  "seed": 5,
+  "tick": 1,
+  "endTime": 1350,
+  "heartbeat": 50,
+  "electionTimeout": { "min": 150, "max": 300 },
+  "network": {
+    "baseDelay": 5,
+    "jitterPct": 0.1,
+    "lossPct": 0.0,
+    "dupPct": 0.0
+  },
+  "dataDir": "tmp/run/majority-window",
+  "nodes": {
+    "1": { "electionMin": 120, "electionMax": 120 },
+    "2": { "electionMin": 260, "electionMax": 280 },
+    "3": { "electionMin": 280, "electionMax": 300 }
+  },
+  "trace": false,
+  "events": [
+    { "time": 300, "type": "client", "node": "leader", "client": "c1", "command": "SET ok 1" },
+
+    { "time": 500, "type": "crash", "node": 2 },
+    { "time": 510, "type": "crash", "node": 3 },
+
+    { "time": 800, "type": "client", "node": 1, "client": "c2-no-quorum", "command": "SET nope 2" }
+  ]
+}

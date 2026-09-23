@@ -1,0 +1,120 @@
+{
+  "name": "crash-restart",
+  "endTime": 3199,
+  "aliveNodes": {
+    "1": true,
+    "2": true,
+    "3": true
+  },
+  "proposals": [
+    {
+      "client": "c1",
+      "node": 1,
+      "command": "SET a 1",
+      "status": "committed",
+      "index": 1,
+      "term": 1
+    },
+    {
+      "client": "c2",
+      "node": 1,
+      "command": "SET b 2",
+      "status": "committed",
+      "index": 2,
+      "term": 1
+    },
+    {
+      "client": "c3-to-follower",
+      "node": 2,
+      "command": "SHOULD-FAIL-notLeader",
+      "status": "notLeader"
+    },
+    {
+      "client": "c4-new-term",
+      "node": 2,
+      "command": "SET c 3",
+      "status": "committed",
+      "index": 3,
+      "term": 2
+    },
+    {
+      "client": "c5-after-restart",
+      "node": 2,
+      "command": "SET d 4",
+      "status": "committed",
+      "index": 4,
+      "term": 2
+    },
+    {
+      "client": "c6-full-restart",
+      "node": 1,
+      "command": "SET e 5",
+      "status": "committed",
+      "index": 5,
+      "term": 3
+    }
+  ],
+  "committed": [
+    {
+      "index": 1,
+      "term": 1,
+      "command": "SET a 1",
+      "client": "c1"
+    },
+    {
+      "index": 2,
+      "term": 1,
+      "command": "SET b 2",
+      "client": "c2"
+    },
+    {
+      "index": 3,
+      "term": 2,
+      "command": "SET c 3",
+      "client": "c4-new-term"
+    },
+    {
+      "index": 4,
+      "term": 2,
+      "command": "SET d 4",
+      "client": "c5-after-restart"
+    },
+    {
+      "index": 5,
+      "term": 3,
+      "command": "SET e 5",
+      "client": "c6-full-restart"
+    }
+  ],
+  "nodeCommitIndex": {
+    "1": 5,
+    "2": 5,
+    "3": 5
+  },
+  "nodeLogLength": {
+    "1": 5,
+    "2": 5,
+    "3": 5
+  },
+  "leaderChanges": [
+    {
+      "time": 128,
+      "term": 1,
+      "node": 1
+    },
+    {
+      "time": 866,
+      "term": 2,
+      "node": 2
+    },
+    {
+      "time": 2330,
+      "term": 3,
+      "node": 1
+    }
+  ],
+  "invariantCheck": {
+    "passed": true,
+    "errors": null
+  }
+}

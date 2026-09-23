@@ -1,0 +1,26 @@
+{
+  "name": "flaky-network-safety",
+  "nodeCount": 3,
+  "seed": 20260923,
+  "tick": 1,
+  "endTime": 6000,
+  "heartbeat": 50,
+  "electionTimeout": { "min": 300, "max": 600 },
+  "network": {
+    "baseDelay": 8,
+    "jitterPct": 0.5,
+    "lossPct": 0.2,
+    "dupPct": 0.05
+  },
+  "dataDir": "tmp/run/flaky",
+  "trace": false,
+  "events": [
+    { "time": 600, "type": "client", "node": "leader", "client": "f01", "command": "SET f1 1" },
+    { "time": 1000, "type": "client", "node": "leader", "client": "f02", "command": "SET f2 2" },
+    { "time": 1400, "type": "client", "node": "leader", "client": "f03", "command": "SET f3 3" },
+    { "time": 2200, "type": "client", "node": "leader", "client": "f04", "command": "SET f4 4" },
+    { "time": 3000, "type": "client", "node": "leader", "client": "f05", "command": "SET f5 5" },
+    { "time": 4000, "type": "client", "node": "leader", "client": "f06", "command": "SET f6 6" },
+    { "time": 5000, "type": "client", "node": "leader", "client": "f07", "command": "SET f7 7" }
+  ]
+}

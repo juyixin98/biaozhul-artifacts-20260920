@@ -1,0 +1,76 @@
+{
+  "name": "majority-unavailable-no-commit",
+  "endTime": 2396,
+  "aliveNodes": {
+    "1": true,
+    "2": true,
+    "3": true
+  },
+  "proposals": [
+    {
+      "client": "c1",
+      "node": 1,
+      "command": "SET ok 1",
+      "status": "committed",
+      "index": 1,
+      "term": 1
+    },
+    {
+      "client": "c2-no-quorum",
+      "node": 1,
+      "command": "SET nope 2",
+      "status": "committed",
+      "index": 2,
+      "term": 1
+    },
+    {
+      "client": "c3-recovered",
+      "node": 1,
+      "command": "SET yes 3",
+      "status": "committed",
+      "index": 3,
+      "term": 1
+    }
+  ],
+  "committed": [
+    {
+      "index": 1,
+      "term": 1,
+      "command": "SET ok 1",
+      "client": "c1"
+    },
+    {
+      "index": 2,
+      "term": 1,
+      "command": "SET nope 2",
+      "client": "c2-no-quorum"
+    },
+    {
+      "index": 3,
+      "term": 1,
+      "command": "SET yes 3",
+      "client": "c3-recovered"
+    }
+  ],
+  "nodeCommitIndex": {
+    "1": 3,
+    "2": 3,
+    "3": 3
+  },
+  "nodeLogLength": {
+    "1": 3,
+    "2": 3,
+    "3": 3
+  },
+  "leaderChanges": [
+    {
+      "time": 128,
+      "term": 1,
+      "node": 1
+    }
+  ],
+  "invariantCheck": {
+    "passed": true,
+    "errors": null
+  }
+}

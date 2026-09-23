@@ -1,0 +1,28 @@
+{
+  "name": "basic-replication",
+  "nodeCount": 3,
+  "seed": 42,
+  "tick": 1,
+  "endTime": 1200,
+  "heartbeat": 50,
+  "electionTimeout": { "min": 150, "max": 300 },
+  "network": {
+    "baseDelay": 5,
+    "jitterPct": 0.1,
+    "lossPct": 0.0,
+    "dupPct": 0.0
+  },
+  "dataDir": "tmp/run/basic",
+  "nodes": {
+    "1": { "electionMin": 120, "electionMax": 120 },
+    "2": { "electionMin": 260, "electionMax": 280 },
+    "3": { "electionMin": 280, "electionMax": 300 }
+  },
+  "trace": true,
+  "events": [
+    { "time": 300, "type": "client", "node": "leader", "client": "c1", "command": "SET k1 v1" },
+    { "time": 400, "type": "client", "node": "leader", "client": "c2", "command": "SET k2 v2" },
+    { "time": 500, "type": "client", "node": 3, "client": "c3-to-follower", "command": "SHOULD-FAIL-notLeader" },
+    { "time": 700, "type": "client", "node": "leader", "client": "c4", "command": "DEL k1" }
+  ]
+}

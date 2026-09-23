@@ -1,0 +1,132 @@
+{
+  "name": "flaky-network-safety",
+  "endTime": 5999,
+  "aliveNodes": {
+    "1": true,
+    "2": true,
+    "3": true
+  },
+  "proposals": [
+    {
+      "client": "f01",
+      "node": 2,
+      "command": "SET f1 1",
+      "status": "committed",
+      "index": 1,
+      "term": 1
+    },
+    {
+      "client": "f02",
+      "node": 2,
+      "command": "SET f2 2",
+      "status": "committed",
+      "index": 2,
+      "term": 1
+    },
+    {
+      "client": "f03",
+      "node": 2,
+      "command": "SET f3 3",
+      "status": "committed",
+      "index": 3,
+      "term": 1
+    },
+    {
+      "client": "f04",
+      "node": 2,
+      "command": "SET f4 4",
+      "status": "committed",
+      "index": 4,
+      "term": 1
+    },
+    {
+      "client": "f05",
+      "node": 2,
+      "command": "SET f5 5",
+      "status": "committed",
+      "index": 5,
+      "term": 1
+    },
+    {
+      "client": "f06",
+      "node": 2,
+      "command": "SET f6 6",
+      "status": "committed",
+      "index": 6,
+      "term": 1
+    },
+    {
+      "client": "f07",
+      "node": 2,
+      "command": "SET f7 7",
+      "status": "committed",
+      "index": 7,
+      "term": 1
+    }
+  ],
+  "committed": [
+    {
+      "index": 1,
+      "term": 1,
+      "command": "SET f1 1",
+      "client": "f01"
+    },
+    {
+      "index": 2,
+      "term": 1,
+      "command": "SET f2 2",
+      "client": "f02"
+    },
+    {
+      "index": 3,
+      "term": 1,
+      "command": "SET f3 3",
+      "client": "f03"
+    },
+    {
+      "index": 4,
+      "term": 1,
+      "command": "SET f4 4",
+      "client": "f04"
+    },
+    {
+      "index": 5,
+      "term": 1,
+      "command": "SET f5 5",
+      "client": "f05"
+    },
+    {
+      "index": 6,
+      "term": 1,
+      "command": "SET f6 6",
+      "client": "f06"
+    },
+    {
+      "index": 7,
+      "term": 1,
+      "command": "SET f7 7",
+      "client": "f07"
+    }
+  ],
+  "nodeCommitIndex": {
+    "1": 7,
+    "2": 7,
+    "3": 7
+  },
+  "nodeLogLength": {
+    "1": 7,
+    "2": 7,
+    "3": 7
+  },
+  "leaderChanges": [
+    {
+      "time": 333,
+      "term": 1,
+      "node": 2
+    }
+  ],
+  "invariantCheck": {
+    "passed": true,
+    "errors": null
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "name": "crash-restart",
+  "nodeCount": 3,
+  "seed": 99,
+  "tick": 1,
+  "endTime": 3200,
+  "heartbeat": 50,
+  "electionTimeout": { "min": 150, "max": 300 },
+  "network": {
+    "baseDelay": 5,
+    "jitterPct": 0.1,
+    "lossPct": 0.0,
+    "dupPct": 0.0
+  },
+  "dataDir": "tmp/run/restart",
+  "nodes": {
+    "1": { "electionMin": 120, "electionMax": 120 },
+    "2": { "electionMin": 260, "electionMax": 280 },
+    "3": { "electionMin": 280, "electionMax": 300 }
+  },
+  "trace": true,
+  "events": [
+    { "time": 300, "type": "client", "node": "leader", "client": "c1", "command": "SET a 1" },
+    { "time": 400, "type": "client", "node": "leader", "client": "c2", "command": "SET b 2" },
+
+    { "time": 600, "type": "crash", "node": 1 },
+    { "time": 700, "type": "client", "node": 2, "client": "c3-to-follower", "command": "SHOULD-FAIL-notLeader" },
+
+    { "time": 1000, "type": "client", "node": "leader", "client": "c4-new-term", "command": "SET c 3" },
+
+    { "time": 1300, "type": "restart", "node": 1 },
+    { "time": 1700, "type": "client", "node": "leader", "client": "c5-after-restart", "command": "SET d 4" },
+
+    { "time": 2000, "type": "crash", "node": 1 },
+    { "time": 2010, "type": "crash", "node": 2 },
+    { "time": 2020, "type": "crash", "node": 3 },
+
+    { "time": 2200, "type": "restart", "node": 1 },
+    { "time": 2220, "type": "restart", "node": 2 },
+    { "time": 2240, "type": "restart", "node": 3 },
+
+    { "time": 2700, "type": "client", "node": "leader", "client": "c6-full-restart", "command": "SET e 5" }
+  ]
+}

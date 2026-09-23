@@ -1,0 +1,52 @@
+{
+  "name": "majority-outage-window",
+  "endTime": 1332,
+  "aliveNodes": {
+    "1": true,
+    "2": false,
+    "3": false
+  },
+  "proposals": [
+    {
+      "client": "c1",
+      "node": 1,
+      "command": "SET ok 1",
+      "status": "committed",
+      "index": 1,
+      "term": 1
+    },
+    {
+      "client": "c2-no-quorum",
+      "node": 1,
+      "command": "SET nope 2",
+      "status": "accepted",
+      "index": 2,
+      "term": 1
+    }
+  ],
+  "committed": [
+    {
+      "index": 1,
+      "term": 1,
+      "command": "SET ok 1",
+      "client": "c1"
+    }
+  ],
+  "nodeCommitIndex": {
+    "1": 1
+  },
+  "nodeLogLength": {
+    "1": 2
+  },
+  "leaderChanges": [
+    {
+      "time": 128,
+      "term": 1,
+      "node": 1
+    }
+  ],
+  "invariantCheck": {
+    "passed": true,
+    "errors": null
+  }
+}
