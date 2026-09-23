@@ -1,0 +1,8 @@
+{
+  "chain_id": "chainA",
+  "channel_id": "channel-0",
+  "conn_id": "conn-1",
+  "ordering": "UNORDERED",
+  "version": "ics20-1",
+  "remote_channel_id": "channel-0"
+}

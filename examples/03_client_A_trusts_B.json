@@ -1,0 +1,5 @@
+{
+  "local_chain_id": "chainA",
+  "remote_chain_id": "chainB",
+  "trusting_period_nanos": 86400000000000
+}

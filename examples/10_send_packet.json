@@ -1,0 +1,10 @@
+{
+  "chain_id": "chainA",
+  "channel_id": "channel-0",
+  "data": "7472616e736665722f313030",
+  "timeout_height": 100,
+  "timeout_time_nanos": 0,
+  "amount": 1000,
+  "sender": "alice",
+  "receiver": "bob"
+}

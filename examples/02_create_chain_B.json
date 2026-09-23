@@ -1,0 +1,5 @@
+{
+  "chain_id": "chainB",
+  "revision_number": 1,
+  "genesis_time_nanos": 1000000000000
+}
