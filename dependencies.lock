@@ -1,0 +1,28 @@
+# 依赖锁定文件 (dependency lock)
+#
+# 本项目刻意保持零第三方依赖：不引入 Maven/Gradle，不需要联网下载任何 jar。
+# 仅使用 JDK 自带模块（java.base、jdk.httpserver、java.net.http），
+# 因此"锁定"的唯一组件就是 JDK 本身。
+#
+# 实际验证环境（2026-09-23 记录）：
+runtime:
+  name: Eclipse Temurin OpenJDK
+  version: 17.0.20.1+1
+  distribution_url: https://api.adoptium.net/v3/binary/latest/17/ga/linux/x64/jdk/hotspot/normal/eclipse
+  sha_source: https://api.adoptium.net/v3/assets/feature_releases/17/ga
+  required_language_level: "17"
+  license: "GPLv2 + Classpath Exception (Temurin)"
+
+# 构建与运行只用到以下 JDK 内置模块/包，均为 JDK 17 标准 API：
+jdk_modules_used:
+  - java.base            # 集合、并发、记录、反射
+  - jdk.httpserver       # com.sun.net.httpserver.HttpServer（JDK 自带，非外部库）
+
+third_party_dependencies: []   # 空：无任何外部 jar，无传递依赖，无供应链面
+build_tools_required:
+  - javac                # JDK 自带
+  - java                 # JDK 自带
+  - bash                 # build.sh / test.sh / run.sh（可选，命令也可直接手敲）
+
+# 升级策略：JDK 17 为当前 LTS；代码不使用任何预览 API，可在 17/21 LTS 上直接编译运行。
+# 验证命令：java -version 应输出 17.x（或 21.x）。

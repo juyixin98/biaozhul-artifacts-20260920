@@ -1,0 +1,54 @@
+build OK -> build/classes, build/test
+== running com.example.intervalindex.core.IntervalIndexTest
+  random differential seed=20260923 ops=6000 OK
+  random differential seed=42 ops=4000 OK
+IntervalIndexTest: all tests passed
+== running com.example.intervalindex.json.JsonTest
+JsonTest: all tests passed
+== running com.example.intervalindex.http.HttpApiTest
+HttpApiTest: all tests passed
+
+suites: 3, passed: 3
+
+
+================================================================
+手工请求演示（全新内存实例，端口 18099，2026-09-23）
+================================================================
+
+$ curl -s http://localhost:18099/health
+{"status":"ok","size":0}
+
+$ # 插入：嵌套 [0,100) [10,90) [40,60)；相邻 [-10,0) [100,110)；重复 [40,60)
+{"id":1,"start":0,"end":100}
+{"id":2,"start":10,"end":90}
+{"id":3,"start":40,"end":60}
+{"id":4,"start":-10,"end":0}
+{"id":5,"start":100,"end":110}
+{"id":6,"start":40,"end":60}
+
+$ curl "http://localhost:18099/intervals?start=45&end=46"   # 嵌套三层 + 重复 => count=4
+{"query":{"start":45,"end":46},"count":4,"intervals":[{"id":1,"start":0,"end":100},{"id":2,"start":10,"end":90},{"id":3,"start":40,"end":60},{"id":6,"start":40,"end":60}]}
+
+$ curl "http://localhost:18099/intervals?start=0&end=10"      # 与 [-10,0) 相邻不算 => count=1
+{"query":{"start":0,"end":10},"count":1,"intervals":[{"id":1,"start":0,"end":100}]}
+
+$ # 覆盖计数：50 => 4；90 仅在 [0,100) => 1；100 是 [100,110) 闭端 => 1；0 => 1
+at=50 -> {"at":50,"count":4}
+at=90 -> {"at":90,"count":1}
+at=100 -> {"at":100,"count":1}
+at=0 -> {"at":0,"count":1}
+
+$ curl -X DELETE http://localhost:18099/intervals/2           # 删除 [10,90)
+{"deleted":true,"id":2,"size":5}
+$ curl -s "http://localhost:18099/intervals/count?at=50"     # 删除后 => 3
+{"at":50,"count":3}
+$ curl -X DELETE http://localhost:18099/intervals/2           # 重复删除 => 404
+{"error":"no interval with id 2","status":404} [HTTP 404]
+
+$ # 非法输入 => 400（空区间 / 逆序区间 / 逆序查询）
+{"error":"invalid half-open interval [5, 5): require start < end","status":400} [HTTP 400]
+{"error":"invalid half-open interval [9, 3): require start < end","status":400} [HTTP 400]
+{"error":"invalid query [8, 2): require start < end","status":400} [HTTP 400]
+
+$ curl http://localhost:18099/intervals/all
+{"count":5,"intervals":[{"id":4,"start":-10,"end":0},{"id":1,"start":0,"end":100},{"id":3,"start":40,"end":60},{"id":6,"start":40,"end":60},{"id":5,"start":100,"end":110}]}
