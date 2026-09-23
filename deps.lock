@@ -1,0 +1,23 @@
+# Dependency lockfile
+#
+# This project intentionally has ZERO third-party dependencies. Everything —
+# the HTTP server, JSON parsing and the test runner — is implemented against
+# the standard Java API, so there are no coordinates to pin and no checksum
+# drift to audit. "Locking" here therefore pins the toolchain instead.
+
+## Runtime / compile classpath
+# (no external artifacts; the following JDK modules are used)
+#   java.base
+#   jdk.httpserver        (com.sun.net.httpserver.HttpServer — supported JDK API)
+#   java.net.http         (test client only)
+
+## Toolchain
+java.version >= 17
+# Developed and verified with:
+#   OpenJDK 17.0.20.1 (build 17.0.20.1+1-1~24.04, amd64, Ubuntu 24.04)
+# Any other 17+ LTS JDK (Temurin, Corretto, ...) should produce identical
+# results; the build only invokes javac/java with no extra flags.
+
+## Build tool
+# None required: scripts/build.sh drives javac directly.
+# No Maven/Gradle, no network access needed to build or test.

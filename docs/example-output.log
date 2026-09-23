@@ -1,0 +1,145 @@
+### 0. health
+{
+  "status": "ok",
+  "service": "event-id-dedup"
+}
+### 1. create partition demo (epoch=1, retention=10000ms)
+{
+  "partitionKey": "demo",
+  "epoch": 1,
+  "state": "ACTIVE",
+  "drained": false,
+  "watermark": null,
+  "retentionMillis": 10000,
+  "retainedEventCount": 0,
+  "retainedIdChars": 0
+}
+### 2. first delivery of event A at t=1000 -> NEW
+{
+  "partitionKey": "demo",
+  "epoch": 1,
+  "eventId": "A",
+  "eventTime": 1000,
+  "status": "NEW",
+  "duplicate": false,
+  "late": false
+}
+### 3. out-of-order redelivery of A at t=900 -> DUPLICATE
+{
+  "partitionKey": "demo",
+  "epoch": 1,
+  "eventId": "A",
+  "eventTime": 900,
+  "status": "DUPLICATE",
+  "duplicate": true,
+  "late": false
+}
+### 4. stale routing version (epoch=0) -> 409 INVALID_ROUTING_VERSION
+HTTP/1.1 409 Conflict
+Date: Wed, 23 Sep 2026 13:53:43 GMT
+Content-type: application/json; charset=utf-8
+Content-length: 142
+
+{
+  "error": "INVALID_ROUTING_VERSION",
+  "message": "Routing version rejected: partition 'demo' is at epoch 1 but request carried epoch 0"
+}
+### 5. advance watermark to 10999 (A anchored 1000 + 10000 = 11000) -> still retained
+{
+  "partitionKey": "demo",
+  "epoch": 1,
+  "state": "ACTIVE",
+  "drained": false,
+  "watermark": 10999,
+  "retentionMillis": 10000,
+  "retainedEventCount": 1,
+  "retainedIdChars": 1
+}
+### 6. advance watermark to exactly 11000 -> boundary inclusive, A released
+{
+  "partitionKey": "demo",
+  "epoch": 1,
+  "state": "ACTIVE",
+  "drained": false,
+  "watermark": 11000,
+  "retentionMillis": 10000,
+  "retainedEventCount": 0,
+  "retainedIdChars": 0
+}
+### 7. A delivered again at t=11000 -> NEW (retention elapsed)
+{
+  "partitionKey": "demo",
+  "epoch": 1,
+  "eventId": "A",
+  "eventTime": 11000,
+  "status": "NEW",
+  "duplicate": false,
+  "late": false
+}
+### 8. migration: export snapshot from source (freezes writes)
+{
+  "partition": {
+    "partitionKey": "demo",
+    "epoch": 1,
+    "state": "MIGRATING",
+    "drained": false,
+    "watermark": 11000,
+    "retentionMillis": 10000,
+    "retainedEventCount": 1,
+    "retainedIdChars": 1
+  },
+  "snapshot": {
+    "partitionKey": "demo",
+    "epoch": 1,
+    "watermark": 11000,
+    "retentionMillis": 10000,
+    "entries": [
+      {
+        "eventId": "A",
+        "anchorEventTime": 11000
+      }
+    ]
+  }
+}
+### 9. import snapshot into partition demo-new under epoch 2
+{
+  "partitionKey": "demo-new",
+  "epoch": 2,
+  "state": "ACTIVE",
+  "drained": false,
+  "watermark": 11000,
+  "retentionMillis": 10000,
+  "retainedEventCount": 1,
+  "retainedIdChars": 1
+}
+### 10. duplicate A redelivered to the NEW owner -> DUPLICATE (state traveled)
+{
+  "partitionKey": "demo-new",
+  "epoch": 2,
+  "eventId": "A",
+  "eventTime": 11000,
+  "status": "DUPLICATE",
+  "duplicate": true,
+  "late": false
+}
+### 11. old epoch routed to new owner -> 409
+HTTP/1.1 409 Conflict
+Date: Wed, 23 Sep 2026 13:53:44 GMT
+Content-type: application/json; charset=utf-8
+Content-length: 146
+
+{
+  "error": "INVALID_ROUTING_VERSION",
+  "message": "Routing version rejected: partition 'demo-new' is at epoch 2 but request carried epoch 1"
+}
+### 12. complete cutover on the source
+{
+  "partitionKey": "demo",
+  "epoch": 2,
+  "state": "ACTIVE",
+  "drained": true,
+  "watermark": null,
+  "retentionMillis": 10000,
+  "retainedEventCount": 0,
+  "retainedIdChars": 0
+}

@@ -1,0 +1,25 @@
+== JsonTest ==
+  [PASS] parsesNestedStructure (1 ms)
+  [PASS] distinguishesLongAndDouble (0 ms)
+  [PASS] roundTripsAndEscapes (0 ms)
+  [PASS] rejectsTrailingGarbageAndBadInput (5 ms)
+  [PASS] longAccessorsValidateFractions (1 ms)
+== DedupCoreTest ==
+  [PASS] duplicatesAreDetectedRegardlessOfArrivalOrder (1 ms)
+  [PASS] boundaryIsInclusiveAtAnchorPlusRetention (0 ms)
+  [PASS] laterDuplicateLiftsAnchorAndExtendsRetention (0 ms)
+  [PASS] watermarkMustBeMonotonic (5 ms)
+  [PASS] lateEventPastRetentionIsDeliveredButNeverStored (0 ms)
+  [PASS] retainedMemoryShrinksWithWatermark (6 ms)
+  [PASS] staleEpochIsRejectedOnEveryWrite (7 ms)
+  [PASS] importRejectsSnapshotWithNonAdvancingEpoch (1 ms)
+  [PASS] migratedStateDedupsRedeliveredEvents (3 ms)
+  [PASS] snapshotEntriesAlreadyExpiredAreNotReinstalled (0 ms)
+  [PASS] abortMigrationUnfreezesWithoutDataLoss (0 ms)
+  [PASS] unknownPartitionAndBasicValidation (0 ms)
+  [PASS] concurrentEventsAndWatermarkStayConsistent (37 ms)
+== HttpApiTest ==
+  [PASS] endToEndDedupWatermarkAndMigration (1400 ms)
+  [PASS] rejectsBadMethodsAndRoutes (47 ms)
+
+Tests: 20 passed, 0 failed, 20 total
