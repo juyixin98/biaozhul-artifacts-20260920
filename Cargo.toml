@@ -1,0 +1,16 @@
+[package]
+name = "tsblock"
+version = "0.1.0"
+edition = "2021"
+description = "File-backed time-series block encoder with delta-of-delta timestamps and injectable I/O"
+
+[lib]
+name = "tsblock"
+path = "src/lib.rs"
+
+[[bin]]
+name = "tsblock"
+path = "src/main.rs"
+
+[profile.release]
+lto = true
