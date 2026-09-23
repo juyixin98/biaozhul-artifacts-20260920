@@ -1,0 +1,7 @@
+{
+  "node_id": "beta",
+  "advertised_delta": 0,
+  "faults": [
+    { "type": "corrupt", "start": 4, "end": 7 }
+  ]
+}

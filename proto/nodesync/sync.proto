@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package nodesync.v1;
+
+option go_package = "nodesync/internal/pb;pb";
+
+// Block is one element of the hash chain.
+message Block {
+  int64 height = 1;
+  bytes parent_hash = 2;
+  bytes hash = 3;
+  int64 timestamp = 4;
+  bytes body = 5;
+}
+
+message StatusRequest {}
+
+message StatusResponse {
+  string node_id = 1;
+  int64 advertised_height = 2; // claimed tip height; NOT verified progress
+  bytes advertised_head_hash = 3;
+  bytes genesis_hash = 4;
+}
+
+message SegmentRequest {
+  int64 start_height = 1;
+  int32 limit = 2;
+}
+
+message SegmentResponse {
+  repeated Block blocks = 3;
+}
+
+service NodeSync {
+  rpc Status(StatusRequest) returns (StatusResponse);
+  rpc GetSegment(SegmentRequest) returns (SegmentResponse);
+}

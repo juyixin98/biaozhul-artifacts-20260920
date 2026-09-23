@@ -1,0 +1,7 @@
+{
+  "node_id": "gamma",
+  "advertised_delta": -2,
+  "faults": [
+    { "type": "badparent", "start": 17, "end": 17 }
+  ]
+}

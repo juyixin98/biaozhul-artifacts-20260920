@@ -1,0 +1,10 @@
+{
+  "node_id": "alpha",
+  "advertised_delta": 7,
+  "delay_ms": {
+    "9": 5000
+  },
+  "faults": [
+    { "type": "timeout", "start": 9, "end": 16 }
+  ]
+}

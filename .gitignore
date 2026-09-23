@@ -1,0 +1,11 @@
+# 编译输出与运行时数据
+/bin/
+/data/
+*.db
+*.db-shm
+*.db-wal
+
+# 本地工具链（protoc / 代码生成插件），由 scripts/proto_gen.sh 按需引导，不入库
+/tools/
+
+# testdata/ 下的可信样例与节点配置需要提交，不忽略
