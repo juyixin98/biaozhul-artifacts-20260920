@@ -1,0 +1,20 @@
+{
+  "k": 3,
+  "order": "desc",
+  "shards": 4,
+  "shardStrategy": "roundRobin",
+  "mergeOrder": "pairwise",
+  "groupBudget": 10000,
+  "data": [
+    {"group": "beijing", "value": 12},
+    {"group": "beijing", "value": 7},
+    {"group": "beijing", "value": 12},
+    {"group": "beijing", "value": 3},
+    {"group": "beijing", "value": 20},
+    {"group": "shanghai", "value": 9},
+    {"group": "shanghai", "value": 15},
+    {"group": "shanghai", "value": 15},
+    {"group": "shanghai", "value": 1},
+    {"group": "shenzhen", "value": 6}
+  ]
+}

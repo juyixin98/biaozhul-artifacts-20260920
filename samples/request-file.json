@@ -1,0 +1,10 @@
+{
+  "k": 2,
+  "order": "asc",
+  "shards": 3,
+  "shardStrategy": "hash",
+  "mergeOrder": "reverse",
+  "groupBudget": 50,
+  "dataFile": "samples/data.json",
+  "exportDir": "out/export-demo"
+}

@@ -1,0 +1,9 @@
+[
+  {"group": "alpha", "value": 5, "seq": 0},
+  {"group": "alpha", "value": 1, "seq": 1},
+  {"group": "alpha", "value": 5, "seq": 2},
+  {"group": "alpha", "value": 9, "seq": 3},
+  {"group": "beta", "value": 0, "seq": 4},
+  {"group": "beta", "value": -3, "seq": 5},
+  {"group": "beta", "value": 4, "seq": 6}
+]
