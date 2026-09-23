@@ -1,0 +1,24 @@
+# 依赖锁（dependency lock）
+#
+# 本项目【没有任何第三方依赖】，不依赖 Maven Central / 任何仓库网络，
+# 构建不需要 Maven/Gradle，也不会下载任何 jar。
+#
+# 唯一运行时依赖是 JDK 标准库本身；构建与验收均在以下 JDK 上实际执行通过：
+java:
+  feature: 17
+  spec: "Java SE 17"
+  verified-with: "Eclipse Temurin JDK 17.0.20.1+1 (x86_64 Linux, hotspot)"
+  required-by-source:
+    # 用到的 Java 特性（最高到 17）：
+    - "records (Java 16)"
+    - "switch 新语法 / 文本块 (Java 15/14 预览转正)"
+  compatible: "17 及以上（未在更高 LTS 上专门回归，但仅使用标准 API）"
+
+# 允许使用的 JDK 模块（全部为内置模块，无需额外安装）：
+jdk-modules:
+  - java.base          # IO/nio 文件、fsync、原子 rename、并发、网络
+  - jdk.httpserver     # com.sun.net.httpserver.HttpServer（JDK 自带 HTTP 服务）
+
+third-party: []        # 显式为空：锁定为不引入任何外部构件
+repositories: []       # 不访问任何构件仓库
+build-tools: []        # 不需要 maven/gradle，仅需 javac
