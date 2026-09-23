@@ -1,0 +1,14 @@
+{
+  "requestId": "sample-01-filter-project",
+  "batchSize": 3,
+  "table": {
+    "columns": [
+      {"name": "id",    "type": "INT",    "values": [1, 2, 3, 4, 5, 6, 7, 8]},
+      {"name": "dept",  "type": "STRING", "values": ["eng", "sales", "eng", null, "sales", "eng", null, "eng"]},
+      {"name": "score", "type": "INT",    "values": [10, 5, null, 20, 5, 10, 7, null]}
+    ]
+  },
+  "filter": {"op": ">=", "column": "score", "value": 10},
+  "project": ["id", "dept", "score"],
+  "explain": true
+}

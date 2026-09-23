@@ -1,0 +1,16 @@
+{
+  "requestId": "sample-04-explicit-selection-duplicates",
+  "table": {
+    "columns": [
+      {"name": "id",    "type": "INT",    "values": [1, 2, 3, 4, 5, 6, 7, 8]},
+      {"name": "dept",  "type": "STRING", "values": ["eng", "sales", "eng", null, "sales", "eng", null, "eng"]},
+      {"name": "score", "type": "INT",    "values": [10, 5, null, 20, 5, 10, 7, null]}
+    ]
+  },
+  "selection": [5, 5, 5, 0, 7, 7],
+  "aggregate": [
+    {"fn": "count"},
+    {"fn": "sum", "column": "score", "alias": "score_sum"},
+    {"fn": "avg", "column": "score", "alias": "score_avg"}
+  ]
+}

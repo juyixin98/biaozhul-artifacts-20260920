@@ -1,0 +1,20 @@
+{
+  "requestId": "sample-03-groupby-agg",
+  "batchSize": 1024,
+  "table": {
+    "columns": [
+      {"name": "id",    "type": "INT",    "values": [1, 2, 3, 4, 5, 6, 7, 8]},
+      {"name": "dept",  "type": "STRING", "values": ["eng", "sales", "eng", null, "sales", "eng", null, "eng"]},
+      {"name": "score", "type": "INT",    "values": [10, 5, null, 20, 5, 10, 7, null]}
+    ]
+  },
+  "groupBy": ["dept"],
+  "aggregate": [
+    {"fn": "count"},
+    {"fn": "count", "column": "score", "alias": "scored_rows"},
+    {"fn": "sum",   "column": "score", "alias": "total_score"},
+    {"fn": "avg",   "column": "score", "alias": "avg_score"},
+    {"fn": "min",   "column": "score", "alias": "min_score"},
+    {"fn": "max",   "column": "score", "alias": "max_score"}
+  ]
+}

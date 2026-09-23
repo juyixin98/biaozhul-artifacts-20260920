@@ -1,0 +1,5 @@
+target/
+out/
+*.class
+sources.txt
+test-sources.txt

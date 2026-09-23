@@ -1,0 +1,16 @@
+{
+  "requestId": "sample-06-all-null-column",
+  "batchSize": 2,
+  "table": {
+    "columns": [
+      {"name": "k", "type": "INT", "values": [1, 2, 3, 4, 5, 6, 7]},
+      {"name": "v", "type": "INT", "values": [null, null, null, null, null, null, null]}
+    ]
+  },
+  "filter": {"op": "is_null", "column": "v"},
+  "aggregate": [
+    {"fn": "count"},
+    {"fn": "count", "column": "v", "alias": "non_null_v"},
+    {"fn": "sum",   "column": "v", "alias": "sum_v"}
+  ]
+}

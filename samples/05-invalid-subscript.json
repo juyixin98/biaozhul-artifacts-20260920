@@ -1,0 +1,10 @@
+{
+  "requestId": "sample-05-invalid-subscript",
+  "table": {
+    "columns": [
+      {"name": "id", "type": "INT", "values": [1, 2, 3]}
+    ]
+  },
+  "selection": [0, 3, 1],
+  "project": ["id"]
+}
