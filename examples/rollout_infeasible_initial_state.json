@@ -1,0 +1,6 @@
+{
+  "x0": [0.0, 2.45],
+  "n_steps": 20,
+  "reference_setpoint": [1.0, 0.0],
+  "disturbance_kind": "none"
+}

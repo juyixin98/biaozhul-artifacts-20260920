@@ -1,0 +1,14 @@
+{
+  "x0": [0.0, 0.0],
+  "n_steps": 60,
+  "reference_before": [0.0, 0.0],
+  "reference_after": [1.5, 0.0],
+  "change_step": 20,
+  "disturbance_kind": "sine",
+  "disturbance_amplitude": 0.1,
+  "disturbance_frequency": 0.2,
+  "dt": 0.1,
+  "horizon": 20,
+  "v_max": 2.0,
+  "a_max": 3.0
+}
