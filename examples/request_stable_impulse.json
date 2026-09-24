@@ -1,0 +1,14 @@
+{
+  "name": "stable_lp_impulse",
+  "comment": "稳定反例之稳定侧：4阶 Butterworth 低通（2 节 SOS 级联），fc=1kHz, fs=8kHz，Q2.14 系数 / Q1.15 数据，冲激输入",
+  "signal": {"type": "impulse", "n": 256, "amplitude": 0.9},
+  "sos": [
+    [0.0976310729, 0.1952621458, 0.0976310729, 1.0, -0.9428090416, 0.3333333333],
+    [0.0976310729, 0.1952621458, 0.0976310729, 1.0, -0.9428090416, 0.3333333333]
+  ],
+  "coef_format": {"word_bits": 16, "frac_bits": 14, "rounding": "round", "overflow": "saturate"},
+  "state_format": {"word_bits": 16, "frac_bits": 15, "rounding": "round", "overflow": "saturate"},
+  "freq_response_points": 512,
+  "limit_cycle_tail": 64,
+  "outputs": {"write_pcm": true, "pcm_fmt": "s16le"}
+}

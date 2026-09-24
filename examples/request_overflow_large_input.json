@@ -1,0 +1,13 @@
+{
+  "name": "overflow_large_input",
+  "comment": "大幅输入溢出样例：输入幅度 1.5 超出 Q1.15 数据格式范围，触发输入饱和与状态溢出统计",
+  "signal": {"type": "sine", "n": 512, "freq_hz": 500, "sample_rate": 8000, "amplitude": 1.5},
+  "sos": [
+    [0.0976310729, 0.1952621458, 0.0976310729, 1.0, -0.9428090416, 0.3333333333]
+  ],
+  "coef_format": {"word_bits": 16, "frac_bits": 14, "rounding": "round", "overflow": "saturate"},
+  "state_format": {"word_bits": 16, "frac_bits": 15, "rounding": "round", "overflow": "saturate"},
+  "freq_response_points": 256,
+  "limit_cycle_tail": 64,
+  "outputs": {"write_pcm": true, "pcm_fmt": "s16le"}
+}

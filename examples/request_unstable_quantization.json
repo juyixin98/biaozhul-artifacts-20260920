@@ -1,0 +1,13 @@
+{
+  "name": "unstable_after_quantization",
+  "comment": "不稳定反例：浮点稳定的谐振器（极点半径 sqrt(0.9961)≈0.998），系数量化到 Q2.6 后 a2 被舍入为 1.0，极点落到单位圆上失稳",
+  "signal": {"type": "impulse", "n": 512, "amplitude": 0.5},
+  "sos": [
+    [0.1, 0.0, 0.0, 1.0, -1.99, 0.9961]
+  ],
+  "coef_format": {"word_bits": 8, "frac_bits": 6, "rounding": "round", "overflow": "saturate"},
+  "state_format": {"word_bits": 16, "frac_bits": 15, "rounding": "round", "overflow": "saturate"},
+  "freq_response_points": 512,
+  "limit_cycle_tail": 128,
+  "outputs": {"write_pcm": true, "pcm_fmt": "s16le"}
+}

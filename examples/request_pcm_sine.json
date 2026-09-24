@@ -1,0 +1,14 @@
+{
+  "name": "pcm_sine_lowpass",
+  "comment": "本地 PCM 输入样例：先运行 scripts/make_example_pcm.py 生成 examples/sine_1k_s16.pcm",
+  "signal": {"type": "pcm_file", "path": "examples/sine_1k_s16.pcm", "fmt": "s16le"},
+  "sos": [
+    [0.0976310729, 0.1952621458, 0.0976310729, 1.0, -0.9428090416, 0.3333333333],
+    [0.0976310729, 0.1952621458, 0.0976310729, 1.0, -0.9428090416, 0.3333333333]
+  ],
+  "coef_format": {"word_bits": 16, "frac_bits": 14, "rounding": "round", "overflow": "saturate"},
+  "state_format": {"word_bits": 16, "frac_bits": 15, "rounding": "round", "overflow": "saturate"},
+  "freq_response_points": 512,
+  "limit_cycle_tail": 64,
+  "outputs": {"write_pcm": true, "pcm_fmt": "s16le"}
+}
