@@ -1,0 +1,6 @@
+# 直接依赖；完整可复现的锁定版本见 requirements.txt
+fastapi
+uvicorn[standard]
+cryptography
+pytest
+httpx
