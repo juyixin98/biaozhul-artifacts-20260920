@@ -1,0 +1,7 @@
+{
+  "ref": "demo/app:1.0",
+  "platform": {
+    "os": "linux",
+    "architecture": "arm64"
+  }
+}
