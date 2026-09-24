@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qos-diag"
+version = "1.0.0"
+description = "ROS 2 本地 QoS 兼容诊断服务（FastAPI + rclpy）：区分确定不兼容与性能风险，带端点生命周期与受完整性保护的拓扑快照"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi==0.141.1",
+    "uvicorn==0.53.0",
+    "pydantic==2.13.5",
+    "starlette==1.6.0",
+]
+
+[project.scripts]
+qosdiag = "qos_diag.cli:main"
+
+[tool.setuptools]
+packages = ["qos_diag"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = [
+    "ros: 需要真实 ROS 2 环境的集成测试（无 rclpy 时自动 skip）",
+]

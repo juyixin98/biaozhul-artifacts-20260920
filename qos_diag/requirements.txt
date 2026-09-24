@@ -1,0 +1,13 @@
+# 纯 Python 依赖（精确锁定，Python 3.12 实测版本）
+# rclpy / std_msgs 由 ROS 2 提供，不通过 pip 安装：
+#   使用前先 `source /opt/ros/jazzy/setup.bash`
+fastapi==0.141.1
+uvicorn==0.53.0
+pydantic==2.13.5
+pydantic-core==2.46.5
+starlette==1.6.0
+anyio==4.15.1
+typing-extensions==4.16.0
+# 测试
+httpx==0.28.1
+pytest==9.1.1
