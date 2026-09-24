@@ -1,0 +1,21 @@
+# 仅用于本地开发/验收的 PostgreSQL。
+# 用法: docker compose up -d
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: promo
+      POSTGRES_PASSWORD: promo_dev_pwd
+      POSTGRES_DB: promo_atomic
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/initdb:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U promo -d promo_atomic"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+volumes:
+  pgdata:

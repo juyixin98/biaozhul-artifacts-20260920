@@ -1,0 +1,16 @@
+{
+  "body": {
+    "policy_id": "promotion-policy",
+    "version": 3,
+    "required_tests": [
+      "unit",
+      "integration",
+      "security_scan"
+    ],
+    "min_signers": 1,
+    "approval_required": true,
+    "keep_last_n": 4
+  },
+  "signer_key_id": "cb52224eb3214fe978b9e6a156623c52f424f26b2ac1acc0d6be9af4ed665ca2",
+  "signature": "rp1sc/cpuB6ZmdN0ugxfLq9o7o09sH7wAFonfySi8uYPTt9fwVHuxRFiNQnmToQPtQb9hM46sbiiMAbI74QqBQ=="
+}

@@ -1,0 +1,19 @@
+{
+  "evidence_id": "ev-c",
+  "version": 1,
+  "artifact_digest": "sha256:fb5e50dd1cdd8dcf67c5b0b4b72d383963aef8a62e6bfe686c85b993c8298f99",
+  "tests_passed": true,
+  "result": {
+    "coverage": {
+      "lines": 0.91
+    },
+    "ran_at": "2026-09-24T00:00:00Z",
+    "tests": {
+      "integration": true,
+      "security_scan": true,
+      "unit": true
+    }
+  },
+  "signer_key_id": "10beb69f1f3aeb51a163b9a2917b15a586f9e4f7a06dc1612174b8c6f62da0bb",
+  "signature": "RoMkCnZcitSNkIDg8x3nMymZFeDgl+iLWK/QBO9es7drL9A1i/nVJmB44J3eyArB/drDa9IFKFiHyh6F+znxBQ=="
+}

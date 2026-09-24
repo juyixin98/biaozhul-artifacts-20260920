@@ -1,0 +1,12 @@
+{
+  "approval_id": "apr-a-staging-gen0",
+  "policy_id": "promotion-policy",
+  "policy_version": 2,
+  "env": "staging",
+  "artifact_digest": "sha256:6cefd9ef12e464638000a08c33e94f674a8c85fc86b61f1e07ebfbcd94526546",
+  "evidence_id": "ev-a",
+  "evidence_version": 2,
+  "expected_gen": 0,
+  "signer_key_id": "b0924eb9436b326d2087d4b3151926e6fd2ad06a5bdeaf5803799cb821f6e7e0",
+  "signature": "PcuzTWZKKX3Ek0HE6gZiVlvSaSTTBmyXdVCzb7nAcWBIhuwtMKanAQQoHYecNlaOGKr3rT2a+nFyoNUbnBgyCg=="
+}
