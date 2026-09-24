@@ -1,0 +1,16 @@
+{
+ "samples": [
+  {
+   "t_s": 2005.0,
+   "current_a": 0.0,
+   "voltage_v": 3.78,
+   "temp_c": 25.0
+  },
+  {
+   "t_s": 105.0,
+   "current_a": 0.0,
+   "voltage_v": 3.78,
+   "temp_c": 25.0
+  }
+ ]
+}

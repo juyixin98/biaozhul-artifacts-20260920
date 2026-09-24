@@ -1,0 +1,6 @@
+# Runtime dependencies (exact pins; see requirements-lock.txt for the full
+# transitive lock verified in CI/local venv).
+numpy==2.5.3
+fastapi==0.141.1
+uvicorn==0.53.0
+pydantic==2.13.5
