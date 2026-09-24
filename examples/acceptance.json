@@ -1,0 +1,7 @@
+{
+  "capacity": 2,
+  "tasks": [
+    {"id": "L", "priority": 1,  "arrival_tick": 0, "total_work": 12, "checkpoint_every": 4, "checkpoint_cost": 3, "resource_demand": 2},
+    {"id": "H", "priority": 10, "arrival_tick": 6, "total_work": 8,  "checkpoint_every": 4, "checkpoint_cost": 1, "resource_demand": 2}
+  ]
+}
