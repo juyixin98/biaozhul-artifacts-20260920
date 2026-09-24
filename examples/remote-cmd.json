@@ -1,0 +1,9 @@
+{
+  "seq": 1,
+  "lease_id": "rc-lease-001",
+  "vx": 0.8,
+  "wz": -0.1,
+  "issued_at": 1000000001000,
+  "lease_ms": 3000,
+  "ttl_ms": 20000
+}

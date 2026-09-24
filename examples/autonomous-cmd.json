@@ -1,0 +1,9 @@
+{
+  "seq": 1,
+  "lease_id": "au-lease-001",
+  "vx": 1.5,
+  "wz": 0.2,
+  "issued_at": 1000000000000,
+  "lease_ms": 5000,
+  "ttl_ms": 20000
+}
