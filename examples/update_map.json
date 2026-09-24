@@ -1,0 +1,7 @@
+{
+  "changes": [
+    {"row": 2, "col": 4, "kind": "block"},
+    {"row": 3, "col": 4, "kind": "block"},
+    {"row": 4, "col": 4, "kind": "block"}
+  ]
+}
