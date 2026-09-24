@@ -1,0 +1,62 @@
+# pytest -v  (2026-09-24T14:09:11Z)
+tests/test_api.py::test_health PASSED                                    [  3%]
+tests/test_api.py::test_list_layouts PASSED                              [  7%]
+tests/test_api.py::test_get_layout PASSED                                [ 11%]
+tests/test_api.py::test_get_layout_missing PASSED                        [ 14%]
+tests/test_api.py::test_check_raw_layouts PASSED                         [ 18%]
+tests/test_api.py::test_check_artifacts_compatible PASSED                [ 22%]
+tests/test_api.py::test_check_artifacts_incompatible PASSED              [ 25%]
+tests/test_api.py::test_check_artifacts_unknown_contract PASSED          [ 29%]
+tests/test_chain_upgrade.py::test_upgrade_preserves_storage PASSED       [ 33%]
+tests/test_chain_upgrade.py::test_checker_blocks_incompatible_upgrade PASSED [ 37%]
+tests/test_layout_checker.py::test_append_is_compatible PASSED           [ 40%]
+tests/test_layout_checker.py::test_append_packed_into_last_slot_is_compatible PASSED [ 44%]
+tests/test_layout_checker.py::test_reorder_is_rejected PASSED            [ 48%]
+tests/test_layout_checker.py::test_removal_is_rejected PASSED            [ 51%]
+tests/test_layout_checker.py::test_type_widening_is_rejected PASSED      [ 55%]
+tests/test_layout_checker.py::test_offset_shift_is_rejected PASSED       [ 59%]
+tests/test_layout_checker.py::test_insertion_is_rejected PASSED          [ 62%]
+tests/test_layout_checker.py::test_dynamic_type_change_is_rejected PASSED [ 66%]
+tests/test_layout_checker.py::test_string_to_bytes_is_rejected PASSED    [ 70%]
+tests/test_layout_checker.py::test_struct_member_change_is_rejected PASSED [ 74%]
+tests/test_layout_checker.py::test_mapping_value_change_is_rejected PASSED [ 77%]
+tests/test_layout_checker.py::test_inheritance_change_warns PASSED       [ 81%]
+tests/test_layout_checker.py::test_compiled_append_box_v1_to_v2 PASSED   [ 85%]
+tests/test_layout_checker.py::test_compiled_reorder_rejected PASSED      [ 88%]
+tests/test_layout_checker.py::test_compiled_type_widening_rejected PASSED [ 92%]
+tests/test_layout_checker.py::test_compiled_base_class_change_rejected PASSED [ 96%]
+tests/test_layout_checker.py::test_compiled_dynamic_type_change_rejected PASSED [100%]
+======================== 27 passed, 1 warning in 2.52s =========================
+
+# scripts/demo.py
+anvil  : http://127.0.0.1:36265
+checker: http://127.0.0.1:37233
+
+== layout checks (POST /check-artifacts) ==
+  BoxV1 -> BoxV2: COMPATIBLE (0 errors)
+  BoxV1 -> BoxBadReorder: BLOCKED (2 errors)
+    [error] SLOT_MOVED: variable 'value' moved from slot 0 to slot 1
+    [error] SLOT_MOVED: variable 'owner' moved from slot 1 to slot 0
+  WidenV1 -> WidenV2: BLOCKED (5 errors)
+    [error] TYPE_CHANGED: a: type label changed 'uint128' -> 'uint256'
+    [error] TYPE_CHANGED: a: size changed 16 -> 32 bytes
+    [error] SLOT_MOVED: variable 'b' moved from slot 0 to slot 1
+    [error] OFFSET_MOVED: variable 'b' moved from byte offset 16 to 0 in slot 0
+    [error] SLOT_MOVED: variable 'c' moved from slot 1 to slot 2
+  BaseV1 -> BaseV2: BLOCKED (2 errors)
+    [error] SLOT_MOVED: variable 'x' moved from slot 0 to slot 1
+    [error] VARIABLE_INSERTED: new variable 'inserted' inserted at slot 0 offset 0, inside the old layout's footprint (last old slot: 0)
+    [warning] INHERITANCE_CHANGED: base contracts changed (added: NewBase)
+  DynTypeV1 -> DynTypeV2: BLOCKED (5 errors)
+    [error] TYPE_CHANGED: items: encoding changed 'dynamic_array' -> 'mapping'
+    [error] TYPE_CHANGED: items: type label changed 'uint256[]' -> 'mapping(uint256 => uint256)'
+    [error] TYPE_CHANGED: items[]: type structure changed (t_uint256 -> None)
+    [error] TYPE_CHANGED: items<key>: type structure changed (None -> t_uint256)
+    [error] TYPE_CHANGED: items<value>: type structure changed (None -> t_uint256)
+
+== on-chain upgrade on local anvil ==
+  deployed BoxV1 + proxy 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
+  before upgrade: value=1337 name='hello-layout' version=v1
+  after upgrade : value=1337 name='hello-layout' version=v2 extra=7
+
+OK: compatible upgrade kept all V1 state; incompatible pairs were blocked.
