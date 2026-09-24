@@ -1,0 +1,6 @@
+{
+  "id": "task-weld-A",
+  "priority": 100,
+  "resources": ["t-arm-1", "t-welder-1", "s-bay-a"],
+  "deadlineMs": 15000
+}

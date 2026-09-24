@@ -1,0 +1,6 @@
+{
+  "id": "task-lowprio-C",
+  "priority": 500,
+  "resources": ["t-welder-1"],
+  "deadlineMs": 30000
+}

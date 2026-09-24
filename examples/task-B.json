@@ -1,0 +1,6 @@
+{
+  "id": "task-assy-B",
+  "priority": 100,
+  "resources": ["t-arm-1", "s-bay-b"],
+  "deadlineMs": 30000
+}
