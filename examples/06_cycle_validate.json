@@ -1,0 +1,16 @@
+{
+  "graph": {
+    "nodes": [
+      { "id": "gen",   "kind": "build", "rule": { "command": "gen-src" } },
+      { "id": "parse", "kind": "build", "rule": { "command": "parse" } },
+      { "id": "opt",   "kind": "build", "rule": { "command": "optimize" } },
+      { "id": "codegen", "kind": "build", "rule": { "command": "codegen" } }
+    ],
+    "edges": [
+      { "from": "gen",     "to": "parse" },
+      { "from": "parse",   "to": "opt" },
+      { "from": "opt",     "to": "codegen" },
+      { "from": "codegen", "to": "gen" }
+    ]
+  }
+}

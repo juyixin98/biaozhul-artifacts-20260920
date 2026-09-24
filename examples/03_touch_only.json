@@ -1,0 +1,63 @@
+{
+  "graph": {
+    "nodes": [
+      { "id": "left.in", "kind": "file" },
+      { "id": "right.in", "kind": "file" },
+      {
+        "id": "compile_l",
+        "kind": "build",
+        "rule": {
+          "command": "cc -c left.in -o left.o",
+          "tool": "cc",
+          "tool_version": "13.2.0",
+          "env": { "CFLAGS": "-O2" }
+        }
+      },
+      {
+        "id": "compile_r",
+        "kind": "build",
+        "rule": {
+          "command": "cc -c right.in -o right.o",
+          "tool": "cc",
+          "tool_version": "13.2.0",
+          "env": { "CFLAGS": "-O2" }
+        }
+      },
+      {
+        "id": "link",
+        "kind": "build",
+        "rule": {
+          "command": "cc left.o right.o -o app.bin",
+          "tool": "cc",
+          "tool_version": "13.2.0",
+          "env": { "CFLAGS": "-O2", "LDFLAGS": "-s" }
+        }
+      },
+      { "id": "app.bin", "kind": "file" }
+    ],
+    "edges": [
+      { "from": "left.in",   "to": "compile_l" },
+      { "from": "right.in",  "to": "compile_r" },
+      { "from": "compile_l", "to": "link" },
+      { "from": "compile_r", "to": "link" },
+      { "from": "link",      "to": "app.bin" }
+    ]
+  },
+  "previous": {
+    "files": {
+      "left.in":  { "content_hash": "h-left-v1",  "mtime_ms": 1000 },
+      "right.in": { "content_hash": "h-right-v1", "mtime_ms": 1000 }
+    },
+    "build_keys": {
+      "compile_l": "REPLACE_WITH_KEY_FROM_01",
+      "compile_r": "REPLACE_WITH_KEY_FROM_01",
+      "link":      "REPLACE_WITH_KEY_FROM_01"
+    }
+  },
+  "current": {
+    "files": {
+      "left.in":  { "content_hash": "h-left-v1", "mtime_ms": 9999 },
+      "right.in": { "content_hash": "h-right-v1", "mtime_ms": 8888 }
+    }
+  }
+}
