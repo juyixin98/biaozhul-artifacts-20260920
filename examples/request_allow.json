@@ -1,0 +1,64 @@
+{
+  "policies": [
+    {
+      "id": "p-access",
+      "rules": [
+        {
+          "id": "r-allow-internal-read",
+          "effect": "allow",
+          "condition": {
+            "op": "and",
+            "args": [
+              {"op": "eq", "args": [{"attr": "subject.department"}, {"literal": "engineering"}]},
+              {"op": "in", "args": [{"literal": "read"}, {"attr": "subject.clearances"}]},
+              {"op": "intersects", "args": [{"attr": "subject.groups"}, {"literal": ["internal", "staff"]}]}
+            ]
+          }
+        },
+        {
+          "id": "r-deny-prod-secrets",
+          "effect": "deny",
+          "condition": {
+            "op": "and",
+            "args": [
+              {"op": "eq", "args": [{"attr": "resource.classification"}, {"literal": "secret"}]},
+              {"op": "contains", "args": [{"attr": "resource.tags"}, {"literal": "prod"}]},
+              {"op": "neq", "args": [{"attr": "subject.role"}, {"literal": "admin"}]}
+            ]
+          }
+        },
+        {
+          "id": "r-deny-contractors",
+          "effect": "deny",
+          "condition": {
+            "op": "and",
+            "args": [
+              {"op": "eq", "args": [{"attr": "subject.employment_type"}, {"literal": "contractor"}]},
+              {"op": "eq", "args": [{"attr": "resource.classification"}, {"literal": "confidential"}]}
+            ]
+          }
+        },
+        {
+          "id": "r-allow-clearance-superset",
+          "effect": "allow",
+          "condition": {
+            "op": "superset",
+            "args": [{"attr": "subject.clearances"}, {"literal": ["read"]}]
+          }
+        }
+      ]
+    }
+  ],
+  "subject": {
+    "department": "engineering",
+    "clearances": ["read", "export"],
+    "groups": ["internal"],
+    "employment_type": "employee",
+    "role": "developer"
+  },
+  "resource": {
+    "id": "repo/edge-gateway",
+    "classification": "internal",
+    "tags": ["repo", "source"]
+  }
+}

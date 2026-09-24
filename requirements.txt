@@ -1,0 +1,5 @@
+# 运行时直接依赖（pip-compile 生成完整锁定见 requirements.lock.txt）
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+pydantic==2.9.2
+cryptography==44.0.0

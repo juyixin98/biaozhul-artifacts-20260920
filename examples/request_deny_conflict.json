@@ -1,0 +1,14 @@
+{
+  "subject": {
+    "department": "engineering",
+    "clearances": ["read", "export"],
+    "groups": ["internal", "sre-oncall"],
+    "employment_type": "employee",
+    "role": "developer"
+  },
+  "resource": {
+    "id": "secrets/prod/db-password",
+    "classification": "secret",
+    "tags": ["prod", "credentials"]
+  }
+}
