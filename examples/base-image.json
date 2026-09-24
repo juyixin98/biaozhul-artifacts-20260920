@@ -1,0 +1,6 @@
+{
+  "repository": "registry.local/base/distroless",
+  "tag": "1.2.3",
+  "config": {"user": "nonroot:65532", "privileged": false, "capAdd": []},
+  "baseImage": null
+}

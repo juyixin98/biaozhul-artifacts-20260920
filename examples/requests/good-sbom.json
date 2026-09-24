@@ -1,0 +1,1 @@
+{"bomFormat":"CycloneDX","component":{"name":"payments","purl":"pkg:oci/payments@v2.1.0?repository_url=registry.local/app","version":"2.1.0"},"components":[{"name":"libcrypto","type":"library","version":"3.2.1"},{"name":"libc","type":"library","version":"2.39"}],"specVersion":"1.5"}

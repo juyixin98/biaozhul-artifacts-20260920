@@ -1,0 +1,1 @@
+{"repository":"registry.local/app/payments","tag":"v2.1.0","config":{"user":"root","privileged":false,"capAdd":["NET_BIND_SERVICE"]},"baseImage":{"repository":"registry.local/base/distroless","digest":"sha256:71b24c31446b22a67ac905a9e5399184758b480963e8955372341627513ab6fe"}}

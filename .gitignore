@@ -1,0 +1,11 @@
+# Go
+/bin/
+*.test
+*.out
+/admissiond
+/mirrorctl
+# 运行期数据（报告仅在本地，绝不入库）
+/data/
+
+# 本地覆盖用的示例产物可用 `make examples` 重新生成；
+# 但为方便离线验收，examples/ 默认入库。

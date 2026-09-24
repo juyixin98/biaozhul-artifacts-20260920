@@ -1,0 +1,7 @@
+{
+  "exemptionAuthorityKey": "exemption-authority.pub",
+  "trustedSignerKeys": [
+    "signer.pub"
+  ],
+  "verifierKey": "verifier.pub"
+}
