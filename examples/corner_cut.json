@@ -1,0 +1,24 @@
+{
+  "request_id": "corner-cut-001",
+  "path": [
+    [0.0, 0.0],
+    [5.0, 0.0],
+    [8.0, 0.0],
+    [8.0, 5.0],
+    [8.0, 10.0],
+    [5.0, 10.0],
+    [10.0, 10.0]
+  ],
+  "obstacles": [
+    {"cx": 5.0, "cy": 5.0, "width": 4.0, "height": 4.0}
+  ],
+  "params": {
+    "max_iterations": 200,
+    "timeout_seconds": 30.0,
+    "curvature_cap": 0.8,
+    "corridor": 1.5,
+    "clearance": 0.05,
+    "deviation_weight": 1.0,
+    "jerk_weight": 0.05
+  }
+}

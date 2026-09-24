@@ -1,0 +1,18 @@
+{
+  "request_id": "infeasible-rounding-001",
+  "path": [
+    [0.0, 0.0],
+    [4.0, 0.0],
+    [4.0, 4.0],
+    [8.0, 4.0]
+  ],
+  "obstacles": [
+    {"cx": 2.0, "cy": 2.0, "width": 4.0, "height": 4.0}
+  ],
+  "params": {
+    "max_iterations": 100,
+    "curvature_cap": 0.05,
+    "corridor": 0.5,
+    "clearance": 0.0
+  }
+}

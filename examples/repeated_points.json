@@ -1,0 +1,20 @@
+{
+  "request_id": "repeated-points-001",
+  "path": [
+    [0.0, 0.0],
+    [0.0, 0.0],
+    [2.0, 0.3],
+    [2.0, 0.3],
+    [4.0, -0.3],
+    [6.0, 0.3],
+    [8.0, 0.0],
+    [8.0, 0.0]
+  ],
+  "obstacles": [],
+  "params": {
+    "max_iterations": 100,
+    "curvature_cap": 0.8,
+    "corridor": 0.5,
+    "clearance": 0.0
+  }
+}
