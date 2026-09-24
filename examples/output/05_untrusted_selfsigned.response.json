@@ -1,0 +1,46 @@
+{
+    "valid": false,
+    "purpose": "server_auth",
+    "subject": "rogue.example.com",
+    "verification_time": "2026-09-24T05:48:14.733316+00:00",
+    "max_chain_depth": null,
+    "error_code": "UNTRUSTED_CHAIN",
+    "error_message": "validation failed: candidates exhausted: all candidates exhausted with no interior errors",
+    "chain": [
+        {
+            "role": "leaf",
+            "issuer_found": false,
+            "subject_cn": "rogue.example.com",
+            "subject": "CN=rogue.example.com",
+            "issuer": "CN=rogue.example.com",
+            "serial_number": "45b8860b29311ca2de3294c9c2a5b13781a023de",
+            "not_before": "2026-09-23T05:34:53+00:00",
+            "not_after": "2027-09-24T05:34:53+00:00",
+            "is_ca": false,
+            "path_length_constraint": null,
+            "san_dns_names": [
+                "rogue.example.com"
+            ],
+            "san_ip_addresses": [],
+            "eku": [
+                "serverAuth"
+            ],
+            "fingerprint_sha256": "d5bb15c303b7b4a8e87959697e6a5e8646c65013f66dca9206c23cb97115b172",
+            "chain_note": "no issuer found among supplied intermediates or trust roots"
+        }
+    ],
+    "findings": [
+        {
+            "code": "ISSUER_NOT_FOUND",
+            "severity": "error",
+            "cert": "CN=rogue.example.com",
+            "detail": "no certificate matching the leaf issuer/AKI was supplied"
+        },
+        {
+            "code": "NAME_MATCH",
+            "severity": "info",
+            "cert": "CN=rogue.example.com",
+            "subject": "rogue.example.com"
+        }
+    ]
+}

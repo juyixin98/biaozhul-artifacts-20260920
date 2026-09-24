@@ -1,0 +1,11 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Demo keys are regenerated with scripts/gen_certs.py.
+# Keep them ignored since they are private material, even though they are test-only.
+examples/certs/*.key

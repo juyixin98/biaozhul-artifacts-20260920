@@ -1,0 +1,77 @@
+{
+    "valid": false,
+    "purpose": "server_auth",
+    "subject": "bad-ca.demo.example.com",
+    "verification_time": "2026-09-24T05:48:14.648754+00:00",
+    "max_chain_depth": null,
+    "error_code": "NOT_A_CA",
+    "error_message": "validation failed: candidates exhausted: basicConstraints.cA must be asserted in a CA certificate",
+    "chain": [
+        {
+            "role": "leaf",
+            "issuer_found": true,
+            "subject_cn": "bad-ca.demo.example.com",
+            "subject": "CN=bad-ca.demo.example.com",
+            "issuer": "CN=Not A CA Intermediate",
+            "serial_number": "5801bc8a9cc6bde7f240500f2a4c6df255dce73d",
+            "not_before": "2026-09-23T05:34:53+00:00",
+            "not_after": "2027-09-24T05:34:53+00:00",
+            "is_ca": false,
+            "path_length_constraint": null,
+            "san_dns_names": [
+                "bad-ca.demo.example.com"
+            ],
+            "san_ip_addresses": [],
+            "eku": [
+                "serverAuth"
+            ],
+            "fingerprint_sha256": "9424e0e95cc2b83e8f447008963492a3f15922421c2276d4c24b7fc11bc6e6cc"
+        },
+        {
+            "role": "intermediate",
+            "issuer_found": true,
+            "subject_cn": "Not A CA Intermediate",
+            "subject": "CN=Not A CA Intermediate",
+            "issuer": "CN=Demo Root CA",
+            "serial_number": "3e1fd88133cd6d9c52eaca26637e16b6bf6da9ef",
+            "not_before": "2021-09-25T05:34:53+00:00",
+            "not_after": "2031-09-23T05:34:53+00:00",
+            "is_ca": false,
+            "path_length_constraint": null,
+            "san_dns_names": [],
+            "san_ip_addresses": [],
+            "eku": [],
+            "fingerprint_sha256": "d203d16e7f2148191337ca3c577a494ff9436941e1153c33bba4d478d3cca130"
+        },
+        {
+            "role": "root",
+            "issuer_found": true,
+            "subject_cn": "Demo Root CA",
+            "subject": "CN=Demo Root CA",
+            "issuer": "CN=Demo Root CA",
+            "serial_number": "6a71947f640e0832a18a5dad42082a69b85635c6",
+            "not_before": "2016-09-26T05:34:53+00:00",
+            "not_after": "2036-09-21T05:34:53+00:00",
+            "is_ca": true,
+            "path_length_constraint": null,
+            "san_dns_names": [],
+            "san_ip_addresses": [],
+            "eku": [],
+            "fingerprint_sha256": "230a04c1a9e9e90040b80ebb63104a9270ac838767fe92980fb335618056b45e"
+        }
+    ],
+    "findings": [
+        {
+            "code": "NOT_A_CA",
+            "severity": "error",
+            "cert": "CN=Not A CA Intermediate",
+            "detail": "basicConstraints.cA not asserted on intermediate"
+        },
+        {
+            "code": "NAME_MATCH",
+            "severity": "info",
+            "cert": "CN=bad-ca.demo.example.com",
+            "subject": "bad-ca.demo.example.com"
+        }
+    ]
+}

@@ -1,0 +1,72 @@
+{
+    "valid": false,
+    "purpose": "server_auth",
+    "subject": "attacker.example.com",
+    "verification_time": "2026-09-24T05:48:14.777559+00:00",
+    "max_chain_depth": null,
+    "error_code": "MAX_CHAIN_DEPTH",
+    "error_message": "validation failed: candidates exhausted: chain construction exceeds max depth",
+    "chain": [
+        {
+            "role": "leaf",
+            "issuer_found": true,
+            "subject_cn": "attacker.example.com",
+            "subject": "CN=attacker.example.com",
+            "issuer": "CN=Attacker Intermediate CA",
+            "serial_number": "2ba00a3c66ba891879c95f33938eae635e69b329",
+            "not_before": "2026-09-23T05:34:53+00:00",
+            "not_after": "2027-09-24T05:34:53+00:00",
+            "is_ca": false,
+            "path_length_constraint": null,
+            "san_dns_names": [
+                "attacker.example.com"
+            ],
+            "san_ip_addresses": [],
+            "eku": [
+                "serverAuth"
+            ],
+            "fingerprint_sha256": "19a1634cd212f222e9ffe43d4e64e6f811fb092c6c600cd487fb75a0e8bb9c4d"
+        },
+        {
+            "role": "intermediate",
+            "issuer_found": true,
+            "subject_cn": "Attacker Intermediate CA",
+            "subject": "CN=Attacker Intermediate CA",
+            "issuer": "CN=Attacker Root CA",
+            "serial_number": "276e026f78de41334f06462abad0a7e2f7af0383",
+            "not_before": "2021-09-25T05:34:53+00:00",
+            "not_after": "2031-09-23T05:34:53+00:00",
+            "is_ca": true,
+            "path_length_constraint": null,
+            "san_dns_names": [],
+            "san_ip_addresses": [],
+            "eku": [],
+            "fingerprint_sha256": "1caf1eb259866de7ade311a264c175d656b5bb00492b4ec9d6a5e75ce8d74a7f"
+        },
+        {
+            "role": "intermediate",
+            "issuer_found": false,
+            "subject_cn": "Attacker Root CA",
+            "subject": "CN=Attacker Root CA",
+            "issuer": "CN=Attacker Root CA",
+            "serial_number": "7a24909fcf72dfc54851150c2579f76a454fd729",
+            "not_before": "2016-09-26T05:34:53+00:00",
+            "not_after": "2036-09-21T05:34:53+00:00",
+            "is_ca": true,
+            "path_length_constraint": null,
+            "san_dns_names": [],
+            "san_ip_addresses": [],
+            "eku": [],
+            "fingerprint_sha256": "eb4418d1c928366dd415f1d98801bc1db60b7c194004d715e778f861f207b83f",
+            "chain_note": "no issuer found among supplied intermediates or trust roots"
+        }
+    ],
+    "findings": [
+        {
+            "code": "NAME_MATCH",
+            "severity": "info",
+            "cert": "CN=attacker.example.com",
+            "subject": "attacker.example.com"
+        }
+    ]
+}
