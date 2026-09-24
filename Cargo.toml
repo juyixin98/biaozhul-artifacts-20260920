@@ -1,0 +1,32 @@
+[package]
+name = "remote-build-cache"
+version = "0.1.0"
+edition = "2021"
+description = "远端构建缓存原型：内容寻址存储 (CAS) + 动作缓存 (AC)，Axum 实现"
+
+[dependencies]
+axum = { version = "0.7.9", default-features = false, features = ["http1", "json", "query", "tokio", "matched-path"] }
+tokio = { version = "1.53.1", features = ["rt-multi-thread", "macros", "net", "fs", "io-util", "sync", "time"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+sha2 = "0.10.9"
+hex = "0.4.3"
+tower = { version = "0.5.3", features = ["util"] }
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }
+
+[dev-dependencies]
+tempfile = "3.27.0"
+http-body-util = "0.1.5"
+tower = { version = "0.5.3", features = ["util"] }
+
+[[bin]]
+name = "rbc-server"
+path = "src/main.rs"
+
+[[example]]
+name = "demo"
+path = "examples/demo.rs"
+
+[profile.release]
+# 原型无需特殊优化配置；保留默认
