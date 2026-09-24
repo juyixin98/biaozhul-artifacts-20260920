@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+data/
+evidence/
+.pytest_cache/
+keys/params_signing_private.pem

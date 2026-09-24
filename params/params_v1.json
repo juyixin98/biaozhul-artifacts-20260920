@@ -1,0 +1,53 @@
+{
+  "params_version": "soc-estimator-params/v1",
+  "description": "Frozen parameter set for the offline battery SOC estimation service. Any change requires a new version id and a new Ed25519 signature. Experimental/synthetic model - NOT for real charge control.",
+  "sign_convention": {
+    "current_positive": "discharge",
+    "current_negative": "charge",
+    "unit": "A"
+  },
+  "pack": {
+    "n_series_cells": 1,
+    "nominal_capacity_ah": 10.0,
+    "reference_temperature_c": 25.0
+  },
+  "efficiency": {
+    "eta_charge": 0.985,
+    "eta_discharge": 1.0
+  },
+  "temperature": {
+    "capacity_factor_table": {
+      "temp_c": [-20.0, -10.0, 0.0, 10.0, 25.0, 40.0, 60.0],
+      "factor": [0.70, 0.80, 0.88, 0.94, 1.00, 1.02, 1.03]
+    },
+    "out_of_table_policy": "clamp_and_flag",
+    "ocv_trusted_range_c": [10.0, 40.0]
+  },
+  "ocv_table": {
+    "note": "Single-cell open-circuit voltage vs SOC at the reference temperature (25 C). Monotonic in SOC. Pack OCV = cell OCV * n_series_cells.",
+    "soc": [0.0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 1.0],
+    "v_cell": [3.00, 3.26, 3.42, 3.55, 3.63, 3.70, 3.76, 3.82, 3.89, 3.98, 4.08, 4.14, 4.20]
+  },
+  "rest_detection": {
+    "abs_current_threshold_a": 0.05,
+    "min_rest_duration_s": 30.0
+  },
+  "gap_handling": {
+    "max_interval_s": 5.0,
+    "policy": "no_integration_over_gap"
+  },
+  "uncertainty": {
+    "current_noise_sigma_a": 0.02,
+    "bias_growth_a_per_sqrt_s": 0.001,
+    "gap_sigma_bound_a": 0.5,
+    "initial_soc_sigma": 0.05,
+    "ocv_soc_sigma": 0.02
+  },
+  "limits": {
+    "max_abs_current_a": 200.0,
+    "max_samples_per_ingest": 200000
+  },
+  "replay": {
+    "default_replay_window_s": 3600.0
+  }
+}
