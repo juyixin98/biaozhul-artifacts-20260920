@@ -1,0 +1,44 @@
+## 环境
+```
+go version go1.23.4 linux/amd64
+Linux 6.8.0-90-generic
+```
+
+## go vet ./...
+```
+vet: clean
+```
+
+## gofmt -l .
+```
+(all formatted)
+```
+
+## go test -race ./... (详细见 -v 运行)
+```
+?   	gangscheduler	[no test files]
+ok  	gangscheduler/api	(cached)
+ok  	gangscheduler/gang	(cached)
+```
+
+## go test -cover ./...
+```
+	gangscheduler		coverage: 0.0% of statements
+ok  	gangscheduler/api	(cached)	coverage: 76.7% of statements
+ok  	gangscheduler/gang	(cached)	coverage: 69.7% of statements
+```
+
+## go build ./...
+```
+build: ok
+```
+
+## 依赖
+```
+all modules verified
+module gangscheduler
+
+go 1.23
+---
+no go.sum (stdlib only, no modules to checksum)
+```

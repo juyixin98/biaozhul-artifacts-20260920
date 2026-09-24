@@ -1,0 +1,6 @@
+# build output
+/gangsrv
+
+# local test/coverage artifacts (kept logs live under testlogs/)
+*.out
+*.test

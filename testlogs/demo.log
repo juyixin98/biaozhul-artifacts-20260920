@@ -1,0 +1,858 @@
+
+=== build & start server (ttl=2s for the expiry demo) ===
+  using http://127.0.0.1:52885
+
+=== 0. health ===
+{
+    "status": "ok"
+}
+  [OK] healthz 200 (200)
+
+=== 1. register three nodes ===
+{
+    "id": "n1",
+    "zone": "z1",
+    "labels": {
+        "role": "a"
+    },
+    "capacity": 1,
+    "online": true,
+    "running_slots": 0,
+    "held_slots": 0,
+    "running_by": null,
+    "held_by": null,
+    "version": 1
+}
+  [OK] add n1 -> 201 (201)
+{
+    "id": "n2",
+    "zone": "z1",
+    "labels": {
+        "role": "shared"
+    },
+    "capacity": 1,
+    "online": true,
+    "running_slots": 0,
+    "held_slots": 0,
+    "running_by": null,
+    "held_by": null,
+    "version": 1
+}
+  [OK] add n2 -> 201 (201)
+{
+    "id": "n3",
+    "zone": "z2",
+    "labels": {
+        "role": "b"
+    },
+    "capacity": 1,
+    "online": true,
+    "running_slots": 0,
+    "held_slots": 0,
+    "running_by": null,
+    "held_by": null,
+    "version": 1
+}
+  [OK] add n3 -> 201 (201)
+
+=== 2. gA (needs n1+n2) reserves atomically ===
+{
+    "gang": {
+        "id": "gA",
+        "min_nodes": 2,
+        "tasks": [
+            {
+                "name": "a1",
+                "node_selector": {
+                    "role": "a"
+                }
+            },
+            {
+                "name": "a2",
+                "node_selector": {
+                    "role": "shared"
+                }
+            }
+        ],
+        "ttl_millis": 60000,
+        "status": "reserved",
+        "active_plan_id": "p1"
+    },
+    "plan": {
+        "id": "p1",
+        "gang_id": "gA",
+        "nodes": [
+            "n1",
+            "n2"
+        ],
+        "version": 5,
+        "status": "reserved",
+        "ttl_remaining_ms": 60000
+    }
+}
+  [OK] gA -> 201 (201)
+  gA plan=p1 version=5
+
+=== 3. gB (needs n2+n3) overlaps gA -> must WAIT and hold nothing ===
+{
+    "gang": {
+        "id": "gB",
+        "min_nodes": 2,
+        "tasks": [
+            {
+                "name": "b1",
+                "node_selector": {
+                    "role": "shared"
+                }
+            },
+            {
+                "name": "b2",
+                "node_selector": {
+                    "role": "b"
+                }
+            }
+        ],
+        "ttl_millis": 60000,
+        "status": "waiting"
+    },
+    "plan": null
+}
+  [OK] gB -> 201 (201)
+  [OK] gB is waiting (waiting)
+{
+    "id": "n3",
+    "zone": "z2",
+    "labels": {
+        "role": "b"
+    },
+    "capacity": 1,
+    "online": true,
+    "running_slots": 0,
+    "held_slots": 0,
+    "running_by": null,
+    "held_by": null,
+    "version": 1
+}
+  [OK] gB holds zero slots even on free n3
+
+=== 4. n2 goes OFFLINE between reserve and commit ===
+{
+    "id": "n2",
+    "zone": "z1",
+    "labels": {
+        "role": "shared"
+    },
+    "capacity": 1,
+    "online": false,
+    "running_slots": 0,
+    "held_slots": 0,
+    "running_by": null,
+    "held_by": null,
+    "version": 4
+}
+  [OK] offline held n2 -> 200 (plan invalidated) (200)
+
+=== 5. commit gA -> must be 410 Gone; NO partial start, NO leak ===
+{
+    "error": "reservation expired or invalidated: plan \"p1\" is aborted"
+}
+  [OK] commit after offline -> 410 (410)
+{
+    "generation": 8,
+    "nodes": [
+        {
+            "id": "n1",
+            "zone": "z1",
+            "labels": {
+                "role": "a"
+            },
+            "capacity": 1,
+            "online": true,
+            "running_slots": 0,
+            "held_slots": 0,
+            "running_by": null,
+            "held_by": null,
+            "version": 3
+        },
+        {
+            "id": "n2",
+            "zone": "z1",
+            "labels": {
+                "role": "shared"
+            },
+            "capacity": 1,
+            "online": false,
+            "running_slots": 0,
+            "held_slots": 0,
+            "running_by": null,
+            "held_by": null,
+            "version": 4
+        },
+        {
+            "id": "n3",
+            "zone": "z2",
+            "labels": {
+                "role": "b"
+            },
+            "capacity": 1,
+            "online": true,
+            "running_slots": 0,
+            "held_slots": 0,
+            "running_by": null,
+            "held_by": null,
+            "version": 1
+        }
+    ],
+    "gangs": [
+        {
+            "id": "gA",
+            "min_nodes": 2,
+            "tasks": [
+                {
+                    "name": "a1",
+                    "node_selector": {
+                        "role": "a"
+                    }
+                },
+                {
+                    "name": "a2",
+                    "node_selector": {
+                        "role": "shared"
+                    }
+                }
+            ],
+            "ttl_millis": 60000,
+            "status": "waiting"
+        },
+        {
+            "id": "gB",
+            "min_nodes": 2,
+            "tasks": [
+                {
+                    "name": "b1",
+                    "node_selector": {
+                        "role": "shared"
+                    }
+                },
+                {
+                    "name": "b2",
+                    "node_selector": {
+                        "role": "b"
+                    }
+                }
+            ],
+            "ttl_millis": 60000,
+            "status": "waiting"
+        }
+    ],
+    "plans": [
+        {
+            "id": "p1",
+            "gang_id": "gA",
+            "nodes": [
+                "n1",
+                "n2"
+            ],
+            "version": 5,
+            "status": "aborted",
+            "ttl_remaining_ms": 0
+        }
+    ],
+    "waiting_queue": [
+        "gA",
+        "gB"
+    ]
+}
+  [OK] total held/running slots after abort = 0 (no leak)
+
+=== 6. recovery: n2 back online -> gA reserves again, commits, completes ===
+{
+    "id": "n2",
+    "zone": "z1",
+    "labels": {
+        "role": "shared"
+    },
+    "capacity": 1,
+    "online": true,
+    "running_slots": 0,
+    "held_slots": 1,
+    "running_by": null,
+    "held_by": [
+        "p2"
+    ],
+    "version": 6
+}
+  [OK] n2 online -> 200 (200)
+{
+    "gang": {
+        "id": "gA",
+        "min_nodes": 2,
+        "tasks": [
+            {
+                "name": "a1",
+                "node_selector": {
+                    "role": "a"
+                }
+            },
+            {
+                "name": "a2",
+                "node_selector": {
+                    "role": "shared"
+                }
+            }
+        ],
+        "ttl_millis": 60000,
+        "status": "reserved",
+        "active_plan_id": "p2"
+    },
+    "plan": {
+        "id": "p2",
+        "gang_id": "gA",
+        "nodes": [
+            "n1",
+            "n2"
+        ],
+        "version": 10,
+        "status": "reserved",
+        "ttl_remaining_ms": 59948
+    }
+}
+{
+    "gang": {
+        "id": "gA",
+        "min_nodes": 2,
+        "tasks": [
+            {
+                "name": "a1",
+                "node_selector": {
+                    "role": "a"
+                }
+            },
+            {
+                "name": "a2",
+                "node_selector": {
+                    "role": "shared"
+                }
+            }
+        ],
+        "ttl_millis": 60000,
+        "status": "running",
+        "active_plan_id": "p2"
+    },
+    "plan": {
+        "id": "p2",
+        "gang_id": "gA",
+        "nodes": [
+            "n1",
+            "n2"
+        ],
+        "version": 10,
+        "status": "committed",
+        "ttl_remaining_ms": 0,
+        "committed_at": 1790212495512
+    }
+}
+  [OK] gA commit -> 200 (200)
+{
+    "error": "conflict: node \"n2\" still runs 1 task slot(s)"
+}
+  [OK] offline RUNNING node -> 409 (409)
+{
+    "gang": {
+        "id": "gA",
+        "min_nodes": 2,
+        "tasks": [
+            {
+                "name": "a1",
+                "node_selector": {
+                    "role": "a"
+                }
+            },
+            {
+                "name": "a2",
+                "node_selector": {
+                    "role": "shared"
+                }
+            }
+        ],
+        "ttl_millis": 60000,
+        "status": "succeeded"
+    },
+    "plan": null
+}
+  [OK] gA complete -> 200 (200)
+
+=== 7. gB now atomically reserves n2+n3 and commits ===
+{
+    "gang": {
+        "id": "gB",
+        "min_nodes": 2,
+        "tasks": [
+            {
+                "name": "b1",
+                "node_selector": {
+                    "role": "shared"
+                }
+            },
+            {
+                "name": "b2",
+                "node_selector": {
+                    "role": "b"
+                }
+            }
+        ],
+        "ttl_millis": 60000,
+        "status": "reserved",
+        "active_plan_id": "p3"
+    },
+    "plan": {
+        "id": "p3",
+        "gang_id": "gB",
+        "nodes": [
+            "n2",
+            "n3"
+        ],
+        "version": 13,
+        "status": "reserved",
+        "ttl_remaining_ms": 59950
+    }
+}
+  [OK] gB auto-reserved (reserved)
+  gB nodes=n2,n3
+  [OK] gB got exactly n2,n3 (no double booking)
+{
+    "gang": {
+        "id": "gB",
+        "min_nodes": 2,
+        "tasks": [
+            {
+                "name": "b1",
+                "node_selector": {
+                    "role": "shared"
+                }
+            },
+            {
+                "name": "b2",
+                "node_selector": {
+                    "role": "b"
+                }
+            }
+        ],
+        "ttl_millis": 60000,
+        "status": "running",
+        "active_plan_id": "p3"
+    },
+    "plan": {
+        "id": "p3",
+        "gang_id": "gB",
+        "nodes": [
+            "n2",
+            "n3"
+        ],
+        "version": 13,
+        "status": "committed",
+        "ttl_remaining_ms": 0,
+        "committed_at": 1790212495822
+    }
+}
+  [OK] gB commit -> 200 (200)
+{
+    "gang": {
+        "id": "gB",
+        "min_nodes": 2,
+        "tasks": [
+            {
+                "name": "b1",
+                "node_selector": {
+                    "role": "shared"
+                }
+            },
+            {
+                "name": "b2",
+                "node_selector": {
+                    "role": "b"
+                }
+            }
+        ],
+        "ttl_millis": 60000,
+        "status": "succeeded"
+    },
+    "plan": null
+}
+  [OK] gB complete -> 200 (200)
+
+=== 8. anti-affinity: two ssd tasks across zones (n1 z1 + n3 z2) ===
+{
+    "gang": {
+        "id": "gS",
+        "min_nodes": 2,
+        "tasks": [
+            {
+                "name": "s1",
+                "node_selector": {
+                    "role": "a"
+                }
+            },
+            {
+                "name": "s2",
+                "node_selector": {
+                    "role": "b"
+                }
+            }
+        ],
+        "anti_affinity": "zone",
+        "ttl_millis": 60000,
+        "status": "reserved",
+        "active_plan_id": "p4"
+    },
+    "plan": {
+        "id": "p4",
+        "gang_id": "gS",
+        "nodes": [
+            "n1",
+            "n3"
+        ],
+        "version": 17,
+        "status": "reserved",
+        "ttl_remaining_ms": 60000
+    }
+}
+  [OK] gS -> 201 (201)
+  [OK] spread across zones: n1,n3
+{
+    "gang": {
+        "id": "gS",
+        "min_nodes": 2,
+        "tasks": [
+            {
+                "name": "s1",
+                "node_selector": {
+                    "role": "a"
+                }
+            },
+            {
+                "name": "s2",
+                "node_selector": {
+                    "role": "b"
+                }
+            }
+        ],
+        "anti_affinity": "zone",
+        "ttl_millis": 60000,
+        "status": "waiting"
+    },
+    "plan": null
+}
+  [OK] release gS -> 200 (200)
+
+=== 9. stale optimistic version -> 409, plan aborted, nothing starts ===
+{
+    "gang": {
+        "id": "gV",
+        "min_nodes": 1,
+        "tasks": [
+            {
+                "name": "v1"
+            }
+        ],
+        "ttl_millis": 60000,
+        "status": "reserved",
+        "active_plan_id": "p5"
+    },
+    "plan": {
+        "id": "p5",
+        "gang_id": "gV",
+        "nodes": [
+            "n1"
+        ],
+        "version": 21,
+        "status": "reserved",
+        "ttl_remaining_ms": 60000
+    }
+}
+  [OK] gV -> 201 (201)
+{
+    "error": "conflict: version mismatch for plan \"p5\" (got 20, want 21)"
+}
+  [OK] stale version commit -> 409 (409)
+{
+    "error": "reservation expired or invalidated: plan \"p5\" is aborted"
+}
+  [OK] re-commit aborted plan -> 410 (410)
+
+=== 10. TTL expiry (server default ttl=2s): reserve, wait, commit -> 410 ===
+{
+    "gang": {
+        "id": "gV",
+        "min_nodes": 1,
+        "tasks": [
+            {
+                "name": "v1"
+            }
+        ],
+        "ttl_millis": 60000,
+        "status": "waiting"
+    },
+    "plan": null
+}
+{
+    "gang": {
+        "id": "gT",
+        "min_nodes": 1,
+        "tasks": [
+            {
+                "name": "t1"
+            }
+        ],
+        "status": "reserved",
+        "active_plan_id": "p7"
+    },
+    "plan": {
+        "id": "p7",
+        "gang_id": "gT",
+        "nodes": [
+            "n2"
+        ],
+        "version": 25,
+        "status": "reserved",
+        "ttl_remaining_ms": 2000
+    }
+}
+  [OK] gT -> 201 (201)
+  [OK] gT reserved
+  sleeping 2.5s for the background reaper...
+{
+    "gang": {
+        "id": "gT",
+        "min_nodes": 1,
+        "tasks": [
+            {
+                "name": "t1"
+            }
+        ],
+        "status": "expired"
+    },
+    "plan": null
+}
+  [OK] gT expired in background
+{
+    "error": "reservation expired or invalidated: plan \"p7\" is expired"
+}
+  [OK] commit expired reservation -> 410 (410)
+
+=== 11. final cluster state ===
+{
+    "generation": 27,
+    "nodes": [
+        {
+            "id": "n1",
+            "zone": "z1",
+            "labels": {
+                "role": "a"
+            },
+            "capacity": 1,
+            "online": true,
+            "running_slots": 0,
+            "held_slots": 1,
+            "running_by": null,
+            "held_by": [
+                "p6"
+            ],
+            "version": 11
+        },
+        {
+            "id": "n2",
+            "zone": "z1",
+            "labels": {
+                "role": "shared"
+            },
+            "capacity": 1,
+            "online": true,
+            "running_slots": 0,
+            "held_slots": 0,
+            "running_by": null,
+            "held_by": null,
+            "version": 13
+        },
+        {
+            "id": "n3",
+            "zone": "z2",
+            "labels": {
+                "role": "b"
+            },
+            "capacity": 1,
+            "online": true,
+            "running_slots": 0,
+            "held_slots": 0,
+            "running_by": null,
+            "held_by": null,
+            "version": 6
+        }
+    ],
+    "gangs": [
+        {
+            "id": "gA",
+            "min_nodes": 2,
+            "tasks": [
+                {
+                    "name": "a1",
+                    "node_selector": {
+                        "role": "a"
+                    }
+                },
+                {
+                    "name": "a2",
+                    "node_selector": {
+                        "role": "shared"
+                    }
+                }
+            ],
+            "ttl_millis": 60000,
+            "status": "succeeded"
+        },
+        {
+            "id": "gB",
+            "min_nodes": 2,
+            "tasks": [
+                {
+                    "name": "b1",
+                    "node_selector": {
+                        "role": "shared"
+                    }
+                },
+                {
+                    "name": "b2",
+                    "node_selector": {
+                        "role": "b"
+                    }
+                }
+            ],
+            "ttl_millis": 60000,
+            "status": "succeeded"
+        },
+        {
+            "id": "gS",
+            "min_nodes": 2,
+            "tasks": [
+                {
+                    "name": "s1",
+                    "node_selector": {
+                        "role": "a"
+                    }
+                },
+                {
+                    "name": "s2",
+                    "node_selector": {
+                        "role": "b"
+                    }
+                }
+            ],
+            "anti_affinity": "zone",
+            "ttl_millis": 60000,
+            "status": "waiting"
+        },
+        {
+            "id": "gT",
+            "min_nodes": 1,
+            "tasks": [
+                {
+                    "name": "t1"
+                }
+            ],
+            "status": "expired"
+        },
+        {
+            "id": "gV",
+            "min_nodes": 1,
+            "tasks": [
+                {
+                    "name": "v1"
+                }
+            ],
+            "ttl_millis": 60000,
+            "status": "reserved",
+            "active_plan_id": "p6"
+        }
+    ],
+    "plans": [
+        {
+            "id": "p1",
+            "gang_id": "gA",
+            "nodes": [
+                "n1",
+                "n2"
+            ],
+            "version": 5,
+            "status": "aborted",
+            "ttl_remaining_ms": 0
+        },
+        {
+            "id": "p2",
+            "gang_id": "gA",
+            "nodes": [
+                "n1",
+                "n2"
+            ],
+            "version": 10,
+            "status": "committed",
+            "ttl_remaining_ms": 0,
+            "committed_at": 1790212495512
+        },
+        {
+            "id": "p3",
+            "gang_id": "gB",
+            "nodes": [
+                "n2",
+                "n3"
+            ],
+            "version": 13,
+            "status": "committed",
+            "ttl_remaining_ms": 0,
+            "committed_at": 1790212495822
+        },
+        {
+            "id": "p4",
+            "gang_id": "gS",
+            "nodes": [
+                "n1",
+                "n3"
+            ],
+            "version": 17,
+            "status": "released",
+            "ttl_remaining_ms": 0
+        },
+        {
+            "id": "p5",
+            "gang_id": "gV",
+            "nodes": [
+                "n1"
+            ],
+            "version": 21,
+            "status": "aborted",
+            "ttl_remaining_ms": 0
+        },
+        {
+            "id": "p6",
+            "gang_id": "gV",
+            "nodes": [
+                "n1"
+            ],
+            "version": 24,
+            "status": "reserved",
+            "ttl_remaining_ms": 57227
+        },
+        {
+            "id": "p7",
+            "gang_id": "gT",
+            "nodes": [
+                "n2"
+            ],
+            "version": 25,
+            "status": "expired",
+            "ttl_remaining_ms": 0
+        }
+    ],
+    "waiting_queue": []
+}
+
+=== RESULT: 29 passed, 0 failed ===

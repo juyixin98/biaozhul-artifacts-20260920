@@ -1,0 +1,95 @@
+# Gang Scheduler — HTTP 请求样例
+#
+# 所有例子默认服务监听 127.0.0.1:8080（go run . 启动）。
+# 内容类型统一为 application/json；错误响应形如 {"error":"..."}。
+#
+# 状态码约定：
+#   200 成功        201 创建成功
+#   400 请求非法     404 资源不存在
+#   405 方法不允许   409 状态/版本冲突（含节点有运行任务时下线）
+#   410 预留已过期或被拓扑变更失效
+#
+# 乐观版本检查：预留(POST /gangs)返回的 plan.version 必须原样带回 commit；
+# 若预留之后任何被选中的节点发生变化（下线、版本变化），commit 失败且
+# 整组计划全部中止——绝不部分启动。
+
+BASE=http://127.0.0.1:8080
+
+# --- 健康检查 / 全局状态 -------------------------------------------------
+
+curl -s $BASE/healthz
+curl -s $BASE/state | jq .
+
+# --- 节点管理 -------------------------------------------------------------
+
+# 注册节点（capacity 为可承载的任务槽位数，缺省按 1 处理）
+curl -s -X POST $BASE/nodes -H 'Content-Type: application/json' -d '{
+  "id": "n1", "zone": "z1", "capacity": 1,
+  "labels": {"role": "compute", "disk": "ssd"}
+}'
+
+curl -s -X POST $BASE/nodes -H 'Content-Type: application/json' -d '{
+  "id": "n2", "zone": "z1", "capacity": 1,
+  "labels": {"role": "compute", "disk": "hdd"}
+}'
+
+curl -s -X POST $BASE/nodes -H 'Content-Type: application/json' -d '{
+  "id": "n3", "zone": "z2", "capacity": 2,
+  "labels": {"role": "compute", "disk": "ssd"}
+}'
+
+curl -s $BASE/nodes/n1 | jq .
+
+# 节点下线：
+#   - 节点上有 running 任务 -> 409 拒绝
+#   - 节点仅被预留占用      -> 允许；关联的预留计划整体失效（410），占用全释放
+curl -s -X POST $BASE/nodes/n2/state -H 'Content-Type: application/json' -d '{"online": false}'
+curl -s -X POST $BASE/nodes/n2/state -H 'Content-Type: application/json' -d '{"online": true}'
+
+# --- 成组任务（gang） ------------------------------------------------------
+
+# 提交即尝试一次性原子预留。字段约束：len(tasks) 必须等于 min_nodes，
+# 一个任务占一个节点槽；全部放下 -> status=reserved 并返回 plan；
+# 放不下任何一个 -> status=waiting，plan 为 null，不占用任何节点。
+curl -s -X POST $BASE/gangs -H 'Content-Type: application/json' -d '{
+  "id": "gA",
+  "min_nodes": 2,
+  "ttl_millis": 15000,
+  "anti_affinity": "zone",
+  "tasks": [
+    {"name": "a1", "node_selector": {"disk": "ssd"}},
+    {"name": "a2", "node_selector": {"disk": "ssd"}}
+  ]
+}' | jq .
+# 响应：{"gang": {...}, "plan": {"id":"p1","version":N,"nodes":[...],"status":"reserved",...}}
+
+# 查看组与其当前计划
+curl -s $BASE/gangs/gA | jq .
+
+# 提交（两阶段的第二阶段）：必须原样携带预留返回的 version
+curl -s -X POST $BASE/gangs/gA/plans/p1/commit \
+  -H 'Content-Type: application/json' -d '{"version": N}' | jq .
+
+# 主动放弃预留（节点释放给其它等待组；本组回到等待队列尾部）
+curl -s -X POST $BASE/gangs/gA/plans/p1/release -H 'Content-Type: application/json' -d '{}'
+
+# 运行中的组结束，释放全部节点
+curl -s -X POST $BASE/gangs/gA/complete -H 'Content-Type: application/json' -d '{}'
+
+# waiting 中的组在资源变化后会自动重试；也可显式触发
+curl -s -X POST $BASE/gangs/gA/retry -H 'Content-Type: application/json' -d '{}' | jq .
+
+# --- 标签选择与反亲和 ------------------------------------------------------
+
+# node_selector：任务只能落在包含全部标签键值的节点上。
+# anti_affinity：同组任务所落节点的该标签值必须互不相同
+#                （内置键 "zone" 无此标签时回退到节点 zone 字段）。
+# 例：2 个 hdd 任务 + anti_affinity=disk，而集群只有 1 个 hdd 值 -> 永远等待。
+curl -s -X POST $BASE/gangs -H 'Content-Type: application/json' -d '{
+  "id": "impossible", "min_nodes": 2,
+  "anti_affinity": "disk",
+  "tasks": [
+    {"name": "x", "node_selector": {"disk": "hdd"}},
+    {"name": "y", "node_selector": {"disk": "hdd"}}
+  ]
+}' | jq .

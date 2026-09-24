@@ -1,0 +1,3 @@
+	gangscheduler		coverage: 0.0% of statements
+ok  	gangscheduler/api	0.102s	coverage: 93.2% of statements
+ok  	gangscheduler/gang	0.004s	coverage: 93.9% of statements
