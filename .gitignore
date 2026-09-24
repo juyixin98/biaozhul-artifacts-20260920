@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# 本地测试密钥与状态（禁止提交/严禁用于生产）
+test-keys/
+*.trust-state.json
+trust-state.json
+
+# 示例运行产物
+examples/*.bin

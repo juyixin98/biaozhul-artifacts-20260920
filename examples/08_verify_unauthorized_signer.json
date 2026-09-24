@@ -1,0 +1,20 @@
+{
+  "envelope": {
+    "digest": "b2e44a607bda0346657f393b5aee130b01d52473e856b164e9dc496be5504730",
+    "artifact_type": "report",
+    "version": "1.0.0",
+    "signatures": [
+      {
+        "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEADURQdYjW2YHxzx42035xSdtC23v1XZBTeo5pIjNIG6c=\n-----END PUBLIC KEY-----\n",
+        "signature": "OqLKE5ihclrukvQtqHqJJxbFmHrRq0Z/wMLduFzMzzzCbpTFcxZszK11v730UxwYhQq3MDBSeiJmDViG9L7OAw==",
+        "nonce": "WJCkEN4F+NHAtzLAE85p2g=="
+      },
+      {
+        "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAoX5KXAekz8f6ASqmQJZWRzNoOGWofeN2QICEtxhpwZE=\n-----END PUBLIC KEY-----\n",
+        "signature": "R20R3Y2REohUf08WXFxupJLwgKQcaMeAdEZ/qKjGS9orFeXKAsTZ+JC6LeGqB3RXjEZOAjbV3bhYd9DGagQJBA==",
+        "nonce": "whmA5RIqD5mavKeiufE97A=="
+      }
+    ]
+  },
+  "content_base64": "eyJyZXBvcnQiOiAicXVhcnRlcmx5LXNhbGVzIiwgImZpZ3VyZXMiOiBbMSwgMiwgM119"
+}

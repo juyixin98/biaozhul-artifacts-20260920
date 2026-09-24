@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "root_threshold": 2,
+  "artifact_threshold": 2,
+  "root_signers": [
+    "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEADURQdYjW2YHxzx42035xSdtC23v1XZBTeo5pIjNIG6c=\n-----END PUBLIC KEY-----\n",
+    "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEALX0lqmw8t2uSWvHra3IMpacFq4ZBa0yIuaqBsUJCcYM=\n-----END PUBLIC KEY-----\n",
+    "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA6YLlAQKom/ZN4B9USXIPv4qMmrjFRT/UUxI7HPTb6B8=\n-----END PUBLIC KEY-----\n"
+  ],
+  "artifact_signers": [
+    "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAoX5KXAekz8f6ASqmQJZWRzNoOGWofeN2QICEtxhpwZE=\n-----END PUBLIC KEY-----\n",
+    "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAnGcVqUZxrrcz55cOzL2Iyu5YkdXpvcYB2kiJowP2LRo=\n-----END PUBLIC KEY-----\n",
+    "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEADqXLJg6NTZ8PWglkOqutDbtk+f2Mn8WqsxShZmOeV/o=\n-----END PUBLIC KEY-----\n"
+  ]
+}

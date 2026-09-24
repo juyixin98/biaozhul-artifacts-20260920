@@ -1,0 +1,28 @@
+{
+  "new_root": {
+    "version": 2,
+    "root_threshold": 2,
+    "artifact_threshold": 2,
+    "root_signers": [
+      "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAnIDKQccCvJNXYnFTJqVRhl6J7OpyLRhRqOO0QgP12f4=\n-----END PUBLIC KEY-----\n",
+      "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAhZe9LO3UfKV15Pj4E5j+r7rsQmbtDJZpF/qshAR3tBs=\n-----END PUBLIC KEY-----\n",
+      "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAKIZYGqWyOJ44WPg43eQUp2jZPJCY6Bd7QPjzuCYFaZY=\n-----END PUBLIC KEY-----\n"
+    ],
+    "artifact_signers": [
+      "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA0fv8v2zFvwsw5JlIiEVMehDe0M4RtP8JcRP27HrGWwU=\n-----END PUBLIC KEY-----\n",
+      "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA4mVd/DY5EjdlTk5vQL0HR6mKfFtPlK57joedPNsOYW4=\n-----END PUBLIC KEY-----\n"
+    ]
+  },
+  "approvals": [
+    {
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEADURQdYjW2YHxzx42035xSdtC23v1XZBTeo5pIjNIG6c=\n-----END PUBLIC KEY-----\n",
+      "signature": "LrTF6fOO9VM5DPTiRfD9mTBVTXQ/Gu+LOzSt0MbxpxYl/FWkAEAOse6YZUVsvuMjUCzByeRO+Dk3a+2Qiyj3CQ==",
+      "nonce": "On8X7O/hepAdHMS0NyUt3w=="
+    },
+    {
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEALX0lqmw8t2uSWvHra3IMpacFq4ZBa0yIuaqBsUJCcYM=\n-----END PUBLIC KEY-----\n",
+      "signature": "43jiWDo07KnToY/Fhyi8HWqGMmufjMcmfB8t4ExDfaz78WYzOhroWXKJz6IUGBbKBFFPyf2APe/xmIbrcePrDw==",
+      "nonce": "9T4wwLW+RknGY5SfdFG5qQ=="
+    }
+  ]
+}

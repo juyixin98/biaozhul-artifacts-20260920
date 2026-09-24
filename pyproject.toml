@@ -1,0 +1,24 @@
+[project]
+name = "artifact-signing-trust-rotation"
+version = "1.0.0"
+description = "基于 Ed25519 的本地制品签名验证与信任根轮换服务（纯后端 HTTP API）"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi==0.141.1",
+    "uvicorn[standard]==0.53.0",
+    "cryptography==50.0.1",
+    "pydantic>=2.13,<3",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8",
+    "httpx>=0.28",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
