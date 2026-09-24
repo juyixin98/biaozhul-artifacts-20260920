@@ -1,0 +1,33 @@
+{
+  "pod": {
+    "name": "candidate-web",
+    "labels": {"app": "web"},
+    "requests": {"cpu": "1500m", "memory": "1Gi"}
+  },
+  "nodes": [
+    {
+      "name": "node-small",
+      "labels": {"topology.kubernetes.io/zone": "zone-a"},
+      "allocatable": {"cpu": "1800m", "memory": "2Gi"}
+    },
+    {
+      "name": "node-big",
+      "labels": {"topology.kubernetes.io/zone": "zone-b"},
+      "allocatable": {"cpu": "4", "memory": "8Gi"}
+    }
+  ],
+  "existing_pods": [
+    {
+      "name": "sidecar-a",
+      "node_name": "node-small",
+      "labels": {"app": "infra"},
+      "requests": {"cpu": "500m", "memory": "256Mi"}
+    },
+    {
+      "name": "batch-job",
+      "node_name": "node-big",
+      "labels": {"app": "batch"},
+      "requests": {"cpu": "1", "memory": "2Gi"}
+    }
+  ]
+}

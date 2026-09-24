@@ -1,0 +1,41 @@
+{
+  "pod": {
+    "name": "candidate-web-2",
+    "labels": {"app": "web"},
+    "requests": {"cpu": "500m", "memory": "512Mi"},
+    "anti_affinity": {
+      "required_terms": [
+        {
+          "match_labels": {"app": "web"},
+          "topology_key": "kubernetes.io/hostname"
+        }
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "name": "node-a",
+      "labels": {
+        "kubernetes.io/hostname": "node-a",
+        "topology.kubernetes.io/zone": "zone-a"
+      },
+      "allocatable": {"cpu": "4", "memory": "8Gi"}
+    },
+    {
+      "name": "node-b",
+      "labels": {
+        "kubernetes.io/hostname": "node-b",
+        "topology.kubernetes.io/zone": "zone-a"
+      },
+      "allocatable": {"cpu": "4", "memory": "8Gi"}
+    }
+  ],
+  "existing_pods": [
+    {
+      "name": "web-1",
+      "node_name": "node-a",
+      "labels": {"app": "web"},
+      "requests": {"cpu": "500m", "memory": "512Mi"}
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "pod": {
+    "name": "candidate-web-3",
+    "labels": {"app": "web"},
+    "requests": {"cpu": "500m", "memory": "512Mi"},
+    "topology_spread": {
+      "topology_key": "topology.kubernetes.io/zone",
+      "match_labels": {"app": "web"}
+    }
+  },
+  "nodes": [
+    {
+      "name": "node-a1",
+      "labels": {"topology.kubernetes.io/zone": "zone-a"},
+      "allocatable": {"cpu": "4", "memory": "8Gi"}
+    },
+    {
+      "name": "node-a2",
+      "labels": {"topology.kubernetes.io/zone": "zone-a"},
+      "allocatable": {"cpu": "4", "memory": "8Gi"}
+    },
+    {
+      "name": "node-b1",
+      "labels": {"topology.kubernetes.io/zone": "zone-b"},
+      "allocatable": {"cpu": "4", "memory": "8Gi"}
+    }
+  ],
+  "existing_pods": [
+    {
+      "name": "web-1",
+      "node_name": "node-a1",
+      "labels": {"app": "web"},
+      "requests": {"cpu": "500m", "memory": "512Mi"}
+    },
+    {
+      "name": "web-2",
+      "node_name": "node-a2",
+      "labels": {"app": "web"},
+      "requests": {"cpu": "500m", "memory": "512Mi"}
+    }
+  ]
+}

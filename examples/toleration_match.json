@@ -1,0 +1,24 @@
+{
+  "pod": {
+    "name": "candidate-gpu",
+    "labels": {"app": "trainer"},
+    "requests": {"cpu": "1", "memory": "2Gi"},
+    "tolerations": []
+  },
+  "nodes": [
+    {
+      "name": "node-gpu",
+      "labels": {"accelerator": "gpu"},
+      "allocatable": {"cpu": "8", "memory": "16Gi"},
+      "taints": [
+        {"key": "dedicated", "value": "gpu", "effect": "NoSchedule"}
+      ]
+    },
+    {
+      "name": "node-normal",
+      "labels": {},
+      "allocatable": {"cpu": "8", "memory": "16Gi"}
+    }
+  ],
+  "existing_pods": []
+}
