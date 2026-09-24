@@ -1,0 +1,20 @@
+{
+  "devices": [
+    {"id": "gpu0", "memoryMB": 24576, "numaNode": 0},
+    {"id": "gpu1", "memoryMB": 24576, "numaNode": 0},
+    {"id": "gpu2", "memoryMB": 24576, "numaNode": 0},
+    {"id": "gpu3", "memoryMB": 24576, "numaNode": 0},
+    {"id": "gpu4", "memoryMB": 24576, "numaNode": 1},
+    {"id": "gpu5", "memoryMB": 24576, "numaNode": 1},
+    {"id": "gpu6", "memoryMB": 24576, "numaNode": 1},
+    {"id": "gpu7", "memoryMB": 24576, "numaNode": 1}
+  ],
+  "links": [
+    {"a": "gpu0", "b": "gpu1", "cost": 0},
+    {"a": "gpu2", "b": "gpu3", "cost": 0},
+    {"a": "gpu4", "b": "gpu5", "cost": 0},
+    {"a": "gpu6", "b": "gpu7", "cost": 0}
+  ],
+  "defaultSameNUMACost": 1,
+  "defaultCrossNUMACost": 10
+}

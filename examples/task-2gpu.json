@@ -1,0 +1,1 @@
+{"taskId": "train-llm", "replicas": 2, "memoryPerReplicaMB": 8192}
