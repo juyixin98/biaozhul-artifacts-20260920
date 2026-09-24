@@ -1,0 +1,8 @@
+{
+  "device_id": "dev-001",
+  "boot_gen": 1,
+  "seq": 1,
+  "value": 213.7,
+  "ts_ms": 1727100000123,
+  "sig": "c41bcc7ef01199d3d58556f3378ea66ead1f9f8caa6aca6ce087ef4189978993"
+}

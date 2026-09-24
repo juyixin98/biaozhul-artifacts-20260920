@@ -1,0 +1,26 @@
+# 本地依赖一键编排：docker compose up -d
+# 端口刻意避开系统默认的 1883 / 5432，防止与本机已有服务冲突。
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: mqttredel-mqtt
+    ports:
+      - "11883:1883"
+    volumes:
+      - ./deploy/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - mqtt-data:/mosquitto/data
+  postgres:
+    image: postgres:16-alpine
+    container_name: mqttredel-pg
+    environment:
+      POSTGRES_USER: mqttredel
+      POSTGRES_PASSWORD: mqttredel
+      POSTGRES_DB: mqttredel
+    ports:
+      - "55433:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+volumes:
+  mqtt-data:
+  pg-data:
