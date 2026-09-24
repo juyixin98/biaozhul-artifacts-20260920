@@ -1,0 +1,9 @@
+# Direct dependencies (see requirements.lock for fully pinned, resolved versions)
+osqp>=1.1,<2.0
+numpy>=1.26
+scipy>=1.11
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pydantic>=2.7
+pytest>=8.0
+httpx>=0.27
