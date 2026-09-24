@@ -1,0 +1,8 @@
+{
+  "name": "bad-cycle",
+  "nodes": [
+    {"id": "a", "type": "const", "deps": ["c"], "params": {"value": 1}},
+    {"id": "b", "type": "const", "deps": ["a"], "params": {"value": 1}},
+    {"id": "c", "type": "const", "deps": ["b"], "params": {"value": 1}}
+  ]
+}

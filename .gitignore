@@ -1,0 +1,5 @@
+# runtime data (snapshot files)
+/data/
+
+# built binary
+/dagserver

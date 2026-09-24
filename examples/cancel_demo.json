@@ -1,0 +1,11 @@
+{
+  "name": "cancel-demo",
+  "backoff_ms": 60000,
+  "nodes": [
+    {"id": "first", "type": "const", "params": {"value": 100}},
+    {"id": "flaky", "type": "fail", "deps": ["first"], "retries": 100,
+     "params": {"message": "keeps failing, long backoff"}},
+    {"id": "downstream", "type": "const", "deps": ["flaky"],
+     "params": {"value": "must-never-run"}}
+  ]
+}

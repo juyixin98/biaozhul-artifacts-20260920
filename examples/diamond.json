@@ -1,0 +1,12 @@
+{
+  "name": "diamond",
+  "retries": 0,
+  "nodes": [
+    {"id": "top", "type": "const", "params": {"value": 10}},
+    {"id": "left", "type": "mul", "deps": ["top"],
+     "params": {"x": {"$ref": "top"}, "y": 2}},
+    {"id": "right", "type": "add", "deps": ["top"],
+     "params": {"x": {"$ref": "top"}, "y": 5}},
+    {"id": "bottom", "type": "sum_deps", "deps": ["left", "right"]}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "middle-failure",
+  "backoff_ms": 20,
+  "nodes": [
+    {"id": "top", "type": "const", "params": {"value": 1}},
+    {"id": "flaky", "type": "fail", "deps": ["top"], "retries": 2,
+     "params": {"message": "middle task failed"}},
+    {"id": "leaf", "type": "const", "deps": ["flaky"],
+     "params": {"value": "done"}}
+  ]
+}

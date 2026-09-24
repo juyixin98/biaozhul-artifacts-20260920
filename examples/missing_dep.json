@@ -1,0 +1,6 @@
+{
+  "name": "missing-dependency",
+  "nodes": [
+    {"id": "a", "type": "const", "deps": ["does-not-exist"], "params": {"value": 1}}
+  ]
+}
