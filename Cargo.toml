@@ -1,0 +1,18 @@
+[package]
+name = "incremental-build-planner"
+version = "0.1.0"
+edition = "2021"
+description = "Incremental build dependency-graph planner (HTTP API, content-addressed cache keys)"
+
+[dependencies]
+axum = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net"] }
+
+[dev-dependencies]
+tower = { version = "0.5", features = ["util"] }
+
+[profile.release]
+opt-level = 2

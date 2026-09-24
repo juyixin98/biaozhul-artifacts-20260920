@@ -1,0 +1,129 @@
+{
+  "graph": {
+    "nodes": [
+      {
+        "id": "a.c",
+        "type": "input"
+      },
+      {
+        "id": "b.c",
+        "type": "input"
+      },
+      {
+        "id": "b.o",
+        "type": "target",
+        "depends_on": [
+          "a.c"
+        ],
+        "rule": {
+          "command": "gcc -c a.c -o b.o",
+          "tool": {
+            "name": "gcc",
+            "version": "13.2.0"
+          },
+          "environment": {
+            "CC": "gcc",
+            "CFLAGS": "-O2"
+          }
+        }
+      },
+      {
+        "id": "c.o",
+        "type": "target",
+        "depends_on": [
+          "a.c"
+        ],
+        "rule": {
+          "command": "gcc -c a.c -o c.o",
+          "tool": {
+            "name": "gcc",
+            "version": "13.2.0"
+          },
+          "environment": {
+            "CC": "gcc",
+            "CFLAGS": "-O2"
+          }
+        }
+      },
+      {
+        "id": "app",
+        "type": "target",
+        "depends_on": [
+          "b.o",
+          "c.o"
+        ],
+        "rule": {
+          "command": "ld b.o c.o -o app",
+          "tool": {
+            "name": "ld",
+            "version": "2.42"
+          },
+          "environment": {}
+        }
+      }
+    ]
+  },
+  "files": {
+    "a.c": {
+      "content_hash": "sha256:01a1-source-a",
+      "mtime": 1727000000
+    },
+    "b.c": {
+      "content_hash": "sha256:02b2-unused-input",
+      "mtime": 1727000000
+    },
+    "README.md": {
+      "content_hash": "sha256:ffff-readme",
+      "mtime": 1727000000
+    }
+  },
+  "baseline": {
+    "files": {
+      "a.c": {
+        "content_hash": "sha256:01a1-source-a",
+        "mtime": 1727000000
+      },
+      "b.c": {
+        "content_hash": "sha256:02b2-unused-input",
+        "mtime": 1727000000
+      }
+    },
+    "rules": {
+      "app": {
+        "command": "ld b.o c.o -o app",
+        "tool": {
+          "name": "ld",
+          "version": "2.42"
+        },
+        "environment": {}
+      },
+      "b.o": {
+        "command": "gcc -c a.c -o b.o",
+        "tool": {
+          "name": "gcc",
+          "version": "13.2.0"
+        },
+        "environment": {
+          "CC": "gcc",
+          "CFLAGS": "-O2"
+        }
+      },
+      "c.o": {
+        "command": "gcc -c a.c -o c.o",
+        "tool": {
+          "name": "gcc",
+          "version": "13.2.0"
+        },
+        "environment": {
+          "CC": "gcc",
+          "CFLAGS": "-O2"
+        }
+      }
+    },
+    "target_keys": {
+      "app": "26960caa7e1898ddecd4451a50384fe9655ea12cf5311424e615f28782f0e427",
+      "b.o": "01f517f445fd6529449ad98202ee0bb5eec9b77a15df5960080010e0d33442ce",
+      "c.o": "c42c6299c7365d825e024413414c0f8dfb31031212eb39522724acbfeb00eb82"
+    }
+  }
+}
