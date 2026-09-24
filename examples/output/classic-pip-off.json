@@ -1,0 +1,455 @@
+{
+  "enableInheritance": false,
+  "events": [
+    {
+      "time": 0,
+      "kind": "RELEASE",
+      "task": "L"
+    },
+    {
+      "time": 0,
+      "kind": "SCHEDULE",
+      "task": "L",
+      "newPriority": 1,
+      "candidates": [
+        "L"
+      ],
+      "candidatePriorities": {
+        "L": 1
+      }
+    },
+    {
+      "time": 0,
+      "kind": "LOCK",
+      "task": "L",
+      "resource": "A"
+    },
+    {
+      "time": 0,
+      "kind": "SCHEDULE",
+      "task": "L",
+      "newPriority": 1,
+      "candidates": [
+        "L"
+      ],
+      "candidatePriorities": {
+        "L": 1
+      },
+      "tickConsumed": true
+    },
+    {
+      "time": 0,
+      "kind": "COMPUTE",
+      "task": "L",
+      "remaining": 3
+    },
+    {
+      "time": 1,
+      "kind": "RELEASE",
+      "task": "H"
+    },
+    {
+      "time": 1,
+      "kind": "SCHEDULE",
+      "task": "H",
+      "newPriority": 3,
+      "candidates": [
+        "L",
+        "H"
+      ],
+      "candidatePriorities": {
+        "H": 3,
+        "L": 1
+      },
+      "preempted": "L"
+    },
+    {
+      "time": 1,
+      "kind": "BLOCK",
+      "task": "H",
+      "resource": "A",
+      "holder": "L"
+    },
+    {
+      "time": 1,
+      "kind": "SCHEDULE",
+      "task": "L",
+      "newPriority": 1,
+      "candidates": [
+        "L"
+      ],
+      "candidatePriorities": {
+        "L": 1
+      },
+      "tickConsumed": true
+    },
+    {
+      "time": 1,
+      "kind": "COMPUTE",
+      "task": "L",
+      "remaining": 2
+    },
+    {
+      "time": 2,
+      "kind": "RELEASE",
+      "task": "M"
+    },
+    {
+      "time": 2,
+      "kind": "SCHEDULE",
+      "task": "M",
+      "newPriority": 2,
+      "candidates": [
+        "L",
+        "M"
+      ],
+      "candidatePriorities": {
+        "L": 1,
+        "M": 2
+      },
+      "preempted": "L",
+      "tickConsumed": true
+    },
+    {
+      "time": 2,
+      "kind": "COMPUTE",
+      "task": "M",
+      "remaining": 4
+    },
+    {
+      "time": 3,
+      "kind": "SCHEDULE",
+      "task": "M",
+      "newPriority": 2,
+      "candidates": [
+        "L",
+        "M"
+      ],
+      "candidatePriorities": {
+        "L": 1,
+        "M": 2
+      },
+      "tickConsumed": true
+    },
+    {
+      "time": 3,
+      "kind": "COMPUTE",
+      "task": "M",
+      "remaining": 3
+    },
+    {
+      "time": 4,
+      "kind": "SCHEDULE",
+      "task": "M",
+      "newPriority": 2,
+      "candidates": [
+        "L",
+        "M"
+      ],
+      "candidatePriorities": {
+        "L": 1,
+        "M": 2
+      },
+      "tickConsumed": true
+    },
+    {
+      "time": 4,
+      "kind": "COMPUTE",
+      "task": "M",
+      "remaining": 2
+    },
+    {
+      "time": 5,
+      "kind": "SCHEDULE",
+      "task": "M",
+      "newPriority": 2,
+      "candidates": [
+        "L",
+        "M"
+      ],
+      "candidatePriorities": {
+        "L": 1,
+        "M": 2
+      },
+      "tickConsumed": true
+    },
+    {
+      "time": 5,
+      "kind": "COMPUTE",
+      "task": "M",
+      "remaining": 1
+    },
+    {
+      "time": 6,
+      "kind": "SCHEDULE",
+      "task": "M",
+      "newPriority": 2,
+      "candidates": [
+        "L",
+        "M"
+      ],
+      "candidatePriorities": {
+        "L": 1,
+        "M": 2
+      },
+      "tickConsumed": true
+    },
+    {
+      "time": 6,
+      "kind": "COMPUTE",
+      "task": "M"
+    },
+    {
+      "time": 7,
+      "kind": "FINISH",
+      "task": "M"
+    },
+    {
+      "time": 7,
+      "kind": "SCHEDULE",
+      "task": "L",
+      "newPriority": 1,
+      "candidates": [
+        "L"
+      ],
+      "candidatePriorities": {
+        "L": 1
+      },
+      "tickConsumed": true
+    },
+    {
+      "time": 7,
+      "kind": "COMPUTE",
+      "task": "L",
+      "remaining": 1
+    },
+    {
+      "time": 8,
+      "kind": "SCHEDULE",
+      "task": "L",
+      "newPriority": 1,
+      "candidates": [
+        "L"
+      ],
+      "candidatePriorities": {
+        "L": 1
+      },
+      "tickConsumed": true
+    },
+    {
+      "time": 8,
+      "kind": "COMPUTE",
+      "task": "L"
+    },
+    {
+      "time": 9,
+      "kind": "SCHEDULE",
+      "task": "L",
+      "newPriority": 1,
+      "candidates": [
+        "L"
+      ],
+      "candidatePriorities": {
+        "L": 1
+      }
+    },
+    {
+      "time": 9,
+      "kind": "UNLOCK",
+      "task": "L",
+      "resource": "A"
+    },
+    {
+      "time": 9,
+      "kind": "SCHEDULE",
+      "task": "H",
+      "newPriority": 3,
+      "candidates": [
+        "L",
+        "H"
+      ],
+      "candidatePriorities": {
+        "H": 3,
+        "L": 1
+      },
+      "preempted": "L",
+      "tickConsumed": true
+    },
+    {
+      "time": 9,
+      "kind": "WAKE",
+      "task": "H",
+      "resource": "A"
+    },
+    {
+      "time": 9,
+      "kind": "COMPUTE",
+      "task": "H",
+      "remaining": 2
+    },
+    {
+      "time": 10,
+      "kind": "SCHEDULE",
+      "task": "H",
+      "newPriority": 3,
+      "candidates": [
+        "L",
+        "H"
+      ],
+      "candidatePriorities": {
+        "H": 3,
+        "L": 1
+      },
+      "tickConsumed": true
+    },
+    {
+      "time": 10,
+      "kind": "COMPUTE",
+      "task": "H",
+      "remaining": 1
+    },
+    {
+      "time": 11,
+      "kind": "SCHEDULE",
+      "task": "H",
+      "newPriority": 3,
+      "candidates": [
+        "L",
+        "H"
+      ],
+      "candidatePriorities": {
+        "H": 3,
+        "L": 1
+      },
+      "tickConsumed": true
+    },
+    {
+      "time": 11,
+      "kind": "COMPUTE",
+      "task": "H"
+    },
+    {
+      "time": 12,
+      "kind": "SCHEDULE",
+      "task": "H",
+      "newPriority": 3,
+      "candidates": [
+        "L",
+        "H"
+      ],
+      "candidatePriorities": {
+        "H": 3,
+        "L": 1
+      }
+    },
+    {
+      "time": 12,
+      "kind": "UNLOCK",
+      "task": "H",
+      "resource": "A"
+    },
+    {
+      "time": 12,
+      "kind": "SCHEDULE",
+      "task": "H",
+      "newPriority": 3,
+      "candidates": [
+        "L",
+        "H"
+      ],
+      "candidatePriorities": {
+        "H": 3,
+        "L": 1
+      }
+    },
+    {
+      "time": 12,
+      "kind": "FINISH",
+      "task": "H"
+    },
+    {
+      "time": 12,
+      "kind": "SCHEDULE",
+      "task": "L",
+      "newPriority": 1,
+      "candidates": [
+        "L"
+      ],
+      "candidatePriorities": {
+        "L": 1
+      },
+      "tickConsumed": true
+    },
+    {
+      "time": 12,
+      "kind": "COMPUTE",
+      "task": "L"
+    },
+    {
+      "time": 13,
+      "kind": "FINISH",
+      "task": "L"
+    }
+  ],
+  "tasks": [
+    {
+      "name": "L",
+      "basePriority": 1,
+      "releaseTime": 0,
+      "startTime": 0,
+      "finishTime": 13,
+      "completed": true,
+      "runningTicks": 5,
+      "blockedTicks": 0,
+      "lockAttempts": [
+        {
+          "resource": "A",
+          "requestedAt": 0,
+          "acquiredAt": 0,
+          "waitedTicks": 0,
+          "acquired": true
+        }
+      ],
+      "totalLockWaits": 0
+    },
+    {
+      "name": "M",
+      "basePriority": 2,
+      "releaseTime": 2,
+      "startTime": 2,
+      "finishTime": 7,
+      "completed": true,
+      "runningTicks": 5,
+      "blockedTicks": 0,
+      "lockAttempts": null,
+      "totalLockWaits": 0
+    },
+    {
+      "name": "H",
+      "basePriority": 3,
+      "releaseTime": 1,
+      "startTime": 1,
+      "finishTime": 12,
+      "completed": true,
+      "runningTicks": 3,
+      "blockedTicks": 8,
+      "lockAttempts": [
+        {
+          "resource": "A",
+          "requestedAt": 1,
+          "acquiredAt": 9,
+          "waitedTicks": 8,
+          "acquired": true
+        }
+      ],
+      "totalLockWaits": 8
+    }
+  ],
+  "makespan": 13,
+  "completed": true,
+  "deadlocked": false,
+  "timedOut": false,
+  "status": "completed",
+  "totalBlockedTicks": 8,
+  "eventCount": 42
+}

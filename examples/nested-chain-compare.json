@@ -1,0 +1,47 @@
+{
+  "tasks": [
+    {
+      "name": "L",
+      "priority": 1,
+      "releaseTime": 0,
+      "steps": [
+        {"op": "lock", "resource": "B"},
+        {"op": "compute", "duration": 6},
+        {"op": "unlock", "resource": "B"},
+        {"op": "compute", "duration": 1}
+      ]
+    },
+    {
+      "name": "X",
+      "priority": 2,
+      "releaseTime": 1,
+      "steps": [
+        {"op": "lock", "resource": "A"},
+        {"op": "compute", "duration": 2},
+        {"op": "lock", "resource": "B"},
+        {"op": "compute", "duration": 2},
+        {"op": "unlock", "resource": "B"},
+        {"op": "unlock", "resource": "A"},
+        {"op": "compute", "duration": 1}
+      ]
+    },
+    {
+      "name": "H",
+      "priority": 3,
+      "releaseTime": 3,
+      "steps": [
+        {"op": "lock", "resource": "A"},
+        {"op": "compute", "duration": 2},
+        {"op": "unlock", "resource": "A"}
+      ]
+    },
+    {
+      "name": "M",
+      "priority": 2,
+      "releaseTime": 4,
+      "steps": [
+        {"op": "compute", "duration": 5}
+      ]
+    }
+  ]
+}

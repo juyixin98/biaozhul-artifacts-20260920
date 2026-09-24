@@ -1,0 +1,46 @@
+Classic scenario - PIP ENABLED
+------------------------------
+t=0  RELEASE           L
+t=0  SCHEDULE          L  runnable=[L:1]  (instant boundary)
+t=0  LOCK              L  A
+t=0  SCHEDULE          L  runnable=[L:1]
+t=0  COMPUTE           L  remaining=3
+t=1  RELEASE           H
+t=1  SCHEDULE          H  runnable=[L:1,H:3]  preempts L  (instant boundary)
+t=1  BLOCK             H  waits on A held by L
+t=1  PRIORITY_INHERIT  L  prio 1->3 due to H
+t=1  SCHEDULE          L  runnable=[L:3]
+t=1  COMPUTE           L  remaining=2
+t=2  RELEASE           M
+t=2  SCHEDULE          L  runnable=[L:3,M:2]
+t=2  COMPUTE           L  remaining=1
+t=3  SCHEDULE          L  runnable=[L:3,M:2]
+t=3  COMPUTE           L  remaining=0
+t=4  SCHEDULE          L  runnable=[L:3,M:2]  (instant boundary)
+t=4  UNLOCK            L  A
+t=4  PRIORITY_RESTORE  L  prio 3->1
+t=4  SCHEDULE          H  runnable=[L:1,M:2,H:3]  preempts L
+t=4  WAKE              H  A
+t=4  COMPUTE           H  remaining=2
+t=5  SCHEDULE          H  runnable=[L:1,M:2,H:3]
+t=5  COMPUTE           H  remaining=1
+t=6  SCHEDULE          H  runnable=[L:1,M:2,H:3]
+t=6  COMPUTE           H  remaining=0
+t=7  SCHEDULE          H  runnable=[L:1,M:2,H:3]  (instant boundary)
+t=7  UNLOCK            H  A
+t=7  SCHEDULE          H  runnable=[L:1,M:2,H:3]  (instant boundary)
+t=7  FINISH            H  <-- completed
+t=7  SCHEDULE          M  runnable=[L:1,M:2]
+t=7  COMPUTE           M  remaining=4
+t=8  SCHEDULE          M  runnable=[L:1,M:2]
+t=8  COMPUTE           M  remaining=3
+t=9  SCHEDULE          M  runnable=[L:1,M:2]
+t=9  COMPUTE           M  remaining=2
+t=10 SCHEDULE          M  runnable=[L:1,M:2]
+t=10 COMPUTE           M  remaining=1
+t=11 SCHEDULE          M  runnable=[L:1,M:2]
+t=11 COMPUTE           M  remaining=0
+t=12 FINISH            M  <-- completed
+t=12 SCHEDULE          L  runnable=[L:1]
+t=12 COMPUTE           L  remaining=0
+t=13 FINISH            L  <-- completed

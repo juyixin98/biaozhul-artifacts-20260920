@@ -1,0 +1,44 @@
+Classic scenario - PIP DISABLED
+-------------------------------
+t=0  RELEASE           L
+t=0  SCHEDULE          L  runnable=[L:1]  (instant boundary)
+t=0  LOCK              L  A
+t=0  SCHEDULE          L  runnable=[L:1]
+t=0  COMPUTE           L  remaining=3
+t=1  RELEASE           H
+t=1  SCHEDULE          H  runnable=[L:1,H:3]  preempts L  (instant boundary)
+t=1  BLOCK             H  waits on A held by L
+t=1  SCHEDULE          L  runnable=[L:1]
+t=1  COMPUTE           L  remaining=2
+t=2  RELEASE           M
+t=2  SCHEDULE          M  runnable=[L:1,M:2]  preempts L
+t=2  COMPUTE           M  remaining=4
+t=3  SCHEDULE          M  runnable=[L:1,M:2]
+t=3  COMPUTE           M  remaining=3
+t=4  SCHEDULE          M  runnable=[L:1,M:2]
+t=4  COMPUTE           M  remaining=2
+t=5  SCHEDULE          M  runnable=[L:1,M:2]
+t=5  COMPUTE           M  remaining=1
+t=6  SCHEDULE          M  runnable=[L:1,M:2]
+t=6  COMPUTE           M  remaining=0
+t=7  FINISH            M  <-- completed
+t=7  SCHEDULE          L  runnable=[L:1]
+t=7  COMPUTE           L  remaining=1
+t=8  SCHEDULE          L  runnable=[L:1]
+t=8  COMPUTE           L  remaining=0
+t=9  SCHEDULE          L  runnable=[L:1]  (instant boundary)
+t=9  UNLOCK            L  A
+t=9  SCHEDULE          H  runnable=[L:1,H:3]  preempts L
+t=9  WAKE              H  A
+t=9  COMPUTE           H  remaining=2
+t=10 SCHEDULE          H  runnable=[L:1,H:3]
+t=10 COMPUTE           H  remaining=1
+t=11 SCHEDULE          H  runnable=[L:1,H:3]
+t=11 COMPUTE           H  remaining=0
+t=12 SCHEDULE          H  runnable=[L:1,H:3]  (instant boundary)
+t=12 UNLOCK            H  A
+t=12 SCHEDULE          H  runnable=[L:1,H:3]  (instant boundary)
+t=12 FINISH            H  <-- completed
+t=12 SCHEDULE          L  runnable=[L:1]
+t=12 COMPUTE           L  remaining=0
+t=13 FINISH            L  <-- completed

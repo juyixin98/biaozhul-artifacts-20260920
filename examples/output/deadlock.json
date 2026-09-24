@@ -1,0 +1,255 @@
+{
+  "enableInheritance": true,
+  "result": {
+    "enableInheritance": true,
+    "events": [
+      {
+        "time": 0,
+        "kind": "RELEASE",
+        "task": "L"
+      },
+      {
+        "time": 0,
+        "kind": "SCHEDULE",
+        "task": "L",
+        "newPriority": 1,
+        "candidates": [
+          "L"
+        ],
+        "candidatePriorities": {
+          "L": 1
+        }
+      },
+      {
+        "time": 0,
+        "kind": "LOCK",
+        "task": "L",
+        "resource": "A"
+      },
+      {
+        "time": 0,
+        "kind": "SCHEDULE",
+        "task": "L",
+        "newPriority": 1,
+        "candidates": [
+          "L"
+        ],
+        "candidatePriorities": {
+          "L": 1
+        },
+        "tickConsumed": true
+      },
+      {
+        "time": 0,
+        "kind": "COMPUTE",
+        "task": "L",
+        "remaining": 2
+      },
+      {
+        "time": 1,
+        "kind": "SCHEDULE",
+        "task": "L",
+        "newPriority": 1,
+        "candidates": [
+          "L"
+        ],
+        "candidatePriorities": {
+          "L": 1
+        },
+        "tickConsumed": true
+      },
+      {
+        "time": 1,
+        "kind": "COMPUTE",
+        "task": "L",
+        "remaining": 1
+      },
+      {
+        "time": 2,
+        "kind": "SCHEDULE",
+        "task": "L",
+        "newPriority": 1,
+        "candidates": [
+          "L"
+        ],
+        "candidatePriorities": {
+          "L": 1
+        },
+        "tickConsumed": true
+      },
+      {
+        "time": 2,
+        "kind": "COMPUTE",
+        "task": "L"
+      },
+      {
+        "time": 3,
+        "kind": "RELEASE",
+        "task": "H"
+      },
+      {
+        "time": 3,
+        "kind": "SCHEDULE",
+        "task": "H",
+        "newPriority": 3,
+        "candidates": [
+          "L",
+          "H"
+        ],
+        "candidatePriorities": {
+          "H": 3,
+          "L": 1
+        },
+        "preempted": "L"
+      },
+      {
+        "time": 3,
+        "kind": "LOCK",
+        "task": "H",
+        "resource": "B"
+      },
+      {
+        "time": 3,
+        "kind": "SCHEDULE",
+        "task": "H",
+        "newPriority": 3,
+        "candidates": [
+          "L",
+          "H"
+        ],
+        "candidatePriorities": {
+          "H": 3,
+          "L": 1
+        },
+        "tickConsumed": true
+      },
+      {
+        "time": 3,
+        "kind": "COMPUTE",
+        "task": "H"
+      },
+      {
+        "time": 4,
+        "kind": "SCHEDULE",
+        "task": "H",
+        "newPriority": 3,
+        "candidates": [
+          "L",
+          "H"
+        ],
+        "candidatePriorities": {
+          "H": 3,
+          "L": 1
+        }
+      },
+      {
+        "time": 4,
+        "kind": "BLOCK",
+        "task": "H",
+        "resource": "A",
+        "holder": "L"
+      },
+      {
+        "time": 4,
+        "kind": "PRIORITY_INHERIT",
+        "task": "L",
+        "oldPriority": 1,
+        "newPriority": 3,
+        "basePriority": 1,
+        "causedBy": "H"
+      },
+      {
+        "time": 4,
+        "kind": "SCHEDULE",
+        "task": "L",
+        "newPriority": 3,
+        "candidates": [
+          "L"
+        ],
+        "candidatePriorities": {
+          "L": 3
+        }
+      },
+      {
+        "time": 4,
+        "kind": "BLOCK",
+        "task": "L",
+        "resource": "B",
+        "holder": "H"
+      },
+      {
+        "time": 4,
+        "kind": "SCHEDULE"
+      },
+      {
+        "time": 4,
+        "kind": "DEADLOCK",
+        "cycle": [
+          "L",
+          "H"
+        ],
+        "message": "cyclic mutex wait detected; priority inheritance does not prevent deadlock"
+      }
+    ],
+    "tasks": [
+      {
+        "name": "L",
+        "basePriority": 1,
+        "releaseTime": 0,
+        "startTime": 0,
+        "completed": false,
+        "runningTicks": 3,
+        "blockedTicks": 0,
+        "lockAttempts": [
+          {
+            "resource": "A",
+            "requestedAt": 0,
+            "acquiredAt": 0,
+            "waitedTicks": 0,
+            "acquired": true
+          },
+          {
+            "resource": "B",
+            "requestedAt": 4,
+            "waitedTicks": 0,
+            "acquired": false
+          }
+        ],
+        "totalLockWaits": 0
+      },
+      {
+        "name": "H",
+        "basePriority": 3,
+        "releaseTime": 3,
+        "startTime": 3,
+        "completed": false,
+        "runningTicks": 1,
+        "blockedTicks": 0,
+        "lockAttempts": [
+          {
+            "resource": "B",
+            "requestedAt": 3,
+            "acquiredAt": 3,
+            "waitedTicks": 0,
+            "acquired": true
+          },
+          {
+            "resource": "A",
+            "requestedAt": 4,
+            "waitedTicks": 0,
+            "acquired": false
+          }
+        ],
+        "totalLockWaits": 0
+      }
+    ],
+    "makespan": 0,
+    "completed": false,
+    "deadlocked": true,
+    "timedOut": false,
+    "status": "deadlocked",
+    "totalBlockedTicks": 0,
+    "eventCount": 21
+  },
+  "scenario": "deadlock"
+}
