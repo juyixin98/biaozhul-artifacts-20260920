@@ -1,0 +1,10 @@
+# Local data directory (snapshot.json + wal.log)
+/data
+/data-*
+
+# Built binaries
+/taskq
+*.out
+
+# OS / editor cruft
+.DS_Store
