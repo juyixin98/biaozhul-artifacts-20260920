@@ -1,0 +1,11 @@
+{
+  "merge_id": "demo-unsafe-link",
+  "actions": [
+    {
+      "id": "action-a",
+      "outputs": [
+        { "path": "dir/link", "kind": "symlink", "link_target": "../../etc/passwd" }
+      ]
+    }
+  ]
+}

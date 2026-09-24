@@ -1,0 +1,17 @@
+{
+  "merge_id": "demo-case-fold",
+  "actions": [
+    {
+      "id": "action-a",
+      "outputs": [
+        { "path": "Readme", "kind": "file", "content": "lowercase r" }
+      ]
+    },
+    {
+      "id": "action-b",
+      "outputs": [
+        { "path": "README", "kind": "file", "content": "uppercase R" }
+      ]
+    }
+  ]
+}

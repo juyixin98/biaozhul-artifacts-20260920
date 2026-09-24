@@ -1,0 +1,27 @@
+[package]
+name = "build-output-merge"
+version = "0.1.0"
+edition = "2021"
+description = "Build action output-tree merge service with path-conflict detection (Axum)"
+
+[lib]
+name = "build_output_merge"
+path = "src/lib.rs"
+
+[[bin]]
+name = "build-output-merge"
+path = "src/main.rs"
+
+[dependencies]
+axum = "0.8"
+base64 = "0.22"
+hex = "0.4"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "fs", "signal"] }
+uuid = { version = "1", features = ["v4"] }
+
+[dev-dependencies]
+tempfile = "3"
+tower = "0.5"

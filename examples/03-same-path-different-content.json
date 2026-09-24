@@ -1,0 +1,17 @@
+{
+  "merge_id": "demo-diff-content",
+  "actions": [
+    {
+      "id": "action-a",
+      "outputs": [
+        { "path": "out/result.txt", "kind": "file", "content": "version one" }
+      ]
+    },
+    {
+      "id": "action-b",
+      "outputs": [
+        { "path": "out/result.txt", "kind": "file", "content": "version two" }
+      ]
+    }
+  ]
+}

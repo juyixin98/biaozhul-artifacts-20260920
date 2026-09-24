@@ -1,0 +1,17 @@
+{
+  "merge_id": "demo-file-vs-dir",
+  "actions": [
+    {
+      "id": "action-a",
+      "outputs": [
+        { "path": "a", "kind": "file", "content": "i am a file" }
+      ]
+    },
+    {
+      "id": "action-b",
+      "outputs": [
+        { "path": "a/b/config.txt", "kind": "file", "content": "need a to be a directory" }
+      ]
+    }
+  ]
+}

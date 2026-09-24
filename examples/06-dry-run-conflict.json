@@ -1,0 +1,17 @@
+{
+  "dry_run": true,
+  "actions": [
+    {
+      "id": "action-a",
+      "outputs": [
+        { "path": "a", "kind": "file", "content": "x" }
+      ]
+    },
+    {
+      "id": "action-b",
+      "outputs": [
+        { "path": "a", "kind": "dir" }
+      ]
+    }
+  ]
+}

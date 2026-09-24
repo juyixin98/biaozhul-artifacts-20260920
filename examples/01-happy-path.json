@@ -1,0 +1,21 @@
+{
+  "merge_id": "demo-happy",
+  "actions": [
+    {
+      "id": "compile",
+      "outputs": [
+        { "path": "bin/app", "kind": "file", "content_base64": "RUZMLWJpbmFyeQ==" },
+        { "path": "lib", "kind": "dir" },
+        { "path": "lib/libcore.a", "kind": "file", "content": "common-payload-A" }
+      ]
+    },
+    {
+      "id": "docs",
+      "outputs": [
+        { "path": "share/README.md", "kind": "file", "content": "# build-output-merge\n" },
+        { "path": "lib/libcore.copy.a", "kind": "file", "content": "common-payload-A" },
+        { "path": "share/latest", "kind": "symlink", "link_target": "README.md" }
+      ]
+    }
+  ]
+}
