@@ -1,0 +1,17 @@
+{
+  "toolchain": "go",
+  "version_command": ["go", "version"],
+  "command": ["go", "build", "-buildvcs=false", "{args}", "-o", "{artifact}", "."],
+  "args": [],
+  "target": {"GOOS": "linux", "GOARCH": "amd64"},
+  "env": {},
+  "sources": [
+    {"path": "go.mod"},
+    {"path": "main.go"},
+    {"path": "flavor_lite.go"},
+    {"path": "flavor_pro.go"}
+  ],
+  "artifact": "app",
+  "timeout_seconds": 120,
+  "wait_seconds": 120
+}

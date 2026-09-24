@@ -1,0 +1,13 @@
+# runtime data (sqlite db, WAL, artifact blobs, quarantine)
+/data/
+*.db
+*.db-wal
+*.db-shm
+
+# compiled binaries
+/buildcache
+/cmd/buildcache/buildcache
+
+# os / editor cruft
+.DS_Store
+*.swp

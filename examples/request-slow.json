@@ -1,0 +1,14 @@
+{
+  "toolchain": "coreutils",
+  "version_command": ["sh", "-c", "echo posix-sh 1.0"],
+  "command": ["sh", "-c", "sleep 3; cp /bin/true \"$1\"", "slow-build", "{artifact}"],
+  "args": [],
+  "target": {},
+  "env": {},
+  "sources": [
+    {"path": "slow.txt", "inline_b64": "c2xvdw=="}
+  ],
+  "artifact": "true.bin",
+  "timeout_seconds": 30,
+  "wait_seconds": 30
+}

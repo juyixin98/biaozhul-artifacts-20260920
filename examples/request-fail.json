@@ -1,0 +1,14 @@
+{
+  "toolchain": "shell",
+  "version_command": ["sh", "-c", "echo posix-sh 1.0"],
+  "command": ["sh", "-c", "echo 'compile error: boom' >&2; exit 8", "failing-build"],
+  "args": [],
+  "target": {},
+  "env": {},
+  "sources": [
+    {"path": "broken.txt", "inline_b64": "YnJva2Vu"}
+  ],
+  "artifact": "never-produced",
+  "timeout_seconds": 10,
+  "wait_seconds": 30
+}
