@@ -1,0 +1,6 @@
+# Build artifacts
+/fencingdemo
+
+# Runtime data
+/data/
+/data-demo/
