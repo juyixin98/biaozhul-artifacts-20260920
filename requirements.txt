@@ -1,0 +1,9 @@
+# 直接依赖（最低版本锁定；完整可复现冻结清单见 requirements.lock）
+# Python 3.10+
+numpy>=2.0,<3
+fastapi>=0.110,<1
+uvicorn>=0.29,<1
+pydantic>=2.6,<3
+# 测试 / 验收
+httpx>=0.27,<1
+pytest>=8,<10
