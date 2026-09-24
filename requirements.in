@@ -1,0 +1,7 @@
+# 直接依赖（宽松约束）
+fastapi
+uvicorn[standard]
+cryptography
+# 测试 / 演示
+pytest
+httpx
