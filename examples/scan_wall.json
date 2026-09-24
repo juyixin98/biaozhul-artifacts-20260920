@@ -1,0 +1,16 @@
+{
+  "pose": [0.0, 0.0, 0.0],
+  "max_range": 5.0,
+  "base_seq": 0,
+  "returns": [
+    {"angle": -0.20, "range": 2.55},
+    {"angle": -0.15, "range": 2.36},
+    {"angle": -0.10, "range": 2.23},
+    {"angle": -0.05, "range": 2.16},
+    {"angle":  0.00, "range": 2.13},
+    {"angle":  0.05, "range": 2.16},
+    {"angle":  0.10, "range": 2.23},
+    {"angle":  0.15, "range": 2.36},
+    {"angle":  0.20, "range": 2.55}
+  ]
+}

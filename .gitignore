@@ -1,0 +1,16 @@
+# Build output
+/build/
+/build-*/
+
+# Local secrets — never commit
+secret.txt
+*.secret
+
+# Editor / OS
+.DS_Store
+*.swp
+compile_commands.json
+
+# Python
+__pycache__/
+*.pyc

@@ -1,0 +1,9 @@
+{
+  "width": 40,
+  "height": 30,
+  "resolution": 0.1,
+  "origin": [-2.0, -1.5],
+  "p_hit": 0.6,
+  "p_free": 0.4,
+  "l_max": 3.0
+}
