@@ -1,0 +1,19 @@
+{
+  "packages": [
+    { "id": "a", "spdx": "GPL-2.0-only" },
+    { "id": "b", "spdx": "GPL-2.0-only OR MIT" },
+    { "id": "c", "spdx": "GPL-2.0-only" }
+  ],
+  "edges": [
+    { "from": "a", "to": "b", "link": "static" },
+    { "from": "b", "to": "a", "link": "dynamic" },
+    { "from": "b", "to": "c", "link": "static" }
+  ],
+  "policy": {
+    "allowed_licenses": {
+      "MIT": ["*", "static", "dynamic"],
+      "GPL-2.0-only": ["*", "static", "dynamic"]
+    }
+  },
+  "exhaustive": true
+}

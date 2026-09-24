@@ -1,0 +1,18 @@
+{
+  "packages": [
+    { "id": "app", "spdx": "MIT" },
+    { "id": "mid", "spdx": "Apache-2.0" },
+    { "id": "lib", "spdx": "GPL-2.0-only" }
+  ],
+  "edges": [
+    { "from": "app", "to": "mid", "link": "static" },
+    { "from": "mid", "to": "lib", "link": "static" }
+  ],
+  "policy": {
+    "allowed_licenses": {
+      "MIT": ["*", "static", "dynamic"],
+      "Apache-2.0": ["*", "static", "dynamic"],
+      "GPL-2.0-only": ["*", "static", "dynamic"]
+    }
+  }
+}

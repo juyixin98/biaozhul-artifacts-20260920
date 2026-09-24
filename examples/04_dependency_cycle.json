@@ -1,0 +1,17 @@
+{
+  "packages": [
+    { "id": "plugin", "spdx": "MIT" },
+    { "id": "core", "spdx": "GPL-2.0-only" }
+  ],
+  "edges": [
+    { "from": "plugin", "to": "core", "link": "static" },
+    { "from": "core", "to": "plugin", "link": "dynamic" }
+  ],
+  "policy": {
+    "allowed_licenses": {
+      "MIT": ["*", "static", "dynamic"],
+      "GPL-2.0-only": ["*", "static", "dynamic"]
+    }
+  },
+  "exhaustive": true
+}
