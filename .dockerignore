@@ -1,0 +1,4 @@
+/bin/
+.git/
+config/samples/generated/
+*.md

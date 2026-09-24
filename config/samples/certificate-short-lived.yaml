@@ -1,0 +1,21 @@
+---
+# Short-lived certificate used to WATCH a real near-expiry renewal quickly.
+#
+# The renewal instant is bound to the issued certificate:
+#   renewalTime = notAfter - renewBefore - clockSkewTolerance(5m)
+# With duration=20m, renewBefore=14m the first renewal opens ~1 minute after
+# issuance (20m - 14m - 5m = 1m). renewBefore must stay below duration-5m so a
+# freshly issued cert is never immediately inside its own window.
+apiVersion: certificates.example.com/v1alpha1
+kind: Certificate
+metadata:
+  name: short-lived
+  namespace: default
+spec:
+  dnsNames:
+    - short.app.local
+  secretName: short-lived-tls
+  duration: 20m
+  renewBefore: 14m
+  issuer:
+    name: test-ca

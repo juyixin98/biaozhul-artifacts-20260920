@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cert-renewal-controller
+  namespace: cert-renewal-system
+  labels:
+    app: cert-renewal-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cert-renewal-controller
+  template:
+    metadata:
+      labels:
+        app: cert-renewal-controller
+    spec:
+      serviceAccountName: cert-renewal-controller
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: manager
+          image: cert-renewal-controller:dev
+          imagePullPolicy: IfNotPresent
+          args:
+            - --health-probe-bind-address=:8081
+            - --max-requeue=60s
+          ports:
+            - containerPort: 8081
+              name: health
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            readOnlyRootFilesystem: true
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: health
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: health
+          resources:
+            requests:
+              cpu: 50m
+              memory: 32Mi
+            limits:
+              cpu: 500m
+              memory: 128Mi

@@ -1,0 +1,16 @@
+---
+# A long-lived, normal certificate.
+apiVersion: certificates.example.com/v1alpha1
+kind: Certificate
+metadata:
+  name: example-app
+  namespace: default
+spec:
+  dnsNames:
+    - example.app.local
+    - www.example.app.local
+  secretName: example-app-tls
+  duration: 24h
+  renewBefore: 8h
+  issuer:
+    name: test-ca

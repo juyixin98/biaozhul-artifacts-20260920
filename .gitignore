@@ -1,0 +1,5 @@
+/bin/
+*.test
+*.out
+config/samples/generated/
+.env

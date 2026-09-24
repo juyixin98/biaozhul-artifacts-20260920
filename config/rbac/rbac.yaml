@@ -1,0 +1,40 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cert-renewal-controller
+  namespace: cert-renewal-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cert-renewal-controller
+rules:
+  - apiGroups: ["certificates.example.com"]
+    resources: ["certificates"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["certificates.example.com"]
+    resources: ["certificates/status"]
+    verbs: ["get", "update", "patch"]
+  - apiGroups: ["certificates.example.com"]
+    resources: ["certificates/finalizers"]
+    verbs: ["update"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cert-renewal-controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cert-renewal-controller
+subjects:
+  - kind: ServiceAccount
+    name: cert-renewal-controller
+    namespace: cert-renewal-system
