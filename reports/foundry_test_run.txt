@@ -1,0 +1,14 @@
+No files changed, compilation skipped
+
+Ran 8 tests for test/Checkpoints.t.sol:CheckpointsTest
+[PASS] testGas_Reads_LogGrowth() (gas: 104022537)
+[PASS] testGas_Writes() (gas: 15314849)
+[PASS] test_BlockGaps() (gas: 384671)
+[PASS] test_EmptyHistory() (gas: 33703)
+[PASS] test_FirstBlock() (gas: 136301)
+[PASS] test_ManyUpdatesSameBlock() (gas: 16946410)
+[PASS] test_MergeThenAppend() (gas: 281474)
+[PASS] test_RejectsFutureBlock() (gas: 122675)
+Suite result: ok. 8 passed; 0 failed; 0 skipped; finished in 110.80ms (123.42ms CPU time)
+
+Ran 1 test suite in 111.61ms (110.80ms CPU time): 8 tests passed, 0 failed, 0 skipped (8 total tests)

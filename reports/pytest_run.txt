@@ -1,0 +1,48 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.2, pluggy-1.6.0 -- /home/admin/Downloads/biaozhul/text86/b/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/admin/Downloads/biaozhul/text86/b
+configfile: pytest.ini
+plugins: anyio-4.15.1
+collecting ... collected 19 items
+
+tests/test_checkpoints.py::TestEmpty::test_length_zero PASSED
+tests/test_checkpoints.py::TestEmpty::test_latest_empty PASSED
+tests/test_checkpoints.py::TestEmpty::test_lookup_empty_any_past_block[0] PASSED
+tests/test_checkpoints.py::TestEmpty::test_lookup_empty_any_past_block[1] PASSED
+tests/test_checkpoints.py::TestEmpty::test_lookup_empty_any_past_block[2] PASSED
+tests/test_checkpoints.py::TestEmpty::test_lookup_empty_any_past_block[100] PASSED
+tests/test_checkpoints.py::TestEmpty::test_http_empty_history PASSED
+tests/test_checkpoints.py::TestFirstBlock::test_first_block_exact_and_after_gap PASSED
+tests/test_checkpoints.py::TestFirstBlock::test_http_first_block PASSED
+tests/test_checkpoints.py::TestBlockGaps::test_gaps_vs_linear_reference PASSED
+tests/test_checkpoints.py::TestBlockGaps::test_http_gap_queries PASSED
+tests/test_checkpoints.py::TestManyUpdatesSameBlock::test_batch_merges_to_one_checkpoint PASSED
+tests/test_checkpoints.py::TestManyUpdatesSameBlock::test_http_batch_then_lookup PASSED
+tests/test_checkpoints.py::TestFutureBlock::test_contract_reverts_on_future_block PASSED
+tests/test_checkpoints.py::TestFutureBlock::test_http_rejects_future_block PASSED
+tests/test_checkpoints.py::TestFutureBlock::test_http_current_block_allowed PASSED
+tests/test_gas.py::test_write_gas_merge_vs_append_and_constant_append 
+WRITE GAS (Anvil receipts, same-block paired batches):
+  append (short history) : 89809
+  merge  (short history) : 33019
+  append (~200 cps)      : 75096
+  merge  (~200 cps)      : 33019
+  append (~400 cps)      : 75108
+  merge  (~400 cps)      : 33031
+PASSED
+tests/test_gas.py::test_read_gas_logarithmic_growth 
+READ GAS (Anvil estimate_gas, cold storage, target=latest):
+  n=   4: 31402
+  n=  16: 36498
+  n=  64: 41594
+  n= 256: 46690
+  4 -> 16 (x4): +5096 gas
+  16 -> 64 (x4): +5096 gas
+  64 -> 256 (x4): +5096 gas
+PASSED
+tests/test_gas.py::test_batch_of_300_merges_gas_and_single_checkpoint 
+BATCH: 300 same-block updates in block 1282, total gas=9960194, avg=33200
+PASSED
+
+======================== 19 passed in 99.39s (0:01:39) =========================

@@ -1,0 +1,66 @@
+[
+  {
+    "type": "function",
+    "name": "setValue",
+    "stateMutability": "nonpayable",
+    "inputs": [{ "name": "value", "type": "uint256" }],
+    "outputs": []
+  },
+  {
+    "type": "function",
+    "name": "length",
+    "stateMutability": "view",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "type": "function",
+    "name": "checkpointAt",
+    "stateMutability": "view",
+    "inputs": [{ "name": "index", "type": "uint256" }],
+    "outputs": [
+      { "name": "blockNumber", "type": "uint64" },
+      { "name": "value", "type": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "latest",
+    "stateMutability": "view",
+    "inputs": [],
+    "outputs": [
+      { "name": "exists", "type": "bool" },
+      { "name": "blockNumber", "type": "uint256" },
+      { "name": "value", "type": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "getAtBlock",
+    "stateMutability": "view",
+    "inputs": [{ "name": "targetBlock", "type": "uint256" }],
+    "outputs": [
+      { "name": "exists", "type": "bool" },
+      { "name": "blockNumber", "type": "uint256" },
+      { "name": "value", "type": "uint256" }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "ValueSet",
+    "anonymous": false,
+    "inputs": [
+      { "name": "blockNumber", "type": "uint64", "indexed": true },
+      { "name": "value", "type": "uint256", "indexed": false },
+      { "name": "merged", "type": "bool", "indexed": false }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "FutureBlock",
+    "inputs": [
+      { "name": "requestedBlock", "type": "uint256" },
+      { "name": "currentBlock", "type": "uint256" }
+    ]
+  }
+]

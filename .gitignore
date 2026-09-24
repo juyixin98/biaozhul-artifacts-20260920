@@ -1,0 +1,20 @@
+# Foundry
+out/
+cache/
+broadcast/
+lib/
+.env
+.env.*
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
