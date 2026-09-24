@@ -1,0 +1,86 @@
+{
+  "chains": {
+    "A": {
+      "rpc": "http://127.0.0.1:8545",
+      "chain_id": 31337,
+      "contract": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
+    },
+    "B": {
+      "rpc": "http://127.0.0.1:8546",
+      "chain_id": 31338,
+      "contract": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+    }
+  },
+  "happy_swap": {
+    "timeline": {
+      "T_A": 1790257882,
+      "T_B": 1790257862,
+      "delta": 20
+    },
+    "ids": {
+      "A": "c96468222e93813a309399270331d7a5ae9da3e1923caa4c956f0782d9636d0a",
+      "B": "c46bf6e6ee3192a4f288719c152cc76fe66fed314093fd75a0e64c77c39f03d4"
+    },
+    "states": {
+      "A": "CLAIMED",
+      "B": "CLAIMED"
+    },
+    "contract_balances_wei": {
+      "A": 0,
+      "B": 0
+    },
+    "claim_blocks": {
+      "A": 4,
+      "B": 3
+    },
+    "amount_wei": "1000000000000000000"
+  },
+  "safe_abort": {
+    "halt_within_delta": true,
+    "halt_seconds": 3,
+    "delta": 20,
+    "rpc_answered_during_halt": true,
+    "block_frozen_during_halt": true,
+    "block_advanced_after_resume": true,
+    "states": {
+      "A": "REFUNDED",
+      "B": "REFUNDED"
+    },
+    "contract_balances_wei": {
+      "A": 0,
+      "B": 0
+    },
+    "refund_blocks": {
+      "A": 8,
+      "B": 6
+    }
+  },
+  "timeout_gap_loss": {
+    "timeline": {
+      "now": 1790257882,
+      "T_A": 1790257922,
+      "T_B": 1790257902,
+      "delta": 20
+    },
+    "states": {
+      "A": "REFUNDED",
+      "B": "CLAIMED"
+    },
+    "B_claimed_by": "Alice",
+    "A_refunded_to": "Alice",
+    "a_still_locked_before_resume": true,
+    "bob_lost_wei": "1000000000000000000",
+    "alice_gained_wei": "1000000000000000000",
+    "contract_balances_wei": {
+      "A": 0,
+      "B": 0
+    },
+    "blocks": {
+      "B_claim": 9,
+      "A_refund": 11
+    },
+    "bob_late_claim_reverted": true,
+    "bob_late_claim_error": "AlreadySettled",
+    "lesson": "reveal + halt longer than DELTA => one leg CLAIMED, other REFUNDED; the party that revealed late assigns the loss to its counterparty"
+  }
+}

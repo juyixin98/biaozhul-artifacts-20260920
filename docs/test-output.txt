@@ -1,0 +1,58 @@
+## forge test
+No files changed, compilation skipped
+
+Ran 14 tests for test/HashedTimelock.t.sol:HashedTimelockTest
+[PASS] test_ClaimAfterDeadlineWhileLockedStillWins() (gas: 68522)
+[PASS] test_ClaimWithCorrectPreimage() (gas: 73415)
+[PASS] test_LockHoldsFunds() (gas: 27856)
+[PASS] test_RefundExactlyAtDeadline() (gas: 67868)
+[PASS] test_RevertWhen_ClaimAfterRefund() (gas: 89279)
+[PASS] test_RevertWhen_ClaimUnknownSwap() (gas: 36007)
+[PASS] test_RevertWhen_DoubleClaim() (gas: 87697)
+[PASS] test_RevertWhen_DoubleRefund() (gas: 84419)
+[PASS] test_RevertWhen_LockInPast() (gas: 51258)
+[PASS] test_RevertWhen_LockZeroValue() (gas: 41653)
+[PASS] test_RevertWhen_RefundAfterClaim() (gas: 91812)
+[PASS] test_RevertWhen_RefundBeforeDeadline() (gas: 44715)
+[PASS] test_RevertWhen_RefundByNonSender() (gas: 46412)
+[PASS] test_RevertWhen_WrongPreimage() (gas: 48095)
+Suite result: ok. 14 passed; 0 failed; 0 skipped; finished in 1.59ms (4.24ms CPU time)
+
+Ran 1 test suite in 10.94ms (1.59ms CPU time): 14 tests passed, 0 failed, 0 skipped (14 total tests)
+
+## pytest
+
+tests/test_contracts.py::test_happy_path_both_legs_claimed PASSED        [  3%]
+tests/test_contracts.py::test_swap_id_matches_on_chain_derivation PASSED [  7%]
+tests/test_contracts.py::test_wrong_preimage_reverts_and_keeps_locked PASSED [ 11%]
+tests/test_contracts.py::test_refund_reverts_before_deline_and_works_at_deadline PASSED [ 15%]
+tests/test_contracts.py::test_refund_only_by_locker PASSED               [ 19%]
+tests/test_contracts.py::test_double_claim_rejected PASSED               [ 23%]
+tests/test_contracts.py::test_double_refund_rejected PASSED              [ 26%]
+tests/test_contracts.py::test_claim_after_refund_and_refund_after_claim_rejected PASSED [ 30%]
+tests/test_contracts.py::test_claim_while_locked_after_deadline_still_wins PASSED [ 34%]
+tests/test_contracts.py::test_timelock_in_the_past_rejected PASSED       [ 38%]
+tests/test_contracts.py::test_unknown_swap_reads_as_nonexistent PASSED   [ 42%]
+tests/test_coordinator.py::test_health_all_up PASSED                     [ 46%]
+tests/test_coordinator.py::test_health_reports_down_chain PASSED         [ 50%]
+tests/test_coordinator.py::test_convention_endpoint PASSED               [ 53%]
+tests/test_coordinator.py::test_single_swap_reads PASSED                 [ 57%]
+tests/test_coordinator.py::test_swap_read_returns_502_when_chain_down PASSED [ 61%]
+tests/test_coordinator.py::test_pair_view_happy_and_derived_ids PASSED   [ 65%]
+tests/test_coordinator.py::test_pair_view_derives_ids_from_lock_params PASSED [ 69%]
+tests/test_coordinator.py::test_pair_view_flags_split_outcome_as_race PASSED [ 73%]
+tests/test_coordinator.py::test_pair_view_reports_unreachable_chain PASSED [ 76%]
+tests/test_coordinator.py::test_pair_missing_params_is_400 PASSED        [ 80%]
+tests/test_coordinator.py::test_derivation_helper_matches_contract_packing PASSED [ 84%]
+tests/test_risk_boundary.py::test_halt_before_reveal_within_delta_safely_aborts PASSED [ 88%]
+tests/test_risk_boundary.py::test_timeout_gap_loss_when_halt_outlasts_delta PASSED [ 92%]
+tests/test_risk_boundary.py::test_pending_claim_during_halt_cannot_be_included PASSED [ 96%]
+tests/test_risk_boundary.py::test_delta_convention_is_signed_and_enforced PASSED [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/starlette/testclient.py:40
+  /home/admin/Downloads/biaozhul/text88/b/.venv/lib/python3.12/site-packages/starlette/testclient.py:40: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 26 passed, 1 warning in 30.60s ========================

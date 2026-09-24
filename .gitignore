@@ -1,0 +1,16 @@
+# Foundry
+out/
+cache/
+broadcast/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local run artifacts (chains are ephemeral)
+logs/
+deployment.json
+demo-results.json
+.run/
