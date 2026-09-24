@@ -1,0 +1,17 @@
+[profile.default]
+src = "contracts"
+out = "out"
+libs = ["lib"]
+solc = "0.8.24"
+optimizer = true
+optimizer-runs = 200
+via_ir = true
+evm_version = "cancun"
+
+# Deterministic, local-only toolchain. No external remappings: the contracts
+# deliberately use zero third-party Solidity dependencies.
+
+[fmt]
+line_length = 100
+tab_width = 4
+int_types = "long"
