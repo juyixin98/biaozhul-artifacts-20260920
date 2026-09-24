@@ -1,0 +1,62 @@
+{
+  "root_frame": "base",
+  "convention": "right",
+  "correlation_policy": "independent",
+  "alpha": 0.01,
+  "edges": [
+    {
+      "id": "base_imu",
+      "parent": "base",
+      "child": "imu",
+      "version": "v1",
+      "transform": {
+        "translation": [1.0, 0.0, 0.0],
+        "rotation": [1.0, 0.0, 0.0, 0.0]
+      },
+      "covariance": [
+        [1e-8, 0, 0, 0, 0, 0],
+        [0, 1e-8, 0, 0, 0, 0],
+        [0, 0, 1e-8, 0, 0, 0],
+        [0, 0, 0, 1e-8, 0, 0],
+        [0, 0, 0, 0, 1e-8, 0],
+        [0, 0, 0, 0, 0, 1e-8]
+      ]
+    },
+    {
+      "id": "imu_gps",
+      "parent": "imu",
+      "child": "gps",
+      "version": "v1",
+      "transform": {
+        "translation": [0.0, 1.0, 0.0],
+        "rotation": [1.0, 0.0, 0.0, 0.0]
+      },
+      "covariance": [
+        [1e-8, 0, 0, 0, 0, 0],
+        [0, 1e-8, 0, 0, 0, 0],
+        [0, 0, 1e-8, 0, 0, 0],
+        [0, 0, 0, 1e-8, 0, 0],
+        [0, 0, 0, 0, 1e-8, 0],
+        [0, 0, 0, 0, 0, 1e-8]
+      ]
+    },
+    {
+      "id": "gps_base",
+      "parent": "gps",
+      "child": "base",
+      "version": "v1",
+      "transform": {
+        "translation": [-1.015, -1.0, 0.0],
+        "rotation": [1.0, 0.0, 0.0, 0.0]
+      },
+      "covariance": [
+        [1e-8, 0, 0, 0, 0, 0],
+        [0, 1e-8, 0, 0, 0, 0],
+        [0, 0, 1e-8, 0, 0, 0],
+        [0, 0, 0, 1e-8, 0, 0],
+        [0, 0, 0, 0, 1e-8, 0],
+        [0, 0, 0, 0, 0, 1e-8]
+      ]
+    }
+  ]
+}

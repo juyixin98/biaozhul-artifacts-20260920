@@ -1,0 +1,7 @@
+# 标定链传播审计 (Calibration Chain Propagation Audit)
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+keys/
+*.log

@@ -1,0 +1,45 @@
+{
+  "root_frame": "base",
+  "convention": "left",
+  "correlation_policy": "independent",
+  "alpha": 0.01,
+  "edges": [
+    {
+      "id": "base_imu",
+      "parent": "base",
+      "child": "imu",
+      "version": "v1",
+      "transform": { "translation": [1.0, 0.0, 0.0], "rotation": [1.0, 0.0, 0.0, 0.0] }
+    },
+    {
+      "id": "imu_cam",
+      "parent": "imu",
+      "child": "cam",
+      "version": "v1",
+      "transform": { "translation": [0.0, 1.0, 0.0], "rotation": [1.0, 0.0, 0.0, 0.0] },
+      "covariance": [
+        [1e-8, 0, 0, 0, 0, 0],
+        [0, 1e-8, 0, 0, 0, 0],
+        [0, 0, 1e-8, 0, 0, 0],
+        [0, 0, 0, 1e-8, 0, 0],
+        [0, 0, 0, 0, 1e-8, 0],
+        [0, 0, 0, 0, 0, 1e-8]
+      ]
+    },
+    {
+      "id": "cam_base",
+      "parent": "cam",
+      "child": "base",
+      "version": "v1",
+      "transform": { "translation": [-1.0, -1.0, 0.0], "rotation": [1.0, 0.0, 0.0, 0.0] },
+      "covariance": [
+        [1e-8, 0, 0, 0, 0, 0],
+        [0, 1e-8, 0, 0, 0, 0],
+        [0, 0, 1e-8, 0, 0, 0],
+        [0, 0, 0, 1e-8, 0, 0],
+        [0, 0, 0, 0, 1e-8, 0],
+        [0, 0, 0, 0, 0, 1e-8]
+      ]
+    }
+  ]
+}
