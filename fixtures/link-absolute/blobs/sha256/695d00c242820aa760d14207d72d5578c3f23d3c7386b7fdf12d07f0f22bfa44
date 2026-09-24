@@ -1,0 +1,11 @@
+{
+  "architecture": "amd64",
+  "config": {},
+  "os": "linux",
+  "rootfs": {
+    "diff_ids": [
+      "sha256:ce6d3235bd2d00d208ebef65963b192e3cbf442a16635a6d33cd7cd1d860c323"
+    ],
+    "type": "layers"
+  }
+}
