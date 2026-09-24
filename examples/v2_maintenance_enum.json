@@ -1,0 +1,12 @@
+{
+  "skip_signature_verify": false,
+  "record_json": {
+    "device_id": "sensor-B",
+    "observed_at_ns": 1727000000123000000,
+    "temperature_uk": 294400000,
+    "phase": 4,
+    "trace_id": "trace-9001",
+    "signature": "LMO0Myu56MZavhATg5bkB20uebb0vJVHywtv+D2E1RI=",
+    "battery_pct_micro": 870000
+  }
+}

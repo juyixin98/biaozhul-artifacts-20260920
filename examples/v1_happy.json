@@ -1,0 +1,16 @@
+{
+  "skip_signature_verify": false,
+  "record_json": {
+    "device_id": "sensor-A",
+    "timestamp_ms": 1727000000123,
+    "temp_milli_c": 21250,
+    "status": 1,
+    "labels": {
+      "rack": "r-7",
+      "site": "dc-1"
+    },
+    "request_id": "req-0001",
+    "signature": "YysbBThp73+005LMRLOXykBF+agLWHo/RnmSqYx5pmk=",
+    "battery_milli_pct": 870
+  }
+}

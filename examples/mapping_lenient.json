@@ -1,0 +1,23 @@
+{
+  "name": "lenient-v2-v1-custom",
+  "direction": "v2_v1",
+  "source_version": "v2",
+  "target_version": "v1",
+  "fields": [
+    {"from": "device_id", "to": "device_id", "kind": "identity"},
+    {"from": "labels", "to": "labels", "kind": "identity"},
+    {"from": "trace_id", "to": "request_id", "kind": "identity"},
+    {"from": "observed_at_ns", "to": "timestamp_ms", "kind": "int_unit",
+      "unit": {"num": 1, "den": 1000000, "mode": "FLOOR"}},
+    {"from": "temperature_uk", "to": "temp_milli_c", "kind": "int_unit",
+      "unit": {"num": 1, "den": 1000, "pre_add": -273150000, "mode": "NEAREST"}},
+    {"from": "battery_pct_micro", "to": "battery_milli_pct", "kind": "int_unit",
+      "unit": {"num": 1, "den": 1000, "mode": "NEAREST"}}
+  ],
+  "enums": [
+    {"from": "phase", "to": "status", "on_missing": "CARRY_ORIGINAL",
+      "values": {"0": 0, "1": 1, "2": 2, "3": 3}}
+  ],
+  "hmac_key_v1": "compgw-dev-shared-hmac-key-v1",
+  "hmac_key_v2": "compgw-dev-shared-hmac-key-v1"
+}

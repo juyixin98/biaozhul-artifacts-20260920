@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package telemetry.v2;
+
+option go_package = "github.com/example/compgw/gen/telemetry/v2;telemetryv2";
+
+// V2 telemetry schema (current).
+//
+// Changes relative to v1:
+//   - timestamp_ms      -> observed_at_ns (whole nanoseconds since epoch)
+//   - temp_milli_c      -> temperature_uk (micro-kelvin, 1/1,000,000 K)
+//   - status            -> phase, plus the new value PHASE_MAINTENANCE (4),
+//                          which has no representation in v1
+//   - request_id        -> trace_id
+//   - signature recomputed with the v2 canonical representation
+message TelemetryRecord {
+  string device_id = 1;
+  int64  observed_at_ns = 2;
+  int64  temperature_uk = 3;
+  Phase  phase = 4;
+  map<string, string> labels = 5;
+  string trace_id = 6;
+  bytes  signature = 7;
+  // Battery level in micro-percent (1/1,000,000 of one percent). Optional:
+  // absence must be preserved through conversion, distinct from explicit 0.
+  optional int64 battery_pct_micro = 8;
+}
+
+enum Phase {
+  PHASE_UNSPECIFIED = 0;
+  PHASE_ACTIVE = 1;
+  PHASE_IDLE = 2;
+  PHASE_ERROR = 3;
+  PHASE_MAINTENANCE = 4; // v2 only; cannot be expressed in v1
+}

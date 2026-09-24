@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package telemetry.v1;
+
+option go_package = "github.com/example/compgw/gen/telemetry/v1;telemetryv1";
+
+// V1 telemetry schema (legacy).
+//
+// Units / naming conventions of v1:
+//   - timestamps are whole milliseconds since unix epoch
+//   - temperature is milli-degrees-Celsius (1/1000 of a degree C)
+//   - status enum has no maintenance state
+message TelemetryRecord {
+  string device_id = 1;
+  int64  timestamp_ms = 2;
+  int64  temp_milli_c = 3;
+  Status status = 4;
+  map<string, string> labels = 5;
+  string request_id = 6;
+  bytes  signature = 7; // HMAC-SHA256 over the canonical representation
+
+  // Set when a newer enum value could not be mapped to v1; carries the
+  // original numeric value so information is never silently dropped.
+  optional int32 raw_phase = 8;
+  // Battery level in milli-percent (1/1000 of one percent). proto3 optional
+  // distinguishes "field absent" from an explicit zero.
+  optional int64 battery_milli_pct = 9;
+}
+
+enum Status {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_ACTIVE = 1;
+  STATUS_IDLE = 2;
+  STATUS_ERROR = 3;
+}

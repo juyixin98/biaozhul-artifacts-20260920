@@ -1,0 +1,124 @@
+syntax = "proto3";
+
+package gateway.v1;
+
+import "telemetry/v1/telemetry.proto";
+import "telemetry/v2/telemetry.proto";
+
+option go_package = "github.com/example/compgw/gen/gateway/v1;gatewayv1";
+
+// Compatibility gateway between telemetry schema v1 and v2.
+service CompatGateway {
+  // Unary conversions.
+  rpc ConvertV1ToV2(ConvertV1ToV2Request) returns (ConvertV1ToV2Response);
+  rpc ConvertV2ToV1(ConvertV2ToV1Request) returns (ConvertV2ToV1Response);
+
+  // Bidirectional streaming conversion. One item per request, one result per
+  // response (same ordering). Backpressure: the server buffers at most
+  // max_in_flight items; cancellation of the RPC stops all conversion.
+  rpc ConvertStreamV1ToV2(stream StreamV1Request) returns (stream StreamV2Response);
+  rpc ConvertStreamV2ToV1(stream StreamV2Request) returns (stream StreamV1Response);
+
+  // Mapping administration / hot switching.
+  rpc GetMapping(GetMappingRequest) returns (GetMappingResponse);
+  rpc ActivateMapping(ActivateMappingRequest) returns (ActivateMappingResponse);
+}
+
+message Provenance {
+  string source_version = 1;          // e.g. "v1"
+  string converted_version = 2;       // e.g. "v2"
+  string mapping_name = 3;            // active mapping used
+  uint32 mapping_version = 4;         // active mapping version pinned at call
+  // How many unknown protobuf fields the inbound message carried. Unknown
+  // fields are preserved through a decode/encode round trip, never rejected.
+  uint32 unknown_fields_seen = 5;
+  // Set when an enum was carried rather than mapped (see error_policy).
+  optional int32 carried_original_enum = 6;
+}
+
+message ConvertV1ToV2Request {
+  telemetry.v1.TelemetryRecord record = 1;
+  // If false (default) the inbound signature must verify.
+  bool skip_signature_verify = 2;
+}
+
+message ConvertV1ToV2Response {
+  telemetry.v2.TelemetryRecord record = 1;
+  Provenance provenance = 2;
+}
+
+message ConvertV2ToV1Request {
+  telemetry.v2.TelemetryRecord record = 1;
+  bool skip_signature_verify = 2;
+}
+
+message ConvertV2ToV1Response {
+  telemetry.v1.TelemetryRecord record = 1;
+  Provenance provenance = 2;
+}
+
+message StreamV1Request {
+  uint64 seq = 1;
+  ConvertV1ToV2Request item = 2;
+}
+
+message StreamV2Response {
+  uint64 seq = 1;
+  oneof outcome {
+    ConvertV1ToV2Response ok = 2;
+    ConversionError error = 3;
+  }
+}
+
+message StreamV2Request {
+  uint64 seq = 1;
+  ConvertV2ToV1Request item = 2;
+}
+
+message StreamV1Response {
+  uint64 seq = 1;
+  oneof outcome {
+    ConvertV2ToV1Response ok = 2;
+    ConversionError error = 3;
+  }
+}
+
+// Locatable conversion error: states the record (trace/request id + stream seq)
+// and the exact field that failed.
+message ConversionError {
+  enum Code {
+    CODE_UNSPECIFIED = 0;
+    ENUM_UNMAPPABLE = 1;     // new enum value the target schema cannot express
+    INTEGER_OVERFLOW = 2;    // converted value outside int64 range
+    ROUNDING_REQUIRED = 3;   // exact conversion needs rounding; policy REJECT
+    SIGNATURE_INVALID = 4;   // inbound HMAC did not verify
+  }
+  Code code = 1;
+  string field = 2;          // e.g. "phase", "temperature_uk"
+  string message = 3;
+  string record_id = 4;      // request_id / trace_id
+  uint64 seq = 5;            // stream sequence (0 for unary)
+  optional int32 original_enum = 6; // raw numeric enum when ENUM_UNMAPPABLE
+}
+
+message GetMappingRequest {}
+
+message GetMappingResponse {
+  string name = 1;
+  uint32 version = 2;
+  bool active = 3;
+  // JSON specification, see mapping.Spec.
+  string spec_json = 4;
+}
+
+message ActivateMappingRequest {
+  // Activate an existing, stored mapping by name.
+  string name = 1;
+  // Or upsert this full JSON spec and activate it atomically.
+  string spec_json = 2;
+}
+
+message ActivateMappingResponse {
+  string name = 1;
+  uint32 version = 2;
+}
