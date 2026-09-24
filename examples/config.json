@@ -1,0 +1,9 @@
+{
+  "targetUtilization": 70,
+  "tolerancePct": 10,
+  "minReplicas": 1,
+  "maxReplicas": 10,
+  "scaleDownStabilizationWindowSeconds": 300,
+  "scaleUpStabilizationWindowSeconds": 0,
+  "metricFreshnessSeconds": 120
+}

@@ -1,0 +1,14 @@
+# Binaries
+scalerd
+verify
+*.exe
+
+# Runtime data
+*.db
+*.db-wal
+*.db-shm
+scaler.db*
+
+# Go
+*.test
+*.out

@@ -1,0 +1,14 @@
+{
+  "scalerId": "checkout",
+  "configVersion": 1,
+  "currentReplicas": 6,
+  "metricTimestamp": "2026-09-23T12:01:00Z",
+  "instances": [
+    { "name": "checkout-0", "ready": true, "utilizationPct": 12 },
+    { "name": "checkout-1", "ready": true, "utilizationPct": 10 },
+    { "name": "checkout-2", "ready": true, "utilizationPct": null },
+    { "name": "checkout-3", "ready": true, "utilizationPct": 11 },
+    { "name": "checkout-4", "ready": true, "utilizationPct": 9 },
+    { "name": "checkout-5", "ready": true, "utilizationPct": 13 }
+  ]
+}

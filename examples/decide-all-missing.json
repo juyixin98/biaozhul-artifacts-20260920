@@ -1,0 +1,14 @@
+{
+  "scalerId": "checkout",
+  "configVersion": 1,
+  "currentReplicas": 6,
+  "metricTimestamp": "2026-09-23T12:11:00Z",
+  "instances": [
+    { "name": "checkout-0", "ready": true },
+    { "name": "checkout-1", "ready": true },
+    { "name": "checkout-2", "ready": true },
+    { "name": "checkout-3", "ready": true },
+    { "name": "checkout-4", "ready": true },
+    { "name": "checkout-5", "ready": true }
+  ]
+}
