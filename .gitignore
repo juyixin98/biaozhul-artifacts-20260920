@@ -1,0 +1,16 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Foundry
+out/
+cache/
+broadcast/
+
+# Local deployment state (never commit real addresses/keys)
+deployment.local.json
+
+# Misc
+.DS_Store
