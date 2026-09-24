@@ -1,0 +1,30 @@
+[package]
+name = "ext-hash-index"
+version = "0.1.0"
+edition = "2021"
+description = "Disk-backed extendible hashing page index with HTTP API (Axum)"
+
+[lib]
+name = "ext_hash_index"
+path = "src/lib.rs"
+
+[[bin]]
+name = "ext-hash-index"
+path = "src/main.rs"
+
+# Crash-injection helper used by integration tests. It performs one mutating
+# command against an index file and hard-exits the process at a chosen crash
+# point, simulating a power loss mid-operation.
+[[bin]]
+name = "crash-runner"
+path = "src/bin/crash_runner.rs"
+
+[dependencies]
+axum = "0.8"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[profile.dev]
+# Faster integration-test loop; correctness is independent of opt level.
+opt-level = 1
