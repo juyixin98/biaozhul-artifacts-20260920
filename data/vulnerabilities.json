@@ -1,0 +1,139 @@
+{
+  "metadata": {
+    "description": "Hand-authored local fixture for the offline SBOM matching service. Not a vulnerability feed; no claim of completeness or currency.",
+    "source": "shipped local fixture (offline)",
+    "live_feed": false,
+    "generated_for": "P093 acceptance tests"
+  },
+  "advisories": [
+    {
+      "id": "NPM-EXAMPLE-1001",
+      "ecosystem": "npm",
+      "name": "left-pad-lite",
+      "summary": "Prototype pollution in deep merge helper",
+      "severity": "high",
+      "ranges": [
+        {
+          "id": "NPM-EXAMPLE-1001:r1",
+          "ecosystem": "npm",
+          "expression": ">=1.2.0 <1.4.2",
+          "introduced": "1.2.0",
+          "fixed": "1.4.2",
+          "note": "local fixture only; endpoints are real semver boundaries"
+        }
+      ]
+    },
+    {
+      "id": "NPM-EXAMPLE-1002",
+      "ecosystem": "npm",
+      "name": "range-toy",
+      "summary": "Pre-release aware advisory: fixed in 2.0.0-rc.2",
+      "severity": "medium",
+      "ranges": [
+        {
+          "id": "NPM-EXAMPLE-1002:r1",
+          "ecosystem": "npm",
+          "expression": ">=1.0.0 <2.0.0-rc.2",
+          "introduced": "1.0.0",
+          "fixed": "2.0.0-rc.2",
+          "note": "local fixture; exercises prerelease precedence"
+        }
+      ]
+    },
+    {
+      "id": "NPM-EXAMPLE-1003",
+      "ecosystem": "npm",
+      "name": "caret-lib",
+      "summary": "Caret/tilde range fixture with OR sets",
+      "severity": "low",
+      "ranges": [
+        {
+          "id": "NPM-EXAMPLE-1003:r1",
+          "ecosystem": "npm",
+          "expression": "^0.2.3 || ~1.0.0",
+          "introduced": "0.2.3",
+          "fixed": "1.1.0",
+          "note": "local fixture; exercises caret 0.x semantics"
+        }
+      ]
+    },
+    {
+      "id": "PYSEC-EXAMPLE-2001",
+      "ecosystem": "pypi",
+      "name": "tinycrypto",
+      "summary": "Timing side channel in verify()",
+      "severity": "high",
+      "ranges": [
+        {
+          "id": "PYSEC-EXAMPLE-2001:r1",
+          "ecosystem": "pypi",
+          "expression": ">=1.0.0,<1.2.3",
+          "introduced": "1.0.0",
+          "fixed": "1.2.3",
+          "note": "local fixture; PEP 440 numeric ordering"
+        }
+      ]
+    },
+    {
+      "id": "PYSEC-EXAMPLE-2002",
+      "ecosystem": "pypi",
+      "name": "wheelmaker",
+      "summary": "Prerelease/post-release boundary fixture",
+      "severity": "medium",
+      "ranges": [
+        {
+          "id": "PYSEC-EXAMPLE-2002:r1",
+          "ecosystem": "pypi",
+          "expression": ">=2.0b1,<2.0",
+          "introduced": "2.0b1",
+          "fixed": "2.0",
+          "note": "local fixture; beta < release per PEP 440"
+        },
+        {
+          "id": "PYSEC-EXAMPLE-2002:r2",
+          "ecosystem": "pypi",
+          "expression": "~=3.1.0",
+          "introduced": "3.1.0",
+          "fixed": "3.2",
+          "note": "local fixture; compatible-release operator"
+        }
+      ]
+    },
+    {
+      "id": "GHSA-EXAMPLE-3001",
+      "ecosystem": "maven",
+      "namespace": ["com", "example"],
+      "name": "common-core",
+      "summary": "Expression-language injection in formatter",
+      "severity": "critical",
+      "ranges": [
+        {
+          "id": "GHSA-EXAMPLE-3001:r1",
+          "ecosystem": "maven",
+          "expression": "[1.0.0,1.5.0)",
+          "introduced": "1.0.0",
+          "fixed": "1.5.0",
+          "note": "local fixture; Maven interval with exclusive upper endpoint"
+        }
+      ]
+    },
+    {
+      "id": "GHSA-EXAMPLE-3002",
+      "ecosystem": "maven",
+      "namespace": ["com", "example"],
+      "name": "legacy-logging",
+      "summary": "Qualifier ordering fixture (alpha/rc/snapshot)",
+      "severity": "low",
+      "ranges": [
+        {
+          "id": "GHSA-EXAMPLE-3002:r1",
+          "ecosystem": "maven",
+          "expression": "[1.0-alpha-1,1.0)",
+          "introduced": "1.0-alpha-1",
+          "fixed": "1.0",
+          "note": "local fixture; Maven ComparableVersion qualifier ordering"
+        }
+      ]
+    }
+  ]
+}

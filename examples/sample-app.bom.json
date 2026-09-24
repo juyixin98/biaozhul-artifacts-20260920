@@ -1,0 +1,185 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:0c0f4b64-2024-4f1e-9c11-sample0001",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-09-24T08:00:00Z",
+    "component": {
+      "type": "application",
+      "bom-ref": "app@1.0.0",
+      "name": "sample-application",
+      "version": "1.0.0"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "lpl-140",
+      "name": "left-pad-lite",
+      "version": "1.4.0",
+      "purl": "pkg:npm/left-pad-lite@1.4.0",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "bom-ref": "lpl-150",
+      "name": "left-pad-lite",
+      "version": "1.5.0",
+      "purl": "pkg:npm/left-pad-lite@1.5.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "range-toy-rc1",
+      "name": "range-toy",
+      "version": "2.0.0-rc.1",
+      "purl": "pkg:npm/range-toy@2.0.0-rc.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "caret-x64",
+      "name": "caret-lib",
+      "version": "0.2.5",
+      "purl": "pkg:npm/caret-lib@0.2.5?arch=x64"
+    },
+    {
+      "type": "library",
+      "bom-ref": "caret-arm64",
+      "name": "caret-lib",
+      "version": "0.2.5",
+      "purl": "pkg:npm/caret-lib@0.2.5?arch=arm64"
+    },
+    {
+      "type": "library",
+      "bom-ref": "tiny-110",
+      "name": "tinycrypto",
+      "version": "1.1.0",
+      "purl": "pkg:pypi/tinycrypto@1.1.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "tiny-bad",
+      "name": "tinycrypto",
+      "version": "not-a-version",
+      "purl": "pkg:pypi/tinycrypto@not-a-version"
+    },
+    {
+      "type": "library",
+      "bom-ref": "wheel-beta",
+      "name": "wheelmaker",
+      "version": "2.0b1",
+      "purl": "pkg:pypi/wheelmaker@2.0b1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "wheel-final",
+      "name": "wheelmaker",
+      "version": "2.0",
+      "purl": "pkg:pypi/wheelmaker@2.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "cc-140",
+      "name": "common-core",
+      "version": "1.4.0",
+      "purl": "pkg:maven/com.example/common-core@1.4.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "legacy-alpha3",
+      "name": "legacy-logging",
+      "version": "1.0-alpha-3",
+      "purl": "pkg:maven/com.example/legacy-logging@1.0-alpha-3"
+    },
+    {
+      "type": "library",
+      "bom-ref": "dup-1",
+      "name": "duplicated-dep",
+      "version": "1.0.0",
+      "purl": "pkg:npm/duplicated-dep@1.0.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "dup-2",
+      "name": "duplicated-dep",
+      "version": "1.0.0",
+      "purl": "pkg:npm/duplicated-dep@1.0.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "mystery",
+      "name": "mystery-lib",
+      "purl": "pkg:npm/mystery-lib"
+    },
+    {
+      "type": "library",
+      "bom-ref": "brandnew",
+      "name": "no-such-package",
+      "version": "0.0.1",
+      "purl": "pkg:npm/no-such-package@0.0.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "bad-purl",
+      "name": "broken-coordinate",
+      "version": "1.0.0",
+      "purl": "pkg:npm/"
+    },
+    {
+      "type": "library",
+      "bom-ref": "golang-lib",
+      "name": "bar",
+      "version": "1.2.3",
+      "purl": "pkg:golang/github.com/foo/bar@1.2.3"
+    },
+    {
+      "type": "library",
+      "bom-ref": "excluded-lpl",
+      "name": "left-pad-lite",
+      "version": "1.3.0",
+      "purl": "pkg:npm/left-pad-lite@1.3.0",
+      "scope": "excluded"
+    },
+    {
+      "type": "library",
+      "bom-ref": "loop-a",
+      "name": "cycle-a",
+      "version": "3.0.0",
+      "purl": "pkg:npm/cycle-a@3.0.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "loop-b",
+      "name": "cycle-b",
+      "version": "3.0.0",
+      "purl": "pkg:npm/cycle-b@3.0.0"
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "app@1.0.0",
+      "dependsOn": [
+        "lpl-140",
+        "lpl-150",
+        "range-toy-rc1",
+        "caret-x64",
+        "caret-arm64",
+        "tiny-bad",
+        "wheel-beta",
+        "wheel-final",
+        "cc-140",
+        "dup-1",
+        "mystery",
+        "brandnew",
+        "bad-purl",
+        "golang-lib",
+        "excluded-lpl",
+        "loop-a"
+      ]
+    },
+    {"ref": "lpl-140", "dependsOn": ["tiny-110", "dup-2"]},
+    {"ref": "cc-140", "dependsOn": ["legacy-alpha3"]},
+    {"ref": "loop-a", "dependsOn": ["loop-b"]},
+    {"ref": "loop-b", "dependsOn": ["loop-a"]}
+  ]
+}

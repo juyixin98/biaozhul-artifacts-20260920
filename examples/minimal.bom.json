@@ -1,0 +1,15 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:0c0f4b64-2024-4f1e-9c11-sample0002",
+  "version": 1,
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "left-pad-142",
+      "name": "left-pad-lite",
+      "version": "1.4.2",
+      "purl": "pkg:npm/left-pad-lite@1.4.2"
+    }
+  ]
+}
