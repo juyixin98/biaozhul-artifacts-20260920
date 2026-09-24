@@ -1,0 +1,28 @@
+---
+# ConfigSnapshot immutability validator. failurePolicy: Ignore keeps the data
+# plane available even if the webhook is temporarily unavailable; the
+# reconciler treats payload content as immutable regardless (digest names).
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: config-distributor-validate
+webhooks:
+  - name: validate.config-distributor.local
+    admissionReviewVersions: [v1]
+    sideEffects: None
+    failurePolicy: Ignore
+    timeoutSeconds: 5
+    matchPolicy: Exact
+    rules:
+      - apiGroups: ["config.example.com"]
+        apiVersions: ["v1alpha1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["configsnapshots"]
+        scope: Cluster
+    clientConfig:
+      service:
+        name: config-distributor-webhook
+        namespace: config-system
+        path: /validate-configsnapshot
+        port: 443
+      caBundle: CABUNDLE_PLACEHOLDER

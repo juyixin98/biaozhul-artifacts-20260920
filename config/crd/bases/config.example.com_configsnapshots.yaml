@@ -1,0 +1,62 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: configsnapshots.config.example.com
+spec:
+  group: config.example.com
+  scope: Cluster
+  names:
+    kind: ConfigSnapshot
+    listKind: ConfigSnapshotList
+    plural: configsnapshots
+    singular: configsnapshot
+    shortNames:
+      - csnap
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      subresources:
+        status: {}
+      additionalPrinterColumns:
+        - name: Version
+          type: string
+          jsonPath: .status.version
+        - name: Targets
+          type: integer
+          jsonPath: .status.targetCount
+        - name: Applied
+          type: integer
+          jsonPath: .status.appliedCount
+        - name: Failed
+          type: integer
+          jsonPath: .status.failedCount
+        - name: Age
+          type: date
+          jsonPath: .metadata.creationTimestamp
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required: [payload, selector]
+              properties:
+                payload:
+                  type: object
+                  required: [data]
+                  properties:
+                    format:
+                      type: string
+                      enum: [properties, json, text]
+                      default: properties
+                    data:
+                      type: string
+                      minLength: 1
+                selector:
+                  type: object
+                  x-kubernetes-preserve-unknown-fields: true
+            status:
+              type: object
+              x-kubernetes-preserve-unknown-fields: true

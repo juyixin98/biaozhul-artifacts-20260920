@@ -1,0 +1,8 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: config-dedup
+# Single control-plane node is enough for the demo; controller-runtime and the
+# webhooks run entirely on user workloads.
+nodes:
+  - role: control-plane
+    image: kindest/node:v1.30.0

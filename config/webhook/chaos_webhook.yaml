@@ -1,0 +1,33 @@
+---
+# Chaos injection webhook. failurePolicy: Ignore guarantees that the chaos
+# surface can never take the cluster down: if the controller is absent or the
+# matcher has no policy, requests pass. The webhook itself denies only when a
+# FailPolicy matches.
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: config-distributor-chaos
+webhooks:
+  - name: chaos.config-distributor.local
+    admissionReviewVersions: [v1]
+    sideEffects: None
+    failurePolicy: Ignore
+    timeoutSeconds: 5
+    matchPolicy: Equivalent
+    objectSelector:
+      matchExpressions:
+        - key: config.example.com/owner
+          operator: Exists
+    rules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: ["CREATE", "UPDATE", "DELETE"]
+        resources: ["configmaps"]
+        scope: Namespaced
+    clientConfig:
+      service:
+        name: config-distributor-webhook
+        namespace: config-system
+        path: /inject
+        port: 443
+      caBundle: CABUNDLE_PLACEHOLDER

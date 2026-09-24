@@ -1,0 +1,66 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: config-distributor-webhook
+  namespace: config-system
+spec:
+  selector:
+    app: config-distributor
+  ports:
+    - name: webhook
+      port: 443
+      targetPort: 9443
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-distributor
+  namespace: config-system
+  labels:
+    app: config-distributor
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: config-distributor
+  template:
+    metadata:
+      labels:
+        app: config-distributor
+    spec:
+      serviceAccountName: config-distributor
+      containers:
+        - name: manager
+          image: IMAGE_PLACEHOLDER
+          imagePullPolicy: IfNotPresent
+          args:
+            - --chaos-webhook=true
+            - --validate-webhook=true
+            - --webhook-port=9443
+            - --cert-dir=/tmp/k8s-webhook-server/serving-certs
+            - --webhook-service-name=config-distributor-webhook.config-system.svc
+            - --chaos-webhook-config-name=config-distributor-chaos
+            - --retry-interval=5s
+            - -v=4
+          ports:
+            - name: webhook
+              containerPort: 9443
+            - name: metrics
+              containerPort: 8080
+            - name: health
+              containerPort: 8081
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: health
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: health
+            initialDelaySeconds: 5
+            periodSeconds: 10

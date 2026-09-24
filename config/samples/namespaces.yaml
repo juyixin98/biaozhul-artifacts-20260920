@@ -1,0 +1,31 @@
+---
+# Three test namespaces selected by tier=test. A fourth namespace with the
+# label removed (see hack/e2e.sh) demonstrates selector-narrowing GC.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test-a
+  labels:
+    tier: test
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test-b
+  labels:
+    tier: test
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test-c
+  labels:
+    tier: test
+---
+# Not selected: proves the controller never touches unrelated namespaces.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test-neutral
+  labels:
+    tier: other

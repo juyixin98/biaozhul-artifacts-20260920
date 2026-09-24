@@ -1,0 +1,14 @@
+---
+# Deny the first two CREATE attempts of managed ConfigMaps in namespace
+# test-b, then recover. Drives the "partial failure, retry, no rollback of
+# successful targets" scenario.
+apiVersion: chaos.example.com/v1alpha1
+kind: FailPolicy
+metadata:
+  name: flaky-test-b
+spec:
+  targetNamespaces: [test-b]
+  actions: [CREATE]
+  mode: FirstN
+  firstN: 2
+  message: "simulated flaky admission for test-b (will recover)"

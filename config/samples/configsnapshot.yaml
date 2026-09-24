@@ -1,0 +1,16 @@
+---
+apiVersion: config.example.com/v1alpha1
+kind: ConfigSnapshot
+metadata:
+  name: demo-app
+spec:
+  payload:
+    format: properties
+    data: |
+      # immutable sample configuration
+      feature.toggle=true
+      service.endpoint=https://example.invalid/api
+      retry.limit=3
+  selector:
+    matchLabels:
+      tier: test
