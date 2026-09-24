@@ -1,0 +1,44 @@
+{
+  "address": "127.0.0.1:1502",
+  "timeout": "5s",
+  "steps": [
+    {
+      "name": "read-crosses-bank",
+      "op": "read", "txn": 1, "unit": 1, "addr": 99, "qty": 5,
+      "expect_exception": 2
+    },
+    {
+      "name": "read-quantity-too-large",
+      "op": "read", "txn": 2, "unit": 1, "addr": 0, "qty": 126,
+      "expect_exception": 3
+    },
+    {
+      "name": "unknown-function-fc04",
+      "op": "raw",
+      "raw_hex": "00 03 00 00 00 06 01 04 00 00 00 01",
+      "expect_exception": 1
+    },
+    {
+      "name": "unknown-unit-id",
+      "op": "read", "txn": 4, "unit": 9, "addr": 0, "qty": 1,
+      "expect_exception": 11
+    },
+    {
+      "name": "write-byte-count-mismatch",
+      "op": "raw",
+      "raw_hex": "00 05 00 00 00 07 01 10 00 00 00 02 02 00 01",
+      "expect_exception": 3
+    },
+    {
+      "name": "write-crosses-bank-whole-batch-fails",
+      "op": "write", "txn": 6, "unit": 1, "addr": 98,
+      "values": [7, 7, 7],
+      "expect_exception": 2
+    },
+    {
+      "name": "prove-registers-untouched",
+      "op": "read", "txn": 7, "unit": 1, "addr": 98, "qty": 2,
+      "expect_values": [0, 0]
+    }
+  ]
+}

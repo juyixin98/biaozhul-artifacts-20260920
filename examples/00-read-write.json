@@ -1,0 +1,26 @@
+{
+  "address": "127.0.0.1:1502",
+  "timeout": "5s",
+  "steps": [
+    {
+      "name": "write-batch-of-4",
+      "op": "write", "txn": 1, "unit": 1, "addr": 10,
+      "values": [113, 114, 115, 116]
+    },
+    {
+      "name": "read-overlapping-snapshot",
+      "op": "read", "txn": 2, "unit": 1, "addr": 9, "qty": 6,
+      "expect_values": [0, 113, 114, 115, 116, 0]
+    },
+    {
+      "name": "read-100-registers-valid",
+      "op": "read", "txn": 3, "unit": 1, "addr": 0, "qty": 100,
+      "expect_values": [0]
+    },
+    {
+      "name": "write-max-allowed-123-accepted",
+      "op": "write", "txn": 4, "unit": 1, "addr": 0,
+      "values": [1, 2, 3]
+    }
+  ]
+}

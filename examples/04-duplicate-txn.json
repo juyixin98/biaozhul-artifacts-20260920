@@ -1,0 +1,23 @@
+{
+  "address": "127.0.0.1:1502",
+  "timeout": "5s",
+  "_comment": "Modbus TCP transaction ids are per-connection matching tokens. The standard defines NO dedupe or idempotency: reusing txn id 7 executes BOTH writes and produces TWO receipts.",
+  "steps": [
+    {
+      "name": "first-write-txn-7",
+      "op": "write", "conn": "c", "txn": 7, "unit": 1, "addr": 0,
+      "values": [4369]
+    },
+    {
+      "name": "second-write-same-txn-7",
+      "op": "write", "conn": "c", "txn": 7, "unit": 1, "addr": 0,
+      "values": [8738]
+    },
+    {
+      "name": "final-value-is-second-write",
+      "op": "read", "conn": "c", "txn": 8, "unit": 1, "addr": 0, "qty": 1,
+      "expect_values": [8738]
+    },
+    {"op": "close", "conn": "c"}
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "address": "127.0.0.1:1502",
+  "timeout": "5s",
+  "_comment": "Abrupt disconnects mid-frame. A compliant server must discard the partial frame, leave registers untouched, and survive. Prefixes are raw MBAP+PDU bytes.",
+  "steps": [
+    {
+      "name": "fin-after-partial-fc10-frame",
+      "op": "abort",
+      "prefix_hex": "00 01 00 00 00 0b 01 10 00 5a 00 03 06 00",
+      "how": "fin"
+    },
+    {
+      "name": "rst-after-two-header-bytes",
+      "op": "abort",
+      "prefix_hex": "00 02",
+      "how": "rst"
+    },
+    {
+      "name": "server-still-alive-partial-write-never-applied",
+      "op": "read", "txn": 3, "unit": 1, "addr": 90, "qty": 3,
+      "expect_values": [0, 0, 0]
+    },
+    {
+      "name": "bad-mbap-length-server-closes",
+      "op": "raw",
+      "raw_hex": "00 01 00 00 00 01 01",
+      "expect_error": "eof"
+    },
+    {
+      "name": "bad-protocol-id-server-closes",
+      "op": "raw",
+      "raw_hex": "00 01 00 05 00 06 01 03 00 00 00 01",
+      "expect_error": "eof"
+    }
+  ]
+}

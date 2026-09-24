@@ -1,0 +1,22 @@
+{
+  "address": "127.0.0.1:1502",
+  "timeout": "5s",
+  "steps": [
+    {
+      "name": "three-adus-in-one-segment",
+      "op": "coalesce",
+      "frames": [
+        {"txn": 100, "unit": 1, "op": "write", "addr": 0, "values": [43690, 48059]},
+        {"txn": 101, "unit": 1, "op": "read",  "addr": 0, "qty": 2},
+        {"txn": 102, "unit": 1, "op": "read",  "addr": 500, "qty": 1}
+      ],
+      "expect_exception": 2
+    },
+    {
+      "name": "read-back-after-coalesced-write",
+      "op": "read", "txn": 103, "unit": 1, "addr": 0, "qty": 2,
+      "expect_values": [43690, 48059],
+      "expect_txn": 103
+    }
+  ]
+}

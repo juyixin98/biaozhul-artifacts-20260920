@@ -1,0 +1,19 @@
+{
+  "address": "127.0.0.1:1502",
+  "timeout": "10s",
+  "steps": [
+    {
+      "name": "write-one-byte-per-tcp-segment",
+      "op": "frag-write",
+      "txn": 9, "unit": 1, "addr": 20,
+      "values": [256, 512, 768, 1024, 1280, 1536],
+      "frag_size": 1,
+      "gap": "2ms"
+    },
+    {
+      "name": "read-back-reassembled-batch",
+      "op": "read", "txn": 10, "unit": 1, "addr": 20, "qty": 6,
+      "expect_values": [256, 512, 768, 1024, 1280, 1536]
+    }
+  ]
+}
