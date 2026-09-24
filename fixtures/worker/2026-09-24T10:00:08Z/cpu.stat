@@ -1,0 +1,6 @@
+usage_usec 10400000
+user_usec 6200000
+system_usec 4200000
+nr_periods 104
+nr_throttled 0
+throttled_usec 0
