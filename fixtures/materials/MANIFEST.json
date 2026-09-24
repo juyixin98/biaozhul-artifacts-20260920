@@ -1,0 +1,7 @@
+{
+  "git+https://vcs.example.com/team/service@0123456789abcdef0123456789abcdef01234567/src/lib.rs": "src/lib.rs",
+  "git+https://vcs.example.com/team/service@0123456789abcdef0123456789abcdef01234567/src/main.rs": "src/main.rs",
+  "https://deps.example.com/dep-a-2.1.0.tar.gz": "deps/dep-a-2.1.0.tar.gz",
+  "https://deps.example.com/dep-b-0.9.4.tar.gz": "deps/dep-b-0.9.4.tar.gz",
+  "https://evil-mirror.example.test/dep-b-0.9.4.tar.gz": "deps/dep-b-0.9.4.tar.gz"
+}

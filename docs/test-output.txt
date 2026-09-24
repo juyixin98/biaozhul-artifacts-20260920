@@ -1,0 +1,28 @@
+running 4 tests
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+running 7 tests
+test verify_rejects_proof_path_traversal ... ok
+test verify_artifact_path_traversal_is_rejected ... ok
+test health_and_policy ... ok
+test verify_requires_a_proof ... ok
+test verify_accepts_inline_envelope ... ok
+test verify_rejects_tampered_payload ... ok
+test scenario_endpoints_return_expected_status ... ok
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+running 9 tests
+test scenario_cross_builder_reuse_is_detected ... ok
+test cross_builder_reuse_detected_even_with_identical_bytes ... ok
+test scenario_output_replacement_is_detected ... ok
+test scenario_forbidden_source_is_detected ... ok
+test scenario_missing_material_is_detected ... ok
+test scenario_valid_is_accepted ... ok
+test scenario_untrusted_builder_is_detected ... ok
+test missing_artifact_input_fails_output_check_only ... ok
+test tampered_material_is_rejected ... ok
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

@@ -1,0 +1,16 @@
+{
+  "allowed_material_prefixes": [
+    "git+https://vcs.example.com/team/service@",
+    "https://deps.example.com/"
+  ],
+  "allowed_source_repositories": [
+    "https://vcs.example.com/team/service"
+  ],
+  "keys": {
+    "pkg:generic/ci-builder@v2": "72f5a064fe06e7bcb8591d1c7b916fd32dabbbbe5725d2976ad5e5983b9afac6",
+    "pkg:generic/shadow-builder@v9": "09d88d4bce9557d08f00a5ef8621d7a4878fc2a407890f4009e9da0fdce58d8e"
+  },
+  "trusted_builders": [
+    "pkg:generic/ci-builder@v2"
+  ]
+}

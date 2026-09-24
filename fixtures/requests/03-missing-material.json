@@ -1,0 +1,5 @@
+{
+  "actual_builder_id": "pkg:generic/ci-builder@v2",
+  "artifact_path": "app-v1.0.0.tar.gz",
+  "proof_path": "missing-material.json"
+}

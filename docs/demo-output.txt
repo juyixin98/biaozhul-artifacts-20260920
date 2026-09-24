@@ -1,0 +1,102 @@
+### GET /health
+{"service":"build-provenance-verify","status":"ok"}
+
+### GET /policy
+{
+    "allowed_material_prefixes": [
+        "git+https://vcs.example.com/team/service@",
+        "https://deps.example.com/"
+    ],
+    "allowed_source_repositories": [
+        "https://vcs.example.com/team/service"
+    ],
+    "local_materials": [
+        "git+https://vcs.example.com/team/service@0123456789abcdef0123456789abcdef01234567/src/lib.rs",
+        "git+https://vcs.example.com/team/service@0123456789abcdef0123456789abcdef01234567/src/main.rs",
+        "https://deps.example.com/dep-a-2.1.0.tar.gz",
+        "https://deps.example.com/dep-b-0.9.4.tar.gz",
+        "https://evil-mirror.example.test/dep-b-0.9.4.tar.gz"
+    ],
+    "registered_keyids": [
+        "pkg:generic/ci-builder@v2",
+        "pkg:generic/shadow-builder@v9"
+    ],
+    "trusted_builders": [
+        "pkg:generic/ci-builder@v2"
+    ]
+}
+
+### POST /scenarios/01-valid
+HTTP 200
+accepted = True
+  [PASS] signature                    PASS
+  [PASS] subject_binding              PASS
+  [PASS] trusted_builder              PASS
+  [PASS] builder_binding              PASS
+  [PASS] source_commit_binding        PASS
+  [PASS] materials_complete           PASS
+  [PASS] material_sources_allowed     PASS
+  [PASS] output_digest                PASS
+
+### POST /scenarios/02-output-replaced
+HTTP 422
+accepted = False
+  [PASS] signature                    PASS
+  [PASS] subject_binding              PASS
+  [PASS] trusted_builder              PASS
+  [PASS] builder_binding              PASS
+  [PASS] source_commit_binding        PASS
+  [PASS] materials_complete           PASS
+  [PASS] material_sources_allowed     PASS
+  [FAIL] output_digest                OUTPUT_DIGEST_MISMATCH
+
+### POST /scenarios/03-missing-material
+HTTP 422
+accepted = False
+  [PASS] signature                    PASS
+  [PASS] subject_binding              PASS
+  [PASS] trusted_builder              PASS
+  [PASS] builder_binding              PASS
+  [PASS] source_commit_binding        PASS
+  [FAIL] materials_complete           MATERIAL_MISSING
+  [PASS] material_sources_allowed     PASS
+  [PASS] output_digest                PASS
+
+### POST /scenarios/04-cross-builder-reuse
+HTTP 422
+accepted = False
+  [PASS] signature                    PASS
+  [PASS] subject_binding              PASS
+  [PASS] trusted_builder              PASS
+  [FAIL] builder_binding              CROSS_BUILDER_REUSE
+  [PASS] source_commit_binding        PASS
+  [PASS] materials_complete           PASS
+  [PASS] material_sources_allowed     PASS
+  [FAIL] output_digest                OUTPUT_DIGEST_MISMATCH
+
+### POST /scenarios/05-forbidden-source
+HTTP 422
+accepted = False
+  [PASS] signature                    PASS
+  [PASS] subject_binding              PASS
+  [PASS] trusted_builder              PASS
+  [PASS] builder_binding              PASS
+  [PASS] source_commit_binding        PASS
+  [PASS] materials_complete           PASS
+  [FAIL] material_sources_allowed     MATERIAL_SOURCE_DENIED
+  [PASS] output_digest                PASS
+
+### POST /scenarios/06-untrusted-builder
+HTTP 422
+accepted = False
+  [PASS] signature                    PASS
+  [PASS] subject_binding              PASS
+  [FAIL] trusted_builder              UNTRUSTED_BUILDER
+  [PASS] builder_binding              PASS
+  [PASS] source_commit_binding        PASS
+  [PASS] materials_complete           PASS
+  [PASS] material_sources_allowed     PASS
+  [PASS] output_digest                PASS
+
+### POST /verify（内联合法 envelope + base64 产物）
+{"accepted":true,"checks":[{"check":"signature","passed":true,"code":"PASS","detail":"Ed25519 签名有效，签名密钥 `pkg:generic/ci-builder@v2`"},{"check":"subject_binding","passed":true,"code":"PASS","detail":"statement subject 与谓词 output 名称及摘要一致"},{"check":"trusted_builder","passed":true,"code":"PASS","detail":"构建器 `pkg:generic/ci-builder@v2` 在可信名单内"},{"check":"builder_binding","passed":true,"code":"PASS","detail":"签名者、陈述声明构建器与实际构建器一致"},{"check":"source_commit_binding","passed":true,"code":"PASS","detail":"源提交固定为 0123456789abcdef0123456789abcdef01234567 的 https://vcs.example.com/team/service"},{"check":"materials_complete","passed":true,"code":"PASS","detail":"全部 4 份材料均在本地且摘要一致"},{"check":"material_sources_allowed","passed":true,"code":"PASS","detail":"全部材料 URI 均命中来源白名单前缀"},{"check":"output_digest","passed":true,"code":"PASS","detail":"实际产物 SHA-256 = 5e9194b56cd023177762f99375a13ad321fe5b8a57db6fa3fdc4b1a5b96e5e55，与证明一致"}],"statement":{"_type":"https://in-toto.io/Statement/v1","subject":[{"name":"bin/app-v1.0.0.tar.gz","digest":{"sha256":"5e9194b56cd023177762f99375a13ad321fe5b8a57db6fa3fdc4b1a5b96e5e55"}}],"predicate_type":"https://slsa.dev/provenance/v1/build-provenance-demo","predicate":{"builder_id":"pkg:generic/ci-builder@v2","source_commit":{"repository":"https://vcs.example.com/team/service","ref_commit":"0123456789abcdef0123456789abcdef01234567"},"materials":[{"uri":"git+https://vcs.example.com/team/service@0123456789abcdef0123456789abcdef01234567/src/main.rs","digest":{"sha256":"1a7769f0e7d96a4393794e403d929549e358e7229d798ae1fccc6904748dff51"}},{"uri":"git+https://vcs.example.com/team/service@0123456789abcdef0123456789abcdef01234567/src/lib.rs","digest":{"sha256":"2ef541cb373ffed7e54a640d23c78dd0926008a40d62f7807b20b95ad2b2d6db"}},{"uri":"https://deps.example.com/dep-a-2.1.0.tar.gz","digest":{"sha256":"d418c5022715c765d65cdde988c9052b2b09e86ab37c26f6a08cf279070b738b"}},{"uri":"https://deps.example.com/dep-b-0.9.4.tar.gz","digest":{"sha256":"8cec433e8e095029f5c49fd84d65bcc36c0a8a3e5614908da8f0a31bf886a01a"}}],"output":{"name":"bin/app-v1.0.0.tar.gz","digest":{"sha256":"5e9194b56cd023177762f99375a13ad321fe5b8a57db6fa3fdc4b1a5b96e5e55"}},"built_at":"2026-09-24T08:00:00Z"}},"signer_keyid":"pkg:generic/ci-builder@v2","actual_output_digest":"5e9194b56cd023177762f99375a13ad321fe5b8a57db6fa3fdc4b1a5b96e5e55"}

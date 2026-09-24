@@ -1,0 +1,5 @@
+{
+  "actual_builder_id": "pkg:generic/shadow-builder@v9",
+  "artifact_path": "app-v1.0.0-from-shadow-builder.tar.gz",
+  "proof_path": "cross-builder-reuse.json"
+}
