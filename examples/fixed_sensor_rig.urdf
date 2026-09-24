@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!-- 最小机器人夹具 2:固定关节传感器支架(固定关节必须被允许) -->
+<robot name="fixed_sensor_rig">
+  <link name="chassis">
+    <inertial>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+      <mass value="5.0"/>
+      <inertia ixx="0.02" iyy="0.02" izz="0.03"
+               ixy="0.0" ixz="0.0" iyz="0.0"/>
+    </inertial>
+  </link>
+
+  <link name="imu_mount">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.05"/>
+      <inertia ixx="1.0e-5" iyy="1.0e-5" izz="1.0e-5"
+               ixy="0.0" ixz="0.0" iyz="0.0"/>
+    </inertial>
+  </link>
+
+  <joint name="imu_fixed" type="fixed">
+    <parent link="chassis"/>
+    <child link="imu_mount"/>
+    <origin xyz="0.1 0 0.05" rpy="0 0 0"/>
+  </joint>
+</robot>

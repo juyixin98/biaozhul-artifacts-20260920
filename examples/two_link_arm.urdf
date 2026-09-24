@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!-- 最小机器人夹具 1:两连杆单旋转关节机械臂(全部惯性参数合法) -->
+<robot name="two_link_arm">
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <mass value="2.0"/>
+      <inertia ixx="0.01" iyy="0.01" izz="0.005"
+               ixy="0.0" ixz="0.0" iyz="0.0"/>
+    </inertial>
+  </link>
+
+  <link name="upper_link">
+    <inertial>
+      <origin xyz="0 0 0.25" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.006" iyy="0.006" izz="0.001"
+               ixy="0.0" ixz="0.0" iyz="0.0"/>
+    </inertial>
+  </link>
+
+  <joint name="shoulder" type="revolute">
+    <parent link="base_link"/>
+    <child link="upper_link"/>
+    <origin xyz="0 0 0.1" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.5708" upper="1.5708" effort="50.0" velocity="2.0"/>
+  </joint>
+</robot>
