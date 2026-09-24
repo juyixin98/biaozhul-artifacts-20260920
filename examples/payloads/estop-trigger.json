@@ -1,0 +1,7 @@
+{
+  "seq": 1,
+  "nonce": "example-estop-trigger-1",
+  "action": "trigger",
+  "issue_ms": 1700000000000,
+  "valid_for_ms": 2000
+}

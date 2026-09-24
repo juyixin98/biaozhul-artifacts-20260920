@@ -1,0 +1,13 @@
+/target
+**/*.rs.bk
+
+# SQLite
+*.db
+*.db-wal
+*.db-shm
+
+# 真实密钥配置（示例在 examples/ 下）
+/config.json
+
+# 运行时杂项
+*.log

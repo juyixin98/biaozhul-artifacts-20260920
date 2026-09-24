@@ -1,0 +1,10 @@
+{
+  "seq": 1,
+  "nonce": "example-auto-1",
+  "vx": 0.5,
+  "vy": 0.0,
+  "omega": 0.0,
+  "issue_ms": 1700000000000,
+  "valid_for_ms": 2000,
+  "lease_for_ms": 2000
+}
