@@ -1,0 +1,7 @@
+{"frame_id": 256, "data": "34 12 D8 64 00 00 00 00", "_expect": {"message_name": "EngineStatus", "EngineSpeed": {"raw": 4660, "value": 1165.0, "byte_order": "intel"}, "EngineTemp": {"raw": 216, "value": -80.0, "signed": true}, "Throttle": {"raw": 100, "value": 50.0}}}
+{"frame_id": 300, "data": "01 00 40 06 00 00 00 00", "_expect": {"message_name": "BrakeMux", "mux": 1, "PedalPos": {"raw": 0, "value": 0.0}, "BrakePress": {"raw": 1600, "value": 160.0}}}
+{"frame_id": 300, "data": "02 00 00 00 06 46 E0 00", "_expect": {"message_name": "BrakeMux", "mux": 2, "LineVoltage": {"raw": 1134, "value": 11.34, "byte_order": "motorola"}, "ErrorCode": {"raw": 6, "value": 6.0}, "_absent": ["PedalPos", "BrakePress"]}}
+{"frame_id": 2047, "data": "12 34 FC 18 60 09 00 00", "_expect": {"message_name": "MaxIdMotorola", "BigCounter": {"raw": 4660, "value": 4660.0, "byte_order": "motorola"}, "BigSigned": {"raw": 64536, "value": -1000.0, "signed": true}, "CrossIntel": {"raw": 2400, "value": 190.0}}}
+{"frame_id": 300, "data": "01 00 40 00 00 00 00", "_expect_error": {"code": "dlc_too_short"}}
+{"frame_id": 2048, "data": "00", "_expect_http_status": 422}
+{"frame_id": 400, "data": "00 00 00 00 00 00 00 00", "_expect_error": {"code": "unknown_message"}}
