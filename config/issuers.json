@@ -1,0 +1,31 @@
+{
+  "issuers": [
+    {
+      "id": "demo-rsa",
+      "iss": "https://demo-issuer.local/rsa",
+      "jwks_uri": "http://127.0.0.1:8787/rsa/jwks.json",
+      "allowed_algs": ["RS256", "RS384", "RS512", "PS256"],
+      "audiences": ["api-gateway", "billing-service"],
+      "leeway": 0,
+      "cache_ttl": 300
+    },
+    {
+      "id": "demo-ec",
+      "iss": "https://demo-issuer.local/ec",
+      "jwks_uri": "http://127.0.0.1:8787/ec/jwks.json",
+      "allowed_algs": ["ES256", "ES384", "ES512", "EdDSA"],
+      "audiences": ["api-gateway"],
+      "leeway": 5,
+      "cache_ttl": 10
+    },
+    {
+      "id": "demo-hmac",
+      "iss": "https://demo-issuer.local/hmac",
+      "allowed_algs": ["HS256"],
+      "hmac_secret_b64": "ZGVtby1obWFjLXNlY3JldC1wbGVhc2UtY2hhbmdlLTMyQis",
+      "audiences": ["internal-service"],
+      "leeway": 0,
+      "cache_ttl": 60
+    }
+  ]
+}
