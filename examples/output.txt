@@ -1,0 +1,172 @@
+=== 1. plain Content-Length request -> ok, body parsed
+{
+    "ok": true,
+    "input_bytes": 70,
+    "request_count": 1,
+    "requests": [
+        {
+            "method": "POST",
+            "target": "/a",
+            "version": "HTTP/1.1",
+            "headers": [
+                {
+                    "name": "Host",
+                    "value": "example.com"
+                },
+                {
+                    "name": "Content-Length",
+                    "value": "11"
+                }
+            ],
+            "frame": "content-length",
+            "content_length": 11,
+            "body": "aGVsbG8gd29ybGQ=",
+            "body_length": 11,
+            "start_offset": 0,
+            "raw_length": 70
+        }
+    ]
+}
+
+=== 2. chunked request with trailers -> decoded body Wikipedia
+{
+    "ok": true,
+    "input_bytes": 104,
+    "request_count": 1,
+    "requests": [
+        {
+            "method": "POST",
+            "target": "/c",
+            "version": "HTTP/1.1",
+            "headers": [
+                {
+                    "name": "Host",
+                    "value": "example.com"
+                },
+                {
+                    "name": "Transfer-Encoding",
+                    "value": "chunked"
+                }
+            ],
+            "frame": "chunked",
+            "body": "V2lraXBlZGlh",
+            "body_length": 9,
+            "trailers": [
+                {
+                    "name": "ETag",
+                    "value": "\"abc\""
+                }
+            ],
+            "start_offset": 0,
+            "raw_length": 104
+        }
+    ]
+}
+
+=== 3. two pipelined requests in one connection -> request_count 2
+{
+    "ok": true,
+    "input_bytes": 78,
+    "request_count": 2,
+    "requests": [
+        {
+            "method": "GET",
+            "target": "/1",
+            "version": "HTTP/1.1",
+            "headers": [
+                {
+                    "name": "Host",
+                    "value": "a"
+                }
+            ],
+            "frame": "none",
+            "body": null,
+            "body_length": 0,
+            "start_offset": 0,
+            "raw_length": 28
+        },
+        {
+            "method": "POST",
+            "target": "/2",
+            "version": "HTTP/1.1",
+            "headers": [
+                {
+                    "name": "Host",
+                    "value": "b"
+                },
+                {
+                    "name": "Content-Length",
+                    "value": "2"
+                }
+            ],
+            "frame": "content-length",
+            "content_length": 2,
+            "body": "aGk=",
+            "body_length": 2,
+            "start_offset": 28,
+            "raw_length": 50
+        }
+    ]
+}
+
+=== 4. CL + chunked together -> content_length_and_chunked, offset at TE line
+{
+    "ok": false,
+    "input_bytes": 67,
+    "error": {
+        "code": "content_length_and_chunked",
+        "offset": 37,
+        "message": "Content-Length and Transfer-Encoding: chunked must not appear together"
+    }
+}
+
+=== 5. conflicting Content-Length values -> content_length_conflict
+{
+    "ok": false,
+    "input_bytes": 58,
+    "error": {
+        "code": "content_length_conflict",
+        "offset": 37,
+        "message": "multiple Content-Length header fields with different values"
+    }
+}
+
+=== 6. folded header -> folded_header with exact offset
+{
+    "ok": false,
+    "input_bytes": 35,
+    "error": {
+        "code": "folded_header",
+        "offset": 24,
+        "message": "obsolete header folding (leading whitespace) is not accepted"
+    }
+}
+
+=== 7. truncated chunk -> chunk_data_truncated offset = total bytes
+{
+    "ok": false,
+    "input_bytes": 54,
+    "error": {
+        "code": "chunk_data_truncated",
+        "offset": 54,
+        "message": "stream ended in the middle of a chunk"
+    }
+}
+
+=== 8. bare LF -> bare_lf
+{
+    "ok": false,
+    "input_bytes": 26,
+    "error": {
+        "code": "bare_lf",
+        "offset": 14,
+        "message": "line ending must be CRLF, bare LF found"
+    }
+}
+
+=== 9. verify: exhaustive byte-split check of sample 2 -> ok, N splits
+{
+    "ok": true,
+    "input_bytes": 104,
+    "splits_checked": 105
+}
