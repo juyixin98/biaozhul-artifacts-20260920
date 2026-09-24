@@ -1,0 +1,13 @@
+# Read the currently committed configuration snapshot.
+# Always returns the whole snapshot so a client never observes a torn
+# half-updated state.
+
+---
+float64 version
+float64 sampling_rate_hz
+float64 cache_length_s
+float64 allowed_latency_s
+# SHA-256 hex digest of the canonical JSON snapshot that was persisted.
+string config_hash
+# Monotonic sequence incremented for every successfully committed update.
+int64 commit_seq

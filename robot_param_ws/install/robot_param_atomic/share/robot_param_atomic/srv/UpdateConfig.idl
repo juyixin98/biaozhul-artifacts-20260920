@@ -1,0 +1,69 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from robot_param_atomic/srv/UpdateConfig.srv
+// generated code does not contain a copyright notice
+
+
+module robot_param_atomic {
+  module srv {
+    @verbatim (language="comment", text=
+      "Atomically update the robot configuration." "\n"
+      "" "\n"
+      "The three fields are packed into one request so they are validated and" "\n"
+      "committed as a single snapshot.  expected_version is an optimistic" "\n"
+      "concurrency token: it must equal the currently committed version, otherwise" "\n"
+      "the whole request is rejected without touching storage (compare-and-swap)." "\n"
+      "" "\n"
+      "Field semantics:" "\n"
+      "  sampling_rate_hz  sampling rate in hertz            (> 0, finite)" "\n"
+      "  cache_length_s    cache window length in seconds    (>= 0, finite)" "\n"
+      "  allowed_latency_s tolerated latency in seconds       (>= 0, finite)" "\n"
+      "Cross-field invariant (evaluated on the COMPLETE candidate snapshot):" "\n"
+      "  cache_length_s >= 2 * allowed_latency_s" "\n"
+      "" "\n"
+      "A sentinel value of -1.0 on any field means \"leave this field unchanged\";" "\n"
+      "callers can therefore send a partial update but the server still validates" "\n"
+      "the resulting whole snapshot.")
+    struct UpdateConfig_Request {
+      double expected_version;
+
+      double sampling_rate_hz;
+
+      double cache_length_s;
+
+      double allowed_latency_s;
+    };
+    module UpdateConfig_Response_Constants {
+      const uint8 OK = 0;
+      @verbatim (language="comment", text=
+        "per-field or cross-field validation failed")
+      const uint8 REJECT_CONSTRAINT = 1;
+      @verbatim (language="comment", text=
+        "expected_version != current version")
+      const uint8 REJECT_STALE_VERSION = 2;
+      @verbatim (language="comment", text=
+        "commit attempted from inside a change callback")
+      const uint8 REJECT_UPDATE_IN_CALLBACK = 3;
+      @verbatim (language="comment", text=
+        "SQLite write failed / rolled back")
+      const uint8 ERR_PERSISTENCE = 4;
+      const uint8 ERR_INTERNAL = 5;
+    };
+    struct UpdateConfig_Response {
+      boolean ok;
+
+      uint8 code;
+
+      string message;
+
+      @verbatim (language="comment", text=
+        "Committed snapshot after the attempt (unchanged on rejection).")
+      double version;
+
+      double sampling_rate_hz;
+
+      double cache_length_s;
+
+      double allowed_latency_s;
+    };
+  };
+};

@@ -1,0 +1,53 @@
+# Locked dependencies for robot_param_atomic
+#
+# Platform verified on (this is NOT a container image, these are the exact
+# system packages the deliverable was built and tested against):
+#   OS:      Ubuntu 24.04.4 LTS (noble)
+#   ROS 2:   Jazzy Jalisco, installed via packages.ros.org apt repository
+#   Compiler: GCC 13.x, C++17
+#
+# All storage and cryptographic work uses the REAL system libraries — SQLite
+# is linked directly (not an in-memory mock) and hashes are computed with
+# OpenSSL's EVP SHA-256.
+#
+# Reproduce the exact set with:
+#   sudo apt-get update
+#   sudo apt-get install -y \
+#     ros-jazzy-rclcpp ros-jazzy-std-msgs \
+#     ros-jazzy-rosidl-default-generators ros-jazzy-rosidl-default-runtime \
+#     ros-jazzy-ament-cmake ros-jazzy-ament-cmake-gtest \
+#     ros-jazzy-ros2cli ros-jazzy-ros2run ros-jazzy-ros2param \
+#     ros-jazzy-ros2service ros-jazzy-ros2launch \
+#     libsqlite3-dev libssl-dev libgtest-dev \
+#     cmake g++ python3-colcon-common-extensions
+#
+# Pin exact versions (apt downgrades/pins) with the list below.
+#
+# name=exact_version_as_installed
+ros-jazzy-rclcpp=28.1.22-1noble.20260902.055335
+ros-jazzy-rcl=9.2.11-1noble.20260902.044558
+ros-jazzy-std-msgs=5.3.8-1noble.20260902.022418
+ros-jazzy-rosidl-default-generators=1.6.1-1noble.20260902.021422
+ros-jazzy-rosidl-default-runtime=1.6.1-1noble.20260902.015921
+ros-jazzy-ament-cmake=2.5.6-2noble.20260225.222913
+ros-jazzy-ament-cmake-gtest=2.5.6-2noble.20260225.145055
+ros-jazzy-ros2cli=0.32.12-1noble.20260902.102710
+ros-jazzy-ros2run=0.32.12-1noble.20260903.074618
+ros-jazzy-ros2param=0.32.12-1noble.20260903.084453
+ros-jazzy-ros2service=0.32.12-1noble.20260903.074340
+libsqlite3-dev=3.45.1-1ubuntu2.8
+libsqlite3-0=3.45.1-1ubuntu2.8
+libssl-dev=3.0.13-0ubuntu3.15
+libgtest-dev=1.14.0-1
+cmake=3.28.3-1build7
+g++=4:13.2.0-7ubuntu1
+python3-colcon-common-extensions=0.3.0-100
+
+# Transitive ROS packages that must be present (pulled in automatically by the
+# above): rosidl-typesupport-fastrtps-cpp, rmw-cyclonedds/fastrtps,
+# rcl-interfaces, example-interfaces, ament-cmake-ros.
+#
+# SQLite interface used: raw C API (sqlite3.h), single append-only table
+#   config_commits(id, version, sampling_rate_hz, cache_length_s,
+#                  allowed_latency_s, hash, created_at)
+# Crypto interface used: OpenSSL 3 EVP_Q_digest("SHA256", ...).

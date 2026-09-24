@@ -1,0 +1,33 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from robot_param_atomic/srv/GetConfig.srv
+// generated code does not contain a copyright notice
+
+
+module robot_param_atomic {
+  module srv {
+    @verbatim (language="comment", text=
+      "Read the currently committed configuration snapshot." "\n"
+      "Always returns the whole snapshot so a client never observes a torn" "\n"
+      "half-updated state.")
+    struct GetConfig_Request {
+      uint8 structure_needs_at_least_one_member;
+    };
+    struct GetConfig_Response {
+      double version;
+
+      double sampling_rate_hz;
+
+      double cache_length_s;
+
+      double allowed_latency_s;
+
+      @verbatim (language="comment", text=
+        "SHA-256 hex digest of the canonical JSON snapshot that was persisted.")
+      string config_hash;
+
+      @verbatim (language="comment", text=
+        "Monotonic sequence incremented for every successfully committed update.")
+      int64 commit_seq;
+    };
+  };
+};

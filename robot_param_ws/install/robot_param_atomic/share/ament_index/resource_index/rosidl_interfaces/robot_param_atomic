@@ -1,0 +1,4 @@
+srv/GetConfig.idl
+srv/GetConfig.srv
+srv/UpdateConfig.idl
+srv/UpdateConfig.srv

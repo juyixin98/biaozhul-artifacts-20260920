@@ -1,0 +1,38 @@
+# Atomically update the robot configuration.
+#
+# The three fields are packed into one request so they are validated and
+# committed as a single snapshot.  expected_version is an optimistic
+# concurrency token: it must equal the currently committed version, otherwise
+# the whole request is rejected without touching storage (compare-and-swap).
+#
+# Field semantics:
+#   sampling_rate_hz  sampling rate in hertz            (> 0, finite)
+#   cache_length_s    cache window length in seconds    (>= 0, finite)
+#   allowed_latency_s tolerated latency in seconds       (>= 0, finite)
+# Cross-field invariant (evaluated on the COMPLETE candidate snapshot):
+#   cache_length_s >= 2 * allowed_latency_s
+#
+# A sentinel value of -1.0 on any field means "leave this field unchanged";
+# callers can therefore send a partial update but the server still validates
+# the resulting whole snapshot.
+
+float64 expected_version
+float64 sampling_rate_hz
+float64 cache_length_s
+float64 allowed_latency_s
+---
+bool ok
+uint8 code
+string message
+# Committed snapshot after the attempt (unchanged on rejection).
+float64 version
+float64 sampling_rate_hz
+float64 cache_length_s
+float64 allowed_latency_s
+
+uint8 OK                        = 0
+uint8 REJECT_CONSTRAINT         = 1   # per-field or cross-field validation failed
+uint8 REJECT_STALE_VERSION      = 2   # expected_version != current version
+uint8 REJECT_UPDATE_IN_CALLBACK = 3   # commit attempted from inside a change callback
+uint8 ERR_PERSISTENCE           = 4   # SQLite write failed / rolled back
+uint8 ERR_INTERNAL              = 5
