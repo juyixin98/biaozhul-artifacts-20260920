@@ -1,0 +1,24 @@
+# Legacy v1alpha1 Task fixtures.
+#
+# These are the shapes an old client (pre-v1 controller/operator) sends.
+# Timeout is a plain integer number of seconds; there is no structured
+# duration, no priority and no tags. Used by:
+#   - docs/roundtrip-strategy.md examples
+#   - manual acceptance (kubectl apply)
+#   - the storage-migrate seeding examples
+
+apiVersion: migration.example.io/v1alpha1
+kind: Task
+metadata:
+  name: nightly-backup
+  namespace: default
+  labels:
+    app.example.io/team: data
+spec:
+  # Whole seconds only. Defaulted to 30 when omitted (mutating webhook).
+  timeoutSeconds: 120
+  payload: "pg_dump --file=/backup/nightly.dump"
+status:
+  phase: Pending
+  retries: 0
+  message: "waiting for window"

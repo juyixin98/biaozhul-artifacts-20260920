@@ -1,0 +1,85 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: task-mutating-webhook-configuration
+webhooks:
+  - name: mtask.v1alpha1.migration.example.io
+    # Exact is deliberate: the default matchPolicy (Equivalent) would cause
+    # this v1alpha1-only webhook to ALSO fire on v1 requests by serving the
+    # object to the webhook in v1alpha1 form. That would invoke the lossy
+    # v1 -> v1alpha1 conversion during every v1 create/update (for example
+    # rejecting a perfectly valid sub-second v1 duration), so each
+    # version-specific webhook must only fire for its own version.
+    matchPolicy: Exact
+    clientConfig:
+      service:
+        name: task-webhook
+        namespace: task-system
+        path: /mutate-migration-example-io-v1alpha1-task
+        port: 443
+    rules:
+      - apiGroups: ["migration.example.io"]
+        apiVersions: ["v1alpha1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["tasks"]
+        scope: Namespaced
+    admissionReviewVersions: ["v1"]
+    sideEffects: None
+    failurePolicy: Fail
+  - name: mtask.v1.migration.example.io
+    matchPolicy: Exact
+    clientConfig:
+      service:
+        name: task-webhook
+        namespace: task-system
+        path: /mutate-migration-example-io-v1-task
+        port: 443
+    rules:
+      - apiGroups: ["migration.example.io"]
+        apiVersions: ["v1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["tasks"]
+        scope: Namespaced
+    admissionReviewVersions: ["v1"]
+    sideEffects: None
+    failurePolicy: Fail
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: task-validating-webhook-configuration
+webhooks:
+  - name: vtask.v1alpha1.migration.example.io
+    matchPolicy: Exact
+    clientConfig:
+      service:
+        name: task-webhook
+        namespace: task-system
+        path: /validate-migration-example-io-v1alpha1-task
+        port: 443
+    rules:
+      - apiGroups: ["migration.example.io"]
+        apiVersions: ["v1alpha1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["tasks"]
+        scope: Namespaced
+    admissionReviewVersions: ["v1"]
+    sideEffects: None
+    failurePolicy: Fail
+  - name: vtask.v1.migration.example.io
+    matchPolicy: Exact
+    clientConfig:
+      service:
+        name: task-webhook
+        namespace: task-system
+        path: /validate-migration-example-io-v1-task
+        port: 443
+    rules:
+      - apiGroups: ["migration.example.io"]
+        apiVersions: ["v1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["tasks"]
+        scope: Namespaced
+    admissionReviewVersions: ["v1"]
+    sideEffects: None
+    failurePolicy: Fail

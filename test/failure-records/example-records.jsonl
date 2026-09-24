@@ -1,0 +1,4 @@
+{"time":"2026-09-23T18:09:28.96445082Z","name":"gen-a","namespace":"itest","fromVersion":"v1alpha1","toVersion":"v1","status":"migrated","resourceName":{"Namespace":"itest","Name":"gen-a"}}
+{"time":"2026-09-23T18:09:28.993481109Z","name":"gen-a","namespace":"itest","fromVersion":"v1alpha1","toVersion":"v1","status":"skipped","reason":"already-stored-as-v1","resourceName":{"Namespace":"itest","Name":"gen-a"}}
+{"time":"2026-09-23T18:09:28.993567772Z","name":"gen-b","namespace":"itest","fromVersion":"v1alpha1","toVersion":"v1","status":"migrated","resourceName":{"Namespace":"itest","Name":"gen-b"}}
+{"time":"2026-09-23T18:09:29.001444759Z","name":"gen-c","namespace":"itest","fromVersion":"v1alpha1","toVersion":"v1","status":"migrated","resourceName":{"Namespace":"itest","Name":"gen-c"}}

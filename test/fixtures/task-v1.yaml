@@ -1,0 +1,46 @@
+# Current v1 Task fixtures.
+#
+# Timeout is the structured Duration (seconds + non-negative nanos) and the
+# new scheduling metadata (priority, tags) is present. priority/tags have no
+# v1alpha1 fields: while this object is served to a legacy client they are
+# parked in migration.example.io/v1-spec-preserve and restored on the way
+# back, so a legacy GET+PUT cannot erase them.
+
+apiVersion: migration.example.io/v1
+kind: Task
+metadata:
+  name: nightly-backup
+  namespace: default
+  labels:
+    app.example.io/team: data
+spec:
+  # Structured duration, whole seconds. This value round-trips through
+  # v1alpha1 (it becomes timeoutSeconds: 120).
+  timeout:
+    seconds: 120
+  payload: "pg_dump --file=/backup/nightly.dump"
+  # v1-only metadata. Survives legacy clients via the preserve annotation.
+  priority: High
+  tags:
+    - backup
+    - nightly
+status:
+  phase: Pending
+  retries: 0
+  message: "waiting for window"
+---
+# A v1 object that v1alpha1 CANNOT represent: sub-second precision.
+# Creating it succeeds; serving it to a legacy client returns an explicit
+# InexpressibleValue conversion error instead of truncating 500ms away.
+apiVersion: migration.example.io/v1
+kind: Task
+metadata:
+  name: latency-sensitive
+  namespace: default
+spec:
+  timeout:
+    seconds: 2
+    nanos: 500000000   # 2.5s — not expressible in v1alpha1
+  payload: "health-probe"
+  priority: Normal
+  tags: ["probe"]

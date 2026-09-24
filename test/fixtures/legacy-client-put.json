@@ -1,0 +1,21 @@
+{
+  "_comment": "What a legacy v1alpha1 client receives on GET and must PUT back verbatim (apart from the one field it changes). The migration.example.io/v1-spec-preserve annotation is the round-trip vehicle for v1-only fields; dropping it is the exact way an old client would erase priority/tags, and the webhook keeps the data exactly because this annotation survives the edit.",
+  "apiVersion": "migration.example.io/v1alpha1",
+  "kind": "Task",
+  "metadata": {
+    "name": "nightly-backup",
+    "namespace": "default",
+    "resourceVersion": "REPLACE-BEFORE-PUT",
+    "annotations": {
+      "migration.example.io/v1-spec-preserve": "{\"apiVersion\":\"migration.example.io/v1\",\"kind\":\"Task\",\"spec\":{\"priority\":\"High\",\"tags\":[\"backup\",\"nightly\"]}}"
+    }
+  },
+  "spec": {
+    "timeoutSeconds": 120,
+    "payload": "pg_dump --file=/backup/nightly.dump --compress=zstd"
+  },
+  "status": {
+    "phase": "Pending",
+    "retries": 0
+  }
+}

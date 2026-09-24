@@ -1,0 +1,24 @@
+# Invalid fixtures, each rejected explicitly (never silently truncated).
+# Apply against the cluster to see the failure modes:
+#   kubectl apply -f test/fixtures/invalid-duration-v1.yaml
+#     -> rejected (validation or conversion, see README)
+
+apiVersion: migration.example.io/v1
+kind: Task
+metadata:
+  name: bad-duration
+  namespace: default
+spec:
+  timeout:
+    seconds: -1            # negative timeout: rejected
+    nanos: 2000000000      # out of [0,999999999]: rejected
+  payload: "should-not-be-stored"
+---
+apiVersion: migration.example.io/v1alpha1
+kind: Task
+metadata:
+  name: bad-duration-legacy
+  namespace: default
+spec:
+  timeoutSeconds: -10      # negative legacy timeout: rejected
+  payload: "should-not-be-stored"
