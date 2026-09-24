@@ -1,0 +1,32 @@
+{
+  "registry": {
+    "packages": {
+      "a": [
+        { "name": "a", "version": "1.0.0", "dependencies": [
+          { "name": "x", "req": "<1.5.0", "optional": false }
+        ]},
+        { "name": "a", "version": "1.1.0", "dependencies": [
+          { "name": "x", "req": "<1.2.0", "optional": false }
+        ]}
+      ],
+      "b": [
+        { "name": "b", "version": "1.0.0", "dependencies": [
+          { "name": "x", "req": ">=1.4.0", "optional": false }
+        ]}
+      ],
+      "x": [
+        { "name": "x", "version": "1.0.0", "dependencies": [] },
+        { "name": "x", "version": "1.4.0", "dependencies": [] },
+        { "name": "x", "version": "1.4.5", "dependencies": [] },
+        { "name": "x", "version": "1.5.0", "dependencies": [] }
+      ]
+    }
+  },
+  "requirements": [
+    { "name": "a", "req": "^1.0" },
+    { "name": "b", "req": "^1.0" }
+  ],
+  "default_preference": "highest",
+  "allow_prerelease": false,
+  "verify": true
+}

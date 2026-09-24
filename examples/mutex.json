@@ -1,0 +1,25 @@
+{
+  "registry": {
+    "packages": {
+      "a": [
+        { "name": "a", "version": "1.0.0", "dependencies": [
+          { "name": "x", "req": "^1.0", "optional": false }
+        ]}
+      ],
+      "b": [
+        { "name": "b", "version": "1.0.0", "dependencies": [
+          { "name": "x", "req": "^2.0", "optional": false }
+        ]}
+      ],
+      "x": [
+        { "name": "x", "version": "1.9.0", "dependencies": [] },
+        { "name": "x", "version": "2.0.0", "dependencies": [] }
+      ]
+    }
+  },
+  "requirements": [
+    { "name": "a", "req": "*" },
+    { "name": "b", "req": "*" }
+  ],
+  "verify": true
+}

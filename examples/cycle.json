@@ -1,0 +1,23 @@
+{
+  "registry": {
+    "packages": {
+      "ping": [
+        { "name": "ping", "version": "1.0.0", "dependencies": [
+          { "name": "pong", "req": "^1.0", "optional": false }
+        ]}
+      ],
+      "pong": [
+        { "name": "pong", "version": "1.0.0", "dependencies": [
+          { "name": "ping", "req": "^1.0", "optional": false }
+        ]},
+        { "name": "pong", "version": "1.1.0", "dependencies": [
+          { "name": "ping", "req": "^1.0", "optional": false }
+        ]}
+      ]
+    }
+  },
+  "requirements": [
+    { "name": "ping", "req": "*" }
+  ],
+  "verify": true
+}
