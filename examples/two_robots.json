@@ -1,0 +1,44 @@
+{
+  "robots": [
+    {
+      "id": "r1",
+      "start": {"x": 0, "y": 0},
+      "start_battery": 50,
+      "battery_capacity": 50,
+      "capacity": 10,
+      "energy_per_dist": 1,
+      "charge_rate": 1
+    },
+    {
+      "id": "r2",
+      "start": {"x": 0, "y": 0},
+      "start_battery": 50,
+      "battery_capacity": 50,
+      "capacity": 10,
+      "energy_per_dist": 1,
+      "charge_rate": 1
+    }
+  ],
+  "depot": {"x": 0, "y": 0},
+  "chargers": [
+    {"id": "c1", "location": {"x": 50, "y": 50}}
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "location": {"x": 8, "y": 0},
+      "load": 2,
+      "ready": 0,
+      "due": 100,
+      "service_time": 1
+    },
+    {
+      "id": "t2",
+      "location": {"x": -10, "y": 0},
+      "load": 3,
+      "ready": 0,
+      "due": 100,
+      "service_time": 1
+    }
+  ]
+}

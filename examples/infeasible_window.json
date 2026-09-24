@@ -1,0 +1,27 @@
+{
+  "robots": [
+    {
+      "id": "r1",
+      "start": {"x": 0, "y": 0},
+      "start_battery": 20,
+      "battery_capacity": 20,
+      "capacity": 10,
+      "energy_per_dist": 1,
+      "charge_rate": 1
+    }
+  ],
+  "depot": {"x": 0, "y": 0},
+  "chargers": [
+    {"id": "c1", "location": {"x": 0, "y": 5}}
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "location": {"x": 20, "y": 0},
+      "load": 1,
+      "ready": 0,
+      "due": 15,
+      "service_time": 0
+    }
+  ]
+}
