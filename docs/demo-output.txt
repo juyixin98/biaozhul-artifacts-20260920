@@ -1,0 +1,314 @@
+
+[1m=== build & start 3 replicas (logs in /tmp/tmp.Gmy1bHnSW3) ===[0m
+replicas ready: http://127.0.0.1:18081 http://127.0.0.1:18082 http://127.0.0.1:18083
+
+[1m=== 1) common history: node1 adds a b c, then full mesh sync ===[0m
+http://127.0.0.1:18081 members: {
+  "elements": [
+    "a",
+    "b",
+    "c"
+  ]
+}
+
+http://127.0.0.1:18082 members: {
+  "elements": [
+    "a",
+    "b",
+    "c"
+  ]
+}
+
+http://127.0.0.1:18083 members: {
+  "elements": [
+    "a",
+    "b",
+    "c"
+  ]
+}
+
+
+[1m=== 2) partition: divergent concurrent edits (NO syncs in this phase) ===[0m
+-- node1 removes a
+{
+  "element": "a",
+  "observedTags": [
+    "node1-1-433692f60e5536a5b9d9711cf13f44e0"
+  ],
+  "op": {
+    "type": "remove",
+    "element": "a",
+    "tags": [
+      "node1-1-433692f60e5536a5b9d9711cf13f44e0"
+    ]
+  }
+}
+
+-- node2 CONCURRENTLY re-adds a (fresh unique tag) and adds d
+{
+  "element": "a",
+  "op": {
+    "type": "add",
+    "element": "a",
+    "tags": [
+      "node2-1-8f0320a3d33d3fd0a253afd4e3ab54b3"
+    ]
+  },
+  "tag": "node2-1-8f0320a3d33d3fd0a253afd4e3ab54b3"
+}
+
+{
+  "element": "d",
+  "op": {
+    "type": "add",
+    "element": "d",
+    "tags": [
+      "node2-2-c6c2fbe8bab8a09794ee79197563f4e8"
+    ]
+  },
+  "tag": "node2-2-c6c2fbe8bab8a09794ee79197563f4e8"
+}
+
+-- node3 removes b and adds e
+{
+  "element": "b",
+  "observedTags": [
+    "node1-2-5e7d168a49b997eb6be8520c7ee3dc8e"
+  ],
+  "op": {
+    "type": "remove",
+    "element": "b",
+    "tags": [
+      "node1-2-5e7d168a49b997eb6be8520c7ee3dc8e"
+    ]
+  }
+}
+
+{
+  "element": "e",
+  "op": {
+    "type": "add",
+    "element": "e",
+    "tags": [
+      "node3-1-2c6d20d09a96c922057fe0d6b523b9b2"
+    ]
+  },
+  "tag": "node3-1-2c6d20d09a96c922057fe0d6b523b9b2"
+}
+
+node1 while partitioned: {
+  "elements": [
+    "b",
+    "c"
+  ]
+}
+
+node2 while partitioned: {
+  "elements": [
+    "a",
+    "b",
+    "c",
+    "d"
+  ]
+}
+
+node3 while partitioned: {
+  "elements": [
+    "a",
+    "c",
+    "e"
+  ]
+}
+
+
+[1m=== 3) partition heals node-by-node (order: node1, node2, node3) ===[0m
+node1 sync: {
+node1 sync:   "elements": [
+node1 sync:     "a",
+node1 sync:     "c",
+node1 sync:     "d",
+node1 sync:     "e"
+node1 sync:   ],
+node1 sync:   "ok": true,
+node1 sync:   "results": [
+node1 sync:     {
+node1 sync:       "peer": "http://127.0.0.1:18082",
+node1 sync:       "pulled": true,
+node1 sync:       "pushed": true
+node1 sync:     },
+node1 sync:     {
+node1 sync:       "peer": "http://127.0.0.1:18083",
+node1 sync:       "pulled": true,
+node1 sync:       "pushed": true
+node1 sync:     }
+node1 sync:   ]
+node1 sync: }
+node1 sync: 
+node2 sync: {
+node2 sync:   "elements": [
+node2 sync:     "a",
+node2 sync:     "c",
+node2 sync:     "d",
+node2 sync:     "e"
+node2 sync:   ],
+node2 sync:   "ok": true,
+node2 sync:   "results": [
+node2 sync:     {
+node2 sync:       "peer": "http://127.0.0.1:18081",
+node2 sync:       "pulled": true,
+node2 sync:       "pushed": true
+node2 sync:     },
+node2 sync:     {
+node2 sync:       "peer": "http://127.0.0.1:18083",
+node2 sync:       "pulled": true,
+node2 sync:       "pushed": true
+node2 sync:     }
+node2 sync:   ]
+node2 sync: }
+node2 sync: 
+node3 sync: {
+node3 sync:   "elements": [
+node3 sync:     "a",
+node3 sync:     "c",
+node3 sync:     "d",
+node3 sync:     "e"
+node3 sync:   ],
+node3 sync:   "ok": true,
+node3 sync:   "results": [
+node3 sync:     {
+node3 sync:       "peer": "http://127.0.0.1:18081",
+node3 sync:       "pulled": true,
+node3 sync:       "pushed": true
+node3 sync:     },
+node3 sync:     {
+node3 sync:       "peer": "http://127.0.0.1:18082",
+node3 sync:       "pulled": true,
+node3 sync:       "pushed": true
+node3 sync:     }
+node3 sync:   ]
+node3 sync: }
+node3 sync: 
+
+[1m=== convergence check — all replicas must show [a c d e] ===[0m
+node1: {
+  "elements": [
+    "a",
+    "c",
+    "d",
+    "e"
+  ]
+}
+
+node2: {
+  "elements": [
+    "a",
+    "c",
+    "d",
+    "e"
+  ]
+}
+
+node3: {
+  "elements": [
+    "a",
+    "c",
+    "d",
+    "e"
+  ]
+}
+
+-- a survived because node2's add used a tag node1's remove never observed (add-wins)
+-- b is gone everywhere because every replica had observed its tag
+
+[1m=== 4) duplicate sync round — must be a no-op (idempotent join) ===[0m
+state byte-identical after repeated full sync: OK
+
+[1m=== 5) tombstone counters BEFORE gc ===[0m
+node1: {
+  "elements": 4,
+  "addTags": 6,
+  "tombstoneTags": 2
+}
+
+node2: {
+  "elements": 4,
+  "addTags": 6,
+  "tombstoneTags": 2
+}
+
+node3: {
+  "elements": 4,
+  "addTags": 6,
+  "tombstoneTags": 2
+}
+
+
+[1m=== 6) dry-run: which tags are safe to reclaim across the 3 converged nodes? ===[0m
+{
+  "eligibleCount": 2,
+  "eligibleTags": {
+    "a": [
+      "node1-1-433692f60e5536a5b9d9711cf13f44e0"
+    ],
+    "b": [
+      "node1-2-5e7d168a49b997eb6be8520c7ee3dc8e"
+    ]
+  },
+  "surveyed": 3
+}
+
+
+[1m=== 7) a lagging 4th replica blocks GC (fail-closed), BEFORE any purge ===[0m
+-- eligible set across 4 nodes incl. a replica that never synced (must be 0):
+{
+  "eligibleCount": 0,
+  "eligibleTags": null,
+  "surveyed": 4
+}
+
+
+[1m=== 8) coordinated GC round over the 3 converged nodes (purge intersection) ===[0m
+{
+  "eligible": {
+    "a": [
+      "node1-1-433692f60e5536a5b9d9711cf13f44e0"
+    ],
+    "b": [
+      "node1-2-5e7d168a49b997eb6be8520c7ee3dc8e"
+    ]
+  },
+  "purgedPerNode": [
+    2,
+    2,
+    2
+  ],
+  "replicas": [
+    "http://127.0.0.1:18081",
+    "http://127.0.0.1:18082",
+    "http://127.0.0.1:18083"
+  ],
+  "totalPurged": 6
+}
+
+[1m=== tombstone counters AFTER gc — tombstoneTags must be 0, members unchanged ===[0m
+node1: {
+  "elements": 4,
+  "addTags": 4,
+  "tombstoneTags": 0
+}
+
+node2: {
+  "elements": 4,
+  "addTags": 4,
+  "tombstoneTags": 0
+}
+
+node3: {
+  "elements": 4,
+  "addTags": 4,
+  "tombstoneTags": 0
+}
+
+
+
+[1m=== DEMO OK — server logs: /tmp/tmp.Gmy1bHnSW3 ===[0m

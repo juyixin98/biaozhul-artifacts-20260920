@@ -1,0 +1,22 @@
+# 实测结果存档 (go go1.23.4 Linux/x86_64)
+
+## 命令: go test -race -count=1 ./...
+# UTC: 2026-09-23T16:45:26Z
+?   	orset/cmd/gc	[no test files]
+?   	orset/cmd/server	[no test files]
+ok  	orset/internal/gc	1.014s
+ok  	orset/internal/orset	1.434s
+ok  	orset/internal/server	1.385s
+
+## 命令: go test -cover ./...
+	orset/cmd/server		coverage: 0.0% of statements
+	orset/cmd/gc		coverage: 0.0% of statements
+ok  	orset/internal/gc	(cached)	coverage: 93.0% of statements
+ok  	orset/internal/orset	(cached)	coverage: 75.3% of statements
+ok  	orset/internal/server	(cached)	coverage: 79.6% of statements
+
+## go vet ./...
+vet: clean
+
+## gofmt -l .
+gofmt: clean
