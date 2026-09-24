@@ -1,0 +1,27 @@
+# Pinned dependency lock for mr-gateway.
+# System-level packages as observed in the run/test environment (pip freeze).
+# NOTE: rclpy and the rosidl message packages (std_msgs) ship with ROS2 Jazzy,
+# not PyPI. Source /opt/ros/jazzy/setup.bash before using this project.
+#
+# Runtime
+fastapi==0.141.1
+starlette==1.6.0
+uvicorn==0.53.0
+pydantic==2.13.5
+pydantic_core==2.46.5
+pydantic-settings==2.15.0
+annotated-types==0.8.0
+typing-extensions==4.16.0
+anyio==4.15.1
+click==8.1.6
+h11==0.16.0
+idna==3.6
+certifi==2023.11.17
+
+# Test
+pytest==9.1.1
+httpx==0.28.1
+httpcore==1.0.9
+iniconfig==2.3.0
+packaging==24.0
+pluggy==1.6.0

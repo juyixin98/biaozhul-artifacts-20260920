@@ -1,0 +1,4 @@
+{
+  "namespace": "team/alpha",
+  "prewarm_topics": ["cmd/move", "cmd/stop"]
+}

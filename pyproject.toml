@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mr-gateway"
+description = "Multi-robot namespace-isolated ROS2 command gateway (rclpy + FastAPI)"
+version = "1.0.0"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi==0.141.1",
+    "uvicorn==0.53.0",
+    "pydantic==2.13.5",
+    # rclpy is NOT a pip package: install ROS2 Jazzy (apt: ros-jazzy-desktop or
+    # ros-jazzy-ros-base) and source /opt/ros/jazzy/setup.bash before running.
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest==9.1.1",
+    "httpx==0.28.1",
+]
+
+[project.scripts]
+mr-gateway = "mr_gateway.main:main"
+mr-synthetic-robot = "mr_gateway.synthetic_robot:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+anyio_mode = "auto"
+addopts = "-ra -q"

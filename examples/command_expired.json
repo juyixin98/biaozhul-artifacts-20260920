@@ -1,0 +1,7 @@
+{
+  "target": "cmd/move",
+  "sequence": 2,
+  "expires_at": 1790000000,
+  "tester_id": "tester-alice",
+  "payload": {"action": "stop"}
+}

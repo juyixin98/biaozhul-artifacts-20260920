@@ -1,0 +1,4 @@
+{
+  "namespace": "team/beta",
+  "prewarm_topics": ["cmd/move"]
+}

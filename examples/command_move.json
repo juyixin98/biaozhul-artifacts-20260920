@@ -1,0 +1,12 @@
+{
+  "target": "cmd/move",
+  "sequence": 1,
+  "ttl_seconds": 30,
+  "tester_id": "tester-alice",
+  "payload": {
+    "action": "goto",
+    "x": 1.25,
+    "y": -0.50,
+    "theta": 0.0
+  }
+}
