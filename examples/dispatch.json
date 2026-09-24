@@ -1,0 +1,6 @@
+{
+  "task_ids": ["T1", "T2"],
+  "options": {
+    "safety_margin_wh": 20.0
+  }
+}

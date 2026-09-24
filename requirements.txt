@@ -1,0 +1,5 @@
+# 直接依赖；可复现安装请使用 requirements.lock
+fastapi
+uvicorn
+httpx
+pytest
