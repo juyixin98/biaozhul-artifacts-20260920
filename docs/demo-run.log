@@ -1,0 +1,73 @@
+== data dir: /tmp/tmp.pSwF94WMjD
+== server up on http://127.0.0.1:36225
+
+== 1) publish 22 events (retention=20, so oldest should slide to 3)
+{"last_id":22,"oldest_id":3,"retained":20,"subscribers":0,"dropped":0,"max_events":20}
+
+
+== 2) stale cursor Last-Event-ID: 1 -> expect event: reset / cursor_expired
+event: reset
+data: {"reason":"cursor_expired","oldest_id":3,"last_id":22,"at":"2026-09-23T17:30:56Z"}
+data: resume impossible from the requested cursor; perform a full resync
+
+
+== 3) fresh stream grabs retained events (first frames shown)
+event: ready
+data: attached; replaying retained events after cursor, then live tail
+
+id: 3
+event: msg
+data: event number 3
+
+id: 4
+
+== 4) multi-line data wire encoding
+event: ready
+data: attached; replaying retained events after cursor, then live tail
+
+id: 23
+event: doc
+data: line-A
+data: line-B
+data: 
+data: line-D after blank
+
+== 5) 409 on stale non-streaming replay
+HTTP 409
+{"error":"cursor not resumable","last_id":23,"oldest_id":4,"reason":"cursor_expired","received_id":1,"resolution":"perform a full resync; reopen the stream without Last-Event-ID"}
+
+
+== 6) demo client: runs 8s; the server is KILLED (SIGKILL, hard crash,
+      every SSE connection drops instantly) and restarted from the same
+      data dir, while 8 more events are published. The client must
+      auto-reconnect with Last-Event-ID, dedupe seam duplicates, and
+      end with a contiguous id set (no gaps).
+-- killing server with SIGKILL (simulated crash) ...
+2026/09/24 01:30:57 connected (sent Last-Event-ID=0, high-water=0)
+2026/09/24 01:31:00 connection ended: unexpected EOF; reconnecting with Last-Event-ID: 24 in 200ms
+2026/09/24 01:31:00 connected (sent Last-Event-ID=21, high-water=24)
+2026/09/24 01:31:00 dup  id=22   (redelivered at replay/live seam; discarded)
+2026/09/24 01:31:00 dup  id=23   (redelivered at replay/live seam; discarded)
+2026/09/24 01:31:00 dup  id=24   (redelivered at replay/live seam; discarded)
+2026/09/24 01:31:07 unique events : 27
+2026/09/24 01:31:07 duplicates    : 3 (dropped after id-based dedup)
+2026/09/24 01:31:07 reconnects    : 1
+2026/09/24 01:31:07 resets/resync : 0
+2026/09/24 01:31:07 pings         : 4
+2026/09/24 01:31:07 RESULT        : PASS - after dedup the observed id set is contiguous (no gaps)
+
+== 7) persistence after restart: ids continue to 30 (oldest slid to 12)
+{"last_id":30,"oldest_id":11,"retained":20,"subscribers":0,"dropped":0,"max_events":20}
+
+
+== 8) validation errors
+empty data -> HTTP 400
+bad cursor -> HTTP 400
+
+== logs:
+-- server log (tail)
+2026/09/24 01:31:07 127.0.0.1:35318 GET /v1/events/stream -> 200 (6.788759794s)
+2026/09/24 01:31:07 127.0.0.1:42026 GET /v1/stats -> 200 (63.976µs)
+2026/09/24 01:31:07 127.0.0.1:42030 POST /v1/events -> 400 (39.961µs)
+2026/09/24 01:31:07 127.0.0.1:42044 GET /v1/events/stream -> 400 (31.398µs)
+DONE

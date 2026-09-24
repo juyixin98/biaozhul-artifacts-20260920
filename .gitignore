@@ -1,0 +1,6 @@
+# runtime data directory
+/data/
+
+# built binaries
+/bin/
+*.test

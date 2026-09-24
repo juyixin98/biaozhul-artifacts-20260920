@@ -1,0 +1,193 @@
+?   	sse-resume/cmd/demo-client	[no test files]
+?   	sse-resume/cmd/server	[no test files]
+=== RUN   TestPublishMonotonicAndReplay
+--- PASS: TestPublishMonotonicAndReplay (0.00s)
+=== RUN   TestPersistenceAcrossRestart
+--- PASS: TestPersistenceAcrossRestart (0.00s)
+=== RUN   TestCorruptLogRejected
+--- PASS: TestCorruptLogRejected (0.00s)
+=== RUN   TestRetentionCompaction
+--- PASS: TestRetentionCompaction (0.01s)
+=== RUN   TestRetentionTightenedOnRestart
+--- PASS: TestRetentionTightenedOnRestart (0.00s)
+=== RUN   TestSubscribeDeliversLiveAndDropSlow
+2026/09/24 01:31:37 sse-resume: dropping slow subscriber (queue=2 full, total dropped=1)
+--- PASS: TestSubscribeDeliversLiveAndDropSlow (0.00s)
+=== RUN   TestSubscribeHeadSeamNoGap
+--- PASS: TestSubscribeHeadSeamNoGap (0.00s)
+=== RUN   TestUnsubscribeStopsDelivery
+--- PASS: TestUnsubscribeStopsDelivery (0.00s)
+PASS
+ok  	sse-resume/internal/broker	1.026s
+=== RUN   TestPublishValidation
+2026/09/24 01:31:38 127.0.0.1:50182 POST /v1/events -> 400 (280.941µs)
+2026/09/24 01:31:38 127.0.0.1:50182 POST /v1/events -> 400 (105.672µs)
+2026/09/24 01:31:38 127.0.0.1:50182 POST /v1/events -> 400 (81.932µs)
+--- PASS: TestPublishValidation (0.00s)
+=== RUN   TestResumeFullBacklogThenLive
+2026/09/24 01:31:38 127.0.0.1:58918 POST /v1/events -> 201 (518.076µs)
+2026/09/24 01:31:38 127.0.0.1:58918 POST /v1/events -> 201 (157.452µs)
+2026/09/24 01:31:38 127.0.0.1:58932 POST /v1/events -> 201 (137.598µs)
+2026/09/24 01:31:38 127.0.0.1:58918 GET /v1/events/stream -> 200 (1.562016ms)
+--- PASS: TestResumeFullBacklogThenLive (0.00s)
+=== RUN   TestLastEventIDHeaderResume
+2026/09/24 01:31:38 127.0.0.1:35288 POST /v1/events -> 201 (117.491µs)
+2026/09/24 01:31:38 127.0.0.1:35288 POST /v1/events -> 201 (119.757µs)
+2026/09/24 01:31:38 127.0.0.1:35288 POST /v1/events -> 201 (112.1µs)
+2026/09/24 01:31:38 127.0.0.1:35288 POST /v1/events -> 201 (94.063µs)
+2026/09/24 01:31:38 127.0.0.1:35302 POST /v1/events -> 201 (122.354µs)
+2026/09/24 01:31:38 127.0.0.1:35288 GET /v1/events/stream -> 200 (1.420376ms)
+--- PASS: TestLastEventIDHeaderResume (0.00s)
+=== RUN   TestBoundaryDisconnectAndReconnect
+2026/09/24 01:31:38 127.0.0.1:41832 POST /v1/events -> 201 (111.788µs)
+2026/09/24 01:31:38 127.0.0.1:41832 POST /v1/events -> 201 (116.535µs)
+2026/09/24 01:31:38 127.0.0.1:41832 POST /v1/events -> 201 (111.58µs)
+2026/09/24 01:31:38 127.0.0.1:41832 POST /v1/events -> 201 (78.283µs)
+2026/09/24 01:31:38 127.0.0.1:41832 POST /v1/events -> 201 (96.432µs)
+2026/09/24 01:31:38 127.0.0.1:41832 POST /v1/events -> 201 (87.426µs)
+2026/09/24 01:31:38 127.0.0.1:41832 POST /v1/events -> 201 (91.245µs)
+2026/09/24 01:31:38 127.0.0.1:41832 POST /v1/events -> 201 (106.17µs)
+2026/09/24 01:31:38 127.0.0.1:41832 POST /v1/events -> 201 (130.166µs)
+2026/09/24 01:31:38 127.0.0.1:41832 POST /v1/events -> 201 (93.599µs)
+2026/09/24 01:31:38 127.0.0.1:41832 GET /v1/events/stream -> 200 (676.567µs)
+2026/09/24 01:31:38 127.0.0.1:41844 POST /v1/events -> 201 (116.811µs)
+2026/09/24 01:31:38 127.0.0.1:41844 GET /v1/events/stream -> 200 (553.623µs)
+    server_test.go:339: OK: 11 unique ids, 6 duplicate redeliveries discarded by dedup
+2026/09/24 01:31:38 127.0.0.1:41856 GET /v1/events/stream -> 200 (643.505µs)
+--- PASS: TestBoundaryDisconnectAndReconnect (0.01s)
+=== RUN   TestRepeatedReconnectsUnderLoad
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (196.104µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (111.432µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (897.224µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (112.305µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (111.397µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (148.506µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (125.595µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (105.429µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (109.135µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (116.016µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (145.334µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (110.764µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (153.537µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (127.166µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (113.383µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (101.543µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (112.137µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (120.324µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (105.994µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (92.946µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (123.54µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (131.233µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (99.154µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (106.987µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (103.787µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (172.355µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (143.716µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (106.794µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (121.44µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (145.506µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (95.968µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (98.756µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (101.016µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (103.646µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (107.27µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (158.935µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (109.676µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (122.423µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (132.216µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (98.861µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (131.563µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (100.715µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (101.345µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (97.244µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (110.614µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (110.124µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (110.44µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (118.203µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (107.482µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (120.394µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (105.938µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (126.428µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (116.222µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (128.59µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (112.14µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (108.864µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (104.355µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (100.3µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (101.921µs)
+2026/09/24 01:31:38 127.0.0.1:50162 POST /v1/events -> 201 (105.539µs)
+2026/09/24 01:31:38 127.0.0.1:50160 GET /v1/events/stream -> 200 (341.003154ms)
+    server_test.go:402: OK: received all 60 ids with repeated disconnect/reconnect cycles
+--- PASS: TestRepeatedReconnectsUnderLoad (0.35s)
+=== RUN   TestRetentionReset
+2026/09/24 01:31:38 127.0.0.1:50392 POST /v1/events -> 201 (746.21µs)
+2026/09/24 01:31:38 127.0.0.1:50392 POST /v1/events -> 201 (138.229µs)
+2026/09/24 01:31:38 127.0.0.1:50392 POST /v1/events -> 201 (152.056µs)
+2026/09/24 01:31:38 127.0.0.1:50392 POST /v1/events -> 201 (109.057µs)
+2026/09/24 01:31:38 127.0.0.1:50392 POST /v1/events -> 201 (95.719µs)
+2026/09/24 01:31:38 127.0.0.1:50392 POST /v1/events -> 201 (1.221116ms)
+2026/09/24 01:31:38 127.0.0.1:50392 POST /v1/events -> 201 (1.008539ms)
+2026/09/24 01:31:38 127.0.0.1:50392 POST /v1/events -> 201 (1.006388ms)
+2026/09/24 01:31:38 127.0.0.1:50392 POST /v1/events -> 201 (1.031541ms)
+2026/09/24 01:31:38 sse-resume: reset required cursor=2 oldest=5 last=9 reason=cursor_expired
+2026/09/24 01:31:38 127.0.0.1:50392 GET /v1/events/stream -> 200 (156.518µs)
+2026/09/24 01:31:38 sse-resume: reset required cursor=999 oldest=5 last=9 reason=cursor_ahead
+2026/09/24 01:31:38 127.0.0.1:50392 GET /v1/events/stream -> 200 (145.413µs)
+2026/09/24 01:31:38 127.0.0.1:50408 GET /v1/events?after=2 -> 409 (87.62µs)
+2026/09/24 01:31:38 127.0.0.1:50408 GET /v1/events/stream -> 400 (37.448µs)
+--- PASS: TestRetentionReset (0.01s)
+=== RUN   TestSlowConsumerEviction
+2026/09/24 01:31:38 127.0.0.1:40544 POST /v1/events -> 201 (121.498µs)
+2026/09/24 01:31:38 127.0.0.1:40544 POST /v1/events -> 201 (115.914µs)
+2026/09/24 01:31:38 127.0.0.1:40544 POST /v1/events -> 201 (114.606µs)
+2026/09/24 01:31:38 sse-resume: dropping slow subscriber (queue=2 full, total dropped=1)
+2026/09/24 01:31:38 127.0.0.1:40544 POST /v1/events -> 201 (126.962µs)
+2026/09/24 01:31:38 127.0.0.1:40544 POST /v1/events -> 201 (96.856µs)
+2026/09/24 01:31:38 127.0.0.1:40544 POST /v1/events -> 201 (89.243µs)
+2026/09/24 01:31:38 127.0.0.1:40544 POST /v1/events -> 201 (91.056µs)
+2026/09/24 01:31:38 127.0.0.1:40544 POST /v1/events -> 201 (100.311µs)
+2026/09/24 01:31:38 127.0.0.1:40544 POST /v1/events -> 201 (96.586µs)
+2026/09/24 01:31:38 127.0.0.1:40544 POST /v1/events -> 201 (103.945µs)
+2026/09/24 01:31:38 127.0.0.1:40544 POST /v1/events -> 201 (100.611µs)
+2026/09/24 01:31:38 127.0.0.1:40544 POST /v1/events -> 201 (90.186µs)
+2026/09/24 01:31:38 127.0.0.1:40544 POST /v1/events -> 201 (119.685µs)
+2026/09/24 01:31:38 127.0.0.1:40544 POST /v1/events -> 201 (94.448µs)
+2026/09/24 01:31:38 127.0.0.1:40544 POST /v1/events -> 201 (86.367µs)
+2026/09/24 01:31:38 127.0.0.1:40544 POST /v1/events -> 201 (90.628µs)
+2026/09/24 01:31:38 sse-resume: evicted subscriber closed at cursor~0
+2026/09/24 01:31:38 127.0.0.1:40536 GET /v1/events/stream -> 200 (10.619626ms)
+2026/09/24 01:31:38 127.0.0.1:40536 GET /v1/events/stream -> 200 (881.737µs)
+--- PASS: TestSlowConsumerEviction (0.01s)
+=== RUN   TestHeartbeat
+2026/09/24 01:31:38 127.0.0.1:55932 GET /v1/events/stream -> 200 (60.463661ms)
+--- PASS: TestHeartbeat (0.06s)
+=== RUN   TestMultilineDataOverHTTP
+2026/09/24 01:31:38 127.0.0.1:36738 POST /v1/events -> 201 (133.718µs)
+2026/09/24 01:31:38 127.0.0.1:36748 GET /v1/events/stream -> 200 (352.312µs)
+--- PASS: TestMultilineDataOverHTTP (0.00s)
+=== RUN   TestClientDisconnectIsolated
+2026/09/24 01:31:38 127.0.0.1:44096 GET /v1/events/stream -> 200 (821.269µs)
+2026/09/24 01:31:38 127.0.0.1:44104 POST /v1/events -> 201 (122.389µs)
+2026/09/24 01:31:38 127.0.0.1:44098 GET /v1/events/stream -> 200 (1.070646ms)
+--- PASS: TestClientDisconnectIsolated (0.00s)
+=== RUN   TestRestartResumesIDs
+2026/09/24 01:31:38 127.0.0.1:49094 POST /v1/events -> 201 (122.061µs)
+2026/09/24 01:31:38 127.0.0.1:51988 POST /v1/events -> 201 (112.823µs)
+2026/09/24 01:31:38 127.0.0.1:51988 GET /v1/events/stream -> 200 (310.622µs)
+--- PASS: TestRestartResumesIDs (0.00s)
+PASS
+ok  	sse-resume/internal/server	1.485s
+=== RUN   TestWriteFrameSingleLine
+--- PASS: TestWriteFrameSingleLine (0.00s)
+=== RUN   TestWriteFrameMultiLine
+--- PASS: TestWriteFrameMultiLine (0.00s)
+=== RUN   TestWriteFrameCRLFNormalized
+--- PASS: TestWriteFrameCRLFNormalized (0.00s)
+=== RUN   TestValidateEventName
+--- PASS: TestValidateEventName (0.00s)
+=== RUN   TestResetFrameHasNoID
+--- PASS: TestResetFrameHasNoID (0.00s)
+=== RUN   TestHeartbeatIsComment
+--- PASS: TestHeartbeatIsComment (0.00s)
+PASS
+ok  	sse-resume/internal/sse	1.015s
