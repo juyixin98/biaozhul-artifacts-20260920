@@ -1,0 +1,53 @@
+{
+  "signal": {
+    "source": "synthetic",
+    "signal_type": "sine",
+    "true_delay_samples": -40,
+    "sample_rate": 16000.0,
+    "n_samples": 16000
+  },
+  "config": {
+    "method": "zncc",
+    "max_lag_samples": 160,
+    "window_size_samples": 16000,
+    "hop_samples": null,
+    "min_coherence": 0.5,
+    "ambiguity_guard_samples": 4,
+    "ambiguity_ratio": 0.9,
+    "ambiguity_gap": 0.1,
+    "energy_db": -60.0,
+    "window_consistency_samples": 1.0
+  },
+  "sign_convention": "lag > 0 表示通道 B 晚于 A（B[n] = A[n-lag]）",
+  "n_windows": 1,
+  "windows": [
+    {
+      "window_index": 0,
+      "sample_start": 0,
+      "sample_end": 16000,
+      "lag_samples": -40,
+      "lag_seconds": -0.0025,
+      "fractional_lag": -40.000028419449706,
+      "peak_coherence": 1.0,
+      "second_coherence": 0.9989150781863527,
+      "peak_ratio": 0.9989150781863527,
+      "prominence": 0.0010849218136472771,
+      "at_boundary": false,
+      "status": "uncertain",
+      "uncertainty_reasons": [
+        "ambiguous_peaks"
+      ],
+      "length_samples": 16000
+    }
+  ],
+  "aggregate": {
+    "status": "uncertain",
+    "uncertainty_reasons": [
+      "all_windows_uncertain"
+    ],
+    "n_ok_windows": 0,
+    "lag_samples": null,
+    "lag_seconds": null
+  },
+  "outputs": {}
+}

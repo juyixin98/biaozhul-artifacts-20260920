@@ -1,0 +1,19 @@
+{
+  "input": {
+    "type": "synthetic",
+    "signal_type": "sine",
+    "n": 16000,
+    "sample_rate": 16000,
+    "freq": 256.0,
+    "delay": -40,
+    "amplitude": 0.6
+  },
+  "analysis": {
+    "method": "zncc",
+    "max_lag_ms": 10,
+    "ambiguity_guard_ms": 0.25,
+    "ambiguity_ratio": 0.9,
+    "min_coherence": 0.5,
+    "energy_db": -60
+  }
+}

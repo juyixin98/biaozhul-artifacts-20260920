@@ -1,0 +1,107 @@
+{
+  "signal": {
+    "source": "synthetic",
+    "signal_type": "noise",
+    "true_delay_samples": 137,
+    "sample_rate": 16000.0,
+    "n_samples": 16000
+  },
+  "config": {
+    "method": "zncc",
+    "max_lag_samples": 320,
+    "window_size_samples": 4000,
+    "hop_samples": 4000,
+    "min_coherence": 0.5,
+    "ambiguity_guard_samples": 8,
+    "ambiguity_ratio": 0.9,
+    "ambiguity_gap": 0.1,
+    "energy_db": -60.0,
+    "window_consistency_samples": 1.0
+  },
+  "sign_convention": "lag > 0 表示通道 B 晚于 A（B[n] = A[n-lag]）",
+  "n_windows": 4,
+  "windows": [
+    {
+      "window_index": 0,
+      "sample_start": 0,
+      "sample_end": 4000,
+      "lag_samples": 137,
+      "lag_seconds": 0.0085625,
+      "fractional_lag": 137.00012872801494,
+      "peak_coherence": 0.9984095489209085,
+      "second_coherence": 0.045159524243965736,
+      "peak_ratio": 0.04523146267258223,
+      "prominence": 0.9532500246769428,
+      "at_boundary": false,
+      "status": "ok",
+      "uncertainty_reasons": [],
+      "length_samples": 4000
+    },
+    {
+      "window_index": 1,
+      "sample_start": 4000,
+      "sample_end": 8000,
+      "lag_samples": 137,
+      "lag_seconds": 0.0085625,
+      "fractional_lag": 137.00002976374765,
+      "peak_coherence": 0.9984660847492842,
+      "second_coherence": 0.04800380254285284,
+      "peak_ratio": 0.048077549429139235,
+      "prominence": 0.9504622822064314,
+      "at_boundary": false,
+      "status": "ok",
+      "uncertainty_reasons": [],
+      "length_samples": 4000
+    },
+    {
+      "window_index": 2,
+      "sample_start": 8000,
+      "sample_end": 12000,
+      "lag_samples": 137,
+      "lag_seconds": 0.0085625,
+      "fractional_lag": 137.0004897326774,
+      "peak_coherence": 0.998397854045122,
+      "second_coherence": 0.05373659680106041,
+      "peak_ratio": 0.05382282882854816,
+      "prominence": 0.9446612572440616,
+      "at_boundary": false,
+      "status": "ok",
+      "uncertainty_reasons": [],
+      "length_samples": 4000
+    },
+    {
+      "window_index": 3,
+      "sample_start": 12000,
+      "sample_end": 16000,
+      "lag_samples": 137,
+      "lag_seconds": 0.0085625,
+      "fractional_lag": 136.99966974758138,
+      "peak_coherence": 0.9984175349570545,
+      "second_coherence": 0.038632187942733744,
+      "peak_ratio": 0.03869341892557551,
+      "prominence": 0.9597853470143208,
+      "at_boundary": false,
+      "status": "ok",
+      "uncertainty_reasons": [],
+      "length_samples": 4000
+    }
+  ],
+  "aggregate": {
+    "status": "ok",
+    "uncertainty_reasons": [],
+    "n_ok_windows": 4,
+    "lag_samples": 137,
+    "lag_median_samples": 137.0,
+    "lag_mean_samples": 137.0,
+    "lag_std_samples": 0.0,
+    "lag_spread_samples": 0.0,
+    "lag_seconds": 0.0085625,
+    "mean_coherence": 0.9984227556680924,
+    "min_coherence_observed": 0.998397854045122,
+    "fractional_lag_median_samples": 137.0000792458813
+  },
+  "outputs": {
+    "profile_npz": "profiles_synthetic.npz",
+    "windows_csv": "windows_synthetic.csv"
+  }
+}

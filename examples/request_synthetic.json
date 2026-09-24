@@ -1,0 +1,28 @@
+{
+  "input": {
+    "type": "synthetic",
+    "signal_type": "noise",
+    "n": 16000,
+    "sample_rate": 16000,
+    "delay": 137,
+    "snr_db": 25,
+    "seed": 2026,
+    "save_wav": "synthetic_pair.wav"
+  },
+  "analysis": {
+    "method": "zncc",
+    "max_lag_ms": 20,
+    "window_ms": 250,
+    "hop_ms": 250,
+    "min_coherence": 0.5,
+    "ambiguity_guard_ms": 0.5,
+    "ambiguity_ratio": 0.9,
+    "ambiguity_gap": 0.1,
+    "energy_db": -60,
+    "window_consistency_samples": 1
+  },
+  "output": {
+    "profile_npz": "profiles_synthetic.npz",
+    "windows_csv": "windows_synthetic.csv"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "input": {
+    "type": "pcm",
+    "mode": "interleaved",
+    "path": "stereo_pair.s16.pcm",
+    "dtype": "s16",
+    "sample_rate": 16000,
+    "max_samples": 16000
+  },
+  "analysis": {
+    "method": "zncc",
+    "max_lag_ms": 20,
+    "window_ms": 250,
+    "hop_ms": 125,
+    "min_coherence": 0.5,
+    "energy_db": -60
+  },
+  "output": {
+    "windows_csv": "windows_from_pcm.csv"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "input": {
+    "type": "synthetic",
+    "signal_type": "silence",
+    "n": 8000,
+    "sample_rate": 16000,
+    "delay": 5
+  },
+  "analysis": {
+    "method": "zncc",
+    "max_lag_ms": 10,
+    "energy_db": -60
+  }
+}
