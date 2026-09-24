@@ -1,0 +1,5 @@
+hello shm ring
+second message, variable length
+3rd: payloads are byte strings up to max_payload
+spaces inside a record are preserved as ordinary bytes
+position wrap at 4294967296 stays correct via uint64 positions
