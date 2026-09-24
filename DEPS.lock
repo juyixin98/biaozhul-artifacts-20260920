@@ -1,0 +1,18 @@
+# TF 坐标树校验 —— 锁定依赖 (DEPS.lock)
+# 校验方式: sha256sum；由 third_party/verify_deps.sh 强制执行
+# 日期: 2026-09-23
+
+eigen 3.4.0
+  url:    https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
+  file:   third_party/eigen-3.4.0.tar.gz
+  sha256: 8586084f71f9bde545ee7fa6d00288b264a2b7ac3607b974e54d13e7162c1c72
+  note:   解压后以源码头文件方式使用，无需安装
+
+nlohmann/json v3.11.3 (单头文件, MIT)
+  url:    https://github.com/nlohmann/json/releases/download/v3.11.3/json.hpp
+  file:   third_party/json.hpp
+  sha256: 9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6
+
+# HTTP 服务端不使用第三方网络库，直接基于 POSIX socket 实现 HTTP/1.1。
+# SHA-256 (响应完整性校验头 X-Content-SHA256) 为 src/sha256.cpp 内的
+# FIPS 180-4 真实实现，单元测试含 NIST 已知答案向量。

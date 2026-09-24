@@ -1,0 +1,6 @@
+{
+  "parent_frame": "world",
+  "child_frame": "mount",
+  "translation": [0.0, 0.0, 1.0],
+  "rotation": [1.0, 0.0, 0.0, 0.0]
+}
