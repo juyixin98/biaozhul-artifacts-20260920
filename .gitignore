@@ -1,0 +1,22 @@
+# Foundry
+out/
+cache/
+broadcast/
+*.log
+
+# Dependencies (the minimal forge-std shim under lib/forge-std is vendored in
+# this repo and force-tracked below).
+lib/*
+!lib/forge-std/
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Deployment artifacts are regenerated locally; keep dir, ignore addresses
+deployment/addresses.json
+
+# OS
+.DS_Store
