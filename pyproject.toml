@@ -1,0 +1,15 @@
+[project]
+name = "imu-bias-estimator"
+version = "1.0.0"
+description = "离线 IMU 静止段识别与陀螺零偏稳健估计服务（FastAPI + NumPy）"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = [
+    "ignore::DeprecationWarning:starlette.*",
+]
+
+[tool.coverage.run]
+source = ["app"]
