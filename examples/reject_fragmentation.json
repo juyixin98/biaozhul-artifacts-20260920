@@ -1,0 +1,13 @@
+{
+  "cluster": {
+    "devices": [
+      {"id": "gpu0", "memory_mb": 40000, "used_memory_mb": 30000, "numa_node": 0},
+      {"id": "gpu1", "memory_mb": 40000, "used_memory_mb": 20000, "numa_node": 0},
+      {"id": "gpu2", "memory_mb": 40000, "used_memory_mb": 25000, "numa_node": 1},
+      {"id": "gpu3", "memory_mb": 40000, "used_memory_mb": 28000, "numa_node": 1}
+    ],
+    "links": [],
+    "default_link_cost": {"same_numa_cost": 1, "cross_numa_cost": 10}
+  },
+  "task": {"name": "fragmented-job", "replicas": 2, "memory_per_replica_mb": 25000}
+}

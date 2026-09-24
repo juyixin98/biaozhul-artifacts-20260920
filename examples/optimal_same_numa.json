@@ -1,0 +1,24 @@
+{
+  "cluster": {
+    "devices": [
+      {"id": "gpu0", "memory_mb": 80000, "used_memory_mb": 0,     "numa_node": 0},
+      {"id": "gpu1", "memory_mb": 80000, "used_memory_mb": 0,     "numa_node": 0},
+      {"id": "gpu2", "memory_mb": 80000, "used_memory_mb": 0,     "numa_node": 0},
+      {"id": "gpu3", "memory_mb": 80000, "used_memory_mb": 0,     "numa_node": 0},
+      {"id": "gpu4", "memory_mb": 80000, "used_memory_mb": 0,     "numa_node": 1},
+      {"id": "gpu5", "memory_mb": 80000, "used_memory_mb": 0,     "numa_node": 1},
+      {"id": "gpu6", "memory_mb": 80000, "used_memory_mb": 0,     "numa_node": 1},
+      {"id": "gpu7", "memory_mb": 80000, "used_memory_mb": 70000, "numa_node": 1}
+    ],
+    "links": [
+      {"a": "gpu0", "b": "gpu1", "cost": 1},
+      {"a": "gpu1", "b": "gpu2", "cost": 1},
+      {"a": "gpu2", "b": "gpu3", "cost": 1},
+      {"a": "gpu3", "b": "gpu0", "cost": 1},
+      {"a": "gpu0", "b": "gpu2", "cost": 2},
+      {"a": "gpu1", "b": "gpu3", "cost": 2}
+    ],
+    "default_link_cost": {"same_numa_cost": 1, "cross_numa_cost": 10}
+  },
+  "task": {"name": "llm-training", "replicas": 4, "memory_per_replica_mb": 20000}
+}

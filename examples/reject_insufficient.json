@@ -1,0 +1,14 @@
+{
+  "cluster": {
+    "devices": [
+      {"id": "gpu0", "memory_mb": 80000, "used_memory_mb": 0,     "numa_node": 0},
+      {"id": "gpu1", "memory_mb": 80000, "used_memory_mb": 0,     "numa_node": 0},
+      {"id": "gpu2", "memory_mb": 80000, "used_memory_mb": 65000, "numa_node": 0},
+      {"id": "gpu3", "memory_mb": 80000, "used_memory_mb": 70000, "numa_node": 1},
+      {"id": "gpu4", "memory_mb": 80000, "used_memory_mb": 70000, "numa_node": 1}
+    ],
+    "links": [],
+    "default_link_cost": {"same_numa_cost": 1, "cross_numa_cost": 10}
+  },
+  "task": {"name": "oversubscribed", "replicas": 4, "memory_per_replica_mb": 20000}
+}
