@@ -1,0 +1,14 @@
+# Runtime dependencies
+#
+# The pure-Python core, SQLite evidence store, scenario replay/verify CLI,
+# and the entire test suite use ONLY the Python 3.10+ standard library
+# (sqlite3, hmac, hashlib, secrets, json ...). No third-party package is
+# required to run or accept this deliverable.
+#
+# rclpy is intentionally NOT pip-pinned: it is distributed as part of a
+# ROS 2 release, not PyPI. Install it via your ROS distro packages:
+#
+#   sudo apt install ros-${ROS_DISTRO}-rclpy ros-${ROS_DISTRO}-sensor-msgs \
+#                    ros-${ROS_DISTRO}-std-msgs ros-${ROS_DISTRO}-rcl-interfaces
+#
+# Tested/expected ROS distributions: humble, iron, jazzy, rolling.

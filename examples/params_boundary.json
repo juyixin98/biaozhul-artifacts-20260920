@@ -1,0 +1,34 @@
+{
+  "name": "parameter boundary: v1 exclusive pair flushed, v2 unlimited reuse after",
+  "params": {"version": 1, "tolerance_ns": 5000000, "imu_exclusive": true},
+  "events": [
+    {"kind": "imu", "id": "i0", "t": 0.010},
+    {"kind": "camera", "id": "c0", "t": 0.011},
+    {"kind": "imu", "id": "i_tick", "t": 0.200},
+
+    {"kind": "params", "version": 2,
+     "params": {"imu_exclusive": false, "imu_max_uses": -1}},
+
+    {"kind": "imu", "id": "i1", "t": 0.210},
+    {"kind": "camera", "id": "c1", "t": 0.210},
+    {"kind": "camera", "id": "c2", "t": 0.211},
+    {"kind": "camera", "id": "c3", "t": 0.212},
+    {"kind": "imu", "id": "i_end", "t": 0.400}
+  ],
+  "expect": {
+    "epochs": 1,
+    "params_versions": [2],
+    "pairs": [
+      {"camera": "c0", "status": "matched", "imu": "i0", "params_version": 1},
+      {"camera": "c1", "status": "matched", "imu": "i1", "dt_ms": 0.0, "params_version": 2},
+      {"camera": "c2", "status": "matched", "imu": "i1", "dt_ms": 1.0, "params_version": 2},
+      {"camera": "c3", "status": "matched", "imu": "i1", "dt_ms": 2.0, "params_version": 2}
+    ],
+    "imus": [
+      {"imu": "i0", "status": "used_expired", "use_count": 1},
+      {"imu": "i_tick", "status": "unused_expired", "use_count": 0},
+      {"imu": "i1", "status": "used_expired", "use_count": 3},
+      {"imu": "i_end", "status": "stream_end", "use_count": 0}
+    ]
+  }
+}

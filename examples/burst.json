@@ -1,0 +1,50 @@
+{
+  "name": "burst: simultaneous frames, tie-break, late-in-window, packet loss",
+  "params": {"tolerance_ns": 5000000, "reorder_tolerance_ns": 100000000},
+  "events": [
+    {"kind": "imu", "id": "i0", "t": 0.010},
+    {"kind": "camera", "id": "c0", "t": 0.011},
+    {"kind": "imu", "id": "i1", "t": 0.012},
+    {"kind": "camera", "id": "c1", "t": 0.012},
+
+    {"kind": "imu", "id": "i2a", "t": 0.020},
+    {"kind": "imu", "id": "i2b", "t": 0.020},
+    {"kind": "camera", "id": "c2", "t": 0.020},
+
+    {"kind": "imu", "id": "i3", "t": 0.040},
+    {"kind": "imu", "id": "i4", "t": 0.044},
+    {"kind": "camera", "id": "c3", "t": 0.042, "recv": 0.045},
+
+    {"kind": "imu", "id": "i_late", "t": 0.029, "recv": 0.074},
+    {"kind": "camera", "id": "c_late", "t": 0.030, "recv": 0.075},
+
+    {"kind": "imu", "id": "i5", "t": 0.060},
+    {"kind": "camera", "id": "c4", "t": 0.050, "recv": 0.061},
+
+    {"kind": "imu", "id": "i_end", "t": 0.165},
+    {"kind": "camera", "id": "c_end", "t": 0.166}
+  ],
+  "expect": {
+    "epochs": 1,
+    "pairs": [
+      {"camera": "c0", "status": "matched", "imu": "i0", "dt_ms": 1.0},
+      {"camera": "c1", "status": "matched", "imu": "i1", "dt_ms": 0.0},
+      {"camera": "c2", "status": "matched", "imu": "i2a", "dt_ms": 0.0},
+      {"camera": "c_late", "status": "matched", "imu": "i_late", "dt_ms": 1.0},
+      {"camera": "c3", "status": "matched", "imu": "i3", "dt_ms": 2.0, "tie_break": "earlier"},
+      {"camera": "c4", "status": "expired_unpaired", "imu": null},
+      {"camera": "c_end", "status": "matched", "imu": "i_end", "dt_ms": 1.0}
+    ],
+    "imus": [
+      {"imu": "i0", "status": "used_expired", "use_count": 1},
+      {"imu": "i1", "status": "used_expired", "use_count": 1},
+      {"imu": "i2a", "status": "used_expired", "use_count": 1},
+      {"imu": "i2b", "status": "unused_expired", "use_count": 0},
+      {"imu": "i_late", "status": "used_expired", "use_count": 1},
+      {"imu": "i3", "status": "used_expired", "use_count": 1},
+      {"imu": "i4", "status": "unused_expired", "use_count": 0},
+      {"imu": "i5", "status": "unused_expired", "use_count": 0},
+      {"imu": "i_end", "status": "stream_end", "use_count": 1}
+    ]
+  }
+}

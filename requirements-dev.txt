@@ -1,0 +1,2 @@
+# Locked development/test dependency versions (Python 3.10+, verified 3.12.3)
+pytest==9.1.1

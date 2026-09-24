@@ -1,0 +1,31 @@
+{
+  "name": "clock resets: explicit reset then time back-jump; never pair across epochs",
+  "params": {"tolerance_ns": 5000000},
+  "events": [
+    {"kind": "imu", "id": "i0", "t": 0.010},
+    {"kind": "camera", "id": "c0", "t": 0.011},
+    {"kind": "imu", "id": "i1", "t": 0.020},
+    {"kind": "reset", "id": "manual-reset", "payload": {"why": "sim_time_restart"}},
+
+    {"kind": "imu", "id": "i2", "t": 1.000},
+    {"kind": "camera", "id": "c1", "t": 1.001},
+    {"kind": "imu", "id": "i3", "t": 2.000},
+    {"kind": "camera", "id": "c_bj", "t": 1.500, "recv": 2.001},
+    {"kind": "imu", "id": "i_bj", "t": 1.501, "recv": 2.002}
+  ],
+  "expect": {
+    "epochs": 3,
+    "pairs": [
+      {"camera": "c0", "status": "matched", "imu": "i0", "epoch": 1},
+      {"camera": "c1", "status": "matched", "imu": "i2", "epoch": 2},
+      {"camera": "c_bj", "status": "matched", "imu": "i_bj", "epoch": 3, "dt_ms": -1.0}
+    ],
+    "imus": [
+      {"imu": "i0", "status": "epoch_closed", "use_count": 1},
+      {"imu": "i1", "status": "epoch_closed", "use_count": 0},
+      {"imu": "i2", "status": "used_expired", "use_count": 1},
+      {"imu": "i3", "status": "epoch_closed", "use_count": 0},
+      {"imu": "i_bj", "status": "stream_end", "use_count": 1}
+    ]
+  }
+}

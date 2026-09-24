@@ -1,0 +1,23 @@
+{
+  "name": "reorder: 49ms late accepted; 100ms+ late triggers a new epoch",
+  "params": {"tolerance_ns": 5000000, "reorder_tolerance_ns": 100000000},
+  "events": [
+    {"kind": "imu", "id": "i0", "t": 0.200},
+    {"kind": "imu", "id": "i1", "t": 0.220},
+    {"kind": "imu", "id": "i2", "t": 0.240},
+    {"kind": "camera", "id": "c0", "t": 0.201, "recv": 0.250},
+    {"kind": "camera", "id": "c_old", "t": 0.100, "recv": 0.260}
+  ],
+  "expect": {
+    "epochs": 2,
+    "pairs": [
+      {"camera": "c0", "status": "matched", "imu": "i0", "epoch": 1, "dt_ms": 1.0},
+      {"camera": "c_old", "status": "stream_end_unpaired", "imu": null, "epoch": 2}
+    ],
+    "imus": [
+      {"imu": "i0", "status": "epoch_closed", "use_count": 1},
+      {"imu": "i1", "status": "epoch_closed", "use_count": 0},
+      {"imu": "i2", "status": "epoch_closed", "use_count": 0}
+    ]
+  }
+}

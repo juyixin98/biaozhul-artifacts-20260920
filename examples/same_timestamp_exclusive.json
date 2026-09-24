@@ -1,0 +1,25 @@
+{
+  "name": "identical timestamps: exclusive (each IMU once) vs reuse after boundary",
+  "params": {"tolerance_ns": 5000000, "imu_exclusive": true},
+  "events": [
+    {"kind": "imu", "id": "i0", "t": 0.010},
+    {"kind": "imu", "id": "i1", "t": 0.010},
+    {"kind": "camera", "id": "c0", "t": 0.010},
+    {"kind": "camera", "id": "c1", "t": 0.010},
+    {"kind": "camera", "id": "c2", "t": 0.010},
+
+    {"kind": "imu", "id": "i_tail", "t": 0.200}
+  ],
+  "expect": {
+    "epochs": 1,
+    "pairs": [
+      {"camera": "c0", "status": "matched", "imu": "i0", "dt_ms": 0.0},
+      {"camera": "c1", "status": "matched", "imu": "i1", "dt_ms": 0.0},
+      {"camera": "c2", "status": "expired_unpaired", "imu": null}
+    ],
+    "imus": [
+      {"imu": "i0", "status": "used_expired", "use_count": 1},
+      {"imu": "i1", "status": "used_expired", "use_count": 1}
+    ]
+  }
+}

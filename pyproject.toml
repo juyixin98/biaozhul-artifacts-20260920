@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "time-alignment"
+version = "1.0.0"
+description = "ROS2 camera/IMU event-time alignment with tamper-evident SQLite log"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = []
+
+[project.optional-dependencies]
+# Install with ROS toolchain for live nodes; see requirements.txt.
+ros = ["rclpy"]
+dev = ["pytest==9.1.1"]
+
+[project.scripts]
+time-alignment = "time_alignment.cli:main"
+
+[tool.setuptools]
+packages = ["time_alignment"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build_egg/
+dist/
+
+# Test / run artifacts
+build/
+.pytest_cache/
+*.db
+*.db-wal
+*.db-shm
+*.jsonl
+
+# Real key material (template: examples/*.key.example)
+*.key
