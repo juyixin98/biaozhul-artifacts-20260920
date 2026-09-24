@@ -1,0 +1,8 @@
+# Direct dependencies (verified versions; full transitive lock in
+# requirements.lock.txt). Install with: pip install -r requirements.lock.txt
+fastapi>=0.110
+uvicorn[standard]>=0.27
+numpy>=1.26
+scipy>=1.11
+pytest>=8
+httpx>=0.27
