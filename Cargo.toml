@@ -1,0 +1,27 @@
+[package]
+name = "manifest-selector"
+version = "0.1.0"
+edition = "2021"
+description = "OCI-style multi-architecture manifest selection service (Axum, pure backend, no network pulls)"
+
+[dependencies]
+axum = "0.8"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "signal"] }
+tower = "0.5"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+hex = "0.4"
+thiserror = "2"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[dev-dependencies]
+tempfile = "3"
+
+[[bin]]
+name = "manifest-selector"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 2
