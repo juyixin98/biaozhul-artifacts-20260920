@@ -1,0 +1,6 @@
+hello, shared memory ring
+变长消息第二行: fixed-capacity slots
+empty-line-follows:
+
+100% SPSC, 序号会在本测试中高频回绕
+	tab and punctuation !@#$%^&*()
