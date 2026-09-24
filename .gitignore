@@ -1,0 +1,13 @@
+# Build artifacts
+/out/
+/cache/
+/broadcast/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Misc
+.DS_Store
