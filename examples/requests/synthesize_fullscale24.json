@@ -1,0 +1,10 @@
+{
+  "action": "synthesize",
+  "kind": "fullscale",
+  "sample_rate": 8000,
+  "duration": 0.002,
+  "bits": 24,
+  "channels": 1,
+  "out": "examples/output/fullscale24.wav",
+  "raw_out": "examples/output/fullscale24.pcm"
+}

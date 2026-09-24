@@ -1,0 +1,572 @@
+== python3 -m pcmval.cli request examples/requests/synthesize_fullscale24.json ==
+{
+  "index": 0,
+  "ok": true,
+  "result": {
+    "status": "ok",
+    "action": "synthesize",
+    "kind": "fullscale",
+    "sample_rate": 8000,
+    "channels": 1,
+    "bits_per_sample": 24,
+    "frames": 16,
+    "files": [
+      "examples/output/fullscale24.pcm",
+      "examples/output/fullscale24.wav"
+    ],
+    "sample_stats": {
+      "count": 16,
+      "int_min": -8388608,
+      "int_max": 8388607,
+      "amplitude_min": -1.0,
+      "amplitude_max": 0.9999998807907104,
+      "zero_crossings": 15,
+      "extreme_negative_count": 8,
+      "extreme_positive_count": 8
+    }
+  }
+}
+(exit=0)
+
+== python3 -m pcmval.cli request examples/requests/validate_wav.json ==
+{
+  "index": 0,
+  "ok": true,
+  "result": {
+    "status": "ok",
+    "container": "RIFF/WAVE",
+    "path": "examples/output/fullscale24.wav",
+    "file_size": 92,
+    "format_tag": 1,
+    "sample_rate": 8000,
+    "channels": 1,
+    "bits_per_sample": 24,
+    "frames": 16,
+    "data_size": 48,
+    "data_offset": 44,
+    "chunks": [
+      {
+        "id": "fmt ",
+        "offset": 12,
+        "declared_size": 16,
+        "padded_size": 16,
+        "handled": "fmt",
+        "truncated": false
+      },
+      {
+        "id": "data",
+        "offset": 36,
+        "declared_size": 48,
+        "padded_size": 48,
+        "handled": "data",
+        "truncated": false
+      }
+    ],
+    "issues": [],
+    "sample_stats": {
+      "count": 16,
+      "int_min": -8388608,
+      "int_max": 8388607,
+      "amplitude_min": -1.0,
+      "amplitude_max": 0.9999998807907104,
+      "zero_crossings": 15,
+      "extreme_negative_count": 8,
+      "extreme_positive_count": 8
+    }
+  }
+}
+(exit=0)
+
+== python3 -m pcmval.cli request examples/requests/validate_raw.json ==
+{
+  "index": 0,
+  "ok": true,
+  "result": {
+    "status": "ok",
+    "container": "raw-pcm",
+    "path": "examples/output/fullscale24.pcm",
+    "file_size": 48,
+    "sample_rate": 8000,
+    "channels": 1,
+    "bits_per_sample": 24,
+    "frames": 16,
+    "issues": [],
+    "sample_stats": {
+      "count": 16,
+      "int_min": -8388608,
+      "int_max": 8388607,
+      "amplitude_min": -1.0,
+      "amplitude_max": 0.9999998807907104,
+      "zero_crossings": 15,
+      "extreme_negative_count": 8,
+      "extreme_positive_count": 8
+    }
+  }
+}
+(exit=0)
+
+== python3 -m pcmval.cli request examples/requests/roundtrip_sine16.json ==
+{
+  "index": 0,
+  "ok": true,
+  "result": {
+    "status": "ok",
+    "action": "roundtrip",
+    "origin": "synthetic",
+    "sample_rate": 8000,
+    "channels": 1,
+    "bits_per_sample": 16,
+    "frames": 80,
+    "wav_bytes": 204,
+    "file": "examples/output/roundtrip16.wav",
+    "checks": {
+      "payload_bytes_identical": true,
+      "integer_samples_identical": true,
+      "amplitude_roundtrip_identical": true,
+      "whole_file_rebuild_identical": null
+    },
+    "quantization": {
+      "source": "pre-quantization floats",
+      "max_abs_error_amplitude": 1.5074269669790308e-05,
+      "half_lsb_amplitude": 1.52587890625e-05
+    },
+    "sample_stats": {
+      "count": 80,
+      "int_min": -29491,
+      "int_max": 29477,
+      "amplitude_min": -0.899993896484375,
+      "amplitude_max": 0.899566650390625,
+      "zero_crossings": 8,
+      "extreme_negative_count": 0,
+      "extreme_positive_count": 0
+    },
+    "issues": []
+  }
+}
+(exit=0)
+
+== python3 -m pcmval.cli request examples/requests/batch.json ==
+[
+  {
+    "index": 0,
+    "ok": true,
+    "result": {
+      "status": "ok",
+      "action": "synthesize",
+      "kind": "ramp",
+      "sample_rate": 48000,
+      "channels": 2,
+      "bits_per_sample": 16,
+      "frames": 64,
+      "files": [
+        "examples/output/ramp16_stereo.wav"
+      ],
+      "sample_stats": {
+        "count": 128,
+        "int_min": -32768,
+        "int_max": 32767,
+        "amplitude_min": -1.0,
+        "amplitude_max": 0.999969482421875,
+        "zero_crossings": 1,
+        "extreme_negative_count": 2,
+        "extreme_positive_count": 2
+      }
+    }
+  },
+  {
+    "index": 1,
+    "ok": true,
+    "result": {
+      "status": "ok",
+      "container": "RIFF/WAVE",
+      "path": "examples/output/ramp16_stereo.wav",
+      "file_size": 300,
+      "format_tag": 1,
+      "sample_rate": 48000,
+      "channels": 2,
+      "bits_per_sample": 16,
+      "frames": 64,
+      "data_size": 256,
+      "data_offset": 44,
+      "chunks": [
+        {
+          "id": "fmt ",
+          "offset": 12,
+          "declared_size": 16,
+          "padded_size": 16,
+          "handled": "fmt",
+          "truncated": false
+        },
+        {
+          "id": "data",
+          "offset": 36,
+          "declared_size": 256,
+          "padded_size": 256,
+          "handled": "data",
+          "truncated": false
+        }
+      ],
+      "issues": [],
+      "sample_stats": {
+        "count": 128,
+        "int_min": -32768,
+        "int_max": 32767,
+        "amplitude_min": -1.0,
+        "amplitude_max": 0.999969482421875,
+        "zero_crossings": 1,
+        "extreme_negative_count": 2,
+        "extreme_positive_count": 2
+      }
+    }
+  },
+  {
+    "index": 2,
+    "ok": true,
+    "result": {
+      "status": "ok",
+      "action": "roundtrip",
+      "origin": "wav:examples/output/ramp16_stereo.wav",
+      "sample_rate": 48000,
+      "channels": 2,
+      "bits_per_sample": 16,
+      "frames": 64,
+      "wav_bytes": 300,
+      "file": null,
+      "checks": {
+        "payload_bytes_identical": true,
+        "integer_samples_identical": true,
+        "amplitude_roundtrip_identical": true,
+        "whole_file_rebuild_identical": true
+      },
+      "quantization": {
+        "source": "decoded integers",
+        "max_abs_error_amplitude": null,
+        "half_lsb_amplitude": 1.52587890625e-05
+      },
+      "sample_stats": {
+        "count": 128,
+        "int_min": -32768,
+        "int_max": 32767,
+        "amplitude_min": -1.0,
+        "amplitude_max": 0.999969482421875,
+        "zero_crossings": 1,
+        "extreme_negative_count": 2,
+        "extreme_positive_count": 2
+      },
+      "issues": []
+    }
+  },
+  {
+    "index": 3,
+    "ok": false,
+    "error": "FileNotFoundError: [Errno 2] No such file or directory: 'examples/output/does_not_exist.wav'"
+  }
+]
+(exit=1)
+
+== python3 examples/make_fixtures.py ==
+fixture_junk_odd16.wav (84 bytes)
+fixture_truncated_junk.wav (58 bytes)
+fixture_partial_frame24stereo.wav (52 bytes)
+fixture_8bit.wav (60 bytes)
+fixture_float32.wav (60 bytes)
+fixture_riff_trailing.wav (51 bytes)
+(exit=0)
+
+== python3 -m pcmval.cli request examples/requests/validate_fixtures.json ==
+[
+  {
+    "index": 0,
+    "ok": true,
+    "result": {
+      "status": "ok",
+      "container": "RIFF/WAVE",
+      "path": "examples/output/fixture_junk_odd16.wav",
+      "file_size": 84,
+      "format_tag": 1,
+      "sample_rate": 8000,
+      "channels": 1,
+      "bits_per_sample": 16,
+      "frames": 4,
+      "data_size": 8,
+      "data_offset": 76,
+      "chunks": [
+        {
+          "id": "JUNK",
+          "offset": 12,
+          "declared_size": 13,
+          "padded_size": 14,
+          "handled": "skipped",
+          "truncated": false
+        },
+        {
+          "id": "fmt ",
+          "offset": 34,
+          "declared_size": 16,
+          "padded_size": 16,
+          "handled": "fmt",
+          "truncated": false
+        },
+        {
+          "id": "LIST",
+          "offset": 58,
+          "declared_size": 2,
+          "padded_size": 2,
+          "handled": "skipped",
+          "truncated": false
+        },
+        {
+          "id": "data",
+          "offset": 68,
+          "declared_size": 8,
+          "padded_size": 8,
+          "handled": "data",
+          "truncated": false
+        }
+      ],
+      "issues": [],
+      "sample_stats": {
+        "count": 4,
+        "int_min": -32768,
+        "int_max": 32767,
+        "amplitude_min": -1.0,
+        "amplitude_max": 0.999969482421875,
+        "zero_crossings": 2,
+        "extreme_negative_count": 1,
+        "extreme_positive_count": 1
+      }
+    }
+  },
+  {
+    "index": 1,
+    "ok": true,
+    "result": {
+      "status": "ok",
+      "container": "RIFF/WAVE",
+      "path": "examples/output/fixture_partial_frame24stereo.wav",
+      "file_size": 52,
+      "format_tag": 1,
+      "sample_rate": 48000,
+      "channels": 2,
+      "bits_per_sample": 24,
+      "frames": 1,
+      "data_size": 8,
+      "data_offset": 44,
+      "chunks": [
+        {
+          "id": "fmt ",
+          "offset": 12,
+          "declared_size": 16,
+          "padded_size": 16,
+          "handled": "fmt",
+          "truncated": false
+        },
+        {
+          "id": "data",
+          "offset": 36,
+          "declared_size": 8,
+          "padded_size": 8,
+          "handled": "data",
+          "truncated": false
+        }
+      ],
+      "issues": [
+        {
+          "code": "PARTIAL_FRAME",
+          "severity": "warning",
+          "message": "data size 8 is not a multiple of block_align 6; dropped 2 trailing byte(s)"
+        }
+      ],
+      "sample_stats": {
+        "count": 2,
+        "int_min": -8388608,
+        "int_max": 8388607,
+        "amplitude_min": -1.0,
+        "amplitude_max": 0.9999998807907104,
+        "zero_crossings": 1,
+        "extreme_negative_count": 1,
+        "extreme_positive_count": 1
+      }
+    }
+  },
+  {
+    "index": 2,
+    "ok": true,
+    "result": {
+      "status": "ok",
+      "container": "RIFF/WAVE",
+      "path": "examples/output/fixture_riff_trailing.wav",
+      "file_size": 51,
+      "format_tag": 1,
+      "sample_rate": 8000,
+      "channels": 1,
+      "bits_per_sample": 16,
+      "frames": 2,
+      "data_size": 4,
+      "data_offset": 44,
+      "chunks": [
+        {
+          "id": "fmt ",
+          "offset": 12,
+          "declared_size": 16,
+          "padded_size": 16,
+          "handled": "fmt",
+          "truncated": false
+        },
+        {
+          "id": "data",
+          "offset": 36,
+          "declared_size": 4,
+          "padded_size": 4,
+          "handled": "data",
+          "truncated": false
+        }
+      ],
+      "issues": [
+        {
+          "code": "RIFF_SIZE_MISMATCH",
+          "severity": "warning",
+          "message": "RIFF header declares 48 bytes total, file has 51 bytes"
+        },
+        {
+          "code": "TRAILING_BYTES",
+          "severity": "warning",
+          "message": "3 trailing byte(s) after last chunk at offset 48 ignored"
+        }
+      ],
+      "sample_stats": {
+        "count": 2,
+        "int_min": 1,
+        "int_max": 2,
+        "amplitude_min": 3.0517578125e-05,
+        "amplitude_max": 6.103515625e-05,
+        "zero_crossings": 0,
+        "extreme_negative_count": 0,
+        "extreme_positive_count": 0
+      }
+    }
+  },
+  {
+    "index": 3,
+    "ok": false,
+    "error": "WavFormatError: truncated chunk 'JUNK' at offset 12: declares 64 payload bytes, only 38 remain"
+  },
+  {
+    "index": 4,
+    "ok": false,
+    "error": "WavFormatError: unsupported bit depth 8; supported: (16, 24)"
+  },
+  {
+    "index": 5,
+    "ok": false,
+    "error": "WavFormatError: unsupported format tag 0x0003 (only PCM 0x0001 / extensible-with-PCM-subtype 0xfffe)"
+  }
+]
+(exit=1)
+
+== python3 -m pcmval.cli synth --kind fullscale --bits 16 --sample-rate 8000 --duration 0.002 -o examples/output/cli_fullscale16.wav ==
+{
+  "status": "ok",
+  "action": "synthesize",
+  "kind": "fullscale",
+  "sample_rate": 8000,
+  "channels": 1,
+  "bits_per_sample": 16,
+  "frames": 16,
+  "files": [
+    "examples/output/cli_fullscale16.wav"
+  ],
+  "sample_stats": {
+    "count": 16,
+    "int_min": -32768,
+    "int_max": 32767,
+    "amplitude_min": -1.0,
+    "amplitude_max": 0.999969482421875,
+    "zero_crossings": 15,
+    "extreme_negative_count": 8,
+    "extreme_positive_count": 8
+  }
+}
+(exit=0)
+
+== python3 -m pcmval.cli validate examples/output/cli_fullscale16.wav ==
+{
+  "status": "ok",
+  "container": "RIFF/WAVE",
+  "path": "examples/output/cli_fullscale16.wav",
+  "file_size": 76,
+  "format_tag": 1,
+  "sample_rate": 8000,
+  "channels": 1,
+  "bits_per_sample": 16,
+  "frames": 16,
+  "data_size": 32,
+  "data_offset": 44,
+  "chunks": [
+    {
+      "id": "fmt ",
+      "offset": 12,
+      "declared_size": 16,
+      "padded_size": 16,
+      "handled": "fmt",
+      "truncated": false
+    },
+    {
+      "id": "data",
+      "offset": 36,
+      "declared_size": 32,
+      "padded_size": 32,
+      "handled": "data",
+      "truncated": false
+    }
+  ],
+  "issues": [],
+  "sample_stats": {
+    "count": 16,
+    "int_min": -32768,
+    "int_max": 32767,
+    "amplitude_min": -1.0,
+    "amplitude_max": 0.999969482421875,
+    "zero_crossings": 15,
+    "extreme_negative_count": 8,
+    "extreme_positive_count": 8
+  }
+}
+(exit=0)
+
+== python3 -m pcmval.cli roundtrip --kind fullscale --bits 24 --sample-rate 48000 --duration 0.001 -o examples/output/cli_roundtrip24.wav ==
+{
+  "status": "ok",
+  "action": "roundtrip",
+  "origin": "synthetic",
+  "sample_rate": 48000,
+  "channels": 1,
+  "bits_per_sample": 24,
+  "frames": 48,
+  "wav_bytes": 188,
+  "file": "examples/output/cli_roundtrip24.wav",
+  "checks": {
+    "payload_bytes_identical": true,
+    "integer_samples_identical": true,
+    "amplitude_roundtrip_identical": true,
+    "whole_file_rebuild_identical": null
+  },
+  "quantization": {
+    "source": "pre-quantization floats",
+    "max_abs_error_amplitude": 0.0,
+    "half_lsb_amplitude": 5.960464477539063e-08
+  },
+  "sample_stats": {
+    "count": 48,
+    "int_min": -8388608,
+    "int_max": 8388607,
+    "amplitude_min": -1.0,
+    "amplitude_max": 0.9999998807907104,
+    "zero_crossings": 47,
+    "extreme_negative_count": 24,
+    "extreme_positive_count": 24
+  },
+  "issues": []
+}
+(exit=0)
+

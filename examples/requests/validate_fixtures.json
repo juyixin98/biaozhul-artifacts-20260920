@@ -1,0 +1,8 @@
+[
+  {"action": "validate", "path": "examples/output/fixture_junk_odd16.wav"},
+  {"action": "validate", "path": "examples/output/fixture_partial_frame24stereo.wav"},
+  {"action": "validate", "path": "examples/output/fixture_riff_trailing.wav"},
+  {"action": "validate", "path": "examples/output/fixture_truncated_junk.wav"},
+  {"action": "validate", "path": "examples/output/fixture_8bit.wav"},
+  {"action": "validate", "path": "examples/output/fixture_float32.wav"}
+]

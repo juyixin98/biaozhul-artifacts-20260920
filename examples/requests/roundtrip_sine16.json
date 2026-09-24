@@ -1,0 +1,10 @@
+{
+  "action": "roundtrip",
+  "kind": "sine",
+  "sample_rate": 8000,
+  "duration": 0.01,
+  "amplitude": 0.9,
+  "bits": 16,
+  "channels": 1,
+  "out": "examples/output/roundtrip16.wav"
+}

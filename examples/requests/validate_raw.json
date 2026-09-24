@@ -1,0 +1,8 @@
+{
+  "action": "validate",
+  "container": "raw",
+  "path": "examples/output/fullscale24.pcm",
+  "bits": 24,
+  "channels": 1,
+  "sample_rate": 8000
+}

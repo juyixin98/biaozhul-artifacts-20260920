@@ -1,0 +1,23 @@
+[
+  {
+    "action": "synthesize",
+    "kind": "ramp",
+    "sample_rate": 48000,
+    "duration": 0.001,
+    "bits": 16,
+    "channels": 2,
+    "out": "examples/output/ramp16_stereo.wav"
+  },
+  {
+    "action": "validate",
+    "path": "examples/output/ramp16_stereo.wav"
+  },
+  {
+    "action": "roundtrip",
+    "path": "examples/output/ramp16_stereo.wav"
+  },
+  {
+    "action": "validate",
+    "path": "examples/output/does_not_exist.wav"
+  }
+]
