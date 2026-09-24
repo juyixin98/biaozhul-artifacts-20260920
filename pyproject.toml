@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lockgate"
+version = "1.0.0"
+description = "Offline dependency-lock consistency gate for Node package.json / package-lock.json"
+readme = "README.md"
+requires-python = ">=3.10"
+# Runtime-only dependencies; exact hashed versions live in requirements.txt.
+# Tests use pytest/httpx, which are also captured in requirements.txt for an
+# air-gapped install but are not required to run the service.
+dependencies = [
+    "fastapi==0.141.1",
+    "uvicorn[standard]==0.53.0",
+    "python-multipart==0.0.32",
+]
+
+[project.optional-dependencies]
+test = ["pytest==9.1.1", "httpx==0.28.1"]
+
+[project.scripts]
+lockgate = "app.lockgate.cli:main"
+
+[tool.setuptools]
+packages = ["app", "app.lockgate"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
