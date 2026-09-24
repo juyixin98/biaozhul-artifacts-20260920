@@ -1,0 +1,26 @@
+# Locked Python dependencies for the ROS2 camera/IMU time-alignment backend.
+#
+# CRITICAL: rclpy / sensor_msgs / std_msgs are NOT pip-installable. They come
+# from the ROS 2 apt packages. Do NOT `pip install rclpy` (no wheel exists).
+#
+# Verified and actually executed on:
+#   OS ............ Ubuntu 24.04.4 LTS (noble), kernel 6.8
+#   Python ........ 3.12.3
+#   ROS 2 ......... Jazzy (/opt/ros/jazzy)
+#
+# System (apt) ROS packages - exact installed versions:
+#   ros-jazzy-rclpy         = 7.1.12-1noble.20260902.053513
+#   ros-jazzy-sensor-msgs   = 5.3.8-1noble.20260902.041633
+#   ros-jazzy-std-msgs      = 5.3.8-1noble.20260902.022418
+#   (plus rcl_interfaces / builtin_interfaces, pulled in automatically)
+#
+# Application third-party Python packages. The runtime engine and storage
+# use ONLY the Python standard library (sqlite3, hashlib, hmac, json, struct),
+# so the offline CLI and most tests have zero third-party requirements.
+#
+# Exact versions observed in the acceptance environment on 2026-09-23:
+pytest==9.1.1
+
+# numpy is already required transitively by rclpy; pinned only to record the
+# verified combination. Not imported by the application code.
+numpy==2.5.3

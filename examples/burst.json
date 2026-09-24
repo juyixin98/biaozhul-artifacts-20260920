@@ -1,0 +1,724 @@
+{
+  "name": "burst",
+  "description": "Sudden camera burst under exclusive IMU policy.",
+  "config": {
+    "tolerance_ms": 5,
+    "imu_policy": "exclusive"
+  },
+  "events": [
+    {
+      "kind": "imu",
+      "stamp_ms": 0,
+      "recv_ms": 0,
+      "seq": 0,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 0,
+        "seq": 0
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 0,
+      "recv_ms": 0,
+      "seq": 0,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 0,
+        "seq": 0
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 10,
+      "recv_ms": 10,
+      "seq": 1,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 10,
+        "seq": 1
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 20,
+      "recv_ms": 20,
+      "seq": 2,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 20,
+        "seq": 2
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 30,
+      "recv_ms": 30,
+      "seq": 3,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 30,
+        "seq": 3
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 40,
+      "recv_ms": 40,
+      "seq": 4,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 40,
+        "seq": 4
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 50,
+      "recv_ms": 50,
+      "seq": 5,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 50,
+        "seq": 5
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 50,
+      "recv_ms": 50,
+      "seq": 1,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 50,
+        "seq": 1
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 60,
+      "recv_ms": 60,
+      "seq": 6,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 60,
+        "seq": 6
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 70,
+      "recv_ms": 70,
+      "seq": 7,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 70,
+        "seq": 7
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 80,
+      "recv_ms": 80,
+      "seq": 8,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 80,
+        "seq": 8
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 90,
+      "recv_ms": 90,
+      "seq": 9,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 90,
+        "seq": 9
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 100,
+      "recv_ms": 100,
+      "seq": 10,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 100,
+        "seq": 10
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 100,
+      "recv_ms": 100,
+      "seq": 2,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 100,
+        "seq": 2
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 110,
+      "recv_ms": 110,
+      "seq": 11,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 110,
+        "seq": 11
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 120,
+      "recv_ms": 120,
+      "seq": 12,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 120,
+        "seq": 12
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 130,
+      "recv_ms": 130,
+      "seq": 13,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 130,
+        "seq": 13
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 140,
+      "recv_ms": 140,
+      "seq": 14,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 140,
+        "seq": 14
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 150,
+      "recv_ms": 150,
+      "seq": 15,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 150,
+        "seq": 15
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 150,
+      "recv_ms": 150,
+      "seq": 3,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 150,
+        "seq": 3
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 160,
+      "recv_ms": 160,
+      "seq": 16,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 160,
+        "seq": 16
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 170,
+      "recv_ms": 170,
+      "seq": 17,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 170,
+        "seq": 17
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 180,
+      "recv_ms": 180,
+      "seq": 18,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 180,
+        "seq": 18
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 190,
+      "recv_ms": 190,
+      "seq": 19,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 190,
+        "seq": 19
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 200,
+      "recv_ms": 200,
+      "seq": 20,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 200,
+        "seq": 20
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 200,
+      "recv_ms": 200,
+      "seq": 4,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 200,
+        "seq": 4
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 210,
+      "recv_ms": 210,
+      "seq": 21,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 210,
+        "seq": 21
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 220,
+      "recv_ms": 220,
+      "seq": 22,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 220,
+        "seq": 22
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 230,
+      "recv_ms": 230,
+      "seq": 23,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 230,
+        "seq": 23
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 240,
+      "recv_ms": 240,
+      "seq": 24,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 240,
+        "seq": 24
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 250,
+      "recv_ms": 250,
+      "seq": 25,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 250,
+        "seq": 25
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 260,
+      "recv_ms": 260,
+      "seq": 26,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 260,
+        "seq": 26
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 252,
+      "recv_ms": 260,
+      "seq": 100,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 252,
+        "seq": 100
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 253,
+      "recv_ms": 260,
+      "seq": 101,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 253,
+        "seq": 101
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 254,
+      "recv_ms": 260,
+      "seq": 102,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 254,
+        "seq": 102
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 255,
+      "recv_ms": 260,
+      "seq": 103,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 255,
+        "seq": 103
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 270,
+      "recv_ms": 270,
+      "seq": 27,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 270,
+        "seq": 27
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 280,
+      "recv_ms": 280,
+      "seq": 28,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 280,
+        "seq": 28
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 290,
+      "recv_ms": 290,
+      "seq": 29,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 290,
+        "seq": 29
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 300,
+      "recv_ms": 300,
+      "seq": 30,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 300,
+        "seq": 30
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 300,
+      "recv_ms": 300,
+      "seq": 20,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 300,
+        "seq": 20
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 310,
+      "recv_ms": 310,
+      "seq": 31,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 310,
+        "seq": 31
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 320,
+      "recv_ms": 320,
+      "seq": 32,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 320,
+        "seq": 32
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 330,
+      "recv_ms": 330,
+      "seq": 33,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 330,
+        "seq": 33
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 340,
+      "recv_ms": 340,
+      "seq": 34,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 340,
+        "seq": 34
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 350,
+      "recv_ms": 350,
+      "seq": 35,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 350,
+        "seq": 35
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 360,
+      "recv_ms": 360,
+      "seq": 36,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 360,
+        "seq": 36
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 370,
+      "recv_ms": 370,
+      "seq": 37,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 370,
+        "seq": 37
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 380,
+      "recv_ms": 380,
+      "seq": 38,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 380,
+        "seq": 38
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 390,
+      "recv_ms": 390,
+      "seq": 39,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 390,
+        "seq": 39
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 400,
+      "recv_ms": 400,
+      "seq": 40,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 400,
+        "seq": 40
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 410,
+      "recv_ms": 410,
+      "seq": 41,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 410,
+        "seq": 41
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 420,
+      "recv_ms": 420,
+      "seq": 42,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 420,
+        "seq": 42
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 430,
+      "recv_ms": 430,
+      "seq": 43,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 430,
+        "seq": 43
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 440,
+      "recv_ms": 440,
+      "seq": 44,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 440,
+        "seq": 44
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 450,
+      "recv_ms": 450,
+      "seq": 45,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 450,
+        "seq": 45
+      }
+    }
+  ],
+  "expect": {
+    "epochs": 1,
+    "matches": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        10
+      ],
+      [
+        3,
+        15
+      ],
+      [
+        4,
+        20
+      ],
+      [
+        100,
+        25
+      ],
+      [
+        103,
+        26
+      ],
+      [
+        20,
+        30
+      ]
+    ],
+    "camera_unmatched": [
+      101,
+      102
+    ],
+    "chain_ok": true
+  }
+}

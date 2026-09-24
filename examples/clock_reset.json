@@ -1,0 +1,185 @@
+{
+  "name": "clock_reset",
+  "description": "Clock reset opens epoch 1; no cross-epoch pairing.",
+  "config": {
+    "tolerance_ms": 5,
+    "imu_policy": "exclusive",
+    "reset_threshold_ms": 100
+  },
+  "events": [
+    {
+      "kind": "imu",
+      "stamp_ms": 0,
+      "recv_ms": 0,
+      "seq": 0,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 0,
+        "seq": 0
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 0,
+      "recv_ms": 0,
+      "seq": 0,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 0,
+        "seq": 0
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 100,
+      "recv_ms": 100,
+      "seq": 1,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 100,
+        "seq": 1
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 100,
+      "recv_ms": 100,
+      "seq": 1,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 100,
+        "seq": 1
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 200,
+      "recv_ms": 200,
+      "seq": 2,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 200,
+        "seq": 2
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 200,
+      "recv_ms": 200,
+      "seq": 2,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 200,
+        "seq": 2
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 50,
+      "recv_ms": 250,
+      "seq": 50,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 50,
+        "seq": 50
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 50,
+      "recv_ms": 251,
+      "seq": 50,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 50,
+        "seq": 50
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 55,
+      "recv_ms": 255,
+      "seq": 51,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 55,
+        "seq": 51
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 55,
+      "recv_ms": 256,
+      "seq": 51,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 55,
+        "seq": 51
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 200,
+      "recv_ms": 300,
+      "seq": 60,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 200,
+        "seq": 60
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 200,
+      "recv_ms": 301,
+      "seq": 60,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 200,
+        "seq": 60
+      }
+    }
+  ],
+  "expect": {
+    "epochs": 2,
+    "matches": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        50,
+        50
+      ],
+      [
+        51,
+        51
+      ],
+      [
+        60,
+        60
+      ]
+    ],
+    "chain_ok": true
+  }
+}

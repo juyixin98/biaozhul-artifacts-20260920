@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>time_alignment</name>
+  <version>0.1.0</version>
+  <description>
+    ROS2 camera/IMU event-time alignment: nearest-IMU matching within
+    tolerance, tie-to-earlier, reusable or exclusive IMUs, bounded caches,
+    100ms out-of-order tolerance, explicit expiry, clock-reset epochs,
+    atomic versioned parameter updates and SQLite tamper-evident evidence.
+  </description>
+  <maintainer email="example@example.com">time-alignment</maintainer>
+  <license>Apache-2.0</license>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>builtin_interfaces</exec_depend>
+  <exec_depend>rosidl_runtime_py</exec_depend>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

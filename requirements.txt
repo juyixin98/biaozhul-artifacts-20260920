@@ -1,0 +1,5 @@
+# Unpinned/minimal requirements. For the fully pinned, verified set see
+# requirements-lock.txt.
+#
+# rclpy, sensor_msgs and std_msgs are provided by ROS 2 itself (apt), not pip.
+pytest

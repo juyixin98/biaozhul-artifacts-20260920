@@ -1,0 +1,160 @@
+{
+  "name": "identical_timestamps",
+  "description": "Duplicate IMU stamps and equidistant tie: earlier wins.",
+  "config": {
+    "tolerance_ms": 5,
+    "imu_policy": "exclusive"
+  },
+  "events": [
+    {
+      "kind": "imu",
+      "stamp_ms": 0,
+      "recv_ms": 0,
+      "seq": 0,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 0,
+        "seq": 0
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 0,
+      "recv_ms": 0,
+      "seq": 0,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 0,
+        "seq": 0
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 100,
+      "recv_ms": 100,
+      "seq": 10,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 100,
+        "seq": 10
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 100,
+      "recv_ms": 100,
+      "seq": 11,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 100,
+        "seq": 11
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 100,
+      "recv_ms": 100,
+      "seq": 1,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 100,
+        "seq": 1
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 195,
+      "recv_ms": 195,
+      "seq": 12,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 195,
+        "seq": 12
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 205,
+      "recv_ms": 205,
+      "seq": 13,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 205,
+        "seq": 13
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 200,
+      "recv_ms": 200,
+      "seq": 2,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 200,
+        "seq": 2
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 310,
+      "recv_ms": 310,
+      "seq": 14,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 310,
+        "seq": 14
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 310,
+      "recv_ms": 310,
+      "seq": 3,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 310,
+        "seq": 3
+      }
+    }
+  ],
+  "expect": {
+    "epochs": 1,
+    "matches": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        10
+      ],
+      [
+        2,
+        12
+      ],
+      [
+        3,
+        14
+      ]
+    ],
+    "tie_cameras": [
+      1,
+      2
+    ],
+    "imu_unmatched": [
+      11,
+      13
+    ],
+    "chain_ok": true
+  }
+}

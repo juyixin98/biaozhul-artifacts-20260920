@@ -1,0 +1,185 @@
+{
+  "name": "out_of_order",
+  "description": "Late arrivals within 100ms are honored; a 120ms-late IMU lags the high-water mark past the reset threshold and opens a new epoch instead.",
+  "config": {
+    "tolerance_ms": 5,
+    "imu_policy": "exclusive",
+    "out_of_order_ms": 100
+  },
+  "events": [
+    {
+      "kind": "imu",
+      "stamp_ms": 0,
+      "recv_ms": 0,
+      "seq": 0,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 0,
+        "seq": 0
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 0,
+      "recv_ms": 0,
+      "seq": 0,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 0,
+        "seq": 0
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 100,
+      "recv_ms": 100,
+      "seq": 1,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 100,
+        "seq": 1
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 100,
+      "recv_ms": 100,
+      "seq": 1,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 100,
+        "seq": 1
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 200,
+      "recv_ms": 200,
+      "seq": 2,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 200,
+        "seq": 2
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 200,
+      "recv_ms": 200,
+      "seq": 2,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 200,
+        "seq": 2
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 198,
+      "recv_ms": 290,
+      "seq": 90,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 198,
+        "seq": 90
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 300,
+      "recv_ms": 300,
+      "seq": 3,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 300,
+        "seq": 3
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 300,
+      "recv_ms": 300,
+      "seq": 3,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 300,
+        "seq": 3
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 410,
+      "recv_ms": 410,
+      "seq": 4,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 410,
+        "seq": 4
+      }
+    },
+    {
+      "kind": "camera",
+      "stamp_ms": 410,
+      "recv_ms": 411,
+      "seq": 4,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "camera",
+        "stamp_ms": 410,
+        "seq": 4
+      }
+    },
+    {
+      "kind": "imu",
+      "stamp_ms": 302,
+      "recv_ms": 420,
+      "seq": 91,
+      "frame_id": "cam0",
+      "payload": {
+        "kind": "imu",
+        "stamp_ms": 302,
+        "seq": 91
+      }
+    }
+  ],
+  "expect": {
+    "epochs": 2,
+    "matches": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        3,
+        3
+      ],
+      [
+        4,
+        4
+      ]
+    ],
+    "imu_unmatched": [
+      90,
+      91
+    ],
+    "chain_ok": true
+  }
+}

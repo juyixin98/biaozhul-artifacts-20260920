@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+install/
+log/
+.eggs/
+
+# Local SQLite evidence databases and WAL sidecars
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+
+# Test / editor artifacts
+.pytest_cache/
+.coverage
+*.log
+.DS_Store
