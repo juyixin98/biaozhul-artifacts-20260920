@@ -1,0 +1,11 @@
+{
+  "device_id": "temp-1",
+  "messages": [
+    { "seq": 1003, "value": "99.9", "sampled_at": "2026-09-23T10:05:00Z" },
+    { "seq": 1004, "value": "99.9", "sampled_at": "2026-09-23T10:05:10Z" },
+    { "seq": 1005, "value": "99.9", "sampled_at": "2026-09-23T10:05:20Z" },
+    { "seq": 1006, "value": "99.9", "sampled_at": "2026-09-23T10:05:30Z" },
+    { "seq": 1007, "value": "99.9", "sampled_at": "2026-09-23T10:05:40Z" },
+    { "seq": 1008, "value": "99.9", "sampled_at": "2026-09-23T10:05:50Z" }
+  ]
+}

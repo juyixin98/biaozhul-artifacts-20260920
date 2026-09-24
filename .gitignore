@@ -1,0 +1,13 @@
+# binaries
+/sensorhealth
+*.test
+/sensorhealth-server
+/sensorhealth-client
+
+# sqlite
+*.db
+*.db-wal
+*.db-shm
+
+# local
+.env

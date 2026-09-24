@@ -1,0 +1,8 @@
+{
+  "device_id": "temp-1",
+  "messages": [
+    { "seq": 1012, "value": "33", "sampled_at": "2026-09-23T12:00:30Z" },
+    { "seq": 1010, "value": "31", "sampled_at": "2026-09-23T12:00:10Z" },
+    { "seq": 1011, "value": "32", "sampled_at": "2026-09-23T12:00:20Z" }
+  ]
+}
