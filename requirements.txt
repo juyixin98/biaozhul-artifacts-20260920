@@ -1,0 +1,20 @@
+# Web3 栈（直接依赖；完整传递依赖锁定见 requirements-lock.txt）
+web3==7.6.0
+eth-account==0.14.0
+eth_abi==6.0.0
+eth-utils==6.0.0
+hexbytes==2.0.0
+
+# HTTP 服务
+fastapi==0.141.1
+uvicorn==0.53.0
+starlette==1.7.0
+pydantic==2.13.5
+pydantic-core==2.46.5
+python-multipart==0.0.32
+anyio==4.15.1
+
+# 测试
+pytest==9.1.1
+httpx==0.28.1
+requests==2.34.2

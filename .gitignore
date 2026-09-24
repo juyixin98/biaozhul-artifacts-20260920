@@ -1,0 +1,20 @@
+# Foundry
+out/
+cache/
+broadcast/
+anvil.ipc
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# 本地部署地址（由 scripts/deploy.py 生成）
+deployments/
+
+# 编辑器
+.idea/
+.vscode/
+.DS_Store
