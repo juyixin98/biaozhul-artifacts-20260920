@@ -1,0 +1,16 @@
+# Foundry
+out/
+cache/
+broadcast/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local deployment / Anvil runtime
+deploy/anvil.log
+deploy/anvil.pid
+deploy/addresses.json
+deploy/anvil-test.log
