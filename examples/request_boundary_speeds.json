@@ -1,0 +1,11 @@
+{
+  "waypoints": [
+    [0.0],
+    [10.0]
+  ],
+  "velocity_limits": [2.0],
+  "acceleration_limits": [1.0],
+  "start_velocity": [1.0],
+  "end_velocity": [1.0],
+  "samples_per_segment": 500
+}

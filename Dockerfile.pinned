@@ -1,0 +1,31 @@
+# Pinned, reproducible build environment.
+#
+# Base image: official Ubuntu 24.04 (noble). To pin to an immutable digest,
+# replace the tag with the digest printed by:
+#   docker image inspect ubuntu:24.04 --format '{{index .RepoDigests 0}}'
+# e.g. FROM ubuntu@sha256:<digest> AS build
+#
+# Every C++ dependency is version-pinned via apt (=...), which is the
+# effective lockfile for this project (no source downloads at build time).
+FROM ubuntu:24.04 AS build
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      g++-13 \
+      cmake-data=3.28.3-1build7 \
+      cmake=3.28.3-1build7 \
+      libeigen3-dev=3.4.0-4build0.1 \
+      nlohmann-json3-dev=3.11.3-1 \
+      libssl-dev=3.0.13-0ubuntu3.15 \
+      ca-certificates \
+      curl jq python3 make bash \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /src
+COPY . /src
+RUN cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
+ && cmake --build build -j"$(nproc)" \
+ && ctest --test-dir build --output-on-failure
+
+EXPOSE 8080
+ENTRYPOINT ["/src/build/jtp_server", "--host", "0.0.0.0", "--port", "8080"]
