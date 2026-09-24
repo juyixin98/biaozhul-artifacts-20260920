@@ -1,0 +1,11 @@
+{
+  "oldText": "same\nsame\nsame\nsame\n",
+  "newText": [
+    {"text": "same", "eol": "LF"},
+    {"text": "same", "eol": "LF"},
+    {"text": "new middle", "eol": "CRLF"},
+    {"text": "same", "eol": "LF"},
+    {"text": "same", "eol": "LF"}
+  ],
+  "budget": {"maxNodes": 100000, "maxD": -1}
+}

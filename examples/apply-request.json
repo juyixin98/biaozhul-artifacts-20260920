@@ -1,0 +1,9 @@
+{
+  "oldText": "a\nb\nc\n",
+  "ops": [
+    {"type": "equal",  "oldIndex": 0, "newIndex": 0, "line": {"text": "a", "eol": "LF"}},
+    {"type": "insert", "oldIndex": 1, "newIndex": 1, "line": {"text": "BETA", "eol": "LF"}},
+    {"type": "delete", "oldIndex": 1, "newIndex": 2, "line": {"text": "b", "eol": "LF"}},
+    {"type": "equal",  "oldIndex": 2, "newIndex": 3, "line": {"text": "c", "eol": "LF"}}
+  ]
+}

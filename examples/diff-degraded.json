@@ -1,0 +1,5 @@
+{
+  "oldText": "L0\nL1\nL2\nL3\nL4\nL5\nL6\nL7\nL8\nL9\n",
+  "newText": "L9\nL8\nL7\nL6\nL5\nL4\nL3\nL2\nL1\nL0\n",
+  "budget": {"maxNodes": 3}
+}
