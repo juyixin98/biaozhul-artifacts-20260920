@@ -1,0 +1,22 @@
+# colcon / ROS build artifacts
+build/
+install/
+log/
+
+# SQLite database files and WAL/SHM sidecars
+*.db
+*.db-wal
+*.db-shm
+data/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# editor / OS
+*.swp
+.DS_Store

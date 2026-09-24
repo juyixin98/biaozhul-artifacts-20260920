@@ -1,0 +1,38 @@
+# requirements.lock — fully resolved, exact versions this project was built
+# and accepted with on 2026-09-23 (Ubuntu 24.04, ROS 2 Jazzy, Python 3.12).
+#
+# Regenerate with:
+#   pip install --dry-run -r requirements.lock   # to inspect
+#   pip freeze | grep -viE 'rclpy|action|rosidl|^std|builtin|unique|ament' \
+#       > requirements.freeze.txt                  # to refresh
+#
+# ---------------------------------------------------------------------------
+# SYSTEM / ROS (apt) — must be present; do NOT install these from PyPI.
+# ---------------------------------------------------------------------------
+# Ubuntu ............... 24.04 (noble), kernel 6.8
+# Python ............... 3.12.3
+# CPython sqlite ....... 3.45.1 (stdlib module 'sqlite3')
+# ros-jazzy-rclpy ...................... 7.1.12-1noble.20260902.053513
+# ros-jazzy-action-msgs ................ 2.0.4-1noble.20260902.015426
+# ros-jazzy-builtin-interfaces ......... 2.0.4-1noble.20260902.013948
+# ros-jazzy-unique-identifier-msgs ..... 2.5.1-1noble.20260902.014005
+# ros-jazzy-rosidl-default-runtime ..... 1.6.1-1noble.20260902.015921
+# ros-jazzy-rosidl-default-generators .. 1.6.1-1noble.20260902.021422
+# ros-jazzy-ament-cmake ................ 2.5.6-2noble.20260225.222913
+# ros-jazzy-ament-cmake-python ......... 2.5.6-2noble.20260225.042326
+# ros-jazzy-ament-cmake-pytest ......... (jazzy, apt)
+# colcon ............................... (apt: python3-colcon-common-extensions)
+#
+# ---------------------------------------------------------------------------
+# PYPI (pip) — pure-Python only. Versions below were captured from the exact
+# interpreter used for the acceptance run (`python3 -m pip freeze`). They are
+# test/tooling deps; the production server needs none of them (stdlib + rclpy).
+# ---------------------------------------------------------------------------
+iniconfig==2.3.0
+packaging==24.0
+pluggy==1.6.0
+pytest==9.1.1
+# optional test tooling present on the acceptance host:
+coverage==7.4.4
+pytest-cov==4.1.0
+# catkin_pkg 1.1.1 is provided system-wide via apt (python3-catkin-pkg), not pip.

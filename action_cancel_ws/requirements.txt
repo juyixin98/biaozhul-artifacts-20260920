@@ -1,0 +1,11 @@
+# Runtime/test Python requirements that are NOT provided by ROS packages.
+#
+# IMPORTANT: rclpy, action_msgs, unique_identifier_msgs, rosidl runtime, etc.
+# are ROS 2 (Jazzy) packages installed via apt, NEVER pip. Install the ROS
+# stack first (see README). Only pure-Python tooling is pinned here.
+#
+# The application itself uses only the Python standard library at runtime
+# (sqlite3, hashlib, hmac, json, argparse, threading, uuid) on top of rclpy.
+#
+# Test-only:
+pytest==9.1.1

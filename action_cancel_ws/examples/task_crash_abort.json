@@ -1,0 +1,11 @@
+{
+  "segment_inputs": [
+    "crash-abort-0",
+    "crash-abort-1",
+    "crash-abort-2",
+    "crash-abort-3"
+  ],
+  "pbkdf2_iterations": 200000,
+  "recovery_policy": "ABORT",
+  "note": "POLICY_ABORT: if the process dies while this goal is active, restart marks it RECOVERABLE then terminates it ABORTED (completed segments are preserved in history)."
+}

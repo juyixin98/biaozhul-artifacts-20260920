@@ -1,0 +1,13 @@
+{
+  "segment_inputs": [
+    "crash-resume-0",
+    "crash-resume-1",
+    "crash-resume-2",
+    "crash-resume-3",
+    "crash-resume-4",
+    "crash-resume-5"
+  ],
+  "pbkdf2_iterations": 200000,
+  "recovery_policy": "RESUME",
+  "note": "Long-ish PBKDF2 work per segment so 'kill -9' can land mid-run; on restart the goal is marked RECOVERABLE then resumed to SUCCEEDED."
+}

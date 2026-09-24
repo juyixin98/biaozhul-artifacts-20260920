@@ -1,0 +1,12 @@
+{
+  "segment_inputs": [
+    "alpha",
+    "beta",
+    "gamma",
+    "delta",
+    "epsilon"
+  ],
+  "pbkdf2_iterations": 50000,
+  "recovery_policy": "RESUME",
+  "note": "Used with --cancel-after-index 3: cancel is admitted while the final segment (epsilon) is running."
+}

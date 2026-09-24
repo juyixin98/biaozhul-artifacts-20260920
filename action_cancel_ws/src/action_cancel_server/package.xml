@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>action_cancel_server</name>
+  <version>1.0.0</version>
+  <description>
+    Backend ROS 2 action server executing segmented synthesis tasks with
+    durable SQLite progress, goal-id deduplication, a single terminal state
+    under cancel/complete races, crash recovery and history queries.
+    No real robot is controlled.
+  </description>
+  <maintainer email="dev@example.com">action-cancel dev</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclpy</depend>
+  <depend>action_msgs</depend>
+  <depend>action_cancel_interfaces</depend>
+
+  <test_depend>ament_cmake_pytest</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

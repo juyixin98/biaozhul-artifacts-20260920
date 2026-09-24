@@ -1,0 +1,36 @@
+# Segmented synthesis task: N independent "segments" executed in order.
+# No real robot is controlled; each segment performs real cryptographic work
+# (PBKDF2-HMAC-SHA256 + SHA-256 chaining) and progress is persisted to SQLite
+# before the feedback is published.
+
+string goal_id              # client-chosen idempotency key (non-empty)
+string[] segment_inputs     # one input string per segment (length == total segments)
+int64 pbkdf2_iterations     # PBKDF2-HMAC-SHA256 rounds per segment, must be > 0
+uint8 recovery_policy       # what to do if the server died while this goal was running
+
+uint8 POLICY_RESUME = 0     # restart: keep finished segments, resume at the gap
+uint8 POLICY_ABORT  = 1     # restart: mark goal ABORTED instead of resuming
+---
+# Result
+# Canonical persisted goal states (see README "Goal lifecycle").
+uint8 STATE_PENDING     = 0
+uint8 STATE_RUNNING     = 1
+uint8 STATE_RECOVERABLE = 2
+uint8 STATE_SUCCEEDED   = 3
+uint8 STATE_CANCELED    = 4
+uint8 STATE_ABORTED     = 5
+uint8 STATE_REJECTED    = 6
+
+string goal_id
+uint8 terminal_state         # one of the STATE_* constants
+int32 completed_segments     # number of segments durably completed
+int32 total_segments
+string result_hash           # final chained SHA-256 digest; "" unless SUCCEEDED
+string error_code            # machine-readable error; "" on clean success
+---
+# Feedback
+string goal_id
+int32 segment_index          # 0-based index of the segment that just completed
+int32 completed_segments
+string segment_hash          # PBKDF2-derived digest of this single segment
+string chained_hash          # running chained SHA-256 digest after this segment

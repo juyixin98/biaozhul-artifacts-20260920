@@ -1,0 +1,23 @@
+string goal_id
+
+# Canonical goal states (mirrors SegmentedTask.action result constants).
+uint8 STATE_PENDING     = 0
+uint8 STATE_RUNNING     = 1
+uint8 STATE_RECOVERABLE = 2
+uint8 STATE_SUCCEEDED   = 3
+uint8 STATE_CANCELED    = 4
+uint8 STATE_ABORTED     = 5
+uint8 STATE_REJECTED    = 6
+---
+bool exists                  # false => no goal with this id ever persisted
+string goal_id
+uint8 state                  # canonical goal state (see constants above)
+int32 completed_segments
+int32 total_segments
+string fingerprint           # SHA-256 over the canonical goal parameters
+uint8 recovery_policy
+string result_hash
+string error_code
+
+# Per-segment durable records, in index order.
+SegmentRecord[] segments

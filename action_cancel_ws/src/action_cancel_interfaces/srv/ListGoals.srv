@@ -1,0 +1,4 @@
+# List durable goal records (history query; works after restart).
+uint8 state_filter           # only return goals in this STATE_* value; 255 = all
+---
+GoalSummary[] goals

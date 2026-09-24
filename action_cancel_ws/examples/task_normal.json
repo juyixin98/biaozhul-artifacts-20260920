@@ -1,0 +1,11 @@
+{
+  "segment_inputs": [
+    "the quick brown fox",
+    "jumps over the lazy dog",
+    "segment three payload",
+    "final synthesis segment"
+  ],
+  "pbkdf2_iterations": 50000,
+  "recovery_policy": "RESUME",
+  "note": "Normal 4-segment task. policy RESUME: if the process dies mid-run, a restart keeps completed segments and resumes at the gap."
+}
