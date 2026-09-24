@@ -1,0 +1,8 @@
+{
+  "id": "pol-test-to-staging",
+  "source_env": "test",
+  "target_env": "staging",
+  "required_suite": "integration",
+  "min_evidence_version": 1,
+  "body": {"description": "integration suite must pass before staging"}
+}

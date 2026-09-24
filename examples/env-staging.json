@@ -1,0 +1,5 @@
+{
+  "name": "staging",
+  "retention_keep": 5,
+  "retention_max_age_days": 30
+}

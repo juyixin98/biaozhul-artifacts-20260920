@@ -1,0 +1,11 @@
+{
+  "source_env": "test",
+  "target_env": "staging",
+  "digest": "sha256:REPLACE_WITH_INGESTED_DIGEST",
+  "evidence_id": "ev-payment-svc",
+  "evidence_version": 1,
+  "policy_id": "pol-test-to-staging",
+  "policy_version": 1,
+  "approval_id": "REPLACE_WITH_APPROVAL_UUID",
+  "expected_generation": 0
+}

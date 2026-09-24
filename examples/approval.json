@@ -1,0 +1,5 @@
+{
+  "environment": "staging",
+  "artifact_digest": "sha256:REPLACE_WITH_INGESTED_DIGEST",
+  "approver": "release-manager"
+}

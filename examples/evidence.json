@@ -1,0 +1,7 @@
+{
+  "id": "ev-payment-svc",
+  "artifact_digest": "sha256:REPLACE_WITH_INGESTED_DIGEST",
+  "suite": "integration",
+  "passed": true,
+  "report": {"tests": 128, "failures": 0, "duration_ms": 4210}
+}

@@ -1,0 +1,5 @@
+{
+  "environment": "staging",
+  "digest": "sha256:REPLACE_WITH_HISTORICAL_DIGEST",
+  "expected_generation": 1
+}
