@@ -1,0 +1,12 @@
+[package]
+name = "seglog"
+version = "0.1.0"
+edition = "2021"
+description = "Segmented append-only log storage with crash recovery, exposed over HTTP (axum)"
+
+[dependencies]
+axum = "0.8"
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+crc32fast = "1"
