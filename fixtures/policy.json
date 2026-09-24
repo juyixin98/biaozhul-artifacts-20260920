@@ -1,0 +1,15 @@
+{
+  "trusted_builders": {
+    "trusted-builder-a": {
+      "public_key_hex": "de3ef197087ef434bf92ff1264917f2bfab5530d3a3f9ddd7a61d69a9ccd6a5b",
+      "display_name": "示例可信构建器 A（CI）"
+    }
+  },
+  "allowed_source_repos": [
+    "https://git.example.com/app/payments"
+  ],
+  "allowed_material_origins": [
+    "https://deps.example.com/distfiles/",
+    "https://vendor.example.com/releases/"
+  ]
+}

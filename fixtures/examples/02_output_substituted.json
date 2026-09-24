@@ -1,0 +1,89 @@
+{
+  "envelope": {
+    "payload": {
+      "builder_id": "trusted-builder-a",
+      "source_commit": {
+        "repo": "https://git.example.com/app/payments",
+        "revision": "7b3f9c1e5a8d2f6041c9e7b6a3d8f0251c4e9b7a"
+      },
+      "materials": [
+        {
+          "uri": "https://deps.example.com/distfiles/serde-1.0.tar.gz",
+          "digest": {
+            "alg": "sha256",
+            "hex": "71945515694019169639b50c8f1e80353ff0e9c39fe25258eeedc93c48e0189e"
+          }
+        },
+        {
+          "uri": "https://deps.example.com/distfiles/tokio-1.43.tar.gz",
+          "digest": {
+            "alg": "sha256",
+            "hex": "0aa84e63a44c2cd060fcc224ccb36be372ddcf6667662c82f7984bee8256aa4c"
+          }
+        },
+        {
+          "uri": "https://vendor.example.com/releases/acme-crypto-2.1.bin",
+          "digest": {
+            "alg": "sha256",
+            "hex": "8ca6697200ea611b19579a1309543540369a6273fb01185ab2395060c61511bc"
+          }
+        },
+        {
+          "uri": "https://vendor.example.com/releases/acme-sdk-5.0.bin",
+          "digest": {
+            "alg": "sha256",
+            "hex": "869ee31293da45e67246e1e6fc7b4046e34b928acc67bcfaa7bb78b113777812"
+          }
+        }
+      ],
+      "output": {
+        "digest": {
+          "alg": "sha256",
+          "hex": "97ce9becc00992d6ffe555ca31a695b424ba9533aa7999fc6f2c0b8c15d9da00"
+        }
+      }
+    },
+    "key_id": "de3ef197087ef434bf92ff1264917f2bfab5530d3a3f9ddd7a61d69a9ccd6a5b",
+    "signature_hex": "843a6c417550e90de00993e9cabc2addb7247cbbb89bc5963d643d6e6e5b60d20bd797c33abf9dfc97cb103bafb0de4cd2175db0bf7cfc8cc3b2cce3af8b490f"
+  },
+  "expected_source_commit": {
+    "repo": "https://git.example.com/app/payments",
+    "revision": "7b3f9c1e5a8d2f6041c9e7b6a3d8f0251c4e9b7a"
+  },
+  "expected_materials": [
+    {
+      "uri": "https://deps.example.com/distfiles/serde-1.0.tar.gz",
+      "digest": {
+        "alg": "sha256",
+        "hex": "71945515694019169639b50c8f1e80353ff0e9c39fe25258eeedc93c48e0189e"
+      }
+    },
+    {
+      "uri": "https://deps.example.com/distfiles/tokio-1.43.tar.gz",
+      "digest": {
+        "alg": "sha256",
+        "hex": "0aa84e63a44c2cd060fcc224ccb36be372ddcf6667662c82f7984bee8256aa4c"
+      }
+    },
+    {
+      "uri": "https://vendor.example.com/releases/acme-crypto-2.1.bin",
+      "digest": {
+        "alg": "sha256",
+        "hex": "8ca6697200ea611b19579a1309543540369a6273fb01185ab2395060c61511bc"
+      }
+    },
+    {
+      "uri": "https://vendor.example.com/releases/acme-sdk-5.0.bin",
+      "digest": {
+        "alg": "sha256",
+        "hex": "869ee31293da45e67246e1e6fc7b4046e34b928acc67bcfaa7bb78b113777812"
+      }
+    }
+  ],
+  "expected_output": {
+    "digest": {
+      "alg": "sha256",
+      "hex": "96042be7518445e94d13b99f7d53b13ad5fb8649bab9182f6d19c494a15e2457"
+    }
+  }
+}
