@@ -1,0 +1,43 @@
+== reset / configure: capacity 10 CPU, 10 mem ==
+{"status":"reset"}
+
+{"capacity":{"cpu":10,"mem":10},"status":"configured"}
+
+== tenants A (CPU-heavy) and B (mem-heavy), equal weight 1 ==
+{"name":"A","quota":{"cpu":0,"mem":0},"status":"created","weight":1}
+
+{"name":"B","quota":{"cpu":0,"mem":0},"status":"created","weight":1}
+
+-- submit a1: tenant=A demand={cpu:4,mem:0}
+{"demand":{"cpu":4,"mem":0},"id":"a1","seq":1,"state":"running","tenant":"A"}
+
+-- submit b1: tenant=B demand={cpu:0,mem:4}
+{"demand":{"cpu":0,"mem":4},"id":"b1","seq":2,"state":"running","tenant":"B"}
+
+-- submit a2: tenant=A demand={cpu:4,mem:0}
+{"demand":{"cpu":4,"mem":0},"id":"a2","seq":3,"state":"running","tenant":"A"}
+
+-- submit b2: tenant=B demand={cpu:0,mem:4}
+{"demand":{"cpu":0,"mem":4},"id":"b2","seq":4,"state":"running","tenant":"B"}
+
+== cluster now 8/8; next tasks cannot fit and must stay QUEUED ==
+-- submit a3: tenant=A demand={cpu:4,mem:0}
+{"demand":{"cpu":4,"mem":0},"id":"a3","seq":5,"state":"queued","tenant":"A"}
+
+-- submit b3: tenant=B demand={cpu:0,mem:4}
+{"demand":{"cpu":0,"mem":4},"id":"b3","seq":6,"state":"queued","tenant":"B"}
+
+== full state (conservation check) ==
+{"configured":true,"capacity":{"cpu":10,"mem":10},"used":{"cpu":8,"mem":8},"free":{"cpu":2,"mem":2},"running":[{"id":"a1","tenant":"A","demand":{"cpu":4,"mem":0},"seq":1,"state":"running"},{"id":"b1","tenant":"B","demand":{"cpu":0,"mem":4},"seq":2,"state":"running"},{"id":"a2","tenant":"A","demand":{"cpu":4,"mem":0},"seq":3,"state":"running"},{"id":"b2","tenant":"B","demand":{"cpu":0,"mem":4},"seq":4,"state":"running"}],"queued":[{"id":"a3","tenant":"A","demand":{"cpu":4,"mem":0},"seq":5,"state":"queued"},{"id":"b3","tenant":"B","demand":{"cpu":0,"mem":4},"seq":6,"state":"queued"}],"tenants":[{"name":"A","weight":1,"quota":{"cpu":0,"mem":0},"used":{"cpu":8,"mem":0},"dominantShare":0.8,"weightedDominantShare":0.8,"runningCount":2,"queuedCount":1,"queuedTaskIds":["a3"]},{"name":"B","weight":1,"quota":{"cpu":0,"mem":0},"used":{"cpu":0,"mem":8},"dominantShare":0.8,"weightedDominantShare":0.8,"runningCount":2,"queuedCount":1,"queuedTaskIds":["b3"]}]}
+
+== release a1 (frees 4 CPU) -> a3 reschedules, b3 still queued ==
+{"id":"a1","state":{"configured":true,"capacity":{"cpu":10,"mem":10},"used":{"cpu":8,"mem":8},"free":{"cpu":2,"mem":2},"running":[{"id":"b1","tenant":"B","demand":{"cpu":0,"mem":4},"seq":2,"state":"running"},{"id":"a2","tenant":"A","demand":{"cpu":4,"mem":0},"seq":3,"state":"running"},{"id":"b2","tenant":"B","demand":{"cpu":0,"mem":4},"seq":4,"state":"running"},{"id":"a3","tenant":"A","demand":{"cpu":4,"mem":0},"seq":5,"state":"running"}],"queued":[{"id":"b3","tenant":"B","demand":{"cpu":0,"mem":4},"seq":6,"state":"queued"}],"tenants":[{"name":"A","weight":1,"quota":{"cpu":0,"mem":0},"used":{"cpu":8,"mem":0},"dominantShare":0.8,"weightedDominantShare":0.8,"runningCount":2,"queuedCount":0,"queuedTaskIds":[]},{"name":"B","weight":1,"quota":{"cpu":0,"mem":0},"used":{"cpu":0,"mem":8},"dominantShare":0.8,"weightedDominantShare":0.8,"runningCount":2,"queuedCount":1,"queuedTaskIds":["b3"]}]},"status":"released"}
+
+
+== release b1 (frees 4 mem) -> b3 reschedules ==
+{"id":"b1","state":{"configured":true,"capacity":{"cpu":10,"mem":10},"used":{"cpu":8,"mem":8},"free":{"cpu":2,"mem":2},"running":[{"id":"a2","tenant":"A","demand":{"cpu":4,"mem":0},"seq":3,"state":"running"},{"id":"b2","tenant":"B","demand":{"cpu":0,"mem":4},"seq":4,"state":"running"},{"id":"a3","tenant":"A","demand":{"cpu":4,"mem":0},"seq":5,"state":"running"},{"id":"b3","tenant":"B","demand":{"cpu":0,"mem":4},"seq":6,"state":"running"}],"queued":[],"tenants":[{"name":"A","weight":1,"quota":{"cpu":0,"mem":0},"used":{"cpu":8,"mem":0},"dominantShare":0.8,"weightedDominantShare":0.8,"runningCount":2,"queuedCount":0,"queuedTaskIds":[]},{"name":"B","weight":1,"quota":{"cpu":0,"mem":0},"used":{"cpu":0,"mem":8},"dominantShare":0.8,"weightedDominantShare":0.8,"runningCount":2,"queuedCount":0,"queuedTaskIds":[]}]},"status":"released"}
+
+
+== final state ==
+{"configured":true,"capacity":{"cpu":10,"mem":10},"used":{"cpu":8,"mem":8},"free":{"cpu":2,"mem":2},"running":[{"id":"a2","tenant":"A","demand":{"cpu":4,"mem":0},"seq":3,"state":"running"},{"id":"b2","tenant":"B","demand":{"cpu":0,"mem":4},"seq":4,"state":"running"},{"id":"a3","tenant":"A","demand":{"cpu":4,"mem":0},"seq":5,"state":"running"},{"id":"b3","tenant":"B","demand":{"cpu":0,"mem":4},"seq":6,"state":"running"}],"queued":[],"tenants":[{"name":"A","weight":1,"quota":{"cpu":0,"mem":0},"used":{"cpu":8,"mem":0},"dominantShare":0.8,"weightedDominantShare":0.8,"runningCount":2,"queuedCount":0,"queuedTaskIds":[]},{"name":"B","weight":1,"quota":{"cpu":0,"mem":0},"used":{"cpu":0,"mem":8},"dominantShare":0.8,"weightedDominantShare":0.8,"runningCount":2,"queuedCount":0,"queuedTaskIds":[]}]}
+
