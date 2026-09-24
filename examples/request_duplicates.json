@@ -1,0 +1,16 @@
+{
+  "joint_names": ["linear_axis", "slow_axis"],
+  "points": [
+    [0.0, 0.0],
+    [0.0, 0.0],
+    [4.0, 0.0],
+    [8.0, 5.0],
+    [8.0, 5.0],
+    [10.0, 5.0]
+  ],
+  "velocity_limits":     [5.0, 5.0],
+  "acceleration_limits": [2.0, 2.0],
+  "grid_cells": 1000,
+  "samples_per_cell": 6,
+  "comment": "two consecutive duplicate waypoints are collapsed; reported via removed_duplicates and retained_input_indices"
+}

@@ -1,0 +1,10 @@
+{
+  "joint_names": ["j0"],
+  "points": [[0.0], [10.0]],
+  "velocity_limits": [2.0],
+  "acceleration_limits": [1.0],
+  "start_velocity": [2.0],
+  "grid_cells": 1500,
+  "samples_per_cell": 6,
+  "comment": "starts already at vmax (no acceleration ramp), then must decelerate to rest"
+}

@@ -1,0 +1,32 @@
+# Pinned dependencies for joint-trajectory-time-parameterization
+#
+# Everything needed to build and run this project offline:
+#   * A C++17 compiler + pthread (system)
+#   * CMake >= 3.16 (system)
+#   * Eigen 3.4.0, header-only (preferred: system; fallback: vendored)
+#
+# The vendored Eigen is fetched from the official GitLab release tarball and
+# verified against the SHA-256 below before extraction (see
+# scripts/setup_deps.sh). Do not change a hash without also changing the URL.
+
+eigen:
+  name: Eigen
+  version: "3.4.0"
+  url: "https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz"
+  sha256: "8586084f71f9bde545ee7fa6d00288b264a2b7ac3607b974e54d13e7162c1c72"
+  license: "MPL-2.0"
+  extraction:
+    strip_components: 1          # eigen-3.4.0/Eigen -> third_party/eigen/Eigen
+  notes: >
+    Header-only; no compiled artifacts. The build picks, in order:
+      1. -DTOPP_EIGEN_INCLUDE=<dir>
+      2. third_party/eigen (populated by scripts/setup_deps.sh)
+      3. system Eigen via find_package (this workspace ships 3.4.0)
+
+# No other third-party libraries are used. JSON, SHA-256 and the HTTP/1.1
+# transport are implemented in-tree (src/json.cpp, include/topp/sha256.hpp,
+# src/http_server.cpp) so the dependency surface stays auditable.
+
+build:
+  cxx_standard: 17
+  cmake_minimum: "3.16"

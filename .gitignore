@@ -1,0 +1,14 @@
+# Build artifacts
+/build/
+/build-*/
+*.o
+*.a
+
+# Vendored dependency (fetched and hash-verified by scripts/setup_deps.sh)
+/third_party/eigen/
+/third_party/unsupported/
+
+# Editor / OS
+*.swp
+.DS_Store
+compile_commands.json

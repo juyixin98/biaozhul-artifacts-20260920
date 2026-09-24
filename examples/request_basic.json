@@ -1,0 +1,17 @@
+{
+  "joint_names": ["joint_1", "joint_2", "joint_3"],
+  "points": [
+    [0.0,  0.0, 0.0],
+    [1.2,  0.4, -0.5],
+    [2.5,  1.1, -0.2],
+    [3.0,  2.0,  0.6],
+    [2.0,  2.6,  1.2],
+    [0.5,  1.8,  0.8],
+    [0.0,  0.0, 0.0]
+  ],
+  "velocity_limits":     [1.5, 1.0, 0.8],
+  "acceleration_limits": [1.0, 1.2, 0.9],
+  "grid_cells": 1200,
+  "samples_per_cell": 6,
+  "duplicate_tolerance": 1e-9
+}
