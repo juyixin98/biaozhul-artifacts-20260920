@@ -1,0 +1,6 @@
+# 运行时依赖（精确版本见 requirements-lock.txt）
+fastapi>=0.115
+uvicorn[standard]>=0.30
+numpy>=2.0
+scipy>=1.13
+httpx>=0.27
