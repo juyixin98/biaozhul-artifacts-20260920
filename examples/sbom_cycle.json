@@ -1,0 +1,11 @@
+{
+  "format": "sbom-matcher/1",
+  "name": "cycle-demo",
+  "components": [
+    {"id": "root", "name": "demo-app", "ecosystem": "npm", "version": "1.0.0", "dependencies": ["a"]},
+    {"id": "a", "name": "pkg-a", "ecosystem": "npm", "version": "1.0.0", "dependencies": ["b"]},
+    {"id": "b", "name": "pkg-b", "ecosystem": "npm", "version": "1.1.0", "dependencies": ["c"]},
+    {"id": "c", "name": "pkg-c", "ecosystem": "npm", "version": "1.2.0", "dependencies": ["a", "dv"]},
+    {"id": "dv", "name": "deep-vuln", "ecosystem": "npm", "version": "2.1.0", "dependencies": []}
+  ]
+}

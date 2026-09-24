@@ -1,0 +1,27 @@
+{
+  "format": "sbom-matcher/1",
+  "name": "boundary-demo",
+  "components": [
+    {
+      "id": "root",
+      "name": "boundary-app",
+      "ecosystem": "npm",
+      "version": "1.0.0",
+      "dependencies": [
+        "net-npm-old", "net-npm-fixed", "net-pypi",
+        "libtrans-pre", "libtrans-release",
+        "bl-lower", "bl-upper",
+        "mystery", "weird"
+      ]
+    },
+    {"id": "net-npm-old", "name": "acme-net", "ecosystem": "npm", "version": "1.4.1"},
+    {"id": "net-npm-fixed", "name": "acme-net", "ecosystem": "npm", "version": "1.4.2"},
+    {"id": "net-pypi", "name": "acme-net", "ecosystem": "pypi", "version": "0.8.3"},
+    {"id": "libtrans-pre", "name": "libtrans", "ecosystem": "npm", "version": "2.0.0-rc.1"},
+    {"id": "libtrans-release", "name": "libtrans", "ecosystem": "npm", "version": "2.0.0"},
+    {"id": "bl-lower", "name": "boundary-lib", "ecosystem": "npm", "version": "1.0.0"},
+    {"id": "bl-upper", "name": "boundary-lib", "ecosystem": "npm", "version": "2.0.0"},
+    {"id": "mystery", "name": "acme-net", "ecosystem": "npm", "version": null},
+    {"id": "weird", "name": "libtrans", "ecosystem": "npm", "version": "latest"}
+  ]
+}
