@@ -1,0 +1,283 @@
+{
+  "contract": "BoxV5",
+  "source": "src/v5/BoxV5.sol",
+  "linearizedBaseContracts": [
+    "BoxV5",
+    "InitialStorageV1",
+    "UUPSUpgradable",
+    "ERC1967Upgrade"
+  ],
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 46,
+        "contract": "src/v5/BoxV5.sol:BoxV5",
+        "label": "_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 118,
+        "contract": "src/v5/BoxV5.sol:BoxV5",
+        "label": "__gap",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_array(t_uint256)49_storage"
+      },
+      {
+        "astId": 16,
+        "contract": "src/v5/BoxV5.sol:BoxV5",
+        "label": "baseCounter",
+        "offset": 0,
+        "slot": "50",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 18,
+        "contract": "src/v5/BoxV5.sol:BoxV5",
+        "label": "baseAdmin",
+        "offset": 0,
+        "slot": "51",
+        "type": "t_address"
+      },
+      {
+        "astId": 22,
+        "contract": "src/v5/BoxV5.sol:BoxV5",
+        "label": "__baseGap",
+        "offset": 0,
+        "slot": "52",
+        "type": "t_array(t_uint256)9_storage"
+      },
+      {
+        "astId": 704,
+        "contract": "src/v5/BoxV5.sol:BoxV5",
+        "label": "x",
+        "offset": 0,
+        "slot": "61",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 706,
+        "contract": "src/v5/BoxV5.sol:BoxV5",
+        "label": "y",
+        "offset": 0,
+        "slot": "62",
+        "type": "t_uint32"
+      },
+      {
+        "astId": 708,
+        "contract": "src/v5/BoxV5.sol:BoxV5",
+        "label": "z",
+        "offset": 4,
+        "slot": "62",
+        "type": "t_uint16"
+      },
+      {
+        "astId": 710,
+        "contract": "src/v5/BoxV5.sol:BoxV5",
+        "label": "w",
+        "offset": 6,
+        "slot": "62",
+        "type": "t_uint16"
+      },
+      {
+        "astId": 712,
+        "contract": "src/v5/BoxV5.sol:BoxV5",
+        "label": "name",
+        "offset": 0,
+        "slot": "63",
+        "type": "t_string_storage"
+      },
+      {
+        "astId": 714,
+        "contract": "src/v5/BoxV5.sol:BoxV5",
+        "label": "flags",
+        "offset": 0,
+        "slot": "64",
+        "type": "t_bytes_storage"
+      },
+      {
+        "astId": 717,
+        "contract": "src/v5/BoxV5.sol:BoxV5",
+        "label": "counts",
+        "offset": 0,
+        "slot": "65",
+        "type": "t_array(t_uint256)dyn_storage"
+      },
+      {
+        "astId": 721,
+        "contract": "src/v5/BoxV5.sol:BoxV5",
+        "label": "values",
+        "offset": 0,
+        "slot": "66",
+        "type": "t_mapping(t_uint256,t_uint256)"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_array(t_uint256)49_storage": {
+        "base": "t_uint256",
+        "encoding": "inplace",
+        "label": "uint256[49]",
+        "numberOfBytes": "1568"
+      },
+      "t_array(t_uint256)9_storage": {
+        "base": "t_uint256",
+        "encoding": "inplace",
+        "label": "uint256[9]",
+        "numberOfBytes": "288"
+      },
+      "t_array(t_uint256)dyn_storage": {
+        "base": "t_uint256",
+        "encoding": "dynamic_array",
+        "label": "uint256[]",
+        "numberOfBytes": "32"
+      },
+      "t_bytes_storage": {
+        "encoding": "bytes",
+        "label": "bytes",
+        "numberOfBytes": "32"
+      },
+      "t_mapping(t_uint256,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_uint16": {
+        "encoding": "inplace",
+        "label": "uint16",
+        "numberOfBytes": "2"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      },
+      "t_uint32": {
+        "encoding": "inplace",
+        "label": "uint32",
+        "numberOfBytes": "4"
+      }
+    }
+  },
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "implementation",
+          "type": "address"
+        }
+      ],
+      "name": "Upgraded",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "getBaseCounter",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "initialize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "v",
+          "type": "uint256"
+        }
+      ],
+      "name": "setBaseCounter",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newImplementation",
+          "type": "address"
+        }
+      ],
+      "name": "upgradeTo",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    }
+  ],
+  "bytecode": "608060405234801561001057600080fd5b5061038a806100206000396000f3fe608060405234801561001057600080fd5b50600436106100625760003560e01c80633659cfe61461006757806354fd4d501461007c5780638129fc1c146100a95780638da5cb5b146100b1578063b8b8bd18146100cc578063fb313363146100df575b600080fd5b61007a6100753660046102bc565b6100f0565b005b6040805180820182526002815261763560f01b602082015290516100a091906102ec565b60405180910390f35b61007a61014d565b6000546040516001600160a01b0390911681526020016100a0565b61007a6100da36600461033b565b603255565b6032546040519081526020016100a0565b6000546001600160a01b031633146101415760405162461bcd60e51b815260206004820152600f60248201526e2aaaa8299d103737ba1037bbb732b960891b60448201526064015b60405180910390fd5b61014a81610157565b50565b610155610222565b565b6000816001600160a01b03163b116101c75760405162461bcd60e51b815260206004820152602d60248201527f455243313936373a206e657720696d706c656d656e746174696f6e206973206e60448201526c1bdd08184818dbdb9d1c9858dd609a1b6064820152608401610138565b7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc8190556040516001600160a01b038216907fbc7cd75a20ee27fd9adebab32041f755214dbc6bffa90cc0225b39da2e5c2d3b90600090a250565b6000546001600160a01b03161561027b5760405162461bcd60e51b815260206004820152601960248201527f555550533a20616c726561647920696e697469616c697a6564000000000000006044820152606401610138565b600080546001600160a01b0319163390811782556040519091907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908290a3565b6000602082840312156102ce57600080fd5b81356001600160a01b03811681146102e557600080fd5b9392505050565b60006020808352835180602085015260005b8181101561031a578581018301518582016040015282016102fe565b506000604082860101526040601f19601f8301168501019250505092915050565b60006020828403121561034d57600080fd5b503591905056fea2646970667358221220a061c8f95d71a9e982980cceac486dd85266b83dc5bdb9b66e4012301294104c64736f6c63430008180033",
+  "deployedBytecode": "608060405234801561001057600080fd5b50600436106100625760003560e01c80633659cfe61461006757806354fd4d501461007c5780638129fc1c146100a95780638da5cb5b146100b1578063b8b8bd18146100cc578063fb313363146100df575b600080fd5b61007a6100753660046102bc565b6100f0565b005b6040805180820182526002815261763560f01b602082015290516100a091906102ec565b60405180910390f35b61007a61014d565b6000546040516001600160a01b0390911681526020016100a0565b61007a6100da36600461033b565b603255565b6032546040519081526020016100a0565b6000546001600160a01b031633146101415760405162461bcd60e51b815260206004820152600f60248201526e2aaaa8299d103737ba1037bbb732b960891b60448201526064015b60405180910390fd5b61014a81610157565b50565b610155610222565b565b6000816001600160a01b03163b116101c75760405162461bcd60e51b815260206004820152602d60248201527f455243313936373a206e657720696d706c656d656e746174696f6e206973206e60448201526c1bdd08184818dbdb9d1c9858dd609a1b6064820152608401610138565b7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc8190556040516001600160a01b038216907fbc7cd75a20ee27fd9adebab32041f755214dbc6bffa90cc0225b39da2e5c2d3b90600090a250565b6000546001600160a01b03161561027b5760405162461bcd60e51b815260206004820152601960248201527f555550533a20616c726561647920696e697469616c697a6564000000000000006044820152606401610138565b600080546001600160a01b0319163390811782556040519091907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908290a3565b6000602082840312156102ce57600080fd5b81356001600160a01b03811681146102e557600080fd5b9392505050565b60006020808352835180602085015260005b8181101561031a578581018301518582016040015282016102fe565b506000604082860101526040601f19601f8301168501019250505092915050565b60006020828403121561034d57600080fd5b503591905056fea2646970667358221220a061c8f95d71a9e982980cceac486dd85266b83dc5bdb9b66e4012301294104c64736f6c63430008180033"
+}
