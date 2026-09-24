@@ -1,0 +1,153 @@
+{
+  "plan": {
+    "old": {
+      "name": "old",
+      "nodes": [
+        {
+          "id": "a",
+          "weight": 1,
+          "vnodes": 2
+        },
+        {
+          "id": "b",
+          "weight": 1,
+          "vnodes": 2
+        }
+      ],
+      "vnodes_per_weight_unit": 2,
+      "total_vnodes": 4,
+      "total_weight": 2
+    },
+    "new": {
+      "name": "new",
+      "nodes": [
+        {
+          "id": "a",
+          "weight": 1,
+          "vnodes": 2
+        },
+        {
+          "id": "b",
+          "weight": 1,
+          "vnodes": 2
+        },
+        {
+          "id": "c",
+          "weight": 1,
+          "vnodes": 2
+        }
+      ],
+      "vnodes_per_weight_unit": 2,
+      "total_vnodes": 6,
+      "total_weight": 3
+    },
+    "key_space": "18446744073709551616",
+    "segments": [
+      {
+        "range": {
+          "lo": "0",
+          "lo_hex": "0x0000000000000000",
+          "hi": "3307252204837096080",
+          "hi_hex": "0x2de5b85b93f14a90",
+          "key_count": "3307252204837096081"
+        },
+        "from_node": "b",
+        "to_node": "c"
+      },
+      {
+        "range": {
+          "lo": "3307252204837096081",
+          "lo_hex": "0x2de5b85b93f14a91",
+          "hi": "6945666507090378816",
+          "hi_hex": "0x6063f6e373734040",
+          "key_count": "3638414302253282736"
+        },
+        "from_node": "b",
+        "to_node": "c"
+      },
+      {
+        "range": {
+          "lo": "6945666507090378817",
+          "lo_hex": "0x6063f6e373734041",
+          "hi": "7133467163201021628",
+          "hi_hex": "0x62ff2a971782a6bc",
+          "key_count": "187800656110642812"
+        },
+        "from_node": "b",
+        "to_node": "b"
+      },
+      {
+        "...": "<7 total segments; see live API for all>"
+      }
+    ],
+    "moves": [
+      {
+        "from_node": "b",
+        "to_node": "c",
+        "ranges": [
+          {
+            "lo": "0",
+            "lo_hex": "0x0000000000000000",
+            "hi": "3307252204837096080",
+            "hi_hex": "0x2de5b85b93f14a90",
+            "key_count": "3307252204837096081"
+          },
+          {
+            "...": "<3 total ranges>"
+          }
+        ],
+        "range_count": 3,
+        "key_count": "9116201375153024545"
+      }
+    ],
+    "node_shares": [
+      {
+        "node_id": "a",
+        "weight": 1,
+        "vnodes": 2,
+        "owned_keys": "3397567172854484089",
+        "share_fraction": "3397567172854484089/18446744073709551616",
+        "share": "0.184182485499"
+      },
+      {
+        "node_id": "b",
+        "weight": 1,
+        "vnodes": 2,
+        "owned_keys": "5932975525702042982",
+        "share_fraction": "2966487762851021491/9223372036854775808",
+        "share": "0.321627247713"
+      },
+      {
+        "node_id": "c",
+        "weight": 1,
+        "vnodes": 2,
+        "owned_keys": "9116201375153024545",
+        "share_fraction": "9116201375153024545/18446744073709551616",
+        "share": "0.494190266788"
+      }
+    ],
+    "moved_keys": "9116201375153024545",
+    "unchanged_keys": "9330542698556527071",
+    "total_segments": 7,
+    "moved_segments": 3,
+    "unchanged_segments": 4
+  },
+  "probes": [
+    {
+      "key": "alpha",
+      "position": "10291840798112322974",
+      "position_hex": "0x8ed3f6ad685b959e",
+      "old_owner": "b",
+      "new_owner": "b",
+      "migrates": false
+    },
+    {
+      "key": "beta",
+      "position": "17604118938335660265",
+      "position_hex": "0xf44e64e75f3948e9",
+      "old_owner": "b",
+      "new_owner": "c",
+      "migrates": true
+    }
+  ]
+}
