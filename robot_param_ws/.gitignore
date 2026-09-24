@@ -1,0 +1,6 @@
+build/
+install/
+log/
+*.sqlite3
+*.key
+__pycache__/

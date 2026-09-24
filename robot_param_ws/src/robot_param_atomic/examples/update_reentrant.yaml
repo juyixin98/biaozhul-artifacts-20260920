@@ -1,0 +1,13 @@
+# A same-process change listener must never mutate the snapshot it is
+# observing. Such callers tag the request with an origin beginning with
+# "inproc:"; while a dispatch is in progress they get REENTRANT_UPDATE.
+# External clients (CLI / other nodes) use origin: "" and are never rejected
+# this way.
+expected_version: 1
+set_allowed_latency: true
+allowed_latency_ms: 40
+origin: "inproc:change-listener"
+
+# Expected response:
+# status=4 (REENTRANT_UPDATE)
+# message='update issued from inside a change callback is not allowed; ...'

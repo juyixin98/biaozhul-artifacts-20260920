@@ -1,0 +1,9 @@
+# Read the current committed snapshot plus startup persistence status.
+---
+uint64 version
+float64 sample_rate_hz
+uint32 buffer_length
+uint64 allowed_latency_ms
+int64 committed_at_ms
+uint8 load_state        # 0 FRESH (no rows) | 1 LOADED | 2 RECOVERED (newest rows corrupt, fell back) | 3 NO_VALID_CONFIG
+string load_detail      # precise corruption/fallback report from startup

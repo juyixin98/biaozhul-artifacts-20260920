@@ -1,0 +1,46 @@
+# Pinned dependency manifest for robot_param_atomic.
+#
+# These are the EXACT apt package versions used to build and run the test
+# suite on the reference machine (Ubuntu 24.04, ROS 2 Jazzy). ROS packages
+# come from packages.ros.org/ros2/ubuntu (noble main). To reproduce the same
+# binary environment, install with `apt-get install pkg=version` (see
+# scripts/install_deps.sh) or restore from an apt snapshot.
+#
+# Schema: <deb name> <installed version>  # role
+
+platform:
+  os: "Ubuntu 24.04.4 LTS (noble)"
+  kernel: "6.8.0-90-generic"
+  ros_distro: "jazzy"
+
+build_toolchain:
+  - "build-essential 12.10ubuntu1"
+  - "gcc 4:13.2.0-7ubuntu1"
+  - "g++ 4:13.2.0-7ubuntu1"           # C++17, strict warnings
+  - "cmake 3.28.3-1build7"            # minimum required: 3.16
+  - "python3-colcon-common-extensions 0.3.0-100"
+
+ros2_packages:
+  - "ros-jazzy-rclcpp 28.1.22-2noble.20260902.055335"
+  - "ros-jazzy-ament-cmake 2.5.6-2noble.20260225.222913"
+  - "ros-jazzy-ament-cmake-gtest 2.5.6-2noble.20260226.145055"
+  - "ros-jazzy-rosidl-default-generators 1.6.1-2noble.20260902.021422"
+  - "ros-jazzy-rosidl-default-runtime 1.6.1-2noble.20260902.015921"
+  - "ros-jazzy-builtin-interfaces 2.0.4-2noble.20260902.013948"
+
+system_libraries:
+  - "libsqlite3-dev 3.45.1-1ubuntu2.8"   # runtime: libsqlite3-0 (same source)
+  - "libssl-dev 3.0.13-0ubuntu3.15"      # runtime: libssl3 (same source)
+
+test_only:
+  - "libgtest-dev 1.14.0-1"
+
+# Build/link contract (not apt packages):
+#   * C++ standard: C++17 (CMAKE_CXX_STANDARD 17, EXTENSIONS OFF)
+#   * SQLite: linked via CMake's FindSQLite3 (SQLite::SQLite3)
+#   * OpenSSL: linked via CMake's FindOpenSSL (OpenSSL::Crypto, >= 3.0)
+#   * sqlite3 CLI is NOT required at runtime; example scripts use Python 3's
+#     stdlib sqlite3 for out-of-band inspection.
+#
+# HMAC key: a 32-byte random secret, either supplied via $ROBOT_PARAM_KEY
+# (raw bytes or 64 hex chars) or auto-created as <db_path>.key with mode 0600.

@@ -1,0 +1,24 @@
+# Atomic batch update. Only fields whose set_* flag is true are changed.
+# The whole batch is either committed (new row, new version) or rejected;
+# expected_version implements optimistic concurrency control.
+uint64 expected_version
+bool set_sample_rate
+float64 sample_rate_hz
+bool set_buffer_length
+uint32 buffer_length
+bool set_allowed_latency
+uint64 allowed_latency_ms
+# Free-form caller label. Empty means an external client (CLI, another ROS
+# node): such calls are always serialized normally. A value starting with
+# "inproc:" identifies a same-process caller (e.g. a change listener); while a
+# listener dispatch is in progress those calls are rejected REENTRANT_UPDATE
+# so callbacks cannot mutate the snapshot they are observing.
+string origin
+---
+uint8 status            # 0 OK | 1 REJECTED_VALIDATION | 2 VERSION_CONFLICT | 3 PERSISTENCE_FAILED | 4 REENTRANT_UPDATE
+string message          # human-readable, machine-stable explanation
+uint64 version          # resulting current version (unchanged on failure)
+float64 sample_rate_hz
+uint32 buffer_length
+uint64 allowed_latency_ms
+int64 committed_at_ms

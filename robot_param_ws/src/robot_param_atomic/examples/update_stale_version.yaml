@@ -1,0 +1,13 @@
+# Optimistic-concurrency failure: the caller read the config when it was v0,
+# but another client committed v1 in the meantime. Submitting against
+# expected_version=0 is refused without touching any field.
+expected_version: 0
+set_sample_rate: true
+sample_rate_hz: 200.0
+origin: ""          # external client; the CLI always leaves this empty
+
+# Expected response:
+# status=2 (VERSION_CONFLICT)
+# message='expected_version 0 does not match current version 1; refresh and
+#  retry'
+# Correct recovery: call get, then resend with expected_version=<current>.

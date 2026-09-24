@@ -1,0 +1,13 @@
+# Batch update: all three fields in one request, each field legal and the
+# combination legal. 1000 Hz, buffer 300 -> 300 ms covered >= 2*100 = 200 ms.
+expected_version: 1
+set_sample_rate: true
+sample_rate_hz: 1000.0
+set_buffer_length: true
+buffer_length: 300
+set_allowed_latency: true
+allowed_latency_ms: 100
+
+# Expected response:
+# status=0 (OK), version=2, and all three new values visible atomically in the
+# single published ~/snapshots message - observers never see a partial batch.

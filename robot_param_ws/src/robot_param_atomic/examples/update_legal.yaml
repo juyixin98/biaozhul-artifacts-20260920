@@ -1,0 +1,16 @@
+# Example AtomicUpdate requests (YAML as accepted by `ros2 service call`).
+# Every example is runnable against a freshly started node. Omitted fields are
+# left unchanged in the node (set_* defaults to false).
+
+# 1. Legal first commit from the built-in v0 defaults:
+#    buffer 5000 samples @100 Hz covers 50000 ms >= 2 * 50 ms.
+#    Command:
+#      ros2 service call /robot_config/update robot_param_atomic/srv/AtomicUpdate \
+#        "$(cat examples/update_legal.yaml)"
+expected_version: 0
+set_buffer_length: true
+buffer_length: 5000
+
+# Expected response:
+# status=0 (OK), version=1, buffer_length=5000, sample_rate_hz=100.0,
+# allowed_latency_ms=50, message='committed'

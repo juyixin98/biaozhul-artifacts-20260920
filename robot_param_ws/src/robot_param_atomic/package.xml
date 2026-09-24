@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>robot_param_atomic</name>
+  <version>1.0.0</version>
+  <description>Atomic, version-checked, persistent robot parameter configuration (sample rate / buffer / latency).</description>
+  <maintainer email="dev@example.com">robot_param_atomic authors</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+
+  <build_depend>rosidl_default_generators</build_depend>
+  <exec_depend>rosidl_default_runtime</exec_depend>
+  <member_of_group>rosidl_interface_packages</member_of_group>
+
+  <!-- System libraries (resolved via rosdep: libsqlite3-dev, libssl-dev) -->
+  <build_depend>libsqlite3-dev</build_depend>
+  <exec_depend>libsqlite3-0</exec_depend>
+  <build_depend>libssl-dev</build_depend>
+  <exec_depend>libssl3</exec_depend>
+
+  <test_depend>ament_cmake_gtest</test_depend>
+  <test_depend>libgtest-dev</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
