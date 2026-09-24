@@ -1,0 +1,27 @@
+{
+  "device_id": "demo-few",
+  "counter_nominal_hz": 1000000.0,
+  "samples": [
+    {
+      "t0": 100.0,
+      "t3": 100.02,
+      "device_counter": 1000.0,
+      "device_counter_send": 1500.0,
+      "seq": 0
+    },
+    {
+      "t0": 101.0,
+      "t3": 101.02,
+      "device_counter": 1001000.0,
+      "device_counter_send": 1001500.0,
+      "seq": 1
+    },
+    {
+      "t0": 102.0,
+      "t3": 102.02,
+      "device_counter": 2001000.0,
+      "device_counter_send": 2001500.0,
+      "seq": 2
+    }
+  ]
+}

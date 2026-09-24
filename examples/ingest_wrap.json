@@ -1,0 +1,217 @@
+{
+  "device_id": "demo-wrap-16bit",
+  "counter_modulus": 65536.0,
+  "counter_nominal_hz": 1000000.0,
+  "samples": [
+    {
+      "t0": 2000.0,
+      "t3": 2000.0045,
+      "device_counter": 2000.12,
+      "device_counter_send": 2500.15,
+      "seq": 0
+    },
+    {
+      "t0": 2000.05,
+      "t3": 2000.0545,
+      "device_counter": 52003.12,
+      "device_counter_send": 52503.15,
+      "seq": 1
+    },
+    {
+      "t0": 2000.1,
+      "t3": 2000.1045,
+      "device_counter": 36470.12,
+      "device_counter_send": 36970.15,
+      "seq": 2
+    },
+    {
+      "t0": 2000.15,
+      "t3": 2000.1545,
+      "device_counter": 20937.12,
+      "device_counter_send": 21437.15,
+      "seq": 3
+    },
+    {
+      "t0": 2000.2,
+      "t3": 2000.2045,
+      "device_counter": 5404.12,
+      "device_counter_send": 5904.15,
+      "seq": 4
+    },
+    {
+      "t0": 2000.25,
+      "t3": 2000.2545,
+      "device_counter": 55407.12,
+      "device_counter_send": 55907.15,
+      "seq": 5
+    },
+    {
+      "t0": 2000.3,
+      "t3": 2000.3045,
+      "device_counter": 39874.12,
+      "device_counter_send": 40374.15,
+      "seq": 6
+    },
+    {
+      "t0": 2000.35,
+      "t3": 2000.3545,
+      "device_counter": 24341.12,
+      "device_counter_send": 24841.15,
+      "seq": 7
+    },
+    {
+      "t0": 2000.4,
+      "t3": 2000.4045,
+      "device_counter": 8808.12,
+      "device_counter_send": 9308.15,
+      "seq": 8
+    },
+    {
+      "t0": 2000.45,
+      "t3": 2000.4545,
+      "device_counter": 58811.12,
+      "device_counter_send": 59311.15,
+      "seq": 9
+    },
+    {
+      "t0": 2000.5,
+      "t3": 2000.5045,
+      "device_counter": 43278.12,
+      "device_counter_send": 43778.15,
+      "seq": 10
+    },
+    {
+      "t0": 2000.55,
+      "t3": 2000.5545,
+      "device_counter": 27745.12,
+      "device_counter_send": 28245.15,
+      "seq": 11
+    },
+    {
+      "t0": 2000.6,
+      "t3": 2000.6045,
+      "device_counter": 12212.12,
+      "device_counter_send": 12712.15,
+      "seq": 12
+    },
+    {
+      "t0": 2000.65,
+      "t3": 2000.6545,
+      "device_counter": 62215.12,
+      "device_counter_send": 62715.15,
+      "seq": 13
+    },
+    {
+      "t0": 2000.7,
+      "t3": 2000.7045,
+      "device_counter": 46682.12,
+      "device_counter_send": 47182.15,
+      "seq": 14
+    },
+    {
+      "t0": 2000.75,
+      "t3": 2000.7545,
+      "device_counter": 31149.12,
+      "device_counter_send": 31649.15,
+      "seq": 15
+    },
+    {
+      "t0": 2000.8,
+      "t3": 2000.8045,
+      "device_counter": 15616.12,
+      "device_counter_send": 16116.15,
+      "seq": 16
+    },
+    {
+      "t0": 2000.85,
+      "t3": 2000.8545,
+      "device_counter": 83.12,
+      "device_counter_send": 583.15,
+      "seq": 17
+    },
+    {
+      "t0": 2000.9,
+      "t3": 2000.9045,
+      "device_counter": 50086.12,
+      "device_counter_send": 50586.15,
+      "seq": 18
+    },
+    {
+      "t0": 2000.95,
+      "t3": 2000.9545,
+      "device_counter": 34553.12,
+      "device_counter_send": 35053.15,
+      "seq": 19
+    },
+    {
+      "t0": 2001.0,
+      "t3": 2001.0045,
+      "device_counter": 19020.12,
+      "device_counter_send": 19520.15,
+      "seq": 20
+    },
+    {
+      "t0": 2001.05,
+      "t3": 2001.0545,
+      "device_counter": 3487.12,
+      "device_counter_send": 3987.15,
+      "seq": 21
+    },
+    {
+      "t0": 2001.1,
+      "t3": 2001.1045,
+      "device_counter": 53490.12,
+      "device_counter_send": 53990.15,
+      "seq": 22
+    },
+    {
+      "t0": 2001.15,
+      "t3": 2001.1545,
+      "device_counter": 37957.12,
+      "device_counter_send": 38457.15,
+      "seq": 23
+    },
+    {
+      "t0": 2001.2,
+      "t3": 2001.2045,
+      "device_counter": 22424.12,
+      "device_counter_send": 22924.15,
+      "seq": 24
+    },
+    {
+      "t0": 2001.25,
+      "t3": 2001.2545,
+      "device_counter": 6891.12,
+      "device_counter_send": 7391.15,
+      "seq": 25
+    },
+    {
+      "t0": 2001.3,
+      "t3": 2001.3045,
+      "device_counter": 56894.12,
+      "device_counter_send": 57394.15,
+      "seq": 26
+    },
+    {
+      "t0": 2001.35,
+      "t3": 2001.3545,
+      "device_counter": 41361.12,
+      "device_counter_send": 41861.15,
+      "seq": 27
+    },
+    {
+      "t0": 2001.4,
+      "t3": 2001.4045,
+      "device_counter": 25828.12,
+      "device_counter_send": 26328.15,
+      "seq": 28
+    },
+    {
+      "t0": 2001.45,
+      "t3": 2001.4545,
+      "device_counter": 10295.12,
+      "device_counter_send": 10795.15,
+      "seq": 29
+    }
+  ]
+}
