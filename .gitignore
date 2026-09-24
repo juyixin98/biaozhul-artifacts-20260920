@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+data/
+data-tests/
+keys/
+*.log
+.pytest_cache/
+anchor-cache.json
+export*.json
