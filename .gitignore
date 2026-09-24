@@ -1,0 +1,7 @@
+/bin/
+/smtpdata/
+*.tmp
+*.eml
+cov.out
+__pycache__/
+*.pyc
