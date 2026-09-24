@@ -1,0 +1,127 @@
+{
+  "kid": "3f21f800d4e92b50dbc09d9a83aed06d",
+  "alg": "EdDSA",
+  "document": {
+    "policies": [
+      {
+        "id": "rbac-policy",
+        "description": "Role-based access: admins and members of the owning group may read/write.",
+        "rules": [
+          {
+            "id": "rbac-admin",
+            "effect": "permit",
+            "when": {
+              "op": "in",
+              "left": {
+                "op": "attr",
+                "bag": "subject",
+                "key": "role"
+              },
+              "right": {
+                "op": "lit",
+                "value": [
+                  "admin",
+                  "owner"
+                ]
+              }
+            }
+          },
+          {
+            "id": "rbac-group-member",
+            "effect": "permit",
+            "when": {
+              "op": "and",
+              "args": [
+                {
+                  "op": "in",
+                  "left": {
+                    "op": "attr",
+                    "bag": "resource",
+                    "key": "group"
+                  },
+                  "right": {
+                    "op": "attr",
+                    "bag": "subject",
+                    "key": "groups"
+                  }
+                },
+                {
+                  "op": "in",
+                  "left": {
+                    "op": "attr",
+                    "bag": "resource",
+                    "key": "action"
+                  },
+                  "right": {
+                    "op": "lit",
+                    "value": [
+                      "read",
+                      "write"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "region-policy",
+        "description": "Data-residency: EU resources only for EU subjects; US export embargo is an explicit deny.",
+        "rules": [
+          {
+            "id": "deny-export-us",
+            "effect": "deny",
+            "when": {
+              "op": "and",
+              "args": [
+                {
+                  "op": "eq",
+                  "left": {
+                    "op": "attr",
+                    "bag": "resource",
+                    "key": "region"
+                  },
+                  "right": {
+                    "op": "lit",
+                    "value": "EU"
+                  }
+                },
+                {
+                  "op": "eq",
+                  "left": {
+                    "op": "attr",
+                    "bag": "subject",
+                    "key": "region"
+                  },
+                  "right": {
+                    "op": "lit",
+                    "value": "US"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "permit-same-region",
+            "effect": "permit",
+            "when": {
+              "op": "eq",
+              "left": {
+                "op": "attr",
+                "bag": "subject",
+                "key": "region"
+              },
+              "right": {
+                "op": "attr",
+                "bag": "resource",
+                "key": "region"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "sig": "3y8fp8qn2sdJH34FFEuQc5dPrYk_FKiEyiFWcPqScLJv_mniwmz8XpEGvByjsk3zPj34ZOtcYusi5aUZxLuzCQ"
+}

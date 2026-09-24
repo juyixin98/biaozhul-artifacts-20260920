@@ -1,0 +1,13 @@
+{
+  "subject": {
+    "user": "carol",
+    "type": "employee",
+    "verified": true
+  },
+  "resource": {
+    "owner": "alice",
+    "action": "read",
+    "classification": "internal",
+    "tags": ["confidential", "draft"]
+  }
+}

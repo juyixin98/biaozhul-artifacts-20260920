@@ -1,0 +1,72 @@
+{
+  "policies": [
+    {
+      "id": "rbac-policy",
+      "description": "Role-based access: admins and members of the owning group may read/write.",
+      "rules": [
+        {
+          "id": "rbac-admin",
+          "effect": "permit",
+          "when": {
+            "op": "in",
+            "left": {"op": "attr", "bag": "subject", "key": "role"},
+            "right": {"op": "lit", "value": ["admin", "owner"]}
+          }
+        },
+        {
+          "id": "rbac-group-member",
+          "effect": "permit",
+          "when": {
+            "op": "and",
+            "args": [
+              {
+                "op": "in",
+                "left": {"op": "attr", "bag": "resource", "key": "group"},
+                "right": {"op": "attr", "bag": "subject", "key": "groups"}
+              },
+              {
+                "op": "in",
+                "left": {"op": "attr", "bag": "resource", "key": "action"},
+                "right": {"op": "lit", "value": ["read", "write"]}
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "region-policy",
+      "description": "Data-residency: EU resources only for EU subjects; US export embargo is an explicit deny.",
+      "rules": [
+        {
+          "id": "deny-export-us",
+          "effect": "deny",
+          "when": {
+            "op": "and",
+            "args": [
+              {
+                "op": "eq",
+                "left": {"op": "attr", "bag": "resource", "key": "region"},
+                "right": {"op": "lit", "value": "EU"}
+              },
+              {
+                "op": "eq",
+                "left": {"op": "attr", "bag": "subject", "key": "region"},
+                "right": {"op": "lit", "value": "US"}
+              }
+            ]
+          }
+        },
+        {
+          "id": "permit-same-region",
+          "effect": "permit",
+          "when": {
+            "op": "eq",
+            "left": {"op": "attr", "bag": "subject", "key": "region"},
+            "right": {"op": "attr", "bag": "resource", "key": "region"}
+          }
+        }
+      ]
+    }
+  ]
+}

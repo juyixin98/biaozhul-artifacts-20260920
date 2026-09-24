@@ -1,0 +1,14 @@
+{
+  "subject": {
+    "user": "bob",
+    "type": "contractor",
+    "verified": true,
+    "clearance": 5
+  },
+  "resource": {
+    "owner": "alice",
+    "action": "read",
+    "classification": "internal",
+    "tags": ["draft"]
+  }
+}

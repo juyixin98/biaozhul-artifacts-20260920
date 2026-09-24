@@ -1,0 +1,10 @@
+{
+  "subject": {
+    "user": "dave"
+  },
+  "resource": {
+    "action": "read",
+    "classification": "public",
+    "tags": ["published"]
+  }
+}

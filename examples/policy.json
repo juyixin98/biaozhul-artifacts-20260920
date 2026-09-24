@@ -1,0 +1,92 @@
+{
+  "id": "document-access",
+  "description": "Demo document access policy: owners and verified employees may read; contractors and tagged-confidential resources are explicitly denied; public documents are readable by anyone.",
+  "combining_algorithm": "deny_overrides",
+  "rules": [
+    {
+      "id": "deny-contractors",
+      "effect": "deny",
+      "description": "Contractors never access documents, even if another rule matches.",
+      "when": {
+        "op": "in",
+        "left": {"op": "attr", "bag": "subject", "key": "type"},
+        "right": {"op": "lit", "value": ["contractor", "external-auditor"]}
+      }
+    },
+    {
+      "id": "deny-confidential-resource",
+      "effect": "deny",
+      "description": "Resources carrying the 'confidential' tag are denied.",
+      "when": {
+        "op": "contains",
+        "left": {"op": "attr", "bag": "resource", "key": "tags"},
+        "right": {"op": "lit", "value": "confidential"}
+      }
+    },
+    {
+      "id": "permit-owner",
+      "effect": "permit",
+      "description": "The resource owner may read it.",
+      "when": {
+        "op": "and",
+        "args": [
+          {
+            "op": "eq",
+            "left": {"op": "attr", "bag": "subject", "key": "user"},
+            "right": {"op": "attr", "bag": "resource", "key": "owner"}
+          },
+          {
+            "op": "eq",
+            "left": {"op": "attr", "bag": "resource", "key": "action"},
+            "right": {"op": "lit", "value": "read"}
+          }
+        ]
+      }
+    },
+    {
+      "id": "permit-verified-employee",
+      "effect": "permit",
+      "description": "Verified employees with clearance >= 3 may read.",
+      "when": {
+        "op": "and",
+        "args": [
+          {
+            "op": "eq",
+            "left": {"op": "attr", "bag": "subject", "key": "verified"},
+            "right": {"op": "lit", "value": true}
+          },
+          {
+            "op": "gte",
+            "left": {"op": "attr", "bag": "subject", "key": "clearance"},
+            "right": {"op": "lit", "value": 3}
+          },
+          {
+            "op": "eq",
+            "left": {"op": "attr", "bag": "resource", "key": "action"},
+            "right": {"op": "lit", "value": "read"}
+          }
+        ]
+      }
+    },
+    {
+      "id": "permit-public-read",
+      "effect": "permit",
+      "description": "Public documents are readable by anyone (no subject attribute required).",
+      "when": {
+        "op": "and",
+        "args": [
+          {
+            "op": "eq",
+            "left": {"op": "attr", "bag": "resource", "key": "classification"},
+            "right": {"op": "lit", "value": "public"}
+          },
+          {
+            "op": "eq",
+            "left": {"op": "attr", "bag": "resource", "key": "action"},
+            "right": {"op": "lit", "value": "read"}
+          }
+        ]
+      }
+    }
+  ]
+}
