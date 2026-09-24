@@ -1,0 +1,5 @@
+{
+  "payloadType": "application/vnd.example.build-attestation.v1",
+  "payload": "eyJfdHlwZSI6ImJ1aWxkLWF0dGVzdGF0aW9uL3N0YXRlbWVudC92MSIsIl90eXBlIjoieCJ9",
+  "signature": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+}

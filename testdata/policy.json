@@ -1,0 +1,42 @@
+{
+  "allowedSourcePrefixes": [
+    "https://github.com/example-org/"
+  ],
+  "builders": [
+    {
+      "id": "ci.example.net",
+      "keys": [
+        {
+          "id": "key-ci-current",
+          "notAfter": "2027-01-01T00:00:00Z",
+          "notBefore": "2026-01-01T00:00:00Z",
+          "publicKey": "d12e625023a56349307cfe8063a30af1ed10451aefc61fa03f6b9f3fd3215817"
+        },
+        {
+          "id": "key-ci-revoked",
+          "notAfter": "2027-01-01T00:00:00Z",
+          "notBefore": "2026-01-01T00:00:00Z",
+          "publicKey": "c3720dd78548afa0133e761b83a87f6421b801aa7b52be186ad76fe69b58f5d0",
+          "revokedAt": "2026-06-01T00:00:00Z"
+        },
+        {
+          "id": "key-ci-old",
+          "notAfter": "2026-01-01T00:00:00Z",
+          "notBefore": "2025-01-01T00:00:00Z",
+          "publicKey": "4b75894878809e6e376757bd988aed8b2351d13fc2656914fed2d3bd3ec4b80c"
+        }
+      ]
+    },
+    {
+      "id": "other-builder.example.com",
+      "keys": [
+        {
+          "id": "key-other-builder",
+          "notAfter": "2027-01-01T00:00:00Z",
+          "notBefore": "2026-01-01T00:00:00Z",
+          "publicKey": "3aa53144d9722f19e0901d997f5716c59204f5afd141746cb984db9a87040969"
+        }
+      ]
+    }
+  ]
+}
