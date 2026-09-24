@@ -1,0 +1,5 @@
+{
+  "task_dir": "examples/hello",
+  "sources": ["main.c", "util.c", "util.h"],
+  "command": "gcc -O2 -Wall -Werror -o \"$OUT\" main.c util.c"
+}
