@@ -1,0 +1,50 @@
+{
+  "name": "nested-lock-chain (compare both modes)",
+  "resources": ["R1", "R2"],
+  "tasks": [
+    {
+      "id": "Low",
+      "base_priority": 10,
+      "release": 0,
+      "ops": [
+        {"kind": "lock", "resource": "R1"},
+        {"kind": "compute", "duration": 6},
+        {"kind": "unlock", "resource": "R1"},
+        {"kind": "compute", "duration": 4}
+      ]
+    },
+    {
+      "id": "Medium",
+      "base_priority": 20,
+      "release": 2,
+      "ops": [
+        {"kind": "lock", "resource": "R2"},
+        {"kind": "compute", "duration": 2},
+        {"kind": "lock", "resource": "R1"},
+        {"kind": "compute", "duration": 2},
+        {"kind": "unlock", "resource": "R1"},
+        {"kind": "compute", "duration": 1},
+        {"kind": "unlock", "resource": "R2"},
+        {"kind": "compute", "duration": 2}
+      ]
+    },
+    {
+      "id": "High",
+      "base_priority": 30,
+      "release": 4,
+      "ops": [
+        {"kind": "lock", "resource": "R2"},
+        {"kind": "compute", "duration": 3},
+        {"kind": "unlock", "resource": "R2"}
+      ]
+    },
+    {
+      "id": "Busy",
+      "base_priority": 15,
+      "release": 3,
+      "ops": [
+        {"kind": "compute", "duration": 4}
+      ]
+    }
+  ]
+}

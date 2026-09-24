@@ -1,0 +1,38 @@
+{
+  "inheritance": false,
+  "workload": {
+    "name": "basic-priority-inversion (PIP OFF)",
+    "resources": ["R"],
+    "tasks": [
+      {
+        "id": "Low",
+        "base_priority": 10,
+        "release": 0,
+        "ops": [
+          {"kind": "lock", "resource": "R"},
+          {"kind": "compute", "duration": 6},
+          {"kind": "unlock", "resource": "R"},
+          {"kind": "compute", "duration": 3}
+        ]
+      },
+      {
+        "id": "Medium",
+        "base_priority": 20,
+        "release": 4,
+        "ops": [
+          {"kind": "compute", "duration": 4}
+        ]
+      },
+      {
+        "id": "High",
+        "base_priority": 30,
+        "release": 3,
+        "ops": [
+          {"kind": "lock", "resource": "R"},
+          {"kind": "compute", "duration": 3},
+          {"kind": "unlock", "resource": "R"}
+        ]
+      }
+    ]
+  }
+}

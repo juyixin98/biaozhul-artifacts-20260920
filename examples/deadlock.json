@@ -1,0 +1,32 @@
+{
+  "name": "deadlock: opposite lock order (AB / BA)",
+  "resources": ["A", "B"],
+  "tasks": [
+    {
+      "id": "T1",
+      "base_priority": 10,
+      "release": 0,
+      "ops": [
+        {"kind": "lock", "resource": "A"},
+        {"kind": "compute", "duration": 1},
+        {"kind": "lock", "resource": "B"},
+        {"kind": "compute", "duration": 1},
+        {"kind": "unlock", "resource": "B"},
+        {"kind": "unlock", "resource": "A"}
+      ]
+    },
+    {
+      "id": "T2",
+      "base_priority": 20,
+      "release": 0,
+      "ops": [
+        {"kind": "lock", "resource": "B"},
+        {"kind": "compute", "duration": 2},
+        {"kind": "lock", "resource": "A"},
+        {"kind": "compute", "duration": 1},
+        {"kind": "unlock", "resource": "A"},
+        {"kind": "unlock", "resource": "B"}
+      ]
+    }
+  ]
+}
