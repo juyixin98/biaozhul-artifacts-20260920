@@ -1,0 +1,11 @@
+# Runtime dependencies (exact versions) — generated from a resolved environment with `pip freeze`.
+# Install with: pip install -r requirements.lock
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+cryptography==44.0.0
+python-multipart==0.0.20
+
+# Test / demo tooling
+httpx==0.28.1
+pytest==8.3.4

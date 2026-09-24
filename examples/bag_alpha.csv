@@ -1,0 +1,15 @@
+# Synthetic robot "bag": comma-separated 3D points (optional 4th = weight).
+# Format: X,Y,Z[,WEIGHT] — comments (#) and blank lines are ignored.
+# These are synthetic laser-scan-style points in the robot base frame.
+0.100,0.200,1.000,1.0
+0.150,0.210,1.020,1.0
+0.120,0.195,0.980,0.8
+0.300,0.400,1.100,1.0
+0.310,0.420,1.120,1.0
+0.290,0.395,1.080,0.9
+0.500,0.600,1.200,1.0
+0.520,0.610,1.210,1.0
+0.480,0.590,1.190,1.0
+0.700,0.800,1.300,0.7
+0.710,0.820,1.310,0.7
+0.690,0.790,1.290,0.7
