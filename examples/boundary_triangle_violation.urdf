@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  边界矩阵 2（非法）：矩阵本身正定（对角全正），但主转动惯量违反
+  三角不等式：diag(6, 2, 1) 中 6 > 2 + 1 = 3。
+  该矩阵可通过正定检查，却不是任何刚体可实现的惯性张量，必须报错。
+-->
+<robot name="boundary_triangle_violation">
+  <link name="impossible_body">
+    <inertial>
+      <mass value="1.0"/>
+      <inertia ixx="6" ixy="0" ixz="0"
+               iyy="2" iyz="0"
+               izz="1"/>
+    </inertial>
+  </link>
+</robot>

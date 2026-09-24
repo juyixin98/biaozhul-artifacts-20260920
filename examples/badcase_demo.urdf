@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  故意构造的反例集合（供人工查看错误定位，不是有效机器人）：
+  * dup 重名 link；zero 质量为零；bad 数值非法；ghost 引用不存在的 link；
+  * j1 轴未归一化、限位 lower>upper；j2 类型未知。
+  运行：python -m urdf_check examples/badcase_demo.urdf
+-->
+<robot name="badcase_demo">
+
+  <link name="dup">
+    <inertial>
+      <mass value="1.0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="dup">
+    <inertial>
+      <mass value="1.0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="zero">
+    <inertial>
+      <mass value="0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="bad">
+    <inertial>
+      <mass value="nan"/>
+      <inertia ixx="not-a-number" ixy="0" ixz="0"
+            iyy="0.02" iyz="0" izz="0.02"/>
+    </inertial>
+  </link>
+
+  <joint name="j1" type="revolute">
+    <parent link="dup"/>
+    <child link="zero"/>
+    <axis xyz="0 0 2"/>
+    <limit lower="3" upper="1" effort="x" velocity="1"/>
+  </joint>
+
+  <joint name="j2" type="wormgear">
+    <parent link="zero"/>
+    <child link="ghost"/>
+  </joint>
+
+</robot>

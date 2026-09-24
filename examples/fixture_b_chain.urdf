@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  夹具 B（set B）：最小多连杆机器人 —— 5 link / 3 DOF 链。
+  base -(fixed)-> shoulder -(revolute)-> arm -(prismatic)-> wrist -(revolute)-> tool
+  固定关节允许存在（无轴、无限位）；运动关节轴归一化；
+  revolute / prismatic 带完整限位与 lower <= upper。
+  单位：SI（kg, m）。
+-->
+<robot name="fixture_b_chain">
+
+  <link name="base">
+    <inertial>
+      <mass value="2.0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.008"/>
+    </inertial>
+  </link>
+
+  <link name="shoulder">
+    <inertial>
+      <origin xyz="0 0 0.05"/>
+      <mass value="0.5"/>
+      <inertia ixx="0.002" ixy="0" ixz="0" iyy="0.002" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <link name="arm">
+    <inertial>
+      <origin xyz="0 0 0.2"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.014" ixy="0" ixz="0" iyy="0.014" iyz="0" izz="0.0006"/>
+    </inertial>
+  </link>
+
+  <link name="wrist">
+    <inertial>
+      <origin xyz="0 0 0.02"/>
+      <mass value="0.4"/>
+      <inertia ixx="0.0008" ixy="0" ixz="0" iyy="0.0008" iyz="0" izz="0.0005"/>
+    </inertial>
+  </link>
+
+  <link name="tool">
+    <inertial>
+      <mass value="0.2"/>
+      <inertia ixx="0.0003" ixy="0.00002" ixz="0"
+               iyy="0.0003" iyz="0" izz="0.0004"/>
+    </inertial>
+  </link>
+
+  <!-- 固定关节：允许，无轴、无限位 -->
+  <joint name="fixed_mount" type="fixed">
+    <parent link="base"/>
+    <child link="shoulder"/>
+    <origin xyz="0 0 0.02"/>
+  </joint>
+
+  <joint name="j1" type="revolute">
+    <parent link="shoulder"/>
+    <child link="arm"/>
+    <origin xyz="0 0 0.1"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.5708" upper="1.5708" effort="10" velocity="1.5"/>
+  </joint>
+
+  <joint name="j2" type="prismatic">
+    <parent link="arm"/>
+    <child link="wrist"/>
+    <origin xyz="0 0 0.4"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-0.05" upper="0.1" effort="5" velocity="0.2"/>
+  </joint>
+
+  <joint name="j3" type="revolute">
+    <parent link="wrist"/>
+    <child link="tool"/>
+    <origin xyz="0 0 0.05"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-3.14159" upper="3.14159" effort="2" velocity="2.0"/>
+  </joint>
+
+</robot>

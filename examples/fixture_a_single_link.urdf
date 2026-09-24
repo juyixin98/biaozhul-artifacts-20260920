@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  夹具 A（set A）：最小单连杆机器人（最小有效模型）。
+  单位：SI（kg, m）。质量 1.0 kg，边长 0.1 m 立方体，
+  主惯量 I = m/12 * (a^2 + a^2) ≈ 0.0016667 kg·m^2。
+-->
+<robot name="fixture_a_single_link">
+  <link name="base">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.001666666666666667" ixy="0" ixz="0"
+               iyy="0.001666666666666667" iyz="0"
+               izz="0.001666666666666667"/>
+    </inertial>
+  </link>
+</robot>

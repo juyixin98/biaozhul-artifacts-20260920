@@ -1,0 +1,20 @@
+[project]
+name = "urdf-inertia-checker"
+version = "1.0.0"
+description = "离线 URDF 结构与惯性参数检查服务（纯后端，lxml + NumPy）"
+requires-python = ">=3.10"
+dependencies = [
+    "lxml==6.1.3",
+    "numpy==2.5.3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==9.1.1"]
+
+[project.scripts]
+urdf-check = "urdf_check.cli:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-ra"
