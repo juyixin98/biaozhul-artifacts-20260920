@@ -1,0 +1,135 @@
+############ health ############
+{"ok":true,"service":"archive-guard","version":"1.0.0"}
+############ benign extract ############
+-> POST /api/v1/archives/extract [a.tar, 10240 bytes]
+<- 200
+{
+  "ok": true,
+  "extraction_id": "393759b63678481f837aac36ca2234f2",
+  "published_path": "extracted/393759b63678481f837aac36ca2234f2",
+  "archive_sha256": "13a4a20eaccaa1a9c044ca9938aad15a08e19479a59a7f2fbba1406ca44b80d6",
+  "compression": "none",
+  "archive_size": 10240,
+  "declared_uncompressed": 19,
+  "bytes_written": 19,
+  "entry_count": 3,
+  "normalized_permissions": {
+    "file": "0600",
+    "dir": "0700"
+  },
+  "entries": [
+    {
+      "name": "docs",
+      "kind": "dir",
+      "size": 0,
+      "target": null
+    },
+    {
+      "name": "docs/alias",
+      "kind": "symlink",
+      "size": 0,
+      "target": "readme.txt"
+    },
+    {
+      "name": "docs/readme.txt",
+      "kind": "file",
+      "size": 19,
+      "target": null
+    }
+  ]
+}
+
+############ precheck (no extract) ############
+-> POST /api/v1/archives/precheck [a.tar, 10240 bytes]
+<- 200
+{
+  "accepted": true,
+  "compression": "none",
+  "archive_size": 10240,
+  "declared_uncompressed": 19,
+  "compression_ratio": 0.002,
+  "entry_count": 3,
+  "entries": [
+    {
+      "name": "docs",
+      "kind": "dir",
+      "size": 0,
+      "target": null
+    },
+    {
+      "name": "docs/alias",
+      "kind": "symlink",
+      "size": 0,
+      "target": "readme.txt"
+    },
+    {
+      "name": "docs/readme.txt",
+      "kind": "file",
+      "size": 19,
+      "target": null
+    }
+  ],
+  "archive_sha256": "13a4a20eaccaa1a9c044ca9938aad15a08e19479a59a7f2fbba1406ca44b80d6",
+  "ok": true
+}
+
+############ evil absolute + traversal ############
+-> POST /api/v1/archives/precheck [a.tar, 10240 bytes]
+<- 422
+{
+  "ok": false,
+  "error": {
+    "code": "absolute_path",
+    "detail": "拒绝绝对路径条目: '/tmp/pwned-absolute'"
+  }
+}
+
+############ evil symlink escape ############
+-> POST /api/v1/archives/extract [a.tar, 10240 bytes]
+<- 422
+{
+  "ok": false,
+  "error": {
+    "code": "link_escape",
+    "detail": "链接目标经 .. 逃逸出目标根: '../../../etc'"
+  }
+}
+
+############ gzip bomb (2MB zeros, ratio limit=30) ############
+-> POST /api/v1/archives/extract [a.tar.gz, 2130 bytes]
+<- 422
+{
+  "ok": false,
+  "error": {
+    "code": "compression_bomb",
+    "detail": "压缩比 984.6 超过上限 30（疑似解压炸弹）"
+  }
+}
+
+############ signature flows ############
+valid sig      : 200 extraction_id: f32d8c2b86b4401186bf7333b11c2596
+tampered sig   : 401 invalid_signature
+missing pubkey : 401 missing_public_key
+
+############ 目标根外是否有写入（应 No such file） ############
+  ls: cannot access '/tmp/pwned-absolute': No such file or directory
+  ls: cannot access '/tmp/pwned-traversal': No such file or directory
+  ls: cannot access '/etc/pwned': No such file or directory
+
+############ 发布目录结构与权限 ############
+  600 admin:admin /tmp/ag-final/extracted/393759b63678481f837aac36ca2234f2/docs/readme.txt -> 
+  600 admin:admin /tmp/ag-final/extracted/f32d8c2b86b4401186bf7333b11c2596/docs/readme.txt -> 
+  664 admin:admin /tmp/ag-final/extracted/393759b63678481f837aac36ca2234f2/.manifest.json -> 
+  664 admin:admin /tmp/ag-final/extracted/f32d8c2b86b4401186bf7333b11c2596/.manifest.json -> 
+  700 admin:admin /tmp/ag-final/extracted/393759b63678481f837aac36ca2234f2 -> 
+  700 admin:admin /tmp/ag-final/extracted/393759b63678481f837aac36ca2234f2/docs -> 
+  700 admin:admin /tmp/ag-final/extracted/f32d8c2b86b4401186bf7333b11c2596 -> 
+  700 admin:admin /tmp/ag-final/extracted/f32d8c2b86b4401186bf7333b11c2596/docs -> 
+  775 admin:admin /tmp/ag-final/extracted -> 
+  777 admin:admin /tmp/ag-final/extracted/393759b63678481f837aac36ca2234f2/docs/alias -> readme.txt
+  777 admin:admin /tmp/ag-final/extracted/f32d8c2b86b4401186bf7333b11c2596/docs/alias -> readme.txt
+
+############ 隔离区（应只剩目录，无 incoming-*） ############
+  total 8
+  drwxrwxr-x 2 admin admin 4096 Sep 24 13:52 .
+  drwxrwxr-x 4 admin admin 4096 Sep 24 13:51 ..

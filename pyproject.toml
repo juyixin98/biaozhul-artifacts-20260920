@@ -1,0 +1,13 @@
+[project]
+name = "archive-guard"
+version = "1.0.0"
+description = "归档解包安全检查服务：tar 预检、隔离解包、链接/穿越/解压炸弹防护"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+pythonpath = ["."]
+
+[tool.coverage.run]
+source = ["app"]

@@ -1,0 +1,106 @@
+================ benign ================
+-> POST /api/v1/archives/extract [a.tar, 10240 bytes]
+<- 200
+{
+  "ok": true,
+  "extraction_id": "477675a6e43446a5982d40bf56b65ec9",
+  "published_path": "extracted/477675a6e43446a5982d40bf56b65ec9",
+  "archive_sha256": "6f0ccdbf0f17f144451558ba7fec6e35b8c1bb06c4326f7e965d7554750bdc56",
+  "compression": "none",
+  "archive_size": 10240,
+  "declared_uncompressed": 19,
+  "bytes_written": 19,
+  "entry_count": 3,
+  "normalized_permissions": {
+    "file": "0600",
+    "dir": "0700"
+  },
+  "entries": [
+    {
+      "name": "docs",
+      "kind": "dir",
+      "size": 0,
+      "target": null
+    },
+    {
+      "name": "docs/alias",
+      "kind": "symlink",
+      "size": 0,
+      "target": "readme.txt"
+    },
+    {
+      "name": "docs/readme.txt",
+      "kind": "file",
+      "size": 19,
+      "target": null
+    }
+  ]
+}
+
+================ precheck ================
+-> POST /api/v1/archives/precheck [a.tar, 10240 bytes]
+<- 200
+{
+  "accepted": true,
+  "compression": "none",
+  "archive_size": 10240,
+  "declared_uncompressed": 19,
+  "compression_ratio": 0.002,
+  "entry_count": 3,
+  "entries": [
+    {
+      "name": "docs",
+      "kind": "dir",
+      "size": 0,
+      "target": null
+    },
+    {
+      "name": "docs/alias",
+      "kind": "symlink",
+      "size": 0,
+      "target": "readme.txt"
+    },
+    {
+      "name": "docs/readme.txt",
+      "kind": "file",
+      "size": 19,
+      "target": null
+    }
+  ],
+  "archive_sha256": "6f0ccdbf0f17f144451558ba7fec6e35b8c1bb06c4326f7e965d7554750bdc56",
+  "ok": true
+}
+
+================ evil-paths ================
+-> POST /api/v1/archives/precheck [a.tar, 10240 bytes]
+<- 422
+{
+  "ok": false,
+  "error": {
+    "code": "absolute_path",
+    "detail": "拒绝绝对路径条目: '/tmp/pwned-absolute'"
+  }
+}
+
+================ evil-links ================
+-> POST /api/v1/archives/extract [a.tar, 10240 bytes]
+<- 422
+{
+  "ok": false,
+  "error": {
+    "code": "link_escape",
+    "detail": "链接目标经 .. 逃逸出目标根: '../../../etc'"
+  }
+}
+
+================ bomb ================
+-> POST /api/v1/archives/extract [a.tar.gz, 2130 bytes]
+<- 422
+{
+  "ok": false,
+  "error": {
+    "code": "file_too_large",
+    "detail": "条目 'zeros.bin' 大小 2097152 超过单文件上限 100000"
+  }
+}
+
