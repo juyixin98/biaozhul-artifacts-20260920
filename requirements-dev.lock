@@ -1,0 +1,7 @@
+# Development / test dependencies (runtime deps are in requirements.lock).
+# Install with: python3 -m pip install -r requirements.lock -r requirements-dev.lock
+-r requirements.lock
+iniconfig==2.3.0
+packaging==24.0
+pluggy==1.6.0
+pytest==9.1.1

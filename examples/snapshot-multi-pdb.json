@@ -1,0 +1,50 @@
+{
+  "generation": 1,
+  "tick": 0,
+  "nodes": [
+    { "name": "node-1" },
+    { "name": "node-2" },
+    { "name": "node-3" },
+    { "name": "node-4" }
+  ],
+  "deployments": [
+    { "name": "payments", "namespace": "fin", "replicas": 4, "readyDelay": 1,
+      "selector": { "matchLabels": { "app": "payments" } } },
+    { "name": "ledger", "namespace": "fin", "replicas": 4, "readyDelay": 1,
+      "selector": { "matchLabels": { "app": "ledger" } } }
+  ],
+  "pdbs": [
+    { "name": "payments-pdb", "namespace": "fin", "minAvailable": 3,
+      "selector": { "matchLabels": { "app": "payments" } } },
+    { "name": "ledger-pdb", "namespace": "fin", "maxUnavailable": 1,
+      "selector": { "matchLabels": { "app": "ledger" } } },
+    { "name": "fin-zone-pdb", "namespace": "fin", "maxUnavailable": 1,
+      "selector": { "matchLabels": { "zone": "critical" } } }
+  ],
+  "pods": [
+    { "name": "payments-0", "namespace": "fin", "node": "node-1", "ready": true,
+      "labels": { "app": "payments", "zone": "critical" },
+      "owner": { "kind": "ReplicaSet", "name": "payments-rs" }, "uid": "pay-0" },
+    { "name": "payments-1", "namespace": "fin", "node": "node-2", "ready": true,
+      "labels": { "app": "payments", "zone": "critical" },
+      "owner": { "kind": "ReplicaSet", "name": "payments-rs" }, "uid": "pay-1" },
+    { "name": "payments-2", "namespace": "fin", "node": "node-3", "ready": true,
+      "labels": { "app": "payments", "zone": "critical" },
+      "owner": { "kind": "ReplicaSet", "name": "payments-rs" }, "uid": "pay-2" },
+    { "name": "payments-3", "namespace": "fin", "node": "node-4", "ready": true,
+      "labels": { "app": "payments", "zone": "critical" },
+      "owner": { "kind": "ReplicaSet", "name": "payments-rs" }, "uid": "pay-3" },
+    { "name": "ledger-0", "namespace": "fin", "node": "node-1", "ready": true,
+      "labels": { "app": "ledger", "zone": "critical" },
+      "owner": { "kind": "ReplicaSet", "name": "ledger-rs" }, "uid": "led-0" },
+    { "name": "ledger-1", "namespace": "fin", "node": "node-2", "ready": true,
+      "labels": { "app": "ledger", "zone": "critical" },
+      "owner": { "kind": "ReplicaSet", "name": "ledger-rs" }, "uid": "led-1" },
+    { "name": "ledger-2", "namespace": "fin", "node": "node-3", "ready": true,
+      "labels": { "app": "ledger", "zone": "critical" },
+      "owner": { "kind": "ReplicaSet", "name": "ledger-rs" }, "uid": "led-2" },
+    { "name": "ledger-3", "namespace": "fin", "node": "node-4", "ready": true,
+      "labels": { "app": "ledger", "zone": "critical" },
+      "owner": { "kind": "ReplicaSet", "name": "ledger-rs" }, "uid": "led-3" }
+  ]
+}

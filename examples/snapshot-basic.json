@@ -1,0 +1,46 @@
+{
+  "generation": 1,
+  "tick": 0,
+  "nodes": [
+    { "name": "node-a", "schedulable": true },
+    { "name": "node-b", "schedulable": true },
+    { "name": "node-c", "schedulable": true }
+  ],
+  "deployments": [
+    {
+      "name": "checkout",
+      "namespace": "shop",
+      "replicas": 3,
+      "readyDelay": 2,
+      "selector": { "matchLabels": { "app": "checkout" } }
+    }
+  ],
+  "pdbs": [
+    {
+      "name": "checkout-pdb",
+      "namespace": "shop",
+      "minAvailable": 2,
+      "selector": { "matchLabels": { "app": "checkout" } }
+    }
+  ],
+  "pods": [
+    {
+      "name": "checkout-7d9c-aaaa", "namespace": "shop", "node": "node-a",
+      "phase": "Running", "ready": true, "labels": { "app": "checkout" },
+      "owner": { "kind": "ReplicaSet", "name": "checkout-7d9c", "uid": "rs-checkout" },
+      "uid": "pod-checkout-a"
+    },
+    {
+      "name": "checkout-7d9c-bbbb", "namespace": "shop", "node": "node-b",
+      "phase": "Running", "ready": true, "labels": { "app": "checkout" },
+      "owner": { "kind": "ReplicaSet", "name": "checkout-7d9c", "uid": "rs-checkout" },
+      "uid": "pod-checkout-b"
+    },
+    {
+      "name": "checkout-7d9c-cccc", "namespace": "shop", "node": "node-c",
+      "phase": "Running", "ready": true, "labels": { "app": "checkout" },
+      "owner": { "kind": "ReplicaSet", "name": "checkout-7d9c", "uid": "rs-checkout" },
+      "uid": "pod-checkout-c"
+    }
+  ]
+}

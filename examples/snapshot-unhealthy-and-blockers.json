@@ -1,0 +1,39 @@
+{
+  "generation": 1,
+  "tick": 0,
+  "nodes": [
+    { "name": "node-a" },
+    { "name": "node-b" },
+    { "name": "node-c" }
+  ],
+  "deployments": [
+    { "name": "api", "replicas": 3, "readyDelay": 2,
+      "selector": { "matchLabels": { "app": "api" } } }
+  ],
+  "daemonSets": [
+    { "name": "node-exporter",
+      "selector": { "matchLabels": { "app": "node-exporter" } } }
+  ],
+  "pdbs": [
+    { "name": "api-pdb", "minAvailable": "50%",
+      "selector": { "matchLabels": { "app": "api" } } }
+  ],
+  "pods": [
+    { "name": "api-0", "node": "node-a", "ready": true,
+      "labels": { "app": "api" },
+      "owner": { "kind": "ReplicaSet", "name": "api-rs" }, "uid": "api-0" },
+    { "name": "api-1", "node": "node-b", "ready": false, "phase": "Running",
+      "labels": { "app": "api" },
+      "owner": { "kind": "ReplicaSet", "name": "api-rs" }, "uid": "api-1" },
+    { "name": "api-2", "node": "node-c", "ready": true,
+      "labels": { "app": "api" },
+      "owner": { "kind": "ReplicaSet", "name": "api-rs" }, "uid": "api-2" },
+    { "name": "kube-proxy-aaaa", "node": "node-a", "ready": true,
+      "staticPod": true,
+      "labels": { "app": "kube-proxy" },
+      "owner": { "kind": "DaemonSet", "name": "kube-proxy" }, "uid": "kp-a" },
+    { "name": "node-exporter-aaaa", "node": "node-a", "ready": true,
+      "labels": { "app": "node-exporter" },
+      "owner": { "kind": "DaemonSet", "name": "node-exporter" }, "uid": "ne-a" }
+  ]
+}
