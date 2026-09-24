@@ -1,0 +1,58 @@
+0. reset to a clean shard
+1. pre-snapshot writes on A (epoch 1)
+    {"seq": 1, "epoch": 1, "primary": "A"}
+    {"seq": 2, "epoch": 1, "primary": "A"}
+2. begin_snapshot (command_id=b) pins the snapshot point
+    {"phase": "snapshot", "snapshot_seq": 2}
+3. writes keep flowing during the snapshot phase
+    {"seq": 3, "epoch": 1, "primary": "A"}
+4. partition B -> snapshot install refused (502)
+   HTTP 502 {"code":"node_down","error":"install snapshot on B: node unreachable (simulated partition)"}
+
+   reconnect B, retry the SAME command_id=s -> succeeds
+    {"phase": "catchup", "installed": 2, "b_last_seq": 2}
+5. catch-up phase: new write, then drain
+    {"phase": "catchup", "installed": 2, "lag": 0}
+   duplicate control message c1 -> replay, state does not move twice
+    {"replayed": true, "lag": 0}
+6. lost-response fault: committed write, first response lost, retry dedupes
+   first  HTTP 500 {"code":"response_dropped_after_commit","error":"write committed on the primary but the response was lost (injected)"}
+
+    {"seq": 5, "deduplicated": true, "primary": "A"}
+   drain k5 to B with a fresh catch-up (lag must reach 0 before cutover)
+    {"phase": "catchup", "installed": 1, "lag": 0}
+7. prepare cutover -> cluster frozen (503 on writes)
+    {"phase": "switching", "cutover_seq": 5}
+   write while switching -> HTTP 503
+8. commit with B partitioned fails and does NOT bump the epoch
+   HTTP 502 {"code":"node_down","error":"push epoch to B: node unreachable (simulated partition)"}
+
+    {"epoch": 1, "primary": "A", "phase": "switching"}
+   retry same command_id=co -> committed (failures are not cached)
+    {"phase": "done", "epoch": 2, "primary": "B"}
+9. after switch the old primary is fenced
+   A with epoch 1 -> HTTP 409 (stale_epoch)
+   A forging epoch 2 -> HTTP 403 (not_primary)
+    {"seq": 6, "epoch": 2, "primary": "B"}
+10. invariant report
+{
+    "all_pass": true,
+    "checks": [
+        {
+            "name": "sequences_gap_free",
+            "pass": true
+        },
+        {
+            "name": "all_confirmed_writes_present",
+            "pass": true
+        },
+        {
+            "name": "epoch_provenance",
+            "pass": true
+        },
+        {
+            "name": "no_dual_primary_confirmation",
+            "pass": true
+        }
+    ]
+}
