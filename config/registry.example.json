@@ -1,0 +1,24 @@
+{
+  "_comment": "Example registry. Demo keys only - regenerate with python3 scripts/gen_keys.py for real use.",
+  "admin_key": "demo-admin-key-change-me-0123456789",
+  "default_ttl_seconds": 5.0,
+  "epoch_key": "ioksSseGEHLK3_AT1mQIr2bI5w2gAv-EwTSdm2g7ZPY",
+  "testers": {
+    "tester_alpha": {
+      "key": "6SkRyx5Fb07IwBAyLkR0y1pSajsbWoG0avrbibiQNP4",
+      "robots": ["alpha", "bravo"]
+    },
+    "tester_bravo": {
+      "key": "-jy51chNDGv8X56cp3X7xYKqXz6LMpD1rdr9p1ECn8A",
+      "robots": ["bravo"]
+    },
+    "tester_guest": {
+      "key": "EGOu6jhPZPbISDgD6efwPiX_l2q_MivLMenRswwt0J4",
+      "robots": []
+    }
+  },
+  "robots": {
+    "alpha": {"namespace": "/p48/alpha"},
+    "bravo": {"namespace": "/p48/bravo"}
+  }
+}

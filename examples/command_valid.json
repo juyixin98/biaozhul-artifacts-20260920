@@ -1,0 +1,6 @@
+{
+  "target": "dock",
+  "seq": 1,
+  "command": {"pose": [1.0, 2.0, 0.0], "frame": "map"},
+  "ttl_seconds": 5.0
+}

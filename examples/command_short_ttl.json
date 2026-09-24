@@ -1,0 +1,6 @@
+{
+  "target": "dock",
+  "seq": 100,
+  "command": {"note": "expires ~0.2s after issue; robot must drop it as expired_on_arrival"},
+  "ttl_seconds": 0.2
+}

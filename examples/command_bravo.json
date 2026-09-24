@@ -1,0 +1,6 @@
+{
+  "target": "dock",
+  "seq": 2,
+  "command": {"speed": 0.4},
+  "ttl_seconds": 30
+}

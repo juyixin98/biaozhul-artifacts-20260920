@@ -1,0 +1,25 @@
+# Pinned dependency closure, verified against the local environment.
+# ROS2 (rclpy, std_msgs) is NOT a pip package: install ROS 2 Jazzy via apt
+# and `source /opt/ros/jazzy/setup.bash` (see README.md and setup_env.sh).
+#
+# All packages below were already present and are imported by the gateway.
+# sniffio is not installed in this environment and is not needed at runtime
+# (anyio 4.15 imports and runs without it).
+fastapi==0.141.1
+uvicorn==0.53.0
+httpx==0.28.1
+pytest==9.1.1
+pydantic==2.13.5
+pydantic-core==2.46.5
+starlette==1.6.0
+anyio==4.15.1
+httpcore==1.0.9
+typing-extensions==4.16.0
+annotated-types==0.8.0
+certifi==2023.11.17
+idna==3.6
+h11==0.16.0
+click==8.1.6
+iniconfig==2.3.0
+pluggy==1.6.0
+packaging==24.0
