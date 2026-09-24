@@ -1,0 +1,171 @@
+{
+  "snapshot": {
+    "namespaces": [
+      { "name": "frontend", "labels": { "tier": "web", "env": "prod" } },
+      { "name": "backend", "labels": { "tier": "api" } },
+      { "name": "database", "labels": { "tier": "data" } }
+    ],
+    "pods": [
+      {
+        "name": "web-1",
+        "namespace": "frontend",
+        "labels": { "app": "web" },
+        "ips": ["10.1.1.5"],
+        "containerPorts": [
+          { "name": "http", "containerPort": 8080, "protocol": "TCP" }
+        ]
+      },
+      {
+        "name": "api-1",
+        "namespace": "backend",
+        "labels": { "app": "api" },
+        "ips": ["10.2.0.7"],
+        "containerPorts": [
+          { "name": "grpc", "containerPort": 9090, "protocol": "TCP" },
+          { "name": "metrics", "containerPort": 9100, "protocol": "TCP" }
+        ]
+      },
+      {
+        "name": "db-1",
+        "namespace": "database",
+        "labels": { "app": "db" },
+        "ips": ["10.3.0.9"],
+        "containerPorts": [
+          { "name": "pg", "containerPort": 5432, "protocol": "TCP" }
+        ]
+      },
+      {
+        "name": "evil-1",
+        "namespace": "backend",
+        "labels": { "app": "evil" },
+        "ips": ["10.2.0.99"]
+      }
+    ],
+    "policies": [
+      {
+        "name": "web-allow-all-egress",
+        "namespace": "frontend",
+        "podSelector": {},
+        "policyTypes": ["Egress"],
+        "egress": [
+          { "to": [{ "namespaceSelector": {} }] },
+          { "to": [{ "ipBlock": { "cidr": "0.0.0.0/0" } }] }
+        ]
+      },
+      {
+        "name": "api-ingress",
+        "namespace": "backend",
+        "podSelector": { "matchLabels": { "app": "api" } },
+        "policyTypes": ["Ingress", "Egress"],
+        "ingress": [
+          {
+            "from": [
+              {
+                "namespaceSelector": { "matchLabels": { "tier": "web" } },
+                "podSelector": { "matchLabels": { "app": "web" } }
+              }
+            ],
+            "ports": [
+              { "port": "grpc", "protocol": "TCP" },
+              { "port": 9100, "endPort": 9200, "protocol": "TCP" }
+            ]
+          }
+        ],
+        "egress": [
+          {
+            "to": [
+              {
+                "namespaceSelector": { "matchLabels": { "tier": "data" } },
+                "podSelector": { "matchLabels": { "app": "db" } }
+              }
+            ],
+            "ports": [{ "port": "pg", "protocol": "TCP" }]
+          },
+          {
+            "to": [{ "ipBlock": { "cidr": "10.2.44.0/24", "except": ["10.2.44.10/32"] } }]
+          }
+        ]
+      },
+      {
+        "name": "db-default-deny-ingress",
+        "namespace": "database",
+        "podSelector": {},
+        "policyTypes": ["Ingress"],
+        "ingress": [
+          {
+            "from": [
+              {
+                "namespaceSelector": { "matchLabels": { "tier": "api" } },
+                "podSelector": { "matchLabels": { "app": "api" } }
+              }
+            ],
+            "ports": [{ "port": "pg", "protocol": "TCP" }]
+          }
+        ]
+      },
+      {
+        "name": "legacy-sctp-policy",
+        "namespace": "backend",
+        "podSelector": { "matchLabels": { "app": "api" } },
+        "policyTypes": ["Ingress"],
+        "ingress": [
+          {
+            "from": [{ "podSelector": {} }],
+            "ports": [{ "port": 5000, "protocol": "SCTP" }]
+          }
+        ]
+      }
+    ]
+  },
+  "queries": [
+    {
+      "name": "web -> api over named gRPC port: ALLOWED",
+      "source": { "pod": { "namespace": "frontend", "name": "web-1" } },
+      "destination": { "pod": { "namespace": "backend", "name": "api-1" } },
+      "protocol": "TCP",
+      "port": 9090
+    },
+    {
+      "name": "web -> api metrics port outside allowed range: DENIED by ingress",
+      "source": { "pod": { "namespace": "frontend", "name": "web-1" } },
+      "destination": { "pod": { "namespace": "backend", "name": "api-1" } },
+      "protocol": "TCP",
+      "port": 9201
+    },
+    {
+      "name": "api -> db over named pg port: ALLOWED",
+      "source": { "pod": { "namespace": "backend", "name": "api-1" } },
+      "destination": { "pod": { "namespace": "database", "name": "db-1" } },
+      "protocol": "TCP",
+      "port": 5432
+    },
+    {
+      "name": "evil pod -> db: DENIED (default deny + peer not selected)",
+      "source": { "pod": { "namespace": "backend", "name": "evil-1" } },
+      "destination": { "pod": { "namespace": "database", "name": "db-1" } },
+      "protocol": "TCP",
+      "port": 5432
+    },
+    {
+      "name": "api -> external IP inside ipBlock: ALLOWED by egress ipBlock",
+      "source": { "pod": { "namespace": "backend", "name": "api-1" } },
+      "destination": { "ip": "10.2.44.20" },
+      "protocol": "TCP",
+      "port": 443
+    },
+    {
+      "name": "api -> excluded IP 10.2.44.10: DENIED by ipBlock except",
+      "source": { "pod": { "namespace": "backend", "name": "api-1" } },
+      "destination": { "ip": "10.2.44.10" },
+      "protocol": "TCP",
+      "port": 443
+    },
+    {
+      "name": "SCTP query: rejected as unsupported protocol",
+      "source": { "pod": { "namespace": "frontend", "name": "web-1" } },
+      "destination": { "pod": { "namespace": "backend", "name": "api-1" } },
+      "protocol": "SCTP",
+      "port": 5000
+    }
+  ]
+}
