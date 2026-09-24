@@ -1,0 +1,6 @@
+{
+  "priority_policy": "RM",
+  "tasks": [
+    {"id": "bad", "C": 3, "T": 8, "D": 10}
+  ]
+}
