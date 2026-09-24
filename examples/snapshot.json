@@ -1,0 +1,117 @@
+{
+  "namespaces": [
+    {"name": "frontend", "labels": {"team": "web"}},
+    {"name": "backend", "labels": {"team": "api"}},
+    {"name": "db", "labels": {"team": "data"}},
+    {"name": "monitoring", "labels": {"team": "observability"}}
+  ],
+  "pods": [
+    {
+      "name": "web-1",
+      "namespace": "frontend",
+      "labels": {"app": "web"},
+      "ip": "10.0.1.11",
+      "ports": [{"name": "http", "containerPort": 8080, "protocol": "TCP"}]
+    },
+    {
+      "name": "api-1",
+      "namespace": "backend",
+      "labels": {"app": "api"},
+      "ip": "10.0.2.21",
+      "ports": [
+        {"name": "http", "containerPort": 8080, "protocol": "TCP"},
+        {"name": "metrics", "containerPort": 9090, "protocol": "TCP"}
+      ]
+    },
+    {
+      "name": "postgres-1",
+      "namespace": "db",
+      "labels": {"app": "postgres"},
+      "ip": "10.0.3.31",
+      "ports": [{"name": "postgres", "containerPort": 5432, "protocol": "TCP"}]
+    },
+    {
+      "name": "prom-1",
+      "namespace": "monitoring",
+      "labels": {"app": "prometheus"},
+      "ip": "192.168.1.10",
+      "ports": [{"name": "metrics", "containerPort": 9090, "protocol": "TCP"}]
+    },
+    {
+      "name": "prom-2",
+      "namespace": "monitoring",
+      "labels": {"app": "prometheus"},
+      "ip": "192.168.1.11",
+      "ports": [{"name": "metrics", "containerPort": 9090, "protocol": "TCP"}]
+    }
+  ],
+  "policies": [
+    {
+      "metadata": {"name": "allow-web-to-api", "namespace": "backend"},
+      "spec": {
+        "podSelector": {"matchLabels": {"app": "api"}},
+        "policyTypes": ["Ingress"],
+        "ingress": [
+          {
+            "from": [
+              {
+                "namespaceSelector": {"matchLabels": {"team": "web"}},
+                "podSelector": {"matchLabels": {"app": "web"}}
+              }
+            ],
+            "ports": [{"protocol": "TCP", "port": "http"}]
+          }
+        ]
+      }
+    },
+    {
+      "metadata": {"name": "api-egress", "namespace": "backend"},
+      "spec": {
+        "podSelector": {"matchLabels": {"app": "api"}},
+        "policyTypes": ["Egress"],
+        "egress": [
+          {
+            "to": [
+              {"namespaceSelector": {"matchLabels": {"team": "data"}}}
+            ],
+            "ports": [{"protocol": "TCP", "port": 5432}]
+          },
+          {
+            "to": [
+              {
+                "ipBlock": {
+                  "cidr": "192.168.1.0/24",
+                  "except": ["192.168.1.10/32"]
+                }
+              }
+            ],
+            "ports": [{"protocol": "TCP", "port": 9090}]
+          }
+        ]
+      }
+    },
+    {
+      "metadata": {"name": "default-deny-ingress", "namespace": "db"},
+      "spec": {
+        "podSelector": {},
+        "policyTypes": ["Ingress"],
+        "ingress": []
+      }
+    },
+    {
+      "metadata": {"name": "allow-api-to-postgres", "namespace": "db"},
+      "spec": {
+        "podSelector": {"matchLabels": {"app": "postgres"}},
+        "policyTypes": ["Ingress"],
+        "ingress": [
+          {
+            "from": [
+              {"namespaceSelector": {"matchLabels": {"team": "api"}}}
+            ],
+            "ports": [{"protocol": "TCP", "port": 5432}]
+          }
+        ]
+      }
+    }
+  ]
+}
