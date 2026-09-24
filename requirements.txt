@@ -1,0 +1,8 @@
+# 运行时
+fastapi==0.141.1
+uvicorn[standard]==0.39.0
+pydantic==2.13.4
+python-multipart==0.0.27
+# 测试与演示
+httpx==0.28.1
+pytest==9.0.2

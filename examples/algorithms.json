@@ -1,0 +1,12 @@
+{
+  "v1": {
+    "name": "grid-cluster",
+    "version": "1.0.0",
+    "description": "calibrate -> bounds filter -> seeded sampling -> 4-neighbour grid clustering"
+  },
+  "v2": {
+    "name": "grid-cluster",
+    "version": "2.0.0",
+    "description": "same pipeline with centroid reporting (algorithm version is pinned inside the snapshot)"
+  }
+}

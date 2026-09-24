@@ -1,0 +1,12 @@
+{
+  "v1": {
+    "matrix": [[1.0, 0.0], [0.0, 1.0]],
+    "translation": [0.0, 0.0],
+    "note": "factory calibration, identity transform"
+  },
+  "v2": {
+    "matrix": [[0.9961947, -0.08715574], [0.08715574, 0.9961947]],
+    "translation": [0.05, -0.02],
+    "note": "field re-calibration: 5 degree rotation and small offset"
+  }
+}
