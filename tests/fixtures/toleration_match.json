@@ -1,0 +1,44 @@
+{
+  "description": "容忍度匹配夹具：node-a 带 dedicated=other:NoSchedule，Pod 的 dedicated=special 容忍度不匹配而被淘汰；node-b 污点为 dedicated=special 被精确匹配通过；node-c 带 PreferNoSchedule 软污点，不淘汰但 taintPreference 扣 10 分。",
+  "request": {
+    "nodes": [
+      {
+        "name": "node-a",
+        "labels": {"zone": "zone-a"},
+        "capacity": {"cpu": "4", "memory": "8Gi"},
+        "taints": [{"key": "dedicated", "value": "other", "effect": "NoSchedule"}]
+      },
+      {
+        "name": "node-b",
+        "labels": {"zone": "zone-b"},
+        "capacity": {"cpu": "4", "memory": "8Gi"},
+        "taints": [{"key": "dedicated", "value": "special", "effect": "NoSchedule"}]
+      },
+      {
+        "name": "node-c",
+        "labels": {"zone": "zone-c"},
+        "capacity": {"cpu": "4", "memory": "8Gi"},
+        "taints": [{"key": "prefer-spot", "value": "true", "effect": "PreferNoSchedule"}]
+      }
+    ],
+    "existingPods": [],
+    "pod": {
+      "name": "tolerant",
+      "namespace": "default",
+      "requests": {"cpu": "500m", "memory": "256Mi"},
+      "labels": {"app": "tolerant"},
+      "tolerations": [
+        {"key": "dedicated", "operator": "Equal", "value": "special", "effect": "NoSchedule"}
+      ]
+    }
+  },
+  "expectations": {
+    "rejected": {
+      "node-a": "TaintNotTolerated"
+    },
+    "feasible": ["node-b", "node-c"],
+    "selectedNode": "node-b",
+    "nodeCComponent": "taintPreference",
+    "nodeCScore": 90
+  }
+}

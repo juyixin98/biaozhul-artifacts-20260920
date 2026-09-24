@@ -1,0 +1,44 @@
+{
+  "description": "反亲和冲突夹具：required pod anti-affinity 以 zone 为拓扑域。zone-a 内已有同标签 Pod，zone-a 两个节点被淘汰；zone-b 通过。",
+  "request": {
+    "nodes": [
+      {"name": "node-a1", "labels": {"zone": "zone-a", "rack": "r1"}, "capacity": {"cpu": "4", "memory": "8Gi"}, "taints": []},
+      {"name": "node-a2", "labels": {"zone": "zone-a", "rack": "r2"}, "capacity": {"cpu": "4", "memory": "8Gi"}, "taints": []},
+      {"name": "node-b1", "labels": {"zone": "zone-b", "rack": "r3"}, "capacity": {"cpu": "4", "memory": "8Gi"}, "taints": []}
+    ],
+    "existingPods": [
+      {
+        "name": "web-0",
+        "namespace": "default",
+        "node": "node-a1",
+        "labels": {"app": "web"},
+        "requests": {"cpu": "100m", "memory": "64Mi"}
+      }
+    ],
+    "pod": {
+      "name": "web-1",
+      "namespace": "default",
+      "requests": {"cpu": "500m", "memory": "256Mi"},
+      "labels": {"app": "web"},
+      "affinity": {
+        "podAntiAffinity": {
+          "requiredDuringSchedulingIgnoredDuringExecution": [
+            {
+              "topologyKey": "zone",
+              "labelSelector": {"matchLabels": {"app": "web"}}
+            }
+          ]
+        }
+      }
+    }
+  },
+  "expectations": {
+    "rejected": {
+      "node-a1": "PodAntiAffinityConflict",
+      "node-a2": "PodAntiAffinityConflict"
+    },
+    "feasible": ["node-b1"],
+    "selectedNode": "node-b1",
+    "conflictingPodOnNodeA1": "web-0"
+  }
+}

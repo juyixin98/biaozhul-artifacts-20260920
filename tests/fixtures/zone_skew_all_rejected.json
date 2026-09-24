@@ -1,0 +1,34 @@
+{
+  "description": "zone/rack 双重硬偏斜夹具：zone 与 rack 两个 maxSkew=1 的 DoNotSchedule 约束交叉。当前 zone 最空域是 zone-a（1 个）、rack 最空架是 rack-r2（1 个），但不存在 (zone-a, rack-r2) 的节点，故三个节点全部淘汰（单条约束必有最空域可行，多条约束交集可以为空）。",
+  "request": {
+    "nodes": [
+      {"name": "node-ar1", "labels": {"zone": "zone-a", "rack": "r1"}, "capacity": {"cpu": "4", "memory": "8Gi"}, "taints": []},
+      {"name": "node-br1", "labels": {"zone": "zone-b", "rack": "r1"}, "capacity": {"cpu": "4", "memory": "8Gi"}, "taints": []},
+      {"name": "node-br2", "labels": {"zone": "zone-b", "rack": "r2"}, "capacity": {"cpu": "4", "memory": "8Gi"}, "taints": []}
+    ],
+    "existingPods": [
+      {"name": "web-1", "namespace": "default", "node": "node-ar1", "labels": {"app": "web"}, "requests": {"cpu": "100m", "memory": "64Mi"}},
+      {"name": "web-2", "namespace": "default", "node": "node-br1", "labels": {"app": "web"}, "requests": {"cpu": "100m", "memory": "64Mi"}},
+      {"name": "web-3", "namespace": "default", "node": "node-br2", "labels": {"app": "web"}, "requests": {"cpu": "100m", "memory": "64Mi"}}
+    ],
+    "pod": {
+      "name": "web-4",
+      "namespace": "default",
+      "requests": {"cpu": "500m", "memory": "256Mi"},
+      "labels": {"app": "web"},
+      "topologySpreadConstraints": [
+        {"maxSkew": 1, "topologyKey": "zone", "whenUnsatisfiable": "DoNotSchedule"},
+        {"maxSkew": 1, "topologyKey": "rack", "whenUnsatisfiable": "DoNotSchedule"}
+      ]
+    }
+  },
+  "expectations": {
+    "rejected": {
+      "node-ar1": "TopologySpreadSkew",
+      "node-br1": "TopologySpreadSkew",
+      "node-br2": "TopologySpreadSkew"
+    },
+    "feasible": [],
+    "selectedNode": null
+  }
+}

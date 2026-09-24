@@ -1,0 +1,25 @@
+{
+  "description": "软拓扑分布（ScheduleAnyway）成功打散夹具：zone-a 已有 1 个 web，zone-b 为空。硬约束全部通过；软评分 topologySpread 按 100*(1-skew/(maxSkew+1))：再放 zone-a 的 skew=2 得 0 分，放 zone-b 的 skew=1 得 50 分，因此选中 zone-b。",
+  "request": {
+    "nodes": [
+      {"name": "node-a", "labels": {"zone": "zone-a"}, "capacity": {"cpu": "4", "memory": "8Gi"}, "taints": []},
+      {"name": "node-b", "labels": {"zone": "zone-b"}, "capacity": {"cpu": "4", "memory": "8Gi"}, "taints": []}
+    ],
+    "existingPods": [
+      {"name": "web-0", "namespace": "default", "node": "node-a", "labels": {"app": "web"}, "requests": {"cpu": "100m", "memory": "64Mi"}}
+    ],
+    "pod": {
+      "name": "web-1",
+      "namespace": "default",
+      "requests": {"cpu": "500m", "memory": "256Mi"},
+      "labels": {"app": "web"},
+      "topologySpreadConstraints": [
+        {"maxSkew": 1, "topologyKey": "zone", "whenUnsatisfiable": "ScheduleAnyway"}
+      ]
+    }
+  },
+  "expectations": {
+    "feasible": ["node-a", "node-b"],
+    "selectedNode": "node-b"
+  }
+}

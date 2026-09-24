@@ -1,0 +1,32 @@
+{
+  "description": "zone 偏斜夹具：硬拓扑分布 maxSkew=1（DoNotSchedule）。zone-a 已有 2 个同标签 Pod，若再放入 zone-a，skew = 3 - 0 = 3 > 1，zone-a 两个节点淘汰；放入当前最空域 zone-b（0 个），skew = 1 - 0 = 1 ≤ 1，zone-b 可行——体现 Kubernetes 始终向最空域再平衡的语义。",
+  "request": {
+    "nodes": [
+      {"name": "node-a1", "labels": {"zone": "zone-a"}, "capacity": {"cpu": "4", "memory": "8Gi"}, "taints": []},
+      {"name": "node-a2", "labels": {"zone": "zone-a"}, "capacity": {"cpu": "4", "memory": "8Gi"}, "taints": []},
+      {"name": "node-b1", "labels": {"zone": "zone-b"}, "capacity": {"cpu": "4", "memory": "8Gi"}, "taints": []}
+    ],
+    "existingPods": [
+      {"name": "web-x", "namespace": "default", "node": "node-a1", "labels": {"app": "web"}, "requests": {"cpu": "100m", "memory": "64Mi"}},
+      {"name": "web-y", "namespace": "default", "node": "node-a2", "labels": {"app": "web"}, "requests": {"cpu": "100m", "memory": "64Mi"}}
+    ],
+    "pod": {
+      "name": "web-z",
+      "namespace": "default",
+      "requests": {"cpu": "500m", "memory": "256Mi"},
+      "labels": {"app": "web"},
+      "topologySpreadConstraints": [
+        {"maxSkew": 1, "topologyKey": "zone", "whenUnsatisfiable": "DoNotSchedule"}
+      ]
+    }
+  },
+  "expectations": {
+    "rejected": {
+      "node-a1": "TopologySpreadSkew",
+      "node-a2": "TopologySpreadSkew"
+    },
+    "skewEvidence": {"node-a1": 3, "node-b1": 1},
+    "feasible": ["node-b1"],
+    "selectedNode": "node-b1"
+  }
+}

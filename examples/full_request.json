@@ -1,0 +1,60 @@
+{
+  "nodes": [
+    {
+      "name": "node-bbb",
+      "labels": {"zone": "zone-b", "disktype": "ssd"},
+      "capacity": {"cpu": "8", "memory": "16Gi"},
+      "allocatable": {"cpu": "7500m", "memory": "15Gi"},
+      "taints": []
+    },
+    {
+      "name": "node-aaa",
+      "labels": {"zone": "zone-a", "disktype": "ssd"},
+      "capacity": {"cpu": "8", "memory": "16Gi"},
+      "allocatable": {"cpu": "7500m", "memory": "15Gi"},
+      "taints": []
+    },
+    {
+      "name": "node-ccc",
+      "labels": {"zone": "zone-c", "disktype": "hdd"},
+      "capacity": {"cpu": "8", "memory": "16Gi"},
+      "allocatable": {"cpu": "7500m", "memory": "15Gi"},
+      "taints": [{"key": "dedicated", "value": "gpu", "effect": "NoSchedule"}]
+    }
+  ],
+  "existingPods": [
+    {
+      "name": "cache-0",
+      "namespace": "prod",
+      "node": "node-bbb",
+      "labels": {"app": "cache"},
+      "requests": {"cpu": "1", "memory": "1Gi"}
+    }
+  ],
+  "pod": {
+    "name": "api-7",
+    "namespace": "prod",
+    "requests": {"cpu": "2", "memory": "2Gi"},
+    "labels": {"app": "api", "tier": "frontend"},
+    "nodeSelector": {"disktype": "ssd"},
+    "tolerations": [],
+    "affinity": {
+      "nodeAffinity": {
+        "requiredDuringSchedulingIgnoredDuringExecution": [
+          {"matchExpressions": [{"key": "zone", "operator": "In", "values": ["zone-a", "zone-b", "zone-c"]}]}
+        ],
+        "preferredDuringSchedulingIgnoredDuringExecution": [
+          {"weight": 50, "preference": {"matchExpressions": [{"key": "zone", "operator": "In", "values": ["zone-a"]}]}}
+        ]
+      },
+      "podAntiAffinity": {
+        "requiredDuringSchedulingIgnoredDuringExecution": [
+          {"topologyKey": "zone", "labelSelector": {"matchLabels": {"app": "api"}}}
+        ]
+      }
+    },
+    "topologySpreadConstraints": [
+      {"maxSkew": 1, "topologyKey": "zone", "whenUnsatisfiable": "ScheduleAnyway"}
+    ]
+  }
+}

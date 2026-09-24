@@ -1,0 +1,41 @@
+{
+  "description": "资源不足夹具：node-a 仅剩 500m CPU，放不下请求 1 CPU 的 Pod；node-b 可容纳。",
+  "request": {
+    "nodes": [
+      {
+        "name": "node-a",
+        "labels": {"kubernetes.io/os": "linux", "zone": "zone-a"},
+        "capacity": {"cpu": "1", "memory": "1Gi"},
+        "taints": []
+      },
+      {
+        "name": "node-b",
+        "labels": {"kubernetes.io/os": "linux", "zone": "zone-b"},
+        "capacity": {"cpu": "4", "memory": "8Gi"},
+        "taints": []
+      }
+    ],
+    "existingPods": [
+      {
+        "name": "existing-busy",
+        "namespace": "default",
+        "node": "node-a",
+        "labels": {"app": "other"},
+        "requests": {"cpu": "500m", "memory": "256Mi"}
+      }
+    ],
+    "pod": {
+      "name": "candidate",
+      "namespace": "default",
+      "requests": {"cpu": "1", "memory": "512Mi"},
+      "labels": {"app": "candidate"}
+    }
+  },
+  "expectations": {
+    "rejected": {
+      "node-a": "InsufficientResources"
+    },
+    "feasible": ["node-b"],
+    "selectedNode": "node-b"
+  }
+}
