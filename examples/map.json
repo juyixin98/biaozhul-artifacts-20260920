@@ -1,0 +1,12 @@
+{
+  "resolution": 0.1,
+  "origin_x": -3.0,
+  "origin_y": -3.0,
+  "width": 60,
+  "height": 60,
+  "l_occ": 0.8473,
+  "l_free": -0.4055,
+  "l_min": -2.0,
+  "l_max": 3.5,
+  "default_max_range": 10.0
+}

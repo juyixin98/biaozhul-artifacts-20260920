@@ -1,0 +1,13 @@
+# Vendored, pinned dependencies (verified at CMake configure time).
+# Regenerate hashes with: sha256sum third_party/httplib.h third_party/nlohmann/json.hpp
+#
+# cpp-httplib v0.18.3 (MIT), single header, header-only HTTP server/client
+a0a0c13dc086663863dbe6730a19716f7d3744904b6205496e8301750814dbd5  httplib.h
+https://raw.githubusercontent.com/yhirose/cpp-httplib/v0.18.3/httplib.h
+#
+# nlohmann/json v3.11.3 (MIT), single include
+9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6  nlohmann/json.hpp
+https://raw.githubusercontent.com/nlohmann/json/v3.11.3/single_include/nlohmann/json.hpp
+#
+# System package (apt, not vendored):
+#   libeigen3-dev 3.4.0-4build0.1  (Eigen ^3.3, MPL2, header-only)

@@ -1,0 +1,5 @@
+build/
+dbgbuild/
+*.o
+*.a
+compile_commands.json
