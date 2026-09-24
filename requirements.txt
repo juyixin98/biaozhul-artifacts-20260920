@@ -1,0 +1,10 @@
+# Direct dependencies (pinned). Transitive closure is frozen in
+# requirements-lock.txt for reproducible installs.
+fastapi==0.115.6
+uvicorn==0.34.0
+numpy==2.2.1
+pydantic==2.13.5
+
+# Test/dev only
+pytest==8.3.4
+httpx==0.28.1
