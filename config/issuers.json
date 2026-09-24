@@ -1,0 +1,37 @@
+{
+  "issuers": [
+    {
+      "issuer_id": "demo-rsa",
+      "iss": "https://demo-idp.local/rsa",
+      "jwks_uri": "http://127.0.0.1:8081/rsa/jwks.json",
+      "audience": "gateway-demo",
+      "algorithms": ["RS256"],
+      "cache_ttl_seconds": 30,
+      "negative_cooldown_seconds": 5,
+      "leeway_seconds": 0,
+      "allow_http": true
+    },
+    {
+      "issuer_id": "demo-ec",
+      "iss": "https://demo-idp.local/ec",
+      "jwks_uri": "http://127.0.0.1:8081/ec/jwks.json",
+      "audience": "gateway-demo",
+      "algorithms": ["ES256"],
+      "cache_ttl_seconds": 30,
+      "negative_cooldown_seconds": 5,
+      "leeway_seconds": 0,
+      "allow_http": true
+    },
+    {
+      "issuer_id": "demo-dup",
+      "iss": "https://demo-idp.local/dup",
+      "jwks_uri": "http://127.0.0.1:8081/dup/jwks.json",
+      "audience": "gateway-demo",
+      "algorithms": ["RS256"],
+      "cache_ttl_seconds": 30,
+      "negative_cooldown_seconds": 5,
+      "leeway_seconds": 0,
+      "allow_http": true
+    }
+  ]
+}

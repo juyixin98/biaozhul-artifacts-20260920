@@ -1,0 +1,15 @@
+{
+  "_comment": "Copy to issuers.local.json and set JWT_GATEWAY_CONFIG to its path. Production jwks_uri values must be https://; 'allow_http' exists solely for local development against loopback.",
+  "issuers": [
+    {
+      "issuer_id": "example-prod",
+      "iss": "https://idp.example.com/",
+      "jwks_uri": "https://idp.example.com/.well-known/jwks.json",
+      "audience": "https://api.example.com",
+      "algorithms": ["RS256", "ES256"],
+      "cache_ttl_seconds": 600,
+      "negative_cooldown_seconds": 30,
+      "leeway_seconds": 30
+    }
+  ]
+}
