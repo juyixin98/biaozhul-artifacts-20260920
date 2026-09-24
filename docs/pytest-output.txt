@@ -1,0 +1,46 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.6.0 -- /home/admin/Downloads/biaozhul/text88/a/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/admin/Downloads/biaozhul/text88/a
+configfile: pytest.ini
+plugins: anyio-4.15.1, web3-6.20.3
+collecting ... collected 30 items
+
+tests/test_api_e2e.py::test_health PASSED                                [  3%]
+tests/test_api_e2e.py::test_config_endpoint PASSED                       [  6%]
+tests/test_api_e2e.py::test_swap_endpoint_full_flow PASSED               [ 10%]
+tests/test_api_e2e.py::test_swaps_listing_contains_locked_swap PASSED    [ 13%]
+tests/test_api_e2e.py::test_swap_bad_hex_rejected PASSED                 [ 16%]
+tests/test_api_e2e.py::test_swap_endpoint_reports_paused_chain PASSED    [ 20%]
+tests/test_coordinator_e2e.py::test_assess_double_lock_convention_ok PASSED [ 23%]
+tests/test_coordinator_e2e.py::test_assess_wrong_timelock_order_flagged PASSED [ 26%]
+tests/test_coordinator_e2e.py::test_assess_delta_too_small_flagged PASSED [ 30%]
+tests/test_coordinator_e2e.py::test_assess_one_sided_lock PASSED         [ 33%]
+tests/test_coordinator_e2e.py::test_assess_hash_mismatch PASSED          [ 36%]
+tests/test_coordinator_e2e.py::test_assess_beta_claimed_alpha_pending_exposes_preimage PASSED [ 40%]
+tests/test_coordinator_e2e.py::test_assess_claimed_both PASSED           [ 43%]
+tests/test_coordinator_e2e.py::test_assess_refunded_both PASSED          [ 46%]
+tests/test_coordinator_e2e.py::test_assess_split_outcome_is_non_atomic PASSED [ 50%]
+tests/test_coordinator_e2e.py::test_assess_beta_refunded_alpha_locked_warns_not_to_claim PASSED [ 53%]
+tests/test_coordinator_e2e.py::test_assess_chain_pause_is_reported PASSED [ 56%]
+tests/test_coordinator_e2e.py::test_assess_absent_both PASSED            [ 60%]
+tests/test_htlc_e2e.py::test_deployment_both_chains PASSED               [ 63%]
+tests/test_htlc_e2e.py::test_lock_then_double_claim_happy_path PASSED    [ 66%]
+tests/test_htlc_e2e.py::test_wrong_preimage_reverts_and_state_unchanged PASSED [ 70%]
+tests/test_htlc_e2e.py::test_claim_by_non_receiver_reverts PASSED        [ 73%]
+tests/test_htlc_e2e.py::test_duplicate_claim_reverts PASSED              [ 76%]
+tests/test_htlc_e2e.py::test_refund_boundary_exact_timelock PASSED       [ 80%]
+tests/test_htlc_e2e.py::test_refund_twice_reverts PASSED                 [ 83%]
+tests/test_htlc_e2e.py::test_claim_then_refund_is_mutex PASSED           [ 86%]
+tests/test_htlc_e2e.py::test_refund_then_claim_is_mutex_even_with_correct_preimage PASSED [ 90%]
+tests/test_htlc_e2e.py::test_lock_same_id_twice_reverts PASSED           [ 93%]
+tests/test_htlc_e2e.py::test_unknown_swap_all_operations_revert PASSED   [ 96%]
+tests/test_htlc_e2e.py::test_funds_actually_move_on_claim_and_refund PASSED [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/starlette/testclient.py:40
+  /home/admin/Downloads/biaozhul/text88/a/.venv/lib/python3.12/site-packages/starlette/testclient.py:40: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 30 passed, 1 warning in 14.64s ========================

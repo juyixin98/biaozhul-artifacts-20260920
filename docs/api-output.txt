@@ -1,0 +1,64 @@
+### GET /health
+{
+  "chains": {
+    "alpha": {
+      "rpc_url": "http://127.0.0.1:8645",
+      "chain_id": 31337,
+      "contract": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "reachable": true,
+      "block_number": 8
+    },
+    "beta": {
+      "rpc_url": "http://127.0.0.1:8646",
+      "chain_id": 31338,
+      "contract": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "reachable": true,
+      "block_number": 14
+    }
+  },
+  "deployment_manifest": "deployment.json"
+}
+
+### GET /config
+{
+  "alpha": {
+    "rpc_url": "http://127.0.0.1:8645",
+    "chain_id": 31337,
+    "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "deploy_block": 1
+  },
+  "beta": {
+    "rpc_url": "http://127.0.0.1:8646",
+    "chain_id": 31338,
+    "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "deploy_block": 1
+  }
+}
+
+### GET /swaps (count + first 2)
+{
+  "count": 4,
+  "swaps": [
+    {
+      "swap_id": "0x2d7024e2aa14376e72c430990e3c7a357e8c229b09dfebbdae8dcb161b97030c",
+      "status": "BETA_CLAIMED_ALPHA_PENDING",
+      "alpha_state": "Locked",
+      "beta_state": "Claimed",
+      "risk_flags": [
+        "若 Alpha 在截止前持续不可用或受益人不作为，Alpha 付款方到期可退款，交换将变为 Beta 已结算、Alpha 退款的非原子结果。"
+      ]
+    },
+    {
+      "swap_id": "0xbb2812f239e0e5539041b0cc29aa32218f7dcf7cea672a27c6ad44a0a561e98e",
+      "status": "REFUNDED_BOTH",
+      "alpha_state": "Refunded",
+      "beta_state": "Refunded",
+      "risk_flags": [
+        "安全裕度不足：Δ=tA−tB=6s < 建议的 15s，若 Beta claim 到 Alpha claim 的传播稍慢，Alpha 可能先到退款截止。"
+      ]
+    }
+  ]
+}
+
+### 错误输入返回 400
+http_code=400

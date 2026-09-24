@@ -1,0 +1,16 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Foundry
+out/
+cache/
+forge-cache/
+lib/
+
+# 本地运行时产物（anvil 状态、pid、日志、部署清单）
+.run/
+logs/
+deployment.json

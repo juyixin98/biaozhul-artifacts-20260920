@@ -1,0 +1,21 @@
+No files changed, compilation skipped
+
+Ran 15 tests for test/HTLC.t.sol:HTLCTest
+[PASS] test_ClaimThenRefund_Reverts() (gas: 233636)
+[PASS] test_Claim_ByNonReceiver_Reverts() (gas: 188171)
+[PASS] test_Claim_ReentrancyCannotSettleTwice() (gas: 454390)
+[PASS] test_Claim_Twice_SecondReverts() (gas: 230831)
+[PASS] test_Claim_WithCorrectPreimage_PaysReceiver() (gas: 212592)
+[PASS] test_Claim_WrongPreimage_Reverts() (gas: 193833)
+[PASS] test_Lock_SameIdTwice_Reverts() (gas: 193886)
+[PASS] test_Lock_StoresStateAndEmits() (gas: 183511)
+[PASS] test_Lock_ZeroValue_Reverts() (gas: 40214)
+[PASS] test_RefundThenClaim_RevertsEvenWithPreimage() (gas: 238209)
+[PASS] test_Refund_AfterTimelock_Succeeds() (gas: 207305)
+[PASS] test_Refund_BeforeTimelock_Reverts() (gas: 189897)
+[PASS] test_Refund_ExactlyAtTimelock_Succeeds() (gas: 207679)
+[PASS] test_Refund_Twice_SecondReverts() (gas: 229749)
+[PASS] test_UnknownSwap_Reverts() (gas: 57391)
+Suite result: ok. 15 passed; 0 failed; 0 skipped; finished in 1.72ms (5.28ms CPU time)
+
+Ran 1 test suite in 8.80ms (1.72ms CPU time): 15 tests passed, 0 failed, 0 skipped (15 total tests)
