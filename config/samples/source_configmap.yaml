@@ -1,0 +1,13 @@
+# The source ConfigMap the snapshot Job reads. Each key is digested as a file.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: default
+data:
+  config.yaml: |
+    replicas: 3
+    image: registry.example.com/app:v1.2.3
+  settings.json: |
+    {"featureX": true, "timeoutSeconds": 30}
+  version.txt: "v1.2.3"

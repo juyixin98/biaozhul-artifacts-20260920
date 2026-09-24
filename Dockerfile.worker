@@ -1,0 +1,13 @@
+# Purpose-built worker image: a small base that already provides bash,
+# coreutils (sha256sum, wc), findutils (find) and sed/grep, plus a kubectl
+# binary copied in from the build context. No package installation and no
+# network access is required to build it (debian:bookworm-slim is cached).
+#
+# Build context must supply kubectl, e.g.:
+#   cp "$(which kubectl)" buildctx/kubectl && docker build -f Dockerfile.worker
+FROM debian:bookworm-slim
+COPY kubectl /usr/local/bin/kubectl
+RUN chmod +x /usr/local/bin/kubectl
+# Sanity: fail the build early if a required tool is missing from the base.
+RUN bash -c 'for t in bash sha256sum wc find awk sed grep kubectl; do command -v "$t" >/dev/null || { echo "missing $t" >&2; exit 1; }; done'
+ENTRYPOINT ["sleep", "infinity"]

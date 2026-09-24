@@ -1,0 +1,14 @@
+# Single-node kind cluster for local E2E (v1.30.10), wired to the local
+# registry at localhost:5000 (see scripts/devregistry.sh). Pushing images to
+# that registry avoids `kind load`, which breaks when the host Docker uses the
+# containerd image store.
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: snapshot-p081a
+containerdConfigPatches:
+  - |-
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      config_path = "/etc/containerd/certs.d"
+nodes:
+  - role: control-plane
+    image: kindest/node:v1.30.10

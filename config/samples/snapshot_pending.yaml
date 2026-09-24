@@ -1,0 +1,9 @@
+# A snapshot whose source is missing: it stays Pending (no Job created) until
+# the ConfigMap appears.
+apiVersion: snapshot.example.com/v1alpha1
+kind: Snapshot
+metadata:
+  name: pending-demo
+  namespace: default
+spec:
+  sourceConfigMap: does-not-exist-yet

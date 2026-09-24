@@ -1,0 +1,10 @@
+# Digest only one key (subPath). A non-existent key makes the generation fail
+# deterministically — try changing subPath to "missing.txt" to observe Failed.
+apiVersion: snapshot.example.com/v1alpha1
+kind: Snapshot
+metadata:
+  name: app-snapshot-subpath
+  namespace: default
+spec:
+  sourceConfigMap: app-config
+  subPath: config.yaml

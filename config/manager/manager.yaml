@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: snapshot-system
+---
+# Manager (controller)
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: snapshot-controller
+  namespace: snapshot-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: snapshot-controller
+rules:
+  - apiGroups: ["snapshot.example.com"]
+    resources: ["snapshots"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["snapshot.example.com"]
+    resources: ["snapshots/status"]
+    verbs: ["get", "update", "patch"]
+  - apiGroups: ["snapshot.example.com"]
+    resources: ["snapshots/finalizers"]
+    verbs: ["update"]
+  - apiGroups: ["batch"]
+    resources: ["jobs"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create", "patch"]
+  - apiGroups: ["coordination.k8s.io"]
+    resources: ["leases"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: snapshot-controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: snapshot-controller
+subjects:
+  - kind: ServiceAccount
+    name: snapshot-controller
+    namespace: snapshot-system
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: snapshot-controller
+  namespace: snapshot-system
+  labels:
+    app: snapshot-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: snapshot-controller
+  template:
+    metadata:
+      labels:
+        app: snapshot-controller
+    spec:
+      serviceAccountName: snapshot-controller
+      containers:
+        - name: manager
+          image: localhost:5000/snapshot-controller:dev
+          imagePullPolicy: Always
+          args:
+            - --leader-elect=false
+            - --job-image=localhost:5000/snapshot-worker:dev
+            - --job-image-pull-policy=IfNotPresent
+          ports:
+            - containerPort: 8080
+              name: metrics
+            - containerPort: 8081
+              name: health
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: health
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: health

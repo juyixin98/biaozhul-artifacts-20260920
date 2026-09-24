@@ -1,0 +1,8 @@
+# Digest every key of app-config.
+apiVersion: snapshot.example.com/v1alpha1
+kind: Snapshot
+metadata:
+  name: app-snapshot
+  namespace: default
+spec:
+  sourceConfigMap: app-config

@@ -1,0 +1,109 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: snapshots.snapshot.example.com
+spec:
+  group: snapshot.example.com
+  names:
+    kind: Snapshot
+    listKind: SnapshotList
+    plural: snapshots
+    singular: snapshot
+  scope: Namespaced
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      subresources:
+        status: {}
+      additionalPrinterColumns:
+        - name: Phase
+          type: string
+          jsonPath: .status.phase
+        - name: Gen
+          type: integer
+          jsonPath: .status.observedGeneration
+        - name: Digest
+          type: string
+          jsonPath: .status.digest
+        - name: Age
+          type: date
+          jsonPath: .metadata.creationTimestamp
+      schema:
+        openAPIV3Schema:
+          description: Snapshot is a digest of a source ConfigMap produced by a real worker Job.
+          type: object
+          properties:
+            apiVersion:
+              type: string
+            kind:
+              type: string
+            metadata:
+              type: object
+            spec:
+              type: object
+              required:
+                - sourceConfigMap
+              properties:
+                sourceConfigMap:
+                  type: string
+                  minLength: 1
+                  description: Name of the ConfigMap whose keys are snapshotted.
+                subPath:
+                  type: string
+                  description: Optional single key to restrict the digest to.
+            status:
+              type: object
+              properties:
+                observedGeneration:
+                  type: integer
+                  format: int64
+                phase:
+                  type: string
+                  enum: [Pending, Running, Ready, Failed]
+                digest:
+                  type: string
+                algorithm:
+                  type: string
+                fileCount:
+                  type: integer
+                totalBytes:
+                  format: int64
+                  type: integer
+                manifest:
+                  type: string
+                jobRef:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    generation:
+                      type: integer
+                      format: int64
+                failureReason:
+                  type: string
+                failureMessage:
+                  type: string
+                conditions:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - type
+                      - status
+                    properties:
+                      type:
+                        type: string
+                      status:
+                        type: string
+                      reason:
+                        type: string
+                      message:
+                        type: string
+                      lastTransitionTime:
+                        type: string
+                        format: date-time
+                      observedGeneration:
+                        type: integer
+                        format: int64
