@@ -1,0 +1,13 @@
+# Local runtime data
+/data/
+*.db
+*.db-wal
+*.db-shm
+
+# Built binaries
+/server
+/bin/
+*.test
+*.out
+
+# Keep fixtures (registry/) and vendored dependencies tracked.

@@ -1,0 +1,11 @@
+{
+  "os": "linux",
+  "architecture": "arm64",
+  "variant": "v8",
+  "rootfs": {
+    "type": "layers",
+    "diff_ids": [
+      "sha256:d062d6f3a9dcbad74b32bbc034908fe3c49fac30b245f596c2c9561c1915a07c"
+    ]
+  }
+}

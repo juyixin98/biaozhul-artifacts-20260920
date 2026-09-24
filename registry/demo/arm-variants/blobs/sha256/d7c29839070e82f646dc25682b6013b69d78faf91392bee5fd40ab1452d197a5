@@ -1,0 +1,11 @@
+{
+  "os": "linux",
+  "architecture": "arm",
+  "variant": "v7",
+  "rootfs": {
+    "type": "layers",
+    "diff_ids": [
+      "sha256:052b36a840cf6ce64cb3a2371e6cdcc27d6fd1271d417d48fad68cbe3500e77b"
+    ]
+  }
+}

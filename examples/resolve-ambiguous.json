@@ -1,0 +1,4 @@
+{
+  "reference": "latest",
+  "platform": { "os": "linux", "architecture": "amd64" }
+}

@@ -1,0 +1,10 @@
+{
+  "os": "linux",
+  "architecture": "386",
+  "rootfs": {
+    "type": "layers",
+    "diff_ids": [
+      "sha256:9089e966a8421361c7f2e3f626ed7b013e119e0668eedb354445298fe508e166"
+    ]
+  }
+}

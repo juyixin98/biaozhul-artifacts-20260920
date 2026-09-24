@@ -1,0 +1,4 @@
+{
+  "digest": "sha256:REPLACE_WITH_TARGET_INDEX_DIGEST",
+  "mediaType": "application/vnd.oci.image.index.v1+json"
+}
