@@ -1,0 +1,24 @@
+{
+  "root": "root_seq",
+  "nodes": {
+    "root_seq": {
+      "id": "root_seq",
+      "kind": "sequence",
+      "children": ["hash_input", "finish"]
+    },
+    "hash_input": {
+      "id": "hash_input",
+      "kind": "action",
+      "action": "hash.sha256",
+      "idempotent": true,
+      "params": {"input": "hello-resumable-behavior-tree", "delay_ms": 50}
+    },
+    "finish": {
+      "id": "finish",
+      "kind": "action",
+      "action": "stub",
+      "idempotent": false,
+      "params": {"message": "all done"}
+    }
+  }
+}

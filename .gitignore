@@ -1,0 +1,7 @@
+# binaries
+/btserver
+*.test
+*.out
+
+# local env
+.env

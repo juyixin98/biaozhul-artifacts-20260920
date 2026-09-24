@@ -1,0 +1,18 @@
+{
+  "root": "bounded_call",
+  "nodes": {
+    "bounded_call": {
+      "id": "bounded_call",
+      "kind": "timeout",
+      "timeout_ms": 80,
+      "children": ["worker"]
+    },
+    "worker": {
+      "id": "worker",
+      "kind": "action",
+      "action": "stub",
+      "idempotent": false,
+      "params": {"message": "slow; must be canceled at 80ms", "delay_ms": 5000}
+    }
+  }
+}

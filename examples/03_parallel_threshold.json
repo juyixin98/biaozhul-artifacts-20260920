@@ -1,0 +1,33 @@
+{
+  "root": "racer",
+  "nodes": {
+    "racer": {
+      "id": "racer",
+      "kind": "parallel",
+      "success_threshold": 2,
+      "failure_threshold": 2,
+      "children": ["fast_a", "fast_b", "slow_c"]
+    },
+    "fast_a": {
+      "id": "fast_a",
+      "kind": "action",
+      "action": "stub",
+      "idempotent": false,
+      "params": {"message": "A finishes fast", "delay_ms": 30}
+    },
+    "fast_b": {
+      "id": "fast_b",
+      "kind": "action",
+      "action": "stub",
+      "idempotent": false,
+      "params": {"message": "B finishes fast", "delay_ms": 60}
+    },
+    "slow_c": {
+      "id": "slow_c",
+      "kind": "action",
+      "action": "stub",
+      "idempotent": false,
+      "params": {"message": "C is canceled once 2 successes are in", "delay_ms": 5000}
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "root": "try_branches",
+  "nodes": {
+    "try_branches": {
+      "id": "try_branches",
+      "kind": "fallback",
+      "children": ["unreliable", "retry_once", "fallback_ok"]
+    },
+    "unreliable": {
+      "id": "unreliable",
+      "kind": "action",
+      "action": "stub",
+      "idempotent": false,
+      "params": {"result": "failure", "message": "first branch always fails"}
+    },
+    "retry_once": {
+      "id": "retry_once",
+      "kind": "action",
+      "action": "stub",
+      "idempotent": false,
+      "params": {"result": "failure", "delay_ms": 20, "message": "second branch fails too"}
+    },
+    "fallback_ok": {
+      "id": "fallback_ok",
+      "kind": "action",
+      "action": "stub",
+      "idempotent": true,
+      "params": {"message": "third branch succeeds"}
+    }
+  }
+}
