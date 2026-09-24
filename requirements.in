@@ -1,0 +1,14 @@
+# Top-level (direct) dependencies. For the fully resolved, tested set see
+# requirements-lock.txt (generated with `pip freeze`).
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+web3==6.20.3
+eth-account==0.11.2
+eth-keys==0.8.0
+eth-utils==4.1.1
+eth-abi==6.0.0
+hexbytes==0.3.1
+pydantic==2.13.5
+httpx==0.27.2
+requests==2.34.2
+pytest==8.3.3
