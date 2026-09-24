@@ -1,0 +1,21 @@
+{
+  "registry": {
+    "packages": [
+      { "name": "app", "versions": [
+        { "version": "2.0.0", "dependencies": [
+          { "name": "tls", "range": "^1.0.0", "optional": "secure" },
+          { "name": "winapi", "range": "^1.0.0", "platform": "windows" },
+          { "name": "libc", "range": "^1.0.0", "platform": "linux" }
+        ] },
+        { "version": "1.0.0", "dependencies": [
+          { "name": "tls", "range": "^9.0.0", "optional": "secure" }
+        ] } ] },
+      { "name": "tls", "versions": [ { "version": "1.2.0" } ] },
+      { "name": "winapi", "versions": [ { "version": "1.0.0" } ] },
+      { "name": "libc", "versions": [ { "version": "1.0.0" } ] }
+    ]
+  },
+  "requirements": [ { "name": "app", "range": ">=1.0.0" } ],
+  "platform": "linux",
+  "extras": [ "app/secure" ]
+}

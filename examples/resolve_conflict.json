@@ -1,0 +1,16 @@
+{
+  "registry": {
+    "packages": [
+      { "name": "a", "versions": [
+        { "version": "1.0.0", "dependencies": [ { "name": "c", "range": ">=2.0.0" } ] } ] },
+      { "name": "b", "versions": [
+        { "version": "1.0.0", "dependencies": [ { "name": "c", "range": "<2.0.0" } ] } ] },
+      { "name": "c", "versions": [
+        { "version": "1.0.0" }, { "version": "2.0.0" } ] }
+    ]
+  },
+  "requirements": [
+    { "name": "a", "range": "^1.0.0" },
+    { "name": "b", "range": "^1.0.0" }
+  ]
+}
