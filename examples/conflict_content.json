@@ -1,0 +1,22 @@
+{
+  "target_dir": "/tmp/build-output/merged",
+  "actions": [
+    {
+      "id": "compile-x86_64",
+      "outputs": [
+        { "path": "bin", "type": "dir" },
+        { "path": "bin/app", "type": "file", "content_base64": "RUxGLWJpbmFyeS1ib2I=" },
+        { "path": "bin/app.debug", "type": "file", "content_base64": "ZGVidWctc3ltYm9scw==" },
+        { "path": "README", "type": "file", "content_base64": "c2hhcmVkLXJlYWRtZQ==" }
+      ]
+    },
+    {
+      "id": "compile-aarch64",
+      "outputs": [
+        { "path": "README", "type": "file", "content_base64": "c2hhcmVkLXJlYWRtZQ==" },
+        { "path": "bin/app", "type": "file", "content_base64": "YUFSQ0gtYmluYXJ5" },
+        { "path": "bin/latest", "type": "symlink", "target": "./app" }
+      ]
+    }
+  ]
+}

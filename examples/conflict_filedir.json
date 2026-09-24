@@ -1,0 +1,17 @@
+{
+  "target_dir": "/tmp/build-output/merged",
+  "actions": [
+    {
+      "id": "action-one",
+      "outputs": [
+        { "path": "a", "type": "file", "content_base64": "ZmlsZS1h" }
+      ]
+    },
+    {
+      "id": "action-two",
+      "outputs": [
+        { "path": "a/b", "type": "file", "content_base64": "ZmlsZS1i" }
+      ]
+    }
+  ]
+}

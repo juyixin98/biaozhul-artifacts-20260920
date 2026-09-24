@@ -1,0 +1,20 @@
+{
+  "target_dir": "/tmp/build-output/merged",
+  "actions": [
+    {
+      "id": "build-one",
+      "outputs": [
+        { "path": "bin", "type": "dir" },
+        { "path": "bin/app", "type": "file", "content_base64": "aGVsbG8td29ybGQ=" },
+        { "path": "share/doc.txt", "type": "file", "content_base64": "aGVsbG8td29ybGQ=" },
+        { "path": "bin/current", "type": "symlink", "target": "./app" }
+      ]
+    },
+    {
+      "id": "build-two",
+      "outputs": [
+        { "path": "bin/app", "type": "file", "content_base64": "aGVsbG8td29ybGQ=" }
+      ]
+    }
+  ]
+}
