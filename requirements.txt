@@ -1,0 +1,8 @@
+# Direct runtime dependencies (exact pins).
+# The full, hash-pinned closure — including transitive packages and the test
+# tooling — is in requirements.lock. Install that for reproducible builds:
+#   pip install --require-hashes --no-index --find-links=wheels -r requirements.lock
+fastapi==0.141.1
+uvicorn==0.53.0
+pydantic==2.13.5
+python-multipart==0.0.32
