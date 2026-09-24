@@ -1,0 +1,10 @@
+# 运行时依赖（已在 Python 3.12 + Linux 验证安装与全部测试）
+opencv-python-headless==4.10.0.84
+numpy==2.5.3
+fastapi==0.115.6
+uvicorn==0.34.0
+python-multipart==0.0.20
+pydantic==2.10.4
+# 测试依赖
+httpx==0.28.1
+pytest==8.3.4
