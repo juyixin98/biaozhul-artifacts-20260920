@@ -1,0 +1,41 @@
+# Legacy v1alpha1 Timer fixtures (whole-second durations).
+# These are valid create inputs for an old client.
+---
+apiVersion: timer.example.com/v1alpha1
+kind: Timer
+metadata:
+  name: legacy-heartbeat
+  namespace: default
+  labels:
+    app.example.com/component: heartbeat
+spec:
+  intervalSeconds: 30
+  timeoutSeconds: 5
+  extra:
+    region: cn-north-1
+    retries: 3
+    tags: ["legacy", "heartbeat"]
+status:
+  lastFired: "2026-09-23T10:00:00Z"
+---
+# Minimal object: no timeout, no extra, no status. Exercises defaulting of
+# the v1-only priority field across the conversion boundary.
+apiVersion: timer.example.com/v1alpha1
+kind: Timer
+metadata:
+  name: legacy-minimal
+  namespace: default
+spec:
+  intervalSeconds: 1
+---
+# Object an old client would create while a v1 client had previously stored
+# a priority. The annotation is what carries the v1-only value.
+apiVersion: timer.example.com/v1alpha1
+kind: Timer
+metadata:
+  name: legacy-with-hidden-priority
+  namespace: default
+  annotations:
+    timer.example.com/v1-priority: High
+spec:
+  intervalSeconds: 15

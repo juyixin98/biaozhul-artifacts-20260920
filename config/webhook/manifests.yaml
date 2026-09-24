@@ -1,0 +1,51 @@
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: timer-mutating-webhook
+  labels:
+    app: timer-webhook
+webhooks:
+  - name: mutate.timer.example.com
+    admissionReviewVersions: ["v1"]
+    sideEffects: None
+    timeoutSeconds: 10
+    clientConfig:
+      service:
+        name: timer-webhook
+        namespace: timer-system
+        path: /mutate-v1-timer
+        port: 443
+    rules:
+      - apiGroups: ["timer.example.com"]
+        apiVersions: ["v1", "v1alpha1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["timers"]
+        scope: Namespaced
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: timer-validating-webhook
+  labels:
+    app: timer-webhook
+webhooks:
+  - name: validate.timer.example.com
+    admissionReviewVersions: ["v1"]
+    sideEffects: None
+    # Deliberately short: the conversion/validation path must be fast; the
+    # tests exercise a slow webhook with a per-object delay annotation.
+    timeoutSeconds: 10
+    failurePolicy: Fail
+    clientConfig:
+      service:
+        name: timer-webhook
+        namespace: timer-system
+        path: /validate-v1-timer
+        port: 443
+    rules:
+      - apiGroups: ["timer.example.com"]
+        apiVersions: ["v1", "v1alpha1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["timers"]
+        scope: Namespaced

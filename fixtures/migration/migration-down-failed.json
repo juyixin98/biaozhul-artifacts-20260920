@@ -1,0 +1,27 @@
+{
+  "startedAt": "2026-09-24T00:21:44.668297893+08:00",
+  "finishedAt": "2026-09-24T00:21:47.68015992+08:00",
+  "direction": "v1-\u003ealpha1",
+  "resource": "timers.timer.example.com",
+  "storageVersionsBefore": [
+    "v1"
+  ],
+  "storageVersionsAfter": [
+    "v1"
+  ],
+  "total": 0,
+  "migrated": 0,
+  "skipped": 0,
+  "failed": 1,
+  "objects": [
+    {
+      "namespace": "",
+      "name": "\u003clist\u003e",
+      "storageVersionHint": "",
+      "status": "failed",
+      "error": "list via v1alpha1: conversion webhook for timer.example.com/v1, Kind=Timer failed: spec.interval={seconds:0,nanos:500000000} cannot be expressed in v1alpha1 (whole seconds only); sub-second precision must be rounded explicitly before downgrade, it is never truncated implicitly",
+      "attempts": 0,
+      "durationMs": 0
+    }
+  ]
+}

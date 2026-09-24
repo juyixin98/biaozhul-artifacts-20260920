@@ -1,0 +1,131 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: timers.timer.example.com
+  annotations:
+    # Explicit policy for unknown fields: the CRD is structural and the
+    # apiserver PRUNES unknown fields at the root, metadata and spec levels.
+    # The ONLY node that accepts and preserves arbitrary keys is spec.extra,
+    # via x-kubernetes-preserve-unknown-fields: true (declared in BOTH
+    # versions below), so the "keep unknowns?" decision is made per-field in
+    # the schema, not guessed at conversion time.
+    timer.example.com/unknown-fields-policy: "prune everywhere except spec.extra"
+spec:
+  group: timer.example.com
+  scope: Namespaced
+  names:
+    plural: timers
+    singular: timer
+    kind: Timer
+    listKind: TimerList
+  # Conversion is served by the external webhook (cmd/webhook, path /convert).
+  # Tests patch clientConfig.caBundle with their locally generated CA; in a
+  # real deployment cert-manager injects it via the annotation shown here.
+  conversion:
+    strategy: Webhook
+    webhook:
+      conversionReviewVersions: ["v1"]
+      clientConfig:
+        service:
+          name: timer-webhook
+          namespace: timer-system
+          path: /convert
+          port: 443
+  preserveUnknownFields: false
+  versions:
+    # ----------------------------------------------------------------- v1
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          description: Timer is the v1 (storage) shape.
+          required: [spec]
+          properties:
+            spec:
+              type: object
+              required: [interval]
+              properties:
+                interval:
+                  type: object
+                  required: [seconds]
+                  description: Structured duration {seconds, nanos}.
+                  properties:
+                    seconds:
+                      type: integer
+                      format: int64
+                      minimum: 0
+                    nanos:
+                      type: integer
+                      format: int32
+                      minimum: -999999999
+                      maximum: 999999999
+                timeout:
+                  type: object
+                  nullable: true
+                  required: [seconds]
+                  properties:
+                    seconds: {type: integer, format: int64, minimum: 0}
+                    nanos:
+                      type: integer
+                      format: int32
+                      minimum: -999999999
+                      maximum: 999999999
+                priority:
+                  type: string
+                  enum: [Low, Normal, High]
+                  default: Normal
+                  description: >-
+                    New in v1. Persists across v1alpha1 views through the
+                    timer.example.com/v1-priority annotation, so old
+                    clients cannot erase it.
+                extra:
+                  type: object
+                  nullable: true
+                  description: Free-form bag; unknown keys ARE preserved.
+                  x-kubernetes-preserve-unknown-fields: true
+            status:
+              type: object
+              properties:
+                lastFired: {type: string, format: date-time, nullable: true}
+      subresources:
+        status: {}
+    # ----------------------------------------------------------- v1alpha1
+    - name: v1alpha1
+      served: true
+      storage: false
+      # Objects written as v1alpha1 are admitted without priority (it lives
+      # in the annotation after conversion). The mutating webhook defaults
+      # priority on v1 creates instead.
+      schema:
+        openAPIV3Schema:
+          type: object
+          description: Timer is the legacy shape (whole seconds only).
+          required: [spec]
+          properties:
+            spec:
+              type: object
+              required: [intervalSeconds]
+              properties:
+                intervalSeconds:
+                  type: integer
+                  format: int64
+                  minimum: 1
+                timeoutSeconds:
+                  type: integer
+                  format: int64
+                  minimum: 0
+                  nullable: true
+                extra:
+                  type: object
+                  nullable: true
+                  description: Free-form bag; unknown keys ARE preserved.
+                  x-kubernetes-preserve-unknown-fields: true
+            status:
+              type: object
+              properties:
+                lastFired: {type: string, format: date-time, nullable: true}
+      subresources:
+        status: {}

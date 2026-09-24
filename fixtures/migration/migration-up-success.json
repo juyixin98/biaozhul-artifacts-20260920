@@ -1,0 +1,42 @@
+{
+  "startedAt": "2026-09-24T00:22:27.427263409+08:00",
+  "finishedAt": "2026-09-24T00:22:28.527797058+08:00",
+  "direction": "alpha1-\u003ev1",
+  "resource": "timers.timer.example.com",
+  "storageVersionsBefore": [
+    "v1alpha1",
+    "v1"
+  ],
+  "storageVersionsAfter": [
+    "v1alpha1",
+    "v1"
+  ],
+  "total": 2,
+  "migrated": 2,
+  "skipped": 0,
+  "failed": 0,
+  "objects": [
+    {
+      "namespace": "fx-ns",
+      "name": "fx-1",
+      "uid": "06608aff-aad4-4e43-b4a8-454b5464c0ba",
+      "resourceVersion": "206",
+      "storageVersionHint": "v1",
+      "status": "migrated",
+      "attempts": 1,
+      "durationMs": 0,
+      "migratedAt": "2026-09-24T00:22:28.507865193+08:00"
+    },
+    {
+      "namespace": "fx-ns",
+      "name": "fx-2",
+      "uid": "42516b2b-7675-4fbb-a5af-ecb5c60728e7",
+      "resourceVersion": "207",
+      "storageVersionHint": "v1",
+      "status": "migrated",
+      "attempts": 1,
+      "durationMs": 0,
+      "migratedAt": "2026-09-24T00:22:28.523553874+08:00"
+    }
+  ]
+}

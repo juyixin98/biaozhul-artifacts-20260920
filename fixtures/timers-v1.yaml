@@ -1,0 +1,57 @@
+# v1 (storage version) Timer fixtures.
+---
+# Whole-second values: downgradable to v1alpha1 without data loss.
+apiVersion: timer.example.com/v1
+kind: Timer
+metadata:
+  name: v1-whole-seconds
+  namespace: default
+spec:
+  interval: {seconds: 10, nanos: 0}
+  timeout: {seconds: 2}
+  priority: Normal
+  extra:
+    region: cn-north-1
+    shuffle: true
+---
+# Sub-second interval: valid in v1, NOT expressible in v1alpha1. Downgrade
+# (v1 -> v1alpha1 GET, or a storage downgrade migration) must fail loudly,
+# never truncate.
+apiVersion: timer.example.com/v1
+kind: Timer
+metadata:
+  name: v1-subsecond
+  namespace: default
+spec:
+  interval: {seconds: 0, nanos: 250000000}
+  priority: High
+---
+# Missing timeout and missing priority: create succeeds with priority
+# defaulted to Normal (CRD schema default + mutating webhook).
+apiVersion: timer.example.com/v1
+kind: Timer
+metadata:
+  name: v1-defaults-check
+  namespace: default
+spec:
+  interval: {seconds: 60}
+---
+# Intentionally invalid duration: seconds and nanos disagree in sign.
+# The validating webhook must reject it at CREATE.
+apiVersion: timer.example.com/v1
+kind: Timer
+metadata:
+  name: v1-bad-sign
+  namespace: default
+spec:
+  interval: {seconds: 1, nanos: -1}
+  priority: Normal
+---
+# Intentionally invalid: nanos out of the (-1e9, 1e9) range.
+apiVersion: timer.example.com/v1
+kind: Timer
+metadata:
+  name: v1-bad-nanos
+  namespace: default
+spec:
+  interval: {seconds: 1, nanos: 1000000000}

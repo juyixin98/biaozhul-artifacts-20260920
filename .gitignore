@@ -1,0 +1,22 @@
+# binaries
+/webhook
+/storage-migrator
+/bin/
+
+# local migration records (regenerated; committed fixtures live under fixtures/)
+/migration-records/
+*.json.tmp
+
+# local certs
+/tmp/
+*.crt
+*.key
+!fixtures/**/ca.crt
+
+# go
+*.test
+*.out
+
+# editor/OS
+.DS_Store
+*.swp
