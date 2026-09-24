@@ -1,0 +1,5 @@
+{
+  "generation": 1,
+  "challenge": "REPLACE_WITH_NONCE_FROM_CHALLENGE_ENDPOINT",
+  "hmac_hex": "REPLACE_WITH_LOWERCASE_HEX_HMAC_SHA256"
+}

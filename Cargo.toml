@@ -1,0 +1,32 @@
+[package]
+name = "watchdog-host"
+version = "0.1.0"
+edition = "2021"
+description = "Host-side watchdog recovery state machine for device firmware (Axum + SQLite)"
+
+[dependencies]
+axum = "0.8"
+tokio = { version = "1", features = ["full"] }
+rusqlite = { version = "0.32", features = ["bundled"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+hmac = "0.12"
+sha2 = "0.10"
+hex = "0.4"
+subtle = "2"
+rand = "0.8"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[dev-dependencies]
+tower = { version = "0.5", features = ["util"] }
+tempfile = "3"
+
+[[bin]]
+name = "watchdog-host"
+path = "src/main.rs"
+
+[[bin]]
+name = "sign-clearance"
+path = "src/bin/sign_clearance.rs"

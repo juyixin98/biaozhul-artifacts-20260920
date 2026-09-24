@@ -1,0 +1,5 @@
+{
+  "reason": "firmware asserted watchdog: net-loop stalled in recv()",
+  "source": "watchdog_timeout",
+  "boot_count": 42
+}

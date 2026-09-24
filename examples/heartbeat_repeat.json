@@ -1,0 +1,6 @@
+{
+  "reports": [
+    { "task_id": "net-loop", "counter": 41 },
+    { "task_id": "storage-flush", "counter": 17 }
+  ]
+}
