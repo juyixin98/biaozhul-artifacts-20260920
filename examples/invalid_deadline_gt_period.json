@@ -1,0 +1,5 @@
+{
+  "tasks": [
+    {"id": "T1", "wcet": 1, "period": 4, "deadline": 5, "blocking": 0, "priority": 1}
+  ]
+}

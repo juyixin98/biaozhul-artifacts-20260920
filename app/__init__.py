@@ -1,0 +1,3 @@
+"""Offline fixed-priority periodic task schedulability analysis service."""
+
+__version__ = "1.0.0"

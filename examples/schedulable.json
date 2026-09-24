@@ -1,0 +1,29 @@
+{
+  "tasks": [
+    {
+      "id": "T1",
+      "wcet": 1,
+      "period": 4,
+      "deadline": 3,
+      "blocking": 0,
+      "priority": 1
+    },
+    {
+      "id": "T2",
+      "wcet": 2,
+      "period": 8,
+      "deadline": 8,
+      "blocking": 1,
+      "priority": 2
+    },
+    {
+      "id": "T3",
+      "wcet": 3,
+      "period": 12,
+      "deadline": 12,
+      "blocking": 0,
+      "priority": 3
+    }
+  ],
+  "options": {"run_simulation": true}
+}
