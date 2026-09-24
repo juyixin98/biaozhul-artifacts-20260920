@@ -1,0 +1,13 @@
+{
+  "trustedBuilders": ["builder-alice"],
+  "allowedSourceRepos": ["https://github.com/example/project"],
+  "maxAttestationAgeSeconds": 600,
+  "keys": [
+    {
+      "keyId": "key-2026a",
+      "publicKey": "KX9IdHyu0I+26fj4esDHHCfngNb7cPLFJ6ZK/Yj+SXg=",
+      "validFrom": "2026-01-01T00:00:00Z",
+      "validUntil": "2027-01-01T00:00:00Z"
+    }
+  ]
+}
