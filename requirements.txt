@@ -1,0 +1,7 @@
+# 直接安装：pip install -r requirements.txt
+# 完整锁定版本见 requirements.lock.txt
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+httpx>=0.27
+pytest>=8.0

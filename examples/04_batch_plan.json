@@ -1,0 +1,8 @@
+{
+  "requests": [
+    {"robot_id": 1, "start": [0, 1], "goal": [7, 1]},
+    {"robot_id": 2, "start": [7, 0], "goal": [0, 0]},
+    {"robot_id": 3, "start": [0, 0], "goal": [7, 0]}
+  ],
+  "expected_map_version": 1
+}

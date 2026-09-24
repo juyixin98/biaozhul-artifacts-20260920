@@ -1,0 +1,6 @@
+{
+  "robot_id": 2,
+  "start": [7, 0],
+  "goal": [0, 0],
+  "expected_map_version": 1
+}
