@@ -1,0 +1,53 @@
+
+==== 1. start participants + coordinator ====
+all nodes up (c=800404 p1=800384 p2=800385)
+
+==== 2. happy-path commit T1 ====
+{"decision":"COMMIT","status":"COMMITTED","txid":"T1","votes":{"p1":"yes","p2":"yes"}}
+
+{"key":"acc","locked":false,"value":"100"}
+
+{"key":"log","locked":false,"value":"T1-ok"}
+
+
+==== 3. vote-no -> whole txn T2 aborts (p2 key blocked by prepared HOLDER) ====
+{"vote":"yes"}
+
+{"decision":"ABORT","status":"ABORTED","txid":"T2","votes":{"p1":"yes","p2":"vote_no:409"}}
+
+{"key":"acc","locked":false,"value":"100"}
+
+{"blocked":false,"keys":[],"status":"ABORTED","txid":"T2"}
+
+{"status":"ABORTED"}
+
+
+==== 4. C2 crash: COMMIT durable on coordinator, phase-2 not delivered ====
+curl: (52) Empty reply from server
+(connection dropped: coordinator crashed at C2)
+coordinator exited at C2
+
+==== 5. while coordinator is dead: participants show PREPARED (blocked, NOT aborted) ====
+{"blocked":true,"keys":["acc"],"status":"PREPARED","txid":"T3"}
+
+{"blocked":true,"keys":["log"],"status":"PREPARED","txid":"T3"}
+
+{"blocked":[{"txid":"T3","keys":["acc"]}],"node":"p1","note":"prepared txns are never aborted on timeout; they wait for the coordinator"}
+
+
+==== 6. restart coordinator clean -> recovery redelivers COMMIT, both nodes commit ====
+{"status":"COMMIT_COMPLETE","txid":"T3"}
+
+{"key":"acc","locked":false,"value":"300"}
+
+{"key":"log","locked":false,"value":"T3-crash"}
+
+
+==== coordinator log lines: ====
+[c1] 2026/09/24 01:23:24 listening on 127.0.0.1:19000
+[c1] 2026/09/24 01:23:24 startup recovery: txn T1 -> COMMIT_COMPLETE
+[c1] 2026/09/24 01:23:24 startup recovery: txn T2 -> ABORT_COMPLETE
+[c1] 2026/09/24 01:23:24 startup recovery: txn T3 -> COMMIT_COMPLETE
+[c1] 2026/09/24 01:23:24 listening on 127.0.0.1:19000
+
+==== DONE (nodes left running; kill: kill 800384 800385 800439) ====

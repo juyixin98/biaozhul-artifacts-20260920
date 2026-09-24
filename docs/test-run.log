@@ -1,0 +1,46 @@
+?   	tpc/cmd/tpc	[no test files]
+?   	tpc/internal/apprun	[no test files]
+?   	tpc/internal/coordinator	[no test files]
+?   	tpc/internal/crashpoint	[no test files]
+=== RUN   TestPreparedParticipantBlocksWhenCoordinatorGone
+--- PASS: TestPreparedParticipantBlocksWhenCoordinatorGone (6.59s)
+=== RUN   TestCoordinatorCrashC1AbortsPreparedParticipants
+--- PASS: TestCoordinatorCrashC1AbortsPreparedParticipants (0.17s)
+=== RUN   TestHappyPathCommit
+--- PASS: TestHappyPathCommit (0.11s)
+=== RUN   TestVoteNoAbortsEntireTxn
+--- PASS: TestVoteNoAbortsEntireTxn (0.10s)
+=== RUN   TestCrashAtEveryDurableBoundary
+=== RUN   TestCrashAtEveryDurableBoundary/C1_begin-logged
+=== RUN   TestCrashAtEveryDurableBoundary/C2_decision-logged_commit
+=== RUN   TestCrashAtEveryDurableBoundary/C3_done-logged
+=== RUN   TestCrashAtEveryDurableBoundary/P1_prepare-logged_before_vote
+=== RUN   TestCrashAtEveryDurableBoundary/P2_commit-logged_before_ack
+=== RUN   TestCrashAtEveryDurableBoundary/P3_abort-logged_before_ack
+--- PASS: TestCrashAtEveryDurableBoundary (2.95s)
+    --- PASS: TestCrashAtEveryDurableBoundary/C1_begin-logged (0.17s)
+    --- PASS: TestCrashAtEveryDurableBoundary/C2_decision-logged_commit (0.17s)
+    --- PASS: TestCrashAtEveryDurableBoundary/C3_done-logged (0.17s)
+    --- PASS: TestCrashAtEveryDurableBoundary/P1_prepare-logged_before_vote (1.13s)
+    --- PASS: TestCrashAtEveryDurableBoundary/P2_commit-logged_before_ack (1.08s)
+    --- PASS: TestCrashAtEveryDurableBoundary/P3_abort-logged_before_ack (0.24s)
+PASS
+ok  	tpc/internal/integration	10.934s
+=== RUN   TestPreparedBlocksWithoutTimeout
+--- PASS: TestPreparedBlocksWithoutTimeout (0.00s)
+=== RUN   TestCommitAppliesAndReleasesLock
+--- PASS: TestCommitAppliesAndReleasesLock (0.00s)
+=== RUN   TestVoteNoOnEmptyKey
+--- PASS: TestVoteNoOnEmptyKey (0.00s)
+=== RUN   TestAbortReleasesLock
+--- PASS: TestAbortReleasesLock (0.00s)
+PASS
+ok  	tpc/internal/participant	1.026s
+=== RUN   TestAppendAndReplay
+--- PASS: TestAppendAndReplay (0.00s)
+=== RUN   TestTornTailTruncated
+--- PASS: TestTornTailTruncated (0.00s)
+=== RUN   TestLongTornTailTruncated
+--- PASS: TestLongTornTailTruncated (0.00s)
+PASS
+ok  	tpc/internal/wal	1.026s
