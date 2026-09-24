@@ -1,0 +1,14 @@
+# Runtime + test dependencies (PyPI side).
+# Versions recorded are exactly those the implementation and the automated
+# test-suite were developed and verified against (see requirements.lock).
+fastapi>=0.115
+uvicorn>=0.30
+pydantic>=2.7
+pytest>=8.0
+httpx>=0.27
+
+# NOTE: rosbag2_py and rclpy are NOT pip-installable in the standard way.
+# They ship with ROS 2 Jazzy via apt and become importable after sourcing:
+#     source /opt/ros/jazzy/setup.bash
+# Only the pure crypto/protocol tests run without ROS; every bag/engine/ROS
+# test is skipped automatically when those modules are missing.
