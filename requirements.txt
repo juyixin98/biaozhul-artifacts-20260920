@@ -1,0 +1,12 @@
+# Pinned runtime + test dependencies (see requirements.lock for the full
+# transitive freeze). Install for production:
+#   pip install -r requirements.txt
+fastapi==0.141.1
+uvicorn[standard]==0.53.0
+pydantic==2.13.5
+numpy==2.5.3
+PyYAML==6.0.3
+cryptography==50.0.1
+# test / local client
+httpx==0.28.1
+pytest==9.1.1

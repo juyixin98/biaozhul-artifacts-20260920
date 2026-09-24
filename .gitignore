@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Local signing keys — NEVER commit private keys
+keys/
+*.pem
+tests/_tmp_keys/
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/

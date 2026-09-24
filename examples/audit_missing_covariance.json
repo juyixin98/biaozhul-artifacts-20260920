@@ -1,0 +1,188 @@
+{
+  "request_id": "example-004-missing-cov",
+  "calibration_version": "rig-v2.0.0-rc1",
+  "convention": "left",
+  "correlation_policy": "independent",
+  "edges": [
+    {
+      "edge_id": "base_to_bracket",
+      "parent_frame": "base",
+      "child_frame": "bracket",
+      "translation": [
+        0.0,
+        0.0,
+        0.15
+      ],
+      "rotation": {
+        "kind": "quat_wxyz",
+        "quat_wxyz": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "covariance": [
+        [
+          2.5e-07,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          2.5e-07,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          2.5e-07,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1e-08,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1e-08,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1e-08
+        ]
+      ]
+    },
+    {
+      "edge_id": "bracket_to_radar",
+      "parent_frame": "bracket",
+      "child_frame": "radar",
+      "translation": [
+        0.0,
+        0.12,
+        0.0
+      ],
+      "rotation": {
+        "kind": "quat_wxyz",
+        "quat_wxyz": [
+          0.70710678,
+          0.0,
+          0.0,
+          0.70710678
+        ]
+      },
+      "covariance": null
+    },
+    {
+      "edge_id": "base_to_radar_direct",
+      "parent_frame": "base",
+      "child_frame": "radar",
+      "translation": [
+        0.0,
+        0.12,
+        0.15
+      ],
+      "rotation": {
+        "kind": "matrix",
+        "matrix": [
+          [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "covariance": [
+        [
+          4e-06,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          4e-06,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          4e-06,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          2e-07,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2e-07,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2e-07
+        ]
+      ]
+    }
+  ],
+  "loops": [
+    {
+      "name": "base-bracket-radar-base",
+      "frame_ids": [
+        "base",
+        "bracket",
+        "radar",
+        "base"
+      ]
+    }
+  ]
+}
