@@ -1,0 +1,57 @@
+== 1. 空记录查询 ==
+{
+    "targetBlock": 0,
+    "currentBlock": 7,
+    "value": 0,
+    "found": false
+}
+== 2. 写入 value=10（交易在下一块打包）==
+{
+    "value": 10,
+    "blockNumber": 8,
+    "txHash": "9ca7bfebbcb68c777b378d4b8f072b339ac4beacbffcdfb017b44e949274d1e9",
+    "status": 1
+}
+== 3. 挖 4 个空隙块后写入 value=20 ==
+{
+    "value": 20,
+    "blockNumber": 13,
+    "txHash": "6f4a399cd938ac44580dbe532389d59cc35ca6ed5e47d9c1dec269ec6bb50115",
+    "status": 1
+}
+== 4. 历史检查点 ==
+[
+    {
+        "blockNumber": 2,
+        "value": 10
+    },
+    {
+        "blockNumber": 7,
+        "value": 20
+    },
+    {
+        "blockNumber": 8,
+        "value": 10
+    },
+    {
+        "blockNumber": 13,
+        "value": 20
+    }
+]
+== 5. 查询：第一值块、空隙中、当前块 ==
+block 0 -> value=0 found=False
+block 1 -> value=0 found=False
+block 2 -> value=10 found=True
+block 3 -> value=10 found=True
+block 4 -> value=10 found=True
+block 5 -> value=10 found=True
+block 13 -> value=20 found=True
+== 6. 未来块查询被拒绝（HTTP 400） ==
+{"detail":"target block 16 is in the future (current block: 13)","error":"future_block","requested":16,"current":13}
+HTTP 400
+== 7. 最新检查点 ==
+{
+    "blockNumber": 13,
+    "value": 20,
+    "exists": true
+}

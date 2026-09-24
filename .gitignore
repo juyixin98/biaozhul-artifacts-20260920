@@ -1,0 +1,13 @@
+# Foundry
+out/
+cache/
+broadcast/
+lib/
+*.log
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+target/
