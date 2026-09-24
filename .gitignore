@@ -1,0 +1,11 @@
+# binaries & local data
+/scaler
+/server
+/data/
+*.db
+*.db-wal
+*.db-shm
+
+# test/coverage artifacts
+*.out
+coverage.txt

@@ -1,0 +1,14 @@
+{
+  "metricTime": "2026-09-23T10:00:30Z",
+  "currentReplicas": 8,
+  "pods": [
+    { "name": "web-a", "ready": true, "utilizationPct": 18.75 },
+    { "name": "web-b", "ready": true, "utilizationPct": 18.75 },
+    { "name": "web-c", "ready": true, "utilizationPct": null },
+    { "name": "web-d", "ready": true, "utilizationPct": null },
+    { "name": "web-e", "ready": true, "utilizationPct": 18.75 },
+    { "name": "web-f", "ready": true, "utilizationPct": 18.75 },
+    { "name": "web-g", "ready": false, "utilizationPct": 0 },
+    { "name": "web-h", "ready": true, "utilizationPct": 18.75 }
+  ]
+}

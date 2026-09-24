@@ -1,0 +1,7 @@
+{
+  "minReplicas": 1,
+  "maxReplicas": 10,
+  "targetPct": 50,
+  "tolerancePct": 10,
+  "stableWindowSec": 60
+}
