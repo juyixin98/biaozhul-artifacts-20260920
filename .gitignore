@@ -1,0 +1,20 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Foundry
+contracts/out/
+contracts/cache/
+contracts/broadcast/
+out/
+cache/
+
+# 部署产物（含本地测试密钥，仅本机演示用）
+deployments.json
+deployments.test.json
+
+# 杂项
+*.log
+.DS_Store
