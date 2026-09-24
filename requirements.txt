@@ -1,0 +1,19 @@
+# Runtime dependencies (installed via pip; rclpy is provided by ROS 2 Jazzy,
+# NOT pip-installable — source /opt/ros/jazzy/setup.bash before running).
+# Locked against the versions verified on the target machine (Ubuntu 24.04 / ROS Jazzy).
+fastapi==0.141.1
+uvicorn==0.53.0
+pydantic==2.13.5
+pydantic-core==2.46.5
+starlette==1.6.0
+anyio==4.15.1
+click==8.1.6
+h11==0.16.0
+idna==3.6
+typing-extensions==4.16.0
+
+# Test dependencies
+pytest==9.1.1
+httpx==0.28.1
+requests==2.31.0
+certifi==2023.11.17

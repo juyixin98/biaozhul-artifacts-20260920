@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Runtime data (snapshots, HMAC keys, acceptance runs)
+/data/acc-*/
+/data/snapshots/snap-*.json
+/data/snapshots/.key
+*.log

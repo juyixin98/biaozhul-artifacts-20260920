@@ -1,0 +1,17 @@
+{
+  "protocol": "qosdiag-endpoint-announce/1",
+  "seq": 7,
+  "sent_ts": 1758624000.123,
+  "node_name": "demo_pub",
+  "node_namespace": "/",
+  "role": "publisher",
+  "topic": "/qos_demo/data",
+  "message_type": "std_msgs/msg/String",
+  "gid": null,
+  "qos": {
+    "reliability": "BEST_EFFORT",
+    "durability": "VOLATILE",
+    "history": "KEEP_LAST",
+    "depth": 5
+  }
+}

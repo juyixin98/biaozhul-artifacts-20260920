@@ -1,0 +1,59 @@
+{
+  "topic": "/qos_demo/data",
+  "severity": "INCOMPATIBLE",
+  "publisher_count": 1,
+  "subscription_count": 1,
+  "matches": [
+    {
+      "topic": "/qos_demo/data",
+      "publisher_node": "/demo_pub",
+      "subscriber_node": "/demo_sub",
+      "severity": "INCOMPATIBLE",
+      "blocking_rules": ["R1"],
+      "risk_rules": [],
+      "rules_version": "1.0.0",
+      "steps": [
+        {
+          "rule_id": "R1",
+          "attribute": "reliability",
+          "publisher_value": "BEST_EFFORT",
+          "subscriber_value": "RELIABLE",
+          "publisher_evidence": "rmw_discovery",
+          "subscriber_evidence": "rmw_discovery",
+          "decision": "INCOMPATIBLE",
+          "rationale": "subscriber REQUESTS reliable delivery but publisher only OFFERS best-effort; DDS will not match these endpoints"
+        },
+        {
+          "rule_id": "R2",
+          "attribute": "durability",
+          "publisher_value": "VOLATILE",
+          "subscriber_value": "VOLATILE",
+          "publisher_evidence": "rmw_discovery",
+          "subscriber_evidence": "rmw_discovery",
+          "decision": "PASS",
+          "rationale": "publisher's durability offer satisfies subscriber request"
+        },
+        {
+          "rule_id": "R3",
+          "attribute": "history",
+          "publisher_value": "KEEP_LAST",
+          "subscriber_value": "KEEP_LAST",
+          "publisher_evidence": "endpoint_announce",
+          "subscriber_evidence": "endpoint_announce",
+          "decision": "PASS",
+          "rationale": "bounded KEEP_LAST on both sides (or defaults)"
+        },
+        {
+          "rule_id": "R4",
+          "attribute": "depth",
+          "publisher_value": 5,
+          "subscriber_value": 10,
+          "publisher_evidence": "endpoint_announce",
+          "subscriber_evidence": "endpoint_announce",
+          "decision": "PASS",
+          "rationale": "publisher depth 5 <= subscriber depth 10"
+        }
+      ]
+    }
+  ]
+}
