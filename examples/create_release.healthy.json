@@ -1,0 +1,7 @@
+{
+  "name": "checkout-api",
+  "version": "2026.09.23",
+  "scenario": "healthy",
+  "observation_ms": 2000,
+  "min_samples": 80
+}

@@ -1,0 +1,15 @@
+# binaries
+/server
+/stub
+/bin/
+*.test
+*.out
+
+# local env
+.env
+*.log
+
+# editor/OS
+.DS_Store
+.vscode/
+.idea/

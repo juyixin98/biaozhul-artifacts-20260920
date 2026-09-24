@@ -1,0 +1,6 @@
+{
+  "error_rate_upper": 0.03,
+  "latency_mean_ms": 100,
+  "latency_p95_ms": 180,
+  "description": "tighter SLO for checkout path"
+}

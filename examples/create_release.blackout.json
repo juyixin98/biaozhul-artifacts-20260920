@@ -1,0 +1,7 @@
+{
+  "name": "legacy-adapter",
+  "version": "2026.09.23-blind",
+  "scenario": "blackout",
+  "observation_ms": 2000,
+  "min_samples": 80
+}
