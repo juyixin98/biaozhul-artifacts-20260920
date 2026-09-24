@@ -1,0 +1,47 @@
+# 六轴串联机械臂参数（标准 DH 约定）
+#
+# 标准 DH（Denavit-Hartenberg）参数表：
+#   theta = theta_offset[i] + q[i]   （q 为关节变量，单位 rad）
+#   d 沿 z_{i-1} 轴；a 沿 x_i 轴；alpha 为绕 x_i 的扭转角
+#
+# 几何上为带球形腕的典型 6R 工业臂：
+#   - J1 底肩旋转，J2 肩，J3 肘，关节 4/5/6 交于腕点（a4=a5=0, d4=d6=0 风格）
+#   - 零位为完全伸直的奇异姿态（J2/J3 共线，臂展最大）
+#
+# 与 UR 类（偏移 d 参数）不同，本表的肘链位于同一平面，
+# 因此零位同时是“伸直（workspace boundary）奇异”的代表位姿。
+
+robot:
+  name: "RX6S"
+  degrees_of_freedom: 6
+  dh_convention: "standard"
+
+dh:
+  # a (m), d (m), alpha (rad), theta_offset (rad)
+  - {a: 0.00, d: 0.65, alpha:  1.5707963267948966, theta_offset: 0.0}   # J1
+  - {a: 0.35, d: 0.00, alpha:  0.0,                theta_offset: 0.0}   # J2
+  - {a: 0.35, d: 0.00, alpha:  1.5707963267948966, theta_offset: 0.0}   # J3
+  - {a: 0.00, d: 0.35, alpha: -1.5707963267948966, theta_offset: 0.0}   # J4
+  - {a: 0.00, d: 0.00, alpha:  1.5707963267948966, theta_offset: 0.0}   # J5
+  - {a: 0.00, d: 0.12, alpha:  0.0,                theta_offset: 0.0}   # J6 (flange)
+
+# 关节软限位（rad）。单位同时给出度，便于人工核对。
+joint_limits:
+  lower: [-2.9670597283903604, -1.7453292519943295, -2.356194490192345, -3.141592653589793, -1.7453292519943295, -6.283185307179586]
+  upper: [ 2.9670597283903604,  0.7853981633974483,  2.356194490192345,  3.141592653589793,  1.7453292519943295,  6.283185307179586]
+  lower_deg: [-170, -100, -135, -180, -100, -360]
+  upper_deg: [ 170,   45,  135,  180,  100,  360]
+
+# 逆运动学求解参数（可被服务环境变量覆盖，见 app/config.py）
+solver:
+  max_iterations: 200          # 单次阻尼最小二乘最大迭代
+  position_tolerance: 1.0e-5   # 位置收敛阈值 (m)
+  orientation_tolerance: 1.0e-5  # 姿态误差收敛阈值 (rad，旋转矢量范数)
+  damping_initial: 1.0e-3      # DLS 阻尼 λ 初值
+  damping_max: 5.0e-2          # 停滞时允许增大的 λ 上限
+  step_clip: 0.4               # 单步关节角增量截断 (rad)
+  finite_difference_eps: 1.0e-6  # 数值雅可比中心差分步长
+  verify_position_tolerance: 1.0e-4   # 候选解正解核验：位置 (m)
+  verify_orientation_tolerance: 1.0e-4  # 候选解正解核验：姿态 (rad)
+  singular_sigma_threshold: 5.0e-3  # 雅可比最小奇异值低于此视为奇异附近
+  singular_stall_iterations: 25     # 误差连续停滞步数，用于判定奇异不收敛
