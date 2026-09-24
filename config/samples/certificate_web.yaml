@@ -1,0 +1,16 @@
+# Sample Certificate: 24h validity, renewal window opens 8h before expiry
+# (renewBefore defaults to duration/3).
+apiVersion: coordinator.example.com/v1alpha1
+kind: Certificate
+metadata:
+  name: sample-web
+  namespace: default
+spec:
+  dnsNames:
+    - web.example.com
+    - www.example.com
+  commonName: web.example.com
+  duration: 24h
+  secretName: sample-web-tls
+  issuerRef:
+    name: test-ca

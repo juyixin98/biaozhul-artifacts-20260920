@@ -1,0 +1,17 @@
+# Sample Certificate with a short lifetime: 30m validity, renews 10m before
+# expiry. Useful to watch a full renewal cycle live:
+#   kubectl get cert sample-shortlived -w
+apiVersion: coordinator.example.com/v1alpha1
+kind: Certificate
+metadata:
+  name: sample-shortlived
+  namespace: default
+spec:
+  dnsNames:
+    - shortlived.example.com
+  commonName: shortlived.example.com
+  duration: 30m
+  renewBefore: 10m
+  secretName: sample-shortlived-tls
+  issuerRef:
+    name: test-ca

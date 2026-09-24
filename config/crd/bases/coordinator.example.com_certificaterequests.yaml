@@ -1,0 +1,101 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: certificaterequests.coordinator.example.com
+spec:
+  group: coordinator.example.com
+  scope: Namespaced
+  names:
+    kind: CertificateRequest
+    listKind: CertificateRequestList
+    plural: certificaterequests
+    singular: certificaterequest
+    shortNames: [crq]
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      subresources:
+        status: {}
+      additionalPrinterColumns:
+        - name: Ready
+          type: string
+          jsonPath: .status.conditions[?(@.type=="Ready")].status
+        - name: Serial
+          type: string
+          jsonPath: .status.serialNumber
+        - name: NotAfter
+          type: string
+          jsonPath: .status.notAfter
+        - name: Age
+          type: date
+          jsonPath: .metadata.creationTimestamp
+      schema:
+        openAPIV3Schema:
+          type: object
+          description: CertificateRequest is an in-flight or completed signing request.
+          properties:
+            apiVersion:
+              type: string
+            kind:
+              type: string
+            metadata:
+              type: object
+            spec:
+              type: object
+              required: [request, duration, issuerRef]
+              properties:
+                request:
+                  type: string
+                  format: byte
+                  minLength: 1
+                  description: PEM-encoded PKCS#10 CSR (base64 in JSON).
+                duration:
+                  type: string
+                issuerRef:
+                  type: object
+                  required: [name]
+                  properties:
+                    name:
+                      type: string
+                      minLength: 1
+            status:
+              type: object
+              properties:
+                certificate:
+                  type: string
+                  format: byte
+                ca:
+                  type: string
+                  format: byte
+                serialNumber:
+                  type: string
+                notAfter:
+                  type: string
+                  format: date-time
+                notBefore:
+                  type: string
+                  format: date-time
+                failureCount:
+                  type: integer
+                  format: int32
+                conditions:
+                  type: array
+                  items:
+                    type: object
+                    required: [type, status, reason, message, lastTransitionTime]
+                    properties:
+                      type:
+                        type: string
+                      status:
+                        type: string
+                      observedGeneration:
+                        type: integer
+                        format: int64
+                      lastTransitionTime:
+                        type: string
+                        format: date-time
+                      reason:
+                        type: string
+                      message:
+                        type: string

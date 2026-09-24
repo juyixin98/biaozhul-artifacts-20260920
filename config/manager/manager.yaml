@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cert-renewal-coordinator
+  namespace: cert-renewal-system
+  labels:
+    app: cert-renewal-coordinator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cert-renewal-coordinator
+  template:
+    metadata:
+      labels:
+        app: cert-renewal-coordinator
+    spec:
+      serviceAccountName: cert-renewal-coordinator
+      containers:
+        - name: manager
+          image: cert-renewal-coordinator:latest
+          imagePullPolicy: IfNotPresent
+          args:
+            - --leader-elect=false
+          ports:
+            - name: metrics
+              containerPort: 8080
+            - name: health
+              containerPort: 8081
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: health
+            initialDelaySeconds: 2
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: health
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 65532
+            capabilities:
+              drop: ["ALL"]
