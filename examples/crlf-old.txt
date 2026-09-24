@@ -1,0 +1,3 @@
+STEP start build
+STEP compile core
+INFO  compilation ok

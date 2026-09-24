@@ -1,0 +1,6 @@
+STEP start build
+STEP compile core
+INFO  compilation ok
+STEP link
+ERROR link failed: missing symbol
+STEP build failed

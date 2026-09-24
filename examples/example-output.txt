@@ -1,0 +1,47 @@
+== health ==
+{
+  "status": "ok"
+}
+== diff (normal, claims shortest) ==
+{
+  "degraded": false,
+  "shortest": true,
+  "degradeReason": null,
+  "oldLineCount": 4,
+  "newLineCount": 4,
+  "deleteCount": 2,
+  "insertCount": 2,
+  "editDistance": 4,
+  "maxEditDistance": null,
+  "maxInputChars": 2000000,
+  "edits": [
+== diff (budget 1 forces degraded, still applicable) ==
+{
+  "degraded": true,
+  "shortest": false,
+  "degradeReason": "edit distance exceeds maxEditDistance budget (1)",
+  "oldLineCount": 2,
+  "newLineCount": 2,
+  "deleteCount": 2,
+  "insertCount": 2,
+== search synthetic corpus ==
+{
+  "query": "compilation ok",
+  "count": 2,
+  "hits": [
+    {
+      "docId": "log-001",
+      "title": "build log alpha",
+      "score": 10.484906649788002,
+      "matchedLines": [
+        3,
+        5,
+        8
+== apply supplied edit script ==
+{
+  "ok": true,
+  "error": null,
+  "text": "x\nY\nz\n"
+}
+== malformed script -> 422 ==
+422

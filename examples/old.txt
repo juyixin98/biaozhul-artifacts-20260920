@@ -1,0 +1,7 @@
+STEP start build
+STEP compile core
+INFO  compilation ok
+STEP link
+WARN  cache miss app.css
+INFO  link ok
+STEP build done
