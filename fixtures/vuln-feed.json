@@ -1,0 +1,101 @@
+{
+  "alg": "ed25519",
+  "kid": "test-fixture-key-2026",
+  "signature_b64": "E+Gh/4JAeBV2om6b/WN6Oaqydfw4ZJ4PYc2tZs0Y/DOlJrG6b54JF3di7bkurwqgX3YkGQoH0jQvsLO0T2gWBw==",
+  "payload": {
+    "feed_version": "2026.09.24",
+    "generated_at": "2026-09-24T00:00:00Z",
+    "vulnerabilities": [
+      {
+        "id": "VULN-LEFTPAD-001",
+        "ecosystem": "npm",
+        "name": "left-pad",
+        "ranges": [
+          ">=1.0.0 <2.0.0"
+        ],
+        "severity": "high",
+        "title": "left-pad 1.x 原型污染（夹具）",
+        "references": [
+          "https://example.invalid/advisory/VULN-LEFTPAD-001"
+        ]
+      },
+      {
+        "id": "VULN-CYCLE-A-1",
+        "ecosystem": "npm",
+        "name": "cycle-a",
+        "ranges": [
+          ">=1.0.0-alpha <2.0.0"
+        ],
+        "severity": "medium",
+        "title": "cycle-a 预发布区间边界夹具",
+        "references": []
+      },
+      {
+        "id": "VULN-CYCLE-B-9",
+        "ecosystem": "npm",
+        "name": "cycle-b",
+        "ranges": [
+          "^1.0.0"
+        ],
+        "severity": "low",
+        "title": "cycle-b 脱字符区间夹具",
+        "references": []
+      },
+      {
+        "id": "VULN-PRE-42",
+        "ecosystem": "npm",
+        "name": "pre-lib",
+        "ranges": [
+          ">=1.2.0-alpha <1.2.0",
+          "=2.0.0-rc.1"
+        ],
+        "severity": "high",
+        "title": "pre-lib 预发布窗口与精确预发布命中夹具",
+        "references": []
+      },
+      {
+        "id": "VULN-MULTI-7",
+        "ecosystem": "npm",
+        "name": "multi-lib",
+        "ranges": [
+          "~3.1.0",
+          ">=3.2.0 <=3.2.1"
+        ],
+        "severity": "medium",
+        "title": "multi-lib 波浪号与闭区间边界夹具",
+        "references": []
+      },
+      {
+        "id": "VULN-WILDCARD-3",
+        "ecosystem": "npm",
+        "name": "weird-x",
+        "ranges": [
+          "*"
+        ],
+        "severity": "info",
+        "title": "weird-x 通配区间夹具（通配不覆盖预发布与非法版本）",
+        "references": []
+      },
+      {
+        "id": "VULN-NORANGE-5",
+        "ecosystem": "npm",
+        "name": "no-range-lib",
+        "ranges": [],
+        "severity": "unknown",
+        "title": "缺少区间的情报夹具",
+        "references": []
+      },
+      {
+        "id": "VULN-JSON-PYPI-2",
+        "ecosystem": "pypi",
+        "name": "json",
+        "ranges": [
+          ">=1.0.0 <2.0.0"
+        ],
+        "severity": "high",
+        "title": "pypi json 夹具：与 npm 同名包不得混淆",
+        "references": []
+      }
+    ]
+  }
+}

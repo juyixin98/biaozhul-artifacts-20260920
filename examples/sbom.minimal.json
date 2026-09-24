@@ -1,0 +1,19 @@
+{
+  "sbom_version": "1.0",
+  "component": {"name": "demo-app", "version": "0.1.0"},
+  "packages": [
+    {
+      "ecosystem": "npm",
+      "name": "demo-app",
+      "version": "0.1.0",
+      "is_root": true,
+      "dependencies": ["npm:left-pad@1.3.0"]
+    },
+    {
+      "ecosystem": "npm",
+      "name": "left-pad",
+      "version": "1.3.0",
+      "dependencies": []
+    }
+  ]
+}

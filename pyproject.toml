@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sbom-risk-matcher"
+version = "1.0.0"
+description = "自定义 JSON SBOM + SemVer 区间的纯后端漏洞风险匹配服务"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "cryptography>=42.0",
+    "pydantic>=2.6",
+]
+
+[tool.setuptools.packages.find]
+include = ["sbom_risk*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
