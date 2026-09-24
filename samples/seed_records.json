@@ -1,0 +1,11 @@
+{
+  "records": [
+    {"entity_id": "u1", "feature": "click_rate_7d", "value": 0.10, "event_ts": 100, "ingest_ts": 110},
+    {"entity_id": "u1", "feature": "click_rate_7d", "value": 0.20, "event_ts": 200, "ingest_ts": 215},
+    {"entity_id": "u1", "feature": "click_rate_7d", "value": 0.99, "event_ts": 200, "ingest_ts": 260},
+    {"entity_id": "u1", "feature": "click_rate_7d", "value": 0.30, "event_ts": 300, "ingest_ts": 400},
+    {"entity_id": "u1", "feature": "avg_spend_30d", "value": 42.0, "event_ts": 150, "ingest_ts": 160},
+    {"entity_id": "u2", "feature": "click_rate_7d", "value": 0.50, "event_ts": 100, "ingest_ts": 105},
+    {"entity_id": "u2", "feature": "click_rate_7d", "value": 0.55, "event_ts": 100, "ingest_ts": 120}
+  ]
+}

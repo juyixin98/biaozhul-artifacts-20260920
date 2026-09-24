@@ -1,0 +1,10 @@
+{
+  "spine": [
+    {"entity_id": "u1", "event_ts": 250},
+    {"entity_id": "u1", "event_ts": 350},
+    {"entity_id": "u1", "event_ts": 450},
+    {"entity_id": "u2", "event_ts": 110},
+    {"entity_id": "u2", "event_ts": 130}
+  ],
+  "features": ["click_rate_7d", "avg_spend_30d"]
+}
