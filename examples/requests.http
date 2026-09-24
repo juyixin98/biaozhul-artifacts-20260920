@@ -1,0 +1,26 @@
+### health check
+GET http://127.0.0.1:8080/health
+
+### package a directory
+# @name pack
+POST http://127.0.0.1:8080/pack
+Content-Type: application/json
+
+{
+  "source": "/tmp/demo/src",
+  "output_dir": "/tmp/demo/out",
+  "artifact_name": "release",
+  "mtime_epoch": 0,
+  "overwrite": true
+}
+
+### verify the produced archive, manifest and digest; rebuild from source
+POST http://127.0.0.1:8080/verify
+Content-Type: application/json
+
+{
+  "tar_path": "/tmp/demo/out/release.tar",
+  "manifest_path": "/tmp/demo/out/release.manifest.json",
+  "digest_path": "/tmp/demo/out/release.sha256",
+  "source": "/tmp/demo/src"
+}

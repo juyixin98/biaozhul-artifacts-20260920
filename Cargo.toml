@@ -1,0 +1,32 @@
+[package]
+name = "repro-pack"
+version = "0.1.0"
+edition = "2021"
+description = "Deterministic, reproducible artifact packaging service (HTTP + CLI)"
+
+[lib]
+name = "repro_pack"
+path = "src/lib.rs"
+
+[[bin]]
+name = "repro-pack"
+path = "src/main.rs"
+
+[dependencies]
+axum = "0.8"
+clap = { version = "4", features = ["derive"] }
+hex = "0.4"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+tar = "0.4"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "signal"] }
+
+[dev-dependencies]
+http-body-util = "0.1"
+tempfile = "3"
+tower = { version = "0.5", features = ["util"] }
+
+[profile.release]
+# reproducible-ish local build hygiene; archive determinism does not depend on it
+panic = "abort"
