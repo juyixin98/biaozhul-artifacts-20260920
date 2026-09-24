@@ -1,0 +1,28 @@
+{
+  "width": 10,
+  "height": 8,
+  "connectivity": 8,
+  "diagonal_rule": "two_blocked",
+  "start": [0, 4],
+  "goal": [9, 3],
+  "cost": [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 4, 4, 4, 1, 1, 1, 1, 1],
+    [1, 1, 4, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 4, 1, 1, 1, 1, 1, 2, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 2, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 2, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  ],
+  "blocked": [
+    [false, false, false, false, false, false, false, false, false, false],
+    [false, false, false, true,  false, false, false, false, false, false],
+    [false, false, false, true,  false, false, false, false, false, false],
+    [false, false, false, true,  false, false, false, false, false, false],
+    [false, false, false, true,  false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false, false, false],
+    [false, false, false, false, false, false, false, false, false, false]
+  ]
+}

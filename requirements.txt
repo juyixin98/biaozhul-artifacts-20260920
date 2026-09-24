@@ -1,0 +1,8 @@
+# Top-level direct dependencies. Pinned, resolved versions live in
+# requirements-lock.txt (install that for reproducible builds).
+fastapi==0.141.1
+uvicorn[standard]==0.53.0
+numpy==2.5.3
+pydantic==2.13.5
+httpx==0.28.1
+pytest==9.1.1
