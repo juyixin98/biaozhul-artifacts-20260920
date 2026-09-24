@@ -1,0 +1,7 @@
+{
+  "slots": 1,
+  "tasks": [
+    {"id": "low",  "priority": 1, "arrival": 0,  "work": 100, "checkpoint_interval": 20, "checkpoint_cost": 5},
+    {"id": "high", "priority": 9, "arrival": 47, "work": 30,  "checkpoint_interval": 10, "checkpoint_cost": 2}
+  ]
+}
