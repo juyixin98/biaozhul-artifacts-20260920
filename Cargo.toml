@@ -1,0 +1,20 @@
+[package]
+name = "serial-frame-parser"
+version = "0.1.0"
+edition = "2021"
+description = "Incremental parser for a custom binary serial protocol and an Axum HTTP replay service"
+license = "MIT"
+publish = false
+
+[dependencies]
+axum = "0.8"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[dev-dependencies]
+http-body-util = "0.1"
+tower = { version = "0.5", features = ["util"] }
+
+[lints.clippy]
+all = "warn"
