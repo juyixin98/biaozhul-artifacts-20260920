@@ -1,0 +1,4 @@
+target/
+index-data/
+*.class
+dependency-reduced-pom.xml
