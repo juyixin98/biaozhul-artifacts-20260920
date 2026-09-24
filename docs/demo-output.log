@@ -1,0 +1,673 @@
+
+### $ POST http://127.0.0.1:55379/v1/nodes
+{
+  "name": "n1",
+  "capacity": 6,
+  "labels": {
+    "zone": "a"
+  }
+}
+### response:
+{
+  "name": "n1",
+  "labels": {
+    "zone": "a"
+  },
+  "capacity": 6,
+  "reserved": 0,
+  "running": 0,
+  "status": "ONLINE",
+  "version": 1
+}
+
+### $ POST http://127.0.0.1:55379/v1/nodes
+{
+  "name": "n2",
+  "capacity": 6,
+  "labels": {
+    "zone": "b"
+  }
+}
+### response:
+{
+  "name": "n2",
+  "labels": {
+    "zone": "b"
+  },
+  "capacity": 6,
+  "reserved": 0,
+  "running": 0,
+  "status": "ONLINE",
+  "version": 1
+}
+
+### $ POST http://127.0.0.1:55379/v1/gangs
+{
+  "id": "A",
+  "ttl_ms": 5000,
+  "tasks": [
+    {
+      "id": "a1",
+      "slots": 4,
+      "match_labels": {
+        "zone": "a"
+      }
+    },
+    {
+      "id": "a2",
+      "slots": 4,
+      "match_labels": {
+        "zone": "b"
+      }
+    }
+  ]
+}
+### response:
+{
+  "id": "A",
+  "status": "HELD",
+  "tasks": [
+    {
+      "id": "a1",
+      "slots": 4,
+      "match_labels": {
+        "zone": "a"
+      }
+    },
+    {
+      "id": "a2",
+      "slots": 4,
+      "match_labels": {
+        "zone": "b"
+      }
+    }
+  ],
+  "distinct_nodes": false,
+  "reservation": {
+    "id": 1,
+    "expires_at": "2026-09-24T09:00:34.426586056+08:00",
+    "ttl_ms": 5000,
+    "assignments": [
+      {
+        "task_id": "a1",
+        "node_name": "n1",
+        "slots": 4
+      },
+      {
+        "task_id": "a2",
+        "node_name": "n2",
+        "slots": 4
+      }
+    ],
+    "node_versions": {
+      "n1": 1,
+      "n2": 1
+    }
+  },
+  "created_at": "2026-09-24T09:00:29.426586056+08:00",
+  "updated_at": "2026-09-24T09:00:29.426586056+08:00"
+}
+
+### $ POST http://127.0.0.1:55379/v1/gangs
+{
+  "id": "B",
+  "ttl_ms": 5000,
+  "tasks": [
+    {
+      "id": "b1",
+      "slots": 4,
+      "match_labels": {
+        "zone": "a"
+      }
+    },
+    {
+      "id": "b2",
+      "slots": 4,
+      "match_labels": {
+        "zone": "b"
+      }
+    }
+  ]
+}
+### response:
+{
+  "id": "B",
+  "status": "WAITING",
+  "tasks": [
+    {
+      "id": "b1",
+      "slots": 4,
+      "match_labels": {
+        "zone": "a"
+      }
+    },
+    {
+      "id": "b2",
+      "slots": 4,
+      "match_labels": {
+        "zone": "b"
+      }
+    }
+  ],
+  "distinct_nodes": false,
+  "created_at": "2026-09-24T09:00:29.438476545+08:00",
+  "updated_at": "2026-09-24T09:00:29.438476545+08:00"
+}
+# A plan versions: {"n1":1,"n2":1}
+
+### $ POST http://127.0.0.1:55379/v1/nodes/n1/status
+{
+  "status": "OFFLINE"
+}
+### response:
+{
+  "name": "n1",
+  "labels": {
+    "zone": "a"
+  },
+  "capacity": 6,
+  "reserved": 4,
+  "running": 0,
+  "status": "OFFLINE",
+  "version": 2
+}
+
+### $ POST http://127.0.0.1:55379/v1/gangs/A/commit
+{
+  "expected_node_versions": {
+    "n1": 1,
+    "n2": 1
+  }
+}
+### response:
+{
+  "error": {
+    "code": "VERSION_MISMATCH",
+    "reason": "stale plan: node n1 changed"
+  }
+}
+
+### $ GET http://127.0.0.1:55379/v1/state
+### response:
+{
+  "nodes": [
+    {
+      "name": "n1",
+      "labels": {
+        "zone": "a"
+      },
+      "capacity": 6,
+      "reserved": 0,
+      "running": 0,
+      "status": "OFFLINE",
+      "version": 2
+    },
+    {
+      "name": "n2",
+      "labels": {
+        "zone": "b"
+      },
+      "capacity": 6,
+      "reserved": 0,
+      "running": 0,
+      "status": "ONLINE",
+      "version": 1
+    }
+  ],
+  "gangs": [
+    {
+      "id": "A",
+      "status": "FAILED",
+      "tasks": [
+        {
+          "id": "a1",
+          "slots": 4,
+          "match_labels": {
+            "zone": "a"
+          }
+        },
+        {
+          "id": "a2",
+          "slots": 4,
+          "match_labels": {
+            "zone": "b"
+          }
+        }
+      ],
+      "distinct_nodes": false,
+      "reason": "VERSION_MISMATCH: node n1 version 2, plan was based on 1",
+      "created_at": "2026-09-24T09:00:29.426586056+08:00",
+      "updated_at": "2026-09-24T09:00:29.471794692+08:00"
+    },
+    {
+      "id": "B",
+      "status": "WAITING",
+      "tasks": [
+        {
+          "id": "b1",
+          "slots": 4,
+          "match_labels": {
+            "zone": "a"
+          }
+        },
+        {
+          "id": "b2",
+          "slots": 4,
+          "match_labels": {
+            "zone": "b"
+          }
+        }
+      ],
+      "distinct_nodes": false,
+      "created_at": "2026-09-24T09:00:29.438476545+08:00",
+      "updated_at": "2026-09-24T09:00:29.438476545+08:00"
+    }
+  ]
+}
+
+### $ POST http://127.0.0.1:55379/v1/nodes/n1/status
+{
+  "status": "ONLINE"
+}
+### response:
+{
+  "name": "n1",
+  "labels": {
+    "zone": "a"
+  },
+  "capacity": 6,
+  "reserved": 4,
+  "running": 0,
+  "status": "ONLINE",
+  "version": 3
+}
+
+### $ GET http://127.0.0.1:55379/v1/gangs/B
+### response:
+{
+  "id": "B",
+  "status": "HELD",
+  "tasks": [
+    {
+      "id": "b1",
+      "slots": 4,
+      "match_labels": {
+        "zone": "a"
+      }
+    },
+    {
+      "id": "b2",
+      "slots": 4,
+      "match_labels": {
+        "zone": "b"
+      }
+    }
+  ],
+  "distinct_nodes": false,
+  "reservation": {
+    "id": 2,
+    "expires_at": "2026-09-24T09:00:34.49087336+08:00",
+    "ttl_ms": 5000,
+    "assignments": [
+      {
+        "task_id": "b1",
+        "node_name": "n1",
+        "slots": 4
+      },
+      {
+        "task_id": "b2",
+        "node_name": "n2",
+        "slots": 4
+      }
+    ],
+    "node_versions": {
+      "n1": 3,
+      "n2": 1
+    }
+  },
+  "created_at": "2026-09-24T09:00:29.49087336+08:00",
+  "updated_at": "2026-09-24T09:00:29.49087336+08:00"
+}
+
+### $ POST http://127.0.0.1:55379/v1/gangs/B/commit
+{
+  "expected_node_versions": {
+    "n1": 3,
+    "n2": 1
+  }
+}
+### response:
+{
+  "id": "B",
+  "status": "RUNNING",
+  "tasks": [
+    {
+      "id": "b1",
+      "slots": 4,
+      "match_labels": {
+        "zone": "a"
+      }
+    },
+    {
+      "id": "b2",
+      "slots": 4,
+      "match_labels": {
+        "zone": "b"
+      }
+    }
+  ],
+  "distinct_nodes": false,
+  "running": [
+    {
+      "task_id": "b1",
+      "node_name": "n1",
+      "slots": 4
+    },
+    {
+      "task_id": "b2",
+      "node_name": "n2",
+      "slots": 4
+    }
+  ],
+  "created_at": "2026-09-24T09:00:29.49087336+08:00",
+  "updated_at": "2026-09-24T09:00:29.518450002+08:00"
+}
+
+### $ POST http://127.0.0.1:55379/v1/gangs/B/release
+### response:
+{
+  "id": "B",
+  "status": "COMPLETE",
+  "tasks": [
+    {
+      "id": "b1",
+      "slots": 4,
+      "match_labels": {
+        "zone": "a"
+      }
+    },
+    {
+      "id": "b2",
+      "slots": 4,
+      "match_labels": {
+        "zone": "b"
+      }
+    }
+  ],
+  "distinct_nodes": false,
+  "created_at": "2026-09-24T09:00:29.49087336+08:00",
+  "updated_at": "2026-09-24T09:00:29.525634153+08:00"
+}
+
+### $ POST http://127.0.0.1:55379/v1/gangs/A/replan
+### response:
+{
+  "id": "A",
+  "status": "HELD",
+  "tasks": [
+    {
+      "id": "a1",
+      "slots": 4,
+      "match_labels": {
+        "zone": "a"
+      }
+    },
+    {
+      "id": "a2",
+      "slots": 4,
+      "match_labels": {
+        "zone": "b"
+      }
+    }
+  ],
+  "distinct_nodes": false,
+  "reservation": {
+    "id": 3,
+    "expires_at": "2026-09-24T09:00:34.534183233+08:00",
+    "ttl_ms": 5000,
+    "assignments": [
+      {
+        "task_id": "a1",
+        "node_name": "n1",
+        "slots": 4
+      },
+      {
+        "task_id": "a2",
+        "node_name": "n2",
+        "slots": 4
+      }
+    ],
+    "node_versions": {
+      "n1": 3,
+      "n2": 1
+    }
+  },
+  "created_at": "2026-09-24T09:00:29.534183233+08:00",
+  "updated_at": "2026-09-24T09:00:29.534183233+08:00"
+}
+
+### $ POST http://127.0.0.1:55379/v1/gangs/A/commit
+{
+  "expected_node_versions": {
+    "n1": 3,
+    "n2": 1
+  }
+}
+### response:
+{
+  "id": "A",
+  "status": "RUNNING",
+  "tasks": [
+    {
+      "id": "a1",
+      "slots": 4,
+      "match_labels": {
+        "zone": "a"
+      }
+    },
+    {
+      "id": "a2",
+      "slots": 4,
+      "match_labels": {
+        "zone": "b"
+      }
+    }
+  ],
+  "distinct_nodes": false,
+  "running": [
+    {
+      "task_id": "a1",
+      "node_name": "n1",
+      "slots": 4
+    },
+    {
+      "task_id": "a2",
+      "node_name": "n2",
+      "slots": 4
+    }
+  ],
+  "created_at": "2026-09-24T09:00:29.534183233+08:00",
+  "updated_at": "2026-09-24T09:00:29.552393708+08:00"
+}
+
+### $ POST http://127.0.0.1:55379/v1/gangs
+{
+  "id": "C",
+  "ttl_ms": 300,
+  "tasks": [
+    {
+      "id": "c1",
+      "slots": 1
+    }
+  ]
+}
+### response:
+{
+  "id": "C",
+  "status": "HELD",
+  "tasks": [
+    {
+      "id": "c1",
+      "slots": 1
+    }
+  ],
+  "distinct_nodes": false,
+  "reservation": {
+    "id": 4,
+    "expires_at": "2026-09-24T09:00:29.863461349+08:00",
+    "ttl_ms": 300,
+    "assignments": [
+      {
+        "task_id": "c1",
+        "node_name": "n1",
+        "slots": 1
+      }
+    ],
+    "node_versions": {
+      "n1": 3
+    }
+  },
+  "created_at": "2026-09-24T09:00:29.563461349+08:00",
+  "updated_at": "2026-09-24T09:00:29.563461349+08:00"
+}
+
+### $ GET http://127.0.0.1:55379/v1/gangs/C
+### response:
+{
+  "id": "C",
+  "status": "FAILED",
+  "tasks": [
+    {
+      "id": "c1",
+      "slots": 1
+    }
+  ],
+  "distinct_nodes": false,
+  "reason": "RESERVATION_EXPIRED: reservation expired at 2026-09-24T09:00:29.863461349+08:00",
+  "created_at": "2026-09-24T09:00:29.563461349+08:00",
+  "updated_at": "2026-09-24T09:00:29.886561791+08:00"
+}
+
+### $ GET http://127.0.0.1:55379/v1/state
+### response:
+{
+  "nodes": [
+    {
+      "name": "n1",
+      "labels": {
+        "zone": "a"
+      },
+      "capacity": 6,
+      "reserved": 0,
+      "running": 4,
+      "status": "ONLINE",
+      "version": 3
+    },
+    {
+      "name": "n2",
+      "labels": {
+        "zone": "b"
+      },
+      "capacity": 6,
+      "reserved": 0,
+      "running": 4,
+      "status": "ONLINE",
+      "version": 1
+    }
+  ],
+  "gangs": [
+    {
+      "id": "A",
+      "status": "RUNNING",
+      "tasks": [
+        {
+          "id": "a1",
+          "slots": 4,
+          "match_labels": {
+            "zone": "a"
+          }
+        },
+        {
+          "id": "a2",
+          "slots": 4,
+          "match_labels": {
+            "zone": "b"
+          }
+        }
+      ],
+      "distinct_nodes": false,
+      "running": [
+        {
+          "task_id": "a1",
+          "node_name": "n1",
+          "slots": 4
+        },
+        {
+          "task_id": "a2",
+          "node_name": "n2",
+          "slots": 4
+        }
+      ],
+      "created_at": "2026-09-24T09:00:29.534183233+08:00",
+      "updated_at": "2026-09-24T09:00:29.552393708+08:00"
+    },
+    {
+      "id": "B",
+      "status": "COMPLETE",
+      "tasks": [
+        {
+          "id": "b1",
+          "slots": 4,
+          "match_labels": {
+            "zone": "a"
+          }
+        },
+        {
+          "id": "b2",
+          "slots": 4,
+          "match_labels": {
+            "zone": "b"
+          }
+        }
+      ],
+      "distinct_nodes": false,
+      "created_at": "2026-09-24T09:00:29.49087336+08:00",
+      "updated_at": "2026-09-24T09:00:29.525634153+08:00"
+    },
+    {
+      "id": "C",
+      "status": "FAILED",
+      "tasks": [
+        {
+          "id": "c1",
+          "slots": 1
+        }
+      ],
+      "distinct_nodes": false,
+      "reason": "RESERVATION_EXPIRED: reservation expired at 2026-09-24T09:00:29.863461349+08:00",
+      "created_at": "2026-09-24T09:00:29.563461349+08:00",
+      "updated_at": "2026-09-24T09:00:29.886561791+08:00"
+    }
+  ]
+}
+2026/09/24 09:00:29 gangd listening on :55379 (ttl=5s reap=50ms)
+2026/09/24 09:00:29 GET /healthz -> 200 37.697µs
+2026/09/24 09:00:29 POST /v1/nodes -> 201 101.035µs
+2026/09/24 09:00:29 POST /v1/nodes -> 201 73.193µs
+2026/09/24 09:00:29 POST /v1/gangs -> 201 240.696µs
+2026/09/24 09:00:29 POST /v1/gangs -> 201 107.837µs
+2026/09/24 09:00:29 GET /v1/gangs/A -> 200 90.792µs
+2026/09/24 09:00:29 POST /v1/nodes/n1/status -> 200 69.282µs
+2026/09/24 09:00:29 POST /v1/gangs/A/commit -> 409 163.83µs
+2026/09/24 09:00:29 GET /v1/state -> 200 103.397µs
+2026/09/24 09:00:29 POST /v1/nodes/n1/status -> 200 55.171µs
+2026/09/24 09:00:29 GET /v1/gangs/B -> 200 76.646µs
+2026/09/24 09:00:29 GET /v1/gangs/B -> 200 48.438µs
+2026/09/24 09:00:29 POST /v1/gangs/B/commit -> 200 59.194µs
+2026/09/24 09:00:29 POST /v1/gangs/B/release -> 200 40.407µs
+2026/09/24 09:00:29 POST /v1/gangs/A/replan -> 200 50.807µs
+2026/09/24 09:00:29 GET /v1/gangs/A -> 200 40.146µs
+2026/09/24 09:00:29 POST /v1/gangs/A/commit -> 200 55.169µs
+2026/09/24 09:00:29 POST /v1/gangs -> 201 120.641µs
+2026/09/24 09:00:30 GET /v1/gangs/C -> 200 48.886µs
+2026/09/24 09:00:30 GET /v1/state -> 200 85.273µs

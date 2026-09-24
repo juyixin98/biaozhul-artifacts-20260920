@@ -1,0 +1,7 @@
+# binaries
+/gangd
+/bin/
+*.test
+
+# local artifacts
+/tmp/
