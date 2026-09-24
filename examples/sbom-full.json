@@ -1,0 +1,182 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-09-24T10:00:00Z",
+    "component": {
+      "bom-ref": "app@1.0.0",
+      "type": "application",
+      "name": "demo-app",
+      "version": "1.0.0",
+      "purl": "pkg:npm/demo-app@1.0.0",
+      "scope": "required"
+    }
+  },
+  "components": [
+    {
+      "bom-ref": "left-pad@6.10.3",
+      "type": "library",
+      "name": "left-pad",
+      "version": "6.10.3",
+      "scope": "required",
+      "purl": "pkg:npm/left-pad@6.10.3"
+    },
+    {
+      "bom-ref": "left-pad@6.10.3-dup",
+      "type": "library",
+      "name": "left-pad",
+      "version": "6.10.3",
+      "scope": "optional",
+      "purl": "pkg:npm/left-pad@6.10.3",
+      "description": "与上一条是同一组件（重复出现），应被合并，scope 取 required"
+    },
+    {
+      "bom-ref": "left-pad-linux@6.10.3",
+      "type": "library",
+      "name": "left-pad",
+      "version": "6.10.3",
+      "purl": "pkg:npm/left-pad@6.10.3?os=linux",
+      "description": "不同变体（qualifier 不同），不能与无前缀变体混同"
+    },
+    {
+      "bom-ref": "left-pad-darwin@6.10.3",
+      "type": "library",
+      "name": "left-pad",
+      "version": "6.10.3",
+      "purl": "pkg:npm/left-pad@6.10.3?os=darwin"
+    },
+    {
+      "bom-ref": "pre-release-lib@1.0.0-rc.2",
+      "type": "library",
+      "name": "pre-release-lib",
+      "version": "1.0.0-rc.2",
+      "purl": "pkg:npm/pre-release-lib@1.0.0-rc.2"
+    },
+    {
+      "bom-ref": "pre-release-lib@1.0.0",
+      "type": "library",
+      "name": "pre-release-lib",
+      "version": "1.0.0",
+      "purl": "pkg:npm/pre-release-lib@1.0.0"
+    },
+    {
+      "bom-ref": "requests@2.20",
+      "type": "library",
+      "name": "requests",
+      "version": "2.20",
+      "purl": "pkg:pypi/requests@2.20"
+    },
+    {
+      "bom-ref": "requests@2.20rc1",
+      "type": "library",
+      "name": "requests",
+      "version": "2.20rc1",
+      "purl": "pkg:pypi/requests@2.20rc1",
+      "description": "预发布：PEP 440 下 2.20rc1 < 2.20，落在 >=1.0,<2.21 内，受影响"
+    },
+    {
+      "bom-ref": "requests@2.21rc1",
+      "type": "library",
+      "name": "requests",
+      "version": "2.21rc1",
+      "purl": "pkg:pypi/requests@2.21rc1",
+      "description": "预发布端点：PEP 440 下 2.21rc1 < 2.21 但属于 2.21 系列；范围 <2.21 判定为不受影响（演示真实数值顺序而非字符串）"
+    },
+    {
+      "bom-ref": "http-core@3.1.0",
+      "type": "library",
+      "group": "com.example",
+      "name": "http-core",
+      "version": "3.1.0",
+      "purl": "pkg:maven/com.example/http-core@3.1.0"
+    },
+    {
+      "bom-ref": "http-core@3.2.0",
+      "type": "library",
+      "group": "com.example",
+      "name": "http-core",
+      "version": "3.2.0",
+      "purl": "pkg:maven/com.example/http-core@3.2.0",
+      "description": "恰为修复端点：闭开区间 [3.0.0,3.2.0) 不受影响"
+    },
+    {
+      "bom-ref": "nokogiri@1.13.0.rc1",
+      "type": "library",
+      "name": "nokogiri",
+      "version": "1.13.0.rc1",
+      "purl": "pkg:gem/nokogiri@1.13.0.rc1"
+    },
+    {
+      "bom-ref": "curl@2.50.3-1",
+      "type": "library",
+      "name": "curl",
+      "version": "2.50.3-1",
+      "purl": "pkg:deb/debian/curl@2.50.3-1?arch=amd64"
+    },
+    {
+      "bom-ref": "cycle-a@1.0.0",
+      "type": "library",
+      "name": "cycle-a",
+      "version": "1.0.0",
+      "purl": "pkg:npm/cycle-a@1.0.0"
+    },
+    {
+      "bom-ref": "cycle-b@2.0.0",
+      "type": "library",
+      "name": "cycle-b",
+      "version": "2.0.0",
+      "purl": "pkg:npm/cycle-b@2.0.0"
+    },
+    {
+      "bom-ref": "ghost@0.1.0",
+      "type": "library",
+      "name": "ghost",
+      "version": "0.1.0",
+      "purl": "pkg:cargo/ghost@0.1.0",
+      "description": "不支持的生态（cargo）-> 未知，而不是字符串比较或误判"
+    },
+    {
+      "bom-ref": "no-version-lib",
+      "type": "library",
+      "name": "no-version-lib",
+      "purl": "pkg:npm/versionless",
+      "description": "purl 缺失版本 -> 未知，且不计入范围匹配"
+    },
+    {
+      "bom-ref": "bad-purl-1",
+      "type": "library",
+      "name": "broken",
+      "version": "9.9.9",
+      "purl": "not-a-purl",
+      "description": "非法 purl：缺少 pkg: scheme -> 进入 ignored 并报告"
+    },
+    {
+      "bom-ref": "bad-purl-2",
+      "type": "library",
+      "name": "broken2",
+      "version": "1.2.3",
+      "purl": "pkg:???/@1.2.3",
+      "description": "非法 purl：生态与名称缺失 -> ignored"
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "app@1.0.0",
+      "dependsOn": [
+        "left-pad@6.10.3",
+        "left-pad-linux@6.10.3",
+        "pre-release-lib@1.0.0-rc.2",
+        "requests@2.20",
+        "http-core@3.1.0",
+        "nokogiri@1.13.0.rc1",
+        "cycle-a@1.0.0"
+      ]
+    },
+    {"ref": "left-pad@6.10.3", "dependsOn": ["requests@2.20rc1"]},
+    {"ref": "requests@2.20", "dependsOn": ["curl@2.50.3-1", "http-core@3.2.0"]},
+    {"ref": "cycle-a@1.0.0", "dependsOn": ["cycle-b@2.0.0"]},
+    {"ref": "cycle-b@2.0.0", "dependsOn": ["cycle-a@1.0.0"]}
+  ]
+}

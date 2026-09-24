@@ -1,0 +1,83 @@
+{
+  "_meta": {
+    "description": "合成漏洞夹具：仅用于本离线服务的测试与演示，非真实漏洞情报，不覆盖最新漏洞。",
+    "generated_at": "2026-09-24",
+    "not_real_advisory": true,
+    "range_type_legend": {
+      "ecosystem_range": "version_range 使用该生态的原生/常用范围语法"
+    }
+  },
+  "vulnerabilities": [
+    {
+      "id": "SYNTH-NPM-2026-0001",
+      "ecosystem": "npm",
+      "namespace": null,
+      "name": "left-pad",
+      "version_range": "^5.0.0 || >=6.0.0 <6.11.3",
+      "range_type": "ecosystem_range",
+      "summary": "合成条目：left-pad 6.11.3 之前的原型污染（虚构，仅用于测试）。",
+      "fixed_versions": ["6.11.3"]
+    },
+    {
+      "id": "SYNTH-NPM-2026-0002",
+      "ecosystem": "npm",
+      "namespace": null,
+      "name": "pre-release-lib",
+      "version_range": ">=1.0.0-rc.1 <1.0.0",
+      "range_type": "ecosystem_range",
+      "summary": "合成条目：仅命中 1.0.0 的预发布候选版本（虚构）。用于验证预发布门禁。",
+      "fixed_versions": ["1.0.0"]
+    },
+    {
+      "id": "SYNTH-NPM-2026-0007",
+      "ecosystem": "npm",
+      "namespace": null,
+      "name": "left-pad",
+      "version_range": ">=6.0.0 <6.11.0",
+      "range_type": "ecosystem_range",
+      "qualifiers": {"os": "linux"},
+      "summary": "合成条目：仅影响 linux 平台变体（?os=linux）；无 qualifier 与 os=darwin 变体不命中，用于验证变体不混同。",
+      "fixed_versions": ["6.11.0"]
+    },
+    {
+      "id": "SYNTH-MAVEN-2026-0003",
+      "ecosystem": "maven",
+      "namespace": "com.example",
+      "name": "http-core",
+      "version_range": "[3.0.0,3.2.0)",
+      "range_type": "ecosystem_range",
+      "summary": "合成条目：http-core [3.0.0,3.2.0) 反序列化问题（虚构）。",
+      "fixed_versions": ["3.2.0"]
+    },
+    {
+      "id": "SYNTH-PYPI-2026-0004",
+      "ecosystem": "pypi",
+      "namespace": null,
+      "name": "requests",
+      "version_range": ">=1.0,<2.21",
+      "range_type": "ecosystem_range",
+      "summary": "合成条目：requests 2.21 之前的信息泄露（虚构，编号与事实均为测试用）。",
+      "fixed_versions": ["2.21"]
+    },
+    {
+      "id": "SYNTH-GEM-2026-0005",
+      "ecosystem": "gem",
+      "namespace": null,
+      "name": "nokogiri",
+      "version_range": ">=1.0,<1.13.0",
+      "range_type": "ecosystem_range",
+      "summary": "合成条目：nokogiri 1.13.0 之前的解析缺陷（虚构）。rc 预发布同样受影响。",
+      "fixed_versions": ["1.13.0"]
+    },
+    {
+      "id": "SYNTH-DEB-2026-0006",
+      "ecosystem": "deb",
+      "namespace": "debian",
+      "name": "curl",
+      "version_range": ">=2.30,<2.50.4-1",
+      "range_type": "ecosystem_range",
+      "summary": "合成条目：curl 在 2.50.4-1 之前存在虚构的缓冲区问题，仅用于演示 dpkg 版本顺序。",
+      "fixed_versions": ["2.50.4-1"]
+    }
+  ]
+}
