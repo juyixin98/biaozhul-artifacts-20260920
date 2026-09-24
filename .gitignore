@@ -1,0 +1,12 @@
+# Python / __pycache__
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Virtualenv
+.venv/
+venv/
+
+# Runtime data (uploaded archives, extracted output)
+.archive_guard_data/
