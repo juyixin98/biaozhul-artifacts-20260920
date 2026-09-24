@@ -1,0 +1,5 @@
+# 运行时直接依赖（见 requirements.lock.txt 获取已验证的精确版本）
+fastapi>=0.110
+uvicorn[standard]>=0.29
+cryptography>=42.0
+python-multipart>=0.0.9

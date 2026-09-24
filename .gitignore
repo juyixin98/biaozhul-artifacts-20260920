@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# 虚拟环境
+.venv/
+venv/
+
+# 运行期数据与生成的演示样例（样例可用 scripts/make_samples.py 重新生成）
+data/
+samples/
