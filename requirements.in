@@ -1,0 +1,7 @@
+# Direct (top-level) dependencies. Pinned install set is in requirements.lock.txt.
+fastapi>=0.115
+uvicorn[standard]>=0.30
+web3>=7.2
+# test / demo only
+pytest>=8
+httpx>=0.27
