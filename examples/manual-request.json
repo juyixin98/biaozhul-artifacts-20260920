@@ -1,0 +1,37 @@
+{
+  "config": {
+    "minReplicas": 2,
+    "maxReplicas": 10,
+    "loadPerReplica": 100,
+    "upWindowSeconds": 60,
+    "downWindowSeconds": 300,
+    "upThresholdPercent": 10,
+    "downThresholdPercent": 20,
+    "maxUpStep": 2,
+    "maxDownStep": 1,
+    "upCooldownSeconds": 60,
+    "downCooldownSeconds": 60,
+    "scaleUpStabilizationSeconds": 60,
+    "coldStartDelaySeconds": 60,
+    "freshnessSeconds": 45,
+    "maxSampleGapSeconds": 45
+  },
+  "decisionTimes": [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420],
+  "samples": [
+    { "timeSeconds": 0, "totalLoad": 150 },
+    { "timeSeconds": 30, "totalLoad": 150 },
+    { "timeSeconds": 60, "totalLoad": 520 },
+    { "timeSeconds": 90, "totalLoad": 540 },
+    { "timeSeconds": 120, "missing": true },
+    { "timeSeconds": 150, "missing": true },
+    { "timeSeconds": 180, "totalLoad": 200 },
+    { "timeSeconds": 210, "totalLoad": 190 },
+    { "timeSeconds": 240, "totalLoad": 185 },
+    { "timeSeconds": 270, "totalLoad": 180 },
+    { "timeSeconds": 300, "totalLoad": 180 },
+    { "timeSeconds": 330, "totalLoad": 175 },
+    { "timeSeconds": 360, "totalLoad": 170 },
+    { "timeSeconds": 390, "totalLoad": 170 },
+    { "timeSeconds": 420, "totalLoad": 170 }
+  ]
+}

@@ -1,0 +1,232 @@
+{
+  "config": {
+    "minReplicas": 2,
+    "maxReplicas": 10,
+    "loadPerReplica": 100,
+    "upWindowSeconds": 60,
+    "downWindowSeconds": 300,
+    "upThresholdPercent": 10,
+    "downThresholdPercent": 20,
+    "maxUpStep": 2,
+    "maxDownStep": 1,
+    "upCooldownSeconds": 60,
+    "downCooldownSeconds": 120,
+    "scaleUpStabilizationSeconds": 180,
+    "coldStartDelaySeconds": 120,
+    "freshnessSeconds": 45,
+    "maxSampleGapSeconds": 45
+  },
+  "initialReplicas": 0,
+  "decisionTimes": null,
+  "samples": [
+    {
+      "timeSeconds": 0,
+      "totalLoad": 150
+    },
+    {
+      "timeSeconds": 30,
+      "totalLoad": 158.5185434277329
+    },
+    {
+      "timeSeconds": 60,
+      "totalLoad": 183.49364905389032
+    },
+    {
+      "timeSeconds": 90,
+      "totalLoad": 223.2233047033631
+    },
+    {
+      "timeSeconds": 120,
+      "totalLoad": 275
+    },
+    {
+      "timeSeconds": 150,
+      "totalLoad": 335.2952387243698
+    },
+    {
+      "timeSeconds": 180,
+      "totalLoad": 400
+    },
+    {
+      "timeSeconds": 210,
+      "totalLoad": 464.70476127563023
+    },
+    {
+      "timeSeconds": 240,
+      "totalLoad": 525
+    },
+    {
+      "timeSeconds": 270,
+      "totalLoad": 576.7766952966368
+    },
+    {
+      "timeSeconds": 300,
+      "totalLoad": 616.5063509461097
+    },
+    {
+      "timeSeconds": 330,
+      "totalLoad": 641.481456572267
+    },
+    {
+      "timeSeconds": 360,
+      "totalLoad": 650
+    },
+    {
+      "timeSeconds": 390,
+      "totalLoad": 641.4814565722671
+    },
+    {
+      "timeSeconds": 420,
+      "totalLoad": 616.5063509461097
+    },
+    {
+      "timeSeconds": 450,
+      "totalLoad": 576.776695296637
+    },
+    {
+      "timeSeconds": 480,
+      "totalLoad": 525.0000000000001
+    },
+    {
+      "timeSeconds": 510,
+      "totalLoad": 464.7047612756302
+    },
+    {
+      "timeSeconds": 540,
+      "totalLoad": 400.00000000000006
+    },
+    {
+      "timeSeconds": 570,
+      "totalLoad": 335.2952387243697
+    },
+    {
+      "timeSeconds": 600,
+      "totalLoad": 0,
+      "missing": true
+    },
+    {
+      "timeSeconds": 630,
+      "totalLoad": 0,
+      "missing": true
+    },
+    {
+      "timeSeconds": 660,
+      "totalLoad": 0,
+      "missing": true
+    },
+    {
+      "timeSeconds": 690,
+      "totalLoad": 0,
+      "missing": true
+    },
+    {
+      "timeSeconds": 720,
+      "totalLoad": 150
+    },
+    {
+      "timeSeconds": 750,
+      "totalLoad": 158.5185434277329
+    },
+    {
+      "timeSeconds": 780,
+      "totalLoad": 183.4936490538902
+    },
+    {
+      "timeSeconds": 810,
+      "totalLoad": 223.2233047033629
+    },
+    {
+      "timeSeconds": 840,
+      "totalLoad": 275.00000000000006
+    },
+    {
+      "timeSeconds": 870,
+      "totalLoad": 335.2952387243698
+    },
+    {
+      "timeSeconds": 900,
+      "totalLoad": 399.99999999999994
+    },
+    {
+      "timeSeconds": 930,
+      "totalLoad": 464.70476127563006
+    },
+    {
+      "timeSeconds": 960,
+      "totalLoad": 524.9999999999998
+    },
+    {
+      "timeSeconds": 990,
+      "totalLoad": 576.776695296637
+    },
+    {
+      "timeSeconds": 1020,
+      "totalLoad": 616.5063509461097
+    },
+    {
+      "timeSeconds": 1050,
+      "totalLoad": 641.4814565722671
+    },
+    {
+      "timeSeconds": 1080,
+      "totalLoad": 650
+    },
+    {
+      "timeSeconds": 1110,
+      "totalLoad": 641.481456572267
+    },
+    {
+      "timeSeconds": 1140,
+      "totalLoad": 616.5063509461096
+    },
+    {
+      "timeSeconds": 1170,
+      "totalLoad": 576.7766952966368
+    },
+    {
+      "timeSeconds": 1200,
+      "totalLoad": 525
+    },
+    {
+      "timeSeconds": 1230,
+      "totalLoad": 464.70476127563023
+    },
+    {
+      "timeSeconds": 1260,
+      "totalLoad": 400.0000000000001
+    },
+    {
+      "timeSeconds": 1290,
+      "totalLoad": 335.29523872437
+    },
+    {
+      "timeSeconds": 1320,
+      "totalLoad": 275.0000000000002
+    },
+    {
+      "timeSeconds": 1350,
+      "totalLoad": 223.22330470336306
+    },
+    {
+      "timeSeconds": 1380,
+      "totalLoad": 183.49364905389032
+    },
+    {
+      "timeSeconds": 1410,
+      "totalLoad": 158.51854342773294
+    },
+    {
+      "timeSeconds": 1440,
+      "totalLoad": 150
+    },
+    {
+      "timeSeconds": 1470,
+      "totalLoad": 158.51854342773288
+    },
+    {
+      "timeSeconds": 1500,
+      "totalLoad": 183.4936490538902
+    }
+  ],
+  "decisionIntervalSeconds": 60
+}
