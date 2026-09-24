@@ -1,0 +1,8 @@
+# Direct runtime + test dependencies (see requirements.lock for the full
+# transitive set, generated with `pip freeze` in a clean venv on Python 3.12).
+numpy==2.5.3
+fastapi==0.141.1
+uvicorn==0.53.0
+pydantic==2.13.5
+httpx==0.28.1
+pytest==9.1.1

@@ -1,0 +1,18 @@
+{
+  "scene": "sparse",
+  "description": "Only 8 points: below the minimum sample size.  No plane claim is possible; every point must remain unknown.",
+  "params": {
+    "seed": 404,
+    "point_count": 8
+  },
+  "labels": [
+    "unknown",
+    "unknown",
+    "unknown",
+    "unknown",
+    "unknown",
+    "unknown",
+    "unknown",
+    "unknown"
+  ]
+}
