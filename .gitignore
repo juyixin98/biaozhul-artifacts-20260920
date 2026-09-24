@@ -1,0 +1,15 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Foundry
+cache/
+out/
+
+# Local deployment state
+deployment.json
+
+# OS
+.DS_Store

@@ -1,0 +1,22 @@
+[profile.default]
+src = "contracts"
+test = "test"
+script = "script"
+out = "out"
+libs = ["lib"]
+cache_path = "cache"
+solc = "0.8.24"
+optimizer = true
+optimizer_runs = 300
+via_ir = true
+evm_version = "cancun"
+# Per-block settlement loops in tests make one test transaction touch many blocks;
+# Anvil/local chain only. Mainnet deployments would settle in separate transactions.
+gas_limit = 300000000
+fuzz = { runs = 300 }
+
+[fmt]
+line_length = 120
+tab_width = 4
+bracket_spacing = true
+int_types = "long"
