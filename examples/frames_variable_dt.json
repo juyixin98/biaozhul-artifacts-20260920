@@ -1,0 +1,134 @@
+[
+  {
+    "frame_id": 0,
+    "timestamp": 0.0,
+    "detections": [
+      {
+        "x": 0.0,
+        "y": 0.0,
+        "detection_id": "A-0"
+      }
+    ]
+  },
+  {
+    "frame_id": 1,
+    "timestamp": 1.268,
+    "detections": [
+      {
+        "x": 1.014185949640308,
+        "y": 0.0,
+        "detection_id": "A-1"
+      }
+    ]
+  },
+  {
+    "frame_id": 2,
+    "timestamp": 3.193,
+    "detections": [
+      {
+        "x": 2.5547423852314304,
+        "y": 0.0,
+        "detection_id": "A-2"
+      }
+    ]
+  },
+  {
+    "frame_id": 3,
+    "timestamp": 3.91,
+    "detections": [
+      {
+        "x": 3.127733920494991,
+        "y": 0.0,
+        "detection_id": "A-3"
+      }
+    ]
+  },
+  {
+    "frame_id": 4,
+    "timestamp": 5.833,
+    "detections": [
+      {
+        "x": 4.666113257059684,
+        "y": 0.0,
+        "detection_id": "A-4"
+      }
+    ]
+  },
+  {
+    "frame_id": 5,
+    "timestamp": 6.8,
+    "detections": [
+      {
+        "x": 5.440310999472267,
+        "y": 0.0,
+        "detection_id": "A-5"
+      }
+    ]
+  },
+  {
+    "frame_id": 6,
+    "timestamp": 7.935,
+    "detections": [
+      {
+        "x": 6.348302738239358,
+        "y": 0.0,
+        "detection_id": "A-6"
+      }
+    ]
+  },
+  {
+    "frame_id": 7,
+    "timestamp": 9.677,
+    "detections": [
+      {
+        "x": 7.741545850823887,
+        "y": 0.0,
+        "detection_id": "A-7"
+      }
+    ]
+  },
+  {
+    "frame_id": 8,
+    "timestamp": 10.791,
+    "detections": [
+      {
+        "x": 8.632584814466881,
+        "y": 0.0,
+        "detection_id": "A-8"
+      }
+    ]
+  },
+  {
+    "frame_id": 9,
+    "timestamp": 12.115,
+    "detections": [
+      {
+        "x": 9.692097239674553,
+        "y": 0.0,
+        "detection_id": "A-9"
+      }
+    ]
+  },
+  {
+    "frame_id": 10,
+    "timestamp": 12.656,
+    "detections": [
+      {
+        "x": 10.125168175566236,
+        "y": 0.0,
+        "detection_id": "A-10"
+      }
+    ]
+  },
+  {
+    "frame_id": 11,
+    "timestamp": 14.287,
+    "detections": [
+      {
+        "x": 11.429383905976003,
+        "y": 0.0,
+        "detection_id": "A-11"
+      }
+    ]
+  }
+]

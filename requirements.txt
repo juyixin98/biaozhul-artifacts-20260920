@@ -1,0 +1,12 @@
+# 直接安装本文件即可获得与开发环境一致的锁定版本：
+#   python -m venv .venv && . .venv/bin/activate
+#   pip install -r requirements.lock
+#
+# 下面是手工维护的核心直接依赖（版本以 requirements.lock 为准）。
+numpy==2.5.3
+scipy==1.18.1
+fastapi==0.141.1
+uvicorn==0.53.0
+pydantic==2.13.5
+pytest==9.1.1
+httpx==0.28.1

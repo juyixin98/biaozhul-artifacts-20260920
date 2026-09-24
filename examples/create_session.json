@@ -1,0 +1,9 @@
+{
+  "session_id": "demo",
+  "config": {
+    "confirm_hits": 3,
+    "max_misses": 5,
+    "gate_threshold": 9.21,
+    "merge_radius": 0.25
+  }
+}
