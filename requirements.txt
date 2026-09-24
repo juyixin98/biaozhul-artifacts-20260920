@@ -1,0 +1,11 @@
+# 直接运行时依赖；完整可复现的传递依赖锁定见 requirements-lock.txt（pip freeze 生成）
+web3==6.20.3
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+eth-abi==5.1.0
+rlp==4.0.1
+pydantic==2.10.4
+
+# 测试
+httpx==0.28.1
+pytest==8.3.4

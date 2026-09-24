@@ -1,0 +1,18 @@
+# Foundry
+out/
+cache/
+broadcast/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# 部署产物（运行 deploy.py 生成）
+deployment.json
+
+# 编辑器
+.idea/
+.vscode/
+.DS_Store

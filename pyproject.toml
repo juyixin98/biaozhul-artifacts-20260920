@@ -1,0 +1,24 @@
+[project]
+name = "merkle-claim-bitmap"
+version = "1.0.0"
+description = "Merkle 批量领取（位图防重、原子批次）—— Solidity/Foundry + Python/FastAPI/web3.py"
+requires-python = ">=3.10"
+dependencies = [
+    "web3==6.20.3",
+    "fastapi==0.115.6",
+    "uvicorn[standard]==0.34.0",
+    "eth-abi==5.1.0",
+    "rlp==4.0.1",
+    "pydantic==2.10.4",
+]
+
+[project.optional-dependencies]
+test = [
+    "httpx==0.28.1",
+    "pytest==8.3.4",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra -v"
