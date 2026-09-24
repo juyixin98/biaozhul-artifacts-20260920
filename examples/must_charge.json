@@ -1,0 +1,26 @@
+{
+  "energyPerDist": 1,
+  "robots": [
+    {
+      "id": "r1",
+      "start": {"x": 0, "y": 0},
+      "battery": 6,
+      "batteryCapacity": 20,
+      "chargeRate": 2,
+      "payloadCapacity": 10
+    }
+  ],
+  "tasks": [
+    {
+      "id": "j1",
+      "loc": {"x": 10, "y": 0},
+      "payload": 1,
+      "ready": 0,
+      "due": 100,
+      "service": 1
+    }
+  ],
+  "chargers": [
+    {"id": "c1", "loc": {"x": 5, "y": 0}}
+  ]
+}

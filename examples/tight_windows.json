@@ -1,0 +1,38 @@
+{
+  "robots": [
+    {
+      "id": "r1",
+      "start": {"x": 0, "y": 0},
+      "battery": 100,
+      "batteryCapacity": 100,
+      "chargeRate": 5,
+      "payloadCapacity": 10
+    },
+    {
+      "id": "r2",
+      "start": {"x": 0, "y": 0},
+      "battery": 100,
+      "batteryCapacity": 100,
+      "chargeRate": 5,
+      "payloadCapacity": 10
+    }
+  ],
+  "tasks": [
+    {
+      "id": "j1",
+      "loc": {"x": 4, "y": 0},
+      "payload": 1,
+      "ready": 4,
+      "due": 4,
+      "service": 2
+    },
+    {
+      "id": "j2",
+      "loc": {"x": 5, "y": 0},
+      "payload": 1,
+      "ready": 5,
+      "due": 5,
+      "service": 3
+    }
+  ]
+}
