@@ -1,0 +1,115 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.16.5
+  name: reservationpools.quota.example.com
+spec:
+  group: quota.example.com
+  names:
+    kind: ReservationPool
+    listKind: ReservationPoolList
+    plural: reservationpools
+    shortNames:
+    - rpool
+    singular: reservationpool
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .spec.cpuCapacity
+      name: CPUCap
+      type: string
+    - jsonPath: .spec.memoryCapacity
+      name: MemCap
+      type: string
+    - jsonPath: .status.reservedCPU
+      name: CPUUsed
+      type: string
+    - jsonPath: .status.reservedMemory
+      name: MemUsed
+      type: string
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: ReservationPool is the per-namespace capacity ledger.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: PoolSpec defines the total capacity that can be reserved
+              in a namespace.
+            properties:
+              cpuCapacity:
+                description: CPUCapacity is the total milli-cpu budget, e.g. "8000m".
+                type: string
+              memoryCapacity:
+                description: MemoryCapacity is the total memory budget, e.g. "16Gi".
+                type: string
+            required:
+            - cpuCapacity
+            - memoryCapacity
+            type: object
+          status:
+            description: |-
+              PoolStatus shows what is currently reserved and by whom. It is the
+              authoritative, durable counter — the source of truth is etcd plus the
+              API server's optimistic-concurrency check, never an in-memory map.
+            properties:
+              claims:
+                additionalProperties:
+                  description: PoolClaimEntry is one claim's contribution to the pool.
+                  properties:
+                    active:
+                      description: |-
+                        Active is true while the claim is Reserved or Bound. Expired/Rejected
+                        entries are deleted on the next credit.
+                      type: boolean
+                    cpu:
+                      description: CPU contributed in milli-cpu integer form.
+                      format: int64
+                      type: integer
+                    memory:
+                      description: Memory contributed in bytes.
+                      format: int64
+                      type: integer
+                    name:
+                      description: Name of the ResourceClaim (for human inspection).
+                      type: string
+                  required:
+                  - active
+                  - cpu
+                  - memory
+                  - name
+                  type: object
+                description: |-
+                  Claims maps claim UID -> "cpu,memory,phase,name" for idempotent debit/credit
+                  across requeues and controller restarts.
+                type: object
+              reservedCPU:
+                description: ReservedCPU / ReservedMemory are sums over active (Reserved|Bound)
+                  claims.
+                type: string
+              reservedMemory:
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

@@ -1,0 +1,137 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.16.5
+  name: resourceclaims.quota.example.com
+spec:
+  group: quota.example.com
+  names:
+    kind: ResourceClaim
+    listKind: ResourceClaimList
+    plural: resourceclaims
+    shortNames:
+    - rc
+    - rclaim
+    singular: resourceclaim
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.phase
+      name: Phase
+      type: string
+    - jsonPath: .spec.cpu
+      name: CPU
+      type: string
+    - jsonPath: .spec.memory
+      name: Memory
+      type: string
+    - jsonPath: .spec.ttl
+      name: TTL
+      type: string
+    - jsonPath: .status.boundPod
+      name: BoundPod
+      type: string
+    - jsonPath: .status.expiresAt
+      name: ExpiresAt
+      type: date
+    - jsonPath: .metadata.creationTimestamp
+      name: Age
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: ResourceClaim is a request to reserve CPU/memory capacity in
+          a namespace.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ResourceClaimSpec describes a request for CPU and memory
+              capacity with a TTL.
+            properties:
+              cpu:
+                description: |-
+                  CPU is the requested amount of CPU, in Kubernetes resource.Quantity
+                  notation restricted to milli-cpu, e.g. "500m", "1" (=1000m). Range 1m..64000m.
+                type: string
+              memory:
+                description: Memory is the requested amount of memory, e.g. "128Mi",
+                  "1Gi". Range 1Mi..256Gi.
+                type: string
+              ttl:
+                description: |-
+                  TTL is the lifetime of the reservation while unbound, e.g. "30s", "5m",
+                  "2h". Range 1s..24h. It starts counting when the claim is created.
+                type: string
+            required:
+            - cpu
+            - memory
+            - ttl
+            type: object
+          status:
+            description: ReservationStatus is the bookkeeping of one debit against
+              the pool.
+            properties:
+              boundPod:
+                description: BoundPod is the name of the Pod backing this reservation,
+                  if any.
+                type: string
+              conflictCount:
+                description: |-
+                  ConflictCount counts resource-version conflicts hit while debiting the
+                  pool; surfaced to demonstrate optimistic concurrency in tests.
+                format: int32
+                type: integer
+              expiresAt:
+                description: |-
+                  ExpiresAt is ReservedAt + TTL. The controller releases the claim once
+                  this instant is in the past and no bound Pod exists.
+                format: date-time
+                type: string
+              message:
+                description: Message carries a human-readable reason for Rejected/Expired
+                  states.
+                type: string
+              observedGeneration:
+                description: ObservedGeneration is the .metadata.generation last reconciled.
+                format: int64
+                type: integer
+              phase:
+                description: Phase is the current lifecycle state.
+                type: string
+              reservedAt:
+                description: ReservedAt is when capacity was debited.
+                format: date-time
+                type: string
+              reservedCPU:
+                description: |-
+                  ReservedCPU / ReservedMemory echo the quantities that were debited,
+                  normalized by the API server's quantity parser.
+                type: string
+              reservedMemory:
+                type: string
+            required:
+            - phase
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

@@ -1,0 +1,12 @@
+# binaries and build output
+bin/
+*.test
+*.out
+
+# generated certs and local deployment artifacts
+hack/_output/
+
+# editor/OS noise
+.idea/
+.vscode/
+.DS_Store

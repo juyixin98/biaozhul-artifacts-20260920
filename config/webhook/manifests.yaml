@@ -1,0 +1,48 @@
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: reservation-claim-validator
+webhooks:
+  - name: vresourceclaim.quota.example.com
+    admissionReviewVersions: ["v1"]
+    sideEffects: None
+    failurePolicy: Fail
+    rules:
+      - apiGroups: ["quota.example.com"]
+        apiVersions: ["v1alpha1"]
+        resources: ["resourceclaims"]
+        operations: ["CREATE", "UPDATE"]
+    clientConfig:
+      service:
+        name: quota-webhook-service
+        namespace: quota-system
+        path: /validate-quota-example-com-v1alpha1-resourceclaim
+      caBundle: __CA_BUNDLE__
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: reservation-pod-validator
+webhooks:
+  - name: vpod.quota.example.com
+    admissionReviewVersions: ["v1"]
+    sideEffects: None
+    failurePolicy: Fail
+    # Only intercept Pods that actually carry a claim label; all other Pods
+    # pass untouched. matchConditions requires Kubernetes >= 1.27 (kind node
+    # image used by this project ships 1.30).
+    matchConditions:
+      - name: "has-reservation-claim-label"
+        expression: 'has(object.metadata.labels) && "quota.example.com/claim" in object.metadata.labels'
+    rules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        resources: ["pods"]
+        operations: ["CREATE"]
+    clientConfig:
+      service:
+        name: quota-webhook-service
+        namespace: quota-system
+        path: /validate-core-v1-pod
+      caBundle: __CA_BUNDLE__

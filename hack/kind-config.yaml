@@ -1,0 +1,7 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: quota-reservation
+# Keep the kube-apiserver admission registration latency tolerant for
+# single-node local runs.
+nodes:
+  - role: control-plane

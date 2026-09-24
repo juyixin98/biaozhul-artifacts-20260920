@@ -1,0 +1,17 @@
+---
+# Test namespace with a capacity pool of 4 CPU / 4Gi.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: quota-demo
+  labels:
+    app.kubernetes.io/part-of: quota-reservation
+---
+apiVersion: quota.example.com/v1alpha1
+kind: ReservationPool
+metadata:
+  name: default-pool
+  namespace: quota-demo
+spec:
+  cpuCapacity: "4000m"
+  memoryCapacity: "4Gi"

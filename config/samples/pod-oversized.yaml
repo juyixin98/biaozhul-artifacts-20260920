@@ -1,0 +1,19 @@
+---
+# This Pod requests MORE cpu than its claim (claim-second reserves 1000m,
+# pod asks 1200m): admission must be DENIED by the pod validating webhook.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: workload-oversized
+  namespace: quota-demo
+  labels:
+    quota.example.com/claim: claim-second
+spec:
+  restartPolicy: Never
+  containers:
+    - name: app
+      image: registry.k8s.io/pause:3.10
+      resources:
+        requests:
+          cpu: "1200m"
+          memory: "512Mi"

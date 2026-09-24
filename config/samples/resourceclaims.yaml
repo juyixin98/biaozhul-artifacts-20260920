@@ -1,0 +1,45 @@
+---
+# A normal claim: 500 milli-CPU + 512Mi, valid for 5 minutes unbound.
+apiVersion: quota.example.com/v1alpha1
+kind: ResourceClaim
+metadata:
+  name: claim-normal
+  namespace: quota-demo
+spec:
+  cpu: "500m"
+  memory: "512Mi"
+  ttl: "5m"
+---
+# A second claim that fits in the remaining 3500m / 3.5Gi.
+apiVersion: quota.example.com/v1alpha1
+kind: ResourceClaim
+metadata:
+  name: claim-second
+  namespace: quota-demo
+spec:
+  cpu: "1000m"
+  memory: "1Gi"
+  ttl: "10m"
+---
+# This claim asks for more than the whole pool (6 cores > 4): the controller
+# reserves optimistically, sees insufficient capacity, and marks it Rejected.
+apiVersion: quota.example.com/v1alpha1
+kind: ResourceClaim
+metadata:
+  name: claim-too-big
+  namespace: quota-demo
+spec:
+  cpu: "6000m"
+  memory: "1Gi"
+  ttl: "5m"
+---
+# Short-lived claim used to demonstrate expiry release (TTL 30s).
+apiVersion: quota.example.com/v1alpha1
+kind: ResourceClaim
+metadata:
+  name: claim-short
+  namespace: quota-demo
+spec:
+  cpu: "200m"
+  memory: "128Mi"
+  ttl: "30s"

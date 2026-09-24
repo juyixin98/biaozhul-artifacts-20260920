@@ -1,0 +1,3 @@
+hack/_output/
+*.test
+.git/

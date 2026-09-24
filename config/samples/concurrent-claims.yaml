@@ -1,0 +1,43 @@
+---
+# Eight claims of 600m against the 4000m pool: exactly 6 reserve, 2 rejected.
+# Apply all at once with kubectl apply -f to create genuine API-server
+# concurrency on the pool object.
+apiVersion: quota.example.com/v1alpha1
+kind: ResourceClaim
+metadata: {name: race-0, namespace: quota-demo}
+spec: {cpu: "600m", memory: "100Mi", ttl: "10m"}
+---
+apiVersion: quota.example.com/v1alpha1
+kind: ResourceClaim
+metadata: {name: race-1, namespace: quota-demo}
+spec: {cpu: "600m", memory: "100Mi", ttl: "10m"}
+---
+apiVersion: quota.example.com/v1alpha1
+kind: ResourceClaim
+metadata: {name: race-2, namespace: quota-demo}
+spec: {cpu: "600m", memory: "100Mi", ttl: "10m"}
+---
+apiVersion: quota.example.com/v1alpha1
+kind: ResourceClaim
+metadata: {name: race-3, namespace: quota-demo}
+spec: {cpu: "600m", memory: "100Mi", ttl: "10m"}
+---
+apiVersion: quota.example.com/v1alpha1
+kind: ResourceClaim
+metadata: {name: race-4, namespace: quota-demo}
+spec: {cpu: "600m", memory: "100Mi", ttl: "10m"}
+---
+apiVersion: quota.example.com/v1alpha1
+kind: ResourceClaim
+metadata: {name: race-5, namespace: quota-demo}
+spec: {cpu: "600m", memory: "100Mi", ttl: "10m"}
+---
+apiVersion: quota.example.com/v1alpha1
+kind: ResourceClaim
+metadata: {name: race-6, namespace: quota-demo}
+spec: {cpu: "600m", memory: "100Mi", ttl: "10m"}
+---
+apiVersion: quota.example.com/v1alpha1
+kind: ResourceClaim
+metadata: {name: race-7, namespace: quota-demo}
+spec: {cpu: "600m", memory: "100Mi", ttl: "10m"}
