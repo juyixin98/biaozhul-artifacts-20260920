@@ -1,0 +1,18 @@
+[package]
+name = "artifact-promotion"
+version = "0.1.0"
+edition = "2021"
+description = "Staged artifact promotion state machine (dev -> verification -> release)"
+
+[dependencies]
+axum = "0.7.9"
+tokio = { version = "1.53.1", features = ["full"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+sha2 = "0.10.9"
+hex = "0.4.3"
+tower = { version = "0.4.13", features = ["util"] }
+
+[profile.release]
+# 纯内存服务,体积换点启动速度
+opt-level = 2

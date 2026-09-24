@@ -1,0 +1,80 @@
+
+[1;36m== 健康检查 ==[0m
+{"message":"artifact-promotion service is up"}
+[HTTP 200]
+
+[1;36m== 1) 上传制品内容 v1(服务端计算 SHA-256,内容按摘要寻址、不可变) ==[0m
+v1 digest = ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3
+
+[1;36m== 2) 登记制品 app-1,绑定该摘要,初始阶段 dev ==[0m
+{"id":"app-1","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","stage":"dev","history":[{"from":"dev","to":"dev","trigger":"promotion","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"artifact registered","at":"2026-09-24T09:36:32Z"}],"created_at":"2026-09-24T09:36:32Z"}
+[HTTP 201]
+
+[1;36m== 3a) 无审批直接晋级 -> 409 APPROVAL_REQUIRED ==[0m
+{"error":{"code":"APPROVAL_REQUIRED","message":"晋级到 verification 需要针对摘要 ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3 的 approved 审批,当前不存在"}}
+[HTTP 409]
+
+[1;36m== 3b) 审批 verification,但没有测试证明 -> 409 PROOF_REQUIRED ==[0m
+{"id":"ap-ver-1","artifact_id":"app-1","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","target_stage":"verification","approver":"qa-lead","decision":"approved","comment":"ok","created_at":"2026-09-24T09:36:32Z"}
+[HTTP 201]
+{"error":{"code":"PROOF_REQUIRED","message":"晋级到 verification 缺少 passed 证明(且须引用同一摘要):[\"unit-test\", \"integration-test\"]"}}
+[HTTP 409]
+
+[1;36m== 3c) 提交 passed 的 unit-test 证明(证明引用同一摘要) ==[0m
+{"id":"proof-unit-1","artifact_id":"app-1","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","kind":"unit-test","result":"passed","detail":"42/42 cases","created_at":"2026-09-24T09:36:32Z"}
+[HTTP 201]
+
+[1;36m== 3d) 晋级 dev -> verification 成功 ==[0m
+{"id":"app-1","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","stage":"verification","history":[{"from":"dev","to":"dev","trigger":"promotion","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"artifact registered","at":"2026-09-24T09:36:32Z"},{"from":"dev","to":"verification","trigger":"promotion","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"promoted to verification","at":"2026-09-24T09:36:32Z"}],"created_at":"2026-09-24T09:36:32Z"}
+[HTTP 201]
+
+[1;36m== 4a) 进入 release 需要 release 审批 + unit-test 与 release-gate 证明 ==[0m
+{"id":"ap-rel-1","artifact_id":"app-1","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","target_stage":"release","approver":"release-manager","decision":"approved","comment":null,"created_at":"2026-09-24T09:36:32Z"}
+[HTTP 201]
+
+[1;36m== 4b) 缺 release-gate 证明 -> 409 PROOF_REQUIRED(不能发布) ==[0m
+{"error":{"code":"PROOF_REQUIRED","message":"晋级到 release 缺少 passed 证明(且须引用同一摘要):[\"release-gate\"]"}}
+[HTTP 409]
+
+[1;36m== 4c) 补上 release-gate 证明 ==[0m
+{"id":"proof-gate-1","artifact_id":"app-1","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","kind":"release-gate","result":"passed","detail":null,"created_at":"2026-09-24T09:36:32Z"}
+[HTTP 201]
+
+[1;36m== 4d) 晋级 verification -> release 成功 ==[0m
+{"id":"app-1","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","stage":"release","history":[{"from":"dev","to":"dev","trigger":"promotion","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"artifact registered","at":"2026-09-24T09:36:32Z"},{"from":"dev","to":"verification","trigger":"promotion","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"promoted to verification","at":"2026-09-24T09:36:32Z"},{"from":"verification","to":"release","trigger":"promotion","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"promoted to release","at":"2026-09-24T09:36:32Z"}],"created_at":"2026-09-24T09:36:32Z"}
+[HTTP 201]
+
+[1;36m== 5) 审批后替换内容:用同一 id 绑定新摘要 -> 409 IMMUTABLE_DIGEST ==[0m
+v2 digest = 4caa9e698527deefc4494ac2eea6560f65d7a890e8794fd482e4766f9491461f
+{"error":{"code":"IMMUTABLE_DIGEST","message":"artifact app-1 已绑定摘要 ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3,不可改绑为 4caa9e698527deefc4494ac2eea6560f65d7a890e8794fd482e4766f9491461f;请使用新制品 id"}}
+[HTTP 409]
+
+[1;36m==    拿新摘要去晋级 -> 409 DIGEST_MISMATCH ==[0m
+{"error":{"code":"DIGEST_MISMATCH","message":"请求摘要 4caa9e698527deefc4494ac2eea6560f65d7a890e8794fd482e4766f9491461f 与制品绑定的不可变摘要 ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3 不一致"}}
+[HTTP 409]
+
+[1;36m== 6) 重复晋级(已在 release 终态)-> 409 ALREADY_AT_FINAL_STAGE ==[0m
+{"error":{"code":"ALREADY_AT_FINAL_STAGE","message":"artifact app-1 已处于 release 终态"}}
+[HTTP 409]
+
+[1;36m== 7) 回退 release -> dev(只追加历史,不重建产物) ==[0m
+{"id":"app-1","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","stage":"dev","history":[{"from":"dev","to":"dev","trigger":"promotion","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"artifact registered","at":"2026-09-24T09:36:32Z"},{"from":"dev","to":"verification","trigger":"promotion","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"promoted to verification","at":"2026-09-24T09:36:32Z"},{"from":"verification","to":"release","trigger":"promotion","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"promoted to release","at":"2026-09-24T09:36:32Z"},{"from":"release","to":"dev","trigger":"rollback","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"incident #42","at":"2026-09-24T09:36:32Z"}],"created_at":"2026-09-24T09:36:32Z"}
+[HTTP 201]
+
+[1;36m== 8) 查看制品全貌:阶段、历史、证明、审批 ==[0m
+{"id":"app-1","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","stage":"dev","created_at":"2026-09-24T09:36:32Z","history":[{"from":"dev","to":"dev","trigger":"promotion","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"artifact registered","at":"2026-09-24T09:36:32Z"},{"from":"dev","to":"verification","trigger":"promotion","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"promoted to verification","at":"2026-09-24T09:36:32Z"},{"from":"verification","to":"release","trigger":"promotion","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"promoted to release","at":"2026-09-24T09:36:32Z"},{"from":"release","to":"dev","trigger":"rollback","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"incident #42","at":"2026-09-24T09:36:32Z"}],"proofs":[{"id":"proof-gate-1","artifact_id":"app-1","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","kind":"release-gate","result":"passed","detail":null,"created_at":"2026-09-24T09:36:32Z"},{"id":"proof-unit-1","artifact_id":"app-1","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","kind":"unit-test","result":"passed","detail":"42/42 cases","created_at":"2026-09-24T09:36:32Z"}],"approvals":[{"id":"ap-rel-1","artifact_id":"app-1","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","target_stage":"release","approver":"release-manager","decision":"approved","comment":null,"created_at":"2026-09-24T09:36:32Z"},{"id":"ap-ver-1","artifact_id":"app-1","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","target_stage":"verification","approver":"qa-lead","decision":"approved","comment":"ok","created_at":"2026-09-24T09:36:32Z"}]}
+[HTTP 200]
+
+[1;36m== 9) 门禁视图:回退后审批/证明仍在,可直接重新晋级 ==[0m
+[{"target_stage":"verification","approved":true,"passed_required_proofs":["unit-test"],"missing_proof_kinds":[]},{"target_stage":"release","approved":true,"passed_required_proofs":["unit-test","release-gate"],"missing_proof_kinds":[]}]
+[HTTP 200]
+{"id":"app-1","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","stage":"verification","history":[{"from":"dev","to":"dev","trigger":"promotion","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"artifact registered","at":"2026-09-24T09:36:32Z"},{"from":"dev","to":"verification","trigger":"promotion","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"promoted to verification","at":"2026-09-24T09:36:32Z"},{"from":"verification","to":"release","trigger":"promotion","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"promoted to release","at":"2026-09-24T09:36:32Z"},{"from":"release","to":"dev","trigger":"rollback","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"incident #42","at":"2026-09-24T09:36:32Z"},{"from":"dev","to":"verification","trigger":"promotion","digest":"ff443297eb06cee14bc8acb5f9423e13e6c7fabd54bed21dd48fa6f4d465ddd3","reason":"promoted to verification","at":"2026-09-24T09:36:32Z"}],"created_at":"2026-09-24T09:36:32Z"}
+[HTTP 201]
+
+[1;36m== 10) 并发回退:16 个请求只有 1 个成功 ==[0m
+201 409 409 409 409 409 409 409 409 409 409 409 409 409 409 409 
+
+[1;36m== 11) 内容审计:按旧摘要取回的字节与最初一致(未被重建/替换) ==[0m
+release-binary-v1
+[HTTP 200]
+release-binary-v1
