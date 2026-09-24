@@ -1,0 +1,7 @@
+# Direct runtime dependencies. Exact transitive versions are pinned in
+# requirements.lock; install from that file for a reproducible environment.
+web3>=7.8,<8
+fastapi>=0.115
+uvicorn>=0.30
+pytest>=8
+httpx>=0.27

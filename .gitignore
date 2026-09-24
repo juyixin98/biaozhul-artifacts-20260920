@@ -1,0 +1,19 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Indexer runtime data
+data/
+*.db
+*.db-wal
+*.db-shm
+
+# Foundry
+contracts/out/
+contracts/cache/
+contracts/lib/
+
+# OS/editor
+.DS_Store
