@@ -1,0 +1,65 @@
+# demo.jsonl — Modbus/TCP replay scenario (JSONL, one object per line)
+#
+# Start the server first:
+#   go run ./cmd/modbusd -listen 127.0.0.1:1502 -bank 32
+# Then replay:
+#   go run ./cmd/modbusctl replay -a 127.0.0.1:1502 examples/demo.jsonl
+#
+# Every step here is expected to PASS, including the ones that assert the
+# server returns a specific exception (expect_error).
+
+# --- 1. Normal batch write: 4 registers at address 0 -------------------------
+{"op":"write","txn":101,"unit":1,"start":0,"values":[10,20,30,40]}
+
+# --- 2. Read them back -------------------------------------------------------
+{"op":"read","txn":102,"unit":1,"start":0,"qty":4}
+
+# --- 3. Duplicate Transaction ID (101 again): legal, NOT deduplicated --------
+{"op":"write","txn":101,"unit":1,"start":4,"values":[99]}
+
+# --- 4. Overwrite part of the first batch ------------------------------------
+{"op":"write","txn":103,"unit":1,"start":1,"values":[21,31]}
+
+# --- 5. Read 0..7 -> 10,21,31,40,99,0,0,0 ------------------------------------
+{"op":"read","txn":104,"unit":1,"start":0,"qty":8}
+
+# --- 6. Out-of-range batch: bank is 32 (addresses 0..31), this touches 32 ---
+#       WHOLE batch fails with exception 0x02; nothing is written.
+{"op":"write","txn":105,"unit":1,"start":30,"values":[1,2,3],"expect_error":"0x02"}
+
+# --- 7. Confirm addresses 30,31 are still zero --------------------------------
+{"op":"read","txn":106,"unit":1,"start":30,"qty":2}
+
+# --- 8. Unknown Unit ID (7): expect exception 0x0B ---------------------------
+{"op":"read","txn":107,"unit":7,"start":0,"qty":1,"expect_error":"0x0B"}
+
+# --- 9. Malformed FC10 (qty 2 declared, byte count 6 = 3 registers) ----------
+#       Raw frame; the server answers exception 0x03.
+{"op":"raw","expect_response":true,"bytes":"00080000000d01100000000206000100020003","expect_error":"0x03"}
+
+# --- 10. Fragmented FC10 ("分包"): ONE frame split across two TCP writes -----
+#        txn=201 write [0x0011,0x0022] at address 8
+#        full frame: 00c9 0000 000b 01 10 0008 0002 04 0011 0022 (17 bytes)
+{"op":"raw","bytes":"00c90000000b01100008"}
+{"op":"raw","expect_response":true,"bytes":"00020400110022"}
+
+# --- 11. Sticky packet ("粘包"): TWO complete ADUs in ONE TCP write ----------
+#        txn=301 FC10 addr=16 [0x00AA]; txn=302 FC10 addr=17 [0x00BB]
+#        frame A: 012d 0000 0009 01 10 0010 0001 02 00aa
+#        frame B: 012e 0000 0009 01 10 0011 0001 02 00bb
+{"op":"raw","bytes":"012d000000090110001000010200aa012e000000090110001100010200bb"}
+{"op":"recv","txn":301}
+{"op":"recv","txn":302}
+
+# --- 12. Verify both sticky writes landed ------------------------------------
+{"op":"read","txn":303,"unit":1,"start":16,"qty":2}
+
+# --- 13. Commit a write, then disconnect WITHOUT reading the response --------
+#        Per Modbus/TCP the committed write survives: no cross-connection
+#        rollback and no idempotency replay. Reconnect and read to prove it.
+#        txn=401 FC10 addr=20 [1234] : 0191 0000 0009 01 10 0014 0001 02 04d2
+{"op":"raw","bytes":"0191000000090110001400010204d2"}
+{"op":"sleep","ms":100}
+{"op":"disconnect"}
+{"op":"connect"}
+{"op":"read","txn":402,"unit":1,"start":20,"qty":1}

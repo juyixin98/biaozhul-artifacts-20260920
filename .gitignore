@@ -1,0 +1,13 @@
+# 运行期数据
+/data/
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+
+# 构建产物
+/modbusd
+/modbusctl
+
+# 测试临时产物
+*.test
