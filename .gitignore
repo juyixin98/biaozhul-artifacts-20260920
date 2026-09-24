@@ -1,0 +1,7 @@
+# build output
+/bin/
+# local content store
+/data/
+# local env
+*.env
+.DS_Store
