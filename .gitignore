@@ -1,0 +1,10 @@
+# build output
+/bin/
+*.exe
+
+# runtime data
+/data/
+examples/generated/
+
+# local logs/temp
+*.log
