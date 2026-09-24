@@ -1,0 +1,10 @@
+{
+  "name": "diamond-middle-fail",
+  "max_attempts": 2,
+  "nodes": [
+    {"id": "A", "task": "identity", "params": {"value": 7}},
+    {"id": "B", "task": "fail", "params": {"message": "boom in middle task"}, "deps": ["A"], "max_attempts": 2},
+    {"id": "C", "task": "add", "deps": ["A"]},
+    {"id": "E", "task": "collect", "deps": ["B", "C"]}
+  ]
+}

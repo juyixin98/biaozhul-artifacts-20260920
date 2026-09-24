@@ -1,0 +1,9 @@
+{
+  "name": "cancel-demo",
+  "max_attempts": 1,
+  "nodes": [
+    {"id": "A", "task": "sleep", "params": {"ms": 30000}},
+    {"id": "B", "task": "sleep", "params": {"ms": 30000}, "deps": ["A"]},
+    {"id": "C", "task": "identity", "params": {"value": "must-not-run"}, "deps": ["B"]}
+  ]
+}

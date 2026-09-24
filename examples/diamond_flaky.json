@@ -1,0 +1,10 @@
+{
+  "name": "diamond-recoverable",
+  "max_attempts": 3,
+  "nodes": [
+    {"id": "A", "task": "identity", "params": {"value": 10}},
+    {"id": "B", "task": "flaky", "params": {"fail_times": 2, "succeed_with": 32}, "deps": ["A"], "max_attempts": 3},
+    {"id": "C", "task": "add", "deps": ["A"]},
+    {"id": "E", "task": "add", "deps": ["B", "C"]}
+  ]
+}
