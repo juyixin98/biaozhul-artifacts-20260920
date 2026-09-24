@@ -1,0 +1,6 @@
+string goal_id
+string command            # "recover" (resume now) | "abort" (stop a RECOVERING goal)
+---
+bool success
+bool accepted
+string message

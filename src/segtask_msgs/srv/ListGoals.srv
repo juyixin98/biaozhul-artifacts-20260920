@@ -1,0 +1,6 @@
+bool include_finished     # also return terminal goals
+int64 limit
+---
+bool success
+string message
+segtask_msgs/GoalInfo[] goals

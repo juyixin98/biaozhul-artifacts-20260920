@@ -1,0 +1,11 @@
+# Locked Python dependencies for the segtask demo (Python 3.12 / Ubuntu 24.04).
+#
+# IMPORTANT: rclpy and segtask_msgs are installed from ROS 2 Jazzy system
+# packages / the local colcon workspace, NOT from PyPI - rclpy is not
+# pip-installable. Verified present versions in the reference environment:
+#   ros-jazzy-rclpy 7.1.12, ros-jazzy-action-msgs 2.0.4,
+#   ros-jazzy-rosidl-generator-py 0.22.2
+# sqlite3 / hashlib / hmac are stdlib.
+#
+# Install:  python3 -m pip install -r requirements.lock.txt
+pytest==9.1.1

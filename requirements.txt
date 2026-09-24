@@ -1,0 +1,7 @@
+# Pinned Python dependencies for the segtask demo.
+#
+# rclpy itself is NOT pip-installable: it is provided by the ROS 2 Jazzy
+# system packages (see README "Requirements"). These pins cover the pure-Python
+# tooling used by the test suite and audit tooling; sqlite3, hashlib and hmac
+# are part of the Python 3.12 standard library.
+pytest==9.1.1

@@ -1,0 +1,33 @@
+# Goal
+string goal_id              # client-chosen idempotency key
+int64 segments_total         # number of synthetic segments to run
+int64 work_units             # SHA-256 iterations per segment (real computation)
+int64 checkpoint_ms          # cancellation-check interval inside a segment
+string policy                # recovery policy used after a crash: "resume" | "abort"
+---
+# Result
+int8 code                    # 0 SUCCEEDED, 1 CANCELED, 2 ABORTED, 3 REPLAYED, 4 FAILED
+bool success
+string goal_id
+int16 status                 # final status, see status constants below
+int64 segments_done          # segments durably committed
+int64 segments_total
+string result_hash           # hash of the last committed segment output
+string message
+uint8 feedback_dropped       # number of feedback publishes intentionally skipped
+---
+# Feedback
+string goal_id
+int64 segment_index          # 0-based index of the segment currently running
+int64 segments_done          # segments committed before this one
+int64 segments_total
+int16 status
+string last_segment_hash
+
+int16 STATUS_PENDING=0
+int16 STATUS_RUNNING=1
+int16 STATUS_CANCELING=2
+int16 STATUS_RECOVERING=3
+int16 STATUS_SUCCEEDED=4
+int16 STATUS_CANCELED=5
+int16 STATUS_ABORTED=6

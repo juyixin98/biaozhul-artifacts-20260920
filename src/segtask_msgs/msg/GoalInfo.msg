@@ -1,0 +1,10 @@
+string goal_id
+int16 status
+int64 segments_done
+int64 segments_total
+string policy
+bool resumed_after_restart
+string result_hash
+string result_message
+int64 created_at
+int64 updated_at

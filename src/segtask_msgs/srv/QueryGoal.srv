@@ -1,0 +1,18 @@
+string goal_id
+---
+bool found
+string goal_id
+int16 status
+int64 segments_done
+int64 segments_total
+string policy
+bool resumed_after_restart
+string params_json
+string result_hash
+string result_message
+bool chain_ok
+string chain_error
+int64 created_at
+int64 updated_at
+builtin_interfaces/Time started_at
+builtin_interfaces/Time ended_at

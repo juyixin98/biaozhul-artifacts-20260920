@@ -1,0 +1,26 @@
+[
+  {
+    "goal_id": "demo-sort-parts",
+    "segments_total": 5,
+    "work_units": 100000,
+    "checkpoint_ms": 50,
+    "policy": "resume",
+    "description": "Synthetic 'sort parts' batch: 5 segments, 100k SHA-256 rounds each; after a crash the server resumes from the last committed segment."
+  },
+  {
+    "goal_id": "demo-pack-boxes",
+    "segments_total": 8,
+    "work_units": 50000,
+    "checkpoint_ms": 20,
+    "policy": "abort",
+    "description": "Synthetic 'pack boxes' batch: if the server dies mid-run, on restart this goal is moved to ABORTED with partial segment counts preserved."
+  },
+  {
+    "goal_id": "demo-long-cancel",
+    "segments_total": 4,
+    "work_units": 400000,
+    "checkpoint_ms": 10,
+    "policy": "resume",
+    "description": "Long per-segment work so the client can request cancellation while the last segment is still in flight."
+  }
+]

@@ -1,0 +1,16 @@
+# colcon build artifacts
+build/
+install/
+log/
+
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# runtime data
+segtask_data/
+*.db
+*.db-wal
+*.db-shm
+*.key
