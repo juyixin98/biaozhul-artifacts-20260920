@@ -1,0 +1,54 @@
+{
+  "tree": {
+    "name": "order-processing",
+    "root": {
+      "id": "root",
+      "kind": "root",
+      "children": [
+        {
+          "id": "charge-then-ship",
+          "kind": "sequence",
+          "children": [
+            {
+              "id": "charge-card",
+              "kind": "action",
+              "name": "Charge the customer card (non-idempotent side effect)",
+              "stub": "succeed",
+              "non_idempotent": true,
+              "args": { "amount_cents": 4999, "currency": "CNY" }
+            },
+            {
+              "id": "fulfillment",
+              "kind": "fallback",
+              "children": [
+                {
+                  "id": "fast-courier",
+                  "kind": "action",
+                  "stub": "gate",
+                  "args": { "token": "courier-fast" }
+                },
+                {
+                  "id": "slow-courier",
+                  "kind": "action",
+                  "stub": "succeed",
+                  "args": { "service": "slow-courier" }
+                }
+              ]
+            },
+            {
+              "id": "notify-with-budget",
+              "kind": "timeout",
+              "ms": 2000,
+              "child": {
+                "id": "send-receipt",
+                "kind": "action",
+                "stub": "gate",
+                "args": { "token": "receipt" }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,10 @@
+# Binaries
+/bt
+/bin/
+*.test
+*.out
+
+# Local env / editor
+.env
+.idea/
+.vscode/

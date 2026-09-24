@@ -1,0 +1,22 @@
+{
+  "tree": {
+    "name": "parallel-fanout",
+    "root": {
+      "id": "root",
+      "kind": "root",
+      "children": [
+        {
+          "id": "fanout",
+          "kind": "parallel",
+          "success": 2,
+          "failure": 2,
+          "children": [
+            { "id": "task-a", "kind": "action", "stub": "gate", "args": { "token": "task-a" } },
+            { "id": "task-b", "kind": "action", "stub": "gate", "args": { "token": "task-b" } },
+            { "id": "task-c", "kind": "action", "stub": "gate", "args": { "token": "task-c" } }
+          ]
+        }
+      ]
+    }
+  }
+}
