@@ -1,0 +1,16 @@
+{
+  "graph": {
+    "root": "service",
+    "packages": [
+      { "id": "service", "license": "MIT OR GPL-3.0-only" },
+      { "id": "sdk", "license": "Apache-2.0 OR LGPL-2.1-only" },
+      { "id": "cache", "license": "ISC OR MPL-2.0" }
+    ],
+    "edges": [
+      { "from": "service", "to": "sdk", "linking": "static" },
+      { "from": "sdk", "to": "cache", "linking": "static" },
+      { "from": "cache", "to": "service", "linking": "static" }
+    ]
+  },
+  "enumerate": 100
+}

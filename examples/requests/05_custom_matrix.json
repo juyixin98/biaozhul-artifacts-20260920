@@ -1,0 +1,25 @@
+{
+  "graph": {
+    "root": "product",
+    "packages": [
+      { "id": "product", "license": "Proprietary" },
+      { "id": "math", "license": "WeirdLicense-1.0 OR MIT" },
+      { "id": "utils", "license": "ISC" },
+      { "id": "gpl-tool", "license": "LGPL-2.1-only" }
+    ],
+    "edges": [
+      { "from": "product", "to": "math", "linking": "static" },
+      { "from": "math", "to": "utils", "linking": "static" },
+      { "from": "product", "to": "gpl-tool", "linking": "dynamic" }
+    ]
+  },
+  "policy": {
+    "allowed": ["WeirdLicense-1.0"],
+    "denied": [],
+    "licenses": {
+      "WeirdLicense-1.0": { "copyleft": "none", "proprietary": false }
+    },
+    "incompatiblePairs": [["WeirdLicense-1.0", "ISC"]],
+    "checkDynamicLinks": false
+  }
+}

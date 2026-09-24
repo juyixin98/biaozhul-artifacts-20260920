@@ -1,0 +1,12 @@
+{
+  "graph": {
+    "root": "app",
+    "packages": [
+      { "id": "app", "license": "Proprietary" },
+      { "id": "db", "license": "GPL-2.0-only OR GPL-3.0-only" }
+    ],
+    "edges": [
+      { "from": "app", "to": "db", "linking": "static" }
+    ]
+  }
+}

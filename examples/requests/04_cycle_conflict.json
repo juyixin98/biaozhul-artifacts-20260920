@@ -1,0 +1,15 @@
+{
+  "graph": {
+    "root": "x",
+    "packages": [
+      { "id": "x", "license": "MIT OR ISC" },
+      { "id": "y", "license": "Apache-2.0 OR GPL-3.0-only" },
+      { "id": "z", "license": "GPL-3.0-only" }
+    ],
+    "edges": [
+      { "from": "x", "to": "y", "linking": "static" },
+      { "from": "y", "to": "z", "linking": "static" },
+      { "from": "z", "to": "x", "linking": "static" }
+    ]
+  }
+}

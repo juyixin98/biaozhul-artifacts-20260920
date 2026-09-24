@@ -1,0 +1,19 @@
+[package]
+name = "license-propagation"
+version = "0.1.0"
+edition = "2021"
+description = "Dependency-graph SPDX license policy propagation service (rule engine, not legal advice)"
+
+[dependencies]
+axum = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+
+[dev-dependencies]
+tower = { version = "0.5", features = ["util"] }
+http-body-util = "0.1"
+
+[[bin]]
+name = "license-propagation"
+path = "src/main.rs"

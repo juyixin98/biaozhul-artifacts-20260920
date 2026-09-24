@@ -1,0 +1,23 @@
+{
+  "graph": {
+    "root": "app",
+    "packages": [
+      { "id": "app", "license": "Proprietary" },
+      { "id": "web", "license": "GPL-3.0-only WITH Classpath-exception-2.0" },
+      { "id": "core", "license": "MIT OR GPL-3.0-only" },
+      { "id": "parser", "license": "BSD-2-Clause OR GPL-2.0-only" }
+    ],
+    "edges": [
+      { "from": "app", "to": "web", "linking": "static" },
+      { "from": "web", "to": "core", "linking": "static" },
+      { "from": "web", "to": "parser", "linking": "static" },
+      { "from": "core", "to": "parser", "linking": "dynamic" }
+    ]
+  },
+  "policy": {
+    "denied": [],
+    "checkDynamicLinks": true,
+    "proprietaryRejectsWeak": true
+  },
+  "enumerate": 50
+}
