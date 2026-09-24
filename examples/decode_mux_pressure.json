@@ -1,0 +1,5 @@
+{
+  "_comment": "DIAG_MUX 0x400: ServiceId=1 selects the Pressure branch (raw 0x0438=1080 -> 108.0 kPa); Voltage branch is present=false.",
+  "frame_id": "0x400",
+  "data": "0x01 0x38 0x04 0x00 0x00 0x00 0x00 0x00"
+}

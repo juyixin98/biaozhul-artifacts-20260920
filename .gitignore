@@ -1,0 +1,10 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+
+# Local data
+data/*.db
+data/*.db-*

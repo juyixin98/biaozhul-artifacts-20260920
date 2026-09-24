@@ -1,0 +1,33 @@
+VERSION "example-powertrain-1"
+
+NS_ :
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+
+BS_:
+
+BU_: ECM BCM TCM
+
+CM_ "Hand-verifiable DBC subset example: cross-byte, signed, Motorola and single-layer multiplexing.";
+
+BO_ 256 ENGINE_STATUS: 8 ECM
+ SG_ EngineSpeed : 0|16@1+ (0.25,0) [0|16383.75] "rpm" ECM,BCM
+ SG_ EngineTemp : 16|8@1- (1,-40) [-40|215] "degC" BCM
+ SG_ ThrottlePos : 24|8@1+ (0.4,0) [0|102] "%" ECM
+
+BO_ 512 BODY_STATUS: 8 BCM
+ SG_ VehicleSpeed : 7|16@0+ (0.01,0) [0|655.35] "km/h" TCM,BCM
+ SG_ GearLever : 23|4@0- (1,0) [-8|7] "" TCM
+
+BO_ 1024 DIAG_MUX: 8 ECM
+ SG_ ServiceId M : 0|8@1+ (1,0) [0|255] "" ECM,TCM
+ SG_ Voltage m0 : 8|16@1+ (0.001,0) [0|65.535] "V" TCM
+ SG_ Pressure m1 : 8|16@1+ (0.1,0) [0|6553.5] "kPa" TCM
+
+BO_ 2047 MAX_ID_PROBE: 8 TCM
+ SG_ Counter : 0|4@1+ (1,0) [0|15] "" ECM
+ SG_ Checksum : 4|4@1+ (1,0) [0|15] "" ECM
+ SG_ BigMoto : 39|32@0- (1,0) [-2147483648|2147483647] "" ECM
