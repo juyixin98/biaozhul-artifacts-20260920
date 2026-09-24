@@ -1,0 +1,4 @@
+build/
+build-san/
+*.o
+*.a
