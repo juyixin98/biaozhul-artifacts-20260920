@@ -1,0 +1,4 @@
+# SHA256 of upstream archives as downloaded by scripts/fetch_deps.sh.
+# nlohmann/json single-header verified identical from two independent mirrors.
+8586084f71f9bde545ee7fa6d00288b264a2b7ac3607b974e54d13e7162c1c72  eigen-3.4.0.tar.gz
+9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6  json.hpp

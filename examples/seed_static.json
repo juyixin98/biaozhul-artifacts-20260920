@@ -1,0 +1,27 @@
+{
+  "edges": [
+    {
+      "parent": "base",
+      "child": "torso",
+      "static": true,
+      "transform": {
+        "translation": [0.0, 0.0, 0.8],
+        "rotation": {"w": 1, "x": 0, "y": 0, "z": 0}
+      }
+    },
+    {
+      "parent": "torso",
+      "child": "head",
+      "static": true,
+      "transform": {
+        "translation": [0.0, 0.0, 0.4],
+        "rotation": {
+          "w": 0.9238795325112867,
+          "x": 0.0,
+          "y": 0.3826834323650898,
+          "z": 0.0
+        }
+      }
+    }
+  ]
+}

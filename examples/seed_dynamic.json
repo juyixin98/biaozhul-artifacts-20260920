@@ -1,0 +1,36 @@
+{
+  "edges": [
+    {
+      "parent": "base",
+      "child": "arm",
+      "samples": [
+        {
+          "stamp_us": 0,
+          "transform": {
+            "translation": [0.0, 0.0, 0.0],
+            "rotation": {"w": 1, "x": 0, "y": 0, "z": 0}
+          }
+        },
+        {
+          "stamp_us": 1000000,
+          "transform": {
+            "translation": [1.0, 0.0, 0.0],
+            "rotation": {
+              "w": 0.7071067811865476,
+              "x": 0,
+              "y": 0,
+              "z": 0.7071067811865476
+            }
+          }
+        },
+        {
+          "stamp_us": 2000000,
+          "transform": {
+            "translation": [2.0, 0.0, 0.0],
+            "rotation": {"w": -1, "x": 0, "y": 0, "z": 0}
+          }
+        }
+      ]
+    }
+  ]
+}
