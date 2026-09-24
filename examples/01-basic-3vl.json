@@ -1,0 +1,39 @@
+{
+  "sql": "SELECT id, name, score FROM students WHERE score >= ? OR score IS NULL",
+  "paramTypes": ["INTEGER"],
+  "params": [75],
+  "crossCheck": true,
+  "batches": [
+    {
+      "schema": [
+        {"name": "id", "type": "INTEGER"},
+        {"name": "name", "type": "STRING"},
+        {"name": "score", "type": "INTEGER"}
+      ],
+      "rows": [
+        {"id": 1, "name": "alice", "score": 90},
+        {"id": 2, "name": "bob",   "score": 60},
+        {"id": 3, "name": "carol", "score": null},
+        {"id": 4, "name": "dave",  "score": 75}
+      ]
+    },
+    {
+      "schema": [
+        {"name": "id", "type": "INTEGER"},
+        {"name": "name", "type": "STRING"},
+        {"name": "score", "type": "INTEGER"}
+      ],
+      "rows": []
+    },
+    {
+      "schema": [
+        {"name": "id", "type": "INTEGER"},
+        {"name": "name", "type": "STRING"},
+        {"name": "score", "type": "INTEGER"}
+      ],
+      "rows": [
+        {"id": 5, "name": "erin", "score": null}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "sql": "SELECT a FROM t WHERE a = 1",
+  "paramTypes": [],
+  "params": [],
+  "crossCheck": true,
+  "batches": [
+    {
+      "schema": [{"name": "a", "type": "INTEGER"}],
+      "rows": []
+    }
+  ]
+}

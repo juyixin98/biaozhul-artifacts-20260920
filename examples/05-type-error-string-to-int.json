@@ -1,0 +1,17 @@
+{
+  "sql": "SELECT id, name FROM t WHERE id = ?",
+  "paramTypes": ["INTEGER"],
+  "params": ["1"],
+  "crossCheck": false,
+  "batches": [
+    {
+      "schema": [
+        {"name": "id", "type": "INTEGER"},
+        {"name": "name", "type": "STRING"}
+      ],
+      "rows": [
+        {"id": 1, "name": "alice"}
+      ]
+    }
+  ]
+}

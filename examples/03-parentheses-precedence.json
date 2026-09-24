@@ -1,0 +1,21 @@
+{
+  "sql": "SELECT a, b, c FROM t WHERE a = 1 OR b = 1 AND c = 1",
+  "paramTypes": [],
+  "params": [],
+  "crossCheck": true,
+  "batches": [
+    {
+      "schema": [
+        {"name": "a", "type": "INTEGER"},
+        {"name": "b", "type": "INTEGER"},
+        {"name": "c", "type": "INTEGER"}
+      ],
+      "rows": [
+        {"a": 1, "b": 2, "c": null},
+        {"a": 2, "b": 1, "c": 1},
+        {"a": 2, "b": 1, "c": null},
+        {"a": 2, "b": 2, "c": 2}
+      ]
+    }
+  ]
+}

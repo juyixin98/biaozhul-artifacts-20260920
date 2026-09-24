@@ -1,0 +1,24 @@
+# 依赖锁定（Dependency Lockfile）
+#
+# 本项目刻意保持“零运行时外部依赖”：所有功能（HTTP 服务、JSON、SQL 解析、
+# 三值逻辑、列式执行）均只用 JDK 标准库实现，因此没有可下载的第三方构件，
+# 也就不存在供应链版本漂移。下面锁定的是构建/运行所需的 JDK 版本。
+#
+# 校验方法：java -version  /  javac -version
+#
+# 开发与验收实际使用的版本：
+#   openjdk 17.0.20.1 (Temurin/OpenJDK 64-Bit Server VM, Linux)
+#
+# 约束：
+#   JDK_MAJOR >= 17
+#
+# 使用到的 JDK 模块（全部为 java.base / jdk.httpserver，无需 --add-modules）：
+#   java.base
+#     - java.util / java.util.concurrent
+#     - java.net.http（测试用 HTTP 客户端）
+#     - java.nio.charset
+#   jdk.httpserver
+#     - com.sun.net.httpserver.HttpServer（服务端，JDK 内置）
+#
+# 第三方依赖：无（Maven/Gradle coordinates 列表为空）。
+# 测试框架：无第三方（自研微型断言运行器，位于 src/test/java/com/tvl/test）。
