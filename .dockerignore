@@ -1,0 +1,9 @@
+.git
+bin/
+test/
+README.md
+Makefile
+scripts/
+config/
+.dockerignore
+Dockerfile

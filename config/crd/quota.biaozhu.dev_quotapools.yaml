@@ -1,0 +1,130 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.16.5
+  name: quotapools.quota.biaozhu.dev
+spec:
+  group: quota.biaozhu.dev
+  names:
+    kind: QuotaPool
+    listKind: QuotaPoolList
+    plural: quotapools
+    shortNames:
+    - qpool
+    singular: quotapool
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.usedCPUMilli
+      name: UsedCPU(m)
+      type: integer
+    - jsonPath: .spec.cpuMilli
+      name: CapCPU(m)
+      type: integer
+    - jsonPath: .status.usedMemoryBytes
+      name: UsedMem(B)
+      type: integer
+    - jsonPath: .spec.memoryBytes
+      name: CapMem(B)
+      type: integer
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: |-
+          QuotaPool is the Schema for the quotapools API. One pool (conventionally
+          named "default") meters resource reservations inside one namespace.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: QuotaPoolSpec defines the total capacity of a quota pool.
+            properties:
+              cpuMilli:
+                description: CPUMilli is the total CPU capacity in milli-cores (1000
+                  = 1 core).
+                format: int64
+                maximum: 1000000
+                minimum: 0
+                type: integer
+              memoryBytes:
+                description: MemoryBytes is the total memory capacity in bytes.
+                format: int64
+                maximum: 109951162777600
+                minimum: 0
+                type: integer
+            required:
+            - cpuMilli
+            - memoryBytes
+            type: object
+          status:
+            description: |-
+              QuotaPoolStatus holds the allocation ledger and the aggregated usage.
+              Used totals are always recomputed from Allocations, so the ledger is the
+              single source of truth and the counters can never drift from it.
+            properties:
+              allocations:
+                description: Allocations is the authoritative ledger of active reservations.
+                items:
+                  description: |-
+                    Allocation records one active reservation held against the pool. The ledger
+                    is keyed by the UID of the owning ResourceRequest, which makes reservation
+                    idempotent: re-reserving the same request is a no-op, never a double count.
+                  properties:
+                    cpuMilli:
+                      description: CPUMilli reserved by this allocation.
+                      format: int64
+                      type: integer
+                    memoryBytes:
+                      description: MemoryBytes reserved by this allocation.
+                      format: int64
+                      type: integer
+                    requestName:
+                      description: |-
+                        RequestName is the name of the ResourceRequest (informational only;
+                        the UID is the authoritative key).
+                      type: string
+                    requestUID:
+                      description: RequestUID is the UID of the ResourceRequest holding
+                        this allocation.
+                      type: string
+                  required:
+                  - cpuMilli
+                  - memoryBytes
+                  - requestName
+                  - requestUID
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - requestUID
+                x-kubernetes-list-type: map
+              usedCPUMilli:
+                description: UsedCPUMilli is the sum of Allocations[].cpuMilli.
+                format: int64
+                type: integer
+              usedMemoryBytes:
+                description: UsedMemoryBytes is the sum of Allocations[].memoryBytes.
+                format: int64
+                type: integer
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

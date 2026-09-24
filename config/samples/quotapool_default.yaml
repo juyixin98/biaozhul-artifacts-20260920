@@ -1,0 +1,8 @@
+apiVersion: quota.biaozhu.dev/v1alpha1
+kind: QuotaPool
+metadata:
+  name: default
+  namespace: demo-quota
+spec:
+  cpuMilli: 2000        # 2 cores
+  memoryBytes: 2147483648  # 2 GiB

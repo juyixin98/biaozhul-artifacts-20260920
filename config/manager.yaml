@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quota-reserver-controller-manager
+  namespace: quota-system
+  labels:
+    app.kubernetes.io/name: quota-reserver
+spec:
+  # Two replicas: only the leader reconciles, but both serve admission
+  # webhooks, so deleting/rolling one pod keeps the webhook available.
+  replicas: 2
+  selector:
+    matchLabels:
+      control-plane: controller-manager
+  template:
+    metadata:
+      labels:
+        control-plane: controller-manager
+    spec:
+      serviceAccountName: quota-reserver-controller-manager
+      containers:
+        - name: manager
+          image: quota-reserver:latest
+          imagePullPolicy: IfNotPresent
+          args:
+            - --leader-elect
+          env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          ports:
+            - name: webhook-server
+              containerPort: 9443
+              protocol: TCP
+            - name: health
+              containerPort: 8081
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8081
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8081
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop: ["ALL"]
+      terminationGracePeriodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: quota-reserver-webhook-service
+  namespace: quota-system
+spec:
+  selector:
+    control-plane: controller-manager
+  ports:
+    - name: https
+      port: 443
+      targetPort: 9443
+      protocol: TCP

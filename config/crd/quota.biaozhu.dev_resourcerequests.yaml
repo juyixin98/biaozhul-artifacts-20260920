@@ -1,0 +1,131 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.16.5
+  name: resourcerequests.quota.biaozhu.dev
+spec:
+  group: quota.biaozhu.dev
+  names:
+    kind: ResourceRequest
+    listKind: ResourceRequestList
+    plural: resourcerequests
+    shortNames:
+    - rrq
+    singular: resourcerequest
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.phase
+      name: Phase
+      type: string
+    - jsonPath: .spec.cpuMilli
+      name: CPU(m)
+      type: integer
+    - jsonPath: .spec.memoryBytes
+      name: Mem(B)
+      type: integer
+    - jsonPath: .spec.ttlSeconds
+      name: TTL(s)
+      type: integer
+    - jsonPath: .metadata.creationTimestamp
+      name: Age
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: ResourceRequest is the Schema for the resourcerequests API.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: |-
+              ResourceRequestSpec describes one quota reservation request.
+              All quantities are plain integers in fixed units — no suffix parsing:
+              CPU in milli-cores, memory in bytes, TTL in seconds.
+            properties:
+              cpuMilli:
+                description: CPUMilli is the requested CPU in milli-cores (500 = 0.5
+                  cores).
+                format: int64
+                maximum: 100000
+                minimum: 1
+                type: integer
+              memoryBytes:
+                description: MemoryBytes is the requested memory in bytes.
+                format: int64
+                maximum: 109951162777600
+                minimum: 1
+                type: integer
+              pool:
+                default: default
+                description: Pool is the name of the QuotaPool in the same namespace
+                  to reserve from.
+                maxLength: 63
+                minLength: 1
+                pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                type: string
+              ttlSeconds:
+                description: TTLSeconds is how long the reservation waits for its
+                  Pod before expiring.
+                format: int64
+                maximum: 86400
+                minimum: 10
+                type: integer
+            required:
+            - cpuMilli
+            - memoryBytes
+            - ttlSeconds
+            type: object
+          status:
+            description: ResourceRequestStatus is the observed state of a ResourceRequest.
+            properties:
+              boundPod:
+                description: BoundPod is the name of the Pod that consumed the reservation.
+                type: string
+              expiresAt:
+                description: ExpiresAt is when the reservation expires if no Pod has
+                  consumed it.
+                format: date-time
+                type: string
+              message:
+                description: Message is a human-readable explanation of the phase.
+                type: string
+              observedGeneration:
+                description: ObservedGeneration is the latest spec generation reconciled.
+                format: int64
+                type: integer
+              phase:
+                description: Phase is the current lifecycle phase.
+                type: string
+              reason:
+                description: Reason is a short CamelCase machine-readable explanation
+                  of the phase.
+                type: string
+              reservedAt:
+                description: ReservedAt is when the quota reservation was recorded
+                  in the pool ledger.
+                format: date-time
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

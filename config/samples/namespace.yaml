@@ -1,0 +1,7 @@
+# Demo namespace: the managed-by label opts it into the admission webhooks.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo-quota
+  labels:
+    quota.biaozhu.dev/managed-by: quota-reserver

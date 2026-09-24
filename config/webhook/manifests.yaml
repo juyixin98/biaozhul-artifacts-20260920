@@ -1,0 +1,51 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: quota-reserver-validating-webhook
+webhooks:
+  - name: vresourcerequest.quota.biaozhu.dev
+    admissionReviewVersions: ["v1"]
+    sideEffects: None
+    failurePolicy: Fail
+    matchPolicy: Equivalent
+    namespaceSelector:
+      matchLabels:
+        quota.biaozhu.dev/managed-by: quota-reserver
+    clientConfig:
+      service:
+        name: quota-reserver-webhook-service
+        namespace: quota-system
+        path: /validate-quota-biaozhu-dev-v1alpha1-resourcerequest
+        port: 443
+      # caBundle is intentionally absent here; the manager fills it at
+      # runtime from its self-signed CA (see internal/cert) and keeps it
+      # in sync. Omitting the field means re-applying this manifest never
+      # clobbers the published CA bundle.
+    rules:
+      - apiGroups: ["quota.biaozhu.dev"]
+        apiVersions: ["v1alpha1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["resourcerequests"]
+  - name: vpod.quota.biaozhu.dev
+    admissionReviewVersions: ["v1"]
+    sideEffects: None
+    failurePolicy: Fail
+    matchPolicy: Equivalent
+    namespaceSelector:
+      matchLabels:
+        quota.biaozhu.dev/managed-by: quota-reserver
+    clientConfig:
+      service:
+        name: quota-reserver-webhook-service
+        namespace: quota-system
+        path: /validate-v1-pod
+        port: 443
+      # caBundle is intentionally absent here; the manager fills it at
+      # runtime from its self-signed CA (see internal/cert) and keeps it
+      # in sync. Omitting the field means re-applying this manifest never
+      # clobbers the published CA bundle.
+    rules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: ["CREATE"]
+        resources: ["pods"]

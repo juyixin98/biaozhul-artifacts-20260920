@@ -1,0 +1,10 @@
+apiVersion: quota.biaozhu.dev/v1alpha1
+kind: ResourceRequest
+metadata:
+  name: example
+  namespace: demo-quota
+spec:
+  pool: default
+  cpuMilli: 500            # 0.5 cores
+  memoryBytes: 268435456   # 256 MiB
+  ttlSeconds: 120
