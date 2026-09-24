@@ -1,0 +1,9 @@
+{
+  "resources": [
+    {"kind": "tool",    "name": "drill",    "description": "pneumatic drill"},
+    {"kind": "tool",    "name": "welder",   "description": "spot welder"},
+    {"kind": "tool",    "name": "gripper",  "description": "vacuum gripper"},
+    {"kind": "station", "name": "bay-1",    "description": "assembly bay 1"},
+    {"kind": "station", "name": "bay-2",    "description": "assembly bay 2"}
+  ]
+}

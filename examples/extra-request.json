@@ -1,0 +1,5 @@
+{
+  "resources": [
+    {"kind": "tool", "name": "welder"}
+  ]
+}

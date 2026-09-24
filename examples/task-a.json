@@ -1,0 +1,10 @@
+{
+  "label": "robot-arm-A",
+  "priority": 100,
+  "aging_per_sec": 1.0,
+  "timeout_ms": 30000,
+  "resources": [
+    {"kind": "tool",    "name": "drill"},
+    {"kind": "station", "name": "bay-1"}
+  ]
+}
