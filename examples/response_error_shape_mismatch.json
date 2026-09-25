@@ -1,0 +1,8 @@
+{
+  "ok": false,
+  "method": "huber",
+  "error": {
+    "type": "input_error",
+    "message": "y 长度 3 与 X 的样本数 2 不一致"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "method": "huber",
+  "result": {
+    "coefficients": [
+      1.9834098188152551
+    ],
+    "intercept": 1.001189088970569,
+    "delta_used": 0.5,
+    "residual_scale": null,
+    "reg_lambda": 0.0,
+    "tol": 1e-10,
+    "max_iter": 300,
+    "fit_intercept": true,
+    "iterations": 9,
+    "converged": true,
+    "status": "converged",
+    "objective": 16.331350732809,
+    "objective_history": [
+      18.46841745564344,
+      16.378191607484116,
+      16.331575589151356,
+      16.33135162929392,
+      16.33135073654279,
+      16.331350732824554,
+      16.331350732809067,
+      16.331350732809003,
+      16.331350732809,
+      16.331350732809
+    ],
+    "rank": 2,
+    "rank_deficient": false,
+    "warnings": []
+  }
+}

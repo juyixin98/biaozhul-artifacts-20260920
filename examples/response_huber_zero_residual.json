@@ -1,0 +1,29 @@
+{
+  "ok": true,
+  "method": "huber",
+  "result": {
+    "coefficients": [
+      2.9999999999999996
+    ],
+    "intercept": 0.0,
+    "delta_used": 1.0,
+    "residual_scale": 0.0,
+    "reg_lambda": 0.0,
+    "tol": 1e-07,
+    "max_iter": 100,
+    "fit_intercept": false,
+    "iterations": 1,
+    "converged": true,
+    "status": "converged",
+    "objective": 3.6484816866471796e-30,
+    "objective_history": [
+      3.6484816866471796e-30,
+      3.6484816866471796e-30
+    ],
+    "rank": 1,
+    "rank_deficient": false,
+    "warnings": [
+      "auto_scale_all_zero_residuals"
+    ]
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux-6.8.0-90-generic-x86_64-with-glibc2.39",
+    "numpy": "2.5.3",
+    "seed": 1
+  },
+  "sections": {
+    "outliers": {
+      "true": {
+        "slope": 2.0,
+        "intercept": 1.0
+      },
+      "ols": {
+        "slope": 1.8333871833558466,
+        "intercept": 0.9801689923216783,
+        "sse": 257.4659751543311
+      },
+      "huber": {
+        "slope": 1.9834098188152551,
+        "intercept": 1.001189088970569,
+        "objective": 16.331350732809,
+        "status": "converged",
+        "iterations": 9,
+        "objective_history": [
+          18.46841745564344,
+          16.378191607484116,
+          16.331575589151356,
+          16.33135162929392,
+          16.33135073654279,
+          16.331350732824554,
+          16.331350732809067,
+          16.331350732809003,
+          16.331350732809,
+          16.331350732809
+        ]
+      }
+    },
+    "collinear": {
+      "rank": 2,
+      "rank_deficient": true,
+      "warnings": [
+        "rank_deficient_min_norm_solution"
+      ],
+      "max_prediction_error": 3.552713678800501e-15,
+      "status": "converged"
+    },
+    "zero_residual": {
+      "status": "converged",
+      "warnings": [
+        "auto_scale_all_zero_residuals"
+      ],
+      "objective": 1.903126933845691e-29,
+      "coefficients": [
+        3.0000000000000004
+      ],
+      "intercept": -2.000000000000001
+    },
+    "reproducibility": {
+      "bitwise_identical": true,
+      "large_delta_vs_ols": {
+        "max_coef_error": 0.0,
+        "intercept_error": 0.0
+      },
+      "json_ok": true
+    }
+  },
+  "summary": {
+    "passed": 19,
+    "total": 19,
+    "all_passed": true,
+    "results": [
+      {
+        "name": "Huber 收敛",
+        "passed": true,
+        "detail": "converged"
+      },
+      {
+        "name": "Huber 斜率误差 < 0.1",
+        "passed": true,
+        "detail": "err=0.0166"
+      },
+      {
+        "name": "Huber 截距误差 < 0.1",
+        "passed": true,
+        "detail": "err=0.0012"
+      },
+      {
+        "name": "Huber 比 OLS 更接近真实斜率",
+        "passed": true,
+        "detail": "huber_err=0.0166 ols_err=0.1666"
+      },
+      {
+        "name": "Huber 比 OLS 更接近真实截距",
+        "passed": true,
+        "detail": "huber_err=0.0012 ols_err=0.0198"
+      },
+      {
+        "name": "目标值相对 OLS 初值下降",
+        "passed": true,
+        "detail": "18.468417 -> 16.331351"
+      },
+      {
+        "name": "目标轨迹单调不增（容差 1e-10）",
+        "passed": true,
+        "detail": "increases=0"
+      },
+      {
+        "name": "离群点权重被压低 (<0.1)，干净点权重接近 1 (>0.95)",
+        "passed": true,
+        "detail": "out=0.0619, clean=0.9868"
+      },
+      {
+        "name": "OLS 上报秩亏",
+        "passed": true,
+        "detail": "rank=2"
+      },
+      {
+        "name": "Huber 上报秩亏并给出 warning",
+        "passed": true,
+        "detail": "rank=2, warnings=['rank_deficient_min_norm_solution']"
+      },
+      {
+        "name": "秩亏下预测仍精确 (<1e-6)",
+        "passed": true,
+        "detail": "max_err=3.55e-15"
+      },
+      {
+        "name": "秩亏下仍然收敛",
+        "passed": true,
+        "detail": "converged"
+      },
+      {
+        "name": "全零残差收敛",
+        "passed": true,
+        "detail": "converged"
+      },
+      {
+        "name": "全零残差目标为 0",
+        "passed": true,
+        "detail": "objective=1.903e-29"
+      },
+      {
+        "name": "零散布 warning 与参数精确恢复",
+        "passed": true,
+        "detail": "['auto_scale_all_zero_residuals']"
+      },
+      {
+        "name": "两次拟合逐位一致（确定性）",
+        "passed": true,
+        "detail": ""
+      },
+      {
+        "name": "δ 极大时 Huber≈OLS (<1e-5)",
+        "passed": true,
+        "detail": "coef_err=0.00e+00, int_err=0.00e+00"
+      },
+      {
+        "name": "JSON 接口 ok=true 且与库调用目标一致",
+        "passed": true,
+        "detail": "json=16.3313507328 lib=16.3313507328"
+      },
+      {
+        "name": "JSON 接口形状错误返回 input_error",
+        "passed": true,
+        "detail": "y 长度 2 与 X 的样本数 1 不一致"
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "method": "ols",
+  "result": {
+    "coefficients": [
+      1.8333871833558466
+    ],
+    "intercept": 0.9801689923216783,
+    "objective_sse": 257.4659751543311,
+    "rank": 2,
+    "rank_deficient": false,
+    "fit_intercept": true
+  }
+}
