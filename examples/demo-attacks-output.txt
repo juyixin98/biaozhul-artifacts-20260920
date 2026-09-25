@@ -1,0 +1,18 @@
+存储目录   : /tmp/env-demo-attack
+主密钥 mk1 : mk_5d9e230d3c926680c09bfb5b
+[1] 加解密往返 OK（25 块，fid=e32519f3fa103643…）
+[2] 轮换 OK: mk_5d9e230d3… -> mk_e6848bb39…；blob sha256 不变 32ae2cc98b6cd37d…；轮换后解密一致
+  [拒绝] [3] 篡改第 3 块密文 1 字节
+         -> AEADAuthenticationError: AEAD 认证失败：密文/nonce/关联数据被篡改，或密钥不正确
+  [拒绝] [4] 同文件交换第 0/3 块
+         -> AEADAuthenticationError: 第 0 块的 nonce 与块序号派生值不一致（块可能被交换或重放）
+  [拒绝] [5] 把另一文件的第 2 块搬入本文件
+         -> AEADAuthenticationError: AEAD 认证失败：密文/nonce/关联数据被篡改，或密钥不正确
+  [拒绝] [6a] 删除尾部 2 个整块（截断）
+         -> CorruptContainerError: 实际数据块数 23 与受保护头声明的 25 不一致（文件可能被截断或被追加）
+  [拒绝] [6b] 最后一块只写一半
+         -> TruncatedContainerError: 容器被截断：期望再读 1724 字节，实际只剩 862 字节
+[7a] 轮换中断 OK：旧信封/旧密钥仍可解密，无临时文件残留
+[7b] 重启重试 OK：清扫遗留 tmp，轮换到 mk_5f631280b…，明文一致且 blob 未变
+
+总结：全部篡改 / 交换 / 截断均被拒绝；轮换只重包 DEK，中断可安全恢复。
