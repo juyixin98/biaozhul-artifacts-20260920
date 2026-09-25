@@ -1,0 +1,16 @@
+{
+  "name": "step_demo",
+  "output_dir": "out/examples",
+  "input": {
+    "scenario": "step",
+    "n": 2000,
+    "sigma": 1.0,
+    "seed": 0,
+    "step_at": 1000,
+    "step_amp": 6.0
+  },
+  "config": {"window_size": 200, "threshold": 6.0, "min_samples": 30},
+  "events": [
+    {"kind": "step", "start": 1000, "eval_end": 1200}
+  ]
+}

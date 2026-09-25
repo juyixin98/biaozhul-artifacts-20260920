@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "burst-anomaly-detector"
+version = "0.1.0"
+description = "基于滑动稳健统计的离线突发异常信号检测（纯后端，NumPy）"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]
+
+[project.scripts]
+burst-detector = "burst_detector.cli:main"
+
+[tool.setuptools]
+packages = ["burst_detector"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
