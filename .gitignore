@@ -1,0 +1,8 @@
+# 编译产物
+build/
+# 运行数据与日志
+data/
+logs/
+# 临时
+*.tmp
+*.staged

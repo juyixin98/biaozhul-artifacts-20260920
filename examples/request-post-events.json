@@ -1,0 +1,9 @@
+{
+  "events": [
+    {"key": "A", "value": 1.5},
+    {"key": "B", "value": 2.0},
+    {"key": "A", "value": 0.5},
+    {"key": "C", "value": 3.0},
+    {"key": "B", "value": 1.0}
+  ]
+}

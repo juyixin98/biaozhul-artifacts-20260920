@@ -1,0 +1,41 @@
+== 1) health ==
+{
+  "ok": true,
+  "state": "RUNNING"
+}
+
+== 2) POST /events（5 条，触发检查点1）==
+{"accepted":5,"firstOffset":0,"lastOffset":4,"cp":1,"off":5}
+== 3) 再发 7 条（共 12 条，已有 2 个检查点）==
+{"accepted":7,"cp":2,"off":12}
+== 4) 注入 OUTPUT_COMMIT 故障于检查点 3，再发 5 条（12->17，触发检查点3）==
+{"allArms":["OUTPUT_COMMIT"],"armed":"OUTPUT_COMMIT@3"}
+{"checkpointId":3,"error":"INJECTED_CRASH","message":"注入故障：checkpointId=3，阶段=OUTPUT_COMMIT","phase":"OUTPUT_COMMIT","recovery":"POST /recover"}
+== 5) 崩溃后 health 与写入拒绝（503）==
+{
+  "ok": false,
+  "state": "CRASHED"
+}
+
+HTTP 503
+{"crashedAt":"注入故障：checkpointId=3，阶段=OUTPUT_COMMIT","error":"进程已因注入故障终止（内存状态已丢弃）","recovery":"POST /recover"}
+== 6) POST /recover 恢复（新进程语义，重放输入日志）==
+{"recovered":true,"resumedToOffset":17,"cp":4,"off":17,"Zpresent":false}
+== 7) 恢复后最终 summary ==
+{
+  "A": {
+    "count": 9,
+    "sum": 9.0
+  },
+  "B": {
+    "count": 7,
+    "sum": 5.5
+  },
+  "C": {
+    "count": 1,
+    "sum": 3.0
+  }
+}
+== 8) 非法输入返回 400 ==
+empty events -> HTTP 400
+bad json    -> HTTP 400

@@ -1,0 +1,287 @@
+构建完成 -> build/
+
+==== 1) 连续执行基线（无故障，全新进程） ====
+基线完成: 接收 37 条，最终检查点 8，nextOffset=37
+{
+  "armedFaults": [],
+  "committedTxns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "inputEvents": 37,
+  "lastCheckpointId": 8,
+  "nextOffset": 37,
+  "policy": "CountPolicy(every=5)",
+  "summary": {
+    "A": {
+      "count": 13,
+      "sum": 12.0
+    },
+    "B": {
+      "count": 12,
+      "sum": 12.5
+    },
+    "C": {
+      "count": 12,
+      "sum": 11.0
+    }
+  }
+}
+
+{
+  "committedTxns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "lastCheckpointId": 8,
+  "nextOffset": 37,
+  "summary": {
+    "A": {
+      "count": 13,
+      "sum": 12.0
+    },
+    "B": {
+      "count": 12,
+      "sum": 12.5
+    },
+    "C": {
+      "count": 12,
+      "sum": 11.0
+    }
+  }
+}
+
+==== 2) 故障阶段 STATE_WRITE：崩溃（进程退出码 42）→ 全新进程恢复 ====
+
+[进程终止] 注入故障命中 -> 注入故障：checkpointId=4，阶段=STATE_WRITE
+内存状态已丢弃。请用 resume 命令以新进程恢复。
+[crash] 退出码=42（期望 42）
+[crash] 崩溃后磁盘现场（.tmp/.staged 为尚未提交的证据，恢复时会清除/回滚）：
+    data/crash-STATE_WRITE/checkpoint-000004.json.tmp
+恢复完成: nextOffset=37，最终检查点 8
+{
+  "armedFaults": [],
+  "committedTxns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "inputEvents": 37,
+  "lastCheckpointId": 8,
+  "nextOffset": 37,
+  "policy": "CountPolicy(every=5)",
+  "summary": {
+    "A": {
+      "count": 13,
+      "sum": 12.0
+    },
+    "B": {
+      "count": 12,
+      "sum": 12.5
+    },
+    "C": {
+      "count": 12,
+      "sum": 11.0
+    }
+  }
+}
+
+[STATE_WRITE] 最终偏移与汇总与基线完全一致 ✓
+[STATE_WRITE] 已提交事务集合一致：{1 2 3 4 5 6 7 8 } ✓（无重复、无缺失）
+[STATE_WRITE] 恢复后无 .tmp/.staged 残留 ✓
+
+==== 2) 故障阶段 OUTPUT_STAGE：崩溃（进程退出码 42）→ 全新进程恢复 ====
+
+[进程终止] 注入故障命中 -> 注入故障：checkpointId=4，阶段=OUTPUT_STAGE
+内存状态已丢弃。请用 resume 命令以新进程恢复。
+[crash] 退出码=42（期望 42）
+[crash] 崩溃后磁盘现场（.tmp/.staged 为尚未提交的证据，恢复时会清除/回滚）：
+    data/crash-OUTPUT_STAGE/output/txn-000004.staged
+恢复完成: nextOffset=37，最终检查点 8
+{
+  "armedFaults": [],
+  "committedTxns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "inputEvents": 37,
+  "lastCheckpointId": 8,
+  "nextOffset": 37,
+  "policy": "CountPolicy(every=5)",
+  "summary": {
+    "A": {
+      "count": 13,
+      "sum": 12.0
+    },
+    "B": {
+      "count": 12,
+      "sum": 12.5
+    },
+    "C": {
+      "count": 12,
+      "sum": 11.0
+    }
+  }
+}
+
+[OUTPUT_STAGE] 最终偏移与汇总与基线完全一致 ✓
+[OUTPUT_STAGE] 已提交事务集合一致：{1 2 3 4 5 6 7 8 } ✓（无重复、无缺失）
+[OUTPUT_STAGE] 恢复后无 .tmp/.staged 残留 ✓
+
+==== 2) 故障阶段 OUTPUT_COMMIT：崩溃（进程退出码 42）→ 全新进程恢复 ====
+
+[进程终止] 注入故障命中 -> 注入故障：checkpointId=4，阶段=OUTPUT_COMMIT
+内存状态已丢弃。请用 resume 命令以新进程恢复。
+[crash] 退出码=42（期望 42）
+[crash] 崩溃后磁盘现场（.tmp/.staged 为尚未提交的证据，恢复时会清除/回滚）：
+恢复完成: nextOffset=37，最终检查点 8
+{
+  "armedFaults": [],
+  "committedTxns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "inputEvents": 37,
+  "lastCheckpointId": 8,
+  "nextOffset": 37,
+  "policy": "CountPolicy(every=5)",
+  "summary": {
+    "A": {
+      "count": 13,
+      "sum": 12.0
+    },
+    "B": {
+      "count": 12,
+      "sum": 12.5
+    },
+    "C": {
+      "count": 12,
+      "sum": 11.0
+    }
+  }
+}
+
+[OUTPUT_COMMIT] 最终偏移与汇总与基线完全一致 ✓
+[OUTPUT_COMMIT] 已提交事务集合一致：{1 2 3 4 5 6 7 8 } ✓（无重复、无缺失）
+[OUTPUT_COMMIT] 恢复后无 .tmp/.staged 残留 ✓
+
+==== 2) 故障阶段 TABLE_APPLY：崩溃（进程退出码 42）→ 全新进程恢复 ====
+
+[进程终止] 注入故障命中 -> 注入故障：checkpointId=4，阶段=TABLE_APPLY
+内存状态已丢弃。请用 resume 命令以新进程恢复。
+[crash] 退出码=42（期望 42）
+[crash] 崩溃后磁盘现场（.tmp/.staged 为尚未提交的证据，恢复时会清除/回滚）：
+恢复完成: nextOffset=37，最终检查点 8
+{
+  "armedFaults": [],
+  "committedTxns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "inputEvents": 37,
+  "lastCheckpointId": 8,
+  "nextOffset": 37,
+  "policy": "CountPolicy(every=5)",
+  "summary": {
+    "A": {
+      "count": 13,
+      "sum": 12.0
+    },
+    "B": {
+      "count": 12,
+      "sum": 12.5
+    },
+    "C": {
+      "count": 12,
+      "sum": 11.0
+    }
+  }
+}
+
+[TABLE_APPLY] 最终偏移与汇总与基线完全一致 ✓
+[TABLE_APPLY] 已提交事务集合一致：{1 2 3 4 5 6 7 8 } ✓（无重复、无缺失）
+[TABLE_APPLY] 恢复后无 .tmp/.staged 残留 ✓
+
+==== 3) 双故障（跨三个进程）：STATE_WRITE@3 崩溃 → OUTPUT_COMMIT@6 崩溃 → 再恢复 ====
+
+[进程终止] 注入故障命中 -> 注入故障：checkpointId=3，阶段=STATE_WRITE
+内存状态已丢弃。请用 resume 命令以新进程恢复。
+
+[进程终止] 注入故障命中 -> 注入故障：checkpointId=6，阶段=OUTPUT_COMMIT
+内存状态已丢弃。请用 resume 命令以新进程恢复。
+[crash2] 退出码=42（期望 42）
+恢复完成: nextOffset=37，最终检查点 8
+{
+  "armedFaults": [],
+  "committedTxns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "inputEvents": 37,
+  "lastCheckpointId": 8,
+  "nextOffset": 37,
+  "policy": "CountPolicy(every=5)",
+  "summary": {
+    "A": {
+      "count": 13,
+      "sum": 12.0
+    },
+    "B": {
+      "count": 12,
+      "sum": 12.5
+    },
+    "C": {
+      "count": 12,
+      "sum": 11.0
+    }
+  }
+}
+
+[DOUBLE] 两次崩溃后最终偏移与汇总仍与基线一致 ✓
+
+==== 4) 汇总表可从提交日志独立重建（删掉 summary.json 后重启） ====
+[REBUILD] summary.json 删除后由已提交事务日志重建，结果一致 ✓
+
+==== 验收结果：通过 6 项，失败 0 项 ====
+完整日志：logs/acceptance-20260923T181115.log

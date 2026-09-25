@@ -1,0 +1,22 @@
+{
+  "committedAtMillis": 1790158574256,
+  "nextOffset": 20,
+  "rows": [
+    {
+      "count": 7,
+      "key": "A",
+      "sum": 6.5
+    },
+    {
+      "count": 7,
+      "key": "B",
+      "sum": 7.5
+    },
+    {
+      "count": 6,
+      "key": "C",
+      "sum": 6.0
+    }
+  ],
+  "txnId": 4
+}

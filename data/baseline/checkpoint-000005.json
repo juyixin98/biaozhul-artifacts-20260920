@@ -1,0 +1,20 @@
+{
+  "createdAtMillis": 1790158573803,
+  "id": 5,
+  "nextOffset": 25,
+  "records": 3,
+  "state": {
+    "A": {
+      "count": 9,
+      "sum": 9.0
+    },
+    "B": {
+      "count": 8,
+      "sum": 8.5
+    },
+    "C": {
+      "count": 8,
+      "sum": 7.5
+    }
+  }
+}
