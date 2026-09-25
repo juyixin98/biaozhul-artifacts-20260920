@@ -1,0 +1,8 @@
+{
+  "artifact_root": "/home/admin/Downloads/biaozhul/opp92/b/demo/work/artifact",
+  "manifest": "也可以直接传清单文件的原始 JSON 文本（字符串形式）——推荐这种方式，能检测重复键",
+  "dry_run": true,
+  "extra_args": ["--verbose"],
+  "timeout": 30,
+  "env": {"OPTIONAL": "额外注入的环境变量"}
+}

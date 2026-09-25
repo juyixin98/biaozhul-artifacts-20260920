@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+
+# 本地演示产物（含测试私钥，勿提交）
+_demo_run/
+demo/work/
+*.pem

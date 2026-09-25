@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "kind": "sig-manifest-trust-store",
+  "keys": [
+    {
+      "key_id": "ed25519-sha256:542b22ca3aabf63421768ab2eb8b110189d2ae356af76476cda7ecdd36bd1abc",
+      "algorithm": "ed25519",
+      "public": "B09ty7gD1SaRkDNA+lE3HtBsMB7OmWeS1TbtzboUIbQ"
+    }
+  ]
+}

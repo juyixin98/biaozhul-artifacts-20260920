@@ -1,0 +1,39 @@
+{
+  "signed": {
+    "manifest_version": 1,
+    "type": "artifact-manifest/v1",
+    "artifact_name": "demo-app",
+    "created_at": "2026-09-23T17:53:02Z",
+    "nonce": "559cf11b5dbfa9b6d1f495984a5dec22",
+    "files": [
+      {
+        "path": "bin/hello.sh",
+        "size": 53,
+        "digest_algorithm": "sha256",
+        "digest": "8ae7da2e12820b16e94098061e7bc37fd9b50229353d8b6fb5a533c5f1a22735"
+      },
+      {
+        "path": "conf/settings.json",
+        "size": 17,
+        "digest_algorithm": "sha256",
+        "digest": "a4adf9e4b112f1f9969aa92f9111bd57c55554c6d5d1637d845f5c6753ffcac1"
+      },
+      {
+        "path": "data.txt",
+        "size": 22,
+        "digest_algorithm": "sha256",
+        "digest": "4c8dffe0610750219857f928be49deb57519bd096e705ef6129bc77aa9f1a9d8"
+      }
+    ],
+    "entrypoint": [
+      "bin/hello.sh"
+    ]
+  },
+  "signatures": [
+    {
+      "key_id": "ed25519-sha256:57c5bf763a7382d6e3defd2bf286e0ba645ba515aee5c9d30bff89de5fbe49e9",
+      "algorithm": "ed25519",
+      "signature": "/vY2HxCpsiSTUVliWNYXTF6/dKKqwTyqPTxuykehO+hSpAl5f6GNBdxNmQYQ7Mq6zexCJoa8SF4gN7EgWmCkCg"
+    }
+  ]
+}

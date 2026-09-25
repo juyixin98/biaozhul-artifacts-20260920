@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sig-manifest"
+version = "1.0.0"
+description = "离线签名制品清单与验证纯后端服务（Ed25519 + SHA-256，规范化 JSON）"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    # 已在 41.0.7 上开发测试；42+ 同样适用。
+    "cryptography>=41,<47",
+]
+
+[project.scripts]
+sig-manifest = "sig_manifest.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["sig_manifest*"]

@@ -1,0 +1,7 @@
+{
+  "artifact_root": "/home/admin/Downloads/biaozhul/opp92/b/demo/work/artifact",
+  "artifact_name": "demo-app",
+  "private_key_pem": "-----BEGIN PRIVATE KEY-----\n<把 demo/work/testkey.pem（无口令）的 PEM 内容粘到这里>\n-----END PRIVATE KEY-----\n",
+  "password": "可选；PEM 有口令时提供",
+  "entrypoint": ["bin/hello.sh", "arg1"]
+}
