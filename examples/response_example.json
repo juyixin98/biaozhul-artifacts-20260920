@@ -1,0 +1,67 @@
+{
+  "status": "ok",
+  "input_summary": {
+    "strip_width": 10.0,
+    "num_rectangles": 5
+  },
+  "lower_bounds": {
+    "area": 8.4,
+    "max_height": 7.0,
+    "wide_items": 4.0,
+    "combined": 8.4
+  },
+  "heuristic": {
+    "height": 11.0,
+    "method": "bottom-left/area-desc",
+    "guarantee": "heuristic (not proven optimal)",
+    "placements": [
+      {
+        "id": 0,
+        "x": 0.0,
+        "y": 0.0,
+        "width": 6.0,
+        "height": 4.0
+      },
+      {
+        "id": 1,
+        "x": 4.0,
+        "y": 7.0,
+        "width": 5.0,
+        "height": 3.0
+      },
+      {
+        "id": 2,
+        "x": 0.0,
+        "y": 4.0,
+        "width": 4.0,
+        "height": 5.0
+      },
+      {
+        "id": 3,
+        "x": 6.0,
+        "y": 0.0,
+        "width": 3.0,
+        "height": 7.0
+      },
+      {
+        "id": 4,
+        "x": 0.0,
+        "y": 9.0,
+        "width": 2.0,
+        "height": 2.0
+      }
+    ]
+  },
+  "layout_verification": {
+    "ok": true,
+    "height": 11.0,
+    "collisions": [],
+    "out_of_bounds": [],
+    "negative_coordinates": []
+  },
+  "gap": {
+    "heuristic_minus_lower_bound": 2.6,
+    "note": "gap=0 仅说明启发式高度达到有效下界、可间接证明该算例最优；gap>0 时真实最优可能介于下界与启发式高度之间，启发式不保证最优。",
+    "proven_optimal": false
+  }
+}

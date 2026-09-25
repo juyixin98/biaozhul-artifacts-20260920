@@ -1,0 +1,7 @@
+{
+  "status": "error",
+  "error": {
+    "code": "rectangle_too_wide",
+    "message": "rectangles[0] 宽度 12 超过条带宽度 10（矩形不允许旋转）"
+  }
+}

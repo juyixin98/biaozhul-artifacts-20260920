@@ -1,0 +1,107 @@
+{
+  "status": "ok",
+  "input_summary": {
+    "strip_width": 6.0,
+    "num_rectangles": 5
+  },
+  "lower_bounds": {
+    "area": 5.0,
+    "max_height": 3.0,
+    "wide_items": 0.0,
+    "combined": 5.0
+  },
+  "heuristic": {
+    "height": 5.0,
+    "method": "bottom-left/height-desc",
+    "guarantee": "heuristic (not proven optimal)",
+    "placements": [
+      {
+        "id": 0,
+        "x": 0.0,
+        "y": 0.0,
+        "width": 3.0,
+        "height": 3.0
+      },
+      {
+        "id": 1,
+        "x": 3.0,
+        "y": 0.0,
+        "width": 3.0,
+        "height": 3.0
+      },
+      {
+        "id": 2,
+        "x": 0.0,
+        "y": 3.0,
+        "width": 2.0,
+        "height": 2.0
+      },
+      {
+        "id": 3,
+        "x": 2.0,
+        "y": 3.0,
+        "width": 2.0,
+        "height": 2.0
+      },
+      {
+        "id": 4,
+        "x": 4.0,
+        "y": 3.0,
+        "width": 2.0,
+        "height": 2.0
+      }
+    ]
+  },
+  "layout_verification": {
+    "ok": true,
+    "height": 5.0,
+    "collisions": [],
+    "out_of_bounds": [],
+    "negative_coordinates": []
+  },
+  "gap": {
+    "heuristic_minus_lower_bound": 0.0,
+    "note": "gap=0 仅说明启发式高度达到有效下界、可间接证明该算例最优；gap>0 时真实最优可能介于下界与启发式高度之间，启发式不保证最优。",
+    "proven_optimal": true,
+    "heuristic_minus_exact_optimum": 0.0
+  },
+  "exact": {
+    "status": "optimal",
+    "height": 5.0,
+    "placements": [
+      {
+        "id": 0,
+        "x": 3.0,
+        "y": 0.0
+      },
+      {
+        "id": 1,
+        "x": 0.0,
+        "y": 0.0
+      },
+      {
+        "id": 2,
+        "x": 4.0,
+        "y": 3.0
+      },
+      {
+        "id": 3,
+        "x": 2.0,
+        "y": 3.0
+      },
+      {
+        "id": 4,
+        "x": 0.0,
+        "y": 3.0
+      }
+    ],
+    "layout_verification": {
+      "ok": true,
+      "height": 5.0,
+      "collisions": [],
+      "out_of_bounds": [],
+      "negative_coordinates": []
+    },
+    "note": "该高度由子集和坐标 + 位掩码 DFS 穷举证明为真实最优（仅限小整数算例）。"
+  }
+}

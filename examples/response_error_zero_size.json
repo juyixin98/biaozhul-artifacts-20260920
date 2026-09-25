@@ -1,0 +1,7 @@
+{
+  "status": "error",
+  "error": {
+    "code": "bad_rectangle_size",
+    "message": "rectangles[0] 含零或负尺寸：width=0 height=4（容差 1e-09）"
+  }
+}
