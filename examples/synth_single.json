@@ -1,0 +1,17 @@
+{
+  "mode": "synth",
+  "sample_rate": 48000,
+  "n_samples": 4096,
+  "tones": [
+    {"frequency_hz": 1176.61, "amplitude": 0.9, "phase": 0.0}
+  ],
+  "noise_db": null,
+  "seed": 0,
+  "analysis": {
+    "window": "hann",
+    "method": "auto",
+    "max_peaks": 10,
+    "min_relative_db": -45.0,
+    "interference_bins": 8
+  }
+}

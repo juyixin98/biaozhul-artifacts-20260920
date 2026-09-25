@@ -1,0 +1,13 @@
+{
+  "mode": "pcm",
+  "path": "examples/tone_440.25Hz_int16.raw",
+  "dtype": "int16",
+  "sample_rate": 48000,
+  "n_samples": 4096,
+  "offset_samples": 0,
+  "analysis": {
+    "window": "hann",
+    "method": "auto",
+    "max_peaks": 10
+  }
+}
