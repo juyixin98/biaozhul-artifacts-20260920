@@ -1,0 +1,75 @@
+$ ./build.sh
+# 2026-09-23T07:46:44Z, openjdk version "21.0.12.1" 2026-08-18
+
+>> compiling main sources
+>> compiling tests
+>> running tests
+
+Thanks for using JUnit! Support its development at https://junit.org/sponsoring
+
+╷
+├─ JUnit Platform Suite ✔
+├─ JUnit Jupiter ✔
+│  ├─ RandomizedComparisonTest ✔
+│  │  └─ compareAgainstFullSortOverRandomStreams() ✔
+│  ├─ SlidingWindowQuantileTest ✔
+│  │  ├─ negativeValues() ✔
+│  │  ├─ rejectsNonPositiveWindow() ✔
+│  │  ├─ allDuplicateValues() ✔
+│  │  ├─ emptyWindowHasNoQuantile() ✔
+│  │  ├─ windowEmptiesAgainAfterAllEventsExpire() ✔
+│  │  ├─ outOfOrderWithinWindowIsAccepted() ✔
+│  │  ├─ expiryRemovesCountsCorrectly() ✔
+│  │  ├─ sameTimestampEventsAllCounted() ✔
+│  │  ├─ lateEventsAreDiscardedAndCounted() ✔
+│  │  ├─ futureEventsEnterWindowAsClockAdvances() ✔
+│  │  ├─ backwardsClockRejected() ✔
+│  │  └─ quantileMatchesDefinitionOnWindowContents() ✔
+│  ├─ JsonTest ✔
+│  │  ├─ roundTripOfRequestShapes() ✔
+│  │  ├─ parsesAllTypes() ✔
+│  │  ├─ rejectsInvalidInput() ✔
+│  │  └─ writeAndParse() ✔
+│  ├─ QuantilesTest ✔
+│  │  ├─ negativeValues() ✔
+│  │  ├─ singleValue() ✔
+│  │  ├─ quartilesUseLinearInterpolation() ✔
+│  │  ├─ extremeLongsDoNotOverflow() ✔
+│  │  ├─ medianOddCount() ✔
+│  │  ├─ duplicatesOccupyRanks() ✔
+│  │  ├─ emptyIsUndefined() ✔
+│  │  ├─ rejectsBadQ() ✔
+│  │  └─ medianEvenCountInterpolates() ✔
+│  └─ QuantileServerTest ✔
+│     ├─ invalidRequestsReturn400() ✔
+│     ├─ emptyWindowThenEventsThenExpiry() ✔
+│     └─ quantilesArrayShapeNotRequired() ✔
+└─ JUnit Vintage ✔
+
+Test run finished after 1927 ms
+[         8 containers found      ]
+[         0 containers skipped    ]
+[         8 containers started    ]
+[         0 containers aborted    ]
+[         8 containers successful ]
+[         0 containers failed     ]
+[        29 tests found           ]
+[         0 tests skipped         ]
+[        29 tests started         ]
+[         0 tests aborted         ]
+[        29 tests successful      ]
+[         0 tests failed          ]
+
+>> BUILD OK
+
+# 开发过程中的失败与修复（如实记录，下列问题均已修复，最终 29/29 通过）
+# 1) javac 编译错误：Json.java 注释里出现字面 "\u" 被 Java 当作 Unicode 转义 → 改为文字描述。
+# 2) 测试编译错误：RandomizedComparisonTest 的 lambda 引用了非 effectively-final 的循环变量 step → 引入 final stepNum。
+# 3) 首轮测试 4 个失败，均为测试用例自身问题（实现行为符合设计）：
+#    - allDuplicateValues / negativeValues / quantileMatchesDefinitionOnWindowContents：
+#      ManualClock 初始为 0，却加入 ts=1..4 的事件；按语义这些是“未来事件”，窗口确实应为空
+#      （OptionalDouble 为空，orElseThrow 抛 NoSuchElementException）。测试时钟初值改为 10。
+#    - JsonTest.writeAndParse：构造期望 Map 时整数字面量 0 为 Integer，JSON 解析回来为 Long，
+#      Map.equals 不等。改为逐字段按 longValue() 断言。
+# 4) examples 首轮存档在已跑完一轮的有状态服务上生成，事件全部迟到、时钟回退报错；
+#    已在全新服务实例上重新生成 examples/sample-output.txt（即上方所录 HTTP 流程对应的干净版本）。
