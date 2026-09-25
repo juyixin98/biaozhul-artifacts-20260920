@@ -1,0 +1,8 @@
+{
+  "eventId": "evt-1001",
+  "op": "ADD",
+  "key": "product-42",
+  "value": 19.99,
+  "version": 1,
+  "opId": "9f2b1c7a-0001"
+}

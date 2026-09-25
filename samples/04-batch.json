@@ -1,0 +1,6 @@
+[
+  { "eventId": "evt-2001", "op": "ADD", "key": "region-east", "value": 100.00, "version": 1 },
+  { "eventId": "evt-2002", "op": "ADD", "key": "region-east", "value": 250.50, "version": 1 },
+  { "eventId": "evt-2001", "op": "CORRECT", "key": "region-west", "value": 100.00, "version": 2 },
+  { "eventId": "evt-2002", "op": "RETRACT", "version": 2 }
+]

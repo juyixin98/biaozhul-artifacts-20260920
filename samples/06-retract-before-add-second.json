@@ -1,0 +1,8 @@
+{
+  "eventId": "evt-3001",
+  "op": "ADD",
+  "key": "late-key",
+  "value": 77.77,
+  "version": 1,
+  "opId": "late-add"
+}
