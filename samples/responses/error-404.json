@@ -1,0 +1,4 @@
+{
+  "error": "DICT_NOT_FOUND",
+  "message": "词典版本不存在: nope，可用版本: [v1, v2]"
+}

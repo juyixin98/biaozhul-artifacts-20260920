@@ -1,0 +1,308 @@
+{
+  "text": "结婚的和尚未",
+  "dictionary": "v1",
+  "totalSegmentations": 4,
+  "comparedK": 4,
+  "match": true,
+  "mismatches": [],
+  "exhaustiveTop": [
+    {
+      "tokens": [
+        {
+          "surface": "结婚",
+          "known": true,
+          "cost": 2,
+          "dictCost": 2
+        },
+        {
+          "surface": "的",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "和",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "尚未",
+          "known": true,
+          "cost": 1.5,
+          "dictCost": 1.5
+        }
+      ],
+      "segmentation": "结婚/的/和/尚未",
+      "totalCost": 5.5,
+      "rank": 1
+    },
+    {
+      "tokens": [
+        {
+          "surface": "结",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        },
+        {
+          "surface": "婚",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        },
+        {
+          "surface": "的",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "和",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "尚未",
+          "known": true,
+          "cost": 1.5,
+          "dictCost": 1.5
+        }
+      ],
+      "segmentation": "结/婚/的/和/尚未",
+      "totalCost": 13.5,
+      "rank": 2
+    },
+    {
+      "tokens": [
+        {
+          "surface": "结婚",
+          "known": true,
+          "cost": 2,
+          "dictCost": 2
+        },
+        {
+          "surface": "的",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "和",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "尚",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        },
+        {
+          "surface": "未",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        }
+      ],
+      "segmentation": "结婚/的/和/尚/未",
+      "totalCost": 14,
+      "rank": 3
+    },
+    {
+      "tokens": [
+        {
+          "surface": "结",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        },
+        {
+          "surface": "婚",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        },
+        {
+          "surface": "的",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "和",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "尚",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        },
+        {
+          "surface": "未",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        }
+      ],
+      "segmentation": "结/婚/的/和/尚/未",
+      "totalCost": 22,
+      "rank": 4
+    }
+  ],
+  "dpTop": [
+    {
+      "tokens": [
+        {
+          "surface": "结婚",
+          "known": true,
+          "cost": 2,
+          "dictCost": 2
+        },
+        {
+          "surface": "的",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "和",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "尚未",
+          "known": true,
+          "cost": 1.5,
+          "dictCost": 1.5
+        }
+      ],
+      "segmentation": "结婚/的/和/尚未",
+      "totalCost": 5.5,
+      "rank": 1
+    },
+    {
+      "tokens": [
+        {
+          "surface": "结",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        },
+        {
+          "surface": "婚",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        },
+        {
+          "surface": "的",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "和",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "尚未",
+          "known": true,
+          "cost": 1.5,
+          "dictCost": 1.5
+        }
+      ],
+      "segmentation": "结/婚/的/和/尚未",
+      "totalCost": 13.5,
+      "rank": 2
+    },
+    {
+      "tokens": [
+        {
+          "surface": "结婚",
+          "known": true,
+          "cost": 2,
+          "dictCost": 2
+        },
+        {
+          "surface": "的",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "和",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "尚",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        },
+        {
+          "surface": "未",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        }
+      ],
+      "segmentation": "结婚/的/和/尚/未",
+      "totalCost": 14,
+      "rank": 3
+    },
+    {
+      "tokens": [
+        {
+          "surface": "结",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        },
+        {
+          "surface": "婚",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        },
+        {
+          "surface": "的",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "和",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "尚",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        },
+        {
+          "surface": "未",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        }
+      ],
+      "segmentation": "结/婚/的/和/尚/未",
+      "totalCost": 22,
+      "rank": 4
+    }
+  ]
+}

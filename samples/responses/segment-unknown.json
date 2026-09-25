@@ -1,0 +1,137 @@
+{
+  "text": "研究生命起源X",
+  "dictionary": "v1",
+  "requestedK": 3,
+  "returnedK": 3,
+  "best": {
+    "tokens": [
+      {
+        "surface": "研究",
+        "known": true,
+        "cost": 1,
+        "dictCost": 1
+      },
+      {
+        "surface": "生命",
+        "known": true,
+        "cost": 1,
+        "dictCost": 1
+      },
+      {
+        "surface": "起源",
+        "known": true,
+        "cost": 2,
+        "dictCost": 2
+      },
+      {
+        "surface": "X",
+        "known": false,
+        "cost": 5,
+        "dictCost": null
+      }
+    ],
+    "segmentation": "研究/生命/起源/X",
+    "totalCost": 9
+  },
+  "nbest": [
+    {
+      "tokens": [
+        {
+          "surface": "研究",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "生命",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "起源",
+          "known": true,
+          "cost": 2,
+          "dictCost": 2
+        },
+        {
+          "surface": "X",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        }
+      ],
+      "segmentation": "研究/生命/起源/X",
+      "totalCost": 9,
+      "rank": 1
+    },
+    {
+      "tokens": [
+        {
+          "surface": "研究",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "生",
+          "known": true,
+          "cost": 1,
+          "dictCost": 1
+        },
+        {
+          "surface": "命",
+          "known": true,
+          "cost": 4,
+          "dictCost": 4
+        },
+        {
+          "surface": "起源",
+          "known": true,
+          "cost": 2,
+          "dictCost": 2
+        },
+        {
+          "surface": "X",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        }
+      ],
+      "segmentation": "研究/生/命/起源/X",
+      "totalCost": 13,
+      "rank": 2
+    },
+    {
+      "tokens": [
+        {
+          "surface": "研究生",
+          "known": true,
+          "cost": 4,
+          "dictCost": 4
+        },
+        {
+          "surface": "命",
+          "known": true,
+          "cost": 4,
+          "dictCost": 4
+        },
+        {
+          "surface": "起源",
+          "known": true,
+          "cost": 2,
+          "dictCost": 2
+        },
+        {
+          "surface": "X",
+          "known": false,
+          "cost": 5,
+          "dictCost": null
+        }
+      ],
+      "segmentation": "研究生/命/起源/X",
+      "totalCost": 15,
+      "rank": 3
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "dictionaries": [
+    {
+      "version": "v1",
+      "description": "合成词典第一版：研究/生/生命 最优；含交叉歧义和重叠词",
+      "entryCount": 16,
+      "maxWordLength": 3,
+      "unknownCharCost": 5
+    },
+    {
+      "version": "v2",
+      "description": "合成词典第二版：调整代价使 研究生/生命 成为最优",
+      "entryCount": 16,
+      "maxWordLength": 3,
+      "unknownCharCost": 8
+    }
+  ]
+}

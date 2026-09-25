@@ -1,0 +1,4 @@
+{
+  "error": "INVALID_JSON",
+  "message": "JSON 解析失败：期望 '\"' 实际 'b'，位置 1"
+}

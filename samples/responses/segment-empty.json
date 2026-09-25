@@ -1,0 +1,11 @@
+{
+  "text": "",
+  "dictionary": "v1",
+  "requestedK": 1,
+  "returnedK": 1,
+  "best": {
+    "tokens": [],
+    "segmentation": "",
+    "totalCost": 0
+  }
+}

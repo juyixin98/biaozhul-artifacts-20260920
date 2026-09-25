@@ -1,0 +1,30 @@
+{
+  "text": "研究生生命",
+  "dictionary": "v1",
+  "requestedK": 1,
+  "returnedK": 1,
+  "best": {
+    "tokens": [
+      {
+        "surface": "研究",
+        "known": true,
+        "cost": 1,
+        "dictCost": 1
+      },
+      {
+        "surface": "生",
+        "known": true,
+        "cost": 1,
+        "dictCost": 1
+      },
+      {
+        "surface": "生命",
+        "known": true,
+        "cost": 1,
+        "dictCost": 1
+      }
+    ],
+    "segmentation": "研究/生/生命",
+    "totalCost": 3
+  }
+}
