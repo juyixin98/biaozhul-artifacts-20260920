@@ -1,0 +1,47 @@
+### Inverted-index JSON service — request samples
+### Base URL defaults to http://127.0.0.1:8080
+
+### Create a document (auto-assigned id)
+POST http://127.0.0.1:8080/documents
+Content-Type: application/json
+
+{"text": "inverted index segment merge demo"}
+
+### Create with an explicit id
+POST http://127.0.0.1:8080/documents
+Content-Type: application/json
+
+{"id": 500, "text": "segment merge policy note"}
+
+### Update the same id — generation advances by one
+POST http://127.0.0.1:8080/documents
+Content-Type: application/json
+
+{"id": 500, "text": "segment merge policy revised"}
+
+### Read the current live revision
+GET http://127.0.0.1:8080/documents/500
+
+### Term query
+GET http://127.0.0.1:8080/search?q=segment
+
+### Boolean AND (both terms in the same revision)
+POST http://127.0.0.1:8080/search
+Content-Type: application/json
+
+{"q": "AND:segment,merge"}
+
+### Boolean OR
+GET http://127.0.0.1:8080/search?q=OR:cafe,rocket
+
+### Force the RAM buffer to flush into a new segment
+POST http://127.0.0.1:8080/flush
+
+### Merge all published segments
+POST http://127.0.0.1:8080/merge
+
+### Segment / tombstone counters
+GET http://127.0.0.1:8080/stats
+
+### Delete the current revision
+DELETE http://127.0.0.1:8080/documents/500
