@@ -1,0 +1,97 @@
+
+========== 0. 环境信息 ==========
+仓库根目录: /home/admin/Downloads/biaozhul/opp102/b
+运行目录:   /home/admin/Downloads/biaozhul/opp102/b/.local/acceptance-20260923T185204Z
+监听端口:   49579
+go version go1.22.2 linux/amd64
+tar (GNU tar) 1.35
+
+========== 1. 编译与自动化测试（含“遍历顺序反转”确定性测试） ==========
+  [PASS] go vet 通过
+?   	reproducible-archive/cmd/server	[no test files]
+ok  	reproducible-archive/internal/archive	(cached)
+ok  	reproducible-archive/internal/httpapi	(cached)
+ok  	reproducible-archive/internal/service	(cached)
+  [PASS] go test ./... 全部通过
+  [PASS] 服务编译成功
+
+========== 2. 启动本地服务（工作目录与缓存目录分离） ==========
+  [PASS] 健康探针 (= {"status":"ok"})
+
+========== 3. 构造两份 mtime 不同、内容相同的目录树 ==========
+tree1/a.txt mtime=1000000000.0000000000
+tree2/a.txt mtime=1700000000.0000000000
+  [PASS] 两棵树的源 mtime 确实不同
+
+========== 4. 通过 JSON 接口分别打包 ==========
+  [PASS] 首次构建 HTTP 状态 (= 201)
+  [PASS] 二次构建 HTTP 状态 (= 201)
+制品1 SHA-256 = e4ad748953905e4feb24f6a2f9436b2cc9fb527dffd64888d1aa13facb27a185 (cache_hit=false)
+制品2 SHA-256 = e4ad748953905e4feb24f6a2f9436b2cc9fb527dffd64888d1aa13facb27a185 (cache_hit=true)
+  [PASS] 首次构建未命中缓存 (= false)
+  [PASS] 二次构建命中缓存（内容寻址） (= true)
+  [PASS] 内容相同→制品哈希一致 (= e4ad748953905e4feb24f6a2f9436b2cc9fb527dffd64888d1aa13facb27a185)
+
+========== 5. 字节级一致性：不同 mtime + 不同目录，tar 逐字节相同 ==========
+  [PASS] 两份 tar 字节完全一致 (cmp)
+  [PASS] 落盘文件 SHA-256 与清单一致 (= e4ad748953905e4feb24f6a2f9436b2cc9fb527dffd64888d1aa13facb27a185)
+
+========== 6. 比较摘要（剔除 build_id/时间/路径/缓存标记等易变字段） ==========
+  [PASS] 两份规范化摘要完全一致（含逐文件 sha256/size/mode/type）
+摘要计数: {"file_count":6,"dir_count":4,"symlink_count":3,"artifact_size":19968}
+
+========== 7. 用系统 tar 独立校验制品内容 ==========
+tar -tvf 输出（节选）:
+    -rw-r--r-- 0/0               6 1970-01-01 00:00 a.txt
+    drwxr-xr-x 0/0               0 1970-01-01 00:00 d e é p/
+    -rw-r--r-- 0/0               5 1970-01-01 00:00 d e é p/b-ünïcode-文件.txt
+    drwxr-xr-x 0/0               0 1970-01-01 00:00 d e é p/子目录/
+    -rw-r--r-- 0/0               6 1970-01-01 00:00 d e é p/子目录/γ.txt
+    lrwxrwxrwx 0/0               0 1970-01-01 00:00 dangling-link -> missing/未来文件
+    lrwxrwxrwx 0/0               0 1970-01-01 00:00 link-to-a -> a.txt
+    lrwxrwxrwx 0/0               0 1970-01-01 00:00 link-to-dir -> d e é p
+    drwxr-xr-x 0/0               0 1970-01-01 00:00 nested/
+    -rw-r--r-- 0/0              13 1970-01-01 00:00 nested/long-ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ.txt
+    -rw-r--r-- 0/0               6 1970-01-01 00:00 z.txt
+    drwxr-xr-x 0/0               0 1970-01-01 00:00 空目录-测试/
+    -rw-r--r-- 0/0              18 1970-01-01 00:00 脚本.sh
+  [PASS] tar 条目按逻辑路径字节序严格排列
+  [PASS] 所有条目 mtime 固定为 epoch (1970-01-01 00:00 UTC) (= 0)
+  [PASS] 权限归一化为 0644 文件 / 0755 目录 / 0777 链接 (= -rw-r--r-- drwxr-xr-x lrwxrwxrwx )
+  [PASS] 属主统一为 0/0 (uid/gid 清零) (= 0/0 )
+  [PASS] 包含 Unicode 文件 b-ünïcode-文件.txt
+  [PASS] 包含 Unicode 文件 γ.txt
+  [PASS] 包含 Unicode 目录 空目录-测试/
+  [PASS] 包含长文件名条目 (>100 字节, PAX)
+  [PASS] 最长归档路径 226 字节 > 100（PAX 路径）
+  [PASS] 脚本.sh 被归一化为 0644
+  [PASS] 解包往返后 a.txt 内容 SHA-256 与清单一致 (= b6a98d9ce9a2d9149288fa3df42d377c3e42737afdcdaf714e33c0a100b51060)
+  [PASS] 空目录解包后仍存在
+
+========== 8. 逃逸符号链接必须被拒绝（HTTP 422，无制品落盘） ==========
+  [PASS] 逃逸符号链接返回 422 (= 422)
+  [PASS] 错误码 unsafe_symlink (= unsafe_symlink)
+错误信息: 拒绝逃逸符号链接: evil-link -> ../../../../etc/passwd (词法解析逃逸出归档根)
+  [PASS] 拒绝构建时无输出文件
+
+========== 9. 其他接口行为 ==========
+  [PASS] 相对 source_dir 返回 400 (= 400)
+  [PASS] 错误码 invalid_request (= invalid_request)
+  [PASS] 查询未知构建返回 404 (= 404)
+  [PASS] 列表接口 200 (= 200)
+  [PASS] 列表包含 2 次成功构建（逃逸那次不入清单） (= 2)
+
+========== 10. 工作目录与缓存目录物理分离 ==========
+  [PASS] 工作目录保存清单 JSON
+  [PASS] 缓存目录保存内容寻址 tar
+  [PASS] 工作目录中无 tar 制品
+  [PASS] 缓存目录中无清单
+  [PASS] 内容相同的多次构建只产生 1 个缓存对象 (= 1)
+
+========== 11. 清理关闭 ==========
+  [PASS] 服务收到 SIGTERM 后正常退出
+
+========== 验收结果 ==========
+PASS: 39    FAIL: 0
+✅ 全部验收项通过
+完整产物目录: /home/admin/Downloads/biaozhul/opp102/b/.local/acceptance-20260923T185204Z

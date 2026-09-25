@@ -1,0 +1,5 @@
+# 本地运行状态（工作目录、缓存、报告等）
+.local/
+/reproducible-archive
+/reproducible-archive.exe
+*.out

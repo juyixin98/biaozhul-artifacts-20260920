@@ -1,0 +1,6 @@
+{
+  "source_dir": "/ABSOLUTE/PATH/TO/source-tree",
+  "output_path": "/ABSOLUTE/PATH/TO/artifacts/app-1.0.tar",
+  "preserve_exec": false,
+  "fixed_modtime_unix": 0
+}
