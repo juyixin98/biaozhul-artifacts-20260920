@@ -1,0 +1,5 @@
+{
+  "direction": "response",
+  "old": {"name": "user-response", "version": "v1"},
+  "new": {"name": "user-response", "version": "v2"}
+}

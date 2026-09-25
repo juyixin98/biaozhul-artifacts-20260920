@@ -1,0 +1,4 @@
+{
+  "fault": {"kind": "flaky", "flakyTimes": 2},
+  "client": {"maxAttempts": 4, "initialBackoffMs": 10, "maxBackoffMs": 100, "useFakeTime": true}
+}
