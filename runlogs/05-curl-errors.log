@@ -1,0 +1,45 @@
+### GET /corpus (head)
+{
+  "documents": [
+    {
+      "id": "d1",
+      "fields": {
+        "title": "echo chamber",
+        "body": "we echo echo echo echo today"
+      }
+    },
+    {
+      "id": "d2",
+      "fields": {
+        "title": "infra notes",
+        "body": "we build a pipeline for data",
+        "tags": "pipeline streaming"
+      }
+    },
+    {
+      "id": "d3",
+      "fields": {
+### 错误: 负 slop
+{
+  "error": true,
+  "status": 400,
+  "message": "slop must be between 0 and 1000"
+}
+
+HTTP 400
+### 错误: 查询只含停用词
+{
+  "error": true,
+  "status": 400,
+  "message": "query produced no terms after analysis (all terms are stopwords?)"
+}
+
+HTTP 400
+### 错误: GET /nope
+{
+  "error": true,
+  "status": 404,
+  "message": "not found: /nope"
+}
+
+HTTP 404

@@ -1,0 +1,5 @@
+{
+  "query": "echo echo",
+  "slop": 0,
+  "analyzer": "standard"
+}

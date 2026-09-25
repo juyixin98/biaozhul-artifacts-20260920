@@ -1,0 +1,36 @@
+{
+  "analyzer": "standard",
+  "slop": 0,
+  "field": null,
+  "queryTerms": [
+    "alpha",
+    "alpha",
+    "beta"
+  ],
+  "totalHits": 1,
+  "truncated": false,
+  "hits": [
+    {
+      "docId": "d4",
+      "matchCount": 1,
+      "truncated": false,
+      "matches": [
+        {
+          "positions": [
+            2,
+            3,
+            4
+          ],
+          "fields": [
+            "body",
+            "body",
+            "body"
+          ],
+          "start": 2,
+          "end": 4,
+          "crossField": false
+        }
+      ]
+    }
+  ]
+}

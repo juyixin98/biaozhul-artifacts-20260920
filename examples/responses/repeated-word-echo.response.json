@@ -1,0 +1,59 @@
+{
+  "analyzer": "standard",
+  "slop": 0,
+  "field": null,
+  "queryTerms": [
+    "echo",
+    "echo"
+  ],
+  "totalHits": 3,
+  "truncated": false,
+  "hits": [
+    {
+      "docId": "d1",
+      "matchCount": 3,
+      "truncated": false,
+      "matches": [
+        {
+          "positions": [
+            4,
+            5
+          ],
+          "fields": [
+            "body",
+            "body"
+          ],
+          "start": 4,
+          "end": 5,
+          "crossField": false
+        },
+        {
+          "positions": [
+            5,
+            6
+          ],
+          "fields": [
+            "body",
+            "body"
+          ],
+          "start": 5,
+          "end": 6,
+          "crossField": false
+        },
+        {
+          "positions": [
+            6,
+            7
+          ],
+          "fields": [
+            "body",
+            "body"
+          ],
+          "start": 6,
+          "end": 7,
+          "crossField": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "query": "data pipeline",
+  "slop": 0,
+  "analyzer": "standard",
+  "field": "body"
+}

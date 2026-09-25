@@ -1,0 +1,44 @@
+Build OK -> build/classes
+Running 40 tests...
+  PASS  tokenizer/simple-lowercase-and-positions
+  PASS  tokenizer/punctuation-does-not-consume-position
+  PASS  tokenizer/digits-and-empty-input
+  PASS  tokenizer/unicode-letters
+  PASS  analyzer/stopwords-removed-but-positions-kept
+  PASS  analyzer/stopword-list-contents
+  PASS  analyzer/unknown-analyzer-rejected
+  PASS  matcher/single-term-lists-all-positions
+  PASS  matcher/slop0-requires-adjacent-positions
+  PASS  matcher/slop1-allows-one-intervening-token
+  PASS  matcher/repeated-words-never-reuse-same-position
+  PASS  matcher/greedy-trap-sequence-alpha-alpha-beta
+  PASS  matcher/aba-exhaustive-enumeration
+  PASS  matcher/result-limit-truncates
+  PASS  matcher/missing-term-yields-no-match
+  PASS  equivalence/random-small-sequences-vs-brute-force
+  PASS  equivalence/corpus-queries-vs-brute-force
+  PASS  search/d1-repeated-echo-enumerates-all-pairs
+  PASS  search/d2-cross-field-phrase-data-pipeline
+  PASS  search/cross-field-blocked-by-field-gap
+  PASS  search/d4-alpha-alpha-beta-greedy-trap-on-corpus
+  PASS  search/field-scope-restricts-matches
+  PASS  search/stopword-keeps-position-cat-mat-needs-slop
+  PASS  search/stopword-query-with-stopword-in-it
+  PASS  search/query-only-stopwords-rejected
+  PASS  search/validation-errors
+  PASS  search/analyzer-independent-indexes
+  PASS  json/roundtrip-nested
+  PASS  json/string-escaping
+  PASS  json/numbers-and-literals
+  PASS  json/parse-errors
+  PASS  json/key-order-preserved
+  PASS  api/health-and-corpus
+  PASS  api/search-repeated-word
+  PASS  api/search-cross-field
+  PASS  api/search-stopword-analyzer
+  PASS  api/analyze-shows-positions
+  PASS  api/error-400-on-bad-request
+  PASS  api/error-404-and-method
+  PASS  api/terms-array-supported
+
+Tests run: 40, passed: 40, failed: 0

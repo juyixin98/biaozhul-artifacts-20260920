@@ -1,0 +1,12 @@
+{
+  "analyzer": "standard",
+  "slop": 0,
+  "field": "body",
+  "queryTerms": [
+    "data",
+    "pipeline"
+  ],
+  "totalHits": 0,
+  "truncated": false,
+  "hits": []
+}

@@ -1,0 +1,33 @@
+{
+  "analyzer": "stopword",
+  "slop": 3,
+  "field": null,
+  "queryTerms": [
+    "cat",
+    "mat"
+  ],
+  "totalHits": 1,
+  "truncated": false,
+  "hits": [
+    {
+      "docId": "d5",
+      "matchCount": 1,
+      "truncated": false,
+      "matches": [
+        {
+          "positions": [
+            4,
+            8
+          ],
+          "fields": [
+            "body",
+            "body"
+          ],
+          "start": 4,
+          "end": 8,
+          "crossField": false
+        }
+      ]
+    }
+  ]
+}

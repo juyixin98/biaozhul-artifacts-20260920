@@ -1,0 +1,18 @@
+{
+  "analyzer": "stopword",
+  "text": "the cat sat in the mat",
+  "tokens": [
+    {
+      "term": "cat",
+      "position": 2
+    },
+    {
+      "term": "sat",
+      "position": 3
+    },
+    {
+      "term": "mat",
+      "position": 6
+    }
+  ]
+}

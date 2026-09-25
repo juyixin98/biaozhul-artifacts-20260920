@@ -1,0 +1,54 @@
+{
+  "documents": [
+    {
+      "id": "d1",
+      "fields": {
+        "title": "echo chamber",
+        "body": "we echo echo echo echo today"
+      }
+    },
+    {
+      "id": "d2",
+      "fields": {
+        "title": "infra notes",
+        "body": "we build a pipeline for data",
+        "tags": "pipeline streaming"
+      }
+    },
+    {
+      "id": "d3",
+      "fields": {
+        "title": "rain watch",
+        "body": "the rain brings more rain"
+      }
+    },
+    {
+      "id": "d4",
+      "fields": {
+        "title": "pattern",
+        "body": "alpha alpha beta"
+      }
+    },
+    {
+      "id": "d5",
+      "fields": {
+        "title": "the cat",
+        "body": "the cat sat in the mat"
+      }
+    },
+    {
+      "id": "d6",
+      "fields": {
+        "title": "aba",
+        "body": "a b a"
+      }
+    },
+    {
+      "id": "d7",
+      "fields": {
+        "title": "deep blue",
+        "body": "ocean currents"
+      }
+    }
+  ]
+}

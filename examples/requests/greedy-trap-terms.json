@@ -1,0 +1,5 @@
+{
+  "terms": ["alpha", "alpha", "beta"],
+  "slop": 0,
+  "analyzer": "standard"
+}

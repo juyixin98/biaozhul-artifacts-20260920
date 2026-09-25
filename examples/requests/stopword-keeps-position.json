@@ -1,0 +1,5 @@
+{
+  "query": "cat mat",
+  "slop": 3,
+  "analyzer": "stopword"
+}
