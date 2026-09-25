@@ -1,0 +1,11 @@
+{
+  "status": "converged",
+  "method": "gk15",
+  "result": 3.1415926535897936,
+  "error_estimate": 5.155583041197922e-10,
+  "evaluations": 15,
+  "depth_reached": 0,
+  "intervals": 1,
+  "warnings": [],
+  "diagnostics": {}
+}

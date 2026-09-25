@@ -1,0 +1,8 @@
+{
+  "expression": "x*log(x)",
+  "a": 0,
+  "b": 1,
+  "method": "simpson",
+  "abs_tol": 1e-8,
+  "rel_tol": 1e-8
+}

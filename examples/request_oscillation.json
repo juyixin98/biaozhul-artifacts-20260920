@@ -1,0 +1,10 @@
+{
+  "expression": "sin(1000*x)",
+  "a": 0,
+  "b": 1,
+  "method": "gk15",
+  "abs_tol": 1e-9,
+  "rel_tol": 1e-9,
+  "max_depth": 60,
+  "max_evaluations": 100000
+}

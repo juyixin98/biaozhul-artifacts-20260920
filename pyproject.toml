@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adaptive-integration"
+version = "1.0.0"
+description = "自适应定积分纯后端：Gauss-Kronrod 7-15 与自适应 Simpson，JSON 接口"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]
+
+[project.scripts]
+adaptive-integration = "adaptive_integration.cli:main"
+
+[tool.setuptools]
+packages = ["adaptive_integration"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

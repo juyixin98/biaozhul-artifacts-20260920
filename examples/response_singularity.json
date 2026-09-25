@@ -1,0 +1,18 @@
+{
+  "status": "failed",
+  "method": "gk15",
+  "result": 0.0,
+  "error_estimate": 0.0,
+  "evaluations": 15,
+  "depth_reached": 0,
+  "intervals": 0,
+  "warnings": [],
+  "diagnostics": {
+    "best_estimate_unreliable": 0.0,
+    "current_error_estimate": 0.0,
+    "intervals_used": 0,
+    "location": 0.0
+  },
+  "error_code": "INVALID_VALUE_AT_POINT",
+  "error_message": "在积分节点处被积函数返回非有限值（inf/NaN）：积分区间内或端点存在奇点（x=0）"
+}

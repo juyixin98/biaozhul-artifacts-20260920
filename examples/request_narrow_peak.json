@@ -1,0 +1,9 @@
+{
+  "expression": "exp(-((x-0.37)/0.0001)^2)/(sqrt(pi)*0.0001)",
+  "a": 0,
+  "b": 1,
+  "method": "gk15",
+  "abs_tol": 1e-8,
+  "rel_tol": 1e-8,
+  "points": [0.36, 0.38]
+}

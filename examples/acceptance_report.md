@@ -1,0 +1,98 @@
+# 自适应积分验收结果（scripts/acceptance.py 实际运行输出）
+```
+
+### A 解析函数
+用例                                       方法      状态                     值        真实误差        误差估计        比值     求值   深度
+x^3+2x+1                                 gk15    converged   2.250000e+00    4.44e-16    2.50e-14   1.8e-02     15    0
+x^3+2x+1                                 simpson converged   2.250000e+00    0.00e+00    0.00e+00   0.0e+00      5    1
+exp(x) on [0,1]                          gk15    converged   1.718282e+00    0.00e+00    1.91e-14   0.0e+00     15    0
+exp(x) on [0,1]                          simpson converged   1.718282e+00    6.66e-16    3.56e-11   1.9e-05    129    6
+4/(1+x^2) -> pi                          gk15    converged   3.141593e+00    8.88e-16    3.49e-14   2.5e-02     45    1
+4/(1+x^2) -> pi                          simpson converged   3.141593e+00    6.57e-14    1.13e-10   5.8e-04    225    7
+sin(x) on [0,pi]                         gk15    converged   2.000000e+00    4.44e-16    2.22e-14   2.0e-02     15    0
+sin(x) on [0,pi]                         simpson converged   2.000000e+00    5.55e-15    1.02e-10   5.4e-05    369    8
+exp(-x^2) on [-1,1]                      gk15    converged   1.493648e+00    4.44e-16    1.66e-14   2.7e-02     45    1
+exp(-x^2) on [-1,1]                      simpson converged   1.493648e+00    1.48e-13    7.83e-11   1.9e-03    393    8
+log(x) on [1,2]                          gk15    converged   3.862944e-01    0.00e+00    1.97e-14   0.0e+00     15    0
+log(x) on [1,2]                          simpson converged   3.862944e-01    1.50e-14    4.40e-11   3.4e-04    125    6
+1/(1+x^2) on [-5,5]                      gk15    converged   2.746802e+00    0.00e+00    7.26e-13   0.0e+00    225    4
+1/(1+x^2) on [-5,5]                      simpson converged   2.746802e+00    2.69e-13    2.24e-10   1.2e-03   1017   10
+cos(10x) on [0,1]                        gk15    converged  -5.440211e-02    4.86e-17    1.14e-11   4.2e-06     45    1
+cos(10x) on [0,1]                        simpson converged  -5.440211e-02    1.46e-16    3.77e-11   3.9e-06    981    9
+
+### B 高振荡
+用例                                       方法      状态                     值        真实误差        误差估计        比值     求值   深度
+sin(100x)                                gk15    converged   1.376811e-03    8.26e-17    8.70e-11   9.5e-07    675    5
+sin(100x)                                simpson converged   1.376811e-03    2.38e-16    8.12e-11   2.9e-06   8021   12
+sin(500x)                                gk15    converged   3.767699e-03    8.67e-19    7.49e-11   1.2e-08   3735    7
+sin(500x)                                simpson converged   3.767699e-03    1.60e-17    4.63e-11   3.5e-07  52385   15
+sin(1000x)                               gk15    converged   4.376209e-04    1.68e-18    6.97e-11   2.4e-08   7515    8
+sin(1000x)                               simpson failed               nan           —         nan         —  99999   16  -> EVALUATION_BUDGET_EXHAUSTED
+sin(5000x)                               gk15    converged   1.690663e-04    2.38e-17    5.50e-11   4.3e-07  30615   10
+sin(5000x)                               simpson failed               nan           —         nan         —  99999   18  -> EVALUATION_BUDGET_EXHAUSTED
+
+### B 高振荡(失效展示)
+用例                                       方法      状态                     值        真实误差        误差估计        比值     求值   深度
+sin(100x) Simpson 松容差                    simpson converged  -1.467765e-01    1.48e-01    1.32e-09   1.1e+08   1009   11  [Simpson 粗面板两级估计偶然一致 -> 提前停止；收紧 rel_tol 或改用 gk15 可消除]
+
+### B 高振荡(对照)
+用例                                       方法      状态                     值        真实误差        误差估计        比值     求值   深度
+sin(100x) Simpson rel_tol=0              simpson converged   1.376811e-03    9.11e-18    3.69e-11   2.5e-07  11333   13  [收紧容差后正确（代价是更多求值）]
+
+### C 奇点
+用例                                       方法      状态                     值        真实误差        误差估计        比值     求值   深度
+端点弱奇异 1/sqrt(x)                          gk15    converged   2.000000e+00    1.36e-09    2.78e-08   4.9e-02   1515   50
+端点弱奇异 1/sqrt(x)                          simpson failed               nan           —         nan         —      1    0  -> INVALID_VALUE_AT_POINT
+端点 x*log(x)                              gk15    converged  -2.500000e-01    5.57e-12    6.23e-09   8.9e-04    285    9
+端点 x*log(x)                              simpson failed               nan           —         nan         —      1    0  -> INVALID_VALUE_AT_POINT
+端点 log(x)                                gk15    converged  -1.000000e+00    2.52e-11    1.09e-08   2.3e-03    795   26
+端点 log(x)                                simpson failed               nan           —         nan         —      1    0  -> INVALID_VALUE_AT_POINT
+内部极点 1/x                                 gk15    failed      0.000000e+00           —    0.00e+00         —     15    0  -> INVALID_VALUE_AT_POINT
+内部极点 1/x                                 simpson failed               nan           —         nan         —      3    0  -> INVALID_VALUE_AT_POINT
+不可积 1/x^2                                gk15    failed      4.578390e+07           —    8.48e+07         —    495   16  -> ROUND_OFF_NO_PROGRESS
+不可积 1/x^2                                simpson failed               nan           —         nan         —      1    0  -> INVALID_VALUE_AT_POINT
+
+### D 窄峰(默认单面板)
+用例                                       方法      状态                     值        真实误差        误差估计        比值     求值   深度
+x0=0.5, delta=0.01                       gk15    converged   1.000000e+00    4.44e-16    2.64e-09   1.7e-07    345    6
+x0=0.5, delta=0.003                      gk15    converged   1.000000e+00    1.78e-15    5.09e-09   3.5e-07    465    8
+x0=0.5, delta=0.001                      gk15    converged   1.000000e+00    1.33e-15    1.77e-08   7.5e-08    555    9
+x0=0.5, delta=0.0001                     gk15    converged   0.000000e+00    1.00e+00    0.00e+00       inf     45    1  [峰未被任何节点采样：规则同时漏检，误报收敛≈0]
+x0=0.37, delta=0.01                      gk15    converged   1.000000e+00    2.22e-16    3.64e-09   6.1e-08    315    6
+x0=0.37, delta=0.003                     gk15    converged   2.472431e-32    1.00e+00    4.44e-32   2.3e+31     15    0  [峰未被任何节点采样：规则同时漏检，误报收敛≈0]
+x0=0.37, delta=0.001                     gk15    converged  5.554450e-295    1.00e+00   9.97e-295  1.0e+294     15    0  [峰未被任何节点采样：规则同时漏检，误报收敛≈0]
+x0=0.37, delta=0.0001                    gk15    converged   0.000000e+00    1.00e+00    0.00e+00       inf     15    0  [峰未被任何节点采样：规则同时漏检，误报收敛≈0]
+
+### D 窄峰(救援)
+用例                                       方法      状态                     值        真实误差        误差估计        比值     求值   深度
+delta=1e-4, x0=.37: initial_intervals=2000 gk15    converged   1.000000e+00    1.83e-13    1.36e-09   1.3e-04  30120    2
+delta=1e-4, x0=.37: points 包围峰           gk15    converged   1.000000e+00    2.52e-14    2.64e-09   9.6e-06    435    7
+delta=1e-4, x0=.37: Simpson 加密网格         simpson converged   1.000000e+00    4.88e-12    6.88e-12   7.1e-01  10313   11
+
+### E 限制与失败
+用例                                       方法      状态                     值        真实误差        误差估计        比值     求值   深度
+1/sqrt(x), max_depth=5                   gk15    failed      1.991925e+00           —    1.65e-01         —    165    5  -> DEPTH_LIMIT_REACHED
+sin(1000x), 预算 150                       gk15    failed     -3.859254e-02           —    5.05e-01         —    135    3  -> EVALUATION_BUDGET_EXHAUSTED
+
+汇总: 49 个用例；收敛 38，结构化失败 11；其中误差估计失效（高置信度错值）5 个；诚实失败 11 个。
+```
+
+## 误差估计失效用例（库会误报收敛，需调用方规避）
+- B 高振荡(失效展示) / sin(100x) Simpson 松容差 / simpson: 值=-1.4678e-01, 真实误差=1.48e-01, 估计=1.32e-09。Simpson 粗面板两级估计偶然一致 -> 提前停止；收紧 rel_tol 或改用 gk15 可消除
+- D 窄峰(默认单面板) / x0=0.5, delta=0.0001 / gk15: 值=0.0000e+00, 真实误差=1.00e+00, 估计=0.00e+00。峰未被任何节点采样：规则同时漏检，误报收敛≈0
+- D 窄峰(默认单面板) / x0=0.37, delta=0.003 / gk15: 值=2.4724e-32, 真实误差=1.00e+00, 估计=4.44e-32。峰未被任何节点采样：规则同时漏检，误报收敛≈0
+- D 窄峰(默认单面板) / x0=0.37, delta=0.001 / gk15: 值=5.5545e-295, 真实误差=1.00e+00, 估计=9.97e-295。峰未被任何节点采样：规则同时漏检，误报收敛≈0
+- D 窄峰(默认单面板) / x0=0.37, delta=0.0001 / gk15: 值=0.0000e+00, 真实误差=1.00e+00, 估计=0.00e+00。峰未被任何节点采样：规则同时漏检，误报收敛≈0
+
+## 诚实失败用例（不收敛/奇点 -> 明确错误码）
+- B 高振荡 / sin(1000x) / simpson: EVALUATION_BUDGET_EXHAUSTED
+- B 高振荡 / sin(5000x) / simpson: EVALUATION_BUDGET_EXHAUSTED
+- C 奇点 / 端点弱奇异 1/sqrt(x) / simpson: INVALID_VALUE_AT_POINT
+- C 奇点 / 端点 x*log(x) / simpson: INVALID_VALUE_AT_POINT
+- C 奇点 / 端点 log(x) / simpson: INVALID_VALUE_AT_POINT
+- C 奇点 / 内部极点 1/x / gk15: INVALID_VALUE_AT_POINT
+- C 奇点 / 内部极点 1/x / simpson: INVALID_VALUE_AT_POINT
+- C 奇点 / 不可积 1/x^2 / gk15: ROUND_OFF_NO_PROGRESS
+- C 奇点 / 不可积 1/x^2 / simpson: INVALID_VALUE_AT_POINT
+- E 限制与失败 / 1/sqrt(x), max_depth=5 / gk15: DEPTH_LIMIT_REACHED
+- E 限制与失败 / sin(1000x), 预算 150 / gk15: EVALUATION_BUDGET_EXHAUSTED

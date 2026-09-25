@@ -1,0 +1,8 @@
+{
+  "expression": "4/(1+x^2)",
+  "a": 0,
+  "b": 1,
+  "method": "gk15",
+  "abs_tol": 1e-10,
+  "rel_tol": 1e-8
+}

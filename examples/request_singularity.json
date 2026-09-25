@@ -1,0 +1,8 @@
+{
+  "expression": "1/x",
+  "a": -1,
+  "b": 1,
+  "method": "gk15",
+  "abs_tol": 1e-8,
+  "rel_tol": 1e-8
+}

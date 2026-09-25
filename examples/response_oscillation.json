@@ -1,0 +1,13 @@
+{
+  "status": "converged",
+  "method": "gk15",
+  "result": 0.00043762092370929373,
+  "error_estimate": 8.870126604246806e-10,
+  "evaluations": 7245,
+  "depth_reached": 8,
+  "intervals": 242,
+  "warnings": [
+    "25 个子区间的误差估计触及浮点舍入底噪（50*eps*积分|f|），绝对误差下界可能偏乐观"
+  ],
+  "diagnostics": {}
+}
