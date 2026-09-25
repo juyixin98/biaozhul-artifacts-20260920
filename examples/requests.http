@@ -1,0 +1,69 @@
+### 短语位置检索服务 — 请求样例
+###
+### 前提：先在另一个终端启动服务
+###   scripts/run_server.sh --port 8080
+###
+### 本文件可被 IntelliJ HTTP Client / VS Code REST Client 直接执行；
+### 纯命令行等价写法见 curl-examples.sh。
+
+### [1] 健康检查
+GET http://127.0.0.1:8080/health
+
+### [2] 查看语义配置（停用词策略、slop 定义、跨字段规则）
+GET http://127.0.0.1:8080/config
+
+### [3] 查看全部文档的全局 token 流与每个 token 的位置（核对用）
+GET http://127.0.0.1:8080/docs
+
+### [4] 精确短语（slop=0）：quick brown fox
+###     doc1 的 title(0-2) 与 body(5-7) 各命中一次
+GET http://127.0.0.1:8080/search?q=quick%20brown%20fox&slop=0
+
+### [5] 【重复词】that that，slop=0：只有真正相邻的两对命中
+GET http://127.0.0.1:8080/search?q=that%20that&slop=0
+
+### [6] 【重复词 + slop】that that，slop=5：穷举 8 对，
+###     每对的两个位置严格递增、互不相同
+GET http://127.0.0.1:8080/search?q=that%20that&slop=5
+
+### [7] 三连重复：had had had 文档中 "had had" 的命中
+GET http://127.0.0.1:8080/search?q=had%20had&slop=0
+
+### [8] 【跨字段】phrase search，slop=0 只在 title 内命中；
+###     slop=2 额外命中 title 结尾 phrase(0) -> body 开头 search(3)
+GET http://127.0.0.1:8080/search?q=phrase%20search&slop=0
+
+GET http://127.0.0.1:8080/search?q=phrase%20search&slop=2
+
+### [9] 【跨字段 + 停用词保留位置】
+###     doc5: title=index system, body=the quick ...
+###     "system the quick" 在 slop=0 跨字段精确命中（默认分析器保留停用词）
+GET http://127.0.0.1:8080/search?q=system%20the%20quick&slop=0
+
+### [10] 字段限定：只在 body 内找 phrase search -> 不命中（phrase 只在 title）
+GET http://127.0.0.1:8080/search?q=phrase%20search&slop=2&field=body
+
+### [11] POST JSON 形式
+POST http://127.0.0.1:8080/search
+Content-Type: application/json
+
+{
+  "query": "alpha alpha",
+  "slop": 4
+}
+
+### [12] 在线分析文本：查看词项、位置、字符偏移
+POST http://127.0.0.1:8080/analyze
+Content-Type: application/json
+
+{
+  "text": "The quick, brown fox!"
+}
+
+### [13] 错误样例：缺少 query -> 400
+POST http://127.0.0.1:8080/search
+Content-Type: application/json
+
+{
+  "slop": 0
+}
