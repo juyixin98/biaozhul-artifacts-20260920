@@ -1,0 +1,16 @@
+[package]
+name = "sse-resume"
+version = "0.1.0"
+edition = "2021"
+description = "Hand-written SSE (Server-Sent Events) incremental parser + TCP server/client with Last-Event-ID resume"
+
+[dependencies]
+# 无第三方依赖：解析器为手写的增量字节解析器，不借用现成协议解析库。
+
+[[bin]]
+name = "sse-server"
+path = "src/bin/sse_server.rs"
+
+[[bin]]
+name = "sse-client"
+path = "src/bin/sse_client.rs"
