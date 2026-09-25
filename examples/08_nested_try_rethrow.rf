@@ -1,0 +1,24 @@
+// 08_nested_try_rethrow.rf - nested handlers and re-throw from catch
+fun boom() throws {
+    throw "boom";
+}
+
+fun inner() throws {
+    let a = acquire("socket");
+    try {
+        boom();
+    } catch (e1) {
+        release a;
+        throw "wrapped";     // propagates out of inner()
+    }
+}
+
+fun main() {
+    let b = acquire("handle");
+    try {
+        inner();
+    } catch (e2) {
+        use(b);              // still held: normal use
+        release b;
+    }
+}

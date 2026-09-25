@@ -1,0 +1,17 @@
+// 07_exception_exit_leak.rf - exceptional exit without cleanup
+// On the exception edge of risky() the resource is still held when control
+// reaches except_exit; the analyzer reports RESOURCE_LEAK on that path.
+// risky() never returns normally, so the dead 'release tmp' is unreachable.
+fun risky() throws {
+    throw "disk full";
+}
+
+fun main(flag) throws {
+    let tmp = acquire("tempfile");
+    if (flag) {
+        risky();
+        release tmp;
+    } else {
+        release tmp;
+    }
+}

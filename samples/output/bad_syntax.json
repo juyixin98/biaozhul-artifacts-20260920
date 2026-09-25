@@ -1,0 +1,19 @@
+{
+  "error": {
+    "code": "E-PARSE",
+    "message": "expected ';' but found '}'",
+    "span": {
+      "filename": "<http>",
+      "start": {
+        "offset": 34,
+        "line": 1,
+        "column": 35
+      },
+      "end": {
+        "offset": 36,
+        "line": 1,
+        "column": 37
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+// 04_loop_acquire.rf - acquisition inside a loop
+// The resource is acquired/released on every iteration: with the default
+// loop bound of 2, three body executions are explored (0,1,2 back edges) and
+// every explored path stays balanced.
+fun main(ready) {
+    while (ready) {
+        let buf = acquire("buffer");
+        use(buf);
+        release buf;
+    }
+}

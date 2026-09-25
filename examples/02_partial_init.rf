@@ -1,0 +1,10 @@
+// 02_partial_init.rf - partial initialization across a branch
+// The resource is only acquired on the true branch; the program then uses it
+// unconditionally. The false path yields USE_NOT_HELD (warning).
+fun main(flag) {
+    if (flag) {
+        let conn = acquire("connection");
+    }
+    use(conn);
+    release conn;
+}

@@ -1,0 +1,21 @@
+// 03_double_release_and_uaf.rf
+// True branch: double release (DOUBLE_RELEASE).
+// False branch: release then use (USE_AFTER_RELEASE), then fail() leaves the
+// function on its exception edge; the resource is already released so the
+// exceptional exit is clean. main is declared 'throws' because fail() is not
+// caught.
+fun fail() throws {
+    throw "boom";
+}
+
+fun main(flag) throws {
+    let h = acquire("mutex");
+    if (flag) {
+        release h;
+        release h;
+    } else {
+        release h;
+        use(h);
+        fail();
+    }
+}

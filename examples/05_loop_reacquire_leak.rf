@@ -1,0 +1,10 @@
+// 05_loop_reacquire_leak.rf - resource leaks when the loop iterates
+// The acquired buffer is never released at the loop back edge. Re-entering the
+// body overwrites a held handle (OVERWRITE_HELD + RESOURCE_LEAK); exiting with
+// one iteration also leaks. The zero-iteration path is clean.
+fun main(ready) {
+    while (ready) {
+        let buf = acquire("buffer");
+        use(buf);
+    }
+}

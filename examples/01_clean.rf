@@ -1,0 +1,10 @@
+// 01_clean.rf - balanced acquire/release on all paths
+fun fail() throws {
+    throw "boom";
+}
+
+fun main() {
+    let f = acquire("file");
+    use(f);
+    release f;
+}

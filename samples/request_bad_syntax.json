@@ -1,0 +1,2 @@
+{"source": "fun main() { let f = acquire(\"x\") }"
+}

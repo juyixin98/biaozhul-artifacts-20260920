@@ -1,0 +1,1246 @@
+{
+  "language": "resflow/1",
+  "filename": "samples/03_double_release_and_uaf.rf",
+  "options": {
+    "loop_bound": 2,
+    "max_steps": 10000
+  },
+  "summaries": [
+    {
+      "name": "fail",
+      "throws": true,
+      "may_return": false,
+      "may_throw": true
+    },
+    {
+      "name": "main",
+      "throws": true,
+      "may_return": true,
+      "may_throw": true
+    }
+  ],
+  "functions": [
+    {
+      "name": "fail",
+      "params": [],
+      "throws": true,
+      "span": {
+        "filename": "samples/03_double_release_and_uaf.rf",
+        "start": {
+          "offset": 0,
+          "line": 1,
+          "column": 1
+        },
+        "end": {
+          "offset": 35,
+          "line": 1,
+          "column": 36
+        }
+      },
+      "resource_variables": [],
+      "cfg": {
+        "entry": "nentry_1",
+        "exit": "nexit_2",
+        "except_exit": "nexcept_exit_3",
+        "nodes": [
+          {
+            "id": "nentry_1",
+            "kind": "entry",
+            "label": "entry fail",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 18,
+                "line": 1,
+                "column": 19
+              },
+              "end": {
+                "offset": 35,
+                "line": 1,
+                "column": 36
+              }
+            }
+          },
+          {
+            "id": "nexit_2",
+            "kind": "exit",
+            "label": "exit fail",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 0,
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "offset": 35,
+                "line": 1,
+                "column": 36
+              }
+            }
+          },
+          {
+            "id": "nexcept_exit_3",
+            "kind": "except_exit",
+            "label": "uncaught-exit fail",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 0,
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "offset": 35,
+                "line": 1,
+                "column": 36
+              }
+            }
+          },
+          {
+            "id": "nskip_4",
+            "kind": "skip",
+            "label": "block",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 18,
+                "line": 1,
+                "column": 19
+              },
+              "end": {
+                "offset": 35,
+                "line": 1,
+                "column": 36
+              }
+            }
+          },
+          {
+            "id": "nthrow_5",
+            "kind": "throw",
+            "label": "throw \"boom\"",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 20,
+                "line": 1,
+                "column": 21
+              },
+              "end": {
+                "offset": 33,
+                "line": 1,
+                "column": 34
+              }
+            }
+          }
+        ],
+        "edges": [
+          {
+            "src": "nentry_1",
+            "dst": "nskip_4",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nskip_4",
+            "dst": "nthrow_5",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nthrow_5",
+            "dst": "nexcept_exit_3",
+            "kind": "exception",
+            "label": "threw"
+          }
+        ]
+      },
+      "paths": [
+        {
+          "path_id": 1,
+          "kind": "exception",
+          "node_sequence": [
+            "nentry_1",
+            "nskip_4",
+            "nthrow_5",
+            "nexcept_exit_3"
+          ],
+          "steps": [
+            {
+              "node_id": "nentry_1",
+              "kind": "entry",
+              "label": "entry fail",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 18,
+                  "line": 1,
+                  "column": 19
+                },
+                "end": {
+                  "offset": 35,
+                  "line": 1,
+                  "column": 36
+                }
+              },
+              "via_edge": null,
+              "state_after": {},
+              "events": []
+            },
+            {
+              "node_id": "nskip_4",
+              "kind": "skip",
+              "label": "block",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 18,
+                  "line": 1,
+                  "column": 19
+                },
+                "end": {
+                  "offset": 35,
+                  "line": 1,
+                  "column": 36
+                }
+              },
+              "via_edge": {
+                "src": "nentry_1",
+                "dst": "nskip_4",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {},
+              "events": []
+            },
+            {
+              "node_id": "nthrow_5",
+              "kind": "throw",
+              "label": "throw \"boom\"",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 20,
+                  "line": 1,
+                  "column": 21
+                },
+                "end": {
+                  "offset": 33,
+                  "line": 1,
+                  "column": 34
+                }
+              },
+              "via_edge": {
+                "src": "nskip_4",
+                "dst": "nthrow_5",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {},
+              "events": []
+            },
+            {
+              "node_id": "nexcept_exit_3",
+              "kind": "except_exit",
+              "label": "uncaught-exit fail",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 0,
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 35,
+                  "line": 1,
+                  "column": 36
+                }
+              },
+              "via_edge": {
+                "src": "nthrow_5",
+                "dst": "nexcept_exit_3",
+                "kind": "exception",
+                "label": "threw"
+              },
+              "state_after": {},
+              "events": []
+            }
+          ],
+          "finding_ids": []
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "name": "main",
+      "params": [
+        "flag"
+      ],
+      "throws": true,
+      "span": {
+        "filename": "samples/03_double_release_and_uaf.rf",
+        "start": {
+          "offset": 37,
+          "line": 3,
+          "column": 1
+        },
+        "end": {
+          "offset": 216,
+          "line": 13,
+          "column": 2
+        }
+      },
+      "resource_variables": [
+        "h"
+      ],
+      "cfg": {
+        "entry": "nentry_1",
+        "exit": "nexit_2",
+        "except_exit": "nexcept_exit_3",
+        "nodes": [
+          {
+            "id": "nentry_1",
+            "kind": "entry",
+            "label": "entry main",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 59,
+                "line": 3,
+                "column": 23
+              },
+              "end": {
+                "offset": 216,
+                "line": 13,
+                "column": 2
+              }
+            }
+          },
+          {
+            "id": "nexit_2",
+            "kind": "exit",
+            "label": "exit main",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 37,
+                "line": 3,
+                "column": 1
+              },
+              "end": {
+                "offset": 216,
+                "line": 13,
+                "column": 2
+              }
+            }
+          },
+          {
+            "id": "nexcept_exit_3",
+            "kind": "except_exit",
+            "label": "uncaught-exit main",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 37,
+                "line": 3,
+                "column": 1
+              },
+              "end": {
+                "offset": 216,
+                "line": 13,
+                "column": 2
+              }
+            }
+          },
+          {
+            "id": "nskip_4",
+            "kind": "skip",
+            "label": "block",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 59,
+                "line": 3,
+                "column": 23
+              },
+              "end": {
+                "offset": 216,
+                "line": 13,
+                "column": 2
+              }
+            }
+          },
+          {
+            "id": "nacquire_5",
+            "kind": "acquire",
+            "label": "let h = acquire(\"mutex\")",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 65,
+                "line": 4,
+                "column": 5
+              },
+              "end": {
+                "offset": 90,
+                "line": 4,
+                "column": 30
+              }
+            }
+          },
+          {
+            "id": "ncondition_6",
+            "kind": "condition",
+            "label": "flag",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 99,
+                "line": 5,
+                "column": 9
+              },
+              "end": {
+                "offset": 103,
+                "line": 5,
+                "column": 13
+              }
+            }
+          },
+          {
+            "id": "nskip_7",
+            "kind": "skip",
+            "label": "block",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 105,
+                "line": 5,
+                "column": 15
+              },
+              "end": {
+                "offset": 150,
+                "line": 8,
+                "column": 6
+              }
+            }
+          },
+          {
+            "id": "nrelease_8",
+            "kind": "release",
+            "label": "release h",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 115,
+                "line": 6,
+                "column": 9
+              },
+              "end": {
+                "offset": 125,
+                "line": 6,
+                "column": 19
+              }
+            }
+          },
+          {
+            "id": "nrelease_9",
+            "kind": "release",
+            "label": "release h",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 134,
+                "line": 7,
+                "column": 9
+              },
+              "end": {
+                "offset": 144,
+                "line": 7,
+                "column": 19
+              }
+            }
+          },
+          {
+            "id": "nskip_10",
+            "kind": "skip",
+            "label": "block",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 156,
+                "line": 8,
+                "column": 12
+              },
+              "end": {
+                "offset": 214,
+                "line": 12,
+                "column": 6
+              }
+            }
+          },
+          {
+            "id": "nrelease_11",
+            "kind": "release",
+            "label": "release h",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 166,
+                "line": 9,
+                "column": 9
+              },
+              "end": {
+                "offset": 176,
+                "line": 9,
+                "column": 19
+              }
+            }
+          },
+          {
+            "id": "nuse_12",
+            "kind": "use",
+            "label": "use(h)",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 185,
+                "line": 10,
+                "column": 9
+              },
+              "end": {
+                "offset": 192,
+                "line": 10,
+                "column": 16
+              }
+            }
+          },
+          {
+            "id": "ncall_13",
+            "kind": "call",
+            "label": "fail();",
+            "span": {
+              "filename": "samples/03_double_release_and_uaf.rf",
+              "start": {
+                "offset": 201,
+                "line": 11,
+                "column": 9
+              },
+              "end": {
+                "offset": 207,
+                "line": 11,
+                "column": 15
+              }
+            }
+          }
+        ],
+        "edges": [
+          {
+            "src": "nacquire_5",
+            "dst": "ncondition_6",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "ncall_13",
+            "dst": "nexit_2",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "ncall_13",
+            "dst": "nexcept_exit_3",
+            "kind": "exception",
+            "label": "threw"
+          },
+          {
+            "src": "ncondition_6",
+            "dst": "nskip_10",
+            "kind": "normal",
+            "label": "false"
+          },
+          {
+            "src": "ncondition_6",
+            "dst": "nskip_7",
+            "kind": "normal",
+            "label": "true"
+          },
+          {
+            "src": "nentry_1",
+            "dst": "nskip_4",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nrelease_11",
+            "dst": "nuse_12",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nrelease_8",
+            "dst": "nrelease_9",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nrelease_9",
+            "dst": "nexit_2",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nskip_10",
+            "dst": "nrelease_11",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nskip_4",
+            "dst": "nacquire_5",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nskip_7",
+            "dst": "nrelease_8",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nuse_12",
+            "dst": "ncall_13",
+            "kind": "normal",
+            "label": ""
+          }
+        ]
+      },
+      "paths": [
+        {
+          "path_id": 2,
+          "kind": "exception",
+          "node_sequence": [
+            "nentry_1",
+            "nskip_4",
+            "nacquire_5",
+            "ncondition_6",
+            "nskip_10",
+            "nrelease_11",
+            "nuse_12",
+            "ncall_13",
+            "nexcept_exit_3"
+          ],
+          "steps": [
+            {
+              "node_id": "nentry_1",
+              "kind": "entry",
+              "label": "entry main",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 59,
+                  "line": 3,
+                  "column": 23
+                },
+                "end": {
+                  "offset": 216,
+                  "line": 13,
+                  "column": 2
+                }
+              },
+              "via_edge": null,
+              "state_after": {
+                "h": "ABSENT"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nskip_4",
+              "kind": "skip",
+              "label": "block",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 59,
+                  "line": 3,
+                  "column": 23
+                },
+                "end": {
+                  "offset": 216,
+                  "line": 13,
+                  "column": 2
+                }
+              },
+              "via_edge": {
+                "src": "nentry_1",
+                "dst": "nskip_4",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "h": "ABSENT"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nacquire_5",
+              "kind": "acquire",
+              "label": "let h = acquire(\"mutex\")",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 65,
+                  "line": 4,
+                  "column": 5
+                },
+                "end": {
+                  "offset": 90,
+                  "line": 4,
+                  "column": 30
+                }
+              },
+              "via_edge": {
+                "src": "nskip_4",
+                "dst": "nacquire_5",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "h": "HELD"
+              },
+              "events": [
+                {
+                  "type": "acquire",
+                  "variable": "h",
+                  "resource_kind": "mutex"
+                }
+              ]
+            },
+            {
+              "node_id": "ncondition_6",
+              "kind": "condition",
+              "label": "flag",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 99,
+                  "line": 5,
+                  "column": 9
+                },
+                "end": {
+                  "offset": 103,
+                  "line": 5,
+                  "column": 13
+                }
+              },
+              "via_edge": {
+                "src": "nacquire_5",
+                "dst": "ncondition_6",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "h": "HELD"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nskip_10",
+              "kind": "skip",
+              "label": "block",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 156,
+                  "line": 8,
+                  "column": 12
+                },
+                "end": {
+                  "offset": 214,
+                  "line": 12,
+                  "column": 6
+                }
+              },
+              "via_edge": {
+                "src": "ncondition_6",
+                "dst": "nskip_10",
+                "kind": "normal",
+                "label": "false"
+              },
+              "state_after": {
+                "h": "HELD"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nrelease_11",
+              "kind": "release",
+              "label": "release h",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 166,
+                  "line": 9,
+                  "column": 9
+                },
+                "end": {
+                  "offset": 176,
+                  "line": 9,
+                  "column": 19
+                }
+              },
+              "via_edge": {
+                "src": "nskip_10",
+                "dst": "nrelease_11",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "h": "RELEASED"
+              },
+              "events": [
+                {
+                  "type": "release",
+                  "variable": "h"
+                }
+              ]
+            },
+            {
+              "node_id": "nuse_12",
+              "kind": "use",
+              "label": "use(h)",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 185,
+                  "line": 10,
+                  "column": 9
+                },
+                "end": {
+                  "offset": 192,
+                  "line": 10,
+                  "column": 16
+                }
+              },
+              "via_edge": {
+                "src": "nrelease_11",
+                "dst": "nuse_12",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "h": "RELEASED"
+              },
+              "events": [
+                {
+                  "type": "finding",
+                  "finding_id": 1,
+                  "code": "USE_AFTER_RELEASE",
+                  "message": "use of 'h' after it was released",
+                  "variable": "h",
+                  "span": {
+                    "filename": "samples/03_double_release_and_uaf.rf",
+                    "start": {
+                      "offset": 185,
+                      "line": 10,
+                      "column": 9
+                    },
+                    "end": {
+                      "offset": 192,
+                      "line": 10,
+                      "column": 16
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "node_id": "ncall_13",
+              "kind": "call",
+              "label": "fail();",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 201,
+                  "line": 11,
+                  "column": 9
+                },
+                "end": {
+                  "offset": 207,
+                  "line": 11,
+                  "column": 15
+                }
+              },
+              "via_edge": {
+                "src": "nuse_12",
+                "dst": "ncall_13",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "h": "RELEASED"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nexcept_exit_3",
+              "kind": "except_exit",
+              "label": "uncaught-exit main",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 37,
+                  "line": 3,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 216,
+                  "line": 13,
+                  "column": 2
+                }
+              },
+              "via_edge": {
+                "src": "ncall_13",
+                "dst": "nexcept_exit_3",
+                "kind": "exception",
+                "label": "threw"
+              },
+              "state_after": {
+                "h": "RELEASED"
+              },
+              "events": []
+            }
+          ],
+          "finding_ids": [
+            1
+          ]
+        },
+        {
+          "path_id": 3,
+          "kind": "normal",
+          "node_sequence": [
+            "nentry_1",
+            "nskip_4",
+            "nacquire_5",
+            "ncondition_6",
+            "nskip_7",
+            "nrelease_8",
+            "nrelease_9",
+            "nexit_2"
+          ],
+          "steps": [
+            {
+              "node_id": "nentry_1",
+              "kind": "entry",
+              "label": "entry main",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 59,
+                  "line": 3,
+                  "column": 23
+                },
+                "end": {
+                  "offset": 216,
+                  "line": 13,
+                  "column": 2
+                }
+              },
+              "via_edge": null,
+              "state_after": {
+                "h": "ABSENT"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nskip_4",
+              "kind": "skip",
+              "label": "block",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 59,
+                  "line": 3,
+                  "column": 23
+                },
+                "end": {
+                  "offset": 216,
+                  "line": 13,
+                  "column": 2
+                }
+              },
+              "via_edge": {
+                "src": "nentry_1",
+                "dst": "nskip_4",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "h": "ABSENT"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nacquire_5",
+              "kind": "acquire",
+              "label": "let h = acquire(\"mutex\")",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 65,
+                  "line": 4,
+                  "column": 5
+                },
+                "end": {
+                  "offset": 90,
+                  "line": 4,
+                  "column": 30
+                }
+              },
+              "via_edge": {
+                "src": "nskip_4",
+                "dst": "nacquire_5",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "h": "HELD"
+              },
+              "events": [
+                {
+                  "type": "acquire",
+                  "variable": "h",
+                  "resource_kind": "mutex"
+                }
+              ]
+            },
+            {
+              "node_id": "ncondition_6",
+              "kind": "condition",
+              "label": "flag",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 99,
+                  "line": 5,
+                  "column": 9
+                },
+                "end": {
+                  "offset": 103,
+                  "line": 5,
+                  "column": 13
+                }
+              },
+              "via_edge": {
+                "src": "nacquire_5",
+                "dst": "ncondition_6",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "h": "HELD"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nskip_7",
+              "kind": "skip",
+              "label": "block",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 105,
+                  "line": 5,
+                  "column": 15
+                },
+                "end": {
+                  "offset": 150,
+                  "line": 8,
+                  "column": 6
+                }
+              },
+              "via_edge": {
+                "src": "ncondition_6",
+                "dst": "nskip_7",
+                "kind": "normal",
+                "label": "true"
+              },
+              "state_after": {
+                "h": "HELD"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nrelease_8",
+              "kind": "release",
+              "label": "release h",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 115,
+                  "line": 6,
+                  "column": 9
+                },
+                "end": {
+                  "offset": 125,
+                  "line": 6,
+                  "column": 19
+                }
+              },
+              "via_edge": {
+                "src": "nskip_7",
+                "dst": "nrelease_8",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "h": "RELEASED"
+              },
+              "events": [
+                {
+                  "type": "release",
+                  "variable": "h"
+                }
+              ]
+            },
+            {
+              "node_id": "nrelease_9",
+              "kind": "release",
+              "label": "release h",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 134,
+                  "line": 7,
+                  "column": 9
+                },
+                "end": {
+                  "offset": 144,
+                  "line": 7,
+                  "column": 19
+                }
+              },
+              "via_edge": {
+                "src": "nrelease_8",
+                "dst": "nrelease_9",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "h": "RELEASED"
+              },
+              "events": [
+                {
+                  "type": "finding",
+                  "finding_id": 2,
+                  "code": "DOUBLE_RELEASE",
+                  "message": "resource 'h' is released a second time",
+                  "variable": "h",
+                  "span": {
+                    "filename": "samples/03_double_release_and_uaf.rf",
+                    "start": {
+                      "offset": 134,
+                      "line": 7,
+                      "column": 9
+                    },
+                    "end": {
+                      "offset": 144,
+                      "line": 7,
+                      "column": 19
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "node_id": "nexit_2",
+              "kind": "exit",
+              "label": "exit main",
+              "span": {
+                "filename": "samples/03_double_release_and_uaf.rf",
+                "start": {
+                  "offset": 37,
+                  "line": 3,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 216,
+                  "line": 13,
+                  "column": 2
+                }
+              },
+              "via_edge": {
+                "src": "nrelease_9",
+                "dst": "nexit_2",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "h": "RELEASED"
+              },
+              "events": []
+            }
+          ],
+          "finding_ids": [
+            2
+          ]
+        }
+      ],
+      "finding_ids": [
+        1,
+        2
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "code": "USE_AFTER_RELEASE",
+      "message": "use of 'h' after it was released",
+      "function": "main",
+      "variable": "h",
+      "resource_kind": null,
+      "node_id": "nuse_12",
+      "span": {
+        "filename": "samples/03_double_release_and_uaf.rf",
+        "start": {
+          "offset": 185,
+          "line": 10,
+          "column": 9
+        },
+        "end": {
+          "offset": 192,
+          "line": 10,
+          "column": 16
+        }
+      }
+    },
+    {
+      "id": 2,
+      "code": "DOUBLE_RELEASE",
+      "message": "resource 'h' is released a second time",
+      "function": "main",
+      "variable": "h",
+      "resource_kind": null,
+      "node_id": "nrelease_9",
+      "span": {
+        "filename": "samples/03_double_release_and_uaf.rf",
+        "start": {
+          "offset": 134,
+          "line": 7,
+          "column": 9
+        },
+        "end": {
+          "offset": 144,
+          "line": 7,
+          "column": 19
+        }
+      }
+    }
+  ],
+  "counts": {
+    "functions": 2,
+    "paths": 3,
+    "findings": 2,
+    "truncated_paths": 0
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "filename": "samples/03_double_release_and_uaf.rf",
+  "loop_bound": 2,
+  "source": "fun fail() throws { throw \"boom\"; }\n\nfun main(flag) throws {\n    let h = acquire(\"mutex\");\n    if (flag) {\n        release h;\n        release h;\n    } else {\n        release h;\n        use(h);\n        fail();\n    }\n}\n"
+}

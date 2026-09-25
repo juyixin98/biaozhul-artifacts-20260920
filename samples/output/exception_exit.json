@@ -1,0 +1,1060 @@
+{
+  "language": "resflow/1",
+  "filename": "exception_exit.rf",
+  "options": {
+    "loop_bound": 1,
+    "max_steps": 10000
+  },
+  "summaries": [
+    {
+      "name": "risky",
+      "throws": true,
+      "may_return": false,
+      "may_throw": true
+    },
+    {
+      "name": "main",
+      "throws": true,
+      "may_return": true,
+      "may_throw": true
+    }
+  ],
+  "functions": [
+    {
+      "name": "risky",
+      "params": [],
+      "throws": true,
+      "span": {
+        "filename": "exception_exit.rf",
+        "start": {
+          "offset": 0,
+          "line": 1,
+          "column": 1
+        },
+        "end": {
+          "offset": 41,
+          "line": 1,
+          "column": 42
+        }
+      },
+      "resource_variables": [],
+      "cfg": {
+        "entry": "nentry_1",
+        "exit": "nexit_2",
+        "except_exit": "nexcept_exit_3",
+        "nodes": [
+          {
+            "id": "nentry_1",
+            "kind": "entry",
+            "label": "entry risky",
+            "span": {
+              "filename": "exception_exit.rf",
+              "start": {
+                "offset": 19,
+                "line": 1,
+                "column": 20
+              },
+              "end": {
+                "offset": 41,
+                "line": 1,
+                "column": 42
+              }
+            }
+          },
+          {
+            "id": "nexit_2",
+            "kind": "exit",
+            "label": "exit risky",
+            "span": {
+              "filename": "exception_exit.rf",
+              "start": {
+                "offset": 0,
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "offset": 41,
+                "line": 1,
+                "column": 42
+              }
+            }
+          },
+          {
+            "id": "nexcept_exit_3",
+            "kind": "except_exit",
+            "label": "uncaught-exit risky",
+            "span": {
+              "filename": "exception_exit.rf",
+              "start": {
+                "offset": 0,
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "offset": 41,
+                "line": 1,
+                "column": 42
+              }
+            }
+          },
+          {
+            "id": "nskip_4",
+            "kind": "skip",
+            "label": "block",
+            "span": {
+              "filename": "exception_exit.rf",
+              "start": {
+                "offset": 19,
+                "line": 1,
+                "column": 20
+              },
+              "end": {
+                "offset": 41,
+                "line": 1,
+                "column": 42
+              }
+            }
+          },
+          {
+            "id": "nthrow_5",
+            "kind": "throw",
+            "label": "throw \"disk full\"",
+            "span": {
+              "filename": "exception_exit.rf",
+              "start": {
+                "offset": 21,
+                "line": 1,
+                "column": 22
+              },
+              "end": {
+                "offset": 39,
+                "line": 1,
+                "column": 40
+              }
+            }
+          }
+        ],
+        "edges": [
+          {
+            "src": "nentry_1",
+            "dst": "nskip_4",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nskip_4",
+            "dst": "nthrow_5",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nthrow_5",
+            "dst": "nexcept_exit_3",
+            "kind": "exception",
+            "label": "threw"
+          }
+        ]
+      },
+      "paths": [
+        {
+          "path_id": 1,
+          "kind": "exception",
+          "node_sequence": [
+            "nentry_1",
+            "nskip_4",
+            "nthrow_5",
+            "nexcept_exit_3"
+          ],
+          "steps": [
+            {
+              "node_id": "nentry_1",
+              "kind": "entry",
+              "label": "entry risky",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 19,
+                  "line": 1,
+                  "column": 20
+                },
+                "end": {
+                  "offset": 41,
+                  "line": 1,
+                  "column": 42
+                }
+              },
+              "via_edge": null,
+              "state_after": {},
+              "events": []
+            },
+            {
+              "node_id": "nskip_4",
+              "kind": "skip",
+              "label": "block",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 19,
+                  "line": 1,
+                  "column": 20
+                },
+                "end": {
+                  "offset": 41,
+                  "line": 1,
+                  "column": 42
+                }
+              },
+              "via_edge": {
+                "src": "nentry_1",
+                "dst": "nskip_4",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {},
+              "events": []
+            },
+            {
+              "node_id": "nthrow_5",
+              "kind": "throw",
+              "label": "throw \"disk full\"",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 21,
+                  "line": 1,
+                  "column": 22
+                },
+                "end": {
+                  "offset": 39,
+                  "line": 1,
+                  "column": 40
+                }
+              },
+              "via_edge": {
+                "src": "nskip_4",
+                "dst": "nthrow_5",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {},
+              "events": []
+            },
+            {
+              "node_id": "nexcept_exit_3",
+              "kind": "except_exit",
+              "label": "uncaught-exit risky",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 0,
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 41,
+                  "line": 1,
+                  "column": 42
+                }
+              },
+              "via_edge": {
+                "src": "nthrow_5",
+                "dst": "nexcept_exit_3",
+                "kind": "exception",
+                "label": "threw"
+              },
+              "state_after": {},
+              "events": []
+            }
+          ],
+          "finding_ids": []
+        }
+      ],
+      "finding_ids": []
+    },
+    {
+      "name": "main",
+      "params": [
+        "flag"
+      ],
+      "throws": true,
+      "span": {
+        "filename": "exception_exit.rf",
+        "start": {
+          "offset": 43,
+          "line": 3,
+          "column": 1
+        },
+        "end": {
+          "offset": 197,
+          "line": 11,
+          "column": 2
+        }
+      },
+      "resource_variables": [
+        "tmp"
+      ],
+      "cfg": {
+        "entry": "nentry_1",
+        "exit": "nexit_2",
+        "except_exit": "nexcept_exit_3",
+        "nodes": [
+          {
+            "id": "nentry_1",
+            "kind": "entry",
+            "label": "entry main",
+            "span": {
+              "filename": "exception_exit.rf",
+              "start": {
+                "offset": 65,
+                "line": 3,
+                "column": 23
+              },
+              "end": {
+                "offset": 197,
+                "line": 11,
+                "column": 2
+              }
+            }
+          },
+          {
+            "id": "nexit_2",
+            "kind": "exit",
+            "label": "exit main",
+            "span": {
+              "filename": "exception_exit.rf",
+              "start": {
+                "offset": 43,
+                "line": 3,
+                "column": 1
+              },
+              "end": {
+                "offset": 197,
+                "line": 11,
+                "column": 2
+              }
+            }
+          },
+          {
+            "id": "nexcept_exit_3",
+            "kind": "except_exit",
+            "label": "uncaught-exit main",
+            "span": {
+              "filename": "exception_exit.rf",
+              "start": {
+                "offset": 43,
+                "line": 3,
+                "column": 1
+              },
+              "end": {
+                "offset": 197,
+                "line": 11,
+                "column": 2
+              }
+            }
+          },
+          {
+            "id": "nskip_4",
+            "kind": "skip",
+            "label": "block",
+            "span": {
+              "filename": "exception_exit.rf",
+              "start": {
+                "offset": 65,
+                "line": 3,
+                "column": 23
+              },
+              "end": {
+                "offset": 197,
+                "line": 11,
+                "column": 2
+              }
+            }
+          },
+          {
+            "id": "nacquire_5",
+            "kind": "acquire",
+            "label": "let tmp = acquire(\"tempfile\")",
+            "span": {
+              "filename": "exception_exit.rf",
+              "start": {
+                "offset": 71,
+                "line": 4,
+                "column": 5
+              },
+              "end": {
+                "offset": 101,
+                "line": 4,
+                "column": 35
+              }
+            }
+          },
+          {
+            "id": "ncondition_6",
+            "kind": "condition",
+            "label": "flag",
+            "span": {
+              "filename": "exception_exit.rf",
+              "start": {
+                "offset": 110,
+                "line": 5,
+                "column": 9
+              },
+              "end": {
+                "offset": 114,
+                "line": 5,
+                "column": 13
+              }
+            }
+          },
+          {
+            "id": "nskip_7",
+            "kind": "skip",
+            "label": "block",
+            "span": {
+              "filename": "exception_exit.rf",
+              "start": {
+                "offset": 116,
+                "line": 5,
+                "column": 15
+              },
+              "end": {
+                "offset": 161,
+                "line": 8,
+                "column": 6
+              }
+            }
+          },
+          {
+            "id": "ncall_8",
+            "kind": "call",
+            "label": "risky();",
+            "span": {
+              "filename": "exception_exit.rf",
+              "start": {
+                "offset": 126,
+                "line": 6,
+                "column": 9
+              },
+              "end": {
+                "offset": 133,
+                "line": 6,
+                "column": 16
+              }
+            }
+          },
+          {
+            "id": "nrelease_9",
+            "kind": "release",
+            "label": "release tmp",
+            "span": {
+              "filename": "exception_exit.rf",
+              "start": {
+                "offset": 143,
+                "line": 7,
+                "column": 9
+              },
+              "end": {
+                "offset": 155,
+                "line": 7,
+                "column": 21
+              }
+            }
+          },
+          {
+            "id": "nskip_10",
+            "kind": "skip",
+            "label": "block",
+            "span": {
+              "filename": "exception_exit.rf",
+              "start": {
+                "offset": 167,
+                "line": 8,
+                "column": 12
+              },
+              "end": {
+                "offset": 195,
+                "line": 10,
+                "column": 6
+              }
+            }
+          },
+          {
+            "id": "nrelease_11",
+            "kind": "release",
+            "label": "release tmp",
+            "span": {
+              "filename": "exception_exit.rf",
+              "start": {
+                "offset": 177,
+                "line": 9,
+                "column": 9
+              },
+              "end": {
+                "offset": 189,
+                "line": 9,
+                "column": 21
+              }
+            }
+          }
+        ],
+        "edges": [
+          {
+            "src": "nacquire_5",
+            "dst": "ncondition_6",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "ncall_8",
+            "dst": "nrelease_9",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "ncall_8",
+            "dst": "nexcept_exit_3",
+            "kind": "exception",
+            "label": "threw"
+          },
+          {
+            "src": "ncondition_6",
+            "dst": "nskip_10",
+            "kind": "normal",
+            "label": "false"
+          },
+          {
+            "src": "ncondition_6",
+            "dst": "nskip_7",
+            "kind": "normal",
+            "label": "true"
+          },
+          {
+            "src": "nentry_1",
+            "dst": "nskip_4",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nrelease_11",
+            "dst": "nexit_2",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nrelease_9",
+            "dst": "nexit_2",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nskip_10",
+            "dst": "nrelease_11",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nskip_4",
+            "dst": "nacquire_5",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nskip_7",
+            "dst": "ncall_8",
+            "kind": "normal",
+            "label": ""
+          }
+        ]
+      },
+      "paths": [
+        {
+          "path_id": 2,
+          "kind": "normal",
+          "node_sequence": [
+            "nentry_1",
+            "nskip_4",
+            "nacquire_5",
+            "ncondition_6",
+            "nskip_10",
+            "nrelease_11",
+            "nexit_2"
+          ],
+          "steps": [
+            {
+              "node_id": "nentry_1",
+              "kind": "entry",
+              "label": "entry main",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 65,
+                  "line": 3,
+                  "column": 23
+                },
+                "end": {
+                  "offset": 197,
+                  "line": 11,
+                  "column": 2
+                }
+              },
+              "via_edge": null,
+              "state_after": {
+                "tmp": "ABSENT"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nskip_4",
+              "kind": "skip",
+              "label": "block",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 65,
+                  "line": 3,
+                  "column": 23
+                },
+                "end": {
+                  "offset": 197,
+                  "line": 11,
+                  "column": 2
+                }
+              },
+              "via_edge": {
+                "src": "nentry_1",
+                "dst": "nskip_4",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "tmp": "ABSENT"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nacquire_5",
+              "kind": "acquire",
+              "label": "let tmp = acquire(\"tempfile\")",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 71,
+                  "line": 4,
+                  "column": 5
+                },
+                "end": {
+                  "offset": 101,
+                  "line": 4,
+                  "column": 35
+                }
+              },
+              "via_edge": {
+                "src": "nskip_4",
+                "dst": "nacquire_5",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "tmp": "HELD"
+              },
+              "events": [
+                {
+                  "type": "acquire",
+                  "variable": "tmp",
+                  "resource_kind": "tempfile"
+                }
+              ]
+            },
+            {
+              "node_id": "ncondition_6",
+              "kind": "condition",
+              "label": "flag",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 110,
+                  "line": 5,
+                  "column": 9
+                },
+                "end": {
+                  "offset": 114,
+                  "line": 5,
+                  "column": 13
+                }
+              },
+              "via_edge": {
+                "src": "nacquire_5",
+                "dst": "ncondition_6",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "tmp": "HELD"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nskip_10",
+              "kind": "skip",
+              "label": "block",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 167,
+                  "line": 8,
+                  "column": 12
+                },
+                "end": {
+                  "offset": 195,
+                  "line": 10,
+                  "column": 6
+                }
+              },
+              "via_edge": {
+                "src": "ncondition_6",
+                "dst": "nskip_10",
+                "kind": "normal",
+                "label": "false"
+              },
+              "state_after": {
+                "tmp": "HELD"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nrelease_11",
+              "kind": "release",
+              "label": "release tmp",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 177,
+                  "line": 9,
+                  "column": 9
+                },
+                "end": {
+                  "offset": 189,
+                  "line": 9,
+                  "column": 21
+                }
+              },
+              "via_edge": {
+                "src": "nskip_10",
+                "dst": "nrelease_11",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "tmp": "RELEASED"
+              },
+              "events": [
+                {
+                  "type": "release",
+                  "variable": "tmp"
+                }
+              ]
+            },
+            {
+              "node_id": "nexit_2",
+              "kind": "exit",
+              "label": "exit main",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 43,
+                  "line": 3,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 197,
+                  "line": 11,
+                  "column": 2
+                }
+              },
+              "via_edge": {
+                "src": "nrelease_11",
+                "dst": "nexit_2",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "tmp": "RELEASED"
+              },
+              "events": []
+            }
+          ],
+          "finding_ids": []
+        },
+        {
+          "path_id": 3,
+          "kind": "exception",
+          "node_sequence": [
+            "nentry_1",
+            "nskip_4",
+            "nacquire_5",
+            "ncondition_6",
+            "nskip_7",
+            "ncall_8",
+            "nexcept_exit_3"
+          ],
+          "steps": [
+            {
+              "node_id": "nentry_1",
+              "kind": "entry",
+              "label": "entry main",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 65,
+                  "line": 3,
+                  "column": 23
+                },
+                "end": {
+                  "offset": 197,
+                  "line": 11,
+                  "column": 2
+                }
+              },
+              "via_edge": null,
+              "state_after": {
+                "tmp": "ABSENT"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nskip_4",
+              "kind": "skip",
+              "label": "block",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 65,
+                  "line": 3,
+                  "column": 23
+                },
+                "end": {
+                  "offset": 197,
+                  "line": 11,
+                  "column": 2
+                }
+              },
+              "via_edge": {
+                "src": "nentry_1",
+                "dst": "nskip_4",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "tmp": "ABSENT"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nacquire_5",
+              "kind": "acquire",
+              "label": "let tmp = acquire(\"tempfile\")",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 71,
+                  "line": 4,
+                  "column": 5
+                },
+                "end": {
+                  "offset": 101,
+                  "line": 4,
+                  "column": 35
+                }
+              },
+              "via_edge": {
+                "src": "nskip_4",
+                "dst": "nacquire_5",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "tmp": "HELD"
+              },
+              "events": [
+                {
+                  "type": "acquire",
+                  "variable": "tmp",
+                  "resource_kind": "tempfile"
+                }
+              ]
+            },
+            {
+              "node_id": "ncondition_6",
+              "kind": "condition",
+              "label": "flag",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 110,
+                  "line": 5,
+                  "column": 9
+                },
+                "end": {
+                  "offset": 114,
+                  "line": 5,
+                  "column": 13
+                }
+              },
+              "via_edge": {
+                "src": "nacquire_5",
+                "dst": "ncondition_6",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "tmp": "HELD"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nskip_7",
+              "kind": "skip",
+              "label": "block",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 116,
+                  "line": 5,
+                  "column": 15
+                },
+                "end": {
+                  "offset": 161,
+                  "line": 8,
+                  "column": 6
+                }
+              },
+              "via_edge": {
+                "src": "ncondition_6",
+                "dst": "nskip_7",
+                "kind": "normal",
+                "label": "true"
+              },
+              "state_after": {
+                "tmp": "HELD"
+              },
+              "events": []
+            },
+            {
+              "node_id": "ncall_8",
+              "kind": "call",
+              "label": "risky();",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 126,
+                  "line": 6,
+                  "column": 9
+                },
+                "end": {
+                  "offset": 133,
+                  "line": 6,
+                  "column": 16
+                }
+              },
+              "via_edge": {
+                "src": "nskip_7",
+                "dst": "ncall_8",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "tmp": "HELD"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nexcept_exit_3",
+              "kind": "except_exit",
+              "label": "uncaught-exit main",
+              "span": {
+                "filename": "exception_exit.rf",
+                "start": {
+                  "offset": 43,
+                  "line": 3,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 197,
+                  "line": 11,
+                  "column": 2
+                }
+              },
+              "via_edge": {
+                "src": "ncall_8",
+                "dst": "nexcept_exit_3",
+                "kind": "exception",
+                "label": "threw"
+              },
+              "state_after": {
+                "tmp": "HELD"
+              },
+              "events": [
+                {
+                  "type": "finding",
+                  "finding_id": 1,
+                  "code": "RESOURCE_LEAK",
+                  "message": "resource 'tmp' (tempfile) is still held on exceptional exit",
+                  "variable": "tmp",
+                  "span": {
+                    "filename": "exception_exit.rf",
+                    "start": {
+                      "offset": 43,
+                      "line": 3,
+                      "column": 1
+                    },
+                    "end": {
+                      "offset": 197,
+                      "line": 11,
+                      "column": 2
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "finding_ids": [
+            1
+          ]
+        }
+      ],
+      "finding_ids": [
+        1
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "code": "RESOURCE_LEAK",
+      "message": "resource 'tmp' (tempfile) is still held on exceptional exit",
+      "function": "main",
+      "variable": "tmp",
+      "resource_kind": "tempfile",
+      "node_id": "nexcept_exit_3",
+      "span": {
+        "filename": "exception_exit.rf",
+        "start": {
+          "offset": 43,
+          "line": 3,
+          "column": 1
+        },
+        "end": {
+          "offset": 197,
+          "line": 11,
+          "column": 2
+        }
+      }
+    }
+  ],
+  "counts": {
+    "functions": 2,
+    "paths": 3,
+    "findings": 1,
+    "truncated_paths": 0
+  }
+}

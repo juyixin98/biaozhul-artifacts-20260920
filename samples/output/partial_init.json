@@ -1,0 +1,793 @@
+{
+  "language": "resflow/1",
+  "filename": "partial_init.rf",
+  "options": {
+    "loop_bound": 2,
+    "max_steps": 10000
+  },
+  "summaries": [
+    {
+      "name": "main",
+      "throws": false,
+      "may_return": true,
+      "may_throw": false
+    }
+  ],
+  "functions": [
+    {
+      "name": "main",
+      "params": [
+        "flag"
+      ],
+      "throws": false,
+      "span": {
+        "filename": "partial_init.rf",
+        "start": {
+          "offset": 0,
+          "line": 1,
+          "column": 1
+        },
+        "end": {
+          "offset": 115,
+          "line": 7,
+          "column": 2
+        }
+      },
+      "resource_variables": [
+        "conn"
+      ],
+      "cfg": {
+        "entry": "nentry_1",
+        "exit": "nexit_2",
+        "except_exit": "nexcept_exit_3",
+        "nodes": [
+          {
+            "id": "nentry_1",
+            "kind": "entry",
+            "label": "entry main",
+            "span": {
+              "filename": "partial_init.rf",
+              "start": {
+                "offset": 15,
+                "line": 1,
+                "column": 16
+              },
+              "end": {
+                "offset": 115,
+                "line": 7,
+                "column": 2
+              }
+            }
+          },
+          {
+            "id": "nexit_2",
+            "kind": "exit",
+            "label": "exit main",
+            "span": {
+              "filename": "partial_init.rf",
+              "start": {
+                "offset": 0,
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "offset": 115,
+                "line": 7,
+                "column": 2
+              }
+            }
+          },
+          {
+            "id": "nexcept_exit_3",
+            "kind": "except_exit",
+            "label": "uncaught-exit main",
+            "span": {
+              "filename": "partial_init.rf",
+              "start": {
+                "offset": 0,
+                "line": 1,
+                "column": 1
+              },
+              "end": {
+                "offset": 115,
+                "line": 7,
+                "column": 2
+              }
+            }
+          },
+          {
+            "id": "nskip_4",
+            "kind": "skip",
+            "label": "block",
+            "span": {
+              "filename": "partial_init.rf",
+              "start": {
+                "offset": 15,
+                "line": 1,
+                "column": 16
+              },
+              "end": {
+                "offset": 115,
+                "line": 7,
+                "column": 2
+              }
+            }
+          },
+          {
+            "id": "ncondition_5",
+            "kind": "condition",
+            "label": "flag",
+            "span": {
+              "filename": "partial_init.rf",
+              "start": {
+                "offset": 25,
+                "line": 2,
+                "column": 9
+              },
+              "end": {
+                "offset": 29,
+                "line": 2,
+                "column": 13
+              }
+            }
+          },
+          {
+            "id": "nskip_6",
+            "kind": "skip",
+            "label": "block",
+            "span": {
+              "filename": "partial_init.rf",
+              "start": {
+                "offset": 31,
+                "line": 2,
+                "column": 15
+              },
+              "end": {
+                "offset": 80,
+                "line": 4,
+                "column": 6
+              }
+            }
+          },
+          {
+            "id": "nacquire_7",
+            "kind": "acquire",
+            "label": "let conn = acquire(\"connection\")",
+            "span": {
+              "filename": "partial_init.rf",
+              "start": {
+                "offset": 41,
+                "line": 3,
+                "column": 9
+              },
+              "end": {
+                "offset": 74,
+                "line": 3,
+                "column": 42
+              }
+            }
+          },
+          {
+            "id": "nuse_8",
+            "kind": "use",
+            "label": "use(conn)",
+            "span": {
+              "filename": "partial_init.rf",
+              "start": {
+                "offset": 85,
+                "line": 5,
+                "column": 5
+              },
+              "end": {
+                "offset": 95,
+                "line": 5,
+                "column": 15
+              }
+            }
+          },
+          {
+            "id": "nrelease_9",
+            "kind": "release",
+            "label": "release conn",
+            "span": {
+              "filename": "partial_init.rf",
+              "start": {
+                "offset": 100,
+                "line": 6,
+                "column": 5
+              },
+              "end": {
+                "offset": 113,
+                "line": 6,
+                "column": 18
+              }
+            }
+          }
+        ],
+        "edges": [
+          {
+            "src": "nacquire_7",
+            "dst": "nuse_8",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "ncondition_5",
+            "dst": "nuse_8",
+            "kind": "normal",
+            "label": "false"
+          },
+          {
+            "src": "ncondition_5",
+            "dst": "nskip_6",
+            "kind": "normal",
+            "label": "true"
+          },
+          {
+            "src": "nentry_1",
+            "dst": "nskip_4",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nrelease_9",
+            "dst": "nexit_2",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nskip_4",
+            "dst": "ncondition_5",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nskip_6",
+            "dst": "nacquire_7",
+            "kind": "normal",
+            "label": ""
+          },
+          {
+            "src": "nuse_8",
+            "dst": "nrelease_9",
+            "kind": "normal",
+            "label": ""
+          }
+        ]
+      },
+      "paths": [
+        {
+          "path_id": 1,
+          "kind": "normal",
+          "node_sequence": [
+            "nentry_1",
+            "nskip_4",
+            "ncondition_5",
+            "nuse_8",
+            "nrelease_9",
+            "nexit_2"
+          ],
+          "steps": [
+            {
+              "node_id": "nentry_1",
+              "kind": "entry",
+              "label": "entry main",
+              "span": {
+                "filename": "partial_init.rf",
+                "start": {
+                  "offset": 15,
+                  "line": 1,
+                  "column": 16
+                },
+                "end": {
+                  "offset": 115,
+                  "line": 7,
+                  "column": 2
+                }
+              },
+              "via_edge": null,
+              "state_after": {
+                "conn": "ABSENT"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nskip_4",
+              "kind": "skip",
+              "label": "block",
+              "span": {
+                "filename": "partial_init.rf",
+                "start": {
+                  "offset": 15,
+                  "line": 1,
+                  "column": 16
+                },
+                "end": {
+                  "offset": 115,
+                  "line": 7,
+                  "column": 2
+                }
+              },
+              "via_edge": {
+                "src": "nentry_1",
+                "dst": "nskip_4",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "conn": "ABSENT"
+              },
+              "events": []
+            },
+            {
+              "node_id": "ncondition_5",
+              "kind": "condition",
+              "label": "flag",
+              "span": {
+                "filename": "partial_init.rf",
+                "start": {
+                  "offset": 25,
+                  "line": 2,
+                  "column": 9
+                },
+                "end": {
+                  "offset": 29,
+                  "line": 2,
+                  "column": 13
+                }
+              },
+              "via_edge": {
+                "src": "nskip_4",
+                "dst": "ncondition_5",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "conn": "ABSENT"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nuse_8",
+              "kind": "use",
+              "label": "use(conn)",
+              "span": {
+                "filename": "partial_init.rf",
+                "start": {
+                  "offset": 85,
+                  "line": 5,
+                  "column": 5
+                },
+                "end": {
+                  "offset": 95,
+                  "line": 5,
+                  "column": 15
+                }
+              },
+              "via_edge": {
+                "src": "ncondition_5",
+                "dst": "nuse_8",
+                "kind": "normal",
+                "label": "false"
+              },
+              "state_after": {
+                "conn": "ABSENT"
+              },
+              "events": [
+                {
+                  "type": "finding",
+                  "finding_id": 1,
+                  "code": "USE_NOT_HELD",
+                  "message": "use of 'conn' but no resource is held on this path",
+                  "variable": "conn",
+                  "span": {
+                    "filename": "partial_init.rf",
+                    "start": {
+                      "offset": 85,
+                      "line": 5,
+                      "column": 5
+                    },
+                    "end": {
+                      "offset": 95,
+                      "line": 5,
+                      "column": 15
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "node_id": "nrelease_9",
+              "kind": "release",
+              "label": "release conn",
+              "span": {
+                "filename": "partial_init.rf",
+                "start": {
+                  "offset": 100,
+                  "line": 6,
+                  "column": 5
+                },
+                "end": {
+                  "offset": 113,
+                  "line": 6,
+                  "column": 18
+                }
+              },
+              "via_edge": {
+                "src": "nuse_8",
+                "dst": "nrelease_9",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "conn": "ABSENT"
+              },
+              "events": [
+                {
+                  "type": "finding",
+                  "finding_id": 2,
+                  "code": "RELEASE_NOT_HELD",
+                  "message": "release of 'conn' but no resource is held on this path",
+                  "variable": "conn",
+                  "span": {
+                    "filename": "partial_init.rf",
+                    "start": {
+                      "offset": 100,
+                      "line": 6,
+                      "column": 5
+                    },
+                    "end": {
+                      "offset": 113,
+                      "line": 6,
+                      "column": 18
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "node_id": "nexit_2",
+              "kind": "exit",
+              "label": "exit main",
+              "span": {
+                "filename": "partial_init.rf",
+                "start": {
+                  "offset": 0,
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 115,
+                  "line": 7,
+                  "column": 2
+                }
+              },
+              "via_edge": {
+                "src": "nrelease_9",
+                "dst": "nexit_2",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "conn": "ABSENT"
+              },
+              "events": []
+            }
+          ],
+          "finding_ids": [
+            1,
+            2
+          ]
+        },
+        {
+          "path_id": 2,
+          "kind": "normal",
+          "node_sequence": [
+            "nentry_1",
+            "nskip_4",
+            "ncondition_5",
+            "nskip_6",
+            "nacquire_7",
+            "nuse_8",
+            "nrelease_9",
+            "nexit_2"
+          ],
+          "steps": [
+            {
+              "node_id": "nentry_1",
+              "kind": "entry",
+              "label": "entry main",
+              "span": {
+                "filename": "partial_init.rf",
+                "start": {
+                  "offset": 15,
+                  "line": 1,
+                  "column": 16
+                },
+                "end": {
+                  "offset": 115,
+                  "line": 7,
+                  "column": 2
+                }
+              },
+              "via_edge": null,
+              "state_after": {
+                "conn": "ABSENT"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nskip_4",
+              "kind": "skip",
+              "label": "block",
+              "span": {
+                "filename": "partial_init.rf",
+                "start": {
+                  "offset": 15,
+                  "line": 1,
+                  "column": 16
+                },
+                "end": {
+                  "offset": 115,
+                  "line": 7,
+                  "column": 2
+                }
+              },
+              "via_edge": {
+                "src": "nentry_1",
+                "dst": "nskip_4",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "conn": "ABSENT"
+              },
+              "events": []
+            },
+            {
+              "node_id": "ncondition_5",
+              "kind": "condition",
+              "label": "flag",
+              "span": {
+                "filename": "partial_init.rf",
+                "start": {
+                  "offset": 25,
+                  "line": 2,
+                  "column": 9
+                },
+                "end": {
+                  "offset": 29,
+                  "line": 2,
+                  "column": 13
+                }
+              },
+              "via_edge": {
+                "src": "nskip_4",
+                "dst": "ncondition_5",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "conn": "ABSENT"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nskip_6",
+              "kind": "skip",
+              "label": "block",
+              "span": {
+                "filename": "partial_init.rf",
+                "start": {
+                  "offset": 31,
+                  "line": 2,
+                  "column": 15
+                },
+                "end": {
+                  "offset": 80,
+                  "line": 4,
+                  "column": 6
+                }
+              },
+              "via_edge": {
+                "src": "ncondition_5",
+                "dst": "nskip_6",
+                "kind": "normal",
+                "label": "true"
+              },
+              "state_after": {
+                "conn": "ABSENT"
+              },
+              "events": []
+            },
+            {
+              "node_id": "nacquire_7",
+              "kind": "acquire",
+              "label": "let conn = acquire(\"connection\")",
+              "span": {
+                "filename": "partial_init.rf",
+                "start": {
+                  "offset": 41,
+                  "line": 3,
+                  "column": 9
+                },
+                "end": {
+                  "offset": 74,
+                  "line": 3,
+                  "column": 42
+                }
+              },
+              "via_edge": {
+                "src": "nskip_6",
+                "dst": "nacquire_7",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "conn": "HELD"
+              },
+              "events": [
+                {
+                  "type": "acquire",
+                  "variable": "conn",
+                  "resource_kind": "connection"
+                }
+              ]
+            },
+            {
+              "node_id": "nuse_8",
+              "kind": "use",
+              "label": "use(conn)",
+              "span": {
+                "filename": "partial_init.rf",
+                "start": {
+                  "offset": 85,
+                  "line": 5,
+                  "column": 5
+                },
+                "end": {
+                  "offset": 95,
+                  "line": 5,
+                  "column": 15
+                }
+              },
+              "via_edge": {
+                "src": "nacquire_7",
+                "dst": "nuse_8",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "conn": "HELD"
+              },
+              "events": [
+                {
+                  "type": "use",
+                  "variable": "conn"
+                }
+              ]
+            },
+            {
+              "node_id": "nrelease_9",
+              "kind": "release",
+              "label": "release conn",
+              "span": {
+                "filename": "partial_init.rf",
+                "start": {
+                  "offset": 100,
+                  "line": 6,
+                  "column": 5
+                },
+                "end": {
+                  "offset": 113,
+                  "line": 6,
+                  "column": 18
+                }
+              },
+              "via_edge": {
+                "src": "nuse_8",
+                "dst": "nrelease_9",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "conn": "RELEASED"
+              },
+              "events": [
+                {
+                  "type": "release",
+                  "variable": "conn"
+                }
+              ]
+            },
+            {
+              "node_id": "nexit_2",
+              "kind": "exit",
+              "label": "exit main",
+              "span": {
+                "filename": "partial_init.rf",
+                "start": {
+                  "offset": 0,
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 115,
+                  "line": 7,
+                  "column": 2
+                }
+              },
+              "via_edge": {
+                "src": "nrelease_9",
+                "dst": "nexit_2",
+                "kind": "normal",
+                "label": ""
+              },
+              "state_after": {
+                "conn": "RELEASED"
+              },
+              "events": []
+            }
+          ],
+          "finding_ids": []
+        }
+      ],
+      "finding_ids": [
+        1,
+        2
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "code": "USE_NOT_HELD",
+      "message": "use of 'conn' but no resource is held on this path",
+      "function": "main",
+      "variable": "conn",
+      "resource_kind": null,
+      "node_id": "nuse_8",
+      "span": {
+        "filename": "partial_init.rf",
+        "start": {
+          "offset": 85,
+          "line": 5,
+          "column": 5
+        },
+        "end": {
+          "offset": 95,
+          "line": 5,
+          "column": 15
+        }
+      }
+    },
+    {
+      "id": 2,
+      "code": "RELEASE_NOT_HELD",
+      "message": "release of 'conn' but no resource is held on this path",
+      "function": "main",
+      "variable": "conn",
+      "resource_kind": null,
+      "node_id": "nrelease_9",
+      "span": {
+        "filename": "partial_init.rf",
+        "start": {
+          "offset": 100,
+          "line": 6,
+          "column": 5
+        },
+        "end": {
+          "offset": 113,
+          "line": 6,
+          "column": 18
+        }
+      }
+    }
+  ],
+  "counts": {
+    "functions": 1,
+    "paths": 2,
+    "findings": 2,
+    "truncated_paths": 0
+  }
+}

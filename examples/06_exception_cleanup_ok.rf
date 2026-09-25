@@ -1,0 +1,15 @@
+// 06_exception_cleanup_ok.rf - exception edges participate, cleanup in catch
+fun fail() throws {
+    throw "io error";
+}
+
+fun main() {
+    let db = acquire("database");
+    try {
+        use(db);
+        fail();
+        release db;            // dead code: fail() throws before this
+    } catch (e) {
+        release db;            // cleanup on the exceptional path
+    }
+}

@@ -1,0 +1,4 @@
+{
+  "filename": "partial_init.rf",
+  "source": "fun main(flag) {\n    if (flag) {\n        let conn = acquire(\"connection\");\n    }\n    use(conn);\n    release conn;\n}\n"
+}

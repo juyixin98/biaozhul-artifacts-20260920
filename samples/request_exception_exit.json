@@ -1,0 +1,5 @@
+{
+  "filename": "exception_exit.rf",
+  "loop_bound": 1,
+  "source": "fun risky() throws { throw \"disk full\"; }\n\nfun main(flag) throws {\n    let tmp = acquire(\"tempfile\");\n    if (flag) {\n        risky();\n        release tmp;\n    } else {\n        release tmp;\n    }\n}\n"
+}
