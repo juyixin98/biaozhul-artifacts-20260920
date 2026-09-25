@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "checkpoint-service"
+version = "0.1.0"
+description = "Local ML training checkpoint recovery service (Python + NumPy, pure backend)"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]
+
+[tool.setuptools]
+packages = ["checkpoint_service"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "unit: fast unit tests",
+    "integration: multi-component integration tests",
+]
+addopts = "-ra"

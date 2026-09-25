@@ -1,0 +1,57 @@
+### Training Checkpoint Recovery - raw HTTP request samples
+### Usable directly in REST clients (VS Code REST Client, IntelliJ HTTP Client).
+### Start the server: python -m checkpoint_service serve --port 8080
+
+@base = http://127.0.0.1:8080
+@run = rest-sample
+
+### Health
+GET {{base}}/health
+
+### Create run (body optional; defaults shown explicitly)
+POST {{base}}/runs/{{run}}
+Content-Type: application/json
+
+{
+  "n_samples": 512,
+  "n_features": 8,
+  "data_seed": 20260925,
+  "train_seed": 42,
+  "batch_size": 32,
+  "lr": 0.05,
+  "momentum": 0.9,
+  "l2": 0.0001,
+  "n_epochs": 4,
+  "checkpoint_every": 8
+}
+
+### Train up to 5 batches (a graceful pause; progress is committed)
+POST {{base}}/runs/{{run}}/train
+Content-Type: application/json
+
+{"stop_after": 5}
+
+### Status (e.g. after restarting the server process)
+GET {{base}}/runs/{{run}}/status
+
+### Resume and run until finished
+POST {{base}}/runs/{{run}}/train
+Content-Type: application/json
+
+{}
+
+### Inspect checkpoint sections (model / optimizer / rng / cursor)
+GET {{base}}/runs/{{run}}/checkpoint
+
+### List runs
+GET {{base}}/runs
+
+### Error: duplicate run -> 409 RunExistsError
+POST {{base}}/runs/{{run}}
+Content-Type: application/json
+
+{}
+
+### Error: corrupt checkpoint -> 422 CheckpointCorruptError
+### (flip a byte in runs/<run>/checkpoint.payload first)
+GET {{base}}/runs/{{run}}/status
