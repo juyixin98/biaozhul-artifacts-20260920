@@ -1,0 +1,9 @@
+{
+  "events": [
+    { "id": "P", "interval": { "start": "2026-03-10T09:00:00Z", "end": "2026-03-10T10:00:00Z" } },
+    { "id": "Q", "interval": { "start": "2026-03-10T08:00:00Z", "end": "2026-03-10T08:30:00Z" } }
+  ],
+  "dependencies": [
+    { "before": "P", "after": "Q", "reason": "reviewer claims P happened before Q" }
+  ]
+}

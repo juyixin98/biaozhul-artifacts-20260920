@@ -1,0 +1,11 @@
+{
+  "events": [
+    { "id": "E1", "interval": { "start": "2026-01-01T09:00:00+08:00", "end": "2026-01-01T10:00:00+08:00" } },
+    { "id": "E2", "interval": { "start": "2026-01-01T10:30:00+08:00", "end": "2026-01-01T11:00:00+08:00" } },
+    { "id": "E3", "version": { "stream": "doc-a", "value": 1 } },
+    { "id": "E4", "version": { "stream": "doc-a", "value": 2 } }
+  ],
+  "dependencies": [
+    { "before": "E2", "after": "E3", "reason": "meeting notes published after the meeting" }
+  ]
+}

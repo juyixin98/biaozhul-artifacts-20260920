@@ -1,0 +1,12 @@
+{
+  "events": [
+    { "id": "X" },
+    { "id": "Y" },
+    { "id": "Z" }
+  ],
+  "dependencies": [
+    { "before": "X", "after": "Y", "reason": "X must precede Y" },
+    { "before": "Y", "after": "Z", "reason": "Y must precede Z" },
+    { "before": "Z", "after": "X", "reason": "Z must precede X" }
+  ]
+}
