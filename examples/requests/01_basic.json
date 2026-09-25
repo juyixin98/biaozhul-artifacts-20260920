@@ -1,0 +1,7 @@
+{
+  "key": "model-a",
+  "model": "sim-llm-1",
+  "prompt": "hello from request 1",
+  "max_tokens": 16,
+  "temperature": 0.7
+}

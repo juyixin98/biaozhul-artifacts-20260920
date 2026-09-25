@@ -1,0 +1,5 @@
+{
+  "key": "shared-llm",
+  "model": "sim-llm-1",
+  "prompt": "requests with different models but the same explicit key still aggregate"
+}

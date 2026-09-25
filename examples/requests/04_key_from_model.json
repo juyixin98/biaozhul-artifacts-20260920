@@ -1,0 +1,4 @@
+{
+  "model": "model-b",
+  "prompt": "no explicit key: the model name acts as the compatibility key"
+}

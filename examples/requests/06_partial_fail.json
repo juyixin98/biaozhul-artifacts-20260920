@@ -1,0 +1,7 @@
+{
+  "key": "model-a",
+  "model": "sim-llm-1",
+  "prompt": "this item fails on purpose",
+  "fail": true,
+  "failure_code": "SIMULATED_E42"
+}
