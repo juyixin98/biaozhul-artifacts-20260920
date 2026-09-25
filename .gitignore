@@ -1,0 +1,4 @@
+spatial_index
+tests/test_kdtree
+*.o
+*.out

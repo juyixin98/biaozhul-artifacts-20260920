@@ -1,0 +1,148 @@
+{
+  "ok": true,
+  "indexed": 8,
+  "coordinate_system": {
+    "plane": "cartesian_2d",
+    "distance": "euclidean",
+    "arithmetic": "long_double_squared_distances",
+    "tie_breaker": "id_ascending",
+    "ball": "closed_distance_equals_radius_included"
+  },
+  "results": [
+    {
+      "type": "knn",
+      "returned": 3,
+      "neighbors": [
+        {
+          "id": 1,
+          "distance_squared": 0,
+          "distance": 0
+        },
+        {
+          "id": 2,
+          "distance_squared": 25,
+          "distance": 5
+        },
+        {
+          "id": 3,
+          "distance_squared": 25,
+          "distance": 5
+        }
+      ]
+    },
+    {
+      "type": "knn",
+      "returned": 8,
+      "neighbors": [
+        {
+          "id": 1,
+          "distance_squared": 0,
+          "distance": 0
+        },
+        {
+          "id": 2,
+          "distance_squared": 25,
+          "distance": 5
+        },
+        {
+          "id": 3,
+          "distance_squared": 25,
+          "distance": 5
+        },
+        {
+          "id": 4,
+          "distance_squared": 25,
+          "distance": 5
+        },
+        {
+          "id": 5,
+          "distance_squared": 25,
+          "distance": 5
+        },
+        {
+          "id": 6,
+          "distance_squared": 25,
+          "distance": 5
+        },
+        {
+          "id": 7,
+          "distance_squared": 25,
+          "distance": 5
+        },
+        {
+          "id": 8,
+          "distance_squared": 200,
+          "distance": 14.1421356237309504876
+        }
+      ]
+    },
+    {
+      "type": "radius",
+      "returned": 7,
+      "neighbors": [
+        {
+          "id": 1,
+          "distance_squared": 0,
+          "distance": 0
+        },
+        {
+          "id": 2,
+          "distance_squared": 25,
+          "distance": 5
+        },
+        {
+          "id": 3,
+          "distance_squared": 25,
+          "distance": 5
+        },
+        {
+          "id": 4,
+          "distance_squared": 25,
+          "distance": 5
+        },
+        {
+          "id": 5,
+          "distance_squared": 25,
+          "distance": 5
+        },
+        {
+          "id": 6,
+          "distance_squared": 25,
+          "distance": 5
+        },
+        {
+          "id": 7,
+          "distance_squared": 25,
+          "distance": 5
+        }
+      ]
+    },
+    {
+      "type": "radius",
+      "returned": 1,
+      "neighbors": [
+        {
+          "id": 1,
+          "distance_squared": 0,
+          "distance": 0
+        }
+      ]
+    },
+    {
+      "type": "knn",
+      "returned": 2,
+      "neighbors": [
+        {
+          "id": 8,
+          "distance_squared": 1,
+          "distance": 1
+        },
+        {
+          "id": 2,
+          "distance_squared": 74,
+          "distance": 8.60232526704262677204
+        }
+      ]
+    }
+  ]
+}
