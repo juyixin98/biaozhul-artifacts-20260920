@@ -1,0 +1,7 @@
+# build output
+/bin/
+*.out
+
+# local event/runtime logs
+*.jsonl
+wsd
