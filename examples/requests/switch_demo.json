@@ -1,0 +1,29 @@
+{
+  "sample_rate": 48000,
+  "input": {
+    "kind": "synthetic",
+    "signal": {"kind": "mixed", "n": 9600, "channels": 2, "seed": 1}
+  },
+  "filter": {"kind": "lowpass", "cutoff": 1000, "num_taps": 65},
+  "chunk_size": 512,
+  "schedule": [
+    {
+      "at": 3000,
+      "filter": {"kind": "lowpass", "cutoff": 3000, "num_taps": 65},
+      "fade_len": 256
+    },
+    {
+      "at": 3100,
+      "filter": {"kind": "highpass", "cutoff": 300, "num_taps": 65},
+      "fade_len": 128,
+      "channels": [0]
+    },
+    {
+      "at": 6000,
+      "filter": {"kind": "identity"},
+      "fade_len": 512
+    }
+  ],
+  "output": {"dir": "out/switch_demo", "pcm_dtype": "f32le", "write_input_pcm": true},
+  "check": {"threshold": null}
+}

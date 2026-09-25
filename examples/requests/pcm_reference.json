@@ -1,0 +1,14 @@
+{
+  "sample_rate": 48000,
+  "input": {
+    "kind": "pcm",
+    "path": "examples/data/input_2ch_s16.pcm",
+    "channels": 2,
+    "dtype": "s16le"
+  },
+  "filter": {"kind": "lowpass", "cutoff": 2000, "num_taps": 65},
+  "chunk_size": 512,
+  "schedule": [],
+  "output": {"dir": "out/pcm_reference", "pcm_dtype": "s16le"},
+  "check": {"threshold": null}
+}
