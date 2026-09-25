@@ -1,0 +1,8 @@
+{
+  "groups": ["g1", "g1", "g2", "g2", "g3", "g3", "g4", "g4", "g5", "g5", "g6", "g6", "g7", "g7", "g8", "g8", "g9", "g9", "g10", "g10"],
+  "labels": [0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0],
+  "splits": {"train": 0.6, "val": 0.2, "test": 0.2},
+  "seed": 42,
+  "tolerance": 0.05,
+  "include_sample_splits": true
+}
