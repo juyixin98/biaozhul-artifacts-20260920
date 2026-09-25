@@ -1,0 +1,25 @@
+{
+  "id": "batch-morning",
+  "request_id": "req-20260923-001",
+  "items": [
+    {
+      "id": "standup",
+      "resource_id": "room-a",
+      "kind": "fixed",
+      "demand": { "seats": 8, "mics": 2 },
+      "interval": {
+        "start": "2026-10-01T09:00:00Z",
+        "end": "2026-10-01T09:30:00Z"
+      }
+    },
+    {
+      "id": "workshop",
+      "resource_id": "room-a",
+      "kind": "earliest",
+      "demand": { "seats": 4, "mics": 1 },
+      "duration": "2h",
+      "window_start": "2026-10-01T08:00:00Z",
+      "window_end": "2026-10-01T18:00:00Z"
+    }
+  ]
+}

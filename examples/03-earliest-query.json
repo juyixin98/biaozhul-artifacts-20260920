@@ -1,0 +1,7 @@
+{
+  "resource_id": "room-a",
+  "window_start": "2026-10-01T08:00:00Z",
+  "window_end": "2026-10-01T18:00:00Z",
+  "duration": "90m",
+  "demand": { "seats": 6, "mics": 1 }
+}

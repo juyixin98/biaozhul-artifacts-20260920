@@ -1,0 +1,15 @@
+{
+  "id": "batch-zero-capacity",
+  "items": [
+    {
+      "id": "impossible",
+      "resource_id": "room-full",
+      "kind": "fixed",
+      "demand": { "seats": 1 },
+      "interval": {
+        "start": "2026-10-01T08:00:00Z",
+        "end": "2026-10-01T09:00:00Z"
+      }
+    }
+  ]
+}
