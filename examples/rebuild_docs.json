@@ -1,0 +1,10 @@
+{
+  "dim": 6,
+  "docs": [
+    {"entries": [{"index": 0, "value": 1.0}, {"index": 1, "value": 1.0}]},
+    {"entries": [{"index": 0, "value": 0.5}, {"index": 0, "value": 0.5}, {"index": 1, "value": 1.0}]},
+    {"entries": [{"index": 1, "value": -1.0}, {"index": 2, "value": 1.0}]},
+    {"entries": []},
+    {"indices": [3], "values": [2.0]}
+  ]
+}
