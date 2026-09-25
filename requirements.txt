@@ -1,0 +1,6 @@
+# 本项目仅依赖 Python 3.10+ 标准库：
+# hmac, hashlib (HMAC-SHA256, 底层 OpenSSL), secrets, sqlite3,
+# http.server, json, base64, urllib.parse ...
+#
+# cryptography 等第三方库非必需；如在真实系统集成，可替换 signing.py
+# 中的原语为 cryptography.hazmat.primitives.hmac，接口保持不变。

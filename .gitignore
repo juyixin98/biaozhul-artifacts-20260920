@@ -1,0 +1,9 @@
+# Local test artifacts — never commit keys or the nonce database.
+data/
+__pycache__/
+*.pyc
+*.db
+*.db-wal
+*.db-shm
+.pytest_cache/
+.coverage
