@@ -1,0 +1,70 @@
+{
+  "version": "mde/policy@v1",
+  "policy_id": "customer-demo",
+  "revision": 1,
+  "description": "客户记录最小披露导出演示策略（本地测试）",
+  "purposes": {
+    "analytics": {
+      "default": "deny",
+      "allow": [
+        "id",
+        "age",
+        "preferences.newsletter",
+        "orders[].id",
+        "orders[].amount",
+        "tags[]"
+      ],
+      "deny": [
+        "ssn",
+        "security",
+        "password_hash"
+      ],
+      "generalize": {
+        "email": {"transform": "email_domain", "params": {}},
+        "signup_date": {"transform": "date_trunc", "params": {"unit": "month"}},
+        "orders[].placed_at": {"transform": "date_trunc", "params": {"unit": "day"}},
+        "name": {"transform": "pseudonymize", "params": {"scope": "purpose"}}
+      }
+    },
+    "support": {
+      "default": "deny",
+      "allow": [
+        "id",
+        "name",
+        "email",
+        "preferences",
+        "open_tickets[].id",
+        "open_tickets[].subject"
+      ],
+      "deny": [
+        "ssn",
+        "security",
+        "password_hash",
+        "orders"
+      ],
+      "generalize": {}
+    },
+    "fraud_review": {
+      "default": "deny",
+      "allow": [
+        "id",
+        "orders[].id",
+        "orders[].amount",
+        "orders[].placed_at",
+        "billing_country"
+      ],
+      "deny": [
+        "ssn",
+        "security",
+        "password_hash"
+      ],
+      "generalize": {
+        "email": {"transform": "email_domain", "params": {}}
+      }
+    }
+  },
+  "aliases": {
+    "e_mail": "email",
+    "orders[].buyer": "id"
+  }
+}

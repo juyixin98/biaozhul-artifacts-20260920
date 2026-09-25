@@ -1,0 +1,1051 @@
+{
+  "package": {
+    "task": {
+      "task_id": "task-9d3721a8ae724fb49aebb64a2b2bd172",
+      "purpose": "analytics",
+      "requester": "local-test",
+      "created_at": "2026-09-23T18:25:35Z",
+      "policy_id": "customer-demo",
+      "policy_revision": 1,
+      "policy_fingerprint": "26a22fe8e52c10c5d34fe0d6e42d9e812fef7ab73d9b74a00ac63b49cd908d17",
+      "policy_created_at": "2026-09-23T18:25:10Z",
+      "key_id": "kid-912829e387d8439b"
+    },
+    "manifest": {
+      "package_format": "mde/export-package@v1",
+      "output_schema": "mde/output@v1",
+      "record_count": 2,
+      "decision_count": 53,
+      "records_digest": "d1cfbca2ffb48fc24703e8961b232413152789506a792470b07c5b93fde8cc2d",
+      "output_digest": "36b12507f53b28faafac2dc62505b5ecb6bb45163d6c62bf7ba27fe1108f041a",
+      "decisions_digest": "de99b8b336290366e92c8c20c7cdce2415d393c3a2b32e7a071f0566917df88e"
+    },
+    "policy_snapshot": {
+      "version": "mde/policy@v1",
+      "policy_id": "customer-demo",
+      "revision": 1,
+      "description": "客户记录最小披露导出演示策略（本地测试）",
+      "purposes": {
+        "analytics": {
+          "default": "deny",
+          "allow": [
+            "id",
+            "age",
+            "preferences.newsletter",
+            "orders[].id",
+            "orders[].amount",
+            "tags[]"
+          ],
+          "deny": [
+            "ssn",
+            "security",
+            "password_hash"
+          ],
+          "generalize": {
+            "email": {
+              "transform": "email_domain",
+              "params": {}
+            },
+            "signup_date": {
+              "transform": "date_trunc",
+              "params": {
+                "unit": "month"
+              }
+            },
+            "orders[].placed_at": {
+              "transform": "date_trunc",
+              "params": {
+                "unit": "day"
+              }
+            },
+            "name": {
+              "transform": "pseudonymize",
+              "params": {
+                "scope": "purpose"
+              }
+            }
+          }
+        },
+        "support": {
+          "default": "deny",
+          "allow": [
+            "id",
+            "name",
+            "email",
+            "preferences",
+            "open_tickets[].id",
+            "open_tickets[].subject"
+          ],
+          "deny": [
+            "ssn",
+            "security",
+            "password_hash",
+            "orders"
+          ],
+          "generalize": {}
+        },
+        "fraud_review": {
+          "default": "deny",
+          "allow": [
+            "id",
+            "orders[].id",
+            "orders[].amount",
+            "orders[].placed_at",
+            "billing_country"
+          ],
+          "deny": [
+            "ssn",
+            "security",
+            "password_hash"
+          ],
+          "generalize": {
+            "email": {
+              "transform": "email_domain",
+              "params": {}
+            }
+          }
+        }
+      },
+      "aliases": {
+        "e_mail": "email",
+        "orders[].buyer": "id"
+      }
+    },
+    "output": [
+      {
+        "id": "C-1001",
+        "name": "hmac:9de66bf9da434b0765aad036ed51c5f1",
+        "email": "example.com",
+        "age": 35,
+        "signup_date": "2021-03",
+        "preferences": {
+          "newsletter": true
+        },
+        "tags": [
+          "premium",
+          "beta"
+        ],
+        "orders": [
+          {
+            "id": "O-1",
+            "amount": 12000,
+            "placed_at": "2026-08-01",
+            "buyer": "C-1001"
+          },
+          {
+            "id": "O-2",
+            "amount": 4500,
+            "placed_at": "2026-09-11",
+            "buyer": "C-1001"
+          }
+        ],
+        "e_mail": "attacker.example"
+      },
+      {
+        "id": "C-1002",
+        "name": "hmac:b32edbfad965c40fa795ee1925891b7c",
+        "email": "mail.example.net",
+        "age": 28,
+        "signup_date": "2024-12",
+        "tags": [],
+        "orders": [],
+        "preferences": {
+          "newsletter": false
+        }
+      }
+    ],
+    "decisions": [
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "",
+        "shape_path": "",
+        "structural": true,
+        "value_type": "object",
+        "action": "none",
+        "decision": "allow",
+        "reason": "container_recursed",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "id",
+        "shape_path": "id",
+        "structural": false,
+        "value_type": "string",
+        "action": "allow",
+        "decision": "allow",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "id",
+        "input_digest": "9d3801c879d67a8108a355281675943977108624078b5662ee6ffbeb4362df10",
+        "output_digest": "9d3801c879d67a8108a355281675943977108624078b5662ee6ffbeb4362df10"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "name",
+        "shape_path": "name",
+        "structural": false,
+        "value_type": "string",
+        "action": "generalize",
+        "decision": "generalize",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "name",
+        "input_digest": "8424ad689af7c068398d05652e2e34f2582441cdbafc50143b2b859a54f8ef41",
+        "output_digest": "b3578713a9bfb2531bc0e1f906d65a641866706b69ef34963893cae8eeb0f315"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "email",
+        "shape_path": "email",
+        "structural": false,
+        "value_type": "string",
+        "action": "generalize",
+        "decision": "generalize",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "email",
+        "input_digest": "36f307fc4817e110eb51dd686a1ee783c39662b063e5ff7880df1d1b8b5895ed",
+        "output_digest": "6902ca67f52fc544c00e9be90f5d43daba1adc8346edca6cfd5802e37a28a85e"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "ssn",
+        "shape_path": "ssn",
+        "structural": false,
+        "value_type": "string",
+        "action": "deny",
+        "decision": "deny",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "ssn",
+        "input_digest": "17fa2d4fb6474a9b5a7b612f72d7ab226c2ae73c866a691c1ffae101ceab304f"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "age",
+        "shape_path": "age",
+        "structural": false,
+        "value_type": "integer",
+        "action": "allow",
+        "decision": "allow",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "age",
+        "input_digest": "9f14025af0065b30e47e23ebb3b491d39ae8ed17d33739e5ff3827ffb3634953",
+        "output_digest": "9f14025af0065b30e47e23ebb3b491d39ae8ed17d33739e5ff3827ffb3634953"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "signup_date",
+        "shape_path": "signup_date",
+        "structural": false,
+        "value_type": "string",
+        "action": "generalize",
+        "decision": "generalize",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "signup_date",
+        "input_digest": "e224cb648973efcb498efcc51a05982407b9379a36fb5524cadb0c00baa047e0",
+        "output_digest": "73730d80ef5b9746c0bfbbf4cea726f3c6b90c1fd2d417a9b0cbf6095275647f"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "billing_country",
+        "shape_path": "billing_country",
+        "structural": false,
+        "value_type": "string",
+        "action": "deny",
+        "decision": "deny",
+        "reason": "default_deny",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null,
+        "input_digest": "8b82357795af13d53c02591d758e3a2a9d94faaa4c3fcc732d1dc6982025d122"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "password_hash",
+        "shape_path": "password_hash",
+        "structural": false,
+        "value_type": "string",
+        "action": "deny",
+        "decision": "deny",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "password_hash",
+        "input_digest": "2fd13db9361d885dc05c8f57a77c2914e76f11de40a58457f355234d875ab110"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "preferences",
+        "shape_path": "preferences",
+        "structural": true,
+        "value_type": "object",
+        "action": "none",
+        "decision": "allow",
+        "reason": "container_recursed",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "preferences.newsletter",
+        "shape_path": "preferences.newsletter",
+        "structural": false,
+        "value_type": "boolean",
+        "action": "allow",
+        "decision": "allow",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "preferences.newsletter",
+        "input_digest": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "output_digest": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "preferences.risk_note",
+        "shape_path": "preferences.risk_note",
+        "structural": false,
+        "value_type": "string",
+        "action": "deny",
+        "decision": "deny",
+        "reason": "default_deny",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null,
+        "input_digest": "63331724e6f79e0b7b65f2529875bb48f000c22fd75ed9b3b57322f5296e63fc"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "security",
+        "shape_path": "security",
+        "structural": true,
+        "value_type": "object",
+        "action": "deny",
+        "decision": "deny",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "security"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "tags",
+        "shape_path": "tags",
+        "structural": true,
+        "value_type": "array",
+        "action": "none",
+        "decision": "allow",
+        "reason": "container_recursed",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "tags[0]",
+        "shape_path": "tags[]",
+        "structural": false,
+        "value_type": "string",
+        "action": "allow",
+        "decision": "allow",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "tags[]",
+        "input_digest": "c1eb22dcf69c5a15b59f3b685b8c7283d9a8b5acb3a9a9ef1f146837e1e8c713",
+        "output_digest": "c1eb22dcf69c5a15b59f3b685b8c7283d9a8b5acb3a9a9ef1f146837e1e8c713"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "tags[1]",
+        "shape_path": "tags[]",
+        "structural": false,
+        "value_type": "string",
+        "action": "allow",
+        "decision": "allow",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "tags[]",
+        "input_digest": "aca89214f1220d4eb23801b3f99abf16be00cd91cfcf5ca4f9ea84cd201ea9d8",
+        "output_digest": "aca89214f1220d4eb23801b3f99abf16be00cd91cfcf5ca4f9ea84cd201ea9d8"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "orders",
+        "shape_path": "orders",
+        "structural": true,
+        "value_type": "array",
+        "action": "none",
+        "decision": "allow",
+        "reason": "container_recursed",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "orders[0]",
+        "shape_path": "orders[]",
+        "structural": true,
+        "value_type": "object",
+        "action": "none",
+        "decision": "allow",
+        "reason": "container_recursed",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "orders[0].id",
+        "shape_path": "orders[].id",
+        "structural": false,
+        "value_type": "string",
+        "action": "allow",
+        "decision": "allow",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "orders[].id",
+        "input_digest": "00e8bd143a6ffd741fd33d18be58118d28a649763eab38767c971c130002bb4a",
+        "output_digest": "00e8bd143a6ffd741fd33d18be58118d28a649763eab38767c971c130002bb4a"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "orders[0].amount",
+        "shape_path": "orders[].amount",
+        "structural": false,
+        "value_type": "integer",
+        "action": "allow",
+        "decision": "allow",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "orders[].amount",
+        "input_digest": "c5d1866aabc15dda07995e73b08c4ccb514947dcd3a621cea851af5fe366f11b",
+        "output_digest": "c5d1866aabc15dda07995e73b08c4ccb514947dcd3a621cea851af5fe366f11b"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "orders[0].placed_at",
+        "shape_path": "orders[].placed_at",
+        "structural": false,
+        "value_type": "string",
+        "action": "generalize",
+        "decision": "generalize",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "orders[].placed_at",
+        "input_digest": "a3b6d681194ee3c6bd4dba0e737676122492df3f8c493f7cbc73ceba653d5013",
+        "output_digest": "e4c44c980c6db648ef3dc73b3e44858f44513012b0adef8342ca3a47eb0f56da"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "orders[0].buyer",
+        "shape_path": "orders[].buyer",
+        "structural": false,
+        "value_type": "string",
+        "action": "allow",
+        "decision": "allow",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": "orders[].buyer",
+        "rule_path": "id",
+        "input_digest": "9d3801c879d67a8108a355281675943977108624078b5662ee6ffbeb4362df10",
+        "output_digest": "9d3801c879d67a8108a355281675943977108624078b5662ee6ffbeb4362df10"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "orders[0].internal_memo",
+        "shape_path": "orders[].internal_memo",
+        "structural": false,
+        "value_type": "string",
+        "action": "deny",
+        "decision": "deny",
+        "reason": "default_deny",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null,
+        "input_digest": "8d5f2eec5498ac0a7177c8724f7d225c0d7863bcbc340333f03628296a17b3f2"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "orders[1]",
+        "shape_path": "orders[]",
+        "structural": true,
+        "value_type": "object",
+        "action": "none",
+        "decision": "allow",
+        "reason": "container_recursed",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "orders[1].id",
+        "shape_path": "orders[].id",
+        "structural": false,
+        "value_type": "string",
+        "action": "allow",
+        "decision": "allow",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "orders[].id",
+        "input_digest": "c2610d34725173940838fcb745f6a1ab638de481a8132e6a00e473a46aabccff",
+        "output_digest": "c2610d34725173940838fcb745f6a1ab638de481a8132e6a00e473a46aabccff"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "orders[1].amount",
+        "shape_path": "orders[].amount",
+        "structural": false,
+        "value_type": "integer",
+        "action": "allow",
+        "decision": "allow",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "orders[].amount",
+        "input_digest": "c746ee2edf45fa00fca8d08045b2575aac17cf3eeb3f2b0da5e5301fae8d1e47",
+        "output_digest": "c746ee2edf45fa00fca8d08045b2575aac17cf3eeb3f2b0da5e5301fae8d1e47"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "orders[1].placed_at",
+        "shape_path": "orders[].placed_at",
+        "structural": false,
+        "value_type": "string",
+        "action": "generalize",
+        "decision": "generalize",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "orders[].placed_at",
+        "input_digest": "32d7aae667cca5a1887ab7b99b845fa2efde6367a677ab981d8524b2be031674",
+        "output_digest": "532d5d6f9a809deb934bb9936a2e29095f56ddb3ca4fd7f7db545dc0a1465c9d"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "orders[1].buyer",
+        "shape_path": "orders[].buyer",
+        "structural": false,
+        "value_type": "string",
+        "action": "allow",
+        "decision": "allow",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": "orders[].buyer",
+        "rule_path": "id",
+        "input_digest": "9d3801c879d67a8108a355281675943977108624078b5662ee6ffbeb4362df10",
+        "output_digest": "9d3801c879d67a8108a355281675943977108624078b5662ee6ffbeb4362df10"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "open_tickets",
+        "shape_path": "open_tickets",
+        "structural": true,
+        "value_type": "array",
+        "action": "none",
+        "decision": "allow",
+        "reason": "container_recursed",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "open_tickets[0]",
+        "shape_path": "open_tickets[]",
+        "structural": true,
+        "value_type": "object",
+        "action": "none",
+        "decision": "allow",
+        "reason": "container_recursed",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "open_tickets[0].id",
+        "shape_path": "open_tickets[].id",
+        "structural": false,
+        "value_type": "string",
+        "action": "deny",
+        "decision": "deny",
+        "reason": "default_deny",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null,
+        "input_digest": "77780bc11fe064279e382d3404d086eaaa427b067d5f461c937bd1f605bcda73"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "open_tickets[0].subject",
+        "shape_path": "open_tickets[].subject",
+        "structural": false,
+        "value_type": "string",
+        "action": "deny",
+        "decision": "deny",
+        "reason": "default_deny",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null,
+        "input_digest": "9f5de9d0d624c64aee5280fd9aa19873fcae023995958718f0dd20ed950db473"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "open_tickets[0].internal_severity",
+        "shape_path": "open_tickets[].internal_severity",
+        "structural": false,
+        "value_type": "integer",
+        "action": "deny",
+        "decision": "deny",
+        "reason": "default_deny",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null,
+        "input_digest": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "open_tickets[0]",
+        "shape_path": "open_tickets[]",
+        "structural": true,
+        "value_type": "object",
+        "action": "deny",
+        "decision": "deny",
+        "reason": "container_dropped_no_surviving_fields",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "open_tickets",
+        "shape_path": "open_tickets",
+        "structural": true,
+        "value_type": "array",
+        "action": "deny",
+        "decision": "deny",
+        "reason": "container_dropped_no_surviving_fields",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "e_mail",
+        "shape_path": "e_mail",
+        "structural": false,
+        "value_type": "string",
+        "action": "generalize",
+        "decision": "generalize",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": "e_mail",
+        "rule_path": "email",
+        "input_digest": "0af57c593b09b4bd570350c7231a0041f34409f988568a7b15c53cb7f2d8d706",
+        "output_digest": "e2f0cbd72e43571c1dca4ac925e25b33ebbc4ad25893dd36f05dc689275346a3"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "user%2eid",
+        "shape_path": "user%2eid",
+        "structural": false,
+        "value_type": "string",
+        "action": "deny",
+        "decision": "deny",
+        "reason": "default_deny",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null,
+        "input_digest": "dd54173fcf50aa3932db67bd9f7ddd5be40040f5531bfec81a07e47d5791fa4a"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 0,
+        "path": "unknown_field",
+        "shape_path": "unknown_field",
+        "structural": false,
+        "value_type": "string",
+        "action": "deny",
+        "decision": "deny",
+        "reason": "default_deny",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null,
+        "input_digest": "732b855c98f73b7a1a4da939ab46c5f5c83af417fd6ff063b4c4734caea7f783"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 1,
+        "path": "",
+        "shape_path": "",
+        "structural": true,
+        "value_type": "object",
+        "action": "none",
+        "decision": "allow",
+        "reason": "container_recursed",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 1,
+        "path": "id",
+        "shape_path": "id",
+        "structural": false,
+        "value_type": "string",
+        "action": "allow",
+        "decision": "allow",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "id",
+        "input_digest": "5cdbbe1d5868dee6faf6e5e06f79dd1f9422695b3c44cfc1705ac824adce22c1",
+        "output_digest": "5cdbbe1d5868dee6faf6e5e06f79dd1f9422695b3c44cfc1705ac824adce22c1"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 1,
+        "path": "name",
+        "shape_path": "name",
+        "structural": false,
+        "value_type": "string",
+        "action": "generalize",
+        "decision": "generalize",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "name",
+        "input_digest": "3cec520ffb96f23110deb1f996f0f14e032b01041fadf9ec198969fb0d65748b",
+        "output_digest": "54b1871b8d0fa106cf49be1ece675f99939fdebf8ca6c249f89366cc3a038533"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 1,
+        "path": "email",
+        "shape_path": "email",
+        "structural": false,
+        "value_type": "string",
+        "action": "generalize",
+        "decision": "generalize",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "email",
+        "input_digest": "6b66cbe692c7b67a3c189310f642724a87661ba5756c2a3868aef06caf538b62",
+        "output_digest": "d476b0ac15e72259bcac7c2e1641b550e91ca6b175a5b3574f1bf5514c411062"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 1,
+        "path": "age",
+        "shape_path": "age",
+        "structural": false,
+        "value_type": "integer",
+        "action": "allow",
+        "decision": "allow",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "age",
+        "input_digest": "59e19706d51d39f66711c2653cd7eb1291c94d9b55eb14bda74ce4dc636d015a",
+        "output_digest": "59e19706d51d39f66711c2653cd7eb1291c94d9b55eb14bda74ce4dc636d015a"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 1,
+        "path": "signup_date",
+        "shape_path": "signup_date",
+        "structural": false,
+        "value_type": "string",
+        "action": "generalize",
+        "decision": "generalize",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "signup_date",
+        "input_digest": "98a972aa9cbfd3a9829a49bb45307c63a05f3f803345830906d127321d0753f2",
+        "output_digest": "cd6a0a1e8f4d8861ed0615029218224855940cc5c0aa7845be3ef35bd46e6e65"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 1,
+        "path": "tags",
+        "shape_path": "tags",
+        "structural": true,
+        "value_type": "array",
+        "action": "none",
+        "decision": "allow",
+        "reason": "empty_container_kept",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 1,
+        "path": "orders",
+        "shape_path": "orders",
+        "structural": true,
+        "value_type": "array",
+        "action": "none",
+        "decision": "allow",
+        "reason": "empty_container_kept",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 1,
+        "path": "extra",
+        "shape_path": "extra",
+        "structural": true,
+        "value_type": "object",
+        "action": "none",
+        "decision": "allow",
+        "reason": "container_recursed",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 1,
+        "path": "extra.nested",
+        "shape_path": "extra.nested",
+        "structural": true,
+        "value_type": "object",
+        "action": "none",
+        "decision": "allow",
+        "reason": "container_recursed",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 1,
+        "path": "extra.nested.deep",
+        "shape_path": "extra.nested.deep",
+        "structural": false,
+        "value_type": "string",
+        "action": "deny",
+        "decision": "deny",
+        "reason": "default_deny",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null,
+        "input_digest": "fd35d4ef2e594c8377079bce17a76538adfbb93de3343d95f69b497dfaefe980"
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 1,
+        "path": "extra.nested",
+        "shape_path": "extra.nested",
+        "structural": true,
+        "value_type": "object",
+        "action": "deny",
+        "decision": "deny",
+        "reason": "container_dropped_no_surviving_fields",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 1,
+        "path": "extra",
+        "shape_path": "extra",
+        "structural": true,
+        "value_type": "object",
+        "action": "deny",
+        "decision": "deny",
+        "reason": "container_dropped_no_surviving_fields",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 1,
+        "path": "preferences",
+        "shape_path": "preferences",
+        "structural": true,
+        "value_type": "object",
+        "action": "none",
+        "decision": "allow",
+        "reason": "container_recursed",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": null
+      },
+      {
+        "schema": "mde/decision-record@v1",
+        "record_index": 1,
+        "path": "preferences.newsletter",
+        "shape_path": "preferences.newsletter",
+        "structural": false,
+        "value_type": "boolean",
+        "action": "allow",
+        "decision": "allow",
+        "reason": "exact_rule",
+        "warning": null,
+        "via_alias": null,
+        "rule_path": "preferences.newsletter",
+        "input_digest": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "output_digest": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+      }
+    ],
+    "disclaimers": [
+      "这是字段级最小披露导出，不是匿名化；输出仍可能被关联再识别。",
+      "pseudonymize 使用目的绑定 HMAC-SHA256 假名，不抗跨数据集关联攻击。",
+      "决策记录本身含字段存在性与输入摘要，应按敏感数据同等保护。",
+      "泛化不改变数据控制者的合规义务；用途绑定由策略与审计流程保证，密码学不强制。"
+    ],
+    "signature": {
+      "version": "mde/signature@v1",
+      "alg": "Ed25519",
+      "canonical": "mde/canonical-json@v1",
+      "covered_fields": [
+        "task",
+        "manifest",
+        "policy_snapshot",
+        "output",
+        "decisions",
+        "disclaimers"
+      ],
+      "value_hex": "22b05e1c7fd013c63f100ef4f52a31cbbb12a94d5f9fcb8ec4026d7a841bdba32a464998a81dbc4a1167c421201622e3e30f3dfb9d2bda12635887a84d6dfd02",
+      "key_id": "kid-912829e387d8439b",
+      "public_key_spki_hex": "302a300506032b6570032100912829e387d8439b1e7190b9d6dc40ce9ebb9ce7eb1fa264cac2ad7d140a13ac"
+    }
+  },
+  "records": [
+    {
+      "id": "C-1001",
+      "name": "Zhang San",
+      "email": "zhangsan@example.com",
+      "ssn": "110101-19900101-001X",
+      "age": 35,
+      "signup_date": "2021-03-17T08:20:00",
+      "billing_country": "CN",
+      "password_hash": "$argon2id$v=19$placeholder",
+      "preferences": {
+        "newsletter": true,
+        "risk_note": "internal-score-97"
+      },
+      "security": {
+        "totp_secret": "JBSWY3DPEHPK3PXP",
+        "backup_codes": [
+          "111111",
+          "222222"
+        ]
+      },
+      "tags": [
+        "premium",
+        "beta"
+      ],
+      "orders": [
+        {
+          "id": "O-1",
+          "amount": 12000,
+          "placed_at": "2026-08-01T10:05:00",
+          "buyer": "C-1001",
+          "internal_memo": "VIP refund note"
+        },
+        {
+          "id": "O-2",
+          "amount": 4500,
+          "placed_at": "2026-09-11T16:42:00",
+          "buyer": "C-1001"
+        }
+      ],
+      "open_tickets": [
+        {
+          "id": "T-9",
+          "subject": "login issue",
+          "internal_severity": 5
+        }
+      ],
+      "e_mail": "alias-injected@attacker.example",
+      "user.id": "LITERAL-DOTTED-KEY-SHOULD-NOT-MATCH-user.id",
+      "unknown_field": "策略未提及 -> 默认拒绝"
+    },
+    {
+      "id": "C-1002",
+      "name": "Li Si",
+      "email": "lisi@mail.example.net",
+      "age": 28,
+      "signup_date": "2024-12-02",
+      "tags": [],
+      "orders": [],
+      "extra": {
+        "nested": {
+          "deep": "默认拒绝整棵未知子树"
+        }
+      },
+      "preferences": {
+        "newsletter": false
+      }
+    }
+  ],
+  "use_local_keys": true
+}

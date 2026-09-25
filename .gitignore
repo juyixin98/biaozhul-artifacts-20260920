@@ -1,0 +1,12 @@
+# 本地测试密钥与运行数据（切勿提交）
+.mde-data/
+.mde-keys/
+keys/
+*.mde-data/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/

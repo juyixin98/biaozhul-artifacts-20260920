@@ -1,0 +1,30 @@
+### 发布策略（不可变；返回 policy_fingerprint，后续导出必须显式指定它）
+POST http://127.0.0.1:8390/policies
+Content-Type: application/json
+
+< ../../examples/policy.json
+
+###
+### 列出策略的所有已发布版本
+GET http://127.0.0.1:8390/policies/customer-demo
+
+###
+### 按 analytics 用途 + 固定策略指纹导出（指纹替换为发布时返回的值）
+POST http://127.0.0.1:8390/exports
+Content-Type: application/json
+
+< export-request.json
+
+###
+### 复验导出包（仅公开信息：签名 + 输出/决策一致性）
+POST http://127.0.0.1:8390/verify
+Content-Type: application/json
+
+< verify-request.json
+
+###
+### 端到端复验（本地持有原始记录与测试密钥：重放引擎，逐字节比对输出与决策）
+POST http://127.0.0.1:8390/verify
+Content-Type: application/json
+
+< verify-request-local.json

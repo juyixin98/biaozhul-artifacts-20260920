@@ -1,0 +1,42 @@
+[
+  {
+    "id": "C-1001",
+    "name": "Zhang San",
+    "email": "zhangsan@example.com",
+    "ssn": "110101-19900101-001X",
+    "age": 35,
+    "signup_date": "2021-03-17T08:20:00",
+    "billing_country": "CN",
+    "password_hash": "$argon2id$v=19$placeholder",
+    "preferences": {
+      "newsletter": true,
+      "risk_note": "internal-score-97"
+    },
+    "security": {
+      "totp_secret": "JBSWY3DPEHPK3PXP",
+      "backup_codes": ["111111", "222222"]
+    },
+    "tags": ["premium", "beta"],
+    "orders": [
+      {"id": "O-1", "amount": 12000, "placed_at": "2026-08-01T10:05:00", "buyer": "C-1001", "internal_memo": "VIP refund note"},
+      {"id": "O-2", "amount": 4500, "placed_at": "2026-09-11T16:42:00", "buyer": "C-1001"}
+    ],
+    "open_tickets": [
+      {"id": "T-9", "subject": "login issue", "internal_severity": 5}
+    ],
+    "e_mail": "alias-injected@attacker.example",
+    "user.id": "LITERAL-DOTTED-KEY-SHOULD-NOT-MATCH-user.id",
+    "unknown_field": "策略未提及 -> 默认拒绝"
+  },
+  {
+    "id": "C-1002",
+    "name": "Li Si",
+    "email": "lisi@mail.example.net",
+    "age": 28,
+    "signup_date": "2024-12-02",
+    "tags": [],
+    "orders": [],
+    "extra": {"nested": {"deep": "默认拒绝整棵未知子树"}},
+    "preferences": {"newsletter": false}
+  }
+]

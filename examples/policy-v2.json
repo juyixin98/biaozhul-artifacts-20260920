@@ -1,0 +1,31 @@
+{
+  "version": "mde/policy@v1",
+  "policy_id": "customer-demo",
+  "revision": 2,
+  "description": "客户记录最小披露导出演示策略 v2：收紧 analytics（tags 改为拒绝，邮箱改假名）",
+  "purposes": {
+    "analytics": {
+      "default": "deny",
+      "allow": [
+        "id",
+        "age",
+        "preferences.newsletter",
+        "orders[].id",
+        "orders[].amount"
+      ],
+      "deny": [
+        "ssn",
+        "security",
+        "password_hash",
+        "tags"
+      ],
+      "generalize": {
+        "name": {"transform": "pseudonymize", "params": {"scope": "purpose"}},
+        "email": {"transform": "pseudonymize", "params": {"scope": "purpose"}},
+        "signup_date": {"transform": "date_trunc", "params": {"unit": "year"}},
+        "orders[].placed_at": {"transform": "date_trunc", "params": {"unit": "day"}}
+      }
+    }
+  },
+  "aliases": {}
+}
