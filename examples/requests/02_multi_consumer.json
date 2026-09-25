@@ -1,0 +1,11 @@
+{
+  "_comment": "场景2 多消费者: A 被 t1 与 t3 两个 op 消费，存活区间拉长",
+  "inputs": {"A": [8], "B": [8]},
+  "ops": [
+    {"name": "C", "op": "add", "inputs": ["A", "B"], "time": 1},
+    {"name": "D", "op": "add", "inputs": ["B", "C"], "time": 2},
+    {"name": "E", "op": "add", "inputs": ["A", "D"], "time": 3}
+  ],
+  "seed": 42,
+  "budget_bytes": 192
+}

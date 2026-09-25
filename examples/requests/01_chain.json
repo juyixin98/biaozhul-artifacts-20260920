@@ -1,0 +1,10 @@
+{
+  "_comment": "场景1 线性链: C=A+B, D=C+B —— A、C 死后槽位被复用",
+  "inputs": {"A": [4], "B": [4]},
+  "ops": [
+    {"name": "C", "op": "add", "inputs": ["A", "B"], "time": 1},
+    {"name": "D", "op": "add", "inputs": ["C", "B"], "time": 2}
+  ],
+  "seed": 42,
+  "budget_bytes": 64
+}

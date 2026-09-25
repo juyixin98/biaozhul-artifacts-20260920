@@ -1,0 +1,12 @@
+{
+  "_comment": "场景3 共享视图: X(4x4) 划分为两个行切片，分别与 P 做矩阵乘",
+  "inputs": {"X": [4, 4], "P": [4, 3]},
+  "ops": [
+    {"name": "v", "op": "slice", "src": "X", "starts": [0, 0], "sizes": [2, 4], "time": 1},
+    {"name": "w", "op": "slice", "src": "X", "starts": [2, 0], "sizes": [2, 4], "time": 2},
+    {"name": "A", "op": "matmul", "inputs": ["v", "P"], "time": 3},
+    {"name": "B", "op": "matmul", "inputs": ["w", "P"], "time": 4}
+  ],
+  "seed": 42,
+  "budget_bytes": 272
+}

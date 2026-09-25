@@ -1,0 +1,11 @@
+{
+  "_comment": "场景4 分支汇合: P 扇出到 A、B 两个分支，t3 汇合为 C=A+B",
+  "inputs": {"P": [6], "Q": [6], "R": [6]},
+  "ops": [
+    {"name": "A", "op": "add", "inputs": ["P", "Q"], "time": 1},
+    {"name": "B", "op": "add", "inputs": ["P", "R"], "time": 2},
+    {"name": "C", "op": "add", "inputs": ["A", "B"], "time": 3}
+  ],
+  "seed": 42,
+  "budget_bytes": 144
+}
