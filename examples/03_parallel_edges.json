@@ -1,0 +1,10 @@
+{
+  "n": 2,
+  "source": 0,
+  "sink": 1,
+  "edges": [
+    {"from": 0, "to": 1, "capacity": 3, "cost": 1},
+    {"from": 0, "to": 1, "capacity": 2, "cost": 4},
+    {"from": 0, "to": 1, "capacity": 2, "cost": -5}
+  ]
+}
