@@ -1,0 +1,25 @@
+{
+  "spans": [
+    {
+      "trace_id": "trace-err-001",
+      "span_id": "root",
+      "name": "POST /checkout",
+      "service": "checkout-api",
+      "status": "ERROR",
+      "error_event": "context deadline exceeded",
+      "start_time_ms": 1700000000000,
+      "duration_ms": 120,
+      "attributes": {"http.method": "POST", "user_id": "u-42"}
+    },
+    {
+      "trace_id": "trace-err-001",
+      "span_id": "child-db",
+      "parent_span_id": "root",
+      "name": "SELECT orders",
+      "service": "postgres",
+      "status": "OK",
+      "start_time_ms": 1700000000010,
+      "duration_ms": 80
+    }
+  ]
+}

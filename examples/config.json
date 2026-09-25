@@ -1,0 +1,12 @@
+{
+  "listen": ":8080",
+  "data_dir": "./data",
+  "wait_window": "2s",
+  "max_ttl": "10s",
+  "snapshot_interval": "5s",
+  "error_policy": true,
+  "latency_threshold_ms": 1000,
+  "probabilistic_rate": 0.1,
+  "budget_capacity": 100,
+  "budget_refill_per_sec": 10
+}

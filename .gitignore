@@ -1,0 +1,8 @@
+# local persistence
+/data/
+*.jsonl
+snapshot.json
+
+# binaries
+/tailsampled
+*.out
