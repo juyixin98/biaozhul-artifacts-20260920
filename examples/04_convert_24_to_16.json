@@ -1,0 +1,6 @@
+{
+  "action": "convert",
+  "input_wav": "out/02_chirp_stereo_24bit.wav",
+  "output_wav": "out/04_chirp_stereo_16bit.wav",
+  "output_bits": 16
+}

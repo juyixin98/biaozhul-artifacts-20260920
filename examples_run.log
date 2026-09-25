@@ -1,0 +1,332 @@
+=== 1/4 合成 16 位正弦 + 24 位立体声扫频 ===
+[
+  {
+    "action": "synthesize",
+    "wave_type": "sine",
+    "sample_rate": 48000,
+    "channels": 1,
+    "bits": 16,
+    "n_frames": 48000,
+    "requested_amplitude": 0.5,
+    "clipped_samples": 0,
+    "stats_float": {
+      "n_samples": 48000,
+      "min": -0.5,
+      "max": 0.5,
+      "mean": -5.847174596359158e-18,
+      "rms": 0.3535533905932738,
+      "peak_abs": 0.5,
+      "peak_index": 300,
+      "peak_value": -0.5
+    },
+    "stats_encoded": {
+      "n_samples": 48000,
+      "min": -0.5,
+      "max": 0.5,
+      "mean": 0.0,
+      "rms": 0.3535529554794787,
+      "peak_abs": 0.5,
+      "peak_index": 191,
+      "peak_value": -0.5
+    },
+    "code_range": {
+      "min": -32768,
+      "max": 32767
+    },
+    "output_wav": {
+      "path": "out/01_sine_440_16bit.wav",
+      "bytes": 96044
+    },
+    "output_npy": {
+      "path": "out/01_sine_440_float.npy"
+    }
+  },
+  {
+    "action": "synthesize",
+    "wave_type": "chirp",
+    "sample_rate": 48000,
+    "channels": 2,
+    "bits": 24,
+    "n_frames": 96000,
+    "requested_amplitude": 0.9,
+    "clipped_samples": 0,
+    "stats_float": {
+      "n_samples": 192000,
+      "min": -0.8999999997553533,
+      "max": 0.8999999992267953,
+      "mean": 0.00034052290503567927,
+      "rms": 0.6363958638660779,
+      "peak_abs": 0.8999999997553533,
+      "peak_index": 191994,
+      "peak_value": -0.8999999997553533
+    },
+    "stats_encoded": {
+      "n_samples": 192000,
+      "min": -0.8999999761581421,
+      "max": 0.8999999761581421,
+      "mean": 0.00034052279219031335,
+      "rms": 0.6363958637698849,
+      "peak_abs": 0.8999999761581421,
+      "peak_index": 2652,
+      "peak_value": 0.8999999761581421
+    },
+    "code_range": {
+      "min": -8388608,
+      "max": 8388607
+    },
+    "output_wav": {
+      "path": "out/02_chirp_stereo_24bit.wav",
+      "bytes": 576044
+    }
+  }
+]
+
+=== 2/4 容器校验（inspect）并导出 raw ===
+{
+  "action": "inspect_wav",
+  "input_wav": "out/01_sine_440_16bit.wav",
+  "container": {
+    "sample_rate": 48000,
+    "channels": 1,
+    "bits": 16,
+    "n_frames": 48000,
+    "data_size_declared": 96000,
+    "fmt_size": 16,
+    "riff_size_declared": 96036,
+    "file_payload_bytes": 96036,
+    "riff_size_matches_file": true,
+    "extra_chunks": []
+  },
+  "stats_float": {
+    "n_samples": 48000,
+    "min": -0.5,
+    "max": 0.5,
+    "mean": 0.0,
+    "rms": 0.3535529554794787,
+    "peak_abs": 0.5,
+    "peak_index": 191,
+    "peak_value": -0.5
+  },
+  "output_npy": {
+    "path": "out/03_inspected_float.npy"
+  },
+  "output_raw": {
+    "path": "out/03_pcm_s16le.raw",
+    "bytes": 96000
+  }
+}
+
+=== 3/4 24 位 -> 16 位容器/位深转换 ===
+{
+  "action": "convert",
+  "input_bits": 24,
+  "output_bits": 16,
+  "sample_rate": 48000,
+  "channels": 2,
+  "n_frames": 96000,
+  "output_wav": {
+    "path": "out/04_chirp_stereo_16bit.wav",
+    "bytes": 384044
+  },
+  "samples_out_of_target_domain": 191418,
+  "stats_input": {
+    "n_samples": 192000,
+    "min": -0.8999999761581421,
+    "max": 0.8999999761581421,
+    "mean": 0.00034052279219031335,
+    "rms": 0.6363958637698849,
+    "peak_abs": 0.8999999761581421,
+    "peak_index": 2652,
+    "peak_value": 0.8999999761581421
+  },
+  "stats_output": {
+    "n_samples": 192000,
+    "min": -0.899993896484375,
+    "max": 0.899993896484375,
+    "mean": 0.000340577761332194,
+    "rms": 0.636395872546122,
+    "peak_abs": 0.899993896484375,
+    "peak_index": 354,
+    "peak_value": -0.899993896484375
+  },
+  "input_code_range": {
+    "min": -7549747,
+    "max": 7549747
+  },
+  "output_code_range": {
+    "min": -29491,
+    "max": 29491
+  }
+}
+
+=== 4/4 raw PCM 重新封装为 WAV ===
+{
+  "action": "raw_to_wav",
+  "input_raw": "out/03_pcm_s16le.raw",
+  "output_wav": {
+    "path": "out/05_rewrapped.wav",
+    "bytes": 96044
+  },
+  "sample_rate": 48000,
+  "channels": 1,
+  "bits": 16,
+  "n_frames": 48000,
+  "stats_float": {
+    "n_samples": 48000,
+    "min": -0.5,
+    "max": 0.5,
+    "mean": 0.0,
+    "rms": 0.3535529554794787,
+    "peak_abs": 0.5,
+    "peak_index": 191,
+    "peak_value": -0.5
+  }
+}
+
+=== 边界文件：生成 ===
+已生成边界文件到 out/edge_cases
+  bad_alignment.wav        54 字节
+  extremal_16.wav          54 字节
+  extremal_24.wav          60 字节
+  float32.wav              76 字节
+  pcm8.wav                 60 字节
+  riff_size_wrong.wav      56 字节
+  truncated_chunk.wav      48 字节
+  unknown_chunks.wav       98 字节
+
+=== 边界文件：合法极值/未知chunk/RIFF长度错误（退出码应为 0） ===
+--- extremal_16.wav
+{
+  "action": "inspect_wav",
+  "input_wav": "out/edge_cases/extremal_16.wav",
+  "container": {
+    "sample_rate": 48000,
+    "channels": 1,
+    "bits": 16,
+    "n_frames": 5,
+    "data_size_declared": 10,
+    "fmt_size": 16,
+    "riff_size_declared": 46,
+    "file_payload_bytes": 46,
+    "riff_size_matches_file": true,
+    "extra_chunks": []
+  },
+  "stats_float": {
+    "n_samples": 5,
+    "min": -1.0,
+    "max": 0.999969482421875,
+    "mean": -1.220703125e-05,
+    "rms": 0.8944135432282033,
+    "peak_abs": 1.0,
+    "peak_index": 0,
+    "peak_value": -1.0
+  }
+}
+[exit=0 OK]
+--- extremal_24.wav
+{
+  "action": "inspect_wav",
+  "input_wav": "out/edge_cases/extremal_24.wav",
+  "container": {
+    "sample_rate": 48000,
+    "channels": 1,
+    "bits": 24,
+    "n_frames": 5,
+    "data_size_declared": 15,
+    "fmt_size": 16,
+    "riff_size_declared": 52,
+    "file_payload_bytes": 52,
+    "riff_size_matches_file": true,
+    "extra_chunks": []
+  },
+  "stats_float": {
+    "n_samples": 5,
+    "min": -1.0,
+    "max": 0.9999998807907104,
+    "mean": -4.76837158203125e-08,
+    "rms": 0.8944271376879025,
+    "peak_abs": 1.0,
+    "peak_index": 0,
+    "peak_value": -1.0
+  }
+}
+[exit=0 OK]
+--- unknown_chunks.wav
+{
+  "action": "inspect_wav",
+  "input_wav": "out/edge_cases/unknown_chunks.wav",
+  "container": {
+    "sample_rate": 48000,
+    "channels": 1,
+    "bits": 16,
+    "n_frames": 8,
+    "data_size_declared": 16,
+    "fmt_size": 16,
+    "riff_size_declared": 90,
+    "file_payload_bytes": 90,
+    "riff_size_matches_file": true,
+    "extra_chunks": [
+      {
+        "id": "JUNK",
+        "size": 10
+      },
+      {
+        "id": "labl",
+        "size": 2
+      },
+      {
+        "id": "note",
+        "size": 1
+      }
+    ]
+  },
+  "stats_float": {
+    "n_samples": 8,
+    "min": 0.0,
+    "max": 0.0,
+    "mean": 0.0,
+    "rms": 0.0,
+    "peak_abs": 0.0,
+    "peak_index": 0,
+    "peak_value": 0.0
+  }
+}
+[exit=0 OK]
+--- riff_size_wrong.wav
+{
+  "action": "inspect_wav",
+  "input_wav": "out/edge_cases/riff_size_wrong.wav",
+  "container": {
+    "sample_rate": 48000,
+    "channels": 1,
+    "bits": 16,
+    "n_frames": 6,
+    "data_size_declared": 12,
+    "fmt_size": 16,
+    "riff_size_declared": 55,
+    "file_payload_bytes": 48,
+    "riff_size_matches_file": false,
+    "extra_chunks": []
+  },
+  "stats_float": {
+    "n_samples": 6,
+    "min": 0.0,
+    "max": 0.000152587890625,
+    "mean": 7.62939453125e-05,
+    "rms": 9.239655621635412e-05,
+    "peak_abs": 0.000152587890625,
+    "peak_index": 5,
+    "peak_value": 0.000152587890625
+  }
+}
+[exit=0 OK]
+
+=== 边界文件：畸形/不支持（退出码应为 2） ===
+--- truncated_chunk.wav
+[exit=2 已拒绝 OK]
+--- bad_alignment.wav
+[exit=2 已拒绝 OK]
+--- float32.wav
+[exit=2 已拒绝 OK]
+--- pcm8.wav
+[exit=2 已拒绝 OK]

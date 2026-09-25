@@ -1,0 +1,12 @@
+{
+  "action": "synthesize",
+  "wave_type": "chirp",
+  "sample_rate": 48000,
+  "duration": 2.0,
+  "frequency": 200.0,
+  "frequency_end": 4000.0,
+  "amplitude": 0.9,
+  "channels": 2,
+  "bits": 24,
+  "output_wav": "out/02_chirp_stereo_24bit.wav"
+}

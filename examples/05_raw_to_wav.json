@@ -1,0 +1,8 @@
+{
+  "action": "raw_to_wav",
+  "input_raw": "out/03_pcm_s16le.raw",
+  "output_wav": "out/05_rewrapped.wav",
+  "sample_rate": 48000,
+  "channels": 1,
+  "bits": 16
+}

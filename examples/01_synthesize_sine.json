@@ -1,0 +1,13 @@
+{
+  "action": "synthesize",
+  "wave_type": "sine",
+  "sample_rate": 48000,
+  "duration": 1.0,
+  "frequency": 440.0,
+  "amplitude": 0.5,
+  "phase": 0.0,
+  "channels": 1,
+  "bits": 16,
+  "output_wav": "out/01_sine_440_16bit.wav",
+  "output_npy": "out/01_sine_440_float.npy"
+}

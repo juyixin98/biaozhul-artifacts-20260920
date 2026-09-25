@@ -1,0 +1,6 @@
+{
+  "action": "inspect_wav",
+  "input_wav": "out/01_sine_440_16bit.wav",
+  "output_npy": "out/03_inspected_float.npy",
+  "output_raw": "out/03_pcm_s16le.raw"
+}
