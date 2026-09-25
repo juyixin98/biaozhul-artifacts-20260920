@@ -1,0 +1,4 @@
+{
+  "name": "forbidden_traversal",
+  "command": ["bash", "../../../etc/passwd"]
+}

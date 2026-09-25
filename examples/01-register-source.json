@@ -1,0 +1,4 @@
+{
+  "path": "src/common.js",
+  "content": "function greet(name) {\n  return \"hello \" + name;\n}\n"
+}

@@ -1,0 +1,9 @@
+{
+  "_comment": "Actual response from POST /v1/artifacts/<binA>/verify (clean run). Every blob was re-read from CAS and re-hashed, every tool re-resolved from files on disk, and the HMAC + log chain were recomputed. See docs/RUNLOG.md.",
+  "artifactId": "art_39f7f9dd692f6199",
+  "complete": true,
+  "issues": null,
+  "depth": 1,
+  "records": 2,
+  "blobsHashed": 6
+}

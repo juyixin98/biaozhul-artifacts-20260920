@@ -1,0 +1,8 @@
+{
+  "tool": "compile_lib",
+  "inputs": [
+    {"slot": "COMMON", "sourcePath": "src/common.js"},
+    {"slot": "PART", "sourcePath": "src/appA.js"}
+  ],
+  "outputs": ["LIB"]
+}

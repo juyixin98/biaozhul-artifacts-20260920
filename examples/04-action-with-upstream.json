@@ -1,0 +1,8 @@
+{
+  "tool": "link_app",
+  "inputs": [
+    {"slot": "APP", "sourcePath": "src/appA.js"},
+    {"slot": "LIB", "artifactId": "art_REPLACE_WITH_LIBA_ID"}
+  ],
+  "outputs": ["BIN"]
+}

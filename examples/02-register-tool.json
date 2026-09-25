@@ -1,0 +1,5 @@
+{
+  "name": "compile_lib",
+  "command": ["bash", "compile_lib.sh"],
+  "env": null
+}

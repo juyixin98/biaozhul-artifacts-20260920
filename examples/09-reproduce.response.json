@@ -1,0 +1,15 @@
+{
+  "_comment": "Actual response from POST /v1/artifacts/<binA>/reproduce. The action is re-executed from CAS-restaged inputs and the produced bytes are compared to the recorded digest. Deterministic tooling: provenance complete AND bytes match.",
+  "artifactId": "art_39f7f9dd692f6199",
+  "actionId": "act_1728954eecf0",
+  "provenanceComplete": true,
+  "reproducible": true,
+  "outputs": [
+    {
+      "slot": "BIN",
+      "recordedDigest": "sha256:131586c985a37da774915b9c27c6fb58e3ec3d16578988180810afdd074bca7a",
+      "reproducedDigest": "sha256:131586c985a37da774915b9c27c6fb58e3ec3d16578988180810afdd074bca7a",
+      "match": true
+    }
+  ]
+}

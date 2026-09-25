@@ -1,0 +1,6 @@
+# build artifacts
+/bin/
+/.bpdata/
+
+# local demo data
+/tmp/

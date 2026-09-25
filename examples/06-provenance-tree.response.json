@@ -1,0 +1,22 @@
+{
+  "_comment": "Actual response from GET /v1/artifacts/art_39f7f9dd692f6199/provenance during the recorded demo run (see docs/RUNLOG.md). Transitive tree: binA links libA, which compiles common.js + appA.js.",
+  "artifactId": "art_39f7f9dd692f6199",
+  "tool": "link_app",
+  "toolDigest": "sha256:42fbcac274739d335a96551d48cd368030a0b5fe67299f4e769e6bbacf74f92e",
+  "digest": "sha256:131586c985a37da774915b9c27c6fb58e3ec3d16578988180810afdd074bca7a",
+  "sourceInputs": [
+    {"slot": "APP", "kind": "source", "path": "src/appA.js", "digest": "sha256:e0a8fc921731d5bdb7779fceda5e25c6c271c6b536d02d34a4b7189081012b50"}
+  ],
+  "upstreams": [
+    {
+      "artifactId": "art_1925919afcbffd95",
+      "tool": "compile_lib",
+      "toolDigest": "sha256:38f5a7a281fe263434fce280ad02044458b24f6311dcf520cfce92af0c7d4c3f",
+      "digest": "sha256:51c21407c626aec66b787763d7a19dcb3f954d3bd6c1c3bb458509f9288a92a7",
+      "sourceInputs": [
+        {"slot": "COMMON", "kind": "source", "path": "src/common.js", "digest": "sha256:369f273b32d1056b583dd4defa17a2df56993a25f1804904f930885ff33e16b8"},
+        {"slot": "PART",   "kind": "source", "path": "src/appA.js",  "digest": "sha256:e0a8fc921731d5bdb7779fceda5e25c6c271c6b536d02d34a4b7189081012b50"}
+      ]
+    }
+  ]
+}

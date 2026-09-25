@@ -1,0 +1,19 @@
+{
+  "_comment": "Actual response from GET /v1/impact?source=src/common.js on an instance with libA, libB and binA built (binB not built in that instance). Changing the shared source invalidates all descendants transitively; directOnly lists actions that consume it in an input slot.",
+  "sourcePath": "src/common.js",
+  "currentDigest": "sha256:369f273b32d1056b583dd4defa17a2df56993a25f1804904f930885ff33e16b8",
+  "affected": [
+    "art_1925919afcbffd95",
+    "art_1f59799b0a464ccf",
+    "art_39f7f9dd692f6199"
+  ],
+  "allDescendants": [
+    "art_1925919afcbffd95",
+    "art_1f59799b0a464ccf",
+    "art_39f7f9dd692f6199"
+  ],
+  "directOnly": [
+    "art_1925919afcbffd95",
+    "art_1f59799b0a464ccf"
+  ]
+}
