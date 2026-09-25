@@ -1,0 +1,10 @@
+{
+  "sourceRoot": "/home/admin/Downloads/biaozhul/opp104/a/examples/demo-project",
+  "includeDirs": ["include", "."],
+  "targets": [
+    { "name": "app",  "sources": ["main.c"] },
+    { "name": "net",  "sources": ["net/open.c"] }
+  ],
+  "changed": ["util.h"],
+  "deleted": []
+}
