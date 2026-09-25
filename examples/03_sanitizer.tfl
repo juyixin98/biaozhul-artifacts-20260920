@@ -1,0 +1,17 @@
+// 03_sanitizer.tfl —— 清洗器必须阻断污点
+fn safe_route(x) {
+    y = clean(x);
+    return y;
+}
+
+fn main() {
+    a = source();
+    b = safe_route(a);
+    sink(b);          // 不应告警：已清洗
+
+    c = source();
+    sink(clean(c));   // 不应告警：就地清洗
+
+    d = source();
+    sink(d);          // 应当告警：未清洗对照
+}

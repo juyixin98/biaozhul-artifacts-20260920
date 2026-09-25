@@ -1,0 +1,15 @@
+// 05_recursion.tfl —— 线性递归：污点沿递归调用传播
+fn walk(n, acc) {
+    if (n == 0) {
+        return acc;
+    } else {
+        m = n - 1;
+        return walk(m, acc);
+    }
+}
+
+fn main() {
+    t = source();
+    r = walk(10, t);
+    sink(r);    // 应当告警：污点穿过递归调用到达 sink
+}

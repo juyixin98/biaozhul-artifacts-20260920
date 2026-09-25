@@ -1,0 +1,13 @@
+{
+  "source": "// 跨函数 + 条件清洗样例\nfn passthrough(x) {\n    return x;\n}\n\nfn main() {\n    a = source();\n    b = passthrough(a);\n    if (flag) {\n        b = clean(b);\n    }\n    sink(b);\n}\n",
+  "entry": "main",
+  "include_ir": false,
+  "config": {
+    "sources": ["source"],
+    "sinks": ["sink"],
+    "sanitizers": ["clean"],
+    "context_k": 2,
+    "max_trace": 40,
+    "conservative_unknown_calls": true
+  }
+}

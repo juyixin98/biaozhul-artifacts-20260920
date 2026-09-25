@@ -1,0 +1,81 @@
+{
+  "ok": true,
+  "tool": "taintflow",
+  "version": "1.0.0",
+  "entry": "main",
+  "summary": {
+    "alerts": 1,
+    "true_positives": 1,
+    "possible_false_positives": 0,
+    "function_contexts": 2,
+    "reanalyses": 3,
+    "intra_iterations": 6,
+    "max_call_depth_seen": 1
+  },
+  "alerts": [
+    {
+      "classification": "true_positive",
+      "may_be_false_positive": false,
+      "classification_note": "",
+      "source_point": {
+        "function": "load",
+        "block": "entry1",
+        "instruction": 0,
+        "line": 1,
+        "col": 19
+      },
+      "sink": {
+        "function": "main",
+        "name": "writeLog",
+        "line": 2,
+        "col": 28
+      },
+      "context": [],
+      "path_length": 5,
+      "path": [
+        {
+          "kind": "source",
+          "desc": "污点入口 source()",
+          "at": "load:1:19"
+        },
+        {
+          "kind": "copy",
+          "desc": "赋值传播: __t1 → raw",
+          "at": "load:1:13"
+        },
+        {
+          "kind": "call_return",
+          "desc": "调用 load() 返回污点值",
+          "at": "main:2:20",
+          "detail": "调用点 main:2"
+        },
+        {
+          "kind": "copy",
+          "desc": "赋值传播: __t1 → data",
+          "at": "main:2:13"
+        },
+        {
+          "kind": "sink",
+          "desc": "到达汇 writeLog()",
+          "at": "main:2:28",
+          "detail": "data"
+        }
+      ]
+    }
+  ],
+  "warnings": [],
+  "config": {
+    "sources": [
+      "getInput"
+    ],
+    "sinks": [
+      "writeLog"
+    ],
+    "sanitizers": [
+      "escape"
+    ],
+    "context_k": 3,
+    "max_trace": 40,
+    "conservative_unknown_calls": true
+  }
+}

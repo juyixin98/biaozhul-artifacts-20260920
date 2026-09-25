@@ -1,0 +1,16 @@
+// 02_context.tfl —— 同一函数在不同调用上下文下：
+//   pass_taint 收到污点实参时应报，收到干净实参时不报（上下文敏感）。
+fn passthrough(x) {
+    y = x;
+    return y;
+}
+
+fn main() {
+    tainted = source();
+    a = passthrough(tainted);
+    sink(a);                 // 应当告警
+
+    clean_input = 42;
+    b = passthrough(clean_input);
+    sink(b);                 // 不应告警
+}

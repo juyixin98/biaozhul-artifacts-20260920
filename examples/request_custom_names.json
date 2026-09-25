@@ -1,0 +1,9 @@
+{
+  "source": "fn load() { raw = getInput(); return raw; }\nfn main() { data = load(); writeLog(data); writeLog(escape(data)); }\n",
+  "config": {
+    "sources": ["getInput"],
+    "sinks": ["writeLog"],
+    "sanitizers": ["escape"],
+    "context_k": 3
+  }
+}

@@ -1,0 +1,9 @@
+// 06_unknown_call.tfl —— FP-1：调用未定义函数（外部库占位）
+//
+// mystery() 没有定义。保守地认为它“可能”原样返回污点实参 —— 因此报 1 条，
+// 但标记为可能误报（真实情况取决于 mystery 的实现）。
+fn main() {
+    x = source();
+    y = mystery(x);
+    sink(y);
+}

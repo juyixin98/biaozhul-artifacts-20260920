@@ -1,0 +1,93 @@
+{
+  "ok": true,
+  "tool": "taintflow",
+  "version": "1.0.0",
+  "entry": "main",
+  "summary": {
+    "alerts": 1,
+    "true_positives": 0,
+    "possible_false_positives": 1,
+    "function_contexts": 2,
+    "reanalyses": 3,
+    "intra_iterations": 6,
+    "max_call_depth_seen": 1
+  },
+  "alerts": [
+    {
+      "classification": "possible_false_positive_branch",
+      "may_be_false_positive": true,
+      "classification_note": "污点只在部分分支路径存活（典型：一个分支清洗、另一个未清洗）；分析不对分支条件做常量传播/约束求解，按两支都可能执行过近似",
+      "source_point": {
+        "function": "main",
+        "block": "entry1",
+        "instruction": 0,
+        "line": 7,
+        "col": 9
+      },
+      "sink": {
+        "function": "main",
+        "name": "sink",
+        "line": 12,
+        "col": 5
+      },
+      "context": [],
+      "path_length": 6,
+      "path": [
+        {
+          "kind": "source",
+          "desc": "污点入口 source()",
+          "at": "main:7:9"
+        },
+        {
+          "kind": "copy",
+          "desc": "赋值传播: __t1 → a",
+          "at": "main:7:5"
+        },
+        {
+          "kind": "param_bind",
+          "desc": "实参绑定到形参 x",
+          "at": "passthrough:2:4",
+          "detail": "x"
+        },
+        {
+          "kind": "call_return",
+          "desc": "调用 passthrough() 返回污点值",
+          "at": "main:8:9",
+          "detail": "调用点 main:8"
+        },
+        {
+          "kind": "copy",
+          "desc": "赋值传播: __t2 → b",
+          "at": "main:8:5"
+        },
+        {
+          "kind": "sink",
+          "desc": "到达汇 sink()",
+          "at": "main:12:5",
+          "detail": "b"
+        }
+      ]
+    }
+  ],
+  "warnings": [
+    {
+      "kind": "uninitialized_read",
+      "message": "变量 'flag' 在函数 'main' 中可能未赋值即被读取，按干净空值处理（请确认这不是遗漏的赋值）",
+      "span": "9:9-9:13"
+    }
+  ],
+  "config": {
+    "sources": [
+      "source"
+    ],
+    "sinks": [
+      "sink"
+    ],
+    "sanitizers": [
+      "clean"
+    ],
+    "context_k": 2,
+    "max_trace": 40,
+    "conservative_unknown_calls": true
+  }
+}

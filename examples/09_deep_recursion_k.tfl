@@ -1,0 +1,18 @@
+// 09_deep_recursion_k.tfl —— FP-3：k 限定调用串的说明性样例
+//
+// walk 线性递归。默认 context_k=2：调用串只保留最近 2 个调用点，超过 2 层
+// 的递归共用同一上下文摘要。may 分析仍然正确（污点确定到达 sink，判为确定
+// 告警），但输出的 context 字段在第 3 层起被截断，体现“有限上下文”的取舍。
+// 把 --context-k 调大可保留更长的调用上下文（代价是摘要数量增加）。
+fn walk(n, acc) {
+    if (n == 0) {
+        return acc;
+    }
+    return walk(n - 1, acc);
+}
+
+fn main() {
+    t = source();
+    r = walk(100, t);
+    sink(r);
+}

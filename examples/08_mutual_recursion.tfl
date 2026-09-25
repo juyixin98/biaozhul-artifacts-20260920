@@ -1,0 +1,22 @@
+// 08_mutual_recursion.tfl —— 相互递归：even/odd 风格的间接传播
+fn is_even(n, v) {
+    if (n == 0) {
+        return v;
+    } else {
+        return is_odd(n - 1, v);
+    }
+}
+
+fn is_odd(n, v) {
+    if (n == 0) {
+        return 0;
+    } else {
+        return is_even(n - 1, v);
+    }
+}
+
+fn main() {
+    t = source();
+    r = is_even(4, t);
+    sink(r);    // 应当告警：污点经相互递归返回到达
+}

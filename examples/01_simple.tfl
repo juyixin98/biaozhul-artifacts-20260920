@@ -1,0 +1,10 @@
+// 01_simple.tfl —— 最基本的跨函数 source -> sink
+fn id(x) {
+    return x;
+}
+
+fn main() {
+    a = source();
+    b = id(a);
+    sink(b);
+}
