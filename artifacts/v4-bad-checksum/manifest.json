@@ -1,0 +1,7 @@
+{
+  "version": "v4-bad-checksum",
+  "input_dim": 8,
+  "output_dim": 3,
+  "seed": 404,
+  "sha256": "d7ce9a348ca110a0f6150909fdc9e5b99ea6acc14f3c1cedb3eb416d1924a882"
+}

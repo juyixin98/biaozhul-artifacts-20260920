@@ -1,0 +1,7 @@
+{
+  "version": "v3-bad-warmup",
+  "input_dim": 8,
+  "output_dim": 3,
+  "seed": 303,
+  "sha256": "9e9edc93cfbd65fc8abb41f4de368ea1e35a7788a70cc4a525a8b951d3adb723"
+}

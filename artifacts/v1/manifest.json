@@ -1,0 +1,7 @@
+{
+  "version": "v1",
+  "input_dim": 8,
+  "output_dim": 3,
+  "seed": 101,
+  "sha256": "d741a579dd18c131f8e1d82fba851e0a180145944f5aca8ccd16dbf11f781bd7"
+}
