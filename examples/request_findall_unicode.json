@@ -1,0 +1,6 @@
+{
+  "pattern": "中+",
+  "text": "x中中y中z",
+  "op": "findall",
+  "debug": false
+}

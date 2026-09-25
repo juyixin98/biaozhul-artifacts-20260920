@@ -1,0 +1,14 @@
+== 1. 健康检查 ==
+{"ok": true, "engine": "renfa", "version": "1.0.0"}
+
+== 2. fullmatch（连接/选择/括号/有限重复）==
+{"ok": true, "op": "fullmatch", "pattern": "(ab|c)(d|e)*f{1,2}", "matched": true, "match": {"start": 0, "end": 6, "text": "cddeff"}, "matches": []}
+
+== 3. findall（Unicode 码点，偏移也是码点）==
+{"ok": true, "op": "findall", "pattern": "中+", "matched": true, "match": {"start": 1, "end": 3, "text": "中中"}, "matches": [{"start": 1, "end": 3, "text": "中中"}, {"start": 4, "end": 5, "text": "中"}]}
+
+== 4. debug：返回 token（含源码位置）、AST、NFA ==
+{"ok": true, "op": "search", "pattern": "a(b|c)*", "matched": true, "match": {"start": 0, "end": 4, "text": "abbc"}, "matches": [], "tokens": [{"kind": "LITERAL", "start": 0, "end": 1, "line": 1, "col": 1, "codepoint": 97, "char": "a"}, {"kind": "LPAREN", "start": 1, "end": 2, "line": 1, "col": 2}, {"kind": "LITERAL", "start": 2, "end": 3, "line": 1, "col": 3, "codepoint": 98, "char": "b"}, {"kind": "PIPE", "start": 3, "end": 4, "line": 1, "col": 4}, {"kind": "LITERAL", "start": 4, "end": 5, "line": 1, "col": 5, "codepoint": 99, "char": "c"}, {"kind": "RPAREN", "start": 5, "end": 6, "line": 1, "col": 6}, {"kind": "STAR", "start": 6, "end": 7, "line": 1, "col": 7}, {"kind": "EOF", "start": 7, "end": 7, "line": 1, "col": 8}], "ast": {"type": "Concat", "children": [{"type": "Literal", "codepoint": 97, "char": "a", "span": {"start": 0, "end": 1, "line": 1, "col": 1}}, {"type": "Repeat", "child": {"type": "Group", "child": {"type": "Alt", "left": {"type": "Literal", "codepoint": 98, "char": "b", "span": {"start": 2, "end": 3, "line": 1, "col": 3}}, "right": {"type": "Literal", "codepoint": 99, "char": "c", "span": {"start": 4, "end": 5, "line": 1, "col": 5}}, "span": {"start": 2, "end": 5, "line": 1, "col": 3}}, "span": {"start": 1, "end": 6, "line": 1, "col": 2}}, "mn": 0, "mx": null, "span": {"start": 1, "end": 7, "line": 1, "col": 2}}], "span": {"start": 0, "end": 7, "line": 1, "col": 1}}, "nfa": {"start": 0, "accept": 4, "states": [{"index": 0, "edges": [{"kind": "char", "target": 1, "codepoint": 97, "char": "a"}]}, {"index": 1, "edges": [{"kind": "eps", "target": 2}]}, {"index": 2, "edges": [{"kind": "eps", "target": 3}]}, {"index": 3, "edges": [{"kind": "eps", "target": 5}, {"kind": "eps", "target": 4}]}, {"index": 4, "edges": []}, {"index": 5, "edges": [{"kind": "eps", "target": 7}, {"kind": "eps", "target": 9}]}, {"index": 6, "edges": [{"kind": "eps", "target": 3}]}, {"index": 7, "edges": [{"kind": "char", "target": 8, "codepoint": 98, "char": "b"}]}, {"index": 8, "edges": [{"kind": "eps", "target": 6}]}, {"index": 9, "edges": [{"kind": "char", "target": 10, "codepoint": 99, "char": "c"}]}, {"index": 10, "edges": [{"kind": "eps", "target": 6}]}]}}
+
+== 5. 语法错误（带行列定位，HTTP 400）==
+{"ok": false, "error": {"type": "syntax", "message": "括号 '(' 没有对应的 ')'", "location": "1:2"}}

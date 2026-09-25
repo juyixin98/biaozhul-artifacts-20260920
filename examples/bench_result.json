@@ -1,0 +1,144 @@
+{
+  "pattern": "(a+)+b",
+  "input": "a*n (无 b，必然失败)",
+  "reference_budget": 10000000,
+  "results": [
+    {
+      "n": 8,
+      "reference": {
+        "n": 8,
+        "steps": 1800,
+        "budget_exhausted": false
+      },
+      "thompson": {
+        "n": 8,
+        "edge_checks": 115,
+        "seconds": 5.4e-05,
+        "matched": false
+      }
+    },
+    {
+      "n": 10,
+      "reference": {
+        "n": 10,
+        "steps": 7178,
+        "budget_exhausted": false
+      }
+    },
+    {
+      "n": 12,
+      "reference": {
+        "n": 12,
+        "steps": 28684,
+        "budget_exhausted": false
+      }
+    },
+    {
+      "n": 14,
+      "reference": {
+        "n": 14,
+        "steps": 114702,
+        "budget_exhausted": false
+      }
+    },
+    {
+      "n": 16,
+      "reference": {
+        "n": 16,
+        "steps": 458768,
+        "budget_exhausted": false
+      },
+      "thompson": {
+        "n": 16,
+        "edge_checks": 251,
+        "seconds": 8.9e-05,
+        "matched": false
+      }
+    },
+    {
+      "n": 18,
+      "reference": {
+        "n": 18,
+        "steps": 1835026,
+        "budget_exhausted": false
+      }
+    },
+    {
+      "n": 20,
+      "reference": {
+        "n": 20,
+        "steps": 7340052,
+        "budget_exhausted": false
+      }
+    },
+    {
+      "n": 32,
+      "thompson": {
+        "n": 32,
+        "edge_checks": 523,
+        "seconds": 0.000171,
+        "matched": false
+      }
+    },
+    {
+      "n": 64,
+      "thompson": {
+        "n": 64,
+        "edge_checks": 1067,
+        "seconds": 0.00033,
+        "matched": false
+      }
+    },
+    {
+      "n": 128,
+      "thompson": {
+        "n": 128,
+        "edge_checks": 2155,
+        "seconds": 0.000656,
+        "matched": false
+      }
+    },
+    {
+      "n": 256,
+      "thompson": {
+        "n": 256,
+        "edge_checks": 4331,
+        "seconds": 0.001293,
+        "matched": false
+      }
+    },
+    {
+      "n": 1000,
+      "thompson": {
+        "n": 1000,
+        "edge_checks": 16979,
+        "seconds": 0.005063,
+        "matched": false
+      }
+    },
+    {
+      "n": 10000,
+      "thompson": {
+        "n": 10000,
+        "edge_checks": 169979,
+        "seconds": 0.051276,
+        "matched": false
+      }
+    },
+    {
+      "n": 100000,
+      "thompson": {
+        "n": 100000,
+        "edge_checks": 1699979,
+        "seconds": 0.525524,
+        "matched": false
+      }
+    }
+  ],
+  "linearity_ratios_edgechecks_2x_n": [
+    2.084,
+    2.04,
+    2.02,
+    2.01
+  ]
+}

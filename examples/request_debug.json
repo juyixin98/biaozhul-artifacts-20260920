@@ -1,0 +1,6 @@
+{
+  "pattern": "a(b|c)*",
+  "text": "abbc",
+  "op": "search",
+  "debug": true
+}

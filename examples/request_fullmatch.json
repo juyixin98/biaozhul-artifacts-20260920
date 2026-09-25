@@ -1,0 +1,5 @@
+{
+  "pattern": "(ab|c)(d|e)*f{1,2}",
+  "text": "cddeff",
+  "op": "fullmatch"
+}
