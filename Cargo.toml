@@ -1,0 +1,15 @@
+[package]
+name = "resp-incr"
+version = "0.1.0"
+edition = "2021"
+description = "Incremental RESP2 byte parser library and local TCP test server"
+
+[lib]
+name = "resp_incr"
+path = "src/lib.rs"
+
+[[bin]]
+name = "resp-server"
+path = "src/bin/resp-server.rs"
+
+[dependencies]
