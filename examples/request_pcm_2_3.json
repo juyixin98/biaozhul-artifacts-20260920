@@ -1,0 +1,11 @@
+{
+  "input": "examples/data/two_tone_48k.s16le",
+  "input_format": "s16le",
+  "fs_in": 48000,
+  "up": 2,
+  "down": 3,
+  "pad_mode": "reflect",
+  "output": "examples/out/two_tone_48k_to_32k.s16le",
+  "output_format": "s16le",
+  "report": "examples/out/two_tone_48k_to_32k.report.json"
+}

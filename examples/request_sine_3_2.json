@@ -1,0 +1,9 @@
+{
+  "signal": {"type": "sine", "freq": 1000, "fs": 48000, "duration": 0.1},
+  "up": 3,
+  "down": 2,
+  "pad_mode": "edge",
+  "output": "examples/out/sine_1k_48k_to_72k.wav",
+  "output_format": "wav",
+  "report": "examples/out/sine_1k_48k_to_72k.report.json"
+}

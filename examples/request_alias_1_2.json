@@ -1,0 +1,9 @@
+{
+  "signal": {"type": "sine", "freq": 20000, "fs": 48000, "duration": 0.1},
+  "up": 1,
+  "down": 2,
+  "pad_mode": "edge",
+  "output": "examples/out/alias_20k_48k_to_24k.f32le",
+  "output_format": "f32le",
+  "report": "examples/out/alias_20k_48k_to_24k.report.json"
+}
