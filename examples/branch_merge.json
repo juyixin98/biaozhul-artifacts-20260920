@@ -1,0 +1,22 @@
+{
+  "description": "Branch-and-join (diamond): x fans out to b1/b2; branches are sliced and joined by add (m1), and independently matmulled and joined by add (m2). Verifies branch tensors stay alive across the join and the shared root x has multiple consumers.",
+  "seed": 77,
+  "inputs": {
+    "x":  [4, 4],
+    "w1": [4, 3],
+    "w2": [4, 3],
+    "w3": [3, 2],
+    "w4": [3, 2]
+  },
+  "ops": [
+    {"name": "b1", "op": "matmul", "inputs": ["x", "w1"]},
+    {"name": "b2", "op": "matmul", "inputs": ["x", "w2"]},
+    {"name": "s1", "op": "slice",  "inputs": ["b1"], "starts": [0, 0], "stops": [2, 3]},
+    {"name": "s2", "op": "slice",  "inputs": ["b2"], "starts": [2, 0], "stops": [4, 3]},
+    {"name": "m1", "op": "add",    "inputs": ["s1", "s2"]},
+    {"name": "h1", "op": "matmul", "inputs": ["b1", "w3"]},
+    {"name": "h2", "op": "matmul", "inputs": ["b2", "w4"]},
+    {"name": "m2", "op": "add",    "inputs": ["h1", "h2"]}
+  ],
+  "outputs": ["m1", "m2"]
+}

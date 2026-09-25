@@ -1,0 +1,21 @@
+{
+  "description": "Long single-consumer matmul chain x1..x8. Every intermediate dies right after its only consumer, so the arena reuses slots aggressively. Peak budget is exactly the theoretical lower bound (w + two live chain tensors = 192 float32 elements) and is enforced.",
+  "seed": 143,
+  "inputs": {
+    "x0": [8, 8],
+    "w":  [8, 8]
+  },
+  "ops": [
+    {"name": "x1", "op": "matmul", "inputs": ["x0", "w"]},
+    {"name": "x2", "op": "matmul", "inputs": ["x1", "w"]},
+    {"name": "x3", "op": "matmul", "inputs": ["x2", "w"]},
+    {"name": "x4", "op": "matmul", "inputs": ["x3", "w"]},
+    {"name": "x5", "op": "matmul", "inputs": ["x4", "w"]},
+    {"name": "x6", "op": "matmul", "inputs": ["x5", "w"]},
+    {"name": "x7", "op": "matmul", "inputs": ["x6", "w"]},
+    {"name": "x8", "op": "matmul", "inputs": ["x7", "w"]}
+  ],
+  "outputs": ["x8"],
+  "peak_budget_elements": 192,
+  "enforce_budget": true
+}

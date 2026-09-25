@@ -1,0 +1,20 @@
+{
+  "description": "Shared slice views: two views v and v2 alias the SAME root storage X; v itself has multiple consumers (t1, t3); v3 is a chained view (slice of a view). Root X must stay alive until every alias family member is last read.",
+  "seed": 2026,
+  "inputs": {
+    "X":    [4, 6],
+    "W":    [3, 2],
+    "bias": [3, 3],
+    "c":    [2]
+  },
+  "ops": [
+    {"name": "v",  "op": "slice",  "inputs": ["X"],  "starts": [1, 2], "stops": [4, 5]},
+    {"name": "v2", "op": "slice",  "inputs": ["X"],  "starts": [0, 0], "stops": [3, 3]},
+    {"name": "t1", "op": "matmul", "inputs": ["v", "W"]},
+    {"name": "t3", "op": "add",    "inputs": ["v", "v2"]},
+    {"name": "v3", "op": "slice",  "inputs": ["v2"], "starts": [0, 0], "stops": [2, 2]},
+    {"name": "t4", "op": "add",    "inputs": ["t3", "bias"]},
+    {"name": "t5", "op": "add",    "inputs": ["t1", "c"]}
+  ],
+  "outputs": ["t4", "t5", "v3"]
+}

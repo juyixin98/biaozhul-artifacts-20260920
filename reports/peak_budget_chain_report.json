@@ -1,0 +1,571 @@
+{
+  "status": "ok",
+  "dag": {
+    "inputs": [
+      {
+        "name": "x0",
+        "shape": [
+          8,
+          8
+        ]
+      },
+      {
+        "name": "w",
+        "shape": [
+          8,
+          8
+        ]
+      }
+    ],
+    "ops": [
+      {
+        "point": 2,
+        "name": "x1",
+        "op": "matmul",
+        "inputs": [
+          "x0",
+          "w"
+        ],
+        "shape": [
+          8,
+          8
+        ],
+        "is_view": false,
+        "is_output": false
+      },
+      {
+        "point": 3,
+        "name": "x2",
+        "op": "matmul",
+        "inputs": [
+          "x1",
+          "w"
+        ],
+        "shape": [
+          8,
+          8
+        ],
+        "is_view": false,
+        "is_output": false
+      },
+      {
+        "point": 4,
+        "name": "x3",
+        "op": "matmul",
+        "inputs": [
+          "x2",
+          "w"
+        ],
+        "shape": [
+          8,
+          8
+        ],
+        "is_view": false,
+        "is_output": false
+      },
+      {
+        "point": 5,
+        "name": "x4",
+        "op": "matmul",
+        "inputs": [
+          "x3",
+          "w"
+        ],
+        "shape": [
+          8,
+          8
+        ],
+        "is_view": false,
+        "is_output": false
+      },
+      {
+        "point": 6,
+        "name": "x5",
+        "op": "matmul",
+        "inputs": [
+          "x4",
+          "w"
+        ],
+        "shape": [
+          8,
+          8
+        ],
+        "is_view": false,
+        "is_output": false
+      },
+      {
+        "point": 7,
+        "name": "x6",
+        "op": "matmul",
+        "inputs": [
+          "x5",
+          "w"
+        ],
+        "shape": [
+          8,
+          8
+        ],
+        "is_view": false,
+        "is_output": false
+      },
+      {
+        "point": 8,
+        "name": "x7",
+        "op": "matmul",
+        "inputs": [
+          "x6",
+          "w"
+        ],
+        "shape": [
+          8,
+          8
+        ],
+        "is_view": false,
+        "is_output": false
+      },
+      {
+        "point": 9,
+        "name": "x8",
+        "op": "matmul",
+        "inputs": [
+          "x7",
+          "w"
+        ],
+        "shape": [
+          8,
+          8
+        ],
+        "is_view": false,
+        "is_output": true
+      }
+    ],
+    "outputs": [
+      "x8"
+    ],
+    "num_tensors": 10
+  },
+  "plan": {
+    "arena": {
+      "elements": 192,
+      "bytes": 768,
+      "dtype": "float32"
+    },
+    "theoretical_peak": {
+      "elements": 192,
+      "bytes": 768
+    },
+    "buffers": [
+      {
+        "id": 0,
+        "root": "x0",
+        "size": 64,
+        "capacity": 64,
+        "offset": 0,
+        "window": [
+          0,
+          64
+        ],
+        "birth": 0,
+        "last_use": 2,
+        "alias_family": [
+          "x0"
+        ]
+      },
+      {
+        "id": 1,
+        "root": "w",
+        "size": 64,
+        "capacity": 64,
+        "offset": 64,
+        "window": [
+          64,
+          128
+        ],
+        "birth": 1,
+        "last_use": 9,
+        "alias_family": [
+          "w"
+        ]
+      },
+      {
+        "id": 2,
+        "root": "x1",
+        "size": 64,
+        "capacity": 64,
+        "offset": 128,
+        "window": [
+          128,
+          192
+        ],
+        "birth": 2,
+        "last_use": 3,
+        "alias_family": [
+          "x1"
+        ]
+      },
+      {
+        "id": 3,
+        "root": "x2",
+        "size": 64,
+        "capacity": 64,
+        "offset": 0,
+        "window": [
+          0,
+          64
+        ],
+        "birth": 3,
+        "last_use": 4,
+        "alias_family": [
+          "x2"
+        ]
+      },
+      {
+        "id": 4,
+        "root": "x3",
+        "size": 64,
+        "capacity": 64,
+        "offset": 128,
+        "window": [
+          128,
+          192
+        ],
+        "birth": 4,
+        "last_use": 5,
+        "alias_family": [
+          "x3"
+        ]
+      },
+      {
+        "id": 5,
+        "root": "x4",
+        "size": 64,
+        "capacity": 64,
+        "offset": 0,
+        "window": [
+          0,
+          64
+        ],
+        "birth": 5,
+        "last_use": 6,
+        "alias_family": [
+          "x4"
+        ]
+      },
+      {
+        "id": 6,
+        "root": "x5",
+        "size": 64,
+        "capacity": 64,
+        "offset": 128,
+        "window": [
+          128,
+          192
+        ],
+        "birth": 6,
+        "last_use": 7,
+        "alias_family": [
+          "x5"
+        ]
+      },
+      {
+        "id": 7,
+        "root": "x6",
+        "size": 64,
+        "capacity": 64,
+        "offset": 0,
+        "window": [
+          0,
+          64
+        ],
+        "birth": 7,
+        "last_use": 8,
+        "alias_family": [
+          "x6"
+        ]
+      },
+      {
+        "id": 8,
+        "root": "x7",
+        "size": 64,
+        "capacity": 64,
+        "offset": 128,
+        "window": [
+          128,
+          192
+        ],
+        "birth": 8,
+        "last_use": 9,
+        "alias_family": [
+          "x7"
+        ]
+      },
+      {
+        "id": 9,
+        "root": "x8",
+        "size": 64,
+        "capacity": 64,
+        "offset": 0,
+        "window": [
+          0,
+          64
+        ],
+        "birth": 9,
+        "last_use": 9,
+        "alias_family": [
+          "x8"
+        ]
+      }
+    ],
+    "views": [],
+    "last_use": {
+      "x0": 2,
+      "w": 9,
+      "x1": 3,
+      "x2": 4,
+      "x3": 5,
+      "x4": 6,
+      "x5": 7,
+      "x6": 8,
+      "x7": 9,
+      "x8": 9
+    },
+    "timeline": [
+      {
+        "point": 0,
+        "name": "x0",
+        "op": "input",
+        "allocated": {
+          "buffer": 0,
+          "size": 64,
+          "offset": 0,
+          "last_use": 2
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 1,
+        "name": "w",
+        "op": "input",
+        "allocated": {
+          "buffer": 1,
+          "size": 64,
+          "offset": 64,
+          "last_use": 9
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 2,
+        "name": "x1",
+        "op": "matmul",
+        "allocated": {
+          "buffer": 2,
+          "size": 64,
+          "offset": 128,
+          "last_use": 3
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 3,
+        "name": "x2",
+        "op": "matmul",
+        "allocated": {
+          "buffer": 3,
+          "size": 64,
+          "offset": 0,
+          "last_use": 4
+        },
+        "reused_slot": true,
+        "reclaimed": [
+          "x0"
+        ]
+      },
+      {
+        "point": 4,
+        "name": "x3",
+        "op": "matmul",
+        "allocated": {
+          "buffer": 4,
+          "size": 64,
+          "offset": 128,
+          "last_use": 5
+        },
+        "reused_slot": true,
+        "reclaimed": [
+          "x1"
+        ]
+      },
+      {
+        "point": 5,
+        "name": "x4",
+        "op": "matmul",
+        "allocated": {
+          "buffer": 5,
+          "size": 64,
+          "offset": 0,
+          "last_use": 6
+        },
+        "reused_slot": true,
+        "reclaimed": [
+          "x2"
+        ]
+      },
+      {
+        "point": 6,
+        "name": "x5",
+        "op": "matmul",
+        "allocated": {
+          "buffer": 6,
+          "size": 64,
+          "offset": 128,
+          "last_use": 7
+        },
+        "reused_slot": true,
+        "reclaimed": [
+          "x3"
+        ]
+      },
+      {
+        "point": 7,
+        "name": "x6",
+        "op": "matmul",
+        "allocated": {
+          "buffer": 7,
+          "size": 64,
+          "offset": 0,
+          "last_use": 8
+        },
+        "reused_slot": true,
+        "reclaimed": [
+          "x4"
+        ]
+      },
+      {
+        "point": 8,
+        "name": "x7",
+        "op": "matmul",
+        "allocated": {
+          "buffer": 8,
+          "size": 64,
+          "offset": 128,
+          "last_use": 9
+        },
+        "reused_slot": true,
+        "reclaimed": [
+          "x5"
+        ]
+      },
+      {
+        "point": 9,
+        "name": "x8",
+        "op": "matmul",
+        "allocated": {
+          "buffer": 9,
+          "size": 64,
+          "offset": 0,
+          "last_use": 9
+        },
+        "reused_slot": true,
+        "reclaimed": [
+          "x6"
+        ]
+      }
+    ],
+    "live_buffers_per_point": [
+      [
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        1,
+        2,
+        3
+      ],
+      [
+        1,
+        3,
+        4
+      ],
+      [
+        1,
+        4,
+        5
+      ],
+      [
+        1,
+        5,
+        6
+      ],
+      [
+        1,
+        6,
+        7
+      ],
+      [
+        1,
+        7,
+        8
+      ],
+      [
+        1,
+        8,
+        9
+      ]
+    ]
+  },
+  "safety": {
+    "simultaneously_live_windows_disjoint": true,
+    "overlapping_live_pairs": []
+  },
+  "budget": {
+    "budget_elements": 192,
+    "budget_bytes": 768,
+    "arena_elements": 192,
+    "within_budget": true,
+    "headroom_elements": 0,
+    "enforced": true
+  },
+  "execution": {
+    "no_reuse": {
+      "peak_elements": 640,
+      "peak_bytes": 2560,
+      "allocations": 10
+    },
+    "reuse": {
+      "peak_elements": 192,
+      "peak_bytes": 768,
+      "allocations": 1
+    },
+    "saved_elements": 448,
+    "saved_bytes": 1792,
+    "reduction_pct": 70.0
+  },
+  "comparison": {
+    "match": true,
+    "rtol": 0.0001,
+    "outputs": {
+      "x8": {
+        "shape": [
+          8,
+          8
+        ],
+        "exact_equal": false,
+        "allclose": true,
+        "max_abs_diff": 2.546585164964199e-11,
+        "mean_abs_diff": 4.912070750151543e-12
+      }
+    }
+  }
+}

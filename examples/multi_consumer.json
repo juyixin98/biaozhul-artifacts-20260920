@@ -1,0 +1,18 @@
+{
+  "description": "One tensor t1 consumed by TWO downstream ops (t2 add and t3 matmul). t1 must stay alive until its last consumer t3.",
+  "seed": 143,
+  "inputs": {
+    "a":  [2, 3],
+    "w":  [3, 4],
+    "w2": [4, 2],
+    "b":  [2, 4],
+    "c":  [2]
+  },
+  "ops": [
+    {"name": "t1", "op": "matmul", "inputs": ["a", "w"]},
+    {"name": "t2", "op": "add",    "inputs": ["t1", "b"]},
+    {"name": "t3", "op": "matmul", "inputs": ["t1", "w2"]},
+    {"name": "t4", "op": "add",    "inputs": ["t3", "c"]}
+  ],
+  "outputs": ["t2", "t4"]
+}

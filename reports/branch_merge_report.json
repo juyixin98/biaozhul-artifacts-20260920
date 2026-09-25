@@ -1,0 +1,716 @@
+{
+  "status": "ok",
+  "dag": {
+    "inputs": [
+      {
+        "name": "x",
+        "shape": [
+          4,
+          4
+        ]
+      },
+      {
+        "name": "w1",
+        "shape": [
+          4,
+          3
+        ]
+      },
+      {
+        "name": "w2",
+        "shape": [
+          4,
+          3
+        ]
+      },
+      {
+        "name": "w3",
+        "shape": [
+          3,
+          2
+        ]
+      },
+      {
+        "name": "w4",
+        "shape": [
+          3,
+          2
+        ]
+      }
+    ],
+    "ops": [
+      {
+        "point": 5,
+        "name": "b1",
+        "op": "matmul",
+        "inputs": [
+          "x",
+          "w1"
+        ],
+        "shape": [
+          4,
+          3
+        ],
+        "is_view": false,
+        "is_output": false
+      },
+      {
+        "point": 6,
+        "name": "b2",
+        "op": "matmul",
+        "inputs": [
+          "x",
+          "w2"
+        ],
+        "shape": [
+          4,
+          3
+        ],
+        "is_view": false,
+        "is_output": false
+      },
+      {
+        "point": 7,
+        "name": "s1",
+        "op": "slice",
+        "inputs": [
+          "b1"
+        ],
+        "shape": [
+          2,
+          3
+        ],
+        "is_view": true,
+        "is_output": false
+      },
+      {
+        "point": 8,
+        "name": "s2",
+        "op": "slice",
+        "inputs": [
+          "b2"
+        ],
+        "shape": [
+          2,
+          3
+        ],
+        "is_view": true,
+        "is_output": false
+      },
+      {
+        "point": 9,
+        "name": "m1",
+        "op": "add",
+        "inputs": [
+          "s1",
+          "s2"
+        ],
+        "shape": [
+          2,
+          3
+        ],
+        "is_view": false,
+        "is_output": true
+      },
+      {
+        "point": 10,
+        "name": "h1",
+        "op": "matmul",
+        "inputs": [
+          "b1",
+          "w3"
+        ],
+        "shape": [
+          4,
+          2
+        ],
+        "is_view": false,
+        "is_output": false
+      },
+      {
+        "point": 11,
+        "name": "h2",
+        "op": "matmul",
+        "inputs": [
+          "b2",
+          "w4"
+        ],
+        "shape": [
+          4,
+          2
+        ],
+        "is_view": false,
+        "is_output": false
+      },
+      {
+        "point": 12,
+        "name": "m2",
+        "op": "add",
+        "inputs": [
+          "h1",
+          "h2"
+        ],
+        "shape": [
+          4,
+          2
+        ],
+        "is_view": false,
+        "is_output": true
+      }
+    ],
+    "outputs": [
+      "m1",
+      "m2"
+    ],
+    "num_tensors": 13
+  },
+  "plan": {
+    "arena": {
+      "elements": 64,
+      "bytes": 256,
+      "dtype": "float32"
+    },
+    "theoretical_peak": {
+      "elements": 64,
+      "bytes": 256
+    },
+    "buffers": [
+      {
+        "id": 0,
+        "root": "x",
+        "size": 16,
+        "capacity": 16,
+        "offset": 0,
+        "window": [
+          0,
+          16
+        ],
+        "birth": 0,
+        "last_use": 6,
+        "alias_family": [
+          "x"
+        ]
+      },
+      {
+        "id": 1,
+        "root": "w1",
+        "size": 12,
+        "capacity": 12,
+        "offset": 16,
+        "window": [
+          16,
+          28
+        ],
+        "birth": 1,
+        "last_use": 5,
+        "alias_family": [
+          "w1"
+        ]
+      },
+      {
+        "id": 2,
+        "root": "w2",
+        "size": 12,
+        "capacity": 12,
+        "offset": 28,
+        "window": [
+          28,
+          40
+        ],
+        "birth": 2,
+        "last_use": 6,
+        "alias_family": [
+          "w2"
+        ]
+      },
+      {
+        "id": 3,
+        "root": "w3",
+        "size": 6,
+        "capacity": 6,
+        "offset": 40,
+        "window": [
+          40,
+          46
+        ],
+        "birth": 3,
+        "last_use": 10,
+        "alias_family": [
+          "w3"
+        ]
+      },
+      {
+        "id": 4,
+        "root": "w4",
+        "size": 6,
+        "capacity": 6,
+        "offset": 46,
+        "window": [
+          46,
+          52
+        ],
+        "birth": 4,
+        "last_use": 11,
+        "alias_family": [
+          "w4"
+        ]
+      },
+      {
+        "id": 5,
+        "root": "b1",
+        "size": 12,
+        "capacity": 12,
+        "offset": 52,
+        "window": [
+          52,
+          64
+        ],
+        "birth": 5,
+        "last_use": 10,
+        "alias_family": [
+          "b1",
+          "s1"
+        ]
+      },
+      {
+        "id": 6,
+        "root": "b2",
+        "size": 12,
+        "capacity": 12,
+        "offset": 16,
+        "window": [
+          16,
+          28
+        ],
+        "birth": 6,
+        "last_use": 11,
+        "alias_family": [
+          "b2",
+          "s2"
+        ]
+      },
+      {
+        "id": 7,
+        "root": "m1",
+        "size": 6,
+        "capacity": 12,
+        "offset": 28,
+        "window": [
+          28,
+          34
+        ],
+        "birth": 9,
+        "last_use": 12,
+        "alias_family": [
+          "m1"
+        ]
+      },
+      {
+        "id": 8,
+        "root": "h1",
+        "size": 8,
+        "capacity": 16,
+        "offset": 0,
+        "window": [
+          0,
+          8
+        ],
+        "birth": 10,
+        "last_use": 12,
+        "alias_family": [
+          "h1"
+        ]
+      },
+      {
+        "id": 9,
+        "root": "h2",
+        "size": 8,
+        "capacity": 12,
+        "offset": 52,
+        "window": [
+          52,
+          60
+        ],
+        "birth": 11,
+        "last_use": 12,
+        "alias_family": [
+          "h2"
+        ]
+      },
+      {
+        "id": 10,
+        "root": "m2",
+        "size": 8,
+        "capacity": 12,
+        "offset": 16,
+        "window": [
+          16,
+          24
+        ],
+        "birth": 12,
+        "last_use": 12,
+        "alias_family": [
+          "m2"
+        ]
+      }
+    ],
+    "views": [
+      {
+        "name": "s1",
+        "root": "b1",
+        "relative_window": [
+          0,
+          6
+        ],
+        "absolute_window": [
+          52,
+          58
+        ],
+        "shape": [
+          2,
+          3
+        ],
+        "strides": [
+          3,
+          1
+        ]
+      },
+      {
+        "name": "s2",
+        "root": "b2",
+        "relative_window": [
+          6,
+          12
+        ],
+        "absolute_window": [
+          22,
+          28
+        ],
+        "shape": [
+          2,
+          3
+        ],
+        "strides": [
+          3,
+          1
+        ]
+      }
+    ],
+    "last_use": {
+      "x": 6,
+      "w1": 5,
+      "w2": 6,
+      "w3": 10,
+      "w4": 11,
+      "b1": 10,
+      "b2": 11,
+      "s1": 9,
+      "s2": 9,
+      "m1": 12,
+      "h1": 12,
+      "h2": 12,
+      "m2": 12
+    },
+    "timeline": [
+      {
+        "point": 0,
+        "name": "x",
+        "op": "input",
+        "allocated": {
+          "buffer": 0,
+          "size": 16,
+          "offset": 0,
+          "last_use": 6
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 1,
+        "name": "w1",
+        "op": "input",
+        "allocated": {
+          "buffer": 1,
+          "size": 12,
+          "offset": 16,
+          "last_use": 5
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 2,
+        "name": "w2",
+        "op": "input",
+        "allocated": {
+          "buffer": 2,
+          "size": 12,
+          "offset": 28,
+          "last_use": 6
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 3,
+        "name": "w3",
+        "op": "input",
+        "allocated": {
+          "buffer": 3,
+          "size": 6,
+          "offset": 40,
+          "last_use": 10
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 4,
+        "name": "w4",
+        "op": "input",
+        "allocated": {
+          "buffer": 4,
+          "size": 6,
+          "offset": 46,
+          "last_use": 11
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 5,
+        "name": "b1",
+        "op": "matmul",
+        "allocated": {
+          "buffer": 5,
+          "size": 12,
+          "offset": 52,
+          "last_use": 10
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 6,
+        "name": "b2",
+        "op": "matmul",
+        "allocated": {
+          "buffer": 6,
+          "size": 12,
+          "offset": 16,
+          "last_use": 11
+        },
+        "reused_slot": true,
+        "reclaimed": [
+          "w1"
+        ]
+      },
+      {
+        "point": 7,
+        "name": "s1",
+        "op": "slice",
+        "allocated": null,
+        "reused_slot": false,
+        "reclaimed": [
+          "x",
+          "w2"
+        ]
+      },
+      {
+        "point": 8,
+        "name": "s2",
+        "op": "slice",
+        "allocated": null,
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 9,
+        "name": "m1",
+        "op": "add",
+        "allocated": {
+          "buffer": 7,
+          "size": 6,
+          "offset": 28,
+          "last_use": 12
+        },
+        "reused_slot": true,
+        "reclaimed": []
+      },
+      {
+        "point": 10,
+        "name": "h1",
+        "op": "matmul",
+        "allocated": {
+          "buffer": 8,
+          "size": 8,
+          "offset": 0,
+          "last_use": 12
+        },
+        "reused_slot": true,
+        "reclaimed": []
+      },
+      {
+        "point": 11,
+        "name": "h2",
+        "op": "matmul",
+        "allocated": {
+          "buffer": 9,
+          "size": 8,
+          "offset": 52,
+          "last_use": 12
+        },
+        "reused_slot": true,
+        "reclaimed": [
+          "w3",
+          "b1"
+        ]
+      },
+      {
+        "point": 12,
+        "name": "m2",
+        "op": "add",
+        "allocated": {
+          "buffer": 10,
+          "size": 8,
+          "offset": 16,
+          "last_use": 12
+        },
+        "reused_slot": true,
+        "reclaimed": [
+          "b2",
+          "w4"
+        ]
+      }
+    ],
+    "live_buffers_per_point": [
+      [
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        1,
+        2,
+        3
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      [
+        3,
+        4,
+        5,
+        6
+      ],
+      [
+        3,
+        4,
+        5,
+        6
+      ],
+      [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      [
+        4,
+        6,
+        7,
+        8,
+        9
+      ],
+      [
+        7,
+        8,
+        9,
+        10
+      ]
+    ]
+  },
+  "safety": {
+    "simultaneously_live_windows_disjoint": true,
+    "overlapping_live_pairs": []
+  },
+  "budget": null,
+  "execution": {
+    "no_reuse": {
+      "peak_elements": 118,
+      "peak_bytes": 472,
+      "allocations": 13
+    },
+    "reuse": {
+      "peak_elements": 64,
+      "peak_bytes": 256,
+      "allocations": 1
+    },
+    "saved_elements": 54,
+    "saved_bytes": 216,
+    "reduction_pct": 45.763
+  },
+  "comparison": {
+    "match": true,
+    "rtol": 0.0001,
+    "outputs": {
+      "m1": {
+        "shape": [
+          2,
+          3
+        ],
+        "exact_equal": false,
+        "allclose": true,
+        "max_abs_diff": 1.6763806343078613e-08,
+        "mean_abs_diff": 6.51925802230835e-09
+      },
+      "m2": {
+        "shape": [
+          4,
+          2
+        ],
+        "exact_equal": false,
+        "allclose": true,
+        "max_abs_diff": 1.4901161193847656e-08,
+        "mean_abs_diff": 4.190951585769653e-09
+      }
+    }
+  }
+}

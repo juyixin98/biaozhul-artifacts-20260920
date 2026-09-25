@@ -1,0 +1,622 @@
+{
+  "status": "ok",
+  "dag": {
+    "inputs": [
+      {
+        "name": "X",
+        "shape": [
+          4,
+          6
+        ]
+      },
+      {
+        "name": "W",
+        "shape": [
+          3,
+          2
+        ]
+      },
+      {
+        "name": "bias",
+        "shape": [
+          3,
+          3
+        ]
+      },
+      {
+        "name": "c",
+        "shape": [
+          2
+        ]
+      }
+    ],
+    "ops": [
+      {
+        "point": 4,
+        "name": "v",
+        "op": "slice",
+        "inputs": [
+          "X"
+        ],
+        "shape": [
+          3,
+          3
+        ],
+        "is_view": true,
+        "is_output": false
+      },
+      {
+        "point": 5,
+        "name": "v2",
+        "op": "slice",
+        "inputs": [
+          "X"
+        ],
+        "shape": [
+          3,
+          3
+        ],
+        "is_view": true,
+        "is_output": false
+      },
+      {
+        "point": 6,
+        "name": "t1",
+        "op": "matmul",
+        "inputs": [
+          "v",
+          "W"
+        ],
+        "shape": [
+          3,
+          2
+        ],
+        "is_view": false,
+        "is_output": false
+      },
+      {
+        "point": 7,
+        "name": "t3",
+        "op": "add",
+        "inputs": [
+          "v",
+          "v2"
+        ],
+        "shape": [
+          3,
+          3
+        ],
+        "is_view": false,
+        "is_output": false
+      },
+      {
+        "point": 8,
+        "name": "v3",
+        "op": "slice",
+        "inputs": [
+          "v2"
+        ],
+        "shape": [
+          2,
+          2
+        ],
+        "is_view": true,
+        "is_output": true
+      },
+      {
+        "point": 9,
+        "name": "t4",
+        "op": "add",
+        "inputs": [
+          "t3",
+          "bias"
+        ],
+        "shape": [
+          3,
+          3
+        ],
+        "is_view": false,
+        "is_output": true
+      },
+      {
+        "point": 10,
+        "name": "t5",
+        "op": "add",
+        "inputs": [
+          "t1",
+          "c"
+        ],
+        "shape": [
+          3,
+          2
+        ],
+        "is_view": false,
+        "is_output": true
+      }
+    ],
+    "outputs": [
+      "t4",
+      "t5",
+      "v3"
+    ],
+    "num_tensors": 11
+  },
+  "plan": {
+    "arena": {
+      "elements": 65,
+      "bytes": 260,
+      "dtype": "float32"
+    },
+    "theoretical_peak": {
+      "elements": 59,
+      "bytes": 236
+    },
+    "buffers": [
+      {
+        "id": 0,
+        "root": "X",
+        "size": 24,
+        "capacity": 24,
+        "offset": 0,
+        "window": [
+          0,
+          24
+        ],
+        "birth": 0,
+        "last_use": 10,
+        "alias_family": [
+          "X",
+          "v",
+          "v2",
+          "v3"
+        ]
+      },
+      {
+        "id": 1,
+        "root": "W",
+        "size": 6,
+        "capacity": 6,
+        "offset": 24,
+        "window": [
+          24,
+          30
+        ],
+        "birth": 1,
+        "last_use": 6,
+        "alias_family": [
+          "W"
+        ]
+      },
+      {
+        "id": 2,
+        "root": "bias",
+        "size": 9,
+        "capacity": 9,
+        "offset": 30,
+        "window": [
+          30,
+          39
+        ],
+        "birth": 2,
+        "last_use": 9,
+        "alias_family": [
+          "bias"
+        ]
+      },
+      {
+        "id": 3,
+        "root": "c",
+        "size": 2,
+        "capacity": 2,
+        "offset": 39,
+        "window": [
+          39,
+          41
+        ],
+        "birth": 3,
+        "last_use": 10,
+        "alias_family": [
+          "c"
+        ]
+      },
+      {
+        "id": 4,
+        "root": "t1",
+        "size": 6,
+        "capacity": 6,
+        "offset": 41,
+        "window": [
+          41,
+          47
+        ],
+        "birth": 6,
+        "last_use": 10,
+        "alias_family": [
+          "t1"
+        ]
+      },
+      {
+        "id": 5,
+        "root": "t3",
+        "size": 9,
+        "capacity": 9,
+        "offset": 47,
+        "window": [
+          47,
+          56
+        ],
+        "birth": 7,
+        "last_use": 9,
+        "alias_family": [
+          "t3"
+        ]
+      },
+      {
+        "id": 6,
+        "root": "t4",
+        "size": 9,
+        "capacity": 9,
+        "offset": 56,
+        "window": [
+          56,
+          65
+        ],
+        "birth": 9,
+        "last_use": 10,
+        "alias_family": [
+          "t4"
+        ]
+      },
+      {
+        "id": 7,
+        "root": "t5",
+        "size": 6,
+        "capacity": 6,
+        "offset": 24,
+        "window": [
+          24,
+          30
+        ],
+        "birth": 10,
+        "last_use": 10,
+        "alias_family": [
+          "t5"
+        ]
+      }
+    ],
+    "views": [
+      {
+        "name": "v",
+        "root": "X",
+        "relative_window": [
+          8,
+          23
+        ],
+        "absolute_window": [
+          8,
+          23
+        ],
+        "shape": [
+          3,
+          3
+        ],
+        "strides": [
+          6,
+          1
+        ]
+      },
+      {
+        "name": "v2",
+        "root": "X",
+        "relative_window": [
+          0,
+          15
+        ],
+        "absolute_window": [
+          0,
+          15
+        ],
+        "shape": [
+          3,
+          3
+        ],
+        "strides": [
+          6,
+          1
+        ]
+      },
+      {
+        "name": "v3",
+        "root": "X",
+        "relative_window": [
+          0,
+          8
+        ],
+        "absolute_window": [
+          0,
+          8
+        ],
+        "shape": [
+          2,
+          2
+        ],
+        "strides": [
+          6,
+          1
+        ]
+      }
+    ],
+    "last_use": {
+      "X": 5,
+      "W": 6,
+      "bias": 9,
+      "c": 10,
+      "v": 7,
+      "v2": 8,
+      "t1": 10,
+      "t3": 9,
+      "v3": 10,
+      "t4": 10,
+      "t5": 10
+    },
+    "timeline": [
+      {
+        "point": 0,
+        "name": "X",
+        "op": "input",
+        "allocated": {
+          "buffer": 0,
+          "size": 24,
+          "offset": 0,
+          "last_use": 10
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 1,
+        "name": "W",
+        "op": "input",
+        "allocated": {
+          "buffer": 1,
+          "size": 6,
+          "offset": 24,
+          "last_use": 6
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 2,
+        "name": "bias",
+        "op": "input",
+        "allocated": {
+          "buffer": 2,
+          "size": 9,
+          "offset": 30,
+          "last_use": 9
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 3,
+        "name": "c",
+        "op": "input",
+        "allocated": {
+          "buffer": 3,
+          "size": 2,
+          "offset": 39,
+          "last_use": 10
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 4,
+        "name": "v",
+        "op": "slice",
+        "allocated": null,
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 5,
+        "name": "v2",
+        "op": "slice",
+        "allocated": null,
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 6,
+        "name": "t1",
+        "op": "matmul",
+        "allocated": {
+          "buffer": 4,
+          "size": 6,
+          "offset": 41,
+          "last_use": 10
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 7,
+        "name": "t3",
+        "op": "add",
+        "allocated": {
+          "buffer": 5,
+          "size": 9,
+          "offset": 47,
+          "last_use": 9
+        },
+        "reused_slot": false,
+        "reclaimed": [
+          "W"
+        ]
+      },
+      {
+        "point": 8,
+        "name": "v3",
+        "op": "slice",
+        "allocated": null,
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 9,
+        "name": "t4",
+        "op": "add",
+        "allocated": {
+          "buffer": 6,
+          "size": 9,
+          "offset": 56,
+          "last_use": 10
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 10,
+        "name": "t5",
+        "op": "add",
+        "allocated": {
+          "buffer": 7,
+          "size": 6,
+          "offset": 24,
+          "last_use": 10
+        },
+        "reused_slot": true,
+        "reclaimed": [
+          "bias",
+          "t3"
+        ]
+      }
+    ],
+    "live_buffers_per_point": [
+      [
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        1,
+        2,
+        3
+      ],
+      [
+        0,
+        1,
+        2,
+        3
+      ],
+      [
+        0,
+        1,
+        2,
+        3
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        2,
+        3,
+        4,
+        5
+      ],
+      [
+        0,
+        2,
+        3,
+        4,
+        5
+      ],
+      [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      [
+        0,
+        3,
+        4,
+        6,
+        7
+      ]
+    ]
+  },
+  "safety": {
+    "simultaneously_live_windows_disjoint": true,
+    "overlapping_live_pairs": []
+  },
+  "budget": null,
+  "execution": {
+    "no_reuse": {
+      "peak_elements": 93,
+      "peak_bytes": 372,
+      "allocations": 11
+    },
+    "reuse": {
+      "peak_elements": 65,
+      "peak_bytes": 260,
+      "allocations": 1
+    },
+    "saved_elements": 28,
+    "saved_bytes": 112,
+    "reduction_pct": 30.108
+  },
+  "comparison": {
+    "match": true,
+    "rtol": 0.0001,
+    "outputs": {
+      "t4": {
+        "shape": [
+          3,
+          3
+        ],
+        "exact_equal": true,
+        "allclose": true,
+        "max_abs_diff": 0.0,
+        "mean_abs_diff": 0.0
+      },
+      "t5": {
+        "shape": [
+          3,
+          2
+        ],
+        "exact_equal": true,
+        "allclose": true,
+        "max_abs_diff": 0.0,
+        "mean_abs_diff": 0.0
+      },
+      "v3": {
+        "shape": [
+          2,
+          2
+        ],
+        "exact_equal": true,
+        "allclose": true,
+        "max_abs_diff": 0.0,
+        "mean_abs_diff": 0.0
+      }
+    }
+  }
+}

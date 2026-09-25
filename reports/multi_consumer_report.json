@@ -1,0 +1,505 @@
+{
+  "status": "ok",
+  "dag": {
+    "inputs": [
+      {
+        "name": "a",
+        "shape": [
+          2,
+          3
+        ]
+      },
+      {
+        "name": "w",
+        "shape": [
+          3,
+          4
+        ]
+      },
+      {
+        "name": "w2",
+        "shape": [
+          4,
+          2
+        ]
+      },
+      {
+        "name": "b",
+        "shape": [
+          2,
+          4
+        ]
+      },
+      {
+        "name": "c",
+        "shape": [
+          2
+        ]
+      }
+    ],
+    "ops": [
+      {
+        "point": 5,
+        "name": "t1",
+        "op": "matmul",
+        "inputs": [
+          "a",
+          "w"
+        ],
+        "shape": [
+          2,
+          4
+        ],
+        "is_view": false,
+        "is_output": false
+      },
+      {
+        "point": 6,
+        "name": "t2",
+        "op": "add",
+        "inputs": [
+          "t1",
+          "b"
+        ],
+        "shape": [
+          2,
+          4
+        ],
+        "is_view": false,
+        "is_output": true
+      },
+      {
+        "point": 7,
+        "name": "t3",
+        "op": "matmul",
+        "inputs": [
+          "t1",
+          "w2"
+        ],
+        "shape": [
+          2,
+          2
+        ],
+        "is_view": false,
+        "is_output": false
+      },
+      {
+        "point": 8,
+        "name": "t4",
+        "op": "add",
+        "inputs": [
+          "t3",
+          "c"
+        ],
+        "shape": [
+          2,
+          2
+        ],
+        "is_view": false,
+        "is_output": true
+      }
+    ],
+    "outputs": [
+      "t2",
+      "t4"
+    ],
+    "num_tensors": 9
+  },
+  "plan": {
+    "arena": {
+      "elements": 44,
+      "bytes": 176,
+      "dtype": "float32"
+    },
+    "theoretical_peak": {
+      "elements": 44,
+      "bytes": 176
+    },
+    "buffers": [
+      {
+        "id": 0,
+        "root": "a",
+        "size": 6,
+        "capacity": 6,
+        "offset": 0,
+        "window": [
+          0,
+          6
+        ],
+        "birth": 0,
+        "last_use": 5,
+        "alias_family": [
+          "a"
+        ]
+      },
+      {
+        "id": 1,
+        "root": "w",
+        "size": 12,
+        "capacity": 12,
+        "offset": 6,
+        "window": [
+          6,
+          18
+        ],
+        "birth": 1,
+        "last_use": 5,
+        "alias_family": [
+          "w"
+        ]
+      },
+      {
+        "id": 2,
+        "root": "w2",
+        "size": 8,
+        "capacity": 8,
+        "offset": 18,
+        "window": [
+          18,
+          26
+        ],
+        "birth": 2,
+        "last_use": 7,
+        "alias_family": [
+          "w2"
+        ]
+      },
+      {
+        "id": 3,
+        "root": "b",
+        "size": 8,
+        "capacity": 8,
+        "offset": 26,
+        "window": [
+          26,
+          34
+        ],
+        "birth": 3,
+        "last_use": 6,
+        "alias_family": [
+          "b"
+        ]
+      },
+      {
+        "id": 4,
+        "root": "c",
+        "size": 2,
+        "capacity": 2,
+        "offset": 34,
+        "window": [
+          34,
+          36
+        ],
+        "birth": 4,
+        "last_use": 8,
+        "alias_family": [
+          "c"
+        ]
+      },
+      {
+        "id": 5,
+        "root": "t1",
+        "size": 8,
+        "capacity": 8,
+        "offset": 36,
+        "window": [
+          36,
+          44
+        ],
+        "birth": 5,
+        "last_use": 7,
+        "alias_family": [
+          "t1"
+        ]
+      },
+      {
+        "id": 6,
+        "root": "t2",
+        "size": 8,
+        "capacity": 12,
+        "offset": 6,
+        "window": [
+          6,
+          14
+        ],
+        "birth": 6,
+        "last_use": 8,
+        "alias_family": [
+          "t2"
+        ]
+      },
+      {
+        "id": 7,
+        "root": "t3",
+        "size": 4,
+        "capacity": 6,
+        "offset": 0,
+        "window": [
+          0,
+          4
+        ],
+        "birth": 7,
+        "last_use": 8,
+        "alias_family": [
+          "t3"
+        ]
+      },
+      {
+        "id": 8,
+        "root": "t4",
+        "size": 4,
+        "capacity": 8,
+        "offset": 18,
+        "window": [
+          18,
+          22
+        ],
+        "birth": 8,
+        "last_use": 8,
+        "alias_family": [
+          "t4"
+        ]
+      }
+    ],
+    "views": [],
+    "last_use": {
+      "a": 5,
+      "w": 5,
+      "w2": 7,
+      "b": 6,
+      "c": 8,
+      "t1": 7,
+      "t2": 8,
+      "t3": 8,
+      "t4": 8
+    },
+    "timeline": [
+      {
+        "point": 0,
+        "name": "a",
+        "op": "input",
+        "allocated": {
+          "buffer": 0,
+          "size": 6,
+          "offset": 0,
+          "last_use": 5
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 1,
+        "name": "w",
+        "op": "input",
+        "allocated": {
+          "buffer": 1,
+          "size": 12,
+          "offset": 6,
+          "last_use": 5
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 2,
+        "name": "w2",
+        "op": "input",
+        "allocated": {
+          "buffer": 2,
+          "size": 8,
+          "offset": 18,
+          "last_use": 7
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 3,
+        "name": "b",
+        "op": "input",
+        "allocated": {
+          "buffer": 3,
+          "size": 8,
+          "offset": 26,
+          "last_use": 6
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 4,
+        "name": "c",
+        "op": "input",
+        "allocated": {
+          "buffer": 4,
+          "size": 2,
+          "offset": 34,
+          "last_use": 8
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 5,
+        "name": "t1",
+        "op": "matmul",
+        "allocated": {
+          "buffer": 5,
+          "size": 8,
+          "offset": 36,
+          "last_use": 7
+        },
+        "reused_slot": false,
+        "reclaimed": []
+      },
+      {
+        "point": 6,
+        "name": "t2",
+        "op": "add",
+        "allocated": {
+          "buffer": 6,
+          "size": 8,
+          "offset": 6,
+          "last_use": 8
+        },
+        "reused_slot": true,
+        "reclaimed": [
+          "a",
+          "w"
+        ]
+      },
+      {
+        "point": 7,
+        "name": "t3",
+        "op": "matmul",
+        "allocated": {
+          "buffer": 7,
+          "size": 4,
+          "offset": 0,
+          "last_use": 8
+        },
+        "reused_slot": true,
+        "reclaimed": [
+          "b"
+        ]
+      },
+      {
+        "point": 8,
+        "name": "t4",
+        "op": "add",
+        "allocated": {
+          "buffer": 8,
+          "size": 4,
+          "offset": 18,
+          "last_use": 8
+        },
+        "reused_slot": true,
+        "reclaimed": [
+          "w2",
+          "t1"
+        ]
+      }
+    ],
+    "live_buffers_per_point": [
+      [
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        1,
+        2,
+        3
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      [
+        2,
+        4,
+        5,
+        6,
+        7
+      ],
+      [
+        4,
+        6,
+        7,
+        8
+      ]
+    ]
+  },
+  "safety": {
+    "simultaneously_live_windows_disjoint": true,
+    "overlapping_live_pairs": []
+  },
+  "budget": null,
+  "execution": {
+    "no_reuse": {
+      "peak_elements": 60,
+      "peak_bytes": 240,
+      "allocations": 9
+    },
+    "reuse": {
+      "peak_elements": 44,
+      "peak_bytes": 176,
+      "allocations": 1
+    },
+    "saved_elements": 16,
+    "saved_bytes": 64,
+    "reduction_pct": 26.667
+  },
+  "comparison": {
+    "match": true,
+    "rtol": 0.0001,
+    "outputs": {
+      "t2": {
+        "shape": [
+          2,
+          4
+        ],
+        "exact_equal": false,
+        "allclose": true,
+        "max_abs_diff": 2.9802322387695312e-08,
+        "mean_abs_diff": 5.587935447692871e-09
+      },
+      "t4": {
+        "shape": [
+          2,
+          2
+        ],
+        "exact_equal": false,
+        "allclose": true,
+        "max_abs_diff": 2.9802322387695312e-08,
+        "mean_abs_diff": 7.450580596923828e-09
+      }
+    }
+  }
+}
