@@ -1,0 +1,16 @@
+{
+  "sample_rate": 8000,
+  "synthesize": {
+    "keys": "159#",
+    "tone_ms": 100,
+    "gap_ms": 50,
+    "snr_db": 20.0,
+    "freq_offset_pct": 1.0,
+    "seed": 42
+  },
+  "detector": {
+    "min_tone_ms": 40.0,
+    "twist_min_db": -8.0,
+    "twist_max_db": 4.0
+  }
+}
