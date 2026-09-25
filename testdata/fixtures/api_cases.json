@@ -1,0 +1,83 @@
+[
+  {
+    "name": "health",
+    "method": "GET",
+    "path": "/healthz",
+    "want_status": 200,
+    "want_body_contains": "\"status\":\"ok\""
+  },
+  {
+    "name": "policy_listing",
+    "method": "GET",
+    "path": "/v1/policies",
+    "want_status": 200,
+    "want_body_contains": "\"unlisted\":\"unknown\""
+  },
+  {
+    "name": "evaluate_allow_with_alternatives",
+    "method": "POST",
+    "path": "/v1/evaluate",
+    "body": {"expression": "MIT OR GPL-3.0-only"},
+    "want_status": 200,
+    "want_verdict": "allow",
+    "want_selection": "MIT",
+    "want_alternatives_count": 2
+  },
+  {
+    "name": "evaluate_deny_and",
+    "method": "POST",
+    "path": "/v1/evaluate",
+    "body": {"expression": "MIT AND GPL-3.0-only"},
+    "want_status": 200,
+    "want_verdict": "deny"
+  },
+  {
+    "name": "evaluate_unknown",
+    "method": "POST",
+    "path": "/v1/evaluate",
+    "body": {"expression": "Unknown-X-1.0"},
+    "want_status": 200,
+    "want_verdict": "unknown"
+  },
+  {
+    "name": "evaluate_parse_error",
+    "method": "POST",
+    "path": "/v1/evaluate",
+    "body": {"expression": "MIT AND"},
+    "want_status": 400,
+    "want_error_code": "parse_error"
+  },
+  {
+    "name": "evaluate_missing_field",
+    "method": "POST",
+    "path": "/v1/evaluate",
+    "body": {},
+    "want_status": 400,
+    "want_error_code": "missing_expression"
+  },
+  {
+    "name": "evaluate_invalid_json",
+    "method": "POST",
+    "path": "/v1/evaluate",
+    "raw_body": "{not-json",
+    "want_status": 400,
+    "want_error_code": "invalid_json"
+  },
+  {
+    "name": "method_not_allowed",
+    "method": "GET",
+    "path": "/v1/evaluate",
+    "want_status": 405,
+    "want_error_code": "method_not_allowed"
+  },
+  {
+    "name": "second_request_cache_hit",
+    "method": "POST",
+    "path": "/v1/evaluate",
+    "body": {"expression": "Apache-2.0 AND MIT"},
+    "want_status": 200,
+    "want_verdict": "allow",
+    "want_cached": true,
+    "send_twice": true
+  }
+]

@@ -1,0 +1,129 @@
+{
+  "started_at": "2026-09-23T19:15:41Z",
+  "finished_at": "2026-09-23T19:15:43Z",
+  "repo_root": "/home/admin/Downloads/biaozhul/opp108/b",
+  "go_version": "go version go1.22.2 linux/amd64",
+  "command_results": [
+    {
+      "name": "go_version",
+      "argv": "go version",
+      "expect_exit": 0,
+      "actual_exit": 0,
+      "pass": true,
+      "duration_ms": 3,
+      "stdout": "go version go1.22.2 linux/amd64\n",
+      "stderr": ""
+    },
+    {
+      "name": "go_vet",
+      "argv": "go vet ./...",
+      "expect_exit": 0,
+      "actual_exit": 0,
+      "pass": true,
+      "duration_ms": 164,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "go_build",
+      "argv": "go build -o bin/licensejudge ./cmd/licensejudge",
+      "expect_exit": 0,
+      "actual_exit": 0,
+      "pass": true,
+      "duration_ms": 101,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "go_test_all",
+      "argv": "go test -count=1 ./...",
+      "expect_exit": 0,
+      "actual_exit": 0,
+      "pass": true,
+      "duration_ms": 460,
+      "stdout": "?   \tlicensejudge/cmd/licensejudge\t[no test files]\nok  \tlicensejudge/internal/cache\t0.005s\nok  \tlicensejudge/internal/expression\t0.003s\nok  \tlicensejudge/internal/judge\t0.003s\nok  \tlicensejudge/internal/policy\t0.004s\n?   \tlicensejudge/scripts/fixturetest\t[no test files]\nok  \tlicensejudge/internal/server\t0.010s\nok  \tlicensejudge/tests\t0.011s\n",
+      "stderr": ""
+    },
+    {
+      "name": "go_test_race",
+      "argv": "go test -race -count=1 ./internal/...",
+      "expect_exit": 0,
+      "actual_exit": 0,
+      "pass": true,
+      "duration_ms": 1531,
+      "stdout": "ok  \tlicensejudge/internal/cache\t1.022s\nok  \tlicensejudge/internal/expression\t1.024s\nok  \tlicensejudge/internal/judge\t1.020s\nok  \tlicensejudge/internal/policy\t1.020s\nok  \tlicensejudge/internal/server\t1.028s\n",
+      "stderr": ""
+    },
+    {
+      "name": "cli_allow",
+      "argv": "bin/licensejudge eval --policy configs/policy.json \"MIT OR GPL-3.0-only\"",
+      "expect_exit": 0,
+      "actual_exit": 0,
+      "pass": true,
+      "duration_ms": 5,
+      "stdout": "{\n  \"verdict\": \"allow\",\n  \"selection\": \"MIT\",\n  \"reasons\": [\n    \"OR 左侧允许，选择左侧分支即可满足策略\",\n    \"许可证 MIT 被策略允许\"\n  ],\n  \"alternatives\": [\n    {\n      \"expression\": \"MIT\",\n      \"verdict\": \"allow\",\n      \"reasons\": [\n        \"许可证 MIT 被策略允许\"\n      ]\n    },\n    {\n      \"expression\": \"GPL-3.0-only\",\n      \"verdict\": \"deny\",\n      \"reasons\": [\n        \"许可证 GPL-3.0-only 被策略拒绝\"\n      ]\n    }\n  ],\n  \"leaves\": [\n    {\n      \"license\": \"MIT\",\n      \"verdict\": \"allow\",\n      \"reasons\": [\n        \"许可证 MIT 被策略允许\"\n      ]\n    },\n    {\n      \"license\": \"GPL-3.0-only\",\n      \"verdict\": \"deny\",\n      \"reasons\": [\n        \"许可证 GPL-3.0-only 被策略拒绝\"\n      ]\n    }\n  ],\n  \"disclaimer\": \"本结果仅为基于所给配置的自动化合规判定，不构成法律意见；许可证义务与例外的实际适用性需由具备资质的人员复核。\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "cli_deny",
+      "argv": "bin/licensejudge eval --policy configs/policy.json \"MIT AND GPL-3.0-only\"",
+      "expect_exit": 1,
+      "actual_exit": 1,
+      "pass": true,
+      "duration_ms": 3,
+      "stdout": "{\n  \"verdict\": \"deny\",\n  \"reasons\": [\n    \"AND 右侧被拒绝，整个组合拒绝\",\n    \"许可证 GPL-3.0-only 被策略拒绝\"\n  ],\n  \"leaves\": [\n    {\n      \"license\": \"MIT\",\n      \"verdict\": \"allow\",\n      \"reasons\": [\n        \"许可证 MIT 被策略允许\"\n      ]\n    },\n    {\n      \"license\": \"GPL-3.0-only\",\n      \"verdict\": \"deny\",\n      \"reasons\": [\n        \"许可证 GPL-3.0-only 被策略拒绝\"\n      ]\n    }\n  ],\n  \"disclaimer\": \"本结果仅为基于所给配置的自动化合规判定，不构成法律意见；许可证义务与例外的实际适用性需由具备资质的人员复核。\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "cli_unknown",
+      "argv": "bin/licensejudge eval --policy configs/policy.json Never-Heard-Of-License-42.0",
+      "expect_exit": 3,
+      "actual_exit": 3,
+      "pass": true,
+      "duration_ms": 3,
+      "stdout": "{\n  \"verdict\": \"unknown\",\n  \"reasons\": [\n    \"许可证 Never-Heard-Of-License-42.0 未在策略中列出，裁决为未知（不自动通过）\"\n  ],\n  \"leaves\": [\n    {\n      \"license\": \"Never-Heard-Of-License-42.0\",\n      \"verdict\": \"unknown\",\n      \"reasons\": [\n        \"许可证 Never-Heard-Of-License-42.0 未在策略中列出，裁决为未知（不自动通过）\"\n      ]\n    }\n  ],\n  \"disclaimer\": \"本结果仅为基于所给配置的自动化合规判定，不构成法律意见；许可证义务与例外的实际适用性需由具备资质的人员复核。\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "cli_parse_error",
+      "argv": "bin/licensejudge eval --policy configs/policy.json \"MIT AND\"",
+      "expect_exit": 2,
+      "actual_exit": 2,
+      "pass": true,
+      "duration_ms": 3,
+      "stdout": "",
+      "stderr": "表达式错误: 位置 7: 表达式意外结束，此处缺少许可证或左括号\n"
+    },
+    {
+      "name": "cli_with_combo",
+      "argv": "bin/licensejudge eval --policy configs/policy.json \"LGPL-2.1-only WITH Classpath-exception-2.0\"",
+      "expect_exit": 0,
+      "actual_exit": 0,
+      "pass": true,
+      "duration_ms": 3,
+      "stdout": "{\n  \"verdict\": \"allow\",\n  \"selection\": \"LGPL-2.1-only WITH Classpath-exception-2.0\",\n  \"reasons\": [\n    \"组合 LGPL-2.1-only WITH Classpath-exception-2.0 被策略允许\"\n  ],\n  \"leaves\": [\n    {\n      \"license\": \"LGPL-2.1-only\",\n      \"exception\": \"Classpath-exception-2.0\",\n      \"verdict\": \"allow\",\n      \"reasons\": [\n        \"组合 LGPL-2.1-only WITH Classpath-exception-2.0 被策略允许\"\n      ]\n    }\n  ],\n  \"disclaimer\": \"本结果仅为基于所给配置的自动化合规判定，不构成法律意见；许可证义务与例外的实际适用性需由具备资质的人员复核。\"\n}\n",
+      "stderr": ""
+    }
+  ],
+  "http_checks": [
+    {
+      "name": "healthz",
+      "pass": true,
+      "status_code": 200,
+      "detail": "{\"status\":\"ok\"}\n"
+    },
+    {
+      "name": "evaluate:allow",
+      "pass": true,
+      "status_code": 200,
+      "detail": "{\"cached\":false,\"expression\":\"(MIT OR GPL-3.0-only) AND Apache-2.0\",\"job_id\":\"job-18844c039d88836e\",\"result\":{\"verdict\":\"allow\",\"selection\":\"(MIT OR GPL-3.0-only) AND Apache-2.0\",\"reasons\":[\"AND 两侧均被允许，组合允许\"],\"leaves\":[{\"license\":\"MIT\",\"verdict\":\"allow\",\"reasons\":[\"许可证 MIT 被策略允许\"]},{\"license\":\"GPL-3.0-only\",\"verdict\":\"deny\",\"reasons\":[\"许可证 GPL-3.0-only 被策略拒绝\"]},{\"license\":\"Apache-2.0\",\"verdict\":\"allow\",\"reasons\":[\"许可证 Apache-2.0 被策略允许\"]}],\"disclaimer\":\"本结果仅为基于所给配置的自动化合规判定，不构成法律意见；许可证义务与例外的实际适用性需由具备资质的人员复核。\"}}\n"
+    },
+    {
+      "name": "evaluate:unknown",
+      "pass": true,
+      "status_code": 200,
+      "detail": "{\"cached\":false,\"expression\":\"Unknown-Smoke-X\",\"job_id\":\"job-136f677394414c3f\",\"result\":{\"verdict\":\"unknown\",\"reasons\":[\"许可证 Unknown-Smoke-X 未在策略中列出，裁决为未知（不自动通过）\"],\"leaves\":[{\"license\":\"Unknown-Smoke-X\",\"verdict\":\"unknown\",\"reasons\":[\"许可证 Unknown-Smoke-X 未在策略中列出，裁决为未知（不自动通过）\"]}],\"disclaimer\":\"本结果仅为基于所给配置的自动化合规判定，不构成法律意见；许可证义务与例外的实际适用性需由具备资质的人员复核。\"}}\n"
+    }
+  ],
+  "all_passed": true
+}

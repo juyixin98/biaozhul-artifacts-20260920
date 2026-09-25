@@ -1,0 +1,77 @@
+[
+  {
+    "name": "empty_expression",
+    "expression": "",
+    "want_error_contains": "为空"
+  },
+  {
+    "name": "whitespace_only",
+    "expression": "   ",
+    "want_error_contains": "为空"
+  },
+  {
+    "name": "dangling_and",
+    "expression": "MIT AND",
+    "want_error_contains": "缺少许可证"
+  },
+  {
+    "name": "leading_operator",
+    "expression": "AND MIT",
+    "want_error_contains": "缺少许可证"
+  },
+  {
+    "name": "dangling_with",
+    "expression": "MIT WITH",
+    "want_error_contains": "例外"
+  },
+  {
+    "name": "with_as_head",
+    "expression": "WITH Classpath-exception-2.0",
+    "want_error_contains": "WITH"
+  },
+  {
+    "name": "missing_rparen",
+    "expression": "(MIT OR Apache-2.0",
+    "want_error_contains": "右括号"
+  },
+  {
+    "name": "unexpected_rparen",
+    "expression": "MIT)",
+    "want_error_contains": "多余记号"
+  },
+  {
+    "name": "two_idents_no_operator",
+    "expression": "MIT Apache-2.0",
+    "want_error_contains": "多余记号"
+  },
+  {
+    "name": "lowercase_keyword",
+    "expression": "MIT and Apache-2.0",
+    "want_error_contains": ""
+  },
+  {
+    "name": "spdx_plus_not_supported",
+    "expression": "GPL-2.0+",
+    "want_error_contains": "+"
+  },
+  {
+    "name": "with_over_parenthesized_group",
+    "expression": "(MIT OR Apache-2.0) WITH Classpath-exception-2.0",
+    "want_error_contains": "多余记号"
+  },
+  {
+    "name": "with_then_parenthesized_exception",
+    "expression": "MIT WITH (Classpath-exception-2.0)",
+    "want_error_contains": "括号"
+  },
+  {
+    "name": "double_operator",
+    "expression": "MIT AND OR Apache-2.0",
+    "want_error_contains": "缺少许可证"
+  },
+  {
+    "name": "illegal_character",
+    "expression": "MIT @ Apache-2.0",
+    "want_error_contains": "非法字符"
+  }
+]

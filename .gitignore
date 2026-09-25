@@ -1,0 +1,11 @@
+# 构建产物
+/bin/
+
+# 运行时工作目录与缓存目录（二者分离，均不入库）
+/.work/
+/.cache/
+/.smoke-work/
+/.smoke-cache/
+
+# 验收报告随交付物保留一份基线（reports/fixture-report.json）；
+# 本地重跑会覆盖它，属正常现象。

@@ -1,0 +1,122 @@
+[
+  {
+    "name": "single_allow",
+    "expression": "MIT",
+    "want_verdict": "allow",
+    "want_selection": "MIT"
+  },
+  {
+    "name": "single_deny",
+    "expression": "GPL-3.0-only",
+    "want_verdict": "deny",
+    "want_reason_contains": "被策略拒绝"
+  },
+  {
+    "name": "unknown_license_not_auto_passed",
+    "expression": "Brand-New-Weird-License-9.9",
+    "want_verdict": "unknown",
+    "want_reason_contains": "不自动通过"
+  },
+  {
+    "name": "and_both_allow",
+    "expression": "MIT AND Apache-2.0",
+    "want_verdict": "allow"
+  },
+  {
+    "name": "and_one_deny",
+    "expression": "MIT AND GPL-3.0-only",
+    "want_verdict": "deny"
+  },
+  {
+    "name": "and_deny_beats_unknown",
+    "expression": "GPL-3.0-only AND Brand-New-Weird-License-9.9",
+    "want_verdict": "deny"
+  },
+  {
+    "name": "and_unknown_blocks_allow",
+    "expression": "MIT AND Brand-New-Weird-License-9.9",
+    "want_verdict": "unknown"
+  },
+  {
+    "name": "or_prefers_allow_left",
+    "expression": "MIT OR GPL-3.0-only",
+    "want_verdict": "allow",
+    "want_selection": "MIT"
+  },
+  {
+    "name": "or_prefers_allow_right",
+    "expression": "GPL-3.0-only OR MIT",
+    "want_verdict": "allow",
+    "want_selection": "MIT"
+  },
+  {
+    "name": "or_all_deny",
+    "expression": "GPL-2.0-only OR GPL-3.0-only OR SSPL-1.0",
+    "want_verdict": "deny",
+    "want_no_selection": true,
+    "want_reason_contains": "均被拒绝"
+  },
+  {
+    "name": "or_deny_and_unknown_is_unknown",
+    "expression": "GPL-3.0-only OR Brand-New-Weird-License-9.9",
+    "want_verdict": "unknown"
+  },
+  {
+    "name": "precedence_and_binds_tighter_than_or",
+    "expression": "MIT OR GPL-3.0-only AND GPL-2.0-only",
+    "want_verdict": "allow",
+    "want_selection": "MIT"
+  },
+  {
+    "name": "parentheses_change_grouping",
+    "expression": "(MIT OR GPL-3.0-only) AND GPL-2.0-only",
+    "want_verdict": "deny"
+  },
+  {
+    "name": "nested_parentheses",
+    "expression": "((MIT OR Apache-2.0) AND BSD-3-Clause) OR AGPL-3.0-only",
+    "want_verdict": "allow",
+    "want_selection": "(MIT OR Apache-2.0) AND BSD-3-Clause"
+  },
+  {
+    "name": "with_classpath_on_lgpl_allowed",
+    "expression": "LGPL-2.1-only WITH Classpath-exception-2.0",
+    "want_verdict": "allow"
+  },
+  {
+    "name": "with_exception_not_bound_to_mit",
+    "expression": "MIT WITH Classpath-exception-2.0",
+    "want_verdict": "deny",
+    "want_reason_contains": "绑定"
+  },
+  {
+    "name": "with_denied_license_exception_cannot_rescue",
+    "expression": "GPL-3.0-only WITH Classpath-exception-2.0",
+    "want_verdict": "deny"
+  },
+  {
+    "name": "with_denied_exception",
+    "expression": "LGPL-2.1-only WITH Bison-exception-2.2",
+    "want_verdict": "deny"
+  },
+  {
+    "name": "with_unknown_exception_is_unknown",
+    "expression": "MIT WITH No-Such-Exception-X",
+    "want_verdict": "unknown"
+  },
+  {
+    "name": "with_unknown_license_known_exception_is_unknown",
+    "expression": "Brand-New-Weird-License-9.9 WITH Classpath-exception-2.0",
+    "want_verdict": "unknown"
+  },
+  {
+    "name": "complex_or_and_with_combination",
+    "expression": "(MIT OR GPL-3.0-only) AND (Apache-2.0 OR LGPL-2.1-only WITH Classpath-exception-2.0)",
+    "want_verdict": "allow"
+  },
+  {
+    "name": "documentref_licenseref_unknown",
+    "expression": "DocumentRef-vendor:LicenseRef-Mystery",
+    "want_verdict": "unknown"
+  }
+]

@@ -1,0 +1,80 @@
+{
+  "name": "example-policy",
+  "version": "1.0.0",
+  "unlisted": "unknown",
+  "licenses": {
+    "MIT": {
+      "decision": "allow",
+      "reason": "宽松许可，保留声明即可"
+    },
+    "Apache-2.0": {
+      "decision": "allow",
+      "reason": "宽松许可，含专利授权条款"
+    },
+    "BSD-3-Clause": {
+      "decision": "allow",
+      "reason": "宽松许可"
+    },
+    "ISC": {
+      "decision": "allow",
+      "reason": "宽松许可，功能等同简化版 MIT/BSD"
+    },
+    "LGPL-2.1-only": {
+      "decision": "allow",
+      "reason": "弱 copyleft，允许以库方式链接"
+    },
+    "MPL-2.0": {
+      "decision": "allow",
+      "reason": "文件级 copyleft"
+    },
+    "GPL-2.0-only": {
+      "decision": "deny",
+      "reason": "示例策略：项目当前不接受 GPL-2.0 强 copyleft（虚构策略，非法律判断）"
+    },
+    "GPL-3.0-only": {
+      "decision": "deny",
+      "reason": "示例策略：项目当前不接受 GPL-3.0 强 copyleft（虚构策略，非法律判断）"
+    },
+    "AGPL-3.0-only": {
+      "decision": "deny",
+      "reason": "示例策略：网络服务场景下不接受 AGPL（虚构策略，非法律判断）"
+    },
+    "SSPL-1.0": {
+      "decision": "deny",
+      "reason": "示例策略：不接受 SSPL 的服务端开源条款（虚构策略，非法律判断）"
+    },
+    "LicenseRef-Proprietary-A": {
+      "decision": "deny",
+      "reason": "未获得商业再分发授权"
+    },
+    "LicenseRef-Internal-Eval": {
+      "decision": "allow",
+      "reason": "内部评估用途已批准"
+    },
+    "LicenseRef-Pending-Legal": {
+      "decision": "unknown",
+      "reason": "法务复核中，暂不裁决"
+    }
+  },
+  "exceptions": {
+    "Classpath-exception-2.0": {
+      "allow": true,
+      "applies_to": ["LGPL-2.1-only", "GPL-2.0-only", "GPL-3.0-only"],
+      "reason": "Classpath 例外允许链接而不触发整体 copyleft（虚构策略：仅对 LGPL 生效，见各许可证自身裁决）"
+    },
+    "OCaml-LGPL-linking-exception": {
+      "allow": true,
+      "applies_to": ["LGPL-2.1-only"],
+      "reason": "LGPL 链接例外"
+    },
+    "Autoconf-exception-3.0": {
+      "allow": true,
+      "applies_to": ["GPL-3.0-only"],
+      "reason": "GPL 配置脚本例外（注意：GPL-3.0-only 在示例策略中被拒，例外不改变该决定）"
+    },
+    "Bison-exception-2.2": {
+      "allow": false,
+      "reason": "示例策略：不接受该 Bison 例外条款（虚构策略，非法律判断）"
+    }
+  }
+}

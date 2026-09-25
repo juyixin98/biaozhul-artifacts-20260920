@@ -1,0 +1,55 @@
+{
+  "description": "显式批准执行的本地验收命令清单。testrun 只执行本文件中的命令；所有命令均为离线本地命令。",
+  "commands": [
+    {
+      "name": "go_version",
+      "argv": ["go", "version"],
+      "expect_exit": 0
+    },
+    {
+      "name": "go_vet",
+      "argv": ["go", "vet", "./..."],
+      "expect_exit": 0
+    },
+    {
+      "name": "go_build",
+      "argv": ["go", "build", "-o", "bin/licensejudge", "./cmd/licensejudge"],
+      "expect_exit": 0
+    },
+    {
+      "name": "go_test_all",
+      "argv": ["go", "test", "-count=1", "./..."],
+      "expect_exit": 0
+    },
+    {
+      "name": "go_test_race",
+      "argv": ["go", "test", "-race", "-count=1", "./internal/..."],
+      "expect_exit": 0
+    },
+    {
+      "name": "cli_allow",
+      "argv": ["bin/licensejudge", "eval", "--policy", "configs/policy.json", "MIT OR GPL-3.0-only"],
+      "expect_exit": 0
+    },
+    {
+      "name": "cli_deny",
+      "argv": ["bin/licensejudge", "eval", "--policy", "configs/policy.json", "MIT AND GPL-3.0-only"],
+      "expect_exit": 1
+    },
+    {
+      "name": "cli_unknown",
+      "argv": ["bin/licensejudge", "eval", "--policy", "configs/policy.json", "Never-Heard-Of-License-42.0"],
+      "expect_exit": 3
+    },
+    {
+      "name": "cli_parse_error",
+      "argv": ["bin/licensejudge", "eval", "--policy", "configs/policy.json", "MIT AND"],
+      "expect_exit": 2
+    },
+    {
+      "name": "cli_with_combo",
+      "argv": ["bin/licensejudge", "eval", "--policy", "configs/policy.json", "LGPL-2.1-only WITH Classpath-exception-2.0"],
+      "expect_exit": 0
+    }
+  ]
+}

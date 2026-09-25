@@ -1,0 +1,169 @@
+# /healthz — 存活探针
+
+GET http://127.0.0.1:8080/healthz
+
+---
+
+# /v1/policies — 查看当前加载的策略概要
+
+GET http://127.0.0.1:8080/v1/policies
+
+---
+
+# /v1/evaluate — 例 1：OR 备选分支，选择一条满足策略的
+
+POST http://127.0.0.1:8080/v1/evaluate
+Content-Type: application/json
+
+{
+  "expression": "MIT OR GPL-3.0-only"
+}
+
+# 期望 verdict=allow，selection="MIT"，alternatives 保留两个分支
+# （MIT=allow，GPL-3.0-only=deny）。
+
+---
+
+# /v1/evaluate — 例 2：AND 中出现被拒许可证，整体拒绝并给出原因
+
+POST http://127.0.0.1:8080/v1/evaluate
+Content-Type: application/json
+
+{
+  "expression": "MIT AND GPL-3.0-only"
+}
+
+# 期望 verdict=deny；reasons 指明 AND 右侧被拒绝。
+
+---
+
+# /v1/evaluate — 例 3：优先级（AND 比 OR 紧）
+
+POST http://127.0.0.1:8080/v1/evaluate
+Content-Type: application/json
+
+{
+  "expression": "MIT OR GPL-3.0-only AND GPL-2.0-only"
+}
+
+# 解析为 MIT OR (GPL-3.0-only AND GPL-2.0-only)；
+# MIT 分支 allow，整体 allow，selection="MIT"。
+
+---
+
+# /v1/evaluate — 例 4：括号改变分组，结果随之改变
+
+POST http://127.0.0.1:8080/v1/evaluate
+Content-Type: application/json
+
+{
+  "expression": "(MIT OR GPL-3.0-only) AND GPL-2.0-only"
+}
+
+# 解析为 (MIT OR GPL-3.0-only) AND GPL-2.0-only；
+# 顶层 AND 右侧被拒，整体 deny。
+
+---
+
+# /v1/evaluate — 例 5：WITH 例外组合（允许）
+
+POST http://127.0.0.1:8080/v1/evaluate
+Content-Type: application/json
+
+{
+  "expression": "LGPL-2.1-only WITH Classpath-exception-2.0"
+}
+
+# 期望 verdict=allow。
+
+---
+
+# /v1/evaluate — 例 6：WITH 例外绑定到不匹配的许可证（拒绝）
+
+POST http://127.0.0.1:8080/v1/evaluate
+Content-Type: application/json
+
+{
+  "expression": "MIT WITH Classpath-exception-2.0"
+}
+
+# 期望 verdict=deny；原因说明该例外仅允许与
+# [LGPL-2.1-only GPL-2.0-only GPL-3.0-only] 绑定。
+
+---
+
+# /v1/evaluate — 例 7：被拒许可证不能靠例外翻盘
+
+POST http://127.0.0.1:8080/v1/evaluate
+Content-Type: application/json
+
+{
+  "expression": "GPL-3.0-only WITH Classpath-exception-2.0"
+}
+
+# 期望 verdict=deny。
+
+---
+
+# /v1/evaluate — 例 8：未知许可证不自动通过（核心约束）
+
+POST http://127.0.0.1:8080/v1/evaluate
+Content-Type: application/json
+
+{
+  "expression": "Brand-New-Weird-License-9.9"
+}
+
+# 期望 verdict=unknown；原因包含"不自动通过"。
+
+---
+
+# /v1/evaluate — 例 9：未知许可证即使配了允许型例外仍是 unknown
+
+POST http://127.0.0.1:8080/v1/evaluate
+Content-Type: application/json
+
+{
+  "expression": "Brand-New-Weird-License-9.9 WITH Classpath-exception-2.0"
+}
+
+# 期望 verdict=unknown。
+
+---
+
+# /v1/evaluate — 例 10：OR 含 unknown 但无 allow 分支 => unknown
+
+POST http://127.0.0.1:8080/v1/evaluate
+Content-Type: application/json
+
+{
+  "expression": "GPL-3.0-only OR Brand-New-Weird-License-9.9"
+}
+
+# 期望 verdict=unknown（既不通过也不武断拒绝）。
+
+---
+
+# /v1/evaluate — 例 11：全部备选被拒 => deny，无 selection
+
+POST http://127.0.0.1:8080/v1/evaluate
+Content-Type: application/json
+
+{
+  "expression": "GPL-2.0-only OR GPL-3.0-only OR SSPL-1.0"
+}
+
+# 期望 verdict=deny；reasons 包含"OR 的所有备选分支均被拒绝"。
+
+---
+
+# /v1/evaluate — 例 12：解析错误（HTTP 400）
+
+POST http://127.0.0.1:8080/v1/evaluate
+Content-Type: application/json
+
+{
+  "expression": "MIT AND"
+}
+
+# 期望 HTTP 400，code="parse_error"，错误带字节位置。
