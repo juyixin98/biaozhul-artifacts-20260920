@@ -1,0 +1,10 @@
+{
+  "profile": "unicode",
+  "textLength": 200,
+  "patternCount": 12,
+  "chunkSize": 3,
+  "chunkUnit": "UTF8_BYTE",
+  "emptyPatternPolicy": "MATCH_EVERY_POSITION",
+  "includeMatches": true,
+  "includeText": true
+}

@@ -1,0 +1,10 @@
+{
+  "text": "ushers",
+  "emptyPatternPolicy": "MATCH_EVERY_POSITION",
+  "patterns": [
+    "he",
+    {"id": "she-pattern", "literal": "she"},
+    "his",
+    "hers"
+  ]
+}
