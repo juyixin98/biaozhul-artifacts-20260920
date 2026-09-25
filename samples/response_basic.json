@@ -1,0 +1,134 @@
+{
+  "results": [
+    {
+      "classification": "cross",
+      "id": "cross-integer",
+      "points": [
+        {
+          "hits": [],
+          "x": {
+            "den": "1",
+            "num": "2"
+          },
+          "y": {
+            "den": "1",
+            "num": "2"
+          }
+        }
+      ]
+    },
+    {
+      "classification": "cross",
+      "id": "cross-fraction",
+      "points": [
+        {
+          "hits": [],
+          "x": {
+            "den": "2",
+            "num": "3"
+          },
+          "y": {
+            "den": "2",
+            "num": "3"
+          }
+        }
+      ]
+    },
+    {
+      "classification": "touch",
+      "id": "touch-t-junction",
+      "points": [
+        {
+          "hits": [
+            "c"
+          ],
+          "x": {
+            "den": "1",
+            "num": "2"
+          },
+          "y": {
+            "den": "1",
+            "num": "0"
+          }
+        }
+      ]
+    },
+    {
+      "classification": "touch",
+      "id": "touch-endpoint-to-endpoint",
+      "points": [
+        {
+          "hits": [
+            "b",
+            "c"
+          ],
+          "x": {
+            "den": "1",
+            "num": "1"
+          },
+          "y": {
+            "den": "1",
+            "num": "0"
+          }
+        }
+      ]
+    },
+    {
+      "classification": "overlap",
+      "id": "overlap-partial",
+      "points": [
+        {
+          "hits": [
+            "c"
+          ],
+          "x": {
+            "den": "1",
+            "num": "2"
+          },
+          "y": {
+            "den": "1",
+            "num": "0"
+          }
+        },
+        {
+          "hits": [
+            "b"
+          ],
+          "x": {
+            "den": "1",
+            "num": "4"
+          },
+          "y": {
+            "den": "1",
+            "num": "0"
+          }
+        }
+      ]
+    },
+    {
+      "classification": "touch",
+      "id": "overlap-touch-tip",
+      "points": [
+        {
+          "hits": [
+            "b",
+            "c"
+          ],
+          "x": {
+            "den": "1",
+            "num": "2"
+          },
+          "y": {
+            "den": "1",
+            "num": "0"
+          }
+        }
+      ]
+    },
+    {
+      "classification": "none",
+      "id": "disjoint",
+      "points": []
+    }
+  ]
+}

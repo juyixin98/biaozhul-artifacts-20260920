@@ -1,0 +1,151 @@
+{
+  "results": [
+    {
+      "classification": "touch",
+      "id": "both-zero-length-equal",
+      "points": [
+        {
+          "hits": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "x": {
+            "den": "1",
+            "num": "5"
+          },
+          "y": {
+            "den": "1",
+            "num": "5"
+          }
+        }
+      ]
+    },
+    {
+      "classification": "none",
+      "id": "both-zero-length-distinct",
+      "points": []
+    },
+    {
+      "classification": "touch",
+      "id": "zero-length-on-segment",
+      "points": [
+        {
+          "hits": [
+            "a",
+            "b"
+          ],
+          "x": {
+            "den": "1",
+            "num": "2"
+          },
+          "y": {
+            "den": "1",
+            "num": "2"
+          }
+        }
+      ]
+    },
+    {
+      "classification": "touch",
+      "id": "zero-length-at-endpoint",
+      "points": [
+        {
+          "hits": [
+            "b",
+            "c",
+            "d"
+          ],
+          "x": {
+            "den": "1",
+            "num": "4"
+          },
+          "y": {
+            "den": "1",
+            "num": "4"
+          }
+        }
+      ]
+    },
+    {
+      "classification": "none",
+      "id": "zero-length-off-line",
+      "points": []
+    },
+    {
+      "classification": "cross",
+      "id": "large-coords-cross",
+      "points": [
+        {
+          "hits": [],
+          "x": {
+            "den": "1",
+            "num": "0"
+          },
+          "y": {
+            "den": "1",
+            "num": "0"
+          }
+        }
+      ]
+    },
+    {
+      "classification": "cross",
+      "id": "large-coords-near-parallel-cross",
+      "points": [
+        {
+          "hits": [],
+          "x": {
+            "den": "13835058055282163705",
+            "num": "-21267647932558653943402482872348573702"
+          },
+          "y": {
+            "den": "13835058055282163705",
+            "num": "9223372036854775804"
+          }
+        }
+      ]
+    },
+    {
+      "classification": "overlap",
+      "id": "collinear-contained",
+      "points": [
+        {
+          "hits": [
+            "c"
+          ],
+          "x": {
+            "den": "1",
+            "num": "-100"
+          },
+          "y": {
+            "den": "1",
+            "num": "7"
+          }
+        },
+        {
+          "hits": [
+            "d"
+          ],
+          "x": {
+            "den": "1",
+            "num": "100"
+          },
+          "y": {
+            "den": "1",
+            "num": "7"
+          }
+        }
+      ]
+    },
+    {
+      "error": "b: coordinate out of range [-2^62+2, 2^62-2]",
+      "id": "bad-coordinate-out-of-range"
+    },
+    {
+      "error": "missing key: d",
+      "id": "bad-missing-field"
+    }
+  ]
+}
