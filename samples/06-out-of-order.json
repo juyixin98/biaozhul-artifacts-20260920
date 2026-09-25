@@ -1,0 +1,17 @@
+{
+  "_comment": "乱序与迟到：outOfOrderBound=500，wm=观测最大时间-500。B@600 先到、A@500 晚到但未越过水位 -> 仍按事件时间排出 A->B；A@99 越过水位 -> DROP",
+  "pattern": {
+    "a": "A", "b": "B", "c": "C",
+    "windowMs": 1000,
+    "policy": "ALL_PAIRS",
+    "outOfOrderBound": 500,
+    "latePolicy": "DROP",
+    "allowedLateness": 0
+  },
+  "events": [
+    {"id": "B1", "key": "B", "timestamp": 600},
+    {"id": "A_late_ok", "key": "A", "timestamp": 500},
+    {"id": "tick", "key": "X", "timestamp": 1500},
+    {"id": "A_dropped", "key": "A", "timestamp": 99}
+  ]
+}

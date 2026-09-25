@@ -1,0 +1,1 @@
+{"matches":[{"aId":"a","bId":"b","aTimestamp":100,"bTimestamp":100,"durationMs":0,"matchedAtWatermark":100,"late":false}],"timeouts":[],"watermark":9223372036854775807,"flushed":true,"stats":{"received":3,"processed":3,"duplicates":0,"droppedLate":0,"acceptedLate":0,"matches":1,"timeouts":0,"cKilled":0,"watermarks":2},"mode":"streaming"}

@@ -1,0 +1,12 @@
+{
+  "_comment": "非重叠贪婪策略 NON_OVERLAPPING：B1 与最早 A1 匹配，并消费区间 [A1..B1] 内的 A2,A3（不产生超时）；A5 开启下一段匹配",
+  "pattern": {"a": "A", "b": "B", "c": "C", "windowMs": 1000, "policy": "NON_OVERLAPPING"},
+  "events": [
+    {"id": "A1", "key": "A", "timestamp": 0},
+    {"id": "A2", "key": "A", "timestamp": 100},
+    {"id": "A3", "key": "A", "timestamp": 200},
+    {"id": "B1", "key": "B", "timestamp": 500},
+    {"id": "A5", "key": "A", "timestamp": 600},
+    {"id": "B2", "key": "B", "timestamp": 900}
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "_comment": "窗口边界：dt=1000 恰好等于 windowMs -> 匹配（边界包含，事件先于同刻定时器）；dt=1001 不匹配，A 超时",
+  "pattern": {"a": "A", "b": "B", "c": "C", "windowMs": 1000, "policy": "ALL_PAIRS"},
+  "events": [
+    {"id": "A1", "key": "A", "timestamp": 0},
+    {"id": "B1", "key": "B", "timestamp": 1000},
+    {"id": "A2", "key": "A", "timestamp": 5000},
+    {"id": "B2", "key": "B", "timestamp": 6001}
+  ]
+}

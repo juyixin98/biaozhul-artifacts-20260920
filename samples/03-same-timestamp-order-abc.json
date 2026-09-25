@@ -1,0 +1,9 @@
+{
+  "_comment": "同一时间戳(100)的全序：未给 seq 时按到达顺序 A(0)<B(1)<C(2)，A 被 B 匹配，C 在 B 之后无可杀之A。把到达顺序换成 A,C,B（见 04b）结果不同",
+  "pattern": {"a": "A", "b": "B", "c": "C", "windowMs": 1000, "policy": "ALL_PAIRS"},
+  "events": [
+    {"id": "a", "key": "A", "timestamp": 100},
+    {"id": "b", "key": "B", "timestamp": 100},
+    {"id": "c", "key": "C", "timestamp": 100}
+  ]
+}

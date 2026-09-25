@@ -1,0 +1,16 @@
+{
+  "_comment": "迟到尽力车道 ACCEPT：wm 到达 2000 后，A@1500 迟到但窗口未过(deadline2500>wm)，进入迟到车道；B@2200 到来时补出匹配，结果带 late=true；已发结果不撤回",
+  "pattern": {
+    "a": "A", "b": "B", "c": "C",
+    "windowMs": 1000,
+    "policy": "ALL_PAIRS",
+    "latePolicy": "ACCEPT",
+    "allowedLateness": 0
+  },
+  "events": [
+    {"id": "A1", "key": "A", "timestamp": 0},
+    {"id": "A2", "key": "A", "timestamp": 2000},
+    {"id": "A_late", "key": "A", "timestamp": 1500},
+    {"id": "B1", "key": "B", "timestamp": 2200}
+  ]
+}

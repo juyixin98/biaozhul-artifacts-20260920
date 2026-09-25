@@ -1,0 +1,13 @@
+{
+  "_comment": "交叉验证：useReference=true 时同时运行小数据精确参考实现(O(n²)扫描)，并返回 agreesWithReference",
+  "useReference": true,
+  "pattern": {"a": "A", "b": "B", "c": "C", "windowMs": 500, "policy": "EARLIEST_A"},
+  "events": [
+    {"id": "a1", "key": "A", "timestamp": 0},
+    {"id": "a2", "key": "A", "timestamp": 100},
+    {"id": "b1", "key": "B", "timestamp": 300},
+    {"id": "c1", "key": "C", "timestamp": 600},
+    {"id": "a3", "key": "A", "timestamp": 700},
+    {"id": "b2", "key": "B", "timestamp": 900}
+  ]
+}

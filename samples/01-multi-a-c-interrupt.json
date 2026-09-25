@@ -1,0 +1,17 @@
+{
+  "_comment": "验收场景1：多个A候选 + C打断 + 超时。A1,A2 被 C1 杀掉；A3->B1 匹配；A4 在窗口内没等到B，flush 时超时",
+  "pattern": {
+    "a": "A", "b": "B", "c": "C",
+    "windowMs": 1000,
+    "policy": "ALL_PAIRS",
+    "emitTimeouts": true
+  },
+  "events": [
+    {"id": "A1", "key": "A", "timestamp": 0},
+    {"id": "A2", "key": "A", "timestamp": 100},
+    {"id": "C1", "key": "C", "timestamp": 400},
+    {"id": "A3", "key": "A", "timestamp": 600},
+    {"id": "B1", "key": "B", "timestamp": 1000},
+    {"id": "A4", "key": "A", "timestamp": 5000}
+  ]
+}

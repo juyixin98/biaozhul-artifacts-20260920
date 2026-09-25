@@ -1,0 +1,9 @@
+{
+  "_comment": "同一时间戳不同次序：A(0)<C(1)<B(2)。C 杀掉同刻且全序在它之前的 A，B 无候选 -> 无匹配。显式 seq 字段可在乱序到达时指定全序",
+  "pattern": {"a": "A", "b": "B", "c": "C", "windowMs": 1000, "policy": "ALL_PAIRS"},
+  "events": [
+    {"id": "a", "key": "A", "timestamp": 100, "seq": 0},
+    {"id": "c", "key": "C", "timestamp": 100, "seq": 1},
+    {"id": "b", "key": "B", "timestamp": 100, "seq": 2}
+  ]
+}

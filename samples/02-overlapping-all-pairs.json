@@ -1,0 +1,14 @@
+{
+  "_comment": "重叠匹配：ALL_PAIRS 下一个 B 同时匹配窗口内全部仍有效的 A；匹配输出所用事件ID并按A全序排列。改 policy 可对比 EARLIEST_A/LATEST_A/NON_OVERLAPPING",
+  "pattern": {
+    "a": "A", "b": "B", "c": "C",
+    "windowMs": 1000,
+    "policy": "ALL_PAIRS"
+  },
+  "events": [
+    {"id": "A1", "key": "A", "timestamp": 0},
+    {"id": "A2", "key": "A", "timestamp": 100},
+    {"id": "A3", "key": "A", "timestamp": 200},
+    {"id": "B1", "key": "B", "timestamp": 500}
+  ]
+}
