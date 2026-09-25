@@ -1,0 +1,7 @@
+{
+  "description": "不可行系统：x1+x2=1 与 x1+x2=3 矛盾；响应含 Farkas 证书 farkas_y。",
+  "sense": "min",
+  "c": [1, 1],
+  "A_eq": [[1, 1], [1, 1]],
+  "b_eq": [1, 3]
+}

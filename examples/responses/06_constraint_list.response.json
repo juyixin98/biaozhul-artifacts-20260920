@@ -1,0 +1,29 @@
+{
+  "status": "optimal",
+  "rule": "bland",
+  "iterations": {
+    "phase1": 1,
+    "phase2": 0,
+    "total": 1
+  },
+  "message": "找到最优解（bland 规则）：目标值=10，最大约束残差=0",
+  "x": [
+    5.0,
+    0.0
+  ],
+  "objective": 10.0,
+  "residuals": {
+    "ub_max_slack_or_violation": 0.0,
+    "ub_violation": 0.0,
+    "eq_abs_residual": 0.0,
+    "lb_violation": 0.0,
+    "ub_bound_violation": 0.0,
+    "max_abs_residual": 0.0,
+    "min_reduced_cost": 0.0,
+    "reduced_cost_violation": 0.0,
+    "objective_tableau_vs_direct": 0.0,
+    "objective_direct_vs_direct": 0.0
+  },
+  "n_variables": 2,
+  "n_constraints": 2
+}

@@ -1,0 +1,21 @@
+{
+  "status": "infeasible",
+  "rule": "bland",
+  "iterations": {
+    "phase1": 1,
+    "phase2": 0,
+    "total": 1
+  },
+  "message": "Phase I 最优值 w*=2 > 容差 1e-07，系统不可行",
+  "farkas_y": [
+    -1.0,
+    1.0
+  ],
+  "residuals": {
+    "farkas_max_ytA": 0.0,
+    "farkas_ytb": 2.0,
+    "farkas_violation": 0.0
+  },
+  "n_variables": 2,
+  "n_constraints": 2
+}

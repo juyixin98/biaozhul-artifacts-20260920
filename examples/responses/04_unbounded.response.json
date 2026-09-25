@@ -1,0 +1,37 @@
+{
+  "status": "unbounded",
+  "rule": "bland",
+  "iterations": {
+    "phase1": 0,
+    "phase2": 0,
+    "total": 0
+  },
+  "message": "问题无界（bland 规则）：沿返回射线目标可无限减小，标准形 c^T d = -1 < 0",
+  "x": [
+    0.0,
+    0.0
+  ],
+  "objective": 0.0,
+  "ray": [
+    1.0,
+    0.0
+  ],
+  "objective_direction": -1.0,
+  "residuals": {
+    "ub_max_slack_or_violation": -1.0,
+    "ub_violation": 0.0,
+    "eq_abs_residual": 0.0,
+    "lb_violation": 0.0,
+    "ub_bound_violation": 0.0,
+    "max_abs_residual": 0.0,
+    "ray_ub_max_direction": -1.0,
+    "ray_eq_abs_residual": 0.0,
+    "ray_lb_negative_component": 0.0,
+    "ray_finite_ub_direction": 0.0,
+    "ray_std_A_eq_residual": 0.0,
+    "ray_std_negative_component": 0.0,
+    "ray_std_cost_direction": -1.0
+  },
+  "n_variables": 2,
+  "n_constraints": 1
+}
