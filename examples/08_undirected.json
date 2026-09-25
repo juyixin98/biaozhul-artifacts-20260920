@@ -1,0 +1,11 @@
+{
+  "nodes": ["A", "B", "C"],
+  "edges": [
+    {"from": "A", "to": "B", "time": 1, "cost": 10},
+    {"from": "B", "to": "C", "time": 1, "cost": 10},
+    {"from": "A", "to": "C", "time": 3, "cost": 1}
+  ],
+  "source": "A",
+  "target": "C",
+  "directed": false
+}

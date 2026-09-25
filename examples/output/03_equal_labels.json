@@ -1,0 +1,88 @@
+{
+  "status": "ok",
+  "paths": [
+    {
+      "nodes": [
+        "s",
+        "a",
+        "t"
+      ],
+      "edges": [
+        {
+          "from": "s",
+          "to": "a",
+          "time": 1.0,
+          "cost": 1.0,
+          "key": 0
+        },
+        {
+          "from": "a",
+          "to": "t",
+          "time": 1.0,
+          "cost": 1.0,
+          "key": 2
+        }
+      ],
+      "time": 2.0,
+      "cost": 2.0
+    },
+    {
+      "nodes": [
+        "s",
+        "b",
+        "t"
+      ],
+      "edges": [
+        {
+          "from": "s",
+          "to": "b",
+          "time": 1.0,
+          "cost": 1.0,
+          "key": 1
+        },
+        {
+          "from": "b",
+          "to": "t",
+          "time": 1.0,
+          "cost": 1.0,
+          "key": 3
+        }
+      ],
+      "time": 2.0,
+      "cost": 2.0
+    }
+  ],
+  "pareto": [
+    {
+      "time": 2.0,
+      "cost": 2.0
+    },
+    {
+      "time": 2.0,
+      "cost": 2.0
+    }
+  ],
+  "stats": {
+    "labels_created": 5,
+    "labels_accepted": 4,
+    "labels_rejected": 0,
+    "old_labels_killed": 0,
+    "labels_cycle_skipped": 0,
+    "pruned_by_budget": 0,
+    "heap_pops": 5,
+    "dead_pops": 0,
+    "truncated": false,
+    "label_cap": 200000,
+    "nodes": 4,
+    "arcs": 4
+  },
+  "parameters": {
+    "source": "s",
+    "target": "t",
+    "directed": true,
+    "time_budget": null,
+    "cost_budget": null,
+    "label_cap": 200000,
+    "eps": 1e-09
+  }
+}

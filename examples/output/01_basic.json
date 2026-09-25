@@ -1,0 +1,80 @@
+{
+  "status": "ok",
+  "paths": [
+    {
+      "nodes": [
+        "A",
+        "B",
+        "D"
+      ],
+      "edges": [
+        {
+          "from": "A",
+          "to": "B",
+          "time": 1.0,
+          "cost": 4.0,
+          "key": 0
+        },
+        {
+          "from": "B",
+          "to": "D",
+          "time": 1.0,
+          "cost": 1.0,
+          "key": 2
+        }
+      ],
+      "time": 2.0,
+      "cost": 5.0
+    },
+    {
+      "nodes": [
+        "A",
+        "D"
+      ],
+      "edges": [
+        {
+          "from": "A",
+          "to": "D",
+          "time": 5.0,
+          "cost": 0.0,
+          "key": 4
+        }
+      ],
+      "time": 5.0,
+      "cost": 0.0
+    }
+  ],
+  "pareto": [
+    {
+      "time": 2.0,
+      "cost": 5.0
+    },
+    {
+      "time": 5.0,
+      "cost": 0.0
+    }
+  ],
+  "stats": {
+    "labels_created": 6,
+    "labels_accepted": 4,
+    "labels_rejected": 1,
+    "old_labels_killed": 0,
+    "labels_cycle_skipped": 0,
+    "pruned_by_budget": 0,
+    "heap_pops": 5,
+    "dead_pops": 0,
+    "truncated": false,
+    "label_cap": 200000,
+    "nodes": 4,
+    "arcs": 5
+  },
+  "parameters": {
+    "source": "A",
+    "target": "D",
+    "directed": true,
+    "time_budget": null,
+    "cost_budget": null,
+    "label_cap": 200000,
+    "eps": 1e-09
+  }
+}

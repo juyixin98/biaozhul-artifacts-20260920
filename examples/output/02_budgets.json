@@ -1,0 +1,59 @@
+{
+  "status": "ok",
+  "paths": [
+    {
+      "nodes": [
+        0,
+        1,
+        3
+      ],
+      "edges": [
+        {
+          "from": 0,
+          "to": 1,
+          "time": 1.0,
+          "cost": 4.0,
+          "key": 0
+        },
+        {
+          "from": 1,
+          "to": 3,
+          "time": 1.0,
+          "cost": 1.0,
+          "key": 2
+        }
+      ],
+      "time": 2.0,
+      "cost": 5.0
+    }
+  ],
+  "pareto": [
+    {
+      "time": 2.0,
+      "cost": 5.0
+    }
+  ],
+  "stats": {
+    "labels_created": 5,
+    "labels_accepted": 3,
+    "labels_rejected": 1,
+    "old_labels_killed": 0,
+    "labels_cycle_skipped": 0,
+    "pruned_by_budget": 1,
+    "heap_pops": 4,
+    "dead_pops": 0,
+    "truncated": false,
+    "label_cap": 200000,
+    "nodes": 4,
+    "arcs": 5
+  },
+  "parameters": {
+    "source": 0,
+    "target": 3,
+    "directed": true,
+    "time_budget": 4.0,
+    "cost_budget": 6.0,
+    "label_cap": 200000,
+    "eps": 1e-09
+  }
+}

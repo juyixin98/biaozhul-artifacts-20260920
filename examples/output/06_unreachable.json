@@ -1,0 +1,28 @@
+{
+  "status": "unreachable",
+  "paths": [],
+  "pareto": [],
+  "stats": {
+    "labels_created": 2,
+    "labels_accepted": 1,
+    "labels_rejected": 0,
+    "old_labels_killed": 0,
+    "labels_cycle_skipped": 0,
+    "pruned_by_budget": 0,
+    "heap_pops": 2,
+    "dead_pops": 0,
+    "truncated": false,
+    "label_cap": 200000,
+    "nodes": 4,
+    "arcs": 2
+  },
+  "parameters": {
+    "source": "s",
+    "target": "t",
+    "directed": true,
+    "time_budget": null,
+    "cost_budget": null,
+    "label_cap": 200000,
+    "eps": 1e-09
+  }
+}

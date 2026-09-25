@@ -1,0 +1,28 @@
+{
+  "status": "truncated",
+  "paths": [],
+  "pareto": [],
+  "stats": {
+    "labels_created": 4,
+    "labels_accepted": 2,
+    "labels_rejected": 0,
+    "old_labels_killed": 0,
+    "labels_cycle_skipped": 0,
+    "pruned_by_budget": 0,
+    "heap_pops": 1,
+    "dead_pops": 0,
+    "truncated": true,
+    "label_cap": 3,
+    "nodes": 4,
+    "arcs": 5
+  },
+  "parameters": {
+    "source": 0,
+    "target": 3,
+    "directed": true,
+    "time_budget": null,
+    "cost_budget": null,
+    "label_cap": 3,
+    "eps": 1e-09
+  }
+}

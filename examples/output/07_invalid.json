@@ -1,0 +1,8 @@
+{
+  "status": "invalid_request",
+  "error": "edges[0] 的 time/cost 必须是有限非负数，得到 time=-1.0, cost=2.0",
+  "paths": [],
+  "pareto": [],
+  "stats": null,
+  "parameters": {}
+}
