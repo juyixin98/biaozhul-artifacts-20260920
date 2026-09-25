@@ -1,0 +1,23 @@
+[package]
+name = "brpc"
+version = "0.1.0"
+edition = "2021"
+description = "Binary RPC multiplexing over TCP: incremental byte parser + frame protocol + mux client/server (std-only)"
+
+[lib]
+name = "brpc"
+path = "src/lib.rs"
+
+[[bin]]
+name = "brpc-server"
+path = "src/bin/server.rs"
+
+[[bin]]
+name = "brpc"
+path = "src/bin/client.rs"
+
+[profile.release]
+opt-level = 2
+
+# std-only: no external dependencies at all.
+[dependencies]
