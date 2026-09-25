@@ -1,0 +1,23 @@
+{
+  "_comment": "Deliberately non-reconstructable: periodic Hann with hop == n_fft places each frame's window end-points (w=0) at positions no other frame covers. The run completes and the report flags reconstruction_possible=false with the zero-weight positions; it does not silently divide by zero.",
+  "input": {
+    "type": "synthetic",
+    "length": 1024,
+    "sample_rate": 8000,
+    "frequencies": [440.0],
+    "amplitudes": [0.8],
+    "noise_std": 0.0,
+    "seed": 1234
+  },
+  "stft": {
+    "n_fft": 64,
+    "hop_length": 64,
+    "window": "hann",
+    "center": true,
+    "pad_mode": "constant"
+  },
+  "chunk_size": 64,
+  "output_dir": "out_diagnostic",
+  "output_format": "f64",
+  "write_csv": false
+}

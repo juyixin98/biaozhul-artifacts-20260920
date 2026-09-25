@@ -1,0 +1,19 @@
+{
+  "input": {
+    "type": "pcm",
+    "path": "input_s16.pcm",
+    "sample_format": "s16"
+  },
+  "stft": {
+    "n_fft": 128,
+    "hop_length": 64,
+    "window": "hann",
+    "center": true,
+    "pad_mode": "constant"
+  },
+  "chunk_size": 300,
+  "output_dir": "out_pcm",
+  "output_format": "s16",
+  "write_csv": true,
+  "csv_rows": 8
+}

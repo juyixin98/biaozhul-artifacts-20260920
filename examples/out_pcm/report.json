@@ -1,0 +1,174 @@
+{
+  "chunks": {
+    "frames_emitted_per_chunk": [
+      4,
+      5,
+      5,
+      4,
+      5,
+      5,
+      4,
+      5,
+      5,
+      4
+    ],
+    "sizes": [
+      300,
+      300,
+      300,
+      300,
+      300,
+      300,
+      300,
+      300,
+      300,
+      300
+    ],
+    "tail_frames": 1
+  },
+  "diagnostic": {
+    "buffer_length": 3128,
+    "center": true,
+    "cola_constant": 1.0,
+    "cola_holds": true,
+    "hop_length": 64,
+    "n_fft": 128,
+    "nola_holds": true,
+    "nola_zero_positions_periodic": [],
+    "period_length_examined": 128,
+    "window": "hann",
+    "zero_weight_positions_all": [
+      0,
+      3072,
+      3073,
+      3074,
+      3075,
+      3076,
+      3077,
+      3078,
+      3079,
+      3080,
+      3081,
+      3082,
+      3083,
+      3084,
+      3085,
+      3086,
+      3087,
+      3088,
+      3089,
+      3090,
+      3091,
+      3092,
+      3093,
+      3094,
+      3095,
+      3096,
+      3097,
+      3098,
+      3099,
+      3100,
+      3101,
+      3102,
+      3103,
+      3104,
+      3105,
+      3106,
+      3107,
+      3108,
+      3109,
+      3110,
+      3111,
+      3112,
+      3113,
+      3114,
+      3115,
+      3116,
+      3117,
+      3118,
+      3119,
+      3120,
+      3121,
+      3122,
+      3123,
+      3124,
+      3125,
+      3126,
+      3127
+    ]
+  },
+  "files": {
+    "magnitude_whole.npy": "/home/admin/Downloads/biaozhul/opp132/a/examples/out_pcm/magnitude_whole.npy",
+    "original.pcm": "/home/admin/Downloads/biaozhul/opp132/a/examples/out_pcm/original.pcm",
+    "reconstructed_stream.pcm": "/home/admin/Downloads/biaozhul/opp132/a/examples/out_pcm/reconstructed_stream.pcm",
+    "reconstructed_whole.pcm": "/home/admin/Downloads/biaozhul/opp132/a/examples/out_pcm/reconstructed_whole.pcm",
+    "spectrum_stream.npy": "/home/admin/Downloads/biaozhul/opp132/a/examples/out_pcm/spectrum_stream.npy",
+    "spectrum_whole.npy": "/home/admin/Downloads/biaozhul/opp132/a/examples/out_pcm/spectrum_whole.npy"
+  },
+  "frames": {
+    "expected": 47,
+    "match": true,
+    "stream": 47,
+    "whole": 47
+  },
+  "input": {
+    "length": 3000,
+    "path": "/home/admin/Downloads/biaozhul/opp132/a/examples/input_s16.pcm",
+    "sample_format": "s16",
+    "type": "pcm"
+  },
+  "metrics": {
+    "forward_whole_vs_stream_max_abs": 0.0,
+    "inverse_whole_vs_singleframe_stream_max_abs": 0.0,
+    "inverse_whole_vs_stream_max_abs": 0.0,
+    "stream_singleframe_vs_original": {
+      "max_abs_error": 1.8596235662471372e-15,
+      "n_samples": 3000,
+      "relative_error_energy": 5.430327032638629e-32,
+      "rmse": 9.92091453890456e-17,
+      "snr_db": 312.65174014942727
+    },
+    "stream_vs_original": {
+      "max_abs_error": 1.8596235662471372e-15,
+      "n_samples": 3000,
+      "relative_error_energy": 5.430327032638629e-32,
+      "rmse": 9.92091453890456e-17,
+      "snr_db": 312.65174014942727
+    },
+    "whole_vs_original": {
+      "max_abs_error": 1.8596235662471372e-15,
+      "n_samples": 3000,
+      "relative_error_energy": 5.430327032638629e-32,
+      "rmse": 9.92091453890456e-17,
+      "snr_db": 312.65174014942727
+    }
+  },
+  "parameters": {
+    "center": true,
+    "frequency_bins": 65,
+    "hop_length": 64,
+    "n_fft": 128,
+    "pad_mode": "constant",
+    "window": "hann"
+  },
+  "reconstruction": {
+    "possible": true,
+    "stream": {
+      "min_weight": 0.0023045139587340316,
+      "n_frames": 47,
+      "reconstruction_possible": true,
+      "zero_weight_positions": []
+    },
+    "whole": {
+      "buffer_length": 3128,
+      "min_weight": 0.0023045139587340316,
+      "n_frames": 47,
+      "padded_buffer_length": 3128,
+      "reconstruction_possible": true,
+      "signal_length": 3000,
+      "zero_weight_positions": []
+    },
+    "zero_weight_positions": []
+  },
+  "status": "ok"
+}

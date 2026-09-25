@@ -1,0 +1,23 @@
+{
+  "input": {
+    "type": "synthetic",
+    "length": 8000,
+    "sample_rate": 8000,
+    "frequencies": [440.0, 1000.0],
+    "amplitudes": [0.6, 0.3],
+    "noise_std": 0.01,
+    "seed": 1234
+  },
+  "stft": {
+    "n_fft": 256,
+    "hop_length": 128,
+    "window": "hann",
+    "center": true,
+    "pad_mode": "constant"
+  },
+  "chunk_size": [100, 200, 37],
+  "output_dir": "out_synthetic",
+  "output_format": "f64",
+  "write_csv": true,
+  "csv_rows": 4
+}
