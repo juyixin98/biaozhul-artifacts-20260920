@@ -1,0 +1,133 @@
+{
+  "format": "feature-pipeline",
+  "version": 1,
+  "schema": [
+    {
+      "name": "age",
+      "dtype": "numeric",
+      "impute_strategy": "mean",
+      "fill_value": null,
+      "scale": true,
+      "handle_unknown": "indicator"
+    },
+    {
+      "name": "income",
+      "dtype": "numeric",
+      "impute_strategy": "constant",
+      "fill_value": 0.0,
+      "scale": true,
+      "handle_unknown": "indicator"
+    },
+    {
+      "name": "city",
+      "dtype": "categorical",
+      "impute_strategy": "most_frequent",
+      "fill_value": null,
+      "scale": true,
+      "handle_unknown": "indicator"
+    },
+    {
+      "name": "plan_tier",
+      "dtype": "numeric",
+      "impute_strategy": "constant",
+      "fill_value": 7.0,
+      "scale": true,
+      "handle_unknown": "indicator"
+    }
+  ],
+  "columns": [
+    {
+      "name": "age",
+      "steps": [
+        {
+          "step": "impute",
+          "params": {
+            "strategy": "mean",
+            "fill_value": 37.2
+          }
+        },
+        {
+          "step": "standard_scale",
+          "params": {
+            "mean": 37.199999999999996,
+            "scale": 10.54197957374863,
+            "zero_variance": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "income",
+      "steps": [
+        {
+          "step": "impute",
+          "params": {
+            "strategy": "constant",
+            "fill_value": 0.0
+          }
+        },
+        {
+          "step": "standard_scale",
+          "params": {
+            "mean": 5416.666666666667,
+            "scale": 2913.998779836548,
+            "zero_variance": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "city",
+      "steps": [
+        {
+          "step": "impute",
+          "params": {
+            "strategy": "most_frequent",
+            "fill_value": "Beijing"
+          }
+        },
+        {
+          "step": "one_hot_encode",
+          "params": {
+            "categories": [
+              "Beijing",
+              "Shanghai",
+              "Shenzhen"
+            ],
+            "handle_unknown": "indicator"
+          }
+        }
+      ]
+    },
+    {
+      "name": "plan_tier",
+      "steps": [
+        {
+          "step": "impute",
+          "params": {
+            "strategy": "constant",
+            "fill_value": 7.0
+          }
+        },
+        {
+          "step": "standard_scale",
+          "params": {
+            "mean": 7.0,
+            "scale": 1.0,
+            "zero_variance": true
+          }
+        }
+      ]
+    }
+  ],
+  "feature_names_out": [
+    "age",
+    "income",
+    "city=Beijing",
+    "city=Shanghai",
+    "city=Shenzhen",
+    "city=__unknown__",
+    "plan_tier"
+  ],
+  "checksum": "fce2c2114a7386bc1824f5748013f66e3493cb23a5c6047b83739eda27225524"
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "age",
+    "dtype": "numeric",
+    "impute_strategy": "mean",
+    "fill_value": null,
+    "scale": true,
+    "handle_unknown": "indicator"
+  },
+  {
+    "name": "income",
+    "dtype": "numeric",
+    "impute_strategy": "median",
+    "fill_value": null,
+    "scale": true,
+    "handle_unknown": "indicator"
+  },
+  {
+    "name": "score",
+    "dtype": "numeric",
+    "impute_strategy": "constant",
+    "fill_value": 0.0,
+    "scale": true,
+    "handle_unknown": "indicator"
+  },
+  {
+    "name": "city",
+    "dtype": "categorical",
+    "impute_strategy": "most_frequent",
+    "fill_value": null,
+    "scale": true,
+    "handle_unknown": "indicator"
+  },
+  {
+    "name": "level",
+    "dtype": "categorical",
+    "impute_strategy": "constant",
+    "fill_value": "unknown_level",
+    "scale": true,
+    "handle_unknown": "ignore"
+  },
+  {
+    "name": "plan_tier",
+    "dtype": "numeric",
+    "impute_strategy": "constant",
+    "fill_value": 7.0,
+    "scale": true,
+    "handle_unknown": "indicator"
+  }
+]

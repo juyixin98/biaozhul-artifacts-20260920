@@ -1,0 +1,6 @@
+{
+  "age": [22.0, 38.0, null, 56.0, 29.0, 41.0],
+  "income": [4200.0, 7800.0, 5100.0, null, 6300.0, 9100.0],
+  "city": ["Beijing", "Shanghai", "Beijing", "Shenzhen", null, "Beijing"],
+  "plan_tier": [7.0, 7.0, 7.0, 7.0, 7.0, 7.0]
+}

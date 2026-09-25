@@ -1,0 +1,196 @@
+{
+  "format": "feature-pipeline",
+  "version": 1,
+  "schema": [
+    {
+      "name": "age",
+      "dtype": "numeric",
+      "impute_strategy": "mean",
+      "fill_value": null,
+      "scale": true,
+      "handle_unknown": "indicator"
+    },
+    {
+      "name": "income",
+      "dtype": "numeric",
+      "impute_strategy": "median",
+      "fill_value": null,
+      "scale": true,
+      "handle_unknown": "indicator"
+    },
+    {
+      "name": "score",
+      "dtype": "numeric",
+      "impute_strategy": "constant",
+      "fill_value": 0.0,
+      "scale": true,
+      "handle_unknown": "indicator"
+    },
+    {
+      "name": "city",
+      "dtype": "categorical",
+      "impute_strategy": "most_frequent",
+      "fill_value": null,
+      "scale": true,
+      "handle_unknown": "indicator"
+    },
+    {
+      "name": "level",
+      "dtype": "categorical",
+      "impute_strategy": "constant",
+      "fill_value": "unknown_level",
+      "scale": true,
+      "handle_unknown": "ignore"
+    },
+    {
+      "name": "plan_tier",
+      "dtype": "numeric",
+      "impute_strategy": "constant",
+      "fill_value": 7.0,
+      "scale": true,
+      "handle_unknown": "indicator"
+    }
+  ],
+  "columns": [
+    {
+      "name": "age",
+      "steps": [
+        {
+          "step": "impute",
+          "params": {
+            "strategy": "mean",
+            "fill_value": 35.85959595959596
+          }
+        },
+        {
+          "step": "standard_scale",
+          "params": {
+            "mean": 35.859595959595964,
+            "scale": 11.359884851457952,
+            "zero_variance": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "income",
+      "steps": [
+        {
+          "step": "impute",
+          "params": {
+            "strategy": "median",
+            "fill_value": 23184.01
+          }
+        },
+        {
+          "step": "standard_scale",
+          "params": {
+            "mean": 25882.320549999997,
+            "scale": 13366.48949177252,
+            "zero_variance": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "score",
+      "steps": [
+        {
+          "step": "impute",
+          "params": {
+            "strategy": "constant",
+            "fill_value": 0.0
+          }
+        },
+        {
+          "step": "standard_scale",
+          "params": {
+            "mean": 53.476000000000006,
+            "scale": 30.21516215412388,
+            "zero_variance": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "city",
+      "steps": [
+        {
+          "step": "impute",
+          "params": {
+            "strategy": "most_frequent",
+            "fill_value": "Beijing"
+          }
+        },
+        {
+          "step": "one_hot_encode",
+          "params": {
+            "categories": [
+              "Beijing",
+              "Shanghai",
+              "Shenzhen"
+            ],
+            "handle_unknown": "indicator"
+          }
+        }
+      ]
+    },
+    {
+      "name": "level",
+      "steps": [
+        {
+          "step": "impute",
+          "params": {
+            "strategy": "constant",
+            "fill_value": "unknown_level"
+          }
+        },
+        {
+          "step": "one_hot_encode",
+          "params": {
+            "categories": [
+              "bronze",
+              "gold",
+              "silver"
+            ],
+            "handle_unknown": "ignore"
+          }
+        }
+      ]
+    },
+    {
+      "name": "plan_tier",
+      "steps": [
+        {
+          "step": "impute",
+          "params": {
+            "strategy": "constant",
+            "fill_value": 7.0
+          }
+        },
+        {
+          "step": "standard_scale",
+          "params": {
+            "mean": 7.0,
+            "scale": 1.0,
+            "zero_variance": true
+          }
+        }
+      ]
+    }
+  ],
+  "feature_names_out": [
+    "age",
+    "income",
+    "score",
+    "city=Beijing",
+    "city=Shanghai",
+    "city=Shenzhen",
+    "city=__unknown__",
+    "level=bronze",
+    "level=gold",
+    "level=silver",
+    "plan_tier"
+  ],
+  "checksum": "80ff3bae30c0db3d106082fe44e275131cc6cee57086fcf53eeac60aa67ea3f0"
+}

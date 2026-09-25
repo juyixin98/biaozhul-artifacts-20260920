@@ -1,0 +1,6 @@
+{
+  "plan_tier": [7.0, 7.0, 7.0],
+  "city": ["Hangzhou", null, "Shenzhen"],
+  "income": [null, 5500.0, 12000.0],
+  "age": [31.0, null, 80.0]
+}
