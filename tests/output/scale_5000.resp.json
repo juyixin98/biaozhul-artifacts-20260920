@@ -65686,7 +65686,7 @@
     "statistics": {
       "dataflow_iterations": 2,
       "edges_total": 5598,
-      "elapsed_microseconds": 52998,
+      "elapsed_microseconds": 50996,
       "nodes_total": 5000,
       "reachable_nodes": 5000,
       "unreachable_nodes": 0

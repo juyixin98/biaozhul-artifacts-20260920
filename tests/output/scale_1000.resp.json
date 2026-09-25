@@ -13158,7 +13158,7 @@
     "statistics": {
       "dataflow_iterations": 2,
       "edges_total": 1120,
-      "elapsed_microseconds": 2008,
+      "elapsed_microseconds": 2001,
       "nodes_total": 1002,
       "reachable_nodes": 1000,
       "unreachable_nodes": 2

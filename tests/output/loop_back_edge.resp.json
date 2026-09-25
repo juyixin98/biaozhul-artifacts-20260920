@@ -202,7 +202,7 @@
     "statistics": {
       "dataflow_iterations": 2,
       "edges_total": 7,
-      "elapsed_microseconds": 4,
+      "elapsed_microseconds": 5,
       "nodes_total": 7,
       "reachable_nodes": 5,
       "unreachable_nodes": 2
