@@ -1,0 +1,26 @@
+GET /healthz ->
+{
+  "status": "ok"
+}
+ [HTTP 200]
+GET /api/scenarios ->
+{
+  "scenarios": [
+    {
+      "label": "classic-priority-inversion",
+      "name": "classic-inversion-no-pi",
+      "op...
+POST no-PI ->
+makespan 14 inversionTicks 4 completed {'High': 13, 'Low': 14, 'Medium': 8}
+[HTTP200]
+GET deadlock ->
+deadlock {'cycle': ['T1', 'T2', 'T1'], 'at': 1}
+[HTTP200]
+GET unknown ->
+HTTP 404
+POST unknown field ->
+{
+  "error": "invalid JSON spec: json: unknown field \"bogus\"",
+  "status": 400
+}
+ [HTTP 400]

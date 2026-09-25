@@ -1,0 +1,16 @@
+# date
+2026-09-23T13:56:15Z
+# go version
+go version go1.22.2 linux/amd64
+# go vet
+vet: clean
+# go test
+?   	pim/cmd/pim	[no test files]
+?   	pim/cmd/server	[no test files]
+?   	pim/internal/event	[no test files]
+ok  	pim/internal/clock	0.002s
+ok  	pim/internal/executor	0.002s
+?   	pim/internal/program	[no test files]
+?   	pim/internal/scenario	[no test files]
+ok  	pim/internal/httpapi	0.008s
+ok  	pim/internal/scheduler	0.003s

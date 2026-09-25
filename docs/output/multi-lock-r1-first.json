@@ -1,0 +1,482 @@
+{
+  "name": "multi-lock-release-R1-first",
+  "options": {
+    "priorityInheritance": true,
+    "deadlockDetection": true
+  },
+  "finishTime": 10,
+  "events": [
+    {
+      "seq": 0,
+      "time": 0,
+      "kind": "task_arrive",
+      "task": "Low",
+      "detail": {
+        "arrival": 0,
+        "priority": 1
+      }
+    },
+    {
+      "seq": 1,
+      "time": 0,
+      "kind": "task_dispatch",
+      "task": "Low",
+      "detail": {
+        "basePriority": 1,
+        "effectivePriority": 1
+      }
+    },
+    {
+      "seq": 2,
+      "time": 0,
+      "kind": "lock_acquire",
+      "task": "Low",
+      "resource": "R1"
+    },
+    {
+      "seq": 3,
+      "time": 0,
+      "kind": "lock_acquire",
+      "task": "Low",
+      "resource": "R2"
+    },
+    {
+      "seq": 4,
+      "time": 1,
+      "kind": "tick",
+      "task": "Low",
+      "detail": {
+        "burstLeft": 5,
+        "effectivePriority": 1
+      }
+    },
+    {
+      "seq": 5,
+      "time": 2,
+      "kind": "tick",
+      "task": "Low",
+      "detail": {
+        "burstLeft": 4,
+        "effectivePriority": 1
+      }
+    },
+    {
+      "seq": 6,
+      "time": 2,
+      "kind": "task_arrive",
+      "task": "A",
+      "detail": {
+        "arrival": 2,
+        "priority": 3
+      }
+    },
+    {
+      "seq": 7,
+      "time": 2,
+      "kind": "task_preempted",
+      "task": "Low",
+      "detail": {
+        "by": "A",
+        "effectivePriority": 1
+      }
+    },
+    {
+      "seq": 8,
+      "time": 2,
+      "kind": "task_dispatch",
+      "task": "A",
+      "detail": {
+        "basePriority": 3,
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 9,
+      "time": 2,
+      "kind": "task_block",
+      "task": "A",
+      "resource": "R1",
+      "detail": {
+        "owner": "Low",
+        "ownerEffectivePri": 1
+      }
+    },
+    {
+      "seq": 10,
+      "time": 2,
+      "kind": "priority_change",
+      "task": "Low",
+      "detail": {
+        "base": 1,
+        "donors": [
+          "A"
+        ],
+        "inheritanceOn": true,
+        "new": 3,
+        "old": 1,
+        "reason": "block"
+      }
+    },
+    {
+      "seq": 11,
+      "time": 2,
+      "kind": "task_dispatch",
+      "task": "Low",
+      "detail": {
+        "basePriority": 1,
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 12,
+      "time": 3,
+      "kind": "tick",
+      "task": "Low",
+      "detail": {
+        "burstLeft": 3,
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 13,
+      "time": 3,
+      "kind": "task_arrive",
+      "task": "B",
+      "detail": {
+        "arrival": 3,
+        "priority": 4
+      }
+    },
+    {
+      "seq": 14,
+      "time": 3,
+      "kind": "task_preempted",
+      "task": "Low",
+      "detail": {
+        "by": "B",
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 15,
+      "time": 3,
+      "kind": "task_dispatch",
+      "task": "B",
+      "detail": {
+        "basePriority": 4,
+        "effectivePriority": 4
+      }
+    },
+    {
+      "seq": 16,
+      "time": 3,
+      "kind": "task_block",
+      "task": "B",
+      "resource": "R2",
+      "detail": {
+        "owner": "Low",
+        "ownerEffectivePri": 3
+      }
+    },
+    {
+      "seq": 17,
+      "time": 3,
+      "kind": "priority_change",
+      "task": "Low",
+      "detail": {
+        "base": 1,
+        "donors": [
+          "A",
+          "B"
+        ],
+        "inheritanceOn": true,
+        "new": 4,
+        "old": 3,
+        "reason": "block"
+      }
+    },
+    {
+      "seq": 18,
+      "time": 3,
+      "kind": "task_dispatch",
+      "task": "Low",
+      "detail": {
+        "basePriority": 1,
+        "effectivePriority": 4
+      }
+    },
+    {
+      "seq": 19,
+      "time": 4,
+      "kind": "tick",
+      "task": "Low",
+      "detail": {
+        "burstLeft": 2,
+        "effectivePriority": 4
+      }
+    },
+    {
+      "seq": 20,
+      "time": 5,
+      "kind": "tick",
+      "task": "Low",
+      "detail": {
+        "burstLeft": 1,
+        "effectivePriority": 4
+      }
+    },
+    {
+      "seq": 21,
+      "time": 6,
+      "kind": "tick",
+      "task": "Low",
+      "detail": {
+        "burstLeft": 0,
+        "effectivePriority": 4
+      }
+    },
+    {
+      "seq": 22,
+      "time": 6,
+      "kind": "lock_release",
+      "task": "Low",
+      "resource": "R1"
+    },
+    {
+      "seq": 23,
+      "time": 6,
+      "kind": "lock_grant",
+      "task": "A",
+      "resource": "R1",
+      "detail": {
+        "effectivePriority": 3,
+        "from": "Low",
+        "waitersRemaining": 0
+      }
+    },
+    {
+      "seq": 24,
+      "time": 6,
+      "kind": "task_wakeup",
+      "task": "A",
+      "resource": "R1",
+      "detail": {
+        "grantedBy": "Low"
+      }
+    },
+    {
+      "seq": 25,
+      "time": 7,
+      "kind": "tick",
+      "task": "Low",
+      "detail": {
+        "burstLeft": 0,
+        "effectivePriority": 4
+      }
+    },
+    {
+      "seq": 26,
+      "time": 7,
+      "kind": "lock_release",
+      "task": "Low",
+      "resource": "R2"
+    },
+    {
+      "seq": 27,
+      "time": 7,
+      "kind": "lock_grant",
+      "task": "B",
+      "resource": "R2",
+      "detail": {
+        "effectivePriority": 4,
+        "from": "Low",
+        "waitersRemaining": 0
+      }
+    },
+    {
+      "seq": 28,
+      "time": 7,
+      "kind": "task_wakeup",
+      "task": "B",
+      "resource": "R2",
+      "detail": {
+        "grantedBy": "Low"
+      }
+    },
+    {
+      "seq": 29,
+      "time": 7,
+      "kind": "priority_change",
+      "task": "Low",
+      "detail": {
+        "base": 1,
+        "donors": [],
+        "inheritanceOn": true,
+        "new": 1,
+        "old": 4,
+        "reason": "grant"
+      }
+    },
+    {
+      "seq": 30,
+      "time": 7,
+      "kind": "task_preempted",
+      "task": "Low",
+      "detail": {
+        "by": "B",
+        "effectivePriority": 1
+      }
+    },
+    {
+      "seq": 31,
+      "time": 7,
+      "kind": "task_dispatch",
+      "task": "B",
+      "detail": {
+        "basePriority": 4,
+        "effectivePriority": 4
+      }
+    },
+    {
+      "seq": 32,
+      "time": 8,
+      "kind": "tick",
+      "task": "B",
+      "detail": {
+        "burstLeft": 0,
+        "effectivePriority": 4
+      }
+    },
+    {
+      "seq": 33,
+      "time": 8,
+      "kind": "lock_release",
+      "task": "B",
+      "resource": "R2"
+    },
+    {
+      "seq": 34,
+      "time": 8,
+      "kind": "task_exit",
+      "task": "B",
+      "detail": {
+        "completedAt": 8
+      }
+    },
+    {
+      "seq": 35,
+      "time": 8,
+      "kind": "task_dispatch",
+      "task": "A",
+      "detail": {
+        "basePriority": 3,
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 36,
+      "time": 9,
+      "kind": "tick",
+      "task": "A",
+      "detail": {
+        "burstLeft": 0,
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 37,
+      "time": 9,
+      "kind": "lock_release",
+      "task": "A",
+      "resource": "R1"
+    },
+    {
+      "seq": 38,
+      "time": 9,
+      "kind": "task_exit",
+      "task": "A",
+      "detail": {
+        "completedAt": 9
+      }
+    },
+    {
+      "seq": 39,
+      "time": 9,
+      "kind": "task_dispatch",
+      "task": "Low",
+      "detail": {
+        "basePriority": 1,
+        "effectivePriority": 1
+      }
+    },
+    {
+      "seq": 40,
+      "time": 10,
+      "kind": "tick",
+      "task": "Low",
+      "detail": {
+        "burstLeft": 0,
+        "effectivePriority": 1
+      }
+    },
+    {
+      "seq": 41,
+      "time": 10,
+      "kind": "task_exit",
+      "task": "Low",
+      "detail": {
+        "completedAt": 10
+      }
+    }
+  ],
+  "summary": {
+    "makespanTicks": 10,
+    "inversionTicks": 0,
+    "blockedTicks": {
+      "A": 4,
+      "B": 4
+    },
+    "completedAt": {
+      "A": 9,
+      "B": 8,
+      "Low": 10
+    }
+  },
+  "tasks": [
+    {
+      "id": "Low",
+      "state": "done",
+      "basePriority": 1,
+      "effectivePriority": 1,
+      "arrival": 0,
+      "completedAt": 10,
+      "blockedTicks": 0
+    },
+    {
+      "id": "A",
+      "state": "done",
+      "basePriority": 3,
+      "effectivePriority": 3,
+      "arrival": 2,
+      "completedAt": 9,
+      "blockedTicks": 4
+    },
+    {
+      "id": "B",
+      "state": "done",
+      "basePriority": 4,
+      "effectivePriority": 4,
+      "arrival": 3,
+      "completedAt": 8,
+      "blockedTicks": 4
+    }
+  ],
+  "locks": [
+    {
+      "id": "R1"
+    },
+    {
+      "id": "R2"
+    }
+  ]
+}

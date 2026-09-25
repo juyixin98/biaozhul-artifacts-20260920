@@ -1,0 +1,417 @@
+{
+  "name": "classic-priority-inversion",
+  "options": {
+    "priorityInheritance": true,
+    "deadlockDetection": true
+  },
+  "finishTime": 14,
+  "events": [
+    {
+      "seq": 0,
+      "time": 0,
+      "kind": "task_arrive",
+      "task": "Low",
+      "detail": {
+        "arrival": 0,
+        "priority": 1
+      }
+    },
+    {
+      "seq": 1,
+      "time": 0,
+      "kind": "task_dispatch",
+      "task": "Low",
+      "detail": {
+        "basePriority": 1,
+        "effectivePriority": 1
+      }
+    },
+    {
+      "seq": 2,
+      "time": 1,
+      "kind": "tick",
+      "task": "Low",
+      "detail": {
+        "burstLeft": 0,
+        "effectivePriority": 1
+      }
+    },
+    {
+      "seq": 3,
+      "time": 1,
+      "kind": "lock_acquire",
+      "task": "Low",
+      "resource": "R"
+    },
+    {
+      "seq": 4,
+      "time": 2,
+      "kind": "tick",
+      "task": "Low",
+      "detail": {
+        "burstLeft": 5,
+        "effectivePriority": 1
+      }
+    },
+    {
+      "seq": 5,
+      "time": 2,
+      "kind": "task_arrive",
+      "task": "High",
+      "detail": {
+        "arrival": 2,
+        "priority": 3
+      }
+    },
+    {
+      "seq": 6,
+      "time": 2,
+      "kind": "task_preempted",
+      "task": "Low",
+      "detail": {
+        "by": "High",
+        "effectivePriority": 1
+      }
+    },
+    {
+      "seq": 7,
+      "time": 2,
+      "kind": "task_dispatch",
+      "task": "High",
+      "detail": {
+        "basePriority": 3,
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 8,
+      "time": 2,
+      "kind": "task_block",
+      "task": "High",
+      "resource": "R",
+      "detail": {
+        "owner": "Low",
+        "ownerEffectivePri": 1
+      }
+    },
+    {
+      "seq": 9,
+      "time": 2,
+      "kind": "priority_change",
+      "task": "Low",
+      "detail": {
+        "base": 1,
+        "donors": [
+          "High"
+        ],
+        "inheritanceOn": true,
+        "new": 3,
+        "old": 1,
+        "reason": "block"
+      }
+    },
+    {
+      "seq": 10,
+      "time": 2,
+      "kind": "task_dispatch",
+      "task": "Low",
+      "detail": {
+        "basePriority": 1,
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 11,
+      "time": 3,
+      "kind": "tick",
+      "task": "Low",
+      "detail": {
+        "burstLeft": 4,
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 12,
+      "time": 4,
+      "kind": "tick",
+      "task": "Low",
+      "detail": {
+        "burstLeft": 3,
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 13,
+      "time": 4,
+      "kind": "task_arrive",
+      "task": "Medium",
+      "detail": {
+        "arrival": 4,
+        "priority": 2
+      }
+    },
+    {
+      "seq": 14,
+      "time": 5,
+      "kind": "tick",
+      "task": "Low",
+      "detail": {
+        "burstLeft": 2,
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 15,
+      "time": 6,
+      "kind": "tick",
+      "task": "Low",
+      "detail": {
+        "burstLeft": 1,
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 16,
+      "time": 7,
+      "kind": "tick",
+      "task": "Low",
+      "detail": {
+        "burstLeft": 0,
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 17,
+      "time": 7,
+      "kind": "lock_release",
+      "task": "Low",
+      "resource": "R"
+    },
+    {
+      "seq": 18,
+      "time": 7,
+      "kind": "lock_grant",
+      "task": "High",
+      "resource": "R",
+      "detail": {
+        "effectivePriority": 3,
+        "from": "Low",
+        "waitersRemaining": 0
+      }
+    },
+    {
+      "seq": 19,
+      "time": 7,
+      "kind": "task_wakeup",
+      "task": "High",
+      "resource": "R",
+      "detail": {
+        "grantedBy": "Low"
+      }
+    },
+    {
+      "seq": 20,
+      "time": 7,
+      "kind": "priority_change",
+      "task": "Low",
+      "detail": {
+        "base": 1,
+        "donors": [],
+        "inheritanceOn": true,
+        "new": 1,
+        "old": 3,
+        "reason": "grant"
+      }
+    },
+    {
+      "seq": 21,
+      "time": 7,
+      "kind": "task_preempted",
+      "task": "Low",
+      "detail": {
+        "by": "High",
+        "effectivePriority": 1
+      }
+    },
+    {
+      "seq": 22,
+      "time": 7,
+      "kind": "task_dispatch",
+      "task": "High",
+      "detail": {
+        "basePriority": 3,
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 23,
+      "time": 8,
+      "kind": "tick",
+      "task": "High",
+      "detail": {
+        "burstLeft": 1,
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 24,
+      "time": 9,
+      "kind": "tick",
+      "task": "High",
+      "detail": {
+        "burstLeft": 0,
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 25,
+      "time": 9,
+      "kind": "lock_release",
+      "task": "High",
+      "resource": "R"
+    },
+    {
+      "seq": 26,
+      "time": 9,
+      "kind": "task_exit",
+      "task": "High",
+      "detail": {
+        "completedAt": 9
+      }
+    },
+    {
+      "seq": 27,
+      "time": 9,
+      "kind": "task_dispatch",
+      "task": "Medium",
+      "detail": {
+        "basePriority": 2,
+        "effectivePriority": 2
+      }
+    },
+    {
+      "seq": 28,
+      "time": 10,
+      "kind": "tick",
+      "task": "Medium",
+      "detail": {
+        "burstLeft": 3,
+        "effectivePriority": 2
+      }
+    },
+    {
+      "seq": 29,
+      "time": 11,
+      "kind": "tick",
+      "task": "Medium",
+      "detail": {
+        "burstLeft": 2,
+        "effectivePriority": 2
+      }
+    },
+    {
+      "seq": 30,
+      "time": 12,
+      "kind": "tick",
+      "task": "Medium",
+      "detail": {
+        "burstLeft": 1,
+        "effectivePriority": 2
+      }
+    },
+    {
+      "seq": 31,
+      "time": 13,
+      "kind": "tick",
+      "task": "Medium",
+      "detail": {
+        "burstLeft": 0,
+        "effectivePriority": 2
+      }
+    },
+    {
+      "seq": 32,
+      "time": 13,
+      "kind": "task_exit",
+      "task": "Medium",
+      "detail": {
+        "completedAt": 13
+      }
+    },
+    {
+      "seq": 33,
+      "time": 13,
+      "kind": "task_dispatch",
+      "task": "Low",
+      "detail": {
+        "basePriority": 1,
+        "effectivePriority": 1
+      }
+    },
+    {
+      "seq": 34,
+      "time": 14,
+      "kind": "tick",
+      "task": "Low",
+      "detail": {
+        "burstLeft": 0,
+        "effectivePriority": 1
+      }
+    },
+    {
+      "seq": 35,
+      "time": 14,
+      "kind": "task_exit",
+      "task": "Low",
+      "detail": {
+        "completedAt": 14
+      }
+    }
+  ],
+  "summary": {
+    "makespanTicks": 14,
+    "inversionTicks": 0,
+    "blockedTicks": {
+      "High": 5
+    },
+    "completedAt": {
+      "High": 9,
+      "Low": 14,
+      "Medium": 13
+    }
+  },
+  "tasks": [
+    {
+      "id": "Low",
+      "state": "done",
+      "basePriority": 1,
+      "effectivePriority": 1,
+      "arrival": 0,
+      "completedAt": 14,
+      "blockedTicks": 0
+    },
+    {
+      "id": "Medium",
+      "state": "done",
+      "basePriority": 2,
+      "effectivePriority": 2,
+      "arrival": 4,
+      "completedAt": 13,
+      "blockedTicks": 0
+    },
+    {
+      "id": "High",
+      "state": "done",
+      "basePriority": 3,
+      "effectivePriority": 3,
+      "arrival": 2,
+      "completedAt": 9,
+      "blockedTicks": 5
+    }
+  ],
+  "locks": [
+    {
+      "id": "R"
+    }
+  ]
+}

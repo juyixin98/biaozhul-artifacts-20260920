@@ -1,0 +1,48 @@
+{
+  "name": "three-level-transitive-inheritance",
+  "resources": ["R1", "R2"],
+  "options": {
+    "priorityInheritance": true,
+    "deadlockDetection": true
+  },
+  "tasks": [
+    {
+      "id": "Low",
+      "arrival": 0,
+      "priority": 1,
+      "program": {
+        "actions": [
+          {"acquire": "R1"},
+          {"cpu": 8},
+          {"release": "R1"}
+        ]
+      }
+    },
+    {
+      "id": "High",
+      "arrival": 1,
+      "priority": 3,
+      "program": {
+        "actions": [
+          {"acquire": "R2"},
+          {"acquire": "R1"},
+          {"cpu": 2},
+          {"release": "R1"},
+          {"release": "R2"}
+        ]
+      }
+    },
+    {
+      "id": "Urgent",
+      "arrival": 2,
+      "priority": 4,
+      "program": {
+        "actions": [
+          {"acquire": "R2"},
+          {"cpu": 2},
+          {"release": "R2"}
+        ]
+      }
+    }
+  ]
+}

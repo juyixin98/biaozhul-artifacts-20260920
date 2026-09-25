@@ -1,0 +1,9 @@
+?   	pim/cmd/pim	[no test files]
+?   	pim/cmd/server	[no test files]
+?   	pim/internal/event	[no test files]
+?   	pim/internal/program	[no test files]
+?   	pim/internal/scenario	[no test files]
+ok  	pim/internal/clock	1.014s
+ok  	pim/internal/executor	1.014s
+ok  	pim/internal/httpapi	1.031s
+ok  	pim/internal/scheduler	1.018s

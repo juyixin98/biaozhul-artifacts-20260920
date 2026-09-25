@@ -1,0 +1,42 @@
+{
+  "name": "classic-priority-inversion-NO-inheritance",
+  "resources": ["R"],
+  "options": {
+    "priorityInheritance": false,
+    "deadlockDetection": true
+  },
+  "tasks": [
+    {
+      "id": "Low",
+      "arrival": 0,
+      "priority": 1,
+      "program": {
+        "actions": [
+          {"cpu": 1},
+          {"acquire": "R"},
+          {"cpu": 6},
+          {"release": "R"},
+          {"cpu": 1}
+        ]
+      }
+    },
+    {
+      "id": "Medium",
+      "arrival": 4,
+      "priority": 2,
+      "program": {"actions": [{"cpu": 4}]}
+    },
+    {
+      "id": "High",
+      "arrival": 2,
+      "priority": 3,
+      "program": {
+        "actions": [
+          {"acquire": "R"},
+          {"cpu": 2},
+          {"release": "R"}
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "name": "multi-lock-release-order-R1-first",
+  "resources": ["R1", "R2"],
+  "options": {
+    "priorityInheritance": true
+  },
+  "tasks": [
+    {
+      "id": "Low",
+      "arrival": 0,
+      "priority": 1,
+      "program": {
+        "actions": [
+          {"acquire": "R1"},
+          {"acquire": "R2"},
+          {"cpu": 6},
+          {"release": "R1"},
+          {"cpu": 1},
+          {"release": "R2"},
+          {"cpu": 1}
+        ]
+      }
+    },
+    {
+      "id": "A",
+      "arrival": 2,
+      "priority": 3,
+      "program": {
+        "actions": [
+          {"acquire": "R1"},
+          {"cpu": 1},
+          {"release": "R1"}
+        ]
+      }
+    },
+    {
+      "id": "B",
+      "arrival": 3,
+      "priority": 4,
+      "program": {
+        "actions": [
+          {"acquire": "R2"},
+          {"cpu": 1},
+          {"release": "R2"}
+        ]
+      }
+    }
+  ]
+}

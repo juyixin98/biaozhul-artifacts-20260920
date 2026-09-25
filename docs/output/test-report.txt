@@ -1,0 +1,57 @@
+?   	pim/cmd/pim	[no test files]
+?   	pim/cmd/server	[no test files]
+?   	pim/internal/event	[no test files]
+=== RUN   TestVirtualClockAdvance
+--- PASS: TestVirtualClockAdvance (0.00s)
+=== RUN   TestVirtualClockNegativePanics
+--- PASS: TestVirtualClockNegativePanics (0.00s)
+=== RUN   TestVirtualClockDeterministicWallTime
+--- PASS: TestVirtualClockDeterministicWallTime (0.00s)
+PASS
+ok  	pim/internal/clock	0.002s
+=== RUN   TestRecordingExecutorCapturesRunOrder
+--- PASS: TestRecordingExecutorCapturesRunOrder (0.00s)
+PASS
+ok  	pim/internal/executor	0.002s
+?   	pim/internal/program	[no test files]
+?   	pim/internal/scenario	[no test files]
+=== RUN   TestHealth
+--- PASS: TestHealth (0.00s)
+=== RUN   TestListScenarios
+--- PASS: TestListScenarios (0.00s)
+=== RUN   TestRunBuiltInScenario
+--- PASS: TestRunBuiltInScenario (0.00s)
+=== RUN   TestScenarioNotFound
+--- PASS: TestScenarioNotFound (0.00s)
+=== RUN   TestSimulateCustomSpec
+--- PASS: TestSimulateCustomSpec (0.00s)
+=== RUN   TestSimulateRejectsInvalidSpec
+--- PASS: TestSimulateRejectsInvalidSpec (0.00s)
+PASS
+ok  	pim/internal/httpapi	0.009s
+=== RUN   TestClassicInversionWithoutPI
+--- PASS: TestClassicInversionWithoutPI (0.00s)
+=== RUN   TestClassicInversionFixedWithPI
+--- PASS: TestClassicInversionFixedWithPI (0.00s)
+=== RUN   TestThreeLevelTransitiveInheritance
+--- PASS: TestThreeLevelTransitiveInheritance (0.00s)
+=== RUN   TestEffectivePriorityRecomputedOnRelease
+--- PASS: TestEffectivePriorityRecomputedOnRelease (0.00s)
+=== RUN   TestMultiLockReleaseOrders
+--- PASS: TestMultiLockReleaseOrders (0.00s)
+=== RUN   TestDeadlockDetected
+--- PASS: TestDeadlockDetected (0.00s)
+=== RUN   TestDeadlockDetectionDisabledTerminatesWithError
+--- PASS: TestDeadlockDetectionDisabledTerminatesWithError (0.00s)
+=== RUN   TestPreemptionByArrival
+--- PASS: TestPreemptionByArrival (0.00s)
+=== RUN   TestValidationErrors
+--- PASS: TestValidationErrors (0.00s)
+=== RUN   TestProgramErrorReleaseNotOwned
+--- PASS: TestProgramErrorReleaseNotOwned (0.00s)
+=== RUN   TestDeterminism
+--- PASS: TestDeterminism (0.00s)
+=== RUN   TestEventSequenceMonotonic
+--- PASS: TestEventSequenceMonotonic (0.00s)
+PASS
+ok  	pim/internal/scheduler	0.003s

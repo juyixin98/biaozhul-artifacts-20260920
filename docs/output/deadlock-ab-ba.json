@@ -1,0 +1,219 @@
+{
+  "name": "ab-ba-deadlock",
+  "options": {
+    "priorityInheritance": true,
+    "deadlockDetection": true
+  },
+  "finishTime": 1,
+  "deadlock": {
+    "cycle": [
+      "T1",
+      "T2",
+      "T1"
+    ],
+    "at": 1
+  },
+  "events": [
+    {
+      "seq": 0,
+      "time": 0,
+      "kind": "task_arrive",
+      "task": "T1",
+      "detail": {
+        "arrival": 0,
+        "priority": 3
+      }
+    },
+    {
+      "seq": 1,
+      "time": 0,
+      "kind": "task_dispatch",
+      "task": "T1",
+      "detail": {
+        "basePriority": 3,
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 2,
+      "time": 0,
+      "kind": "lock_acquire",
+      "task": "T1",
+      "resource": "R1"
+    },
+    {
+      "seq": 3,
+      "time": 1,
+      "kind": "tick",
+      "task": "T1",
+      "detail": {
+        "burstLeft": 0,
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 4,
+      "time": 1,
+      "kind": "task_arrive",
+      "task": "T2",
+      "detail": {
+        "arrival": 1,
+        "priority": 4
+      }
+    },
+    {
+      "seq": 5,
+      "time": 1,
+      "kind": "task_preempted",
+      "task": "T1",
+      "detail": {
+        "by": "T2",
+        "effectivePriority": 3
+      }
+    },
+    {
+      "seq": 6,
+      "time": 1,
+      "kind": "task_dispatch",
+      "task": "T2",
+      "detail": {
+        "basePriority": 4,
+        "effectivePriority": 4
+      }
+    },
+    {
+      "seq": 7,
+      "time": 1,
+      "kind": "lock_acquire",
+      "task": "T2",
+      "resource": "R2"
+    },
+    {
+      "seq": 8,
+      "time": 1,
+      "kind": "task_block",
+      "task": "T2",
+      "resource": "R1",
+      "detail": {
+        "owner": "T1",
+        "ownerEffectivePri": 3
+      }
+    },
+    {
+      "seq": 9,
+      "time": 1,
+      "kind": "priority_change",
+      "task": "T1",
+      "detail": {
+        "base": 3,
+        "donors": [
+          "T2"
+        ],
+        "inheritanceOn": true,
+        "new": 4,
+        "old": 3,
+        "reason": "block"
+      }
+    },
+    {
+      "seq": 10,
+      "time": 1,
+      "kind": "task_dispatch",
+      "task": "T1",
+      "detail": {
+        "basePriority": 3,
+        "effectivePriority": 4
+      }
+    },
+    {
+      "seq": 11,
+      "time": 1,
+      "kind": "task_block",
+      "task": "T1",
+      "resource": "R2",
+      "detail": {
+        "owner": "T2",
+        "ownerEffectivePri": 4
+      }
+    },
+    {
+      "seq": 12,
+      "time": 1,
+      "kind": "deadlock",
+      "detail": {
+        "at": 1,
+        "cycle": [
+          "T1",
+          "T2",
+          "T1"
+        ],
+        "edges": [
+          {
+            "holds": "R2",
+            "owner": "T2",
+            "waiter": "T1"
+          },
+          {
+            "holds": "R1",
+            "owner": "T1",
+            "waiter": "T2"
+          }
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "makespanTicks": 1,
+    "inversionTicks": 0,
+    "blockedTicks": {},
+    "completedAt": {}
+  },
+  "tasks": [
+    {
+      "id": "T1",
+      "state": "blocked",
+      "basePriority": 3,
+      "effectivePriority": 4,
+      "donors": [
+        "T2"
+      ],
+      "held": [
+        "R1"
+      ],
+      "waitingFor": "R2",
+      "arrival": 0,
+      "blockedTicks": 0
+    },
+    {
+      "id": "T2",
+      "state": "blocked",
+      "basePriority": 4,
+      "effectivePriority": 4,
+      "donors": [
+        "T1"
+      ],
+      "held": [
+        "R2"
+      ],
+      "waitingFor": "R1",
+      "arrival": 1,
+      "blockedTicks": 0
+    }
+  ],
+  "locks": [
+    {
+      "id": "R1",
+      "owner": "T1",
+      "waiters": [
+        "T2"
+      ]
+    },
+    {
+      "id": "R2",
+      "owner": "T2",
+      "waiters": [
+        "T1"
+      ]
+    }
+  ]
+}
