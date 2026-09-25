@@ -1,0 +1,8 @@
+{
+  "threshold": 0.5,
+  "texts": [
+    "the quick brown fox jumps over the lazy dog.",
+    "a quick brown fox jumps over the lazy dog.",
+    "completely unrelated material appears in this short note."
+  ]
+}
