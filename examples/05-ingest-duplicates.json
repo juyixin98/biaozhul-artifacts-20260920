@@ -1,0 +1,44 @@
+{
+  "spans": [
+    {
+      "trace_id": "tr-dup",
+      "span_id": "s1",
+      "parent_span_id": "root",
+      "service": "api",
+      "operation": "op",
+      "start": "2026-01-01T00:00:00Z",
+      "duration_nanos": 10000000,
+      "receive_ns": 10
+    },
+    {
+      "trace_id": "tr-dup",
+      "span_id": "s1",
+      "parent_span_id": "root",
+      "service": "api",
+      "operation": "op",
+      "start": "2026-01-01T00:00:00Z",
+      "duration_nanos": 10000000,
+      "receive_ns": 15
+    },
+    {
+      "trace_id": "tr-dup",
+      "span_id": "s1",
+      "parent_span_id": "root",
+      "service": "api",
+      "operation": "op-changed",
+      "start": "2026-01-01T00:00:00Z",
+      "duration_nanos": 12000000,
+      "receive_ns": 20
+    },
+    {
+      "trace_id": "tr-dup",
+      "span_id": "root",
+      "service": "gateway",
+      "operation": "entry",
+      "start": "2026-01-01T00:00:00Z",
+      "duration_nanos": 30000000,
+      "receive_ns": 25
+    }
+  ],
+  "at_least_watermark_ns": 200
+}

@@ -1,0 +1,13 @@
+{
+  "spans": [
+    {
+      "trace_id": "tr-demo",
+      "span_id": "root",
+      "service": "gateway",
+      "operation": "entry",
+      "start": "2026-01-01T00:00:00Z",
+      "duration_nanos": 100000000,
+      "receive_ns": 300
+    }
+  ]
+}

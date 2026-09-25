@@ -1,0 +1,52 @@
+{
+  "trace_id": "tr-demo",
+  "revision": 1,
+  "closed": true,
+  "complete": false,
+  "reasons": [
+    "missing-root",
+    "missing-parent",
+    "timeout"
+  ],
+  "span_ids": [
+    "g1",
+    "c1"
+  ],
+  "root_span_ids": null,
+  "spans": [
+    {
+      "trace_id": "tr-demo",
+      "span_id": "g1",
+      "parent_span_id": "c1",
+      "service": "edge",
+      "operation": "render",
+      "start": "2026-01-01T00:00:00.03Z",
+      "duration_nanos": 5000000,
+      "attributes": {
+        "region": "cn-1"
+      },
+      "receive_ns": 10
+    },
+    {
+      "trace_id": "tr-demo",
+      "span_id": "c1",
+      "parent_span_id": "root",
+      "service": "api",
+      "operation": "handle",
+      "start": "2026-01-01T00:00:00.01Z",
+      "duration_nanos": 40000000,
+      "receive_ns": 20
+    }
+  ],
+  "conflicts": null,
+  "missing_parents": [
+    {
+      "child_span_id": "c1",
+      "missing_parent_span_id": "root"
+    }
+  ],
+  "cycles": null,
+  "clock_skew": null,
+  "watermark_ns": 200,
+  "emitted_at_ns": 200
+}

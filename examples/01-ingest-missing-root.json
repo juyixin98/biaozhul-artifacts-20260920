@@ -1,0 +1,25 @@
+{
+  "spans": [
+    {
+      "trace_id": "tr-demo",
+      "span_id": "g1",
+      "parent_span_id": "c1",
+      "service": "edge",
+      "operation": "render",
+      "start": "2026-01-01T00:00:00.030Z",
+      "duration_nanos": 5000000,
+      "receive_ns": 10,
+      "attributes": {"region": "cn-1"}
+    },
+    {
+      "trace_id": "tr-demo",
+      "span_id": "c1",
+      "parent_span_id": "root",
+      "service": "api",
+      "operation": "handle",
+      "start": "2026-01-01T00:00:00.010Z",
+      "duration_nanos": 40000000,
+      "receive_ns": 20
+    }
+  ]
+}

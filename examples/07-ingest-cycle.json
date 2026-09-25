@@ -1,0 +1,25 @@
+{
+  "spans": [
+    {
+      "trace_id": "tr-cycle",
+      "span_id": "a",
+      "parent_span_id": "b",
+      "service": "svc-x",
+      "operation": "loop-a",
+      "start": "2026-01-01T00:00:00Z",
+      "duration_nanos": 10000000,
+      "receive_ns": 10
+    },
+    {
+      "trace_id": "tr-cycle",
+      "span_id": "b",
+      "parent_span_id": "a",
+      "service": "svc-x",
+      "operation": "loop-b",
+      "start": "2026-01-01T00:00:00Z",
+      "duration_nanos": 10000000,
+      "receive_ns": 20
+    }
+  ],
+  "at_least_watermark_ns": 200
+}

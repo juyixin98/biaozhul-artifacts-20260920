@@ -1,0 +1,7 @@
+# 运行产物
+/data/
+/data-e2e/
+/bin/
+*.log
+resp-*.json
+e2e-output.txt

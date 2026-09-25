@@ -1,0 +1,34 @@
+{
+  "spans": [
+    {
+      "trace_id": "tr-skew",
+      "span_id": "ch",
+      "parent_span_id": "p",
+      "service": "svc-b",
+      "operation": "child",
+      "start": "2026-01-01T00:00:00.005Z",
+      "duration_nanos": 35000000,
+      "receive_ns": 20
+    },
+    {
+      "trace_id": "tr-skew",
+      "span_id": "p",
+      "parent_span_id": "root",
+      "service": "svc-a",
+      "operation": "parent",
+      "start": "2026-01-01T00:00:00.010Z",
+      "duration_nanos": 20000000,
+      "receive_ns": 10
+    },
+    {
+      "trace_id": "tr-skew",
+      "span_id": "root",
+      "service": "gateway",
+      "operation": "entry",
+      "start": "2026-01-01T00:00:00Z",
+      "duration_nanos": 100000000,
+      "receive_ns": 5
+    }
+  ],
+  "at_least_watermark_ns": 200
+}
