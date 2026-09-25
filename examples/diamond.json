@@ -1,0 +1,31 @@
+{
+  "name": "diamond-all-success",
+  "nodes": [
+    {
+      "name": "extract",
+      "maxAttempts": 1,
+      "payload": {"action": "ok"}
+    },
+    {
+      "name": "validate",
+      "deps": ["extract"],
+      "policy": "ALL_SUCCESS",
+      "maxAttempts": 1,
+      "payload": {"action": "sleep", "sleepMs": 50}
+    },
+    {
+      "name": "transform",
+      "deps": ["extract"],
+      "policy": "ALL_SUCCESS",
+      "maxAttempts": 1,
+      "payload": {"action": "ok"}
+    },
+    {
+      "name": "load",
+      "deps": ["validate", "transform"],
+      "policy": "ALL_SUCCESS",
+      "maxAttempts": 1,
+      "payload": {"action": "ok"}
+    }
+  ]
+}

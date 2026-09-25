@@ -1,0 +1,17 @@
+{
+  "name": "cancellable-long-job",
+  "nodes": [
+    {
+      "name": "long-running",
+      "maxAttempts": 1,
+      "payload": {"action": "sleep", "sleepMs": 30000}
+    },
+    {
+      "name": "after-long-step",
+      "deps": ["long-running"],
+      "policy": "ALL_SUCCESS",
+      "maxAttempts": 1,
+      "payload": {"action": "ok"}
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "failure-propagation",
+  "nodes": [
+    {
+      "name": "start",
+      "maxAttempts": 1,
+      "payload": {"action": "ok"}
+    },
+    {
+      "name": "risky",
+      "deps": ["start"],
+      "policy": "ALL_SUCCESS",
+      "maxAttempts": 2,
+      "payload": {"action": "fail", "message": "hard disk on fire"}
+    },
+    {
+      "name": "parallel-ok",
+      "deps": ["start"],
+      "policy": "ALL_SUCCESS",
+      "maxAttempts": 1,
+      "payload": {"action": "ok"}
+    },
+    {
+      "name": "needs-everything",
+      "deps": ["risky", "parallel-ok"],
+      "policy": "ALL_SUCCESS",
+      "maxAttempts": 1,
+      "payload": {"action": "ok"}
+    },
+    {
+      "name": "tolerates-failure",
+      "deps": ["risky"],
+      "policy": "ALL_END",
+      "maxAttempts": 1,
+      "payload": {"action": "ok"}
+    }
+  ]
+}

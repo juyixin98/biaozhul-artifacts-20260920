@@ -1,0 +1,14 @@
+{
+  "name": "retry-then-succeed",
+  "nodes": [
+    {
+      "name": "flaky-api",
+      "maxAttempts": 4,
+      "payload": {
+        "action": "flaky",
+        "failTimes": 2,
+        "message": "upstream returned 503"
+      }
+    }
+  ]
+}
