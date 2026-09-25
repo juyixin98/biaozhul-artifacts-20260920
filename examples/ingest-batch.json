@@ -1,0 +1,14 @@
+{
+  "lines": [
+    "2026-09-24 10:00:00.001 INFO http: GET /api/users/550e8400-e29b-41d4-a716-446655440000 200 1024 bytes in 12ms",
+    "2026-09-24 10:00:01.001 INFO http: GET /api/users/660e8400-e29b-41d4-a716-446655440000 200 2048 bytes in 7ms",
+    "2026-09-24 10:00:02.001 WARN db: Connection to 10.0.0.1:5432 refused: dial tcp, retrying",
+    "2026-09-24 10:00:03.001 WARN db: Connection to 10.0.0.2:5432 refused: dial tcp, retrying",
+    "2026-09-24 10:00:04.001 WARN db: Connection to 10.0.0.3:5432 timed out after 500ms, giving up",
+    "2026-09-24 10:00:05.001 INFO auth: user \"alice\" login from 10.1.2.3 status 200",
+    "2026-09-24 10:00:06.001 INFO auth: user \"bob\" login from 10.1.2.4 status 401",
+    "2026-09-24 10:00:07.001 ERROR app: uncaught NullPointerException while processing request 77",
+    "2026-09-24 10:00:08.001 ERROR app: uncaught IllegalArgumentException while processing request 78",
+    "2026-09-24 10:00:09.001 FATAL kernel: segmentation fault at address 0xDEADBEEF in module driver"
+  ]
+}

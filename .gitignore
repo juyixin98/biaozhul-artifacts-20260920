@@ -1,0 +1,16 @@
+# Binaries
+/bin/
+
+# Local runtime data (snapshots)
+/data/
+*.snap
+
+# Test / coverage artifacts
+*.out
+*.prof
+
+# OS files
+.DS_Store
+
+# Compiled test binaries
+*.test
