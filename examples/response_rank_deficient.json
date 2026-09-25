@@ -1,0 +1,13 @@
+{
+  "ok": false,
+  "error": {
+    "code": "rank_deficient",
+    "message": "matrix is rank deficient: numerical rank 3 / 4 (threshold=3.07e-14, smallest singular value=0.855, nullspace dim=1)",
+    "rank": 3,
+    "p": 4,
+    "nullspace_dim": 1,
+    "smallest_singular_value": 0.8554798692306795,
+    "threshold": 3.071269626055557e-14,
+    "hint": "remove redundant columns, add lam>0 ridge penalty on slopes, or set allow_rank_deficient=true to obtain the SVD minimum-norm solution"
+  }
+}

@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robustreg"
+version = "1.0.0"
+description = "Robust linear regression (Huber IRLS) pure-backend library with a JSON interface"
+requires-python = ">=3.9"
+dependencies = ["numpy>=1.24"]
+
+[project.scripts]
+robustreg = "robustreg.cli:main"
+
+[tool.setuptools]
+packages = ["robustreg"]
