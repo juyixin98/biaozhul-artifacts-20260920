@@ -1,0 +1,11 @@
+REQUEST op=echo id=1, 27 bytes:
+42 51 01 00 01 00 00 00 01 00 00 00 0a 01 68 65 6c 6c 6f 20 72 70 63 49 f2 d6 14
+  magic       42 51  (OK)
+  version     1
+  flags       x00
+  command     1 (REQUEST)
+  request_id  1
+  payload_len 10
+  payload     01 68 65 6c 6c 6f 20 72 70 63  (10 bytes)
+  crc32       49f2d614 (matches)
+  total       27 bytes

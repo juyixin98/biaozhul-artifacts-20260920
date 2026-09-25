@@ -1,0 +1,11 @@
+REQUEST op=add id=2, 34 bytes:
+42 51 01 00 01 00 00 00 02 00 00 00 11 04 00 00 00 00 00 00 00 28 00 00 00 00 00 00 00 02 5e 5c 7a b1
+  magic       42 51  (OK)
+  version     1
+  flags       x00
+  command     1 (REQUEST)
+  request_id  2
+  payload_len 17
+  payload     04 00 00 00 00 00 00 00 28 00 00 00 00 00 00 00 02  (17 bytes)
+  crc32       5e5c7ab1 (matches)
+  total       34 bytes

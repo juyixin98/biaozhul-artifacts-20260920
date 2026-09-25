@@ -1,0 +1,11 @@
+REQUEST op=slow id=3, 31 bytes:
+42 51 01 00 01 00 00 00 03 00 00 00 0e 03 00 00 03 e8 6c 61 74 65 2d 62 6f 64 79 78 8a 38 ee
+  magic       42 51  (OK)
+  version     1
+  flags       x00
+  command     1 (REQUEST)
+  request_id  3
+  payload_len 14
+  payload     03 00 00 03 e8 6c 61 74 65 2d 62 6f 64 79  (14 bytes)
+  crc32       788a38ee (matches)
+  total       31 bytes

@@ -1,0 +1,25 @@
+[package]
+name = "brpc-reuse"
+version = "0.1.0"
+edition = "2021"
+description = "Binary RPC multiplexing library over TCP: incremental byte parser, concurrent multiplexed requests, cancellation, bounded memory"
+license = "MIT"
+
+[lib]
+name = "brpc_reuse"
+path = "src/lib.rs"
+
+[[bin]]
+name = "demo-server"
+path = "src/bin/server.rs"
+
+[[bin]]
+name = "demo-client"
+path = "src/bin/client.rs"
+
+# Deliberately zero external dependencies: the incremental byte parser,
+# CRC-32, framing and multiplexing are all implemented from scratch.
+[dependencies]
+
+[profile.release]
+panic = "abort"
