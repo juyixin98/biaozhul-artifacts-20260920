@@ -1,0 +1,17 @@
+{
+  "description": "封窗后迟到：窗口 [0,0] 在 W>=10 封存并保留到 W>15（gap=10, allowedLateness=5）。t=14 在 W=20 时因 14 < W-L=15 被丢弃；t=8 在 W=30 时同样被丢弃（状态早已清除）。",
+  "gap": 10,
+  "allowedLateness": 5,
+  "aggregate": "COUNT",
+  "watermarkStrategy": {"type": "NONE"},
+  "input": [
+    {"key": "a", "timestamp": 0, "value": 1},
+    {"watermark": 10},
+    {"watermark": 20},
+    {"key": "a", "timestamp": 14, "value": 1},
+    {"watermark": 30},
+    {"key": "a", "timestamp": 8, "value": 1},
+    {"watermark": 100}
+  ],
+  "finish": false
+}

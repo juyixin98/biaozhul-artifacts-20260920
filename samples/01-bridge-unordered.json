@@ -1,0 +1,18 @@
+{
+  "description": "乱序 + 迟到桥接：两个已封存会话被一个迟到事件桥接，产生 RETRACT x2 + ADD x1；之后水位线越过允许迟到完成状态清除。",
+  "gap": 10,
+  "allowedLateness": 20,
+  "aggregate": "SUM",
+  "watermarkStrategy": {"type": "NONE"},
+  "input": [
+    {"key": "a", "timestamp": 1, "value": 10},
+    {"key": "a", "timestamp": 5, "value": 10},
+    {"watermark": 15},
+    {"key": "a", "timestamp": 21, "value": 100},
+    {"key": "a", "timestamp": 25, "value": 100},
+    {"watermark": 35},
+    {"key": "a", "timestamp": 15, "value": 1000},
+    {"watermark": 56}
+  ],
+  "finish": false
+}

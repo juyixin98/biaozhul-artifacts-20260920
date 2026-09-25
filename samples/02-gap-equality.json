@@ -1,0 +1,16 @@
+{
+  "description": "边界间隔相等：相邻事件间隔恰好等于 gap（eq: 0->10->20，gap=10）仍属同一会话；间隔 gap+1（split: 0->11）则拆分为两个会话。",
+  "gap": 10,
+  "allowedLateness": 0,
+  "aggregate": "COUNT",
+  "watermarkStrategy": {"type": "NONE"},
+  "input": [
+    {"key": "eq", "timestamp": 0, "value": 1},
+    {"key": "eq", "timestamp": 10, "value": 1},
+    {"key": "eq", "timestamp": 20, "value": 1},
+    {"key": "split", "timestamp": 0, "value": 1},
+    {"key": "split", "timestamp": 11, "value": 1},
+    {"watermark": 100}
+  ],
+  "finish": false
+}

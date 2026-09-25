@@ -1,0 +1,17 @@
+{
+  "description": "多 key + BOUNDED 水位线（maxOutOfOrderness=3）+ COUNT：观察跨 key 隔离与乱序丢弃计数。",
+  "gap": 5,
+  "allowedLateness": 2,
+  "aggregate": "COUNT",
+  "watermarkStrategy": {"type": "BOUNDED", "maxOutOfOrderness": 3},
+  "input": [
+    {"key": "user-1", "timestamp": 1, "value": 1},
+    {"key": "user-2", "timestamp": 2, "value": 1},
+    {"key": "user-1", "timestamp": 4, "value": 1},
+    {"key": "user-1", "timestamp": 20, "value": 1},
+    {"key": "user-2", "timestamp": 3, "value": 1},
+    {"key": "user-2", "timestamp": 25, "value": 1},
+    {"key": "user-1", "timestamp": 24, "value": 1}
+  ],
+  "finish": true
+}
