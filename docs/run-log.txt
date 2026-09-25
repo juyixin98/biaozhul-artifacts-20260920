@@ -1,0 +1,482 @@
+
+========== health ==========
+{
+  "status": "UP"
+}
+
+========== reset ==========
+{
+  "status": "RESET"
+}
+
+========== batch: retract-before-add + out-of-order v3 correction + duplicate replay ==========
+{
+  "count": 8,
+  "applied": 4,
+  "buffered": 3,
+  "duplicate": 1,
+  "conflict": 0,
+  "results": [
+    {
+      "status": "BUFFERED",
+      "message": "waiting for version 1 before version 2",
+      "bufferedPending": 1
+    },
+    {
+      "status": "BUFFERED",
+      "message": "RETRACT buffered: waiting for ADD of event 'order-200'",
+      "bufferedPending": 2
+    },
+    {
+      "status": "APPLIED",
+      "message": "applied",
+      "appliedVersion": 1,
+      "bufferedPending": 1,
+      "drained": [
+        {
+          "opId": "evt-1",
+          "eventId": "order-100",
+          "op": "ADD",
+          "version": 1,
+          "newKey": "books",
+          "newValue": 29.9,
+          "eventTime": 1790157600000,
+          "resolvedTime": 1790157388486
+        },
+        {
+          "opId": "evt-3",
+          "eventId": "order-100",
+          "op": "RETRACT",
+          "version": 2,
+          "oldKey": "books",
+          "oldValue": 29.9,
+          "resolvedTime": 1790157388486
+        }
+      ]
+    },
+    {
+      "status": "APPLIED",
+      "message": "applied",
+      "appliedVersion": 1,
+      "bufferedPending": 0,
+      "drained": [
+        {
+          "opId": "evt-4",
+          "eventId": "order-200",
+          "op": "ADD",
+          "version": 1,
+          "newKey": "music",
+          "newValue": 15,
+          "eventTime": 1790157660000,
+          "resolvedTime": 1790157388486
+        },
+        {
+          "opId": "evt-6",
+          "eventId": "order-200",
+          "op": "RETRACT",
+          "version": 2,
+          "oldKey": "music",
+          "oldValue": 15,
+          "resolvedTime": 1790157388486
+        }
+      ]
+    },
+    {
+      "status": "BUFFERED",
+      "message": "waiting for version 1 before version 3",
+      "bufferedPending": 1
+    },
+    {
+      "status": "APPLIED",
+      "message": "applied",
+      "appliedVersion": 1,
+      "bufferedPending": 1,
+      "drained": [
+        {
+          "opId": "evt-7",
+          "eventId": "order-300",
+          "op": "ADD",
+          "version": 1,
+          "newKey": "books",
+          "newValue": 39.9,
+          "eventTime": 1790157720000,
+          "resolvedTime": 1790157388487
+        }
+      ]
+    },
+    {
+      "status": "APPLIED",
+      "message": "applied",
+      "appliedVersion": 2,
+      "bufferedPending": 0,
+      "drained": [
+        {
+          "opId": "evt-8",
+          "eventId": "order-300",
+          "op": "CORRECT",
+          "version": 2,
+          "oldKey": "books",
+          "oldValue": 39.9,
+          "newKey": "books",
+          "newValue": 49.9,
+          "resolvedTime": 1790157388487
+        },
+        {
+          "opId": "evt-9",
+          "eventId": "order-300",
+          "op": "CORRECT",
+          "version": 3,
+          "oldKey": "books",
+          "oldValue": 49.9,
+          "newKey": "books",
+          "newValue": 49.9,
+          "resolvedTime": 1790157388487
+        }
+      ]
+    },
+    {
+      "status": "DUPLICATE",
+      "message": "opId 'evt-4' already seen",
+      "bufferedPending": 0
+    }
+  ],
+  "aggregates": [
+    {
+      "key": "books",
+      "sum": 49.9,
+      "count": 1
+    }
+  ]
+}
+
+========== aggregates with ledger verification (?verify=1) ==========
+{
+  "aggregates": [
+    {
+      "key": "books",
+      "sum": 49.9,
+      "count": 1
+    }
+  ],
+  "liveEvents": 1,
+  "pendingOps": 0,
+  "watermark": 1790157720000,
+  "verification": {
+    "matchesLedgerRecomputation": true,
+    "discrepancies": [],
+    "ledgerEntries": 7
+  }
+}
+
+========== live events + buffered pending ==========
+{
+  "liveEvents": [
+    {
+      "eventId": "order-300",
+      "key": "books",
+      "value": 49.9,
+      "version": 3,
+      "createdAt": 1790157388487,
+      "updatedAt": 1790157388487
+    }
+  ],
+  "pending": []
+}
+
+========== single-op retract-before-add STEP 1 (retract buffered) ==========
+{
+  "status": "BUFFERED",
+  "message": "RETRACT buffered: waiting for ADD of event 'order-900'",
+  "bufferedPending": 1
+}
+
+========== single-op retract-before-add STEP 2 (add releases the buffered retract) ==========
+{
+  "status": "APPLIED",
+  "message": "applied",
+  "appliedVersion": 1,
+  "bufferedPending": 0,
+  "drained": [
+    {
+      "opId": "late-add",
+      "eventId": "order-900",
+      "op": "ADD",
+      "version": 1,
+      "newKey": "games",
+      "newValue": 59.95,
+      "resolvedTime": 1790157388521
+    },
+    {
+      "opId": "late-undo",
+      "eventId": "order-900",
+      "op": "RETRACT",
+      "version": 2,
+      "oldKey": "games",
+      "oldValue": 59.95,
+      "resolvedTime": 1790157388521
+    }
+  ]
+}
+
+========== correction moving order-300 from books to movies (v4) ==========
+{
+  "status": "APPLIED",
+  "message": "applied",
+  "appliedVersion": 4,
+  "bufferedPending": 0,
+  "drained": [
+    {
+      "opId": "evt-10",
+      "eventId": "order-300",
+      "op": "CORRECT",
+      "version": 4,
+      "oldKey": "books",
+      "oldValue": 49.9,
+      "newKey": "movies",
+      "newValue": 55,
+      "resolvedTime": 1790157388529
+    }
+  ]
+}
+
+========== correct after terminal RETRACT (order-100 v3) -> CONFLICT ==========
+{
+  "status": "CONFLICT",
+  "message": "event 'order-100' was retired by a RETRACT at version 2; cannot apply CORRECT at version 3 (ADD again to open a new chain)",
+  "bufferedPending": 0
+}
+
+========== duplicate replay of already applied evt-1 -> DUPLICATE ==========
+{
+  "status": "DUPLICATE",
+  "message": "opId 'evt-1' already seen",
+  "bufferedPending": 0
+}
+
+========== final aggregates (streaming state) ==========
+{
+  "aggregates": [
+    {
+      "key": "movies",
+      "sum": 55,
+      "count": 1
+    }
+  ],
+  "liveEvents": 1,
+  "pendingOps": 0,
+  "watermark": 1790157720000,
+  "verification": {
+    "matchesLedgerRecomputation": true,
+    "discrepancies": [],
+    "ledgerEntries": 10
+  }
+}
+
+========== resolved event ledger ==========
+{
+  "entries": [
+    {
+      "opId": "evt-1",
+      "eventId": "order-100",
+      "op": "ADD",
+      "version": 1,
+      "newKey": "books",
+      "newValue": 29.9,
+      "eventTime": 1790157600000,
+      "resolvedTime": 1790157388486
+    },
+    {
+      "opId": "evt-3",
+      "eventId": "order-100",
+      "op": "RETRACT",
+      "version": 2,
+      "oldKey": "books",
+      "oldValue": 29.9,
+      "resolvedTime": 1790157388486
+    },
+    {
+      "opId": "evt-4",
+      "eventId": "order-200",
+      "op": "ADD",
+      "version": 1,
+      "newKey": "music",
+      "newValue": 15,
+      "eventTime": 1790157660000,
+      "resolvedTime": 1790157388486
+    },
+    {
+      "opId": "evt-6",
+      "eventId": "order-200",
+      "op": "RETRACT",
+      "version": 2,
+      "oldKey": "music",
+      "oldValue": 15,
+      "resolvedTime": 1790157388486
+    },
+    {
+      "opId": "evt-7",
+      "eventId": "order-300",
+      "op": "ADD",
+      "version": 1,
+      "newKey": "books",
+      "newValue": 39.9,
+      "eventTime": 1790157720000,
+      "resolvedTime": 1790157388487
+    },
+    {
+      "opId": "evt-8",
+      "eventId": "order-300",
+      "op": "CORRECT",
+      "version": 2,
+      "oldKey": "books",
+      "oldValue": 39.9,
+      "newKey": "books",
+      "newValue": 49.9,
+      "resolvedTime": 1790157388487
+    },
+    {
+      "opId": "evt-9",
+      "eventId": "order-300",
+      "op": "CORRECT",
+      "version": 3,
+      "oldKey": "books",
+      "oldValue": 49.9,
+      "newKey": "books",
+      "newValue": 49.9,
+      "resolvedTime": 1790157388487
+    },
+    {
+      "opId": "late-add",
+      "eventId": "order-900",
+      "op": "ADD",
+      "version": 1,
+      "newKey": "games",
+      "newValue": 59.95,
+      "resolvedTime": 1790157388521
+    },
+    {
+      "opId": "late-undo",
+      "eventId": "order-900",
+      "op": "RETRACT",
+      "version": 2,
+      "oldKey": "games",
+      "oldValue": 59.95,
+      "resolvedTime": 1790157388521
+    },
+    {
+      "opId": "evt-10",
+      "eventId": "order-300",
+      "op": "CORRECT",
+      "version": 4,
+      "oldKey": "books",
+      "oldValue": 49.9,
+      "newKey": "movies",
+      "newValue": 55,
+      "resolvedTime": 1790157388529
+    }
+  ],
+  "count": 10
+}
+
+========== reference replay of a fresh raw-op stream (what-if) ==========
+{
+  "inputOperations": 6,
+  "resolvedLedgerEntries": 5,
+  "pendingAfterReplay": 0,
+  "matchesLedgerRecomputation": true,
+  "discrepancies": [],
+  "aggregatesAfterReplay": [
+    {
+      "key": "alpha",
+      "sum": 2.5,
+      "count": 1
+    },
+    {
+      "key": "beta",
+      "sum": 1.5,
+      "count": 1
+    }
+  ],
+  "results": [
+    {
+      "index": 0,
+      "status": "APPLIED",
+      "message": "applied",
+      "drained": [
+        "r1#v1:ADD"
+      ]
+    },
+    {
+      "index": 1,
+      "status": "APPLIED",
+      "message": "applied",
+      "drained": [
+        "r2#v1:ADD"
+      ]
+    },
+    {
+      "index": 2,
+      "status": "BUFFERED",
+      "message": "waiting for version 1 before version 2"
+    },
+    {
+      "index": 3,
+      "status": "APPLIED",
+      "message": "applied",
+      "drained": [
+        "r3#v1:ADD",
+        "r3#v2:RETRACT"
+      ]
+    },
+    {
+      "index": 4,
+      "status": "APPLIED",
+      "message": "applied",
+      "drained": [
+        "r1#v2:CORRECT"
+      ]
+    },
+    {
+      "index": 5,
+      "status": "DUPLICATE",
+      "message": "opId 'r-a2' already seen"
+    }
+  ],
+  "warnings": []
+}
+
+========== reference recomputation of the current ledger (empty body) ==========
+{
+  "inputOperations": 0,
+  "resolvedLedgerEntries": 10,
+  "matchesLedgerRecomputation": true,
+  "discrepancies": [],
+  "aggregatesAfterReplay": [
+    {
+      "key": "movies",
+      "sum": 55,
+      "count": 1
+    }
+  ],
+  "results": [],
+  "warnings": []
+}
+
+========== emit one output snapshot ==========
+{
+  "sequence": 1,
+  "emittedAt": 1790157388587,
+  "watermark": 1790157720000,
+  "aggregates": [
+    {
+      "key": "movies",
+      "sum": 55,
+      "count": 1
+    }
+  ],
+  "liveEvents": 1,
+  "pendingOps": 0
+}
+
+========== invalid request (ADD without value) -> 400 ==========
+HTTP 400

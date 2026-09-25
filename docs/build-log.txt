@@ -1,0 +1,3 @@
+==> compiling main sources
+==> compiling test sources
+BUILD OK

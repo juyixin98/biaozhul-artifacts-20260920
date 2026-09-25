@@ -1,0 +1,10 @@
+{
+  "operations": [
+    {"eventId": "r1", "op": "ADD", "key": "alpha", "value": "1.5", "opId": "r-a1"},
+    {"eventId": "r2", "op": "ADD", "key": "alpha", "value": "2.5", "opId": "r-a2"},
+    {"eventId": "r3", "op": "RETRACT", "version": 2, "opId": "r-x2"},
+    {"eventId": "r3", "op": "ADD", "key": "beta", "value": "10", "version": 1, "opId": "r-x1"},
+    {"eventId": "r1", "op": "CORRECT", "key": "beta", "value": "1.5", "opId": "r-c1"},
+    {"eventId": "r2", "op": "ADD", "key": "alpha", "value": "2.5", "opId": "r-a2"}
+  ]
+}

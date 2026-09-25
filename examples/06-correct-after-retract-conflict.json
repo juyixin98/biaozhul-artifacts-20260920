@@ -1,0 +1,8 @@
+{
+  "eventId": "order-100",
+  "op": "CORRECT",
+  "key": "books",
+  "value": "99.99",
+  "version": 3,
+  "opId": "evt-99"
+}

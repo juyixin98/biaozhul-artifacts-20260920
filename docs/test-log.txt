@@ -1,0 +1,43 @@
+1..38
+ok 1 - json: parses primitives, objects and arrays
+ok 2 - json: decimal numbers keep exact precision
+ok 3 - json: string escapes round-trip
+ok 4 - json: rejects malformed input
+ok 5 - json: rejects trailing characters
+ok 6 - json: writer produces valid re-parseable output
+ok 7 - engine: ADD then aggregates appear
+ok 8 - engine: RETRACT removes event and updates sum/count
+ok 9 - engine: CORRECT changes value on same key
+ok 10 - engine: CORRECT moves event to a new key
+ok 11 - acceptance: RETRACT before ADD buffers and releases (unversioned)
+ok 12 - acceptance: RETRACT before ADD then re-ADD works
+ok 13 - acceptance: CORRECT before ADD buffers and applies on release
+ok 14 - acceptance: out-of-order versions buffer until gaps fill
+ok 15 - acceptance: multiple corrections in version chain
+ok 16 - acceptance: versioned retract-before-add (v2 retract before v1 add)
+ok 17 - idempotency: same opId replay is DUPLICATE and state unchanged
+ok 18 - idempotency: replay of full mixed stream leaves same aggregates
+ok 19 - idempotency: identical unversioned ADD replayed is deduplicated by fingerprint
+ok 20 - idempotency: buffered out-of-order op replayed before release stays DUPLICATE
+ok 21 - conflict: CORRECT after terminal RETRACT is rejected, not parked forever
+ok 22 - conflict: same version different content rejected
+ok 23 - invariant: count never goes negative on cross-key correction churn
+ok 24 - invariant: reference recompute throws on injected negative drift
+ok 25 - validation: ADD requires key and value
+ok 26 - lateness: operations beyond watermark minus lateness are rejected
+ok 27 - ledger: records old/new key and value on every resolved change
+ok 28 - acceptance: complex interleaved stream matches ledger recomputation at every step
+ok 29 - time: manual clock only moves when advanced
+ok 30 - time: periodic output emission fires on virtual ticks
+ok 31 - time: cancellation stops future firings
+ok 32 - time: one-shot task fires once at due time
+ok 33 - http: full retract-before-add acceptance flow over HTTP
+ok 34 - http: batch corrections then replay reference check
+ok 35 - http: duplicate opId in batch is idempotent
+ok 36 - http: invalid and malformed requests return 400
+ok 37 - http: ledger and events endpoints show resolved and pending state
+ok 38 - http: reset clears all state
+
+# tests 38
+# pass 38
+# fail 0

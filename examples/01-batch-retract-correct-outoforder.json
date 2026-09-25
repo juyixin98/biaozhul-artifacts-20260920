@@ -1,0 +1,12 @@
+{
+  "operations": [
+    {"eventId": "order-100", "op": "RETRACT", "version": 2, "opId": "evt-3"},
+    {"eventId": "order-200", "op": "RETRACT", "opId": "evt-6"},
+    {"eventId": "order-100", "op": "ADD", "key": "books", "value": "29.90", "version": 1, "opId": "evt-1", "eventTime": "2026-09-23T10:00:00Z"},
+    {"eventId": "order-200", "op": "ADD", "key": "music", "value": "15.00", "opId": "evt-4", "eventTime": "2026-09-23T10:01:00Z"},
+    {"eventId": "order-300", "op": "CORRECT", "key": "books", "value": "49.90", "version": 3, "opId": "evt-9"},
+    {"eventId": "order-300", "op": "ADD", "key": "books", "value": "39.90", "version": 1, "opId": "evt-7", "eventTime": "2026-09-23T10:02:00Z"},
+    {"eventId": "order-300", "op": "CORRECT", "key": "books", "value": "49.90", "version": 2, "opId": "evt-8"},
+    {"eventId": "order-200", "op": "ADD", "key": "music", "value": "15.00", "opId": "evt-4"}
+  ]
+}
