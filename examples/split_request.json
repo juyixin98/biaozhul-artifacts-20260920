@@ -1,0 +1,6 @@
+{
+  "threshold": 3,
+  "total": 5,
+  "secret_text": "correct horse battery staple",
+  "_comment": "create 5 shares; any 3 recover the secret. Use secret_b64 for binary data (mutually exclusive with secret_text)."
+}

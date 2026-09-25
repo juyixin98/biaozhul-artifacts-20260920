@@ -1,0 +1,132 @@
+>> starting server on http://127.0.0.1:8091
+
+== health ==
+{
+    "status": "ok",
+    "version": "1.0.0",
+    "scheme_version": 1
+}
+
+== split: 3-of-5 ==
+{
+    "version": 1,
+    "field": "secp256k1-prime",
+    "threshold": 3,
+    "total": 5,
+    "block_count": 2,
+    "shares": [
+        "SSS1$U1NTMQABAAMABQDK9HTniI1NC0UempT70keIC7GpFlUpXnRi8KE49SAgAK79z_bVimkmHL9xDmgKnmOS8snjbDE_gBKDjQIV9jE",
+        "SSS1$U1NTMQACAAMABQLmxoXit92c5RQRwt-32D8w3x3kiL2Wu4XWQBFlxLNwAVkSxq1iLmNLomImhJUMK_7p-vd97QXUomzbtkF35kg",
+        "SSS1$U1NTMQADAAMABQZTdjMN8WBh_9I87QCcgVlt32UUuK28fKbTDsP60CpcAmM-5COl6-5wkOggYocEqNIFGIjPgn2_Zw8Ie74l0EU",
+        "SSS1$U1NTMQAEAAMABQsRA3xpNRWcW3-gGPepzZY_DIc5piWaoddZXLj4F4TkA82CKFmgwwqU6FFeqD30FNzkS33YLJj_zfkJ3XgftCg",
+        "SSS1$U1NTMQAFAAMABREfbmH0gv1L-Bw7RsTfvPWkZoRTUSUxKxdpKfBdmsMIBZfck09Ss7e4qJ3hVbnacB-Hk9aX61eV1yrf229lkfE"
+    ],
+    "shares_json": [
+        {
+            "version": 1,
+            "x": 1,
+            "threshold": 3,
+            "total": 5,
+            "y": [
+
+== recover with shares 1,3,5 + expected fingerprint ==
+{
+  "version": 1,
+  "field": "secp256k1-prime",
+  "threshold": 3,
+  "total": 5,
+  "used_positions": [
+    0,
+    1,
+    2
+  ],
+  "used_indices": [
+    1,
+    3,
+    5
+  ],
+  "unused_positions": [],
+  "valid_share_count": 3,
+  "secret_b64": "Y29ycmVjdCBob3JzZSBiYXR0ZXJ5IHN0YXBsZQ==",
+  "secret_length": 28,
+  "secret_fingerprint": "sha256:c4bbcb1fbec99d65bf59d85c8cb62ee2db963f0fe106f483d9afa73bd4e39a8a",
+  "fingerprint_matches": true
+}
+
+== recover with only 2 shares -> HTTP 400 insufficient_shares ==
+HTTP 400
+{
+    "error": {
+        "code": "insufficient_shares",
+        "message": "recovery requires at least 3 distinct shares, received 2",
+        "details": {
+            "required": 3,
+            "received": 2,
+            "missing": 1,
+            "total": 5
+        }
+    }
+}
+
+== mixed batch (two shares of this split + one from a 2-of-3 split) -> 400 mixed_batch ==
+HTTP 400
+{
+    "error": {
+        "code": "mixed_batch",
+        "message": "shares belong to different parameter sets (threshold/total/size); cannot combine them in one recovery",
+        "details": {
+            "expected": {
+                "threshold": 3,
+                "total": 5,
+                "block_count": 2
+            },
+            "mismatches": [
+                {
+                    "position": 2,
+                    "threshold": 2,
+                    "total": 3,
+                    "block_count": 1
+                }
+            ]
+        }
+    }
+}
+
+== corrupt share encoding -> 400 invalid_share_encoding ==
+HTTP 400
+{
+    "error": {
+        "code": "invalid_share_encoding",
+        "message": "1 of 3 share(s) failed to decode; recovery refused",
+        "details": {
+            "errors": [
+                {
+                    "position": 1,
+                    "reason": "share is not canonical unpadded base64url"
+                }
+            ]
+        }
+    }
+}
+
+== duplicate x (same share twice) -> 400 duplicate_share_index ==
+HTTP 400
+{
+    "error": {
+        "code": "duplicate_share_index",
+        "message": "duplicate share index (x coordinate) in batch; holders must submit distinct shares",
+        "details": {
+            "duplicates": [
+                {
+                    "x": 1,
+                    "positions": [
+                        0,
+                        1
+                    ]
+                }
+            ]
+        }
+    }
+}
+
+>> demo complete

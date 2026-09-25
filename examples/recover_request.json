@@ -1,0 +1,9 @@
+{
+  "_comment": "recovery request. Paste share strings produced by /v1/split. The optional expected_fingerprint (returned by split) turns on tamper detection: a mismatch -> HTTP 422.",
+  "shares": [
+    "PASTE_SSS1_SHARE_1",
+    "PASTE_SSS1_SHARE_3",
+    "PASTE_SSS1_SHARE_5"
+  ],
+  "expected_fingerprint": "PASTE_sha256_FINGERPRINT_FROM_SPLIT (optional, delete this line if unavailable)"
+}
