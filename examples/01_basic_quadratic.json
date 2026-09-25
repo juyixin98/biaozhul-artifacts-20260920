@@ -1,0 +1,6 @@
+{
+  "coefficients": [-2, 0, 1],
+  "coefficient_order": "ascending",
+  "epsilon": "1e-12",
+  "max_depth": 5000
+}

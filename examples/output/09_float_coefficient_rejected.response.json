@@ -1,0 +1,7 @@
+{
+  "ok": false,
+  "error": {
+    "code": "invalid_input",
+    "message": "coefficients[0] 不接受浮点字面量（JSON number 会丢失精确性）；请用整数或字符串，如 \"1/3\"、\"-0.25\"、\"1e-6\""
+  }
+}

@@ -1,0 +1,343 @@
+{
+  "ok": true,
+  "result": {
+    "status": "ok",
+    "input": {
+      "coefficients": [
+        {
+          "fraction": "0",
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "fraction": "-1",
+          "numerator": -1,
+          "denominator": 1
+        },
+        {
+          "fraction": "0",
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "fraction": "1",
+          "numerator": 1,
+          "denominator": 1
+        }
+      ],
+      "coefficient_order": "ascending",
+      "degree": 3,
+      "epsilon": {
+        "fraction": "1/1000000000000",
+        "numerator": 1,
+        "denominator": 1000000000000
+      },
+      "max_depth": 5000,
+      "is_zero_polynomial": false
+    },
+    "search_region": {
+      "cauchy_bounds": {
+        "lower": {
+          "fraction": "-2",
+          "numerator": -2,
+          "denominator": 1
+        },
+        "upper": {
+          "fraction": "2",
+          "numerator": 2,
+          "denominator": 1
+        },
+        "width": {
+          "fraction": "4",
+          "numerator": 4,
+          "denominator": 1
+        }
+      },
+      "requested_bounds": {
+        "lower": {
+          "fraction": "0",
+          "numerator": 0,
+          "denominator": 1
+        },
+        "upper": {
+          "fraction": "2",
+          "numerator": 2,
+          "denominator": 1
+        },
+        "width": {
+          "fraction": "2",
+          "numerator": 2,
+          "denominator": 1
+        }
+      },
+      "note": "隔离在严格的 Cauchy 根界内完成；请求区间仅用于筛选输出。"
+    },
+    "polynomial_kind": "non_constant",
+    "message": "全部实根完成隔离与细化，区间边界与计数均由 Sturm 变号数严格保证。",
+    "real_roots": [
+      {
+        "kind": "exact",
+        "multiplicity": 1,
+        "relation_to_requested_bounds": "boundary_exact",
+        "exact_value": {
+          "fraction": "0",
+          "numerator": 0,
+          "denominator": 1
+        },
+        "interval": {
+          "lower": {
+            "fraction": "0",
+            "numerator": 0,
+            "denominator": 1
+          },
+          "upper": {
+            "fraction": "0",
+            "numerator": 0,
+            "denominator": 1
+          },
+          "width": {
+            "fraction": "0",
+            "numerator": 0,
+            "denominator": 1
+          }
+        },
+        "interval_width": {
+          "fraction": "0",
+          "numerator": 0,
+          "denominator": 1
+        },
+        "sign_at_endpoints": {
+          "lower": 0,
+          "upper": 0
+        },
+        "approximation": {
+          "midpoint": "0.000000000000",
+          "radius": "0.000000000001",
+          "decimal_places": 12,
+          "certificate": "exact rational root; |root - midpoint_decimal| <= radius_decimal",
+          "midpoint_rational": {
+            "fraction": "0",
+            "numerator": 0,
+            "denominator": 1
+          },
+          "radius_rational": {
+            "fraction": "1/1000000000000",
+            "numerator": 1,
+            "denominator": 1000000000000
+          }
+        },
+        "evidence": {
+          "source": "bisection midpoint evaluated to zero (exact rational root)",
+          "isolation_depth": 1,
+          "refinement_status": "exact"
+        }
+      },
+      {
+        "kind": "exact",
+        "multiplicity": 1,
+        "relation_to_requested_bounds": "inside",
+        "exact_value": {
+          "fraction": "1",
+          "numerator": 1,
+          "denominator": 1
+        },
+        "interval": {
+          "lower": {
+            "fraction": "1",
+            "numerator": 1,
+            "denominator": 1
+          },
+          "upper": {
+            "fraction": "1",
+            "numerator": 1,
+            "denominator": 1
+          },
+          "width": {
+            "fraction": "0",
+            "numerator": 0,
+            "denominator": 1
+          }
+        },
+        "interval_width": {
+          "fraction": "0",
+          "numerator": 0,
+          "denominator": 1
+        },
+        "sign_at_endpoints": {
+          "lower": 0,
+          "upper": 0
+        },
+        "approximation": {
+          "midpoint": "1.000000000000",
+          "radius": "0.000000000001",
+          "decimal_places": 12,
+          "certificate": "exact rational root; |root - midpoint_decimal| <= radius_decimal",
+          "midpoint_rational": {
+            "fraction": "1",
+            "numerator": 1,
+            "denominator": 1
+          },
+          "radius_rational": {
+            "fraction": "1/1000000000000",
+            "numerator": 1,
+            "denominator": 1000000000000
+          }
+        },
+        "evidence": {
+          "source": "bisection midpoint evaluated to zero (exact rational root)",
+          "isolation_depth": 2,
+          "refinement_status": "exact"
+        }
+      }
+    ],
+    "root_count_distinct": 2,
+    "root_count_with_multiplicity": 2,
+    "global_root_count_distinct": 3,
+    "global_root_count_with_multiplicity": 3,
+    "square_free_factorization": {
+      "leading_constant": {
+        "fraction": "1",
+        "numerator": 1,
+        "denominator": 1
+      },
+      "factors": [
+        {
+          "coefficients_ascending": [
+            {
+              "fraction": "0",
+              "numerator": 0,
+              "denominator": 1
+            },
+            {
+              "fraction": "-1",
+              "numerator": -1,
+              "denominator": 1
+            },
+            {
+              "fraction": "0",
+              "numerator": 0,
+              "denominator": 1
+            },
+            {
+              "fraction": "1",
+              "numerator": 1,
+              "denominator": 1
+            }
+          ],
+          "multiplicity": 1
+        }
+      ],
+      "algorithm": "Yun's algorithm over Q[x], exact rational arithmetic"
+    },
+    "counting_basis": {
+      "method": "Sturm's theorem with sign variations",
+      "theorem": "对无平方因子 p，开区间 (a,b) 内不同实根数 = V(a)-V(b)；重根按其无平方因子指标计重数。",
+      "arithmetic": "fractions.Fraction 精确有理数；NumPy object 数组仅做容器",
+      "epsilon": {
+        "fraction": "1/1000000000000",
+        "numerator": 1,
+        "denominator": 1000000000000
+      },
+      "factor_reports": [
+        {
+          "factor": {
+            "coefficients_ascending": [
+              {
+                "fraction": "0",
+                "numerator": 0,
+                "denominator": 1
+              },
+              {
+                "fraction": "-1",
+                "numerator": -1,
+                "denominator": 1
+              },
+              {
+                "fraction": "0",
+                "numerator": 0,
+                "denominator": 1
+              },
+              {
+                "fraction": "1",
+                "numerator": 1,
+                "denominator": 1
+              }
+            ],
+            "monic": true
+          },
+          "multiplicity": 1,
+          "sturm_chain_length": 4,
+          "sturm_sequence": [
+            [
+              {
+                "fraction": "0",
+                "numerator": 0,
+                "denominator": 1
+              },
+              {
+                "fraction": "-1",
+                "numerator": -1,
+                "denominator": 1
+              },
+              {
+                "fraction": "0",
+                "numerator": 0,
+                "denominator": 1
+              },
+              {
+                "fraction": "1",
+                "numerator": 1,
+                "denominator": 1
+              }
+            ],
+            [
+              {
+                "fraction": "-1",
+                "numerator": -1,
+                "denominator": 1
+              },
+              {
+                "fraction": "0",
+                "numerator": 0,
+                "denominator": 1
+              },
+              {
+                "fraction": "3",
+                "numerator": 3,
+                "denominator": 1
+              }
+            ],
+            [
+              {
+                "fraction": "0",
+                "numerator": 0,
+                "denominator": 1
+              },
+              {
+                "fraction": "1",
+                "numerator": 1,
+                "denominator": 1
+              }
+            ],
+            [
+              {
+                "fraction": "1",
+                "numerator": 1,
+                "denominator": 1
+              }
+            ]
+          ],
+          "variations_at_cauchy_lower": 3,
+          "variations_at_cauchy_upper": 0,
+          "distinct_real_roots": 3,
+          "weighted_real_roots": 3,
+          "unresolved_intervals": 0
+        }
+      ]
+    },
+    "unresolved": [],
+    "warnings": [
+      "epsilon 已按十进制字符串精确解析为有理数，未引入浮点。"
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "coefficients": ["1/6", "-5/6", 1],
+  "coefficient_order": "ascending",
+  "epsilon": "1e-12"
+}

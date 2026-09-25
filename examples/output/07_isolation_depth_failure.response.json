@@ -1,0 +1,298 @@
+{
+  "ok": true,
+  "result": {
+    "status": "isolation_depth",
+    "input": {
+      "coefficients": [
+        {
+          "fraction": "24",
+          "numerator": 24,
+          "denominator": 1
+        },
+        {
+          "fraction": "-50",
+          "numerator": -50,
+          "denominator": 1
+        },
+        {
+          "fraction": "35",
+          "numerator": 35,
+          "denominator": 1
+        },
+        {
+          "fraction": "-10",
+          "numerator": -10,
+          "denominator": 1
+        },
+        {
+          "fraction": "1",
+          "numerator": 1,
+          "denominator": 1
+        }
+      ],
+      "coefficient_order": "ascending",
+      "degree": 4,
+      "epsilon": {
+        "fraction": "1/1000000000000",
+        "numerator": 1,
+        "denominator": 1000000000000
+      },
+      "max_depth": 1,
+      "is_zero_polynomial": false
+    },
+    "search_region": {
+      "cauchy_bounds": {
+        "lower": {
+          "fraction": "-51",
+          "numerator": -51,
+          "denominator": 1
+        },
+        "upper": {
+          "fraction": "51",
+          "numerator": 51,
+          "denominator": 1
+        },
+        "width": {
+          "fraction": "102",
+          "numerator": 102,
+          "denominator": 1
+        }
+      },
+      "requested_bounds": {
+        "lower": {
+          "fraction": "-51",
+          "numerator": -51,
+          "denominator": 1
+        },
+        "upper": {
+          "fraction": "51",
+          "numerator": 51,
+          "denominator": 1
+        },
+        "width": {
+          "fraction": "102",
+          "numerator": 102,
+          "denominator": 1
+        }
+      },
+      "note": "隔离在严格的 Cauchy 根界内完成；请求区间仅用于筛选输出。"
+    },
+    "polynomial_kind": "non_constant",
+    "message": "隔离触及 max_depth=1：仍有 4 个不同根未能彼此分开；已给区间与变号数可信，但未输出对应根。",
+    "real_roots": [],
+    "root_count_distinct": 0,
+    "root_count_with_multiplicity": 0,
+    "global_root_count_distinct": 4,
+    "global_root_count_with_multiplicity": 4,
+    "square_free_factorization": {
+      "leading_constant": {
+        "fraction": "1",
+        "numerator": 1,
+        "denominator": 1
+      },
+      "factors": [
+        {
+          "coefficients_ascending": [
+            {
+              "fraction": "24",
+              "numerator": 24,
+              "denominator": 1
+            },
+            {
+              "fraction": "-50",
+              "numerator": -50,
+              "denominator": 1
+            },
+            {
+              "fraction": "35",
+              "numerator": 35,
+              "denominator": 1
+            },
+            {
+              "fraction": "-10",
+              "numerator": -10,
+              "denominator": 1
+            },
+            {
+              "fraction": "1",
+              "numerator": 1,
+              "denominator": 1
+            }
+          ],
+          "multiplicity": 1
+        }
+      ],
+      "algorithm": "Yun's algorithm over Q[x], exact rational arithmetic"
+    },
+    "counting_basis": {
+      "method": "Sturm's theorem with sign variations",
+      "theorem": "对无平方因子 p，开区间 (a,b) 内不同实根数 = V(a)-V(b)；重根按其无平方因子指标计重数。",
+      "arithmetic": "fractions.Fraction 精确有理数；NumPy object 数组仅做容器",
+      "epsilon": {
+        "fraction": "1/1000000000000",
+        "numerator": 1,
+        "denominator": 1000000000000
+      },
+      "factor_reports": [
+        {
+          "factor": {
+            "coefficients_ascending": [
+              {
+                "fraction": "24",
+                "numerator": 24,
+                "denominator": 1
+              },
+              {
+                "fraction": "-50",
+                "numerator": -50,
+                "denominator": 1
+              },
+              {
+                "fraction": "35",
+                "numerator": 35,
+                "denominator": 1
+              },
+              {
+                "fraction": "-10",
+                "numerator": -10,
+                "denominator": 1
+              },
+              {
+                "fraction": "1",
+                "numerator": 1,
+                "denominator": 1
+              }
+            ],
+            "monic": true
+          },
+          "multiplicity": 1,
+          "sturm_chain_length": 5,
+          "sturm_sequence": [
+            [
+              {
+                "fraction": "24",
+                "numerator": 24,
+                "denominator": 1
+              },
+              {
+                "fraction": "-50",
+                "numerator": -50,
+                "denominator": 1
+              },
+              {
+                "fraction": "35",
+                "numerator": 35,
+                "denominator": 1
+              },
+              {
+                "fraction": "-10",
+                "numerator": -10,
+                "denominator": 1
+              },
+              {
+                "fraction": "1",
+                "numerator": 1,
+                "denominator": 1
+              }
+            ],
+            [
+              {
+                "fraction": "-50",
+                "numerator": -50,
+                "denominator": 1
+              },
+              {
+                "fraction": "70",
+                "numerator": 70,
+                "denominator": 1
+              },
+              {
+                "fraction": "-30",
+                "numerator": -30,
+                "denominator": 1
+              },
+              {
+                "fraction": "4",
+                "numerator": 4,
+                "denominator": 1
+              }
+            ],
+            [
+              {
+                "fraction": "29",
+                "numerator": 29,
+                "denominator": 1
+              },
+              {
+                "fraction": "-25",
+                "numerator": -25,
+                "denominator": 1
+              },
+              {
+                "fraction": "5",
+                "numerator": 5,
+                "denominator": 1
+              }
+            ],
+            [
+              {
+                "fraction": "-5",
+                "numerator": -5,
+                "denominator": 1
+              },
+              {
+                "fraction": "2",
+                "numerator": 2,
+                "denominator": 1
+              }
+            ],
+            [
+              {
+                "fraction": "1",
+                "numerator": 1,
+                "denominator": 1
+              }
+            ]
+          ],
+          "variations_at_cauchy_lower": 4,
+          "variations_at_cauchy_upper": 0,
+          "distinct_real_roots": 4,
+          "weighted_real_roots": 4,
+          "unresolved_intervals": 1
+        }
+      ]
+    },
+    "unresolved": [
+      {
+        "factor_multiplicity": 1,
+        "interval": {
+          "lower": {
+            "fraction": "0",
+            "numerator": 0,
+            "denominator": 1
+          },
+          "upper": {
+            "fraction": "51",
+            "numerator": 51,
+            "denominator": 1
+          },
+          "width": {
+            "fraction": "51",
+            "numerator": 51,
+            "denominator": 1
+          }
+        },
+        "var_left": 4,
+        "var_right": 0,
+        "distinct_roots_in_interval": 4,
+        "left_is_point_root": false,
+        "right_is_point_root": false,
+        "relation_to_requested_bounds": "inside_requested_bounds",
+        "depth": 1
+      }
+    ],
+    "warnings": [
+      "epsilon 已按十进制字符串精确解析为有理数，未引入浮点。"
+    ]
+  }
+}

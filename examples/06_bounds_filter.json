@@ -1,0 +1,5 @@
+{
+  "coefficients": [0, -1, 0, 1],
+  "bounds": { "lower": "0", "upper": "2" },
+  "epsilon": "1e-12"
+}

@@ -1,0 +1,37 @@
+{
+  "ok": true,
+  "result": {
+    "status": "ok",
+    "input": {
+      "coefficients": [
+        {
+          "fraction": "7",
+          "numerator": 7,
+          "denominator": 1
+        }
+      ],
+      "coefficient_order": "ascending",
+      "degree": 0,
+      "epsilon": {
+        "fraction": "1/1000000000000",
+        "numerator": 1,
+        "denominator": 1000000000000
+      },
+      "max_depth": 5000,
+      "is_zero_polynomial": false
+    },
+    "polynomial_kind": "constant",
+    "real_roots": [],
+    "root_count_distinct": 0,
+    "root_count_with_multiplicity": 0,
+    "counting_basis": {
+      "method": "constant polynomial evaluation",
+      "note": "非零常数 c 恒不为零，实根数为 0（无需 Sturm 链）。",
+      "value": {
+        "fraction": "7",
+        "numerator": 7,
+        "denominator": 1
+      }
+    }
+  }
+}
