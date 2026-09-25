@@ -1,0 +1,4 @@
+# build artifacts
+/bin/
+# runtime snapshot data
+/data/
