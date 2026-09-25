@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "name": "concurrent-same-version-one-wins",
+      "passed": true,
+      "durationMs": 1,
+      "details": "statuses=[412 200] (want exactly one 200 and one 412)"
+    },
+    {
+      "name": "delete-recreate-stale-etag-rejected",
+      "passed": true,
+      "durationMs": 0,
+      "details": "oldETag=\"sc-delrec-v1-a7937b64\" newETag=\"sc-delrec-v1-16367aac\" staleWriteStatus=412 (want 412)"
+    },
+    {
+      "name": "wildcard-if-match",
+      "passed": true,
+      "durationMs": 0,
+      "details": "existing=200 (want 200), missing=412 (want 412)"
+    },
+    {
+      "name": "missing-precondition-428",
+      "passed": true,
+      "durationMs": 0,
+      "details": "status=428 (want 428) body={\"error\":{\"code\":\"precondition_required\",\"message\":\"conditional update requires If-Match or If-None-Match\"}}\n"
+    },
+    {
+      "name": "weak-etag-no-strong-match",
+      "passed": true,
+      "durationMs": 0,
+      "details": "weak If-Match status=412 (want 412)"
+    },
+    {
+      "name": "fault-injection-no-side-effects",
+      "passed": true,
+      "durationMs": 1,
+      "details": "status=503, ETag after failed update=\"sc-fault-v1-3bfc2695\" unchanged=true"
+    }
+  ],
+  "server": "http://127.0.0.1:18080"
+}
