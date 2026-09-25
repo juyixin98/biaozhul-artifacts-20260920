@@ -1,0 +1,106 @@
+# Anti-Replay HMAC-SHA256 v1 —— 原始 HTTP 报文样例
+#
+# 说明：
+# * 本文件中的签名基于示例密钥
+#     secret_hex = 4a8c2f9d17e64b3a80d5c9e2f1b7a4d69308f5c271e4b9a0d3f68c1e5b29470a
+#   计算，仅用于展示报文形态；请用 scripts/keygen.py 生成自己的本地测试密钥。
+# * X-Auth-Timestamp=1758680400 是固定样例时间。超过 ±300 秒窗口后，
+#   下面的报文会得到 401 stale_timestamp —— 这是防重放的预期行为。
+#   要发实时请求，请运行：python3 examples/client.py call ...
+# * 规范请求串（8 行，LF 连接）：
+#     ANTI-REPLAY-API-HMAC-SHA256-v1
+#     demo-key-1
+#     POST
+#     /api/data
+#     <空行：无查询串>
+#     09558902d65d886f8a90c26d2a60edd2c040aa15565cfdcbb6fc42bb1775b130
+#     1758680400
+#     Zm9vYmFyMTIzNDU2cXdlcnR5
+
+### 1) 健康检查（无需签名）
+GET /health HTTP/1.1
+Host: 127.0.0.1:8080
+Connection: close
+
+###
+
+### 2) 合法签名请求（窗口内发送将返回 200）
+POST /api/data HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+Content-Length: 28
+X-Auth-Key-Id: demo-key-1
+X-Auth-Timestamp: 1758680400
+X-Auth-Nonce: Zm9vYmFyMTIzNDU2cXdlcnR5
+X-Auth-Signature: 5df0f49882cd7316f3a994904e5c35e7a98e87239a39579057e8bb5303b89488
+Connection: close
+
+{"op":"transfer","amount":100}
+
+### 3) 原样重放第 2 条：方法/路径/正文/时间戳/nonce/签名全部不变
+###    窗口内第二次发送 -> 409 replay_detected
+POST /api/data HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+Content-Length: 28
+X-Auth-Key-Id: demo-key-1
+X-Auth-Timestamp: 1758680400
+X-Auth-Nonce: Zm9vYmFyMTIzNDU2cXdlcnR5
+X-Auth-Signature: 5df0f49882cd7316f3a994904e5c35e7a98e87239a39579057e8bb5303b89488
+Connection: close
+
+{"op":"transfer","amount":100}
+
+### 4) 正文篡改：签名仍是第 2 条的签名，只把 amount 100 改成 999
+###    -> 401 bad_signature（body sha256 不匹配）
+POST /api/data HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+Content-Length: 28
+X-Auth-Key-Id: demo-key-1
+X-Auth-Timestamp: 1758680400
+X-Auth-Nonce: Zm9vYmFyMTIzNDU2cXdlcnR5
+X-Auth-Signature: 5df0f49882cd7316f3a994904e5c35e7a98e87239a39579057e8bb5303b89488
+Connection: close
+
+{"op":"transfer","amount":999}
+
+### 5) 路径编码歧义（与 /api/data?a=1&b=2 等价）：
+###    raw target 为 /api/%64ata?b=2&a=1，服务端规范化后与
+###    /api/data?a=1&b=2 逐字节相同；客户端对“原始 raw target”签名。
+POST /api/%64ata?b=2&a=1 HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+Content-Length: 28
+X-Auth-Key-Id: demo-key-1
+X-Auth-Timestamp: 1758680400
+X-Auth-Nonce: bW5idmN4c2pobGtrMTIzNDU2Nw
+X-Auth-Signature: 5112110dc3b650c3a6fcb5b22c09cca74be593589c0781bc83fe6459962e4f6c
+Connection: close
+
+{"op":"transfer","amount":100}
+
+### 6) 编码分隔符攻击：%2f 想把一个段拆成两个段 -> 400 malformed_request
+POST /api%2fdata HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+Content-Length: 28
+X-Auth-Key-Id: demo-key-1
+X-Auth-Timestamp: 1758680400
+X-Auth-Nonce: YWFhYWFhYWFhYWFhYWFhYWFh
+X-Auth-Signature: 0000000000000000000000000000000000000000000000000000000000000000
+Connection: close
+
+{"op":"transfer","amount":100}
+
+### 7) 缺少 X-Auth-Nonce -> 400 malformed_request
+POST /api/data HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+Content-Length: 28
+X-Auth-Key-Id: demo-key-1
+X-Auth-Timestamp: 1758680400
+X-Auth-Signature: 5df0f49882cd7316f3a994904e5c35e7a98e87239a39579057e8bb5303b89488
+Connection: close
+
+{"op":"transfer","amount":100}

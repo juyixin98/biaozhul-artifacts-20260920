@@ -1,0 +1,193 @@
+test_control_characters_rejected (test_canonical.CanonicalPathTests.test_control_characters_rejected) ... ok
+test_dot_segments (test_canonical.CanonicalPathTests.test_dot_segments) ... ok
+test_dotdot_escaping_root_rejected (test_canonical.CanonicalPathTests.test_dotdot_escaping_root_rejected) ... ok
+test_double_encoded_separator_does_not_collapse (test_canonical.CanonicalPathTests.test_double_encoded_separator_does_not_collapse) ... ok
+test_empty_segments_collapsed (test_canonical.CanonicalPathTests.test_empty_segments_collapsed) ... ok
+test_encoded_dotdot_is_still_dotdot (test_canonical.CanonicalPathTests.test_encoded_dotdot_is_still_dotdot) ... ok
+test_encoded_letter_normalizes_to_equivalent_path (test_canonical.CanonicalPathTests.test_encoded_letter_normalizes_to_equivalent_path) ... ok
+test_encoded_separator_rejected (test_canonical.CanonicalPathTests.test_encoded_separator_rejected) ... ok
+test_malformed_percent_encoding_rejected (test_canonical.CanonicalPathTests.test_malformed_percent_encoding_rejected) ... ok
+test_raw_non_ascii_rejected (test_canonical.CanonicalPathTests.test_raw_non_ascii_rejected) ... ok
+test_relative_path_rejected (test_canonical.CanonicalPathTests.test_relative_path_rejected) ... ok
+test_root_and_basic (test_canonical.CanonicalPathTests.test_root_and_basic) ... ok
+test_space_encodes_to_percent20 (test_canonical.CanonicalPathTests.test_space_encodes_to_percent20) ... ok
+test_trailing_dot_segment (test_canonical.CanonicalPathTests.test_trailing_dot_segment) ... ok
+test_utf8_percent_encoded_non_ascii_preserved (test_canonical.CanonicalPathTests.test_utf8_percent_encoded_non_ascii_preserved) ... ok
+test_bare_token_rejected (test_canonical.CanonicalQueryTests.test_bare_token_rejected) ... ok
+test_duplicate_key_rejected (test_canonical.CanonicalQueryTests.test_duplicate_key_rejected) ... ok
+test_empty (test_canonical.CanonicalQueryTests.test_empty) ... ok
+test_empty_key_rejected (test_canonical.CanonicalQueryTests.test_empty_key_rejected) ... ok
+test_empty_value_allowed (test_canonical.CanonicalQueryTests.test_empty_value_allowed) ... ok
+test_encoded_slash_allowed_inside_value (test_canonical.CanonicalQueryTests.test_encoded_slash_allowed_inside_value) ... ok
+test_encoded_values_normalized (test_canonical.CanonicalQueryTests.test_encoded_values_normalized) ... ok
+test_plus_is_literal (test_canonical.CanonicalQueryTests.test_plus_is_literal) ... ok
+test_sort_order_is_byte_order_on_decoded_values (test_canonical.CanonicalQueryTests.test_sort_order_is_byte_order_on_decoded_values) ... ok
+test_sorted (test_canonical.CanonicalQueryTests.test_sorted) ... ok
+test_absolute_form_rejected (test_canonical.RequestTargetTests.test_absolute_form_rejected) ... ok
+test_fragment_rejected (test_canonical.RequestTargetTests.test_fragment_rejected) ... ok
+test_full_equivalence_group (test_canonical.RequestTargetTests.test_full_equivalence_group) ... ok
+test_query_equivalence (test_canonical.RequestTargetTests.test_query_equivalence) ... ok
+test_split (test_canonical.RequestTargetTests.test_split) ... ok
+test_bad_version_rejected (test_keys.KeystoreTests.test_bad_version_rejected) ... ok
+test_corrupt_json_rejected (test_keys.KeystoreTests.test_corrupt_json_rejected) ... ok
+test_create_load_roundtrip_and_0600_mode (test_keys.KeystoreTests.test_create_load_roundtrip_and_0600_mode) ... ok
+test_duplicate_id_requires_overwrite (test_keys.KeystoreTests.test_duplicate_id_requires_overwrite) ... ok
+test_missing_file (test_keys.KeystoreTests.test_missing_file) ... ok
+test_short_key_rejected_with_clean_error (test_keys.KeystoreTests.test_short_key_rejected_with_clean_error) ... ok
+test_world_readable_keystore_rejected (test_keys.KeystoreTests.test_world_readable_keystore_rejected) ... ok
+test_concurrent_duplicates_exactly_one_winner (test_nonce_store.MemoryStoreTests.test_concurrent_duplicates_exactly_one_winner) ... ok
+test_expired_record_allows_reuse_after_ttl (test_nonce_store.MemoryStoreTests.test_expired_record_allows_reuse_after_ttl) ... ok
+test_first_claim_wins (test_nonce_store.MemoryStoreTests.test_first_claim_wins) ... ok
+test_many_distinct_nonces_all_accepted (test_nonce_store.MemoryStoreTests.test_many_distinct_nonces_all_accepted) ... ok
+test_scope_is_per_key_id (test_nonce_store.MemoryStoreTests.test_scope_is_per_key_id) ... ok
+test_concurrent_duplicates_exactly_one_winner (test_nonce_store.SqliteStoreTests.test_concurrent_duplicates_exactly_one_winner) ... ok
+test_expired_record_allows_reuse_after_ttl (test_nonce_store.SqliteStoreTests.test_expired_record_allows_reuse_after_ttl) ... ok
+test_first_claim_wins (test_nonce_store.SqliteStoreTests.test_first_claim_wins) ... ok
+test_many_distinct_nonces_all_accepted (test_nonce_store.SqliteStoreTests.test_many_distinct_nonces_all_accepted) ... ok
+test_scope_is_per_key_id (test_nonce_store.SqliteStoreTests.test_scope_is_per_key_id) ... ok
+test_separate_store_instances_share_database (test_nonce_store.SqliteStoreTests.test_separate_store_instances_share_database) ... ok
+2026-09-24T02:14:28+0800 INFO anti_replay event=server_start host=127.0.0.1 port=54079 window=300s store=memory keys=1
+test_001_valid_request (test_server.HttpEndToEndTests.test_001_valid_request) ... 2026-09-24T02:14:28+0800 INFO anti_replay event=request_accepted result=accepted key_id=k1 nonce_fp=8016c651 peer=127.0.0.1
+ok
+test_002_exact_replay_returns_409 (test_server.HttpEndToEndTests.test_002_exact_replay_returns_409) ... 2026-09-24T02:14:28+0800 INFO anti_replay event=request_accepted result=accepted key_id=k1 nonce_fp=144fd1db peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=144fd1db peer=127.0.0.1
+ok
+test_003_concurrent_duplicates_only_one_200 (test_server.HttpEndToEndTests.test_003_concurrent_duplicates_only_one_200) ... 2026-09-24T02:14:28+0800 INFO anti_replay event=request_accepted result=accepted key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=bf772e60 peer=127.0.0.1
+ok
+test_004_body_tampering_bad_signature (test_server.HttpEndToEndTests.test_004_body_tampering_bad_signature) ... 2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=bad_signature key_id=k1 nonce_fp=c5856a7f peer=127.0.0.1
+ok
+test_005_time_window_in_and_out (test_server.HttpEndToEndTests.test_005_time_window_in_and_out) ... 2026-09-24T02:14:28+0800 INFO anti_replay event=request_accepted result=accepted key_id=k1 nonce_fp=acf0062b peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_accepted result=accepted key_id=k1 nonce_fp=9d9f65bb peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=stale_timestamp key_id=k1 nonce_fp=afafbdaa peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=future_timestamp key_id=k1 nonce_fp=2061025e peer=127.0.0.1
+ok
+test_006_equivalent_paths_accepted (test_server.HttpEndToEndTests.test_006_equivalent_paths_accepted) ... 2026-09-24T02:14:28+0800 INFO anti_replay event=request_accepted result=accepted key_id=k1 nonce_fp=11502a08 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_accepted result=accepted key_id=k1 nonce_fp=b3db848e peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_accepted result=accepted key_id=k1 nonce_fp=8ef613c4 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_accepted result=accepted key_id=k1 nonce_fp=1206370f peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_accepted result=accepted key_id=k1 nonce_fp=a2f0a48a peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_accepted result=accepted key_id=k1 nonce_fp=4616f15d peer=127.0.0.1
+ok
+test_007_malicious_targets_rejected_with_400 (test_server.HttpEndToEndTests.test_007_malicious_targets_rejected_with_400) ... 2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=malformed_request key_id=- nonce_fp=- peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=malformed_request key_id=- nonce_fp=- peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=malformed_request key_id=- nonce_fp=- peer=127.0.0.1
+ok
+test_008_unknown_key (test_server.HttpEndToEndTests.test_008_unknown_key) ... 2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=unknown_key key_id=ghost nonce_fp=f01c87ba peer=127.0.0.1
+ok
+test_009_missing_header (test_server.HttpEndToEndTests.test_009_missing_header) ... 2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=malformed_request key_id=- nonce_fp=- peer=127.0.0.1
+ok
+test_010_signed_get_on_api_path (test_server.HttpEndToEndTests.test_010_signed_get_on_api_path) ... 2026-09-24T02:14:28+0800 INFO anti_replay event=request_accepted result=accepted key_id=k1 nonce_fp=fd9f6f61 peer=127.0.0.1
+ok
+test_011_invalid_json_does_not_burn_nonce_and_is_retryable (test_server.HttpEndToEndTests.test_011_invalid_json_does_not_burn_nonce_and_is_retryable) ... 2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=invalid_json key_id=- nonce_fp=- peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_accepted result=accepted key_id=k1 nonce_fp=d2c63c55 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=d2c63c55 peer=127.0.0.1
+ok
+test_012_unknown_route_404 (test_server.HttpEndToEndTests.test_012_unknown_route_404) ... ok
+test_013_duplicate_content_length_rejected (test_server.HttpEndToEndTests.test_013_duplicate_content_length_rejected) ... 2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=malformed_request key_id=- nonce_fp=- peer=127.0.0.1
+ok
+test_014_oversized_body_rejected_413 (test_server.HttpEndToEndTests.test_014_oversized_body_rejected_413) ... 2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=payload_too_large key_id=- nonce_fp=- peer=127.0.0.1
+ok
+test_015_non_ascii_nonce_header_returns_400_not_500 (test_server.HttpEndToEndTests.test_015_non_ascii_nonce_header_returns_400_not_500) ... 2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=malformed_request key_id=- nonce_fp=50894599 peer=127.0.0.1
+ok
+test_health (test_server.HttpEndToEndTests.test_health) ... ok
+test_audit_log_contains_no_signature_or_secret (test_server.LogRedactionTests.test_audit_log_contains_no_signature_or_secret) ... 2026-09-24T02:14:28+0800 INFO anti_replay event=server_start host=127.0.0.1 port=39053 window=300s store=memory keys=1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_accepted result=accepted key_id=k1 nonce_fp=20ec8409 peer=127.0.0.1
+2026-09-24T02:14:28+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=20ec8409 peer=127.0.0.1
+ok
+test_configure_logging_attaches_filter_and_redacts (test_server.LogRedactionTests.test_configure_logging_attaches_filter_and_redacts) ... 2026-09-24T02:14:29+0800 INFO anti_replay leak attempt: ***REDACTED***
+2026-09-24T02:14:29+0800 INFO anti_replay normal event key_id=demo-key-1
+ok
+test_redacting_filter_replaces_known_secret (test_server.LogRedactionTests.test_redacting_filter_replaces_known_secret) ... ok
+2026-09-24T02:14:29+0800 INFO anti_replay event=server_start host=127.0.0.1 port=48103 window=300s store=sqlite keys=1
+test_concurrent_duplicates_only_one_200_sqlite (test_server.SqliteEndToEndTests.test_concurrent_duplicates_only_one_200_sqlite) ... 2026-09-24T02:14:29+0800 INFO anti_replay event=request_accepted result=accepted key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+2026-09-24T02:14:29+0800 INFO anti_replay event=request_rejected result=replay_detected key_id=k1 nonce_fp=f9792fac peer=127.0.0.1
+ok
+test_empty_body_uses_sha256_of_empty (test_signing.CanonicalRequestFormatTests.test_empty_body_uses_sha256_of_empty) ... ok
+test_empty_query_is_blank_line (test_signing.CanonicalRequestFormatTests.test_empty_query_is_blank_line) ... ok
+test_exact_eight_line_format (test_signing.CanonicalRequestFormatTests.test_exact_eight_line_format) ... ok
+test_equivalent_targets_share_one_signature_material (test_signing.SignatureTests.test_equivalent_targets_share_one_signature_material) ... ok
+test_malformed_signature_hex_returns_false (test_signing.SignatureTests.test_malformed_signature_hex_returns_false) ... ok
+test_tampered_body_fails (test_signing.SignatureTests.test_tampered_body_fails) ... ok
+test_tampered_method_fails (test_signing.SignatureTests.test_tampered_method_fails) ... ok
+test_tampered_path_query_timestamp_nonce_fail (test_signing.SignatureTests.test_tampered_path_query_timestamp_nonce_fail) ... ok
+test_valid_signature_roundtrip (test_signing.SignatureTests.test_valid_signature_roundtrip) ... ok
+test_wrong_key_fails (test_signing.SignatureTests.test_wrong_key_fails) ... ok
+test_bad_formats (test_verifier.VerifierTests.test_bad_formats) ... ok
+test_concurrent_identical_requests_exactly_one_accepted (test_verifier.VerifierTests.test_concurrent_identical_requests_exactly_one_accepted) ... ok
+test_encoded_separator_rejected_before_signature_check (test_verifier.VerifierTests.test_encoded_separator_rejected_before_signature_check) ... ok
+test_happy_path (test_verifier.VerifierTests.test_happy_path) ... ok
+test_header_names_case_insensitive (test_verifier.VerifierTests.test_header_names_case_insensitive) ... ok
+test_missing_headers (test_verifier.VerifierTests.test_missing_headers) ... ok
+test_path_encoding_ambiguity_equivalence (test_verifier.VerifierTests.test_path_encoding_ambiguity_equivalence) ... ok
+test_raw_target_differs_from_signed_target_fails_signature (test_verifier.VerifierTests.test_raw_target_differs_from_signed_target_fails_signature) ... ok
+test_replay_second_time_rejected (test_verifier.VerifierTests.test_replay_second_time_rejected) ... ok
+test_signature_with_other_key_fails (test_verifier.VerifierTests.test_signature_with_other_key_fails) ... ok
+test_tampered_body (test_verifier.VerifierTests.test_tampered_body) ... ok
+test_timestamp_boundaries (test_verifier.VerifierTests.test_timestamp_boundaries) ... ok
+test_unknown_key (test_verifier.VerifierTests.test_unknown_key) ... ok
+
+----------------------------------------------------------------------
+Ran 91 tests in 1.893s
+
+OK

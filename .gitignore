@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 本地测试密钥与 nonce 数据库——绝不入库
+dev-keys.json
+*-keys.json
+*.db
+*.db-wal
+*.db-shm
+nonces.db
+
+# 运行产物
+server.log
+*.egg-info/
+.pytest_cache/

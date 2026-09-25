@@ -1,0 +1,40 @@
+== 1/3 生成本地测试密钥 ==
+已写入密钥 'demo-key-1' -> /tmp/anti-replay-keys.RqfY9B.json（权限 0600）
+secret_hex=<redacted: 本地临时测试密钥，每次运行随机生成>
+提醒：该密钥仅用于本地测试，请勿提交到版本库或用于生产。
+
+== 2/3 启动服务（:55009，内存 nonce 存储）==
+
+== 3/3 运行攻击场景演示 ==
+== 使用 key_id=demo-key-1（密钥内容不会被打印），目标 http://127.0.0.1:55009/api/data ==
+
+规范请求串（客户端侧）：
+    ANTI-REPLAY-API-HMAC-SHA256-v1
+    demo-key-1
+    POST
+    /api/data
+    
+    4a35cde253567e80abfcc64081b6e3891e94c038dde71f6ce381027b56cf561e
+    1790187270
+    POUgmzKxKYFEBiOqyF3u6flO
+[OK 200] 正常请求（应 200）: {"status": "accepted", "body_sha256": "4a35cde253567e80abfcc64081b6e3891e94c038dde71f6ce381027b56cf561e", "top_level_keys": ["amount", "op"]}
+[!! 409] 原样重放（应 409 replay_detected）: {"error": {"code": "replay_detected", "message": "nonce has already been used"}}
+[并发] 32 个完全相同的并发请求：1 个 200，31 个 409（必须恰好 1 个 200）
+[!! 401] 正文篡改 100->999（应 401 bad_signature）: {"error": {"code": "bad_signature", "message": "signature verification failed"}}
+[OK 200] 时间戳 now-299（窗口内，应 200）: {"status": "accepted", "body_sha256": "4a35cde253567e80abfcc64081b6e3891e94c038dde71f6ce381027b56cf561e", "top_level_keys": ["amount", "op"]}
+[OK 200] 时间戳 now+299（窗口内，应 200）: {"status": "accepted", "body_sha256": "4a35cde253567e80abfcc64081b6e3891e94c038dde71f6ce381027b56cf561e", "top_level_keys": ["amount", "op"]}
+[!! 401] 时间戳 now-305（应 401 stale）: {"error": {"code": "stale_timestamp", "message": "timestamp 305s older than window 300s"}}
+[!! 401] 时间戳 now+305（应 401 future）: {"error": {"code": "future_timestamp", "message": "timestamp 305s ahead of window 300s"}}
+[OK 200] 等价路径 /api/data（应 200）: {"status": "accepted", "body_sha256": "4a35cde253567e80abfcc64081b6e3891e94c038dde71f6ce381027b56cf561e", "top_level_keys": ["amount", "op"]}
+[OK 200] 等价路径 /./api/data（应 200）: {"status": "accepted", "body_sha256": "4a35cde253567e80abfcc64081b6e3891e94c038dde71f6ce381027b56cf561e", "top_level_keys": ["amount", "op"]}
+[OK 200] 等价路径 //api//data（应 200）: {"status": "accepted", "body_sha256": "4a35cde253567e80abfcc64081b6e3891e94c038dde71f6ce381027b56cf561e", "top_level_keys": ["amount", "op"]}
+[OK 200] 等价路径 /api/%64ata（应 200）: {"status": "accepted", "body_sha256": "4a35cde253567e80abfcc64081b6e3891e94c038dde71f6ce381027b56cf561e", "top_level_keys": ["amount", "op"]}
+[OK 200] 等价路径 /api/../api/data（应 200）: {"status": "accepted", "body_sha256": "4a35cde253567e80abfcc64081b6e3891e94c038dde71f6ce381027b56cf561e", "top_level_keys": ["amount", "op"]}
+[OK 200] 等价路径 /api/data?b=2&a=1（应 200）: {"status": "accepted", "body_sha256": "4a35cde253567e80abfcc64081b6e3891e94c038dde71f6ce381027b56cf561e", "top_level_keys": ["amount", "op"]}
+[!! 400] 恶意请求目标 /api%2fdata（应 400）: {"error": {"code": "malformed_request", "message": "request target rejected: encoded path separator (%2F) is not allowed inside a segment"}}
+[!! 400] 恶意请求目标 /%2e%2e/etc/passwd（应 400）: {"error": {"code": "malformed_request", "message": "request target rejected: '..' segment escapes the path root"}}
+[!! 400] 恶意请求目标 /api/data?a=1&a=2（应 400）: {"error": {"code": "malformed_request", "message": "request target rejected: duplicate query parameter name"}}
+[!! 401] 未知 key id（应 401 unknown_key）: {"error": {"code": "unknown_key", "message": "unknown key id"}}
+[OK 200] GET /health（应 200）: {"status": "ok"}
+
+全部场景完成。
