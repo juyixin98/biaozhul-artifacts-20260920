@@ -1,0 +1,9 @@
+# build artifacts and local state
+/bin/
+/reprobuild
+/acceptance
+/.reprobuild/
+
+# editor/OS noise
+*.swp
+.DS_Store

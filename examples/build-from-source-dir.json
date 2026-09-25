@@ -1,0 +1,13 @@
+{
+  "source_dir": "/absolute/path/to/a/local/source/tree",
+  "fixtures": [
+    {
+      "name": "compile",
+      "args": ["sh", "-c", "echo built > output.txt"],
+      "env": {"GREETING": "hello"},
+      "timeout_seconds": 30
+    }
+  ],
+  "keep_work": false,
+  "fixed_time_seconds": 0
+}

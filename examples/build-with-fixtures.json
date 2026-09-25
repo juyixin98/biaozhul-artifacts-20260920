@@ -1,0 +1,16 @@
+{
+  "files": [
+    {"path": "src/数据.txt", "content": "你好，reproducible\n"},
+    {"path": "src/empty-dir/.gitkeep", "content": ""}
+  ],
+  "fixtures": [
+    {
+      "name": "render",
+      "args": ["sh", "-c", "mkdir -p build && date -u -d @0 +%Y > build/epoch-year.txt && wc -c src/数据.txt > build/sizes.txt"]
+    },
+    {
+      "name": "verify",
+      "args": ["sh", "-c", "test -f build/epoch-year.txt && echo fixture-chain-ok"]
+    }
+  ]
+}

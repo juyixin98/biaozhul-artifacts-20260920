@@ -1,0 +1,8 @@
+{
+  "files": [
+    {"path": "seed", "content": "x"}
+  ],
+  "fixtures": [
+    {"name": "evil", "args": ["sh", "-c", "ln -s ../../../../etc escape"]}
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "files": [
+    {"path": "README.txt", "content": "hello deterministic world\n", "mode": 420},
+    {"path": "config/app.json", "content": "{\"env\":\"test\"}\n"},
+    {"path": "empty/.keep", "content": ""}
+  ]
+}
