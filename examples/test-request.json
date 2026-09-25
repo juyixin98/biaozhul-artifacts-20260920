@@ -1,0 +1,5 @@
+{
+  "workdir": "/tmp/patchsvc-demo/work",
+  "command": ["grep", "-n", "TWO", "f.txt"],
+  "timeout_seconds": 30
+}
