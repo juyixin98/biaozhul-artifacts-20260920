@@ -1,0 +1,16 @@
+// 不可达块：then 分支 return，merge 仍由 else 边可达；
+// merge 有 φ（两个前驱），其中 then 边来自一个已终结的块——
+// IR 构建器会把 return 之后的语句放进独立的 dead 块，merge 从而带上
+// “不可达前驱 + 可达前驱”的混合 φ。
+func main(a) {
+    var x = 0;
+    if (a > 0) {
+        x = 1;
+        return x;       // 提前返回
+        x = 2;          // 不可达
+    } else {
+        x = 3;
+    }
+    x = x + 1;          // 仅 else 路径可达；merge 的 φ 有一个不可达前驱
+    return x;
+}

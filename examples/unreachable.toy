@@ -1,0 +1,11 @@
+// 不可达块：if 条件恒为真，else 分支不可达；return 之后还有语句
+func main() {
+    var x = 5;
+    if (1) {
+        return x;
+    } else {
+        x = 99;
+    }
+    x = 7;          // 不可达
+    return x;
+}

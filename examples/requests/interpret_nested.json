@@ -1,0 +1,6 @@
+{
+  "source": "func main(a,b){\n  var x=0;\n  if (a>0){ if (b>0){x=1;} else {x=2;} } else { x=3; }\n  var y=0;\n  if (a>5 && b>5) { y=100; }\n  return x+y;\n}\n",
+  "file": "nested_branch.toy",
+  "args": [7, -1],
+  "flavor": "exec"
+}

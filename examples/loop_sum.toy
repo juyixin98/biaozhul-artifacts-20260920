@@ -1,0 +1,10 @@
+// 循环携带变量：sum、i 都需要循环头 φ
+func main(n) {
+    var sum = 0;
+    var i = 1;
+    while (i <= n) {
+        sum = sum + i;
+        i = i + 1;
+    }
+    return sum;
+}

@@ -1,0 +1,10 @@
+// 菱形控制流：if/else 汇流处 x 需要 φ
+func main(a) {
+    var x;
+    if (a > 0) {
+        x = 10;
+    } else {
+        x = 20;
+    }
+    return x + a;
+}

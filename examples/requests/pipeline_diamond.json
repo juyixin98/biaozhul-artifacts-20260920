@@ -1,0 +1,6 @@
+{
+  "source": "// 菱形控制流\nfunc main(a) {\n    var x;\n    if (a > 0) {\n        x = 10;\n    } else {\n        x = 20;\n    }\n    return x + a;\n}\n",
+  "file": "diamond.toy",
+  "args": [4],
+  "run": true
+}

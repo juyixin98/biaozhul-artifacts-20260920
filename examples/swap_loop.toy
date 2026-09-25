@@ -1,0 +1,13 @@
+// 循环体内交换 a、b：循环头 φ 的入边在 latch 边上构成 a<-b, b<-a 的并行复制环
+func main(n) {
+    var a = 1;
+    var b = 2;
+    var i = 0;
+    while (i < n) {
+        var t = a;
+        a = b;
+        b = t;
+        i = i + 1;
+    }
+    return a + b;
+}
