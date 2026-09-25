@@ -1,0 +1,219 @@
+[
+  {
+    "file": "01-get-minimal.http",
+    "bytes": 18,
+    "expected": "accepted",
+    "error": null,
+    "notes": "GET with no headers and no body"
+  },
+  {
+    "file": "02-get-host.http",
+    "bytes": 65,
+    "expected": "accepted",
+    "error": null,
+    "notes": "ordinary GET with two headers"
+  },
+  {
+    "file": "03-post-fixed.http",
+    "bytes": 75,
+    "expected": "accepted",
+    "error": null,
+    "notes": "fixed-length body (Content-Length: 11)"
+  },
+  {
+    "file": "04-post-fixed-zero.http",
+    "bytes": 43,
+    "expected": "accepted",
+    "error": null,
+    "notes": "fixed-length zero body"
+  },
+  {
+    "file": "05-chunked-simple.http",
+    "bytes": 93,
+    "expected": "accepted",
+    "error": null,
+    "notes": "two chunks, no trailers"
+  },
+  {
+    "file": "06-chunked-trailer.http",
+    "bytes": 100,
+    "expected": "accepted",
+    "error": null,
+    "notes": "chunked body with two trailer fields"
+  },
+  {
+    "file": "07-chunked-ext.http",
+    "bytes": 83,
+    "expected": "accepted",
+    "error": null,
+    "notes": "chunk extensions, including quoted-string value"
+  },
+  {
+    "file": "08-chunked-multi.http",
+    "bytes": 91,
+    "expected": "accepted",
+    "error": null,
+    "notes": "multiple chunks, body contains literal CRLF"
+  },
+  {
+    "file": "09-pipeline-two.http",
+    "bytes": 56,
+    "expected": "accepted",
+    "error": null,
+    "notes": "two pipelined GETs in one TCP stream"
+  },
+  {
+    "file": "10-pipeline-get-post.http",
+    "bytes": 61,
+    "expected": "accepted",
+    "error": null,
+    "notes": "pipelined GET then fixed-length POST"
+  },
+  {
+    "file": "11-cl-agreed-list.http",
+    "bytes": 46,
+    "expected": "accepted",
+    "error": null,
+    "notes": "RFC 9112 allowed form: repeated identical values in one CL field"
+  },
+  {
+    "file": "12-headers-empty-value.http",
+    "bytes": 41,
+    "expected": "accepted",
+    "error": null,
+    "notes": "empty and OWS-only header values"
+  },
+  {
+    "file": "13-connection-close.http",
+    "bytes": 46,
+    "expected": "accepted",
+    "error": null,
+    "notes": "explicit keep-alive shutdown"
+  },
+  {
+    "file": "14-chunked-uppercase.http",
+    "bytes": 62,
+    "expected": "accepted",
+    "error": null,
+    "notes": "header names and the chunked coding are case insensitive"
+  },
+  {
+    "file": "20-bare-lf.http",
+    "bytes": 34,
+    "expected": "rejected",
+    "error": "bare_line_feed",
+    "notes": "request line ends with bare LF (no CR)"
+  },
+  {
+    "file": "21-bare-cr.http",
+    "bytes": 26,
+    "expected": "rejected",
+    "error": "bare_carriage_return",
+    "notes": "bare CR in the request line"
+  },
+  {
+    "file": "22-obs-fold.http",
+    "bytes": 28,
+    "expected": "rejected",
+    "error": "obs_fold",
+    "notes": "obsolete line folding (continuation starts with SP)"
+  },
+  {
+    "file": "23-space-before-colon.http",
+    "bytes": 25,
+    "expected": "rejected",
+    "error": "invalid_header_name",
+    "notes": "space between header name and colon (RFC 9112 smuggling case)"
+  },
+  {
+    "file": "24-cl-te.http",
+    "bytes": 71,
+    "expected": "rejected",
+    "error": "te_and_cl",
+    "notes": "TE and CL present together (CL.TE ambiguity)"
+  },
+  {
+    "file": "25-te-cl.http",
+    "bytes": 71,
+    "expected": "rejected",
+    "error": "te_and_cl",
+    "notes": "TE and CL present together, reverse order (TE.CL ambiguity)"
+  },
+  {
+    "file": "26-duplicate-cl.http",
+    "bytes": 62,
+    "expected": "rejected",
+    "error": "duplicate_content_length",
+    "notes": "two CL header fields, even with equal values"
+  },
+  {
+    "file": "27-conflicting-cl-list.http",
+    "bytes": 46,
+    "expected": "rejected",
+    "error": "conflicting_content_length",
+    "notes": "comma list of CL values that disagree"
+  },
+  {
+    "file": "28-te-not-chunked.http",
+    "bytes": 62,
+    "expected": "rejected",
+    "error": "invalid_transfer_encoding",
+    "notes": "TE lists more than the single chunked coding"
+  },
+  {
+    "file": "29-cl-non-numeric.http",
+    "bytes": 41,
+    "expected": "rejected",
+    "error": "invalid_content_length",
+    "notes": "CL value is not a decimal integer"
+  },
+  {
+    "file": "30-duplicate-te.http",
+    "bytes": 80,
+    "expected": "rejected",
+    "error": "invalid_transfer_encoding",
+    "notes": "two TE header fields"
+  },
+  {
+    "file": "31-malformed-request-line.http",
+    "bytes": 19,
+    "expected": "rejected",
+    "error": "malformed_request_line",
+    "notes": "double SP in request line"
+  },
+  {
+    "file": "32-http10.http",
+    "bytes": 18,
+    "expected": "rejected",
+    "error": "unsupported_version",
+    "notes": "only HTTP/1.1 is supported"
+  },
+  {
+    "file": "33-bad-chunk-size.http",
+    "bytes": 52,
+    "expected": "rejected",
+    "error": "malformed_chunk_size",
+    "notes": "chunk size is not hexadecimal"
+  },
+  {
+    "file": "34-trailer-cl.http",
+    "bytes": 72,
+    "expected": "rejected",
+    "error": "forbidden_trailer_field",
+    "notes": "Content-Length smuggled into trailers"
+  },
+  {
+    "file": "35-bad-chunk-ext.http",
+    "bytes": 53,
+    "expected": "rejected",
+    "error": "invalid_chunk_extension",
+    "notes": "control byte in chunk extension"
+  },
+  {
+    "file": "36-header-no-colon.http",
+    "bytes": 30,
+    "expected": "rejected",
+    "error": "malformed_header",
+    "notes": "header line without a colon"
+  }
+]

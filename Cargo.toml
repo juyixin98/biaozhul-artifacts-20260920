@@ -1,0 +1,25 @@
+[package]
+name = "http-framing-consistency"
+version = "0.1.0"
+edition = "2021"
+description = "Incremental byte-wise HTTP/1.1 request framer (fixed-length + chunked) and local TCP test server"
+license = "MIT"
+
+[lib]
+name = "http_framing"
+path = "src/lib.rs"
+
+[[bin]]
+name = "http-framing-server"
+path = "src/bin/http-framing-server.rs"
+
+[[bin]]
+name = "http-framing-raw"
+path = "src/bin/http-framing-raw.rs"
+
+[profile.release]
+panic = "unwind"
+
+# Zero runtime dependencies: the core framer is hand written and must not be
+# backed by an off-the-shelf HTTP parser.
+[dependencies]
