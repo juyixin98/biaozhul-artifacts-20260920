@@ -1,0 +1,81 @@
+### DRF scheduler request samples (REST Client / IntelliJ .http style)
+### Base: sim-mode server started with:
+###   go run ./cmd/drfscheduler -capacity-cpu 9000 -capacity-mem 18000
+
+### Health
+GET http://127.0.0.1:8080/healthz
+
+### Set / change cluster capacity (rejected with 422 if below current usage)
+PUT http://127.0.0.1:8080/v1/cluster/capacity
+Content-Type: application/json
+
+{"cpu_millicpu": 9000, "memory_mib": 18000}
+
+### Create tenants with explicit weights
+PUT http://127.0.0.1:8080/v1/tenants/A
+Content-Type: application/json
+
+{"weight": 1}
+
+PUT http://127.0.0.1:8080/v1/tenants/B
+Content-Type: application/json
+
+{"weight": 2}
+
+### List tenants (includes exact dominant / weighted shares)
+GET http://127.0.0.1:8080/v1/tenants
+
+### Submit tasks (sim mode uses duration_ms; id optional)
+POST http://127.0.0.1:8080/v1/tasks
+Content-Type: application/json
+
+{"id": "A1", "tenant_id": "A", "cpu_millicpu": 1000, "memory_mib": 4000, "duration_ms": 100}
+
+### Batch submit: all tasks arrive at the same virtual instant.
+### The first scheduling pass sees the whole batch (atomic; one bad
+### element rejects the entire request with no partial admission).
+POST http://127.0.0.1:8080/v1/tasks/batch
+Content-Type: application/json
+
+[
+  {"id": "A1", "tenant_id": "A", "cpu_millicpu": 1000, "memory_mib": 4000, "duration_ms": 100},
+  {"id": "B1", "tenant_id": "B", "cpu_millicpu": 3000, "memory_mib": 1000, "duration_ms": 200}
+]
+
+### A task larger than total capacity -> 422 (never queued)POST http://127.0.0.1:8080/v1/tasks
+Content-Type: application/json
+
+{"tenant_id": "A", "cpu_millicpu": 999999, "memory_mib": 1, "duration_ms": 100}
+
+### Unknown tenant -> 404
+POST http://127.0.0.1:8080/v1/tasks
+Content-Type: application/json
+
+{"tenant_id": "ghost", "cpu_millicpu": 1, "memory_mib": 1, "duration_ms": 100}
+
+### Full state snapshot with the no-overcommit invariant
+GET http://127.0.0.1:8080/v1/state
+
+### Filter tasks
+GET http://127.0.0.1:8080/v1/tasks?tenant_id=A&state=QUEUED
+
+### Single task
+GET http://127.0.0.1:8080/v1/tasks/A1
+
+### Cancel a queued task
+POST http://127.0.0.1:8080/v1/tasks/A1/cancel
+Content-Type: application/json
+
+{"reason": "user cancelled"}
+
+### Structured state-change events
+GET http://127.0.0.1:8080/v1/events
+
+### Manually trigger a scheduling pass
+POST http://127.0.0.1:8080/v1/schedule
+
+### Advance the fake clock (sim mode only; 400 in real mode)
+POST http://127.0.0.1:8080/v1/clock/advance
+Content-Type: application/json
+
+{"advance_ms": 100}
