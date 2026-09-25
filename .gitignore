@@ -1,0 +1,8 @@
+# 编译产物
+build/
+out/
+*.class
+
+# 杂项
+.DS_Store
+*.log

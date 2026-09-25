@@ -1,0 +1,8 @@
+{
+  "width": 64,
+  "depth": 5,
+  "seed": 42,
+  "candidateCapacity": 50,
+  "windowMillis": 60000,
+  "retainedWindows": 10
+}

@@ -1,0 +1,9 @@
+{
+  "events": [
+    {"key": "page:home", "count": 500},
+    {"key": "page:product", "count": 210},
+    {"key": "page:cart", "count": 80},
+    {"key": "page:checkout", "count": 35},
+    {"key": "page:promo-xyz", "count": 3}
+  ]
+}
