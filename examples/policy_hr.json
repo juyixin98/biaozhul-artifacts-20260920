@@ -1,0 +1,32 @@
+{
+  "policy_id": "hr-export",
+  "description": "HR 记录对外分析用途的字段策略（示例）",
+  "default_action": "deny",
+  "aliases": [
+    {"canonical": "email", "aliases": ["mail", "email_address", "e_mail"]},
+    {"canonical": "national_id", "aliases": ["ssn", "id_number", "证件号"]}
+  ],
+  "rules": [
+    {"path": "employee_id", "action": "allow",
+     "description": "工号可直接导出"},
+    {"path": "full_name", "action": "allow"},
+    {"path": "email", "action": "generalize", "generalizer": "email_mask",
+     "description": "邮箱保留首字符与域名"},
+    {"path": "national_id", "action": "deny",
+     "description": "证件号绝不导出"},
+    {"path": "salary", "action": "deny"},
+    {"path": "date_of_birth", "action": "generalize",
+     "generalizer": "date_bucket", "params": {"granularity": "year"}},
+    {"path": "age", "action": "generalize", "generalizer": "numeric_bucket",
+     "params": {"bins": [0, 18, 30, 45, 60]}},
+    {"path": "country", "action": "generalize", "generalizer": "category",
+     "params": {"map": {"CN": "domestic"}, "default": "foreign"}},
+    {"path": "contacts[].label", "action": "allow"},
+    {"path": "contacts[].email", "action": "generalize",
+     "generalizer": "email_mask"},
+    {"path": "contacts[].phone", "action": "generalize",
+     "generalizer": "mask", "params": {"keep_prefix": 0, "keep_suffix": 2}},
+    {"path": "medical", "action": "deny",
+     "description": "整个医疗子树拒绝，嵌套字段无法旁路"}
+  ]
+}

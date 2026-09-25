@@ -1,0 +1,17 @@
+{
+  "employee_id": "E-10086",
+  "full_name": "Zhang San",
+  "mail": "zhangsan@example.com",
+  "ssn": "11010119900101001X",
+  "salary": 320000,
+  "date_of_birth": "1990-03-14T08:00:00Z",
+  "age": 36,
+  "country": "CN",
+  "contacts": [
+    {"label": "home", "email": "home@example.com", "phone": "13800009999"},
+    {"label": "work", "email": "work@example.com", "phone": "13911112222",
+     "internal_note": "prefers morning calls"}
+  ],
+  "medical": {"diagnosis": "X", "hospital": "Y"},
+  "debug_trace_id": "leak-attempt"
+}

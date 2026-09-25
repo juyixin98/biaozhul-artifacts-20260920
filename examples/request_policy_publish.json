@@ -1,0 +1,12 @@
+{
+  "rules": [
+    {"path": "employee_id", "action": "allow"},
+    {"path": "full_name", "action": "allow"},
+    {"path": "email", "action": "deny"}
+  ],
+  "aliases": [
+    {"canonical": "email", "aliases": ["mail", "email_address"]}
+  ],
+  "default_action": "deny",
+  "description": "收紧后的 v2：邮箱直接拒绝"
+}
