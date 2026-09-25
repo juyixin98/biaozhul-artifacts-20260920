@@ -1,0 +1,5 @@
+{
+  "match": ["service=checkout"],
+  "quantiles": [0.5, 0.95, 0.99],
+  "coarsen": true
+}

@@ -1,0 +1,42 @@
+{
+  "samples": [
+    {
+      "timestamp": "2026-09-24T10:00:00Z",
+      "labels": [
+        {"name": "service", "value": "checkout"},
+        {"name": "route", "value": "/api/pay"}
+      ],
+      "histogram": {
+        "total_count": 10,
+        "sum": 2.34,
+        "buckets": [
+          {"upper": 0.01,  "cumulative_count": 1},
+          {"upper": 0.1,   "cumulative_count": 4},
+          {"upper": 0.5,   "cumulative_count": 8},
+          {"upper": 1,     "cumulative_count": 9},
+          {"upper": 10,    "cumulative_count": 10},
+          {"upper": "+Inf", "cumulative_count": 10}
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-09-24T10:01:00Z",
+      "labels": [
+        {"name": "service", "value": "billing"},
+        {"name": "route", "value": "/api/invoice"}
+      ],
+      "histogram": {
+        "total_count": 6,
+        "sum": 5.9,
+        "buckets": [
+          {"upper": 0.01,  "cumulative_count": 0},
+          {"upper": 0.1,   "cumulative_count": 2},
+          {"upper": 0.5,   "cumulative_count": 3},
+          {"upper": 1,     "cumulative_count": 5},
+          {"upper": 10,    "cumulative_count": 6},
+          {"upper": "+Inf", "cumulative_count": 6}
+        ]
+      }
+    }
+  ]
+}

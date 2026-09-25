@@ -1,0 +1,24 @@
+{
+  "samples": [
+    {
+      "timestamp": "2026-09-24T10:00:00Z",
+      "labels": [
+        {"name": "service", "value": "checkout"},
+        {"name": "route", "value": "/api/cart"}
+      ],
+      "histogram": {
+        "total_count": 7,
+        "sum": 11.2,
+        "buckets": [
+          {"upper": 0.03,  "cumulative_count": 1},
+          {"upper": 0.1,   "cumulative_count": 2},
+          {"upper": 0.3,   "cumulative_count": 3},
+          {"upper": 1.5,   "cumulative_count": 4},
+          {"upper": 10,    "cumulative_count": 6},
+          {"upper": 30,    "cumulative_count": 7},
+          {"upper": "+Inf", "cumulative_count": 7}
+        ]
+      }
+    }
+  ]
+}

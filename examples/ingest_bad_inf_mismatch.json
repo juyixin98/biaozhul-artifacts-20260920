@@ -1,0 +1,11 @@
+{
+  "labels": [{"name": "service", "value": "broken"}],
+  "histogram": {
+    "total_count": 5,
+    "sum": 1.0,
+    "buckets": [
+      {"upper": 1, "cumulative_count": 2},
+      {"upper": "+Inf", "cumulative_count": 4}
+    ]
+  }
+}

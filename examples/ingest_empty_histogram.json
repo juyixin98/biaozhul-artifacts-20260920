@@ -1,0 +1,16 @@
+{
+  "labels": [
+    {"name": "service", "value": "idle"},
+    {"name": "route", "value": "/health"}
+  ],
+  "histogram": {
+    "total_count": 0,
+    "sum": 0,
+    "buckets": [
+      {"upper": 0.1,    "cumulative_count": 0},
+      {"upper": 1,      "cumulative_count": 0},
+      {"upper": 10,     "cumulative_count": 0},
+      {"upper": "+Inf", "cumulative_count": 0}
+    ]
+  }
+}
