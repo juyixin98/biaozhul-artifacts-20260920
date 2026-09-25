@@ -1,0 +1,22 @@
+{
+  "stft": {
+    "nfft": 64,
+    "hop": 64,
+    "window": "hann",
+    "center": false
+  },
+  "input": {
+    "kind": "synthetic",
+    "signal": {
+      "duration_s": 0.02,
+      "sample_rate": 8000,
+      "frequencies": [1000.0]
+    }
+  },
+  "streaming": {
+    "chunk_sizes": [10]
+  },
+  "output": {
+    "dir": "out/bad_window"
+  }
+}

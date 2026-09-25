@@ -1,0 +1,28 @@
+{
+  "stft": {
+    "nfft": 256,
+    "hop": 128,
+    "window": "hann",
+    "center": true,
+    "pad_mode": "reflect",
+    "periodic_window": true
+  },
+  "input": {
+    "kind": "synthetic",
+    "signal": {
+      "duration_s": 0.25,
+      "sample_rate": 8000,
+      "frequencies": [440.0, 880.0],
+      "amplitudes": [0.6, 0.3],
+      "noise_std": 0.01,
+      "seed": 42
+    }
+  },
+  "streaming": {
+    "chunk_sizes": [137, 363, 1, 499]
+  },
+  "output": {
+    "dir": "out/synth",
+    "dtype": "float64"
+  }
+}

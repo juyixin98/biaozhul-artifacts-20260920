@@ -1,0 +1,21 @@
+{
+  "stft": {
+    "nfft": 128,
+    "hop": 32,
+    "window": "hann",
+    "center": true,
+    "pad_mode": "constant"
+  },
+  "input": {
+    "kind": "file",
+    "path": "examples/sample_f32.pcm",
+    "dtype": "float32"
+  },
+  "streaming": {
+    "chunk_sizes": [50, 77, 3]
+  },
+  "output": {
+    "dir": "out/pcm",
+    "dtype": "float32"
+  }
+}
