@@ -1,0 +1,13 @@
+[package]
+name = "mqtt-subset"
+version = "0.1.0"
+edition = "2021"
+description = "MQTT 3.1.1 subset (CONNECT / SUBSCRIBE / QoS0-1 PUBLISH) with incremental byte parser, session and retransmission state. Pure backend, no external dependencies."
+
+[lib]
+name = "mqtt_subset"
+path = "src/lib.rs"
+
+[[bin]]
+name = "mqtt-server"
+path = "src/bin/mqtt_server.rs"
