@@ -1,0 +1,8 @@
+{
+  "id": "cyclic-rejected",
+  "nodes": [
+    {"id": "a", "task_type": "noop", "depends_on": ["c"]},
+    {"id": "b", "task_type": "noop", "depends_on": ["a"]},
+    {"id": "c", "task_type": "noop", "depends_on": ["b"]}
+  ]
+}

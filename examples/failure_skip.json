@@ -1,0 +1,19 @@
+{
+  "id": "skip-propagation",
+  "nodes": [
+    {
+      "id": "broken",
+      "task_type": "fail",
+      "params": {"message": "disk full"},
+      "max_attempts": 2,
+      "backoff": "100ms"
+    },
+    {"id": "skipped_branch", "task_type": "noop", "depends_on": ["broken"]},
+    {
+      "id": "lenient_branch",
+      "task_type": "noop",
+      "depends_on": ["broken"],
+      "policy": "all_finished"
+    }
+  ]
+}

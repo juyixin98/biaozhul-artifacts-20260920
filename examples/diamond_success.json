@@ -1,0 +1,9 @@
+{
+  "id": "diamond-success",
+  "nodes": [
+    {"id": "prepare", "task_type": "noop"},
+    {"id": "extract_a", "task_type": "noop", "depends_on": ["prepare"]},
+    {"id": "extract_b", "task_type": "noop", "depends_on": ["prepare"]},
+    {"id": "merge", "task_type": "noop", "depends_on": ["extract_a", "extract_b"]}
+  ]
+}

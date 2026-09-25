@@ -1,0 +1,7 @@
+{
+  "id": "cancellable",
+  "nodes": [
+    {"id": "long", "task_type": "sleep", "params": {"duration": "60s"}},
+    {"id": "after", "task_type": "noop", "depends_on": ["long"]}
+  ]
+}

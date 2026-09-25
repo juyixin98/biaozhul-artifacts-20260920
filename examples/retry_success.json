@@ -1,0 +1,18 @@
+{
+  "id": "failure-and-retry",
+  "nodes": [
+    {
+      "id": "flaky",
+      "task_type": "flaky",
+      "params": {"fail_for": "2", "message": "transient error"},
+      "max_attempts": 4,
+      "backoff": "200ms"
+    },
+    {
+      "id": "strict_child",
+      "task_type": "noop",
+      "depends_on": ["flaky"],
+      "policy": "all_success"
+    }
+  ]
+}
