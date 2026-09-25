@@ -1,0 +1,5 @@
+{
+  "action": "distance",
+  "a": {"lat": 91.0, "lon": 0},
+  "b": {"lat": 0, "lon": 0}
+}

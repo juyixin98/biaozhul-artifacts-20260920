@@ -1,0 +1,6 @@
+{
+  "action": "range",
+  "center": {"lat": 0.0, "lon": 180.0},
+  "radius_m": 150000,
+  "points_file": "data/points_world.json"
+}

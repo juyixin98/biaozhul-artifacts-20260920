@@ -1,0 +1,12 @@
+{
+  "action": "range",
+  "center": {"lat": 35.68, "lon": 139.69},
+  "radius_m": 3000000,
+  "points": [
+    {"id": "tokyo",    "lat": 35.68,  "lon": 139.69},
+    {"id": "shanghai", "lat": 31.23,  "lon": 121.47},
+    {"id": "beijing",  "lat": 39.90,  "lon": 116.41},
+    {"id": "singapore","lat": 1.35,   "lon": 103.82},
+    {"id": "sydney",   "lat": -33.87, "lon": 151.21}
+  ]
+}
