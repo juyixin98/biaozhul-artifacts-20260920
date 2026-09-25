@@ -1,0 +1,7 @@
+{
+  "y_true": [1, 0, 1, 0],
+  "y_prob": [0.9, 0.2, 0.6, 0.4],
+  "sample_weight": [1.0, 1.0, 2.0, 1.0],
+  "n_bins": 2,
+  "endpoint_strategy": "clip"
+}
