@@ -1,0 +1,5 @@
+{
+  "name": "app",
+  "argv": ["cp", "/tmp/delta-demo/fixtures/v2.bin", "artifact.bin"],
+  "artifact_path": "artifact.bin"
+}

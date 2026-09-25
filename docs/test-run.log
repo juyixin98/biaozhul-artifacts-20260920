@@ -1,0 +1,83 @@
+# 测试运行记录
+# 日期: 2026-09-24 03:56:58 CST
+# 环境: go version go1.22.2 linux/amd64, Linux 6.8.0-90-generic x86_64
+
+## 命令: go vet ./...
+(无输出，通过)
+
+## 命令: go test ./... -count=1 -v
+=== RUN   TestCrashRecoveryAllStages
+=== RUN   TestCrashRecoveryAllStages/preflight
+=== RUN   TestCrashRecoveryAllStages/stage-open
+=== RUN   TestCrashRecoveryAllStages/stage-copy
+=== RUN   TestCrashRecoveryAllStages/verify
+=== RUN   TestCrashRecoveryAllStages/commit
+--- PASS: TestCrashRecoveryAllStages (11.31s)
+=== RUN   TestCrashHelperWithoutStage
+--- PASS: TestCrashHelperWithoutStage (1.22s)
+ok  	deltaupdate/cmd/deltaupd	12.537s
+=== RUN   TestEndToEndHTTP
+--- PASS: TestEndToEndHTTP (2.29s)
+=== RUN   TestHTTPWrongBaselineAndCorruptPatch
+--- PASS: TestHTTPWrongBaselineAndCorruptPatch (2.19s)
+=== RUN   TestHTTPNoSpace
+--- PASS: TestHTTPNoSpace (0.00s)
+ok  	deltaupdate/internal/api	4.488s
+=== RUN   TestBytesFileReader
+--- PASS: TestBytesFileReader (0.00s)
+=== RUN   TestTeeReader
+--- PASS: TestTeeReader (0.00s)
+ok  	deltaupdate/internal/digest	0.004s
+=== RUN   TestRoundTripSmall
+--- PASS: TestRoundTripSmall (0.00s)
+=== RUN   TestRoundTripLargeRandom
+--- PASS: TestRoundTripLargeRandom (0.01s)
+=== RUN   TestInsertionShift
+--- PASS: TestInsertionShift (0.01s)
+=== RUN   TestDeletionShift
+--- PASS: TestDeletionShift (0.01s)
+=== RUN   TestEmptyAndIdentical
+--- PASS: TestEmptyAndIdentical (0.00s)
+=== RUN   TestWrongBaseline
+--- PASS: TestWrongBaseline (0.00s)
+=== RUN   TestCorruptPatch
+--- PASS: TestCorruptPatch (0.01s)
+=== RUN   TestTruncatedPatch
+--- PASS: TestTruncatedPatch (2.10s)
+=== RUN   TestBadMagic
+--- PASS: TestBadMagic (0.00s)
+=== RUN   TestStreamingReader
+--- PASS: TestStreamingReader (2.08s)
+ok  	deltaupdate/internal/patch	4.231s
+=== RUN   TestBuildAndHappyPath
+--- PASS: TestBuildAndHappyPath (2.14s)
+=== RUN   TestWrongBaselineDigest
+--- PASS: TestWrongBaselineDigest (2.19s)
+=== RUN   TestCorruptPatchHeaderAndBody
+--- PASS: TestCorruptPatchHeaderAndBody (2.19s)
+=== RUN   TestNoSpace
+--- PASS: TestNoSpace (0.06s)
+=== RUN   TestFaultInjectionAllStages
+=== RUN   TestFaultInjectionAllStages/preflight
+=== RUN   TestFaultInjectionAllStages/stage-open
+=== RUN   TestFaultInjectionAllStages/stage-copy
+=== RUN   TestFaultInjectionAllStages/verify
+=== RUN   TestFaultInjectionAllStages/commit
+--- PASS: TestFaultInjectionAllStages (2.17s)
+=== RUN   TestIdempotentReapply
+--- PASS: TestIdempotentReapply (2.14s)
+ok  	deltaupdate/internal/service	10.894s
+=== RUN   TestCASRoundTripAndDedup
+--- PASS: TestCASRoundTripAndDedup (0.01s)
+=== RUN   TestNotFoundAndBadDigest
+--- PASS: TestNotFoundAndBadDigest (0.00s)
+=== RUN   TestRefsAtomicAndList
+--- PASS: TestRefsAtomicAndList (0.01s)
+=== RUN   TestWorkDirIsolationAndCleanup
+--- PASS: TestWorkDirIsolationAndCleanup (0.00s)
+=== RUN   TestCheckSpace
+--- PASS: TestCheckSpace (0.00s)
+ok  	deltaupdate/internal/storage	0.024s
+
+## go test -race 结果
+ok（见 README 实录，约 200s，逐阶段子进程崩溃测试）
