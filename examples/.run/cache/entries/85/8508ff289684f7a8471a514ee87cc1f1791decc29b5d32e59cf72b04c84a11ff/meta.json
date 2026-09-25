@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "key": "8508ff289684f7a8471a514ee87cc1f1791decc29b5d32e59cf72b04c84a11ff",
+  "node_id": "package",
+  "outputs": [
+    {
+      "path": "dist/release.txt",
+      "mode": 436,
+      "sha256": "e383a9baea0fec98bb7e4fdbed17bd2cf92102e97aecde2b6dbba0112f8c51cf"
+    }
+  ],
+  "fingerprint": {
+    "node_id": "package",
+    "inputs": [
+      {
+        "path": "build/decorated.txt",
+        "mode": 436,
+        "sha256": "e383a9baea0fec98bb7e4fdbed17bd2cf92102e97aecde2b6dbba0112f8c51cf"
+      }
+    ],
+    "deps": [
+      {
+        "id": "decorate",
+        "fingerprint": "4e41e9847352bbfc1b787d8cc1b75cc207f9a7d9b53bd7e70b9e180e66237271",
+        "outputs": [
+          {
+            "path": "build/decorated.txt",
+            "mode": 436,
+            "sha256": "e383a9baea0fec98bb7e4fdbed17bd2cf92102e97aecde2b6dbba0112f8c51cf"
+          }
+        ]
+      }
+    ]
+  }
+}

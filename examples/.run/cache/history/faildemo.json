@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "nodes": {
+    "boom": {
+      "node_id": "boom",
+      "last_key": "65d1ce15ae6f8709f4e5272a74fccd25626a717cb462c0ffb3ba7ae5598bc3fb",
+      "last_status": "failed"
+    }
+  }
+}

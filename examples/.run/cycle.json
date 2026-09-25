@@ -1,0 +1,8 @@
+{
+  "id": "cycledemo",
+  "workdir": "/home/admin/Downloads/biaozhul/opp101/a/examples/.run/workspace",
+  "graph": {"nodes": [
+    {"id": "a", "command": "echo a > build/a.txt", "outputs": ["build/a.txt"], "depends_on": ["b"]},
+    {"id": "b", "command": "echo b > build/b.txt", "outputs": ["build/b.txt"], "depends_on": ["a"]}
+  ]}
+}

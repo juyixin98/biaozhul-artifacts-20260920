@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "key": "4e41e9847352bbfc1b787d8cc1b75cc207f9a7d9b53bd7e70b9e180e66237271",
+  "node_id": "decorate",
+  "outputs": [
+    {
+      "path": "build/decorated.txt",
+      "mode": 436,
+      "sha256": "e383a9baea0fec98bb7e4fdbed17bd2cf92102e97aecde2b6dbba0112f8c51cf"
+    }
+  ],
+  "fingerprint": {
+    "node_id": "decorate",
+    "inputs": [
+      {
+        "path": "build/normalized.txt",
+        "mode": 436,
+        "sha256": "36e7e86d026de308e4f9f70e32a02344a36010d7db2437fd39455a7bd753c574"
+      }
+    ],
+    "deps": [
+      {
+        "id": "normalize",
+        "fingerprint": "6cfd50dd4230dd3620450cf62f55dede597e2776489d26276429ee5daefbb9c3",
+        "outputs": [
+          {
+            "path": "build/normalized.txt",
+            "mode": 436,
+            "sha256": "36e7e86d026de308e4f9f70e32a02344a36010d7db2437fd39455a7bd753c574"
+          }
+        ]
+      }
+    ],
+    "params": [
+      {
+        "key": "format",
+        "val": "rich"
+      },
+      {
+        "key": "stage",
+        "val": "decorate"
+      }
+    ],
+    "env": [
+      {
+        "key": "GREETING",
+        "val": "hello"
+      },
+      {
+        "key": "MODE",
+        "val": "rich"
+      }
+    ]
+  }
+}

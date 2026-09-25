@@ -1,0 +1,267 @@
+
+==================== 1. validate ====================
+{
+  "id": "demo",
+  "node_count": 5,
+  "valid": true,
+  "workdir": "/home/admin/Downloads/biaozhul/opp101/a/examples/.run/workspace"
+}
+
+==================== 2. cold build (every command runs) ====================
+{
+  "project_id": "demo",
+  "workdir": "/home/admin/Downloads/biaozhul/opp101/a/examples/.run/workspace",
+  "cache_dir": "/home/admin/Downloads/biaozhul/opp101/a/examples/.run/cache",
+  "targets": [
+    "readme",
+    "source",
+    "normalize",
+    "decorate",
+    "package"
+  ],
+  "success": true,
+  "duration_ms": 13,
+  "counts": {
+    "built": 4,
+    "cached": 0,
+    "verified": 1,
+    "failed": 0,
+    "blocked": 0,
+    "total": 5
+  },
+  "results": [
+    {
+      "node_id": "readme",
+      "status": "built",
+      "cached": false,
+      "key": "9a652db6f55dd33f445ad02dd791d7d2245adf28176ba1772fdb532159a71ab4",
+      "reason": "cache miss: no previous build recorded for this node; running command",
+      "duration_ms": 2,
+      "outputs": [
+        {
+          "path": "build/readme.txt",
+          "mode": 436,
+          "sha256": "7ed57bab1c45a488743987356e655bb1a33e6ba3466e36f81890709093507f32"
+        }
+      ],
+      "exit_code": 0
+    },
+    {
+      "node_id": "source",
+      "status": "verified",
+      "cached": false,
+      "key": "0c6dc85ba1c1bf5519e4a687e72328174ff40f12f5a8d45bbc3bb4f39bf49e19",
+      "reason": "source/bundle node: inputs verified, no command to run",
+      "duration_ms": 0,
+      "outputs": [
+        {
+          "path": "src/message.txt",
+          "mode": 436,
+          "sha256": "5c1d96efc330637489c9f36855417b4bc6553de998510aea589bd3fc518d9b34"
+        }
+      ]
+    },
+    {
+      "node_id": "normalize",
+      "status": "built",
+      "cached": false,
+      "key": "c6a61a07febc94f882d77e9c2d919f8a7fcb0bae8399ea248617f2cfdd4f0e1d",
+      "reason": "cache miss: no previous build recorded for this node; running command",
+      "duration_ms": 5,
+      "outputs": [
+        {
+          "path": "build/normalized.txt",
+          "mode": 436,
+          "sha256": "c81e7b6fffc4c7506af00b7e2b7e483290ef366530fca17188f271c455ae7cea"
+        }
+      ],
+      "exit_code": 0
+    },
+    {
+      "node_id": "decorate",
+      "status": "built",
+      "cached": false,
+      "key": "ac237e802214f20c88884f33b870d4be23b10f2bafb211e7ef751a397c412f99",
+      "reason": "cache miss: no previous build recorded for this node; running command",
+      "duration_ms": 1,
+      "outputs": [
+        {
+          "path": "build/decorated.txt",
+          "mode": 436,
+          "sha256": "8a5935b92fea31b4d44e428afe170586464bd6b9c1374b4ae3c99fb3fb8e2f8e"
+        }
+      ],
+      "exit_code": 0
+    },
+    {
+      "node_id": "package",
+      "status": "built",
+      "cached": false,
+      "key": "6ed90ddaf000c8bf487a52fb2da66c250004c76fdcf46d3d2f9401b5f68a5e85",
+      "reason": "cache miss: no previous build recorded for this node; running command",
+      "duration_ms": 3,
+      "outputs": [
+        {
+          "path": "dist/release.txt",
+          "mode": 436,
+          "sha256": "8a5935b92fea31b4d44e428afe170586464bd6b9c1374b4ae3c99fb3fb8e2f8e"
+        }
+      ],
+      "exit_code": 0
+    }
+  ]
+}
+-- dist/release.txt content:
+hello content-driven build
+hello-plain
+
+==================== 3. no-op rebuild (everything cached) ====================
+    "built": 0,
+    "cached": 4,
+      "node_id": "readme",
+      "status": "cached",
+      "cached": true,
+      "reason": "cache hit: inputs, dependency outputs, params, env and tool versions unchanged",
+      "node_id": "source",
+      "status": "verified",
+      "cached": false,
+      "reason": "source/bundle node: inputs verified, no command to run",
+      "node_id": "normalize",
+      "status": "cached",
+      "cached": true,
+      "reason": "cache hit: inputs, dependency outputs, params, env and tool versions unchanged",
+      "node_id": "decorate",
+      "status": "cached",
+      "cached": true,
+      "reason": "cache hit: inputs, dependency outputs, params, env and tool versions unchanged",
+      "node_id": "package",
+      "status": "cached",
+      "cached": true,
+      "reason": "cache hit: inputs, dependency outputs, params, env and tool versions unchanged",
+
+==================== 4. touch files preserving CONTENT and timestamp-only change ====================
+src mtime before=1790191646 after=1893524645 (content unchanged)
+      4       "status": "cached",
+      1       "status": "verified",
+
+==================== 5. change FILE CONTENT (transitive rebuild; readme reused) ====================
+      "node_id": "readme",
+      "status": "cached",
+      "node_id": "source",
+      "status": "verified",
+      "node_id": "normalize",
+      "status": "built",
+          "detail": "input file \"src/message.txt\" content changed (5c1d96efc3 -\u003e 1fc8781ff6)"
+          "detail": "dependency \"source\" output \"src/message.txt\" content changed (5c1d96efc3 -\u003e 1fc8781ff6)"
+      "node_id": "decorate",
+      "status": "built",
+          "detail": "input file \"build/normalized.txt\" content changed (c81e7b6fff -\u003e 36e7e86d02)"
+          "detail": "transitive dependency \"normalize\" changed (c6a61a07febc -\u003e 6cfd50dd4230)"
+      "node_id": "package",
+      "status": "built",
+          "detail": "input file \"build/decorated.txt\" content changed (8a5935b92f -\u003e 464f487ec9)"
+          "detail": "transitive dependency \"decorate\" changed (ac237e802214 -\u003e 351bd2dd5956)"
+-- dist/release.txt content:
+goodbye content-driven build
+hello-plain
+
+==================== 6. change PARAMETER (decorate + package rebuilt, others reused) ====================
+      "node_id": "readme",
+      "status": "cached",
+      "node_id": "source",
+      "status": "verified",
+      "node_id": "normalize",
+      "status": "cached",
+      "node_id": "decorate",
+      "status": "built",
+          "type": "param_changed",
+      "node_id": "package",
+      "status": "built",
+
+==================== 7. change declared ENV VAR (decorate + package rebuilt) ====================
+      "node_id": "readme",
+      "status": "cached",
+      "node_id": "source",
+      "status": "verified",
+      "node_id": "normalize",
+      "status": "cached",
+      "node_id": "decorate",
+      "status": "built",
+          "type": "env_changed",
+      "node_id": "package",
+      "status": "built",
+-- dist/release.txt content:
+goodbye content-driven build
+hello-rich
+
+==================== 8. failed node: package command fails, no cache published, dependents blocked ====================
+{
+  "project_id": "faildemo",
+  "workdir": "/home/admin/Downloads/biaozhul/opp101/a/examples/.run/workspace",
+  "cache_dir": "/home/admin/Downloads/biaozhul/opp101/a/examples/.run/cache",
+  "targets": [
+    "boom",
+    "after"
+  ],
+  "success": false,
+  "duration_ms": 1,
+  "counts": {
+    "built": 0,
+    "cached": 0,
+    "verified": 0,
+    "failed": 1,
+    "blocked": 1,
+    "total": 2
+  },
+  "results": [
+    {
+      "node_id": "boom",
+      "status": "failed",
+      "cached": false,
+      "key": "65d1ce15ae6f8709f4e5272a74fccd25626a717cb462c0ffb3ba7ae5598bc3fb",
+      "reason": "cache miss: no previous build recorded for this node; running command; command failed: exit status 7: about to fail",
+      "duration_ms": 1,
+      "exit_code": 7,
+      "stderr": "about to fail",
+      "error": "exit status 7: about to fail"
+    },
+    {
+      "node_id": "after",
+      "status": "blocked",
+      "cached": false,
+      "reason": "skipped: dependency \"boom\" failed (exit status 7: about to fail)",
+      "duration_ms": 0
+    }
+  ]
+}
+exit=1 (expected nonzero)
+OK: failed node left no output file
+OK: cache store intact
+
+==================== 9. cycle detection rejected before any command runs ====================
+cdag: project "cycledemo": cycle: dependency cycle detected: [a b a]
+exit=1 (expected nonzero)
+
+==================== 10. cache lives outside workdir ====================
+workdir:
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/workspace
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/workspace/build
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/workspace/dist
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/workspace/src
+cache root:
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/cache
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/cache/entries
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/cache/entries/35
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/cache/entries/3c
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/cache/entries/4e
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/cache/entries/6c
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/cache/entries/6e
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/cache/entries/85
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/cache/entries/9a
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/cache/entries/ac
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/cache/entries/c4
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/cache/entries/c6
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/cache/entries/e2
+/home/admin/Downloads/biaozhul/opp101/a/examples/.run/cache/history
+
+==================== DONE ====================

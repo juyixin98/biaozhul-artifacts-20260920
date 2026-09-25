@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "nodes": {
+    "decorate": {
+      "node_id": "decorate",
+      "last_key": "4e41e9847352bbfc1b787d8cc1b75cc207f9a7d9b53bd7e70b9e180e66237271",
+      "last_status": "success"
+    },
+    "normalize": {
+      "node_id": "normalize",
+      "last_key": "6cfd50dd4230dd3620450cf62f55dede597e2776489d26276429ee5daefbb9c3",
+      "last_status": "success"
+    },
+    "package": {
+      "node_id": "package",
+      "last_key": "8508ff289684f7a8471a514ee87cc1f1791decc29b5d32e59cf72b04c84a11ff",
+      "last_status": "success"
+    },
+    "readme": {
+      "node_id": "readme",
+      "last_key": "9a652db6f55dd33f445ad02dd791d7d2245adf28176ba1772fdb532159a71ab4",
+      "last_status": "success"
+    }
+  }
+}

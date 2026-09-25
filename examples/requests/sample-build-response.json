@@ -1,0 +1,78 @@
+{
+  "project_id": "sample",
+  "workdir": "/tmp/sample-ws",
+  "cache_dir": "/tmp/sample-cache",
+  "targets": [
+    "readme",
+    "source",
+    "normalize"
+  ],
+  "success": true,
+  "duration_ms": 6,
+  "counts": {
+    "built": 1,
+    "cached": 1,
+    "verified": 1,
+    "failed": 0,
+    "blocked": 0,
+    "total": 3
+  },
+  "results": [
+    {
+      "node_id": "readme",
+      "status": "cached",
+      "cached": true,
+      "key": "9a652db6f55dd33f445ad02dd791d7d2245adf28176ba1772fdb532159a71ab4",
+      "reason": "cache hit: inputs, dependency outputs, params, env and tool versions unchanged",
+      "duration_ms": 0,
+      "outputs": [
+        {
+          "path": "build/readme.txt",
+          "mode": 436,
+          "sha256": "f641f022503420433a082e885647810297b74db84e34a743976893e73e7e20cc"
+        }
+      ]
+    },
+    {
+      "node_id": "source",
+      "status": "verified",
+      "cached": false,
+      "key": "0c6dc85ba1c1bf5519e4a687e72328174ff40f12f5a8d45bbc3bb4f39bf49e19",
+      "reason": "source/bundle node: inputs verified, no command to run",
+      "duration_ms": 0,
+      "outputs": [
+        {
+          "path": "src/message.txt",
+          "mode": 436,
+          "sha256": "2a58feab627fca9a80721eb298a45de471e1a5e02b4f58240015803e2b46b749"
+        }
+      ]
+    },
+    {
+      "node_id": "normalize",
+      "status": "built",
+      "cached": false,
+      "key": "e7a7d50f965f7a31b3f007ea33c8b8c1dd9aad472afa76d00e6faf3b989f7cc5",
+      "reason": "cache miss: input file \"src/message.txt\" content changed (12c51ae88c -\u003e 2a58feab62); dependency \"source\" output \"src/message.txt\" content changed (12c51ae88c -\u003e 2a58feab62); running command",
+      "changes": [
+        {
+          "type": "input_changed",
+          "detail": "input file \"src/message.txt\" content changed (12c51ae88c -\u003e 2a58feab62)"
+        },
+        {
+          "type": "output_changed",
+          "detail": "dependency \"source\" output \"src/message.txt\" content changed (12c51ae88c -\u003e 2a58feab62)"
+        }
+      ],
+      "duration_ms": 5,
+      "outputs": [
+        {
+          "path": "build/normalized.txt",
+          "mode": 436,
+          "sha256": "5395017ae0cd353a9ce89168a02c7a83793105abc021cc9227e9c57e97d935b2"
+        }
+      ],
+      "exit_code": 0
+    }
+  ]
+}

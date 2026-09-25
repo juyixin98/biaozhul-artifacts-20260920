@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "key": "6cfd50dd4230dd3620450cf62f55dede597e2776489d26276429ee5daefbb9c3",
+  "node_id": "normalize",
+  "outputs": [
+    {
+      "path": "build/normalized.txt",
+      "mode": 436,
+      "sha256": "36e7e86d026de308e4f9f70e32a02344a36010d7db2437fd39455a7bd753c574"
+    }
+  ],
+  "fingerprint": {
+    "node_id": "normalize",
+    "inputs": [
+      {
+        "path": "src/message.txt",
+        "mode": 436,
+        "sha256": "1fc8781ff61197bb85ac1cbd90baaecd0dafefaa2ab168728b84b625be30a985"
+      }
+    ],
+    "deps": [
+      {
+        "id": "source",
+        "fingerprint": "0c6dc85ba1c1bf5519e4a687e72328174ff40f12f5a8d45bbc3bb4f39bf49e19",
+        "outputs": [
+          {
+            "path": "src/message.txt",
+            "mode": 436,
+            "sha256": "1fc8781ff61197bb85ac1cbd90baaecd0dafefaa2ab168728b84b625be30a985"
+          }
+        ]
+      }
+    ],
+    "tools": [
+      {
+        "name": "tr",
+        "version": "tr (GNU coreutils) 9.4"
+      }
+    ]
+  }
+}

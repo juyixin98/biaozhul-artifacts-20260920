@@ -1,0 +1,8 @@
+{
+  "id": "faildemo",
+  "workdir": "/home/admin/Downloads/biaozhul/opp101/a/examples/.run/workspace",
+  "graph": {"nodes": [
+    {"id": "boom", "command": "echo about to fail >&2; exit 7", "outputs": ["build/boom.txt"]},
+    {"id": "after", "command": "cat build/boom.txt > build/after.txt", "inputs": ["build/boom.txt"], "outputs": ["build/after.txt"], "depends_on": ["boom"]}
+  ]}
+}

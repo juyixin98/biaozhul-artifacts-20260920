@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "key": "9a652db6f55dd33f445ad02dd791d7d2245adf28176ba1772fdb532159a71ab4",
+  "node_id": "readme",
+  "outputs": [
+    {
+      "path": "build/readme.txt",
+      "mode": 436,
+      "sha256": "7ed57bab1c45a488743987356e655bb1a33e6ba3466e36f81890709093507f32"
+    }
+  ],
+  "fingerprint": {
+    "node_id": "readme"
+  }
+}
