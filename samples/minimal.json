@@ -1,0 +1,6 @@
+{
+  "rectangles": [
+    {"x1": 0, "y1": 0, "x2": 2, "y2": 2}
+  ],
+  "note": "unknown top-level fields are ignored; the only required field is \"rectangles\""
+}
