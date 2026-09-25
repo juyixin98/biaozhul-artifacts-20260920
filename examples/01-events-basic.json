@@ -1,0 +1,25 @@
+{
+  "events": [
+    {
+      "id": "evt-1001",
+      "eventTime": 1000,
+      "type": "UPSERT",
+      "key": "user:42",
+      "payload": {"name": "ada", "score": 10, "tags": ["a", "b"]}
+    },
+    {
+      "id": "evt-1002",
+      "eventTime": 1200,
+      "type": "UPSERT",
+      "key": "user:43",
+      "payload": {"name": "grace", "score": 7}
+    },
+    {
+      "id": "evt-1001",
+      "eventTime": 1000,
+      "type": "UPSERT",
+      "key": "user:42",
+      "payload": {"name": "ada", "score": 10, "tags": ["a", "b"]}
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "events": [
+    {
+      "id": "evt-3001",
+      "eventTime": 2000,
+      "type": "UPSERT",
+      "key": "order:7",
+      "payload": {"status": "open", "amount": 500}
+    },
+    {
+      "id": "evt-3002",
+      "eventTime": 2500,
+      "type": "DELETE",
+      "key": "order:7"
+    },
+    {
+      "id": "evt-3003",
+      "eventTime": 2300,
+      "type": "UPSERT",
+      "key": "order:7",
+      "payload": {"status": "open", "amount": 500, "note": "out-of-order, before delete -> suppressed"}
+    },
+    {
+      "id": "evt-3004",
+      "eventTime": 2800,
+      "type": "UPSERT",
+      "key": "order:7",
+      "payload": {"status": "reopened", "amount": 750, "note": "after delete -> re-create, passes"}
+    }
+  ]
+}

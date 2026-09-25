@@ -1,0 +1,32 @@
+{
+  "events": [
+    {
+      "id": "evt-2001",
+      "eventTime": 1000,
+      "type": "UPSERT",
+      "key": "user:42",
+      "payload": {"name": "ada", "score": 10}
+    },
+    {
+      "id": "evt-2001-DUP-DIFFERENT-PAYLOAD",
+      "eventTime": 1000,
+      "type": "UPSERT",
+      "key": "user:42",
+      "payload": {"note": "this is a DIFFERENT id; for same-id mismatch reuse evt-2001"}
+    },
+    {
+      "id": "evt-2001",
+      "eventTime": 1000,
+      "type": "UPSERT",
+      "key": "user:42",
+      "payload": {"name": "ada", "score": 999}
+    },
+    {
+      "id": "evt-2001",
+      "eventTime": 1800,
+      "type": "UPSERT",
+      "key": "user:42",
+      "payload": {"name": "ada", "score": 10}
+    }
+  ]
+}

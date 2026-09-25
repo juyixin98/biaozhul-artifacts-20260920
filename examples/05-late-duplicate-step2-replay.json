@@ -1,0 +1,5 @@
+{
+  "events": [
+    {"id": "evt-4001", "eventTime": 1000, "type": "UPSERT", "key": "k", "payload": {"v": 1}}
+  ]
+}
