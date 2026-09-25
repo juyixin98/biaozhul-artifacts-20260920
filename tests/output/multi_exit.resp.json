@@ -1,0 +1,197 @@
+{
+  "naive_verification": {
+    "match": true,
+    "mismatches": [],
+    "paths_enumerated": 7,
+    "ran": true
+  },
+  "queries": [
+    {
+      "idom": "B",
+      "node": "F",
+      "ok": true,
+      "reachable": true,
+      "type": "idom"
+    },
+    {
+      "frontier": [],
+      "node": "B",
+      "ok": true,
+      "reachable": true,
+      "type": "frontier"
+    },
+    {
+      "frontier": [
+        "F"
+      ],
+      "node": "C",
+      "ok": true,
+      "reachable": true,
+      "type": "frontier"
+    },
+    {
+      "frontier": [
+        "F"
+      ],
+      "node": "D",
+      "ok": true,
+      "reachable": true,
+      "type": "frontier"
+    },
+    {
+      "frontier": [
+        "F"
+      ],
+      "node": "E",
+      "ok": true,
+      "reachable": true,
+      "type": "frontier"
+    },
+    {
+      "node": "B",
+      "ok": true,
+      "reachable": true,
+      "subtree": [
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "type": "dominated_by"
+    },
+    {
+      "dominators": [
+        "A",
+        "B",
+        "F"
+      ],
+      "node": "F",
+      "ok": true,
+      "reachable": true,
+      "type": "dominators"
+    }
+  ],
+  "result": {
+    "dominance_frontiers": {
+      "A": [],
+      "B": [],
+      "C": [
+        "F"
+      ],
+      "D": [
+        "F"
+      ],
+      "E": [
+        "F"
+      ],
+      "F": []
+    },
+    "dominator_sets": {
+      "A": [
+        "A"
+      ],
+      "B": [
+        "A",
+        "B"
+      ],
+      "C": [
+        "A",
+        "B",
+        "C"
+      ],
+      "D": [
+        "A",
+        "B",
+        "D"
+      ],
+      "E": [
+        "A",
+        "B",
+        "E"
+      ],
+      "F": [
+        "A",
+        "B",
+        "F"
+      ]
+    },
+    "dominator_tree_edges": [
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "C"
+      ],
+      [
+        "B",
+        "D"
+      ],
+      [
+        "B",
+        "E"
+      ],
+      [
+        "B",
+        "F"
+      ]
+    ],
+    "entry": "A",
+    "evidence": {
+      "back_edges": [],
+      "edges_touching_unreachable": []
+    },
+    "immediate_dominators": [
+      {
+        "idom": null,
+        "node": "A",
+        "tree_depth": 0
+      },
+      {
+        "idom": "A",
+        "node": "B",
+        "tree_depth": 1
+      },
+      {
+        "idom": "B",
+        "node": "C",
+        "tree_depth": 2
+      },
+      {
+        "idom": "B",
+        "node": "D",
+        "tree_depth": 2
+      },
+      {
+        "idom": "B",
+        "node": "E",
+        "tree_depth": 2
+      },
+      {
+        "idom": "B",
+        "node": "F",
+        "tree_depth": 2
+      }
+    ],
+    "reachable": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F"
+    ],
+    "statistics": {
+      "dataflow_iterations": 2,
+      "edges_total": 7,
+      "elapsed_microseconds": 5,
+      "nodes_total": 6,
+      "reachable_nodes": 6,
+      "unreachable_nodes": 0
+    },
+    "unreachable": []
+  },
+  "success": true
+}

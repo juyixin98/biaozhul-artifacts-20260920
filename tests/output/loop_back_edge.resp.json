@@ -1,0 +1,216 @@
+{
+  "naive_verification": {
+    "match": true,
+    "mismatches": [],
+    "paths_enumerated": 4,
+    "ran": true
+  },
+  "queries": [
+    {
+      "idom": "header",
+      "node": "body",
+      "ok": true,
+      "reachable": true,
+      "type": "idom"
+    },
+    {
+      "idom": "latch",
+      "node": "exit",
+      "ok": true,
+      "reachable": true,
+      "type": "idom"
+    },
+    {
+      "frontier": [
+        "header"
+      ],
+      "node": "header",
+      "ok": true,
+      "reachable": true,
+      "type": "frontier"
+    },
+    {
+      "frontier": [
+        "header"
+      ],
+      "node": "latch",
+      "ok": true,
+      "reachable": true,
+      "type": "frontier"
+    },
+    {
+      "frontier": [
+        "header"
+      ],
+      "node": "body",
+      "ok": true,
+      "reachable": true,
+      "type": "frontier"
+    },
+    {
+      "dominators": [
+        "entry",
+        "header",
+        "body",
+        "latch",
+        "exit"
+      ],
+      "node": "exit",
+      "ok": true,
+      "reachable": true,
+      "type": "dominators"
+    },
+    {
+      "node": "header",
+      "ok": true,
+      "reachable": true,
+      "subtree": [
+        "header",
+        "body",
+        "latch",
+        "exit"
+      ],
+      "type": "dominated_by"
+    },
+    {
+      "error": "node is unreachable from entry; dominators are undefined",
+      "node": "unreachable1",
+      "ok": false,
+      "reachable": false,
+      "type": "idom"
+    },
+    {
+      "a": "header",
+      "b": "latch",
+      "ok": true,
+      "result": true,
+      "type": "dominates"
+    }
+  ],
+  "result": {
+    "dominance_frontiers": {
+      "body": [
+        "header"
+      ],
+      "entry": [],
+      "exit": [],
+      "header": [
+        "header"
+      ],
+      "latch": [
+        "header"
+      ]
+    },
+    "dominator_sets": {
+      "body": [
+        "entry",
+        "header",
+        "body"
+      ],
+      "entry": [
+        "entry"
+      ],
+      "exit": [
+        "entry",
+        "header",
+        "body",
+        "latch",
+        "exit"
+      ],
+      "header": [
+        "entry",
+        "header"
+      ],
+      "latch": [
+        "entry",
+        "header",
+        "body",
+        "latch"
+      ]
+    },
+    "dominator_tree_edges": [
+      [
+        "entry",
+        "header"
+      ],
+      [
+        "header",
+        "body"
+      ],
+      [
+        "body",
+        "latch"
+      ],
+      [
+        "latch",
+        "exit"
+      ]
+    ],
+    "entry": "entry",
+    "evidence": {
+      "back_edges": [
+        [
+          "latch",
+          "header"
+        ]
+      ],
+      "edges_touching_unreachable": [
+        [
+          "unreachable1",
+          "unreachable2"
+        ],
+        [
+          "unreachable2",
+          "unreachable1"
+        ]
+      ]
+    },
+    "immediate_dominators": [
+      {
+        "idom": null,
+        "node": "entry",
+        "tree_depth": 0
+      },
+      {
+        "idom": "entry",
+        "node": "header",
+        "tree_depth": 1
+      },
+      {
+        "idom": "header",
+        "node": "body",
+        "tree_depth": 2
+      },
+      {
+        "idom": "body",
+        "node": "latch",
+        "tree_depth": 3
+      },
+      {
+        "idom": "latch",
+        "node": "exit",
+        "tree_depth": 4
+      }
+    ],
+    "reachable": [
+      "entry",
+      "header",
+      "body",
+      "latch",
+      "exit"
+    ],
+    "statistics": {
+      "dataflow_iterations": 2,
+      "edges_total": 7,
+      "elapsed_microseconds": 4,
+      "nodes_total": 7,
+      "reachable_nodes": 5,
+      "unreachable_nodes": 2
+    },
+    "unreachable": [
+      "unreachable1",
+      "unreachable2"
+    ]
+  },
+  "success": true
+}

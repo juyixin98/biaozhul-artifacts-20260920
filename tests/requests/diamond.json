@@ -1,0 +1,14 @@
+{
+  "entry": "A",
+  "nodes": ["A", "B", "C", "D"],
+  "edges": [["A", "B"], ["A", "C"], ["B", "D"], ["C", "D"]],
+  "queries": [
+    {"type": "idom", "node": "D"},
+    {"type": "frontier", "node": "B"},
+    {"type": "frontier", "node": "C"},
+    {"type": "dominates", "a": "A", "b": "D"},
+    {"type": "strictly_dominates", "a": "D", "b": "D"},
+    {"type": "dom_chain", "node": "D"}
+  ],
+  "verify_naive": true
+}

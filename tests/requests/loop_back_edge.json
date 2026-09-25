@@ -1,0 +1,25 @@
+{
+  "entry": "entry",
+  "nodes": ["entry", "header", "body", "latch", "exit", "unreachable1", "unreachable2"],
+  "edges": [
+    ["entry", "header"],
+    ["header", "body"],
+    ["body", "latch"],
+    ["latch", "header"],
+    ["latch", "exit"],
+    ["unreachable1", "unreachable2"],
+    ["unreachable2", "unreachable1"]
+  ],
+  "queries": [
+    {"type": "idom", "node": "body"},
+    {"type": "idom", "node": "exit"},
+    {"type": "frontier", "node": "header"},
+    {"type": "frontier", "node": "latch"},
+    {"type": "frontier", "node": "body"},
+    {"type": "dominators", "node": "exit"},
+    {"type": "dominated_by", "node": "header"},
+    {"type": "idom", "node": "unreachable1"},
+    {"type": "dominates", "a": "header", "b": "latch"}
+  ],
+  "verify_naive": true
+}

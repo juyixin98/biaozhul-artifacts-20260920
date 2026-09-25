@@ -1,0 +1,23 @@
+{
+  "entry": "A",
+  "nodes": ["A", "B", "C", "D", "E", "F"],
+  "edges": [
+    ["A", "B"],
+    ["B", "C"],
+    ["B", "D"],
+    ["B", "E"],
+    ["C", "F"],
+    ["D", "F"],
+    ["E", "F"]
+  ],
+  "queries": [
+    {"type": "idom", "node": "F"},
+    {"type": "frontier", "node": "B"},
+    {"type": "frontier", "node": "C"},
+    {"type": "frontier", "node": "D"},
+    {"type": "frontier", "node": "E"},
+    {"type": "dominated_by", "node": "B"},
+    {"type": "dominators", "node": "F"}
+  ],
+  "verify_naive": true
+}

@@ -1,0 +1,145 @@
+{
+  "naive_verification": {
+    "match": true,
+    "mismatches": [],
+    "paths_enumerated": 4,
+    "ran": true
+  },
+  "queries": [
+    {
+      "idom": "A",
+      "node": "D",
+      "ok": true,
+      "reachable": true,
+      "type": "idom"
+    },
+    {
+      "frontier": [
+        "D"
+      ],
+      "node": "B",
+      "ok": true,
+      "reachable": true,
+      "type": "frontier"
+    },
+    {
+      "frontier": [
+        "D"
+      ],
+      "node": "C",
+      "ok": true,
+      "reachable": true,
+      "type": "frontier"
+    },
+    {
+      "a": "A",
+      "b": "D",
+      "ok": true,
+      "result": true,
+      "type": "dominates"
+    },
+    {
+      "a": "D",
+      "b": "D",
+      "ok": true,
+      "result": false,
+      "type": "strictly_dominates"
+    },
+    {
+      "chain": [
+        "D",
+        "A"
+      ],
+      "node": "D",
+      "ok": true,
+      "reachable": true,
+      "type": "dom_chain"
+    }
+  ],
+  "result": {
+    "dominance_frontiers": {
+      "A": [],
+      "B": [
+        "D"
+      ],
+      "C": [
+        "D"
+      ],
+      "D": []
+    },
+    "dominator_sets": {
+      "A": [
+        "A"
+      ],
+      "B": [
+        "A",
+        "B"
+      ],
+      "C": [
+        "A",
+        "C"
+      ],
+      "D": [
+        "A",
+        "D"
+      ]
+    },
+    "dominator_tree_edges": [
+      [
+        "A",
+        "B"
+      ],
+      [
+        "A",
+        "C"
+      ],
+      [
+        "A",
+        "D"
+      ]
+    ],
+    "entry": "A",
+    "evidence": {
+      "back_edges": [],
+      "edges_touching_unreachable": []
+    },
+    "immediate_dominators": [
+      {
+        "idom": null,
+        "node": "A",
+        "tree_depth": 0
+      },
+      {
+        "idom": "A",
+        "node": "B",
+        "tree_depth": 1
+      },
+      {
+        "idom": "A",
+        "node": "C",
+        "tree_depth": 1
+      },
+      {
+        "idom": "A",
+        "node": "D",
+        "tree_depth": 1
+      }
+    ],
+    "reachable": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "statistics": {
+      "dataflow_iterations": 2,
+      "edges_total": 4,
+      "elapsed_microseconds": 4,
+      "nodes_total": 4,
+      "reachable_nodes": 4,
+      "unreachable_nodes": 0
+    },
+    "unreachable": []
+  },
+  "success": true
+}
