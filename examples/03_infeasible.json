@@ -1,0 +1,8 @@
+{
+  "_comment": "不可行：x=1 与 x=2 两条矛盾等式；响应包含可独立核验的 Farkas 证书",
+  "objective": {"c": [1], "sense": "min"},
+  "constraints": {
+    "A_eq": [[1], [1]],
+    "b_eq": [1, 2]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "_comment": "经典两变量例：min -3x1-5x2 s.t. x1<=4, 2x2<=12, 3x1+2x2<=18, x>=0",
+  "objective": {
+    "c": [-3, -5],
+    "sense": "min",
+    "constant": 0
+  },
+  "constraints": {
+    "A_ub": [
+      [1, 0],
+      [0, 2],
+      [3, 2]
+    ],
+    "b_ub": [4, 12, 18]
+  },
+  "variables": {
+    "lb": 0,
+    "ub": null
+  },
+  "verify_certificate": true
+}

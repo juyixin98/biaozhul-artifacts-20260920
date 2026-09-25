@@ -1,0 +1,40 @@
+{
+  "status": "optimal",
+  "pivot_rule": "bland",
+  "iterations": {
+    "phase1": 0,
+    "phase2": 3,
+    "total": 3
+  },
+  "warnings": [],
+  "elapsed_seconds": 0.0008408540015807375,
+  "objective": -36.0,
+  "x": [
+    2.0,
+    6.0
+  ],
+  "residuals": {
+    "ineq": {
+      "max_violation": 0.0,
+      "max_abs_violation": 2.0,
+      "per_row": [
+        -2.0,
+        0.0,
+        0.0
+      ]
+    },
+    "eq": {
+      "max_abs_residual": 0.0,
+      "per_row": []
+    },
+    "nonnegativity": {
+      "min_x": 2.0
+    },
+    "upper_bounds": {
+      "max_violation": 0.0,
+      "max_abs_violation": 0.0
+    },
+    "overall_max_violation": 0.0,
+    "feasible": true
+  }
+}

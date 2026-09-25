@@ -1,0 +1,11 @@
+{
+  "_comment": "带正下界与显式上界：min 4x+3y, 2x+y>=8（变量平移后求解），2<=x<=6, 1<=y<=6",
+  "objective": {"c": [4, 3], "sense": "min"},
+  "constraint_rows": [
+    {"row": [2, 1], "sense": ">=", "rhs": 8}
+  ],
+  "variables": {
+    "lb": [2, 1],
+    "ub": [6, 6]
+  }
+}

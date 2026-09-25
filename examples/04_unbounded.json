@@ -1,0 +1,7 @@
+{
+  "_comment": "无界：min -2x+y, x-y<=5, x,y>=0；射线 d=(1,1)，目标变化率 -1",
+  "objective": {"c": [-2, 1], "sense": "min"},
+  "constraint_rows": [
+    {"row": [1, -1], "sense": "<=", "rhs": 5}
+  ]
+}

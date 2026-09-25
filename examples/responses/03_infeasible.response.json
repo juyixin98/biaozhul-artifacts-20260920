@@ -1,0 +1,38 @@
+{
+  "status": "infeasible",
+  "pivot_rule": "bland",
+  "iterations": {
+    "phase1": 1,
+    "phase2": 0,
+    "total": 1
+  },
+  "warnings": [],
+  "elapsed_seconds": 0.0005239989986876026,
+  "certificate": {
+    "convention": "原系统 A_ub x <= b_ub, A_eq x = b_eq, x >= 0 的 Farkas 证书 mu：<= 行乘子 >= 0、= 行乘子自由；mu^T A_struct >= 0（逐结构变量列）；mu^T b_orig < 0。若 x 可行则 mu^T b_orig >= 0，矛盾。行翻转在输出时已还原。",
+    "rows": [
+      {
+        "kind": "eq",
+        "index": 0,
+        "row_flipped": false,
+        "multiplier": 1.0
+      },
+      {
+        "kind": "eq",
+        "index": 1,
+        "row_flipped": false,
+        "multiplier": -1.0
+      }
+    ],
+    "muTb": -1.0,
+    "min_struct_Atmu": 0.0,
+    "min_ineq_multiplier": 0.0,
+    "reduced_cost_residual": 0.0,
+    "independent_check": {
+      "min_ineq_multiplier": 0.0,
+      "min_struct_Atmu": 0.0,
+      "muTb": -1.0,
+      "valid": true
+    }
+  }
+}

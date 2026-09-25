@@ -1,0 +1,16 @@
+{
+  "_comment": "逐行约束写法，含 <=、>=、= 三种符号与变量上下界：min x+2y, x+y=1, x+y>=0.5, x<=0.7, 0<=x,y<=1",
+  "objective": {
+    "c": [1, 2],
+    "sense": "min"
+  },
+  "constraint_rows": [
+    {"name": "sum_eq_one", "row": [1, 1], "sense": "=", "rhs": 1},
+    {"name": "lower_sum",    "row": [1, 1], "sense": ">=", "rhs": 0.5},
+    {"name": "x_cap",        "row": [1, 0], "sense": "<=", "rhs": 0.7}
+  ],
+  "variables": {
+    "lb": [0, 0],
+    "ub": [1, 1]
+  }
+}

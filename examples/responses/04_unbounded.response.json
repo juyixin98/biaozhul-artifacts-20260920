@@ -1,0 +1,51 @@
+{
+  "status": "unbounded",
+  "pivot_rule": "bland",
+  "iterations": {
+    "phase1": 0,
+    "phase2": 1,
+    "total": 1
+  },
+  "warnings": [],
+  "elapsed_seconds": 0.0006755130016244948,
+  "ray": [
+    1.0,
+    1.0
+  ],
+  "ray_objective_rate": -1.0,
+  "witness": [
+    6.0,
+    1.0
+  ],
+  "residuals": {
+    "x0_feasible": {
+      "ineq": {
+        "max_violation": 0.0,
+        "max_abs_violation": 0.0,
+        "per_row": [
+          0.0
+        ]
+      },
+      "eq": {
+        "max_abs_residual": 0.0,
+        "per_row": []
+      },
+      "nonnegativity": {
+        "min_x": 0.0
+      },
+      "upper_bounds": {
+        "max_violation": 0.0,
+        "max_abs_violation": 0.0
+      },
+      "overall_max_violation": 0.0,
+      "feasible": true
+    },
+    "direction_min_component": 1.0,
+    "ineq_direction_max": 0.0,
+    "eq_direction_max_abs": 0.0,
+    "bound_direction_max": 0.0,
+    "overall_max_violation": 0.0,
+    "valid": true
+  },
+  "detail": "入基列（标准化后编号）=1，内部目标变化率=-1"
+}
