@@ -1,0 +1,89 @@
+{
+  "ok": false,
+  "schema_version": 1,
+  "summary": {
+    "num_steps": 2,
+    "num_updated": 0,
+    "num_predicted_only": 0,
+    "num_errors": 2,
+    "max_covariance_asymmetry": 0.0,
+    "min_covariance_eigenvalue": 0.0
+  },
+  "final": {
+    "index": 1,
+    "x": [
+      0.0,
+      0.0
+    ],
+    "P": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ]
+  },
+  "steps": [
+    {
+      "index": 0,
+      "status": "error",
+      "available": [
+        true
+      ],
+      "error": {
+        "code": "singular_innovation_covariance",
+        "message": "创新协方差 S 的 Cholesky 分解失败：矩阵在数值上奇异或不正定"
+      },
+      "x": [
+        0.0,
+        0.0
+      ],
+      "P": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      "diagnostics": {
+        "max_asymmetry": 0.0,
+        "min_eigenvalue": 0.0
+      }
+    },
+    {
+      "index": 1,
+      "status": "error",
+      "available": [
+        true
+      ],
+      "error": {
+        "code": "singular_innovation_covariance",
+        "message": "创新协方差 S 的 Cholesky 分解失败：矩阵在数值上奇异或不正定"
+      },
+      "x": [
+        0.0,
+        0.0
+      ],
+      "P": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      "diagnostics": {
+        "max_asymmetry": 0.0,
+        "min_eigenvalue": 0.0
+      }
+    }
+  ]
+}

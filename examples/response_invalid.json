@@ -1,0 +1,7 @@
+{
+  "ok": false,
+  "error": {
+    "code": "matrix_property_violation",
+    "message": "R（量测噪声协方差） 不是半正定：最小特征值 -1 小于容差 -1.1e-09"
+  }
+}
