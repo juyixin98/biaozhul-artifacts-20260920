@@ -1,0 +1,92 @@
+[
+  {
+    "name": "exact upscale seconds to nanoseconds",
+    "endpoint": "convert",
+    "request": {"value": "1", "fromUnit": "SECOND", "toUnit": "NANOSECOND"},
+    "expect": {"ok": true, "result": "1000000000", "unit": "NANOSECOND", "exact": true}
+  },
+  {
+    "name": "negative epoch seconds to milliseconds",
+    "endpoint": "convert",
+    "request": {"value": "-1", "fromUnit": "SECOND", "toUnit": "MILLISECOND"},
+    "expect": {"ok": true, "result": "-1000", "unit": "MILLISECOND", "exact": true}
+  },
+  {
+    "name": "negative FLOOR rounds toward minus infinity",
+    "endpoint": "convert",
+    "request": {"value": "-1500", "fromUnit": "MILLISECOND", "toUnit": "SECOND", "rounding": "FLOOR"},
+    "expect": {"ok": true, "result": "-2", "exact": false}
+  },
+  {
+    "name": "negative CEILING rounds toward plus infinity",
+    "endpoint": "convert",
+    "request": {"value": "-1500", "fromUnit": "MILLISECOND", "toUnit": "SECOND", "rounding": "CEILING"},
+    "expect": {"ok": true, "result": "-1", "exact": false}
+  },
+  {
+    "name": "negative DOWN truncates toward zero",
+    "endpoint": "convert",
+    "request": {"value": "-1500", "fromUnit": "MILLISECOND", "toUnit": "SECOND", "rounding": "DOWN"},
+    "expect": {"ok": true, "result": "-1", "exact": false}
+  },
+  {
+    "name": "negative HALF_UP ties away from zero",
+    "endpoint": "convert",
+    "request": {"value": "-1500", "fromUnit": "MILLISECOND", "toUnit": "SECOND", "rounding": "HALF_UP"},
+    "expect": {"ok": true, "result": "-2", "exact": false}
+  },
+  {
+    "name": "HALF_EVEN tie goes to even neighbour",
+    "endpoint": "convert",
+    "request": {"value": "2500", "fromUnit": "MILLISECOND", "toUnit": "SECOND", "rounding": "HALF_EVEN"},
+    "expect": {"ok": true, "result": "2", "exact": false}
+  },
+  {
+    "name": "inexact conversion without rounding mode is rejected",
+    "endpoint": "convert",
+    "request": {"value": "1500", "fromUnit": "MILLISECOND", "toUnit": "SECOND"},
+    "expect": {"ok": false, "code": "INEXACT"}
+  },
+  {
+    "name": "Long.MAX_VALUE nanoseconds to microseconds FLOOR",
+    "endpoint": "convert",
+    "request": {"value": "9223372036854775807", "fromUnit": "NANOSECOND", "toUnit": "MICROSECOND", "rounding": "FLOOR"},
+    "expect": {"ok": true, "result": "9223372036854775", "exact": false}
+  },
+  {
+    "name": "Long.MIN_VALUE nanoseconds to microseconds FLOOR",
+    "endpoint": "convert",
+    "request": {"value": "-9223372036854775808", "fromUnit": "NANOSECOND", "toUnit": "MICROSECOND", "rounding": "FLOOR"},
+    "expect": {"ok": true, "result": "-9223372036854776", "exact": false}
+  },
+  {
+    "name": "overflow is an error, never silent truncation",
+    "endpoint": "convert",
+    "request": {"value": "9223372036854775807", "fromUnit": "SECOND", "toUnit": "NANOSECOND"},
+    "expect": {"ok": false, "code": "OVERFLOW"}
+  },
+  {
+    "name": "unsupported unit picosecond is rejected",
+    "endpoint": "convert",
+    "request": {"value": "1", "fromUnit": "PICOSECOND", "toUnit": "SECOND"},
+    "expect": {"ok": false, "code": "INVALID_UNIT"}
+  },
+  {
+    "name": "unknown rounding mode is rejected",
+    "endpoint": "convert",
+    "request": {"value": "1", "fromUnit": "SECOND", "toUnit": "MILLISECOND", "rounding": "BANKERS_MAYBE"},
+    "expect": {"ok": false, "code": "INVALID_ROUNDING"}
+  },
+  {
+    "name": "non-integer value is rejected",
+    "endpoint": "convert",
+    "request": {"value": "1.5", "fromUnit": "SECOND", "toUnit": "MILLISECOND"},
+    "expect": {"ok": false, "code": "INVALID_VALUE"}
+  },
+  {
+    "name": "unit aliases are accepted",
+    "endpoint": "convert",
+    "request": {"value": "2", "fromUnit": "ms", "toUnit": "us"},
+    "expect": {"ok": true, "result": "2000", "unit": "MICROSECOND", "exact": true}
+  }
+]
