@@ -1,0 +1,12 @@
+POST /upload HTTP/1.1
+Host: example.com
+Transfer-Encoding: chunked
+
+4
+Wiki
+5
+pedia
+0
+ETag: "deadbeef"
+X-Checksum: ok
+

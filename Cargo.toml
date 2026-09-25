@@ -1,0 +1,19 @@
+[package]
+name = "http-framing"
+version = "0.1.0"
+edition = "2021"
+description = "Incremental HTTP/1.1 request framing parser and local TCP test service"
+
+[[bin]]
+name = "http-framing-server"
+path = "src/main.rs"
+
+[lib]
+name = "http_framing"
+path = "src/lib.rs"
+
+[profile.release]
+opt-level = 2
+
+# Pure backend: no external dependencies, std-only, no frontend.
+[dependencies]

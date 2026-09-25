@@ -1,0 +1,10 @@
+POST / HTTP/1.1
+Host: example.com
+Transfer-Encoding: chunked
+Content-Length: 4
+
+0
+
+GET /admin HTTP/1.1
+Host: example.com
+
