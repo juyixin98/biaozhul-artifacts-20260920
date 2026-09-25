@@ -1,0 +1,6 @@
+[
+  { "eventId": "b1", "eventTime": 2500, "type": "payment", "payload": { "amount": 250 } },
+  { "eventId": "b2-late", "eventTime": 500, "type": "payment", "payload": { "amount": 150 } },
+  { "eventId": "b3-edge", "eventTime": 1000, "type": "payment", "payload": { "amount": 100 } },
+  { "eventId": "b4-ancient", "eventTime": -1, "type": "payment", "payload": { "amount": 1 } }
+]

@@ -1,0 +1,11 @@
+{
+  "versionId": "v1",
+  "name": "threshold-100",
+  "effectiveFrom": 0,
+  "note": "初版规则：金额 >= 100 命中",
+  "predicate": {
+    "op": "gte",
+    "field": "amount",
+    "value": 100
+  }
+}

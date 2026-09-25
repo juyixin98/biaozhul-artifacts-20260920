@@ -1,0 +1,11 @@
+{
+  "versionId": "v2",
+  "name": "threshold-200",
+  "effectiveFrom": 1000,
+  "note": "热更新：自事件时间 1000 起收紧到 >= 200",
+  "predicate": {
+    "op": "gte",
+    "field": "amount",
+    "value": 200
+  }
+}

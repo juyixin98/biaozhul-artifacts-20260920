@@ -1,0 +1,23 @@
+{
+  "versionId": "v3",
+  "name": "compound-rule",
+  "effectiveFrom": 3000,
+  "note": "组合谓词示例：支付事件且（高金额 或 VIP），但备注不能含 test",
+  "predicate": {
+    "op": "and",
+    "predicates": [
+      { "op": "eq", "field": "type", "value": "payment" },
+      {
+        "op": "or",
+        "predicates": [
+          { "op": "gte", "field": "amount", "value": 1000 },
+          { "op": "in", "field": "tier", "values": ["gold", "vip"] }
+        ]
+      },
+      {
+        "op": "not",
+        "predicate": { "op": "contains", "field": "note", "value": "test" }
+      }
+    ]
+  }
+}

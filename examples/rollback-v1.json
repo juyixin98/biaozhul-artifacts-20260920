@@ -1,0 +1,5 @@
+{
+  "versionId": "v1",
+  "effectiveFrom": 3000,
+  "note": "v2 误杀正常交易，回滚：自事件时间 3000 起 v1 重新生效"
+}
