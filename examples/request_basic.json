@@ -1,0 +1,18 @@
+{
+  "graph": {
+    "nodes": ["A", "B", "C", "D"],
+    "edges": [
+      {"id": "e1", "source": "A", "target": "B", "time": 1, "cost": 4},
+      {"id": "e2", "source": "A", "target": "C", "time": 2, "cost": 2},
+      {"id": "e3", "source": "B", "target": "D", "time": 3, "cost": 1},
+      {"id": "e4", "source": "C", "target": "D", "time": 4, "cost": 1},
+      {"id": "e5", "source": "B", "target": "C", "time": 1, "cost": 1}
+    ]
+  },
+  "source": "A",
+  "target": "D",
+  "mode": "simple",
+  "atol": 1e-9,
+  "rtol": 1e-9,
+  "verify_paths": true
+}

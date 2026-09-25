@@ -1,0 +1,19 @@
+{
+  "graph": {
+    "nodes": ["A", "B", "C", "D", "E"],
+    "edges": [
+      {"source": "A", "target": "B", "time": 1, "cost": 9},
+      {"source": "A", "target": "C", "time": 3, "cost": 3},
+      {"source": "B", "target": "D", "time": 2, "cost": 2},
+      {"source": "C", "target": "D", "time": 2, "cost": 4},
+      {"source": "B", "target": "E", "time": 9, "cost": 1},
+      {"source": "D", "target": "E", "time": 2, "cost": 2},
+      {"source": "C", "target": "E", "time": 8, "cost": 1}
+    ]
+  },
+  "source": "A",
+  "target": "E",
+  "mode": "simple",
+  "time_budget": 8,
+  "cost_budget": 10
+}

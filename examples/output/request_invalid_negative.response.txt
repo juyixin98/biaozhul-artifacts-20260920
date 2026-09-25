@@ -1,0 +1,5 @@
+{
+  "error": "negative_weight",
+  "message": "graph.edges[0].time 必须非负，得到 -2.0（本项目只支持非负时间/费用）",
+  "field": "graph.edges[0].time"
+}

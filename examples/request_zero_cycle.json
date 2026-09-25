@@ -1,0 +1,18 @@
+{
+  "graph": {
+    "nodes": ["s", "1", "2", "3", "t"],
+    "edges": [
+      {"source": "s", "target": "1", "time": 0, "cost": 0, "id": "zc1"},
+      {"source": "1", "target": "s", "time": 0, "cost": 0, "id": "zc2"},
+      {"source": "s", "target": "2", "time": 2, "cost": 5, "id": "a"},
+      {"source": "s", "target": "3", "time": 5, "cost": 1, "id": "b"},
+      {"source": "1", "target": "2", "time": 3, "cost": 1, "id": "c"},
+      {"source": "2", "target": "t", "time": 1, "cost": 6, "id": "d"},
+      {"source": "3", "target": "t", "time": 1, "cost": 2, "id": "e"},
+      {"source": "t", "target": "t", "time": 0, "cost": 0, "id": "selfloop"}
+    ]
+  },
+  "source": "s",
+  "target": "t",
+  "mode": "simple"
+}

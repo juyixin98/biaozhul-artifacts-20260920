@@ -1,0 +1,154 @@
+{
+  "status": "truncated",
+  "request_echo": {
+    "source": "s",
+    "target": "t",
+    "mode": "simple",
+    "time_budget": null,
+    "cost_budget": null,
+    "atol": 1e-09,
+    "rtol": 1e-09
+  },
+  "pareto_front": [
+    {
+      "rank": 0,
+      "time": 0,
+      "cost": 14,
+      "nodes": [
+        "s",
+        "l0_0",
+        "l1_0",
+        "l2_0",
+        "t"
+      ],
+      "edges": [
+        {
+          "source": "s",
+          "target": "l0_0",
+          "index": 0
+        },
+        {
+          "source": "l0_0",
+          "target": "l1_0",
+          "index": 0
+        },
+        {
+          "source": "l1_0",
+          "target": "l2_0",
+          "index": 0
+        },
+        {
+          "source": "l2_0",
+          "target": "t",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "rank": 1,
+      "time": 1,
+      "cost": 13,
+      "nodes": [
+        "s",
+        "l0_1",
+        "l1_0",
+        "l2_0",
+        "t"
+      ],
+      "edges": [
+        {
+          "source": "s",
+          "target": "l0_1",
+          "index": 0
+        },
+        {
+          "source": "l0_1",
+          "target": "l1_0",
+          "index": 0
+        },
+        {
+          "source": "l1_0",
+          "target": "l2_0",
+          "index": 0
+        },
+        {
+          "source": "l2_0",
+          "target": "t",
+          "index": 0
+        }
+      ]
+    }
+  ],
+  "truncated": true,
+  "truncation": [
+    {
+      "node": "l1_0",
+      "reason": "node_label_cap",
+      "dropped_labels": 2
+    },
+    {
+      "node": "l1_1",
+      "reason": "node_label_cap",
+      "dropped_labels": 2
+    },
+    {
+      "node": "l1_2",
+      "reason": "node_label_cap",
+      "dropped_labels": 2
+    },
+    {
+      "node": "l1_3",
+      "reason": "node_label_cap",
+      "dropped_labels": 2
+    },
+    {
+      "node": "l1_4",
+      "reason": "node_label_cap",
+      "dropped_labels": 2
+    },
+    {
+      "node": "l2_0",
+      "reason": "node_label_cap",
+      "dropped_labels": 12
+    },
+    {
+      "node": "l2_1",
+      "reason": "node_label_cap",
+      "dropped_labels": 12
+    },
+    {
+      "node": "l2_2",
+      "reason": "node_label_cap",
+      "dropped_labels": 12
+    },
+    {
+      "node": "l2_3",
+      "reason": "node_label_cap",
+      "dropped_labels": 12
+    },
+    {
+      "node": "l2_4",
+      "reason": "node_label_cap",
+      "dropped_labels": 12
+    },
+    {
+      "node": "t",
+      "reason": "node_label_cap",
+      "dropped_labels": 12
+    }
+  ],
+  "statistics": {
+    "labels_created": 121,
+    "labels_pushed": 121,
+    "labels_popped": 121,
+    "labels_rejected": 82,
+    "labels_permanent": 39,
+    "edges_scanned": 120,
+    "budget_pruned": 0,
+    "nodes_reached": 17,
+    "permanent_label_total": 39,
+    "pareto_front_size": 2,
+    "paths_verified": true,
+    "paths_verification_ok": true
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "status": "ok",
+  "request_echo": {
+    "source": "s",
+    "target": "t",
+    "mode": "simple",
+    "time_budget": null,
+    "cost_budget": null,
+    "atol": 1e-09,
+    "rtol": 1e-09
+  },
+  "pareto_front": [
+    {
+      "rank": 0,
+      "time": 3,
+      "cost": 11,
+      "nodes": [
+        "s",
+        "2",
+        "t"
+      ],
+      "edges": [
+        "a",
+        "d"
+      ]
+    },
+    {
+      "rank": 1,
+      "time": 4,
+      "cost": 7,
+      "nodes": [
+        "s",
+        "1",
+        "2",
+        "t"
+      ],
+      "edges": [
+        "zc1",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "rank": 2,
+      "time": 6,
+      "cost": 3,
+      "nodes": [
+        "s",
+        "3",
+        "t"
+      ],
+      "edges": [
+        "b",
+        "e"
+      ]
+    }
+  ],
+  "truncated": false,
+  "truncation": [],
+  "statistics": {
+    "labels_created": 8,
+    "labels_pushed": 8,
+    "labels_popped": 8,
+    "labels_rejected": 0,
+    "labels_permanent": 8,
+    "edges_scanned": 11,
+    "budget_pruned": 0,
+    "nodes_reached": 5,
+    "permanent_label_total": 8,
+    "pareto_front_size": 3,
+    "paths_verified": true,
+    "paths_verification_ok": true
+  }
+}

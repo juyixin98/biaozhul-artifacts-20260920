@@ -1,0 +1,126 @@
+{
+  "status": "ok",
+  "request_echo": {
+    "source": "n0",
+    "target": "n7",
+    "mode": "walk",
+    "time_budget": null,
+    "cost_budget": null,
+    "atol": 1e-09,
+    "rtol": 1e-09
+  },
+  "pareto_front": [
+    {
+      "rank": 0,
+      "time": 11,
+      "cost": 18,
+      "nodes": [
+        "n0",
+        "n1",
+        "n6",
+        "n7"
+      ],
+      "edges": [
+        {
+          "source": "n0",
+          "target": "n1",
+          "index": 0
+        },
+        {
+          "source": "n1",
+          "target": "n6",
+          "index": 0
+        },
+        {
+          "source": "n6",
+          "target": "n7",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "rank": 1,
+      "time": 14,
+      "cost": 16,
+      "nodes": [
+        "n0",
+        "n2",
+        "n3",
+        "n5",
+        "n7"
+      ],
+      "edges": [
+        {
+          "source": "n0",
+          "target": "n2",
+          "index": 0
+        },
+        {
+          "source": "n2",
+          "target": "n3",
+          "index": 0
+        },
+        {
+          "source": "n3",
+          "target": "n5",
+          "index": 0
+        },
+        {
+          "source": "n5",
+          "target": "n7",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "time": 17,
+      "cost": 15,
+      "nodes": [
+        "n0",
+        "n2",
+        "n4",
+        "n5",
+        "n7"
+      ],
+      "edges": [
+        {
+          "source": "n0",
+          "target": "n2",
+          "index": 0
+        },
+        {
+          "source": "n2",
+          "target": "n4",
+          "index": 0
+        },
+        {
+          "source": "n4",
+          "target": "n5",
+          "index": 0
+        },
+        {
+          "source": "n5",
+          "target": "n7",
+          "index": 0
+        }
+      ]
+    }
+  ],
+  "truncated": false,
+  "truncation": [],
+  "statistics": {
+    "labels_created": 15,
+    "labels_pushed": 14,
+    "labels_popped": 14,
+    "labels_rejected": 1,
+    "labels_permanent": 13,
+    "edges_scanned": 14,
+    "budget_pruned": 0,
+    "nodes_reached": 8,
+    "permanent_label_total": 13,
+    "pareto_front_size": 3,
+    "paths_verified": true,
+    "paths_verification_ok": true
+  }
+}

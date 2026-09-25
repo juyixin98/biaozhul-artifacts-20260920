@@ -1,0 +1,10 @@
+{
+  "graph": {
+    "nodes": ["A", "B"],
+    "edges": [
+      {"source": "A", "target": "B", "time": -2, "cost": 3}
+    ]
+  },
+  "source": "A",
+  "target": "B"
+}

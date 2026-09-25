@@ -1,0 +1,23 @@
+{
+  "graph": {
+    "nodes": ["n0", "n1", "n2", "n3", "n4", "n5", "n6", "n7"],
+    "edges": [
+      {"source": "n0", "target": "n1", "time": 2, "cost": 9},
+      {"source": "n0", "target": "n2", "time": 5, "cost": 4},
+      {"source": "n1", "target": "n3", "time": 3, "cost": 3},
+      {"source": "n2", "target": "n3", "time": 2, "cost": 6},
+      {"source": "n2", "target": "n4", "time": 7, "cost": 2},
+      {"source": "n3", "target": "n5", "time": 4, "cost": 4},
+      {"source": "n4", "target": "n5", "time": 2, "cost": 7},
+      {"source": "n1", "target": "n6", "time": 8, "cost": 1},
+      {"source": "n6", "target": "n7", "time": 1, "cost": 8},
+      {"source": "n5", "target": "n7", "time": 3, "cost": 2},
+      {"source": "n4", "target": "n6", "time": 2, "cost": 5}
+    ]
+  },
+  "source": "n0",
+  "target": "n7",
+  "mode": "walk",
+  "node_label_cap": 20000,
+  "total_label_cap": 1000000
+}
