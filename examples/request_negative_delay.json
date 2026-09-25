@@ -1,0 +1,19 @@
+{
+  "_comment": "负延迟演示：delay_samples=-37 表示 chan 相对 ref 左移（chan 超前），估计结果应为 -37，用于核对符号定义。",
+  "source": {
+    "mode": "synthetic",
+    "kind": "noise",
+    "duration": 1.0,
+    "sample_rate": 8000,
+    "delay_samples": -37,
+    "noise_db": -20.0,
+    "amplitude": 0.5,
+    "seed": 22
+  },
+  "estimator": {
+    "max_lag": 128,
+    "min_peak": 0.5,
+    "max_secondary_peak_ratio": 0.85,
+    "min_rms_db": -60.0
+  }
+}

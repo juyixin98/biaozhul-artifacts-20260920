@@ -1,0 +1,18 @@
+{
+  "_comment": "周期信号不确定状态演示：200Hz 正弦（8kHz 采样下周期 40 样本）整周期重相关，次峰与主峰等高，应判 multiple_peaks。",
+  "source": {
+    "mode": "synthetic",
+    "kind": "sine",
+    "duration": 0.5,
+    "sample_rate": 8000,
+    "freq": 200.0,
+    "delay_samples": 10,
+    "amplitude": 0.8
+  },
+  "estimator": {
+    "max_lag": 200,
+    "min_peak": 0.5,
+    "max_secondary_peak_ratio": 0.85,
+    "min_peak_distance": 3
+  }
+}

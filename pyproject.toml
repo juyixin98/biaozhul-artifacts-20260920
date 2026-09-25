@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "delay-correlator"
+version = "1.0.0"
+description = "基于归一化互相关的双通道延迟估计离线服务（纯后端）"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]
+
+[project.scripts]
+delay-correlator = "delay_correlator.cli:main"
+
+[tool.setuptools]
+packages = ["delay_correlator"]

@@ -1,0 +1,16 @@
+{
+  "_comment": "静音不确定状态演示：ref/chan 均为近零信号（用极小幅白噪声模拟底噪），应判 low_energy。可把 amplitude 调大观察状态翻转。",
+  "source": {
+    "mode": "synthetic",
+    "kind": "noise",
+    "duration": 0.5,
+    "sample_rate": 8000,
+    "delay_samples": 3,
+    "amplitude": 0.0005,
+    "seed": 77
+  },
+  "estimator": {
+    "max_lag": 128,
+    "min_rms_db": -60.0
+  }
+}

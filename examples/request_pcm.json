@@ -1,0 +1,21 @@
+{
+  "source": {
+    "mode": "file",
+    "kind": "raw_pcm",
+    "path": "data/pair_s16_stereo_8k.pcm",
+    "dtype": "s16",
+    "channels": 2,
+    "ref_channel": 0,
+    "channel": 1,
+    "sample_rate": 8000
+  },
+  "estimator": {
+    "max_lag": 128,
+    "min_peak": 0.5,
+    "max_secondary_peak_ratio": 0.85,
+    "min_rms_db": -60.0,
+    "min_peak_distance": 3,
+    "subtract_mean": true,
+    "interpolate": false
+  }
+}

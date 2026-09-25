@@ -1,0 +1,18 @@
+{
+  "source": {
+    "mode": "file",
+    "kind": "wav",
+    "path": "data/pair_s16_stereo_8k.wav",
+    "ref_channel": 0,
+    "channel": 1
+  },
+  "estimator": {
+    "max_lag": 200,
+    "window_size": 4000,
+    "hop_size": 4000,
+    "min_peak": 0.5,
+    "max_secondary_peak_ratio": 0.85,
+    "min_rms_db": -60.0,
+    "interpolate": true
+  }
+}

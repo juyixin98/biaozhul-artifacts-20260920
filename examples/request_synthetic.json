@@ -1,0 +1,22 @@
+{
+  "source": {
+    "mode": "synthetic",
+    "kind": "noise",
+    "duration": 1.0,
+    "sample_rate": 8000,
+    "delay_samples": 37,
+    "noise_db": -20.0,
+    "gain": 1.0,
+    "amplitude": 0.5,
+    "seed": 11
+  },
+  "estimator": {
+    "max_lag": 128,
+    "min_peak": 0.5,
+    "max_secondary_peak_ratio": 0.85,
+    "min_rms_db": -60.0,
+    "min_peak_distance": 3,
+    "subtract_mean": true,
+    "interpolate": false
+  }
+}
