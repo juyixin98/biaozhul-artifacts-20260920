@@ -1,0 +1,456 @@
+{
+  "inheritance": "pip",
+  "queuePolicy": "fifo",
+  "endTick": 15,
+  "completed": true,
+  "deadlocked": false,
+  "tasks": [
+    {
+      "id": "L",
+      "basePriority": 1,
+      "effectivePriority": 1,
+      "state": "finished",
+      "arrival": 0,
+      "finishTick": 15,
+      "cpuTicks": 6,
+      "blockedTicks": 0,
+      "readyTicks": 9,
+      "heldLocks": null,
+      "priorityBoosts": 1
+    },
+    {
+      "id": "M",
+      "basePriority": 4,
+      "effectivePriority": 4,
+      "state": "finished",
+      "arrival": 2,
+      "finishTick": 15,
+      "cpuTicks": 4,
+      "blockedTicks": 0,
+      "readyTicks": 9,
+      "heldLocks": null,
+      "priorityBoosts": 0
+    },
+    {
+      "id": "H",
+      "basePriority": 8,
+      "effectivePriority": 8,
+      "state": "finished",
+      "arrival": 4,
+      "finishTick": 13,
+      "cpuTicks": 5,
+      "blockedTicks": 4,
+      "readyTicks": 0,
+      "heldLocks": null,
+      "priorityBoosts": 0
+    }
+  ],
+  "locks": [
+    {
+      "id": "A",
+      "waiters": null
+    },
+    {
+      "id": "B",
+      "waiters": null
+    }
+  ],
+  "events": [
+    {
+      "tick": 0,
+      "seq": 1,
+      "type": "arrive",
+      "task": "L",
+      "basePrio": 1,
+      "effPrio": 1
+    },
+    {
+      "tick": 0,
+      "seq": 2,
+      "type": "dispatch",
+      "task": "L",
+      "to": "L",
+      "basePrio": 1,
+      "effPrio": 1
+    },
+    {
+      "tick": 0,
+      "seq": 3,
+      "type": "lockAcquired",
+      "task": "L",
+      "lock": "A",
+      "basePrio": 1,
+      "effPrio": 1
+    },
+    {
+      "tick": 0,
+      "seq": 4,
+      "type": "lockAcquired",
+      "task": "L",
+      "lock": "B",
+      "basePrio": 1,
+      "effPrio": 1
+    },
+    {
+      "tick": 0,
+      "seq": 5,
+      "type": "cpuTick",
+      "task": "L",
+      "basePrio": 1,
+      "effPrio": 1,
+      "remaining": 4
+    },
+    {
+      "tick": 1,
+      "seq": 6,
+      "type": "cpuTick",
+      "task": "L",
+      "basePrio": 1,
+      "effPrio": 1,
+      "remaining": 3
+    },
+    {
+      "tick": 2,
+      "seq": 7,
+      "type": "arrive",
+      "task": "M",
+      "basePrio": 4,
+      "effPrio": 4
+    },
+    {
+      "tick": 2,
+      "seq": 8,
+      "type": "preempt",
+      "task": "L",
+      "by": "M",
+      "from": "L",
+      "effPrio": 1
+    },
+    {
+      "tick": 2,
+      "seq": 9,
+      "type": "dispatch",
+      "task": "M",
+      "to": "M",
+      "basePrio": 4,
+      "effPrio": 4
+    },
+    {
+      "tick": 2,
+      "seq": 10,
+      "type": "cpuTick",
+      "task": "M",
+      "basePrio": 4,
+      "effPrio": 4,
+      "remaining": 1
+    },
+    {
+      "tick": 3,
+      "seq": 11,
+      "type": "cpuTick",
+      "task": "M",
+      "basePrio": 4,
+      "effPrio": 4
+    },
+    {
+      "tick": 4,
+      "seq": 12,
+      "type": "arrive",
+      "task": "H",
+      "basePrio": 8,
+      "effPrio": 8
+    },
+    {
+      "tick": 4,
+      "seq": 13,
+      "type": "preempt",
+      "task": "M",
+      "by": "H",
+      "from": "M",
+      "effPrio": 4
+    },
+    {
+      "tick": 4,
+      "seq": 14,
+      "type": "dispatch",
+      "task": "H",
+      "to": "H",
+      "basePrio": 8,
+      "effPrio": 8
+    },
+    {
+      "tick": 4,
+      "seq": 15,
+      "type": "cpuTick",
+      "task": "H",
+      "basePrio": 8,
+      "effPrio": 8,
+      "remaining": 3
+    },
+    {
+      "tick": 5,
+      "seq": 16,
+      "type": "cpuTick",
+      "task": "H",
+      "basePrio": 8,
+      "effPrio": 8,
+      "remaining": 2
+    },
+    {
+      "tick": 6,
+      "seq": 17,
+      "type": "cpuTick",
+      "task": "H",
+      "basePrio": 8,
+      "effPrio": 8,
+      "remaining": 1
+    },
+    {
+      "tick": 7,
+      "seq": 18,
+      "type": "cpuTick",
+      "task": "H",
+      "basePrio": 8,
+      "effPrio": 8
+    },
+    {
+      "tick": 8,
+      "seq": 19,
+      "type": "block",
+      "task": "H",
+      "lock": "A",
+      "owner": "L",
+      "basePrio": 8,
+      "effPrio": 8,
+      "waiters": [
+        "H"
+      ]
+    },
+    {
+      "tick": 8,
+      "seq": 20,
+      "type": "donorJoin",
+      "task": "L",
+      "lock": "A",
+      "donor": "H",
+      "owner": "L",
+      "effPrio": 1
+    },
+    {
+      "tick": 8,
+      "seq": 21,
+      "type": "priorityBoost",
+      "task": "L",
+      "oldPrio": 1,
+      "newPrio": 8,
+      "basePrio": 1,
+      "effPrio": 8
+    },
+    {
+      "tick": 8,
+      "seq": 22,
+      "type": "dispatch",
+      "task": "L",
+      "to": "L",
+      "basePrio": 1,
+      "effPrio": 8
+    },
+    {
+      "tick": 8,
+      "seq": 23,
+      "type": "cpuTick",
+      "task": "L",
+      "basePrio": 1,
+      "effPrio": 8,
+      "remaining": 2
+    },
+    {
+      "tick": 9,
+      "seq": 24,
+      "type": "cpuTick",
+      "task": "L",
+      "basePrio": 1,
+      "effPrio": 8,
+      "remaining": 1
+    },
+    {
+      "tick": 10,
+      "seq": 25,
+      "type": "cpuTick",
+      "task": "L",
+      "basePrio": 1,
+      "effPrio": 8
+    },
+    {
+      "tick": 11,
+      "seq": 26,
+      "type": "lockReleased",
+      "task": "L",
+      "lock": "B",
+      "basePrio": 1,
+      "effPrio": 8
+    },
+    {
+      "tick": 11,
+      "seq": 27,
+      "type": "cpuTick",
+      "task": "L",
+      "basePrio": 1,
+      "effPrio": 8
+    },
+    {
+      "tick": 12,
+      "seq": 28,
+      "type": "lockReleased",
+      "task": "L",
+      "lock": "A",
+      "basePrio": 1,
+      "effPrio": 8,
+      "waiters": [
+        "H"
+      ]
+    },
+    {
+      "tick": 12,
+      "seq": 29,
+      "type": "wakeup",
+      "task": "H",
+      "lock": "A",
+      "owner": "L",
+      "basePrio": 8,
+      "effPrio": 8
+    },
+    {
+      "tick": 12,
+      "seq": 30,
+      "type": "donorLeave",
+      "task": "L",
+      "lock": "A",
+      "donor": "H",
+      "owner": "L",
+      "effPrio": 8
+    },
+    {
+      "tick": 12,
+      "seq": 31,
+      "type": "priorityReset",
+      "task": "L",
+      "oldPrio": 8,
+      "newPrio": 1,
+      "basePrio": 1,
+      "effPrio": 1
+    },
+    {
+      "tick": 12,
+      "seq": 32,
+      "type": "preempt",
+      "task": "L",
+      "by": "H",
+      "from": "L",
+      "effPrio": 1
+    },
+    {
+      "tick": 12,
+      "seq": 33,
+      "type": "dispatch",
+      "task": "H",
+      "to": "H",
+      "basePrio": 8,
+      "effPrio": 8
+    },
+    {
+      "tick": 12,
+      "seq": 34,
+      "type": "cpuTick",
+      "task": "H",
+      "basePrio": 8,
+      "effPrio": 8
+    },
+    {
+      "tick": 13,
+      "seq": 35,
+      "type": "lockReleased",
+      "task": "H",
+      "lock": "A",
+      "basePrio": 8,
+      "effPrio": 8
+    },
+    {
+      "tick": 13,
+      "seq": 36,
+      "type": "finish",
+      "task": "H",
+      "basePrio": 8,
+      "effPrio": 8
+    },
+    {
+      "tick": 13,
+      "seq": 37,
+      "type": "dispatch",
+      "task": "M",
+      "to": "M",
+      "basePrio": 4,
+      "effPrio": 4
+    },
+    {
+      "tick": 13,
+      "seq": 38,
+      "type": "lockAcquired",
+      "task": "M",
+      "lock": "B",
+      "basePrio": 4,
+      "effPrio": 4
+    },
+    {
+      "tick": 13,
+      "seq": 39,
+      "type": "cpuTick",
+      "task": "M",
+      "basePrio": 4,
+      "effPrio": 4,
+      "remaining": 1
+    },
+    {
+      "tick": 14,
+      "seq": 40,
+      "type": "cpuTick",
+      "task": "M",
+      "basePrio": 4,
+      "effPrio": 4
+    },
+    {
+      "tick": 15,
+      "seq": 41,
+      "type": "lockReleased",
+      "task": "M",
+      "lock": "B",
+      "basePrio": 4,
+      "effPrio": 4
+    },
+    {
+      "tick": 15,
+      "seq": 42,
+      "type": "finish",
+      "task": "M",
+      "basePrio": 4,
+      "effPrio": 4
+    },
+    {
+      "tick": 15,
+      "seq": 43,
+      "type": "dispatch",
+      "task": "L",
+      "to": "L",
+      "basePrio": 1,
+      "effPrio": 1
+    },
+    {
+      "tick": 15,
+      "seq": 44,
+      "type": "finish",
+      "task": "L",
+      "basePrio": 1,
+      "effPrio": 1
+    }
+  ]
+}

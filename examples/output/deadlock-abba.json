@@ -1,0 +1,244 @@
+{
+  "inheritance": "pip",
+  "queuePolicy": "fifo",
+  "endTick": 6,
+  "completed": false,
+  "deadlocked": true,
+  "tasks": [
+    {
+      "id": "P1",
+      "basePriority": 3,
+      "effectivePriority": 6,
+      "state": "blocked",
+      "arrival": 0,
+      "cpuTicks": 4,
+      "blockedTicks": 0,
+      "readyTicks": 2,
+      "heldLocks": [
+        "A"
+      ],
+      "waitingOn": "B",
+      "priorityBoosts": 1
+    },
+    {
+      "id": "P2",
+      "basePriority": 6,
+      "effectivePriority": 6,
+      "state": "blocked",
+      "arrival": 2,
+      "cpuTicks": 2,
+      "blockedTicks": 2,
+      "readyTicks": 0,
+      "heldLocks": [
+        "B"
+      ],
+      "waitingOn": "A",
+      "priorityBoosts": 0
+    }
+  ],
+  "locks": [
+    {
+      "id": "A",
+      "holder": "P1",
+      "waiters": [
+        "P2"
+      ]
+    },
+    {
+      "id": "B",
+      "holder": "P2",
+      "waiters": [
+        "P1"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "tick": 0,
+      "seq": 1,
+      "type": "arrive",
+      "task": "P1",
+      "basePrio": 3,
+      "effPrio": 3
+    },
+    {
+      "tick": 0,
+      "seq": 2,
+      "type": "dispatch",
+      "task": "P1",
+      "to": "P1",
+      "basePrio": 3,
+      "effPrio": 3
+    },
+    {
+      "tick": 0,
+      "seq": 3,
+      "type": "cpuTick",
+      "task": "P1",
+      "basePrio": 3,
+      "effPrio": 3
+    },
+    {
+      "tick": 1,
+      "seq": 4,
+      "type": "lockAcquired",
+      "task": "P1",
+      "lock": "A",
+      "basePrio": 3,
+      "effPrio": 3
+    },
+    {
+      "tick": 1,
+      "seq": 5,
+      "type": "cpuTick",
+      "task": "P1",
+      "basePrio": 3,
+      "effPrio": 3,
+      "remaining": 2
+    },
+    {
+      "tick": 2,
+      "seq": 6,
+      "type": "arrive",
+      "task": "P2",
+      "basePrio": 6,
+      "effPrio": 6
+    },
+    {
+      "tick": 2,
+      "seq": 7,
+      "type": "preempt",
+      "task": "P1",
+      "by": "P2",
+      "from": "P1",
+      "effPrio": 3
+    },
+    {
+      "tick": 2,
+      "seq": 8,
+      "type": "dispatch",
+      "task": "P2",
+      "to": "P2",
+      "basePrio": 6,
+      "effPrio": 6
+    },
+    {
+      "tick": 2,
+      "seq": 9,
+      "type": "cpuTick",
+      "task": "P2",
+      "basePrio": 6,
+      "effPrio": 6
+    },
+    {
+      "tick": 3,
+      "seq": 10,
+      "type": "lockAcquired",
+      "task": "P2",
+      "lock": "B",
+      "basePrio": 6,
+      "effPrio": 6
+    },
+    {
+      "tick": 3,
+      "seq": 11,
+      "type": "cpuTick",
+      "task": "P2",
+      "basePrio": 6,
+      "effPrio": 6
+    },
+    {
+      "tick": 4,
+      "seq": 12,
+      "type": "block",
+      "task": "P2",
+      "lock": "A",
+      "owner": "P1",
+      "basePrio": 6,
+      "effPrio": 6,
+      "waiters": [
+        "P2"
+      ]
+    },
+    {
+      "tick": 4,
+      "seq": 13,
+      "type": "donorJoin",
+      "task": "P1",
+      "lock": "A",
+      "donor": "P2",
+      "owner": "P1",
+      "effPrio": 3
+    },
+    {
+      "tick": 4,
+      "seq": 14,
+      "type": "priorityBoost",
+      "task": "P1",
+      "oldPrio": 3,
+      "newPrio": 6,
+      "basePrio": 3,
+      "effPrio": 6
+    },
+    {
+      "tick": 4,
+      "seq": 15,
+      "type": "dispatch",
+      "task": "P1",
+      "to": "P1",
+      "basePrio": 3,
+      "effPrio": 6
+    },
+    {
+      "tick": 4,
+      "seq": 16,
+      "type": "cpuTick",
+      "task": "P1",
+      "basePrio": 3,
+      "effPrio": 6,
+      "remaining": 1
+    },
+    {
+      "tick": 5,
+      "seq": 17,
+      "type": "cpuTick",
+      "task": "P1",
+      "basePrio": 3,
+      "effPrio": 6
+    },
+    {
+      "tick": 6,
+      "seq": 18,
+      "type": "block",
+      "task": "P1",
+      "lock": "B",
+      "owner": "P2",
+      "basePrio": 3,
+      "effPrio": 6,
+      "waiters": [
+        "P1"
+      ]
+    },
+    {
+      "tick": 6,
+      "seq": 19,
+      "type": "donorJoin",
+      "task": "P2",
+      "lock": "B",
+      "donor": "P1",
+      "owner": "P2",
+      "effPrio": 6
+    },
+    {
+      "tick": 6,
+      "seq": 20,
+      "type": "deadlock",
+      "cycle": [
+        "P1",
+        "P2",
+        "P1"
+      ],
+      "reason": "wait-for cycle: each task blocks on a lock held by the next"
+    }
+  ]
+}

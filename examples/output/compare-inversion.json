@@ -1,0 +1,793 @@
+{
+  "withoutInheritance": {
+    "inheritance": "none",
+    "queuePolicy": "fifo",
+    "endTick": 14,
+    "completed": true,
+    "deadlocked": false,
+    "tasks": [
+      {
+        "id": "L",
+        "basePriority": 1,
+        "effectivePriority": 1,
+        "state": "finished",
+        "arrival": 0,
+        "finishTick": 14,
+        "cpuTicks": 6,
+        "blockedTicks": 0,
+        "readyTicks": 8,
+        "heldLocks": null,
+        "priorityBoosts": 0
+      },
+      {
+        "id": "M",
+        "basePriority": 5,
+        "effectivePriority": 5,
+        "state": "finished",
+        "arrival": 2,
+        "finishTick": 9,
+        "cpuTicks": 6,
+        "blockedTicks": 0,
+        "readyTicks": 1,
+        "heldLocks": null,
+        "priorityBoosts": 0
+      },
+      {
+        "id": "H",
+        "basePriority": 10,
+        "effectivePriority": 10,
+        "state": "finished",
+        "arrival": 3,
+        "finishTick": 13,
+        "cpuTicks": 2,
+        "blockedTicks": 8,
+        "readyTicks": 0,
+        "heldLocks": null,
+        "priorityBoosts": 0
+      }
+    ],
+    "locks": [
+      {
+        "id": "A",
+        "waiters": null
+      }
+    ],
+    "events": [
+      {
+        "tick": 0,
+        "seq": 1,
+        "type": "arrive",
+        "task": "L",
+        "basePrio": 1,
+        "effPrio": 1
+      },
+      {
+        "tick": 0,
+        "seq": 2,
+        "type": "dispatch",
+        "task": "L",
+        "to": "L",
+        "basePrio": 1,
+        "effPrio": 1
+      },
+      {
+        "tick": 0,
+        "seq": 3,
+        "type": "cpuTick",
+        "task": "L",
+        "basePrio": 1,
+        "effPrio": 1
+      },
+      {
+        "tick": 1,
+        "seq": 4,
+        "type": "lockAcquired",
+        "task": "L",
+        "lock": "A",
+        "basePrio": 1,
+        "effPrio": 1
+      },
+      {
+        "tick": 1,
+        "seq": 5,
+        "type": "cpuTick",
+        "task": "L",
+        "basePrio": 1,
+        "effPrio": 1,
+        "remaining": 3
+      },
+      {
+        "tick": 2,
+        "seq": 6,
+        "type": "arrive",
+        "task": "M",
+        "basePrio": 5,
+        "effPrio": 5
+      },
+      {
+        "tick": 2,
+        "seq": 7,
+        "type": "preempt",
+        "task": "L",
+        "by": "M",
+        "from": "L",
+        "effPrio": 1
+      },
+      {
+        "tick": 2,
+        "seq": 8,
+        "type": "dispatch",
+        "task": "M",
+        "to": "M",
+        "basePrio": 5,
+        "effPrio": 5
+      },
+      {
+        "tick": 2,
+        "seq": 9,
+        "type": "cpuTick",
+        "task": "M",
+        "basePrio": 5,
+        "effPrio": 5,
+        "remaining": 5
+      },
+      {
+        "tick": 3,
+        "seq": 10,
+        "type": "arrive",
+        "task": "H",
+        "basePrio": 10,
+        "effPrio": 10
+      },
+      {
+        "tick": 3,
+        "seq": 11,
+        "type": "preempt",
+        "task": "M",
+        "by": "H",
+        "from": "M",
+        "effPrio": 5
+      },
+      {
+        "tick": 3,
+        "seq": 12,
+        "type": "dispatch",
+        "task": "H",
+        "to": "H",
+        "basePrio": 10,
+        "effPrio": 10
+      },
+      {
+        "tick": 3,
+        "seq": 13,
+        "type": "cpuTick",
+        "task": "H",
+        "basePrio": 10,
+        "effPrio": 10
+      },
+      {
+        "tick": 4,
+        "seq": 14,
+        "type": "block",
+        "task": "H",
+        "lock": "A",
+        "owner": "L",
+        "basePrio": 10,
+        "effPrio": 10,
+        "waiters": [
+          "H"
+        ]
+      },
+      {
+        "tick": 4,
+        "seq": 15,
+        "type": "dispatch",
+        "task": "M",
+        "to": "M",
+        "basePrio": 5,
+        "effPrio": 5
+      },
+      {
+        "tick": 4,
+        "seq": 16,
+        "type": "cpuTick",
+        "task": "M",
+        "basePrio": 5,
+        "effPrio": 5,
+        "remaining": 4
+      },
+      {
+        "tick": 5,
+        "seq": 17,
+        "type": "cpuTick",
+        "task": "M",
+        "basePrio": 5,
+        "effPrio": 5,
+        "remaining": 3
+      },
+      {
+        "tick": 6,
+        "seq": 18,
+        "type": "cpuTick",
+        "task": "M",
+        "basePrio": 5,
+        "effPrio": 5,
+        "remaining": 2
+      },
+      {
+        "tick": 7,
+        "seq": 19,
+        "type": "cpuTick",
+        "task": "M",
+        "basePrio": 5,
+        "effPrio": 5,
+        "remaining": 1
+      },
+      {
+        "tick": 8,
+        "seq": 20,
+        "type": "cpuTick",
+        "task": "M",
+        "basePrio": 5,
+        "effPrio": 5
+      },
+      {
+        "tick": 9,
+        "seq": 21,
+        "type": "finish",
+        "task": "M",
+        "basePrio": 5,
+        "effPrio": 5
+      },
+      {
+        "tick": 9,
+        "seq": 22,
+        "type": "dispatch",
+        "task": "L",
+        "to": "L",
+        "basePrio": 1,
+        "effPrio": 1
+      },
+      {
+        "tick": 9,
+        "seq": 23,
+        "type": "cpuTick",
+        "task": "L",
+        "basePrio": 1,
+        "effPrio": 1,
+        "remaining": 2
+      },
+      {
+        "tick": 10,
+        "seq": 24,
+        "type": "cpuTick",
+        "task": "L",
+        "basePrio": 1,
+        "effPrio": 1,
+        "remaining": 1
+      },
+      {
+        "tick": 11,
+        "seq": 25,
+        "type": "cpuTick",
+        "task": "L",
+        "basePrio": 1,
+        "effPrio": 1
+      },
+      {
+        "tick": 12,
+        "seq": 26,
+        "type": "lockReleased",
+        "task": "L",
+        "lock": "A",
+        "basePrio": 1,
+        "effPrio": 1,
+        "waiters": [
+          "H"
+        ]
+      },
+      {
+        "tick": 12,
+        "seq": 27,
+        "type": "wakeup",
+        "task": "H",
+        "lock": "A",
+        "owner": "L",
+        "basePrio": 10,
+        "effPrio": 10
+      },
+      {
+        "tick": 12,
+        "seq": 28,
+        "type": "preempt",
+        "task": "L",
+        "by": "H",
+        "from": "L",
+        "effPrio": 1
+      },
+      {
+        "tick": 12,
+        "seq": 29,
+        "type": "dispatch",
+        "task": "H",
+        "to": "H",
+        "basePrio": 10,
+        "effPrio": 10
+      },
+      {
+        "tick": 12,
+        "seq": 30,
+        "type": "cpuTick",
+        "task": "H",
+        "basePrio": 10,
+        "effPrio": 10
+      },
+      {
+        "tick": 13,
+        "seq": 31,
+        "type": "lockReleased",
+        "task": "H",
+        "lock": "A",
+        "basePrio": 10,
+        "effPrio": 10
+      },
+      {
+        "tick": 13,
+        "seq": 32,
+        "type": "finish",
+        "task": "H",
+        "basePrio": 10,
+        "effPrio": 10
+      },
+      {
+        "tick": 13,
+        "seq": 33,
+        "type": "dispatch",
+        "task": "L",
+        "to": "L",
+        "basePrio": 1,
+        "effPrio": 1
+      },
+      {
+        "tick": 13,
+        "seq": 34,
+        "type": "cpuTick",
+        "task": "L",
+        "basePrio": 1,
+        "effPrio": 1
+      },
+      {
+        "tick": 14,
+        "seq": 35,
+        "type": "finish",
+        "task": "L",
+        "basePrio": 1,
+        "effPrio": 1
+      }
+    ]
+  },
+  "withInheritance": {
+    "inheritance": "pip",
+    "queuePolicy": "fifo",
+    "endTick": 14,
+    "completed": true,
+    "deadlocked": false,
+    "tasks": [
+      {
+        "id": "L",
+        "basePriority": 1,
+        "effectivePriority": 1,
+        "state": "finished",
+        "arrival": 0,
+        "finishTick": 14,
+        "cpuTicks": 6,
+        "blockedTicks": 0,
+        "readyTicks": 8,
+        "heldLocks": null,
+        "priorityBoosts": 1
+      },
+      {
+        "id": "M",
+        "basePriority": 5,
+        "effectivePriority": 5,
+        "state": "finished",
+        "arrival": 2,
+        "finishTick": 13,
+        "cpuTicks": 6,
+        "blockedTicks": 0,
+        "readyTicks": 5,
+        "heldLocks": null,
+        "priorityBoosts": 0
+      },
+      {
+        "id": "H",
+        "basePriority": 10,
+        "effectivePriority": 10,
+        "state": "finished",
+        "arrival": 3,
+        "finishTick": 8,
+        "cpuTicks": 2,
+        "blockedTicks": 3,
+        "readyTicks": 0,
+        "heldLocks": null,
+        "priorityBoosts": 0
+      }
+    ],
+    "locks": [
+      {
+        "id": "A",
+        "waiters": null
+      }
+    ],
+    "events": [
+      {
+        "tick": 0,
+        "seq": 1,
+        "type": "arrive",
+        "task": "L",
+        "basePrio": 1,
+        "effPrio": 1
+      },
+      {
+        "tick": 0,
+        "seq": 2,
+        "type": "dispatch",
+        "task": "L",
+        "to": "L",
+        "basePrio": 1,
+        "effPrio": 1
+      },
+      {
+        "tick": 0,
+        "seq": 3,
+        "type": "cpuTick",
+        "task": "L",
+        "basePrio": 1,
+        "effPrio": 1
+      },
+      {
+        "tick": 1,
+        "seq": 4,
+        "type": "lockAcquired",
+        "task": "L",
+        "lock": "A",
+        "basePrio": 1,
+        "effPrio": 1
+      },
+      {
+        "tick": 1,
+        "seq": 5,
+        "type": "cpuTick",
+        "task": "L",
+        "basePrio": 1,
+        "effPrio": 1,
+        "remaining": 3
+      },
+      {
+        "tick": 2,
+        "seq": 6,
+        "type": "arrive",
+        "task": "M",
+        "basePrio": 5,
+        "effPrio": 5
+      },
+      {
+        "tick": 2,
+        "seq": 7,
+        "type": "preempt",
+        "task": "L",
+        "by": "M",
+        "from": "L",
+        "effPrio": 1
+      },
+      {
+        "tick": 2,
+        "seq": 8,
+        "type": "dispatch",
+        "task": "M",
+        "to": "M",
+        "basePrio": 5,
+        "effPrio": 5
+      },
+      {
+        "tick": 2,
+        "seq": 9,
+        "type": "cpuTick",
+        "task": "M",
+        "basePrio": 5,
+        "effPrio": 5,
+        "remaining": 5
+      },
+      {
+        "tick": 3,
+        "seq": 10,
+        "type": "arrive",
+        "task": "H",
+        "basePrio": 10,
+        "effPrio": 10
+      },
+      {
+        "tick": 3,
+        "seq": 11,
+        "type": "preempt",
+        "task": "M",
+        "by": "H",
+        "from": "M",
+        "effPrio": 5
+      },
+      {
+        "tick": 3,
+        "seq": 12,
+        "type": "dispatch",
+        "task": "H",
+        "to": "H",
+        "basePrio": 10,
+        "effPrio": 10
+      },
+      {
+        "tick": 3,
+        "seq": 13,
+        "type": "cpuTick",
+        "task": "H",
+        "basePrio": 10,
+        "effPrio": 10
+      },
+      {
+        "tick": 4,
+        "seq": 14,
+        "type": "block",
+        "task": "H",
+        "lock": "A",
+        "owner": "L",
+        "basePrio": 10,
+        "effPrio": 10,
+        "waiters": [
+          "H"
+        ]
+      },
+      {
+        "tick": 4,
+        "seq": 15,
+        "type": "donorJoin",
+        "task": "L",
+        "lock": "A",
+        "donor": "H",
+        "owner": "L",
+        "effPrio": 1
+      },
+      {
+        "tick": 4,
+        "seq": 16,
+        "type": "priorityBoost",
+        "task": "L",
+        "oldPrio": 1,
+        "newPrio": 10,
+        "basePrio": 1,
+        "effPrio": 10
+      },
+      {
+        "tick": 4,
+        "seq": 17,
+        "type": "dispatch",
+        "task": "L",
+        "to": "L",
+        "basePrio": 1,
+        "effPrio": 10
+      },
+      {
+        "tick": 4,
+        "seq": 18,
+        "type": "cpuTick",
+        "task": "L",
+        "basePrio": 1,
+        "effPrio": 10,
+        "remaining": 2
+      },
+      {
+        "tick": 5,
+        "seq": 19,
+        "type": "cpuTick",
+        "task": "L",
+        "basePrio": 1,
+        "effPrio": 10,
+        "remaining": 1
+      },
+      {
+        "tick": 6,
+        "seq": 20,
+        "type": "cpuTick",
+        "task": "L",
+        "basePrio": 1,
+        "effPrio": 10
+      },
+      {
+        "tick": 7,
+        "seq": 21,
+        "type": "lockReleased",
+        "task": "L",
+        "lock": "A",
+        "basePrio": 1,
+        "effPrio": 10,
+        "waiters": [
+          "H"
+        ]
+      },
+      {
+        "tick": 7,
+        "seq": 22,
+        "type": "wakeup",
+        "task": "H",
+        "lock": "A",
+        "owner": "L",
+        "basePrio": 10,
+        "effPrio": 10
+      },
+      {
+        "tick": 7,
+        "seq": 23,
+        "type": "donorLeave",
+        "task": "L",
+        "lock": "A",
+        "donor": "H",
+        "owner": "L",
+        "effPrio": 10
+      },
+      {
+        "tick": 7,
+        "seq": 24,
+        "type": "priorityReset",
+        "task": "L",
+        "oldPrio": 10,
+        "newPrio": 1,
+        "basePrio": 1,
+        "effPrio": 1
+      },
+      {
+        "tick": 7,
+        "seq": 25,
+        "type": "preempt",
+        "task": "L",
+        "by": "H",
+        "from": "L",
+        "effPrio": 1
+      },
+      {
+        "tick": 7,
+        "seq": 26,
+        "type": "dispatch",
+        "task": "H",
+        "to": "H",
+        "basePrio": 10,
+        "effPrio": 10
+      },
+      {
+        "tick": 7,
+        "seq": 27,
+        "type": "cpuTick",
+        "task": "H",
+        "basePrio": 10,
+        "effPrio": 10
+      },
+      {
+        "tick": 8,
+        "seq": 28,
+        "type": "lockReleased",
+        "task": "H",
+        "lock": "A",
+        "basePrio": 10,
+        "effPrio": 10
+      },
+      {
+        "tick": 8,
+        "seq": 29,
+        "type": "finish",
+        "task": "H",
+        "basePrio": 10,
+        "effPrio": 10
+      },
+      {
+        "tick": 8,
+        "seq": 30,
+        "type": "dispatch",
+        "task": "M",
+        "to": "M",
+        "basePrio": 5,
+        "effPrio": 5
+      },
+      {
+        "tick": 8,
+        "seq": 31,
+        "type": "cpuTick",
+        "task": "M",
+        "basePrio": 5,
+        "effPrio": 5,
+        "remaining": 4
+      },
+      {
+        "tick": 9,
+        "seq": 32,
+        "type": "cpuTick",
+        "task": "M",
+        "basePrio": 5,
+        "effPrio": 5,
+        "remaining": 3
+      },
+      {
+        "tick": 10,
+        "seq": 33,
+        "type": "cpuTick",
+        "task": "M",
+        "basePrio": 5,
+        "effPrio": 5,
+        "remaining": 2
+      },
+      {
+        "tick": 11,
+        "seq": 34,
+        "type": "cpuTick",
+        "task": "M",
+        "basePrio": 5,
+        "effPrio": 5,
+        "remaining": 1
+      },
+      {
+        "tick": 12,
+        "seq": 35,
+        "type": "cpuTick",
+        "task": "M",
+        "basePrio": 5,
+        "effPrio": 5
+      },
+      {
+        "tick": 13,
+        "seq": 36,
+        "type": "finish",
+        "task": "M",
+        "basePrio": 5,
+        "effPrio": 5
+      },
+      {
+        "tick": 13,
+        "seq": 37,
+        "type": "dispatch",
+        "task": "L",
+        "to": "L",
+        "basePrio": 1,
+        "effPrio": 1
+      },
+      {
+        "tick": 13,
+        "seq": 38,
+        "type": "cpuTick",
+        "task": "L",
+        "basePrio": 1,
+        "effPrio": 1
+      },
+      {
+        "tick": 14,
+        "seq": 39,
+        "type": "finish",
+        "task": "L",
+        "basePrio": 1,
+        "effPrio": 1
+      }
+    ]
+  },
+  "highPriorityTask": "H",
+  "withoutInheritanceMetric": {
+    "task": "H",
+    "basePriority": 10,
+    "finishTick": 13,
+    "blockedTicks": 8,
+    "priorityBoosts": 0
+  },
+  "pipMetric": {
+    "task": "H",
+    "basePriority": 10,
+    "finishTick": 8,
+    "blockedTicks": 3,
+    "priorityBoosts": 0
+  },
+  "highFinishTickSaved": 5,
+  "highBlockedTicksSaved": 5
+}

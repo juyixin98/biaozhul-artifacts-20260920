@@ -1,0 +1,40 @@
+{
+  "inheritance": "none",
+  "queuePolicy": "fifo",
+  "locks": [
+    { "id": "A" }
+  ],
+  "tasks": [
+    {
+      "id": "L",
+      "basePriority": 1,
+      "arrival": 0,
+      "program": [
+        { "op": "cpu", "ticks": 1 },
+        { "op": "lock", "lock": "A" },
+        { "op": "cpu", "ticks": 4 },
+        { "op": "unlock", "lock": "A" },
+        { "op": "cpu", "ticks": 1 }
+      ]
+    },
+    {
+      "id": "M",
+      "basePriority": 5,
+      "arrival": 2,
+      "program": [
+        { "op": "cpu", "ticks": 6 }
+      ]
+    },
+    {
+      "id": "H",
+      "basePriority": 10,
+      "arrival": 3,
+      "program": [
+        { "op": "cpu", "ticks": 1 },
+        { "op": "lock", "lock": "A" },
+        { "op": "cpu", "ticks": 1 },
+        { "op": "unlock", "lock": "A" }
+      ]
+    }
+  ]
+}

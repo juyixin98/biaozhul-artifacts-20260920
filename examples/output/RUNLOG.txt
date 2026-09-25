@@ -1,0 +1,38 @@
+$ go version
+go version go1.22.2 linux/amd64
+
+$ go build ./...
+build: OK
+
+$ go vet ./...
+vet: OK
+
+$ gofmt -l .
+gofmt: clean
+
+$ go test -count=1 ./...
+?   	pilab/cmd/pilab	[no test files]
+ok  	pilab/httpapi	0.015s
+ok  	pilab/scenario	0.003s
+ok  	pilab/scheduler	0.004s
+
+$ go test -race -count=1 ./...
+?   	pilab/cmd/pilab	[no test files]
+ok  	pilab/httpapi	1.040s
+ok  	pilab/scenario	1.019s
+ok  	pilab/scheduler	1.018s
+
+$ go test -cover ./scheduler/ ./scenario/ ./httpapi/
+ok  	pilab/scheduler	(cached)	coverage: 90.8% of statements
+ok  	pilab/scenario	(cached)	coverage: 84.4% of statements
+ok  	pilab/httpapi	(cached)	coverage: 72.4% of statements
+
+# CLI scenarios
+inversion-pip              end=14 completed=True deadlocked=False
+inversion-none             end=14 completed=True deadlocked=False
+three-level-inheritance    end=10 completed=True deadlocked=False
+multi-lock-order           end=15 completed=True deadlocked=False
+deadlock-abba              end=6 completed=False deadlocked=True
+
+$ go run ./cmd/pilab compare (summary)
+H finish none=13 pip=8 saved=5

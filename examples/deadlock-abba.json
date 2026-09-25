@@ -1,0 +1,38 @@
+{
+  "inheritance": "pip",
+  "queuePolicy": "fifo",
+  "locks": [
+    { "id": "A" },
+    { "id": "B" }
+  ],
+  "tasks": [
+    {
+      "id": "P1",
+      "basePriority": 3,
+      "arrival": 0,
+      "program": [
+        { "op": "cpu", "ticks": 1 },
+        { "op": "lock", "lock": "A" },
+        { "op": "cpu", "ticks": 3 },
+        { "op": "lock", "lock": "B" },
+        { "op": "cpu", "ticks": 2 },
+        { "op": "unlock", "lock": "B" },
+        { "op": "unlock", "lock": "A" }
+      ]
+    },
+    {
+      "id": "P2",
+      "basePriority": 6,
+      "arrival": 2,
+      "program": [
+        { "op": "cpu", "ticks": 1 },
+        { "op": "lock", "lock": "B" },
+        { "op": "cpu", "ticks": 1 },
+        { "op": "lock", "lock": "A" },
+        { "op": "cpu", "ticks": 2 },
+        { "op": "unlock", "lock": "A" },
+        { "op": "unlock", "lock": "B" }
+      ]
+    }
+  ]
+}
