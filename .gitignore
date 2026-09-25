@@ -1,0 +1,4 @@
+/bin/
+/.testmerge-cache/
+/.testmerge-work/
+*.out
