@@ -1,0 +1,82 @@
+### 密钥版本审计服务 —— 请求样例
+### 假设服务运行在 http://127.0.0.1:8080
+### 可被 VS Code REST Client / IntelliJ HTTP Client 直接执行；
+### 等价 curl 命令见每条注释。
+
+### 健康检查
+### curl -s http://127.0.0.1:8080/health
+GET http://127.0.0.1:8080/health
+
+### 列出全部版本
+### curl -s http://127.0.0.1:8080/keys
+GET http://127.0.0.1:8080/keys
+
+### 生成一个新版本（generated，不影响 active）
+### curl -s -X POST http://127.0.0.1:8080/keys/generate -H 'Content-Type: application/json' -d '{}'
+POST http://127.0.0.1:8080/keys/generate
+Content-Type: application/json
+
+{}
+
+### 轮换：生成新版本并激活，旧 active 自动 retired
+### curl -s -X POST .../keys/rotate -d '{}'
+POST http://127.0.0.1:8080/keys/rotate
+Content-Type: application/json
+
+{}
+
+### 激活指定版本（把路径里的 ID 换成实际版本号）
+### curl -s -X POST http://127.0.0.1:8080/keys/v0002-xxxxxxxx/activate -d '{}'
+POST http://127.0.0.1:8080/keys/v0002-xxxxxxxx/activate
+Content-Type: application/json
+
+{}
+
+### 停用（active -> retired）
+POST http://127.0.0.1:8080/keys/v0002-xxxxxxxx/deactivate
+Content-Type: application/json
+
+{}
+
+### 销毁（材料删除，不可恢复）
+POST http://127.0.0.1:8080/keys/v0001-xxxxxxxx/destroy
+Content-Type: application/json
+
+{}
+
+### 加密：默认使用当前 active 版本
+### 明文按 UTF-8 文本处理；二进制请传规范 base64
+### curl -s -X POST .../encrypt -H 'Content-Type: application/json' \
+###   -d '{"plaintext":"hello world"}'
+POST http://127.0.0.1:8080/encrypt
+Content-Type: application/json
+
+{"plaintext": "hello world"}
+
+### 加密：显式指定非 active 版本 —— 预期 409 encrypt_version_not_active
+POST http://127.0.0.1:8080/encrypt
+Content-Type: application/json
+
+{"plaintext": "should fail", "version_id": "v0001-xxxxxxxx"}
+
+### 加密：无 active 版本 —— 预期 409 no_active_version
+POST http://127.0.0.1:8080/encrypt
+Content-Type: application/json
+
+{"plaintext": "no active key"}
+
+### 解密：版本号包含在 KVA1 信封内，按历史版本权限处理
+### 将 ciphertext 替换为 /encrypt 返回值
+### curl -s -X POST .../decrypt -H 'Content-Type: application/json' \
+###   -d '{"ciphertext":"S1ZBMQAOdjAwMDEt...."}'
+POST http://127.0.0.1:8080/decrypt
+Content-Type: application/json
+
+{"ciphertext": "S1ZBMQAOdjAwMDEtY2U1MjMzNDQecy+nA/0SHlB84PD3gknTT74z9txVZLJ/VIYL3+ifGzo+ZpOdzMHq"}
+
+### 解密：版本已销毁 —— 预期 409 decrypt_version_destroyed
+### 解密：密文损坏 —— 预期 400 invalid_envelope
+
+### 审计日志（读取时校验哈希链；只含长度/结果，不含明文或密钥）
+### curl -s http://127.0.0.1:8080/audit | jq .
+GET http://127.0.0.1:8080/audit
