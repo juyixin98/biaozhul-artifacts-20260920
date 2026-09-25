@@ -1,0 +1,9 @@
+# Local runtime directories
+/cache/
+/work/
+/artifacts/
+/bin/
+
+# Test scratch
+*.part
+*.tmp

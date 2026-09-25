@@ -1,0 +1,36 @@
+{
+  "fixtures": [
+    {
+      "name": "make-model",
+      "description": "Generate a deterministic local model artifact (default 4 KiB) in the job work dir.",
+      "command": "bash",
+      "args": ["${FIXTURES_DIR}/make-model.sh"],
+      "outputs": ["model.bin"],
+      "timeout": "30s"
+    },
+    {
+      "name": "big-model",
+      "description": "Generate a larger deterministic 4 MiB artifact for resume/concurrency checks.",
+      "command": "bash",
+      "args": ["${FIXTURES_DIR}/make-model.sh", "4194304"],
+      "outputs": ["model.bin"],
+      "timeout": "60s"
+    },
+    {
+      "name": "slow-model",
+      "description": "Stream a 1 MiB deterministic artifact slowly to exercise interrupted downloads/uploads.",
+      "command": "bash",
+      "args": ["${FIXTURES_DIR}/slow-model.sh"],
+      "outputs": ["model.bin"],
+      "timeout": "60s"
+    },
+    {
+      "name": "fail-fixture",
+      "description": "Exits non-zero and produces no artifact; used to verify failure is reported, not cached.",
+      "command": "bash",
+      "args": ["${FIXTURES_DIR}/fail.sh"],
+      "outputs": ["model.bin"],
+      "timeout": "15s"
+    }
+  ]
+}
