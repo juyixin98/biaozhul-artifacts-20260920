@@ -1,0 +1,20 @@
+[package]
+name = "ipfrag"
+version = "0.1.0"
+edition = "2021"
+description = "离线 IPv4 分片重组：手写增量字节解析库 + 本地 TCP 测试服务（零三方依赖）"
+license = "MIT"
+
+[lib]
+name = "ipfrag"
+path = "src/lib.rs"
+
+[[bin]]
+name = "reasm-server"
+path = "src/bin/reasm_server.rs"
+
+[profile.release]
+opt-level = 2
+
+# 零三方依赖：所有代码仅使用 std，可完全离线构建
+[dependencies]

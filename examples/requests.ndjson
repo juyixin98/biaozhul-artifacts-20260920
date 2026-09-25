@@ -1,0 +1,10 @@
+{"op":"raw_packet","packet_hex":"45000018030900004011ac5bc0a800010a0000c8deadbeef","now_ms":0}
+{"op":"fragment","src":"192.168.0.1","dst":"10.0.0.200","protocol":17,"id":4660,"offset":136,"mf":true,"payload_hex":"a8cdf2173c6186abd0f51a3f6489aed3f81d42678cb1d6fb20456a8fb4d9fe23486d92b7dc01264b7095badf04294e7398bde2072c51769bc0e50a2f54799ec3e80d32577ca1c6eb10355a7fa4c9ee13385d82a7ccf1163b6085aacff4193e6388add2f71c41668bb0d5fa1f44698eb3d8fd22476c91b6db00254a6f94b9de03284d7297bce1062b","now_ms":10}
+{"op":"fragment","src":"192.168.0.1","dst":"10.0.0.200","protocol":17,"id":4660,"offset":136,"mf":true,"payload_hex":"a8cdf2173c6186abd0f51a3f6489aed3f81d42678cb1d6fb20456a8fb4d9fe23486d92b7dc01264b7095badf04294e7398bde2072c51769bc0e50a2f54799ec3e80d32577ca1c6eb10355a7fa4c9ee13385d82a7ccf1163b6085aacff4193e6388add2f71c41668bb0d5fa1f44698eb3d8fd22476c91b6db00254a6f94b9de03284d7297bce1062b","now_ms":11}
+{"op":"fragment","src":"192.168.0.1","dst":"10.0.0.200","protocol":17,"id":4660,"offset":272,"mf":false,"payload_hex":"50759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed1237","now_ms":20}
+{"op":"status"}
+{"op":"fragment","src":"192.168.0.1","dst":"10.0.0.200","protocol":17,"id":4660,"offset":0,"mf":true,"payload_hex":"00254a6f94b9de03284d7297bce1062b50759abfe4092e53789dc2e70c31567ba0c5ea0f34597ea3c8ed12375c81a6cbf0153a5f84a9cef3183d6287acd1f61b40658aafd4f91e43688db2d7fc21466b90b5daff24496e93b8dd02274c7196bbe0052a4f7499bee3082d52779cc1e60b30557a9fc4e90e33587da2c7ec11365b80a5caef14395e83","now_ms":30}
+{"op":"fragment","src":"192.168.0.1","dst":"10.0.0.200","protocol":17,"id":4661,"offset":0,"mf":true,"payload_hex":"11111111111111111111111111111111","now_ms":40}
+{"op":"fragment","src":"192.168.0.1","dst":"10.0.0.200","protocol":17,"id":4661,"offset":8,"mf":true,"payload_hex":"22222222222222222222222222222222","now_ms":41}
+{"op":"purge","now_ms":40000}
+{"op":"reset"}
