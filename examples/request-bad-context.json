@@ -1,0 +1,8 @@
+{
+  "workdir": "./demo/workdir",
+  "patches": [
+    {
+      "diff": "--- a/hello.txt\n+++ b/hello.txt\n@@ -1,3 +1,3 @@\n line one\n-THIS DOES NOT EXIST\n+line TWO\n line three\n"
+    }
+  ]
+}

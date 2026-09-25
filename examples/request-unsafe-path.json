@@ -1,0 +1,8 @@
+{
+  "workdir": "./demo/workdir",
+  "patches": [
+    {
+      "diff": "--- a/../escape.txt\n+++ b/../escape.txt\n@@ -1,0 +1,1 @@\n+must be rejected\n"
+    }
+  ]
+}

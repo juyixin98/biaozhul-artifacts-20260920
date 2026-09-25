@@ -1,0 +1,8 @@
+{
+  "workdir": "./demo/workdir",
+  "patches": [
+    {
+      "diff": "--- a/no-newline.txt\n+++ b/no-newline.txt\n@@ -1,2 +1,2 @@\n alpha\n-beta\n\\ No newline at end of file\n+BETA\n\\ No newline at end of file\n"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+patchd verification run
+=========================
+date: 2026-09-23 19:33:12 UTC
+host: Linux 6.8.0-90-generic x86_64
+
+$ go version
+go version go1.22.2 linux/amd64
+
+$ go vet ./...
+(no issues)
+
+$ gofmt -l .
+(all files formatted)
+
+$ go build ./...
+(build OK)
+
+$ go test -race -count=1 ./...
+?   	patchd/cmd/patchd	[no test files]
+ok  	patchd/internal/apply	1.021s
+ok  	patchd/internal/batch	1.031s
+ok  	patchd/internal/diff	1.020s
+ok  	patchd/internal/paths	1.023s
+ok  	patchd/internal/server	1.028s
+
+$ go test -cover ./...
+	patchd/cmd/patchd		coverage: 0.0% of statements
+ok  	patchd/internal/apply	0.004s	coverage: 81.7% of statements
+ok  	patchd/internal/batch	0.007s	coverage: 69.2% of statements
+ok  	patchd/internal/diff	0.003s	coverage: 83.4% of statements
+ok  	patchd/internal/paths	0.004s	coverage: 76.1% of statements
+ok  	patchd/internal/server	0.008s	coverage: 76.9% of statements
+
+$ ./test/run_fixtures.sh
+== build ==
+ok   - go build
+== go test ==
+?   	patchd/cmd/patchd	[no test files]
+ok  	patchd/internal/apply	(cached)
+ok  	patchd/internal/batch	(cached)
+ok  	patchd/internal/diff	(cached)
+ok  	patchd/internal/paths	(cached)
+ok  	patchd/internal/server	(cached)
+ok   - go test ./...
+ok   - dry-run reports validated
+ok   - batch reports applied
+ok   - hello.txt content modified
+ok   - new file created
+ok   - file deleted
+ok   - no-newline content
+ok   - file ends with 'A' (no trailing newline)
+ok   - bad-context batch rejected (exit non-zero)
+ok   - error code context_mismatch
+ok   - overlapping hunks rejected
+ok   - error code overlapping_hunks
+ok   - path traversal rejected
+ok   - error code unsafe_path
+ok   - no file escaped to parent
+ok   - batch with one bad patch rejected wholesale
+ok   - first patch was not published
+ok   - no directories created on validation failure
+ok   - GET /healthz
+ok   - bad context over HTTP -> 422
+ok   - HTTP error detail present
+ok   - valid patch over HTTP -> 200
+ok   - HTTP patch applied
+
+=== fixtures: 24 passed, 0 failed ===
