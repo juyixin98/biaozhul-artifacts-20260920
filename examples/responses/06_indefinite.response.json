@@ -1,0 +1,20 @@
+{
+  "status": "negative_curvature",
+  "converged": false,
+  "message": "第 2 次迭代检测到负曲率：瑞利商 pᵀAp/pᵀp=-6.000e-01 < 0（原始 pᵀAp=-1.200e+01）：矩阵不是正定的（对称但不定），CG 不适用",
+  "iterations": 2,
+  "residual_norm": 2.0,
+  "initial_residual_norm": 1.0,
+  "relative_residual": 2.0,
+  "residual_history": [
+    1.0
+  ],
+  "x": [
+    1.0,
+    0.0
+  ],
+  "ok": true,
+  "algorithm_failed": true,
+  "nnz": 4,
+  "n": 2
+}
