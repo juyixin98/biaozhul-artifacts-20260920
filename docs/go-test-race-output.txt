@@ -1,0 +1,24 @@
+?   	fairdrf/cmd/drfsim	[no test files]
+?   	fairdrf/cmd/fairdrf	[no test files]
+=== RUN   TestAcceptanceHandCalculated
+--- PASS: TestAcceptanceHandCalculated (0.00s)
+=== RUN   TestHTTPEndToEnd
+--- PASS: TestHTTPEndToEnd (0.01s)
+=== RUN   TestWeightedShareOrdering
+--- PASS: TestWeightedShareOrdering (0.00s)
+=== RUN   TestDeterministicTieBreak
+--- PASS: TestDeterministicTieBreak (0.00s)
+=== RUN   TestPermanentHeadBlockIsTenantLocal
+--- PASS: TestPermanentHeadBlockIsTenantLocal (0.00s)
+=== RUN   TestEventsAreStructured
+--- PASS: TestEventsAreStructured (0.00s)
+=== RUN   TestSmallTaskFitsBehindBigHead
+--- PASS: TestSmallTaskFitsBehindBigHead (0.00s)
+=== RUN   TestNonPreemptibleAndReuse
+--- PASS: TestNonPreemptibleAndReuse (0.00s)
+=== RUN   TestNoOvercommitRandomized
+--- PASS: TestNoOvercommitRandomized (0.31s)
+=== RUN   TestValidationErrors
+--- PASS: TestValidationErrors (0.00s)
+PASS
+ok  	fairdrf/scheduler	1.343s

@@ -1,0 +1,9 @@
+{
+  "id": "huge-001",
+  "tenant_id": "team-batch",
+  "request": {
+    "cpu_milli": 20000,
+    "mem_mib": 32768
+  },
+  "duration": "1m"
+}

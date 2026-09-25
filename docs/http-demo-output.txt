@@ -1,0 +1,408 @@
+== health ==
+{
+    "status": "ok"
+}
+== create tenants (weights 1 and 2) ==
+{
+    "id": "team-batch",
+    "status": "created"
+}
+{
+    "id": "team-analytics",
+    "status": "created"
+}
+== submit a big task for team-batch (6 CPU / 6 GiB, 5s) ==
+{
+    "id": "batch-1",
+    "tenant_id": "team-batch",
+    "seq": 1,
+    "status": "RUNNING",
+    "request": {
+        "cpu_milli": 6000,
+        "mem_mib": 6144
+    },
+    "duration": "5s",
+    "started_at": "2026-09-23T21:02:36.041132781+08:00"
+}
+== submit two small analytics tasks ==
+{
+    "id": "ana-1",
+    "tenant_id": "team-analytics",
+    "seq": 2,
+    "status": "RUNNING",
+    "request": {
+        "cpu_milli": 1000,
+        "mem_mib": 1024
+    },
+    "duration": "8s",
+    "started_at": "2026-09-23T21:02:36.085592714+08:00"
+}
+{
+    "id": "ana-2",
+    "tenant_id": "team-analytics",
+    "seq": 3,
+    "status": "RUNNING",
+    "request": {
+        "cpu_milli": 1000,
+        "mem_mib": 1024
+    },
+    "duration": "8s",
+    "started_at": "2026-09-23T21:02:36.129357174+08:00"
+}
+== submit an infeasible task (exceeds total capacity) ==
+{
+    "id": "batch-huge",
+    "tenant_id": "team-batch",
+    "seq": 4,
+    "status": "WAITING",
+    "request": {
+        "cpu_milli": 99999,
+        "mem_mib": 99999
+    },
+    "duration": "10s"
+}
+== cluster snapshot ==
+{
+    "capacity": {
+        "cpu_milli": 10000,
+        "mem_mib": 10240
+    },
+    "used": {
+        "cpu_milli": 8000,
+        "mem_mib": 8192
+    },
+    "available": {
+        "cpu_milli": 2000,
+        "mem_mib": 2048
+    },
+    "tenants": [
+        {
+            "id": "team-analytics",
+            "weight": 2,
+            "dominant_share": 0.2,
+            "allocated": {
+                "cpu_milli": 2000,
+                "mem_mib": 2048
+            },
+            "running": [
+                {
+                    "id": "ana-1",
+                    "tenant_id": "team-analytics",
+                    "seq": 2,
+                    "status": "RUNNING",
+                    "request": {
+                        "cpu_milli": 1000,
+                        "mem_mib": 1024
+                    },
+                    "duration": "8s",
+                    "started_at": "2026-09-23T21:02:36.085592714+08:00"
+                },
+                {
+                    "id": "ana-2",
+                    "tenant_id": "team-analytics",
+                    "seq": 3,
+                    "status": "RUNNING",
+                    "request": {
+                        "cpu_milli": 1000,
+                        "mem_mib": 1024
+                    },
+                    "duration": "8s",
+                    "started_at": "2026-09-23T21:02:36.129357174+08:00"
+                }
+            ],
+            "waiting": null,
+            "finished_count": 0,
+            "head_blocked": false,
+            "head_exceeds_capacity": false
+        },
+        {
+            "id": "team-batch",
+            "weight": 1,
+            "dominant_share": 0.6,
+            "allocated": {
+                "cpu_milli": 6000,
+                "mem_mib": 6144
+            },
+            "running": [
+                {
+                    "id": "batch-1",
+                    "tenant_id": "team-batch",
+                    "seq": 1,
+                    "status": "RUNNING",
+                    "request": {
+                        "cpu_milli": 6000,
+                        "mem_mib": 6144
+                    },
+                    "duration": "5s",
+                    "started_at": "2026-09-23T21:02:36.041132781+08:00"
+                }
+            ],
+            "waiting": [
+                {
+                    "id": "batch-huge",
+                    "tenant_id": "team-batch",
+                    "seq": 4,
+                    "status": "WAITING",
+                    "request": {
+                        "cpu_milli": 99999,
+                        "mem_mib": 99999
+                    },
+                    "duration": "10s"
+                }
+            ],
+            "finished_count": 0,
+            "head_blocked": true,
+            "head_exceeds_capacity": true
+        }
+    ],
+    "tasks": [
+        {
+            "id": "batch-1",
+            "tenant_id": "team-batch",
+            "seq": 1,
+            "status": "RUNNING",
+            "request": {
+                "cpu_milli": 6000,
+                "mem_mib": 6144
+            },
+            "duration": "5s",
+            "started_at": "2026-09-23T21:02:36.041132781+08:00"
+        },
+        {
+            "id": "ana-1",
+            "tenant_id": "team-analytics",
+            "seq": 2,
+            "status": "RUNNING",
+            "request": {
+                "cpu_milli": 1000,
+                "mem_mib": 1024
+            },
+            "duration": "8s",
+            "started_at": "2026-09-23T21:02:36.085592714+08:00"
+        },
+        {
+            "id": "ana-2",
+            "tenant_id": "team-analytics",
+            "seq": 3,
+            "status": "RUNNING",
+            "request": {
+                "cpu_milli": 1000,
+                "mem_mib": 1024
+            },
+            "duration": "8s",
+            "started_at": "2026-09-23T21:02:36.129357174+08:00"
+        },
+        {
+            "id": "batch-huge",
+            "tenant_id": "team-batch",
+            "seq": 4,
+            "status": "WAITING",
+            "request": {
+                "cpu_milli": 99999,
+                "mem_mib": 99999
+            },
+            "duration": "10s"
+        }
+    ],
+    "event_seq": 10
+}
+== event log ==
+[
+    {
+        "event_id": 1,
+        "seq": 0,
+        "type": "TENANT_CREATED",
+        "at": "2026-09-23T21:02:35.956845272+08:00",
+        "tenant_id": "team-batch",
+        "used_after": {
+            "cpu_milli": 0,
+            "mem_mib": 0
+        },
+        "available_after": {
+            "cpu_milli": 10000,
+            "mem_mib": 10240
+        }
+    },
+    {
+        "event_id": 2,
+        "seq": 0,
+        "type": "TENANT_CREATED",
+        "at": "2026-09-23T21:02:35.997910283+08:00",
+        "tenant_id": "team-analytics",
+        "used_after": {
+            "cpu_milli": 0,
+            "mem_mib": 0
+        },
+        "available_after": {
+            "cpu_milli": 10000,
+            "mem_mib": 10240
+        }
+    },
+    {
+        "event_id": 3,
+        "seq": 1,
+        "type": "TASK_SUBMITTED",
+        "at": "2026-09-23T21:02:36.041122241+08:00",
+        "tenant_id": "team-batch",
+        "task_id": "batch-1",
+        "request": {
+            "cpu_milli": 6000,
+            "mem_mib": 6144
+        },
+        "used_after": {
+            "cpu_milli": 0,
+            "mem_mib": 0
+        },
+        "available_after": {
+            "cpu_milli": 10000,
+            "mem_mib": 10240
+        }
+    },
+    {
+        "event_id": 4,
+        "seq": 1,
+        "type": "TASK_STARTED",
+        "at": "2026-09-23T21:02:36.041133214+08:00",
+        "tenant_id": "team-batch",
+        "task_id": "batch-1",
+        "request": {
+            "cpu_milli": 6000,
+            "mem_mib": 6144
+        },
+        "used_after": {
+            "cpu_milli": 6000,
+            "mem_mib": 6144
+        },
+        "available_after": {
+            "cpu_milli": 4000,
+            "mem_mib": 4096
+        }
+    },
+    {
+        "event_id": 5,
+        "seq": 2,
+        "type": "TASK_SUBMITTED",
+        "at": "2026-09-23T21:02:36.085586143+08:00",
+        "tenant_id": "team-analytics",
+        "task_id": "ana-1",
+        "request": {
+            "cpu_milli": 1000,
+            "mem_mib": 1024
+        },
+        "used_after": {
+            "cpu_milli": 6000,
+            "mem_mib": 6144
+        },
+        "available_after": {
+            "cpu_milli": 4000,
+            "mem_mib": 4096
+        }
+    },
+    {
+        "event_id": 6,
+        "seq": 2,
+        "type": "TASK_STARTED",
+        "at": "2026-09-23T21:02:36.085593111+08:00",
+        "tenant_id": "team-analytics",
+        "task_id": "ana-1",
+        "request": {
+            "cpu_milli": 1000,
+            "mem_mib": 1024
+        },
+        "used_after": {
+            "cpu_milli": 7000,
+            "mem_mib": 7168
+        },
+        "available_after": {
+            "cpu_milli": 3000,
+            "mem_mib": 3072
+        }
+    },
+    {
+        "event_id": 7,
+        "seq": 3,
+        "type": "TASK_SUBMITTED",
+        "at": "2026-09-23T21:02:36.129354777+08:00",
+        "tenant_id": "team-analytics",
+        "task_id": "ana-2",
+        "request": {
+            "cpu_milli": 1000,
+            "mem_mib": 1024
+        },
+        "used_after": {
+            "cpu_milli": 7000,
+            "mem_mib": 7168
+        },
+        "available_after": {
+            "cpu_milli": 3000,
+            "mem_mib": 3072
+        }
+    },
+    {
+        "event_id": 8,
+        "seq": 3,
+        "type": "TASK_STARTED",
+        "at": "2026-09-23T21:02:36.129357515+08:00",
+        "tenant_id": "team-analytics",
+        "task_id": "ana-2",
+        "request": {
+            "cpu_milli": 1000,
+            "mem_mib": 1024
+        },
+        "used_after": {
+            "cpu_milli": 8000,
+            "mem_mib": 8192
+        },
+        "available_after": {
+            "cpu_milli": 2000,
+            "mem_mib": 2048
+        }
+    },
+    {
+        "event_id": 9,
+        "seq": 4,
+        "type": "TASK_SUBMITTED",
+        "at": "2026-09-23T21:02:36.173639871+08:00",
+        "tenant_id": "team-batch",
+        "task_id": "batch-huge",
+        "request": {
+            "cpu_milli": 99999,
+            "mem_mib": 99999
+        },
+        "used_after": {
+            "cpu_milli": 8000,
+            "mem_mib": 8192
+        },
+        "available_after": {
+            "cpu_milli": 2000,
+            "mem_mib": 2048
+        }
+    },
+    {
+        "event_id": 10,
+        "seq": 4,
+        "type": "TASK_BLOCKED",
+        "at": "2026-09-23T21:02:36.17365066+08:00",
+        "tenant_id": "team-batch",
+        "task_id": "batch-huge",
+        "request": {
+            "cpu_milli": 99999,
+            "mem_mib": 99999
+        },
+        "used_after": {
+            "cpu_milli": 8000,
+            "mem_mib": 8192
+        },
+        "available_after": {
+            "cpu_milli": 2000,
+            "mem_mib": 2048
+        },
+        "reason": "request exceeds total cluster capacity; queue head blocked (other tenants unaffected)"
+    }
+]
+
+Wait ~10s then re-check the snapshot to see releases/admissions:
+  curl -sS http://localhost:18092/snapshot | python3 -m json.tool
+=== snapshot after drain (12s wait) ===
+{"capacity":{"cpu_milli":10000,"mem_mib":10240},"used":{"cpu_milli":0,"mem_mib":0},"available":{"cpu_milli":10000,"mem_mib":10240},"tenants":[{"id":"team-analytics","weight":2,"dominant_share":0,"allocated":{"cpu_milli":0,"mem_mib":0},"running":null,"waiting":null,"finished_count":2,"head_blocked":false,"head_exceeds_capacity":false},{"id":"team-batch","weight":1,"dominant_share":0,"allocated":{"cpu_milli":0,"mem_mib":0},"running":null,"waiting":[{"id":"batch-huge","tenant_id":"team-batch","seq":4,"status":"WAITING","request":{"cpu_milli":99999,"mem_mib":99999},"duration":"10s"}],"finished_count":1,"head_blocked":true,"head_exceeds_capacity":true}],"tasks":[{"id":"batch-1","tenant_id":"team-batch","seq":1,"status":"FINISHED","request":{"cpu_milli":6000,"mem_mib":6144},"duration":"5s","started_at":"2026-09-23T21:02:36.041132781+08:00","finished_at":"2026-09-23T21:02:41.041616551+08:00"},{"id":"ana-1","tenant_id":"team-analytics","seq":2,"status":"FINISHED","request":{"cpu_milli":1000,"mem_mib":1024},"duration":"8s","started_at":"2026-09-23T21:02:36.085592714+08:00","finished_at":"2026-09-23T21:02:44.085687737+08:00"},{"id":"ana-2","tenant_id":"team-analytics","seq":3,"status":"FINISHED","request":{"cpu_milli":1000,"mem_mib":1024},"duration":"8s","started_at":"2026-09-23T21:02:36.129357174+08:00","finished_at":"2026-09-23T21:02:44.129900764+08:00"},{"id":"batch-huge","tenant_id":"team-batch","seq":4,"status":"WAITING","request":{"cpu_milli":99999,"mem_mib":99999},"duration":"10s"}],"event_seq":13}
+

@@ -1,0 +1,9 @@
+{
+  "id": "etl-001",
+  "tenant_id": "team-analytics",
+  "request": {
+    "cpu_milli": 2000,
+    "mem_mib": 2048
+  },
+  "duration": "30s"
+}
