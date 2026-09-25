@@ -1,0 +1,13 @@
+{
+  "grid": {"width": 10, "height": 10, "resolution": 1.0, "origin": [0.0, 0.0]},
+  "params": {"log_odds_occ": 0.85, "log_odds_free": -0.4, "clamp_min": -4.0, "clamp_max": 4.0},
+  "scans": [
+    {
+      "pose": {"x": 0.5, "y": 0.5, "theta": 0.0},
+      "angle_min": 0.0,
+      "angle_increment": 1.5707963267948966,
+      "range_max": 8.0,
+      "ranges": [20.0, 20.0, 20.0, 20.0]
+    }
+  ]
+}
