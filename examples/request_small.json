@@ -1,0 +1,11 @@
+{
+  "capacity": 15,
+  "items": [
+    {"id": "laptop", "weight": 5, "value": 12},
+    {"id": "camera", "weight": 3, "value": 7},
+    {"id": "book", "weight": 4, "value": 8},
+    {"id": "charger", "weight": 2, "value": 4},
+    {"id": "headphones", "weight": 3, "value": 6}
+  ],
+  "options": {"time_limit_ms": 5000, "max_nodes": 200000}
+}

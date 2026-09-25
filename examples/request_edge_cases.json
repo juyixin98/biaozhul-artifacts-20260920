@@ -1,0 +1,12 @@
+{
+  "capacity": 8,
+  "items": [
+    {"id": "free-coupon", "weight": 0, "value": 5},
+    {"id": "dead-weight", "weight": 0, "value": -3},
+    {"id": "junk", "weight": 4, "value": -10},
+    {"id": "ratio-a", "weight": 2, "value": 4},
+    {"id": "ratio-b", "weight": 3, "value": 6},
+    {"id": "ratio-c", "weight": 5, "value": 10}
+  ],
+  "options": {"time_limit_ms": 5000}
+}
