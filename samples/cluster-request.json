@@ -1,0 +1,25 @@
+{
+  "threshold": 0.5,
+  "documents": [
+    {
+      "id": "report-v1",
+      "text": "the quick brown fox jumps over the lazy dog near the river bank while the sun rises over the quiet valley"
+    },
+    {
+      "id": "report-v2",
+      "text": "the quick brown fox jumps over the lazy dog near the river bank while the sun sets over the quiet valley"
+    },
+    {
+      "id": "report-v3",
+      "text": "the quick brown fox jumps over the lazy dog near the river side while the moon rises above the noisy city"
+    },
+    {
+      "id": "unrelated",
+      "text": "compilers parse source code into tokens build syntax trees and emit bytecode for the runtime"
+    },
+    {
+      "id": "too-short",
+      "text": "hello world"
+    }
+  ]
+}
