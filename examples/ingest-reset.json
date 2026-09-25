@@ -1,0 +1,14 @@
+{
+  "labels": {
+    "__name__": "http_requests_total",
+    "instance": "demo-1",
+    "path": "/api/v1/widgets"
+  },
+  "samples": [
+    {"ts_ms": 1700000000000, "value": 0},
+    {"ts_ms": 1700000010000, "value": 12},
+    {"ts_ms": 1700000020000, "value": 25},
+    {"ts_ms": 1700000030000, "value": 3},
+    {"ts_ms": 1700000040000, "value": 9}
+  ]
+}

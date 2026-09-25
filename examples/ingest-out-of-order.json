@@ -1,0 +1,10 @@
+{
+  "labels": {"__name__": "orders_total", "shop": "shop-7"},
+  "samples": [
+    {"ts_ms": 1700000030000, "value": 30},
+    {"ts_ms": 1700000010000, "value": 10},
+    {"ts_ms": 1700000020000, "value": 20},
+    {"ts_ms": 1700000020000, "value": 20},
+    {"ts_ms": 1700000020000, "value": 99}
+  ]
+}

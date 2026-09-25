@@ -1,0 +1,1526 @@
+
+===== 1. 编译 =====
+
+===== 2. 启动服务（空数据目录，首次启动会加载合成种子） =====
+2026/09/24 04:21:59 合成种子加载完成：2 条记录（来自 examples/seed.jsonl）
+2026/09/24 04:21:59 计数器重置服务启动，监听 127.0.0.1:52157（WAL: /tmp/counterreset-demo.KaV2My/counter.wal.jsonl）
+{
+  "status": "ok"
+}
+
+
+===== 3. 序列列表（种子含 2 条序列） =====
+{
+  "series": [
+    {
+      "labels": {
+        "__name__": "http_requests_total",
+        "instance": "demo-1"
+      },
+      "sample_count": 11,
+      "first_ts_ms": 1700000000000,
+      "last_ts_ms": 1700000100000,
+      "duplicate_same": 1,
+      "duplicate_conflicts": 1
+    },
+    {
+      "labels": {
+        "__name__": "jobs_total",
+        "instance": "demo-1"
+      },
+      "sample_count": 3,
+      "first_ts_ms": 1700000000000,
+      "last_ts_ms": 1700000060000,
+      "duplicate_same": 0,
+      "duplicate_conflicts": 0
+    }
+  ]
+}
+
+===== 4. 查询主序列完整窗口 [t0,t100]，不外推（下界点估计；upper=null 表示无上界信息） =====
+{
+  "labels": {
+    "__name__": "http_requests_total",
+    "instance": "demo-1"
+  },
+  "report": {
+    "window_start_ms": 1700000000000,
+    "window_end_ms": 1700000100000,
+    "window_ms": 100000,
+    "selected_samples": [
+      {
+        "ts_ms": 1700000000000,
+        "value": 0
+      },
+      {
+        "ts_ms": 1700000010000,
+        "value": 10
+      },
+      {
+        "ts_ms": 1700000020000,
+        "value": 20
+      },
+      {
+        "ts_ms": 1700000030000,
+        "value": 20
+      },
+      {
+        "ts_ms": 1700000040000,
+        "value": 30
+      },
+      {
+        "ts_ms": 1700000050000,
+        "value": 30
+      },
+      {
+        "ts_ms": 1700000060000,
+        "value": 40
+      },
+      {
+        "ts_ms": 1700000070000,
+        "value": 45
+      },
+      {
+        "ts_ms": 1700000080000,
+        "value": 60
+      },
+      {
+        "ts_ms": 1700000090000,
+        "value": 10
+      },
+      {
+        "ts_ms": 1700000100000,
+        "value": 15
+      }
+    ],
+    "sample_count": 11,
+    "median_interval_ms": 10000,
+    "observed_start_ms": 1700000000000,
+    "observed_end_ms": 1700000100000,
+    "observed_span_ms": 100000,
+    "intervals": [
+      {
+        "t1_ms": 1700000000000,
+        "t2_ms": 1700000010000,
+        "v1": 0,
+        "v2": 10,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000010000,
+        "t2_ms": 1700000020000,
+        "v1": 10,
+        "v2": 20,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000020000,
+        "t2_ms": 1700000030000,
+        "v1": 20,
+        "v2": 20,
+        "delta_ms": 10000,
+        "increase_lb": 0,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000030000,
+        "t2_ms": 1700000040000,
+        "v1": 20,
+        "v2": 30,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000040000,
+        "t2_ms": 1700000050000,
+        "v1": 30,
+        "v2": 30,
+        "delta_ms": 10000,
+        "increase_lb": 0,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000050000,
+        "t2_ms": 1700000060000,
+        "v1": 30,
+        "v2": 40,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000060000,
+        "t2_ms": 1700000070000,
+        "v1": 40,
+        "v2": 45,
+        "delta_ms": 10000,
+        "increase_lb": 5,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000070000,
+        "t2_ms": 1700000080000,
+        "v1": 45,
+        "v2": 60,
+        "delta_ms": 10000,
+        "increase_lb": 15,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000080000,
+        "t2_ms": 1700000090000,
+        "v1": 60,
+        "v2": 10,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": true,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000090000,
+        "t2_ms": 1700000100000,
+        "v1": 10,
+        "v2": 15,
+        "delta_ms": 10000,
+        "increase_lb": 5,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      }
+    ],
+    "resets": [
+      {
+        "before_ts_ms": 1700000080000,
+        "after_ts_ms": 1700000090000,
+        "before_value": 60,
+        "after_value": 10
+      }
+    ],
+    "gaps": [],
+    "extrapolation": "none",
+    "capacity": null,
+    "raw_increase": {
+      "point": 75,
+      "lower": 75,
+      "upper": null
+    },
+    "increase": {
+      "point": 75,
+      "lower": 75,
+      "upper": null
+    },
+    "increase_denominator_ms": 100000,
+    "extrapolation_factor": 1,
+    "observed_coverage": 1,
+    "rate_per_second": {
+      "point": 0.75,
+      "lower": 0.75,
+      "upper": null
+    },
+    "bounds_basis": "point/lower 为严格下界：真实增量不可能更低（即使缺样区间内有隐藏重置，也只会让真实值更大）。未提供计数器容量，区间内可能发生任意次重置/回绕，真实增量无上界（upper=null）。",
+    "notes": [
+      "边界策略 none：未对窗口两端的未观测部分做外推，注意 observed_coverage 可能小于 1",
+      "观测到 1 次计数器重置（相邻样本值下降）；点估计假设重置发生在上一样本之后（下界）"
+    ]
+  }
+}
+
+===== 5. 同窗口给定容量 C=100（条件上界，仅在“每区间至多一次重置”假设下成立） =====
+{
+  "labels": {
+    "__name__": "http_requests_total",
+    "instance": "demo-1"
+  },
+  "report": {
+    "window_start_ms": 1700000000000,
+    "window_end_ms": 1700000100000,
+    "window_ms": 100000,
+    "selected_samples": [
+      {
+        "ts_ms": 1700000000000,
+        "value": 0
+      },
+      {
+        "ts_ms": 1700000010000,
+        "value": 10
+      },
+      {
+        "ts_ms": 1700000020000,
+        "value": 20
+      },
+      {
+        "ts_ms": 1700000030000,
+        "value": 20
+      },
+      {
+        "ts_ms": 1700000040000,
+        "value": 30
+      },
+      {
+        "ts_ms": 1700000050000,
+        "value": 30
+      },
+      {
+        "ts_ms": 1700000060000,
+        "value": 40
+      },
+      {
+        "ts_ms": 1700000070000,
+        "value": 45
+      },
+      {
+        "ts_ms": 1700000080000,
+        "value": 60
+      },
+      {
+        "ts_ms": 1700000090000,
+        "value": 10
+      },
+      {
+        "ts_ms": 1700000100000,
+        "value": 15
+      }
+    ],
+    "sample_count": 11,
+    "median_interval_ms": 10000,
+    "observed_start_ms": 1700000000000,
+    "observed_end_ms": 1700000100000,
+    "observed_span_ms": 100000,
+    "intervals": [
+      {
+        "t1_ms": 1700000000000,
+        "t2_ms": 1700000010000,
+        "v1": 0,
+        "v2": 10,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": 110,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000010000,
+        "t2_ms": 1700000020000,
+        "v1": 10,
+        "v2": 20,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": 110,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000020000,
+        "t2_ms": 1700000030000,
+        "v1": 20,
+        "v2": 20,
+        "delta_ms": 10000,
+        "increase_lb": 0,
+        "increase_ub": 100,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000030000,
+        "t2_ms": 1700000040000,
+        "v1": 20,
+        "v2": 30,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": 110,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000040000,
+        "t2_ms": 1700000050000,
+        "v1": 30,
+        "v2": 30,
+        "delta_ms": 10000,
+        "increase_lb": 0,
+        "increase_ub": 100,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000050000,
+        "t2_ms": 1700000060000,
+        "v1": 30,
+        "v2": 40,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": 110,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000060000,
+        "t2_ms": 1700000070000,
+        "v1": 40,
+        "v2": 45,
+        "delta_ms": 10000,
+        "increase_lb": 5,
+        "increase_ub": 105,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000070000,
+        "t2_ms": 1700000080000,
+        "v1": 45,
+        "v2": 60,
+        "delta_ms": 10000,
+        "increase_lb": 15,
+        "increase_ub": 115,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000080000,
+        "t2_ms": 1700000090000,
+        "v1": 60,
+        "v2": 10,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": 50,
+        "reset": true,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000090000,
+        "t2_ms": 1700000100000,
+        "v1": 10,
+        "v2": 15,
+        "delta_ms": 10000,
+        "increase_lb": 5,
+        "increase_ub": 105,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      }
+    ],
+    "resets": [
+      {
+        "before_ts_ms": 1700000080000,
+        "after_ts_ms": 1700000090000,
+        "before_value": 60,
+        "after_value": 10
+      }
+    ],
+    "gaps": [],
+    "extrapolation": "none",
+    "capacity": 100,
+    "raw_increase": {
+      "point": 75,
+      "lower": 75,
+      "upper": 1015
+    },
+    "increase": {
+      "point": 75,
+      "lower": 75,
+      "upper": 1015
+    },
+    "increase_denominator_ms": 100000,
+    "extrapolation_factor": 1,
+    "observed_coverage": 1,
+    "rate_per_second": {
+      "point": 0.75,
+      "lower": 0.75,
+      "upper": 10.15
+    },
+    "bounds_basis": "point/lower 为严格下界：真实增量不可能更低（即使缺样区间内有隐藏重置，也只会让真实值更大）。upper 为条件上界：仅在给定容量 C=100、且每个观测区间至多重置一次、无隐藏回绕的额外假设下成立；缺样区间内部若发生多次重置，上界将失效。",
+    "notes": [
+      "边界策略 none：未对窗口两端的未观测部分做外推，注意 observed_coverage 可能小于 1",
+      "观测到 1 次计数器重置（相邻样本值下降）；点估计假设重置发生在上一样本之后（下界）"
+    ]
+  }
+}
+
+===== 6. 窗口 [t0,t200]：后 100s 无样本 —— none 不外推，coverage=0.5 =====
+{
+  "labels": {
+    "__name__": "http_requests_total",
+    "instance": "demo-1"
+  },
+  "report": {
+    "window_start_ms": 1700000000000,
+    "window_end_ms": 1700000200000,
+    "window_ms": 200000,
+    "selected_samples": [
+      {
+        "ts_ms": 1700000000000,
+        "value": 0
+      },
+      {
+        "ts_ms": 1700000010000,
+        "value": 10
+      },
+      {
+        "ts_ms": 1700000020000,
+        "value": 20
+      },
+      {
+        "ts_ms": 1700000030000,
+        "value": 20
+      },
+      {
+        "ts_ms": 1700000040000,
+        "value": 30
+      },
+      {
+        "ts_ms": 1700000050000,
+        "value": 30
+      },
+      {
+        "ts_ms": 1700000060000,
+        "value": 40
+      },
+      {
+        "ts_ms": 1700000070000,
+        "value": 45
+      },
+      {
+        "ts_ms": 1700000080000,
+        "value": 60
+      },
+      {
+        "ts_ms": 1700000090000,
+        "value": 10
+      },
+      {
+        "ts_ms": 1700000100000,
+        "value": 15
+      }
+    ],
+    "sample_count": 11,
+    "median_interval_ms": 10000,
+    "observed_start_ms": 1700000000000,
+    "observed_end_ms": 1700000100000,
+    "observed_span_ms": 100000,
+    "intervals": [
+      {
+        "t1_ms": 1700000000000,
+        "t2_ms": 1700000010000,
+        "v1": 0,
+        "v2": 10,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000010000,
+        "t2_ms": 1700000020000,
+        "v1": 10,
+        "v2": 20,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000020000,
+        "t2_ms": 1700000030000,
+        "v1": 20,
+        "v2": 20,
+        "delta_ms": 10000,
+        "increase_lb": 0,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000030000,
+        "t2_ms": 1700000040000,
+        "v1": 20,
+        "v2": 30,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000040000,
+        "t2_ms": 1700000050000,
+        "v1": 30,
+        "v2": 30,
+        "delta_ms": 10000,
+        "increase_lb": 0,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000050000,
+        "t2_ms": 1700000060000,
+        "v1": 30,
+        "v2": 40,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000060000,
+        "t2_ms": 1700000070000,
+        "v1": 40,
+        "v2": 45,
+        "delta_ms": 10000,
+        "increase_lb": 5,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000070000,
+        "t2_ms": 1700000080000,
+        "v1": 45,
+        "v2": 60,
+        "delta_ms": 10000,
+        "increase_lb": 15,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000080000,
+        "t2_ms": 1700000090000,
+        "v1": 60,
+        "v2": 10,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": true,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000090000,
+        "t2_ms": 1700000100000,
+        "v1": 10,
+        "v2": 15,
+        "delta_ms": 10000,
+        "increase_lb": 5,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      }
+    ],
+    "resets": [
+      {
+        "before_ts_ms": 1700000080000,
+        "after_ts_ms": 1700000090000,
+        "before_value": 60,
+        "after_value": 10
+      }
+    ],
+    "gaps": [],
+    "extrapolation": "none",
+    "capacity": null,
+    "raw_increase": {
+      "point": 75,
+      "lower": 75,
+      "upper": null
+    },
+    "increase": {
+      "point": 75,
+      "lower": 75,
+      "upper": null
+    },
+    "increase_denominator_ms": 200000,
+    "extrapolation_factor": 1,
+    "observed_coverage": 0.5,
+    "rate_per_second": {
+      "point": 0.375,
+      "lower": 0.375,
+      "upper": null
+    },
+    "bounds_basis": "point/lower 为严格下界：真实增量不可能更低（即使缺样区间内有隐藏重置，也只会让真实值更大）。未提供计数器容量，区间内可能发生任意次重置/回绕，真实增量无上界（upper=null）。",
+    "notes": [
+      "边界策略 none：未对窗口两端的未观测部分做外推，注意 observed_coverage 可能小于 1",
+      "观测到 1 次计数器重置（相邻样本值下降）；点估计假设重置发生在上一样本之后（下界）"
+    ]
+  }
+}
+
+===== 7. 同窗口 linear 线性外推（启发式，非精确值） =====
+{
+  "labels": {
+    "__name__": "http_requests_total",
+    "instance": "demo-1"
+  },
+  "report": {
+    "window_start_ms": 1700000000000,
+    "window_end_ms": 1700000200000,
+    "window_ms": 200000,
+    "selected_samples": [
+      {
+        "ts_ms": 1700000000000,
+        "value": 0
+      },
+      {
+        "ts_ms": 1700000010000,
+        "value": 10
+      },
+      {
+        "ts_ms": 1700000020000,
+        "value": 20
+      },
+      {
+        "ts_ms": 1700000030000,
+        "value": 20
+      },
+      {
+        "ts_ms": 1700000040000,
+        "value": 30
+      },
+      {
+        "ts_ms": 1700000050000,
+        "value": 30
+      },
+      {
+        "ts_ms": 1700000060000,
+        "value": 40
+      },
+      {
+        "ts_ms": 1700000070000,
+        "value": 45
+      },
+      {
+        "ts_ms": 1700000080000,
+        "value": 60
+      },
+      {
+        "ts_ms": 1700000090000,
+        "value": 10
+      },
+      {
+        "ts_ms": 1700000100000,
+        "value": 15
+      }
+    ],
+    "sample_count": 11,
+    "median_interval_ms": 10000,
+    "observed_start_ms": 1700000000000,
+    "observed_end_ms": 1700000100000,
+    "observed_span_ms": 100000,
+    "intervals": [
+      {
+        "t1_ms": 1700000000000,
+        "t2_ms": 1700000010000,
+        "v1": 0,
+        "v2": 10,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000010000,
+        "t2_ms": 1700000020000,
+        "v1": 10,
+        "v2": 20,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000020000,
+        "t2_ms": 1700000030000,
+        "v1": 20,
+        "v2": 20,
+        "delta_ms": 10000,
+        "increase_lb": 0,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000030000,
+        "t2_ms": 1700000040000,
+        "v1": 20,
+        "v2": 30,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000040000,
+        "t2_ms": 1700000050000,
+        "v1": 30,
+        "v2": 30,
+        "delta_ms": 10000,
+        "increase_lb": 0,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000050000,
+        "t2_ms": 1700000060000,
+        "v1": 30,
+        "v2": 40,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000060000,
+        "t2_ms": 1700000070000,
+        "v1": 40,
+        "v2": 45,
+        "delta_ms": 10000,
+        "increase_lb": 5,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000070000,
+        "t2_ms": 1700000080000,
+        "v1": 45,
+        "v2": 60,
+        "delta_ms": 10000,
+        "increase_lb": 15,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000080000,
+        "t2_ms": 1700000090000,
+        "v1": 60,
+        "v2": 10,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": true,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000090000,
+        "t2_ms": 1700000100000,
+        "v1": 10,
+        "v2": 15,
+        "delta_ms": 10000,
+        "increase_lb": 5,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      }
+    ],
+    "resets": [
+      {
+        "before_ts_ms": 1700000080000,
+        "after_ts_ms": 1700000090000,
+        "before_value": 60,
+        "after_value": 10
+      }
+    ],
+    "gaps": [],
+    "extrapolation": "linear",
+    "capacity": null,
+    "raw_increase": {
+      "point": 75,
+      "lower": 75,
+      "upper": null
+    },
+    "increase": {
+      "point": 150,
+      "lower": 150,
+      "upper": null
+    },
+    "increase_denominator_ms": 200000,
+    "extrapolation_factor": 2,
+    "observed_coverage": 0.5,
+    "rate_per_second": {
+      "point": 0.75,
+      "lower": 0.75,
+      "upper": null
+    },
+    "bounds_basis": "point/lower 为严格下界：真实增量不可能更低（即使缺样区间内有隐藏重置，也只会让真实值更大）。未提供计数器容量，区间内可能发生任意次重置/回绕，真实增量无上界（upper=null）。",
+    "notes": [
+      "边界采用 linear 外推（因子 2.0000）：这是按观测斜率推算的启发式估计，不是未观测区间的精确值",
+      "观测到 1 次计数器重置（相邻样本值下降）；点估计假设重置发生在上一样本之后（下界）"
+    ]
+  }
+}
+
+===== 8. 同窗口 clamped 截断外推（默认策略，近似 Prometheus） =====
+{
+  "labels": {
+    "__name__": "http_requests_total",
+    "instance": "demo-1"
+  },
+  "report": {
+    "window_start_ms": 1700000000000,
+    "window_end_ms": 1700000200000,
+    "window_ms": 200000,
+    "selected_samples": [
+      {
+        "ts_ms": 1700000000000,
+        "value": 0
+      },
+      {
+        "ts_ms": 1700000010000,
+        "value": 10
+      },
+      {
+        "ts_ms": 1700000020000,
+        "value": 20
+      },
+      {
+        "ts_ms": 1700000030000,
+        "value": 20
+      },
+      {
+        "ts_ms": 1700000040000,
+        "value": 30
+      },
+      {
+        "ts_ms": 1700000050000,
+        "value": 30
+      },
+      {
+        "ts_ms": 1700000060000,
+        "value": 40
+      },
+      {
+        "ts_ms": 1700000070000,
+        "value": 45
+      },
+      {
+        "ts_ms": 1700000080000,
+        "value": 60
+      },
+      {
+        "ts_ms": 1700000090000,
+        "value": 10
+      },
+      {
+        "ts_ms": 1700000100000,
+        "value": 15
+      }
+    ],
+    "sample_count": 11,
+    "median_interval_ms": 10000,
+    "observed_start_ms": 1700000000000,
+    "observed_end_ms": 1700000100000,
+    "observed_span_ms": 100000,
+    "intervals": [
+      {
+        "t1_ms": 1700000000000,
+        "t2_ms": 1700000010000,
+        "v1": 0,
+        "v2": 10,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000010000,
+        "t2_ms": 1700000020000,
+        "v1": 10,
+        "v2": 20,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000020000,
+        "t2_ms": 1700000030000,
+        "v1": 20,
+        "v2": 20,
+        "delta_ms": 10000,
+        "increase_lb": 0,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000030000,
+        "t2_ms": 1700000040000,
+        "v1": 20,
+        "v2": 30,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000040000,
+        "t2_ms": 1700000050000,
+        "v1": 30,
+        "v2": 30,
+        "delta_ms": 10000,
+        "increase_lb": 0,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000050000,
+        "t2_ms": 1700000060000,
+        "v1": 30,
+        "v2": 40,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000060000,
+        "t2_ms": 1700000070000,
+        "v1": 40,
+        "v2": 45,
+        "delta_ms": 10000,
+        "increase_lb": 5,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000070000,
+        "t2_ms": 1700000080000,
+        "v1": 45,
+        "v2": 60,
+        "delta_ms": 10000,
+        "increase_lb": 15,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000080000,
+        "t2_ms": 1700000090000,
+        "v1": 60,
+        "v2": 10,
+        "delta_ms": 10000,
+        "increase_lb": 10,
+        "increase_ub": null,
+        "reset": true,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000090000,
+        "t2_ms": 1700000100000,
+        "v1": 10,
+        "v2": 15,
+        "delta_ms": 10000,
+        "increase_lb": 5,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      }
+    ],
+    "resets": [
+      {
+        "before_ts_ms": 1700000080000,
+        "after_ts_ms": 1700000090000,
+        "before_value": 60,
+        "after_value": 10
+      }
+    ],
+    "gaps": [],
+    "extrapolation": "clamped",
+    "capacity": null,
+    "raw_increase": {
+      "point": 75,
+      "lower": 75,
+      "upper": null
+    },
+    "increase": {
+      "point": 78.75,
+      "lower": 78.75,
+      "upper": null
+    },
+    "increase_denominator_ms": 200000,
+    "extrapolation_factor": 1.05,
+    "observed_coverage": 0.5,
+    "rate_per_second": {
+      "point": 0.39375,
+      "lower": 0.39375,
+      "upper": null
+    },
+    "bounds_basis": "point/lower 为严格下界：真实增量不可能更低（即使缺样区间内有隐藏重置，也只会让真实值更大）。未提供计数器容量，区间内可能发生任意次重置/回绕，真实增量无上界（upper=null）。",
+    "notes": [
+      "边界采用 clamped 外推（因子 1.0500）：这是按观测斜率推算的启发式估计，不是未观测区间的精确值",
+      "观测到 1 次计数器重置（相邻样本值下降）；点估计假设重置发生在上一样本之后（下界）"
+    ]
+  }
+}
+
+===== 9. 乱序摄入新序列（一次性 POST 乱序样本） =====
+{
+  "ingest": {
+    "unique_samples": 3,
+    "requested_samples": 5,
+    "batch_duplicate_same": 0,
+    "batch_duplicate_conflicts": 2,
+    "overlap_same": 0,
+    "overlap_conflicts": 0,
+    "total_duplicate_same": 0,
+    "total_duplicate_conflicts": 2
+  },
+  "labels": {
+    "__name__": "manual_demo",
+    "env": "test"
+  },
+  "status": "accepted"
+}
+
+===== 10. 查询乱序序列（ts=20000 冲突按 max-wins 保留 99） =====
+{
+  "labels": {
+    "__name__": "manual_demo",
+    "env": "test"
+  },
+  "report": {
+    "window_start_ms": 1700000010000,
+    "window_end_ms": 1700000030000,
+    "window_ms": 20000,
+    "selected_samples": [
+      {
+        "ts_ms": 1700000010000,
+        "value": 10
+      },
+      {
+        "ts_ms": 1700000020000,
+        "value": 99
+      },
+      {
+        "ts_ms": 1700000030000,
+        "value": 30
+      }
+    ],
+    "sample_count": 3,
+    "median_interval_ms": 10000,
+    "observed_start_ms": 1700000010000,
+    "observed_end_ms": 1700000030000,
+    "observed_span_ms": 20000,
+    "intervals": [
+      {
+        "t1_ms": 1700000010000,
+        "t2_ms": 1700000020000,
+        "v1": 10,
+        "v2": 99,
+        "delta_ms": 10000,
+        "increase_lb": 89,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000020000,
+        "t2_ms": 1700000030000,
+        "v1": 99,
+        "v2": 30,
+        "delta_ms": 10000,
+        "increase_lb": 30,
+        "increase_ub": null,
+        "reset": true,
+        "gap_ratio": 1,
+        "is_gap": false
+      }
+    ],
+    "resets": [
+      {
+        "before_ts_ms": 1700000020000,
+        "after_ts_ms": 1700000030000,
+        "before_value": 99,
+        "after_value": 30
+      }
+    ],
+    "gaps": [],
+    "extrapolation": "none",
+    "capacity": null,
+    "raw_increase": {
+      "point": 119,
+      "lower": 119,
+      "upper": null
+    },
+    "increase": {
+      "point": 119,
+      "lower": 119,
+      "upper": null
+    },
+    "increase_denominator_ms": 20000,
+    "extrapolation_factor": 1,
+    "observed_coverage": 1,
+    "rate_per_second": {
+      "point": 5.95,
+      "lower": 5.95,
+      "upper": null
+    },
+    "bounds_basis": "point/lower 为严格下界：真实增量不可能更低（即使缺样区间内有隐藏重置，也只会让真实值更大）。未提供计数器容量，区间内可能发生任意次重置/回绕，真实增量无上界（upper=null）。",
+    "notes": [
+      "边界策略 none：未对窗口两端的未观测部分做外推，注意 observed_coverage 可能小于 1",
+      "观测到 1 次计数器重置（相邻样本值下降）；点估计假设重置发生在上一样本之后（下界）"
+    ]
+  }
+}
+
+===== 11. 负值样本被拒绝（整批拒绝，HTTP 400，无任何写入） =====
+HTTP 400
+{
+  "error": "存在非法样本，整批拒绝（未写入任何数据）",
+  "rejected": [
+    {
+      "index": 1,
+      "ts_ms": 1700000020000,
+      "value": -1,
+      "error": "计数器值不允许为负：计数器语义下原始值必须非负"
+    }
+  ]
+}
+
+===== 12. NaN 也被拒绝（JSON 不支持 NaN 字面量，这里用 Go 测试覆盖；此处演示非法 JSON） =====
+HTTP 400
+{
+  "error": "请求体不是合法 JSON: invalid character 'n' looking for beginning of object key string"
+}
+
+===== 12b. 使用仓库中的请求样例文件摄入（--data @examples/ingest-reset.json） =====
+{
+  "ingest": {
+    "unique_samples": 5,
+    "requested_samples": 5,
+    "batch_duplicate_same": 0,
+    "batch_duplicate_conflicts": 0,
+    "overlap_same": 0,
+    "overlap_conflicts": 0,
+    "total_duplicate_same": 0,
+    "total_duplicate_conflicts": 0
+  },
+  "labels": {
+    "__name__": "http_requests_total",
+    "instance": "demo-1",
+    "path": "/api/v1/widgets"
+  },
+  "status": "accepted"
+}
+--- 再用样例文件验证负值整批拒绝（--data @examples/ingest-negative-rejected.json）---
+HTTP 400
+{
+  "error": "存在非法样本，整批拒绝（未写入任何数据）",
+  "rejected": [
+    {
+      "index": 1,
+      "ts_ms": 1700000020000,
+      "value": -1,
+      "error": "计数器值不允许为负：计数器语义下原始值必须非负"
+    }
+  ]
+}
+--- 查询样例文件写入的序列（t=10..40：12+13+3+6=34，其中 25→3 为重置）---
+{
+  "labels": {
+    "__name__": "http_requests_total",
+    "instance": "demo-1",
+    "path": "/api/v1/widgets"
+  },
+  "report": {
+    "window_start_ms": 1700000010000,
+    "window_end_ms": 1700000040000,
+    "window_ms": 30000,
+    "selected_samples": [
+      {
+        "ts_ms": 1700000010000,
+        "value": 12
+      },
+      {
+        "ts_ms": 1700000020000,
+        "value": 25
+      },
+      {
+        "ts_ms": 1700000030000,
+        "value": 3
+      },
+      {
+        "ts_ms": 1700000040000,
+        "value": 9
+      }
+    ],
+    "sample_count": 4,
+    "median_interval_ms": 10000,
+    "observed_start_ms": 1700000010000,
+    "observed_end_ms": 1700000040000,
+    "observed_span_ms": 30000,
+    "intervals": [
+      {
+        "t1_ms": 1700000010000,
+        "t2_ms": 1700000020000,
+        "v1": 12,
+        "v2": 25,
+        "delta_ms": 10000,
+        "increase_lb": 13,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000020000,
+        "t2_ms": 1700000030000,
+        "v1": 25,
+        "v2": 3,
+        "delta_ms": 10000,
+        "increase_lb": 3,
+        "increase_ub": null,
+        "reset": true,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000030000,
+        "t2_ms": 1700000040000,
+        "v1": 3,
+        "v2": 9,
+        "delta_ms": 10000,
+        "increase_lb": 6,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      }
+    ],
+    "resets": [
+      {
+        "before_ts_ms": 1700000020000,
+        "after_ts_ms": 1700000030000,
+        "before_value": 25,
+        "after_value": 3
+      }
+    ],
+    "gaps": [],
+    "extrapolation": "none",
+    "capacity": null,
+    "raw_increase": {
+      "point": 22,
+      "lower": 22,
+      "upper": null
+    },
+    "increase": {
+      "point": 22,
+      "lower": 22,
+      "upper": null
+    },
+    "increase_denominator_ms": 30000,
+    "extrapolation_factor": 1,
+    "observed_coverage": 1,
+    "rate_per_second": {
+      "point": 0.7333333333333333,
+      "lower": 0.7333333333333333,
+      "upper": null
+    },
+    "bounds_basis": "point/lower 为严格下界：真实增量不可能更低（即使缺样区间内有隐藏重置，也只会让真实值更大）。未提供计数器容量，区间内可能发生任意次重置/回绕，真实增量无上界（upper=null）。",
+    "notes": [
+      "边界策略 none：未对窗口两端的未观测部分做外推，注意 observed_coverage 可能小于 1",
+      "观测到 1 次计数器重置（相邻样本值下降）；点估计假设重置发生在上一样本之后（下界）"
+    ]
+  }
+}
+
+===== 13. 停止服务并重启（验证 WAL 持久化与重放） =====
+2026/09/24 04:21:59 收到退出信号，开始优雅关闭…
+已退出
+--- WAL 文件内容（每行一条摄入记录，含原始乱序）---
+{"labels":{"__name__":"http_requests_total","instance":"demo-1"},"samples":[{"ts_ms":1700000050000,"value":30},{"ts_ms":1700000020000,"value":20},{"ts_ms":1700000070000,"value":45},{"ts_ms":1700000010000,"value":10},{"ts_ms":1700000060000,"value":40},{"ts_ms":1700000090000,"value":10},{"ts_ms":1700000000000,"value":0},{"ts_ms":1700000030000,"value":20},{"ts_ms":1700000100000,"value":15},{"ts_ms":1700000080000,"value":60},{"ts_ms":1700000040000,"value":30},{"ts_ms":1700000020000,"value":20},{"ts_ms":1700000060000,"value":35}]}
+{"labels":{"__name__":"jobs_total","instance":"demo-1"},"samples":[{"ts_ms":1700000000000,"value":0},{"ts_ms":1700000030000,"value":3},{"ts_ms":1700000060000,"value":1}]}
+{"labels":{"__name__":"manual_demo","env":"test"},"samples":[{"ts_ms":1700000030000,"value":30},{"ts_ms":1700000010000,"value":10},{"ts_ms":1700000020000,"value":20},{"ts_ms":1700000020000,"value":20},{"ts_ms":1700000020000,"value":99}]}
+{"labels":{"__name__":"bad"},"samples":[{"ts_ms":1700000010000,"value":5},{"ts_ms":1700000020000,"value":-1}]}
+{"labels":{"__name__":"http_requests_total","instance":"demo-1","path":"/api/v1/widgets"},"samples":[{"ts_ms":1700000000000,"value":0},{"ts_ms":1700000010000,"value":12},{"ts_ms":1700000020000,"value":25},{"ts_ms":1700000030000,"value":3},{"ts_ms":1700000040000,"value":9}]}
+{"labels":{"__name__":"bad_counter"},"samples":[{"ts_ms":1700000010000,"value":5},{"ts_ms":1700000020000,"value":-1}]}
+2026/09/24 04:21:59 警告：重放时跳过含非法样本的记录 labels=map[__name__:bad] rejected=1
+2026/09/24 04:21:59 警告：重放时跳过含非法样本的记录 labels=map[__name__:bad_counter] rejected=1
+2026/09/24 04:21:59 WAL 重放完成：成功 6 条，损坏跳过 0 条
+2026/09/24 04:21:59 计数器重置服务启动，监听 127.0.0.1:52157（WAL: /tmp/counterreset-demo.KaV2My/counter.wal.jsonl）
+--- 重启后查询手动摄入的序列，数据仍在且已排序 ---
+{
+  "labels": {
+    "__name__": "manual_demo",
+    "env": "test"
+  },
+  "report": {
+    "window_start_ms": 1700000010000,
+    "window_end_ms": 1700000030000,
+    "window_ms": 20000,
+    "selected_samples": [
+      {
+        "ts_ms": 1700000010000,
+        "value": 10
+      },
+      {
+        "ts_ms": 1700000020000,
+        "value": 99
+      },
+      {
+        "ts_ms": 1700000030000,
+        "value": 30
+      }
+    ],
+    "sample_count": 3,
+    "median_interval_ms": 10000,
+    "observed_start_ms": 1700000010000,
+    "observed_end_ms": 1700000030000,
+    "observed_span_ms": 20000,
+    "intervals": [
+      {
+        "t1_ms": 1700000010000,
+        "t2_ms": 1700000020000,
+        "v1": 10,
+        "v2": 99,
+        "delta_ms": 10000,
+        "increase_lb": 89,
+        "increase_ub": null,
+        "reset": false,
+        "gap_ratio": 1,
+        "is_gap": false
+      },
+      {
+        "t1_ms": 1700000020000,
+        "t2_ms": 1700000030000,
+        "v1": 99,
+        "v2": 30,
+        "delta_ms": 10000,
+        "increase_lb": 30,
+        "increase_ub": null,
+        "reset": true,
+        "gap_ratio": 1,
+        "is_gap": false
+      }
+    ],
+    "resets": [
+      {
+        "before_ts_ms": 1700000020000,
+        "after_ts_ms": 1700000030000,
+        "before_value": 99,
+        "after_value": 30
+      }
+    ],
+    "gaps": [],
+    "extrapolation": "none",
+    "capacity": null,
+    "raw_increase": {
+      "point": 119,
+      "lower": 119,
+      "upper": null
+    },
+    "increase": {
+      "point": 119,
+      "lower": 119,
+      "upper": null
+    },
+    "increase_denominator_ms": 20000,
+    "extrapolation_factor": 1,
+    "observed_coverage": 1,
+    "rate_per_second": {
+      "point": 5.95,
+      "lower": 5.95,
+      "upper": null
+    },
+    "bounds_basis": "point/lower 为严格下界：真实增量不可能更低（即使缺样区间内有隐藏重置，也只会让真实值更大）。未提供计数器容量，区间内可能发生任意次重置/回绕，真实增量无上界（upper=null）。",
+    "notes": [
+      "边界策略 none：未对窗口两端的未观测部分做外推，注意 observed_coverage 可能小于 1",
+      "观测到 1 次计数器重置（相邻样本值下降）；点估计假设重置发生在上一样本之后（下界）"
+    ]
+  }
+}
+
+===== 14. 不存在的序列 -> 404 =====
+HTTP 404
+{
+  "error": "未找到该标签对应的序列"
+}
+
+===== 演示完成，数据目录: /tmp/counterreset-demo.KaV2My（服务即将被脚本退出时清理） =====
+2026/09/24 04:21:59 收到退出信号，开始优雅关闭…
+已退出

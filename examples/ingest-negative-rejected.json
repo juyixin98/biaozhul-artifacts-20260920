@@ -1,0 +1,7 @@
+{
+  "labels": {"__name__": "bad_counter"},
+  "samples": [
+    {"ts_ms": 1700000010000, "value": 5},
+    {"ts_ms": 1700000020000, "value": -1}
+  ]
+}
