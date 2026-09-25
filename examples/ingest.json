@@ -1,0 +1,11 @@
+{
+  "samples": [
+    {"metric": "cpu.usage", "labels": {"host": "h1", "dc": "dc-a"}, "ts": 7200, "value": 12.5},
+    {"metric": "cpu.usage", "labels": {"host": "h1", "dc": "dc-a"}, "ts": 7210, "value": 13.1},
+    {"metric": "cpu.usage", "labels": {"host": "h1", "dc": "dc-a"}, "ts": 7259, "value": 9.8},
+    {"metric": "cpu.usage", "labels": {"host": "h1", "dc": "dc-a"}, "ts": 7260, "value": 10.0},
+    {"metric": "cpu.usage", "labels": {"host": "h1", "dc": "dc-a"}, "ts": 10799, "value": 5.5},
+    {"metric": "cpu.usage", "labels": {"host": "h1", "dc": "dc-a"}, "ts": 10800, "value": 20.0},
+    {"metric": "cpu.usage", "labels": {"host": "h2", "dc": "dc-a"}, "ts": 7200, "value": 77.7}
+  ]
+}

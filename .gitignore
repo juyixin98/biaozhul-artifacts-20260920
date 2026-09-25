@@ -1,0 +1,13 @@
+# Local snapshot data
+/data/
+*.snap
+*.tmp
+
+# Binaries
+/bin/
+metricrollup-server
+metricrollup-verify
+
+# Editor/OS
+*.swp
+.DS_Store

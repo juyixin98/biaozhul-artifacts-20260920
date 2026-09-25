@@ -1,0 +1,6 @@
+{
+  "metric": "cpu.usage",
+  "labels": {"host": "h1", "dc": "dc-a"},
+  "ts": 7200,
+  "value": 42.25
+}
