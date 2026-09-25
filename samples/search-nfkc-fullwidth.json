@@ -1,0 +1,5 @@
+{
+  "query": "abc",
+  "threshold": 1,
+  "normalization": "NFKC"
+}
