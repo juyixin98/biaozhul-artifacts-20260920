@@ -1,0 +1,45 @@
+{
+  "expression": "GPL-3.0-only OR AGPL-3.0-only",
+  "decision": "deny",
+  "reasons": [
+    {
+      "code": "denied",
+      "expression": "GPL-3.0-only",
+      "message": "license \"GPL-3.0-only\" is explicitly denied by policy"
+    },
+    {
+      "code": "denied",
+      "expression": "AGPL-3.0-only",
+      "message": "license \"AGPL-3.0-only\" is explicitly denied by policy"
+    },
+    {
+      "code": "all-branches-denied",
+      "expression": "GPL-3.0-only OR AGPL-3.0-only",
+      "message": "OR has no allowed branch; every branch is explicitly denied"
+    }
+  ],
+  "alternatives": [
+    {
+      "expression": "GPL-3.0-only",
+      "decision": "deny",
+      "reasons": [
+        {
+          "code": "denied",
+          "expression": "GPL-3.0-only",
+          "message": "license \"GPL-3.0-only\" is explicitly denied by policy"
+        }
+      ]
+    },
+    {
+      "expression": "AGPL-3.0-only",
+      "decision": "deny",
+      "reasons": [
+        {
+          "code": "denied",
+          "expression": "AGPL-3.0-only",
+          "message": "license \"AGPL-3.0-only\" is explicitly denied by policy"
+        }
+      ]
+    }
+  ]
+}

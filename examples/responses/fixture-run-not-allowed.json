@@ -1,0 +1,4 @@
+{
+  "error": "fixture-not-allowed",
+  "message": "unknown fixture command \"rm -rf /\"; allowed: [go-build go-test go-version go-vet true]"
+}

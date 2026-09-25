@@ -1,0 +1,11 @@
+{
+  "expression": "GPL-3.0-only WITH Classpath-exception-2.0",
+  "decision": "deny",
+  "reasons": [
+    {
+      "code": "denied",
+      "expression": "GPL-3.0-only WITH Classpath-exception-2.0",
+      "message": "license \"GPL-3.0-only WITH Classpath-exception-2.0\" is explicitly denied by policy"
+    }
+  ]
+}

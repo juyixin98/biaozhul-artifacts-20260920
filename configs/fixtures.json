@@ -1,0 +1,40 @@
+{
+  "commands": [
+    {
+      "name": "go-version",
+      "description": "Print the local Go toolchain version.",
+      "program": "go",
+      "args": ["version"]
+    },
+    {
+      "name": "go-vet",
+      "description": "Run go vet on all local packages.",
+      "program": "go",
+      "args": ["vet", "./..."],
+      "workdir": ".",
+      "timeout_seconds": 120
+    },
+    {
+      "name": "go-test",
+      "description": "Run the local automated test suite.",
+      "program": "go",
+      "args": ["test", "./..."],
+      "workdir": ".",
+      "timeout_seconds": 120
+    },
+    {
+      "name": "go-build",
+      "description": "Compile all local packages without producing output binaries.",
+      "program": "go",
+      "args": ["build", "./..."],
+      "workdir": ".",
+      "timeout_seconds": 120
+    },
+    {
+      "name": "true",
+      "description": "Minimal always-succeeding local fixture used for cache checks.",
+      "program": "true",
+      "args": []
+    }
+  ]
+}

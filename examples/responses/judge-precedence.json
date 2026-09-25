@@ -1,0 +1,22 @@
+{
+  "expression": "GPL-3.0-only OR MIT AND Apache-2.0",
+  "decision": "allow",
+  "selection": "MIT AND Apache-2.0",
+  "alternatives": [
+    {
+      "expression": "GPL-3.0-only",
+      "decision": "deny",
+      "reasons": [
+        {
+          "code": "denied",
+          "expression": "GPL-3.0-only",
+          "message": "license \"GPL-3.0-only\" is explicitly denied by policy"
+        }
+      ]
+    },
+    {
+      "expression": "MIT AND Apache-2.0",
+      "decision": "allow"
+    }
+  ]
+}

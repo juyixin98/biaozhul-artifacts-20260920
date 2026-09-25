@@ -1,0 +1,11 @@
+{
+  "expression": "WeirdProprietary-9.9",
+  "decision": "unknown",
+  "reasons": [
+    {
+      "code": "unknown-license",
+      "expression": "WeirdProprietary-9.9",
+      "message": "license \"WeirdProprietary-9.9\" is not declared in the policy; it is not auto-approved"
+    }
+  ]
+}

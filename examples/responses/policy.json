@@ -1,0 +1,29 @@
+{
+  "name": "example-permissive-first-policy",
+  "licenses": {
+    "AGPL-3.0-only": "deny",
+    "Apache-2.0": "allow",
+    "BSD-2-Clause": "allow",
+    "BSD-3-Clause": "allow",
+    "BUSL-1.1": "deny",
+    "CC0-1.0": "allow",
+    "GPL-2.0-with-classpath-exception": "allow",
+    "GPL-3.0-only": "deny",
+    "ISC": "allow",
+    "LGPL-2.1-or-later": "allow",
+    "MIT": "allow",
+    "MPL-2.0": "allow",
+    "SSPL-1.0": "deny",
+    "Zlib": "allow"
+  },
+  "exceptions": {
+    "Autoconf-exception-3.0": "allow",
+    "Classpath-exception-2.0": "allow",
+    "GCC-exception-3.1": "deny"
+  },
+  "combos": {
+    "GPL-2.0-only WITH Autoconf-exception-3.0": "allow",
+    "GPL-2.0-only WITH Classpath-exception-2.0": "allow",
+    "GPL-3.0-only WITH Classpath-exception-2.0": "deny"
+  }
+}

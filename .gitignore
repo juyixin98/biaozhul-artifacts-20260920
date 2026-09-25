@@ -1,0 +1,7 @@
+# Go build/test artifacts
+/licensejudge
+*.test
+*.out
+
+# Local runtime dirs (work and cache are deliberately separated)
+.local/

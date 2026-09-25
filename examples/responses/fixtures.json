@@ -1,0 +1,26 @@
+{
+  "cache_dir": "/home/admin/Downloads/biaozhul/opp108/a/.local/cache",
+  "fixtures": [
+    {
+      "name": "go-version",
+      "description": "Print the local Go toolchain version."
+    },
+    {
+      "name": "go-vet",
+      "description": "Run go vet on all local packages."
+    },
+    {
+      "name": "go-test",
+      "description": "Run the local automated test suite."
+    },
+    {
+      "name": "go-build",
+      "description": "Compile all local packages without producing output binaries."
+    },
+    {
+      "name": "true",
+      "description": "Minimal always-succeeding local fixture used for cache checks."
+    }
+  ],
+  "work_dir": "/home/admin/Downloads/biaozhul/opp108/a/.local/work"
+}
