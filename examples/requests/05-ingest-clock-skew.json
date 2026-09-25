@@ -1,0 +1,8 @@
+{
+  "trace_id": "trace-clock-skew",
+  "spans": [
+    {"span_id": "root", "name": "gateway",    "start_time": 0,   "end_time": 100, "relation": "sync"},
+    {"span_id": "c1",   "name": "early-call", "start_time": -20, "end_time": 30,  "relation": "sync",  "parent_span_id": "root"},
+    {"span_id": "c2",   "name": "late-call",  "start_time": 60,  "end_time": 140, "relation": "async", "parent_span_id": "root"}
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "trace_id": "trace-sync-overlap",
+  "spans": [
+    {"span_id": "root", "name": "gateway",     "start_time": 0,  "end_time": 100, "relation": "sync"},
+    {"span_id": "s1",   "name": "db-query-1",  "start_time": 0,  "end_time": 60,  "relation": "sync",  "parent_span_id": "root"},
+    {"span_id": "s2",   "name": "db-query-2",  "start_time": 40, "end_time": 100, "relation": "sync",  "parent_span_id": "root"},
+    {"span_id": "a3",   "name": "bg-flush",    "start_time": 10, "end_time": 90,  "relation": "async", "parent_span_id": "root"}
+  ]
+}

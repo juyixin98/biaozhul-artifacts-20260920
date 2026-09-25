@@ -1,0 +1,8 @@
+{
+  "trace_id": "trace-missing-span",
+  "spans": [
+    {"span_id": "root", "name": "gateway",      "start_time": 0,  "end_time": 100, "relation": "sync"},
+    {"span_id": "c",    "name": "cache-get",    "start_time": 10, "end_time": 40,  "relation": "sync", "parent_span_id": "root"},
+    {"span_id": "o",    "name": "orphaned",     "start_time": 40, "end_time": 80,  "relation": "sync", "parent_span_id": "ghost-not-in-trace"}
+  ]
+}

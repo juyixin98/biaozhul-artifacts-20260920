@@ -1,0 +1,9 @@
+{
+  "trace_id": "trace-cycle",
+  "spans": [
+    {"span_id": "r", "name": "gateway", "start_time": 0, "end_time": 30, "relation": "sync"},
+    {"span_id": "a", "name": "svc-a",   "start_time": 0, "end_time": 30, "relation": "sync", "parent_span_id": "c"},
+    {"span_id": "b", "name": "svc-b",   "start_time": 0, "end_time": 30, "relation": "sync", "parent_span_id": "a"},
+    {"span_id": "c", "name": "svc-c",   "start_time": 0, "end_time": 30, "relation": "sync", "parent_span_id": "b"}
+  ]
+}

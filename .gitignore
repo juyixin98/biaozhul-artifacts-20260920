@@ -1,0 +1,5 @@
+# built binary
+/cpathtrace
+
+# local trace data
+/data/

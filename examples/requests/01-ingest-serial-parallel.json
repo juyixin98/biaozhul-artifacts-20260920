@@ -1,0 +1,12 @@
+{
+  "trace_id": "trace-serial-parallel",
+  "spans": [
+    {"span_id": "root", "name": "gateway",   "start_time": 0,   "end_time": 120, "relation": "sync"},
+    {"span_id": "s1",   "name": "auth",      "start_time": 0,   "end_time": 20,  "relation": "sync",  "parent_span_id": "root"},
+    {"span_id": "a1",   "name": "fanout-A",  "start_time": 20,  "end_time": 120, "relation": "async", "parent_span_id": "root"},
+    {"span_id": "x",    "name": "A-stage1",  "start_time": 20,  "end_time": 70,  "relation": "sync",  "parent_span_id": "a1"},
+    {"span_id": "y",    "name": "A-stage2",  "start_time": 70,  "end_time": 120, "relation": "sync",  "parent_span_id": "a1"},
+    {"span_id": "a2",   "name": "fanout-B",  "start_time": 20,  "end_time": 50,  "relation": "async", "parent_span_id": "root"},
+    {"span_id": "s2",   "name": "render",    "start_time": 50,  "end_time": 70,  "relation": "sync",  "parent_span_id": "root"}
+  ]
+}
