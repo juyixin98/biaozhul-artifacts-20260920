@@ -1,0 +1,18 @@
+POST /upload HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: multipart/form-data; boundary=----demoBoundary7MA
+Content-Length: <由发送工具自动填写>
+
+------demoBoundary7MA
+Content-Disposition: form-data; name="field1"
+
+text value
+------demoBoundary7MA
+Content-Disposition: form-data; name="empty_field"
+
+------demoBoundary7MA
+Content-Disposition: form-data; name="file"; filename="f.bin"
+Content-Type: application/octet-stream
+
+<binary bytes: 见 binary-payload.bin，包含裸 ------demoBoundary7MA 等近似边界，必须被当作正文>
+------demoBoundary7MA--

@@ -1,0 +1,17 @@
+[package]
+name = "minimultipart"
+version = "0.1.0"
+edition = "2021"
+description = "增量式 multipart/form-data 解析库与本地 TCP 测试服务（仅依赖 std，核心解析器手写）"
+license = "MIT"
+
+[lib]
+name = "minimultipart"
+path = "src/lib.rs"
+
+[[bin]]
+name = "multipart-server"
+path = "src/bin/server.rs"
+
+[profile.release]
+opt-level = 3
