@@ -1,0 +1,16 @@
+{
+  "description": "合成信号分析请求样例：对应 CLI 子命令 synth，字段与命令行参数一一对应",
+  "command": "synth",
+  "freq": 1000.5,
+  "amp": 0.8,
+  "phase": 0.0,
+  "dc": 0.0,
+  "noise": 0.0,
+  "n": 4096,
+  "sr": 48000,
+  "window": "hann",
+  "estimator": "auto",
+  "min_peak_ratio": 0.01,
+  "max_peaks": 16,
+  "cli_equivalent": "python -m spectral_peak.cli synth --freq 1000.5 --amp 0.8 --sr 48000 --n 4096"
+}

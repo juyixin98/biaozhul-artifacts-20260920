@@ -1,0 +1,14 @@
+{
+  "description": "本地 PCM 文件分析请求样例：对应 CLI 子命令 pcm，字段与命令行参数一一对应",
+  "command": "pcm",
+  "file": "examples/demo_tone.pcm",
+  "fmt": "s16le",
+  "channels": 1,
+  "channel": 0,
+  "sr": 48000,
+  "window": "hann",
+  "estimator": "auto",
+  "min_peak_ratio": 0.01,
+  "max_peaks": 16,
+  "cli_equivalent": "python -m spectral_peak.cli pcm --file examples/demo_tone.pcm --fmt s16le --sr 48000"
+}
