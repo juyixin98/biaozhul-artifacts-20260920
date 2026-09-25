@@ -1,0 +1,9 @@
+{
+  "n_samples": 2000,
+  "n_features": 8,
+  "n_classes": 3,
+  "n_groups": 40,
+  "ratios": [0.7, 0.15, 0.15],
+  "seed": 42,
+  "tolerance": 0.05
+}
