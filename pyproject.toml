@@ -1,0 +1,11 @@
+[project]
+name = "enrange"
+version = "0.1.0"
+description = "Local encrypted object store with authenticated cross-block range reads"
+requires-python = ">=3.9"
+dependencies = ["cryptography>=41.0.0"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-ra"
