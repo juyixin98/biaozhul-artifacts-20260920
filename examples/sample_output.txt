@@ -1,0 +1,419 @@
+== 0. 健康检查 ==
+{
+  "now": "2030-01-01T00:00:00Z",
+  "ok": true,
+  "tick": 31557600
+}
+== 1. 查看已有资源 ==
+{
+  "resources": [
+    {
+      "id": "room-a",
+      "name": "A 号会议室（1 间 / 0 辆接驳车）",
+      "capacity": [
+        1,
+        0
+      ]
+    },
+    {
+      "id": "venue",
+      "name": "多功能厅（2 间 / 6 席）",
+      "capacity": [
+        2,
+        6
+      ]
+    }
+  ]
+}
+== 2. 新建多维容量资源（机房：3 台机器 / 12 核） ==
+{
+  "id": "lab",
+  "name": "计算机房",
+  "capacity": [
+    3,
+    12
+  ]
+}
+== 3. 固定区间预约（与 seed-meeting 相邻，应成功） ==
+{
+  "id": "adjacent-ok",
+  "resource": "room-a",
+  "interval": {
+    "start": "2030-01-01T10:00:00Z",
+    "end": "2030-01-01T11:00:00Z"
+  },
+  "demand": [
+    1,
+    0
+  ],
+  "status": "pending"
+}
+== 4. 重叠区间预约（应 409 冲突，结构化错误带码） ==
+HTTP 409
+{
+  "code": "conflict",
+  "message": "资源 room-a 在区间 [31558170,31558230) 上容量不足"
+}
+== 5. 零容量维度上的正需求（应 400） ==
+HTTP 400
+{
+  "code": "invalid_request",
+  "message": "资源 \"room-a\" 的维度 1 单条需求 1 超过容量 0"
+}
+== 6. 最早可行位置查询（不落地） ==
+{
+  "feasible": true,
+  "interval": {
+    "start": "2030-01-01T11:00:00Z",
+    "end": "2030-01-01T13:00:00Z"
+  }
+}
+== 7. 原子批量：两笔都可行（相邻打满 + 自动放置） ==
+{
+  "count": 2,
+  "reservations": [
+    {
+      "id": "batch-1",
+      "resource": "lab",
+      "interval": {
+        "start": "2030-01-01T00:00:00Z",
+        "end": "2030-01-01T02:00:00Z"
+      },
+      "demand": [
+        2,
+        8
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "batch-2",
+      "resource": "lab",
+      "interval": {
+        "start": "2030-01-01T02:00:00Z",
+        "end": "2030-01-01T04:00:00Z"
+      },
+      "demand": [
+        2,
+        8
+      ],
+      "status": "pending",
+      "auto_placed": true
+    }
+  ]
+}
+== 8. 原子批量：一笔冲突 -> 整批拒绝（注意 batch-bad-* 均不存在） ==
+HTTP 409
+{
+  "code": "conflict",
+  "message": "批量预约被拒绝：1/2 个条目存在问题",
+  "details": [
+    {
+      "index": 1,
+      "id": "batch-bad-conflict",
+      "error": {
+        "code": "conflict",
+        "message": "资源 room-a 在区间 [31558140,31558170) 上容量不足",
+        "conflicts": [
+          "seed-meeting"
+        ],
+        "violations": [
+          {
+            "segment": {
+              "start": 31558140,
+              "end": 31558170
+            },
+            "dimension": 0,
+            "load": 2,
+            "capacity": 1
+          }
+        ]
+      }
+    }
+  ]
+}
+-- 确认 batch-bad-good 未落地（应 404） --
+GET batch-bad-good -> HTTP 404
+== 9. 取消预约并立即复用其区间 ==
+{
+  "id": "seed-meeting",
+  "resource": "room-a",
+  "interval": {
+    "start": "2030-01-01T09:00:00Z",
+    "end": "2030-01-01T10:00:00Z"
+  },
+  "demand": [
+    1,
+    0
+  ],
+  "status": "cancelled",
+  "meta": {
+    "note": "周会",
+    "owner": "alice"
+  }
+}
+{
+  "id": "reused-slot",
+  "resource": "room-a",
+  "interval": {
+    "start": "2030-01-01T09:00:00Z",
+    "end": "2030-01-01T10:00:00Z"
+  },
+  "demand": [
+    1,
+    0
+  ],
+  "status": "pending"
+}
+== 10. 查询结构化事件流 ==
+{
+  "events": [
+    {
+      "seq": 1,
+      "at": "2030-01-01T00:00:00Z",
+      "type": "resource.added",
+      "detail": {
+        "id": "room-a",
+        "name": "A 号会议室（1 间 / 0 辆接驳车）",
+        "capacity": [
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "seq": 2,
+      "at": "2030-01-01T00:00:00Z",
+      "type": "resource.added",
+      "detail": {
+        "id": "venue",
+        "name": "多功能厅（2 间 / 6 席）",
+        "capacity": [
+          2,
+          6
+        ]
+      }
+    },
+    {
+      "seq": 3,
+      "at": "2030-01-01T00:00:00Z",
+      "type": "reservation.created",
+      "detail": {
+        "id": "seed-meeting",
+        "resource": "room-a",
+        "interval": {
+          "start": 31558140,
+          "end": 31558200
+        },
+        "demand": [
+          1,
+          0
+        ],
+        "status": "pending",
+        "meta": {
+          "note": "周会",
+          "owner": "alice"
+        }
+      }
+    },
+    {
+      "seq": 4,
+      "at": "2030-01-01T00:00:00Z",
+      "type": "reservation.created",
+      "detail": {
+        "id": "seed-workshop",
+        "resource": "venue",
+        "interval": {
+          "start": 31558380,
+          "end": 31558560
+        },
+        "demand": [
+          1,
+          4
+        ],
+        "status": "pending",
+        "meta": {
+          "owner": "bob"
+        }
+      }
+    },
+    {
+      "seq": 5,
+      "at": "2030-01-01T00:00:00Z",
+      "type": "resource.added",
+      "detail": {
+        "id": "lab",
+        "name": "计算机房",
+        "capacity": [
+          3,
+          12
+        ]
+      }
+    },
+    {
+      "seq": 6,
+      "at": "2030-01-01T00:00:00Z",
+      "type": "reservation.created",
+      "detail": {
+        "id": "adjacent-ok",
+        "resource": "room-a",
+        "interval": {
+          "start": 31558200,
+          "end": 31558260
+        },
+        "demand": [
+          1,
+          0
+        ],
+        "status": "pending"
+      }
+    },
+    {
+      "seq": 7,
+      "at": "2030-01-01T00:00:00Z",
+      "type": "reservation.rejected",
+      "detail": {
+        "resource": "room-a",
+        "error": {
+          "code": "conflict",
+          "message": "资源 room-a 在区间 [31558170,31558230) 上容量不足",
+          "conflicts": [
+            "adjacent-ok",
+            "seed-meeting"
+          ],
+          "violations": [
+            {
+              "segment": {
+                "start": 31558170,
+                "end": 31558200
+              },
+              "dimension": 0,
+              "load": 2,
+              "capacity": 1
+            },
+            {
+              "segment": {
+                "start": 31558200,
+                "end": 31558230
+              },
+              "dimension": 0,
+              "load": 2,
+              "capacity": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "seq": 8,
+      "at": "2030-01-01T00:00:00Z",
+      "type": "reservation.rejected",
+      "detail": {
+        "resource": "room-a",
+        "error": {
+          "code": "invalid_request",
+          "message": "资源 \"room-a\" 的维度 1 单条需求 1 超过容量 0"
+        }
+      }
+    },
+    {
+      "seq": 9,
+      "at": "2030-01-01T00:00:00Z",
+      "type": "reservation.batch_created",
+      "detail": {
+        "ids": [
+          "batch-1",
+          "batch-2"
+        ],
+        "count": 2,
+        "items": [
+          {
+            "id": "batch-1",
+            "resource": "lab",
+            "interval": {
+              "start": 31557600,
+              "end": 31557720
+            },
+            "demand": [
+              2,
+              8
+            ],
+            "status": "pending"
+          },
+          {
+            "id": "batch-2",
+            "resource": "lab",
+            "interval": {
+              "start": 31557720,
+              "end": 31557840
+            },
+            "demand": [
+              2,
+              8
+            ],
+            "status": "pending",
+            "auto_placed": true
+          }
+        ]
+      }
+    },
+    {
+      "seq": 10,
+      "at": "2030-01-01T00:00:00Z",
+      "type": "reservation.batch_rejected",
+      "detail": {
+        "items": [
+          {
+            "index": 1,
+            "id": "batch-bad-conflict",
+            "error": {
+              "code": "conflict",
+              "message": "资源 room-a 在区间 [31558140,31558170) 上容量不足",
+              "conflicts": [
+                "seed-meeting"
+              ],
+              "violations": [
+                {
+                  "segment": {
+                    "start": 31558140,
+                    "end": 31558170
+                  },
+                  "dimension": 0,
+                  "load": 2,
+                  "capacity": 1
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "seq": 11,
+      "at": "2030-01-01T00:00:00Z",
+      "type": "reservation.cancelled",
+      "detail": {
+        "id": "seed-meeting",
+        "resource": "room-a",
+        "at": 31557600
+      }
+    },
+    {
+      "seq": 12,
+      "at": "2030-01-01T00:00:00Z",
+      "type": "reservation.created",
+      "detail": {
+        "id": "reused-slot",
+        "resource": "room-a",
+        "interval": {
+          "start": 31558140,
+          "end": 31558200
+        },
+        "demand": [
+          1,
+          0
+        ],
+        "status": "pending"
+      }
+    }
+  ]
+}

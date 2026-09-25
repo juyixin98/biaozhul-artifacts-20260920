@@ -1,0 +1,32 @@
+{
+  "resources": [
+    {
+      "id": "room-a",
+      "name": "A 号会议室（1 间 / 0 辆接驳车）",
+      "capacity": [1, 0]
+    },
+    {
+      "id": "venue",
+      "name": "多功能厅（2 间 / 6 席）",
+      "capacity": [2, 6]
+    }
+  ],
+  "reservations": [
+    {
+      "id": "seed-meeting",
+      "resource": "room-a",
+      "start": "2030-01-01T09:00:00Z",
+      "end": "2030-01-01T10:00:00Z",
+      "demand": [1, 0],
+      "meta": {"owner": "alice", "note": "周会"}
+    },
+    {
+      "id": "seed-workshop",
+      "resource": "venue",
+      "start": "2030-01-01T13:00:00Z",
+      "end": "2030-01-01T16:00:00Z",
+      "demand": [1, 4],
+      "meta": {"owner": "bob"}
+    }
+  ]
+}
