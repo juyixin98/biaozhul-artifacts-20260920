@@ -1,0 +1,57 @@
+$ ./run.sh --port 8080
+布尔检索服务已启动
+  语料文档数: 12
+  存活词项数: 100
+  监听地址:   http://127.0.0.1:8080
+  示例: curl -s http://127.0.0.1:8080/stats
+
+$ curl -s -i http://127.0.0.1:8080/health
+HTTP/1.1 200 OK
+Date: Wed, 23 Sep 2026 21:20:54 GMT
+Content-type: application/json; charset=utf-8
+Content-length: 21
+
+{
+  "status": "ok"
+}
+
+$ curl -s -X POST .../search -d {"query":"pet AND cat AND zebra"} （仅看 costComparison）
+{
+  "hitCount": 0,
+  "resultsIdentical": true,
+  "costComparison": {
+    "naiveMembershipProbes": 12,
+    "optimizedMembershipProbes": 1,
+    "probeDeltaOptimizedMinusNaive": -11,
+    "naivePostingReads": 14,
+    "optimizedPostingReads": 14
+  }
+}
+
+$ curl -s -X POST .../search -d {"query":"(cat AND dog"}   # 缺右括号，带状态码
+HTTP/1.1 400 Bad Request
+{
+
+$ curl -s -X POST .../search -d {"query":"NOT cat"} （仅看 hitCount 与 id）
+hitCount= 6 ids= [2, 5, 8, 9, 10, 11]
+
+$ curl -s -X DELETE .../documents/11    # 删除唯一含 zebra 的文档
+{
+  "deleted": true,
+  "id": 11
+}
+
+$ curl -s .../stats
+{
+  "deletedDocuments": 1,
+  "documents": 11,
+  "terms": 90,
+  "totalDocumentsEver": 12,
+  "vocabularyRaw": 100
+}
+
+$ curl -s -X POST .../search -d {"query":"NOT cat"}  # 删除后全集变化
+universeSize= 11 hitCount= 5 ids= [2, 5, 8, 9, 10]
+
+$ curl -s -X POST .../search -d {"query":"zebra"}    # 被删词变空
+hitCount= 0

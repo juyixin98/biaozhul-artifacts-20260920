@@ -1,0 +1,41 @@
+主源码编译完成 -> build/classes
+
+########## ParserTest ##########
+== ParserTest: 合法查询的 AST 规范化
+== ParserTest: 错误位置精确保留
+   断言数: 32，失败数: 0
+
+########## IndexTest ##########
+== IndexTest: 分词器
+== IndexTest: 增删改与倒排链
+== IndexTest: 标题与正文共同被索引
+   断言数: 29，失败数: 0
+
+########## JsonTest ##########
+== JsonTest: 解析与往返
+   断言数: 15，失败数: 0
+
+########## ExhaustiveEquivalenceTest ##########
+== ExhaustiveEquivalenceTest: 生成查询
+   查询形态数: 588，删除子集数: 16，比较组合数: 9408
+   完成比较组合: 9408
+   朴素探测总数:   9024
+   优化探测总数:   5868（节省 3156 次）
+   严格减少探测的(查询,删除子集)组合数: 2190
+== ExhaustiveEquivalenceTest: 点名场景
+   断言数: 37643，失败数: 0
+
+########## OptimizationCostTest ##########
+== OptimizationCostTest: 优化前后探测次数对照
+   pet AND cat AND zebra            朴素探测=12  优化探测=1   节省=11 命中=[]
+   pet AND (falcon OR glacier)      朴素探测=7   优化探测=1   节省=6 命中=[]
+   cat AND dog AND food             朴素探测=9   优化探测=8   节省=1 命中=[3, 12]
+   断言数: 10，失败数: 0
+
+########## SearchServerTest ##########
+== SearchServerTest: 启动与基本端点
+== SearchServerTest: /search 成功与错误位置
+== SearchServerTest: 文档增删与 NOT 全集变化
+   断言数: 32，失败数: 0
+
+全部测试套件通过 ✔

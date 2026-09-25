@@ -1,0 +1,74 @@
+{
+  "query": "NOT cat",
+  "normalizedAst": "(NOT cat)",
+  "universeSize": 12,
+  "hitCount": 6,
+  "hits": [
+    {
+      "id": 2,
+      "title": "狗的公园日"
+    },
+    {
+      "id": 5,
+      "title": "量子计算入门"
+    },
+    {
+      "id": 8,
+      "title": "花园里的狗"
+    },
+    {
+      "id": 9,
+      "title": "木琴课"
+    },
+    {
+      "id": 10,
+      "title": "量子机器人"
+    },
+    {
+      "id": 11,
+      "title": "孤舟皮划艇"
+    }
+  ],
+  "resultsIdentical": true,
+  "naivePlan": {
+    "docIds": [
+      2,
+      5,
+      8,
+      9,
+      10,
+      11
+    ],
+    "hitCount": 6,
+    "postingReads": 6,
+    "membershipProbes": 12,
+    "trace": [
+      "TERM cat -> 6 篇 [1, 3, 4, 6, 7, 12]",
+      "NOT (固定全集 12 篇) 减去子结果 6 篇 -> 6 篇 [2, 5, 8, 9, 10, 11]"
+    ]
+  },
+  "optimizedPlan": {
+    "docIds": [
+      2,
+      5,
+      8,
+      9,
+      10,
+      11
+    ],
+    "hitCount": 6,
+    "postingReads": 6,
+    "membershipProbes": 12,
+    "trace": [
+      "TERM cat -> 6 篇 [1, 3, 4, 6, 7, 12]",
+      "NOT (固定全集 12 篇) 减去子结果 6 篇 -> 6 篇 [2, 5, 8, 9, 10, 11]"
+    ]
+  },
+  "costComparison": {
+    "naiveMembershipProbes": 12,
+    "optimizedMembershipProbes": 12,
+    "probeDeltaOptimizedMinusNaive": 0,
+    "naivePostingReads": 6,
+    "optimizedPostingReads": 6
+  }
+}

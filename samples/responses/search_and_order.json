@@ -1,0 +1,47 @@
+{
+  "query": "pet AND cat AND zebra",
+  "normalizedAst": "(pet AND cat AND zebra)",
+  "universeSize": 12,
+  "hitCount": 0,
+  "hits": [],
+  "resultsIdentical": true,
+  "naivePlan": {
+    "docIds": [],
+    "hitCount": 0,
+    "postingReads": 14,
+    "membershipProbes": 12,
+    "trace": [
+      "AND 朴素顺序:",
+      "  TERM pet -> 7 篇 [1, 2, 3, 5, 6, 7, 12]",
+      "  TERM cat -> 6 篇 [1, 3, 4, 6, 7, 12]",
+      "  交集: 7 ∩ 6，探测 7 次 -> 5 篇",
+      "  TERM zebra -> 1 篇 [11]",
+      "  交集: 5 ∩ 1，探测 5 次 -> 0 篇"
+    ]
+  },
+  "optimizedPlan": {
+    "docIds": [],
+    "hitCount": 0,
+    "postingReads": 14,
+    "membershipProbes": 1,
+    "trace": [
+      "AND 优化器：先估计各合取项大小再排序",
+      "  排序后第 1 位: zebra（倒排大小=1，原顺序第 3 位）",
+      "  排序后第 2 位: cat（倒排大小=6）",
+      "  排序后第 3 位: pet（倒排大小=7，原顺序第 1 位）",
+      "  TERM zebra -> 1 篇 [11]",
+      "  TERM cat -> 6 篇 [1, 3, 4, 6, 7, 12]",
+      "  交集: 1 ∩ 6，探测 1 次 -> 0 篇",
+      "  中间结果已为空，剩余 1 个合取项仍会按计划求值以完整展示，但交集保持空",
+      "  TERM pet -> 7 篇 [1, 2, 3, 5, 6, 7, 12]",
+      "  交集: 0 ∩ 7，探测 0 次 -> 0 篇"
+    ]
+  },
+  "costComparison": {
+    "naiveMembershipProbes": 12,
+    "optimizedMembershipProbes": 1,
+    "probeDeltaOptimizedMinusNaive": -11,
+    "naivePostingReads": 14,
+    "optimizedPostingReads": 14
+  }
+}

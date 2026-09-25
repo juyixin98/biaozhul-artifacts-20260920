@@ -1,0 +1,3 @@
+{
+  "query": "cat AND (dog OR tea) AND NOT quantum"
+}

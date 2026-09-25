@@ -1,0 +1,47 @@
+{
+  "query": "(cat OR dog) AND quantum",
+  "normalizedAst": "((cat OR dog) AND quantum)",
+  "universeSize": 12,
+  "hitCount": 0,
+  "hits": [],
+  "resultsIdentical": true,
+  "naivePlan": {
+    "docIds": [],
+    "hitCount": 0,
+    "postingReads": 13,
+    "membershipProbes": 8,
+    "trace": [
+      "AND 朴素顺序:",
+      "  OR 朴素顺序:",
+      "    TERM cat -> 6 篇 [1, 3, 4, 6, 7, 12]",
+      "    TERM dog -> 5 篇 [2, 3, 7, 8, 12]",
+      "    并集: 6 ∪ 5 -> 8 篇",
+      "  TERM quantum -> 2 篇 [5, 10]",
+      "  交集: 8 ∩ 2，探测 8 次 -> 0 篇"
+    ]
+  },
+  "optimizedPlan": {
+    "docIds": [],
+    "hitCount": 0,
+    "postingReads": 13,
+    "membershipProbes": 2,
+    "trace": [
+      "AND 优化器：先估计各合取项大小再排序",
+      "  OR 朴素顺序:",
+      "    TERM cat -> 6 篇 [1, 3, 4, 6, 7, 12]",
+      "    TERM dog -> 5 篇 [2, 3, 7, 8, 12]",
+      "    并集: 6 ∪ 5 -> 8 篇",
+      "  排序后第 1 位: quantum（倒排大小=2，原顺序第 2 位）",
+      "  排序后第 2 位: ( ... OR ... )（子表达式结果大小=8，原顺序第 1 位）",
+      "  TERM quantum -> 2 篇 [5, 10]",
+      "  交集: 2 ∩ 8，探测 2 次 -> 0 篇"
+    ]
+  },
+  "costComparison": {
+    "naiveMembershipProbes": 8,
+    "optimizedMembershipProbes": 2,
+    "probeDeltaOptimizedMinusNaive": -6,
+    "naivePostingReads": 13,
+    "optimizedPostingReads": 13
+  }
+}
