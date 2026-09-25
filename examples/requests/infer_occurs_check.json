@@ -1,0 +1,4 @@
+{
+  "source": "let loop = fun x -> x x in loop",
+  "trace": true
+}

@@ -1,0 +1,5 @@
+{
+  "source": "let id = fun x -> x ;;\nlet a = id 42 ;;\nlet b = id true ;;\nid",
+  "trace": true,
+  "value_restriction": true
+}

@@ -1,0 +1,19 @@
+{
+  "ok": false,
+  "error": {
+    "code": "E004",
+    "phase": "infer",
+    "message": "argument type: occurs check failed; infinite type: cannot construct the infinite type a = a -> b",
+    "location": {
+      "start": {
+        "line": 1,
+        "column": 23
+      },
+      "end": {
+        "line": 1,
+        "column": 24
+      }
+    },
+    "rendered": "error[E004]: argument type: occurs check failed; infinite type: cannot construct the infinite type a = a -> b\n--> <input>:1:23\n  |\n1 | let loop = fun x -> x x in loop\n  |                     - ^ argument type: occurs check failed; infinite type: cannot construct the infinite type a = a -> b; function expects a here\n  |"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "ok": false,
+  "error": {
+    "code": "E005",
+    "phase": "eval",
+    "message": "operator '+': expected int but got runtime value true",
+    "location": {
+      "start": {
+        "line": 2,
+        "column": 16
+      },
+      "end": {
+        "line": 2,
+        "column": 17
+      }
+    },
+    "rendered": "runtime panic: operator '+': expected int but got runtime value true at line 2"
+  }
+}

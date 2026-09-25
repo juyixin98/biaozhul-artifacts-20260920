@@ -1,0 +1,5 @@
+{
+  "source": "let r = ref (fun x -> x) in\nr := (fun n -> n + 1);\nlet f = !r in\nlet a = f true in\nlet b = f 0 in\nb",
+  "trace": true,
+  "value_restriction": false
+}

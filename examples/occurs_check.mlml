@@ -1,0 +1,3 @@
+(* occurs check: x is applied to itself, forcing  t  =  t -> 'a *)
+let loop = fun x -> x x ;;
+loop

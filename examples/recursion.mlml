@@ -1,0 +1,11 @@
+(* recursive functions: factorial, and a generic function kept abstract *)
+let rec fact = fun n ->
+  if n <= 1 then 1 else n * fact (n - 1) ;;
+
+let rec apply_twice = fun f -> fun x -> f (f x) ;;
+
+let incr = fun n -> n + 1 ;;
+
+let use_fact = fact 5 ;;                 (* int *)
+let use_twice_int = apply_twice incr 10 ;;       (* int *)
+let use_twice_bool = apply_twice (fun b -> if b then false else true) true ;; (* bool *)

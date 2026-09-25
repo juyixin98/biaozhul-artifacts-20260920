@@ -1,0 +1,19 @@
+{
+  "ok": false,
+  "error": {
+    "code": "E003",
+    "phase": "infer",
+    "message": "argument type: expected int, but got bool",
+    "location": {
+      "start": {
+        "line": 4,
+        "column": 11
+      },
+      "end": {
+        "line": 4,
+        "column": 15
+      }
+    },
+    "rendered": "error[E003]: argument type: expected int, but got bool\n--> <input>:4:11\n  |\n4 | let a = f true in\n  |         - ^^^^ argument type: expected int, but got bool; function expects int here\n  |"
+  }
+}

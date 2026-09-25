@@ -1,0 +1,242 @@
+{
+  "ok": true,
+  "bindings": [],
+  "final_type": "int",
+  "trace": [
+    {
+      "step": "enter-lambda",
+      "detail": "parameter x : a",
+      "location": "1:14"
+    },
+    {
+      "step": "instantiate",
+      "detail": "variable 'x': a  =>  a  (fresh: t17)",
+      "location": null
+    },
+    {
+      "step": "inferred",
+      "detail": "variable : a",
+      "location": "1:23"
+    },
+    {
+      "step": "inferred",
+      "detail": "function : a -> a",
+      "location": "1:14"
+    },
+    {
+      "step": "inferred",
+      "detail": "parenthesized expression : a -> a",
+      "location": "1:13"
+    },
+    {
+      "step": "inferred",
+      "detail": "reference allocation : ref a -> a",
+      "location": "1:9"
+    },
+    {
+      "step": "generalize",
+      "detail": "r : ref a -> a  =>  forall a. ref a -> a",
+      "location": "1:5"
+    },
+    {
+      "step": "instantiate",
+      "detail": "variable 'r': forall a. ref a -> a  =>  ref a -> a  (fresh: t18)",
+      "location": null
+    },
+    {
+      "step": "inferred",
+      "detail": "variable : ref a -> a",
+      "location": "2:1"
+    },
+    {
+      "step": "enter-lambda",
+      "detail": "parameter n : a",
+      "location": "2:7"
+    },
+    {
+      "step": "instantiate",
+      "detail": "variable 'n': a  =>  a  (fresh: t19)",
+      "location": null
+    },
+    {
+      "step": "inferred",
+      "detail": "variable : a",
+      "location": "2:16"
+    },
+    {
+      "step": "inferred",
+      "detail": "integer literal : int",
+      "location": "2:20"
+    },
+    {
+      "step": "unify",
+      "detail": "left operand of '+': a ~ int",
+      "location": "2:16"
+    },
+    {
+      "step": "unify",
+      "detail": "right operand of '+': int ~ int",
+      "location": "2:20"
+    },
+    {
+      "step": "inferred",
+      "detail": "binary operation : int",
+      "location": "2:16"
+    },
+    {
+      "step": "inferred",
+      "detail": "function : int -> int",
+      "location": "2:7"
+    },
+    {
+      "step": "inferred",
+      "detail": "parenthesized expression : int -> int",
+      "location": "2:6"
+    },
+    {
+      "step": "unify",
+      "detail": "left side of ':=' must be a reference: ref a -> a ~ ref a",
+      "location": "2:1"
+    },
+    {
+      "step": "unify",
+      "detail": "value assigned to the reference: int -> int ~ a -> a",
+      "location": "2:6"
+    },
+    {
+      "step": "inferred",
+      "detail": "assignment : unit",
+      "location": "2:1"
+    },
+    {
+      "step": "instantiate",
+      "detail": "variable 'r': forall a. ref a -> a  =>  ref a -> a  (fresh: t21)",
+      "location": null
+    },
+    {
+      "step": "inferred",
+      "detail": "variable : ref a -> a",
+      "location": "3:10"
+    },
+    {
+      "step": "unify",
+      "detail": "dereference expects a reference: ref a -> a ~ ref a",
+      "location": "3:10"
+    },
+    {
+      "step": "inferred",
+      "detail": "dereference : a -> a",
+      "location": "3:9"
+    },
+    {
+      "step": "generalize",
+      "detail": "f : a -> a  =>  forall a. a -> a",
+      "location": "3:5"
+    },
+    {
+      "step": "instantiate",
+      "detail": "variable 'f': forall a. a -> a  =>  a -> a  (fresh: t23)",
+      "location": null
+    },
+    {
+      "step": "inferred",
+      "detail": "variable : a -> a",
+      "location": "4:9"
+    },
+    {
+      "step": "inferred",
+      "detail": "boolean literal : bool",
+      "location": "4:11"
+    },
+    {
+      "step": "unify",
+      "detail": "this expression is applied as a function: a -> a ~ a -> b",
+      "location": "4:9"
+    },
+    {
+      "step": "unify",
+      "detail": "argument type: bool ~ a",
+      "location": "4:11"
+    },
+    {
+      "step": "inferred",
+      "detail": "application : bool",
+      "location": "4:9"
+    },
+    {
+      "step": "generalize",
+      "detail": "a : bool  =>  bool",
+      "location": "4:5"
+    },
+    {
+      "step": "instantiate",
+      "detail": "variable 'f': forall a. a -> a  =>  a -> a  (fresh: t26)",
+      "location": null
+    },
+    {
+      "step": "inferred",
+      "detail": "variable : a -> a",
+      "location": "5:9"
+    },
+    {
+      "step": "inferred",
+      "detail": "integer literal : int",
+      "location": "5:11"
+    },
+    {
+      "step": "unify",
+      "detail": "this expression is applied as a function: a -> a ~ a -> b",
+      "location": "5:9"
+    },
+    {
+      "step": "unify",
+      "detail": "argument type: int ~ a",
+      "location": "5:11"
+    },
+    {
+      "step": "inferred",
+      "detail": "application : int",
+      "location": "5:9"
+    },
+    {
+      "step": "generalize",
+      "detail": "b : int  =>  int",
+      "location": "5:5"
+    },
+    {
+      "step": "instantiate",
+      "detail": "variable 'b': int  =>  int  (fresh: none)",
+      "location": null
+    },
+    {
+      "step": "inferred",
+      "detail": "variable : int",
+      "location": "6:1"
+    },
+    {
+      "step": "inferred",
+      "detail": "let-expression : int",
+      "location": "5:1"
+    },
+    {
+      "step": "inferred",
+      "detail": "let-expression : int",
+      "location": "4:1"
+    },
+    {
+      "step": "inferred",
+      "detail": "let-expression : int",
+      "location": "3:1"
+    },
+    {
+      "step": "inferred",
+      "detail": "sequence : int",
+      "location": "2:1"
+    },
+    {
+      "step": "inferred",
+      "detail": "let-expression : int",
+      "location": "1:1"
+    }
+  ]
+}

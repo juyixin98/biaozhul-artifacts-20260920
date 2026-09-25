@@ -1,0 +1,24 @@
+(* mutable references are monomorphic under the value restriction *)
+let r = ref 0 ;;
+
+let bump = fun u ->
+  r := !r + 1 ;;
+
+let v1 = !r ;;
+
+(* a polymorphic identity kept inside a reference: once constrained at int,
+   every later use sees int -> int (the reference cell is shared/mutable) *)
+let program =
+  let rid = ref (fun x -> x) in
+  rid := (fun n -> n + 1);
+  let one = (!rid) 1 in
+  one ;;
+
+(* the unsound program is rejected; uncomment to see the located error:
+ *
+ * let bad = ref (fun x -> x) in
+ * bad := (fun n -> n + 1);
+ * (!bad true)
+ *)
+
+v1 + program

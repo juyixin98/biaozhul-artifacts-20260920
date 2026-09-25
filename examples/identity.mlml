@@ -1,0 +1,9 @@
+(* identity used at multiple different types: the hallmark of let-polymorphism *)
+let id = fun x -> x ;;
+
+let a = id 42 ;;
+let b = id true ;;
+let c = id id ;;            (* id instantiated at  (a -> a) -> (a -> a)  *)
+let d = id (id 1 + id 2) ;; (* int instances and a function instance mixed *)
+
+id
