@@ -1,0 +1,119 @@
+{
+  "ok": true,
+  "results": [
+    {
+      "count": 3,
+      "k": 3,
+      "results": [
+        {
+          "distance": 0,
+          "distance_sq": 0,
+          "id": 1,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "distance": 0.707106781186547524,
+          "distance_sq": 0.5,
+          "id": 7,
+          "x": 0.5,
+          "y": -0.5
+        },
+        {
+          "distance": 4.98196748283246024,
+          "distance_sq": 24.82,
+          "id": 4,
+          "x": 3.1,
+          "y": 3.9
+        }
+      ],
+      "truncated": false,
+      "type": "knn"
+    },
+    {
+      "count": 2,
+      "k": 2,
+      "results": [
+        {
+          "distance": 1.5264337522473748,
+          "distance_sq": 2.33,
+          "id": 5,
+          "x": 10,
+          "y": 10
+        },
+        {
+          "distance": 9.57757798193259296,
+          "distance_sq": 91.73,
+          "id": 2,
+          "x": 3,
+          "y": 4
+        }
+      ],
+      "truncated": false,
+      "type": "knn"
+    },
+    {
+      "count": 7,
+      "k": 100,
+      "results": [
+        {
+          "distance": 0,
+          "distance_sq": 0,
+          "id": 1,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "distance": 0.707106781186547524,
+          "distance_sq": 0.5,
+          "id": 7,
+          "x": 0.5,
+          "y": -0.5
+        },
+        {
+          "distance": 4.98196748283246024,
+          "distance_sq": 24.82,
+          "id": 4,
+          "x": 3.1,
+          "y": 3.9
+        },
+        {
+          "distance": 5,
+          "distance_sq": 25,
+          "id": 2,
+          "x": 3,
+          "y": 4
+        },
+        {
+          "distance": 5,
+          "distance_sq": 25,
+          "id": 3,
+          "x": -3,
+          "y": -4
+        },
+        {
+          "distance": 10.7383657974572649,
+          "distance_sq": 115.3125,
+          "id": 6,
+          "x": -10.5,
+          "y": 2.25
+        },
+        {
+          "distance": 14.1421356237309505,
+          "distance_sq": 200,
+          "id": 5,
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "truncated": true,
+      "type": "knn"
+    }
+  ],
+  "summary": {
+    "build_time_us": 2,
+    "points": 7,
+    "queries": 3,
+    "query_time_us": 47
+  }
+}

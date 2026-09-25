@@ -1,0 +1,7 @@
+{
+  "error": {
+    "code": "INVALID_TYPE",
+    "message": "queries[0] \"k\" 必须是非负整数"
+  },
+  "ok": false
+}

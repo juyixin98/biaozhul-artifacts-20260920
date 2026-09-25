@@ -1,0 +1,125 @@
+{
+  "ok": true,
+  "results": [
+    {
+      "count": 5,
+      "k": 5,
+      "results": [
+        {
+          "distance": 0,
+          "distance_sq": 0,
+          "id": 101,
+          "x": 2,
+          "y": 2
+        },
+        {
+          "distance": 0,
+          "distance_sq": 0,
+          "id": 102,
+          "x": 2,
+          "y": 2
+        },
+        {
+          "distance": 0,
+          "distance_sq": 0,
+          "id": 103,
+          "x": 2,
+          "y": 2
+        },
+        {
+          "distance": 2,
+          "distance_sq": 4,
+          "id": 203,
+          "x": 2,
+          "y": 0
+        },
+        {
+          "distance": 2.8284271247461901,
+          "distance_sq": 8,
+          "id": 204,
+          "x": 4,
+          "y": 0
+        }
+      ],
+      "truncated": false,
+      "type": "knn"
+    },
+    {
+      "count": 7,
+      "radius": 4,
+      "results": [
+        {
+          "distance": 2,
+          "distance_sq": 4,
+          "id": 202,
+          "x": -2,
+          "y": 0
+        },
+        {
+          "distance": 2,
+          "distance_sq": 4,
+          "id": 203,
+          "x": 2,
+          "y": 0
+        },
+        {
+          "distance": 2.8284271247461901,
+          "distance_sq": 8,
+          "id": 101,
+          "x": 2,
+          "y": 2
+        },
+        {
+          "distance": 2.8284271247461901,
+          "distance_sq": 8,
+          "id": 102,
+          "x": 2,
+          "y": 2
+        },
+        {
+          "distance": 2.8284271247461901,
+          "distance_sq": 8,
+          "id": 103,
+          "x": 2,
+          "y": 2
+        },
+        {
+          "distance": 4,
+          "distance_sq": 16,
+          "id": 201,
+          "x": -4,
+          "y": 0
+        },
+        {
+          "distance": 4,
+          "distance_sq": 16,
+          "id": 204,
+          "x": 4,
+          "y": 0
+        }
+      ],
+      "type": "radius"
+    },
+    {
+      "count": 1,
+      "k": 1,
+      "results": [
+        {
+          "distance": 0,
+          "distance_sq": 0,
+          "id": -7,
+          "x": 1000000,
+          "y": 1000000
+        }
+      ],
+      "truncated": false,
+      "type": "knn"
+    }
+  ],
+  "summary": {
+    "build_time_us": 3,
+    "points": 9,
+    "queries": 3,
+    "query_time_us": 47
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "ok": true,
+  "results": [
+    {
+      "count": 1,
+      "radius": 0,
+      "results": [
+        {
+          "distance": 0,
+          "distance_sq": 0,
+          "id": 15,
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "type": "radius"
+    },
+    {
+      "count": 5,
+      "radius": 5,
+      "results": [
+        {
+          "distance": 0,
+          "distance_sq": 0,
+          "id": 15,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "distance": 1.41421356237309505,
+          "distance_sq": 2,
+          "id": 11,
+          "x": 1,
+          "y": 1
+        },
+        {
+          "distance": 1.41421356237309505,
+          "distance_sq": 2,
+          "id": 12,
+          "x": -1,
+          "y": -1
+        },
+        {
+          "distance": 2.8284271247461901,
+          "distance_sq": 8,
+          "id": 13,
+          "x": 2,
+          "y": 2
+        },
+        {
+          "distance": 5,
+          "distance_sq": 25,
+          "id": 14,
+          "x": 3,
+          "y": 4
+        }
+      ],
+      "type": "radius"
+    },
+    {
+      "count": 1,
+      "radius": 1,
+      "results": [
+        {
+          "distance": 0,
+          "distance_sq": 0,
+          "id": 13,
+          "x": 2,
+          "y": 2
+        }
+      ],
+      "type": "radius"
+    },
+    {
+      "count": 5,
+      "radius": 10,
+      "results": [
+        {
+          "distance": 0.707106781186547524,
+          "distance_sq": 0.5,
+          "id": 11,
+          "x": 1,
+          "y": 1
+        },
+        {
+          "distance": 0.707106781186547524,
+          "distance_sq": 0.5,
+          "id": 13,
+          "x": 2,
+          "y": 2
+        },
+        {
+          "distance": 2.12132034355964257,
+          "distance_sq": 4.5,
+          "id": 15,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "distance": 2.91547594742265024,
+          "distance_sq": 8.5,
+          "id": 14,
+          "x": 3,
+          "y": 4
+        },
+        {
+          "distance": 3.53553390593273762,
+          "distance_sq": 12.5,
+          "id": 12,
+          "x": -1,
+          "y": -1
+        }
+      ],
+      "type": "radius"
+    }
+  ],
+  "summary": {
+    "build_time_us": 3,
+    "points": 5,
+    "queries": 4,
+    "query_time_us": 59
+  }
+}
