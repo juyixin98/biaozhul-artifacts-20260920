@@ -1,0 +1,12 @@
+{
+  "waypoints": [[0.0, 0.0], [4.0, 0.0], [4.0, 3.0]],
+  "constraints": {
+    "max_velocity": 2.0,
+    "max_acceleration": 1.5,
+    "max_lateral_acceleration": 1.0
+  },
+  "corner_strategy": "curvature",
+  "start_velocity": 0.0,
+  "end_velocity": 0.0,
+  "sample_dt": 0.05
+}
