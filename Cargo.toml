@@ -1,0 +1,20 @@
+[package]
+name = "dns-compress"
+version = "0.1.0"
+edition = "2021"
+description = "DNS 压缩名字增量解码库与本地 TCP 测试服务（仅标准库，支持子集 A/AAAA/CNAME）"
+
+[lib]
+name = "dns_compress"
+path = "src/lib.rs"
+
+[[bin]]
+name = "dns-server"
+path = "src/bin/server.rs"
+
+[[bin]]
+name = "dns-client"
+path = "src/bin/client.rs"
+
+[profile.release]
+panic = "abort"
