@@ -1,0 +1,10 @@
+{
+  "n_control": 500,
+  "n_treatment": 500,
+  "effect": 0.0,
+  "reps": 2000,
+  "confidence": 0.95,
+  "missing_strategy": "drop",
+  "missing_rate": 0.1,
+  "seed": 42
+}

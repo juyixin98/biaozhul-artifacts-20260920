@@ -1,0 +1,7 @@
+{
+  "n_per_group": 500,
+  "looks": 5,
+  "reps": 2000,
+  "alpha": 0.05,
+  "seed": 42
+}
