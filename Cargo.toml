@@ -1,0 +1,27 @@
+[package]
+name = "ipfrag"
+version = "0.1.0"
+edition = "2021"
+description = "Offline IPv4 fragment reassembly with an incremental byte-parsing library and a local TCP test service (no external dependencies)"
+
+[lib]
+name = "ipfrag"
+path = "src/lib.rs"
+
+[[bin]]
+name = "ipfrag-server"
+path = "src/bin/ipfrag-server.rs"
+
+[[bin]]
+name = "ipfrag-client"
+path = "src/bin/ipfrag-client.rs"
+
+[[bin]]
+name = "fraggen"
+path = "src/bin/fraggen.rs"
+
+[profile.release]
+opt-level = 2
+
+# 纯标准库实现，刻意不引入任何现成协议解析器（如 nom / pnet / etherparse）。
+[dependencies]

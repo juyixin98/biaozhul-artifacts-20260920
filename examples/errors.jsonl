@@ -1,0 +1,8 @@
+# 错误处理样例：每个请求都应得到结构化的 ok=false 响应，连接不断开。
+{"op":"frag","src":"10.5.0.1","dst":"10.5.0.2","protocol":17,"id":4001,"offset":0,"mf":true,"payload_hex":"abc"}
+{"op":"frag","src":"10.5.0.1","dst":"10.5.0.2","protocol":999,"id":4001,"offset":0,"mf":true,"payload_hex":""}
+{"op":"frag","src":"10.5.0.1","dst":"10.5.0.2","protocol":17,"id":4001,"offset":7,"mf":true,"payload_hex":"0102"}
+{"op":"frag","src":"10.5.0.1","dst":"10.5.0.2","protocol":17,"id":4001,"offset":0,"mf":"yes","payload_hex":""}
+{"op":"frag","packet_hex":"4500001c00010000"}
+{"op":"bogus"}
+{"op":"ping"}

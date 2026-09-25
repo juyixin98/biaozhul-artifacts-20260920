@@ -1,0 +1,18 @@
+ipfrag-server — local IPv4 fragment reassembly test service (127.0.0.1 only)
+
+USAGE:
+    ipfrag-server [OPTIONS]
+
+OPTIONS:
+    -p, --port <PORT>               TCP port to bind on 127.0.0.1 (default 9000; 0 = OS-assigned)
+        --ttl-ms <MS>               per-assembly lifetime (default 30000)
+        --purge-interval-ms <MS>    opportunistic sweep interval on insert (default 1000)
+        --mem-budget <BYTES>        total bytes buffered across assemblies (default 4194304)
+        --max-datagram <BYTES>      max reassembled datagram size (default 65535)
+        --max-assemblies <N>        max concurrent assemblies (default 1024)
+        --overlap <POLICY>          reject_new_fragment (default) | drop_assembly
+    -h, --help                      print this help
+
+PROTOCOL:
+    One JSON object per line over TCP; one JSON response object per line.
+    Ops: ping, frag, status, purge, stats, config. See README.md for samples.

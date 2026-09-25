@@ -1,0 +1,6 @@
+# original_payload: length=72 mtu_payload=24 order=forward
+# expected: completed total_bytes=72 sha256=89366f8b252e4bdac957d60a9ff0606a74294a292c72a21e5af459debef765f5
+# note: --omit-first set; offset=0 fragment withheld (missing-first scenario)
+{"op":"frag","src":"10.0.0.1","dst":"10.0.0.2","protocol":17,"id":1005,"offset":24,"mf":true,"payload_hex":"c40b07e8c46e2703a65f7a3be1936b10b9cf7ed8056a1c2b"}
+{"op":"frag","src":"10.0.0.1","dst":"10.0.0.2","protocol":17,"id":1005,"offset":48,"mf":false,"payload_hex":"cc072657ff435d1489f4a059b56c7f3ad4f3d44a43043b57"}
+{"op":"stats"}

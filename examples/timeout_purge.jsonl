@@ -1,0 +1,13 @@
+# 超时清理演示：需要用短 TTL 启动服务器，例如：
+#   ./target/debug/ipfrag-server --port 9000 --ttl-ms 500 --purge-interval-ms 60000
+# 片中显式携带 now_ms（确定性时间，不依赖系统时钟）。
+# 第 2~3 行建立两个未完成组装；now=0。
+# 第 4 行在 now=200 查看：仍然存在。
+# 第 5 行在 now=500 清理：id=3001 / id=3002 均过期（age>=500ms）。
+{"op":"frag","src":"10.4.0.1","dst":"10.4.0.2","protocol":17,"id":3001,"offset":0,"mf":true,"payload_hex":"0102030405060708","now_ms":0}
+{"op":"frag","src":"10.4.0.1","dst":"10.4.0.2","protocol":17,"id":3002,"offset":0,"mf":true,"payload_hex":"1112131415161718","now_ms":0}
+{"op":"status","now_ms":0}
+{"op":"status","now_ms":200}
+{"op":"purge","now_ms":500}
+{"op":"status","now_ms":500}
+{"op":"stats"}

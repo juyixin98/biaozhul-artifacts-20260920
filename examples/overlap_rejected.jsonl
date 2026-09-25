@@ -1,0 +1,9 @@
+# 重叠片场景（offset=8 与已有 [0,24) 相交）—— 默认 reject_new_fragment 策略。
+# 期望：第 3 行返回 {"ok":false,"error":"overlap",...}，原组装保留；
+#       第 4 行补上合法相邻末片 [24,32) 后正常完成。
+{"op":"ping"}
+{"op":"frag","src":"10.2.0.1","dst":"10.2.0.2","protocol":17,"id":2001,"offset":0,"mf":true,"payload_hex":"000102030405060708090a0b0c0d0e0f1011121314151617"}
+{"op":"frag","src":"10.2.0.1","dst":"10.2.0.2","protocol":17,"id":2001,"offset":8,"mf":true,"payload_hex":"a0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7"}
+{"op":"status","src":"10.2.0.1","dst":"10.2.0.2","protocol":17,"id":2001}
+{"op":"frag","src":"10.2.0.1","dst":"10.2.0.2","protocol":17,"id":2001,"offset":24,"mf":false,"payload_hex":"18191a1b1c1d1e1f"}
+{"op":"stats"}
