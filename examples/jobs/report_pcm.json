@@ -1,0 +1,20 @@
+{
+  "sample_rate": 48000.0,
+  "channels": 2,
+  "samples_in": 24000,
+  "samples_out": 24000,
+  "block_size": 512,
+  "num_blocks": 47,
+  "switches_applied": [
+    {
+      "at_sample": 8192,
+      "fade_samples": 512,
+      "channel": null,
+      "filter": "lowpass"
+    }
+  ],
+  "max_abs_output": 0.620208740234375,
+  "max_boundary_jump": 0.135894775390625,
+  "output_path": "/home/admin/Downloads/biaozhul/opp135/b/examples/jobs/out_pcm.f32",
+  "output_format": "f32le"
+}

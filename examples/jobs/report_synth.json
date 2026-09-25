@@ -1,0 +1,32 @@
+{
+  "sample_rate": 48000.0,
+  "channels": 2,
+  "samples_in": 48000,
+  "samples_out": 48000,
+  "block_size": 256,
+  "num_blocks": 189,
+  "switches_applied": [
+    {
+      "at_sample": 16000,
+      "fade_samples": 1024,
+      "channel": null,
+      "filter": "highpass"
+    },
+    {
+      "at_sample": 16400,
+      "fade_samples": 2048,
+      "channel": null,
+      "filter": "lowpass"
+    },
+    {
+      "at_sample": 32000,
+      "fade_samples": 0,
+      "channel": 0,
+      "filter": "moving_average"
+    }
+  ],
+  "max_abs_output": 0.5098759595908243,
+  "max_boundary_jump": 0.67127057404029,
+  "output_path": "/home/admin/Downloads/biaozhul/opp135/b/examples/jobs/out_synth.f32",
+  "output_format": "f32le"
+}

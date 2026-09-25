@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+examples/jobs/out_*.f32
+examples/jobs/report_*.json
+examples/sample_input.pcm

@@ -1,0 +1,15 @@
+{
+  "sample_rate": 48000,
+  "channels": 2,
+  "block_size": 512,
+  "input": {"type": "pcm", "path": "../sample_input.pcm", "format": "s16le"},
+  "filter": {"type": "identity"},
+  "schedule": [
+    {
+      "at_sample": 8192,
+      "filter": {"type": "lowpass", "num_taps": 127, "cutoff_hz": 2000},
+      "fade_samples": 512
+    }
+  ],
+  "output": {"path": "out_pcm.f32", "format": "f32le", "report_path": "report_pcm.json"}
+}

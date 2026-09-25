@@ -1,0 +1,32 @@
+{
+  "sample_rate": 48000,
+  "channels": 2,
+  "block_size": 256,
+  "input": {
+    "type": "synth",
+    "duration_s": 1.0,
+    "freqs_hz": [440, 2800, 9000],
+    "seed": 1,
+    "noise_level": 0.01
+  },
+  "filter": {"type": "lowpass", "num_taps": 63, "cutoff_hz": 1000},
+  "schedule": [
+    {
+      "at_sample": 16000,
+      "filter": {"type": "highpass", "num_taps": 63, "cutoff_hz": 3000},
+      "fade_samples": 1024
+    },
+    {
+      "at_sample": 16400,
+      "filter": {"type": "lowpass", "num_taps": 95, "cutoff_hz": 5000},
+      "fade_samples": 2048
+    },
+    {
+      "at_sample": 32000,
+      "filter": {"type": "moving_average", "num_taps": 9},
+      "fade_samples": 0,
+      "channel": 0
+    }
+  ],
+  "output": {"path": "out_synth.f32", "format": "f32le", "report_path": "report_synth.json"}
+}
