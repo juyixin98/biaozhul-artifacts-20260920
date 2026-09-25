@@ -1,0 +1,12 @@
+# 编译输出
+build/
+out/
+
+# 本地样例运行时产物保留在 examples/out/（已纳入版本，作为真实响应留档）
+*.class
+
+# 系统/编辑器
+.DS_Store
+.idea/
+*.iml
+.vscode/
