@@ -1,0 +1,37 @@
+{
+  "samples": [
+    {
+      "metric": "http_requests",
+      "labels": {
+        "method": "GET",
+        "path": "/api/users",
+        "request_id": "01HXYZ-UNIQUE-ID-0001",
+        "session": "sess-0001",
+        "trace_id": "trace-0001"
+      },
+      "value": 1
+    },
+    {
+      "metric": "http_requests",
+      "labels": {
+        "method": "GET",
+        "path": "/api/users",
+        "request_id": "01HXYZ-UNIQUE-ID-0002",
+        "session": "sess-0002",
+        "trace_id": "trace-0002"
+      },
+      "value": 1
+    },
+    {
+      "metric": "http_requests",
+      "labels": {
+        "method": "GET",
+        "path": "/api/users",
+        "request_id": "01HXYZ-UNIQUE-ID-0003",
+        "session": "sess-0003",
+        "trace_id": "trace-0003"
+      },
+      "value": 1
+    }
+  ]
+}

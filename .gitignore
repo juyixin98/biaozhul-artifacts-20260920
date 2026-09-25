@@ -1,0 +1,9 @@
+# binaries
+/bin/
+/server
+/synthgen
+
+# local runtime data
+/data/
+/data-demo/
+*.log

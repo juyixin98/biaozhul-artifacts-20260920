@@ -1,0 +1,32 @@
+{
+  "samples": [
+    {
+      "metric": "http_requests",
+      "labels": {
+        "method": "GET",
+        "path": "/api/users",
+        "status": "200",
+        "host": "host-01"
+      },
+      "value": 12.4
+    },
+    {
+      "metric": "http_requests",
+      "labels": {
+        "method": "POST",
+        "path": "/api/login",
+        "status": "401",
+        "host": "host-02"
+      },
+      "value": 3.1
+    },
+    {
+      "metric": "queue_depth",
+      "labels": {
+        "queue": "billing",
+        "region": "cn-north"
+      },
+      "value": 42
+    }
+  ]
+}
