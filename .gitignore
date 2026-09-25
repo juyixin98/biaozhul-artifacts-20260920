@@ -1,0 +1,16 @@
+# 构建产物
+build/
+
+# 演示/运行期数据
+*.log
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# OS
+.DS_Store
