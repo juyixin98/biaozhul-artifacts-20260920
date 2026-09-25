@@ -1,0 +1,61 @@
+{
+  "GET /health": {
+    "status": "ok",
+    "tree_size": 10
+  },
+  "POST /add (追加第 11 条叶子后)": {
+    "leaf_index": 10,
+    "tree_size": 11,
+    "leaf_hash_hex": "93f7389bebd29c71934981a5de3a77943b242f64e8c0720dc0898d1d9edf6b82"
+  },
+  "GET /sth (tree_size=11)": {
+    "tree_size": 11,
+    "timestamp_ms": 1790186165612,
+    "sha256_root_hash": "92e6ca8ffedc38ea0c66b67d948f8e7ebadfc4d4b277332509503b951bd49c0d",
+    "tree_head_signature": "871523f80012e27d96018f76e3d392aeabc46c78921cd64e85aeba8d635c58b3ef95e135eafb0c053a6bb7ff053b165d844a750e275817cf94b795b7bf522b01",
+    "public_key_hex": "dea8e2a590671062e680b3d828271337703fc3ba7b8fab09bf6b67cc7528281b",
+    "public_key_b64": "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUNvd0JRWURLMlZ3QXlFQTNxamlwWkJuRUdMbWdMUFlLQ2NUTjNBL3c3cDdqNnNKdjJ0bnpIVW9LQnM9Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo=",
+    "empty_tree_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "GET /get-inclusion-proof?leaf_index=10": {
+    "leaf_index": 10,
+    "tree_size": 11,
+    "leaf_hash_hex": "93f7389bebd29c71934981a5de3a77943b242f64e8c0720dc0898d1d9edf6b82",
+    "root_hash_hex": "92e6ca8ffedc38ea0c66b67d948f8e7ebadfc4d4b277332509503b951bd49c0d",
+    "inclusion_path": [
+      "8a221bb1d5e99d99e4258fa0675319de44238e2b7ac78a33be71e3176bddf502",
+      "9f16ccf310ae8353093d43967c26a0a7825109c4c59b4bec9c1a0b5e2ecfd994"
+    ]
+  },
+  "GET /get-inclusion-proof?leaf_index=2&tree_size=3 (历史树大小)": {
+    "leaf_index": 2,
+    "tree_size": 3,
+    "leaf_hash_hex": "6b0271f8cc97121c9e25e8c731f47c941b487c583f5fe15498a4c6f1994af299",
+    "root_hash_hex": "6ecf2b947595ba302766c68ed603f90b089313dd2dfd3ed94c17e75cd41e433b",
+    "inclusion_path": [
+      "b9107a2d0438c5591d96df59052547ae97f4cbfa482171fbddefc5bbbe95024a"
+    ]
+  },
+  "GET /get-consistency-proof?first=4": {
+    "first_size": 4,
+    "second_size": 11,
+    "first_root_hash_hex": "49643cf98e47e6121fa5d0bf54acbb2a3fe2eabfd229537049ab748427a30506",
+    "second_root_hash_hex": "92e6ca8ffedc38ea0c66b67d948f8e7ebadfc4d4b277332509503b951bd49c0d",
+    "consistency_path": [
+      "88f1610f6696718629d9dbb36d0580369c8e120e7a724e6165d625d46113b7a8",
+      "6077883c3eda089f1031bb94af3cd724be95063d734319d3b982d07fe0433e56"
+    ]
+  },
+  "GET /get-leaf?index=0": {
+    "index": 0,
+    "data_b64": "6K+B5Lmm6K6w5b2VIGFscGhh",
+    "leaf_hash_hex": "4652127415a244a04d068ef6cff636d090a7725328e96181b3cec558b815ece7",
+    "data_utf8": "证书记录 alpha"
+  },
+  "GET /get-inclusion-proof?leaf_index=999 (HTTP 400)": {
+    "http_status": 400,
+    "body": {
+      "error": "叶子下标 999 不在大小为 11 的树中"
+    }
+  }
+}

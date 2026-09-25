@@ -1,0 +1,5 @@
+# 运行依赖。Python 标准库（http.server / urllib / hashlib / unittest）
+# 提供 HTTP 服务、HTTP 客户端、SHA-256 和测试框架；
+# 唯一第三方依赖是成熟密码库 cryptography（Ed25519 签名）。
+# 本项目在 cryptography 41.0.7 / Python 3.12 上实际运行验证。
+cryptography>=41.0.0
