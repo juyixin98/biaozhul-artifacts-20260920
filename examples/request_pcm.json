@@ -1,0 +1,14 @@
+{
+  "filter": {"type": "butter_lowpass", "order": 4, "cutoff": 0.1},
+  "fixed": {
+    "sig": [1, 15],
+    "coef": [2, 14],
+    "guard_bits": 2,
+    "rounding": "convergent",
+    "overflow": "saturate"
+  },
+  "input": {"kind": "pcm", "path": "examples/in_chirp.pcm", "dtype": "int16"},
+  "output": {"dir": "out/pcm", "basename": "pcm_chirp",
+             "pcm": true, "csv": false, "npy": true},
+  "analyze": false
+}

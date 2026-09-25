@@ -1,0 +1,16 @@
+{
+  "filter": {"type": "sos",
+             "sections": [[0.1, 0.0, 0.0, 1.0, -1.8, 0.95]]},
+  "fixed": {
+    "sig": [1, 15],
+    "coef": [2, 14],
+    "guard_bits": 0,
+    "rounding": "convergent",
+    "overflow": "wrap"
+  },
+  "input": {"kind": "sine", "n": 1024, "freq_fraction": 0.05,
+            "amplitude": 0.9},
+  "output": {"dir": "out/wrap_cycle", "basename": "wrap_cycle",
+             "pcm": true, "csv": true, "npy": true},
+  "analyze": true
+}
