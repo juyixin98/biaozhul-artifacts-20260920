@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "rules": [
+    {"id": "mask-email-local", "action": "mask", "path": "$.users[*].emails[*]",
+     "options": {"keep_last": 0, "mask_char": "·"}}
+  ]
+}

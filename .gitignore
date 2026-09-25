@@ -1,0 +1,9 @@
+# 本地测试密钥，严禁提交
+.secrets/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+.venv/

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dms-masking"
+version = "0.1.0"
+description = "Local JSON data-masking rule compiler and execution engine (backend only)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["cryptography>=41"]
+
+[project.scripts]
+dms = "dms.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-ra"

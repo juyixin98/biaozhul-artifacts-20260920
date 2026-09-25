@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "version": 1,
+    "rules": [
+      {"id": "mask-phone", "action": "mask", "path": "$.users[*].phone",
+       "priority": 20, "options": {"keep_last": 4}},
+      {"id": "hash-ssn", "action": "hash", "path": "$.users[*].ssn"},
+      {"id": "drop-tags", "action": "drop", "path": "$.users[*].internal_tags"}
+    ]
+  },
+  "document": {
+    "users": [
+      {"name": "张三", "phone": "13812345678", "ssn": "110101199003078888",
+       "internal_tags": ["vip"]}
+    ]
+  }
+}

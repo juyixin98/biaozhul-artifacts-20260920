@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "name": "张三",
+      "phone": "13812345678",
+      "ssn": "110101199003078888",
+      "emails": ["zhangsan@example.com", "zs@test.example.cn"],
+      "addresses": [
+        {"city": "北京", "detail": "朝阳区某街道1号", "note": "家庭住址勿外传"},
+        {"city": "上海", "detail": "浦东新区世纪大道2号", "note": "公司地址"}
+      ],
+      "internal_tags": ["vip", "risk-low"]
+    },
+    {
+      "name": "John O'Brien",
+      "phone": "+1-415-555-0132",
+      "ssn": "987-65-4320",
+      "emails": [],
+      "addresses": [
+        {"city": "San Francisco", "detail": "1 Market St", "note": "Emoji test 🔐"}
+      ]
+    }
+  ],
+  "meta": {"generated_by": "fixture", "note": "顶层备注"}
+}

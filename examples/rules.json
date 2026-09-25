@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "id": "mask-user-phone",
+      "action": "mask",
+      "path": "$.users[*].phone",
+      "priority": 20,
+      "options": {"keep_last": 4, "mask_char": "*"}
+    },
+    {
+      "id": "hash-ssn",
+      "action": "hash",
+      "path": "$.users[*].ssn",
+      "priority": 10
+    },
+    {
+      "id": "redact-secret-note",
+      "action": "redact",
+      "path": "$..note",
+      "priority": 5,
+      "options": {"replacement": "【已脱敏】"}
+    },
+    {
+      "id": "drop-internal-tags",
+      "action": "drop",
+      "path": "$.users[*].internal_tags"
+    }
+  ]
+}
