@@ -1,0 +1,6 @@
+name: expired
+description: Expired leaf: same chain verified at 2027-06-01, after the leaf notAfter (2026-01-01).
+verification_time: 2027-06-01T12:00:00Z
+hostname: expired.example.test
+expected_valid: False
+expected_codes: ['EXPIRED']

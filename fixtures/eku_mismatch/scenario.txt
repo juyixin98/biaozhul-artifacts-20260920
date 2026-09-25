@@ -1,0 +1,6 @@
+name: eku_mismatch
+description: Leaf has only clientAuth EKU; verifying for serverAuth fails.
+verification_time: 2025-06-01T12:00:00Z
+hostname: clientonly.example.test
+expected_valid: False
+expected_codes: ['EKU_MISMATCH']

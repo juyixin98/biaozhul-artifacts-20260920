@@ -1,0 +1,6 @@
+name: untrusted_root
+description: Chain is internally valid but its root is not in the explicitly supplied trust store.
+verification_time: 2025-06-01T12:00:00Z
+hostname: other.example.test
+expected_valid: False
+expected_codes: ['NO_PATH_TO_TRUST_ANCHOR']

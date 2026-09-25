@@ -1,0 +1,66 @@
+{
+  "chain": [
+    {
+      "index": 0,
+      "is_trust_anchor": false,
+      "issuer": "O=Offline Test CA,CN=Offline Test Intermediate CA",
+      "not_after": "2026-01-01T00:00:00+00:00",
+      "not_before": "2025-01-01T00:00:00+00:00",
+      "serial_number": "7297f4341170e4054bf761a7f69593f202510281",
+      "sha256_fingerprint": "96:4e:90:c2:f6:6c:90:83:6b:e0:73:07:1f:65:99:64:85:87:a3:f3:44:23:3b:ae:c0:82:78:99:07:ea:86:a7",
+      "signature_algorithm": "sha256WithRSAEncryption",
+      "subject": "O=Example Test Org,CN=example.test",
+      "subject_key_identifier": "236fe9e0f673c07f8f3e80247b6711dce9ce5409"
+    },
+    {
+      "index": 1,
+      "is_trust_anchor": false,
+      "issuer": "O=Offline Test CA,CN=Offline Test Root CA",
+      "not_after": "2030-01-01T00:00:00+00:00",
+      "not_before": "2020-01-01T00:00:00+00:00",
+      "serial_number": "efc5711370d9edfeef9d78dc7f44e5c9f6e1a80",
+      "sha256_fingerprint": "ba:c0:33:e9:9f:b0:2c:0d:e4:77:5b:12:86:b3:6a:17:ba:54:1e:14:36:2f:dd:3f:11:43:d6:fb:b8:4c:51:3d",
+      "signature_algorithm": "sha256WithRSAEncryption",
+      "subject": "O=Offline Test CA,CN=Offline Test Intermediate CA",
+      "subject_key_identifier": "b68f244555c9075ad04a18c56db4c3b16653445a"
+    },
+    {
+      "index": 2,
+      "is_trust_anchor": true,
+      "issuer": "O=Offline Test CA,CN=Offline Test Root CA",
+      "not_after": "2030-01-01T00:00:00+00:00",
+      "not_before": "2020-01-01T00:00:00+00:00",
+      "serial_number": "75e0d32679f023250ee34564c78499132e978ce7",
+      "sha256_fingerprint": "82:01:a9:f9:d9:8e:ad:19:31:1e:fe:c1:1f:64:4b:7e:4a:38:87:53:1b:d7:e8:fd:80:c3:fb:5e:03:c7:a9:d2",
+      "signature_algorithm": "sha256WithRSAEncryption",
+      "subject": "O=Offline Test CA,CN=Offline Test Root CA",
+      "subject_key_identifier": "a973067e72bc5f8faa59898ee942353d052ae698"
+    }
+  ],
+  "findings": [],
+  "hostname": "example.test",
+  "notes": [
+    "Revocation status NOT checked: no CRL, OCSP or stapled response was inspected (offline mode by design)."
+  ],
+  "purpose": "serverAuth",
+  "revocation": {
+    "checked": false,
+    "crl_checked": false,
+    "note": "OFFLINE MODE: revocation status (CRL/OCSP/OCSP-stapling) was NOT checked. A VALID result says nothing about whether any certificate in the chain has been revoked.",
+    "ocsp_checked": false
+  },
+  "trust_anchor": {
+    "index": null,
+    "is_trust_anchor": true,
+    "issuer": "O=Offline Test CA,CN=Offline Test Root CA",
+    "not_after": "2030-01-01T00:00:00+00:00",
+    "not_before": "2020-01-01T00:00:00+00:00",
+    "serial_number": "75e0d32679f023250ee34564c78499132e978ce7",
+    "sha256_fingerprint": "82:01:a9:f9:d9:8e:ad:19:31:1e:fe:c1:1f:64:4b:7e:4a:38:87:53:1b:d7:e8:fd:80:c3:fb:5e:03:c7:a9:d2",
+    "signature_algorithm": "sha256WithRSAEncryption",
+    "subject": "O=Offline Test CA,CN=Offline Test Root CA",
+    "subject_key_identifier": "a973067e72bc5f8faa59898ee942353d052ae698"
+  },
+  "valid": true,
+  "verification_time": "2025-06-01T12:00:00+00:00"
+}

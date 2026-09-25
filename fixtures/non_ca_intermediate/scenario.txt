@@ -1,0 +1,6 @@
+name: non_ca_intermediate
+description: Intermediate certificate has basicConstraints CA:FALSE (and no keyCertSign); it must not be used to sign/issue the leaf.
+verification_time: 2025-06-01T12:00:00Z
+hostname: badsign.example.test
+expected_valid: False
+expected_codes: ['NOT_A_CA']

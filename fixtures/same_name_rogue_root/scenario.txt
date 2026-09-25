@@ -1,0 +1,6 @@
+name: same_name_rogue_root
+description: A rogue CA shares the trusted root's exact subject DN but has a different key. Name matching alone would be fooled; signature/SPKI validation rejects the rogue chain.
+verification_time: 2025-06-01T12:00:00Z
+hostname: evil.example.test
+expected_valid: False
+expected_codes: ['NO_PATH_TO_TRUST_ANCHOR']

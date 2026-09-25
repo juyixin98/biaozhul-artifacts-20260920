@@ -1,0 +1,6 @@
+name: expired_intermediate
+description: Intermediate CA already expired at 2022-01-01; verified 2025-06-01 -> EXPIRED on the intermediate.
+verification_time: 2025-06-01T12:00:00Z
+hostname: expiredint.example.test
+expected_valid: False
+expected_codes: ['EXPIRED']

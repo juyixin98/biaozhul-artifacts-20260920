@@ -1,0 +1,6 @@
+name: hostname_mismatch
+description: Chain is valid, but the requested host 'attacker.test' is not in the certificate SAN.
+verification_time: 2025-06-01T12:00:00Z
+hostname: attacker.test
+expected_valid: False
+expected_codes: ['HOSTNAME_MISMATCH']

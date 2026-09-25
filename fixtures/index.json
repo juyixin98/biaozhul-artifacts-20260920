@@ -1,0 +1,82 @@
+{
+  "eku_mismatch": {
+    "description": "Leaf has only clientAuth EKU; verifying for serverAuth fails.",
+    "expected_codes": [
+      "EKU_MISMATCH"
+    ],
+    "expected_valid": false
+  },
+  "expired": {
+    "description": "Expired leaf: same chain verified at 2027-06-01, after the leaf notAfter (2026-01-01).",
+    "expected_codes": [
+      "EXPIRED"
+    ],
+    "expected_valid": false
+  },
+  "expired_intermediate": {
+    "description": "Intermediate CA already expired at 2022-01-01; verified 2025-06-01 -> EXPIRED on the intermediate.",
+    "expected_codes": [
+      "EXPIRED"
+    ],
+    "expected_valid": false
+  },
+  "good": {
+    "description": "Valid chain: root -> intermediate -> leaf, in date, serverAuth EKU, SAN example.test, verified at 2025-06-01.",
+    "expected_codes": [],
+    "expected_valid": true
+  },
+  "hostname_mismatch": {
+    "description": "Chain is valid, but the requested host 'attacker.test' is not in the certificate SAN.",
+    "expected_codes": [
+      "HOSTNAME_MISMATCH"
+    ],
+    "expected_valid": false
+  },
+  "non_ca_intermediate": {
+    "description": "Intermediate certificate has basicConstraints CA:FALSE (and no keyCertSign); it must not be used to sign/issue the leaf.",
+    "expected_codes": [
+      "NOT_A_CA"
+    ],
+    "expected_valid": false
+  },
+  "not_yet_valid": {
+    "description": "Leaf notBefore is 2025-01-01 but verification runs 2024-06-01.",
+    "expected_codes": [
+      "NOT_YET_VALID"
+    ],
+    "expected_valid": false
+  },
+  "path_length_violation": {
+    "description": "Root has basicConstraints pathLenConstraint=0 but a CA intermediate is present, violating RFC 5280 4.2.1.9.",
+    "expected_codes": [
+      "PATH_LENGTH_VIOLATION"
+    ],
+    "expected_valid": false
+  },
+  "same_name_intermediate": {
+    "description": "Two intermediates share a subject DN; only one chains to the anchor. The builder must follow signatures, not names.",
+    "expected_codes": [
+      "NO_PATH_TO_TRUST_ANCHOR"
+    ],
+    "expected_valid": false
+  },
+  "same_name_rogue_root": {
+    "description": "A rogue CA shares the trusted root's exact subject DN but has a different key. Name matching alone would be fooled; signature/SPKI validation rejects the rogue chain.",
+    "expected_codes": [
+      "NO_PATH_TO_TRUST_ANCHOR"
+    ],
+    "expected_valid": false
+  },
+  "untrusted_root": {
+    "description": "Chain is internally valid but its root is not in the explicitly supplied trust store.",
+    "expected_codes": [
+      "NO_PATH_TO_TRUST_ANCHOR"
+    ],
+    "expected_valid": false
+  },
+  "wildcard": {
+    "description": "Wildcard SAN *.example.test must match one label only.",
+    "expected_codes": [],
+    "expected_valid": true
+  }
+}

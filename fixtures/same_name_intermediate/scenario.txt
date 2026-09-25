@@ -1,0 +1,6 @@
+name: same_name_intermediate
+description: Two intermediates share a subject DN; only one chains to the anchor. The builder must follow signatures, not names.
+verification_time: 2025-06-01T12:00:00Z
+hostname: evil2.example.test
+expected_valid: False
+expected_codes: ['NO_PATH_TO_TRUST_ANCHOR']

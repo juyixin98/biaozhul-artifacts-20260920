@@ -1,0 +1,6 @@
+name: wildcard
+description: Wildcard SAN *.example.test must match one label only.
+verification_time: 2025-06-01T12:00:00Z
+hostname: api.example.test
+expected_valid: True
+expected_codes: []

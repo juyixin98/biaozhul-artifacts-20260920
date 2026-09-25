@@ -1,0 +1,6 @@
+name: good
+description: Valid chain: root -> intermediate -> leaf, in date, serverAuth EKU, SAN example.test, verified at 2025-06-01.
+verification_time: 2025-06-01T12:00:00Z
+hostname: example.test
+expected_valid: True
+expected_codes: []

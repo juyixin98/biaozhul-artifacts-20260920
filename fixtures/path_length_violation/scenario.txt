@@ -1,0 +1,6 @@
+name: path_length_violation
+description: Root has basicConstraints pathLenConstraint=0 but a CA intermediate is present, violating RFC 5280 4.2.1.9.
+verification_time: 2025-06-01T12:00:00Z
+hostname: pathlen.example.test
+expected_valid: False
+expected_codes: ['PATH_LENGTH_VIOLATION']
