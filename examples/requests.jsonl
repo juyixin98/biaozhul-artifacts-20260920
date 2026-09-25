@@ -1,0 +1,3 @@
+{"id": 1, "action": "decode_synth", "keys": "159#", "synth": {"snr_db": 20, "seed": 11}, "detector": {"min_tone_ms": 40}}
+{"id": 2, "action": "synthesize", "keys": "0755", "out_file": "examples/out_0755.pcm", "config": {"tone_ms": 60, "gap_ms": 40, "snr_db": 25, "seed": 3}}
+{"id": 3, "action": "decode", "pcm_file": "examples/out_0755.pcm", "sample_rate": 8000}
