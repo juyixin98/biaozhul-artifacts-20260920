@@ -1,0 +1,7 @@
+{
+  "events": [
+    { "id": "A1", "key": "k", "type": "A", "timestamp": 0 },
+    { "id": "C2", "key": "k", "type": "C", "timestamp": 40 },
+    { "id": "B3", "key": "k", "type": "B", "timestamp": 60 }
+  ]
+}

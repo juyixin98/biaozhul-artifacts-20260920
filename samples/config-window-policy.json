@@ -1,0 +1,6 @@
+{
+  "windowMillis": 250,
+  "matchPolicy": "SKIP_PAST_LAST",
+  "allowedLatenessMillis": 50,
+  "latePolicy": "DROP"
+}
