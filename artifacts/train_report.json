@@ -1,0 +1,22 @@
+{
+  "n_train": 12,
+  "n_features_in": 4,
+  "feature_names_out": [
+    "age",
+    "income",
+    "constant_col",
+    "city=east",
+    "city=north",
+    "city=south",
+    "city=west"
+  ],
+  "model_rank": 6,
+  "intercept": 176.07961426382343,
+  "columns_in_order": [
+    "age",
+    "income",
+    "constant_col",
+    "city"
+  ],
+  "artifact_path": "artifacts/model.json"
+}

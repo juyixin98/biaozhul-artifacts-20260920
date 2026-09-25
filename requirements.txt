@@ -1,0 +1,4 @@
+numpy>=1.24
+# Test / coverage tooling (not needed to run the service):
+pytest>=7.0
+pytest-cov>=4.0

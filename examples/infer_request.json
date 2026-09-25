@@ -1,0 +1,7 @@
+{
+  "rows": [
+    {"age": 31.0, "income": 5100.0, "constant_col": 7.0, "city": "north"},
+    {"city": "remote", "constant_col": 7.0, "income": 4600.0, "age": 27.0},
+    {"age": null, "income": null, "constant_col": 7.0, "city": "east"}
+  ]
+}

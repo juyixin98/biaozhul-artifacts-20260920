@@ -1,0 +1,23 @@
+{
+  "columns_in_order": [
+    "age",
+    "income",
+    "constant_col",
+    "city"
+  ],
+  "feature_names_out": [
+    "age",
+    "income",
+    "constant_col",
+    "city=east",
+    "city=north",
+    "city=south",
+    "city=west"
+  ],
+  "n_rows": 3,
+  "predictions": [
+    257.0822909523232,
+    138.18914079899855,
+    233.59470703994305
+  ]
+}

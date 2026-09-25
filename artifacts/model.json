@@ -1,0 +1,182 @@
+{
+  "kind": "feature_pipeline_artifact",
+  "version": 1,
+  "schema": {
+    "columns": [
+      {
+        "name": "age",
+        "dtype": "numeric",
+        "impute": "mean",
+        "fill_value": null
+      },
+      {
+        "name": "income",
+        "dtype": "numeric",
+        "impute": "median",
+        "fill_value": null
+      },
+      {
+        "name": "constant_col",
+        "dtype": "numeric",
+        "impute": "constant",
+        "fill_value": 7.0
+      },
+      {
+        "name": "city",
+        "dtype": "categorical",
+        "impute": "mode",
+        "fill_value": null
+      }
+    ],
+    "target": "price"
+  },
+  "feature_names": [
+    "age",
+    "income",
+    "constant_col",
+    "city=east",
+    "city=north",
+    "city=south",
+    "city=west"
+  ],
+  "pipeline": {
+    "schema": {
+      "columns": [
+        {
+          "name": "age",
+          "dtype": "numeric",
+          "impute": "mean",
+          "fill_value": null
+        },
+        {
+          "name": "income",
+          "dtype": "numeric",
+          "impute": "median",
+          "fill_value": null
+        },
+        {
+          "name": "constant_col",
+          "dtype": "numeric",
+          "impute": "constant",
+          "fill_value": 7.0
+        },
+        {
+          "name": "city",
+          "dtype": "categorical",
+          "impute": "mode",
+          "fill_value": null
+        }
+      ],
+      "target": "price"
+    },
+    "fitted": true,
+    "steps": [
+      {
+        "column": "age",
+        "dtype": "numeric",
+        "transformers": [
+          {
+            "type": "numeric_imputer",
+            "strategy": "mean",
+            "fill_value": null,
+            "statistic": 35.3,
+            "n_seen": 12,
+            "fitted": true
+          },
+          {
+            "type": "standard_scaler",
+            "mean": 35.300000000000004,
+            "std": 6.904708538381616,
+            "scale": 6.904708538381616,
+            "zero_variance": false,
+            "fitted": true
+          }
+        ]
+      },
+      {
+        "column": "income",
+        "dtype": "numeric",
+        "transformers": [
+          {
+            "type": "numeric_imputer",
+            "strategy": "median",
+            "fill_value": null,
+            "statistic": 5300.0,
+            "n_seen": 12,
+            "fitted": true
+          },
+          {
+            "type": "standard_scaler",
+            "mean": 5508.333333333333,
+            "std": 861.6441002847728,
+            "scale": 861.6441002847728,
+            "zero_variance": false,
+            "fitted": true
+          }
+        ]
+      },
+      {
+        "column": "constant_col",
+        "dtype": "numeric",
+        "transformers": [
+          {
+            "type": "numeric_imputer",
+            "strategy": "constant",
+            "fill_value": 7.0,
+            "statistic": 7.0,
+            "n_seen": 12,
+            "fitted": true
+          },
+          {
+            "type": "standard_scaler",
+            "mean": 7.0,
+            "std": 0.0,
+            "scale": 1.0,
+            "zero_variance": true,
+            "fitted": true
+          }
+        ]
+      },
+      {
+        "column": "city",
+        "dtype": "categorical",
+        "transformers": [
+          {
+            "type": "categorical_imputer",
+            "strategy": "mode",
+            "fill_value": null,
+            "statistic": "north",
+            "n_seen": 12,
+            "fitted": true
+          },
+          {
+            "type": "one_hot_encoder",
+            "column_name": "city",
+            "categories": [
+              "east",
+              "north",
+              "south",
+              "west"
+            ],
+            "fitted": true
+          }
+        ]
+      }
+    ]
+  },
+  "model": {
+    "fitted": true,
+    "coefficients": [
+      25.617360757473758,
+      6.731639068389877,
+      -3.552713678800501e-15,
+      59.14270771069767,
+      100.14635751512546,
+      32.44632776109921,
+      -15.655778723098956
+    ],
+    "intercept": 176.07961426382343,
+    "n_features": 7,
+    "rank": 6
+  }
+}
