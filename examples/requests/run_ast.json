@@ -1,0 +1,5 @@
+{
+  "action": "run",
+  "mode": "ast",
+  "source": "print -7 / 2\nprint -7 % 2"
+}

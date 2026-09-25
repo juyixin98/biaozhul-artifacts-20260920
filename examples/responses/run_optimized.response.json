@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "action": "run",
+  "mode": "optimized",
+  "output": [],
+  "stdout": "",
+  "steps": 3,
+  "error": {
+    "stage": "runtime",
+    "message": "division or modulo by zero",
+    "span": {
+      "start": {
+        "line": 1,
+        "col": 14
+      },
+      "end": {
+        "line": 1,
+        "col": 19
+      },
+      "offset": 13,
+      "length": 5,
+      "synthetic": false
+    }
+  }
+}

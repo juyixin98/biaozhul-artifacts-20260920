@@ -1,0 +1,7 @@
+# Branch whose condition is a compile-time constant.
+x := 1;
+if 1 {
+  print x;
+} else {
+  print 999;
+}

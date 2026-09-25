@@ -1,0 +1,211 @@
+{
+  "ok": true,
+  "action": "optimize",
+  "changes": [
+    {
+      "kind": "constant_fold",
+      "block": "b1_entry",
+      "dest": "$t1.1",
+      "value": 0,
+      "op": "const",
+      "span": {
+        "start": {
+          "line": 1,
+          "col": 6
+        },
+        "end": {
+          "line": 1,
+          "col": 7
+        },
+        "offset": 5,
+        "length": 1,
+        "synthetic": false
+      }
+    },
+    {
+      "kind": "constant_fold",
+      "block": "b1_entry",
+      "dest": "i.1",
+      "value": 0,
+      "op": "copy",
+      "span": {
+        "start": {
+          "line": 1,
+          "col": 1
+        },
+        "end": {
+          "line": 1,
+          "col": 7
+        },
+        "offset": 0,
+        "length": 6,
+        "synthetic": false
+      }
+    },
+    {
+      "kind": "constant_fold",
+      "block": "b4_while_head",
+      "dest": "$t2.1",
+      "value": 3,
+      "op": "const",
+      "span": {
+        "start": {
+          "line": 2,
+          "col": 11
+        },
+        "end": {
+          "line": 2,
+          "col": 12
+        },
+        "offset": 17,
+        "length": 1,
+        "synthetic": false
+      }
+    },
+    {
+      "kind": "constant_fold",
+      "block": "b5_while_body",
+      "dest": "$t4.1",
+      "value": 1,
+      "op": "const",
+      "span": {
+        "start": {
+          "line": 4,
+          "col": 12
+        },
+        "end": {
+          "line": 4,
+          "col": 13
+        },
+        "offset": 42,
+        "length": 1,
+        "synthetic": false
+      }
+    },
+    {
+      "kind": "constant_fold",
+      "block": "b3_cont",
+      "dest": "$t6.1",
+      "value": 99,
+      "op": "const",
+      "span": {
+        "start": {
+          "line": 6,
+          "col": 7
+        },
+        "end": {
+          "line": 6,
+          "col": 9
+        },
+        "offset": 52,
+        "length": 2,
+        "synthetic": false
+      }
+    },
+    {
+      "kind": "remove_dead_instruction",
+      "block": "b1_entry",
+      "dest": "$t1.1",
+      "op": "const",
+      "span": {
+        "start": {
+          "line": 1,
+          "col": 6
+        },
+        "end": {
+          "line": 1,
+          "col": 7
+        },
+        "offset": 5,
+        "length": 1,
+        "synthetic": false
+      }
+    },
+    {
+      "kind": "remove_dead_instruction",
+      "block": "b1_entry",
+      "dest": "i.1",
+      "op": "copy",
+      "span": {
+        "start": {
+          "line": 1,
+          "col": 1
+        },
+        "end": {
+          "line": 1,
+          "col": 7
+        },
+        "offset": 0,
+        "length": 6,
+        "synthetic": false
+      }
+    },
+    {
+      "kind": "remove_dead_instruction",
+      "block": "b4_while_head",
+      "dest": "$t2.1",
+      "op": "const",
+      "span": {
+        "start": {
+          "line": 2,
+          "col": 11
+        },
+        "end": {
+          "line": 2,
+          "col": 12
+        },
+        "offset": 17,
+        "length": 1,
+        "synthetic": false
+      }
+    },
+    {
+      "kind": "remove_dead_instruction",
+      "block": "b5_while_body",
+      "dest": "$t4.1",
+      "op": "const",
+      "span": {
+        "start": {
+          "line": 4,
+          "col": 12
+        },
+        "end": {
+          "line": 4,
+          "col": 13
+        },
+        "offset": 42,
+        "length": 1,
+        "synthetic": false
+      }
+    },
+    {
+      "kind": "remove_dead_instruction",
+      "block": "b3_cont",
+      "dest": "$t6.1",
+      "op": "const",
+      "span": {
+        "start": {
+          "line": 6,
+          "col": 7
+        },
+        "end": {
+          "line": 6,
+          "col": 9
+        },
+        "offset": 52,
+        "length": 2,
+        "synthetic": false
+      }
+    }
+  ],
+  "change_count": 10,
+  "reachable_before": [
+    "b1_entry",
+    "b2_exit",
+    "b3_cont",
+    "b4_while_head",
+    "b5_while_body"
+  ],
+  "ssa_ir": "b1_entry:\n  $t1.1 = const 0  #@ 1:6-1:7 off=5 len=1\n  i.1 = copy $t1.1  #@ 1:1-1:7 off=0 len=6\n  jmp b4_while_head\nb4_while_head:\n  i.2 = phi [i.1, i.3]\n  $t2.1 = const 3  #@ 2:11-2:12 off=17 len=1\n  $t3.1 = lt i.2 $t2.1  #@ 2:7-2:12 off=13 len=5\n  br $t3.1 b5_while_body b3_cont  #@ 2:7-2:12 off=13 len=5\nb5_while_body:\n  print i.2  #@ 3:3-3:10 off=23 len=7\n  $t4.1 = const 1  #@ 4:12-4:13 off=42 len=1\n  $t5.1 = add i.2 $t4.1  #@ 4:8-4:13 off=38 len=5\n  i.3 = copy $t5.1  #@ 4:3-4:13 off=33 len=10\n  jmp b4_while_head\nb3_cont:\n  $t6.1 = const 99  #@ 6:7-6:9 off=52 len=2\n  print $t6.1  #@ 6:1-6:9 off=46 len=8\n  jmp b2_exit\nb2_exit:\n  ret\n",
+  "optimized_ir": "b1_entry:\n  jmp b4_while_head\nb4_while_head:\n  i.2 = phi [0, i.3]\n  $t3.1 = lt i.2 3  #@ 2:7-2:12 off=13 len=5\n  br $t3.1 b5_while_body b3_cont  #@ 2:7-2:12 off=13 len=5\nb5_while_body:\n  print i.2  #@ 3:3-3:10 off=23 len=7\n  $t5.1 = add i.2 1  #@ 4:8-4:13 off=38 len=5\n  i.3 = copy $t5.1  #@ 4:3-4:13 off=33 len=10\n  jmp b4_while_head\nb3_cont:\n  print 99  #@ 6:1-6:9 off=46 len=8\n  jmp b2_exit\nb2_exit:\n  ret\n"
+}

@@ -1,0 +1,6 @@
+# Dynamically zero divisor: analysis must keep x bottom and retain the op.
+x := 0;
+while x < 3 {
+  print 10 / x;
+  x := x + 1;
+}

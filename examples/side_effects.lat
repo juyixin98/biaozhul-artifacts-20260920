@@ -1,0 +1,10 @@
+# Even with a constant condition, prints in a reachable branch stay ordered;
+# a print in the dead branch must be removed, not reordered.
+a := 3;
+if 1 {
+  print a;
+  print a + 1;
+} else {
+  print 100;
+}
+print 9;

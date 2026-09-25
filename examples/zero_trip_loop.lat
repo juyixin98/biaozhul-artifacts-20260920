@@ -1,0 +1,7 @@
+# Loop with a compile-time-false condition: body is never reachable.
+i := 10;
+while 0 {
+  print i;
+  i := i + 1;
+}
+print i;

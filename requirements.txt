@@ -1,0 +1,2 @@
+# LattLang uses only the Python 3 standard library (3.10+).
+# No third-party dependencies are required.

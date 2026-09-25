@@ -1,0 +1,7 @@
+# Division by zero on a reachable path MUST still trap after optimization.
+x := 1;
+if 1 {
+  print x / 0;
+} else {
+  print 42;
+}

@@ -1,0 +1,20 @@
+{
+  "ok": false,
+  "error": {
+    "stage": "parse",
+    "message": "expected an expression but found ''",
+    "span": {
+      "start": {
+        "line": 1,
+        "col": 5
+      },
+      "end": {
+        "line": 1,
+        "col": 5
+      },
+      "offset": 4,
+      "length": 0,
+      "synthetic": false
+    }
+  }
+}

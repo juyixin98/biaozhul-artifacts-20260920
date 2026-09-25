@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "action": "run",
+  "mode": "ast",
+  "output": [
+    "-3",
+    "-1"
+  ],
+  "stdout": "-3\n-1\n",
+  "steps": 10,
+  "error": null
+}

@@ -1,0 +1,14 @@
+# Confluence counterexample: the while loop makes i non-constant (BOTTOM).
+# The following if therefore cannot be folded, and at the merge x is the
+# meet of 1 and 2, also BOTTOM. Both prints must survive optimization.
+i := 0;
+while i < 1 {
+  i := i + 1;
+}
+x := 7;
+if i {
+  x := 1;
+} else {
+  x := 2;
+}
+print x;

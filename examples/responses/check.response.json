@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "action": "check",
+  "equivalent": true,
+  "signatures": {
+    "ast": {
+      "output": [
+        "1"
+      ],
+      "error_stage": null,
+      "error_message": null,
+      "error_span": null
+    },
+    "ir": {
+      "output": [
+        "1"
+      ],
+      "error_stage": null,
+      "error_message": null,
+      "error_span": null
+    },
+    "optimized": {
+      "output": [
+        "1"
+      ],
+      "error_stage": null,
+      "error_message": null,
+      "error_span": null
+    }
+  },
+  "steps": {
+    "ast": 19,
+    "ir": 20,
+    "optimized": 13
+  }
+}

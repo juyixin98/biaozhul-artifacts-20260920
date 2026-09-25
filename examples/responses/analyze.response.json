@@ -1,0 +1,309 @@
+{
+  "ok": true,
+  "action": "analyze",
+  "reachable_blocks": [
+    "b1_entry",
+    "b2_exit",
+    "b3_cont",
+    "b4_then"
+  ],
+  "executable_edges": [
+    [
+      "b1_entry",
+      "b4_then"
+    ],
+    [
+      "b3_cont",
+      "b2_exit"
+    ],
+    [
+      "b4_then",
+      "b3_cont"
+    ]
+  ],
+  "blocks": [
+    {
+      "label": "b1_entry",
+      "reachable": true,
+      "preds": [],
+      "succs": [
+        "b4_then",
+        "b5_else"
+      ],
+      "phis": [],
+      "instructions": [
+        {
+          "kind": "const",
+          "op": null,
+          "dest": "$t1.1",
+          "span": {
+            "start": {
+              "line": 2,
+              "col": 6
+            },
+            "end": {
+              "line": 2,
+              "col": 7
+            },
+            "offset": 30,
+            "length": 1,
+            "synthetic": false
+          },
+          "value": {
+            "kind": "const",
+            "value": 7
+          }
+        },
+        {
+          "kind": "copy",
+          "op": null,
+          "dest": "x.1",
+          "span": {
+            "start": {
+              "line": 2,
+              "col": 1
+            },
+            "end": {
+              "line": 2,
+              "col": 7
+            },
+            "offset": 25,
+            "length": 6,
+            "synthetic": false
+          },
+          "value": {
+            "kind": "const",
+            "value": 7
+          }
+        },
+        {
+          "kind": "const",
+          "op": null,
+          "dest": "$t2.1",
+          "span": {
+            "start": {
+              "line": 3,
+              "col": 4
+            },
+            "end": {
+              "line": 3,
+              "col": 5
+            },
+            "offset": 35,
+            "length": 1,
+            "synthetic": false
+          },
+          "value": {
+            "kind": "const",
+            "value": 1
+          }
+        }
+      ],
+      "terminator": {
+        "kind": "br",
+        "span": {
+          "start": {
+            "line": 3,
+            "col": 4
+          },
+          "end": {
+            "line": 3,
+            "col": 5
+          },
+          "offset": 35,
+          "length": 1,
+          "synthetic": false
+        },
+        "condition": {
+          "kind": "const",
+          "value": 1
+        },
+        "edges": [
+          {
+            "to": "b4_then",
+            "executable": true
+          },
+          {
+            "to": "b5_else",
+            "executable": false
+          }
+        ]
+      }
+    },
+    {
+      "label": "b4_then",
+      "reachable": true,
+      "preds": [
+        "b1_entry"
+      ],
+      "succs": [
+        "b3_cont"
+      ],
+      "phis": [],
+      "instructions": [
+        {
+          "kind": "print",
+          "op": null,
+          "dest": null,
+          "span": {
+            "start": {
+              "line": 4,
+              "col": 3
+            },
+            "end": {
+              "line": 4,
+              "col": 10
+            },
+            "offset": 41,
+            "length": 7,
+            "synthetic": false
+          }
+        }
+      ],
+      "terminator": {
+        "kind": "jmp",
+        "span": {
+          "start": {
+            "line": 0,
+            "col": 0
+          },
+          "end": {
+            "line": 0,
+            "col": 0
+          },
+          "offset": 0,
+          "length": 0,
+          "synthetic": true
+        }
+      }
+    },
+    {
+      "label": "b3_cont",
+      "reachable": true,
+      "preds": [
+        "b4_then",
+        "b5_else"
+      ],
+      "succs": [
+        "b2_exit"
+      ],
+      "phis": [],
+      "instructions": [],
+      "terminator": {
+        "kind": "jmp",
+        "span": {
+          "start": {
+            "line": 0,
+            "col": 0
+          },
+          "end": {
+            "line": 0,
+            "col": 0
+          },
+          "offset": 0,
+          "length": 0,
+          "synthetic": true
+        }
+      }
+    },
+    {
+      "label": "b2_exit",
+      "reachable": true,
+      "preds": [
+        "b3_cont"
+      ],
+      "succs": [],
+      "phis": [],
+      "instructions": [],
+      "terminator": {
+        "kind": "ret",
+        "span": {
+          "start": {
+            "line": 0,
+            "col": 0
+          },
+          "end": {
+            "line": 0,
+            "col": 0
+          },
+          "offset": 0,
+          "length": 0,
+          "synthetic": true
+        }
+      }
+    },
+    {
+      "label": "b5_else",
+      "reachable": false,
+      "preds": [
+        "b1_entry"
+      ],
+      "succs": [
+        "b3_cont"
+      ],
+      "phis": [],
+      "instructions": [
+        {
+          "kind": "const",
+          "op": null,
+          "dest": "$t3.1",
+          "span": {
+            "start": {
+              "line": 6,
+              "col": 9
+            },
+            "end": {
+              "line": 6,
+              "col": 12
+            },
+            "offset": 66,
+            "length": 3,
+            "synthetic": false
+          },
+          "value": {
+            "kind": "top"
+          }
+        },
+        {
+          "kind": "print",
+          "op": null,
+          "dest": null,
+          "span": {
+            "start": {
+              "line": 6,
+              "col": 3
+            },
+            "end": {
+              "line": 6,
+              "col": 12
+            },
+            "offset": 60,
+            "length": 9,
+            "synthetic": false
+          }
+        }
+      ],
+      "terminator": {
+        "kind": "jmp",
+        "span": {
+          "start": {
+            "line": 0,
+            "col": 0
+          },
+          "end": {
+            "line": 0,
+            "col": 0
+          },
+          "offset": 0,
+          "length": 0,
+          "synthetic": true
+        }
+      }
+    }
+  ],
+  "lattice_summary": {
+    "top": 0,
+    "const": 3,
+    "bottom": 0
+  }
+}

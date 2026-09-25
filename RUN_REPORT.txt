@@ -1,0 +1,42 @@
+=== interpreter ===
+Python 3.12.3
+
+=== 1/4 unit/integration tests ===
+test_dominance_frontiers_loop (test_ssa.TestSSA.test_dominance_frontiers_loop) ... ok
+test_dominators_diamond (test_ssa.TestSSA.test_dominators_diamond) ... ok
+test_each_defined_name_unique (test_ssa.TestSSA.test_each_defined_name_unique) ... ok
+test_implicit_zero_init_via_phi (test_ssa.TestSSA.test_implicit_zero_init_via_phi) ... ok
+test_no_phi_for_single_assignment (test_ssa.TestSSA.test_no_phi_for_single_assignment) ... ok
+test_phi_at_if_merge (test_ssa.TestSSA.test_phi_at_if_merge) ... ok
+test_phi_at_loop_head (test_ssa.TestSSA.test_phi_at_loop_head) ... ok
+
+----------------------------------------------------------------------
+Ran 87 tests in 2.945s
+
+OK
+
+=== 2/4 acceptance examples: three-way equivalence (AST / IR / optimized) ===
+  [PASS] confluence.lat
+  [PASS] divzero_dynamic.lat
+  [PASS] divzero_reachable.lat
+  [PASS] divzero_unreachable.lat
+  [PASS] loop_materializes.lat
+  [PASS] mod_negative.lat
+  [PASS] side_effects.lat
+  [PASS] unreachable.lat
+  [PASS] zero_trip_loop.lat
+
+=== 3/4 safety spot checks (div-by-zero behavior must be preserved) ===
+  [PASS] examples/divzero_reachable.lat  (trap at line 4 col 9)
+  [PASS] examples/divzero_dynamic.lat  (trap at line 4 col 9)
+  [PASS] divzero_unreachable.lat  (dead /0 removed, prints 5)
+
+=== 4/4 JSON service smoke tests ===
+  [PASS] analyze.json
+  [PASS] check.json
+  [PASS] error_parse.json (expected ok=false)
+  [PASS] optimize.json
+  [PASS] run_ast.json
+  [PASS] run_optimized.json
+
+ALL CHECKS PASSED

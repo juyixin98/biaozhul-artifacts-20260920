@@ -1,0 +1,8 @@
+# Classic SCCP: loop condition looks constant on entry but becomes
+# non-constant after one iteration (i via the head phi).
+i := 0;
+while i < 3 {
+  print i;
+  i := i + 1;
+}
+print 99;

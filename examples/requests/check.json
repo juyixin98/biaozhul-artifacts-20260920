@@ -1,0 +1,4 @@
+{
+  "action": "check",
+  "source": "i := 0\nwhile i < 1 {\n  i := i + 1\n}\nif i {\n  x := 1\n} else {\n  x := 2\n}\nprint x"
+}

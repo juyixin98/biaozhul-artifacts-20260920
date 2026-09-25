@@ -1,0 +1,5 @@
+{
+  "action": "run",
+  "mode": "optimized",
+  "source": "if 1 { print 1 / 0 } else { print 2 }"
+}

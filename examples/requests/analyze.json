@@ -1,0 +1,4 @@
+{
+  "action": "analyze",
+  "source": "# Which branch is taken?\nx := 7\nif 1 {\n  print x\n} else {\n  print 999\n}"
+}

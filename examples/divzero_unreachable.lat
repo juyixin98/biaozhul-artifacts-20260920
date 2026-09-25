@@ -1,0 +1,6 @@
+# Division by zero that is provably never executed must disappear with the
+# dead branch — without ever being constant-folded into something else.
+if 0 {
+  print 1 / 0;
+}
+print 5;
