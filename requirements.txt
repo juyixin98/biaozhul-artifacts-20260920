@@ -1,0 +1,4 @@
+# 运行时依赖（唯一加密依赖，使用其中成熟的 AES-GCM 与 HKDF 实现）
+cryptography>=41.0
+# 自动化测试（标准库 unittest 也可运行，pytest 为推荐方式）
+pytest>=7.0
