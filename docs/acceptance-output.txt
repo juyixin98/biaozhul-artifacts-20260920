@@ -1,0 +1,285 @@
+== build ==
+built /tmp/tmp.ewzwHuE0YJ/trmerge
+== start server (cache and work dirs separate) ==
+server up; cache=/tmp/tmp.ewzwHuE0YJ/cache work=/tmp/tmp.ewzwHuE0YJ/work
+  PASS  cache dir differs from work dir
+
+== scenario A: events API with crash + retry + missing + cancel ==
+run A = run-a3fd530de7a9147f99955751
+  PASS  redelivered event is marked duplicate
+  PASS  post-finalize result marked late
+summary A:
+    {
+      "run_id": "run-a3fd530de7a9147f99955751",
+      "status": "failed",
+      "finalized": true,
+      "cancel_requested": true,
+      "shards": [
+        {
+          "shard_id": "s1",
+          "status": "completed",
+          "exit_code": 0
+        },
+        {
+          "shard_id": "s2",
+          "status": "completed",
+          "exit_code": 0,
+          "error": "lost worker",
+          "conflict": true
+        },
+        {
+          "shard_id": "s3",
+          "status": "canceled"
+        }
+      ],
+      "tests": [
+        {
+          "test_id": "auth.login",
+          "status": "passed",
+          "latest_attempt_no": 1,
+          "attempts": [
+            {
+              "attempt_id": "auth.login#1",
+              "attempt_no": 1,
+              "shard_id": "s1",
+              "started": true,
+              "status": "passed",
+              "claims": [
+                "passed"
+              ],
+              "first_claim": "passed"
+            }
+          ]
+        },
+        {
+          "test_id": "auth.logout",
+          "status": "passed",
+          "latest_attempt_no": 1,
+          "attempts": [
+            {
+              "attempt_id": "auth.logout#1",
+              "attempt_no": 1,
+              "shard_id": "s1",
+              "started": true,
+              "status": "passed",
+              "claims": [
+                "passed"
+              ],
+              "first_claim": "passed"
+            }
+          ]
+        },
+        {
+          "test_id": "auth.expired_token",
+          "status": "incomplete",
+          "latest_attempt_no": 0,
+          "attempts": null
+        },
+        {
+          "test_id": "billing.charge",
+          "status": "passed",
+          "latest_attempt_no": 2,
+          "attempts": [
+            {
+              "attempt_id": "billing.charge#1",
+              "attempt_no": 1,
+              "shard_id": "s2",
+              "started": true,
+              "status": "failed",
+              "claims": [
+                "failed"
+              ],
+              "first_claim": "failed"
+            },
+            {
+              "attempt_id": "billing.charge#2",
+              "attempt_no": 2,
+              "shard_id": "s2",
+              "started": true,
+              "status": "passed",
+              "claims": [
+                "passed"
+              ],
+              "first_claim": "passed"
+            }
+          ]
+        },
+        {
+          "test_id": "billing.refund",
+          "status": "passed",
+          "latest_attempt_no": 1,
+          "attempts": [
+            {
+              "attempt_id": "billing.refund#1",
+              "attempt_no": 1,
+              "shard_id": "s2",
+              "started": true,
+              "status": "passed",
+              "claims": [
+                "passed"
+              ],
+              "first_claim": "passed"
+            }
+          ]
+        },
+        {
+          "test_id": "reports.export",
+          "status": "canceled",
+          "latest_attempt_no": 1,
+          "attempts": [
+            {
+              "attempt_id": "reports.export#1",
+              "attempt_no": 1,
+              "shard_id": "s3",
+              "started": true,
+              "status": "running"
+            }
+          ]
+        }
+      ],
+      "conflicts": [
+        {
+          "kind": "shard",
+          "id": "s2",
+          "claims": "completed,crashed",
+          "kept_as": "completed"
+        }
+      ],
+      "counts": {
+        "total": 6,
+        "passed": 4,
+        "failed": 0,
+        "canceled": 1,
+        "incomplete": 1
+      },
+      "total_shards": 3,
+      "crashed_shards": 0
+    }
+  PASS  A run failed (crash + missing result)
+  PASS  A auth.login passed
+  PASS  A billing.charge passed after retry (attempt 2)
+  PASS  A billing.refund passed
+  PASS  A auth.expired_token incomplete (late pass ignored)
+  PASS  A reports.export canceled
+  PASS  A passed count is 4
+  PASS  A incomplete count is 1
+  PASS  A canceled count is 1
+  PASS  A summary is repeatable across requests
+
+== scenario B: execute mode with real crashing fixture command ==
+run B = run-b59104749c87f2335b41def6
+summary B:
+    {
+      "run_id": "run-b59104749c87f2335b41def6",
+      "status": "failed",
+      "finalized": true,
+      "cancel_requested": false,
+      "shards": [
+        {
+          "shard_id": "s-pass",
+          "status": "completed",
+          "exit_code": 0
+        },
+        {
+          "shard_id": "s-crash",
+          "status": "crashed",
+          "exit_code": 137,
+          "error": "exit status 137; stderr: executor panic: lost connection to worker"
+        }
+      ],
+      "tests": [
+        {
+          "test_id": "auth.login",
+          "status": "passed",
+          "latest_attempt_no": 1,
+          "attempts": [
+            {
+              "attempt_id": "auth.login#1",
+              "attempt_no": 1,
+              "shard_id": "s-pass",
+              "started": true,
+              "status": "passed",
+              "claims": [
+                "passed"
+              ],
+              "first_claim": "passed"
+            }
+          ]
+        },
+        {
+          "test_id": "auth.logout",
+          "status": "passed",
+          "latest_attempt_no": 1,
+          "attempts": [
+            {
+              "attempt_id": "auth.logout#1",
+              "attempt_no": 1,
+              "shard_id": "s-pass",
+              "started": true,
+              "status": "passed",
+              "claims": [
+                "passed"
+              ],
+              "first_claim": "passed"
+            }
+          ]
+        },
+        {
+          "test_id": "billing.charge",
+          "status": "incomplete",
+          "latest_attempt_no": 2,
+          "attempts": [
+            {
+              "attempt_id": "billing.charge#1",
+              "attempt_no": 1,
+              "shard_id": "s-crash",
+              "started": true,
+              "status": "failed",
+              "claims": [
+                "failed"
+              ],
+              "first_claim": "failed"
+            },
+            {
+              "attempt_id": "billing.charge#2",
+              "attempt_no": 2,
+              "shard_id": "s-crash",
+              "started": true,
+              "status": "running"
+            }
+          ]
+        }
+      ],
+      "counts": {
+        "total": 3,
+        "passed": 2,
+        "failed": 0,
+        "canceled": 0,
+        "incomplete": 1
+      },
+      "total_shards": 2,
+      "crashed_shards": 1
+    }
+  PASS  B s-crash recorded as crashed from real exit code
+  PASS  B crashed shard exit code 137
+  PASS  B billing.charge incomplete (retry died in crash)
+  PASS  B auth.login passed
+  PASS  B auth.logout passed
+  PASS  B run failed because of crash
+  PASS  B fixture wrote no scripts inside the cache dir
+
+== scenario C: /replay shuffled + duplicated events are identical ==
+replay: identical=true status=failed
+  PASS  C shuffled replay repeats are identical
+  PASS  C replay t1 passed (retry)
+  PASS  C replay t2 incomplete (missing result)
+  PASS  C replay t3 canceled
+
+== scenario D: restart recovery from the on-disk event log ==
+  PASS  D summary survives process restart
+  PASS  D finalized flag recovered
+  PASS  D status recovered
+
+================================================
+  PASS=27  FAIL=0
+================================================

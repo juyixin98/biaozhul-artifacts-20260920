@@ -1,0 +1,13 @@
+{
+  "mode": "events",
+  "shards": [
+    {
+      "shard_id": "s1",
+      "test_ids": ["auth.login", "auth.logout", "auth.expired_token"]
+    },
+    {
+      "shard_id": "s2",
+      "test_ids": ["billing.charge", "billing.refund"]
+    }
+  ]
+}

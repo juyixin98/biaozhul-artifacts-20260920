@@ -1,0 +1,14 @@
+{
+  "mode": "execute",
+  "shards": [
+    { "shard_id": "s-pass",   "test_ids": ["auth.login", "auth.logout"] },
+    { "shard_id": "s-crash",  "test_ids": ["billing.charge"] },
+    { "shard_id": "s-cancel", "test_ids": ["reports.export"] }
+  ],
+  "commands": [
+    { "shard_id": "s-pass",   "command": "bash /ABSOLUTE/PATH/TO/examples/fixtures/shard-pass.sh" },
+    { "shard_id": "s-crash",  "command": "bash /ABSOLUTE/PATH/TO/examples/fixtures/shard-crash.sh" },
+    { "shard_id": "s-cancel", "command": "bash /ABSOLUTE/PATH/TO/examples/fixtures/shard-cancel.sh" }
+  ],
+  "auto_finalize": true
+}

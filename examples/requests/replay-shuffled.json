@@ -1,0 +1,29 @@
+{
+  "shuffle": true,
+  "seed": 20260924,
+  "repeats": 5,
+  "shards": [
+    { "shard_id": "s1", "test_ids": ["t1", "t2"] },
+    { "shard_id": "s2", "test_ids": ["t3"] }
+  ],
+  "events": [
+    { "event_id": "a1-start", "type": "attempt_started", "shard_id": "s1", "test_id": "t1", "attempt_id": "t1#1", "attempt_no": 1 },
+    { "event_id": "a1-fail",  "type": "attempt_result",  "shard_id": "s1", "test_id": "t1", "attempt_id": "t1#1", "attempt_no": 1, "result": "failed" },
+    { "event_id": "a2-start", "type": "attempt_started", "shard_id": "s1", "test_id": "t1", "attempt_id": "t1#2", "attempt_no": 2 },
+    { "event_id": "a2-pass",  "type": "attempt_result",  "shard_id": "s1", "test_id": "t1", "attempt_id": "t1#2", "attempt_no": 2, "result": "passed" },
+
+    { "event_id": "b1-start", "type": "attempt_started", "shard_id": "s1", "test_id": "t2", "attempt_id": "t2#1", "attempt_no": 1 },
+
+    { "event_id": "c1-start", "type": "attempt_started", "shard_id": "s2", "test_id": "t3", "attempt_id": "t3#1", "attempt_no": 1 },
+    { "event_id": "c1-cancel","type": "attempt_result",  "shard_id": "s2", "test_id": "t3", "attempt_id": "t3#1", "attempt_no": 1, "result": "canceled" },
+
+    { "event_id": "s1-start", "type": "shard_started", "shard_id": "s1" },
+    { "event_id": "s2-start", "type": "shard_started", "shard_id": "s2" },
+    { "event_id": "s1-fin",   "type": "shard_finished", "shard_id": "s1", "outcome": "completed", "exit_code": 0 },
+    { "event_id": "s2-fin",   "type": "shard_finished", "shard_id": "s2", "outcome": "completed", "exit_code": 0 },
+
+    { "event_id": "a1-fail", "type": "attempt_result", "shard_id": "s1", "test_id": "t1", "attempt_id": "t1#1", "attempt_no": 1, "result": "failed" },
+
+    { "event_id": "fin", "type": "run_finalized" }
+  ]
+}

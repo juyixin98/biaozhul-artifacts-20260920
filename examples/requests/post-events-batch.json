@@ -1,0 +1,23 @@
+{
+  "events": [
+    { "event_id": "s1-start", "type": "shard_started", "shard_id": "s1" },
+    { "event_id": "s2-start", "type": "shard_started", "shard_id": "s2" },
+
+    { "event_id": "login-a1-start", "type": "attempt_started", "shard_id": "s1", "test_id": "auth.login", "attempt_id": "auth.login#1", "attempt_no": 1 },
+    { "event_id": "login-a1-pass",  "type": "attempt_result",  "shard_id": "s1", "test_id": "auth.login", "attempt_id": "auth.login#1", "attempt_no": 1, "result": "passed" },
+
+    { "event_id": "logout-a1-start", "type": "attempt_started", "shard_id": "s1", "test_id": "auth.logout", "attempt_id": "auth.logout#1", "attempt_no": 1 },
+    { "event_id": "logout-a1-pass",  "type": "attempt_result",  "shard_id": "s1", "test_id": "auth.logout", "attempt_id": "auth.logout#1", "attempt_no": 1, "result": "passed" },
+
+    { "event_id": "charge-a1-start", "type": "attempt_started", "shard_id": "s2", "test_id": "billing.charge", "attempt_id": "billing.charge#1", "attempt_no": 1 },
+    { "event_id": "charge-a1-fail",  "type": "attempt_result",  "shard_id": "s2", "test_id": "billing.charge", "attempt_id": "billing.charge#1", "attempt_no": 1, "result": "failed", "reason": "assertion" },
+    { "event_id": "charge-a2-start", "type": "attempt_started", "shard_id": "s2", "test_id": "billing.charge", "attempt_id": "billing.charge#2", "attempt_no": 2 },
+
+    { "event_id": "refund-a1-start", "type": "attempt_started", "shard_id": "s2", "test_id": "billing.refund", "attempt_id": "billing.refund#1", "attempt_no": 1 },
+    { "event_id": "refund-a1-pass",  "type": "attempt_result",  "shard_id": "s2", "test_id": "billing.refund", "attempt_id": "billing.refund#1", "attempt_no": 1, "result": "passed" },
+
+    { "event_id": "s1-fin", "type": "shard_finished", "shard_id": "s1", "outcome": "completed", "exit_code": 0 },
+
+    { "type": "shard_finished", "shard_id": "s2", "outcome": "crashed", "exit_code": 137, "error": "executor panic: lost connection to worker" }
+  ]
+}

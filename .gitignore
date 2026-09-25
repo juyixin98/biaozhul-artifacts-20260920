@@ -1,0 +1,12 @@
+# Local runtime artifacts
+.trmerge-cache/
+.trmerge-work/
+
+# Build output
+/trmerge
+*.test
+*.out
+
+# Editor/OS
+.DS_Store
+*.swp
