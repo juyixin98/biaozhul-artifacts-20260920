@@ -1,0 +1,26 @@
+{
+  "name": "shared-demo",
+  "actions": [
+    {
+      "id": "compile_a",
+      "tool": "tools/concat.sh",
+      "args": ["out/a.bundle", "src/shared.txt", "src/a.txt"],
+      "sources": ["src/shared.txt", "src/a.txt"],
+      "outputs": ["out/a.bundle"]
+    },
+    {
+      "id": "compile_b",
+      "tool": "tools/concat.sh",
+      "args": ["out/b.bundle", "src/shared.txt", "src/b.txt"],
+      "sources": ["src/shared.txt", "src/b.txt"],
+      "outputs": ["out/b.bundle"]
+    },
+    {
+      "id": "link",
+      "tool": "tools/concat.sh",
+      "args": ["out/final.txt", "in/a/out/a.bundle", "in/b/out/b.bundle"],
+      "upstream": {"a": "compile_a", "b": "compile_b"},
+      "outputs": ["out/final.txt"]
+    }
+  ]
+}

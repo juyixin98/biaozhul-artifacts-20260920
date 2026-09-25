@@ -1,0 +1,12 @@
+{
+  "name": "nondet-demo",
+  "actions": [
+    {
+      "id": "make",
+      "tool": "tools/concat_nondet.sh",
+      "args": ["out/x.txt", "src/s.txt"],
+      "sources": ["src/s.txt"],
+      "outputs": ["out/x.txt"]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+# Service runtime state and binaries (regenerated; never source)
+.bis/
+bin/
+*.test
