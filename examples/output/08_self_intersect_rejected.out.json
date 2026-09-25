@@ -1,0 +1,17 @@
+{
+  "ok": false,
+  "status": "SELF_INTERSECTING",
+  "kind": "EMPTY",
+  "message": "非相邻边相交或端点接触（自交/自触）",
+  "coordinate_system": {
+    "type": "planar_cartesian",
+    "axes": "x-right, y-up (mathematical)",
+    "units": "as-supplied; no projection performed"
+  },
+  "tolerance": 1.0000000000000001e-09,
+  "vertex_count": 0,
+  "vertices": [],
+  "orientation": "NONE",
+  "area": 0,
+  "signed_area": 0
+}

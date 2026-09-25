@@ -1,0 +1,34 @@
+{
+  "ok": true,
+  "status": "OK",
+  "kind": "POLYGON",
+  "message": "被裁多边形完全包含于裁剪域",
+  "coordinate_system": {
+    "type": "planar_cartesian",
+    "axes": "x-right, y-up (mathematical)",
+    "units": "as-supplied; no projection performed"
+  },
+  "tolerance": 1.0000000000000001e-09,
+  "vertex_count": 4,
+  "vertices": [
+    [
+      2,
+      2
+    ],
+    [
+      8,
+      2
+    ],
+    [
+      8,
+      8
+    ],
+    [
+      2,
+      8
+    ]
+  ],
+  "orientation": "CCW",
+  "area": 36,
+  "signed_area": 36
+}

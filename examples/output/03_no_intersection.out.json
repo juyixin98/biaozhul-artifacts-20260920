@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "status": "OK",
+  "kind": "EMPTY",
+  "message": "无交集",
+  "coordinate_system": {
+    "type": "planar_cartesian",
+    "axes": "x-right, y-up (mathematical)",
+    "units": "as-supplied; no projection performed"
+  },
+  "tolerance": 1.0000000000000001e-09,
+  "vertex_count": 0,
+  "vertices": [],
+  "orientation": "NONE",
+  "area": 0,
+  "signed_area": 0
+}

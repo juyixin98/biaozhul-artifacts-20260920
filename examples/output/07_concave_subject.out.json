@@ -1,0 +1,34 @@
+{
+  "ok": true,
+  "status": "OK",
+  "kind": "POLYGON",
+  "message": "多边形裁剪成功",
+  "coordinate_system": {
+    "type": "planar_cartesian",
+    "axes": "x-right, y-up (mathematical)",
+    "units": "as-supplied; no projection performed"
+  },
+  "tolerance": 1.0634299999999999e-09,
+  "vertex_count": 4,
+  "vertices": [
+    [
+      0.95193556173799998,
+      3.8685704221531894
+    ],
+    [
+      -0.112774,
+      4.7243700000000004
+    ],
+    [
+      -6.4941500000000003,
+      3.2694000000000001
+    ],
+    [
+      -2.034179993475365,
+      0.80619837833011676
+    ]
+  ],
+  "orientation": "CCW",
+  "area": 14.011895750144692,
+  "signed_area": 14.011895750144692
+}

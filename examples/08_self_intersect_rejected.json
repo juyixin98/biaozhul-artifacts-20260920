@@ -1,0 +1,5 @@
+{
+  "description": "自交输入：蝴蝶结四边形，期望被拒绝 status=SELF_INTERSECTING，ok=false，不输出顶点",
+  "subject": [[0, 0], [10, 10], [0, 10], [10, 0]],
+  "clip": [[0, 0], [10, 0], [10, 10], [0, 10]]
+}

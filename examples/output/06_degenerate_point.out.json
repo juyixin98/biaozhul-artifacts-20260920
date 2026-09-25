@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "status": "OK",
+  "kind": "POINT",
+  "message": "交集退化为点（角/边接触）",
+  "coordinate_system": {
+    "type": "planar_cartesian",
+    "axes": "x-right, y-up (mathematical)",
+    "units": "as-supplied; no projection performed"
+  },
+  "tolerance": 1.0000000000000001e-09,
+  "vertex_count": 1,
+  "vertices": [
+    [
+      0,
+      0
+    ]
+  ],
+  "orientation": "NONE",
+  "area": 0,
+  "signed_area": 0
+}

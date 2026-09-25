@@ -1,0 +1,26 @@
+{
+  "ok": true,
+  "status": "OK",
+  "kind": "SEGMENT",
+  "message": "交集退化为线段（边界接触）",
+  "coordinate_system": {
+    "type": "planar_cartesian",
+    "axes": "x-right, y-up (mathematical)",
+    "units": "as-supplied; no projection performed"
+  },
+  "tolerance": 1.2e-09,
+  "vertex_count": 2,
+  "vertices": [
+    [
+      10,
+      0
+    ],
+    [
+      0,
+      0
+    ]
+  ],
+  "orientation": "NONE",
+  "area": 0,
+  "signed_area": 0
+}
