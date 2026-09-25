@@ -1,0 +1,13 @@
+// 干净程序：所有路径都成对 acquire/release，应当零诊断。
+// 参数 owned 视为函数入口已持有的资源（所有权传入），出口前释放。
+fn clean(owned) {
+  let flag;
+  acquire(local);
+  use(local);
+  if (flag) {
+    use(owned);
+  }
+  release(local);
+  release(owned);
+  return;
+}

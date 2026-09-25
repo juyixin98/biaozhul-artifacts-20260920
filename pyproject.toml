@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "resflow"
+version = "1.0.0"
+description = "ResFlow: a small-language toolchain for resource-release path analysis (pure backend)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "ResFlow authors" }]
+dependencies = []
+
+[project.scripts]
+resflow = "resflow.cli:main"
+
+[tool.setuptools]
+packages = ["resflow"]

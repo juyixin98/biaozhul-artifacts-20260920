@@ -1,0 +1,3 @@
+{
+  "source": "fn clean(owned) {\n  let flag;\n  acquire(local);\n  use(local);\n  if (flag) {\n    use(owned);\n  }\n  release(local);\n  release(owned);\n  return;\n}\n"
+}

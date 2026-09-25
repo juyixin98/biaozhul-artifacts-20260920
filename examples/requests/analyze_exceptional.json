@@ -1,0 +1,3 @@
+{
+  "source": "fn exceptional() {\n  let flag;\n  acquire(db);\n  use(db);\n  if (flag) {\n    throw \"backend refused\";\n  }\n  release(db);\n  return;\n}\n"
+}

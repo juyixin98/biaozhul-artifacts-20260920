@@ -1,0 +1,14 @@
+// 重复释放与释放后使用（双重缺陷）。
+//
+// 条件为真：release 两次 -> double_release；之后又 use -> use_after_release。
+// 条件为假：只释放一次，随后 use 仍属于“释放后使用”。
+fn double() {
+  let flag;
+  acquire(h);
+  release(h);
+  if (flag) {
+    release(h);
+  }
+  use(h);
+  return;
+}

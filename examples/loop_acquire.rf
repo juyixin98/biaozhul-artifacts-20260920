@@ -1,0 +1,20 @@
+// 验收场景二：循环获取（loop acquisition）。
+//
+// 条件无法静态求值，分析器按 loop_bound（默认 2）展开，再产生一条
+// 截断路径，保证可复现：
+//   - 第 1 轮进入：conn 未获取即 acquire，正常；退出循环后 release(conn)
+//     在“从未获取”状态上执行；
+//   - 第 2 轮进入：conn 已在上一轮释放，重新 acquire（合法重获取）；
+//   - 第 0 次判定就退出：conn 从未获取，最后的 release 是
+//     “释放未获取资源”；
+//   - 超过 loop_bound 仍试图进入 -> loop_truncated。
+fn loop_acquire() {
+  let condition;
+  while (condition) {
+    acquire(conn);
+    use(conn);
+    release(conn);
+  }
+  release(conn);
+  return;
+}

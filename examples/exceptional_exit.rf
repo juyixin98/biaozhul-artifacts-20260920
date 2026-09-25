@@ -1,0 +1,15 @@
+// 验收场景三：异常退出参与状态计算（exceptional exit）。
+//
+// 获取 db 之后，若条件成立就 throw：异常边直达函数 uncaught 出口，
+// 该路径上 db 仍 held —— 异常路径泄漏。
+// 条件不成立时正常释放。异常边与普通边一样参与状态传播。
+fn exceptional() {
+  let flag;
+  acquire(db);
+  use(db);
+  if (flag) {
+    throw "backend refused";
+  }
+  release(db);
+  return;
+}

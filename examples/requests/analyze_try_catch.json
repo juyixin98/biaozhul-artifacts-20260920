@@ -1,0 +1,3 @@
+{
+  "source": "fn recovery() {\n  let thrown;\n  let rethrow;\n  acquire(a);\n  try {\n    if (thrown) {\n      throw \"first failure\";\n    }\n  } catch (e) {\n    if (rethrow) {\n      throw \"second failure\";\n    }\n    release(a);\n    return;\n  }\n  release(a);\n  return;\n}\n"
+}

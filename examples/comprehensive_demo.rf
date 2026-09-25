@@ -1,0 +1,44 @@
+// 综合演示：一个函数里混合部分初始化、循环、异常恢复与所有权形参。
+//
+// 资源：
+//   socket  —— 形参，入口已持有
+//   handle  —— 函数内 acquire
+//   buffer  —— 仅在 mode == 2 分支里 acquire（部分初始化）
+//
+// 路径要点：
+//   * retry 未知：while 按 loop_bound 展开，截断路径单独标注；
+//   * mode == 1：try 抛错被 catch，handle 在 catch 中释放；
+//   * mode == 2：buffer 获取但在 catch/正常路径上释放安排不同，
+//                 暴露部分初始化导致的路径差异；
+//   * mode == 3：catch 内 rethrow -> socket/handle 状态沿异常边检查。
+fn demo(socket) {
+  let mode;
+  let retry;
+
+  acquire(handle);
+  let attempt = 0;
+
+  while (retry) {
+    use(handle);
+    let attempt = attempt + 1;
+  }
+
+  try {
+    if (mode == 1) {
+      throw "io failure";
+    }
+    if (mode == 2) {
+      acquire(buffer);
+      use(buffer);
+    }
+    release(handle);
+  } catch (err) {
+    if (mode == 3) {
+      throw "fatal";
+    }
+    release(handle);
+  }
+
+  release(socket);
+  return;
+}

@@ -1,0 +1,5 @@
+{
+  "source": "fn loop_acquire() {\n  let condition;\n  while (condition) {\n    acquire(conn);\n    use(conn);\n    release(conn);\n  }\n  release(conn);\n  return;\n}\n",
+  "loop_bound": 3,
+  "max_paths": 1000
+}

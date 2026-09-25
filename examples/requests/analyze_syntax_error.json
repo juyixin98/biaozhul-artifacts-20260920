@@ -1,0 +1,3 @@
+{
+  "source": "fn broken() {\n  acquire(a);\n  release(a\n  return;\n}\n"
+}

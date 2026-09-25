@@ -1,0 +1,3 @@
+{
+  "source": "fn partial() {\n  let flag;\n  acquire(a);\n  if (flag) {\n    acquire(r);\n    release(r);\n    release(a);\n  }\n  use(r);\n  return;\n}\n"
+}

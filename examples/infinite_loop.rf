@@ -1,0 +1,10 @@
+// 常量真死循环 + 截断：条件被折叠为 true，没有 false 出口，
+// 分析器只产生 loop_truncated 路径（不会挂起）。
+// 该截断路径上 res 每轮重复获取/释放；截断时状态为 released。
+fn forever() {
+  while (true) {
+    acquire(res);
+    release(res);
+  }
+  return;
+}

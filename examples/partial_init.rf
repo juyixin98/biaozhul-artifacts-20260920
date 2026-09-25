@@ -1,0 +1,20 @@
+// 验收场景一：分支部分初始化（partial initialization）。
+//
+// r 只在 flag 为真的分支里获取（部分初始化）。分支汇合后的公共代码
+// 在两条路径上暴露不同缺陷：
+//   - flag == true : r 已在分支内 release，汇合后 use(r) 是
+//                    “释放后使用”，且 a 正常释放无泄漏；
+//   - flag == false: r 从未获取，汇合后 use(r) 是“未获取即使用”，
+//                    且 a 一直未释放 -> 出口泄漏。
+// a 在分支前获取，true 路径释放、false 路径不释放，形成路径敏感差异。
+fn partial() {
+  let flag;
+  acquire(a);
+  if (flag) {
+    acquire(r);
+    release(r);
+    release(a);
+  }
+  use(r);
+  return;
+}

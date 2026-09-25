@@ -1,0 +1,25 @@
+// try/catch 恢复路径：try 中 throw 沿异常边进入 catch，
+// catch 块要么补齐释放，要么重新抛出（逃逸到函数 uncaught）。
+//
+// 路径：
+//   1) 正常穿过 try：正常释放 a
+//   2) try 抛错被 catch 接住，rethrow 标志为假：catch 中释放 a
+//   3) catch 中 rethrow 为真：a 泄漏到 uncaught
+fn recovery() {
+  let thrown;
+  let rethrow;
+  acquire(a);
+  try {
+    if (thrown) {
+      throw "first failure";
+    }
+  } catch (e) {
+    if (rethrow) {
+      throw "second failure";
+    }
+    release(a);
+    return;
+  }
+  release(a);
+  return;
+}
