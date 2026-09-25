@@ -1,0 +1,10 @@
+{
+  "traceId": "demo-ooo",
+  "spanId": "pay-svc",
+  "parentSpanId": "checkout-svc",
+  "serviceName": "payments",
+  "name": "charge-DUPLICATE-CONFLICT",
+  "startUnixNano": 1727172000666666666,
+  "endUnixNano": 1727172000888888888,
+  "attributes": {"payment.provider": "stripe"}
+}

@@ -1,0 +1,6 @@
+# local persistence artifacts (WAL + snapshots)
+/data/
+
+# built binaries
+/tracestitch
+*.out

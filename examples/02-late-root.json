@@ -1,0 +1,10 @@
+{
+  "traceId": "demo-ooo",
+  "spanId": "gateway",
+  "parentSpanId": "",
+  "serviceName": "edge-gateway",
+  "name": "GET /order",
+  "startUnixNano": 1727172000100000000,
+  "endUnixNano": 1727172000950000000,
+  "attributes": {"region": "cn-north-1"}
+}

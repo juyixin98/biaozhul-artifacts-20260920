@@ -1,0 +1,8 @@
+{
+  "spans": [
+    {"traceId": "demo-cycle", "spanId": "a", "parentSpanId": "b", "serviceName": "svc", "name": "a", "startUnixNano": 1, "endUnixNano": 2},
+    {"traceId": "demo-cycle", "spanId": "b", "parentSpanId": "c", "serviceName": "svc", "name": "b", "startUnixNano": 1, "endUnixNano": 2},
+    {"traceId": "demo-cycle", "spanId": "c", "parentSpanId": "a", "serviceName": "svc", "name": "c", "startUnixNano": 1, "endUnixNano": 2},
+    {"traceId": "demo-cycle", "spanId": "d", "parentSpanId": "d", "serviceName": "svc", "name": "d-self-loop", "startUnixNano": 1, "endUnixNano": 2}
+  ]
+}

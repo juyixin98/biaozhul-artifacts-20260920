@@ -1,0 +1,24 @@
+{
+  "spans": [
+    {
+      "traceId": "demo-ooo",
+      "spanId": "checkout-svc",
+      "parentSpanId": "gateway",
+      "serviceName": "checkout",
+      "name": "POST /checkout",
+      "startUnixNano": 1727172000500000000,
+      "endUnixNano": 1727172000900000000,
+      "attributes": {"http.method": "POST"}
+    },
+    {
+      "traceId": "demo-ooo",
+      "spanId": "pay-svc",
+      "parentSpanId": "checkout-svc",
+      "serviceName": "payments",
+      "name": "charge",
+      "startUnixNano": 1727172000600000000,
+      "endUnixNano": 1727172000800000000,
+      "attributes": {"payment.provider": "stripe"}
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "spans": [
+    {
+      "traceId": "demo-skew",
+      "spanId": "api",
+      "parentSpanId": "",
+      "serviceName": "api",
+      "name": "GET /items",
+      "startUnixNano": 1727172100000000000,
+      "endUnixNano": 1727172100100000000
+    },
+    {
+      "traceId": "demo-skew",
+      "spanId": "inventory",
+      "parentSpanId": "api",
+      "serviceName": "inventory",
+      "name": "db.query",
+      "startUnixNano": 1727172099990000000,
+      "endUnixNano": 1727172100120000000
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "spans": [
+    {"traceId": "demo-missing-root", "spanId": "worker-1", "parentSpanId": "job-dispatch", "serviceName": "worker", "name": "process", "startUnixNano": 1727172200000000000, "endUnixNano": 1727172200100000000},
+    {"traceId": "demo-missing-root", "spanId": "worker-2", "parentSpanId": "worker-1", "serviceName": "worker", "name": "process-child", "startUnixNano": 1727172200010000000, "endUnixNano": 1727172200090000000}
+  ]
+}
