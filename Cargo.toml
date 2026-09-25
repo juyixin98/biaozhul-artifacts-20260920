@@ -1,0 +1,19 @@
+[package]
+name = "adaptive-arith"
+version = "0.1.0"
+edition = "2021"
+description = "Adaptive arithmetic coding: streaming binary codec library with a JSON control entry"
+license = "MIT"
+
+# 核心编解码库（lib）不依赖任何第三方 crate；
+# serde_json / base64 仅用于 JSON 控制入口（bin）。
+[dependencies]
+serde_json = "1"
+base64 = "0.22"
+
+[[bin]]
+name = "aac"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3

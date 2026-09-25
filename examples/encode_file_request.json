@@ -1,0 +1,6 @@
+{
+  "op": "encode",
+  "input_file": "/tmp/skewed.bin",
+  "output_file": "/tmp/skewed.aac",
+  "max_output_bytes": 10485760
+}
