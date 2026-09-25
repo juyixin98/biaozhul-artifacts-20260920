@@ -1,0 +1,6 @@
+{
+  "text": "a😀bushers 日本語",
+  "patterns": ["he", "she", "hers", "😀", "日本", "a"],
+  "emptyPolicy": "SKIP",
+  "chunkCodePoints": 2
+}

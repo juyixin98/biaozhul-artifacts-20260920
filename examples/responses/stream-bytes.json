@@ -1,0 +1,221 @@
+{
+    "ok": true,
+    "mode": "utf8-bytes(1)",
+    "emptyPolicy": "SKIP",
+    "textCodePoints": 12,
+    "streamedMatchCount": 5,
+    "oneShotMatchCount": 5,
+    "naiveMatchCount": 5,
+    "matchesStream": true,
+    "matchesNaive": true,
+    "chunks": [
+        {
+            "index": 0,
+            "span": "byte[0,1)",
+            "hitCount": 0,
+            "hits": []
+        },
+        {
+            "index": 1,
+            "span": "byte[1,2)",
+            "hitCount": 0,
+            "hits": []
+        },
+        {
+            "index": 2,
+            "span": "byte[2,3)",
+            "hitCount": 0,
+            "hits": []
+        },
+        {
+            "index": 3,
+            "span": "byte[3,4)",
+            "hitCount": 0,
+            "hits": []
+        },
+        {
+            "index": 4,
+            "span": "byte[4,5)",
+            "hitCount": 1,
+            "hits": [
+                {
+                    "patternId": 3,
+                    "start": 1,
+                    "end": 2,
+                    "length": 1,
+                    "pattern": "😀"
+                }
+            ]
+        },
+        {
+            "index": 5,
+            "span": "byte[5,6)",
+            "hitCount": 0,
+            "hits": []
+        },
+        {
+            "index": 6,
+            "span": "byte[6,7)",
+            "hitCount": 0,
+            "hits": []
+        },
+        {
+            "index": 7,
+            "span": "byte[7,8)",
+            "hitCount": 0,
+            "hits": []
+        },
+        {
+            "index": 8,
+            "span": "byte[8,9)",
+            "hitCount": 2,
+            "hits": [
+                {
+                    "patternId": 1,
+                    "start": 3,
+                    "end": 6,
+                    "length": 3,
+                    "pattern": "she"
+                },
+                {
+                    "patternId": 0,
+                    "start": 4,
+                    "end": 6,
+                    "length": 2,
+                    "pattern": "he"
+                }
+            ]
+        },
+        {
+            "index": 9,
+            "span": "byte[9,10)",
+            "hitCount": 0,
+            "hits": []
+        },
+        {
+            "index": 10,
+            "span": "byte[10,11)",
+            "hitCount": 1,
+            "hits": [
+                {
+                    "patternId": 2,
+                    "start": 4,
+                    "end": 8,
+                    "length": 4,
+                    "pattern": "hers"
+                }
+            ]
+        },
+        {
+            "index": 11,
+            "span": "byte[11,12)",
+            "hitCount": 0,
+            "hits": []
+        },
+        {
+            "index": 12,
+            "span": "byte[12,13)",
+            "hitCount": 0,
+            "hits": []
+        },
+        {
+            "index": 13,
+            "span": "byte[13,14)",
+            "hitCount": 0,
+            "hits": []
+        },
+        {
+            "index": 14,
+            "span": "byte[14,15)",
+            "hitCount": 0,
+            "hits": []
+        },
+        {
+            "index": 15,
+            "span": "byte[15,16)",
+            "hitCount": 0,
+            "hits": []
+        },
+        {
+            "index": 16,
+            "span": "byte[16,17)",
+            "hitCount": 0,
+            "hits": []
+        },
+        {
+            "index": 17,
+            "span": "byte[17,18)",
+            "hitCount": 1,
+            "hits": [
+                {
+                    "patternId": 4,
+                    "start": 9,
+                    "end": 11,
+                    "length": 2,
+                    "pattern": "日本"
+                }
+            ]
+        },
+        {
+            "index": 18,
+            "span": "byte[18,19)",
+            "hitCount": 0,
+            "hits": []
+        },
+        {
+            "index": 19,
+            "span": "byte[19,20)",
+            "hitCount": 0,
+            "hits": []
+        },
+        {
+            "index": 20,
+            "span": "byte[20,21)",
+            "hitCount": 0,
+            "hits": []
+        },
+        {
+            "index": 21,
+            "span": "finish",
+            "hitCount": 0,
+            "hits": []
+        }
+    ],
+    "matches": [
+        {
+            "patternId": 3,
+            "start": 1,
+            "end": 2,
+            "length": 1,
+            "pattern": "😀"
+        },
+        {
+            "patternId": 1,
+            "start": 3,
+            "end": 6,
+            "length": 3,
+            "pattern": "she"
+        },
+        {
+            "patternId": 0,
+            "start": 4,
+            "end": 6,
+            "length": 2,
+            "pattern": "he"
+        },
+        {
+            "patternId": 2,
+            "start": 4,
+            "end": 8,
+            "length": 4,
+            "pattern": "hers"
+        },
+        {
+            "patternId": 4,
+            "start": 9,
+            "end": 11,
+            "length": 2,
+            "pattern": "日本"
+        }
+    ]
+}

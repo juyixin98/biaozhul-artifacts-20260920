@@ -1,0 +1,22 @@
+{
+    "ok": true,
+    "name": "overlap",
+    "seed": 3,
+    "patternCount": 13,
+    "patterns": [
+        "he",
+        "she",
+        "his",
+        "hers",
+        "he",
+        "a",
+        "ah",
+        "aha",
+        "aa",
+        "aaa",
+        "aaaa",
+        "shes",
+        "h"
+    ],
+    "textCodePoints": 19471
+}

@@ -1,0 +1,9 @@
+{
+  "text": "she sells seashells",
+  "patterns": [
+    {"id": 100, "pattern": "she"},
+    {"id": 200, "pattern": "she"},
+    {"id": 101, "pattern": "he"},
+    {"id": 300, "pattern": "sea"}
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "text": "x😀ushers 日本語",
+  "patterns": ["he", "she", "hers", "😀", "日本"],
+  "byteMode": true,
+  "chunkBytes": 1
+}

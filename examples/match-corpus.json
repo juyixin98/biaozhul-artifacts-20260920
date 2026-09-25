@@ -1,0 +1,6 @@
+{
+  "corpusName": "sharedPrefix",
+  "seed": 7,
+  "patterns": ["pr3fix", "x", "pr3fix/0000/000042"],
+  "emptyPolicy": "SKIP"
+}

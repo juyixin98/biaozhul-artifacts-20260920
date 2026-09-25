@@ -1,0 +1,41 @@
+{
+    "ok": true,
+    "source": "inline",
+    "emptyPolicy": "SKIP",
+    "textCodePoints": 6,
+    "textChars": 6,
+    "patternCount": 5,
+    "matchCount": 4,
+    "matches": [
+        {
+            "patternId": 1,
+            "start": 1,
+            "end": 4,
+            "length": 3,
+            "pattern": "she"
+        },
+        {
+            "patternId": 0,
+            "start": 2,
+            "end": 4,
+            "length": 2,
+            "pattern": "he"
+        },
+        {
+            "patternId": 4,
+            "start": 2,
+            "end": 4,
+            "length": 2,
+            "pattern": "he"
+        },
+        {
+            "patternId": 3,
+            "start": 2,
+            "end": 6,
+            "length": 4,
+            "pattern": "hers"
+        }
+    ],
+    "naiveMatchCount": 4,
+    "matchesNaive": true
+}

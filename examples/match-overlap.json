@@ -1,0 +1,6 @@
+{
+  "text": "ushers",
+  "patterns": ["he", "she", "his", "hers", "he"],
+  "emptyPolicy": "SKIP",
+  "compareWithNaive": true
+}

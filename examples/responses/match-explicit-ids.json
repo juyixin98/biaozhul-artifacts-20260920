@@ -1,0 +1,62 @@
+{
+    "ok": true,
+    "source": "inline",
+    "emptyPolicy": "SKIP",
+    "textCodePoints": 19,
+    "textChars": 19,
+    "patternCount": 4,
+    "matchCount": 7,
+    "matches": [
+        {
+            "patternId": 100,
+            "start": 0,
+            "end": 3,
+            "length": 3,
+            "pattern": "she"
+        },
+        {
+            "patternId": 200,
+            "start": 0,
+            "end": 3,
+            "length": 3,
+            "pattern": "she"
+        },
+        {
+            "patternId": 101,
+            "start": 1,
+            "end": 3,
+            "length": 2,
+            "pattern": "he"
+        },
+        {
+            "patternId": 300,
+            "start": 10,
+            "end": 13,
+            "length": 3,
+            "pattern": "sea"
+        },
+        {
+            "patternId": 100,
+            "start": 13,
+            "end": 16,
+            "length": 3,
+            "pattern": "she"
+        },
+        {
+            "patternId": 200,
+            "start": 13,
+            "end": 16,
+            "length": 3,
+            "pattern": "she"
+        },
+        {
+            "patternId": 101,
+            "start": 14,
+            "end": 16,
+            "length": 2,
+            "pattern": "he"
+        }
+    ],
+    "naiveMatchCount": 7,
+    "matchesNaive": true
+}

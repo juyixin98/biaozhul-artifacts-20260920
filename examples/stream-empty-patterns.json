@@ -1,0 +1,6 @@
+{
+  "text": "abcabc",
+  "patterns": ["", "a", "ab", ""],
+  "emptyPolicy": "BEFORE",
+  "chunkCodePoints": 2
+}
