@@ -1,0 +1,6 @@
+{
+  "capacity": 10,
+  "weights": [6, 4, 3, 2],
+  "values": [10, 7, 6, 3],
+  "timeout_seconds": 5.0
+}

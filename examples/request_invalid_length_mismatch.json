@@ -1,0 +1,5 @@
+{
+  "capacity": 10,
+  "weights": [1, 2],
+  "values": [3]
+}
