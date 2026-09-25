@@ -1,0 +1,6 @@
+{
+  "scenario": "mean_shift",
+  "seed": 42,
+  "n_baseline": 5000,
+  "n_current": 2000
+}
