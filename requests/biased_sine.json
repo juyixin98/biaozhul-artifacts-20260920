@@ -1,0 +1,13 @@
+{
+  "sample_rate": 48000,
+  "cutoff_hz": 5.0,
+  "block_size": 1024,
+  "input": {
+    "type": "sine",
+    "frequency": 440,
+    "amplitude": 0.5,
+    "dc_offset": 0.3,
+    "duration_s": 2.0
+  },
+  "output_file": "out/biased_sine_cleaned.f32"
+}

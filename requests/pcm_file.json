@@ -1,0 +1,11 @@
+{
+  "sample_rate": 44100,
+  "cutoff_hz": 8.0,
+  "block_size": 2048,
+  "input": {
+    "type": "pcm_file",
+    "path": "in/example.i16",
+    "format": "int16"
+  },
+  "output_file": "out/pcm_file_cleaned.i16"
+}

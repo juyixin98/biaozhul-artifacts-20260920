@@ -1,0 +1,13 @@
+{
+  "sample_rate": 48000,
+  "cutoff_hz": 5.0,
+  "block_size": 512,
+  "input": {
+    "type": "dc_step",
+    "initial_dc": 0.2,
+    "final_dc": -0.4,
+    "step_time_s": 1.0,
+    "duration_s": 4.0
+  },
+  "output_file": "out/bias_step_cleaned.f32"
+}
