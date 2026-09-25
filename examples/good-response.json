@@ -1,0 +1,35 @@
+{
+  "valid": true,
+  "chain": [
+    {
+      "subject": "CN=service.example.local,O=Offline Verify Lab",
+      "issuer": "CN=Lab Intermediate CA,O=Offline Verify Lab",
+      "serial_number": "3efaec882d2a2df660c198786082b4756dcab22f",
+      "not_before": "2020-01-01T00:00:00+00:00",
+      "not_after": "2029-12-29T00:00:00+00:00",
+      "is_ca": false
+    },
+    {
+      "subject": "CN=Lab Intermediate CA,O=Offline Verify Lab",
+      "issuer": "CN=Lab Root CA,O=Offline Verify Lab",
+      "serial_number": "100c7ddd98aa3186f3526a1de54bbcf7b0f07478",
+      "not_before": "2020-01-01T00:00:00+00:00",
+      "not_after": "2029-12-29T00:00:00+00:00",
+      "is_ca": true
+    },
+    {
+      "subject": "CN=Lab Root CA,O=Offline Verify Lab",
+      "issuer": "CN=Lab Root CA,O=Offline Verify Lab",
+      "serial_number": "6d1a11c16239d031428d0f7f3e3fb04376560a9c",
+      "not_before": "2020-01-01T00:00:00+00:00",
+      "not_after": "2029-12-29T00:00:00+00:00",
+      "is_ca": true
+    }
+  ],
+  "error": null,
+  "validation_time": "2026-06-01T00:00:00+00:00",
+  "purpose": "server_tls",
+  "hostname": "service.example.local",
+  "revocation_checked": false,
+  "revocation_note": "离线验证：未执行 CRL/OCSP 吊销检查，链中所有证书的吊销状态未知。调用方如需吊销语义，必须自行离线提供吊销信息并另行核查。"
+}
