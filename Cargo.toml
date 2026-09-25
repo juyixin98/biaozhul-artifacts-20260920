@@ -1,0 +1,20 @@
+[package]
+name = "wsframe"
+version = "0.1.0"
+edition = "2021"
+description = "Incremental WebSocket (RFC 6455) frame reassembly library and local TCP test server. Hand-written parser, zero dependencies."
+license = "MIT"
+
+[lib]
+name = "wsframe"
+path = "src/lib.rs"
+
+[[bin]]
+name = "wsframe-server"
+path = "src/bin/server.rs"
+
+[profile.release]
+opt-level = 3
+
+# 纯标准库实现，刻意不依赖任何 WebSocket / HTTP / 哈希 crate
+[dependencies]
