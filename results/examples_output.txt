@@ -1,0 +1,18 @@
+### examples/request_endpoint_singular.json
+{"converged": false, "status": "failed", "value": null, "error_estimate": null, "error_code": "SINGULAR_ENDPOINT", "message": "被积函数在区间端点 x=0 处产生非有限值 inf（NaN 或无穷大）。端点处通常意味着端点奇点，例如 1/sqrt(x)；内部则通常意味着极点。请先做变量代换消去奇点后再积分。", "n_evals": 1, "n_intervals": 0, "max_depth_reached": 0, "method": "simpson", "details": {"point": 0.0, "position": "endpoint", "max_abs_f_observed": 0.0, "interval": [0.0, 1.0]}, "request_echo": {"expression": "1/sqrt(x)", "a": 0.0, "b": 1.0, "eps_abs": 1e-08, "eps_rel": 1e-08, "method": "simpson", "max_depth": 20, "max_evals": 100000}}
+
+### examples/request_high_oscillation.json
+{"converged": false, "status": "failed", "value": null, "error_estimate": null, "error_code": "EVAL_BUDGET_REACHED", "message": "函数求值次数超过预算 100000；请提高 max_evals、放宽容差或缩小积分区间。（已用 100000 次求值）已观测最大函数幅值 |f|=1.000e+00。可能原因：高频振荡或极窄峰使规则需要超出允许的细化次数。高频振荡可先尝试 method=\"gauss\"（Gauss-Legendre 对振荡更稳健），或增大 max_evals / 放宽容差；已知窄峰建议在峰两侧分段积分。", "n_evals": 100000, "n_intervals": 4163, "max_depth_reached": 14, "method": "gauss", "details": {"interval": [0.0, 1.0], "max_abs_f_observed": 0.9999999992410026, "max_depth_allowed": 20, "max_evals_allowed": 100000}, "request_echo": {"expression": "sin(2*pi*1000.25*x)", "a": 0.0, "b": 1.0, "eps_abs": 1e-08, "eps_rel": 1e-08, "method": "gauss", "max_depth": 20, "max_evals": 100000}}
+
+### examples/request_invalid.json
+{"status": "invalid_request", "converged": false, "value": null, "error_estimate": null, "error_code": "INVALID_REQUEST", "message": "eps_rel 必须是 [0, 1] 内的有限数。"}
+
+### examples/request_narrow_peak.json
+{"converged": false, "status": "failed", "value": null, "error_estimate": null, "error_code": "MAX_DEPTH_REACHED", "message": "在区间 [0.49998093, 0.49998283]（宽度 1.91e-06）上达到深度上限 20，局部误差估计 5.815e-10 仍大于局部预算 1.849e-11。已观测最大函数幅值 |f|=3.183e+05。可能原因：高频振荡或极窄峰使规则需要超出允许的细化次数。高频振荡可先尝试 method=\"gauss\"（Gauss-Legendre 对振荡更稳健），或增大 max_evals / 放宽容差；已知窄峰建议在峰两侧分段积分。", "n_evals": 247, "n_intervals": 59, "max_depth_reached": 20, "method": "simpson", "details": {"interval": [0.0, 1.0], "max_abs_f_observed": 318309.8861837907, "max_depth_allowed": 20, "max_evals_allowed": 100000}, "request_echo": {"expression": "1e-6/(pi*((x-0.5)**2+1e-12))", "a": 0.0, "b": 1.0, "eps_abs": 1e-08, "eps_rel": 1e-08, "method": "simpson", "max_depth": 20, "max_evals": 100000}}
+
+### examples/request_regularized.json
+{"converged": true, "status": "converged", "value": 1.493648265624854, "error_estimate": 1.580519048971496e-11, "error_code": null, "message": "积分在给定容差与深度/预算限制内收敛。", "n_evals": 84, "n_intervals": 4, "max_depth_reached": 3, "method": "gauss", "details": {"interval": [0.0, 1.0], "roundoff_hits": 0}, "request_echo": {"expression": "2*exp(-x**2)", "a": 0.0, "b": 1.0, "eps_abs": 1e-10, "eps_rel": 1e-10, "method": "gauss", "max_depth": 20, "max_evals": 100000}}
+
+### examples/request_smooth.json
+{"converged": true, "status": "converged", "value": 0.7468241328124992, "error_estimate": 2.9054424260007333e-11, "error_code": null, "message": "积分在给定容差与深度/预算限制内收敛。", "n_evals": 209, "n_intervals": 52, "max_depth_reached": 7, "method": "simpson", "details": {"interval": [0.0, 1.0], "roundoff_hits": 0}, "request_echo": {"expression": "exp(-x**2)", "a": 0.0, "b": 1.0, "eps_abs": 1e-10, "eps_rel": 1e-10, "method": "simpson", "max_depth": 20, "max_evals": 100000}}
+

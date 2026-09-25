@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adaptive-integration"
+version = "0.1.0"
+description = "自适应一维定积分纯后端库（自适应 Simpson / Gauss-Legendre + 安全 JSON 表达式接口）"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26"]
+
+[tool.setuptools]
+packages = ["adaptive_integration"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

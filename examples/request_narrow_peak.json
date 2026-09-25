@@ -1,0 +1,10 @@
+{
+  "expression": "1e-6/(pi*((x-0.5)**2+1e-12))",
+  "a": 0.0,
+  "b": 1.0,
+  "eps_abs": 1e-8,
+  "eps_rel": 1e-8,
+  "method": "simpson",
+  "max_depth": 20,
+  "max_evals": 100000
+}

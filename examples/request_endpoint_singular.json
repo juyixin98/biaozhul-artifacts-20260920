@@ -1,0 +1,8 @@
+{
+  "expression": "1/sqrt(x)",
+  "a": 0.0,
+  "b": 1.0,
+  "eps_abs": 1e-8,
+  "eps_rel": 1e-8,
+  "method": "simpson"
+}

@@ -1,0 +1,22 @@
+$ python3 --version
+Python 3.12.3
+$ python3 -c "import numpy; print(numpy.__version__)"
+2.5.3
+
+$ python3 -m unittest discover -s tests
+----------------------------------------------------------------------
+Ran 47 tests in 0.623s
+
+OK
+
+$ python3 -m pytest tests -q
+...............................................  [100%]
+47 passed, 24 subtests passed in 0.81s
+
+$ python3 -m scripts.acceptance_study   # 写 results/acceptance_report.md + acceptance_results.json
+exit=0
+
+[已写入 /home/admin/Downloads/biaozhul/opp77/a/results/acceptance_report.md 与 acceptance_results.json]
+
+$ bash examples/run_examples.sh   # 完整输出见 results/examples_output.txt
+exit=0

@@ -1,0 +1,10 @@
+{
+  "expression": "sin(2*pi*1000.25*x)",
+  "a": 0.0,
+  "b": 1.0,
+  "eps_abs": 1e-8,
+  "eps_rel": 1e-8,
+  "method": "gauss",
+  "max_depth": 20,
+  "max_evals": 100000
+}
