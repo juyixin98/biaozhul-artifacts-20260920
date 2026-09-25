@@ -1,0 +1,8 @@
+{
+  "source": "func id(v) { return v; }\n\nfunc main() {\n  var t = id(source());\n  sink(t);\n  var c = id(\"clean\");\n  sink(c);\n}\n",
+  "config": {
+    "k": 0,
+    "entry_points": ["main"]
+  },
+  "include_ir": false
+}

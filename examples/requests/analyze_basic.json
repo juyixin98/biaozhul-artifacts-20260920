@@ -1,0 +1,11 @@
+{
+  "source": "func getData() {\n  return source();\n}\n\nfunc main() {\n  var x = getData();\n  sink(x);\n}\n",
+  "config": {
+    "k": 2,
+    "entry_points": ["main"],
+    "sources": ["source"],
+    "sinks": ["sink"],
+    "sanitizers": ["sanitize"]
+  },
+  "include_ir": true
+}

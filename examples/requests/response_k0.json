@@ -1,0 +1,1214 @@
+{
+  "ok": true,
+  "result": {
+    "findings": [
+      {
+        "sink": {
+          "marker": "sink",
+          "func": "main",
+          "span": {
+            "start": {
+              "offset": 66,
+              "line": 5,
+              "column": 3
+            },
+            "end": {
+              "offset": 73,
+              "line": 5,
+              "column": 10
+            },
+            "text": "sink(t)"
+          },
+          "instr_uid": 2
+        },
+        "source": {
+          "kind": "source",
+          "func": "main",
+          "instr_uid": 0,
+          "span": {
+            "start": {
+              "offset": 53,
+              "line": 4,
+              "column": 14
+            },
+            "end": {
+              "offset": 61,
+              "line": 4,
+              "column": 22
+            },
+            "text": "source()"
+          },
+          "detail": "source() in main"
+        },
+        "paths": [
+          {
+            "length": 9,
+            "steps": [
+              {
+                "node": "n0",
+                "kind": "source",
+                "span": {
+                  "start": {
+                    "offset": 53,
+                    "line": 4,
+                    "column": 14
+                  },
+                  "end": {
+                    "offset": 61,
+                    "line": 4,
+                    "column": 22
+                  },
+                  "text": "source()"
+                },
+                "instr_uid": 0,
+                "text": "source()",
+                "label": "source()"
+              },
+              {
+                "node": "arg:0:0:root",
+                "kind": "call-arg",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 50,
+                    "line": 4,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 62,
+                    "line": 4,
+                    "column": 23
+                  },
+                  "text": "id(source())"
+                },
+                "label": "argument #0 at call #0"
+              },
+              {
+                "node": "param:id:0:root",
+                "kind": "param",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 5,
+                    "line": 1,
+                    "column": 6
+                  },
+                  "end": {
+                    "offset": 24,
+                    "line": 1,
+                    "column": 25
+                  },
+                  "text": "id(v) { return v; }"
+                },
+                "label": "bind param v of id"
+              },
+              {
+                "node": "entry:id:id.entry:root",
+                "kind": "block-entry",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 5,
+                    "line": 1,
+                    "column": 6
+                  },
+                  "end": {
+                    "offset": 24,
+                    "line": 1,
+                    "column": 25
+                  },
+                  "text": "id(v) { return v; }"
+                },
+                "label": "block id.entry"
+              },
+              {
+                "node": "exit:id:root",
+                "kind": "exit",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 13,
+                    "line": 1,
+                    "column": 14
+                  },
+                  "end": {
+                    "offset": 22,
+                    "line": 1,
+                    "column": 23
+                  },
+                  "text": "return v;"
+                },
+                "label": "return from id"
+              },
+              {
+                "node": "ret:0:root",
+                "kind": "call-return",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 50,
+                    "line": 4,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 62,
+                    "line": 4,
+                    "column": 23
+                  },
+                  "text": "id(source())"
+                },
+                "label": "return from id at call #0"
+              },
+              {
+                "node": "entry:main:main.cont0:root",
+                "kind": "block-entry",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 50,
+                    "line": 4,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 62,
+                    "line": 4,
+                    "column": 23
+                  },
+                  "text": "id(source())"
+                },
+                "label": "block main.cont0"
+              },
+              {
+                "node": "n1",
+                "kind": "copy",
+                "span": {
+                  "start": {
+                    "offset": 42,
+                    "line": 4,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 63,
+                    "line": 4,
+                    "column": 24
+                  },
+                  "text": "var t = id(source());"
+                },
+                "instr_uid": 1,
+                "text": "var t = id(source());",
+                "label": "t = %1"
+              },
+              {
+                "node": "n2",
+                "kind": "sink",
+                "span": {
+                  "start": {
+                    "offset": 66,
+                    "line": 5,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 73,
+                    "line": 5,
+                    "column": 10
+                  },
+                  "text": "sink(t)"
+                },
+                "instr_uid": 2,
+                "text": "sink(t)",
+                "label": "sink(t)"
+              }
+            ]
+          },
+          {
+            "length": 4,
+            "steps": [
+              {
+                "node": "n0",
+                "kind": "source",
+                "span": {
+                  "start": {
+                    "offset": 53,
+                    "line": 4,
+                    "column": 14
+                  },
+                  "end": {
+                    "offset": 61,
+                    "line": 4,
+                    "column": 22
+                  },
+                  "text": "source()"
+                },
+                "instr_uid": 0,
+                "text": "source()",
+                "label": "source()"
+              },
+              {
+                "node": "entry:main:main.cont0:root",
+                "kind": "block-entry",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 50,
+                    "line": 4,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 62,
+                    "line": 4,
+                    "column": 23
+                  },
+                  "text": "id(source())"
+                },
+                "label": "block main.cont0"
+              },
+              {
+                "node": "n1",
+                "kind": "copy",
+                "span": {
+                  "start": {
+                    "offset": 42,
+                    "line": 4,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 63,
+                    "line": 4,
+                    "column": 24
+                  },
+                  "text": "var t = id(source());"
+                },
+                "instr_uid": 1,
+                "text": "var t = id(source());",
+                "label": "t = %1"
+              },
+              {
+                "node": "n2",
+                "kind": "sink",
+                "span": {
+                  "start": {
+                    "offset": 66,
+                    "line": 5,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 73,
+                    "line": 5,
+                    "column": 10
+                  },
+                  "text": "sink(t)"
+                },
+                "instr_uid": 2,
+                "text": "sink(t)",
+                "label": "sink(t)"
+              }
+            ]
+          }
+        ],
+        "path_count": 2,
+        "paths_truncated": false
+      },
+      {
+        "sink": {
+          "marker": "sink",
+          "func": "main",
+          "span": {
+            "start": {
+              "offset": 100,
+              "line": 7,
+              "column": 3
+            },
+            "end": {
+              "offset": 107,
+              "line": 7,
+              "column": 10
+            },
+            "text": "sink(c)"
+          },
+          "instr_uid": 6
+        },
+        "source": {
+          "kind": "source",
+          "func": "main",
+          "instr_uid": 0,
+          "span": {
+            "start": {
+              "offset": 53,
+              "line": 4,
+              "column": 14
+            },
+            "end": {
+              "offset": 61,
+              "line": 4,
+              "column": 22
+            },
+            "text": "source()"
+          },
+          "detail": "source() in main"
+        },
+        "paths": [
+          {
+            "length": 9,
+            "steps": [
+              {
+                "node": "n0",
+                "kind": "source",
+                "span": {
+                  "start": {
+                    "offset": 53,
+                    "line": 4,
+                    "column": 14
+                  },
+                  "end": {
+                    "offset": 61,
+                    "line": 4,
+                    "column": 22
+                  },
+                  "text": "source()"
+                },
+                "instr_uid": 0,
+                "text": "source()",
+                "label": "source()"
+              },
+              {
+                "node": "arg:0:0:root",
+                "kind": "call-arg",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 50,
+                    "line": 4,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 62,
+                    "line": 4,
+                    "column": 23
+                  },
+                  "text": "id(source())"
+                },
+                "label": "argument #0 at call #0"
+              },
+              {
+                "node": "param:id:0:root",
+                "kind": "param",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 5,
+                    "line": 1,
+                    "column": 6
+                  },
+                  "end": {
+                    "offset": 24,
+                    "line": 1,
+                    "column": 25
+                  },
+                  "text": "id(v) { return v; }"
+                },
+                "label": "bind param v of id"
+              },
+              {
+                "node": "entry:id:id.entry:root",
+                "kind": "block-entry",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 5,
+                    "line": 1,
+                    "column": 6
+                  },
+                  "end": {
+                    "offset": 24,
+                    "line": 1,
+                    "column": 25
+                  },
+                  "text": "id(v) { return v; }"
+                },
+                "label": "block id.entry"
+              },
+              {
+                "node": "exit:id:root",
+                "kind": "exit",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 13,
+                    "line": 1,
+                    "column": 14
+                  },
+                  "end": {
+                    "offset": 22,
+                    "line": 1,
+                    "column": 23
+                  },
+                  "text": "return v;"
+                },
+                "label": "return from id"
+              },
+              {
+                "node": "ret:1:root",
+                "kind": "call-return",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 85,
+                    "line": 6,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 96,
+                    "line": 6,
+                    "column": 22
+                  },
+                  "text": "id(\"clean\")"
+                },
+                "label": "return from id at call #1"
+              },
+              {
+                "node": "entry:main:main.cont1:root",
+                "kind": "block-entry",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 85,
+                    "line": 6,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 96,
+                    "line": 6,
+                    "column": 22
+                  },
+                  "text": "id(\"clean\")"
+                },
+                "label": "block main.cont1"
+              },
+              {
+                "node": "n5",
+                "kind": "copy",
+                "span": {
+                  "start": {
+                    "offset": 77,
+                    "line": 6,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 97,
+                    "line": 6,
+                    "column": 23
+                  },
+                  "text": "var c = id(\"clean\");"
+                },
+                "instr_uid": 5,
+                "text": "var c = id(\"clean\");",
+                "label": "c = %4"
+              },
+              {
+                "node": "n6",
+                "kind": "sink",
+                "span": {
+                  "start": {
+                    "offset": 100,
+                    "line": 7,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 107,
+                    "line": 7,
+                    "column": 10
+                  },
+                  "text": "sink(c)"
+                },
+                "instr_uid": 6,
+                "text": "sink(c)",
+                "label": "sink(c)"
+              }
+            ]
+          },
+          {
+            "length": 10,
+            "steps": [
+              {
+                "node": "n0",
+                "kind": "source",
+                "span": {
+                  "start": {
+                    "offset": 53,
+                    "line": 4,
+                    "column": 14
+                  },
+                  "end": {
+                    "offset": 61,
+                    "line": 4,
+                    "column": 22
+                  },
+                  "text": "source()"
+                },
+                "instr_uid": 0,
+                "text": "source()",
+                "label": "source()"
+              },
+              {
+                "node": "arg:0:0:root",
+                "kind": "call-arg",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 50,
+                    "line": 4,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 62,
+                    "line": 4,
+                    "column": 23
+                  },
+                  "text": "id(source())"
+                },
+                "label": "argument #0 at call #0"
+              },
+              {
+                "node": "param:id:0:root",
+                "kind": "param",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 5,
+                    "line": 1,
+                    "column": 6
+                  },
+                  "end": {
+                    "offset": 24,
+                    "line": 1,
+                    "column": 25
+                  },
+                  "text": "id(v) { return v; }"
+                },
+                "label": "bind param v of id"
+              },
+              {
+                "node": "entry:id:id.entry:root",
+                "kind": "block-entry",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 5,
+                    "line": 1,
+                    "column": 6
+                  },
+                  "end": {
+                    "offset": 24,
+                    "line": 1,
+                    "column": 25
+                  },
+                  "text": "id(v) { return v; }"
+                },
+                "label": "block id.entry"
+              },
+              {
+                "node": "exit:id:root",
+                "kind": "exit",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 13,
+                    "line": 1,
+                    "column": 14
+                  },
+                  "end": {
+                    "offset": 22,
+                    "line": 1,
+                    "column": 23
+                  },
+                  "text": "return v;"
+                },
+                "label": "return from id"
+              },
+              {
+                "node": "ret:0:root",
+                "kind": "call-return",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 50,
+                    "line": 4,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 62,
+                    "line": 4,
+                    "column": 23
+                  },
+                  "text": "id(source())"
+                },
+                "label": "return from id at call #0"
+              },
+              {
+                "node": "entry:main:main.cont0:root",
+                "kind": "block-entry",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 50,
+                    "line": 4,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 62,
+                    "line": 4,
+                    "column": 23
+                  },
+                  "text": "id(source())"
+                },
+                "label": "block main.cont0"
+              },
+              {
+                "node": "entry:main:main.cont1:root",
+                "kind": "block-entry",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 85,
+                    "line": 6,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 96,
+                    "line": 6,
+                    "column": 22
+                  },
+                  "text": "id(\"clean\")"
+                },
+                "label": "block main.cont1"
+              },
+              {
+                "node": "n5",
+                "kind": "copy",
+                "span": {
+                  "start": {
+                    "offset": 77,
+                    "line": 6,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 97,
+                    "line": 6,
+                    "column": 23
+                  },
+                  "text": "var c = id(\"clean\");"
+                },
+                "instr_uid": 5,
+                "text": "var c = id(\"clean\");",
+                "label": "c = %4"
+              },
+              {
+                "node": "n6",
+                "kind": "sink",
+                "span": {
+                  "start": {
+                    "offset": 100,
+                    "line": 7,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 107,
+                    "line": 7,
+                    "column": 10
+                  },
+                  "text": "sink(c)"
+                },
+                "instr_uid": 6,
+                "text": "sink(c)",
+                "label": "sink(c)"
+              }
+            ]
+          },
+          {
+            "length": 5,
+            "steps": [
+              {
+                "node": "n0",
+                "kind": "source",
+                "span": {
+                  "start": {
+                    "offset": 53,
+                    "line": 4,
+                    "column": 14
+                  },
+                  "end": {
+                    "offset": 61,
+                    "line": 4,
+                    "column": 22
+                  },
+                  "text": "source()"
+                },
+                "instr_uid": 0,
+                "text": "source()",
+                "label": "source()"
+              },
+              {
+                "node": "entry:main:main.cont0:root",
+                "kind": "block-entry",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 50,
+                    "line": 4,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 62,
+                    "line": 4,
+                    "column": 23
+                  },
+                  "text": "id(source())"
+                },
+                "label": "block main.cont0"
+              },
+              {
+                "node": "entry:main:main.cont1:root",
+                "kind": "block-entry",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 85,
+                    "line": 6,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 96,
+                    "line": 6,
+                    "column": 22
+                  },
+                  "text": "id(\"clean\")"
+                },
+                "label": "block main.cont1"
+              },
+              {
+                "node": "n5",
+                "kind": "copy",
+                "span": {
+                  "start": {
+                    "offset": 77,
+                    "line": 6,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 97,
+                    "line": 6,
+                    "column": 23
+                  },
+                  "text": "var c = id(\"clean\");"
+                },
+                "instr_uid": 5,
+                "text": "var c = id(\"clean\");",
+                "label": "c = %4"
+              },
+              {
+                "node": "n6",
+                "kind": "sink",
+                "span": {
+                  "start": {
+                    "offset": 100,
+                    "line": 7,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 107,
+                    "line": 7,
+                    "column": 10
+                  },
+                  "text": "sink(c)"
+                },
+                "instr_uid": 6,
+                "text": "sink(c)",
+                "label": "sink(c)"
+              }
+            ]
+          },
+          {
+            "length": 11,
+            "steps": [
+              {
+                "node": "n0",
+                "kind": "source",
+                "span": {
+                  "start": {
+                    "offset": 53,
+                    "line": 4,
+                    "column": 14
+                  },
+                  "end": {
+                    "offset": 61,
+                    "line": 4,
+                    "column": 22
+                  },
+                  "text": "source()"
+                },
+                "instr_uid": 0,
+                "text": "source()",
+                "label": "source()"
+              },
+              {
+                "node": "arg:0:0:root",
+                "kind": "call-arg",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 50,
+                    "line": 4,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 62,
+                    "line": 4,
+                    "column": 23
+                  },
+                  "text": "id(source())"
+                },
+                "label": "argument #0 at call #0"
+              },
+              {
+                "node": "param:id:0:root",
+                "kind": "param",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 5,
+                    "line": 1,
+                    "column": 6
+                  },
+                  "end": {
+                    "offset": 24,
+                    "line": 1,
+                    "column": 25
+                  },
+                  "text": "id(v) { return v; }"
+                },
+                "label": "bind param v of id"
+              },
+              {
+                "node": "entry:id:id.entry:root",
+                "kind": "block-entry",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 5,
+                    "line": 1,
+                    "column": 6
+                  },
+                  "end": {
+                    "offset": 24,
+                    "line": 1,
+                    "column": 25
+                  },
+                  "text": "id(v) { return v; }"
+                },
+                "label": "block id.entry"
+              },
+              {
+                "node": "exit:id:root",
+                "kind": "exit",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 13,
+                    "line": 1,
+                    "column": 14
+                  },
+                  "end": {
+                    "offset": 22,
+                    "line": 1,
+                    "column": 23
+                  },
+                  "text": "return v;"
+                },
+                "label": "return from id"
+              },
+              {
+                "node": "ret:0:root",
+                "kind": "call-return",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 50,
+                    "line": 4,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 62,
+                    "line": 4,
+                    "column": 23
+                  },
+                  "text": "id(source())"
+                },
+                "label": "return from id at call #0"
+              },
+              {
+                "node": "entry:main:main.cont0:root",
+                "kind": "block-entry",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 50,
+                    "line": 4,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 62,
+                    "line": 4,
+                    "column": 23
+                  },
+                  "text": "id(source())"
+                },
+                "label": "block main.cont0"
+              },
+              {
+                "node": "n1",
+                "kind": "copy",
+                "span": {
+                  "start": {
+                    "offset": 42,
+                    "line": 4,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 63,
+                    "line": 4,
+                    "column": 24
+                  },
+                  "text": "var t = id(source());"
+                },
+                "instr_uid": 1,
+                "text": "var t = id(source());",
+                "label": "t = %1"
+              },
+              {
+                "node": "entry:main:main.cont1:root",
+                "kind": "block-entry",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 85,
+                    "line": 6,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 96,
+                    "line": 6,
+                    "column": 22
+                  },
+                  "text": "id(\"clean\")"
+                },
+                "label": "block main.cont1"
+              },
+              {
+                "node": "n5",
+                "kind": "copy",
+                "span": {
+                  "start": {
+                    "offset": 77,
+                    "line": 6,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 97,
+                    "line": 6,
+                    "column": 23
+                  },
+                  "text": "var c = id(\"clean\");"
+                },
+                "instr_uid": 5,
+                "text": "var c = id(\"clean\");",
+                "label": "c = %4"
+              },
+              {
+                "node": "n6",
+                "kind": "sink",
+                "span": {
+                  "start": {
+                    "offset": 100,
+                    "line": 7,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 107,
+                    "line": 7,
+                    "column": 10
+                  },
+                  "text": "sink(c)"
+                },
+                "instr_uid": 6,
+                "text": "sink(c)",
+                "label": "sink(c)"
+              }
+            ]
+          },
+          {
+            "length": 6,
+            "steps": [
+              {
+                "node": "n0",
+                "kind": "source",
+                "span": {
+                  "start": {
+                    "offset": 53,
+                    "line": 4,
+                    "column": 14
+                  },
+                  "end": {
+                    "offset": 61,
+                    "line": 4,
+                    "column": 22
+                  },
+                  "text": "source()"
+                },
+                "instr_uid": 0,
+                "text": "source()",
+                "label": "source()"
+              },
+              {
+                "node": "entry:main:main.cont0:root",
+                "kind": "block-entry",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 50,
+                    "line": 4,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 62,
+                    "line": 4,
+                    "column": 23
+                  },
+                  "text": "id(source())"
+                },
+                "label": "block main.cont0"
+              },
+              {
+                "node": "n1",
+                "kind": "copy",
+                "span": {
+                  "start": {
+                    "offset": 42,
+                    "line": 4,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 63,
+                    "line": 4,
+                    "column": 24
+                  },
+                  "text": "var t = id(source());"
+                },
+                "instr_uid": 1,
+                "text": "var t = id(source());",
+                "label": "t = %1"
+              },
+              {
+                "node": "entry:main:main.cont1:root",
+                "kind": "block-entry",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 85,
+                    "line": 6,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 96,
+                    "line": 6,
+                    "column": 22
+                  },
+                  "text": "id(\"clean\")"
+                },
+                "label": "block main.cont1"
+              },
+              {
+                "node": "n5",
+                "kind": "copy",
+                "span": {
+                  "start": {
+                    "offset": 77,
+                    "line": 6,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 97,
+                    "line": 6,
+                    "column": 23
+                  },
+                  "text": "var c = id(\"clean\");"
+                },
+                "instr_uid": 5,
+                "text": "var c = id(\"clean\");",
+                "label": "c = %4"
+              },
+              {
+                "node": "n6",
+                "kind": "sink",
+                "span": {
+                  "start": {
+                    "offset": 100,
+                    "line": 7,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 107,
+                    "line": 7,
+                    "column": 10
+                  },
+                  "text": "sink(c)"
+                },
+                "instr_uid": 6,
+                "text": "sink(c)",
+                "label": "sink(c)"
+              }
+            ]
+          }
+        ],
+        "path_count": 5,
+        "paths_truncated": false
+      }
+    ],
+    "sinks_without_taint": [],
+    "opaque_calls": [],
+    "contexts": [
+      {
+        "context": [],
+        "frames": [],
+        "truncated": false
+      }
+    ],
+    "truncated_contexts": [],
+    "entry_points": [
+      "main"
+    ],
+    "config_echo": {
+      "k": 0,
+      "sources": [
+        "source"
+      ],
+      "sinks": [
+        "sink"
+      ],
+      "sanitizers": [
+        "sanitize"
+      ],
+      "tainted_entry_params": true
+    },
+    "stats": {
+      "functions": 2,
+      "blocks": 4,
+      "instructions": 8,
+      "call_sites": 2,
+      "contexts": 1,
+      "block_steps": 4,
+      "flow_nodes": 19,
+      "flow_edges": 15,
+      "findings": 2
+    }
+  }
+}

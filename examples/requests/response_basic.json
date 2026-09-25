@@ -1,0 +1,407 @@
+{
+  "ok": true,
+  "result": {
+    "findings": [
+      {
+        "sink": {
+          "marker": "sink",
+          "func": "main",
+          "span": {
+            "start": {
+              "offset": 76,
+              "line": 7,
+              "column": 3
+            },
+            "end": {
+              "offset": 83,
+              "line": 7,
+              "column": 10
+            },
+            "text": "sink(x)"
+          },
+          "instr_uid": 2
+        },
+        "source": {
+          "kind": "source",
+          "func": "getData",
+          "instr_uid": 0,
+          "span": {
+            "start": {
+              "offset": 26,
+              "line": 2,
+              "column": 10
+            },
+            "end": {
+              "offset": 34,
+              "line": 2,
+              "column": 18
+            },
+            "text": "source()"
+          },
+          "detail": "source() in getData"
+        },
+        "paths": [
+          {
+            "length": 6,
+            "steps": [
+              {
+                "node": "n0",
+                "kind": "source",
+                "span": {
+                  "start": {
+                    "offset": 26,
+                    "line": 2,
+                    "column": 10
+                  },
+                  "end": {
+                    "offset": 34,
+                    "line": 2,
+                    "column": 18
+                  },
+                  "text": "source()"
+                },
+                "instr_uid": 0,
+                "text": "source()",
+                "label": "source()"
+              },
+              {
+                "node": "exit:getData:0",
+                "kind": "exit",
+                "context": [
+                  0
+                ],
+                "span": {
+                  "start": {
+                    "offset": 19,
+                    "line": 2,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 35,
+                    "line": 2,
+                    "column": 19
+                  },
+                  "text": "return source();"
+                },
+                "label": "return from getData"
+              },
+              {
+                "node": "ret:0:root",
+                "kind": "call-return",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 63,
+                    "line": 6,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 72,
+                    "line": 6,
+                    "column": 20
+                  },
+                  "text": "getData()"
+                },
+                "label": "return from getData at call #0"
+              },
+              {
+                "node": "entry:main:main.cont0:root",
+                "kind": "block-entry",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 63,
+                    "line": 6,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 72,
+                    "line": 6,
+                    "column": 20
+                  },
+                  "text": "getData()"
+                },
+                "label": "block main.cont0"
+              },
+              {
+                "node": "n1",
+                "kind": "copy",
+                "span": {
+                  "start": {
+                    "offset": 55,
+                    "line": 6,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 73,
+                    "line": 6,
+                    "column": 21
+                  },
+                  "text": "var x = getData();"
+                },
+                "instr_uid": 1,
+                "text": "var x = getData();",
+                "label": "x = %0"
+              },
+              {
+                "node": "n2",
+                "kind": "sink",
+                "span": {
+                  "start": {
+                    "offset": 76,
+                    "line": 7,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 83,
+                    "line": 7,
+                    "column": 10
+                  },
+                  "text": "sink(x)"
+                },
+                "instr_uid": 2,
+                "text": "sink(x)",
+                "label": "sink(x)"
+              }
+            ]
+          }
+        ],
+        "path_count": 1,
+        "paths_truncated": false
+      }
+    ],
+    "sinks_without_taint": [],
+    "opaque_calls": [],
+    "contexts": [
+      {
+        "context": [],
+        "frames": [],
+        "truncated": false
+      },
+      {
+        "context": [
+          0
+        ],
+        "frames": [
+          {
+            "site_uid": 0,
+            "caller": "main",
+            "callee": "getData"
+          }
+        ],
+        "truncated": false
+      }
+    ],
+    "truncated_contexts": [],
+    "entry_points": [
+      "main"
+    ],
+    "config_echo": {
+      "k": 2,
+      "sources": [
+        "source"
+      ],
+      "sinks": [
+        "sink"
+      ],
+      "sanitizers": [
+        "sanitize"
+      ],
+      "tainted_entry_params": true
+    },
+    "stats": {
+      "functions": 2,
+      "blocks": 3,
+      "instructions": 4,
+      "call_sites": 1,
+      "contexts": 2,
+      "block_steps": 3,
+      "flow_nodes": 10,
+      "flow_edges": 5,
+      "findings": 1
+    },
+    "ir": {
+      "functions": [
+        {
+          "name": "getData",
+          "params": [],
+          "entry": "getData.entry",
+          "blocks": [
+            {
+              "label": "getData.entry",
+              "instructions": [
+                {
+                  "uid": 0,
+                  "op": "SourceInstr",
+                  "span": {
+                    "start": {
+                      "offset": 26,
+                      "line": 2,
+                      "column": 10
+                    },
+                    "end": {
+                      "offset": 34,
+                      "line": 2,
+                      "column": 18
+                    },
+                    "text": "source()"
+                  },
+                  "dst": "%0",
+                  "kind": "source"
+                }
+              ],
+              "terminator": {
+                "op": "Ret",
+                "span": {
+                  "start": {
+                    "offset": 19,
+                    "line": 2,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 35,
+                    "line": 2,
+                    "column": 19
+                  },
+                  "text": "return source();"
+                },
+                "value": "%0"
+              }
+            }
+          ]
+        },
+        {
+          "name": "main",
+          "params": [],
+          "entry": "main.entry",
+          "blocks": [
+            {
+              "label": "main.entry",
+              "instructions": [],
+              "terminator": {
+                "op": "CallTerm",
+                "span": {
+                  "start": {
+                    "offset": 63,
+                    "line": 6,
+                    "column": 11
+                  },
+                  "end": {
+                    "offset": 72,
+                    "line": 6,
+                    "column": 20
+                  },
+                  "text": "getData()"
+                },
+                "callee": "getData",
+                "args": [],
+                "return_reg": "%0",
+                "cont": "main.cont0",
+                "site_uid": 0
+              }
+            },
+            {
+              "label": "main.cont0",
+              "instructions": [
+                {
+                  "uid": 1,
+                  "op": "Copy",
+                  "span": {
+                    "start": {
+                      "offset": 55,
+                      "line": 6,
+                      "column": 3
+                    },
+                    "end": {
+                      "offset": 73,
+                      "line": 6,
+                      "column": 21
+                    },
+                    "text": "var x = getData();"
+                  },
+                  "dst": "x",
+                  "src": "%0"
+                },
+                {
+                  "uid": 2,
+                  "op": "SinkInstr",
+                  "span": {
+                    "start": {
+                      "offset": 76,
+                      "line": 7,
+                      "column": 3
+                    },
+                    "end": {
+                      "offset": 83,
+                      "line": 7,
+                      "column": 10
+                    },
+                    "text": "sink(x)"
+                  },
+                  "arg": "x",
+                  "kind": "sink"
+                },
+                {
+                  "uid": 3,
+                  "op": "Const",
+                  "span": {
+                    "start": {
+                      "offset": 76,
+                      "line": 7,
+                      "column": 3
+                    },
+                    "end": {
+                      "offset": 83,
+                      "line": 7,
+                      "column": 10
+                    },
+                    "text": "sink(x)"
+                  },
+                  "dst": "%1",
+                  "value": "0"
+                }
+              ],
+              "terminator": {
+                "op": "Ret",
+                "span": {
+                  "start": {
+                    "offset": 87,
+                    "line": 9,
+                    "column": 1
+                  },
+                  "end": {
+                    "offset": 87,
+                    "line": 9,
+                    "column": 1
+                  },
+                  "text": ""
+                },
+                "value": null
+              }
+            }
+          ]
+        }
+      ],
+      "call_sites": [
+        {
+          "site_uid": 0,
+          "caller": "main",
+          "callee": "getData",
+          "span": {
+            "start": {
+              "offset": 63,
+              "line": 6,
+              "column": 11
+            },
+            "end": {
+              "offset": 72,
+              "line": 6,
+              "column": 20
+            },
+            "text": "getData()"
+          }
+        }
+      ]
+    }
+  }
+}

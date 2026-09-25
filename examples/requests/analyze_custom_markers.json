@@ -1,0 +1,11 @@
+{
+  "source": "func readUserInput() {\n  return getInput();\n}\n\nfunc main() {\n  var data = readUserInput();\n  var safe = escapeHtml(data);\n  writeLog(safe);\n  writeLog(data);\n}\n",
+  "config": {
+    "k": 3,
+    "entry_points": ["main"],
+    "sources": ["getInput"],
+    "sinks": ["writeLog"],
+    "sanitizers": ["escapeHtml"]
+  },
+  "tainted_entry_params": false
+}

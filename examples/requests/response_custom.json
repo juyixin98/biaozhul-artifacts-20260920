@@ -1,0 +1,503 @@
+{
+  "ok": true,
+  "result": {
+    "findings": [
+      {
+        "sink": {
+          "marker": "writeLog",
+          "func": "main",
+          "span": {
+            "start": {
+              "offset": 142,
+              "line": 9,
+              "column": 3
+            },
+            "end": {
+              "offset": 156,
+              "line": 9,
+              "column": 17
+            },
+            "text": "writeLog(data)"
+          },
+          "instr_uid": 6
+        },
+        "source": {
+          "kind": "getInput",
+          "func": "readUserInput",
+          "instr_uid": 0,
+          "span": {
+            "start": {
+              "offset": 32,
+              "line": 2,
+              "column": 10
+            },
+            "end": {
+              "offset": 42,
+              "line": 2,
+              "column": 20
+            },
+            "text": "getInput()"
+          },
+          "detail": "getInput() in readUserInput"
+        },
+        "paths": [
+          {
+            "length": 6,
+            "steps": [
+              {
+                "node": "n0",
+                "kind": "source",
+                "span": {
+                  "start": {
+                    "offset": 32,
+                    "line": 2,
+                    "column": 10
+                  },
+                  "end": {
+                    "offset": 42,
+                    "line": 2,
+                    "column": 20
+                  },
+                  "text": "getInput()"
+                },
+                "instr_uid": 0,
+                "text": "getInput()",
+                "label": "getInput()"
+              },
+              {
+                "node": "exit:readUserInput:0",
+                "kind": "exit",
+                "context": [
+                  0
+                ],
+                "span": {
+                  "start": {
+                    "offset": 25,
+                    "line": 2,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 43,
+                    "line": 2,
+                    "column": 21
+                  },
+                  "text": "return getInput();"
+                },
+                "label": "return from readUserInput"
+              },
+              {
+                "node": "ret:0:root",
+                "kind": "call-return",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 74,
+                    "line": 6,
+                    "column": 14
+                  },
+                  "end": {
+                    "offset": 89,
+                    "line": 6,
+                    "column": 29
+                  },
+                  "text": "readUserInput()"
+                },
+                "label": "return from readUserInput at call #0"
+              },
+              {
+                "node": "entry:main:main.cont0:root",
+                "kind": "block-entry",
+                "context": [],
+                "span": {
+                  "start": {
+                    "offset": 74,
+                    "line": 6,
+                    "column": 14
+                  },
+                  "end": {
+                    "offset": 89,
+                    "line": 6,
+                    "column": 29
+                  },
+                  "text": "readUserInput()"
+                },
+                "label": "block main.cont0"
+              },
+              {
+                "node": "n1",
+                "kind": "copy",
+                "span": {
+                  "start": {
+                    "offset": 63,
+                    "line": 6,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 90,
+                    "line": 6,
+                    "column": 30
+                  },
+                  "text": "var data = readUserInput();"
+                },
+                "instr_uid": 1,
+                "text": "var data = readUserInput();",
+                "label": "data = %0"
+              },
+              {
+                "node": "n6",
+                "kind": "sink",
+                "span": {
+                  "start": {
+                    "offset": 142,
+                    "line": 9,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 156,
+                    "line": 9,
+                    "column": 17
+                  },
+                  "text": "writeLog(data)"
+                },
+                "instr_uid": 6,
+                "text": "writeLog(data)",
+                "label": "writeLog(data)"
+              }
+            ]
+          }
+        ],
+        "path_count": 1,
+        "paths_truncated": false
+      }
+    ],
+    "sinks_without_taint": [
+      {
+        "marker": "writeLog",
+        "func": "main",
+        "span": {
+          "start": {
+            "offset": 124,
+            "line": 8,
+            "column": 3
+          },
+          "end": {
+            "offset": 138,
+            "line": 8,
+            "column": 17
+          },
+          "text": "writeLog(safe)"
+        },
+        "instr_uid": 4
+      }
+    ],
+    "opaque_calls": [],
+    "contexts": [
+      {
+        "context": [],
+        "frames": [],
+        "truncated": false
+      },
+      {
+        "context": [
+          0
+        ],
+        "frames": [
+          {
+            "site_uid": 0,
+            "caller": "main",
+            "callee": "readUserInput"
+          }
+        ],
+        "truncated": false
+      }
+    ],
+    "truncated_contexts": [],
+    "entry_points": [
+      "main"
+    ],
+    "config_echo": {
+      "k": 3,
+      "sources": [
+        "getInput"
+      ],
+      "sinks": [
+        "writeLog"
+      ],
+      "sanitizers": [
+        "escapeHtml"
+      ],
+      "tainted_entry_params": false
+    },
+    "stats": {
+      "functions": 2,
+      "blocks": 3,
+      "instructions": 8,
+      "call_sites": 1,
+      "contexts": 2,
+      "block_steps": 3,
+      "flow_nodes": 14,
+      "flow_edges": 6,
+      "findings": 1
+    },
+    "ir": {
+      "functions": [
+        {
+          "name": "readUserInput",
+          "params": [],
+          "entry": "readUserInput.entry",
+          "blocks": [
+            {
+              "label": "readUserInput.entry",
+              "instructions": [
+                {
+                  "uid": 0,
+                  "op": "SourceInstr",
+                  "span": {
+                    "start": {
+                      "offset": 32,
+                      "line": 2,
+                      "column": 10
+                    },
+                    "end": {
+                      "offset": 42,
+                      "line": 2,
+                      "column": 20
+                    },
+                    "text": "getInput()"
+                  },
+                  "dst": "%0",
+                  "kind": "getInput"
+                }
+              ],
+              "terminator": {
+                "op": "Ret",
+                "span": {
+                  "start": {
+                    "offset": 25,
+                    "line": 2,
+                    "column": 3
+                  },
+                  "end": {
+                    "offset": 43,
+                    "line": 2,
+                    "column": 21
+                  },
+                  "text": "return getInput();"
+                },
+                "value": "%0"
+              }
+            }
+          ]
+        },
+        {
+          "name": "main",
+          "params": [],
+          "entry": "main.entry",
+          "blocks": [
+            {
+              "label": "main.entry",
+              "instructions": [],
+              "terminator": {
+                "op": "CallTerm",
+                "span": {
+                  "start": {
+                    "offset": 74,
+                    "line": 6,
+                    "column": 14
+                  },
+                  "end": {
+                    "offset": 89,
+                    "line": 6,
+                    "column": 29
+                  },
+                  "text": "readUserInput()"
+                },
+                "callee": "readUserInput",
+                "args": [],
+                "return_reg": "%0",
+                "cont": "main.cont0",
+                "site_uid": 0
+              }
+            },
+            {
+              "label": "main.cont0",
+              "instructions": [
+                {
+                  "uid": 1,
+                  "op": "Copy",
+                  "span": {
+                    "start": {
+                      "offset": 63,
+                      "line": 6,
+                      "column": 3
+                    },
+                    "end": {
+                      "offset": 90,
+                      "line": 6,
+                      "column": 30
+                    },
+                    "text": "var data = readUserInput();"
+                  },
+                  "dst": "data",
+                  "src": "%0"
+                },
+                {
+                  "uid": 2,
+                  "op": "SanitizeInstr",
+                  "span": {
+                    "start": {
+                      "offset": 104,
+                      "line": 7,
+                      "column": 14
+                    },
+                    "end": {
+                      "offset": 120,
+                      "line": 7,
+                      "column": 30
+                    },
+                    "text": "escapeHtml(data)"
+                  },
+                  "dst": "%1",
+                  "src": "data",
+                  "kind": "escapeHtml"
+                },
+                {
+                  "uid": 3,
+                  "op": "Copy",
+                  "span": {
+                    "start": {
+                      "offset": 93,
+                      "line": 7,
+                      "column": 3
+                    },
+                    "end": {
+                      "offset": 121,
+                      "line": 7,
+                      "column": 31
+                    },
+                    "text": "var safe = escapeHtml(data);"
+                  },
+                  "dst": "safe",
+                  "src": "%1"
+                },
+                {
+                  "uid": 4,
+                  "op": "SinkInstr",
+                  "span": {
+                    "start": {
+                      "offset": 124,
+                      "line": 8,
+                      "column": 3
+                    },
+                    "end": {
+                      "offset": 138,
+                      "line": 8,
+                      "column": 17
+                    },
+                    "text": "writeLog(safe)"
+                  },
+                  "arg": "safe",
+                  "kind": "writeLog"
+                },
+                {
+                  "uid": 5,
+                  "op": "Const",
+                  "span": {
+                    "start": {
+                      "offset": 124,
+                      "line": 8,
+                      "column": 3
+                    },
+                    "end": {
+                      "offset": 138,
+                      "line": 8,
+                      "column": 17
+                    },
+                    "text": "writeLog(safe)"
+                  },
+                  "dst": "%2",
+                  "value": "0"
+                },
+                {
+                  "uid": 6,
+                  "op": "SinkInstr",
+                  "span": {
+                    "start": {
+                      "offset": 142,
+                      "line": 9,
+                      "column": 3
+                    },
+                    "end": {
+                      "offset": 156,
+                      "line": 9,
+                      "column": 17
+                    },
+                    "text": "writeLog(data)"
+                  },
+                  "arg": "data",
+                  "kind": "writeLog"
+                },
+                {
+                  "uid": 7,
+                  "op": "Const",
+                  "span": {
+                    "start": {
+                      "offset": 142,
+                      "line": 9,
+                      "column": 3
+                    },
+                    "end": {
+                      "offset": 156,
+                      "line": 9,
+                      "column": 17
+                    },
+                    "text": "writeLog(data)"
+                  },
+                  "dst": "%3",
+                  "value": "0"
+                }
+              ],
+              "terminator": {
+                "op": "Ret",
+                "span": {
+                  "start": {
+                    "offset": 160,
+                    "line": 11,
+                    "column": 1
+                  },
+                  "end": {
+                    "offset": 160,
+                    "line": 11,
+                    "column": 1
+                  },
+                  "text": ""
+                },
+                "value": null
+              }
+            }
+          ]
+        }
+      ],
+      "call_sites": [
+        {
+          "site_uid": 0,
+          "caller": "main",
+          "callee": "readUserInput",
+          "span": {
+            "start": {
+              "offset": 74,
+              "line": 6,
+              "column": 14
+            },
+            "end": {
+              "offset": 89,
+              "line": 6,
+              "column": 29
+            },
+            "text": "readUserInput()"
+          }
+        }
+      ]
+    }
+  }
+}
