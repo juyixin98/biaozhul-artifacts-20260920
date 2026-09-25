@@ -1,0 +1,20 @@
+{
+  "status": "ok",
+  "result": {
+    "relation": "endpoint_touch",
+    "segment_a_zero_length": false,
+    "segment_b_zero_length": false,
+    "point": {
+      "x": {
+        "num": 2,
+        "den": 1
+      },
+      "y": {
+        "num": 0,
+        "den": 1
+      }
+    },
+    "contact_on_a": "i",
+    "contact_on_b": "p"
+  }
+}

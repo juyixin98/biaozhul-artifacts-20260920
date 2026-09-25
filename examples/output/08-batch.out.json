@@ -1,0 +1,52 @@
+{
+  "status": "ok",
+  "count": 3,
+  "results": [
+    {
+      "index": 0,
+      "result": {
+        "relation": "cross",
+        "segment_a_zero_length": false,
+        "segment_b_zero_length": false,
+        "point": {
+          "x": {
+            "num": 1,
+            "den": 1
+          },
+          "y": {
+            "num": 1,
+            "den": 1
+          }
+        }
+      }
+    },
+    {
+      "index": 1,
+      "result": {
+        "relation": "disjoint",
+        "segment_a_zero_length": false,
+        "segment_b_zero_length": false
+      }
+    },
+    {
+      "index": 2,
+      "result": {
+        "relation": "endpoint_touch",
+        "segment_a_zero_length": true,
+        "segment_b_zero_length": true,
+        "point": {
+          "x": {
+            "num": 3,
+            "den": 1
+          },
+          "y": {
+            "num": 3,
+            "den": 1
+          }
+        },
+        "contact_on_a": "p",
+        "contact_on_b": "p"
+      }
+    }
+  ]
+}

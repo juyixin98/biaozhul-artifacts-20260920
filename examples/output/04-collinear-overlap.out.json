@@ -1,0 +1,30 @@
+{
+  "status": "ok",
+  "result": {
+    "relation": "collinear_overlap",
+    "segment_a_zero_length": false,
+    "segment_b_zero_length": false,
+    "overlap": {
+      "start": {
+        "x": {
+          "num": 1,
+          "den": 1
+        },
+        "y": {
+          "num": 0,
+          "den": 1
+        }
+      },
+      "end": {
+        "x": {
+          "num": 3,
+          "den": 1
+        },
+        "y": {
+          "num": 0,
+          "den": 1
+        }
+      }
+    }
+  }
+}

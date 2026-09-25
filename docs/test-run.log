@@ -1,0 +1,10 @@
+mkdir -p build
+g++ -std=c++20 -O2 -Wall -Wextra -Wpedantic -Iinclude src/bigint.cpp src/json.cpp src/geometry.cpp src/main.cpp -o build/segi-cli
+g++ -std=c++20 -O2 -Wall -Wextra -Wpedantic -Iinclude src/bigint.cpp src/json.cpp src/geometry.cpp tests/test_segments.cpp -o build/segi-tests
+./build/segi-tests
+C++ tests OK: 12093 checks passed
+python3 tests/crosscheck.py --cli ./build/segi-cli --seed 20260923 --count 4000
+crosscheck: 16028 comparisons (4007 cases x 4 endpoint orderings)
+  case kinds (base): {'random': 2225, 'huge': 209, 'collinear': 803, 'zero': 576, 'oversize': 187}
+  relation tally   : {'disjoint': 10036, 'collinear_overlap': 3212, 'cross': 2316, 'endpoint_touch': 464}
+crosscheck OK: C++ output matches Fraction reference on every case
