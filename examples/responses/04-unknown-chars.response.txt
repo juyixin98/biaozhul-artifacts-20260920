@@ -1,0 +1,162 @@
+{
+  "text": "我们学习中文分词Ψ，研究生命的起源。",
+  "codePoints": 18,
+  "version": "dict_v1",
+  "unknownCharCost": 10,
+  "results": [
+    {
+      "rank": 1,
+      "totalCost": 51.570468,
+      "words": [
+        "我们",
+        "学习",
+        "中文",
+        "分词",
+        "Ψ",
+        "，",
+        "研究",
+        "生命",
+        "的",
+        "起源",
+        "。"
+      ],
+      "tokens": [
+        {
+          "word": "我们",
+          "cost": 2.820635,
+          "unknown": false
+        },
+        {
+          "word": "学习",
+          "cost": 2.954166,
+          "unknown": false
+        },
+        {
+          "word": "中文",
+          "cost": 3.108317,
+          "unknown": false
+        },
+        {
+          "word": "分词",
+          "cost": 2.702852,
+          "unknown": false
+        },
+        {
+          "word": "Ψ",
+          "cost": 10,
+          "unknown": true
+        },
+        {
+          "word": "，",
+          "cost": 10,
+          "unknown": true
+        },
+        {
+          "word": "研究",
+          "cost": 2.597491,
+          "unknown": false
+        },
+        {
+          "word": "生命",
+          "cost": 2.597491,
+          "unknown": false
+        },
+        {
+          "word": "的",
+          "cost": 1.498879,
+          "unknown": false
+        },
+        {
+          "word": "起源",
+          "cost": 3.290638,
+          "unknown": false
+        },
+        {
+          "word": "。",
+          "cost": 10,
+          "unknown": true
+        }
+      ],
+      "tokenCount": 11,
+      "unknownCount": 3
+    }
+  ],
+  "best": {
+    "rank": 1,
+    "totalCost": 51.570468,
+    "words": [
+      "我们",
+      "学习",
+      "中文",
+      "分词",
+      "Ψ",
+      "，",
+      "研究",
+      "生命",
+      "的",
+      "起源",
+      "。"
+    ],
+    "tokens": [
+      {
+        "word": "我们",
+        "cost": 2.820635,
+        "unknown": false
+      },
+      {
+        "word": "学习",
+        "cost": 2.954166,
+        "unknown": false
+      },
+      {
+        "word": "中文",
+        "cost": 3.108317,
+        "unknown": false
+      },
+      {
+        "word": "分词",
+        "cost": 2.702852,
+        "unknown": false
+      },
+      {
+        "word": "Ψ",
+        "cost": 10,
+        "unknown": true
+      },
+      {
+        "word": "，",
+        "cost": 10,
+        "unknown": true
+      },
+      {
+        "word": "研究",
+        "cost": 2.597491,
+        "unknown": false
+      },
+      {
+        "word": "生命",
+        "cost": 2.597491,
+        "unknown": false
+      },
+      {
+        "word": "的",
+        "cost": 1.498879,
+        "unknown": false
+      },
+      {
+        "word": "起源",
+        "cost": 3.290638,
+        "unknown": false
+      },
+      {
+        "word": "。",
+        "cost": 10,
+        "unknown": true
+      }
+    ],
+    "tokenCount": 11,
+    "unknownCount": 3
+  }
+}
+
+[HTTP 200]

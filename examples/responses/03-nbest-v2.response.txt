@@ -1,0 +1,144 @@
+{
+  "text": "研究生生命",
+  "codePoints": 5,
+  "version": "dict_v2",
+  "unknownCharCost": 10,
+  "results": [
+    {
+      "rank": 1,
+      "totalCost": 5.059527,
+      "words": [
+        "研究生",
+        "生命"
+      ],
+      "tokens": [
+        {
+          "word": "研究生",
+          "cost": 2.004853,
+          "unknown": false
+        },
+        {
+          "word": "生命",
+          "cost": 3.054675,
+          "unknown": false
+        }
+      ],
+      "tokenCount": 2,
+      "unknownCount": 0
+    },
+    {
+      "rank": 2,
+      "totalCost": 10.90741,
+      "words": [
+        "研究生",
+        "生",
+        "命"
+      ],
+      "tokens": [
+        {
+          "word": "研究生",
+          "cost": 2.004853,
+          "unknown": false
+        },
+        {
+          "word": "生",
+          "cost": 5.693732,
+          "unknown": false
+        },
+        {
+          "word": "命",
+          "cost": 3.208825,
+          "unknown": false
+        }
+      ],
+      "tokenCount": 3,
+      "unknownCount": 0
+    },
+    {
+      "rank": 3,
+      "totalCost": 11.803082,
+      "words": [
+        "研究",
+        "生",
+        "生命"
+      ],
+      "tokens": [
+        {
+          "word": "研究",
+          "cost": 3.054675,
+          "unknown": false
+        },
+        {
+          "word": "生",
+          "cost": 5.693732,
+          "unknown": false
+        },
+        {
+          "word": "生命",
+          "cost": 3.054675,
+          "unknown": false
+        }
+      ],
+      "tokenCount": 3,
+      "unknownCount": 0
+    },
+    {
+      "rank": 4,
+      "totalCost": 15.213678,
+      "words": [
+        "研究生",
+        "生",
+        "命"
+      ],
+      "tokens": [
+        {
+          "word": "研究生",
+          "cost": 2.004853,
+          "unknown": false
+        },
+        {
+          "word": "生",
+          "cost": 10,
+          "unknown": true
+        },
+        {
+          "word": "命",
+          "cost": 3.208825,
+          "unknown": false
+        }
+      ],
+      "tokenCount": 3,
+      "unknownCount": 1
+    },
+    {
+      "rank": 5,
+      "totalCost": 16.10935,
+      "words": [
+        "研究",
+        "生",
+        "生命"
+      ],
+      "tokens": [
+        {
+          "word": "研究",
+          "cost": 3.054675,
+          "unknown": false
+        },
+        {
+          "word": "生",
+          "cost": 10,
+          "unknown": true
+        },
+        {
+          "word": "生命",
+          "cost": 3.054675,
+          "unknown": false
+        }
+      ],
+      "tokenCount": 3,
+      "unknownCount": 1
+    }
+  ]
+}
+
+[HTTP 200]

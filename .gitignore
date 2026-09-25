@@ -1,0 +1,12 @@
+# 构建产物
+build/
+out/
+*.class
+
+# JDK / 编辑器
+hs_err_pid*
+.replay/
+.idea/
+*.iml
+.vscode/
+.DS_Store

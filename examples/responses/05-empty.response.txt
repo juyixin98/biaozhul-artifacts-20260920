@@ -1,0 +1,26 @@
+{
+  "text": "",
+  "codePoints": 0,
+  "version": "dict_v1",
+  "unknownCharCost": 10,
+  "results": [
+    {
+      "rank": 1,
+      "totalCost": 0,
+      "words": [],
+      "tokens": [],
+      "tokenCount": 0,
+      "unknownCount": 0
+    }
+  ],
+  "best": {
+    "rank": 1,
+    "totalCost": 0,
+    "words": [],
+    "tokens": [],
+    "tokenCount": 0,
+    "unknownCount": 0
+  }
+}
+
+[HTTP 200]

@@ -1,0 +1,6 @@
+{
+  "error": "missing_field",
+  "message": "field 'text' is required"
+}
+
+[HTTP 400]

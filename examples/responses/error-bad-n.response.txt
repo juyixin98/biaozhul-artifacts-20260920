@@ -1,0 +1,6 @@
+{
+  "error": "invalid_field",
+  "message": "field 'n' must be an integer in [1, 64]"
+}
+
+[HTTP 400]

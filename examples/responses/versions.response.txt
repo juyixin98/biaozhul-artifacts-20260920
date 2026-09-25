@@ -1,0 +1,18 @@
+{
+  "default": "dict_v1",
+  "unknownCharCost": 10,
+  "versions": [
+    {
+      "version": "dict_v1",
+      "wordCount": 24,
+      "totalFrequency": 1343
+    },
+    {
+      "version": "dict_v2",
+      "wordCount": 25,
+      "totalFrequency": 1485
+    }
+  ]
+}
+
+[HTTP 200]

@@ -1,0 +1,6 @@
+{
+  "error": "unknown_version",
+  "message": "no such dictionary version: no-such-version (available: dict_v1, dict_v2)"
+}
+
+[HTTP 404]
