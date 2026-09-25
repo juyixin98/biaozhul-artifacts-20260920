@@ -1,0 +1,3 @@
+{"jobId":"B","lowerBound":0,"upperBound":10000,
+ "left":{"maxOutOfOrderness":0,"idleTimeoutMillis":5000,"maxBufferSize":100,"overflowPolicy":"REJECT"},
+ "right":{"maxOutOfOrderness":0,"idleTimeoutMillis":5000,"maxBufferSize":100,"overflowPolicy":"REJECT"}}

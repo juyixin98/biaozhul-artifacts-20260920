@@ -1,0 +1,19 @@
+{
+  "config": {
+    "lowerBound": 0,
+    "upperBound": 10000,
+    "left":  { "maxOutOfOrderness": 0, "idleTimeoutMillis": 0, "maxBufferSize": 0, "overflowPolicy": "REJECT" },
+    "right": { "maxOutOfOrderness": 0, "idleTimeoutMillis": 0, "maxBufferSize": 0, "overflowPolicy": "REJECT" }
+  },
+  "steps": [
+    { "type": "event", "side": "right", "processingTime": 1, "event": { "id": "RA", "key": "k", "eventTime": 10000 } },
+    { "type": "event", "side": "right", "processingTime": 1, "event": { "id": "RB", "key": "k", "eventTime": 15000 } },
+    { "type": "event", "side": "right", "processingTime": 1, "event": { "id": "RC", "key": "k", "eventTime": 20000 } },
+    { "type": "event", "side": "right", "processingTime": 1, "event": { "id": "RD", "key": "k", "eventTime": 35000 } },
+
+    { "type": "watermark", "side": "left", "processingTime": 2, "watermark": 20000 },
+
+    { "type": "event", "side": "left", "processingTime": 3, "event": { "id": "LE-boundary", "key": "k", "eventTime": 20000 } },
+    { "type": "event", "side": "left", "processingTime": 4, "event": { "id": "LL-late", "key": "k", "eventTime": 19999 } }
+  ]
+}

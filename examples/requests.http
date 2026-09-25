@@ -1,0 +1,84 @@
+# HTTP request samples for the dual-stream interval join service.
+# Usable with IntelliJ/VS Code HTTP clients, or read alongside demo.sh
+# which contains the same requests as curl commands.
+
+@host = http://localhost:8080
+@job = acc
+
+### 1. Create a job: interval [0,10000]ms, 5s idle detection, per-side
+###    buffer cap 3 with REJECT (never drop a buffered matchable record).
+POST {{host}}/api/v1/jobs
+Content-Type: application/json
+
+{
+  "jobId": "{{job}}",
+  "lowerBound": 0,
+  "upperBound": 10000,
+  "left":  { "maxOutOfOrderness": 0, "idleTimeoutMillis": 5000, "maxBufferSize": 3, "overflowPolicy": "REJECT" },
+  "right": { "maxOutOfOrderness": 0, "idleTimeoutMillis": 5000, "maxBufferSize": 3, "overflowPolicy": "REJECT" }
+}
+
+### 2. Push left events (processing time is injected manually).
+POST {{host}}/api/v1/jobs/{{job}}/events/left
+Content-Type: application/json
+
+{
+  "processingTime": 1000,
+  "events": [
+    { "id": "L1", "key": "k", "eventTime": 10000, "value": "order-1" },
+    { "id": "L2", "key": "k", "eventTime": 12000, "value": "order-2" }
+  ]
+}
+
+### 3. Push right events: 3 pairs emitted (R3 at 22001 is 1ms past boundary).
+POST {{host}}/api/v1/jobs/{{job}}/events/right
+Content-Type: application/json
+
+{
+  "processingTime": 2000,
+  "events": [
+    { "id": "R1", "key": "k", "eventTime": 15000 },
+    { "id": "R2", "key": "k", "eventTime": 22000 },
+    { "id": "R3", "key": "k", "eventTime": 22001 }
+  ]
+}
+
+### 4. Status: independent watermarks, buffer sizes, counters.
+GET {{host}}/api/v1/jobs/{{job}}/status
+
+### 5. Simulate the RIGHT side stalling: no more right events; advance
+###    processing time past the 5s idle timeout.
+POST {{host}}/api/v1/jobs/{{job}}/time
+Content-Type: application/json
+
+{ "advanceTo": 8000 }
+
+### 6. The stalled side resumes — previously buffered records still match.
+POST {{host}}/api/v1/jobs/{{job}}/events/right
+Content-Type: application/json
+
+{
+  "processingTime": 9000,
+  "events": [ { "id": "R4", "key": "k", "eventTime": 10500 } ]
+}
+
+### 7. Explicit watermark injection drives boundary-exact state cleanup.
+POST {{host}}/api/v1/jobs/{{job}}/watermark/left
+Content-Type: application/json
+
+{ "processingTime": 11000, "watermark": 20000 }
+
+### 8. Over-cap event is refused, buffered records are retained.
+POST {{host}}/api/v1/jobs/{{job}}/events/left
+Content-Type: application/json
+
+{
+  "processingTime": 12000,
+  "events": [ { "id": "LBUFOVER", "key": "k", "eventTime": 20001 } ]
+}
+
+### 9. List jobs, then delete this one.
+GET {{host}}/api/v1/jobs
+
+###
+DELETE {{host}}/api/v1/jobs/{{job}}

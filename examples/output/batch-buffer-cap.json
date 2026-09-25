@@ -1,0 +1,58 @@
+{
+  "ok" : true,
+  "steps" : [ {
+    "type" : "event",
+    "side" : "LEFT",
+    "id" : "L1",
+    "status" : "ACCEPTED",
+    "emitted" : [ ],
+    "cleaned" : 0
+  }, {
+    "type" : "event",
+    "side" : "LEFT",
+    "id" : "L2",
+    "status" : "ACCEPTED",
+    "emitted" : [ ],
+    "cleaned" : 0
+  }, {
+    "type" : "event",
+    "side" : "LEFT",
+    "id" : "L3-over-cap",
+    "status" : "BUFFER_FULL",
+    "emitted" : [ ],
+    "cleaned" : 0
+  }, {
+    "type" : "event",
+    "side" : "RIGHT",
+    "id" : "R1",
+    "status" : "ACCEPTED",
+    "emitted" : [ {
+      "leftId" : "L1",
+      "rightId" : "R1",
+      "key" : "k",
+      "leftEventTime" : 1000,
+      "rightEventTime" : 1000,
+      "timeDistance" : 0,
+      "emittedAtProcessingTime" : 4
+    } ],
+    "cleaned" : 1
+  } ],
+  "final" : {
+    "processingTime" : 4,
+    "leftWatermark" : 2000,
+    "rightWatermark" : 1000,
+    "leftBuffered" : 2,
+    "rightBuffered" : 0,
+    "metrics" : {
+      "pairsEmitted" : 1,
+      "duplicatesDropped" : 0,
+      "lateDropped" : 0,
+      "bufferRejected" : 1,
+      "oldestEvicted" : 0,
+      "leftStateCleaned" : 0,
+      "rightStateCleaned" : 1,
+      "leftIdle" : false,
+      "rightIdle" : false
+    }
+  }
+}

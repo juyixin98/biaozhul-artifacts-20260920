@@ -1,0 +1,20 @@
+{
+  "config": {
+    "lowerBound": 0,
+    "upperBound": 10000,
+    "left":  { "maxOutOfOrderness": 0, "idleTimeoutMillis": 5000, "maxBufferSize": 100, "overflowPolicy": "REJECT" },
+    "right": { "maxOutOfOrderness": 0, "idleTimeoutMillis": 5000, "maxBufferSize": 100, "overflowPolicy": "REJECT" }
+  },
+  "steps": [
+    { "type": "event", "side": "right", "processingTime": 1000, "event": { "id": "R1", "key": "k", "eventTime": 10000 } },
+    { "type": "event", "side": "left",  "processingTime": 2000, "event": { "id": "L1", "key": "k", "eventTime": 5000 } },
+    { "type": "event", "side": "left",  "processingTime": 2100, "event": { "id": "L2", "key": "k", "eventTime": 15000 } },
+
+    { "type": "event", "side": "left", "processingTime": 3000, "event": { "id": "L3", "key": "k", "eventTime": 60000 } },
+
+    { "type": "advanceTime", "to": 8000 },
+    { "type": "tick" },
+
+    { "type": "event", "side": "right", "processingTime": 9000, "event": { "id": "R2", "key": "k", "eventTime": 10000 } }
+  ]
+}

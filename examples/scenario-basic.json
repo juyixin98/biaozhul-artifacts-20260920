@@ -1,0 +1,18 @@
+{
+  "config": {
+    "lowerBound": 0,
+    "upperBound": 10000,
+    "left":  { "maxOutOfOrderness": 0, "idleTimeoutMillis": 5000, "maxBufferSize": 100, "overflowPolicy": "REJECT" },
+    "right": { "maxOutOfOrderness": 0, "idleTimeoutMillis": 5000, "maxBufferSize": 100, "overflowPolicy": "REJECT" }
+  },
+  "steps": [
+    { "type": "event", "side": "left",  "processingTime": 1000, "event": { "id": "L1", "key": "k", "eventTime": 10000, "value": "order-1" } },
+    { "type": "event", "side": "left",  "processingTime": 1100, "event": { "id": "L2", "key": "k", "eventTime": 12000, "value": "order-2" } },
+
+    { "type": "event", "side": "right", "processingTime": 2000, "event": { "id": "R1", "key": "k", "eventTime": 15000, "value": "payment-1" } },
+    { "type": "event", "side": "right", "processingTime": 2100, "event": { "id": "R2", "key": "k", "eventTime": 22000, "value": "payment-2" } },
+    { "type": "event", "side": "right", "processingTime": 2200, "event": { "id": "R3", "key": "k", "eventTime": 22001, "value": "payment-3" } },
+
+    { "type": "event", "side": "right", "processingTime": 2300, "event": { "id": "R2", "key": "k", "eventTime": 22000, "value": "payment-2-redelivered" } }
+  ]
+}

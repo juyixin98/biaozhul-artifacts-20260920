@@ -1,0 +1,79 @@
+{
+  "ok" : true,
+  "steps" : [ {
+    "type" : "event",
+    "side" : "RIGHT",
+    "id" : "R1",
+    "status" : "ACCEPTED",
+    "emitted" : [ ],
+    "cleaned" : 0
+  }, {
+    "type" : "event",
+    "side" : "LEFT",
+    "id" : "L1",
+    "status" : "ACCEPTED",
+    "emitted" : [ {
+      "leftId" : "L1",
+      "rightId" : "R1",
+      "key" : "k",
+      "leftEventTime" : 5000,
+      "rightEventTime" : 10000,
+      "timeDistance" : 5000,
+      "emittedAtProcessingTime" : 2000
+    } ],
+    "cleaned" : 0
+  }, {
+    "type" : "event",
+    "side" : "LEFT",
+    "id" : "L2",
+    "status" : "ACCEPTED",
+    "emitted" : [ ],
+    "cleaned" : 1
+  }, {
+    "type" : "event",
+    "side" : "LEFT",
+    "id" : "L3",
+    "status" : "ACCEPTED",
+    "emitted" : [ ],
+    "cleaned" : 0
+  }, {
+    "type" : "advanceTime",
+    "now" : 8000,
+    "timersFired" : 50
+  }, {
+    "type" : "tick"
+  }, {
+    "type" : "event",
+    "side" : "RIGHT",
+    "id" : "R2",
+    "status" : "ACCEPTED",
+    "emitted" : [ {
+      "leftId" : "L1",
+      "rightId" : "R2",
+      "key" : "k",
+      "leftEventTime" : 5000,
+      "rightEventTime" : 10000,
+      "timeDistance" : 5000,
+      "emittedAtProcessingTime" : 9000
+    } ],
+    "cleaned" : 1
+  } ],
+  "final" : {
+    "processingTime" : 9000,
+    "leftWatermark" : 60000,
+    "rightWatermark" : 10000,
+    "leftBuffered" : 3,
+    "rightBuffered" : 0,
+    "metrics" : {
+      "pairsEmitted" : 2,
+      "duplicatesDropped" : 0,
+      "lateDropped" : 0,
+      "bufferRejected" : 0,
+      "oldestEvicted" : 0,
+      "leftStateCleaned" : 0,
+      "rightStateCleaned" : 2,
+      "leftIdle" : true,
+      "rightIdle" : false
+    }
+  }
+}

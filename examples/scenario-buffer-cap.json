@@ -1,0 +1,15 @@
+{
+  "config": {
+    "lowerBound": 0,
+    "upperBound": 10000,
+    "left":  { "maxOutOfOrderness": 0, "idleTimeoutMillis": 0, "maxBufferSize": 2, "overflowPolicy": "REJECT" },
+    "right": { "maxOutOfOrderness": 0, "idleTimeoutMillis": 0, "maxBufferSize": 2, "overflowPolicy": "REJECT" }
+  },
+  "steps": [
+    { "type": "event", "side": "left", "processingTime": 1, "event": { "id": "L1", "key": "k", "eventTime": 1000 } },
+    { "type": "event", "side": "left", "processingTime": 2, "event": { "id": "L2", "key": "k", "eventTime": 2000 } },
+    { "type": "event", "side": "left", "processingTime": 3, "event": { "id": "L3-over-cap", "key": "k", "eventTime": 3000 } },
+
+    { "type": "event", "side": "right", "processingTime": 4, "event": { "id": "R1", "key": "k", "eventTime": 1000 } }
+  ]
+}

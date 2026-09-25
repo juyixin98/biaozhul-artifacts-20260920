@@ -1,0 +1,94 @@
+{
+  "ok" : true,
+  "steps" : [ {
+    "type" : "event",
+    "side" : "LEFT",
+    "id" : "L1",
+    "status" : "ACCEPTED",
+    "emitted" : [ ],
+    "cleaned" : 0
+  }, {
+    "type" : "event",
+    "side" : "LEFT",
+    "id" : "L2",
+    "status" : "ACCEPTED",
+    "emitted" : [ ],
+    "cleaned" : 0
+  }, {
+    "type" : "event",
+    "side" : "RIGHT",
+    "id" : "R1",
+    "status" : "ACCEPTED",
+    "emitted" : [ {
+      "leftId" : "L1",
+      "rightId" : "R1",
+      "key" : "k",
+      "leftEventTime" : 10000,
+      "rightEventTime" : 15000,
+      "timeDistance" : 5000,
+      "leftValue" : "order-1",
+      "rightValue" : "payment-1",
+      "emittedAtProcessingTime" : 2000
+    }, {
+      "leftId" : "L2",
+      "rightId" : "R1",
+      "key" : "k",
+      "leftEventTime" : 12000,
+      "rightEventTime" : 15000,
+      "timeDistance" : 3000,
+      "leftValue" : "order-2",
+      "rightValue" : "payment-1",
+      "emittedAtProcessingTime" : 2000
+    } ],
+    "cleaned" : 0
+  }, {
+    "type" : "event",
+    "side" : "RIGHT",
+    "id" : "R2",
+    "status" : "ACCEPTED",
+    "emitted" : [ {
+      "leftId" : "L2",
+      "rightId" : "R2",
+      "key" : "k",
+      "leftEventTime" : 12000,
+      "rightEventTime" : 22000,
+      "timeDistance" : 10000,
+      "leftValue" : "order-2",
+      "rightValue" : "payment-2",
+      "emittedAtProcessingTime" : 2100
+    } ],
+    "cleaned" : 1
+  }, {
+    "type" : "event",
+    "side" : "RIGHT",
+    "id" : "R3",
+    "status" : "ACCEPTED",
+    "emitted" : [ ],
+    "cleaned" : 1
+  }, {
+    "type" : "event",
+    "side" : "RIGHT",
+    "id" : "R2",
+    "status" : "DUPLICATE",
+    "emitted" : [ ],
+    "cleaned" : 0
+  } ],
+  "final" : {
+    "processingTime" : 2300,
+    "leftWatermark" : 12000,
+    "rightWatermark" : 22001,
+    "leftBuffered" : 0,
+    "rightBuffered" : 3,
+    "metrics" : {
+      "pairsEmitted" : 3,
+      "duplicatesDropped" : 1,
+      "lateDropped" : 0,
+      "bufferRejected" : 0,
+      "oldestEvicted" : 0,
+      "leftStateCleaned" : 2,
+      "rightStateCleaned" : 0,
+      "leftIdle" : false,
+      "rightIdle" : false
+    }
+  }
+}

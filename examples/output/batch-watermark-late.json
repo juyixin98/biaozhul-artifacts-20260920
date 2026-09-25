@@ -1,0 +1,77 @@
+{
+  "ok" : true,
+  "steps" : [ {
+    "type" : "event",
+    "side" : "RIGHT",
+    "id" : "RA",
+    "status" : "ACCEPTED",
+    "emitted" : [ ],
+    "cleaned" : 0
+  }, {
+    "type" : "event",
+    "side" : "RIGHT",
+    "id" : "RB",
+    "status" : "ACCEPTED",
+    "emitted" : [ ],
+    "cleaned" : 0
+  }, {
+    "type" : "event",
+    "side" : "RIGHT",
+    "id" : "RC",
+    "status" : "ACCEPTED",
+    "emitted" : [ ],
+    "cleaned" : 0
+  }, {
+    "type" : "event",
+    "side" : "RIGHT",
+    "id" : "RD",
+    "status" : "ACCEPTED",
+    "emitted" : [ ],
+    "cleaned" : 0
+  }, {
+    "type" : "watermark",
+    "side" : "LEFT",
+    "watermark" : 20000,
+    "cleaned" : 2
+  }, {
+    "type" : "event",
+    "side" : "LEFT",
+    "id" : "LE-boundary",
+    "status" : "ACCEPTED",
+    "emitted" : [ {
+      "leftId" : "LE-boundary",
+      "rightId" : "RC",
+      "key" : "k",
+      "leftEventTime" : 20000,
+      "rightEventTime" : 20000,
+      "timeDistance" : 0,
+      "emittedAtProcessingTime" : 3
+    } ],
+    "cleaned" : 1
+  }, {
+    "type" : "event",
+    "side" : "LEFT",
+    "id" : "LL-late",
+    "status" : "LATE",
+    "emitted" : [ ],
+    "cleaned" : 0
+  } ],
+  "final" : {
+    "processingTime" : 4,
+    "leftWatermark" : 20000,
+    "rightWatermark" : 35000,
+    "leftBuffered" : 0,
+    "rightBuffered" : 2,
+    "metrics" : {
+      "pairsEmitted" : 1,
+      "duplicatesDropped" : 0,
+      "lateDropped" : 1,
+      "bufferRejected" : 0,
+      "oldestEvicted" : 0,
+      "leftStateCleaned" : 1,
+      "rightStateCleaned" : 2,
+      "leftIdle" : false,
+      "rightIdle" : false
+    }
+  }
+}
