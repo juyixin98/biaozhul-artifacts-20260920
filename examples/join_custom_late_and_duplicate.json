@@ -1,0 +1,18 @@
+{
+  "records": [
+    {"entity_id": "u1", "feature_name": "f_credit_limit", "value": 1000.0,
+     "effective_time": "2026-01-01T00:00:00Z",
+     "ingest_time": "2026-01-01T01:00:00Z", "version": 1, "record_id": "v1-prelim"},
+    {"entity_id": "u1", "feature_name": "f_credit_limit", "value": 1200.0,
+     "effective_time": "2026-01-01T00:00:00Z",
+     "ingest_time": "2026-01-05T00:00:00Z", "version": 2, "record_id": "v2-revised"},
+    {"entity_id": "u1", "feature_name": "f_credit_limit", "value": 1200.0,
+     "effective_time": "2026-01-01T00:00:00Z",
+     "ingest_time": "2026-01-05T00:00:00Z", "version": 2, "record_id": "v2-duplicate"}
+  ],
+  "events": [
+    {"entity_id": "u1", "event_time": "2026-01-02T00:00:00Z"},
+    {"entity_id": "u1", "event_time": "2026-01-06T00:00:00Z"}
+  ],
+  "use_event_as_of": true
+}

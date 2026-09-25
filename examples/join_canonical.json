@@ -1,0 +1,13 @@
+{
+  "dataset": "canonical",
+  "events": [
+    {"entity_id": "cust_A", "event_time": "2026-01-02T12:00:00Z", "label": 1},
+    {"entity_id": "cust_A", "event_time": "2026-01-04T12:00:00Z", "label": 1},
+    {"entity_id": "cust_B", "event_time": "2026-01-02T00:00:00Z", "label": 1},
+    {"entity_id": "cust_C", "event_time": "2026-01-02T00:00:00Z", "label": 0},
+    {"entity_id": "cust_D", "event_time": "2026-01-02T00:00:00Z", "label": 0},
+    {"entity_id": "cust_E", "event_time": "2026-01-02T00:00:00Z", "label": 0}
+  ],
+  "features": ["f_balance", "f_score", "f_tier"],
+  "use_event_as_of": true
+}

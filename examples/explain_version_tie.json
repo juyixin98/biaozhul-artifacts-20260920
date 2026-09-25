@@ -1,0 +1,6 @@
+{
+  "dataset": "canonical",
+  "entity_id": "cust_B",
+  "feature_name": "f_score",
+  "event_time": "2026-01-02T00:00:00Z"
+}

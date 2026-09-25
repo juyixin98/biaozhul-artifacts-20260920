@@ -1,0 +1,597 @@
+== 1) 健康检查 ==
+{
+  "status": "ok",
+  "service": "pitjoin"
+}
+== 2) 单点依据：晚到修订（E2 时刻 rA3 尚未入库，应选 rA2，剔除原因为 LATE_INGEST） ==
+{
+  "entity_id": "cust_A",
+  "feature_name": "f_balance",
+  "event_time": "2026-01-02T12:00:00.000Z",
+  "reason": "SELECTED",
+  "selected": {
+    "record_id": "rA2",
+    "version": 1,
+    "value": 110.0,
+    "effective_time": "2026-01-02T00:00:00.000Z",
+    "ingest_time": "2026-01-02T01:00:00.000Z"
+  },
+  "candidates_total": 3,
+  "candidates_asof": 3,
+  "tie_resolved": false,
+  "excluded": [
+    {
+      "record_id": "rA3",
+      "version": 2,
+      "value": 111.0,
+      "effective_time": "2026-01-02T00:00:00.000Z",
+      "ingest_time": "2026-01-04T00:00:00.000Z",
+      "cause": "LATE_INGEST"
+    }
+  ],
+  "explanation": "[entity=cust_A feature=f_balance] event_time=2026-01-02T12:00:00.000Z: SELECTED -> record=rA2 v1 value=110.0 (effective=2026-01-02T00:00:00.000Z, ingest=2026-01-02T01:00:00.000Z) | 1 条事后修订(ingest>event_time)被剔除，防止泄漏: rA3@ingest=2026-01-04T00:00:00.000Z"
+}
+== 3) 单点依据：同时间多版本（rB1/rB2/rB3 同时刻，按版本号取 rB3 v3=3.0） ==
+{
+  "entity_id": "cust_B",
+  "feature_name": "f_score",
+  "event_time": "2026-01-02T00:00:00.000Z",
+  "reason": "SELECTED",
+  "selected": {
+    "record_id": "rB3",
+    "version": 3,
+    "value": 3.0,
+    "effective_time": "2026-01-01T00:00:00.000Z",
+    "ingest_time": "2026-01-01T00:00:00.000Z"
+  },
+  "candidates_total": 3,
+  "candidates_asof": 3,
+  "tie_resolved": true,
+  "excluded": [
+    {
+      "record_id": "rB1",
+      "version": 1,
+      "value": 1.0,
+      "effective_time": "2026-01-01T00:00:00.000Z",
+      "ingest_time": "2026-01-01T00:00:00.000Z",
+      "cause": "TIE_LOST"
+    },
+    {
+      "record_id": "rB2",
+      "version": 2,
+      "value": 2.0,
+      "effective_time": "2026-01-01T00:00:00.000Z",
+      "ingest_time": "2026-01-01T00:00:00.000Z",
+      "cause": "TIE_LOST"
+    }
+  ],
+  "explanation": "[entity=cust_B feature=f_score] event_time=2026-01-02T00:00:00.000Z: SELECTED -> record=rB3 v3 value=3.0 (effective=2026-01-01T00:00:00.000Z, ingest=2026-01-01T00:00:00.000Z) | 同生效时间多版本，按 入库最晚>版本号最高 裁决，落选: rB1, rB2"
+}
+== 4) 批量连接：规范数据集 ==
+{
+  "feature_names": [
+    "f_balance",
+    "f_score",
+    "f_tier"
+  ],
+  "rows": [
+    {
+      "entity_id": "cust_A",
+      "event_time": "2026-01-02T12:00:00.000Z",
+      "label": 1.0,
+      "features": {
+        "f_balance": 110.0,
+        "f_score": null,
+        "f_tier": null
+      }
+    },
+    {
+      "entity_id": "cust_A",
+      "event_time": "2026-01-04T12:00:00.000Z",
+      "label": 1.0,
+      "features": {
+        "f_balance": 111.0,
+        "f_score": null,
+        "f_tier": null
+      }
+    },
+    {
+      "entity_id": "cust_B",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "label": 1.0,
+      "features": {
+        "f_balance": null,
+        "f_score": 3.0,
+        "f_tier": 20.0
+      }
+    },
+    {
+      "entity_id": "cust_C",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "label": 0.0,
+      "features": {
+        "f_balance": null,
+        "f_score": null,
+        "f_tier": null
+      }
+    },
+    {
+      "entity_id": "cust_D",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "label": 0.0,
+      "features": {
+        "f_balance": null,
+        "f_score": null,
+        "f_tier": null
+      }
+    },
+    {
+      "entity_id": "cust_E",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "label": 0.0,
+      "features": {
+        "f_balance": null,
+        "f_score": null,
+        "f_tier": null
+      }
+    }
+  ],
+  "reason_counts": {
+    "SELECTED": 4,
+    "MISSING_KEY": 12,
+    "ALL_FUTURE": 1,
+    "ALL_LATE": 1
+  },
+  "evidence": [
+    {
+      "entity_id": "cust_A",
+      "feature_name": "f_balance",
+      "event_time": "2026-01-02T12:00:00.000Z",
+      "reason": "SELECTED",
+      "selected": {
+        "record_id": "rA2",
+        "version": 1,
+        "value": 110.0,
+        "effective_time": "2026-01-02T00:00:00.000Z",
+        "ingest_time": "2026-01-02T01:00:00.000Z"
+      },
+      "candidates_total": 3,
+      "candidates_asof": 3,
+      "tie_resolved": false,
+      "excluded": [
+        {
+          "record_id": "rA3",
+          "version": 2,
+          "value": 111.0,
+          "effective_time": "2026-01-02T00:00:00.000Z",
+          "ingest_time": "2026-01-04T00:00:00.000Z",
+          "cause": "LATE_INGEST"
+        }
+      ],
+      "explanation": "[entity=cust_A feature=f_balance] event_time=2026-01-02T12:00:00.000Z: SELECTED -> record=rA2 v1 value=110.0 (effective=2026-01-02T00:00:00.000Z, ingest=2026-01-02T01:00:00.000Z) | 1 条事后修订(ingest>event_time)被剔除，防止泄漏: rA3@ingest=2026-01-04T00:00:00.000Z"
+    },
+    {
+      "entity_id": "cust_A",
+      "feature_name": "f_balance",
+      "event_time": "2026-01-04T12:00:00.000Z",
+      "reason": "SELECTED",
+      "selected": {
+        "record_id": "rA3",
+        "version": 2,
+        "value": 111.0,
+        "effective_time": "2026-01-02T00:00:00.000Z",
+        "ingest_time": "2026-01-04T00:00:00.000Z"
+      },
+      "candidates_total": 3,
+      "candidates_asof": 3,
+      "tie_resolved": true,
+      "excluded": [
+        {
+          "record_id": "rA2",
+          "version": 1,
+          "value": 110.0,
+          "effective_time": "2026-01-02T00:00:00.000Z",
+          "ingest_time": "2026-01-02T01:00:00.000Z",
+          "cause": "TIE_LOST"
+        }
+      ],
+      "explanation": "[entity=cust_A feature=f_balance] event_time=2026-01-04T12:00:00.000Z: SELECTED -> record=rA3 v2 value=111.0 (effective=2026-01-02T00:00:00.000Z, ingest=2026-01-04T00:00:00.000Z) | 同生效时间多版本，按 入库最晚>版本号最高 裁决，落选: rA2"
+    },
+    {
+      "entity_id": "cust_B",
+      "feature_name": "f_balance",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "reason": "MISSING_KEY",
+      "selected": null,
+      "candidates_total": 0,
+      "candidates_asof": 0,
+      "tie_resolved": false,
+      "excluded": [],
+      "explanation": "[entity=cust_B feature=f_balance] event_time=2026-01-02T00:00:00.000Z: MISSING_KEY"
+    },
+    {
+      "entity_id": "cust_C",
+      "feature_name": "f_balance",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "reason": "ALL_FUTURE",
+      "selected": null,
+      "candidates_total": 1,
+      "candidates_asof": 0,
+      "tie_resolved": false,
+      "excluded": [
+        {
+          "record_id": "rC1",
+          "version": 1,
+          "value": 500.0,
+          "effective_time": "2026-01-11T00:00:00.000Z",
+          "ingest_time": "2025-12-31T00:00:00.000Z",
+          "cause": "FUTURE_EFFECTIVE"
+        }
+      ],
+      "explanation": "[entity=cust_C feature=f_balance] event_time=2026-01-02T00:00:00.000Z: ALL_FUTURE"
+    },
+    {
+      "entity_id": "cust_D",
+      "feature_name": "f_balance",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "reason": "ALL_LATE",
+      "selected": null,
+      "candidates_total": 1,
+      "candidates_asof": 1,
+      "tie_resolved": false,
+      "excluded": [
+        {
+          "record_id": "rD1",
+          "version": 1,
+          "value": 77.0,
+          "effective_time": "2026-01-01T00:00:00.000Z",
+          "ingest_time": "2026-01-06T00:00:00.000Z",
+          "cause": "LATE_INGEST"
+        }
+      ],
+      "explanation": "[entity=cust_D feature=f_balance] event_time=2026-01-02T00:00:00.000Z: ALL_LATE | 1 条事后修订(ingest>event_time)被剔除，防止泄漏: rD1@ingest=2026-01-06T00:00:00.000Z"
+    },
+    {
+      "entity_id": "cust_E",
+      "feature_name": "f_balance",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "reason": "MISSING_KEY",
+      "selected": null,
+      "candidates_total": 0,
+      "candidates_asof": 0,
+      "tie_resolved": false,
+      "excluded": [],
+      "explanation": "[entity=cust_E feature=f_balance] event_time=2026-01-02T00:00:00.000Z: MISSING_KEY"
+    },
+    {
+      "entity_id": "cust_A",
+      "feature_name": "f_score",
+      "event_time": "2026-01-02T12:00:00.000Z",
+      "reason": "MISSING_KEY",
+      "selected": null,
+      "candidates_total": 0,
+      "candidates_asof": 0,
+      "tie_resolved": false,
+      "excluded": [],
+      "explanation": "[entity=cust_A feature=f_score] event_time=2026-01-02T12:00:00.000Z: MISSING_KEY"
+    },
+    {
+      "entity_id": "cust_A",
+      "feature_name": "f_score",
+      "event_time": "2026-01-04T12:00:00.000Z",
+      "reason": "MISSING_KEY",
+      "selected": null,
+      "candidates_total": 0,
+      "candidates_asof": 0,
+      "tie_resolved": false,
+      "excluded": [],
+      "explanation": "[entity=cust_A feature=f_score] event_time=2026-01-04T12:00:00.000Z: MISSING_KEY"
+    },
+    {
+      "entity_id": "cust_B",
+      "feature_name": "f_score",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "reason": "SELECTED",
+      "selected": {
+        "record_id": "rB3",
+        "version": 3,
+        "value": 3.0,
+        "effective_time": "2026-01-01T00:00:00.000Z",
+        "ingest_time": "2026-01-01T00:00:00.000Z"
+      },
+      "candidates_total": 3,
+      "candidates_asof": 3,
+      "tie_resolved": true,
+      "excluded": [
+        {
+          "record_id": "rB1",
+          "version": 1,
+          "value": 1.0,
+          "effective_time": "2026-01-01T00:00:00.000Z",
+          "ingest_time": "2026-01-01T00:00:00.000Z",
+          "cause": "TIE_LOST"
+        },
+        {
+          "record_id": "rB2",
+          "version": 2,
+          "value": 2.0,
+          "effective_time": "2026-01-01T00:00:00.000Z",
+          "ingest_time": "2026-01-01T00:00:00.000Z",
+          "cause": "TIE_LOST"
+        }
+      ],
+      "explanation": "[entity=cust_B feature=f_score] event_time=2026-01-02T00:00:00.000Z: SELECTED -> record=rB3 v3 value=3.0 (effective=2026-01-01T00:00:00.000Z, ingest=2026-01-01T00:00:00.000Z) | 同生效时间多版本，按 入库最晚>版本号最高 裁决，落选: rB1, rB2"
+    },
+    {
+      "entity_id": "cust_C",
+      "feature_name": "f_score",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "reason": "MISSING_KEY",
+      "selected": null,
+      "candidates_total": 0,
+      "candidates_asof": 0,
+      "tie_resolved": false,
+      "excluded": [],
+      "explanation": "[entity=cust_C feature=f_score] event_time=2026-01-02T00:00:00.000Z: MISSING_KEY"
+    },
+    {
+      "entity_id": "cust_D",
+      "feature_name": "f_score",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "reason": "MISSING_KEY",
+      "selected": null,
+      "candidates_total": 0,
+      "candidates_asof": 0,
+      "tie_resolved": false,
+      "excluded": [],
+      "explanation": "[entity=cust_D feature=f_score] event_time=2026-01-02T00:00:00.000Z: MISSING_KEY"
+    },
+    {
+      "entity_id": "cust_E",
+      "feature_name": "f_score",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "reason": "MISSING_KEY",
+      "selected": null,
+      "candidates_total": 0,
+      "candidates_asof": 0,
+      "tie_resolved": false,
+      "excluded": [],
+      "explanation": "[entity=cust_E feature=f_score] event_time=2026-01-02T00:00:00.000Z: MISSING_KEY"
+    },
+    {
+      "entity_id": "cust_A",
+      "feature_name": "f_tier",
+      "event_time": "2026-01-02T12:00:00.000Z",
+      "reason": "MISSING_KEY",
+      "selected": null,
+      "candidates_total": 0,
+      "candidates_asof": 0,
+      "tie_resolved": false,
+      "excluded": [],
+      "explanation": "[entity=cust_A feature=f_tier] event_time=2026-01-02T12:00:00.000Z: MISSING_KEY"
+    },
+    {
+      "entity_id": "cust_A",
+      "feature_name": "f_tier",
+      "event_time": "2026-01-04T12:00:00.000Z",
+      "reason": "MISSING_KEY",
+      "selected": null,
+      "candidates_total": 0,
+      "candidates_asof": 0,
+      "tie_resolved": false,
+      "excluded": [],
+      "explanation": "[entity=cust_A feature=f_tier] event_time=2026-01-04T12:00:00.000Z: MISSING_KEY"
+    },
+    {
+      "entity_id": "cust_B",
+      "feature_name": "f_tier",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "reason": "SELECTED",
+      "selected": {
+        "record_id": "rB5",
+        "version": 1,
+        "value": 20.0,
+        "effective_time": "2026-01-01T00:00:00.000Z",
+        "ingest_time": "2026-01-01T05:00:00.000Z"
+      },
+      "candidates_total": 2,
+      "candidates_asof": 2,
+      "tie_resolved": true,
+      "excluded": [
+        {
+          "record_id": "rB4",
+          "version": 1,
+          "value": 10.0,
+          "effective_time": "2026-01-01T00:00:00.000Z",
+          "ingest_time": "2026-01-01T02:00:00.000Z",
+          "cause": "TIE_LOST"
+        }
+      ],
+      "explanation": "[entity=cust_B feature=f_tier] event_time=2026-01-02T00:00:00.000Z: SELECTED -> record=rB5 v1 value=20.0 (effective=2026-01-01T00:00:00.000Z, ingest=2026-01-01T05:00:00.000Z) | 同生效时间多版本，按 入库最晚>版本号最高 裁决，落选: rB4"
+    },
+    {
+      "entity_id": "cust_C",
+      "feature_name": "f_tier",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "reason": "MISSING_KEY",
+      "selected": null,
+      "candidates_total": 0,
+      "candidates_asof": 0,
+      "tie_resolved": false,
+      "excluded": [],
+      "explanation": "[entity=cust_C feature=f_tier] event_time=2026-01-02T00:00:00.000Z: MISSING_KEY"
+    },
+    {
+      "entity_id": "cust_D",
+      "feature_name": "f_tier",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "reason": "MISSING_KEY",
+      "selected": null,
+      "candidates_total": 0,
+      "candidates_asof": 0,
+      "tie_resolved": false,
+      "excluded": [],
+      "explanation": "[entity=cust_D feature=f_tier] event_time=2026-01-02T00:00:00.000Z: MISSING_KEY"
+    },
+    {
+      "entity_id": "cust_E",
+      "feature_name": "f_tier",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "reason": "MISSING_KEY",
+      "selected": null,
+      "candidates_total": 0,
+      "candidates_asof": 0,
+      "tie_resolved": false,
+      "excluded": [],
+      "explanation": "[entity=cust_E feature=f_tier] event_time=2026-01-02T00:00:00.000Z: MISSING_KEY"
+    }
+  ]
+}
+== 5) 自带记录：晚到修订 + 完全重复记录 ==
+{
+  "feature_names": [
+    "f_credit_limit"
+  ],
+  "rows": [
+    {
+      "entity_id": "u1",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "label": null,
+      "features": {
+        "f_credit_limit": 1000.0
+      }
+    },
+    {
+      "entity_id": "u1",
+      "event_time": "2026-01-06T00:00:00.000Z",
+      "label": null,
+      "features": {
+        "f_credit_limit": 1200.0
+      }
+    }
+  ],
+  "reason_counts": {
+    "SELECTED": 1,
+    "DUPLICATE": 1
+  },
+  "evidence": [
+    {
+      "entity_id": "u1",
+      "feature_name": "f_credit_limit",
+      "event_time": "2026-01-02T00:00:00.000Z",
+      "reason": "SELECTED",
+      "selected": {
+        "record_id": "v1-prelim",
+        "version": 1,
+        "value": 1000.0,
+        "effective_time": "2026-01-01T00:00:00.000Z",
+        "ingest_time": "2026-01-01T01:00:00.000Z"
+      },
+      "candidates_total": 3,
+      "candidates_asof": 3,
+      "tie_resolved": false,
+      "excluded": [
+        {
+          "record_id": "v2-revised",
+          "version": 2,
+          "value": 1200.0,
+          "effective_time": "2026-01-01T00:00:00.000Z",
+          "ingest_time": "2026-01-05T00:00:00.000Z",
+          "cause": "LATE_INGEST"
+        },
+        {
+          "record_id": "v2-duplicate",
+          "version": 2,
+          "value": 1200.0,
+          "effective_time": "2026-01-01T00:00:00.000Z",
+          "ingest_time": "2026-01-05T00:00:00.000Z",
+          "cause": "LATE_INGEST"
+        }
+      ],
+      "explanation": "[entity=u1 feature=f_credit_limit] event_time=2026-01-02T00:00:00.000Z: SELECTED -> record=v1-prelim v1 value=1000.0 (effective=2026-01-01T00:00:00.000Z, ingest=2026-01-01T01:00:00.000Z) | 2 条事后修订(ingest>event_time)被剔除，防止泄漏: v2-revised@ingest=2026-01-05T00:00:00.000Z, v2-duplicate@ingest=2026-01-05T00:00:00.000Z"
+    },
+    {
+      "entity_id": "u1",
+      "feature_name": "f_credit_limit",
+      "event_time": "2026-01-06T00:00:00.000Z",
+      "reason": "DUPLICATE",
+      "selected": {
+        "record_id": "v2-revised",
+        "version": 2,
+        "value": 1200.0,
+        "effective_time": "2026-01-01T00:00:00.000Z",
+        "ingest_time": "2026-01-05T00:00:00.000Z"
+      },
+      "candidates_total": 3,
+      "candidates_asof": 3,
+      "tie_resolved": true,
+      "excluded": [
+        {
+          "record_id": "v1-prelim",
+          "version": 1,
+          "value": 1000.0,
+          "effective_time": "2026-01-01T00:00:00.000Z",
+          "ingest_time": "2026-01-01T01:00:00.000Z",
+          "cause": "TIE_LOST"
+        },
+        {
+          "record_id": "v2-duplicate",
+          "version": 2,
+          "value": 1200.0,
+          "effective_time": "2026-01-01T00:00:00.000Z",
+          "ingest_time": "2026-01-05T00:00:00.000Z",
+          "cause": "DUPLICATE"
+        }
+      ],
+      "explanation": "[entity=u1 feature=f_credit_limit] event_time=2026-01-06T00:00:00.000Z: DUPLICATE -> record=v2-revised v2 value=1200.0 (effective=2026-01-01T00:00:00.000Z, ingest=2026-01-05T00:00:00.000Z) | 同生效时间多版本，按 入库最晚>版本号最高 裁决，落选: v1-prelim"
+    }
+  ]
+}
+== 6) 对照：use_event_as_of=false 朴素 join 会泄漏 rA3=111（仅用于演示，勿用于生产） ==
+{
+  "feature_names": [
+    "f_balance"
+  ],
+  "rows": [
+    {
+      "entity_id": "cust_A",
+      "event_time": "2026-01-02T12:00:00.000Z",
+      "label": null,
+      "features": {
+        "f_balance": 111.0
+      }
+    }
+  ],
+  "reason_counts": {
+    "SELECTED": 1
+  },
+  "evidence": [
+    {
+      "entity_id": "cust_A",
+      "feature_name": "f_balance",
+      "event_time": "2026-01-02T12:00:00.000Z",
+      "reason": "SELECTED",
+      "selected": {
+        "record_id": "rA3",
+        "version": 2,
+        "value": 111.0,
+        "effective_time": "2026-01-02T00:00:00.000Z",
+        "ingest_time": "2026-01-04T00:00:00.000Z"
+      },
+      "candidates_total": 3,
+      "candidates_asof": 3,
+      "tie_resolved": true,
+      "excluded": [
+        {
+          "record_id": "rA2",
+          "version": 1,
+          "value": 110.0,
+          "effective_time": "2026-01-02T00:00:00.000Z",
+          "ingest_time": "2026-01-02T01:00:00.000Z",
+          "cause": "TIE_LOST"
+        }
+      ],
+      "explanation": "[entity=cust_A feature=f_balance] event_time=2026-01-02T12:00:00.000Z: SELECTED -> record=rA3 v2 value=111.0 (effective=2026-01-02T00:00:00.000Z, ingest=2026-01-04T00:00:00.000Z) | 同生效时间多版本，按 入库最晚>版本号最高 裁决，落选: rA2"
+    }
+  ]
+}

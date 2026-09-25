@@ -1,0 +1,7 @@
+{
+  "dataset": "canonical",
+  "entity_id": "cust_A",
+  "feature_name": "f_balance",
+  "event_time": "2026-01-02T12:00:00Z",
+  "use_event_as_of": true
+}
