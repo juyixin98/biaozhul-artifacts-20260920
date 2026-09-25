@@ -1,0 +1,41 @@
+{
+  "roots": [
+    { "name": "app", "constraint": "1.0.0" }
+  ],
+  "includePrereleases": false,
+  "workspaceDir": "/tmp/depsolver-demo/workspace",
+  "cacheDir": "/tmp/depsolver-demo/cache",
+  "lockfileName": "depsolver.lock.json",
+  "registry": {
+    "packages": [
+      {
+        "name": "app",
+        "versions": [
+          {
+            "version": "1.0.0",
+            "deps": [
+              { "name": "web", "constraint": "^2.0.0" },
+              { "name": "log", "constraint": ">=1.0.0 <3.0.0" }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "web",
+        "versions": [
+          { "version": "2.1.0", "deps": [ { "name": "log", "constraint": "~1.4.0" } ] },
+          { "version": "2.0.0", "deps": [ { "name": "log", "constraint": "^1.0.0" } ] }
+        ]
+      },
+      {
+        "name": "log",
+        "versions": [
+          { "version": "2.0.0" },
+          { "version": "1.4.2" },
+          { "version": "1.4.0" },
+          { "version": "1.0.0" }
+        ]
+      }
+    ]
+  }
+}

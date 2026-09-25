@@ -1,0 +1,30 @@
+{
+  "_expect": {
+    "case": "prerelease-gate-default",
+    "satisfiable": true,
+    "selections": {
+      "app": "1.0.0",
+      "lib": "1.0.0"
+    }
+  },
+  "roots": [
+    { "name": "app", "constraint": "1.0.0" }
+  ],
+  "registry": {
+    "packages": [
+      {
+        "name": "app",
+        "versions": [
+          { "version": "1.0.0", "deps": [ { "name": "lib", "constraint": "^1.0.0" } ] }
+        ]
+      },
+      {
+        "name": "lib",
+        "versions": [
+          { "version": "1.1.0-beta.1" },
+          { "version": "1.0.0" }
+        ]
+      }
+    ]
+  }
+}

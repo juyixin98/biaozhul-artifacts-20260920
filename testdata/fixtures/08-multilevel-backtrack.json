@@ -1,0 +1,53 @@
+{
+  "_expect": {
+    "case": "multi-level-backtrack",
+    "satisfiable": true,
+    "selections": {
+      "root": "1.0.0",
+      "a": "1.0.0",
+      "b": "2.0.0",
+      "c": "1.5.0"
+    },
+    "minBacktracks": 3
+  },
+  "roots": [
+    { "name": "root", "constraint": "1.0.0" }
+  ],
+  "registry": {
+    "packages": [
+      {
+        "name": "root",
+        "versions": [
+          {
+            "version": "1.0.0",
+            "deps": [
+              { "name": "a", "constraint": ">=1.0.0" },
+              { "name": "b", "constraint": ">=1.0.0" }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "a",
+        "versions": [
+          { "version": "2.0.0", "deps": [ { "name": "c", "constraint": "^2.0.0" } ] },
+          { "version": "1.0.0", "deps": [ { "name": "c", "constraint": "^1.0.0" } ] }
+        ]
+      },
+      {
+        "name": "b",
+        "versions": [
+          { "version": "2.0.0", "deps": [ { "name": "c", "constraint": "^1.0.0" } ] },
+          { "version": "1.0.0", "deps": [ { "name": "c", "constraint": "~1.5.0" } ] }
+        ]
+      },
+      {
+        "name": "c",
+        "versions": [
+          { "version": "2.0.0" },
+          { "version": "1.5.0" }
+        ]
+      }
+    ]
+  }
+}

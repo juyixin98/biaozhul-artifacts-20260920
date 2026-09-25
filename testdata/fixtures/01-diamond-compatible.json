@@ -1,0 +1,54 @@
+{
+  "_expect": {
+    "case": "diamond-compatible",
+    "satisfiable": true,
+    "selections": {
+      "root": "1.0.0",
+      "left": "1.1.0",
+      "right": "1.2.0",
+      "common": "1.2.1"
+    }
+  },
+  "roots": [
+    { "name": "root", "constraint": "1.0.0" }
+  ],
+  "registry": {
+    "packages": [
+      {
+        "name": "root",
+        "versions": [
+          {
+            "version": "1.0.0",
+            "deps": [
+              { "name": "left", "constraint": "^1.0.0" },
+              { "name": "right", "constraint": "^1.2.0" }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "left",
+        "versions": [
+          { "version": "1.1.0", "deps": [ { "name": "common", "constraint": ">=1.1.0 <2.0.0" } ] },
+          { "version": "1.0.0", "deps": [ { "name": "common", "constraint": ">=1.0.0 <2.0.0" } ] }
+        ]
+      },
+      {
+        "name": "right",
+        "versions": [
+          { "version": "1.2.0", "deps": [ { "name": "common", "constraint": "~1.2.0" } ] }
+        ]
+      },
+      {
+        "name": "common",
+        "versions": [
+          { "version": "2.0.0" },
+          { "version": "1.2.1" },
+          { "version": "1.2.0" },
+          { "version": "1.1.0" },
+          { "version": "1.0.0" }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "_expect": {
+    "case": "unknown-transitive-package",
+    "satisfiable": false,
+    "conflictType": "unknown-package",
+    "conflictPackage": "ghost",
+    "chainReachesRoot": true
+  },
+  "roots": [
+    { "name": "app", "constraint": "1.0.0" }
+  ],
+  "registry": {
+    "packages": [
+      {
+        "name": "app",
+        "versions": [
+          { "version": "1.0.0", "deps": [ { "name": "mid", "constraint": "^1.0.0" } ] }
+        ]
+      },
+      {
+        "name": "mid",
+        "versions": [
+          { "version": "1.0.0", "deps": [ { "name": "ghost", "constraint": "^1.0.0" } ] }
+        ]
+      }
+    ]
+  }
+}

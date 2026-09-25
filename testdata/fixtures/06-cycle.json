@@ -1,0 +1,31 @@
+{
+  "_expect": {
+    "case": "cyclic-dependency",
+    "satisfiable": true,
+    "selections": {
+      "a": "1.1.0",
+      "b": "1.0.0"
+    },
+    "cyclePackages": ["a", "b"]
+  },
+  "roots": [
+    { "name": "a", "constraint": "^1.0.0" }
+  ],
+  "registry": {
+    "packages": [
+      {
+        "name": "a",
+        "versions": [
+          { "version": "1.1.0", "deps": [ { "name": "b", "constraint": "^1.0.0" } ] },
+          { "version": "1.0.0", "deps": [ { "name": "b", "constraint": "^1.0.0" } ] }
+        ]
+      },
+      {
+        "name": "b",
+        "versions": [
+          { "version": "1.0.0", "deps": [ { "name": "a", "constraint": "^1.0.0" } ] }
+        ]
+      }
+    ]
+  }
+}
