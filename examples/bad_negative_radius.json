@@ -1,0 +1,6 @@
+{
+  "action": "range",
+  "center": {"lat": 0.0, "lon": 0.0},
+  "radius_m": -100,
+  "points": []
+}
