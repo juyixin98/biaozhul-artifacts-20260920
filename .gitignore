@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# 演示用本地私钥不入库 (公钥在 demo/trust 中保留以便复现 verify)
+demo/keys/

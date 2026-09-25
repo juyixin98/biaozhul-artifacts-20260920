@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "envelope": {
+    "sam_version": 1,
+    "algorithm": "ed25519",
+    "manifest": {
+      "sam_version": 1,
+      "algorithm": "ed25519",
+      "key_id": "1b705b898e76cd1611583343c620d7a1ff9b5c14a463171ba4b202abc9933fdc",
+      "created_at": "2026-09-23T18:07:13Z",
+      "entrypoint": "bin/app.py",
+      "files": [
+        {
+          "path": "bin/app.py",
+          "sha256": "5857d83ce4ebaf6ca41a8ad0e3b5da959db2b9552d662585d22926d1e0343001",
+          "size": 44
+        },
+        {
+          "path": "data/message.txt",
+          "sha256": "a22e87b43e99adf383276ea75b63586a976b6dbefa14cadab581dd9d63ed43fd",
+          "size": 13
+        }
+      ]
+    },
+    "signature": "jcHvBJeoE0bA9aeWW2q5+DdtN84wEeEDkRnHRjA+ffgetJzcfGVY1OBikkH05W782rcR4icpNsFoK1iRkBP6Cw=="
+  }
+}

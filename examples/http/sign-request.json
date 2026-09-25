@@ -1,0 +1,12 @@
+{
+  "_comment": "POST /v1/sign 请求样例。files 的值可用 text (UTF-8 字符串) 或 b64 (base64)。entrypoint 可选。",
+  "entrypoint": "bin/app.py",
+  "files": {
+    "bin/app.py": {
+      "text": "import sys\nprint('http artifact', sys.argv)\n"
+    },
+    "data/message.txt": {
+      "b64": "aHR0cCBwYXlsb2FkCg=="
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "_comment": "POST /v1/verify 请求样例。envelope 可用对象 / JSON 文本 / base64; trusted_public_keys 为 PEM 的 base64 数组 (信任锚点逐请求显式给出)。",
+  "envelope": {
+    "sam_version": 1,
+    "algorithm": "ed25519",
+    "manifest": {
+      "sam_version": 1,
+      "algorithm": "ed25519",
+      "key_id": "见 sign-response.json 中的实际值 (每次 keygen 不同)",
+      "created_at": "2026-09-23T18:03:15Z",
+      "entrypoint": "bin/app.py",
+      "files": [
+        {
+          "path": "bin/app.py",
+          "sha256": "<64 位小写十六进制 SHA-256>",
+          "size": 52
+        }
+      ]
+    },
+    "signature": "<base64 编码的 Ed25519 签名>"
+  },
+  "trusted_public_keys": [
+    "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0..."
+  ],
+  "files": {
+    "bin/app.py": {
+      "text": "import sys\nprint('http artifact', sys.argv)\n"
+    },
+    "data/message.txt": {
+      "b64": "aHR0cCBwYXlsb2FkCg=="
+    }
+  }
+}
