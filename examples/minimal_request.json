@@ -1,0 +1,23 @@
+{
+  "edges": [
+    {
+      "parent": "base",
+      "child": "arm",
+      "type": "timed",
+      "keyframes": [
+        {"t": 0.0, "translation": [0, 0, 0], "rotation": {"quaternion": [1, 0, 0, 0]}},
+        {"t": 2.0, "translation": [1, 0, 0],
+         "rotation": {"axis_angle": {"axis": [0, 0, 1], "angle": 1.5707963267948966}}}
+      ]
+    },
+    {
+      "parent": "arm",
+      "child": "tip",
+      "type": "static",
+      "transform": {"translation": [0, 0, 0.1]}
+    }
+  ],
+  "queries": [
+    {"source": "tip", "target": "base", "time": 1.0}
+  ]
+}

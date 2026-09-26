@@ -1,0 +1,792 @@
+{
+  "default_max_gap": 0.6,
+  "edges": [
+    {
+      "parent": "base",
+      "child": "link1",
+      "type": "timed",
+      "keyframes": [
+        {
+          "t": 0.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.0
+            }
+          }
+        },
+        {
+          "t": 0.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.05
+            }
+          }
+        },
+        {
+          "t": 1.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.1
+            }
+          }
+        },
+        {
+          "t": 1.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.15000000000000002
+            }
+          }
+        },
+        {
+          "t": 2.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.2
+            }
+          }
+        },
+        {
+          "t": 2.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.25
+            }
+          }
+        },
+        {
+          "t": 3.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.30000000000000004
+            }
+          }
+        },
+        {
+          "t": 3.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.35000000000000003
+            }
+          }
+        },
+        {
+          "t": 4.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.4
+            }
+          }
+        },
+        {
+          "t": 4.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.45
+            }
+          }
+        },
+        {
+          "t": 5.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.5
+            }
+          }
+        },
+        {
+          "t": 5.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.55
+            }
+          }
+        },
+        {
+          "t": 6.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.6000000000000001
+            }
+          }
+        },
+        {
+          "t": 6.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.65
+            }
+          }
+        },
+        {
+          "t": 7.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.7000000000000001
+            }
+          }
+        },
+        {
+          "t": 7.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.75
+            }
+          }
+        },
+        {
+          "t": 8.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.8
+            }
+          }
+        },
+        {
+          "t": 8.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.8500000000000001
+            }
+          }
+        },
+        {
+          "t": 9.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.9
+            }
+          }
+        },
+        {
+          "t": 9.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.9500000000000001
+            }
+          }
+        },
+        {
+          "t": 10.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.1
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 1.0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "parent": "link1",
+      "child": "link2",
+      "type": "timed",
+      "keyframes": [
+        {
+          "t": 0.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.0
+            }
+          }
+        },
+        {
+          "t": 0.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.0
+            }
+          }
+        },
+        {
+          "t": 1.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.0
+            }
+          }
+        },
+        {
+          "t": 1.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.0
+            }
+          }
+        },
+        {
+          "t": 2.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.0
+            }
+          }
+        },
+        {
+          "t": 2.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.0
+            }
+          }
+        },
+        {
+          "t": 3.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.0
+            }
+          }
+        },
+        {
+          "t": 3.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.0
+            }
+          }
+        },
+        {
+          "t": 4.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 0.0
+            }
+          }
+        },
+        {
+          "t": 6.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 1.5707963267948966
+            }
+          }
+        },
+        {
+          "t": 6.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 1.5707963267948966
+            }
+          }
+        },
+        {
+          "t": 7.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 1.5707963267948966
+            }
+          }
+        },
+        {
+          "t": 7.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 1.5707963267948966
+            }
+          }
+        },
+        {
+          "t": 8.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 1.5707963267948966
+            }
+          }
+        },
+        {
+          "t": 8.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 1.5707963267948966
+            }
+          }
+        },
+        {
+          "t": 9.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 1.5707963267948966
+            }
+          }
+        },
+        {
+          "t": 9.5,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 1.5707963267948966
+            }
+          }
+        },
+        {
+          "t": 10.0,
+          "translation": [
+            0.0,
+            0.0,
+            0.2
+          ],
+          "rotation": {
+            "axis_angle": {
+              "axis": [
+                0,
+                0,
+                1
+              ],
+              "angle": 1.5707963267948966
+            }
+          }
+        }
+      ]
+    },
+    {
+      "parent": "link2",
+      "child": "tool",
+      "type": "static",
+      "transform": {
+        "translation": [
+          0.0,
+          0.0,
+          0.15
+        ]
+      }
+    },
+    {
+      "parent": "base",
+      "child": "sensor",
+      "type": "static",
+      "transform": {
+        "translation": [
+          0.5,
+          0.0,
+          0.3
+        ],
+        "rotation": {
+          "axis_angle": {
+            "axis": [
+              0,
+              0,
+              1
+            ],
+            "angle": 1.5707963267948966
+          }
+        }
+      }
+    }
+  ],
+  "queries": [
+    {
+      "source": "tool",
+      "target": "base",
+      "time": 2.0
+    },
+    {
+      "source": "base",
+      "target": "tool",
+      "time": 1.25
+    },
+    {
+      "source": "sensor",
+      "target": "tool",
+      "time": 0.0
+    },
+    {
+      "source": "tool",
+      "target": "base",
+      "time": 5.0
+    },
+    {
+      "source": "tool",
+      "target": "base",
+      "time": -0.1
+    },
+    {
+      "source": "tool",
+      "target": "base",
+      "time": 10.5
+    },
+    {
+      "source": "tool",
+      "target": "gripper",
+      "time": 1.0
+    }
+  ]
+}
