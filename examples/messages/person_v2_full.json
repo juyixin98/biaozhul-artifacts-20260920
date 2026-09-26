@@ -1,0 +1,15 @@
+{
+  "id": 42,
+  "display_name": "Ada Lovelace",
+  "email": "ada@example.com",
+  "scores": [95, -7, 100],
+  "address": {
+    "street": "1815 Analytical Engine Rd",
+    "zip": 10000,
+    "country": "UK"
+  },
+  "active": true,
+  "nickname": "Ada",
+  "tags": ["pioneer", "mathematician"],
+  "balance": 1234.56
+}

@@ -1,0 +1,27 @@
+{
+  "root": "Person",
+  "messages": [
+    {
+      "name": "Address",
+      "fields": [
+        {"number": 1, "name": "street", "type": "string", "required": true},
+        {"number": 2, "name": "zip", "type": "int32"},
+        {"number": 3, "name": "country", "type": "string"}
+      ]
+    },
+    {
+      "name": "Person",
+      "fields": [
+        {"number": 1, "name": "id", "type": "int64", "required": true},
+        {"number": 2, "name": "display_name", "type": "string", "required": true},
+        {"number": 3, "name": "email", "type": "string"},
+        {"number": 4, "name": "scores", "type": "sint32", "repeated": "packed"},
+        {"number": 5, "name": "address", "type": "Address"},
+        {"number": 6, "name": "active", "type": "bool"},
+        {"number": 7, "name": "nickname", "type": "string"},
+        {"number": 8, "name": "tags", "type": "string", "repeated": "unpacked"},
+        {"number": 9, "name": "balance", "type": "double"}
+      ]
+    }
+  ]
+}

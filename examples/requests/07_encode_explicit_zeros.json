@@ -1,0 +1,5 @@
+{
+  "op": "encode",
+  "schema_file": "examples/schemas/person_v1.json",
+  "message_file": "examples/messages/person_zeros.json"
+}

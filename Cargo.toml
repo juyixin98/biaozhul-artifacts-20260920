@@ -1,0 +1,16 @@
+[package]
+name = "bschema"
+version = "0.1.0"
+edition = "2021"
+description = "Streaming binary schema-evolution codec with a JSON control plane"
+
+[lib]
+name = "bschema"
+path = "src/lib.rs"
+
+[[bin]]
+name = "bschema"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 2

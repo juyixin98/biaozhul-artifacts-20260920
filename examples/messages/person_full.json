@@ -1,0 +1,11 @@
+{
+  "id": 42,
+  "name": "Ada Lovelace",
+  "email": "ada@example.com",
+  "scores": [95, -7, 100, 0],
+  "address": {
+    "street": "1815 Analytical Engine Rd",
+    "zip": 10000
+  },
+  "active": true
+}

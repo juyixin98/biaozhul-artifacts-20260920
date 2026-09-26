@@ -1,0 +1,5 @@
+{
+  "op": "decode",
+  "schema_file": "examples/schemas/person_v2.json",
+  "input_file": "build/person_v2.bse1"
+}

@@ -1,0 +1,6 @@
+{
+  "op": "forward",
+  "schema_file": "examples/schemas/person_v1.json",
+  "input_file": "build/person_v2.bse1",
+  "output_file": "build/person_through_v1.bse1"
+}

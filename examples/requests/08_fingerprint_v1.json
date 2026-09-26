@@ -1,0 +1,4 @@
+{
+  "op": "fingerprint",
+  "schema_file": "examples/schemas/person_v1.json"
+}

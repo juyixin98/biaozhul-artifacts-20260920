@@ -1,0 +1,12 @@
+{
+  "op": "encode",
+  "schema_file": "examples/schemas/person_v2.json",
+  "message_file": "examples/messages/person_v2_full.json",
+  "output_file": "build/person_v2.bse1",
+  "limits": {
+    "max_message_bytes": 16777216,
+    "max_output_bytes": 16777216,
+    "max_nesting": 32,
+    "max_repeated": 10000
+  }
+}
