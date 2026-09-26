@@ -1,0 +1,17 @@
+{
+  "name": "corner_curvature_limit",
+  "points": [[0.0, 0.0], [2.0, 0.0], [2.0, 2.0]],
+  "dynamics": {
+    "v_max": 1.5,
+    "a_max": 0.8,
+    "d_max": 0.8,
+    "a_lat_max": 0.6,
+    "v_start": 0.0,
+    "v_end": 0.0
+  },
+  "corner": {
+    "strategy": "curvature",
+    "radius": 0.5
+  },
+  "sample_dt": 0.05
+}

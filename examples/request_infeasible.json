@@ -1,0 +1,12 @@
+{
+  "name": "infeasible_stop",
+  "points": [[0.0, 0.0], [0.1, 0.0]],
+  "dynamics": {
+    "v_max": 5.0,
+    "a_max": 0.5,
+    "d_max": 0.5,
+    "v_start": 3.0,
+    "v_end": 0.0
+  },
+  "corner": {"strategy": "stop"}
+}

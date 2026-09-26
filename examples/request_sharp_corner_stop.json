@@ -1,0 +1,19 @@
+{
+  "name": "sharp_corner_stop",
+  "points": [[0.0, 0.0], [2.0, 0.0], [2.0, 2.0]],
+  "dynamics": {
+    "v_max": 1.0,
+    "a_max": 0.5,
+    "d_max": 0.5,
+    "v_start": 0.0,
+    "v_end": 0.0
+  },
+  "corner": {"strategy": "stop"},
+  "sample_dt": 0.05,
+  "synthetic_sensor": {
+    "dt": 0.02,
+    "position_noise_std": 0.001,
+    "speed_noise_std": 0.01,
+    "seed": 7
+  }
+}
