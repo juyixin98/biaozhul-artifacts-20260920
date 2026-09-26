@@ -1,0 +1,8 @@
+{"id":1,"op":"decode","data_hex":"616263e4b8"}
+{"id":2,"op":"finish"}
+{"id":3,"op":"reset"}
+{"id":4,"op":"decode","data_hex":"c080"}
+{"id":5,"op":"reset"}
+{"id":6,"op":"decode","data_hex":"eda080"}
+{"id":7,"op":"reset"}
+{"id":8,"op":"decode","data_hex":"f4908080"}

@@ -1,0 +1,22 @@
+[package]
+name = "inc-utf8"
+version = "0.1.0"
+edition = "2021"
+description = "Incremental (streaming) UTF-8 validation and decoding library with a JSON control entry point"
+license = "MIT OR Apache-2.0"
+
+# Core algorithm is implemented from scratch; the crate has no dependencies
+# (including no JSON library -- the control protocol uses a self-contained
+# minimal JSON implementation in src/json.rs).
+[dependencies]
+
+[lib]
+name = "inc_utf8"
+path = "src/lib.rs"
+
+[[bin]]
+name = "utf8ctl"
+path = "src/bin/utf8ctl.rs"
+
+[profile.release]
+opt-level = 3

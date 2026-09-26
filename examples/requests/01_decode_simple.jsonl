@@ -1,0 +1,3 @@
+{"id":1,"op":"configure","recovery":"fail_fast","limits":{"max_input_bytes":1048576,"max_output_codepoints":100000}}
+{"id":2,"op":"decode","data_hex":"e4b8ade69687"}
+{"id":3,"op":"finish"}

@@ -1,0 +1,3 @@
+{"id":1,"op":"configure","recovery":"skip"}
+{"id":2,"op":"decode","data_hex":"41ff42c08043"}
+{"id":3,"op":"finish"}
