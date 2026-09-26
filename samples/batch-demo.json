@@ -1,0 +1,48 @@
+{
+  "steps": [
+    {"type": "reset"},
+    {"type": "seed"},
+    {
+      "type": "commit",
+      "txnId": "batch-fix",
+      "committedAt": "2026-03-01T09:00:00Z",
+      "changes": [
+        {
+          "op": "revise",
+          "recordId": "emp-1001",
+          "data": "{\"level\":\"L2\",\"team\":\"Platform\"}",
+          "validFrom": "2026-01-15T00:00:00Z",
+          "validTo": "2026-03-01T00:00:00Z"
+        }
+      ]
+    },
+    {
+      "type": "query",
+      "validAt": "2026-02-15T00:00:00Z",
+      "systemAt": "2026-02-15T12:00:00Z",
+      "recordId": "emp-1001"
+    },
+    {
+      "type": "query",
+      "validAt": "2026-02-15T00:00:00Z",
+      "systemAt": "2026-03-02T00:00:00Z",
+      "recordId": "emp-1001"
+    },
+    {
+      "type": "commit",
+      "txnId": "batch-overlap-expected-to-fail",
+      "committedAt": "2026-03-05T00:00:00Z",
+      "changes": [
+        {
+          "op": "insert",
+          "recordId": "emp-1001",
+          "data": "x",
+          "validFrom": "2026-02-01T00:00:00Z",
+          "validTo": "2026-05-01T00:00:00Z"
+        }
+      ],
+      "continueOnError": true
+    },
+    {"type": "history", "recordId": "emp-1001"}
+  ]
+}

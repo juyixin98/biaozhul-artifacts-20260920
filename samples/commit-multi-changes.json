@@ -1,0 +1,27 @@
+{
+  "txnId": "multi-changes-demo",
+  "committedAt": "2026-03-06T00:00:00Z",
+  "changes": [
+    {
+      "op": "insert",
+      "recordId": "emp-1003",
+      "data": "jan",
+      "validFrom": "2026-01-01T00:00:00Z",
+      "validTo": "2026-02-01T00:00:00Z"
+    },
+    {
+      "op": "insert",
+      "recordId": "emp-1003",
+      "data": "feb",
+      "validFrom": "2026-02-01T00:00:00Z",
+      "validTo": "2026-03-01T00:00:00Z"
+    },
+    {
+      "op": "revise",
+      "recordId": "emp-1003",
+      "data": "feb-fixed",
+      "validFrom": "2026-02-10T00:00:00Z",
+      "validTo": "2026-02-20T00:00:00Z"
+    }
+  ]
+}

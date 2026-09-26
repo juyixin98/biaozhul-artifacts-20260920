@@ -1,0 +1,13 @@
+{
+  "txnId": "fix-q1-level",
+  "committedAt": "2026-03-01T09:00:00Z",
+  "changes": [
+    {
+      "op": "revise",
+      "recordId": "emp-1001",
+      "data": "{\"level\":\"L2\",\"team\":\"Platform\"}",
+      "validFrom": "2026-01-15T00:00:00Z",
+      "validTo": "2026-03-01T00:00:00Z"
+    }
+  ]
+}

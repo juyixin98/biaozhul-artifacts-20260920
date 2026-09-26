@@ -1,0 +1,13 @@
+{
+  "txnId": "overlap-demo",
+  "committedAt": "2026-03-05T00:00:00Z",
+  "changes": [
+    {
+      "op": "insert",
+      "recordId": "emp-1001",
+      "data": "{\"level\":\"XX\"}",
+      "validFrom": "2026-02-01T00:00:00Z",
+      "validTo": "2026-05-01T00:00:00Z"
+    }
+  ]
+}
