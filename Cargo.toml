@@ -1,0 +1,18 @@
+[package]
+name = "cdc"
+version = "0.1.0"
+edition = "2021"
+description = "Columnar dictionary encoding: streaming binary codec with a JSON control entry point"
+license = "MIT"
+
+[lib]
+name = "cdc"
+path = "src/lib.rs"
+
+[[bin]]
+name = "cdc"
+path = "src/bin/cdc.rs"
+
+[profile.release]
+lto = true
+codegen-units = 1

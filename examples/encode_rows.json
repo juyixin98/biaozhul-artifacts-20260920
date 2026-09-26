@@ -1,0 +1,4 @@
+{
+  "op": "encode",
+  "rows": ["alpha", "beta", null, "", "alpha", "gamma", "beta", null, "你好，世界", "alpha"]
+}
