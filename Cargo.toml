@@ -1,0 +1,22 @@
+[package]
+name = "bitpack"
+version = "0.1.0"
+edition = "2021"
+description = "Bit-packed integer block stream codec with a JSON control entry"
+license = "MIT"
+
+[lib]
+name = "bitpack"
+path = "src/lib.rs"
+
+[[bin]]
+name = "bitpack-ctl"
+path = "src/bin/bitpack-ctl.rs"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+base64 = "0.22"
+
+[profile.release]
+opt-level = 3
