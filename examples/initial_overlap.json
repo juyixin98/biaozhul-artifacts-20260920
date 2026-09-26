@@ -1,0 +1,7 @@
+{
+  "time_window": [0.0, 10.0],
+  "robot": {"position": [0.0, 0.0], "velocity": [0.0, 0.0], "radius": 1.0},
+  "obstacles": [
+    {"id": "overlapping-obstacle", "position": [1.5, 0.0], "velocity": [0.0, 0.0], "radius": 1.0}
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "time_window": [0.0, 10.0],
+  "robot": {"position": [0.0, 0.0], "velocity": [1.0, 0.0], "radius": 1.0},
+  "obstacles": [
+    {"id": "wall-runner", "position": [10.0, 0.0], "velocity": [-1.0, 0.0], "radius": 1.0}
+  ]
+}

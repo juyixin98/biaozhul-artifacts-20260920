@@ -1,0 +1,10 @@
+[project]
+name = "ccd"
+version = "0.1.0"
+description = "Continuous collision detection for 2D circle trajectories (closed-form, no sampling)"
+requires-python = ">=3.10"
+dependencies = ["numpy"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
