@@ -1,0 +1,40 @@
+{
+  "old": {
+    "request": {
+      "type": "object",
+      "required": ["orderId", "amount"],
+      "properties": {
+        "orderId": {"type": "string"},
+        "amount": {"type": "number", "minimum": 0},
+        "currency": {"type": "string", "enum": ["USD", "EUR", "CNY"]}
+      }
+    },
+    "response": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": {"type": "string", "enum": ["ok", "failed"]},
+        "etaDays": {"type": "integer", "minimum": 0, "maximum": 30}
+      }
+    }
+  },
+  "new": {
+    "request": {
+      "type": "object",
+      "required": ["orderId", "amount", "currency"],
+      "properties": {
+        "orderId": {"type": "string"},
+        "amount": {"type": "number", "minimum": 1},
+        "currency": {"type": "string", "enum": ["USD", "EUR"]}
+      }
+    },
+    "response": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": {"type": "string", "enum": ["ok", "failed", "pending"]},
+        "etaDays": {"type": "integer", "minimum": 0, "maximum": 60}
+      }
+    }
+  }
+}

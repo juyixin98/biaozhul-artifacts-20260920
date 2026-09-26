@@ -1,0 +1,10 @@
+{
+  "old": {
+    "request": {"type": "string"},
+    "response": {"type": "string"}
+  },
+  "new": {
+    "request": {"type": "string", "minLength": 3},
+    "response": {"type": "string", "format": "email"}
+  }
+}
