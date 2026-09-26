@@ -1,0 +1,398 @@
+{
+  "all_passed": true,
+  "base_url": "http://127.0.0.1:38409",
+  "failed_scenarios": 0,
+  "generated_at": "2026-09-25T11:08:40Z",
+  "passed_scenarios": 14,
+  "scenarios": [
+    {
+      "name": "prefix-range",
+      "passed": true,
+      "expectation": "bytes=0-99 (tiled with 100-255) yields 206 multipart and verifies",
+      "client_report": {
+        "artifact_id": "binary256",
+        "url": "http://127.0.0.1:38409/artifacts/binary256",
+        "started_at": "2026-09-25T00:00:00Z",
+        "total_duration_ms": 0,
+        "encoding": "identity",
+        "representation_size": 256,
+        "expected_sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+        "actual_sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+        "requested_ranges": [
+          "0-99",
+          "100-255"
+        ],
+        "overlapping_ranges_requested": false,
+        "attempts": [
+          {
+            "number": 1,
+            "range_header": "bytes=0-99, 100-255",
+            "status": 206,
+            "decision": "multipart",
+            "bytes_received": 537,
+            "duration_ms": 0
+          }
+        ],
+        "segments": [
+          {
+            "first": 0,
+            "last": 99,
+            "length": 100,
+            "sha256": "bce0aff19cf5aa6a7469a30d61d04e4376e4bbf6381052ee9e7f33925c954d52",
+            "overlapping_already_delivered_bytes": false
+          },
+          {
+            "first": 100,
+            "last": 255,
+            "length": 156,
+            "sha256": "9bb2f9f3f8e1cc779a0e102b63cca410f06c8af85fbce06716eebd7a3e169183",
+            "overlapping_already_delivered_bytes": false
+          }
+        ],
+        "reassembled_bytes": 256,
+        "complete_coverage": true,
+        "verified": true,
+        "status_summary": "ok"
+      }
+    },
+    {
+      "name": "suffix-range",
+      "passed": true,
+      "expectation": "bytes=-64 yields the final 64 bytes (192-255); suffix tiles to the original",
+      "client_report": {
+        "artifact_id": "binary256",
+        "url": "http://127.0.0.1:38409/artifacts/binary256",
+        "started_at": "2026-09-25T00:00:00Z",
+        "total_duration_ms": 0,
+        "encoding": "identity",
+        "representation_size": 256,
+        "expected_sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+        "actual_sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+        "requested_ranges": [
+          "0-191",
+          "-64"
+        ],
+        "overlapping_ranges_requested": false,
+        "attempts": [
+          {
+            "number": 1,
+            "range_header": "bytes=0-191, -64",
+            "status": 206,
+            "decision": "multipart",
+            "bytes_received": 538,
+            "duration_ms": 0
+          }
+        ],
+        "segments": [
+          {
+            "first": 0,
+            "last": 191,
+            "length": 192,
+            "sha256": "8b4a544837a1a0280fa8a7c82865c27a1064b3cc6281fda0753566b9bb104a87",
+            "overlapping_already_delivered_bytes": false
+          },
+          {
+            "first": 192,
+            "last": 255,
+            "length": 64,
+            "sha256": "47f7e1441be49b5e4701d19e2af2c31a5ee056914c03bd8d6249bdb085bb374d",
+            "overlapping_already_delivered_bytes": false
+          }
+        ],
+        "reassembled_bytes": 256,
+        "complete_coverage": true,
+        "verified": true,
+        "status_summary": "ok"
+      }
+    },
+    {
+      "name": "open-ended-range",
+      "passed": true,
+      "expectation": "bytes=200- yields 206 bytes 200-255/256 with 56 bytes",
+      "detail": {
+        "raw_check": "status=206 decision=single-partial"
+      }
+    },
+    {
+      "name": "multi-range-tiled",
+      "passed": true,
+      "expectation": "three adjacent ranges return multipart/byteranges and reassemble to the original",
+      "client_report": {
+        "artifact_id": "binary256",
+        "url": "http://127.0.0.1:38409/artifacts/binary256",
+        "started_at": "2026-09-25T00:00:00Z",
+        "total_duration_ms": 0,
+        "encoding": "identity",
+        "representation_size": 256,
+        "expected_sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+        "actual_sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+        "requested_ranges": [
+          "0-99",
+          "100-199",
+          "200-255"
+        ],
+        "overlapping_ranges_requested": false,
+        "attempts": [
+          {
+            "number": 1,
+            "range_header": "bytes=0-99, 100-199, 200-255",
+            "status": 206,
+            "decision": "multipart",
+            "bytes_received": 657,
+            "duration_ms": 0
+          }
+        ],
+        "segments": [
+          {
+            "first": 0,
+            "last": 99,
+            "length": 100,
+            "sha256": "bce0aff19cf5aa6a7469a30d61d04e4376e4bbf6381052ee9e7f33925c954d52",
+            "overlapping_already_delivered_bytes": false
+          },
+          {
+            "first": 100,
+            "last": 199,
+            "length": 100,
+            "sha256": "dc51c9546d5998caf68ce165eccafcb7db043b226364a7b2c99c31f3ae658735",
+            "overlapping_already_delivered_bytes": false
+          },
+          {
+            "first": 200,
+            "last": 255,
+            "length": 56,
+            "sha256": "d51274dabb4fa867e63abc93a57a113477640921d4579eca216689e3d7de57ce",
+            "overlapping_already_delivered_bytes": false
+          }
+        ],
+        "reassembled_bytes": 256,
+        "complete_coverage": true,
+        "verified": true,
+        "status_summary": "ok"
+      }
+    },
+    {
+      "name": "overlapping-ranges",
+      "passed": true,
+      "expectation": "overlapping ranges coalesce server-side; no duplicated/contradictory bytes; hash matches",
+      "client_report": {
+        "artifact_id": "binary256",
+        "url": "http://127.0.0.1:38409/artifacts/binary256",
+        "started_at": "2026-09-25T00:00:00Z",
+        "total_duration_ms": 0,
+        "encoding": "identity",
+        "representation_size": 256,
+        "expected_sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+        "actual_sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+        "requested_ranges": [
+          "0-119",
+          "100-255"
+        ],
+        "overlapping_ranges_requested": true,
+        "attempts": [
+          {
+            "number": 1,
+            "range_header": "bytes=0-119, 100-255",
+            "status": 206,
+            "decision": "single-partial",
+            "bytes_received": 256,
+            "duration_ms": 0
+          }
+        ],
+        "segments": [
+          {
+            "first": 0,
+            "last": 255,
+            "length": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "overlapping_already_delivered_bytes": false
+          }
+        ],
+        "reassembled_bytes": 256,
+        "complete_coverage": true,
+        "verified": true,
+        "status_summary": "ok"
+      }
+    },
+    {
+      "name": "unsatisfiable-range",
+      "passed": true,
+      "expectation": "bytes=1000- on a 256-byte artifact yields 416 with Content-Range bytes */256",
+      "detail": {
+        "raw_check": "status=416 decision=unsatisfiable-416"
+      }
+    },
+    {
+      "name": "zero-length-artifact",
+      "passed": true,
+      "expectation": "any range on a zero-length artifact yields 416 with bytes */0 and a status body",
+      "detail": {
+        "plain_get": "200 empty body, Accept-Ranges: bytes",
+        "raw_check": "status=416 decision=unsatisfiable-416"
+      }
+    },
+    {
+      "name": "etag-mismatch-if-range",
+      "passed": true,
+      "expectation": "stale If-Range ETag causes the server to ignore Range and return 200 (full body)",
+      "detail": {
+        "raw_check": "status=200 decision=ignored-if-range"
+      }
+    },
+    {
+      "name": "if-range-date-forms",
+      "passed": true,
+      "expectation": "If-Range future-date honors the range (206); past-date ignores it (200)",
+      "detail": {
+        "checks": [
+          "future-date: status=206 decision=single-partial",
+          "past-date: status=200 decision=ignored-if-range"
+        ]
+      }
+    },
+    {
+      "name": "malformed-range-ignored",
+      "passed": true,
+      "expectation": "a syntactically invalid Range header is ignored and the full 200 representation is sent",
+      "detail": {
+        "raw_check": "status=200 decision=ignored-malformed"
+      }
+    },
+    {
+      "name": "too-many-ranges",
+      "passed": true,
+      "expectation": "more than 5 ranges are rejected with 400 rather than assembled",
+      "detail": {
+        "raw_check": "status=400 decision=rejected-range-limit"
+      }
+    },
+    {
+      "name": "retry-after-transport-faults",
+      "passed": true,
+      "expectation": "client retries 2 injected transport errors and still verifies the original bytes",
+      "client_report": {
+        "artifact_id": "binary256",
+        "url": "http://127.0.0.1:38409/artifacts/binary256",
+        "started_at": "2026-09-25T00:00:00Z",
+        "total_duration_ms": 0,
+        "encoding": "identity",
+        "representation_size": 256,
+        "expected_sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+        "actual_sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+        "requested_ranges": [
+          "0-127",
+          "128-255"
+        ],
+        "overlapping_ranges_requested": false,
+        "attempts": [
+          {
+            "number": 1,
+            "range_header": "bytes=0-127, 128-255",
+            "bytes_received": 0,
+            "retry_reason": "Get \"http://127.0.0.1:38409/artifacts/binary256\": fault: injected transport failure",
+            "error": "Get \"http://127.0.0.1:38409/artifacts/binary256\": fault: injected transport failure",
+            "duration_ms": 0
+          },
+          {
+            "number": 2,
+            "range_header": "bytes=0-127, 128-255",
+            "bytes_received": 0,
+            "retry_reason": "Get \"http://127.0.0.1:38409/artifacts/binary256\": fault: injected transport failure",
+            "error": "Get \"http://127.0.0.1:38409/artifacts/binary256\": fault: injected transport failure",
+            "duration_ms": 0
+          },
+          {
+            "number": 3,
+            "range_header": "bytes=0-127, 128-255",
+            "status": 206,
+            "decision": "multipart",
+            "bytes_received": 538,
+            "duration_ms": 0
+          }
+        ],
+        "segments": [
+          {
+            "first": 0,
+            "last": 127,
+            "length": 128,
+            "sha256": "471fb943aa23c511f6f72f8d1652d9c880cfa392ad80503120547703e56a2be5",
+            "overlapping_already_delivered_bytes": false
+          },
+          {
+            "first": 128,
+            "last": 255,
+            "length": 128,
+            "sha256": "60ae23ee1dd9974d2f4036aa646f97b13f1a5a8b6304c31faea05c59cb363c65",
+            "overlapping_already_delivered_bytes": false
+          }
+        ],
+        "reassembled_bytes": 256,
+        "complete_coverage": true,
+        "verified": true,
+        "status_summary": "ok"
+      }
+    },
+    {
+      "name": "retry-after-truncated-body",
+      "passed": true,
+      "expectation": "a body that errors mid-read is retried; final bytes verify",
+      "client_report": {
+        "artifact_id": "binary256",
+        "url": "http://127.0.0.1:38409/artifacts/binary256",
+        "started_at": "2026-09-25T00:00:00Z",
+        "total_duration_ms": 0,
+        "encoding": "identity",
+        "representation_size": 256,
+        "expected_sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+        "actual_sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+        "requested_ranges": [
+          "0-255"
+        ],
+        "overlapping_ranges_requested": false,
+        "attempts": [
+          {
+            "number": 1,
+            "range_header": "bytes=0-255",
+            "status": 206,
+            "decision": "single-partial",
+            "bytes_received": 0,
+            "retry_reason": "fault: injected unexpected EOF",
+            "error": "fault: injected unexpected EOF",
+            "duration_ms": 0
+          },
+          {
+            "number": 2,
+            "range_header": "bytes=0-255",
+            "status": 206,
+            "decision": "single-partial",
+            "bytes_received": 256,
+            "duration_ms": 0
+          }
+        ],
+        "segments": [
+          {
+            "first": 0,
+            "last": 255,
+            "length": 256,
+            "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+            "overlapping_already_delivered_bytes": false
+          }
+        ],
+        "reassembled_bytes": 256,
+        "complete_coverage": true,
+        "verified": true,
+        "status_summary": "ok"
+      }
+    },
+    {
+      "name": "gzip-selected-representation",
+      "passed": true,
+      "expectation": "Accept-Encoding: gzip returns a gzip-coded 200 with Vary and its own length/ETag",
+      "detail": {
+        "coded_range": "status=206 decision=single-partial",
+        "raw_check": "status=200 decision=full"
+      }
+    }
+  ],
+  "total_scenarios": 14
+}

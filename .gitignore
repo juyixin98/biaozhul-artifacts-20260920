@@ -1,0 +1,5 @@
+# 本地编译产物
+/rangeserver
+/verify
+*.test
+.out
