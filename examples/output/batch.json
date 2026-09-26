@@ -1,0 +1,128 @@
+[
+  {
+    "ok": true,
+    "graph": {
+      "left_count": 2,
+      "right_count": 2,
+      "edge_count": 3
+    },
+    "matching_size": 2,
+    "matching": [
+      {
+        "left": 0,
+        "right": 3
+      },
+      {
+        "left": 1,
+        "right": 2
+      }
+    ],
+    "minimum_vertex_cover_size": 2,
+    "minimum_vertex_cover": [
+      {
+        "side": "L",
+        "id": 0
+      },
+      {
+        "side": "L",
+        "id": 1
+      }
+    ],
+    "alternating_reachable": {
+      "left": [],
+      "right": []
+    },
+    "verification": {
+      "matching_is_valid": true,
+      "cover_touches_every_edge": true,
+      "cover_size_equals_matching_size": true,
+      "verified_optimal": true,
+      "argument": "Every edge touches the cover (feasibility), and the cover size equals the matching size. A matching is a lower bound on any vertex cover, so a feasible cover of the same size is minimum and the matching is maximum (Kőnig's theorem)."
+    },
+    "brute_reference": {
+      "max_matching_size": 2,
+      "min_vertex_cover_size": 2,
+      "agrees": true
+    },
+    "warnings": [],
+    "elapsed_us": 33
+  },
+  {
+    "ok": true,
+    "graph": {
+      "left_count": 1,
+      "right_count": 2,
+      "edge_count": 2
+    },
+    "matching_size": 1,
+    "matching": [
+      {
+        "left": 10,
+        "right": 20
+      }
+    ],
+    "minimum_vertex_cover_size": 1,
+    "minimum_vertex_cover": [
+      {
+        "side": "L",
+        "id": 10
+      }
+    ],
+    "alternating_reachable": {
+      "left": [],
+      "right": []
+    },
+    "verification": {
+      "matching_is_valid": true,
+      "cover_touches_every_edge": true,
+      "cover_size_equals_matching_size": true,
+      "verified_optimal": true,
+      "argument": "Every edge touches the cover (feasibility), and the cover size equals the matching size. A matching is a lower bound on any vertex cover, so a feasible cover of the same size is minimum and the matching is maximum (Kőnig's theorem)."
+    },
+    "warnings": [],
+    "elapsed_us": 10
+  },
+  {
+    "ok": true,
+    "graph": {
+      "left_count": 2,
+      "right_count": 2,
+      "edge_count": 2
+    },
+    "matching_size": 2,
+    "matching": [
+      {
+        "left": 50,
+        "right": 60
+      },
+      {
+        "left": 80,
+        "right": 70
+      }
+    ],
+    "minimum_vertex_cover_size": 2,
+    "minimum_vertex_cover": [
+      {
+        "side": "L",
+        "id": 50
+      },
+      {
+        "side": "L",
+        "id": 80
+      }
+    ],
+    "alternating_reachable": {
+      "left": [],
+      "right": []
+    },
+    "verification": {
+      "matching_is_valid": true,
+      "cover_touches_every_edge": true,
+      "cover_size_equals_matching_size": true,
+      "verified_optimal": true,
+      "argument": "Every edge touches the cover (feasibility), and the cover size equals the matching size. A matching is a lower bound on any vertex cover, so a feasible cover of the same size is minimum and the matching is maximum (Kőnig's theorem)."
+    },
+    "warnings": [],
+    "elapsed_us": 11
+  }
+]

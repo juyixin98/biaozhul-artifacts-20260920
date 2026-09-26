@@ -1,0 +1,14 @@
+{
+  "left": [1, 2, 3, 10],
+  "right": [7, 8, 9],
+  "edges": [
+    {"left": 1, "right": 7},
+    {"left": 1, "right": 8},
+    {"left": 2, "right": 8},
+    {"left": 3, "right": 7},
+    {"left": 3, "right": 9},
+    {"left": 3, "right": 9}
+  ],
+  "brute_force": true,
+  "include_reachable": true
+}
