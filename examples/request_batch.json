@@ -1,0 +1,9 @@
+[
+  {"action": "naive", "graph": {"n": 5, "edges": [[0,1],[1,2],[2,3],[3,4],[4,0]]}},
+  {"action": "exact", "limit": 10, "graph": {"n": 6, "edges": [[0,1],[1,2],[2,3],[3,4],[4,5],[5,0]]}},
+  {"action": "generate", "n": 8, "p": 0.3, "seed": 42},
+  {
+    "action": "solve",
+    "graph": {"adjacency": {"A": ["B", "C"], "B": ["A"], "C": ["A"]}}
+  }
+]

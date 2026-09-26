@@ -1,0 +1,11 @@
+{
+  "action": "solve",
+  "heuristic": "min-fill",
+  "graph": {
+    "vertices": ["a", "b", "c", "d", "e", "f"],
+    "edges": [
+      ["a", "b"], ["b", "c"], ["c", "a"],
+      ["d", "e"], ["e", "f"]
+    ]
+  }
+}

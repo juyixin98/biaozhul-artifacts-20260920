@@ -1,0 +1,237 @@
+{
+  "action": "solve",
+  "data": {
+    "comparison": {
+      "gap": 0,
+      "heuristic_is_optimal": true,
+      "heuristic_matches_replay": true,
+      "heuristic_order_width_recomputed": 2,
+      "optimal_treewidth": 2
+    },
+    "elimination": {
+      "elapsed_ms": 0.0078329999999999997,
+      "heuristic": "min-fill",
+      "heuristic_width": 2,
+      "note": "heuristic_width is an upper bound on treewidth, NOT claimed optimal",
+      "order": [
+        "d",
+        "e",
+        "f",
+        "a",
+        "b",
+        "c"
+      ],
+      "steps": [
+        {
+          "added_fill": [],
+          "bag": [
+            "d",
+            "e"
+          ],
+          "degree_at_elimination": 1,
+          "position": 0,
+          "vertex": "d"
+        },
+        {
+          "added_fill": [],
+          "bag": [
+            "e",
+            "f"
+          ],
+          "degree_at_elimination": 1,
+          "position": 1,
+          "vertex": "e"
+        },
+        {
+          "added_fill": [],
+          "bag": [
+            "f"
+          ],
+          "degree_at_elimination": 0,
+          "position": 2,
+          "vertex": "f"
+        },
+        {
+          "added_fill": [],
+          "bag": [
+            "a",
+            "b",
+            "c"
+          ],
+          "degree_at_elimination": 2,
+          "position": 3,
+          "vertex": "a"
+        },
+        {
+          "added_fill": [],
+          "bag": [
+            "b",
+            "c"
+          ],
+          "degree_at_elimination": 1,
+          "position": 4,
+          "vertex": "b"
+        },
+        {
+          "added_fill": [],
+          "bag": [
+            "c"
+          ],
+          "degree_at_elimination": 0,
+          "position": 5,
+          "vertex": "c"
+        }
+      ],
+      "total_fill": 0
+    },
+    "elimination_self_check": {
+      "errors": [],
+      "passed": true
+    },
+    "exact": {
+      "elapsed_ms": 0.016684999999999998,
+      "feasible": true,
+      "memo_states": 27,
+      "optimal_order": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f"
+      ],
+      "optimal_treewidth": 2,
+      "search_nodes": 82
+    },
+    "input": {
+      "edges": [
+        [
+          "a",
+          "b"
+        ],
+        [
+          "a",
+          "c"
+        ],
+        [
+          "b",
+          "c"
+        ],
+        [
+          "d",
+          "e"
+        ],
+        [
+          "e",
+          "f"
+        ]
+      ],
+      "vertices": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f"
+      ]
+    },
+    "m": 5,
+    "n": 6,
+    "terminology": "optimal_treewidth is populated only by exhaustive/memoized search on small graphs; heuristic_width is never labeled optimal",
+    "tree_decomposition": {
+      "bags": [
+        {
+          "id": 0,
+          "parent": 1,
+          "size": 2,
+          "vertices": [
+            "d",
+            "e"
+          ]
+        },
+        {
+          "id": 1,
+          "parent": 2,
+          "size": 2,
+          "vertices": [
+            "e",
+            "f"
+          ]
+        },
+        {
+          "id": 2,
+          "parent": null,
+          "size": 1,
+          "vertices": [
+            "f"
+          ]
+        },
+        {
+          "id": 3,
+          "parent": 4,
+          "size": 3,
+          "vertices": [
+            "a",
+            "b",
+            "c"
+          ]
+        },
+        {
+          "id": 4,
+          "parent": 5,
+          "size": 2,
+          "vertices": [
+            "b",
+            "c"
+          ]
+        },
+        {
+          "id": 5,
+          "parent": null,
+          "size": 1,
+          "vertices": [
+            "c"
+          ]
+        }
+      ],
+      "component_roots": 2,
+      "root_join_edges": [
+        [
+          2,
+          5
+        ]
+      ],
+      "tree_edges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "width": 2
+    },
+    "verification": {
+      "bag_count": 6,
+      "edges_covered": 5,
+      "edges_total": 5,
+      "errors": [],
+      "passed": true,
+      "tree_connected": true,
+      "warnings": [],
+      "width_recomputed": 2
+    }
+  },
+  "ok": true,
+  "wall_ms": 0.15648500000000001
+}

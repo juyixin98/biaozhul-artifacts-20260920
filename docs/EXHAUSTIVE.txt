@@ -1,0 +1,25 @@
+# 小图穷举取证：min-fill 次优首次出现在 n=7
+
+命令：`make exhaustive`（即 `build/exhaustive 7`，枚举每个 n 的全部
+2^(n choose 2) 个标号简单图；n≤6 同时用 n! 朴素参考交叉核对精确搜索）。
+实测耗时约 53 秒（g++ -O2，8 核机）。
+
+```
+n=1: 1 graphs | min-fill suboptimal: 0 | min-degree suboptimal: 0 | exact!=naive: 0
+n=2: 2 graphs | min-fill suboptimal: 0 | min-degree suboptimal: 0 | exact!=naive: 0
+n=3: 8 graphs | min-fill suboptimal: 0 | min-degree suboptimal: 0 | exact!=naive: 0
+n=4: 64 graphs | min-fill suboptimal: 0 | min-degree suboptimal: 0 | exact!=naive: 0
+n=5: 1024 graphs | min-fill suboptimal: 0 | min-degree suboptimal: 0 | exact!=naive: 0
+n=6: 32768 graphs | min-fill suboptimal: 0 | min-degree suboptimal: 15 | exact!=naive: 0
+n=7: 2097152 graphs | min-fill suboptimal: 140 | min-degree suboptimal: 5684 | exact!=naive: 0
+```
+
+结论：
+
+- n ≤ 6 的全部 33863 个图上，记忆化精确搜索与 n! 朴素参考宽度**零分歧**；
+- **min-fill 在 n ≤ 6 的所有图上都恰好最优**，最早的次优出现在 **n=7**，
+  共 140 个图（2^21=2097152 个图中）；
+- 作为对照，min-degree 在 n=6 已有 15 个图次优、n=7 有 5684 个——说明
+  min-fill 在这些规模上明显更稳，但仍**不是**最优保证；
+- 首个 min-fill 反例（hw=5 vs opt=4）已固化到
+  `examples/request_heuristic_nonoptimal.json`，与本工具输出逐边一致。

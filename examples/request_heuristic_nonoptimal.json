@@ -1,0 +1,15 @@
+{
+  "action": "solve",
+  "heuristic": "min-fill",
+  "exact_limit": 10,
+  "_comment": "Known case where min-fill (width 5) is NOT optimal; exact optimum is 4. Demonstrates that the heuristic width is only an upper bound. Found by exhaustively checking all 2^21 labeled graphs on 7 vertices (140 are min-fill-suboptimal).",
+  "graph": {
+    "vertices": ["0", "1", "2", "3", "4", "5", "6"],
+    "edges": [
+      ["0", "1"], ["0", "2"], ["0", "4"], ["0", "5"], ["0", "6"],
+      ["1", "2"], ["1", "4"], ["1", "5"], ["1", "6"],
+      ["2", "4"], ["2", "5"], ["2", "6"],
+      ["3", "4"], ["3", "5"], ["3", "6"]
+    ]
+  }
+}

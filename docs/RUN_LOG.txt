@@ -1,0 +1,41 @@
+### toolchain / date
+g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+GNU Make 4.3
+2026-09-25T10:00:02Z
+
+### make clean && make all  (warnings expected: 0)
+mkdir -p build
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Wshadow -Isrc -c src/json.cpp -o build/json.o
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Wshadow -Isrc -c src/graph.cpp -o build/graph.o
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Wshadow -Isrc -c src/treewidth.cpp -o build/treewidth.o
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Wshadow -Isrc -c src/validate.cpp -o build/validate.o
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Wshadow -Isrc src/cli.cpp build/json.o build/graph.o build/treewidth.o build/validate.o -o build/treewidth
+build exit=0 ; warning count: 0
+
+### make test
+- scale limits enforced
+
+6230 checks, 0 failures
+ALL TESTS PASSED
+
+### make e2e
+./tests/e2e.sh
+PASS c5
+PASS k5
+PASS disc
+PASS nonopt
+PASS batch
+PASS tiny
+error-handling assertions ok
+PASS error-handling
+PASS file-and-stdin parity
+random-crosscheck ok (1 suboptimal cases observed)
+PASS random-crosscheck
+
+E2E: 9 passed, 0 failed
+e2e exit=0
+
+### ASan/UBSan
+asan build warnings: 0
+6230 checks, 0 failures
+ALL TESTS PASSED
