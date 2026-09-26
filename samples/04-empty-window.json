@@ -1,0 +1,10 @@
+{
+  "zoneId": "UTC",
+  "rule": {
+    "start": "2024-01-01",
+    "until": "2024-01-05",
+    "frequency": "DAILY"
+  },
+  "windowStart": "2025-01-01",
+  "windowEnd": "2025-12-31"
+}

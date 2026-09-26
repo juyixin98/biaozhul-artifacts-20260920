@@ -1,0 +1,10 @@
+{
+  "zoneId": "UTC",
+  "rule": {
+    "start": "2024-02-29",
+    "until": "2032-12-31",
+    "frequency": "MONTHLY",
+    "interval": 12,
+    "monthEndPolicy": "SKIP"
+  }
+}

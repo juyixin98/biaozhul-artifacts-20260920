@@ -1,0 +1,9 @@
+{
+  "zoneId": "Asia/Shanghai",
+  "rule": {
+    "start": "2024-03-01T09:00:00",
+    "frequency": "DAILY",
+    "interval": 1,
+    "count": 5
+  }
+}

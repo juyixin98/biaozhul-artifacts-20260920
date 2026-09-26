@@ -1,0 +1,9 @@
+{
+  "zoneId": "America/New_York",
+  "rule": {
+    "start": "2024-03-04T09:00:00",
+    "until": "2024-04-01T09:00:00",
+    "frequency": "WEEKLY",
+    "interval": 1
+  }
+}

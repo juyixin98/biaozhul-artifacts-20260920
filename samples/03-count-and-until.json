@@ -1,0 +1,11 @@
+{
+  "zoneId": "UTC",
+  "rule": {
+    "start": "2024-01-01",
+    "until": "2024-12-31T23:59:59",
+    "frequency": "DAILY",
+    "interval": 1,
+    "count": 5
+  },
+  "maxExpansions": 5000
+}
