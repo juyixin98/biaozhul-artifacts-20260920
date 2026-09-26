@@ -1,0 +1,7 @@
+{
+  "id": "base-v1",
+  "priority": 1,
+  "intervals": [
+    { "start": 0, "end": 10, "label": "baseline rule" }
+  ]
+}

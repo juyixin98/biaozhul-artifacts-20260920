@@ -1,0 +1,7 @@
+{
+  "id": "clash-v3",
+  "priority": 2,
+  "intervals": [
+    { "start": 5, "end": 8, "label": "overlaps patch-v2 at same priority -> rejected" }
+  ]
+}

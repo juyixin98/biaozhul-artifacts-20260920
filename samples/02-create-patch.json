@@ -1,0 +1,7 @@
+{
+  "id": "patch-v2",
+  "priority": 2,
+  "intervals": [
+    { "start": 3, "end": 6, "label": "hotfix overrides baseline" }
+  ]
+}

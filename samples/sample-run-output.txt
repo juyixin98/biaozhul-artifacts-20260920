@@ -1,0 +1,97 @@
+
+=== GET /api/meta (tzdb version) ===
+{
+  "service" : "version-interval-coverage",
+  "axis" : "long (integer positions; epoch seconds for time rules)",
+  "intervalSemantics" : "half-open [start, end)",
+  "tzdbVersion" : "2026b",
+  "availableZoneCount" : 604,
+  "javaVersion" : "21.0.12.1"
+}
+=== POST /api/versions base-v1 (priority 1, [0,10)) ===
+{
+  "id" : "base-v1",
+  "priority" : 1,
+  "intervals" : [ {
+    "start" : 0,
+    "end" : 10,
+    "label" : "baseline rule"
+  } ]
+}
+=== POST /api/versions patch-v2 (priority 2, [3,6)) ===
+{
+  "id" : "patch-v2",
+  "priority" : 2,
+  "intervals" : [ {
+    "start" : 3,
+    "end" : 6,
+    "label" : "hotfix overrides baseline"
+  } ]
+}
+=== GET /api/coverage?from=0&to=10 (expect 3 non-overlapping segments) ===
+[ {
+  "start" : 0,
+  "end" : 3,
+  "versionId" : "base-v1",
+  "priority" : 1,
+  "label" : "baseline rule"
+}, {
+  "start" : 3,
+  "end" : 6,
+  "versionId" : "patch-v2",
+  "priority" : 2,
+  "label" : "hotfix overrides baseline"
+}, {
+  "start" : 6,
+  "end" : 10,
+  "versionId" : "base-v1",
+  "priority" : 1,
+  "label" : "baseline rule"
+} ]
+=== GET /api/point?at=4 (expect patch-v2) ===
+{
+  "start" : 4,
+  "end" : 5,
+  "versionId" : "patch-v2",
+  "priority" : 2,
+  "label" : "hotfix overrides baseline"
+}
+=== POST /api/versions clash-v3 (same-priority overlap, expect HTTP 409) ===
+{
+  "error" : "conflict",
+  "message" : "priority 2 conflict: version 'clash-v3' IntervalRule[start=5, end=8, label=overlaps patch-v2 at same priority -> rejected] overlaps version 'patch-v2' IntervalRule[start=3, end=6, label=hotfix overrides baseline]"
+}
+HTTP 409
+
+=== DELETE /api/versions/patch-v2 ===
+{
+  "deleted" : "patch-v2"
+}
+=== GET /api/coverage?from=0&to=10 after delete (expect single base-v1 segment) ===
+[ {
+  "start" : 0,
+  "end" : 10,
+  "versionId" : "base-v1",
+  "priority" : 1,
+  "label" : "baseline rule"
+} ]
+=== POST /api/versions utc-day-2026-01-01 (time axis, epoch seconds) ===
+{
+  "id" : "utc-day-2026-01-01",
+  "priority" : 1,
+  "intervals" : [ {
+    "start" : 1767225600,
+    "end" : 1767312000,
+    "label" : "2026-01-01 00:00:00Z .. 2026-01-02 00:00:00Z (epoch seconds)"
+  } ]
+}
+=== GET /api/point?at=1767225600 (2026-01-01T00:00:00Z, expect utc-day-2026-01-01) ===
+{
+  "start" : 1767225600,
+  "end" : 1767225601,
+  "versionId" : "utc-day-2026-01-01",
+  "priority" : 1,
+  "label" : "2026-01-01 00:00:00Z .. 2026-01-02 00:00:00Z (epoch seconds)"
+}
+=== GET /api/point?at=1767312000 (exclusive end, expect null) ===
+null
