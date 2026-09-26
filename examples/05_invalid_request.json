@@ -1,0 +1,6 @@
+{
+  "variables": ["x", "x"],
+  "constraints": [
+    {"id": "c1", "x": "x", "y": "y", "c": 1.5}
+  ]
+}

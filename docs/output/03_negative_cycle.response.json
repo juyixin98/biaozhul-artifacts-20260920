@@ -1,0 +1,67 @@
+{
+  "status": "ok",
+  "feasible": false,
+  "variables": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "lonely"
+  ],
+  "sizes": {
+    "num_variables": 5,
+    "num_constraints": 5,
+    "num_components": 2
+  },
+  "evidence": {
+    "primary_algorithm": "bellman_ford",
+    "note": "Labels start at 0: an implicit 0-weight super-source reaches every component.",
+    "iterations": 5,
+    "relaxations": 7,
+    "elapsed_micros": 1,
+    "reference": {
+      "used": true,
+      "algorithm": "floyd_warshall",
+      "elapsed_micros": 3,
+      "verdict_matches_primary": true,
+      "floyd_assignment_verified": null,
+      "note": "Infeasible systems admit no assignment to verify."
+    }
+  },
+  "negative_cycle": {
+    "constraint_ids": [
+      "r1",
+      "r3",
+      "r2"
+    ],
+    "edge_indices": [
+      0,
+      2,
+      1
+    ],
+    "variable_cycle": [
+      "b",
+      "a",
+      "c",
+      "b"
+    ],
+    "length": 3,
+    "sum_bounds": -2,
+    "closes": true,
+    "explanation": "Each constraint x - y <= c is the edge y -> x of weight c. Traversing the cycle and summing telescopes the variable differences to 0, so the constraints imply 0 <= -2, which is impossible."
+  },
+  "minimal_candidate": {
+    "method": "deletion_filter",
+    "constraint_ids": [
+      "r1",
+      "r2",
+      "r3"
+    ],
+    "size": 3,
+    "verification": {
+      "subset_infeasible": true,
+      "irreducible": true,
+      "definition": "Minimal = removing any single member makes the rest feasible; it is not necessarily the globally smallest such set."
+    }
+  }
+}

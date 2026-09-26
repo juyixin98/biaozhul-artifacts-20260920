@@ -1,0 +1,10 @@
+{
+  "variables": ["p", "q", "r", "s"],
+  "constraints": [
+    {"id": "cycA1", "x": "p", "y": "q", "c": 1},
+    {"id": "cycA2", "x": "q", "y": "p", "c": -3},
+    {"id": "cycB1", "x": "r", "y": "s", "c": 1},
+    {"id": "cycB2", "x": "s", "y": "r", "c": -3}
+  ],
+  "options": {"minimal_candidate": true}
+}

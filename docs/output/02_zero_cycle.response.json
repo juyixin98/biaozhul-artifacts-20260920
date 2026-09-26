@@ -1,0 +1,47 @@
+{
+  "status": "ok",
+  "feasible": true,
+  "variables": [
+    "a",
+    "b",
+    "c"
+  ],
+  "sizes": {
+    "num_variables": 3,
+    "num_constraints": 3,
+    "num_components": 1
+  },
+  "evidence": {
+    "primary_algorithm": "bellman_ford",
+    "note": "Labels start at 0: an implicit 0-weight super-source reaches every component.",
+    "iterations": 3,
+    "relaxations": 2,
+    "elapsed_micros": 0,
+    "reference": {
+      "used": true,
+      "algorithm": "floyd_warshall",
+      "elapsed_micros": 0,
+      "verdict_matches_primary": true,
+      "floyd_assignment_verified": true
+    }
+  },
+  "assignment": {
+    "a": 2,
+    "b": 1,
+    "c": 0
+  },
+  "normalization": {
+    "mode": "per_component_min_zero",
+    "components": [
+      [
+        "a",
+        "b",
+        "c"
+      ]
+    ]
+  },
+  "verification": {
+    "all_satisfied": true,
+    "checked_constraints": 3
+  }
+}

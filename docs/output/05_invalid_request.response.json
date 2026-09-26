@@ -1,0 +1,7 @@
+{
+  "status": "error",
+  "error": {
+    "code": "duplicate_variable",
+    "message": "Duplicate variable name: x"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "variables": ["a", "b", "c"],
+  "constraints": [
+    {"id": "eq1", "x": "a", "y": "b", "c": 1},
+    {"id": "eq2", "x": "b", "y": "c", "c": 1},
+    {"id": "eq3", "x": "c", "y": "a", "c": -2}
+  ],
+  "options": {"normalize": true}
+}

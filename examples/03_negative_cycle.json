@@ -1,0 +1,11 @@
+{
+  "variables": ["a", "b", "c", "d", "lonely"],
+  "constraints": [
+    {"id": "r1", "x": "a", "y": "b", "c": 1},
+    {"id": "r2", "x": "b", "y": "c", "c": 1},
+    {"id": "r3", "x": "c", "y": "a", "c": -4},
+    {"id": "r4", "x": "a", "y": "d", "c": 5},
+    {"id": "r5", "x": "d", "y": "a", "c": 5}
+  ],
+  "options": {"normalize": true, "minimal_candidate": true, "reference": "auto"}
+}
