@@ -1,0 +1,100 @@
+### Circuit breaker demo — request samples
+### Start the server first:  go run ./cmd/server -addr 127.0.0.1:18080
+### (Compatible with IntelliJ/Goland/VS Code REST Client; each block is one request.)
+
+### Reset everything (virtual clock back to 2026-01-01, breaker CLOSED)
+POST http://127.0.0.1:18080/api/reset
+
+### Current breaker snapshot and virtual time
+GET http://127.0.0.1:18080/api/state
+
+### One healthy call (upstream default is an immediate in-process success)
+POST http://127.0.0.1:18080/api/call
+Content-Type: application/json
+
+{}
+
+### Inject failures into the fake upstream (applies to every subsequent call)
+POST http://127.0.0.1:18080/api/upstream/behavior
+Content-Type: application/json
+
+{"fail": true}
+
+### Three failing calls trip the breaker (3 failures in 5-sample window)
+POST http://127.0.0.1:18080/api/call
+### ^^ run this request 3 times, then observe OPEN:
+GET http://127.0.0.1:18080/api/state
+
+### While OPEN, calls are rejected with HTTP 503 and never reach the upstream
+POST http://127.0.0.1:18080/api/call
+
+### Advance the virtual clock 10s past the cool-down -> HALF_OPEN
+POST http://127.0.0.1:18080/api/clock/advance
+Content-Type: application/json
+
+{"duration_ms": 10000}
+
+### Restore the fake upstream to healthy, then send two successful probes
+POST http://127.0.0.1:18080/api/upstream/behavior
+Content-Type: application/json
+
+{"dynamic": false}
+
+### Probe 1 (half_open, run = 1/2)
+POST http://127.0.0.1:18080/api/call
+
+### Probe 2 -> breaker CLOSED
+POST http://127.0.0.1:18080/api/call
+
+### --- Half-open probe contention -------------------------------------------
+POST http://127.0.0.1:18080/api/reset
+POST http://127.0.0.1:18080/api/upstream/behavior
+Content-Type: application/json
+
+{"stall": true}
+
+### Make the upstream stall all calls (use two concurrent clients; each call
+### now blocks until /api/upstream/release). First trip it with failures:
+POST http://127.0.0.1:18080/api/upstream/behavior
+Content-Type: application/json
+
+{"fail": true}
+### POST /api/call x3, then advance cooldown, then switch to stall:
+POST http://127.0.0.1:18080/api/clock/advance
+Content-Type: application/json
+
+{"duration_ms": 10000}
+POST http://127.0.0.1:18080/api/upstream/behavior
+Content-Type: application/json
+
+{"stall": true}
+
+### With two calls in flight, a third POST /api/call returns 503; release one:
+POST http://127.0.0.1:18080/api/upstream/release
+
+### --- Cancellation is not a failure ----------------------------------------
+POST http://127.0.0.1:18080/api/reset
+POST http://127.0.0.1:18080/api/upstream/behavior
+Content-Type: application/json
+
+{"stall": true}
+
+### A call with a 100ms clock-driven timeout; then advance 200ms.
+### It comes back "canceled" and never counts as a failure.
+POST http://127.0.0.1:18080/api/call
+Content-Type: application/json
+
+{"timeout_ms": 100}
+POST http://127.0.0.1:18080/api/clock/advance
+Content-Type: application/json
+
+{"duration_ms": 200}
+
+### --- Observability & acceptance scenarios --------------------------------
+GET http://127.0.0.1:18080/api/history
+GET http://127.0.0.1:18080/api/upstream
+GET http://127.0.0.1:18080/api/scenarios
+
+POST http://127.0.0.1:18080/api/scenarios/late_failure/run
+POST http://127.0.0.1:18080/api/scenarios/probe_contention/run
+POST http://127.0.0.1:18080/api/scenarios/cancel_is_not_failure/run
