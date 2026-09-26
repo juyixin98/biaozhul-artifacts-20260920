@@ -1,0 +1,116 @@
+{
+  "status": "ok",
+  "summary": {
+    "num_nodes": 3,
+    "num_edges": 3,
+    "cost_initial": 4.714998722529722,
+    "cost_final": 0.4908522068910052,
+    "cost_reduction_ratio": 0.8958955800888001,
+    "iterations": 5,
+    "converged": true,
+    "termination_reason": "relative_cost_change_below_ftol",
+    "fixed_nodes": [
+      0
+    ],
+    "auto_anchored_nodes": [],
+    "rms_residual_initial": 1.2536611347741624,
+    "rms_residual_final": 0.4044964799562559,
+    "max_angular_residual_initial": 0.10000000000000009,
+    "max_angular_residual_final": 0.05980951387495059
+  },
+  "poses": [
+    {
+      "id": 0,
+      "pose": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "theta_wrapped": 0.0
+    },
+    {
+      "id": 1,
+      "pose": [
+        0.9839293359662773,
+        0.0800753761029915,
+        0.05980951387495059
+      ],
+      "theta_wrapped": 0.05980951387495059
+    },
+    {
+      "id": 2,
+      "pose": [
+        1.9660706640337227,
+        0.2199246238970085,
+        0.25490475695621173
+      ],
+      "theta_wrapped": 0.25490475695621173
+    }
+  ],
+  "cost_history": [
+    4.714998722529722,
+    0.4932122699614811,
+    0.4908570577097784,
+    0.490852216916706,
+    0.49085220691158243,
+    0.4908522068910052
+  ],
+  "connectivity": {
+    "num_nodes": 3,
+    "num_edges": 3,
+    "is_connected": true,
+    "num_components": 1,
+    "components": [
+      {
+        "member_nodes": [
+          0,
+          1,
+          2
+        ],
+        "num_nodes": 3,
+        "num_edges": 3,
+        "fixed_nodes": [
+          0
+        ],
+        "anchored": true
+      }
+    ],
+    "unanchored_components": []
+  },
+  "edge_stats": [
+    {
+      "i": 0,
+      "j": 1,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 0.9000000000000008,
+      "squared_residual_final": 0.22283609075935426,
+      "robust_cost_initial": 0.9000000000000008,
+      "robust_cost_final": 0.22283609075935426,
+      "angular_residual_abs_final": 0.05980951387495059
+    },
+    {
+      "i": 1,
+      "j": 2,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 1.864998722529719,
+      "squared_residual_final": 0.13400805810125674,
+      "robust_cost_initial": 1.864998722529719,
+      "robust_cost_final": 0.13400805810125674,
+      "angular_residual_abs_final": 0.004904756918739039
+    },
+    {
+      "i": 0,
+      "j": 2,
+      "label": "loop_closure",
+      "kernel": "linear",
+      "squared_residual_initial": 1.9500000000000017,
+      "squared_residual_final": 0.13400805803039423,
+      "robust_cost_initial": 1.9500000000000017,
+      "robust_cost_final": 0.13400805803039423,
+      "angular_residual_abs_final": 0.004904756956211731
+    }
+  ],
+  "note": "Local optimum from iterative nonlinear least squares; global optimality is not guaranteed."
+}

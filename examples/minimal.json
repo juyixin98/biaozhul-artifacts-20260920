@@ -1,0 +1,41 @@
+{
+  "options": {
+    "max_iterations": 50,
+    "ftol": 1e-8,
+    "xtol": 1e-10,
+    "gtol": 1e-8,
+    "lambda_init": 0.001,
+    "strict_anchoring": false
+  },
+  "nodes": [
+    {"id": 0, "pose": [0.0, 0.0, 0.0], "fixed": true},
+    {"id": 1, "pose": [1.1, 0.15, 0.1]},
+    {"id": 2, "pose": [2.1, 0.55, 0.35]}
+  ],
+  "edges": [
+    {
+      "i": 0,
+      "j": 1,
+      "z": [1.0, 0.0, 0.0],
+      "information": [[20, 0, 0], [0, 20, 0], [0, 0, 25]],
+      "kernel": {"type": "linear"},
+      "label": "odometry"
+    },
+    {
+      "i": 1,
+      "j": 2,
+      "z": [1.0, 0.0, 0.2],
+      "information": [[20, 0, 0], [0, 20, 0], [0, 0, 25]],
+      "kernel": {"type": "linear"},
+      "label": "odometry"
+    },
+    {
+      "i": 0,
+      "j": 2,
+      "z": [1.95, 0.3, 0.25],
+      "information": [[20, 0, 0], [0, 20, 0], [0, 0, 25]],
+      "kernel": {"type": "linear"},
+      "label": "loop_closure"
+    }
+  ]
+}

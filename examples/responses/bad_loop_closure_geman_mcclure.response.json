@@ -1,0 +1,486 @@
+{
+  "status": "ok",
+  "summary": {
+    "num_nodes": 20,
+    "num_edges": 21,
+    "cost_initial": 11.256513019349226,
+    "cost_final": 1.0215155200342674,
+    "cost_reduction_ratio": 0.909251158127002,
+    "iterations": 7,
+    "converged": true,
+    "termination_reason": "relative_cost_change_below_ftol",
+    "fixed_nodes": [
+      0
+    ],
+    "auto_anchored_nodes": [],
+    "rms_residual_initial": 2.6862405677044037,
+    "rms_residual_final": 2.9636298218525496,
+    "max_angular_residual_initial": 0.4528848395172931,
+    "max_angular_residual_final": 0.4374688592133822
+  },
+  "poses": [
+    {
+      "id": 0,
+      "pose": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "theta_wrapped": 0.0
+    },
+    {
+      "id": 1,
+      "pose": [
+        1.99866611495619,
+        0.013679346496309974,
+        0.0035943773144446745
+      ],
+      "theta_wrapped": 0.0035943773144446745
+    },
+    {
+      "id": 2,
+      "pose": [
+        3.9528102243216066,
+        -0.0032833073728980723,
+        0.0024955449905825766
+      ],
+      "theta_wrapped": 0.0024955449905825766
+    },
+    {
+      "id": 3,
+      "pose": [
+        5.954248569785676,
+        0.06746788048058343,
+        0.008810112310811302
+      ],
+      "theta_wrapped": 0.008810112310811302
+    },
+    {
+      "id": 4,
+      "pose": [
+        7.921537273091447,
+        0.10804774965879713,
+        0.02603376682433911
+      ],
+      "theta_wrapped": 0.02603376682433911
+    },
+    {
+      "id": 5,
+      "pose": [
+        9.925935891682423,
+        0.11256800628688841,
+        1.6119143618517153
+      ],
+      "theta_wrapped": 1.6119143618517153
+    },
+    {
+      "id": 6,
+      "pose": [
+        9.90804420483476,
+        2.1472051696427266,
+        1.619838158320558
+      ],
+      "theta_wrapped": 1.619838158320558
+    },
+    {
+      "id": 7,
+      "pose": [
+        9.87765568554001,
+        4.051843559407262,
+        1.6112117596526625
+      ],
+      "theta_wrapped": 1.6112117596526625
+    },
+    {
+      "id": 8,
+      "pose": [
+        9.859238690651003,
+        6.039855002959615,
+        1.6209033342219428
+      ],
+      "theta_wrapped": 1.6209033342219428
+    },
+    {
+      "id": 9,
+      "pose": [
+        9.76660521985578,
+        8.044469736472964,
+        1.5997924265133419
+      ],
+      "theta_wrapped": 1.5997924265133419
+    },
+    {
+      "id": 10,
+      "pose": [
+        9.710422407433096,
+        10.015605084777578,
+        -3.1102393563392825
+      ],
+      "theta_wrapped": -3.1102393563392825
+    },
+    {
+      "id": 11,
+      "pose": [
+        7.785722043970328,
+        9.97801211925615,
+        -3.1210013303685753
+      ],
+      "theta_wrapped": -3.1210013303685753
+    },
+    {
+      "id": 12,
+      "pose": [
+        5.826267836838737,
+        9.883460478849981,
+        -3.1322150856841944
+      ],
+      "theta_wrapped": -3.1322150856841944
+    },
+    {
+      "id": 13,
+      "pose": [
+        3.826992777114577,
+        9.819332408638786,
+        3.1397448563100943
+      ],
+      "theta_wrapped": 3.1397448563100943
+    },
+    {
+      "id": 14,
+      "pose": [
+        1.8311673923045437,
+        9.816323574591346,
+        3.1326606085742164
+      ],
+      "theta_wrapped": 3.1326606085742164
+    },
+    {
+      "id": 15,
+      "pose": [
+        -0.10894016782201284,
+        9.828662551293505,
+        -1.5761512146928238
+      ],
+      "theta_wrapped": -1.5761512146928238
+    },
+    {
+      "id": 16,
+      "pose": [
+        -0.07767082402763152,
+        7.9046463414809605,
+        -1.58223141918394
+      ],
+      "theta_wrapped": -1.58223141918394
+    },
+    {
+      "id": 17,
+      "pose": [
+        -0.001554886101002143,
+        5.934446883966894,
+        -1.579050286573101
+      ],
+      "theta_wrapped": -1.579050286573101
+    },
+    {
+      "id": 18,
+      "pose": [
+        -0.015237419990427247,
+        3.993188746365683,
+        -1.5750331860766233
+      ],
+      "theta_wrapped": -1.5750331860766233
+    },
+    {
+      "id": 19,
+      "pose": [
+        0.009078653586147336,
+        2.001243140587978,
+        -1.5746379420188994
+      ],
+      "theta_wrapped": -1.5746379420188994
+    }
+  ],
+  "cost_history": [
+    11.256513019349226,
+    1.0761146834967867,
+    1.0313519893575784,
+    1.0229450906942914,
+    1.0215997495028148,
+    1.0215171633260196,
+    1.021515529769935,
+    1.0215155200342674
+  ],
+  "connectivity": {
+    "num_nodes": 20,
+    "num_edges": 21,
+    "is_connected": true,
+    "num_components": 1,
+    "components": [
+      {
+        "member_nodes": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "num_nodes": 20,
+        "num_edges": 21,
+        "fixed_nodes": [
+          0
+        ],
+        "anchored": true
+      }
+    ],
+    "unanchored_components": []
+  },
+  "edge_stats": [
+    {
+      "i": 0,
+      "j": 1,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 0.0,
+      "squared_residual_final": 0.0008734262415652093,
+      "robust_cost_initial": 0.0,
+      "robust_cost_final": 0.0008734262415652093,
+      "angular_residual_abs_final": 0.006335755868066784
+    },
+    {
+      "i": 1,
+      "j": 2,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 2.407412430484045e-34,
+      "squared_residual_final": 0.001625603298809241,
+      "robust_cost_initial": 2.407412430484045e-34,
+      "robust_cost_final": 0.001625603298809241,
+      "angular_residual_abs_final": 0.008817633226102739
+    },
+    {
+      "i": 2,
+      "j": 3,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 3.9481563859938335e-30,
+      "squared_residual_final": 0.002595828335546141,
+      "robust_cost_initial": 3.9481563859938335e-30,
+      "robust_cost_final": 0.002595828335546141,
+      "angular_residual_abs_final": 0.011236632505741806
+    },
+    {
+      "i": 3,
+      "j": 4,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 8.876851854923818e-30,
+      "squared_residual_final": 0.0037996527864736724,
+      "robust_cost_initial": 8.876851854923818e-30,
+      "robust_cost_final": 0.0037996527864736724,
+      "angular_residual_abs_final": 0.013654784431927247
+    },
+    {
+      "i": 4,
+      "j": 5,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 3.9452674910772526e-30,
+      "squared_residual_final": 0.004795737789363908,
+      "robust_cost_initial": 3.9452674910772526e-30,
+      "robust_cost_final": 0.004795737789363908,
+      "angular_residual_abs_final": 0.015376786457112601
+    },
+    {
+      "i": 5,
+      "j": 6,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 5.808604712271903e-30,
+      "squared_residual_final": 0.003191803373298376,
+      "robust_cost_initial": 5.808604712271903e-30,
+      "robust_cost_final": 0.003191803373298376,
+      "angular_residual_abs_final": 0.01249995407924498
+    },
+    {
+      "i": 6,
+      "j": 7,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 3.3934885620103096e-30,
+      "squared_residual_final": 0.001984080902039076,
+      "robust_cost_initial": 3.3934885620103096e-30,
+      "robust_cost_final": 0.001984080902039076,
+      "angular_residual_abs_final": 0.009790951710021645
+    },
+    {
+      "i": 7,
+      "j": 8,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 1.7410406697260612e-30,
+      "squared_residual_final": 0.001040935679165615,
+      "robust_cost_initial": 1.7410406697260612e-30,
+      "robust_cost_final": 0.001040935679165615,
+      "angular_residual_abs_final": 0.006978930981063058
+    },
+    {
+      "i": 8,
+      "j": 9,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 3.4666738998970245e-30,
+      "squared_residual_final": 0.00039596070780566336,
+      "robust_cost_initial": 3.4666738998970245e-30,
+      "robust_cost_final": 0.00039596070780566336,
+      "angular_residual_abs_final": 0.004056689399604352
+    },
+    {
+      "i": 9,
+      "j": 10,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 1.3394244671687527e-29,
+      "squared_residual_final": 9.67949897504927e-05,
+      "robust_cost_initial": 1.3394244671687527e-29,
+      "robust_cost_final": 9.67949897504927e-05,
+      "angular_residual_abs_final": 0.001224107672031849
+    },
+    {
+      "i": 10,
+      "j": 11,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 2.8082466001596383e-30,
+      "squared_residual_final": 8.590845691275955e-05,
+      "robust_cost_initial": 2.8082466001596383e-30,
+      "robust_cost_final": 8.590845691275955e-05,
+      "angular_residual_abs_final": 0.0009767832487264094
+    },
+    {
+      "i": 11,
+      "j": 12,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 4.945788097186422e-30,
+      "squared_residual_final": 0.0002638186772337501,
+      "robust_cost_initial": 4.945788097186422e-30,
+      "robust_cost_final": 0.0002638186772337501,
+      "angular_residual_abs_final": 0.003138408562300299
+    },
+    {
+      "i": 12,
+      "j": 13,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 4.869713864383126e-30,
+      "squared_residual_final": 0.0006477309260904828,
+      "robust_cost_initial": 4.869713864383126e-30,
+      "robust_cost_final": 0.0006477309260904828,
+      "angular_residual_abs_final": 0.005389360857865455
+    },
+    {
+      "i": 13,
+      "j": 14,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 9.451636619029575e-30,
+      "squared_residual_final": 0.0012594328727954082,
+      "robust_cost_initial": 9.451636619029575e-30,
+      "robust_cost_final": 0.0012594328727954082,
+      "angular_residual_abs_final": 0.007722065478428686
+    },
+    {
+      "i": 14,
+      "j": 15,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 1.159897327538289e-29,
+      "squared_residual_final": 0.00207126056382425,
+      "robust_cost_initial": 1.159897327538289e-29,
+      "robust_cost_final": 0.00207126056382425,
+      "angular_residual_abs_final": 0.01001107709976612
+    },
+    {
+      "i": 15,
+      "j": 16,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 8.875648148708576e-30,
+      "squared_residual_final": 0.0011249748777519034,
+      "robust_cost_initial": 8.875648148708576e-30,
+      "robust_cost_final": 0.0011249748777519034,
+      "angular_residual_abs_final": 0.007273744748081512
+    },
+    {
+      "i": 16,
+      "j": 17,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 1.020742870525235e-30,
+      "squared_residual_final": 0.0004651231811058689,
+      "robust_cost_initial": 1.020742870525235e-30,
+      "robust_cost_final": 0.0004651231811058689,
+      "angular_residual_abs_final": 0.004441464510008153
+    },
+    {
+      "i": 17,
+      "j": 18,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 1.0299512230718365e-30,
+      "squared_residual_final": 0.0001318268953809397,
+      "robust_cost_initial": 1.0299512230718365e-30,
+      "robust_cost_final": 0.0001318268953809397,
+      "angular_residual_abs_final": 0.001749795340224125
+    },
+    {
+      "i": 18,
+      "j": 19,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 9.899279914150392e-31,
+      "squared_residual_final": 9.308101232977748e-05,
+      "robust_cost_initial": 9.899279914150392e-31,
+      "robust_cost_final": 9.308101232977748e-05,
+      "angular_residual_abs_final": 0.0010604172592181271
+    },
+    {
+      "i": 19,
+      "j": 0,
+      "label": "loop_closure",
+      "kernel": "linear",
+      "squared_residual_initial": 10.263541902438023,
+      "squared_residual_final": 0.0003657514967389527,
+      "robust_cost_initial": 10.263541902438023,
+      "robust_cost_final": 0.0003657514967389527,
+      "angular_residual_abs_final": 0.0038416152240028367
+    },
+    {
+      "i": 4,
+      "j": 16,
+      "label": "bad_loop_closure",
+      "kernel": "geman_mcclure",
+      "squared_residual_initial": 141.27011423676038,
+      "squared_residual_final": 184.4182274073853,
+      "robust_cost_initial": 0.9929711169112029,
+      "robust_cost_final": 0.9946067869702859,
+      "angular_residual_abs_final": 0.4374688592133822
+    }
+  ],
+  "note": "Local optimum from iterative nonlinear least squares; global optimality is not guaranteed."
+}

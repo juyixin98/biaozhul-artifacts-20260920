@@ -1,0 +1,756 @@
+{
+  "status": "ok",
+  "summary": {
+    "num_nodes": 32,
+    "num_edges": 32,
+    "cost_initial": 2.369412966512248,
+    "cost_final": 0.01421473469713934,
+    "cost_reduction_ratio": 0.9940007356682683,
+    "iterations": 7,
+    "converged": true,
+    "termination_reason": "relative_cost_change_below_ftol",
+    "fixed_nodes": [
+      0
+    ],
+    "auto_anchored_nodes": [
+      16
+    ],
+    "rms_residual_initial": 0.2721105569497585,
+    "rms_residual_final": 0.021076300891892875,
+    "max_angular_residual_initial": 0.038241673971268764,
+    "max_angular_residual_final": 0.009413863914453202
+  },
+  "poses": [
+    {
+      "id": 0,
+      "pose": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "theta_wrapped": 0.0
+    },
+    {
+      "id": 1,
+      "pose": [
+        2.518470641700775,
+        0.040604345696476946,
+        -0.004860851886777873
+      ],
+      "theta_wrapped": -0.004860851886777873
+    },
+    {
+      "id": 2,
+      "pose": [
+        4.954695485917719,
+        0.07355968123533625,
+        -0.0073620510595171496
+      ],
+      "theta_wrapped": -0.0073620510595171496
+    },
+    {
+      "id": 3,
+      "pose": [
+        7.429186142777313,
+        0.08393092633387231,
+        -0.009489663773345036
+      ],
+      "theta_wrapped": -0.009489663773345036
+    },
+    {
+      "id": 4,
+      "pose": [
+        9.944984456051383,
+        0.06101204833436509,
+        1.5621720884655268
+      ],
+      "theta_wrapped": 1.5621720884655268
+    },
+    {
+      "id": 5,
+      "pose": [
+        9.975563846525873,
+        2.523550930071723,
+        1.5556977097115423
+      ],
+      "theta_wrapped": 1.5556977097115423
+    },
+    {
+      "id": 6,
+      "pose": [
+        10.01296657786675,
+        5.052758294855617,
+        1.554151158533628
+      ],
+      "theta_wrapped": 1.554151158533628
+    },
+    {
+      "id": 7,
+      "pose": [
+        10.067976119578935,
+        7.512631363431313,
+        1.5585675832239883
+      ],
+      "theta_wrapped": 1.5585675832239883
+    },
+    {
+      "id": 8,
+      "pose": [
+        10.03487178631533,
+        9.998979977455534,
+        -3.1364726115401784
+      ],
+      "theta_wrapped": -3.1364726115401784
+    },
+    {
+      "id": 9,
+      "pose": [
+        7.671168745498707,
+        10.080846847966844,
+        -3.131967708938402
+      ],
+      "theta_wrapped": -3.131967708938402
+    },
+    {
+      "id": 10,
+      "pose": [
+        5.1936873336775955,
+        10.04582981248731,
+        -3.1247642678367398
+      ],
+      "theta_wrapped": -3.1247642678367398
+    },
+    {
+      "id": 11,
+      "pose": [
+        2.588420176611062,
+        10.057095527432441,
+        -3.1247382541606252
+      ],
+      "theta_wrapped": -3.1247382541606252
+    },
+    {
+      "id": 12,
+      "pose": [
+        -0.011612418919967274,
+        9.980432997839861,
+        -1.5448396550104881
+      ],
+      "theta_wrapped": -1.5448396550104881
+    },
+    {
+      "id": 13,
+      "pose": [
+        -0.028579611781820065,
+        7.504351544565072,
+        -1.5436515437479672
+      ],
+      "theta_wrapped": -1.5436515437479672
+    },
+    {
+      "id": 14,
+      "pose": [
+        -0.02073160806298019,
+        4.99768166881343,
+        -1.553953140163393
+      ],
+      "theta_wrapped": -1.553953140163393
+    },
+    {
+      "id": 15,
+      "pose": [
+        -0.02472574757423256,
+        2.5003657899812515,
+        -1.5613824628804436
+      ],
+      "theta_wrapped": -1.5613824628804436
+    },
+    {
+      "id": 16,
+      "pose": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "theta_wrapped": 0.0
+    },
+    {
+      "id": 17,
+      "pose": [
+        2.509397009535616,
+        -0.026783916288594577,
+        -0.007793417508560108
+      ],
+      "theta_wrapped": -0.007793417508560108
+    },
+    {
+      "id": 18,
+      "pose": [
+        4.887897053062131,
+        0.04402023847878686,
+        0.0015192046723400132
+      ],
+      "theta_wrapped": 0.0015192046723400132
+    },
+    {
+      "id": 19,
+      "pose": [
+        7.371508606765911,
+        0.08583731998763405,
+        0.003805587760238538
+      ],
+      "theta_wrapped": 0.003805587760238538
+    },
+    {
+      "id": 20,
+      "pose": [
+        9.843557892098346,
+        0.1434774099741327,
+        1.5725655828447005
+      ],
+      "theta_wrapped": 1.5725655828447005
+    },
+    {
+      "id": 21,
+      "pose": [
+        9.878715458961175,
+        2.6264559088396235,
+        1.5780689244309745
+      ],
+      "theta_wrapped": 1.5780689244309745
+    },
+    {
+      "id": 22,
+      "pose": [
+        9.833250821793888,
+        5.12058524845683,
+        1.5727826130848026
+      ],
+      "theta_wrapped": 1.5727826130848026
+    },
+    {
+      "id": 23,
+      "pose": [
+        9.872830468036113,
+        7.626363817709462,
+        1.5818689256895517
+      ],
+      "theta_wrapped": 1.5818689256895517
+    },
+    {
+      "id": 24,
+      "pose": [
+        9.828462239954904,
+        10.134782239438167,
+        -3.125911653979649
+      ],
+      "theta_wrapped": -3.125911653979649
+    },
+    {
+      "id": 25,
+      "pose": [
+        7.379859630940628,
+        10.056573068903086,
+        -3.106419919508705
+      ],
+      "theta_wrapped": -3.106419919508705
+    },
+    {
+      "id": 26,
+      "pose": [
+        4.960180890863775,
+        10.057310790949371,
+        -3.1241078777978935
+      ],
+      "theta_wrapped": -3.1241078777978935
+    },
+    {
+      "id": 27,
+      "pose": [
+        2.418553377451667,
+        10.005784186345005,
+        -3.1176043783080942
+      ],
+      "theta_wrapped": -3.1176043783080942
+    },
+    {
+      "id": 28,
+      "pose": [
+        -0.11664163232217015,
+        9.93378078291189,
+        -1.5498825774928096
+      ],
+      "theta_wrapped": -1.5498825774928096
+    },
+    {
+      "id": 29,
+      "pose": [
+        -0.02118071840028097,
+        7.443075239869279,
+        -1.5668942990321078
+      ],
+      "theta_wrapped": -1.5668942990321078
+    },
+    {
+      "id": 30,
+      "pose": [
+        0.0005832123041425181,
+        4.963587955743116,
+        -1.5544425761124743
+      ],
+      "theta_wrapped": -1.5544425761124743
+    },
+    {
+      "id": 31,
+      "pose": [
+        -0.013160765675545938,
+        2.500611559683439,
+        -1.5655097323228233
+      ],
+      "theta_wrapped": -1.5655097323228233
+    }
+  ],
+  "cost_history": [
+    2.369412966512248,
+    0.020930775817517445,
+    0.01539918746768344,
+    0.014318200103610849,
+    0.014217832099835072,
+    0.014214762002323057,
+    0.014214734761026257,
+    0.01421473469713934
+  ],
+  "connectivity": {
+    "num_nodes": 32,
+    "num_edges": 32,
+    "is_connected": false,
+    "num_components": 2,
+    "components": [
+      {
+        "member_nodes": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "num_nodes": 16,
+        "num_edges": 16,
+        "fixed_nodes": [
+          0
+        ],
+        "anchored": true
+      },
+      {
+        "member_nodes": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31
+        ],
+        "num_nodes": 16,
+        "num_edges": 16,
+        "fixed_nodes": [],
+        "anchored": false
+      }
+    ],
+    "unanchored_components": [
+      [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ]
+    ]
+  },
+  "edge_stats": [
+    {
+      "i": 0,
+      "j": 1,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 0.0,
+      "squared_residual_final": 0.0013663496437460734,
+      "robust_cost_initial": 0.0,
+      "robust_cost_final": 0.0013663496437460734,
+      "angular_residual_abs_final": 0.008165222648611525
+    },
+    {
+      "i": 1,
+      "j": 2,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 9.62964972193618e-34,
+      "squared_residual_final": 0.0010031415740808791,
+      "robust_cost_initial": 9.62964972193618e-34,
+      "robust_cost_final": 0.0010031415740808791,
+      "angular_residual_abs_final": 0.0069649448963793326
+    },
+    {
+      "i": 2,
+      "j": 3,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 3.9452674910772526e-30,
+      "squared_residual_final": 0.0006995607550364861,
+      "robust_cost_initial": 3.9452674910772526e-30,
+      "robust_cost_final": 0.0006995607550364861,
+      "angular_residual_abs_final": 0.0057733366756886895
+    },
+    {
+      "i": 3,
+      "j": 4,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 7.890775723397554e-30,
+      "squared_residual_final": 0.0004564461034731808,
+      "robust_cost_initial": 7.890775723397554e-30,
+      "robust_cost_final": 0.0004564461034731808,
+      "angular_residual_abs_final": 0.004601704422149133
+    },
+    {
+      "i": 4,
+      "j": 5,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 7.288681874533494e-30,
+      "squared_residual_final": 8.75928925260183e-05,
+      "robust_cost_initial": 7.288681874533494e-30,
+      "robust_cost_final": 8.75928925260183e-05,
+      "angular_residual_abs_final": 0.001653185627184861
+    },
+    {
+      "i": 5,
+      "j": 6,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 1.3765768595021977e-29,
+      "squared_residual_final": 7.091103157953494e-05,
+      "robust_cost_initial": 1.3765768595021977e-29,
+      "robust_cost_final": 7.091103157953494e-05,
+      "angular_residual_abs_final": 0.001378016331736731
+    },
+    {
+      "i": 6,
+      "j": 7,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 5.23762666907185e-30,
+      "squared_residual_final": 0.00040877747105349957,
+      "robust_cost_initial": 5.23762666907185e-30,
+      "robust_cost_final": 0.00040877747105349957,
+      "angular_residual_abs_final": 0.004335002885176742
+    },
+    {
+      "i": 7,
+      "j": 8,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 8.936314941956774e-30,
+      "squared_residual_final": 0.0010933497096523091,
+      "robust_cost_initial": 8.936314941956774e-30,
+      "robust_cost_final": 0.0010933497096523091,
+      "angular_residual_abs_final": 0.007281542467465485
+    },
+    {
+      "i": 8,
+      "j": 9,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 9.248315592947507e-30,
+      "squared_residual_final": 0.000814838543162387,
+      "robust_cost_initial": 9.248315592947507e-30,
+      "robust_cost_final": 0.000814838543162387,
+      "angular_residual_abs_final": 0.006252623522327916
+    },
+    {
+      "i": 9,
+      "j": 10,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 1.5407439555097887e-32,
+      "squared_residual_final": 0.0005389951783466912,
+      "robust_cost_initial": 1.5407439555097887e-32,
+      "robust_cost_final": 0.0005389951783466912,
+      "angular_residual_abs_final": 0.005030221791436862
+    },
+    {
+      "i": 10,
+      "j": 11,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 1.227298857060766e-29,
+      "squared_residual_final": 0.00032204635401030684,
+      "robust_cost_initial": 1.227298857060766e-29,
+      "robust_cost_final": 0.00032204635401030684,
+      "angular_residual_abs_final": 0.0038020637473845653
+    },
+    {
+      "i": 11,
+      "j": 12,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 5.334825945952643e-30,
+      "squared_residual_final": 0.00015511255411707512,
+      "robust_cost_initial": 5.334825945952643e-30,
+      "robust_cost_final": 0.00015511255411707512,
+      "angular_residual_abs_final": 0.0024716386314778127
+    },
+    {
+      "i": 12,
+      "j": 13,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 1.5777218104420236e-29,
+      "squared_residual_final": 3.766697489654997e-05,
+      "robust_cost_initial": 1.5777218104420236e-29,
+      "robust_cost_final": 3.766697489654997e-05,
+      "angular_residual_abs_final": 0.0004865361797063983
+    },
+    {
+      "i": 13,
+      "j": 14,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 3.9529712108548016e-30,
+      "squared_residual_final": 0.00027365762635720375,
+      "robust_cost_initial": 3.9529712108548016e-30,
+      "robust_cost_final": 0.00027365762635720375,
+      "angular_residual_abs_final": 0.0034693297976202686
+    },
+    {
+      "i": 14,
+      "j": 15,
+      "label": "odometry",
+      "kernel": "linear",
+      "squared_residual_initial": 8.666684749742561e-33,
+      "squared_residual_final": 0.0008641116225534703,
+      "robust_cost_initial": 8.666684749742561e-33,
+      "robust_cost_final": 0.0008641116225534703,
+      "angular_residual_abs_final": 0.006446623038528276
+    },
+    {
+      "i": 15,
+      "j": 0,
+      "label": "loop_closure",
+      "kernel": "linear",
+      "squared_residual_initial": 1.4860511891627803,
+      "squared_residual_final": 0.001805349329989926,
+      "robust_cost_initial": 1.4860511891627803,
+      "robust_cost_final": 0.001805349329989926,
+      "angular_residual_abs_final": 0.009413863914453202
+    },
+    {
+      "i": 16,
+      "j": 17,
+      "label": "odometry_b",
+      "kernel": "linear",
+      "squared_residual_initial": 0.0,
+      "squared_residual_final": 0.0002767405056345589,
+      "robust_cost_initial": 0.0,
+      "robust_cost_final": 0.0002767405056345589,
+      "angular_residual_abs_final": 0.003662782074641324
+    },
+    {
+      "i": 17,
+      "j": 18,
+      "label": "odometry_b",
+      "kernel": "linear",
+      "squared_residual_initial": 3.9481563859938335e-30,
+      "squared_residual_final": 9.907698685758596e-05,
+      "robust_cost_initial": 3.9481563859938335e-30,
+      "robust_cost_final": 9.907698685758596e-05,
+      "angular_residual_abs_final": 0.0021290365394723842
+    },
+    {
+      "i": 18,
+      "j": 19,
+      "label": "odometry_b",
+      "kernel": "linear",
+      "squared_residual_initial": 3.9452674910772526e-30,
+      "squared_residual_final": 1.3948761801131703e-05,
+      "robust_cost_initial": 3.9452674910772526e-30,
+      "robust_cost_final": 1.3948761801131703e-05,
+      "angular_residual_abs_final": 0.0005257236100781881
+    },
+    {
+      "i": 19,
+      "j": 20,
+      "label": "odometry_b",
+      "kernel": "linear",
+      "squared_residual_initial": 3.9529712108548016e-30,
+      "squared_residual_final": 3.1286273026087746e-05,
+      "robust_cost_initial": 3.9529712108548016e-30,
+      "robust_cost_final": 3.1286273026087746e-05,
+      "angular_residual_abs_final": 0.0010692337561568621
+    },
+    {
+      "i": 20,
+      "j": 21,
+      "label": "odometry_b",
+      "kernel": "linear",
+      "squared_residual_initial": 4.6463059908342065e-30,
+      "squared_residual_final": 2.6614254319916458e-05,
+      "robust_cost_initial": 4.6463059908342065e-30,
+      "robust_cost_final": 2.6614254319916458e-05,
+      "angular_residual_abs_final": 0.0009537608738652281
+    },
+    {
+      "i": 21,
+      "j": 22,
+      "label": "odometry_b",
+      "kernel": "linear",
+      "squared_residual_initial": 1.3294935147348137e-29,
+      "squared_residual_final": 2.0762699356654818e-05,
+      "robust_cost_initial": 1.3294935147348137e-29,
+      "robust_cost_final": 2.0762699356654818e-05,
+      "angular_residual_abs_final": 0.000785545652534303
+    },
+    {
+      "i": 22,
+      "j": 23,
+      "label": "odometry_b",
+      "kernel": "linear",
+      "squared_residual_initial": 9.075944862924849e-30,
+      "squared_residual_final": 1.7443682061542417e-05,
+      "robust_cost_initial": 9.075944862924849e-30,
+      "robust_cost_final": 1.7443682061542417e-05,
+      "angular_residual_abs_final": 0.0006716628810474745
+    },
+    {
+      "i": 23,
+      "j": 24,
+      "label": "odometry_b",
+      "kernel": "linear",
+      "squared_residual_initial": 1.4646697227064929e-30,
+      "squared_residual_final": 1.3488520874967776e-05,
+      "robust_cost_initial": 1.4646697227064929e-30,
+      "robust_cost_final": 1.3488520874967776e-05,
+      "angular_residual_abs_final": 0.0005033615857854556
+    },
+    {
+      "i": 24,
+      "j": 25,
+      "label": "odometry_b",
+      "kernel": "linear",
+      "squared_residual_initial": 9.65372384624102e-30,
+      "squared_residual_final": 3.154619608680133e-05,
+      "robust_cost_initial": 9.65372384624102e-30,
+      "robust_cost_final": 3.154619608680133e-05,
+      "angular_residual_abs_final": 0.00107529371247983
+    },
+    {
+      "i": 25,
+      "j": 26,
+      "label": "odometry_b",
+      "kernel": "linear",
+      "squared_residual_initial": 4.660750465417111e-31,
+      "squared_residual_final": 0.00014777549071550848,
+      "robust_cost_initial": 4.660750465417111e-31,
+      "robust_cost_final": 0.00014777549071550848,
+      "angular_residual_abs_final": 0.002639644150545184
+    },
+    {
+      "i": 26,
+      "j": 27,
+      "label": "odometry_b",
+      "kernel": "linear",
+      "squared_residual_initial": 1.4460122763702415e-29,
+      "squared_residual_final": 0.00037477621264824163,
+      "robust_cost_initial": 1.4460122763702415e-29,
+      "robust_cost_final": 0.00037477621264824163,
+      "angular_residual_abs_final": 0.004279924917593547
+    },
+    {
+      "i": 27,
+      "j": 28,
+      "label": "odometry_b",
+      "kernel": "linear",
+      "squared_residual_initial": 8.52284185702114e-31,
+      "squared_residual_final": 0.0007081436655460891,
+      "robust_cost_initial": 8.52284185702114e-31,
+      "robust_cost_final": 0.0007081436655460891,
+      "angular_residual_abs_final": 0.005914907432115868
+    },
+    {
+      "i": 28,
+      "j": 29,
+      "label": "odometry_b",
+      "kernel": "linear",
+      "squared_residual_initial": 1.5792625543975334e-29,
+      "squared_residual_final": 0.0006615454257781114,
+      "robust_cost_initial": 1.5792625543975334e-29,
+      "robust_cost_final": 0.0006615454257781114,
+      "angular_residual_abs_final": 0.005714561921490446
+    },
+    {
+      "i": 29,
+      "j": 30,
+      "label": "odometry_b",
+      "kernel": "linear",
+      "squared_residual_initial": 3.947253606332402e-30,
+      "squared_residual_final": 0.0006272460019593983,
+      "robust_cost_initial": 3.947253606332402e-30,
+      "robust_cost_final": 0.0006272460019593983,
+      "angular_residual_abs_final": 0.005562485664859729
+    },
+    {
+      "i": 30,
+      "j": 31,
+      "label": "odometry_b",
+      "kernel": "linear",
+      "squared_residual_initial": 3.9529712108548016e-30,
+      "squared_residual_final": 0.0005990499672590434,
+      "robust_cost_initial": 3.9529712108548016e-30,
+      "robust_cost_final": 0.0005990499672590434,
+      "angular_residual_abs_final": 0.005434284225308339
+    },
+    {
+      "i": 31,
+      "j": 16,
+      "label": "loop_closure_b",
+      "kernel": "linear",
+      "squared_residual_initial": 0.8833617773494677,
+      "squared_residual_final": 0.000567382688632111,
+      "robust_cost_initial": 0.8833617773494677,
+      "robust_cost_final": 0.000567382688632111,
+      "angular_residual_abs_final": 0.005286594472073247
+    }
+  ],
+  "note": "Local optimum from iterative nonlinear least squares; global optimality is not guaranteed."
+}
