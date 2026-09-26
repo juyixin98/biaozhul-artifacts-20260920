@@ -1,0 +1,11 @@
+{
+  "description": "rectangle room with 180 outliers and 70% overlap",
+  "ground_truth_pose": [
+    0.8,
+    -0.5,
+    0.15
+  ],
+  "noise_sigma": 0.01,
+  "outlier_count": 180,
+  "overlap_ratio": 0.7
+}

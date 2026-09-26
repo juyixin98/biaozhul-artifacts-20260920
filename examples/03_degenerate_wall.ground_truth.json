@@ -1,0 +1,11 @@
+{
+  "description": "single straight wall: along-wall translation unobservable",
+  "ground_truth_pose": [
+    1.0,
+    0.3,
+    0.0
+  ],
+  "noise_sigma": 0.005,
+  "outlier_count": 0,
+  "overlap_ratio": 1.0
+}

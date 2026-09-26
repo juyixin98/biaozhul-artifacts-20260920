@@ -1,0 +1,11 @@
+{
+  "description": "square room with a quarter-turn initial guess (symmetry trap)",
+  "ground_truth_pose": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "noise_sigma": 0.005,
+  "outlier_count": 0,
+  "overlap_ratio": 1.0
+}

@@ -1,0 +1,11 @@
+{
+  "description": "rectangle room, known transform, light sensor noise",
+  "ground_truth_pose": [
+    0.8,
+    -0.5,
+    0.15
+  ],
+  "noise_sigma": 0.01,
+  "outlier_count": 0,
+  "overlap_ratio": 1.0
+}

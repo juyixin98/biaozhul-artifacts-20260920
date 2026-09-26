@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "icp2d"
+version = "0.1.0"
+description = "Offline point-to-point 2D ICP laser scan matching (NumPy only)"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[tool.setuptools.packages.find]
+include = ["icp2d*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,11 @@
+{
+  "description": "initial guess 10 m off: correspondence gate rejects everything",
+  "ground_truth_pose": [
+    0.8,
+    -0.5,
+    0.15
+  ],
+  "noise_sigma": 0.0,
+  "outlier_count": 0,
+  "overlap_ratio": 1.0
+}
