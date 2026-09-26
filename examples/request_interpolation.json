@@ -1,0 +1,13 @@
+{
+  "transforms": [
+    {"parent": "world", "child": "cam", "time": 0.0,
+     "translation": [0, 0, 0], "rotation_xyzw": [0, 0, 0, 1]},
+    {"parent": "world", "child": "cam", "time": 10.0,
+     "translation": [10, 0, 0], "rotation_xyzw": [0, 0, 0.7071067811865476, 0.7071067811865476]}
+  ],
+  "queries": [
+    {"target": "world", "source": "cam", "time": 5.0},
+    {"target": "world", "source": "cam", "time": 0.0},
+    {"target": "world", "source": "cam", "time": -1.0}
+  ]
+}

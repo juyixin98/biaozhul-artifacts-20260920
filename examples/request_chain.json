@@ -1,0 +1,22 @@
+{
+  "transforms": [
+    {"parent": "world", "child": "base", "time": 0.0,
+     "translation": [1, 0, 0], "rotation_xyzw": [0, 0, 0, 1]},
+    {"parent": "world", "child": "base", "time": 10.0,
+     "translation": [1, 0, 0], "rotation_xyzw": [0, 0, 0, 1]},
+    {"parent": "base", "child": "arm", "time": 0.0,
+     "translation": [0, 1, 0], "rotation_xyzw": [0, 0, 0.7071067811865476, 0.7071067811865476]},
+    {"parent": "base", "child": "arm", "time": 10.0,
+     "translation": [0, 1, 0], "rotation_xyzw": [0, 0, 0.7071067811865476, 0.7071067811865476]},
+    {"parent": "arm", "child": "tool", "time": 0.0,
+     "translation": [0, 0, 1], "rotation_xyzw": [0, 0, 0, 1]},
+    {"parent": "arm", "child": "tool", "time": 10.0,
+     "translation": [0, 0, 1], "rotation_xyzw": [0, 0, 0, 1]}
+  ],
+  "queries": [
+    {"target": "world", "source": "tool", "time": 5.0},
+    {"target": "tool", "source": "world", "time": 5.0},
+    {"target": "base", "source": "tool", "time": 5.0},
+    {"target": "world", "source": "tool", "time": 10.5}
+  ]
+}
