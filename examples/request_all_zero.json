@@ -1,0 +1,11 @@
+{
+  "num_vertices": 3,
+  "source": 0,
+  "sink": 2,
+  "edges": [
+    {"id": "a", "from": 0, "to": 1, "capacity": 0},
+    {"id": "b", "from": 1, "to": 2, "capacity": 0},
+    {"id": "c", "from": 0, "to": 2, "capacity": 0}
+  ],
+  "bruteforce": true
+}

@@ -1,0 +1,5 @@
+{
+  "error_code": "INVALID_REQUEST",
+  "message": "edges[0].capacity must be nonnegative, got -5",
+  "status": "error"
+}

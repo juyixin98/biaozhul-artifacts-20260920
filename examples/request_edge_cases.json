@@ -1,0 +1,16 @@
+{
+  "num_vertices": 4,
+  "source": 0,
+  "sink": 3,
+  "edges": [
+    {"id": "p1", "from": 0, "to": 1, "capacity": 4},
+    {"id": "p2", "from": 0, "to": 1, "capacity": 3},
+    {"id": "p3", "from": 0, "to": 1, "capacity": 0},
+    {"id": "back", "from": 1, "to": 0, "capacity": 10},
+    {"id": "loop", "from": 2, "to": 2, "capacity": 99},
+    {"id": "e1", "from": 1, "to": 2, "capacity": 0},
+    {"id": "e2", "from": 1, "to": 3, "capacity": 5},
+    {"id": "e3", "from": 2, "to": 3, "capacity": 6}
+  ],
+  "bruteforce": true
+}

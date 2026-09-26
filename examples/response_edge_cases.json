@@ -1,0 +1,153 @@
+{
+  "bruteforce": {
+    "enabled": true,
+    "matches_max_flow": true,
+    "min_cut_value": 5,
+    "partitions_checked": 4,
+    "reference_source_side": [
+      0,
+      1
+    ]
+  },
+  "flow": [
+    {
+      "capacity": 4,
+      "flow": 4,
+      "from": 0,
+      "id": "p1",
+      "to": 1
+    },
+    {
+      "capacity": 3,
+      "flow": 1,
+      "from": 0,
+      "id": "p2",
+      "to": 1
+    },
+    {
+      "capacity": 0,
+      "flow": 0,
+      "from": 0,
+      "id": "p3",
+      "to": 1
+    },
+    {
+      "capacity": 10,
+      "flow": 0,
+      "from": 1,
+      "id": "back",
+      "to": 0
+    },
+    {
+      "capacity": 99,
+      "flow": 0,
+      "from": 2,
+      "id": "loop",
+      "to": 2
+    },
+    {
+      "capacity": 0,
+      "flow": 0,
+      "from": 1,
+      "id": "e1",
+      "to": 2
+    },
+    {
+      "capacity": 5,
+      "flow": 5,
+      "from": 1,
+      "id": "e2",
+      "to": 3
+    },
+    {
+      "capacity": 6,
+      "flow": 0,
+      "from": 2,
+      "id": "e3",
+      "to": 3
+    }
+  ],
+  "input": {
+    "num_vertices": 4,
+    "sink": 3,
+    "source": 0
+  },
+  "max_flow_value": 5,
+  "min_cut": {
+    "cut_edge_ids": [
+      "e1",
+      "e2"
+    ],
+    "cut_edges": [
+      {
+        "capacity": 0,
+        "flow": 0,
+        "from": 1,
+        "id": "e1",
+        "to": 2
+      },
+      {
+        "capacity": 5,
+        "flow": 5,
+        "from": 1,
+        "id": "e2",
+        "to": 3
+      }
+    ],
+    "cut_value": 5,
+    "sink_side": [
+      2,
+      3
+    ],
+    "source_side": [
+      0,
+      1
+    ]
+  },
+  "status": "ok",
+  "verification": {
+    "checks": [
+      {
+        "name": "flow_count_matches_edges",
+        "passed": true
+      },
+      {
+        "name": "partition_covers_all_vertices",
+        "passed": true
+      },
+      {
+        "name": "capacity_constraints",
+        "passed": true
+      },
+      {
+        "name": "flow_conservation",
+        "passed": true
+      },
+      {
+        "name": "source_sink_balance",
+        "passed": true
+      },
+      {
+        "name": "claimed_value_matches_flow",
+        "passed": true
+      },
+      {
+        "name": "partition_is_residual_reachable_set",
+        "passed": true
+      },
+      {
+        "name": "cut_edges_saturated",
+        "passed": true
+      },
+      {
+        "name": "cut_value_equals_flow_value",
+        "passed": true
+      }
+    ],
+    "cut_value": 5,
+    "failures": [],
+    "ok": true,
+    "sink_inflow": 5,
+    "source_outflow": 5
+  }
+}

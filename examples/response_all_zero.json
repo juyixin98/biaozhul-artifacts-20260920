@@ -1,0 +1,116 @@
+{
+  "bruteforce": {
+    "enabled": true,
+    "matches_max_flow": true,
+    "min_cut_value": 0,
+    "partitions_checked": 2,
+    "reference_source_side": [
+      0
+    ]
+  },
+  "flow": [
+    {
+      "capacity": 0,
+      "flow": 0,
+      "from": 0,
+      "id": "a",
+      "to": 1
+    },
+    {
+      "capacity": 0,
+      "flow": 0,
+      "from": 1,
+      "id": "b",
+      "to": 2
+    },
+    {
+      "capacity": 0,
+      "flow": 0,
+      "from": 0,
+      "id": "c",
+      "to": 2
+    }
+  ],
+  "input": {
+    "num_vertices": 3,
+    "sink": 2,
+    "source": 0
+  },
+  "max_flow_value": 0,
+  "min_cut": {
+    "cut_edge_ids": [
+      "a",
+      "c"
+    ],
+    "cut_edges": [
+      {
+        "capacity": 0,
+        "flow": 0,
+        "from": 0,
+        "id": "a",
+        "to": 1
+      },
+      {
+        "capacity": 0,
+        "flow": 0,
+        "from": 0,
+        "id": "c",
+        "to": 2
+      }
+    ],
+    "cut_value": 0,
+    "sink_side": [
+      1,
+      2
+    ],
+    "source_side": [
+      0
+    ]
+  },
+  "status": "ok",
+  "verification": {
+    "checks": [
+      {
+        "name": "flow_count_matches_edges",
+        "passed": true
+      },
+      {
+        "name": "partition_covers_all_vertices",
+        "passed": true
+      },
+      {
+        "name": "capacity_constraints",
+        "passed": true
+      },
+      {
+        "name": "flow_conservation",
+        "passed": true
+      },
+      {
+        "name": "source_sink_balance",
+        "passed": true
+      },
+      {
+        "name": "claimed_value_matches_flow",
+        "passed": true
+      },
+      {
+        "name": "partition_is_residual_reachable_set",
+        "passed": true
+      },
+      {
+        "name": "cut_edges_saturated",
+        "passed": true
+      },
+      {
+        "name": "cut_value_equals_flow_value",
+        "passed": true
+      }
+    ],
+    "cut_value": 0,
+    "failures": [],
+    "ok": true,
+    "sink_inflow": 0,
+    "source_outflow": 0
+  }
+}

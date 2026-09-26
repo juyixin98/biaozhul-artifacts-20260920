@@ -1,0 +1,179 @@
+{
+  "bruteforce": {
+    "enabled": true,
+    "matches_max_flow": true,
+    "min_cut_value": 23,
+    "partitions_checked": 16,
+    "reference_source_side": [
+      0,
+      1,
+      2,
+      4
+    ]
+  },
+  "flow": [
+    {
+      "capacity": 16,
+      "flow": 12,
+      "from": 0,
+      "id": "s-a",
+      "to": 1
+    },
+    {
+      "capacity": 13,
+      "flow": 11,
+      "from": 0,
+      "id": "s-b",
+      "to": 2
+    },
+    {
+      "capacity": 10,
+      "flow": 0,
+      "from": 1,
+      "id": "a-b",
+      "to": 2
+    },
+    {
+      "capacity": 12,
+      "flow": 12,
+      "from": 1,
+      "id": "a-c",
+      "to": 3
+    },
+    {
+      "capacity": 4,
+      "flow": 0,
+      "from": 2,
+      "id": "b-a",
+      "to": 1
+    },
+    {
+      "capacity": 14,
+      "flow": 11,
+      "from": 2,
+      "id": "b-d",
+      "to": 4
+    },
+    {
+      "capacity": 9,
+      "flow": 0,
+      "from": 3,
+      "id": "c-b",
+      "to": 2
+    },
+    {
+      "capacity": 20,
+      "flow": 19,
+      "from": 3,
+      "id": "c-t",
+      "to": 5
+    },
+    {
+      "capacity": 7,
+      "flow": 7,
+      "from": 4,
+      "id": "d-c",
+      "to": 3
+    },
+    {
+      "capacity": 4,
+      "flow": 4,
+      "from": 4,
+      "id": "d-t",
+      "to": 5
+    }
+  ],
+  "input": {
+    "num_vertices": 6,
+    "sink": 5,
+    "source": 0
+  },
+  "max_flow_value": 23,
+  "min_cut": {
+    "cut_edge_ids": [
+      "a-c",
+      "d-c",
+      "d-t"
+    ],
+    "cut_edges": [
+      {
+        "capacity": 12,
+        "flow": 12,
+        "from": 1,
+        "id": "a-c",
+        "to": 3
+      },
+      {
+        "capacity": 7,
+        "flow": 7,
+        "from": 4,
+        "id": "d-c",
+        "to": 3
+      },
+      {
+        "capacity": 4,
+        "flow": 4,
+        "from": 4,
+        "id": "d-t",
+        "to": 5
+      }
+    ],
+    "cut_value": 23,
+    "sink_side": [
+      3,
+      5
+    ],
+    "source_side": [
+      0,
+      1,
+      2,
+      4
+    ]
+  },
+  "status": "ok",
+  "verification": {
+    "checks": [
+      {
+        "name": "flow_count_matches_edges",
+        "passed": true
+      },
+      {
+        "name": "partition_covers_all_vertices",
+        "passed": true
+      },
+      {
+        "name": "capacity_constraints",
+        "passed": true
+      },
+      {
+        "name": "flow_conservation",
+        "passed": true
+      },
+      {
+        "name": "source_sink_balance",
+        "passed": true
+      },
+      {
+        "name": "claimed_value_matches_flow",
+        "passed": true
+      },
+      {
+        "name": "partition_is_residual_reachable_set",
+        "passed": true
+      },
+      {
+        "name": "cut_edges_saturated",
+        "passed": true
+      },
+      {
+        "name": "cut_value_equals_flow_value",
+        "passed": true
+      }
+    ],
+    "cut_value": 23,
+    "failures": [],
+    "ok": true,
+    "sink_inflow": 23,
+    "source_outflow": 23
+  }
+}

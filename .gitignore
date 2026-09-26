@@ -1,0 +1,9 @@
+# Build artifacts
+/mincut-backend
+/build/
+*.o
+*.out
+
+# Editor/OS files
+*.swp
+.DS_Store
