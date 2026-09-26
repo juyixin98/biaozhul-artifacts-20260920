@@ -1,0 +1,195 @@
+{
+  "scenario": "graceful-shutdown acceptance: long+stream requests interleaved with repeated shutdown signals",
+  "started_at": "2026-09-25T18:55:04.00985538+08:00",
+  "ended_at": "2026-09-25T18:55:06.314746769+08:00",
+  "checks": [
+    {
+      "name": "liveness_ok_before_shutdown",
+      "passed": true,
+      "detail": "GET /healthz -\u003e 200"
+    },
+    {
+      "name": "readiness_ok_before_shutdown",
+      "passed": true,
+      "detail": "GET /readyz -\u003e 200"
+    },
+    {
+      "name": "background_task_accepted_before_shutdown",
+      "passed": true,
+      "detail": "POST /task -\u003e 202"
+    },
+    {
+      "name": "first_shutdown_signal_accepted",
+      "passed": true,
+      "detail": "POST /shutdown -\u003e 202"
+    },
+    {
+      "name": "second_shutdown_signal_idempotent",
+      "passed": true,
+      "detail": "POST /shutdown again -\u003e 202"
+    },
+    {
+      "name": "readiness_fails_after_stop_accepting",
+      "passed": true,
+      "detail": "GET /readyz -\u003e 503"
+    },
+    {
+      "name": "liveness_still_ok_after_stop_accepting",
+      "passed": true,
+      "detail": "GET /healthz -\u003e 200"
+    },
+    {
+      "name": "new_request_rejected_after_stop_accepting",
+      "passed": true,
+      "detail": "GET /work -\u003e 503"
+    },
+    {
+      "name": "no_new_background_tasks_after_stop_accepting",
+      "passed": true,
+      "detail": "POST /task -\u003e 503"
+    },
+    {
+      "name": "long_request_completed",
+      "passed": true,
+      "detail": "status=200 body={\"outcome\":\"completed\",\"result\":\"result(long)\"}"
+    },
+    {
+      "name": "stream_request_completed",
+      "passed": true,
+      "detail": "status=200 body=\"chunk 1/4\\nchunk 2/4\\nchunk 3/4\\nchunk 4/4\""
+    },
+    {
+      "name": "too_long_request_explicitly_cancelled",
+      "passed": true,
+      "detail": "status=499 body={\"outcome\":\"cancelled\",\"reason\":\"context canceled\"}"
+    },
+    {
+      "name": "shutdown_reached_done_phase",
+      "passed": true,
+      "detail": "phase=done"
+    },
+    {
+      "name": "drain_timed_out_as_expected",
+      "passed": true,
+      "detail": "drain_timed_out=true"
+    },
+    {
+      "name": "shutdown_signals_counted",
+      "passed": true,
+      "detail": "signals=2"
+    },
+    {
+      "name": "rejected_requests_counted",
+      "passed": true,
+      "detail": "rejected=1"
+    },
+    {
+      "name": "rejected_tasks_counted",
+      "passed": true,
+      "detail": "rejected=1"
+    },
+    {
+      "name": "phase_sequence_exact",
+      "passed": true,
+      "detail": "phases=[receiving draining cancelling closing done]"
+    },
+    {
+      "name": "resources_closed_in_lifo_order",
+      "passed": true,
+      "detail": "close_order=[{Order:1 Name:fake-queue} {Order:2 Name:fake-db}]"
+    },
+    {
+      "name": "all_accepted_work_has_terminal_outcome",
+      "passed": true,
+      "detail": "ledger=4 entries, completed=3 cancelled=1"
+    },
+    {
+      "name": "both_outcomes_observed",
+      "passed": true,
+      "detail": "completed=3 cancelled=1"
+    }
+  ],
+  "requests": [
+    {
+      "label": "stream-request",
+      "status": 200,
+      "body": "chunk 1/4\nchunk 2/4\nchunk 3/4\nchunk 4/4",
+      "duration": "603ms"
+    },
+    {
+      "label": "long-request",
+      "status": 200,
+      "body": "{\"outcome\":\"completed\",\"result\":\"result(long)\"}",
+      "duration": "801ms"
+    },
+    {
+      "label": "too-long-request",
+      "status": 499,
+      "body": "{\"outcome\":\"cancelled\",\"reason\":\"context canceled\"}",
+      "duration": "2.303s"
+    }
+  ],
+  "final_state": {
+    "phase": "done",
+    "accepting": false,
+    "in_flight": 0,
+    "drain_timed_out": true,
+    "shutdown_signals": 2,
+    "rejected_requests": 1,
+    "rejected_tasks": 1,
+    "phase_log": [
+      {
+        "phase": "receiving"
+      },
+      {
+        "phase": "draining"
+      },
+      {
+        "phase": "cancelling"
+      },
+      {
+        "phase": "closing"
+      },
+      {
+        "phase": "done"
+      }
+    ],
+    "close_order": [
+      {
+        "order": 1,
+        "name": "fake-queue"
+      },
+      {
+        "order": 2,
+        "name": "fake-db"
+      }
+    ],
+    "ledger": [
+      {
+        "id": 1,
+        "path": "/work?ms=800\u0026q=long",
+        "kind": "request",
+        "outcome": "completed"
+      },
+      {
+        "id": 2,
+        "path": "/task?msg=pre-shutdown-job",
+        "kind": "background-task",
+        "outcome": "completed"
+      },
+      {
+        "id": 3,
+        "path": "/stream?chunks=4\u0026interval_ms=150",
+        "kind": "request",
+        "outcome": "completed"
+      },
+      {
+        "id": 4,
+        "path": "/work?ms=30000\u0026q=stuck",
+        "kind": "request",
+        "outcome": "cancelled"
+      }
+    ]
+  },
+  "passed": true
+}
