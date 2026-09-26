@@ -1,0 +1,11 @@
+{
+  "n": 2,
+  "algorithm": "segment-tree",
+  "operations": [
+    {"type": "add", "u": 0, "v": 1},
+    {"type": "add", "u": 0, "v": 1},
+    {"type": "query", "u": 0, "v": 1},
+    {"type": "delete", "edge_id": 0},
+    {"type": "query", "u": 0, "v": 1}
+  ]
+}

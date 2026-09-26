@@ -1,0 +1,8 @@
+{
+  "ok": false,
+  "error": {
+    "code": "duplicate_delete",
+    "message": "op[2]: duplicate delete of edge_id 0: instance was already deleted",
+    "op_index": 2
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "n": 6,
+  "algorithm": "segment-tree",
+  "operations": [
+    {"type": "add", "u": 0, "v": 1},
+    {"type": "add", "u": 1, "v": 2},
+    {"type": "add", "u": 3, "v": 4},
+    {"type": "query", "u": 0, "v": 2},
+    {"type": "query", "u": 0, "v": 3},
+    {"type": "add", "u": 2, "v": 3},
+    {"type": "query", "u": 0, "v": 4},
+    {"type": "delete", "edge_id": 3},
+    {"type": "query", "u": 0, "v": 4},
+    {"type": "query", "u": 3, "v": 4}
+  ]
+}

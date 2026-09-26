@@ -1,0 +1,59 @@
+{
+  "ok": true,
+  "algorithm": "segment-tree",
+  "n": 6,
+  "edge_ids": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "results": [
+    {
+      "op_index": 3,
+      "t": 3,
+      "u": 0,
+      "v": 2,
+      "connected": true
+    },
+    {
+      "op_index": 4,
+      "t": 4,
+      "u": 0,
+      "v": 3,
+      "connected": false
+    },
+    {
+      "op_index": 6,
+      "t": 6,
+      "u": 0,
+      "v": 4,
+      "connected": true
+    },
+    {
+      "op_index": 8,
+      "t": 8,
+      "u": 0,
+      "v": 4,
+      "connected": false
+    },
+    {
+      "op_index": 9,
+      "t": 9,
+      "u": 3,
+      "v": 4,
+      "connected": true
+    }
+  ],
+  "stats": {
+    "num_vertices": 6,
+    "num_operations": 10,
+    "num_adds": 4,
+    "num_deletes": 1,
+    "num_queries": 5,
+    "segment_placements": 4,
+    "union_calls": 4,
+    "merge_calls": 4,
+    "max_rollback_stack": 4
+  }
+}

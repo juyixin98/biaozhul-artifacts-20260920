@@ -1,0 +1,8 @@
+{
+  "n": 2,
+  "operations": [
+    {"type": "add", "u": 0, "v": 1},
+    {"type": "delete", "edge_id": 0},
+    {"type": "delete", "edge_id": 0}
+  ]
+}
