@@ -1,0 +1,13 @@
+{
+  "zoneId": "Australia/Sydney",
+  "fromDate": "2026-12-29",
+  "toDate": "2027-01-04",
+  "rules": [
+    { "ruleId": "daily-0900", "type": "daily", "localTime": "09:00" },
+    { "ruleId": "midnight-first", "type": "cron", "cron": "0 0 1 * *" }
+  ],
+  "gapPolicy": "later",
+  "overlapPolicy": "earlier",
+  "sort": true,
+  "deduplicate": true
+}

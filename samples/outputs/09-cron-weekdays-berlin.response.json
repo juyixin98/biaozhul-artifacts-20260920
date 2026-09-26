@@ -1,0 +1,101 @@
+{
+  "success" : true,
+  "zoneId" : "Europe/Berlin",
+  "fromDate" : "2026-03-23",
+  "toDate" : "2026-03-29",
+  "zoneRules" : {
+    "tzdbVersion" : "2026b",
+    "javaVersion" : "21.0.12.1",
+    "relevantTransitions" : [ {
+      "utcInstant" : "2026-03-29T01:00:00Z",
+      "offsetBeforeSeconds" : 3600,
+      "offsetAfterSeconds" : 7200,
+      "type" : "GAP"
+    } ]
+  },
+  "policies" : {
+    "gapPolicy" : "earlier",
+    "overlapPolicy" : "later"
+  },
+  "totalRules" : 3,
+  "candidateCount" : 12,
+  "occurrenceCount" : 12,
+  "skippedCount" : 0,
+  "duplicateCount" : 0,
+  "sorted" : true,
+  "deduplicated" : true,
+  "occurrences" : [ {
+    "utcInstant" : "2026-03-23T08:00:00Z",
+    "ruleId" : "weekday-0900",
+    "localDateTime" : "2026-03-23T09:00",
+    "offsetSeconds" : 3600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2026-03-23T09:00:00Z",
+    "ruleId" : "quarter-hourly-monday",
+    "localDateTime" : "2026-03-23T10:00",
+    "offsetSeconds" : 3600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2026-03-23T09:15:00Z",
+    "ruleId" : "quarter-hourly-monday",
+    "localDateTime" : "2026-03-23T10:15",
+    "offsetSeconds" : 3600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2026-03-23T09:30:00Z",
+    "ruleId" : "quarter-hourly-monday",
+    "localDateTime" : "2026-03-23T10:30",
+    "offsetSeconds" : 3600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2026-03-23T09:45:00Z",
+    "ruleId" : "quarter-hourly-monday",
+    "localDateTime" : "2026-03-23T10:45",
+    "offsetSeconds" : 3600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2026-03-23T17:30:00Z",
+    "ruleId" : "backup-evening",
+    "localDateTime" : "2026-03-23T18:30",
+    "offsetSeconds" : 3600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2026-03-24T08:00:00Z",
+    "ruleId" : "weekday-0900",
+    "localDateTime" : "2026-03-24T09:00",
+    "offsetSeconds" : 3600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2026-03-25T08:00:00Z",
+    "ruleId" : "weekday-0900",
+    "localDateTime" : "2026-03-25T09:00",
+    "offsetSeconds" : 3600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2026-03-25T17:30:00Z",
+    "ruleId" : "backup-evening",
+    "localDateTime" : "2026-03-25T18:30",
+    "offsetSeconds" : 3600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2026-03-26T08:00:00Z",
+    "ruleId" : "weekday-0900",
+    "localDateTime" : "2026-03-26T09:00",
+    "offsetSeconds" : 3600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2026-03-27T08:00:00Z",
+    "ruleId" : "weekday-0900",
+    "localDateTime" : "2026-03-27T09:00",
+    "offsetSeconds" : 3600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2026-03-27T17:30:00Z",
+    "ruleId" : "backup-evening",
+    "localDateTime" : "2026-03-27T18:30",
+    "offsetSeconds" : 3600,
+    "kind" : "NORMAL"
+  } ],
+  "skipped" : [ ]
+}

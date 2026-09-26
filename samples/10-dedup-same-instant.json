@@ -1,0 +1,13 @@
+{
+  "zoneId": "UTC",
+  "fromDate": "2026-01-01",
+  "toDate": "2026-01-01",
+  "rules": [
+    { "ruleId": "rule-a", "type": "daily", "localTime": "12:00" },
+    { "ruleId": "rule-b", "type": "cron", "cron": "0 12 * * *" }
+  ],
+  "gapPolicy": "earlier",
+  "overlapPolicy": "later",
+  "sort": true,
+  "deduplicate": true
+}

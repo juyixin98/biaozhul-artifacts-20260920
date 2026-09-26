@@ -1,0 +1,72 @@
+{
+  "success" : true,
+  "zoneId" : "Australia/Sydney",
+  "fromDate" : "2026-12-29",
+  "toDate" : "2027-01-04",
+  "zoneRules" : {
+    "tzdbVersion" : "2026b",
+    "javaVersion" : "21.0.12.1",
+    "relevantTransitions" : [ ]
+  },
+  "policies" : {
+    "gapPolicy" : "later",
+    "overlapPolicy" : "earlier"
+  },
+  "totalRules" : 2,
+  "candidateCount" : 8,
+  "occurrenceCount" : 8,
+  "skippedCount" : 0,
+  "duplicateCount" : 0,
+  "sorted" : true,
+  "deduplicated" : true,
+  "occurrences" : [ {
+    "utcInstant" : "2026-12-28T22:00:00Z",
+    "ruleId" : "daily-0900",
+    "localDateTime" : "2026-12-29T09:00",
+    "offsetSeconds" : 39600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2026-12-29T22:00:00Z",
+    "ruleId" : "daily-0900",
+    "localDateTime" : "2026-12-30T09:00",
+    "offsetSeconds" : 39600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2026-12-30T22:00:00Z",
+    "ruleId" : "daily-0900",
+    "localDateTime" : "2026-12-31T09:00",
+    "offsetSeconds" : 39600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2026-12-31T13:00:00Z",
+    "ruleId" : "midnight-first",
+    "localDateTime" : "2027-01-01T00:00",
+    "offsetSeconds" : 39600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2026-12-31T22:00:00Z",
+    "ruleId" : "daily-0900",
+    "localDateTime" : "2027-01-01T09:00",
+    "offsetSeconds" : 39600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2027-01-01T22:00:00Z",
+    "ruleId" : "daily-0900",
+    "localDateTime" : "2027-01-02T09:00",
+    "offsetSeconds" : 39600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2027-01-02T22:00:00Z",
+    "ruleId" : "daily-0900",
+    "localDateTime" : "2027-01-03T09:00",
+    "offsetSeconds" : 39600,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2027-01-03T22:00:00Z",
+    "ruleId" : "daily-0900",
+    "localDateTime" : "2027-01-04T09:00",
+    "offsetSeconds" : 39600,
+    "kind" : "NORMAL"
+  } ],
+  "skipped" : [ ]
+}

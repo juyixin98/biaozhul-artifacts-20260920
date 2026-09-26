@@ -1,0 +1,35 @@
+{
+  "success" : true,
+  "zoneId" : "America/New_York",
+  "fromDate" : "2026-11-01",
+  "toDate" : "2026-11-01",
+  "zoneRules" : {
+    "tzdbVersion" : "2026b",
+    "javaVersion" : "21.0.12.1",
+    "relevantTransitions" : [ {
+      "utcInstant" : "2026-11-01T06:00:00Z",
+      "offsetBeforeSeconds" : -14400,
+      "offsetAfterSeconds" : -18000,
+      "type" : "OVERLAP"
+    } ]
+  },
+  "policies" : {
+    "gapPolicy" : "earlier",
+    "overlapPolicy" : "later"
+  },
+  "totalRules" : 1,
+  "candidateCount" : 1,
+  "occurrenceCount" : 1,
+  "skippedCount" : 0,
+  "duplicateCount" : 0,
+  "sorted" : true,
+  "deduplicated" : true,
+  "occurrences" : [ {
+    "utcInstant" : "2026-11-01T06:30:00Z",
+    "ruleId" : "night-job-0130",
+    "localDateTime" : "2026-11-01T01:30",
+    "offsetSeconds" : -18000,
+    "kind" : "OVERLAP_LATER"
+  } ],
+  "skipped" : [ ]
+}

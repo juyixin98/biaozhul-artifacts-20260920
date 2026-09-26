@@ -1,0 +1,12 @@
+{
+  "zoneId": "America/New_York",
+  "fromDate": "2026-11-01",
+  "toDate": "2026-11-01",
+  "rules": [
+    { "ruleId": "night-job-0130", "type": "daily", "localTime": "01:30" }
+  ],
+  "gapPolicy": "earlier",
+  "overlapPolicy": "earlier",
+  "sort": true,
+  "deduplicate": true
+}

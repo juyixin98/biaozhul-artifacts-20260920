@@ -1,0 +1,47 @@
+{
+  "success" : true,
+  "zoneId" : "America/New_York",
+  "fromDate" : "2026-03-07",
+  "toDate" : "2026-03-09",
+  "zoneRules" : {
+    "tzdbVersion" : "2026b",
+    "javaVersion" : "21.0.12.1",
+    "relevantTransitions" : [ {
+      "utcInstant" : "2026-03-08T07:00:00Z",
+      "offsetBeforeSeconds" : -18000,
+      "offsetAfterSeconds" : -14400,
+      "type" : "GAP"
+    } ]
+  },
+  "policies" : {
+    "gapPolicy" : "earlier",
+    "overlapPolicy" : "later"
+  },
+  "totalRules" : 1,
+  "candidateCount" : 3,
+  "occurrenceCount" : 3,
+  "skippedCount" : 0,
+  "duplicateCount" : 0,
+  "sorted" : true,
+  "deduplicated" : true,
+  "occurrences" : [ {
+    "utcInstant" : "2026-03-07T07:30:00Z",
+    "ruleId" : "standup-0230",
+    "localDateTime" : "2026-03-07T02:30",
+    "offsetSeconds" : -18000,
+    "kind" : "NORMAL"
+  }, {
+    "utcInstant" : "2026-03-08T06:30:00Z",
+    "ruleId" : "standup-0230",
+    "localDateTime" : "2026-03-08T02:30",
+    "offsetSeconds" : -14400,
+    "kind" : "GAP_EARLIER"
+  }, {
+    "utcInstant" : "2026-03-09T06:30:00Z",
+    "ruleId" : "standup-0230",
+    "localDateTime" : "2026-03-09T02:30",
+    "offsetSeconds" : -14400,
+    "kind" : "NORMAL"
+  } ],
+  "skipped" : [ ]
+}

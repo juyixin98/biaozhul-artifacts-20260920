@@ -1,0 +1,33 @@
+{
+  "success" : true,
+  "zoneId" : "America/New_York",
+  "fromDate" : "2026-03-08",
+  "toDate" : "2026-03-08",
+  "zoneRules" : {
+    "tzdbVersion" : "2026b",
+    "javaVersion" : "21.0.12.1",
+    "relevantTransitions" : [ {
+      "utcInstant" : "2026-03-08T07:00:00Z",
+      "offsetBeforeSeconds" : -18000,
+      "offsetAfterSeconds" : -14400,
+      "type" : "GAP"
+    } ]
+  },
+  "policies" : {
+    "gapPolicy" : "skip",
+    "overlapPolicy" : "later"
+  },
+  "totalRules" : 1,
+  "candidateCount" : 1,
+  "occurrenceCount" : 0,
+  "skippedCount" : 1,
+  "duplicateCount" : 0,
+  "sorted" : true,
+  "deduplicated" : true,
+  "occurrences" : [ ],
+  "skipped" : [ {
+    "ruleId" : "standup-0230",
+    "localDateTime" : "2026-03-08T02:30",
+    "reason" : "GAP_SKIPPED"
+  } ]
+}

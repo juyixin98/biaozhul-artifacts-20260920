@@ -1,0 +1,30 @@
+{
+  "success" : true,
+  "zoneId" : "UTC",
+  "fromDate" : "2026-01-01",
+  "toDate" : "2026-01-01",
+  "zoneRules" : {
+    "tzdbVersion" : "2026b",
+    "javaVersion" : "21.0.12.1",
+    "relevantTransitions" : [ ]
+  },
+  "policies" : {
+    "gapPolicy" : "earlier",
+    "overlapPolicy" : "later"
+  },
+  "totalRules" : 2,
+  "candidateCount" : 2,
+  "occurrenceCount" : 1,
+  "skippedCount" : 0,
+  "duplicateCount" : 1,
+  "sorted" : true,
+  "deduplicated" : true,
+  "occurrences" : [ {
+    "utcInstant" : "2026-01-01T12:00:00Z",
+    "ruleId" : "rule-a",
+    "localDateTime" : "2026-01-01T12:00",
+    "offsetSeconds" : 0,
+    "kind" : "NORMAL"
+  } ],
+  "skipped" : [ ]
+}

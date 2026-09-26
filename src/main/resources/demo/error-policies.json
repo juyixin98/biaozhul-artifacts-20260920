@@ -1,0 +1,12 @@
+{
+  "zoneId": "America/New_York",
+  "fromDate": "2026-03-08",
+  "toDate": "2026-03-08",
+  "rules": [
+    { "ruleId": "in-the-gap", "type": "daily", "localTime": "02:30" }
+  ],
+  "gapPolicy": "error",
+  "overlapPolicy": "error",
+  "sort": true,
+  "deduplicate": true
+}

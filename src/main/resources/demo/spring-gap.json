@@ -1,0 +1,13 @@
+{
+  "zoneId": "America/New_York",
+  "fromDate": "2026-03-07",
+  "toDate": "2026-03-09",
+  "rules": [
+    { "ruleId": "daily-0230", "type": "daily", "localTime": "02:30" },
+    { "ruleId": "cron-0200", "type": "cron", "cron": "0 2 * * *" }
+  ],
+  "gapPolicy": "earlier",
+  "overlapPolicy": "later",
+  "sort": true,
+  "deduplicate": true
+}
