@@ -1,0 +1,23 @@
+{
+  "tolerance": 0.05,
+  "cache_size": 10,
+  "clock_offset_b": 0.0,
+  "stream_a": [
+    {"id": "a1", "t": 1.00, "data": {"x": 1.00, "y": 0.48}},
+    {"id": "a2", "t": 2.00, "data": {"x": 2.00, "y": 0.84}},
+    {"id": "a3", "t": 3.00, "data": {"x": 3.00, "y": 1.00}}
+  ],
+  "stream_b": [
+    {"id": "b1", "t": 1.02, "data": {"x": 1.01, "y": 0.47}},
+    {"id": "b2", "t": 2.06, "data": {"x": 2.05, "y": 0.85}},
+    {"id": "b3", "t": 5.00, "data": {"x": 5.00, "y": -0.96}}
+  ],
+  "arrival": [
+    {"stream": "a", "id": "a1"},
+    {"stream": "b", "id": "b1"},
+    {"stream": "a", "id": "a2"},
+    {"stream": "b", "id": "b2"},
+    {"stream": "a", "id": "a3"},
+    {"stream": "b", "id": "b3"}
+  ]
+}
