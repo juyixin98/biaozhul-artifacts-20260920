@@ -1,0 +1,166 @@
+{
+  "op": "compat",
+  "old_schema": {
+    "root": "Person",
+    "types": [
+      {
+        "name": "Address",
+        "fields": [
+          {
+            "name": "street",
+            "number": 1,
+            "type": "string",
+            "cardinality": "optional"
+          },
+          {
+            "name": "zip",
+            "number": 2,
+            "type": "int32",
+            "cardinality": "optional"
+          }
+        ]
+      },
+      {
+        "name": "Person",
+        "fields": [
+          {
+            "name": "id",
+            "number": 1,
+            "type": "int64",
+            "cardinality": "required"
+          },
+          {
+            "name": "name",
+            "number": 2,
+            "type": "string",
+            "cardinality": "required"
+          },
+          {
+            "name": "email",
+            "number": 3,
+            "type": "string",
+            "cardinality": "optional"
+          },
+          {
+            "name": "tags",
+            "number": 4,
+            "type": "string",
+            "cardinality": "repeated"
+          },
+          {
+            "name": "score",
+            "number": 5,
+            "type": "double",
+            "cardinality": "optional"
+          },
+          {
+            "name": "active",
+            "number": 6,
+            "type": "bool",
+            "cardinality": "optional"
+          },
+          {
+            "name": "addr",
+            "number": 9,
+            "type": "Address",
+            "cardinality": "optional"
+          }
+        ]
+      }
+    ]
+  },
+  "new_schema": {
+    "root": "Person",
+    "types": [
+      {
+        "name": "Address",
+        "fields": [
+          {
+            "name": "street",
+            "number": 1,
+            "type": "string",
+            "cardinality": "optional"
+          },
+          {
+            "name": "zip",
+            "number": 2,
+            "type": "int32",
+            "cardinality": "optional"
+          },
+          {
+            "name": "city",
+            "number": 3,
+            "type": "string",
+            "cardinality": "optional"
+          }
+        ]
+      },
+      {
+        "name": "Person",
+        "fields": [
+          {
+            "name": "id",
+            "number": 1,
+            "type": "int64",
+            "cardinality": "required"
+          },
+          {
+            "name": "name",
+            "number": 2,
+            "type": "string",
+            "cardinality": "required"
+          },
+          {
+            "name": "email",
+            "number": 3,
+            "type": "string",
+            "cardinality": "optional"
+          },
+          {
+            "name": "tags",
+            "number": 4,
+            "type": "string",
+            "cardinality": "repeated"
+          },
+          {
+            "name": "score",
+            "number": 5,
+            "type": "double",
+            "cardinality": "optional"
+          },
+          {
+            "name": "active",
+            "number": 6,
+            "type": "bool",
+            "cardinality": "optional"
+          },
+          {
+            "name": "addr",
+            "number": 9,
+            "type": "Address",
+            "cardinality": "optional"
+          },
+          {
+            "name": "age",
+            "number": 7,
+            "type": "int32",
+            "cardinality": "optional"
+          },
+          {
+            "name": "scores",
+            "number": 8,
+            "type": "int32",
+            "cardinality": "repeated",
+            "packed": true
+          },
+          {
+            "name": "nickname",
+            "number": 10,
+            "type": "string",
+            "cardinality": "optional"
+          }
+        ]
+      }
+    ]
+  }
+}
