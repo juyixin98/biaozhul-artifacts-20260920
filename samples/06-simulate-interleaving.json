@@ -1,0 +1,11 @@
+{
+  "name": "3-node interleaving with clock skew and physical regression",
+  "events": [
+    { "label": "a1", "node": "alice", "type": "SEND",  "physicalMicros": 1000000 },
+    { "label": "c0", "node": "carol", "type": "LOCAL", "physicalMicros": 1000500 },
+    { "label": "b1", "node": "bob",   "type": "RECV",  "physicalMicros": 1000100, "from": "a1" },
+    { "label": "b2", "node": "bob",   "type": "SEND",  "physicalMicros": 1000200 },
+    { "label": "c1", "node": "carol", "type": "LOCAL", "physicalMicros": 1000600 },
+    { "label": "c2", "node": "carol", "type": "RECV",  "physicalMicros": 900000,  "from": "b2" }
+  ]
+}

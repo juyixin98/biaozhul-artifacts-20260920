@@ -1,0 +1,17 @@
+# Build output
+/build/
+/target/
+*.class
+
+# Runtime persistence (local fixed-data state)
+/data/*.properties
+
+# Editor / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# Temp
+*.tmp
+*.log

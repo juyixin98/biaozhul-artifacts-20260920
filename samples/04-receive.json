@@ -1,0 +1,10 @@
+{
+  "node": "bob",
+  "physicalMicros": 950000,
+  "message": {
+    "from": "alice",
+    "hlc": "1000000:1",
+    "l": 1000000,
+    "c": 1
+  }
+}

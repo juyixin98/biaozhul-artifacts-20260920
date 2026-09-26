@@ -1,0 +1,9 @@
+{
+  "name": "two independent nodes: timestamp order is NOT causal order",
+  "events": [
+    { "label": "x1", "node": "nodeX", "type": "LOCAL", "physicalMicros": 2000 },
+    { "label": "y1", "node": "nodeY", "type": "LOCAL", "physicalMicros": 1000 },
+    { "label": "x2", "node": "nodeX", "type": "LOCAL", "physicalMicros": 3000 },
+    { "label": "y2", "node": "nodeY", "type": "LOCAL", "physicalMicros": 4000 }
+  ]
+}
