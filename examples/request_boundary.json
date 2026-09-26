@@ -1,0 +1,10 @@
+{
+  "n": 3,
+  "ops": [
+    {"type": "query", "u": 0, "v": 1},
+    {"type": "add", "u": 0, "v": 1},
+    {"type": "query", "u": 0, "v": 1},
+    {"type": "del", "u": 0, "v": 1},
+    {"type": "query", "u": 0, "v": 1}
+  ]
+}
