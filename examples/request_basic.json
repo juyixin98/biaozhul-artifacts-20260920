@@ -1,0 +1,10 @@
+{
+  "left": ["alice", "bob", "carol"],
+  "right": ["task1", "task2", "task3"],
+  "edges": [
+    ["alice", "task1"],
+    ["alice", "task2"],
+    ["bob", "task1"],
+    ["carol", "task3"]
+  ]
+}

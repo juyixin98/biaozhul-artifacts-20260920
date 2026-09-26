@@ -1,0 +1,11 @@
+{
+  "left": ["u1", "u2", "isolated_left"],
+  "right": ["v1", "v2", "isolated_right"],
+  "edges": [
+    ["u1", "v1"],
+    ["u1", "v1"],
+    ["u1", "v1"],
+    ["u2", "v1"],
+    ["u2", "v2"]
+  ]
+}
