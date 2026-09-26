@@ -1,0 +1,139 @@
+{
+  "started_at": "2026-09-25T18:33:51.485593623+08:00",
+  "target": "http://127.0.0.1:38569",
+  "scenarios": [
+    {
+      "name": "cross_tenant_same_key_isolation",
+      "ok": true,
+      "duration_ms": 1,
+      "steps": [
+        {
+          "name": "tenant-a compute completes",
+          "ok": true,
+          "expect": "200 completed",
+          "got": "code=200 status=completed err=\u003cnil\u003e"
+        },
+        {
+          "name": "tenant-b compute completes",
+          "ok": true,
+          "expect": "200 completed",
+          "got": "code=200 status=completed err=\u003cnil\u003e"
+        },
+        {
+          "name": "results differ for different work",
+          "ok": true,
+          "expect": "result-a != result-b",
+          "got": "a=32313536366362613139313139666533 b=61376333663030653639353433366333"
+        },
+        {
+          "name": "cache keys are tenant-scoped",
+          "ok": true,
+          "expect": "compute|tenant-a|... != compute|tenant-b|...",
+          "got": "a=compute|tenant-a|shared-key b=compute|tenant-b|shared-key"
+        },
+        {
+          "name": "each tenant reads back only its own value",
+          "ok": true,
+          "expect": "cache[a]==result-a \u0026\u0026 cache[b]==result-b",
+          "got": "cacheA=32313536366362613139313139666533 cacheB=61376333663030653639353433366333"
+        }
+      ]
+    },
+    {
+      "name": "tenant_override_rejected",
+      "ok": true,
+      "duration_ms": 0,
+      "steps": [
+        {
+          "name": "tenant_id in body rejected",
+          "ok": true,
+          "expect": "400 TENANT_OVERRIDE_REJECTED",
+          "got": "code=400 errCode=TENANT_OVERRIDE_REJECTED err=\u003cnil\u003e"
+        },
+        {
+          "name": "tenantId (camelCase) in body rejected",
+          "ok": true,
+          "expect": "400",
+          "got": "code=400 err=\u003cnil\u003e"
+        },
+        {
+          "name": "missing auth header rejected",
+          "ok": true,
+          "expect": "401",
+          "got": "code=401 err=\u003cnil\u003e"
+        }
+      ]
+    },
+    {
+      "name": "single_tenant_overload",
+      "ok": true,
+      "duration_ms": 30,
+      "steps": [
+        {
+          "name": "overloaded tenant gets 429s",
+          "ok": true,
+          "expect": "rejected \u003e 0, no transport errors",
+          "got": "accepted=6 rejected=10 errs=0"
+        },
+        {
+          "name": "admissions bounded by queue backpressure",
+          "ok": true,
+          "expect": "0 \u003c accepted \u003c flood",
+          "got": "accepted=6 flood=16"
+        },
+        {
+          "name": "other tenant still served during overload",
+          "ok": true,
+          "expect": "200 completed",
+          "got": "code=200 status=completed elapsed=26ms err=\u003cnil\u003e"
+        },
+        {
+          "name": "stats record queue-full rejections",
+          "ok": true,
+          "expect": "rejected_queue_full \u003e 0",
+          "got": "rejected_queue_full=20 err=\u003cnil\u003e"
+        }
+      ]
+    },
+    {
+      "name": "cancellation",
+      "ok": true,
+      "duration_ms": 502,
+      "steps": [
+        {
+          "name": "long job accepted",
+          "ok": true,
+          "expect": "202 with job_id",
+          "got": "code=202 id=job-000023 err=\u003cnil\u003e"
+        },
+        {
+          "name": "cross-tenant cancel refused",
+          "ok": true,
+          "expect": "404",
+          "got": "code=404 err=\u003cnil\u003e"
+        },
+        {
+          "name": "owner cancel accepted",
+          "ok": true,
+          "expect": "200",
+          "got": "code=200 err=\u003cnil\u003e"
+        },
+        {
+          "name": "job reaches cancelled state",
+          "ok": true,
+          "expect": "cancelled",
+          "got": "status=cancelled"
+        },
+        {
+          "name": "client disconnect cancels the job",
+          "ok": true,
+          "expect": "cancelled count increases",
+          "got": "before=1 after=2"
+        }
+      ]
+    }
+  ],
+  "passed": 4,
+  "failed": 0,
+  "ok": true
+}
