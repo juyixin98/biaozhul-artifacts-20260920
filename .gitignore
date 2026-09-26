@@ -1,0 +1,16 @@
+# 编译产物
+/bin/
+*.test
+*.out
+
+# 本地运行数据（WAL、临时日志）
+/data/
+*.log
+
+# 验收客户端工作目录（二进制、子进程日志、WAL）
+run/acceptance/
+
+# 临时与系统文件
+*.tmp
+*.swp
+.DS_Store

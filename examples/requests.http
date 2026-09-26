@@ -1,0 +1,92 @@
+### 幂等存款服务 —— 请求样例（REST Client / 可直接阅读）
+###
+### 前置：先启动两个进程（见 README）
+###   ./bin/idempotency-server -addr 127.0.0.1:18080 -fake-clock -pending-ttl 30s
+###   ./bin/auditserver    -addr 127.0.0.1:18081
+###
+### curl 版本见同目录 curl-examples.sh。
+
+@baseUrl = http://127.0.0.1:18080
+@auditUrl = http://127.0.0.1:18081
+
+### --- 健康检查 ---------------------------------------------------------
+GET {{baseUrl}}/healthz
+
+### --- 1. 首次请求：执行并保存结果（Idempotency-Status: created）--------
+POST {{baseUrl}}/v1/deposits
+Idempotency-Key: demo-key-0001
+Content-Type: application/json
+
+{"account": "alice", "amount": 100, "memo": "lunch"}
+
+### --- 2. 同键同正文重试：原样重放（Idempotency-Status: replayed），
+###        服务端不再执行业务、不再调用外部审计，账本仍只有一笔 -----------
+POST {{baseUrl}}/v1/deposits
+Idempotency-Key: demo-key-0001
+Content-Type: application/json
+
+{"account": "alice", "amount": 100, "memo": "lunch"}
+
+### --- 3. 同键不同正文：409 冲突（键绑定请求摘要，防止串用）------------
+POST {{baseUrl}}/v1/deposits
+Idempotency-Key: demo-key-0001
+Content-Type: application/json
+
+{"account": "alice", "amount": 999}
+
+### --- 4. 查看某个幂等键的当前记录 --------------------------------------
+GET {{baseUrl}}/v1/idempotency/demo-key-0001
+
+### --- 5. 查看本地副作用（账本流水 + 余额）------------------------------
+GET {{baseUrl}}/admin/ledger
+
+### --- 6. 处理中的重复请求：先返回 202 + Retry-After（可长轮询等待）----
+POST {{baseUrl}}/v1/deposits
+Idempotency-Key: demo-key-0002
+X-Fault-Delay-Before-Commit-Ms: 400
+Content-Type: application/json
+
+{"account": "bob", "amount": 50}
+
+### --- 7. 提交【前】断线：连接被对端直接关闭，占位遗留至 TTL ------------
+POST {{baseUrl}}/v1/deposits
+Idempotency-Key: demo-key-0003
+X-Fault-Before-Commit-Disconnect: 1
+Content-Type: application/json
+
+{"account": "carol", "amount": 300}
+
+### 拨快假时钟超过 TTL（默认 30s）后，同键同正文重试才会接管并执行
+POST {{baseUrl}}/admin/clock/advance
+Content-Type: application/json
+
+{"ms": 31000}
+
+### --- 8. 提交【后】断线：事务已落盘，重试只重放，不产生第二笔 ----------
+POST {{baseUrl}}/v1/deposits
+Idempotency-Key: demo-key-0004
+X-Fault-After-Commit-Disconnect: 1
+Content-Type: application/json
+
+{"account": "dave", "amount": 900}
+
+### --- 9. 外部系统"已落账但响应丢失"：重试会让外部收到两条事件，
+###        但本地事务仍只一笔（明确不保证外部恰好一次）-------------------
+POST {{auditUrl}}/audit/faults
+Content-Type: application/json
+
+{"record_then_fail_next_n": 1}
+
+POST {{baseUrl}}/v1/deposits
+Idempotency-Key: demo-key-0005
+Content-Type: application/json
+
+{"account": "erin", "amount": 500}
+
+### 查看外部假审计系统实际收到的事件数（>1 即外部重复的证据）
+GET {{auditUrl}}/audit/inspect
+
+### --- 观测与复位 -------------------------------------------------------
+GET {{baseUrl}}/admin/stats
+POST {{baseUrl}}/admin/reset
+POST {{auditUrl}}/audit/reset
