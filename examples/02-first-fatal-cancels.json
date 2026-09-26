@@ -1,0 +1,7 @@
+{
+  "leaves": [
+    {"name": "slow-a", "service": "a", "fatal": true, "gate": "g1", "resource": "lock-a"},
+    {"name": "slow-b", "service": "b", "fatal": true, "gate": "g1", "resource": "lock-b"},
+    {"name": "fatal-c", "service": "a", "fatal": true, "fail_request": true, "delay_ms": 300}
+  ]
+}

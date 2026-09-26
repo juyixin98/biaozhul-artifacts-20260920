@@ -1,0 +1,6 @@
+{
+  "leaves": [
+    {"name": "work-a", "service": "a", "fatal": true, "gate": "hold", "resource": "r-a"},
+    {"name": "work-b", "service": "b", "fatal": true, "gate": "hold", "resource": "r-b"}
+  ]
+}

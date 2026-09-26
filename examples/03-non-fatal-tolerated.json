@@ -1,0 +1,6 @@
+{
+  "leaves": [
+    {"name": "best-effort", "service": "a", "fatal": false, "fail": true},
+    {"name": "required", "service": "b", "fatal": true}
+  ]
+}

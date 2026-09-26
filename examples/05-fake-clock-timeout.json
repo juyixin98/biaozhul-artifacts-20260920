@@ -1,0 +1,6 @@
+{
+  "leaves": [
+    {"name": "slow", "service": "a", "fatal": true, "gate": "slow", "hold_ms": 0},
+    {"name": "deadline", "service": "b", "fatal": true, "gate": "slow", "timeout_ms": 100}
+  ]
+}

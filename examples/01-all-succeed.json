@@ -1,0 +1,6 @@
+{
+  "leaves": [
+    {"name": "fetch-a", "service": "a", "fatal": true},
+    {"name": "fetch-b", "service": "b", "fatal": true}
+  ]
+}
