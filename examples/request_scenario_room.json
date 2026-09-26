@@ -1,0 +1,16 @@
+{
+  "scenario": {
+    "scene": "room",
+    "source_pose": {"x": 0.3, "y": -0.15, "theta": 0.08},
+    "target_pose": {"x": 0.0, "y": 0.0, "theta": 0.0},
+    "noise_sigma": 0.01,
+    "outliers": 30,
+    "seed": 42
+  },
+  "initial_pose": {"x": 0.0, "y": 0.0, "theta": 0.0},
+  "params": {
+    "max_iterations": 60,
+    "max_correspondence_distance": 1.5,
+    "trim_ratio": 0.9
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "scenario": {
+    "scene": "line",
+    "source_pose": {"x": 0.4, "y": 0.2, "theta": 0.0},
+    "target_pose": {"x": 0.0, "y": 0.0, "theta": 0.0},
+    "noise_sigma": 0.005,
+    "seed": 7
+  },
+  "params": {
+    "max_iterations": 50,
+    "max_correspondence_distance": 1.0
+  }
+}
