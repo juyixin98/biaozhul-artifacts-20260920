@@ -1,0 +1,15 @@
+[package]
+name = "rbitmap"
+version = "0.1.0"
+edition = "2021"
+description = "Run-length (Roaring-style) hybrid integer set: streaming binary codec + JSON control entry, no external dependencies"
+license = "MIT"
+
+[dependencies]
+
+[[bin]]
+name = "rbitmap"
+path = "src/bin/rbitmap.rs"
+
+[profile.release]
+opt-level = 3
