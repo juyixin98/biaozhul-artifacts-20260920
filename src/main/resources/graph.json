@@ -1,0 +1,124 @@
+{
+  "graphId": "schema-migration-fixture",
+  "graphVersion": "1.0.0",
+  "nodes": ["v1", "v2a", "v2b", "v3", "v4", "v5", "v6", "isolated", "schema-9", "schema-10"],
+  "edges": [
+    {
+      "id": "e1",
+      "from": "v1",
+      "to": "v2a",
+      "cost": 2,
+      "reversible": true,
+      "description": "v1 -> v2a: add nullable column",
+      "preconditions": []
+    },
+    {
+      "id": "e2",
+      "from": "v2a",
+      "to": "v1",
+      "cost": 2,
+      "reversible": true,
+      "description": "v2a -> v1: drop nullable column (real inverse of e1)",
+      "preconditions": []
+    },
+    {
+      "id": "e3",
+      "from": "v1",
+      "to": "v2b",
+      "cost": 5,
+      "reversible": false,
+      "description": "v1 -> v2b: destructive rewrite, no inverse edge",
+      "preconditions": []
+    },
+    {
+      "id": "e4",
+      "from": "v2a",
+      "to": "v3",
+      "cost": 2,
+      "reversible": false,
+      "description": "v2a -> v3: index rebuild, needs maintenance window",
+      "preconditions": [{"flag": "maintenance_window", "expected": true}]
+    },
+    {
+      "id": "e5",
+      "from": "v2b",
+      "to": "v3",
+      "cost": 1,
+      "reversible": true,
+      "description": "v2b -> v3: backfill defaults",
+      "preconditions": []
+    },
+    {
+      "id": "e6",
+      "from": "v3",
+      "to": "v2b",
+      "cost": 1,
+      "reversible": true,
+      "description": "v3 -> v2b: restore pre-backfill state (real inverse of e5)",
+      "preconditions": []
+    },
+    {
+      "id": "e7",
+      "from": "v3",
+      "to": "v4",
+      "cost": 3,
+      "reversible": false,
+      "description": "v3 -> v4: split table",
+      "preconditions": []
+    },
+    {
+      "id": "e8",
+      "from": "v4",
+      "to": "v5",
+      "cost": 3,
+      "reversible": false,
+      "description": "v4 -> v5: migrate partitions",
+      "preconditions": []
+    },
+    {
+      "id": "e9",
+      "from": "v5",
+      "to": "v3",
+      "cost": 3,
+      "reversible": false,
+      "description": "v5 -> v3: re-merge (forms cycle v3->v4->v5->v3)",
+      "preconditions": []
+    },
+    {
+      "id": "e10",
+      "from": "v4",
+      "to": "v6",
+      "cost": 4,
+      "reversible": true,
+      "description": "v4 -> v6: declared reversible by author, but NO inverse edge exists in the graph",
+      "preconditions": []
+    },
+    {
+      "id": "e11",
+      "from": "v5",
+      "to": "v6",
+      "cost": 1,
+      "reversible": false,
+      "description": "v5 -> v6: final cutover, requires verified backup",
+      "preconditions": [{"flag": "backup_verified", "expected": true}]
+    },
+    {
+      "id": "e12",
+      "from": "v3",
+      "to": "v6",
+      "cost": 7,
+      "reversible": false,
+      "description": "v3 -> v6: direct bulk export",
+      "preconditions": []
+    },
+    {
+      "id": "e13",
+      "from": "schema-10",
+      "to": "schema-9",
+      "cost": 1,
+      "reversible": false,
+      "description": "schema-10 -> schema-9 only; proves version numbers are never used to infer direction",
+      "preconditions": []
+    }
+  ]
+}

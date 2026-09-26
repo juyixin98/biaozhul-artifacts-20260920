@@ -1,0 +1,8 @@
+{
+  "from": "v6",
+  "to": "v1",
+  "context": {
+    "maintenance_window": true,
+    "backup_verified": true
+  }
+}
