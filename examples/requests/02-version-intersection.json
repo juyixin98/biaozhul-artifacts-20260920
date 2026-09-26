@@ -1,0 +1,12 @@
+{
+  "domain": "version",
+  "operation": "intersection",
+  "a": [
+    {"lower": 1, "upper": 5},
+    {"lower": 8, "upper": null}
+  ],
+  "b": [
+    {"lower": 3, "upper": 8, "upperOpen": false},
+    {"lower": 10, "upper": 20}
+  ]
+}

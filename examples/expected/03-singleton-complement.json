@@ -1,0 +1,33 @@
+{
+  "domain": "version",
+  "ok": true,
+  "operation": "complement",
+  "result": [
+    {
+      "lower": null,
+      "lowerOpen": true,
+      "upper": 3,
+      "upperOpen": true
+    },
+    {
+      "lower": 3,
+      "lowerOpen": true,
+      "upper": 5,
+      "upperOpen": false
+    },
+    {
+      "lower": 7,
+      "lowerOpen": true,
+      "upper": null,
+      "upperOpen": true
+    }
+  ],
+  "timeZone": "Asia/Shanghai",
+  "tzVersion": {
+    "javaVersion": "21.0.12.1",
+    "jvmDefaultZone": "Asia/Shanghai",
+    "jvmTzdbVersion": "2026b",
+    "osTzdataVersion": "2026c",
+    "zoneIdCount": 604
+  }
+}

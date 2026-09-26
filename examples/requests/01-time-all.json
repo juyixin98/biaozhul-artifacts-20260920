@@ -1,0 +1,14 @@
+{
+  "domain": "time",
+  "timeZone": "Asia/Shanghai",
+  "operation": "all",
+  "a": [
+    {"lower": "2026-01-01T00:00:00", "upper": "2026-03-31T23:59:59", "lowerOpen": false, "upperOpen": false},
+    {"lower": "2026-03-31T23:59:59", "upper": "2026-06-30T00:00:00", "lowerOpen": true,  "upperOpen": true},
+    {"lower": "2026-07-01T00:00:00", "upper": null}
+  ],
+  "b": [
+    {"lower": "2026-02-01T00:00:00", "upper": "2026-02-14T23:59:59"},
+    {"lower": "2026-03-31T23:59:59", "upper": "2026-03-31T23:59:59"}
+  ]
+}

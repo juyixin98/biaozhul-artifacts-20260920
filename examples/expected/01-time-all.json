@@ -1,0 +1,84 @@
+{
+  "domain": "time",
+  "ok": true,
+  "operation": "all",
+  "results": {
+    "complementOfA": [
+      {
+        "lower": null,
+        "lowerOpen": true,
+        "upper": "2026-01-01T00:00:00+08:00",
+        "upperOpen": true
+      },
+      {
+        "lower": "2026-06-30T00:00:00+08:00",
+        "lowerOpen": false,
+        "upper": "2026-07-01T00:00:00+08:00",
+        "upperOpen": true
+      }
+    ],
+    "difference": [
+      {
+        "lower": "2026-01-01T00:00:00+08:00",
+        "lowerOpen": false,
+        "upper": "2026-02-01T00:00:00+08:00",
+        "upperOpen": true
+      },
+      {
+        "lower": "2026-02-14T23:59:59+08:00",
+        "lowerOpen": true,
+        "upper": "2026-03-31T23:59:59+08:00",
+        "upperOpen": true
+      },
+      {
+        "lower": "2026-03-31T23:59:59+08:00",
+        "lowerOpen": true,
+        "upper": "2026-06-30T00:00:00+08:00",
+        "upperOpen": true
+      },
+      {
+        "lower": "2026-07-01T00:00:00+08:00",
+        "lowerOpen": false,
+        "upper": null,
+        "upperOpen": true
+      }
+    ],
+    "intersection": [
+      {
+        "lower": "2026-02-01T00:00:00+08:00",
+        "lowerOpen": false,
+        "upper": "2026-02-14T23:59:59+08:00",
+        "upperOpen": false
+      },
+      {
+        "lower": "2026-03-31T23:59:59+08:00",
+        "lowerOpen": false,
+        "singleton": true,
+        "upper": "2026-03-31T23:59:59+08:00",
+        "upperOpen": false
+      }
+    ],
+    "union": [
+      {
+        "lower": "2026-01-01T00:00:00+08:00",
+        "lowerOpen": false,
+        "upper": "2026-06-30T00:00:00+08:00",
+        "upperOpen": true
+      },
+      {
+        "lower": "2026-07-01T00:00:00+08:00",
+        "lowerOpen": false,
+        "upper": null,
+        "upperOpen": true
+      }
+    ]
+  },
+  "timeZone": "Asia/Shanghai",
+  "tzVersion": {
+    "javaVersion": "21.0.12.1",
+    "jvmDefaultZone": "Asia/Shanghai",
+    "jvmTzdbVersion": "2026b",
+    "osTzdataVersion": "2026c",
+    "zoneIdCount": 604
+  }
+}

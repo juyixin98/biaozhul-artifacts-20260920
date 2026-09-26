@@ -1,0 +1,8 @@
+{
+  "domain": "version",
+  "operation": "union",
+  "a": [
+    {"lower": 9, "upper": 2}
+  ],
+  "b": []
+}

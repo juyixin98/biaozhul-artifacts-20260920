@@ -1,0 +1,27 @@
+{
+  "domain": "time",
+  "ok": true,
+  "operation": "difference",
+  "result": [
+    {
+      "lower": null,
+      "lowerOpen": true,
+      "upper": "2025-12-31T16:00:00Z",
+      "upperOpen": true
+    },
+    {
+      "lower": "2026-06-29T16:00:00Z",
+      "lowerOpen": true,
+      "upper": null,
+      "upperOpen": true
+    }
+  ],
+  "timeZone": "UTC",
+  "tzVersion": {
+    "javaVersion": "21.0.12.1",
+    "jvmDefaultZone": "Asia/Shanghai",
+    "jvmTzdbVersion": "2026b",
+    "osTzdataVersion": "2026c",
+    "zoneIdCount": 604
+  }
+}

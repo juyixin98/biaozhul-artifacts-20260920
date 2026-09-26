@@ -1,0 +1,8 @@
+{
+  "domain": "version",
+  "operation": "complement",
+  "a": [
+    {"lower": 3, "upper": 3},
+    {"lower": 5, "upper": 7, "lowerOpen": true, "upperOpen": false}
+  ]
+}
