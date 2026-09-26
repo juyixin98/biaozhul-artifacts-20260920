@@ -1,0 +1,457 @@
+{
+  "schema": "idemresp-test-results/v1",
+  "generated_at": "2026-09-25T10:44:25Z",
+  "overall": "PASS",
+  "packages": [
+    {
+      "package": "idemresp/internal/clock",
+      "result": "pass",
+      "elapsed": 1.02
+    },
+    {
+      "package": "idemresp/internal/digest",
+      "result": "pass",
+      "elapsed": 1.024
+    },
+    {
+      "package": "idemresp/internal/txn",
+      "result": "pass",
+      "elapsed": 1.039
+    },
+    {
+      "package": "idemresp/internal/server",
+      "result": "pass",
+      "elapsed": 1.076
+    },
+    {
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 1.195
+    },
+    {
+      "package": "idemresp/internal/gateway",
+      "result": "pass",
+      "elapsed": 1.458
+    },
+    {
+      "package": "idemresp/internal/client",
+      "result": "pass",
+      "elapsed": 3.038
+    },
+    {
+      "package": "idemresp/e2e",
+      "result": "pass",
+      "elapsed": 4.146
+    }
+  ],
+  "tests": [
+    {
+      "test": "TestE2E_HappyThenReplay",
+      "package": "idemresp/e2e",
+      "result": "pass",
+      "elapsed": 0.02
+    },
+    {
+      "test": "TestE2E_ConflictOnDifferentBody",
+      "package": "idemresp/e2e",
+      "result": "pass",
+      "elapsed": 0.01
+    },
+    {
+      "test": "TestE2E_ConcurrentRetriesOneSideEffect",
+      "package": "idemresp/e2e",
+      "result": "pass",
+      "elapsed": 0.05
+    },
+    {
+      "test": "TestFakeDeterministic",
+      "package": "idemresp/internal/clock",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestRealAdvances",
+      "package": "idemresp/internal/clock",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestChargeSuccess",
+      "package": "idemresp/internal/client",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestChargeClassifies500AsFailed",
+      "package": "idemresp/internal/client",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestNewAppliesDefaults",
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 0.01
+    },
+    {
+      "test": "TestInvalidJSONAtDigestStage",
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestOfStableAcrossKeyOrderAndWhitespace",
+      "package": "idemresp/internal/digest",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestOfDistinguishesPayloads",
+      "package": "idemresp/internal/digest",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestOfRejectsInvalidJSON",
+      "package": "idemresp/internal/digest",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestOfEmptyBodyIsNull",
+      "package": "idemresp/internal/digest",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestChargeClassifiesResetAsAmbiguous",
+      "package": "idemresp/internal/client",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestMethodNotAllowed",
+      "package": "idemresp/internal/gateway",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestMissingCurrencyRejected",
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 0.01
+    },
+    {
+      "test": "TestBadJSONRejected",
+      "package": "idemresp/internal/gateway",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestResetClearsState",
+      "package": "idemresp/internal/gateway",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestResetBeforeChargeDoesNotChargeThenSucceeds",
+      "package": "idemresp/internal/gateway",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestPreCommitContextCancelAbortsCommit",
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 0.05
+    },
+    {
+      "test": "TestAcquireCommitReplay",
+      "package": "idemresp/internal/txn",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestMissingIdempotencyKey",
+      "package": "idemresp/internal/server",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestConflictDifferentHash",
+      "package": "idemresp/internal/txn",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestInvalidJSONRejected",
+      "package": "idemresp/internal/server",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestInProgressDuplicate",
+      "package": "idemresp/internal/txn",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestFailAllowsImmediateRetry",
+      "package": "idemresp/internal/txn",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestCommitAtomicityInOneRecord",
+      "package": "idemresp/internal/txn",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestWALReplayAcrossRestart",
+      "package": "idemresp/internal/txn",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestWALTornTailRecovery",
+      "package": "idemresp/internal/txn",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestConcurrentAcquiresSingleCommit",
+      "package": "idemresp/internal/txn",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestBodyTooLarge",
+      "package": "idemresp/internal/server",
+      "result": "pass",
+      "elapsed": 0.03
+    },
+    {
+      "test": "TestPostCommitContextCancelStillReturnsResult",
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 0.05
+    },
+    {
+      "test": "TestCreateThenReadOrderAndLedger",
+      "package": "idemresp/internal/server",
+      "result": "pass",
+      "elapsed": 0.01
+    },
+    {
+      "test": "TestCommitFailureMapped500",
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestReplayStoredZeroStatusDefaultsToOK",
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestAmbiguousKeylessWithinLeaseAndImmediateFail",
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestReplayHeaderAndConflict",
+      "package": "idemresp/internal/server",
+      "result": "pass",
+      "elapsed": 0.01
+    },
+    {
+      "test": "TestHealthz",
+      "package": "idemresp/internal/server",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestHappyPathCommitOnceReplaySameResponse",
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestSameKeyDifferentBodyIsConflict",
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestCrashHeaderIgnoredWhenNotAllowed",
+      "package": "idemresp/internal/server",
+      "result": "pass",
+      "elapsed": 0.01
+    },
+    {
+      "test": "TestParseDurAndTruthy",
+      "package": "idemresp/internal/server",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestStatusRecorder",
+      "package": "idemresp/internal/server",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestInProgressDuplicateThenReplay",
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestConcurrentRequestsExactlyOneSideEffect",
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 0.02
+    },
+    {
+      "test": "TestDefiniteFailureThenRetryCommitsOnce",
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestAmbiguousWithForwardedKeySafelyRetries",
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestAmbiguousWithoutKeyDoesNotCommitOrRetry",
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestValidationFailureDoesNotCommitSideEffect",
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestCrashHooksFireAroundCommit",
+      "package": "idemresp/internal/idem",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestHangFaultTimesOutClient",
+      "package": "idemresp/internal/gateway",
+      "result": "pass",
+      "elapsed": 0.4
+    },
+    {
+      "test": "TestKeyedChargeDeduplicated",
+      "package": "idemresp/internal/gateway",
+      "result": "pass",
+      "elapsed": 0.01
+    },
+    {
+      "test": "TestKeylessChargesAreNotDeduplicated",
+      "package": "idemresp/internal/gateway",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestResetAfterChargeFaultFiresOnce",
+      "package": "idemresp/internal/gateway",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestError500DoesNotCharge",
+      "package": "idemresp/internal/gateway",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestE2E_DisconnectBeforeCommit",
+      "package": "idemresp/e2e",
+      "result": "pass",
+      "elapsed": 1.23
+    },
+    {
+      "test": "TestChargeClassifiesHangAsAmbiguous",
+      "package": "idemresp/internal/client",
+      "result": "pass",
+      "elapsed": 2
+    },
+    {
+      "test": "TestMetricsAndReset",
+      "package": "idemresp/internal/client",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestMetricsErrorStatuses",
+      "package": "idemresp/internal/client",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestCharge4xxIsFailed",
+      "package": "idemresp/internal/client",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestChargeUnparseable2xxIsAmbiguous",
+      "package": "idemresp/internal/client",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestNewUsesTimeout",
+      "package": "idemresp/internal/client",
+      "result": "pass",
+      "elapsed": 0
+    },
+    {
+      "test": "TestE2E_DisconnectAfterCommit",
+      "package": "idemresp/e2e",
+      "result": "pass",
+      "elapsed": 1.39
+    },
+    {
+      "test": "TestE2E_KeyedAmbiguousTimeoutRecovers",
+      "package": "idemresp/e2e",
+      "result": "pass",
+      "elapsed": 0.01
+    },
+    {
+      "test": "TestE2E_KeylessAmbiguousIsNotExactlyOnce",
+      "package": "idemresp/e2e",
+      "result": "pass",
+      "elapsed": 0.01
+    },
+    {
+      "test": "TestE2E_RestartReplaysPersistedResult",
+      "package": "idemresp/e2e",
+      "result": "pass",
+      "elapsed": 0.01
+    },
+    {
+      "test": "TestE2E_CrashBeforeCommit",
+      "package": "idemresp/e2e",
+      "result": "pass",
+      "elapsed": 0.35
+    },
+    {
+      "test": "TestE2E_CrashAfterCommit",
+      "package": "idemresp/e2e",
+      "result": "pass",
+      "elapsed": 0.04
+    }
+  ]
+}

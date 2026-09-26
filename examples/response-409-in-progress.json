@@ -1,0 +1,6 @@
+{
+  "error": "request_in_progress",
+  "idempotency_key": "sample-slow-0001",
+  "attempts": 1,
+  "message": "an identical request is being processed; retry with the same Idempotency-Key to get the stored response"
+}

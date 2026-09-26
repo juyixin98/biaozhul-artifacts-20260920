@@ -1,0 +1,4 @@
+{
+  "error": "idempotency_key_conflict",
+  "message": "this Idempotency-Key was already used with a different request payload; reuse the exact same request or choose a new key"
+}

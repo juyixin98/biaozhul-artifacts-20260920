@@ -1,0 +1,13 @@
+# Local WAL / runtime data
+/data/
+*.wal
+
+# Test/build artifacts
+/build/*.out
+/build/*.summary
+/build/*.func.txt
+/build/run-tests.stdout
+
+# Compiled binary
+/idemresp
+*.test

@@ -1,0 +1,66 @@
+# Raw HTTP request samples for idemresp (http://127.0.0.1:18080)
+
+### 1. Create an order — first call executes exactly once
+
+POST /v1/orders HTTP/1.1
+Host: 127.0.0.1:18080
+Content-Type: application/json
+Idempotency-Key: sample-order-0001
+
+{"amount":1000,"currency":"USD","reference":"invoice-42"}
+
+### 2. Retry unchanged — replays the stored response (no second side effect)
+
+POST /v1/orders HTTP/1.1
+Host: 127.0.0.1:18080
+Content-Type: application/json
+Idempotency-Key: sample-order-0001
+
+{"amount":1000,"currency":"USD","reference":"invoice-42"}
+
+# Response header on the replay:
+#   Idempotent-Replay: true
+
+### 3. Same key with a different body — 409 conflict
+
+POST /v1/orders HTTP/1.1
+Host: 127.0.0.1:18080
+Content-Type: application/json
+Idempotency-Key: sample-order-0001
+
+{"amount":9999,"currency":"USD"}
+
+# 409 {"error":"idempotency_key_conflict", ...}
+
+### 4. Duplicate while the first request is still processing
+
+POST /v1/orders HTTP/1.1
+Host: 127.0.0.1:18080
+Content-Type: application/json
+Idempotency-Key: sample-slow-0001
+
+{"amount":1000,"currency":"USD"}
+
+# 409 {"error":"request_in_progress", ...} with a Retry-After header.
+# Re-issue the SAME request after completion to receive the stored response.
+
+### 5. Read stored state
+
+GET /v1/keys/sample-order-0001 HTTP/1.1
+GET /v1/ledger?key=sample-order-0001 HTTP/1.1
+GET /v1/orders?id=ord_xxxxxxxx HTTP/1.1
+
+### 6. Fault injection headers (fake gateway only)
+
+#   X-Fault: reset-before-charge   connection dropped, no charge
+#   X-Fault: reset-after-charge    charged, then connection dropped (ambiguous)
+#   X-Fault: hang                 charged, then no response (ambiguous)
+#   X-Fault: error500             definite 500, no charge
+#
+#   X-Forward-Key: false          do not send Idempotency-Key to the gateway
+#                                  (demonstrates the no-exactly-once boundary)
+#   X-Pre-Commit-Delay: 1200ms    hold before the atomic commit
+#   X-Post-Commit-Delay: 1200ms   hold after commit, before responding
+#
+# Crash injection additionally requires the server to run with -allow-crash:
+#   X-Crash: before-commit | after-commit

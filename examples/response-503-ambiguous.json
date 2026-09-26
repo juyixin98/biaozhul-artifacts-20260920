@@ -1,0 +1,4 @@
+{
+  "error": "ambiguous_outcome",
+  "message": "gateway result is unknown (timeout/reset); not retrying without an end-to-end idempotency key, no local side effect recorded; operator reconciliation required"
+}
