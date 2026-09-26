@@ -1,0 +1,10 @@
+{
+  "variables": ["p", "q", "r", "s"],
+  "constraints": [
+    {"id": "m1", "var": "p", "minus": "q", "bound": -1},
+    {"id": "m2", "var": "q", "minus": "p", "bound": -1},
+    {"id": "m3", "var": "r", "minus": "s", "bound": 0},
+    {"id": "m4", "var": "s", "minus": "r", "bound": -1},
+    {"id": "m5", "var": "p", "minus": "r", "bound": 10}
+  ]
+}

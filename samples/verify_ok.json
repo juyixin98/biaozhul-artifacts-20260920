@@ -1,0 +1,10 @@
+{
+  "variables": ["a", "b", "c", "d"],
+  "constraints": [
+    {"id": "c1", "var": "a", "minus": "b", "bound": 5},
+    {"id": "c2", "var": "b", "minus": "c", "bound": 2},
+    {"id": "c3", "var": "c", "minus": "a", "bound": -7},
+    {"id": "c4", "var": "d", "minus": "a", "bound": 3}
+  ],
+  "assignment": {"a": 7, "b": 2, "c": 0, "d": 10}
+}

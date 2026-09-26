@@ -1,0 +1,2 @@
+{"variables":["x"],
+ "constraints":[{"id":"s1","var":"x","minus":"x","bound":-1}]}

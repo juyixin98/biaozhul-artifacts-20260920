@@ -1,0 +1,8 @@
+{
+  "variables": ["x", "y", "z"],
+  "constraints": [
+    {"id": "k1", "var": "x", "minus": "y", "bound": -1},
+    {"id": "k2", "var": "y", "minus": "z", "bound": -1},
+    {"id": "k3", "var": "z", "minus": "x", "bound": 1}
+  ]
+}

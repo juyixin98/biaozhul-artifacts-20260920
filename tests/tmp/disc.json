@@ -1,0 +1,2 @@
+{"variables":["a","b","c"],
+ "constraints":[{"id":"d1","var":"a","minus":"b","bound":4}]}
