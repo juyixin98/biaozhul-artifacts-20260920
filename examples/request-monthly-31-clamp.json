@@ -1,0 +1,11 @@
+{
+  "requestId": "monthly-31st-clamp",
+  "rule": {
+    "dtStart": "2025-01-31",
+    "freq": "MONTHLY",
+    "interval": 1,
+    "monthEndPolicy": "CLAMP"
+  },
+  "windowStart": "2025-01-01",
+  "windowEnd": "2025-12-31"
+}

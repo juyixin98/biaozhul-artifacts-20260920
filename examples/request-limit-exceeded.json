@@ -1,0 +1,11 @@
+{
+  "requestId": "limit-exceeded",
+  "rule": {
+    "dtStart": "2026-01-01",
+    "freq": "DAILY",
+    "interval": 1
+  },
+  "windowStart": "2026-01-01",
+  "windowEnd": "2026-12-31",
+  "maxExpansions": 10
+}

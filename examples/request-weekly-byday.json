@@ -1,0 +1,13 @@
+{
+  "requestId": "weekly-byday-count-until",
+  "rule": {
+    "dtStart": "2026-03-02",
+    "freq": "WEEKLY",
+    "interval": 2,
+    "byDay": ["MO", "WE", "FR"],
+    "count": 6,
+    "until": "2026-05-31"
+  },
+  "windowStart": "2026-03-01",
+  "windowEnd": "2026-06-30"
+}

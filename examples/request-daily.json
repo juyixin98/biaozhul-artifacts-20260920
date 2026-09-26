@@ -1,0 +1,12 @@
+{
+  "requestId": "daily-001",
+  "rule": {
+    "dtStart": "2026-01-01",
+    "freq": "DAILY",
+    "interval": 1,
+    "count": 5
+  },
+  "windowStart": "2026-01-01",
+  "windowEnd": "2026-01-31",
+  "maxExpansions": 100
+}

@@ -1,0 +1,10 @@
+{
+  "requestId": "empty-window",
+  "rule": {
+    "dtStart": "2030-01-01",
+    "freq": "MONTHLY",
+    "interval": 1
+  },
+  "windowStart": "2026-01-01",
+  "windowEnd": "2026-12-31"
+}

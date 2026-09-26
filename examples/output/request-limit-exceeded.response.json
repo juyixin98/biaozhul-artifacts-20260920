@@ -1,0 +1,9 @@
+{
+  "ok" : false,
+  "requestId" : "limit-exceeded",
+  "tzdbVersion" : "2026b",
+  "error" : {
+    "code" : "EXPANSION_LIMIT_EXCEEDED",
+    "message" : "expansion produced more than 10 occurrences inside the window; narrow the window or raise maxExpansions"
+  }
+}
