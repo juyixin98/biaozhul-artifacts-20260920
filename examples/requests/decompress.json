@@ -1,0 +1,1 @@
+{"op":"decompress","input":"/tmp/chf-demo-output.chf","output":"/tmp/chf-demo-restored.bin","max_output_bytes":67108864,"incomplete_policy":"permit"}

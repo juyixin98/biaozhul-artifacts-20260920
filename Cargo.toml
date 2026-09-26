@@ -1,0 +1,13 @@
+[package]
+name = "canohuff"
+version = "0.1.0"
+edition = "2021"
+description = "Canonical Huffman streaming codec library with a JSON control CLI (pure backend, no dependencies)"
+license = "MIT"
+
+[[bin]]
+name = "chf"
+path = "src/bin/chf.rs"
+
+[profile.release]
+opt-level = 3
