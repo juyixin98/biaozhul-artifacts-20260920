@@ -1,0 +1,17 @@
+[package]
+name = "lzsw"
+version = "0.1.0"
+edition = "2021"
+description = "Streaming LZ77 sliding-window codec with a JSON control entry point"
+license = "MIT"
+
+[lib]
+name = "lzsw"
+path = "src/lib.rs"
+
+[[bin]]
+name = "lzsw"
+path = "src/bin/lzsw.rs"
+
+[profile.release]
+opt-level = 3
