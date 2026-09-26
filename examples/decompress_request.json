@@ -1,0 +1,8 @@
+{
+  "op": "decompress",
+  "encoding": "base64",
+  "data": "Q0hGQwEAAQAAAAAAAAA6AAAAAAAAANYADiADIQQsBUgEYQNjBGUEZgRpBWwDbQVuA28EdQWbS3govX2ihP8zxcCbS3govX2ihP8zxcCbS2A=",
+  "incomplete_policy": "reject",
+  "max_output_bytes": 1073741824,
+  "max_block_bytes": 16777216
+}
