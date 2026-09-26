@@ -1,0 +1,1 @@
+{"success":true,"data":{"segments":[{"start":0,"end":4,"versionId":"v1","ruleId":"r1","label":"baseline"},{"start":4,"end":6,"versionId":"v3","ruleId":"r3","label":"top-layer"},{"start":6,"end":12,"versionId":"v1","ruleId":"r1","label":"baseline"},{"start":12,"end":15,"versionId":"v1","ruleId":"r4","label":"adjacent"}]},"error":null}

@@ -1,0 +1,2 @@
+{"success":false,"data":null,"error":"equal-priority conflict: rule r5 (version v1, priority 1) overlaps rule r1 (version v1, priority 1) on Interval[start=3, end=5]"}
+HTTP 409
