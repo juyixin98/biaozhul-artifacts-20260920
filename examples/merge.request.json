@@ -1,0 +1,6 @@
+{
+  "op": "merge",
+  "inputs": ["out/rows.cdc", "out/rows2.cdc"],
+  "output": "out/merged.cdc",
+  "segment_rows": 4
+}

@@ -1,0 +1,22 @@
+[package]
+name = "cdict"
+version = "0.1.0"
+edition = "2021"
+description = "Streaming columnar dictionary encoding codec with a JSON control entry (std-only)"
+license = "MIT"
+
+[lib]
+name = "cdict"
+path = "src/lib.rs"
+
+[[bin]]
+name = "cdict"
+path = "src/bin/cdict.rs"
+
+[profile.release]
+opt-level = 3
+
+# Intentionally no third-party dependencies: the dictionary codec, segment
+# merging, LEB128 varints and the JSON control-plane parser are all implemented
+# in-house so the crate builds fully offline.
+[dependencies]

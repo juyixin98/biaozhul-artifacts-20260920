@@ -1,0 +1,10 @@
+{
+  "op": "encode",
+  "input": "examples/rows.json",
+  "output": "out/rows.cdc",
+  "segment_rows": 3,
+  "limits": {
+    "max_dict_entries": 1000000,
+    "max_rows": 10000000
+  }
+}

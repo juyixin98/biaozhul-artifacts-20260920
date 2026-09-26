@@ -1,0 +1,5 @@
+{
+  "op": "decode",
+  "input": "out/rows.cdc",
+  "output": "out/rows.decoded.json"
+}

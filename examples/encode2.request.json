@@ -1,0 +1,6 @@
+{
+  "op": "encode",
+  "input": "examples/rows2.json",
+  "output": "out/rows2.cdc",
+  "segment_rows": 2
+}
