@@ -1,0 +1,23 @@
+[package]
+name = "ifix"
+version = "0.1.0"
+edition = "2021"
+description = "Immutable File Index (IFIX): streaming binary codec with a multi-layer offset index"
+license = "MIT"
+
+[lib]
+name = "ifix"
+path = "src/lib.rs"
+
+[[bin]]
+name = "ifix"
+path = "src/main.rs"
+
+[dependencies]
+# JSON is the only third-party dependency; the binary format, hashing and all
+# index algorithms are implemented from scratch in this crate.
+serde_json = { version = "1.0.151", default-features = false, features = ["std"] }
+
+[profile.release]
+codegen-units = 1
+lto = true

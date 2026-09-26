@@ -1,0 +1,5 @@
+{
+  "command": "verify",
+  "index": "samples/demo.ifix",
+  "backend": "mmap"
+}

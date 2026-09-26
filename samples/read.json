@@ -1,0 +1,6 @@
+{
+  "command": "read",
+  "index": "samples/demo.ifix",
+  "path": "/docs/notes.txt",
+  "max_inline_base64": 1048576
+}

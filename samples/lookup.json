@@ -1,0 +1,6 @@
+{
+  "command": "lookup",
+  "index": "samples/demo.ifix",
+  "path": "/photos/a/1.txt",
+  "backend": "read"
+}

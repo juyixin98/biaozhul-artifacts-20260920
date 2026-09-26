@@ -1,0 +1,40 @@
+{
+  "output": "samples/demo.ifix",
+  "log2_page": 6,
+  "root": {
+    "name": "",
+    "type": "dir",
+    "children": [
+      {
+        "name": "docs",
+        "type": "dir",
+        "children": [
+          { "name": "README.md", "type": "file", "content_b64": "IyBERU1PXG4jIyMgT25saW5lIHJlYWRzIHRoaXM=" },
+          { "name": "notes.txt", "type": "file", "content_b64": "cmVtZW1iZXIgdG8gc2hpcCBpdA==" }
+        ]
+      },
+      {
+        "name": "photos",
+        "type": "dir",
+        "children": [
+          {
+            "name": "a",
+            "type": "dir",
+            "children": [
+              { "name": "1.txt", "type": "file", "content_b64": "aGVsbG8=" },
+              { "name": "2.txt", "type": "file", "content_b64": "d29ybGQ=" }
+            ]
+          },
+          {
+            "name": "b",
+            "type": "dir",
+            "children": [
+              { "name": "empty.dat", "type": "file" }
+            ]
+          }
+        ]
+      },
+      { "name": "top.txt", "type": "file", "content_b64": "dG9wLWxldmVsIGJsb2I=" }
+    ]
+  }
+}
