@@ -1,0 +1,25 @@
+{
+  "mode": "messages",
+  "tolerance": 0.05,
+  "max_buffer_size": 1000,
+  "max_out_of_orderness": 0.0,
+  "clock_offset_b": 0.0,
+  "streams": {
+    "a": [
+      {"id": "a0000", "timestamp": 0.0, "payload": {"sensor": "lidar"}},
+      {"id": "a0001", "timestamp": 0.5, "payload": {"sensor": "lidar"}},
+      {"id": "a0002", "timestamp": 1.0, "payload": {"sensor": "lidar"}},
+      {"id": "a0003", "timestamp": 1.0, "payload": {"sensor": "lidar"}},
+      {"id": "a0004", "timestamp": 2.0, "payload": {"sensor": "lidar"}},
+      {"id": "a0005", "timestamp": 3.0, "payload": {"sensor": "lidar"}}
+    ],
+    "b": [
+      {"id": "b0000", "timestamp": 0.02, "payload": {"sensor": "camera"}},
+      {"id": "b0001", "timestamp": 0.48, "payload": {"sensor": "camera"}},
+      {"id": "b0002", "timestamp": 1.0, "payload": {"sensor": "camera"}},
+      {"id": "b0003", "timestamp": 1.0, "payload": {"sensor": "camera"}},
+      {"id": "b0004", "timestamp": 2.06, "payload": {"sensor": "distant"}},
+      {"id": "b0005", "timestamp": 5.0, "payload": {"sensor": "lonely"}}
+    ]
+  }
+}

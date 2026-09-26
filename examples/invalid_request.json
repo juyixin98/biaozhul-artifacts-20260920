@@ -1,0 +1,8 @@
+{
+  "mode": "messages",
+  "tolerance": -0.05,
+  "streams": {
+    "a": [{"id": "a1", "timestamp": 0.0}],
+    "b": [{"id": "b1", "timestamp": 0.0}]
+  }
+}

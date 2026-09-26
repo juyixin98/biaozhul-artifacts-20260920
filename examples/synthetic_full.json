@@ -1,0 +1,38 @@
+{
+  "mode": "synthetic",
+  "config": {
+    "tolerance": 0.08,
+    "duration": 20.0,
+    "traj_dt": 0.005,
+    "max_buffer_size": 10000,
+    "auto_out_of_orderness": true,
+    "sensor_a": {
+      "rate_hz": 10.0,
+      "clock_offset": 0.0,
+      "timestamp_jitter": 0.002,
+      "delay_mean": 0.15,
+      "delay_jitter": 0.12,
+      "drop_prob": 0.02,
+      "gap_intervals": [[7.0, 9.0]],
+      "duplicate_spec": [15, 40],
+      "seed": 101
+    },
+    "sensor_b": {
+      "rate_hz": 7.0,
+      "clock_offset": -0.23,
+      "timestamp_jitter": 0.002,
+      "delay_mean": 0.2,
+      "delay_jitter": 0.18,
+      "drop_prob": 0.02,
+      "gap_intervals": [[13.0, 14.5]],
+      "duplicate_spec": [22],
+      "seed": 202
+    },
+    "calibration": {
+      "n_points": 31,
+      "jitter": 0.001,
+      "trim_ratio": 0.1,
+      "seed": 303
+    }
+  }
+}

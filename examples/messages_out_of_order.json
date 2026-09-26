@@ -1,0 +1,26 @@
+{
+  "mode": "messages",
+  "tolerance": 0.05,
+  "max_buffer_size": 100,
+  "max_out_of_orderness": 2.0,
+  "streams": {
+    "a": [
+      {"id": "a1", "timestamp": 0.0},
+      {"id": "a2", "timestamp": 1.0},
+      {"id": "a3", "timestamp": 2.0}
+    ],
+    "b": [
+      {"id": "b1", "timestamp": 0.01},
+      {"id": "b2", "timestamp": 1.02},
+      {"id": "b3", "timestamp": 1.99}
+    ]
+  },
+  "arrival": [
+    ["b", "b3"],
+    ["a", "a3"],
+    ["b", "b2"],
+    ["a", "a2"],
+    ["b", "b1"],
+    ["a", "a1"]
+  ]
+}
