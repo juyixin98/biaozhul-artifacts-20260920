@@ -1,0 +1,20 @@
+[package]
+name = "rbitset"
+version = "0.1.0"
+edition = "2021"
+description = "Streaming hybrid sparse-array/bitmap u32 set codec with a JSON control entry"
+license = "MIT"
+
+[lib]
+name = "rbitset"
+path = "src/lib.rs"
+
+[[bin]]
+name = "rbitset"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3
+
+[profile.dev]
+opt-level = 0
