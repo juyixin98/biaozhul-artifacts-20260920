@@ -1,0 +1,14 @@
+{
+  "request_id": "sample-soft-fail-continues",
+  "tasks": [
+    {
+      "id": "optional-enrichment",
+      "fatal": false,
+      "call": { "method": "GET", "url": "/upstream/work?delay=20ms&fail=1&status=503" }
+    },
+    {
+      "id": "core-work",
+      "call": { "method": "GET", "url": "/upstream/work?delay=30ms" }
+    }
+  ]
+}

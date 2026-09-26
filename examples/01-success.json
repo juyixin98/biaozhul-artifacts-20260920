@@ -1,0 +1,13 @@
+{
+  "request_id": "sample-success",
+  "tasks": [
+    {
+      "id": "fetch-profile",
+      "call": { "method": "GET", "url": "/upstream/work?delay=20ms" }
+    },
+    {
+      "id": "fetch-inventory",
+      "call": { "method": "GET", "url": "/upstream/work?delay=40ms" }
+    }
+  ]
+}

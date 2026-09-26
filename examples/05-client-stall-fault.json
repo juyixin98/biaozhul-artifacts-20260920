@@ -1,0 +1,20 @@
+{
+  "request_id": "sample-client-faults",
+  "tasks": [
+    {
+      "id": "client-stalls",
+      "fatal": true,
+      "call": {
+        "method": "GET",
+        "url": "/upstream/work",
+        "fault": { "kind": "stall" }
+      },
+      "cleanup": { "url": "/upstream/cleanup", "timeout_ms": 1000 }
+    },
+    {
+      "id": "sibling-gets-canceled",
+      "call": { "method": "GET", "url": "/upstream/work?hold=1&hold_id=hold-sibling" },
+      "cleanup": { "url": "/upstream/cleanup", "timeout_ms": 1000 }
+    }
+  ]
+}

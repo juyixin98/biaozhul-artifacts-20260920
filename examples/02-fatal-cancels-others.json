@@ -1,0 +1,21 @@
+{
+  "request_id": "sample-fatal-cancels-siblings",
+  "tasks": [
+    {
+      "id": "slow-downstream-a",
+      "call": { "method": "GET", "url": "/upstream/work?hold=1&hold_id=hold-a" },
+      "cleanup": { "url": "/upstream/cleanup", "timeout_ms": 1000 }
+    },
+    {
+      "id": "slow-downstream-b",
+      "call": { "method": "GET", "url": "/upstream/work?hold=1&hold_id=hold-b" },
+      "cleanup": { "url": "/upstream/cleanup", "timeout_ms": 1000 }
+    },
+    {
+      "id": "payment-authorize",
+      "fatal": true,
+      "call": { "method": "GET", "url": "/upstream/work?delay=50ms&fail=1&status=500" },
+      "cleanup": { "url": "/upstream/cleanup", "timeout_ms": 1000 }
+    }
+  ]
+}

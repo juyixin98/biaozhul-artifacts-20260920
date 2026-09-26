@@ -1,0 +1,11 @@
+{
+  "request_id": "sample-task-timeout",
+  "tasks": [
+    {
+      "id": "too-slow",
+      "timeout_ms": 100,
+      "call": { "method": "GET", "url": "/upstream/work?hold=1&hold_id=will-not-release" },
+      "cleanup": { "url": "/upstream/cleanup", "timeout_ms": 1000 }
+    }
+  ]
+}

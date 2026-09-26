@@ -1,0 +1,22 @@
+{
+  "request_id": "sample-latency-and-reset",
+  "tasks": [
+    {
+      "id": "slow-client-side",
+      "call": {
+        "method": "GET",
+        "url": "/upstream/work?delay=1ms",
+        "fault": { "kind": "latency", "delay_ms": 80 }
+      }
+    },
+    {
+      "id": "connection-reset",
+      "fatal": false,
+      "call": {
+        "method": "GET",
+        "url": "/upstream/work",
+        "fault": { "kind": "reset" }
+      }
+    }
+  ]
+}
