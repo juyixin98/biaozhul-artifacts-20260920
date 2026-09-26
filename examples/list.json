@@ -1,0 +1,6 @@
+{
+  "op": "list",
+  "file": "/tmp/demo.ifix",
+  "path": "/",
+  "backend": "file"
+}

@@ -1,0 +1,7 @@
+{
+  "op": "lookup",
+  "file": "/tmp/demo.ifix",
+  "path": "/etc/hostname",
+  "follow": true,
+  "backend": "mmap"
+}

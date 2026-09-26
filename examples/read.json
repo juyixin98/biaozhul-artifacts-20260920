@@ -1,0 +1,9 @@
+{
+  "op": "read",
+  "file": "/tmp/demo.ifix",
+  "path": "/etc/hostname",
+  "offset": 0,
+  "len": 5,
+  "backend": "file",
+  "max_inline_base64": 4096
+}

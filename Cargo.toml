@@ -1,0 +1,21 @@
+[package]
+name = "ifix"
+version = "0.1.0"
+edition = "2021"
+description = "Immutable File Index (IFIX): streaming binary codec with a multi-level offset index"
+license = "MIT OR Apache-2.0"
+
+[lib]
+name = "ifix"
+path = "src/lib.rs"
+
+[[bin]]
+name = "ifix"
+path = "src/bin/ifix.rs"
+
+[profile.release]
+codegen-units = 1
+lto = true
+
+# Intentionally no external dependencies: JSON, base64, and the mmap wrapper
+# are implemented in-tree. Only std is used, so `cargo build --offline` works.

@@ -1,0 +1,39 @@
+{
+  "op": "build",
+  "output": "/tmp/demo.ifix",
+  "tree": {
+    "name": "",
+    "type": "dir",
+    "mode": 493,
+    "children": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "mode": 420,
+        "mtime": 1758800000,
+        "content_base64": "IElGSVggZGVtbyBpbmRleCBmaWxlCg=="
+      },
+      {
+        "name": "etc",
+        "type": "dir",
+        "children": [
+          {
+            "name": "hostname",
+            "type": "file",
+            "content_base64": "ZXhhbXBsZS1ob3N0Cg=="
+          },
+          {
+            "name": "motd",
+            "type": "symlink",
+            "target": "/README.md"
+          }
+        ]
+      },
+      {
+        "name": "empty.bin",
+        "type": "file",
+        "content_base64": ""
+      }
+    ]
+  }
+}

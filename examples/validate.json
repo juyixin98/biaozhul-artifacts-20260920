@@ -1,0 +1,5 @@
+{
+  "op": "validate",
+  "file": "/tmp/demo.ifix",
+  "backend": "file"
+}
