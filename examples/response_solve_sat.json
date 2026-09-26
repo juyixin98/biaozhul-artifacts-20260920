@@ -1,0 +1,71 @@
+{
+  "status": "sat",
+  "num_vars": 3,
+  "normalized_clauses": [
+    [
+      1
+    ],
+    [
+      -1,
+      2
+    ],
+    [
+      -2,
+      3
+    ]
+  ],
+  "tautology_clause_indices": [],
+  "model": [
+    {
+      "variable": 1,
+      "value": true
+    },
+    {
+      "variable": 2,
+      "value": true
+    },
+    {
+      "variable": 3,
+      "value": true
+    }
+  ],
+  "stats": {
+    "nodes": 1,
+    "decisions": 0,
+    "propagations": 3,
+    "conflicts": 0,
+    "node_limit": 200000
+  },
+  "proof": {
+    "root": 0,
+    "nodes": [
+      {
+        "id": 0,
+        "kind": "sat",
+        "decision_var": null,
+        "propagations": [
+          {
+            "literal": 1,
+            "reason_clause": 0
+          },
+          {
+            "literal": 2,
+            "reason_clause": 1
+          },
+          {
+            "literal": 3,
+            "reason_clause": 2
+          }
+        ],
+        "positive_child": null,
+        "negative_child": null,
+        "conflict_clause": null,
+        "assignment": [
+          1,
+          1,
+          1
+        ]
+      }
+    ]
+  }
+}

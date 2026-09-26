@@ -1,0 +1,23 @@
+{
+  "status": "sat",
+  "num_vars": 4,
+  "assignments_tested": 5,
+  "model": [
+    {
+      "variable": 1,
+      "value": false
+    },
+    {
+      "variable": 2,
+      "value": false
+    },
+    {
+      "variable": 3,
+      "value": true
+    },
+    {
+      "variable": 4,
+      "value": false
+    }
+  ]
+}

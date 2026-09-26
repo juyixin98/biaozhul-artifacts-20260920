@@ -1,0 +1,7 @@
+c UNSAT example requiring branching: all four sign combinations of x1,x2
+c are forbidden. DPLL branches on x1 then x2 and explores both polarities.
+p cnf 2 4
+1 2 0
+-1 2 0
+1 -2 0
+-1 -2 0

@@ -1,0 +1,73 @@
+{
+  "status": "unsat",
+  "num_vars": 2,
+  "normalized_clauses": [
+    [
+      1,
+      2
+    ],
+    [
+      -1,
+      2
+    ],
+    [
+      -2,
+      1
+    ],
+    [
+      -2,
+      -1
+    ]
+  ],
+  "tautology_clause_indices": [],
+  "model": null,
+  "stats": {
+    "nodes": 3,
+    "decisions": 1,
+    "propagations": 2,
+    "conflicts": 2,
+    "node_limit": 200000
+  },
+  "proof": {
+    "root": 0,
+    "nodes": [
+      {
+        "id": 0,
+        "kind": "branch",
+        "decision_var": 1,
+        "propagations": [],
+        "positive_child": 1,
+        "negative_child": 2,
+        "conflict_clause": null
+      },
+      {
+        "id": 1,
+        "kind": "conflict",
+        "decision_var": null,
+        "propagations": [
+          {
+            "literal": 2,
+            "reason_clause": 1
+          }
+        ],
+        "positive_child": null,
+        "negative_child": null,
+        "conflict_clause": 3
+      },
+      {
+        "id": 2,
+        "kind": "conflict",
+        "decision_var": null,
+        "propagations": [
+          {
+            "literal": 2,
+            "reason_clause": 0
+          }
+        ],
+        "positive_child": null,
+        "negative_child": null,
+        "conflict_clause": 2
+      }
+    ]
+  }
+}

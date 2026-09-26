@@ -1,0 +1,6 @@
+c SAT example: unit propagation determines every variable.
+c (x1 = true), (-x1 v x2), (-x2 v x3)  =>  x1=x2=x3=true
+p cnf 3 3
+1 0
+-1 2 0
+-2 3 0
