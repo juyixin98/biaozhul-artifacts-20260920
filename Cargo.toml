@@ -1,0 +1,15 @@
+[package]
+name = "ecstripe"
+version = "0.1.0"
+edition = "2021"
+description = "Erasure-coded stripe recovery: streaming systematic Reed-Solomon codec over GF(2^8) with a JSON control entry"
+license = "MIT"
+
+[dependencies]
+gf256 = "0.3"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+
+[profile.test]
+opt-level = 1

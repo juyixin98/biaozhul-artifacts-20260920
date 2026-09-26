@@ -1,0 +1,6 @@
+{
+  "op": "decode",
+  "input_path": "examples/data/output.ecsr",
+  "output_path": "examples/data/recovered.bin",
+  "missing_shards": [1, 4]
+}

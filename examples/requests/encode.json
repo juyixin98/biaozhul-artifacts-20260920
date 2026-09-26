@@ -1,0 +1,8 @@
+{
+  "op": "encode",
+  "data_shards": 4,
+  "parity_shards": 2,
+  "stripe_size": 4096,
+  "input_path": "examples/data/input.bin",
+  "output_path": "examples/data/output.ecsr"
+}
