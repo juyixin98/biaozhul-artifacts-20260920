@@ -1,0 +1,12 @@
+{"op":"ping"}
+{"op":"limits"}
+{"op":"add_node","id":30}
+{"op":"add_node","id":31}
+{"op":"add_node","id":32}
+{"op":"insert_edge","u":30,"v":31}
+{"op":"insert_edge","u":31,"v":32}
+{"op":"insert_edge","u":30,"v":32}
+{"op":"order"}
+{"op":"verify"}
+{"op":"stats"}
+{"op":"quit"}

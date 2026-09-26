@@ -1,0 +1,9 @@
+# build artifacts
+/topo_server
+/test_topo
+/build/
+*.o
+
+# editor / os
+*.swp
+.DS_Store
