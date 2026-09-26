@@ -1,0 +1,9 @@
+{
+  "description": "相同速度场景：相对速度为零、间距恒定。障碍0 间距 5 > 半径和 2 => 永不碰撞；障碍1 间距 1.5 < 2 => 整窗重叠",
+  "time_window": [0.0, 4.0],
+  "robot": { "center": [0.0, 0.0], "velocity": [1.0, 0.5], "radius": 1.0 },
+  "obstacles": [
+    { "center": [5.0, 0.0], "velocity": [1.0, 0.5], "radius": 1.0 },
+    { "center": [1.5, 0.0], "velocity": [1.0, 0.5], "radius": 1.0 }
+  ]
+}

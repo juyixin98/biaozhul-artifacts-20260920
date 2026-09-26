@@ -1,0 +1,8 @@
+{
+  "description": "初始重叠场景：t=0 时间距 3 < 半径和 4，已处于重叠状态。手算：a=1,b=-6,c=-7, 根 t=-1,7；窗口 [0,5] 与接触区间 [-1,7] 相交 => t_enter=0",
+  "time_window": [0.0, 5.0],
+  "robot": { "center": [0.0, 0.0], "velocity": [1.0, 0.0], "radius": 2.0 },
+  "obstacles": [
+    { "center": [3.0, 0.0], "velocity": [0.0, 0.0], "radius": 2.0 }
+  ]
+}

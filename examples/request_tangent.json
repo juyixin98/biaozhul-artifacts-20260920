@@ -1,0 +1,8 @@
+{
+  "description": "相切场景：机器人水平运动，与静止障碍在 t=2 恰好外切（判别式=0，二重根）。手算：d0=(-4,-3), v_rel=(2,0), R=3 => a=4,b=-16,c=16,D=0, t=2",
+  "time_window": [0.0, 3.0],
+  "robot": { "center": [0.0, 0.0], "velocity": [2.0, 0.0], "radius": 1.0 },
+  "obstacles": [
+    { "center": [4.0, 3.0], "velocity": [0.0, 0.0], "radius": 2.0 }
+  ]
+}
