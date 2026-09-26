@@ -1,0 +1,1 @@
+{"op": "verify_proof", "num_vars": 1, "clauses": [[1]], "result": "sat", "proof": [{"ev": "unit", "lit": 1, "clause": 0}]}

@@ -1,0 +1,1 @@
+{"op": "check_assignment", "num_vars": 3, "clauses": [[1, 2], [-1, 3], [-2, -3]], "assignment": [true, false, true]}

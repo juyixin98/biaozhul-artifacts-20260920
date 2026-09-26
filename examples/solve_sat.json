@@ -1,0 +1,1 @@
+{"op": "solve", "num_vars": 3, "clauses": [[1, 2], [-1, 3], [-2, -3]], "proof": true}
