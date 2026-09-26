@@ -1,0 +1,1392 @@
+{
+  "all_pass": true,
+  "generated_at": "2026-09-25T10:19:27Z",
+  "scenario_count": 4,
+  "scenarios": [
+    {
+      "name": "late_failure_from_old_generation",
+      "goal": "An old-generation call that fails after the breaker recovered cannot change new-generation state",
+      "pass": true,
+      "virtual_clock_start": "1970-01-01T00:00:00Z",
+      "breaker_config": {
+        "sliding_window_size": 10,
+        "min_requests": 5,
+        "failure_threshold": 0.5,
+        "open_cooldown": 5000000000,
+        "half_open_max_probes": 3,
+        "required_successes": 2
+      },
+      "steps": [
+        {
+          "index": 1,
+          "name": "old_call_in_flight",
+          "virtual_time": "1970-01-01T00:00:00Z",
+          "detail": "call #1 parked at upstream in closed generation",
+          "snapshot": {
+            "state": "closed",
+            "generation": 0,
+            "now": "1970-01-01T00:00:00Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 0,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 2,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 1,
+              "rejected": 0,
+              "successes": 0,
+              "failures": 0,
+              "canceled": 0,
+              "probes_granted": 0,
+              "probes_rejected": 0,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 2
+            }
+          },
+          "checks": []
+        },
+        {
+          "index": 2,
+          "name": "breaker_tripped",
+          "virtual_time": "1970-01-01T00:00:00Z",
+          "detail": "5 immediate failures arrived while the old call is still parked",
+          "snapshot": {
+            "state": "open",
+            "generation": 1,
+            "now": "1970-01-01T00:00:00Z",
+            "cooldown_until": "1970-01-01T00:00:05Z",
+            "probes_in_flight": 0,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 2,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 6,
+              "rejected": 0,
+              "successes": 0,
+              "failures": 5,
+              "canceled": 0,
+              "probes_granted": 0,
+              "probes_rejected": 0,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 2
+            }
+          },
+          "checks": [
+            {
+              "name": "state is open",
+              "detail": "got=open want=open",
+              "pass": true
+            },
+            {
+              "name": "generation advanced to 1",
+              "detail": "got=1 want=1",
+              "pass": true
+            },
+            {
+              "name": "failure counter is 5",
+              "detail": "got=5 want=5",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "name": "cooldown_elapsed",
+          "virtual_time": "1970-01-01T00:00:05Z",
+          "detail": "advanced 5 virtual seconds; state stays open until the next Allow",
+          "snapshot": {
+            "state": "open",
+            "generation": 1,
+            "now": "1970-01-01T00:00:05Z",
+            "cooldown_until": "1970-01-01T00:00:05Z",
+            "probes_in_flight": 0,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 2,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 6,
+              "rejected": 0,
+              "successes": 0,
+              "failures": 5,
+              "canceled": 0,
+              "probes_granted": 0,
+              "probes_rejected": 0,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 2
+            }
+          },
+          "checks": [
+            {
+              "name": "still open before Allow",
+              "detail": "got=open want=open",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "name": "probe_1_success",
+          "virtual_time": "1970-01-01T00:00:05Z",
+          "detail": "first probe after cooldown succeeds",
+          "snapshot": {
+            "state": "half_open",
+            "generation": 2,
+            "now": "1970-01-01T00:00:05Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 0,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 1,
+            "required_successes": 2,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 7,
+              "rejected": 0,
+              "successes": 1,
+              "failures": 5,
+              "canceled": 0,
+              "probes_granted": 1,
+              "probes_rejected": 0,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 2
+            }
+          },
+          "checks": [
+            {
+              "name": "probe outcome",
+              "detail": "got=success want=success",
+              "pass": true
+            },
+            {
+              "name": "state half_open",
+              "detail": "got=half_open want=half_open",
+              "pass": true
+            },
+            {
+              "name": "consecutive successes",
+              "detail": "got=1 want=1",
+              "pass": true
+            },
+            {
+              "name": "probe generation 2",
+              "detail": "got=2 want=2",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "name": "probe_2_success_recovers",
+          "virtual_time": "1970-01-01T00:00:05Z",
+          "detail": "second probe succeeds -\u003e breaker closes",
+          "snapshot": {
+            "state": "closed",
+            "generation": 3,
+            "now": "1970-01-01T00:00:05Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 0,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 2,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 8,
+              "rejected": 0,
+              "successes": 2,
+              "failures": 5,
+              "canceled": 0,
+              "probes_granted": 2,
+              "probes_rejected": 0,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 2
+            }
+          },
+          "checks": [
+            {
+              "name": "probe outcome",
+              "detail": "got=success want=success",
+              "pass": true
+            },
+            {
+              "name": "state closed",
+              "detail": "got=closed want=closed",
+              "pass": true
+            },
+            {
+              "name": "generation advanced to 3",
+              "detail": "got=3 want=3",
+              "pass": true
+            },
+            {
+              "name": "window was reset",
+              "detail": "got=0 want=0",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "name": "late_old_failure_arrives",
+          "virtual_time": "1970-01-01T00:00:05Z",
+          "detail": "the parked gen-0 call is released as a failure after recovery",
+          "snapshot": {
+            "state": "closed",
+            "generation": 3,
+            "now": "1970-01-01T00:00:05Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 0,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 2,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 8,
+              "rejected": 0,
+              "successes": 2,
+              "failures": 5,
+              "canceled": 0,
+              "probes_granted": 2,
+              "probes_rejected": 0,
+              "stale_results": 1
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 2
+            }
+          },
+          "checks": [
+            {
+              "name": "client saw a service failure",
+              "detail": "got=failure want=failure",
+              "pass": true
+            },
+            {
+              "name": "late result permit generation",
+              "detail": "got=0 want=0",
+              "pass": true
+            },
+            {
+              "name": "state stays closed",
+              "detail": "got=closed want=closed",
+              "pass": true
+            },
+            {
+              "name": "generation unchanged",
+              "detail": "got=3 want=3",
+              "pass": true
+            },
+            {
+              "name": "failure counter did not move",
+              "detail": "got=5 want=5",
+              "pass": true
+            },
+            {
+              "name": "window still empty",
+              "detail": "got=0 want=0",
+              "pass": true
+            },
+            {
+              "name": "stale result counted once",
+              "detail": "got=1 want=1",
+              "pass": true
+            }
+          ]
+        }
+      ],
+      "summary_counters": {
+        "allowed": 8,
+        "canceled": 0,
+        "failures": 5,
+        "probes_granted": 2,
+        "probes_rejected": 0,
+        "rejected": 0,
+        "stale_results": 1,
+        "successes": 2
+      }
+    },
+    {
+      "name": "half_open_probe_competition",
+      "goal": "Only 3 probes may be in flight; the 4th is rejected; freed slots are reusable; in-flight probes from a closed generation go stale",
+      "pass": true,
+      "virtual_clock_start": "1970-01-01T00:00:00Z",
+      "breaker_config": {
+        "sliding_window_size": 10,
+        "min_requests": 5,
+        "failure_threshold": 0.5,
+        "open_cooldown": 5000000000,
+        "half_open_max_probes": 3,
+        "required_successes": 3
+      },
+      "steps": [
+        {
+          "index": 1,
+          "name": "three_probes_occupy_slots",
+          "virtual_time": "1970-01-01T00:00:05Z",
+          "detail": "3 concurrent probes parked at the upstream",
+          "snapshot": {
+            "state": "half_open",
+            "generation": 2,
+            "now": "1970-01-01T00:00:05Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 3,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 3,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 8,
+              "rejected": 0,
+              "successes": 0,
+              "failures": 5,
+              "canceled": 0,
+              "probes_granted": 3,
+              "probes_rejected": 0,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 3
+            }
+          },
+          "checks": [
+            {
+              "name": "state half_open",
+              "detail": "got=half_open want=half_open",
+              "pass": true
+            },
+            {
+              "name": "probes in flight",
+              "detail": "got=3 want=3",
+              "pass": true
+            },
+            {
+              "name": "probes granted",
+              "detail": "got=3 want=3",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "name": "fourth_competitor_rejected",
+          "virtual_time": "1970-01-01T00:00:05Z",
+          "detail": "no slot available -\u003e fast reject",
+          "snapshot": {
+            "state": "half_open",
+            "generation": 2,
+            "now": "1970-01-01T00:00:05Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 3,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 3,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 8,
+              "rejected": 1,
+              "successes": 0,
+              "failures": 5,
+              "canceled": 0,
+              "probes_granted": 3,
+              "probes_rejected": 1,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 3
+            }
+          },
+          "checks": [
+            {
+              "name": "rejection error",
+              "detail": "got=half-open probe slots exhausted want=half-open probe slots exhausted",
+              "pass": true
+            },
+            {
+              "name": "probes in flight stays 3",
+              "detail": "got=3 want=3",
+              "pass": true
+            },
+            {
+              "name": "probes rejected counter",
+              "detail": "got=1 want=1",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "name": "freed_slot_reused",
+          "virtual_time": "1970-01-01T00:00:05Z",
+          "detail": "after one probe succeeds the rejected competitor is granted a slot",
+          "snapshot": {
+            "state": "half_open",
+            "generation": 2,
+            "now": "1970-01-01T00:00:05Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 3,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 1,
+            "required_successes": 3,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 9,
+              "rejected": 1,
+              "successes": 1,
+              "failures": 5,
+              "canceled": 0,
+              "probes_granted": 4,
+              "probes_rejected": 1,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 3
+            }
+          },
+          "checks": [
+            {
+              "name": "probe 1 success",
+              "detail": "got=success want=success",
+              "pass": true
+            },
+            {
+              "name": "retry allowed",
+              "detail": "got=true want=true",
+              "pass": true
+            },
+            {
+              "name": "consecutive successes",
+              "detail": "got=1 want=1",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "name": "slots_full_again",
+          "virtual_time": "1970-01-01T00:00:05Z",
+          "detail": "the reused slot is occupied",
+          "snapshot": {
+            "state": "half_open",
+            "generation": 2,
+            "now": "1970-01-01T00:00:05Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 3,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 1,
+            "required_successes": 3,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 9,
+              "rejected": 1,
+              "successes": 1,
+              "failures": 5,
+              "canceled": 0,
+              "probes_granted": 4,
+              "probes_rejected": 1,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 3
+            }
+          },
+          "checks": [
+            {
+              "name": "probes in flight back to 3",
+              "detail": "got=3 want=3",
+              "pass": true
+            },
+            {
+              "name": "probes granted total",
+              "detail": "got=4 want=4",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "name": "probes_recover_breaker",
+          "virtual_time": "1970-01-01T00:00:05Z",
+          "detail": "3 consecutive probe successes close the breaker while a 4th probe is still in flight",
+          "snapshot": {
+            "state": "closed",
+            "generation": 3,
+            "now": "1970-01-01T00:00:05Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 0,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 3,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 9,
+              "rejected": 1,
+              "successes": 3,
+              "failures": 5,
+              "canceled": 0,
+              "probes_granted": 4,
+              "probes_rejected": 1,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 3
+            }
+          },
+          "checks": [
+            {
+              "name": "p2 success",
+              "detail": "got=success want=success",
+              "pass": true
+            },
+            {
+              "name": "p3 success",
+              "detail": "got=success want=success",
+              "pass": true
+            },
+            {
+              "name": "state closed",
+              "detail": "got=closed want=closed",
+              "pass": true
+            },
+            {
+              "name": "generation advanced to 3",
+              "detail": "got=3 want=3",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "name": "leftover_probe_goes_stale",
+          "virtual_time": "1970-01-01T00:00:05Z",
+          "detail": "the in-flight 4th probe completes after close and is stale",
+          "snapshot": {
+            "state": "closed",
+            "generation": 3,
+            "now": "1970-01-01T00:00:05Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 0,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 3,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 9,
+              "rejected": 1,
+              "successes": 3,
+              "failures": 5,
+              "canceled": 0,
+              "probes_granted": 4,
+              "probes_rejected": 1,
+              "stale_results": 1
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 3
+            }
+          },
+          "checks": [
+            {
+              "name": "leftover permit generation",
+              "detail": "got=2 want=2",
+              "pass": true
+            },
+            {
+              "name": "state stays closed",
+              "detail": "got=closed want=closed",
+              "pass": true
+            },
+            {
+              "name": "stale results",
+              "detail": "got=1 want=1",
+              "pass": true
+            },
+            {
+              "name": "success counter only counts 3 probes",
+              "detail": "got=3 want=3",
+              "pass": true
+            }
+          ]
+        }
+      ],
+      "summary_counters": {
+        "allowed": 9,
+        "canceled": 0,
+        "failures": 5,
+        "probes_granted": 4,
+        "probes_rejected": 1,
+        "rejected": 1,
+        "stale_results": 1,
+        "successes": 3
+      }
+    },
+    {
+      "name": "full_recovery_lifecycle",
+      "goal": "Failures open the breaker, cooldown rejects calls, two good probes close it, healthy traffic resumes",
+      "pass": true,
+      "virtual_clock_start": "1970-01-01T00:00:00Z",
+      "breaker_config": {
+        "sliding_window_size": 10,
+        "min_requests": 5,
+        "failure_threshold": 0.5,
+        "open_cooldown": 5000000000,
+        "half_open_max_probes": 3,
+        "required_successes": 2
+      },
+      "steps": [
+        {
+          "index": 1,
+          "name": "tripped",
+          "virtual_time": "1970-01-01T00:00:00Z",
+          "detail": "5 failures in the sliding window",
+          "snapshot": {
+            "state": "open",
+            "generation": 1,
+            "now": "1970-01-01T00:00:00Z",
+            "cooldown_until": "1970-01-01T00:00:05Z",
+            "probes_in_flight": 0,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 2,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 5,
+              "rejected": 0,
+              "successes": 0,
+              "failures": 5,
+              "canceled": 0,
+              "probes_granted": 0,
+              "probes_rejected": 0,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 2
+            }
+          },
+          "checks": [
+            {
+              "name": "state open",
+              "detail": "got=open want=open",
+              "pass": true
+            },
+            {
+              "name": "failures",
+              "detail": "got=5 want=5",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "name": "open_rejects_traffic",
+          "virtual_time": "1970-01-01T00:00:04Z",
+          "detail": "3 immediate rejects plus 1 more at t=4s (cooldown is 5s)",
+          "snapshot": {
+            "state": "open",
+            "generation": 1,
+            "now": "1970-01-01T00:00:04Z",
+            "cooldown_until": "1970-01-01T00:00:05Z",
+            "probes_in_flight": 0,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 2,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 5,
+              "rejected": 4,
+              "successes": 0,
+              "failures": 5,
+              "canceled": 0,
+              "probes_granted": 0,
+              "probes_rejected": 0,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 2
+            }
+          },
+          "checks": [
+            {
+              "name": "rejected 4 calls",
+              "detail": "got=4 want=4",
+              "pass": true
+            },
+            {
+              "name": "still open at 4s",
+              "detail": "got=open want=open",
+              "pass": true
+            },
+            {
+              "name": "rejected counter",
+              "detail": "got=4 want=4",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "name": "first_probe",
+          "virtual_time": "1970-01-01T00:00:05Z",
+          "detail": "at t=5s the first call enters half-open as a probe",
+          "snapshot": {
+            "state": "half_open",
+            "generation": 2,
+            "now": "1970-01-01T00:00:05Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 0,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 1,
+            "required_successes": 2,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 6,
+              "rejected": 4,
+              "successes": 1,
+              "failures": 5,
+              "canceled": 0,
+              "probes_granted": 1,
+              "probes_rejected": 0,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 2
+            }
+          },
+          "checks": [
+            {
+              "name": "probe marked",
+              "detail": "got=true want=true",
+              "pass": true
+            },
+            {
+              "name": "state half_open",
+              "detail": "got=half_open want=half_open",
+              "pass": true
+            },
+            {
+              "name": "one probe in flight accounting settled",
+              "detail": "got=0 want=0",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "name": "second_probe_closes",
+          "virtual_time": "1970-01-01T00:00:05Z",
+          "detail": "second consecutive success closes the breaker",
+          "snapshot": {
+            "state": "closed",
+            "generation": 3,
+            "now": "1970-01-01T00:00:05Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 0,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 2,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 7,
+              "rejected": 4,
+              "successes": 2,
+              "failures": 5,
+              "canceled": 0,
+              "probes_granted": 2,
+              "probes_rejected": 0,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 2
+            }
+          },
+          "checks": [
+            {
+              "name": "probe 2 success",
+              "detail": "got=success want=success",
+              "pass": true
+            },
+            {
+              "name": "state closed",
+              "detail": "got=closed want=closed",
+              "pass": true
+            },
+            {
+              "name": "generation 3",
+              "detail": "got=3 want=3",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "name": "healthy_traffic_resumes",
+          "virtual_time": "1970-01-01T00:00:05Z",
+          "detail": "new sliding window after recovery",
+          "snapshot": {
+            "state": "closed",
+            "generation": 3,
+            "now": "1970-01-01T00:00:05Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 0,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 2,
+            "window_samples": 3,
+            "window_successes": 3,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 10,
+              "rejected": 4,
+              "successes": 5,
+              "failures": 5,
+              "canceled": 0,
+              "probes_granted": 2,
+              "probes_rejected": 0,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 2
+            }
+          },
+          "checks": [
+            {
+              "name": "state closed",
+              "detail": "got=closed want=closed",
+              "pass": true
+            },
+            {
+              "name": "window samples",
+              "detail": "got=3 want=3",
+              "pass": true
+            },
+            {
+              "name": "window failures",
+              "detail": "got=0 want=0",
+              "pass": true
+            },
+            {
+              "name": "failure ratio",
+              "detail": "got=0 want=0",
+              "pass": true
+            },
+            {
+              "name": "successes total",
+              "detail": "got=5 want=5",
+              "pass": true
+            },
+            {
+              "name": "no stale results",
+              "detail": "got=0 want=0",
+              "pass": true
+            }
+          ]
+        }
+      ],
+      "summary_counters": {
+        "allowed": 10,
+        "canceled": 0,
+        "failures": 5,
+        "probes_granted": 2,
+        "probes_rejected": 0,
+        "rejected": 4,
+        "stale_results": 0,
+        "successes": 5
+      }
+    },
+    {
+      "name": "canceled_is_not_failure",
+      "goal": "Caller cancellation releases permits and probe slots but never counts as a service failure",
+      "pass": true,
+      "virtual_clock_start": "1970-01-01T00:00:00Z",
+      "breaker_config": {
+        "sliding_window_size": 10,
+        "min_requests": 5,
+        "failure_threshold": 0.5,
+        "open_cooldown": 5000000000,
+        "half_open_max_probes": 3,
+        "required_successes": 2
+      },
+      "steps": [
+        {
+          "index": 1,
+          "name": "closed_call_canceled",
+          "virtual_time": "1970-01-01T00:00:00Z",
+          "detail": "caller gives up on a parked healthy-state call",
+          "snapshot": {
+            "state": "closed",
+            "generation": 0,
+            "now": "1970-01-01T00:00:00Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 0,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 2,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 1,
+              "rejected": 0,
+              "successes": 0,
+              "failures": 0,
+              "canceled": 1,
+              "probes_granted": 0,
+              "probes_rejected": 0,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 2
+            }
+          },
+          "checks": [
+            {
+              "name": "outcome canceled",
+              "detail": "got=canceled want=canceled",
+              "pass": true
+            },
+            {
+              "name": "canceled counter",
+              "detail": "got=1 want=1",
+              "pass": true
+            },
+            {
+              "name": "failures counter",
+              "detail": "got=0 want=0",
+              "pass": true
+            },
+            {
+              "name": "not recorded in window",
+              "detail": "got=0 want=0",
+              "pass": true
+            },
+            {
+              "name": "state stays closed",
+              "detail": "got=closed want=closed",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "name": "late_answer_after_cancel_ignored",
+          "virtual_time": "1970-01-01T00:00:00Z",
+          "detail": "upstream fails the already-canceled call",
+          "snapshot": {
+            "state": "closed",
+            "generation": 0,
+            "now": "1970-01-01T00:00:00Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 0,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 2,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 1,
+              "rejected": 0,
+              "successes": 0,
+              "failures": 0,
+              "canceled": 1,
+              "probes_granted": 0,
+              "probes_rejected": 0,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 2
+            }
+          },
+          "checks": [
+            {
+              "name": "failures still zero",
+              "detail": "got=0 want=0",
+              "pass": true
+            },
+            {
+              "name": "state closed",
+              "detail": "got=closed want=closed",
+              "pass": true
+            },
+            {
+              "name": "no stale marker (permit already settled)",
+              "detail": "got=0 want=0",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "name": "probe_in_flight",
+          "virtual_time": "1970-01-01T00:00:05Z",
+          "detail": "half-open probe parked at upstream",
+          "snapshot": {
+            "state": "half_open",
+            "generation": 2,
+            "now": "1970-01-01T00:00:05Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 1,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 2,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 7,
+              "rejected": 0,
+              "successes": 0,
+              "failures": 5,
+              "canceled": 1,
+              "probes_granted": 1,
+              "probes_rejected": 0,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 2
+            }
+          },
+          "checks": [
+            {
+              "name": "state half_open",
+              "detail": "got=half_open want=half_open",
+              "pass": true
+            },
+            {
+              "name": "probe slot occupied",
+              "detail": "got=1 want=1",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "name": "probe_canceled",
+          "virtual_time": "1970-01-01T00:00:05Z",
+          "detail": "caller cancels the probe: slot released, success streak untouched",
+          "snapshot": {
+            "state": "half_open",
+            "generation": 2,
+            "now": "1970-01-01T00:00:05Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 0,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 2,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 7,
+              "rejected": 0,
+              "successes": 0,
+              "failures": 5,
+              "canceled": 2,
+              "probes_granted": 1,
+              "probes_rejected": 0,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 2
+            }
+          },
+          "checks": [
+            {
+              "name": "probe outcome canceled",
+              "detail": "got=canceled want=canceled",
+              "pass": true
+            },
+            {
+              "name": "probe slot released",
+              "detail": "got=0 want=0",
+              "pass": true
+            },
+            {
+              "name": "still half_open",
+              "detail": "got=half_open want=half_open",
+              "pass": true
+            },
+            {
+              "name": "no consecutive success change",
+              "detail": "got=0 want=0",
+              "pass": true
+            },
+            {
+              "name": "canceled counter",
+              "detail": "got=2 want=2",
+              "pass": true
+            },
+            {
+              "name": "failures still only tripping ones",
+              "detail": "got=5 want=5",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "name": "fresh_probes_recover",
+          "virtual_time": "1970-01-01T00:00:05Z",
+          "detail": "replacement probes use the freed slot and close the breaker",
+          "snapshot": {
+            "state": "closed",
+            "generation": 3,
+            "now": "1970-01-01T00:00:05Z",
+            "cooldown_until": "0001-01-01T00:00:00Z",
+            "probes_in_flight": 0,
+            "half_open_max_probes": 3,
+            "consecutive_successes": 0,
+            "required_successes": 2,
+            "window_samples": 0,
+            "window_successes": 0,
+            "window_failures": 0,
+            "window_canceled": 0,
+            "failure_ratio": 0,
+            "counters": {
+              "allowed": 9,
+              "rejected": 0,
+              "successes": 2,
+              "failures": 5,
+              "canceled": 2,
+              "probes_granted": 3,
+              "probes_rejected": 0,
+              "stale_results": 0
+            },
+            "config": {
+              "sliding_window_size": 10,
+              "min_requests": 5,
+              "failure_threshold": 0.5,
+              "open_cooldown": 5000000000,
+              "half_open_max_probes": 3,
+              "required_successes": 2
+            }
+          },
+          "checks": [
+            {
+              "name": "replacement probe 1",
+              "detail": "got=success want=success",
+              "pass": true
+            },
+            {
+              "name": "replacement probe 2",
+              "detail": "got=success want=success",
+              "pass": true
+            },
+            {
+              "name": "state closed",
+              "detail": "got=closed want=closed",
+              "pass": true
+            },
+            {
+              "name": "failures unchanged",
+              "detail": "got=5 want=5",
+              "pass": true
+            },
+            {
+              "name": "canceled total",
+              "detail": "got=2 want=2",
+              "pass": true
+            }
+          ]
+        }
+      ],
+      "summary_counters": {
+        "allowed": 9,
+        "canceled": 2,
+        "failures": 5,
+        "probes_granted": 3,
+        "probes_rejected": 0,
+        "rejected": 0,
+        "stale_results": 0,
+        "successes": 2
+      }
+    }
+  ]
+}
