@@ -1,0 +1,77 @@
+{
+  "description": "leaf healthy — one chain",
+  "preset": "success",
+  "result": {
+    "attempts": 1,
+    "error": "",
+    "http_status": 200,
+    "root_max": 10,
+    "total_used": 4,
+    "verdict": "ok"
+  },
+  "timeline": [
+    {
+      "seq": 1,
+      "time": "2026-09-25T18:50:32.623389486+08:00",
+      "elapsed_ms": 0,
+      "layer": "client",
+      "type": "attempt-start",
+      "attempt": 1,
+      "detail": "call edge (used=1/10)"
+    },
+    {
+      "seq": 2,
+      "time": "2026-09-25T18:50:32.623591549+08:00",
+      "elapsed_ms": 0,
+      "layer": "edge",
+      "type": "attempt-start",
+      "attempt": 2,
+      "detail": "forward -\u003e http://127.0.0.1:38575 (used=2/10)"
+    },
+    {
+      "seq": 3,
+      "time": "2026-09-25T18:50:32.623798449+08:00",
+      "elapsed_ms": 0,
+      "layer": "mid",
+      "type": "attempt-start",
+      "attempt": 3,
+      "detail": "forward -\u003e http://127.0.0.1:35299 (used=3/10)"
+    },
+    {
+      "seq": 4,
+      "time": "2026-09-25T18:50:32.623990555+08:00",
+      "elapsed_ms": 0,
+      "layer": "leaf",
+      "type": "attempt-end",
+      "attempt": 4,
+      "detail": "script hit 1 -\u003e 200 ok"
+    },
+    {
+      "seq": 5,
+      "time": "2026-09-25T18:50:32.624102647+08:00",
+      "elapsed_ms": 0,
+      "layer": "mid",
+      "type": "attempt-end",
+      "attempt": 3,
+      "detail": "used=4/10 err=\u003cnil\u003e"
+    },
+    {
+      "seq": 6,
+      "time": "2026-09-25T18:50:32.624168629+08:00",
+      "elapsed_ms": 0,
+      "layer": "edge",
+      "type": "attempt-end",
+      "attempt": 2,
+      "detail": "used=4/10 err=\u003cnil\u003e"
+    },
+    {
+      "seq": 7,
+      "time": "2026-09-25T18:50:32.624226224+08:00",
+      "elapsed_ms": 0,
+      "layer": "client",
+      "type": "attempt-end",
+      "attempt": 1,
+      "detail": "status=200 verdict=ok used=4"
+    }
+  ]
+}

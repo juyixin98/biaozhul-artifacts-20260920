@@ -1,0 +1,131 @@
+{
+  "description": "leaf always 503; all layers retry; total attempts capped by root budget",
+  "preset": "budget-cap",
+  "result": {
+    "attempts": 1,
+    "error": "client: retry budget exhausted after 0 attempt(s): {\"error\":\"edge: edge: retry budget exhausted after 2 attempt(s): downstream: retry budget exhausted after 0 attempt(s): {\\\"error\\\":\\\"mid: retry: retry budget exhausted after 7 attempt(s): downstream: retryable: 503 Service Unavailable\\\",\\\"status\\\":503,\\\"used\\\":8,\\\"verdict\\\":\\\"budget-exhausted\\\"}\\n\",\"status\":503,\"used\":8,\"verdict\":\"budget-exhausted\"}\n",
+    "http_status": 503,
+    "root_max": 8,
+    "total_used": 8,
+    "verdict": "budget-exhausted"
+  },
+  "timeline": [
+    {
+      "seq": 1,
+      "time": "2026-09-25T18:50:31.312749693+08:00",
+      "elapsed_ms": 0,
+      "layer": "client",
+      "type": "attempt-start",
+      "attempt": 1,
+      "detail": "call edge (used=1/8)"
+    },
+    {
+      "seq": 2,
+      "time": "2026-09-25T18:50:31.312893969+08:00",
+      "elapsed_ms": 0,
+      "layer": "edge",
+      "type": "attempt-start",
+      "attempt": 2,
+      "detail": "forward -\u003e http://127.0.0.1:46199 (used=2/8)"
+    },
+    {
+      "seq": 3,
+      "time": "2026-09-25T18:50:31.313075719+08:00",
+      "elapsed_ms": 0,
+      "layer": "mid",
+      "type": "attempt-start",
+      "attempt": 3,
+      "detail": "forward -\u003e http://127.0.0.1:34899 (used=3/8)"
+    },
+    {
+      "seq": 4,
+      "time": "2026-09-25T18:50:31.31326181+08:00",
+      "elapsed_ms": 0,
+      "layer": "leaf",
+      "type": "attempt-end",
+      "attempt": 4,
+      "detail": "script hit 1 -\u003e 503 service unavailable"
+    },
+    {
+      "seq": 5,
+      "time": "2026-09-25T18:50:31.313330584+08:00",
+      "elapsed_ms": 0,
+      "layer": "mid",
+      "type": "attempt-end",
+      "attempt": 3,
+      "detail": "used=4/8 err=downstream: retryable: 503 Service Unavailable"
+    },
+    {
+      "seq": 6,
+      "time": "2026-09-25T18:50:31.393538319+08:00",
+      "elapsed_ms": 80,
+      "layer": "mid",
+      "type": "attempt-start",
+      "attempt": 5,
+      "detail": "forward -\u003e http://127.0.0.1:34899 (used=5/8)"
+    },
+    {
+      "seq": 7,
+      "time": "2026-09-25T18:50:31.393711276+08:00",
+      "elapsed_ms": 80,
+      "layer": "leaf",
+      "type": "attempt-end",
+      "attempt": 6,
+      "detail": "script hit 2 -\u003e 503 service unavailable"
+    },
+    {
+      "seq": 8,
+      "time": "2026-09-25T18:50:31.393814378+08:00",
+      "elapsed_ms": 81,
+      "layer": "mid",
+      "type": "attempt-end",
+      "attempt": 5,
+      "detail": "used=6/8 err=downstream: retryable: 503 Service Unavailable"
+    },
+    {
+      "seq": 9,
+      "time": "2026-09-25T18:50:31.594149038+08:00",
+      "elapsed_ms": 281,
+      "layer": "mid",
+      "type": "attempt-start",
+      "attempt": 7,
+      "detail": "forward -\u003e http://127.0.0.1:34899 (used=7/8)"
+    },
+    {
+      "seq": 10,
+      "time": "2026-09-25T18:50:31.59434316+08:00",
+      "elapsed_ms": 281,
+      "layer": "leaf",
+      "type": "attempt-end",
+      "attempt": 8,
+      "detail": "script hit 3 -\u003e 503 service unavailable"
+    },
+    {
+      "seq": 11,
+      "time": "2026-09-25T18:50:31.594518376+08:00",
+      "elapsed_ms": 281,
+      "layer": "mid",
+      "type": "attempt-end",
+      "attempt": 7,
+      "detail": "used=8/8 err=downstream: retryable: 503 Service Unavailable"
+    },
+    {
+      "seq": 12,
+      "time": "2026-09-25T18:50:31.594654624+08:00",
+      "elapsed_ms": 281,
+      "layer": "edge",
+      "type": "attempt-end",
+      "attempt": 2,
+      "detail": "used=8/8 err=downstream: retry budget exhausted after 0 attempt(s): {\"error\":\"mid: retry: retry budget exhausted after 7 attempt(s): downstream: retryable: 503 Service Unavailable\",\"status\":503,\"used\":8,\"verdict\":\"budget-exhausted\"}\n"
+    },
+    {
+      "seq": 13,
+      "time": "2026-09-25T18:50:31.594761997+08:00",
+      "elapsed_ms": 282,
+      "layer": "client",
+      "type": "attempt-end",
+      "attempt": 1,
+      "detail": "status=503 verdict=budget-exhausted used=8"
+    }
+  ]
+}

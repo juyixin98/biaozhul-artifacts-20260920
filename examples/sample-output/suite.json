@@ -1,0 +1,836 @@
+{
+  "cases": [
+    {
+      "case": "root-budget-cap",
+      "passed": true,
+      "outcome": {
+        "name": "root-budget-cap",
+        "description": "Always-failing leaf, every layer willing to retry; total attempts must equal the root cap (8).",
+        "status": "budget-exhausted",
+        "verdict": "budget-exhausted",
+        "http_status": 503,
+        "root_max": 8,
+        "total_used": 8,
+        "tiers": {
+          "client_attempts": 1,
+          "edge_attempts": 1,
+          "mid_attempts": 3,
+          "leaf_hits": 3,
+          "leaf_rejected": 0
+        },
+        "elapsed_ms": 70,
+        "timeline": [
+          {
+            "seq": 1,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "client",
+            "type": "attempt-start",
+            "attempt": 1,
+            "detail": "call edge (used=1/8)"
+          },
+          {
+            "seq": 2,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "edge",
+            "type": "attempt-start",
+            "attempt": 2,
+            "detail": "forward -\u003e http://127.0.0.1:36443 (used=2/8)"
+          },
+          {
+            "seq": 3,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "mid",
+            "type": "attempt-start",
+            "attempt": 3,
+            "detail": "forward -\u003e http://127.0.0.1:43959 (used=3/8)"
+          },
+          {
+            "seq": 4,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "leaf",
+            "type": "attempt-end",
+            "attempt": 4,
+            "detail": "script hit 1 -\u003e 503 service unavailable"
+          },
+          {
+            "seq": 5,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "mid",
+            "type": "attempt-end",
+            "attempt": 3,
+            "detail": "used=4/8 err=downstream: retryable: 503 Service Unavailable"
+          },
+          {
+            "seq": 6,
+            "time": "2023-11-15T06:13:20.02+08:00",
+            "elapsed_ms": 20,
+            "layer": "mid",
+            "type": "attempt-start",
+            "attempt": 5,
+            "detail": "forward -\u003e http://127.0.0.1:43959 (used=5/8)"
+          },
+          {
+            "seq": 7,
+            "time": "2023-11-15T06:13:20.02+08:00",
+            "elapsed_ms": 20,
+            "layer": "leaf",
+            "type": "attempt-end",
+            "attempt": 6,
+            "detail": "script hit 2 -\u003e 503 service unavailable"
+          },
+          {
+            "seq": 8,
+            "time": "2023-11-15T06:13:20.02+08:00",
+            "elapsed_ms": 20,
+            "layer": "mid",
+            "type": "attempt-end",
+            "attempt": 5,
+            "detail": "used=6/8 err=downstream: retryable: 503 Service Unavailable"
+          },
+          {
+            "seq": 9,
+            "time": "2023-11-15T06:13:20.07+08:00",
+            "elapsed_ms": 70,
+            "layer": "mid",
+            "type": "attempt-start",
+            "attempt": 7,
+            "detail": "forward -\u003e http://127.0.0.1:43959 (used=7/8)"
+          },
+          {
+            "seq": 10,
+            "time": "2023-11-15T06:13:20.07+08:00",
+            "elapsed_ms": 70,
+            "layer": "leaf",
+            "type": "attempt-end",
+            "attempt": 8,
+            "detail": "script hit 3 -\u003e 503 service unavailable"
+          },
+          {
+            "seq": 11,
+            "time": "2023-11-15T06:13:20.07+08:00",
+            "elapsed_ms": 70,
+            "layer": "mid",
+            "type": "attempt-end",
+            "attempt": 7,
+            "detail": "used=8/8 err=downstream: retryable: 503 Service Unavailable"
+          },
+          {
+            "seq": 12,
+            "time": "2023-11-15T06:13:20.07+08:00",
+            "elapsed_ms": 70,
+            "layer": "edge",
+            "type": "attempt-end",
+            "attempt": 2,
+            "detail": "used=8/8 err=downstream: retry budget exhausted after 0 attempt(s): {\"error\":\"mid: retry: retry budget exhausted after 7 attempt(s): downstream: retryable: 503 Service Unavailable\",\"status\":503,\"used\":8,\"verdict\":\"budget-exhausted\"}\n"
+          },
+          {
+            "seq": 13,
+            "time": "2023-11-15T06:13:20.07+08:00",
+            "elapsed_ms": 70,
+            "layer": "client",
+            "type": "attempt-end",
+            "attempt": 1,
+            "detail": "status=503 verdict=budget-exhausted used=8"
+          }
+        ]
+      }
+    },
+    {
+      "case": "local-cap-upstream-retry",
+      "passed": true,
+      "outcome": {
+        "name": "local-cap-upstream-retry",
+        "description": "Mid burns its local cap; edge starts fresh chains until the root is spent.",
+        "status": "budget-exhausted",
+        "verdict": "budget-exhausted",
+        "http_status": 503,
+        "root_max": 12,
+        "total_used": 12,
+        "tiers": {
+          "client_attempts": 2,
+          "edge_attempts": 2,
+          "mid_attempts": 4,
+          "leaf_hits": 4,
+          "leaf_rejected": 0
+        },
+        "elapsed_ms": 85,
+        "timeline": [
+          {
+            "seq": 1,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "client",
+            "type": "attempt-start",
+            "attempt": 1,
+            "detail": "call edge (used=1/12)"
+          },
+          {
+            "seq": 2,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "edge",
+            "type": "attempt-start",
+            "attempt": 2,
+            "detail": "forward -\u003e http://127.0.0.1:44163 (used=2/12)"
+          },
+          {
+            "seq": 3,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "mid",
+            "type": "attempt-start",
+            "attempt": 3,
+            "detail": "forward -\u003e http://127.0.0.1:39533 (used=3/12)"
+          },
+          {
+            "seq": 4,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "leaf",
+            "type": "attempt-end",
+            "attempt": 4,
+            "detail": "script hit 1 -\u003e 503 service unavailable"
+          },
+          {
+            "seq": 5,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "mid",
+            "type": "attempt-end",
+            "attempt": 3,
+            "detail": "used=4/12 err=downstream: retryable: 503 Service Unavailable"
+          },
+          {
+            "seq": 6,
+            "time": "2023-11-15T06:13:20.02+08:00",
+            "elapsed_ms": 20,
+            "layer": "mid",
+            "type": "attempt-start",
+            "attempt": 5,
+            "detail": "forward -\u003e http://127.0.0.1:39533 (used=5/12)"
+          },
+          {
+            "seq": 7,
+            "time": "2023-11-15T06:13:20.02+08:00",
+            "elapsed_ms": 20,
+            "layer": "leaf",
+            "type": "attempt-end",
+            "attempt": 6,
+            "detail": "script hit 2 -\u003e 503 service unavailable"
+          },
+          {
+            "seq": 8,
+            "time": "2023-11-15T06:13:20.02+08:00",
+            "elapsed_ms": 20,
+            "layer": "mid",
+            "type": "attempt-end",
+            "attempt": 5,
+            "detail": "used=6/12 err=downstream: retryable: 503 Service Unavailable"
+          },
+          {
+            "seq": 9,
+            "time": "2023-11-15T06:13:20.02+08:00",
+            "elapsed_ms": 20,
+            "layer": "edge",
+            "type": "attempt-end",
+            "attempt": 2,
+            "detail": "used=6/12 err=downstream: local retry cap reached after 0 attempt(s): {\"error\":\"mid: retry: local retry cap reached after 5 attempt(s): downstream: retryable: 503 Service Unavailable\",\"status\":503,\"used\":6,\"verdict\":\"local-exhausted\"}\n"
+          },
+          {
+            "seq": 10,
+            "time": "2023-11-15T06:13:20.03+08:00",
+            "elapsed_ms": 30,
+            "layer": "edge",
+            "type": "attempt-start",
+            "attempt": 7,
+            "detail": "forward -\u003e http://127.0.0.1:44163 (used=7/12)"
+          },
+          {
+            "seq": 11,
+            "time": "2023-11-15T06:13:20.03+08:00",
+            "elapsed_ms": 30,
+            "layer": "mid",
+            "type": "attempt-start",
+            "attempt": 8,
+            "detail": "forward -\u003e http://127.0.0.1:39533 (used=8/12)"
+          },
+          {
+            "seq": 12,
+            "time": "2023-11-15T06:13:20.03+08:00",
+            "elapsed_ms": 30,
+            "layer": "leaf",
+            "type": "attempt-end",
+            "attempt": 9,
+            "detail": "script hit 3 -\u003e 503 service unavailable"
+          },
+          {
+            "seq": 13,
+            "time": "2023-11-15T06:13:20.03+08:00",
+            "elapsed_ms": 30,
+            "layer": "mid",
+            "type": "attempt-end",
+            "attempt": 8,
+            "detail": "used=9/12 err=downstream: retryable: 503 Service Unavailable"
+          },
+          {
+            "seq": 14,
+            "time": "2023-11-15T06:13:20.08+08:00",
+            "elapsed_ms": 80,
+            "layer": "mid",
+            "type": "attempt-start",
+            "attempt": 10,
+            "detail": "forward -\u003e http://127.0.0.1:39533 (used=10/12)"
+          },
+          {
+            "seq": 15,
+            "time": "2023-11-15T06:13:20.08+08:00",
+            "elapsed_ms": 80,
+            "layer": "leaf",
+            "type": "attempt-end",
+            "attempt": 11,
+            "detail": "script hit 4 -\u003e 503 service unavailable"
+          },
+          {
+            "seq": 16,
+            "time": "2023-11-15T06:13:20.08+08:00",
+            "elapsed_ms": 80,
+            "layer": "mid",
+            "type": "attempt-end",
+            "attempt": 10,
+            "detail": "used=11/12 err=downstream: retryable: 503 Service Unavailable"
+          },
+          {
+            "seq": 17,
+            "time": "2023-11-15T06:13:20.08+08:00",
+            "elapsed_ms": 80,
+            "layer": "edge",
+            "type": "attempt-end",
+            "attempt": 7,
+            "detail": "used=11/12 err=downstream: local retry cap reached after 0 attempt(s): {\"error\":\"mid: retry: local retry cap reached after 10 attempt(s): downstream: retryable: 503 Service Unavailable\",\"status\":503,\"used\":11,\"verdict\":\"local-exhausted\"}\n"
+          },
+          {
+            "seq": 18,
+            "time": "2023-11-15T06:13:20.08+08:00",
+            "elapsed_ms": 80,
+            "layer": "client",
+            "type": "attempt-end",
+            "attempt": 1,
+            "detail": "status=503 verdict=local-exhausted used=11"
+          },
+          {
+            "seq": 19,
+            "time": "2023-11-15T06:13:20.085+08:00",
+            "elapsed_ms": 85,
+            "layer": "client",
+            "type": "attempt-start",
+            "attempt": 12,
+            "detail": "call edge (used=12/12)"
+          },
+          {
+            "seq": 20,
+            "time": "2023-11-15T06:13:20.085+08:00",
+            "elapsed_ms": 85,
+            "layer": "client",
+            "type": "attempt-end",
+            "attempt": 12,
+            "detail": "status=503 verdict=budget-exhausted used=12"
+          }
+        ]
+      }
+    },
+    {
+      "case": "server-retry-after-recovery",
+      "passed": true,
+      "outcome": {
+        "name": "server-retry-after-recovery",
+        "description": "Leaf returns 429 with Retry-After=1s once, then OK; the hint is honored and the call succeeds.",
+        "status": "success",
+        "verdict": "ok",
+        "http_status": 200,
+        "root_max": 10,
+        "total_used": 6,
+        "tiers": {
+          "client_attempts": 1,
+          "edge_attempts": 1,
+          "mid_attempts": 2,
+          "leaf_hits": 2,
+          "leaf_rejected": 0
+        },
+        "elapsed_ms": 1000,
+        "timeline": [
+          {
+            "seq": 1,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "client",
+            "type": "attempt-start",
+            "attempt": 1,
+            "detail": "call edge (used=1/10)"
+          },
+          {
+            "seq": 2,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "edge",
+            "type": "attempt-start",
+            "attempt": 2,
+            "detail": "forward -\u003e http://127.0.0.1:39819 (used=2/10)"
+          },
+          {
+            "seq": 3,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "mid",
+            "type": "attempt-start",
+            "attempt": 3,
+            "detail": "forward -\u003e http://127.0.0.1:44947 (used=3/10)"
+          },
+          {
+            "seq": 4,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "leaf",
+            "type": "attempt-end",
+            "attempt": 4,
+            "detail": "script hit 1 -\u003e 429 rate limited"
+          },
+          {
+            "seq": 5,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "mid",
+            "type": "attempt-end",
+            "attempt": 3,
+            "detail": "used=4/10 err=downstream: retryable: 429 Too Many Requests retry-after (retry-after 1s)"
+          },
+          {
+            "seq": 6,
+            "time": "2023-11-15T06:13:21+08:00",
+            "elapsed_ms": 1000,
+            "layer": "mid",
+            "type": "attempt-start",
+            "attempt": 5,
+            "detail": "forward -\u003e http://127.0.0.1:44947 (used=5/10)"
+          },
+          {
+            "seq": 7,
+            "time": "2023-11-15T06:13:21+08:00",
+            "elapsed_ms": 1000,
+            "layer": "leaf",
+            "type": "attempt-end",
+            "attempt": 6,
+            "detail": "script hit 2 -\u003e 200 ok"
+          },
+          {
+            "seq": 8,
+            "time": "2023-11-15T06:13:21+08:00",
+            "elapsed_ms": 1000,
+            "layer": "mid",
+            "type": "attempt-end",
+            "attempt": 5,
+            "detail": "used=6/10 err=\u003cnil\u003e"
+          },
+          {
+            "seq": 9,
+            "time": "2023-11-15T06:13:21+08:00",
+            "elapsed_ms": 1000,
+            "layer": "edge",
+            "type": "attempt-end",
+            "attempt": 2,
+            "detail": "used=6/10 err=\u003cnil\u003e"
+          },
+          {
+            "seq": 10,
+            "time": "2023-11-15T06:13:21+08:00",
+            "elapsed_ms": 1000,
+            "layer": "client",
+            "type": "attempt-end",
+            "attempt": 1,
+            "detail": "status=200 verdict=ok used=6"
+          }
+        ]
+      }
+    },
+    {
+      "case": "retry-after-vs-deadline",
+      "passed": true,
+      "outcome": {
+        "name": "retry-after-vs-deadline",
+        "description": "A 10s Retry-After against a 250ms propagated deadline ends in deadline-exceeded.",
+        "status": "deadline-exceeded",
+        "verdict": "deadline",
+        "http_status": 504,
+        "root_max": 20,
+        "total_used": 4,
+        "tiers": {
+          "client_attempts": 1,
+          "edge_attempts": 1,
+          "mid_attempts": 1,
+          "leaf_hits": 1,
+          "leaf_rejected": 0
+        },
+        "elapsed_ms": 250,
+        "timeline": [
+          {
+            "seq": 1,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "client",
+            "type": "attempt-start",
+            "attempt": 1,
+            "detail": "call edge (used=1/20)"
+          },
+          {
+            "seq": 2,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "edge",
+            "type": "attempt-start",
+            "attempt": 2,
+            "detail": "forward -\u003e http://127.0.0.1:36949 (used=2/20)"
+          },
+          {
+            "seq": 3,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "mid",
+            "type": "attempt-start",
+            "attempt": 3,
+            "detail": "forward -\u003e http://127.0.0.1:45389 (used=3/20)"
+          },
+          {
+            "seq": 4,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "leaf",
+            "type": "attempt-end",
+            "attempt": 4,
+            "detail": "script hit 1 -\u003e 429 rate limited"
+          },
+          {
+            "seq": 5,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "mid",
+            "type": "attempt-end",
+            "attempt": 3,
+            "detail": "used=4/20 err=downstream: retryable: 429 Too Many Requests retry-after (retry-after 10s)"
+          },
+          {
+            "seq": 6,
+            "time": "2023-11-15T06:13:20.25+08:00",
+            "elapsed_ms": 250,
+            "layer": "edge",
+            "type": "attempt-end",
+            "attempt": 2,
+            "detail": "used=4/20 err=downstream: deadline exceeded after 0 attempt(s): {\"error\":\"mid: retry: deadline exceeded after 3 attempt(s): downstream: retryable: 429 Too Many Requests retry-after (retry-after 10s)\",\"status\":504,\"used\":4,\"verdict\":\"deadline\"}\n"
+          },
+          {
+            "seq": 7,
+            "time": "2023-11-15T06:13:20.25+08:00",
+            "elapsed_ms": 250,
+            "layer": "client",
+            "type": "attempt-end",
+            "attempt": 1,
+            "detail": "status=504 verdict=deadline used=4"
+          }
+        ]
+      }
+    },
+    {
+      "case": "client-cancellation",
+      "passed": true,
+      "outcome": {
+        "name": "client-cancellation",
+        "description": "Client cancels after 40ms while tiers are in backoff; the call unwinds as canceled.",
+        "status": "canceled",
+        "verdict": "",
+        "http_status": 0,
+        "root_max": 100,
+        "total_used": 6,
+        "tiers": {
+          "client_attempts": 1,
+          "edge_attempts": 1,
+          "mid_attempts": 2,
+          "leaf_hits": 2,
+          "leaf_rejected": 0
+        },
+        "elapsed_ms": 40,
+        "timeline": [
+          {
+            "seq": 1,
+            "time": "2026-09-25T18:50:31.260741443+08:00",
+            "elapsed_ms": 0,
+            "layer": "client",
+            "type": "attempt-start",
+            "attempt": 1,
+            "detail": "call edge (used=1/100)"
+          },
+          {
+            "seq": 2,
+            "time": "2026-09-25T18:50:31.260990698+08:00",
+            "elapsed_ms": 0,
+            "layer": "edge",
+            "type": "attempt-start",
+            "attempt": 2,
+            "detail": "forward -\u003e http://127.0.0.1:38983 (used=2/100)"
+          },
+          {
+            "seq": 3,
+            "time": "2026-09-25T18:50:31.261214089+08:00",
+            "elapsed_ms": 0,
+            "layer": "mid",
+            "type": "attempt-start",
+            "attempt": 3,
+            "detail": "forward -\u003e http://127.0.0.1:43729 (used=3/100)"
+          },
+          {
+            "seq": 4,
+            "time": "2026-09-25T18:50:31.261382311+08:00",
+            "elapsed_ms": 0,
+            "layer": "leaf",
+            "type": "attempt-end",
+            "attempt": 4,
+            "detail": "script hit 1 -\u003e 503 service unavailable"
+          },
+          {
+            "seq": 5,
+            "time": "2026-09-25T18:50:31.261447435+08:00",
+            "elapsed_ms": 0,
+            "layer": "mid",
+            "type": "attempt-end",
+            "attempt": 3,
+            "detail": "used=4/100 err=downstream: retryable: 503 Service Unavailable"
+          },
+          {
+            "seq": 6,
+            "time": "2026-09-25T18:50:31.281609117+08:00",
+            "elapsed_ms": 20,
+            "layer": "mid",
+            "type": "attempt-start",
+            "attempt": 5,
+            "detail": "forward -\u003e http://127.0.0.1:43729 (used=5/100)"
+          },
+          {
+            "seq": 7,
+            "time": "2026-09-25T18:50:31.281737831+08:00",
+            "elapsed_ms": 20,
+            "layer": "leaf",
+            "type": "attempt-end",
+            "attempt": 6,
+            "detail": "script hit 2 -\u003e 503 service unavailable"
+          },
+          {
+            "seq": 8,
+            "time": "2026-09-25T18:50:31.28182353+08:00",
+            "elapsed_ms": 21,
+            "layer": "mid",
+            "type": "attempt-end",
+            "attempt": 5,
+            "detail": "used=6/100 err=downstream: retryable: 503 Service Unavailable"
+          },
+          {
+            "seq": 9,
+            "time": "2026-09-25T18:50:31.301022997+08:00",
+            "elapsed_ms": 40,
+            "layer": "client",
+            "type": "attempt-end",
+            "attempt": 1,
+            "detail": "transport: Get \"http://127.0.0.1:38325\": context canceled"
+          },
+          {
+            "seq": 10,
+            "time": "2026-09-25T18:50:31.301063848+08:00",
+            "elapsed_ms": 40,
+            "layer": "edge",
+            "type": "attempt-end",
+            "attempt": 2,
+            "detail": "used=2/100 err=context canceled"
+          }
+        ]
+      }
+    },
+    {
+      "case": "non-retryable-400",
+      "passed": true,
+      "outcome": {
+        "name": "non-retryable-400",
+        "description": "A deterministic 400 is unsafe to retry; exactly one chain runs.",
+        "status": "non-retryable",
+        "verdict": "non-retryable",
+        "http_status": 400,
+        "root_max": 10,
+        "total_used": 4,
+        "tiers": {
+          "client_attempts": 1,
+          "edge_attempts": 1,
+          "mid_attempts": 1,
+          "leaf_hits": 1,
+          "leaf_rejected": 0
+        },
+        "elapsed_ms": 0,
+        "timeline": [
+          {
+            "seq": 1,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "client",
+            "type": "attempt-start",
+            "attempt": 1,
+            "detail": "call edge (used=1/10)"
+          },
+          {
+            "seq": 2,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "edge",
+            "type": "attempt-start",
+            "attempt": 2,
+            "detail": "forward -\u003e http://127.0.0.1:45689 (used=2/10)"
+          },
+          {
+            "seq": 3,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "mid",
+            "type": "attempt-start",
+            "attempt": 3,
+            "detail": "forward -\u003e http://127.0.0.1:36871 (used=3/10)"
+          },
+          {
+            "seq": 4,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "leaf",
+            "type": "attempt-end",
+            "attempt": 4,
+            "detail": "script hit 1 -\u003e 400 deterministic client error"
+          },
+          {
+            "seq": 5,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "mid",
+            "type": "attempt-end",
+            "attempt": 3,
+            "detail": "used=4/10 err=downstream: non-retryable: {\"attempt\":4,\"hit\":1,\"message\":\"deterministic client error\",\"status\":400,\"tier\":\"leaf\",\"used\":4}\n"
+          },
+          {
+            "seq": 6,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "edge",
+            "type": "attempt-end",
+            "attempt": 2,
+            "detail": "used=4/10 err=downstream: non-retryable: {\"error\":\"mid: downstream: non-retryable: {\\\"attempt\\\":4,\\\"hit\\\":1,\\\"message\\\":\\\"deterministic client error\\\",\\\"status\\\":400,\\\"tier\\\":\\\"leaf\\\",\\\"used\\\":4}\\n\",\"status\":400,\"used\":4,\"verdict\":\"non-retry…"
+          },
+          {
+            "seq": 7,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "client",
+            "type": "attempt-end",
+            "attempt": 1,
+            "detail": "status=400 verdict=non-retryable used=4"
+          }
+        ]
+      }
+    },
+    {
+      "case": "immediate-success",
+      "passed": true,
+      "outcome": {
+        "name": "immediate-success",
+        "description": "Leaf is healthy; a single chain of four attempts succeeds.",
+        "status": "success",
+        "verdict": "ok",
+        "http_status": 200,
+        "root_max": 10,
+        "total_used": 4,
+        "tiers": {
+          "client_attempts": 1,
+          "edge_attempts": 1,
+          "mid_attempts": 1,
+          "leaf_hits": 1,
+          "leaf_rejected": 0
+        },
+        "elapsed_ms": 0,
+        "timeline": [
+          {
+            "seq": 1,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "client",
+            "type": "attempt-start",
+            "attempt": 1,
+            "detail": "call edge (used=1/10)"
+          },
+          {
+            "seq": 2,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "edge",
+            "type": "attempt-start",
+            "attempt": 2,
+            "detail": "forward -\u003e http://127.0.0.1:37961 (used=2/10)"
+          },
+          {
+            "seq": 3,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "mid",
+            "type": "attempt-start",
+            "attempt": 3,
+            "detail": "forward -\u003e http://127.0.0.1:40153 (used=3/10)"
+          },
+          {
+            "seq": 4,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "leaf",
+            "type": "attempt-end",
+            "attempt": 4,
+            "detail": "script hit 1 -\u003e 200 ok"
+          },
+          {
+            "seq": 5,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "mid",
+            "type": "attempt-end",
+            "attempt": 3,
+            "detail": "used=4/10 err=\u003cnil\u003e"
+          },
+          {
+            "seq": 6,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "edge",
+            "type": "attempt-end",
+            "attempt": 2,
+            "detail": "used=4/10 err=\u003cnil\u003e"
+          },
+          {
+            "seq": 7,
+            "time": "2023-11-15T06:13:20+08:00",
+            "elapsed_ms": 0,
+            "layer": "client",
+            "type": "attempt-end",
+            "attempt": 1,
+            "detail": "status=200 verdict=ok used=4"
+          }
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "all_passed": true,
+    "passed": 7,
+    "total": 7
+  }
+}

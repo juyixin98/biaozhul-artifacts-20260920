@@ -1,0 +1,77 @@
+{
+  "description": "leaf 400 — never replayed",
+  "preset": "non-retryable",
+  "result": {
+    "attempts": 1,
+    "error": "client: non-retryable: {\"error\":\"edge: downstream: non-retryable: {\\\"error\\\":\\\"mid: downstream: non-retryable: {\\\\\\\"attempt\\\\\\\":4,\\\\\\\"hit\\\\\\\":1,\\\\\\\"message\\\\\\\":\\\\\\\"deterministic client error\\\\\\\",\\\\\\\"status\\\\\\\":400,\\\\\\\"tier\\\\\\\":\\\\\\\"leaf\\\\\\\",\\\\\\\"used\\\\\\\":4}\\\\n\\\",\\\"status\\\":400,\\\"used\\\":4,\\\"verdict\\\":\\\"non-retry…\",\"status\":400,\"used\":4,\"verdict\":\"non-retryable\"}\n",
+    "http_status": 400,
+    "root_max": 10,
+    "total_used": 4,
+    "verdict": "non-retryable"
+  },
+  "timeline": [
+    {
+      "seq": 1,
+      "time": "2026-09-25T18:50:32.614246834+08:00",
+      "elapsed_ms": 0,
+      "layer": "client",
+      "type": "attempt-start",
+      "attempt": 1,
+      "detail": "call edge (used=1/10)"
+    },
+    {
+      "seq": 2,
+      "time": "2026-09-25T18:50:32.614489288+08:00",
+      "elapsed_ms": 0,
+      "layer": "edge",
+      "type": "attempt-start",
+      "attempt": 2,
+      "detail": "forward -\u003e http://127.0.0.1:44785 (used=2/10)"
+    },
+    {
+      "seq": 3,
+      "time": "2026-09-25T18:50:32.614742599+08:00",
+      "elapsed_ms": 0,
+      "layer": "mid",
+      "type": "attempt-start",
+      "attempt": 3,
+      "detail": "forward -\u003e http://127.0.0.1:45475 (used=3/10)"
+    },
+    {
+      "seq": 4,
+      "time": "2026-09-25T18:50:32.614935577+08:00",
+      "elapsed_ms": 0,
+      "layer": "leaf",
+      "type": "attempt-end",
+      "attempt": 4,
+      "detail": "script hit 1 -\u003e 400 deterministic client error"
+    },
+    {
+      "seq": 5,
+      "time": "2026-09-25T18:50:32.61503157+08:00",
+      "elapsed_ms": 0,
+      "layer": "mid",
+      "type": "attempt-end",
+      "attempt": 3,
+      "detail": "used=4/10 err=downstream: non-retryable: {\"attempt\":4,\"hit\":1,\"message\":\"deterministic client error\",\"status\":400,\"tier\":\"leaf\",\"used\":4}\n"
+    },
+    {
+      "seq": 6,
+      "time": "2026-09-25T18:50:32.615149058+08:00",
+      "elapsed_ms": 0,
+      "layer": "edge",
+      "type": "attempt-end",
+      "attempt": 2,
+      "detail": "used=4/10 err=downstream: non-retryable: {\"error\":\"mid: downstream: non-retryable: {\\\"attempt\\\":4,\\\"hit\\\":1,\\\"message\\\":\\\"deterministic client error\\\",\\\"status\\\":400,\\\"tier\\\":\\\"leaf\\\",\\\"used\\\":4}\\n\",\"status\":400,\"used\":4,\"verdict\":\"non-retry…"
+    },
+    {
+      "seq": 7,
+      "time": "2026-09-25T18:50:32.615243651+08:00",
+      "elapsed_ms": 0,
+      "layer": "client",
+      "type": "attempt-end",
+      "attempt": 1,
+      "detail": "status=400 verdict=non-retryable used=4"
+    }
+  ]
+}
