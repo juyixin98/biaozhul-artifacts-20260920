@@ -1,0 +1,10 @@
+{
+  "nodes": ["s", "t"],
+  "edges": [
+    {"id": "p1", "from": "s", "to": "t", "capacity": 5},
+    {"id": "p2", "from": "s", "to": "t", "capacity": 7},
+    {"id": "p3", "from": "s", "to": "t", "capacity": 0}
+  ],
+  "source": "s",
+  "sink": "t"
+}

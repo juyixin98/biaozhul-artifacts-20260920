@@ -1,0 +1,8 @@
+{
+  "valid": true,
+  "errors": [],
+  "source_outflow": 12,
+  "sink_inflow": 12,
+  "cut_value_computed": 12,
+  "residual_reachable_count": 1
+}

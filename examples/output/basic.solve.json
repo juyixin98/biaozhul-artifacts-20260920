@@ -1,0 +1,171 @@
+{
+  "ok": true,
+  "request": {
+    "nodes": [
+      "s",
+      "a",
+      "b",
+      "t"
+    ],
+    "edges": [
+      {
+        "id": "e1",
+        "from": "s",
+        "to": "a",
+        "capacity": 10
+      },
+      {
+        "id": "e2",
+        "from": "s",
+        "to": "b",
+        "capacity": 5
+      },
+      {
+        "id": "e3",
+        "from": "a",
+        "to": "b",
+        "capacity": 4
+      },
+      {
+        "id": "e4",
+        "from": "a",
+        "to": "t",
+        "capacity": 7
+      },
+      {
+        "id": "e5",
+        "from": "b",
+        "to": "t",
+        "capacity": 10
+      }
+    ],
+    "source": "s",
+    "sink": "t"
+  },
+  "max_flow": 15,
+  "flows": [
+    {
+      "edge_id": "e1",
+      "flow": 10
+    },
+    {
+      "edge_id": "e2",
+      "flow": 5
+    },
+    {
+      "edge_id": "e3",
+      "flow": 3
+    },
+    {
+      "edge_id": "e4",
+      "flow": 7
+    },
+    {
+      "edge_id": "e5",
+      "flow": 8
+    }
+  ],
+  "cut": {
+    "source_side": [
+      "s"
+    ],
+    "sink_side": [
+      "a",
+      "b",
+      "t"
+    ],
+    "cut_edges": [
+      "e1",
+      "e2"
+    ],
+    "cut_value": 15
+  },
+  "residual": {
+    "nodes": [
+      {
+        "node": "s",
+        "arcs": [
+          {
+            "to": "a",
+            "edge_id": "e1",
+            "kind": "forward",
+            "residual_capacity": 0
+          },
+          {
+            "to": "b",
+            "edge_id": "e2",
+            "kind": "forward",
+            "residual_capacity": 0
+          }
+        ]
+      },
+      {
+        "node": "a",
+        "arcs": [
+          {
+            "to": "s",
+            "edge_id": "e1",
+            "kind": "artificial_reverse",
+            "residual_capacity": 10
+          },
+          {
+            "to": "b",
+            "edge_id": "e3",
+            "kind": "forward",
+            "residual_capacity": 1
+          },
+          {
+            "to": "t",
+            "edge_id": "e4",
+            "kind": "forward",
+            "residual_capacity": 0
+          }
+        ]
+      },
+      {
+        "node": "b",
+        "arcs": [
+          {
+            "to": "s",
+            "edge_id": "e2",
+            "kind": "artificial_reverse",
+            "residual_capacity": 5
+          },
+          {
+            "to": "a",
+            "edge_id": "e3",
+            "kind": "artificial_reverse",
+            "residual_capacity": 3
+          },
+          {
+            "to": "t",
+            "edge_id": "e5",
+            "kind": "forward",
+            "residual_capacity": 2
+          }
+        ]
+      },
+      {
+        "node": "t",
+        "arcs": [
+          {
+            "to": "a",
+            "edge_id": "e4",
+            "kind": "artificial_reverse",
+            "residual_capacity": 7
+          },
+          {
+            "to": "b",
+            "edge_id": "e5",
+            "kind": "artificial_reverse",
+            "residual_capacity": 8
+          }
+        ]
+      }
+    ]
+  },
+  "stats": {
+    "bfs_rounds": 2,
+    "augmentations": 3
+  }
+}

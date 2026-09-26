@@ -1,0 +1,17 @@
+{
+  "nodes": ["s", "v1", "v2", "v3", "v4", "t"],
+  "edges": [
+    {"id": "a", "from": "s",  "to": "v1", "capacity": 16},
+    {"id": "b", "from": "s",  "to": "v2", "capacity": 13},
+    {"id": "c", "from": "v1", "to": "v2", "capacity": 10},
+    {"id": "d", "from": "v2", "to": "v1", "capacity": 4},
+    {"id": "e", "from": "v1", "to": "v3", "capacity": 12},
+    {"id": "f", "from": "v3", "to": "v2", "capacity": 9},
+    {"id": "g", "from": "v2", "to": "v4", "capacity": 14},
+    {"id": "h", "from": "v4", "to": "v3", "capacity": 7},
+    {"id": "i", "from": "v3", "to": "t",  "capacity": 20},
+    {"id": "j", "from": "v4", "to": "t",  "capacity": 4}
+  ],
+  "source": "s",
+  "sink": "t"
+}

@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "min_cut_value": 3,
+  "source_side": [
+    "s",
+    "b"
+  ],
+  "sink_side": [
+    "a",
+    "t"
+  ],
+  "partitions_checked": 4
+}

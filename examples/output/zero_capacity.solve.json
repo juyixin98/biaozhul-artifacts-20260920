@@ -1,0 +1,194 @@
+{
+  "ok": true,
+  "request": {
+    "nodes": [
+      "s",
+      "a",
+      "b",
+      "t"
+    ],
+    "edges": [
+      {
+        "id": "dead_path_1",
+        "from": "s",
+        "to": "a",
+        "capacity": 0
+      },
+      {
+        "id": "dead_path_2",
+        "from": "a",
+        "to": "t",
+        "capacity": 100
+      },
+      {
+        "id": "zero_mid",
+        "from": "s",
+        "to": "b",
+        "capacity": 6
+      },
+      {
+        "id": "blocked",
+        "from": "b",
+        "to": "t",
+        "capacity": 0
+      },
+      {
+        "id": "direct",
+        "from": "s",
+        "to": "t",
+        "capacity": 3
+      },
+      {
+        "id": "selfloop",
+        "from": "a",
+        "to": "a",
+        "capacity": 50
+      }
+    ],
+    "source": "s",
+    "sink": "t"
+  },
+  "max_flow": 3,
+  "flows": [
+    {
+      "edge_id": "dead_path_1",
+      "flow": 0
+    },
+    {
+      "edge_id": "dead_path_2",
+      "flow": 0
+    },
+    {
+      "edge_id": "zero_mid",
+      "flow": 0
+    },
+    {
+      "edge_id": "blocked",
+      "flow": 0
+    },
+    {
+      "edge_id": "direct",
+      "flow": 3
+    },
+    {
+      "edge_id": "selfloop",
+      "flow": 0
+    }
+  ],
+  "cut": {
+    "source_side": [
+      "s",
+      "b"
+    ],
+    "sink_side": [
+      "a",
+      "t"
+    ],
+    "cut_edges": [
+      "dead_path_1",
+      "blocked",
+      "direct"
+    ],
+    "cut_value": 3
+  },
+  "residual": {
+    "nodes": [
+      {
+        "node": "s",
+        "arcs": [
+          {
+            "to": "a",
+            "edge_id": "dead_path_1",
+            "kind": "forward",
+            "residual_capacity": 0
+          },
+          {
+            "to": "b",
+            "edge_id": "zero_mid",
+            "kind": "forward",
+            "residual_capacity": 6
+          },
+          {
+            "to": "t",
+            "edge_id": "direct",
+            "kind": "forward",
+            "residual_capacity": 0
+          }
+        ]
+      },
+      {
+        "node": "a",
+        "arcs": [
+          {
+            "to": "s",
+            "edge_id": "dead_path_1",
+            "kind": "artificial_reverse",
+            "residual_capacity": 0
+          },
+          {
+            "to": "t",
+            "edge_id": "dead_path_2",
+            "kind": "forward",
+            "residual_capacity": 100
+          },
+          {
+            "to": "a",
+            "edge_id": "selfloop",
+            "kind": "forward",
+            "residual_capacity": 50
+          },
+          {
+            "to": "a",
+            "edge_id": "selfloop",
+            "kind": "artificial_reverse",
+            "residual_capacity": 0
+          }
+        ]
+      },
+      {
+        "node": "b",
+        "arcs": [
+          {
+            "to": "s",
+            "edge_id": "zero_mid",
+            "kind": "artificial_reverse",
+            "residual_capacity": 0
+          },
+          {
+            "to": "t",
+            "edge_id": "blocked",
+            "kind": "forward",
+            "residual_capacity": 0
+          }
+        ]
+      },
+      {
+        "node": "t",
+        "arcs": [
+          {
+            "to": "a",
+            "edge_id": "dead_path_2",
+            "kind": "artificial_reverse",
+            "residual_capacity": 0
+          },
+          {
+            "to": "b",
+            "edge_id": "blocked",
+            "kind": "artificial_reverse",
+            "residual_capacity": 0
+          },
+          {
+            "to": "s",
+            "edge_id": "direct",
+            "kind": "artificial_reverse",
+            "residual_capacity": 3
+          }
+        ]
+      }
+    ]
+  },
+  "stats": {
+    "bfs_rounds": 1,
+    "augmentations": 1
+  }
+}

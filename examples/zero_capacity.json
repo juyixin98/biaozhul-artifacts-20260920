@@ -1,0 +1,13 @@
+{
+  "nodes": ["s", "a", "b", "t"],
+  "edges": [
+    {"id": "dead_path_1", "from": "s", "to": "a", "capacity": 0},
+    {"id": "dead_path_2", "from": "a", "to": "t", "capacity": 100},
+    {"id": "zero_mid",    "from": "s", "to": "b", "capacity": 6},
+    {"id": "blocked",     "from": "b", "to": "t", "capacity": 0},
+    {"id": "direct",      "from": "s", "to": "t", "capacity": 3},
+    {"id": "selfloop",    "from": "a", "to": "a", "capacity": 50}
+  ],
+  "source": "s",
+  "sink": "t"
+}
