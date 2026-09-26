@@ -1,0 +1,44 @@
+{
+  "zoneId" : "America/New_York",
+  "tzdbVersion" : "2026b",
+  "startDate" : "2026-10-31",
+  "endDate" : "2026-11-02",
+  "gapPolicy" : "LATER",
+  "overlapPolicy" : "EARLIER",
+  "stats" : {
+    "inputRules" : 1,
+    "uniqueRules" : 1,
+    "duplicateRulesRemoved" : 0,
+    "days" : 3,
+    "occurrences" : 3,
+    "duplicatesRemoved" : 0,
+    "skipped" : 0
+  },
+  "occurrences" : [ {
+    "rule" : "01:30",
+    "label" : "nightly-job",
+    "date" : "2026-10-31",
+    "requestedLocal" : "2026-10-31T01:30:00",
+    "resolvedLocal" : "2026-10-31T01:30:00",
+    "utc" : "2026-10-31T05:30:00Z",
+    "resolution" : "NORMAL"
+  }, {
+    "rule" : "01:30",
+    "label" : "nightly-job",
+    "date" : "2026-11-01",
+    "requestedLocal" : "2026-11-01T01:30:00",
+    "resolvedLocal" : "2026-11-01T01:30:00",
+    "utc" : "2026-11-01T05:30:00Z",
+    "resolution" : "OVERLAP_EARLIER"
+  }, {
+    "rule" : "01:30",
+    "label" : "nightly-job",
+    "date" : "2026-11-02",
+    "requestedLocal" : "2026-11-02T01:30:00",
+    "resolvedLocal" : "2026-11-02T01:30:00",
+    "utc" : "2026-11-02T06:30:00Z",
+    "resolution" : "NORMAL"
+  } ],
+  "skipped" : [ ],
+  "error" : null
+}

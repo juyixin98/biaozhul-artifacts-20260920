@@ -1,0 +1,11 @@
+{
+  "zoneId": "America/New_York",
+  "startDate": "2026-12-31",
+  "endDate": "2027-01-02",
+  "rules": [
+    { "time": "00:30", "label": "midnight" },
+    { "time": "09:00", "label": "morning" }
+  ],
+  "gapPolicy": "SKIP",
+  "overlapPolicy": "SKIP"
+}

@@ -1,0 +1,12 @@
+{
+  "zoneId" : null,
+  "tzdbVersion" : null,
+  "startDate" : null,
+  "endDate" : null,
+  "gapPolicy" : null,
+  "overlapPolicy" : null,
+  "stats" : null,
+  "occurrences" : [ ],
+  "skipped" : [ ],
+  "error" : "Local time 2026-03-08T02:30 does not exist in zone America/New_York (DST gap, transition at 2026-03-08T02:00); gapPolicy=ERROR"
+}

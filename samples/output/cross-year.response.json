@@ -1,0 +1,68 @@
+{
+  "zoneId" : "America/New_York",
+  "tzdbVersion" : "2026b",
+  "startDate" : "2026-12-31",
+  "endDate" : "2027-01-02",
+  "gapPolicy" : "SKIP",
+  "overlapPolicy" : "SKIP",
+  "stats" : {
+    "inputRules" : 2,
+    "uniqueRules" : 2,
+    "duplicateRulesRemoved" : 0,
+    "days" : 3,
+    "occurrences" : 6,
+    "duplicatesRemoved" : 0,
+    "skipped" : 0
+  },
+  "occurrences" : [ {
+    "rule" : "00:30",
+    "label" : "midnight",
+    "date" : "2026-12-31",
+    "requestedLocal" : "2026-12-31T00:30:00",
+    "resolvedLocal" : "2026-12-31T00:30:00",
+    "utc" : "2026-12-31T05:30:00Z",
+    "resolution" : "NORMAL"
+  }, {
+    "rule" : "09:00",
+    "label" : "morning",
+    "date" : "2026-12-31",
+    "requestedLocal" : "2026-12-31T09:00:00",
+    "resolvedLocal" : "2026-12-31T09:00:00",
+    "utc" : "2026-12-31T14:00:00Z",
+    "resolution" : "NORMAL"
+  }, {
+    "rule" : "00:30",
+    "label" : "midnight",
+    "date" : "2027-01-01",
+    "requestedLocal" : "2027-01-01T00:30:00",
+    "resolvedLocal" : "2027-01-01T00:30:00",
+    "utc" : "2027-01-01T05:30:00Z",
+    "resolution" : "NORMAL"
+  }, {
+    "rule" : "09:00",
+    "label" : "morning",
+    "date" : "2027-01-01",
+    "requestedLocal" : "2027-01-01T09:00:00",
+    "resolvedLocal" : "2027-01-01T09:00:00",
+    "utc" : "2027-01-01T14:00:00Z",
+    "resolution" : "NORMAL"
+  }, {
+    "rule" : "00:30",
+    "label" : "midnight",
+    "date" : "2027-01-02",
+    "requestedLocal" : "2027-01-02T00:30:00",
+    "resolvedLocal" : "2027-01-02T00:30:00",
+    "utc" : "2027-01-02T05:30:00Z",
+    "resolution" : "NORMAL"
+  }, {
+    "rule" : "09:00",
+    "label" : "morning",
+    "date" : "2027-01-02",
+    "requestedLocal" : "2027-01-02T09:00:00",
+    "resolvedLocal" : "2027-01-02T09:00:00",
+    "utc" : "2027-01-02T14:00:00Z",
+    "resolution" : "NORMAL"
+  } ],
+  "skipped" : [ ],
+  "error" : null
+}

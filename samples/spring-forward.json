@@ -1,0 +1,10 @@
+{
+  "zoneId": "America/New_York",
+  "startDate": "2026-03-07",
+  "endDate": "2026-03-09",
+  "rules": [
+    { "time": "02:30", "label": "nightly-job" }
+  ],
+  "gapPolicy": "LATER",
+  "overlapPolicy": "EARLIER"
+}
