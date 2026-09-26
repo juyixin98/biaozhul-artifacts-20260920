@@ -1,0 +1,6 @@
+{
+  "input": "data.enc",
+  "output": "decoded.impossible.bin",
+  "loss": { "shards": [0, 1, 2] },
+  "expect_hash": true
+}

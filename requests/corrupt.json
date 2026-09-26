@@ -1,0 +1,7 @@
+{
+  "input": "data.enc",
+  "output": "data.corrupt.enc",
+  "flips": [
+    { "stripe": 0, "shard": 0, "offset": 0, "xor": 255 }
+  ]
+}

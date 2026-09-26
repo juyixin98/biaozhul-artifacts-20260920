@@ -1,0 +1,26 @@
+[package]
+name = "ecstripe"
+version = "0.1.0"
+edition = "2021"
+description = "Streaming systematic Reed-Solomon erasure-coded stripe recovery library with a JSON control entry point"
+license = "MIT"
+
+[lib]
+name = "ecstripe"
+path = "src/lib.rs"
+
+[[bin]]
+name = "ecstripe"
+path = "src/main.rs"
+
+[dependencies]
+# Mature GF(2^8) finite-field arithmetic (polynomial 0x11d, generator 0x02).
+# Only the low-level field element type is used; matrix construction and
+# recovery are implemented in this crate (see src/matrix.rs).
+gf256 = "0.3.1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+
+[profile.release]
+lto = true
