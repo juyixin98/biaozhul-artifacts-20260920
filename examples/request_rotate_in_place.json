@@ -1,0 +1,69 @@
+{
+  "robot": {
+    "wheel_diameter_m": 0.1,
+    "track_width_m": 0.5,
+    "ticks_per_rev": 1000,
+    "encoder_min": 0,
+    "encoder_max": 65535,
+    "max_linear_velocity_mps": 3.0,
+    "max_angular_velocity_rps": 12.0,
+    "max_sample_period_s": 0.5
+  },
+  "samples": [
+    {
+      "t": 0.0,
+      "left": 0,
+      "right": 0
+    },
+    {
+      "t": 0.1,
+      "left": 65336,
+      "right": 200
+    },
+    {
+      "t": 0.2,
+      "left": 65136,
+      "right": 400
+    },
+    {
+      "t": 0.3,
+      "left": 64936,
+      "right": 600
+    },
+    {
+      "t": 0.4,
+      "left": 64736,
+      "right": 800
+    },
+    {
+      "t": 0.5,
+      "left": 64536,
+      "right": 1000
+    },
+    {
+      "t": 0.6,
+      "left": 64336,
+      "right": 1200
+    },
+    {
+      "t": 0.7,
+      "left": 64136,
+      "right": 1400
+    },
+    {
+      "t": 0.8,
+      "left": 63936,
+      "right": 1600
+    },
+    {
+      "t": 0.9,
+      "left": 63736,
+      "right": 1800
+    },
+    {
+      "t": 1.0,
+      "left": 63536,
+      "right": 2000
+    }
+  ]
+}
