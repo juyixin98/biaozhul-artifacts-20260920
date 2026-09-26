@@ -1,0 +1,8 @@
+{
+  "requestId": "sample-overlap-no-causality",
+  "events": [
+    { "id": "batch-a", "earliest": "2026-03-01T09:00:00+08:00", "latest": "2026-03-01T11:00:00+08:00" },
+    { "id": "batch-b", "earliest": "2026-03-01T10:00:00+08:00", "latest": "2026-03-01T12:00:00+08:00" }
+  ],
+  "dependencies": []
+}

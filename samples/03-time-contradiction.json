@@ -1,0 +1,12 @@
+{
+  "requestId": "sample-time-contradiction",
+  "events": [
+    { "id": "deploy-eu", "earliest": "2026-03-01T12:00:00Z" },
+    { "id": "smoke-test" },
+    { "id": "announce", "latest": "2026-03-01T11:00:00Z" }
+  ],
+  "dependencies": [
+    { "before": "deploy-eu", "after": "smoke-test" },
+    { "before": "smoke-test", "after": "announce" }
+  ]
+}

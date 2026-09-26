@@ -1,0 +1,11 @@
+{
+  "requestId": "sample-multiple-orders",
+  "events": [
+    { "id": "compile" },
+    { "id": "lint" },
+    { "id": "package" }
+  ],
+  "dependencies": [
+    { "before": "compile", "after": "package", "reason": "jar needs classes" }
+  ]
+}

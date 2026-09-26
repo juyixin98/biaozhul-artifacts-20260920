@@ -1,0 +1,11 @@
+{
+  "requestId": "sample-version-rule",
+  "events": [
+    { "id": "schema-v2", "version": 2 },
+    { "id": "schema-v1", "version": 1 }
+  ],
+  "dependencies": [
+    { "before": "schema-v2", "after": "schema-v1", "reason": "suspect edge under review" }
+  ],
+  "options": { "enforceVersionOrder": true, "maxEnumeratedOrders": 10 }
+}

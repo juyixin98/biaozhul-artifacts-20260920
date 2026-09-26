@@ -1,0 +1,13 @@
+{
+  "requestId": "sample-cycle",
+  "events": [
+    { "id": "ingest" },
+    { "id": "normalize" },
+    { "id": "index" }
+  ],
+  "dependencies": [
+    { "before": "ingest", "after": "normalize" },
+    { "before": "normalize", "after": "index" },
+    { "before": "index", "after": "ingest", "reason": "re-ingest on schema change (mistake)" }
+  ]
+}
