@@ -1,0 +1,18 @@
+[package]
+name = "incutf8"
+version = "0.1.0"
+edition = "2021"
+description = "Incremental (streaming) UTF-8 validation and decoding library with a JSON control entry point"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+# Zero dependencies on purpose: the UTF-8 state machine, Base64 and the
+# JSON subset are all implemented in this crate.
+
+[[bin]]
+name = "incutf8"
+path = "src/main.rs"
+
+[lib]
+name = "incutf8"
+path = "src/lib.rs"
