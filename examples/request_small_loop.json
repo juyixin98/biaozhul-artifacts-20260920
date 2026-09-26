@@ -1,0 +1,42 @@
+{
+  "name": "small_manual_loop",
+  "description": "8 节点单位正方形：前进边 [1,0,0] 与原地转弯边 [0,0,pi/2] 交替，外加一条错误对角线回环（Huber 软抑制）。初始猜测带漂移。",
+  "options": {
+    "max_iterations": 50,
+    "tol_step": 1e-8,
+    "initial_lambda": 0.001
+  },
+  "nodes": [
+    {"id": 0, "pose": [0.0, 0.0, 0.0], "fixed": true},
+    {"id": 1, "pose": [1.05, 0.03, 0.04]},
+    {"id": 2, "pose": [1.08, 0.05, 1.63]},
+    {"id": 3, "pose": [1.06, 1.04, 1.60]},
+    {"id": 4, "pose": [1.10, 1.08, 3.19]},
+    {"id": 5, "pose": [0.02, 1.12, 3.17]},
+    {"id": 6, "pose": [-0.05, 1.06, -1.52]},
+    {"id": 7, "pose": [-0.02, 0.05, -1.50]}
+  ],
+  "edges": [
+    {"i": 0, "j": 1, "measurement": [1.0, 0.0, 0.0],
+     "info": {"sigma_xy": 0.05, "sigma_theta": 0.035}},
+    {"i": 1, "j": 2, "measurement": [0.0, 0.0, 1.5707963267948966],
+     "info": {"sigma_xy": 0.05, "sigma_theta": 0.035}},
+    {"i": 2, "j": 3, "measurement": [1.0, 0.0, 0.0],
+     "info": {"sigma_xy": 0.05, "sigma_theta": 0.035}},
+    {"i": 3, "j": 4, "measurement": [0.0, 0.0, 1.5707963267948966],
+     "info": {"sigma_xy": 0.05, "sigma_theta": 0.035}},
+    {"i": 4, "j": 5, "measurement": [1.0, 0.0, 0.0],
+     "info": {"sigma_xy": 0.05, "sigma_theta": 0.035}},
+    {"i": 5, "j": 6, "measurement": [0.0, 0.0, 1.5707963267948966],
+     "info": {"sigma_xy": 0.05, "sigma_theta": 0.035}},
+    {"i": 6, "j": 7, "measurement": [1.0, 0.0, 0.0],
+     "info": {"sigma_xy": 0.05, "sigma_theta": 0.035}},
+    {"i": 7, "j": 0, "measurement": [0.0, 0.0, 1.5707963267948966],
+     "info": {"sigma_xy": 0.05, "sigma_theta": 0.035},
+     "comment": "闭合回环：最后一次转弯回到朝向 0"},
+    {"i": 1, "j": 5, "measurement": [0.5, 1.5, 0.3],
+     "info": {"sigma_xy": 0.05, "sigma_theta": 0.035},
+     "kernel": {"type": "huber", "delta": 1.0},
+     "comment": "错误回环：真值约为 [-1, 1, pi]，此处故意注入大偏差"}
+  ]
+}
