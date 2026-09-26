@@ -1,0 +1,93 @@
+{
+  "ok": true,
+  "results": [
+    {
+      "a": "B0",
+      "b": "B5",
+      "known": true,
+      "reachableA": true,
+      "reachableB": true,
+      "dominates": true,
+      "properlyDominates": true
+    },
+    {
+      "a": "B1",
+      "b": "B4",
+      "known": true,
+      "reachableA": true,
+      "reachableB": true,
+      "dominates": true,
+      "properlyDominates": true
+    },
+    {
+      "a": "B2",
+      "b": "B4",
+      "known": true,
+      "reachableA": true,
+      "reachableB": true,
+      "dominates": false,
+      "properlyDominates": false
+    },
+    {
+      "a": "B3",
+      "b": "B4",
+      "known": true,
+      "reachableA": true,
+      "reachableB": true,
+      "dominates": false,
+      "properlyDominates": false
+    },
+    {
+      "a": "B4",
+      "b": "B4",
+      "known": true,
+      "reachableA": true,
+      "reachableB": true,
+      "dominates": true,
+      "properlyDominates": false
+    },
+    {
+      "a": "B1",
+      "b": "B1",
+      "known": true,
+      "reachableA": true,
+      "reachableB": true,
+      "dominates": true,
+      "properlyDominates": false
+    },
+    {
+      "a": "B0",
+      "b": "U1",
+      "known": true,
+      "reachableA": true,
+      "reachableB": false,
+      "dominates": false,
+      "properlyDominates": false
+    },
+    {
+      "a": "U1",
+      "b": "U2",
+      "known": true,
+      "reachableA": false,
+      "reachableB": false,
+      "dominates": false,
+      "properlyDominates": false
+    },
+    {
+      "a": "U1",
+      "b": "B0",
+      "known": true,
+      "reachableA": false,
+      "reachableB": true,
+      "dominates": false,
+      "properlyDominates": false
+    },
+    {
+      "a": "B2",
+      "b": "ZZZ",
+      "known": false,
+      "dominates": false,
+      "properlyDominates": false
+    }
+  ]
+}

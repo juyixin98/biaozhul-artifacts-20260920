@@ -1,0 +1,15 @@
+{
+  "entry": "A",
+  "nodes": ["A", "B", "C", "D", "E", "F"],
+  "edges": [
+    ["A", "B"],
+    ["A", "C"],
+    ["B", "D"],
+    ["C", "D"],
+    ["D", "E"],
+    ["D", "F"]
+  ],
+  "include": {
+    "dominators": true
+  }
+}

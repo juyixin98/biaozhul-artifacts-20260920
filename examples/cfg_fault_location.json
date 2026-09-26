@@ -1,0 +1,25 @@
+{
+  "entry": "B0",
+  "nodes": ["B0", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "U1", "U2", "U3"],
+  "edges": [
+    {"from": "B0", "to": "B1"},
+    {"from": "B1", "to": "B2"},
+    {"from": "B2", "to": "B3"},
+    {"from": "B3", "to": "B2"},
+    {"from": "B2", "to": "B4"},
+    {"from": "B3", "to": "B5"},
+    {"from": "B4", "to": "B5"},
+    {"from": "B4", "to": "B6"},
+    {"from": "B5", "to": "B6"},
+    {"from": "B5", "to": "B7"},
+    {"from": "U1", "to": "U2"},
+    {"from": "U2", "to": "U1"},
+    {"from": "U3", "to": "U1"},
+    {"from": "U3", "to": "B4"}
+  ],
+  "include": {
+    "dominators": true,
+    "references": true
+  },
+  "pathCap": 200000
+}

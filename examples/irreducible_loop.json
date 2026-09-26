@@ -1,0 +1,17 @@
+{
+  "entry": "S",
+  "nodes": ["S", "X", "Y", "Z", "W"],
+  "edges": [
+    ["S", "X"],
+    ["S", "Y"],
+    ["X", "Y"],
+    ["Y", "X"],
+    ["X", "Z"],
+    ["Y", "Z"],
+    ["Z", "W"]
+  ],
+  "include": {
+    "dominators": true,
+    "references": true
+  }
+}

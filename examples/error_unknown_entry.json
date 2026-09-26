@@ -1,0 +1,5 @@
+{
+  "entry": "NOPE",
+  "nodes": ["A", "B"],
+  "edges": [["A", "B"]]
+}

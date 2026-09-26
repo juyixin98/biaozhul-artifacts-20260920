@@ -1,0 +1,200 @@
+{
+  "ok": true,
+  "algorithm": "lengauer-tarjan (semi-dominators + path compression); dominance frontier via Cooper-Harvey-Kennedy idom-tree walk",
+  "graph": {
+    "nodeCount": 11,
+    "edgeCount": 14,
+    "entry": "B0",
+    "reachableCount": 8,
+    "unreachableCount": 3
+  },
+  "reachable": [
+    "B0",
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "B5",
+    "B6",
+    "B7"
+  ],
+  "unreachable": [
+    "U1",
+    "U2",
+    "U3"
+  ],
+  "nodes": [
+    {
+      "label": "B0",
+      "reachable": true,
+      "idom": null,
+      "idomTreeDepth": 0,
+      "dominanceFrontier": [],
+      "dominators": [
+        "B0"
+      ]
+    },
+    {
+      "label": "B1",
+      "reachable": true,
+      "idom": "B0",
+      "idomTreeDepth": 1,
+      "dominanceFrontier": [],
+      "dominators": [
+        "B0",
+        "B1"
+      ]
+    },
+    {
+      "label": "B2",
+      "reachable": true,
+      "idom": "B1",
+      "idomTreeDepth": 2,
+      "dominanceFrontier": [
+        "B2"
+      ],
+      "dominators": [
+        "B0",
+        "B1",
+        "B2"
+      ]
+    },
+    {
+      "label": "B3",
+      "reachable": true,
+      "idom": "B2",
+      "idomTreeDepth": 3,
+      "dominanceFrontier": [
+        "B2",
+        "B5"
+      ],
+      "dominators": [
+        "B0",
+        "B1",
+        "B2",
+        "B3"
+      ]
+    },
+    {
+      "label": "B4",
+      "reachable": true,
+      "idom": "B2",
+      "idomTreeDepth": 3,
+      "dominanceFrontier": [
+        "B5",
+        "B6"
+      ],
+      "dominators": [
+        "B0",
+        "B1",
+        "B2",
+        "B4"
+      ]
+    },
+    {
+      "label": "B5",
+      "reachable": true,
+      "idom": "B2",
+      "idomTreeDepth": 3,
+      "dominanceFrontier": [
+        "B6"
+      ],
+      "dominators": [
+        "B0",
+        "B1",
+        "B2",
+        "B5"
+      ]
+    },
+    {
+      "label": "B6",
+      "reachable": true,
+      "idom": "B2",
+      "idomTreeDepth": 3,
+      "dominanceFrontier": [],
+      "dominators": [
+        "B0",
+        "B1",
+        "B2",
+        "B6"
+      ]
+    },
+    {
+      "label": "B7",
+      "reachable": true,
+      "idom": "B5",
+      "idomTreeDepth": 4,
+      "dominanceFrontier": [],
+      "dominators": [
+        "B0",
+        "B1",
+        "B2",
+        "B5",
+        "B7"
+      ]
+    },
+    {
+      "label": "U1",
+      "reachable": false,
+      "idom": null,
+      "idomTreeDepth": -1,
+      "dominanceFrontier": [],
+      "dominators": []
+    },
+    {
+      "label": "U2",
+      "reachable": false,
+      "idom": null,
+      "idomTreeDepth": -1,
+      "dominanceFrontier": [],
+      "dominators": []
+    },
+    {
+      "label": "U3",
+      "reachable": false,
+      "idom": null,
+      "idomTreeDepth": -1,
+      "dominanceFrontier": [],
+      "dominators": []
+    }
+  ],
+  "idomTreeEdges": [
+    {
+      "parent": "B0",
+      "child": "B1"
+    },
+    {
+      "parent": "B1",
+      "child": "B2"
+    },
+    {
+      "parent": "B2",
+      "child": "B3"
+    },
+    {
+      "parent": "B2",
+      "child": "B5"
+    },
+    {
+      "parent": "B2",
+      "child": "B6"
+    },
+    {
+      "parent": "B5",
+      "child": "B7"
+    },
+    {
+      "parent": "B2",
+      "child": "B4"
+    }
+  ],
+  "references": {
+    "naiveIterativeRounds": 2,
+    "idomAgreesWithNaive": true,
+    "frontierAgreesWithNaive": true,
+    "domSetsAgreeWithNaive": true,
+    "simplePathEnumeration": true,
+    "totalSimplePathsFromEntry": 12,
+    "domSetsAgreeWithPathEnum": true
+  }
+}
