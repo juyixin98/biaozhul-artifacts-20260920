@@ -1,0 +1,15 @@
+{
+  "action": "integrate",
+  "gravity": [0.0, 0.0, -9.81],
+  "gyro_bias": [0.0, 0.0, 0.0],
+  "accel_bias": [0.0, 0.0, 0.0],
+  "initial_orientation": [1.0, 0.0, 0.0, 0.0],
+  "scenario": {
+    "name": "rotation",
+    "duration": 2.0,
+    "dt": 0.02,
+    "angular_velocity": [0.0, 0.0, 0.5],
+    "start_time": 0.0
+  },
+  "include_trajectory": false
+}

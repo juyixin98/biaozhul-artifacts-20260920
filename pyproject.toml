@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "imu-preintegration-subset"
+version = "0.1.0"
+description = "惯性数据预积分子集：已知重力与固定偏置的离线 IMU 积分（四元数姿态，JSON 入口，纯合成数据）"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]
+
+[project.optional-dependencies]
+test = ["pytest>=7.0"]
+
+[project.scripts]
+imu-integrator = "imu_integrator.cli:main"
+
+[tool.setuptools]
+packages = ["imu_integrator"]
