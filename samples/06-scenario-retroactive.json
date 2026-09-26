@@ -1,0 +1,46 @@
+{
+  "op": "scenario",
+  "steps": [
+    {
+      "type": "asOf",
+      "entityId": "E001",
+      "businessDate": "2025-05-01",
+      "observationDate": "2026-01-15",
+      "_comment": "修订前的观察时刻：应看到 Dev"
+    },
+    {
+      "type": "commit",
+      "transactionDate": "2026-02-15",
+      "changes": [
+        {
+          "entityId": "E001",
+          "department": "Platform",
+          "role": "SRE",
+          "validFrom": "2025-03-01",
+          "validTo": "2025-09-01",
+          "mode": "CORRECTION"
+        }
+      ]
+    },
+    {
+      "type": "asOf",
+      "entityId": "E001",
+      "businessDate": "2025-05-01",
+      "observationDate": "2026-01-15",
+      "_comment": "用修订前的观察时刻重查：历史不可变，仍是 Dev"
+    },
+    {
+      "type": "asOf",
+      "entityId": "E001",
+      "businessDate": "2025-05-01",
+      "observationDate": "2026-06-01",
+      "_comment": "用修订后的观察时刻查：已重述为 SRE"
+    },
+    {
+      "type": "history",
+      "entityId": "E001",
+      "observationDate": "2026-06-01",
+      "_comment": "修订后看到的完整有效时间线"
+    }
+  ]
+}
