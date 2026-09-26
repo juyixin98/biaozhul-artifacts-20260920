@@ -1,0 +1,16 @@
+{
+  "vertices": ["A", "B", "C", "D", "E", "F", "G"],
+  "edges": [
+    {"from": "A", "to": "B"},
+    {"from": "B", "to": "C"},
+    {"from": "C", "to": "A"},
+    {"from": "B", "to": "A"},
+
+    {"from": "C", "to": "D"},
+    {"from": "D", "to": "E"},
+    {"from": "D", "to": "E"},
+    {"from": "D", "to": "E"},
+
+    {"from": "F", "to": "F"}
+  ]
+}

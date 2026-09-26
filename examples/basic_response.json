@@ -1,0 +1,236 @@
+{
+  "ok": true,
+  "vertices": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G"
+  ],
+  "stats": {
+    "n": 7,
+    "rawEdgeCount": 9,
+    "uniqueEdgeCount": 7,
+    "componentCount": 5,
+    "dagEdgeCount": 2,
+    "solverMicros": 10,
+    "verifyMicros": 11
+  },
+  "components": [
+    {
+      "id": 0,
+      "representative": 0,
+      "vertices": [
+        0,
+        1,
+        2
+      ],
+      "vertexLabels": [
+        "A",
+        "B",
+        "C"
+      ],
+      "cyclic": true,
+      "cycleWitness": [
+        0,
+        1
+      ],
+      "cycleWitnessLabels": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": 1,
+      "representative": 3,
+      "vertices": [
+        3
+      ],
+      "vertexLabels": [
+        "D"
+      ],
+      "cyclic": false,
+      "cycleWitness": [],
+      "cycleWitnessLabels": []
+    },
+    {
+      "id": 2,
+      "representative": 4,
+      "vertices": [
+        4
+      ],
+      "vertexLabels": [
+        "E"
+      ],
+      "cyclic": false,
+      "cycleWitness": [],
+      "cycleWitnessLabels": []
+    },
+    {
+      "id": 3,
+      "representative": 5,
+      "vertices": [
+        5
+      ],
+      "vertexLabels": [
+        "F"
+      ],
+      "cyclic": true,
+      "cycleWitness": [
+        5
+      ],
+      "cycleWitnessLabels": [
+        "F"
+      ]
+    },
+    {
+      "id": 4,
+      "representative": 6,
+      "vertices": [
+        6
+      ],
+      "vertexLabels": [
+        "G"
+      ],
+      "cyclic": false,
+      "cycleWitness": [],
+      "cycleWitnessLabels": []
+    }
+  ],
+  "condensation": {
+    "edges": [
+      {
+        "from": 0,
+        "to": 1,
+        "multiplicity": 1
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "multiplicity": 3
+      }
+    ]
+  },
+  "uniqueEdges": [
+    {
+      "from": 0,
+      "to": 1,
+      "multiplicity": 1
+    },
+    {
+      "from": 1,
+      "to": 0,
+      "multiplicity": 1
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "multiplicity": 1
+    },
+    {
+      "from": 2,
+      "to": 0,
+      "multiplicity": 1
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "multiplicity": 1
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "multiplicity": 3
+    },
+    {
+      "from": 5,
+      "to": 5,
+      "multiplicity": 1
+    }
+  ],
+  "naiveReference": {
+    "enabled": true,
+    "cutoff": 64,
+    "reachabilityMatrix": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "sccPartitionMatchesNaive": true,
+    "naiveComponentOf": [
+      0,
+      0,
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "verification": {
+    "ok": true,
+    "failures": []
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "vertices": 6,
+  "edges": [
+    {"from": 0, "to": 1},
+    {"from": 1, "to": 0},
+    {"from": 0, "to": 1},
+    {"from": 1, "to": 0},
+
+    {"from": 2, "to": 2},
+
+    {"from": 3, "to": 4},
+    {"from": 4, "to": 3},
+    {"from": 1, "to": 3},
+    {"from": 1, "to": 3}
+  ]
+}

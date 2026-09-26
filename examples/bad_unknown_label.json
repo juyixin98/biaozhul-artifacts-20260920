@@ -1,0 +1,7 @@
+{
+  "vertices": ["A", "B"],
+  "edges": [
+    {"from": "A", "to": "B"},
+    {"from": "B", "to": "GHOST"}
+  ]
+}

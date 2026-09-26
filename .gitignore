@@ -1,0 +1,7 @@
+# build artifacts
+*.o
+scc_analyze
+run_tests
+
+# generated scale payload (~23 MB), regenerate via examples/gen_scale.py
+examples/scale_100k.json
