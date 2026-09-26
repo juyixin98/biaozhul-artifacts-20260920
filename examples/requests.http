@@ -1,0 +1,62 @@
+### Conditional-update request samples (REST Client / IntelliJ / VS Code format)
+### Start the server first: go run ./cmd/server -addr 127.0.0.1:8080
+@host = http://127.0.0.1:8080
+@resource = demo
+
+### Create -> 201 Created, response carries a strong ETag
+POST {{host}}/resources/{{resource}}
+Content-Type: text/plain
+
+draft one
+
+### Read -> 200 OK + ETag (copy the ETag value for the requests below)
+GET {{host}}/resources/{{resource}}
+
+### Conditional update: replace @etag with the quoted value from GET
+# @name update
+PUT {{host}}/resources/{{resource}}
+If-Match: "v1-REPLACE-WITH-REAL-ETAG"
+Content-Type: text/plain
+
+draft two
+
+### Replaying the same ETag after a successful update -> 412
+PUT {{host}}/resources/{{resource}}
+If-Match: "v1-REPLACE-WITH-REAL-ETAG"
+Content-Type: text/plain
+
+late writer
+
+### No precondition at all -> 428 Precondition Required
+PUT {{host}}/resources/{{resource}}
+Content-Type: text/plain
+
+no precondition
+
+### Weak validator used for a strong comparison -> 412 weak_etag_rejected
+PUT {{host}}/resources/{{resource}}
+If-Match: W/"v1-REPLACE-WITH-REAL-ETAG"
+Content-Type: text/plain
+
+weak try
+
+### Wildcard while the resource exists -> 200
+PUT {{host}}/resources/{{resource}}
+If-Match: *
+Content-Type: text/plain
+
+wildcard write
+
+### Wildcard delete -> 204 No Content
+DELETE {{host}}/resources/{{resource}}
+If-Match: *
+
+### Wildcard update on the now-deleted resource -> 412
+PUT {{host}}/resources/{{resource}}
+If-Match: *
+Content-Type: text/plain
+
+ghost write
+
+### Inspect the in-process fake audit log
+GET {{host}}/audit
