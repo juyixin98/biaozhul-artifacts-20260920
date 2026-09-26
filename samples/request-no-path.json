@@ -1,0 +1,16 @@
+{
+  "from": "v2",
+  "to": "vX-orphan",
+  "at": "2026-06-01T02:00:00Z",
+  "mode": "UPGRADE",
+  "attributes": {},
+  "maxPaths": 3,
+  "graph": {
+    "nodes": ["v2", "v3", "vX-orphan"],
+    "edges": [
+      {"from": "v2", "to": "v3", "cost": 2, "reversible": true},
+      {"from": "vX-orphan", "to": "v3", "cost": 1, "reversible": false,
+        "description": "points AWAY from the orphan; target is unreachable"}
+    ]
+  }
+}

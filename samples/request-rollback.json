@@ -1,0 +1,24 @@
+{
+  "from": "schema-aurora",
+  "to": "v2",
+  "at": "2026-06-01T02:00:00Z",
+  "mode": "ROLLBACK",
+  "attributes": {},
+  "requireReversible": false,
+  "maxPaths": 5,
+  "graph": {
+    "nodes": ["v2", "v3-1", "v3-hotfix", "schema-aurora"],
+    "edges": [
+      {"from": "v2", "to": "v3-1", "cost": 3, "reversible": true,
+        "description": "forward, has matching real reverse edge"},
+      {"from": "v2", "to": "v3-hotfix", "cost": 2, "reversible": true,
+        "description": "flagged reversible BUT no reverse edge exists"},
+      {"from": "v3-1", "to": "schema-aurora", "cost": 4, "reversible": true},
+      {"from": "v3-hotfix", "to": "schema-aurora", "cost": 6, "reversible": true},
+      {"from": "schema-aurora", "to": "v3-1", "cost": 4, "reversible": true,
+        "description": "REAL reverse edge"},
+      {"from": "v3-1", "to": "v2", "cost": 3, "reversible": true,
+        "description": "REAL reverse edge"}
+    ]
+  }
+}

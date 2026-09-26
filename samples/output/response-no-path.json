@@ -1,0 +1,16 @@
+{
+  "status" : "NO_PATH",
+  "success" : false,
+  "environment" : {
+    "tzdbVersion" : "2026b",
+    "javaVersion" : "21.0.12.1",
+    "dataSet" : "request-provided"
+  },
+  "mode" : "UPGRADE",
+  "from" : "v2",
+  "to" : "vX-orphan",
+  "evaluatedAt" : "2026-06-01T02:00:00Z",
+  "paths" : [ ],
+  "blockedEdges" : [ ],
+  "warnings" : [ ]
+}

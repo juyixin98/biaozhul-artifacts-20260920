@@ -1,0 +1,79 @@
+{
+  "status" : "FOUND",
+  "success" : true,
+  "environment" : {
+    "tzdbVersion" : "2026b",
+    "javaVersion" : "21.0.12.1",
+    "dataSet" : "request-provided"
+  },
+  "mode" : "UPGRADE",
+  "from" : "legacy",
+  "to" : "schema-aurora",
+  "evaluatedAt" : "2025-01-01T00:00:00Z",
+  "paths" : [ {
+    "rank" : 1,
+    "totalCost" : 13.0,
+    "stepCount" : 3,
+    "initialCheckpoint" : {
+      "id" : "CP-0",
+      "version" : "legacy",
+      "cumulativeCost" : 0.0,
+      "note" : "starting version verified; no edge inferred from version numbers"
+    },
+    "steps" : [ {
+      "sequence" : 1,
+      "action" : "MIGRATE",
+      "from" : "legacy",
+      "to" : "v2",
+      "cost" : 5.0,
+      "description" : "baseline import (one-way, destructive)",
+      "reverseEdgeExists" : false,
+      "checkpoint" : {
+        "id" : "CP-1",
+        "version" : "v2",
+        "cumulativeCost" : 5.0,
+        "note" : "after step 1: legacy->v2"
+      }
+    }, {
+      "sequence" : 2,
+      "action" : "MIGRATE",
+      "from" : "v2",
+      "to" : "v3-hotfix",
+      "cost" : 2.0,
+      "description" : "emergency hotfix branch (not reversible)",
+      "reverseEdgeExists" : false,
+      "checkpoint" : {
+        "id" : "CP-2",
+        "version" : "v3-hotfix",
+        "cumulativeCost" : 7.0,
+        "note" : "after step 2: v2->v3-hotfix"
+      }
+    }, {
+      "sequence" : 3,
+      "action" : "MIGRATE",
+      "from" : "v3-hotfix",
+      "to" : "schema-aurora",
+      "cost" : 6.0,
+      "description" : "reconcile hotfix then move to aurora",
+      "reverseEdgeExists" : false,
+      "checkpoint" : {
+        "id" : "CP-3",
+        "version" : "schema-aurora",
+        "cumulativeCost" : 13.0,
+        "note" : "after step 3: v3-hotfix->schema-aurora"
+      }
+    } ],
+    "finalCheckpoint" : {
+      "id" : "CP-3",
+      "version" : "schema-aurora",
+      "cumulativeCost" : 13.0,
+      "note" : "after step 3: v3-hotfix->schema-aurora"
+    }
+  } ],
+  "blockedEdges" : [ {
+    "from" : "v2",
+    "to" : "v3-1",
+    "reasons" : [ "time window: edge not open until 2026-01-01T00:00:00Z (at 2025-01-01T00:00:00Z)" ]
+  } ],
+  "warnings" : [ "graph contains 2 reachable cycle(s); only simple (loop-free) paths are enumerated" ]
+}
