@@ -1,0 +1,8 @@
+{
+  "id": "timeout-duration-iso",
+  "label": "时长规则也支持 ISO-8601 duration 文本",
+  "rule": {
+    "type": "duration",
+    "duration": "PT2M30S"
+  }
+}

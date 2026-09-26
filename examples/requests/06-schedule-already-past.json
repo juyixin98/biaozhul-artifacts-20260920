@@ -1,0 +1,8 @@
+{
+  "id": "timeout-already-past",
+  "label": "截止时间在过去：转换后立即 EXPIRED，remainingAtConversionNanos 为负（迟到多久）",
+  "rule": {
+    "type": "absolute",
+    "deadline": "2026-09-25T08:00:00Z"
+  }
+}

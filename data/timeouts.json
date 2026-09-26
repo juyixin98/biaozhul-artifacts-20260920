@@ -1,0 +1,97 @@
+[ {
+  "id" : "seed-duration-10m",
+  "label" : "fixed: ten minute duration",
+  "deadlineWall" : "2026-09-25T10:10:00Z",
+  "status" : "EXPIRED",
+  "ruleSource" : "DurationRule"
+}, {
+  "id" : "seed-daily-shanghai",
+  "label" : "fixed: daily 03:30 Asia/Shanghai",
+  "deadlineWall" : "2026-09-25T19:30:00Z",
+  "status" : "SCHEDULED",
+  "ruleSource" : "DailyLocal"
+}, {
+  "id" : "seed-version-ttl",
+  "label" : "fixed: version issued at start, ttl 15m",
+  "deadlineWall" : "2026-09-25T10:15:00Z",
+  "status" : "EXPIRED",
+  "ruleSource" : "VersionTtl"
+}, {
+  "id" : "seed-absolute-1h",
+  "label" : "fixed: absolute one hour after start",
+  "deadlineWall" : "2026-09-25T11:00:00Z",
+  "status" : "EXPIRED",
+  "ruleSource" : "Absolute"
+}, {
+  "id" : "seed-already-expired",
+  "label" : "fixed: deadline one hour in the past",
+  "deadlineWall" : "2026-09-25T09:00:00Z",
+  "status" : "EXPIRED",
+  "ruleSource" : "Absolute"
+}, {
+  "id" : "demo-job",
+  "label" : "acceptance demo",
+  "deadlineWall" : "2026-09-25T10:10:00Z",
+  "status" : "EXPIRED",
+  "ruleSource" : "DurationRule"
+}, {
+  "id" : "demo-past",
+  "label" : "demo-past",
+  "deadlineWall" : "2026-09-25T05:00:00Z",
+  "status" : "EXPIRED",
+  "ruleSource" : "Absolute"
+}, {
+  "id" : "restart-job",
+  "label" : "restart demo",
+  "deadlineWall" : "2026-09-25T09:10:00Z",
+  "status" : "EXPIRED",
+  "ruleSource" : "DurationRule"
+}, {
+  "id" : "fresh-10m",
+  "label" : "fresh-10m",
+  "deadlineWall" : "2026-09-25T12:10:00Z",
+  "status" : "EXPIRED",
+  "ruleSource" : "DurationRule"
+}, {
+  "id" : "sample-scheduled",
+  "label" : "sample-scheduled",
+  "deadlineWall" : "2026-09-25T13:15:00Z",
+  "status" : "SCHEDULED",
+  "ruleSource" : "DurationRule"
+}, {
+  "id" : "timeout-duration-600s",
+  "label" : "10 分钟后超时（从安排时刻的墙钟起算，再锚定到单调钟）",
+  "deadlineWall" : "2026-09-25T13:10:00Z",
+  "status" : "SCHEDULED",
+  "ruleSource" : "DurationRule"
+}, {
+  "id" : "timeout-duration-iso",
+  "label" : "时长规则也支持 ISO-8601 duration 文本",
+  "deadlineWall" : "2026-09-25T13:02:30Z",
+  "status" : "SCHEDULED",
+  "ruleSource" : "DurationRule"
+}, {
+  "id" : "timeout-absolute",
+  "label" : "绝对墙钟截止时间（UTC 瞬时）；若已在过去则立即 EXPIRED",
+  "deadlineWall" : "2026-09-25T11:00:00Z",
+  "status" : "EXPIRED",
+  "ruleSource" : "Absolute"
+}, {
+  "id" : "timeout-daily-shanghai",
+  "label" : "每个上海日 03:30（自动解析为下一次出现的 UTC 瞬时，正确处理 DST）",
+  "deadlineWall" : "2026-09-25T19:30:00Z",
+  "status" : "SCHEDULED",
+  "ruleSource" : "DailyLocal"
+}, {
+  "id" : "timeout-version-ttl",
+  "label" : "版本规则：截止时间 = 版本发布时间戳 + TTL，与安排时刻无关（同一版本重放结果确定）",
+  "deadlineWall" : "2026-09-25T09:15:00Z",
+  "status" : "EXPIRED",
+  "ruleSource" : "VersionTtl"
+}, {
+  "id" : "timeout-already-past",
+  "label" : "截止时间在过去：转换后立即 EXPIRED，remainingAtConversionNanos 为负（迟到多久）",
+  "deadlineWall" : "2026-09-25T08:00:00Z",
+  "status" : "EXPIRED",
+  "ruleSource" : "Absolute"
+} ]

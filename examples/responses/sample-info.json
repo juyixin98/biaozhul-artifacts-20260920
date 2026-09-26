@@ -1,0 +1,14 @@
+{
+  "success" : true,
+  "data" : {
+    "clockType" : "virtual",
+    "generation" : 1,
+    "wallNow" : "2026-09-25T13:00:00Z",
+    "monoNowNanos" : 0,
+    "tzdbVersion" : "2026b",
+    "javaVersion" : "21.0.12.1",
+    "timeZoneCount" : 604,
+    "note" : "monoNowNanos is process-local and meaningless across restarts; scheduled timeout durations are measured only by this monotonic clock"
+  },
+  "error" : null
+}

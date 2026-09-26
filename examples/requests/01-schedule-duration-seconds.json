@@ -1,0 +1,8 @@
+{
+  "id": "timeout-duration-600s",
+  "label": "10 分钟后超时（从安排时刻的墙钟起算，再锚定到单调钟）",
+  "rule": {
+    "type": "duration",
+    "seconds": 600
+  }
+}

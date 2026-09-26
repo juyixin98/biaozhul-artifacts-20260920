@@ -1,0 +1,9 @@
+{
+  "id": "timeout-daily-shanghai",
+  "label": "每个上海日 03:30（自动解析为下一次出现的 UTC 瞬时，正确处理 DST）",
+  "rule": {
+    "type": "dailyLocal",
+    "localTime": "03:30",
+    "zone": "Asia/Shanghai"
+  }
+}

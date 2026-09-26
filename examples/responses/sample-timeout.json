@@ -1,0 +1,18 @@
+{
+  "success" : true,
+  "data" : {
+    "id" : "fresh-10m",
+    "label" : "fresh-10m",
+    "status" : "EXPIRED",
+    "deadlineWall" : "2026-09-25T12:10:00Z",
+    "convertedAtWall" : "2026-09-25T13:00:00Z",
+    "convertedAtMonoNanos" : 0,
+    "remainingAtConversionNanos" : -3000000000000,
+    "fireMonoNanos" : -3000000000000,
+    "remainingMonotonicNanos" : 0,
+    "firedAtWall" : "2026-09-25T13:00:00Z",
+    "firedAtMonoNanos" : 0,
+    "ruleSource" : "DurationRule"
+  },
+  "error" : null
+}

@@ -1,0 +1,16 @@
+{
+  "success" : true,
+  "data" : {
+    "id" : "sample-scheduled",
+    "label" : "sample-scheduled",
+    "status" : "SCHEDULED",
+    "deadlineWall" : "2026-09-25T13:15:00Z",
+    "convertedAtWall" : "2026-09-25T13:00:00Z",
+    "convertedAtMonoNanos" : 0,
+    "remainingAtConversionNanos" : 900000000000,
+    "fireMonoNanos" : 900000000000,
+    "remainingMonotonicNanos" : 900000000000,
+    "ruleSource" : "DurationRule"
+  },
+  "error" : null
+}

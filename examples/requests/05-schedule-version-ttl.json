@@ -1,0 +1,9 @@
+{
+  "id": "timeout-version-ttl",
+  "label": "版本规则：截止时间 = 版本发布时间戳 + TTL，与安排时刻无关（同一版本重放结果确定）",
+  "rule": {
+    "type": "versionTtl",
+    "issuedAt": "2026-09-25T09:00:00Z",
+    "ttlSeconds": 900
+  }
+}
