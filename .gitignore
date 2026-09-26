@@ -1,0 +1,4 @@
+build/
+*.o
+gmon.out
+__pycache__/

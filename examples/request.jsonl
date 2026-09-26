@@ -1,0 +1,14 @@
+{"op":"reset","n":6}
+{"op":"addEdge","u":5,"v":4}
+{"op":"addEdge","u":4,"v":3}
+{"op":"addEdge","u":3,"v":2}
+{"op":"addEdge","u":2,"v":1}
+{"op":"addEdge","u":1,"v":0}
+{"op":"order"}
+{"op":"addEdge","u":0,"v":5}
+{"op":"addEdge","u":5,"v":4}
+{"op":"addEdge","u":3,"v":3}
+{"op":"stats"}
+{"op":"validate"}
+{"ops":[{"op":"reset","n":4},{"op":"addEdge","u":0,"v":1},{"op":"addEdge","u":1,"v":2},{"op":"order"}]}
+{"op":"quit"}

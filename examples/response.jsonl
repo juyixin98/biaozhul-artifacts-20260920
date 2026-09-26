@@ -1,0 +1,13 @@
+{"n":6,"ok":true}
+{"accepted":true,"cycle":false,"duplicate":false,"edge":"5->4","edges":1,"ok":true,"reordered":true,"visited":2}
+{"accepted":true,"cycle":false,"duplicate":false,"edge":"4->3","edges":2,"ok":true,"reordered":true,"visited":3}
+{"accepted":true,"cycle":false,"duplicate":false,"edge":"3->2","edges":3,"ok":true,"reordered":true,"visited":4}
+{"accepted":true,"cycle":false,"duplicate":false,"edge":"2->1","edges":4,"ok":true,"reordered":true,"visited":5}
+{"accepted":true,"cycle":false,"duplicate":false,"edge":"1->0","edges":5,"ok":true,"reordered":true,"visited":6}
+{"ok":true,"order":[5,4,3,2,1,0]}
+{"accepted":false,"cycle":true,"cyclePath":[0,5,4,3,2,1,0],"duplicate":false,"edge":"0->5","edges":5,"graphUnchanged":true,"ok":true,"reordered":false,"visited":7}
+{"accepted":true,"cycle":false,"duplicate":true,"edge":"5->4","edges":5,"ok":true,"reordered":false,"visited":0}
+{"accepted":false,"cycle":true,"cyclePath":[3,3],"duplicate":false,"edge":"3->3","edges":5,"graphUnchanged":true,"ok":true,"reordered":false,"visited":0}
+{"edges":5,"ok":true,"vertices":6}
+{"incrementalOrderValid":true,"ok":true,"referenceAcyclic":true}
+{"ok":true,"results":[{"n":4,"ok":true},{"accepted":true,"cycle":false,"duplicate":false,"edge":"0->1","edges":1,"ok":true,"reordered":false,"visited":0},{"accepted":true,"cycle":false,"duplicate":false,"edge":"1->2","edges":2,"ok":true,"reordered":false,"visited":0},{"ok":true,"order":[0,1,2,3]}]}
