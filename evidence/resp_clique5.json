@@ -1,0 +1,168 @@
+{
+  "mode": "heuristic",
+  "graph": {
+    "num_vertices": 5,
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        3,
+        4
+      ]
+    ]
+  },
+  "heuristic": "min_fill",
+  "elimination_order": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "heuristic_width": 4,
+  "width_claim": "heuristic_upper_bound_on_treewidth_not_claimed_optimal",
+  "is_optimal": false,
+  "fill_edges": [],
+  "tree_decomposition": {
+    "bags": [
+      {
+        "id": 0,
+        "eliminated_vertex": 0,
+        "vertices": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "bag_size": 5
+      },
+      {
+        "id": 1,
+        "eliminated_vertex": 1,
+        "vertices": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "bag_size": 4
+      },
+      {
+        "id": 2,
+        "eliminated_vertex": 2,
+        "vertices": [
+          2,
+          3,
+          4
+        ],
+        "bag_size": 3
+      },
+      {
+        "id": 3,
+        "eliminated_vertex": 3,
+        "vertices": [
+          3,
+          4
+        ],
+        "bag_size": 2
+      },
+      {
+        "id": 4,
+        "eliminated_vertex": 4,
+        "vertices": [
+          4
+        ],
+        "bag_size": 1
+      }
+    ],
+    "bag_tree_edges": [
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        3,
+        2
+      ],
+      [
+        4,
+        3
+      ]
+    ],
+    "width": 4
+  },
+  "statistics": {
+    "fill_edge_count": 0,
+    "candidates_considered_per_step": [
+      5,
+      4,
+      3,
+      2,
+      1
+    ],
+    "elapsed_milliseconds": 0,
+    "elapsed_microseconds": 2
+  },
+  "limits": {
+    "max_vertices": 64,
+    "default_exact_n_limit": 8,
+    "hard_exact_n_limit": 10,
+    "solver": "self_contained_no_external_solver"
+  },
+  "validation": {
+    "valid": true,
+    "errors": [],
+    "vertex_count": 5,
+    "edge_count": 10,
+    "bag_count": 5,
+    "bag_tree_edge_count": 4,
+    "uncovered_edges": 0,
+    "vertices_missing_from_bags": 0,
+    "running_intersection_violations": 0,
+    "reported_width": 4,
+    "recomputed_width": 4,
+    "max_bag_size": 5,
+    "replay_width_matches": true,
+    "fill_edges_match_replay": true,
+    "width_labeled_non_optimal": true
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "method": "all_labeled_simple_graphs_vs_n!_exact_reference",
+  "exact_method": "naive_permutation_enumeration",
+  "external_solver_used": false,
+  "n_max": 6,
+  "total_graphs": 33867,
+  "total_graphs_with_suboptimal_heuristic": 0,
+  "worst_gap_overall": 0,
+  "suboptimal_examples": [],
+  "rows": [
+    {
+      "n": 1,
+      "labeled_graphs_enumerated": 1,
+      "graphs_where_minfill_exceeds_optimum": 0,
+      "worst_gap": 0
+    },
+    {
+      "n": 2,
+      "labeled_graphs_enumerated": 2,
+      "graphs_where_minfill_exceeds_optimum": 0,
+      "worst_gap": 0
+    },
+    {
+      "n": 3,
+      "labeled_graphs_enumerated": 8,
+      "graphs_where_minfill_exceeds_optimum": 0,
+      "worst_gap": 0
+    },
+    {
+      "n": 4,
+      "labeled_graphs_enumerated": 64,
+      "graphs_where_minfill_exceeds_optimum": 0,
+      "worst_gap": 0
+    },
+    {
+      "n": 5,
+      "labeled_graphs_enumerated": 1024,
+      "graphs_where_minfill_exceeds_optimum": 0,
+      "worst_gap": 0
+    },
+    {
+      "n": 6,
+      "labeled_graphs_enumerated": 32768,
+      "graphs_where_minfill_exceeds_optimum": 0,
+      "worst_gap": 0
+    }
+  ],
+  "elapsed_milliseconds": 15364
+}

@@ -1,0 +1,5 @@
+build/
+tdw_cli
+*.o
+__pycache__/
+*.pyc

@@ -1,0 +1,20 @@
+{
+  "verifier": "independent_replay_and_running_intersection_check",
+  "report": {
+    "valid": true,
+    "errors": [],
+    "vertex_count": 6,
+    "edge_count": 6,
+    "bag_count": 6,
+    "bag_tree_edge_count": 5,
+    "uncovered_edges": 0,
+    "vertices_missing_from_bags": 0,
+    "running_intersection_violations": 0,
+    "reported_width": 2,
+    "recomputed_width": 2,
+    "max_bag_size": 3,
+    "replay_width_matches": true,
+    "fill_edges_match_replay": true,
+    "width_labeled_non_optimal": true
+  }
+}

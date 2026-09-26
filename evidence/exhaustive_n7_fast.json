@@ -1,0 +1,132 @@
+{
+  "method": "all_labeled_simple_graphs_vs_self_contained_DFS_exact",
+  "exact_method": "elimination_DFS_with_degeneracy_lower_bound",
+  "external_solver_used": false,
+  "n_max": 7,
+  "total_graphs": 2131019,
+  "total_graphs_with_suboptimal_heuristic": 140,
+  "worst_gap_overall": 1,
+  "suboptimal_examples": [
+    {
+      "n": 7,
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ]
+      ],
+      "heuristic_width": 5,
+      "optimal_width": 4,
+      "heuristic_order": [
+        3,
+        0,
+        1,
+        2,
+        4,
+        5,
+        6
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "n": 1,
+      "labeled_graphs_enumerated": 1,
+      "graphs_where_minfill_exceeds_optimum": 0,
+      "worst_gap": 0
+    },
+    {
+      "n": 2,
+      "labeled_graphs_enumerated": 2,
+      "graphs_where_minfill_exceeds_optimum": 0,
+      "worst_gap": 0
+    },
+    {
+      "n": 3,
+      "labeled_graphs_enumerated": 8,
+      "graphs_where_minfill_exceeds_optimum": 0,
+      "worst_gap": 0
+    },
+    {
+      "n": 4,
+      "labeled_graphs_enumerated": 64,
+      "graphs_where_minfill_exceeds_optimum": 0,
+      "worst_gap": 0
+    },
+    {
+      "n": 5,
+      "labeled_graphs_enumerated": 1024,
+      "graphs_where_minfill_exceeds_optimum": 0,
+      "worst_gap": 0
+    },
+    {
+      "n": 6,
+      "labeled_graphs_enumerated": 32768,
+      "graphs_where_minfill_exceeds_optimum": 0,
+      "worst_gap": 0
+    },
+    {
+      "n": 7,
+      "labeled_graphs_enumerated": 2097152,
+      "graphs_where_minfill_exceeds_optimum": 140,
+      "worst_gap": 1
+    }
+  ],
+  "elapsed_milliseconds": 6711
+}
