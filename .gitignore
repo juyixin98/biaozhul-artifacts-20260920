@@ -1,0 +1,7 @@
+# built binaries
+/server
+/selftest
+/bin/
+*.exe
+*.test
+*.out

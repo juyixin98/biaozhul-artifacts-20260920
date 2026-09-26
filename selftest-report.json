@@ -1,0 +1,727 @@
+{
+  "name": "http-range-semantics acceptance",
+  "started_at": "2026-09-25T10:44:42.692732317Z",
+  "duration_ms": 6,
+  "cases": [
+    {
+      "id": "R01",
+      "name": "full representation baseline",
+      "given": "sample.bin, 1024 immutable bytes",
+      "when": "GET /artifacts/sample.bin (no Range)",
+      "then": "200, Accept-Ranges: bytes, strong ETag, declared Content-Length",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 200,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 1024,
+        "body_sha256": "f90eb6607ad372adfbe184f04c1d29061464a6e187e54f8d1ecdfe0ee7a562eb",
+        "body_length": 1024
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R02",
+      "name": "prefix range",
+      "given": "sample.bin (1024 bytes)",
+      "when": "GET with Range: bytes=0-99",
+      "then": "206, Content-Range: bytes 0-99/1024, first 100 bytes",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 206,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Range": "bytes 0-99/1024",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 100,
+        "body_sha256": "57e8310931615cb786e0923d1ef88d4ad9f0ab74bf85a807f77fe2a8915001e4",
+        "body_length": 100
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R03",
+      "name": "open-ended range",
+      "given": "sample.bin (1024 bytes)",
+      "when": "Range: bytes=1000-",
+      "then": "206, bytes 1000-1023/1024, 24 bytes",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 206,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Range": "bytes 1000-1023/1024",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 24,
+        "body_sha256": "e3d738764f68ac473b6238816f990e89ebc7563faefad111d80988bb70dc853c",
+        "body_length": 24
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R04",
+      "name": "suffix range",
+      "given": "sample.bin (1024 bytes)",
+      "when": "Range: bytes=-200",
+      "then": "206, last 200 bytes: 824-1023/1024",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 206,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Range": "bytes 824-1023/1024",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 200,
+        "body_sha256": "9a924f2a12a123173e4b610de9ec12ec18f8fc17c202dcd96cc3aff2ce28bcdb",
+        "body_length": 200
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R05",
+      "name": "suffix longer than representation covers all",
+      "given": "sample.bin (1024 bytes)",
+      "when": "Range: bytes=-5000",
+      "then": "206, bytes 0-1023/1024 (suffix clamped to full rep)",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 206,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Range": "bytes 0-1023/1024",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 1024,
+        "body_sha256": "f90eb6607ad372adfbe184f04c1d29061464a6e187e54f8d1ecdfe0ee7a562eb",
+        "body_length": 1024
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R06",
+      "name": "last-pos beyond end is clamped",
+      "given": "sample.bin (1024 bytes)",
+      "when": "Range: bytes=900-5000",
+      "then": "206, bytes 900-1023/1024",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 206,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Range": "bytes 900-1023/1024",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 124,
+        "body_sha256": "c6ee43578163611062a49bf430aa92d5b17fb368d90d67b609640be7abee00e9",
+        "body_length": 124
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R07",
+      "name": "unsatisfiable: first-pos at size",
+      "given": "sample.bin (1024 bytes)",
+      "when": "Range: bytes=1024-",
+      "then": "416 with Content-Range: bytes */1024",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 416,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Range": "bytes */1024",
+          "Content-Type": "text/plain; charset=utf-8",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 32,
+        "body_sha256": "297e539766c4b2731c4f4194acae191d290b1bfa3a6e79d7feab1581ee90b131",
+        "body_length": 32
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R08",
+      "name": "unsatisfiable: entirely past end",
+      "given": "sample.bin (1024 bytes)",
+      "when": "Range: bytes=2000-3000",
+      "then": "416, bytes */1024",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 416,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Range": "bytes */1024",
+          "Content-Type": "text/plain; charset=utf-8",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 32,
+        "body_sha256": "297e539766c4b2731c4f4194acae191d290b1bfa3a6e79d7feab1581ee90b131",
+        "body_length": 32
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R09",
+      "name": "zero-length artifact: plain GET",
+      "given": "empty.bin (0 bytes)",
+      "when": "GET /artifacts/empty.bin",
+      "then": "200 with Content-Length: 0",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 200,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"e3b0c44298fc1c149afbf4c8996fb924\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 0
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R10",
+      "name": "zero-length artifact: any range is unsatisfiable",
+      "given": "empty.bin (0 bytes)",
+      "when": "Range: bytes=0-0",
+      "then": "416 with Content-Range: bytes */0",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 416,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Range": "bytes */0",
+          "Content-Type": "text/plain; charset=utf-8",
+          "ETag": "\"e3b0c44298fc1c149afbf4c8996fb924\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 32,
+        "body_sha256": "297e539766c4b2731c4f4194acae191d290b1bfa3a6e79d7feab1581ee90b131",
+        "body_length": 32
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R11",
+      "name": "multiple ranges: exact partition reassembles to original",
+      "given": "sample.bin (1024 bytes)",
+      "when": "Range: bytes=0-255,256-511,512-767,768-1023",
+      "then": "206 multipart/byteranges; client reassembly byte-identical to original",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 206,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Type": "multipart/byteranges; boundary=httprange-b2577d0ed07655552ba2660176d70e",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 1561,
+        "body_sha256": "4a3f3cb5010d84e13da773aa733fa2048c9174bab06589856be964da5518e083",
+        "body_length": 1561
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R12",
+      "name": "overlapping ranges delivered; strict reassembly rejects overlap",
+      "given": "sample.bin (1024 bytes)",
+      "when": "Range: bytes=100-300,200-400",
+      "then": "206 multipart with 2 parts, each byte-correct; Reassemble reports overlap",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 206,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Type": "multipart/byteranges; boundary=httprange-f0fb2ea98ce5148fdb3bad279c3886",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 694,
+        "body_sha256": "fc4acac078d326417f5a04326a6d11e818e9f45003f8ec7f41360ac2ddef628b",
+        "body_length": 694
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R13",
+      "name": "range count at the limit is served",
+      "given": "range member limit = 5",
+      "when": "Range with 5 members",
+      "then": "206 multipart/byteranges",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 206,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Type": "multipart/byteranges; boundary=httprange-ecb009b4582b11925ddc8fbe00d262",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 699,
+        "body_sha256": "c51a3c3dc01362c002fc6033b927e5370b2527b18325442d52e1e6459ad118ee",
+        "body_length": 699
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R14",
+      "name": "range count over the limit is ignored (200 full)",
+      "given": "range member limit = 5",
+      "when": "Range with 6 members",
+      "then": "server ignores Range and returns 200 full representation",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 200,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 1024,
+        "body_sha256": "f90eb6607ad372adfbe184f04c1d29061464a6e187e54f8d1ecdfe0ee7a562eb",
+        "body_length": 1024
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R15",
+      "name": "If-Range matching strong ETag allows 206",
+      "given": "current strong ETag",
+      "when": "Range: bytes=0-49 with If-Range: \u003ccurrent ETag\u003e",
+      "then": "206 partial response",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 206,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Range": "bytes 0-49/1024",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 50,
+        "body_sha256": "21ab8b865e56efd6c022316c986fa031263adaca693f591f37f059f900b8abc6",
+        "body_length": 50
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R16",
+      "name": "If-Range mismatched ETag returns full 200",
+      "given": "client holds a stale strong ETag",
+      "when": "Range + If-Range with a non-matching strong ETag",
+      "then": "200 full representation; no Content-Range",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 200,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 1024,
+        "body_sha256": "f90eb6607ad372adfbe184f04c1d29061464a6e187e54f8d1ecdfe0ee7a562eb",
+        "body_length": 1024
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R17",
+      "name": "If-Range weak ETag is ignored (206)",
+      "given": "If-Range carries W/\"...\"",
+      "when": "Range + weak If-Range entity-tag",
+      "then": "field ignored per RFC 9110; 206 served",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 206,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Range": "bytes 0-9/1024",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 10,
+        "body_sha256": "c848e1013f9f04a9d63fa43ce7fd4af035152c7c669a4a404b67107cee5f2e4e",
+        "body_length": 10
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R18",
+      "name": "If-Range date newer than Last-Modified allows 206",
+      "given": "Last-Modified 2026-01-15T12:00:00Z",
+      "when": "If-Range dated one day later + Range",
+      "then": "206 partial response",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 206,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Range": "bytes 0-9/1024",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 10,
+        "body_sha256": "c848e1013f9f04a9d63fa43ce7fd4af035152c7c669a4a404b67107cee5f2e4e",
+        "body_length": 10
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R19",
+      "name": "If-Range stale date returns full 200",
+      "given": "Last-Modified 2026-01-15T12:00:00Z",
+      "when": "If-Range dated one day earlier + Range",
+      "then": "200 full representation",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 200,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 1024,
+        "body_sha256": "f90eb6607ad372adfbe184f04c1d29061464a6e187e54f8d1ecdfe0ee7a562eb",
+        "body_length": 1024
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R20",
+      "name": "malformed Range header is ignored",
+      "given": "sample.bin",
+      "when": "Range: bytes=abc (syntactically invalid)",
+      "then": "200 full representation",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 200,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 1024,
+        "body_sha256": "f90eb6607ad372adfbe184f04c1d29061464a6e187e54f8d1ecdfe0ee7a562eb",
+        "body_length": 1024
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R21",
+      "name": "unsupported range unit is ignored",
+      "given": "sample.bin",
+      "when": "Range: items=0-9",
+      "then": "200 full representation",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 200,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 1024,
+        "body_sha256": "f90eb6607ad372adfbe184f04c1d29061464a6e187e54f8d1ecdfe0ee7a562eb",
+        "body_length": 1024
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R22",
+      "name": "ranges index the selected (gzip) representation",
+      "given": "gzip-enabled origin; Accept-Encoding: gzip",
+      "when": "full GET gzip, then Range: bytes=0- over the encoded bytes",
+      "then": "206 reassembles to the encoded body; gzip ETag differs from identity",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 206,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Encoding": "gzip",
+          "Content-Range": "bytes 0-316/317",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"133a5ab7825df0b19bdf1694eee5f9ff\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 317,
+        "body_sha256": "133a5ab7825df0b19bdf1694eee5f9ffb16a303343e0ab0117b169f897eab34f",
+        "body_length": 317
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R23",
+      "name": "If-None-Match hit yields 304",
+      "given": "current ETag known to client",
+      "when": "GET with If-None-Match: \u003cETag\u003e",
+      "then": "304 Not Modified, no body",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 304,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 0
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "R24",
+      "name": "HEAD returns range metadata without a body",
+      "given": "sample.bin",
+      "when": "HEAD with Range: bytes=0-9",
+      "then": "206, correct Content-Range and Content-Length, empty body",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 206,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Range": "bytes 0-9/1024",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 10
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "F01",
+      "name": "fault: truncated body is detected",
+      "given": "transport truncates after 64 of 1024 bytes",
+      "when": "plain GET through truncating transport",
+      "then": "client rejects with ErrTruncated (Content-Length mismatch)",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 200,
+        "content_length": 0,
+        "body_length": 64
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "F02",
+      "name": "fault: abrupt abort is detected",
+      "given": "transport aborts after 64 bytes (unexpected EOF)",
+      "when": "plain GET through aborting transport",
+      "then": "client surfaces the read error (no silent partial body)",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 200,
+        "content_length": 0,
+        "body_length": 64
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "F03",
+      "name": "fault: corrupted byte fails end-to-end verification",
+      "given": "transport flips byte 10 of a range response",
+      "when": "Range: bytes=0-99 through corrupting transport; verify vs ground truth",
+      "then": "Verify reports integrity failure",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 206,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Range": "bytes 0-99/1024",
+          "Content-Type": "application/octet-stream",
+          "ETag": "\"f90eb6607ad372adfbe184f04c1d2906\"",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 100,
+        "body_sha256": "f430eb3a74b8c0b6db893ee330b7a4c93ef5e5f02df762881264fdaca3ccc264",
+        "body_length": 100
+      },
+      "elapsed_ms": 0
+    },
+    {
+      "id": "F04",
+      "name": "fault: ETag stripped does not fool byte verification",
+      "given": "transport removes ETag from a 206",
+      "when": "Range: bytes=0-99; client has independent ground truth",
+      "then": "206 body still byte-verified against a separately fetched copy",
+      "status": "pass",
+      "request": {
+        "method": "GET",
+        "path": "/artifacts/\u003cid\u003e"
+      },
+      "response": {
+        "status_code": 206,
+        "headers": {
+          "Accept-Ranges": "bytes",
+          "Content-Range": "bytes 0-99/1024",
+          "Content-Type": "application/octet-stream",
+          "Last-Modified": "Thu, 15 Jan 2026 12:00:00 GMT",
+          "X-Range-Member-Limit": "5"
+        },
+        "content_length": 100,
+        "body_sha256": "57e8310931615cb786e0923d1ef88d4ad9f0ab74bf85a807f77fe2a8915001e4",
+        "body_length": 100
+      },
+      "elapsed_ms": 0
+    }
+  ]
+}

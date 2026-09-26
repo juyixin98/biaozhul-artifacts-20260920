@@ -1,0 +1,79 @@
+### HTTP Range semantics — raw request samples (RFC 9110 §13/§14)
+### Base URL: http://127.0.0.1:8080
+### hello.txt is an 18-byte immutable text artifact.
+
+### Full representation
+GET http://127.0.0.1:8080/artifacts/hello.txt
+
+### Prefix range — 206, Content-Range: bytes 0-4/18
+GET http://127.0.0.1:8080/artifacts/hello.txt
+Range: bytes=0-4
+
+### Open-ended range — bytes 6-17/18
+GET http://127.0.0.1:8080/artifacts/hello.txt
+Range: bytes=6-
+
+### Suffix range (last 6 bytes) — bytes 12-17/18
+GET http://127.0.0.1:8080/artifacts/hello.txt
+Range: bytes=-6
+
+### Suffix larger than the representation — clamped to 0-17/18
+GET http://127.0.0.1:8080/artifacts/hello.txt
+Range: bytes=-9999
+
+### last-pos beyond end — clamped to 10-17/18
+GET http://127.0.0.1:8080/artifacts/hello.txt
+Range: bytes=10-9999
+
+### Unsatisfiable — 416 with Content-Range: bytes */18
+GET http://127.0.0.1:8080/artifacts/hello.txt
+Range: bytes=100-
+
+### Zero-length artifact — 416 with Content-Range: bytes */0
+GET http://127.0.0.1:8080/artifacts/empty.bin
+Range: bytes=0-0
+
+### Multiple ranges — 206 multipart/byteranges
+GET http://127.0.0.1:8080/artifacts/hello.txt
+Range: bytes=0-4,12-17
+
+### Overlapping ranges — both parts returned
+GET http://127.0.0.1:8080/artifacts/hello.txt
+Range: bytes=0-10,6-14
+
+### Malformed Range — ignored, 200 full representation
+GET http://127.0.0.1:8080/artifacts/hello.txt
+Range: bytes=abc
+
+### Unsupported range unit — ignored, 200 full representation
+GET http://127.0.0.1:8080/artifacts/hello.txt
+Range: items=0-9
+
+### If-Range matching strong ETag — 206
+### (replace the tag with the current ETag from a plain GET)
+GET http://127.0.0.1:8080/artifacts/hello.txt
+Range: bytes=0-4
+If-Range: "9ef630ab5208825b17e9b23d6594041f"
+
+### If-Range mismatched strong ETag — 200 full representation
+GET http://127.0.0.1:8080/artifacts/hello.txt
+Range: bytes=0-4
+If-Range: "00000000000000000000000000000000"
+
+### If-Range fresh HTTP-date — 206
+GET http://127.0.0.1:8080/artifacts/hello.txt
+Range: bytes=0-4
+If-Range: Wed, 01 Jan 2031 00:00:00 GMT
+
+### If-Range stale HTTP-date — 200 full representation
+GET http://127.0.0.1:8080/artifacts/hello.txt
+Range: bytes=0-4
+If-Range: Wed, 01 Jan 2020 00:00:00 GMT
+
+### Over the 5-member limit — Range ignored, 200 full representation
+GET http://127.0.0.1:8080/artifacts/hello.txt
+Range: bytes=0-0,1-1,2-2,3-3,4-4,5-5
+
+### Conditional GET — 304 Not Modified
+GET http://127.0.0.1:8080/artifacts/hello.txt
+If-None-Match: "9ef630ab5208825b17e9b23d6594041f"
