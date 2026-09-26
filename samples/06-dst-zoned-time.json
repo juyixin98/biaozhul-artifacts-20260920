@@ -1,0 +1,9 @@
+{
+  "domain": "time",
+  "dataset": "time-dst-europe-2024",
+  "expression": {
+    "op": "intersection",
+    "left": { "set": "A" },
+    "right": { "set": "B" }
+  }
+}

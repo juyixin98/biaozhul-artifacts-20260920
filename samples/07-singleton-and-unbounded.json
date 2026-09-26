@@ -1,0 +1,16 @@
+{
+  "domain": "version",
+  "sets": {
+    "A": [
+      { "lower": "v07", "lowerOpen": false, "upper": "v07", "upperOpen": false }
+    ],
+    "B": [
+      { "lower": null, "lowerOpen": false, "upper": "v07", "upperOpen": true }
+    ]
+  },
+  "expression": {
+    "op": "union",
+    "left": { "set": "A" },
+    "right": { "set": "B" }
+  }
+}

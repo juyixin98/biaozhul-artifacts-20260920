@@ -1,0 +1,64 @@
+{
+  "datasets": [
+    {
+      "id": "time-adjacency",
+      "domain": "time",
+      "description": "Two adjacent/overlapping maintenance windows mixing open and closed endpoints; A abuts B at 2024-02-01T00:00:00Z.",
+      "sets": {
+        "A": [
+          { "lower": "2024-01-01T00:00:00Z", "lowerOpen": false, "upper": "2024-02-01T00:00:00Z", "upperOpen": true },
+          { "lower": "2024-03-15T08:00:00Z", "lowerOpen": false, "upper": "2024-03-15T18:00:00Z", "upperOpen": false }
+        ],
+        "B": [
+          { "lower": "2024-02-01T00:00:00Z", "lowerOpen": false, "upper": "2024-02-15T00:00:00Z", "upperOpen": false },
+          { "lower": "2024-03-15T12:00:00Z", "lowerOpen": false, "upper": "2024-03-20T00:00:00Z", "upperOpen": true }
+        ]
+      }
+    },
+    {
+      "id": "time-dst-europe-2024",
+      "domain": "time",
+      "description": "Windows expressed in local zoned time across the Europe spring-forward gap (2024-03-31 01:00Z) to verify normalization onto the UTC time line.",
+      "sets": {
+        "A": [
+          { "lower": "2024-03-31T00:30:00+01:00[Europe/Paris]", "lowerOpen": false, "upper": "2024-03-31T03:30:00+02:00[Europe/Paris]", "upperOpen": false }
+        ],
+        "B": [
+          { "lower": "2024-03-31T01:30:00Z", "lowerOpen": true, "upper": null, "upperOpen": true }
+        ]
+      }
+    },
+    {
+      "id": "time-unbounded",
+      "domain": "time",
+      "description": "Half-open and fully unbounded availability ranges for complement and difference checks.",
+      "sets": {
+        "A": [
+          { "lower": null, "lowerOpen": false, "upper": "2024-01-01T00:00:00Z", "upperOpen": false },
+          { "lower": "2025-06-01T00:00:00Z", "lowerOpen": true, "upper": null, "upperOpen": false }
+        ],
+        "B": [
+          { "lower": "2023-06-01T00:00:00Z", "lowerOpen": false, "upper": "2026-01-01T00:00:00Z", "upperOpen": false }
+        ]
+      }
+    },
+    {
+      "id": "version-rollout",
+      "domain": "version",
+      "description": "Staged feature availability over lexicographically ordered, zero-padded version tags.",
+      "sets": {
+        "A": [
+          { "lower": "v01", "lowerOpen": false, "upper": "v05", "upperOpen": true },
+          { "lower": "v09", "lowerOpen": true, "upper": "v09", "upperOpen": true }
+        ],
+        "B": [
+          { "lower": "v03", "lowerOpen": false, "upper": "v12", "upperOpen": false },
+          { "lower": "v12", "lowerOpen": false, "upper": "v12", "upperOpen": false }
+        ],
+        "C": [
+          { "lower": "v07", "lowerOpen": false, "upper": "v07", "upperOpen": false }
+        ]
+      }
+    }
+  ]
+}

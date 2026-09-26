@@ -1,0 +1,13 @@
+{
+  "domain": "version",
+  "dataset": "version-rollout",
+  "expression": {
+    "op": "union",
+    "left": { "set": "A" },
+    "right": {
+      "op": "intersection",
+      "left": { "set": "B" },
+      "right": { "set": "C" }
+    }
+  }
+}

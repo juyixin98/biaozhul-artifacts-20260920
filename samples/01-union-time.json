@@ -1,0 +1,14 @@
+{
+  "domain": "time",
+  "sets": {
+    "A": [
+      { "lower": "2024-01-01T00:00:00Z", "lowerOpen": false, "upper": "2024-02-01T00:00:00Z", "upperOpen": true },
+      { "lower": "2024-03-15T08:00:00Z", "lowerOpen": false, "upper": "2024-03-15T18:00:00Z", "upperOpen": false }
+    ],
+    "B": [
+      { "lower": "2024-02-01T00:00:00Z", "lowerOpen": false, "upper": "2024-02-15T00:00:00Z", "upperOpen": false },
+      { "lower": "2024-03-15T12:00:00Z", "lowerOpen": false, "upper": "2024-03-20T00:00:00Z", "upperOpen": true }
+    ]
+  },
+  "expression": { "op": "union", "left": { "set": "A" }, "right": { "set": "B" } }
+}

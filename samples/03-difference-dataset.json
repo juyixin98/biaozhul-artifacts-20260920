@@ -1,0 +1,9 @@
+{
+  "domain": "time",
+  "dataset": "time-unbounded",
+  "expression": {
+    "op": "difference",
+    "left": { "set": "B" },
+    "right": { "set": "A" }
+  }
+}
