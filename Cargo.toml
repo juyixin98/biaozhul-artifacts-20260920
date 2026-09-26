@@ -1,0 +1,17 @@
+[package]
+name = "lzsw"
+version = "0.1.0"
+edition = "2021"
+description = "Streaming LZ77 sliding-window binary codec with a JSON control entry"
+license = "MIT"
+
+[dependencies]
+# 零外部依赖：核心算法、JSON、Base64 均为自行实现（纯 std）。
+
+[[bin]]
+name = "lzsw"
+path = "src/main.rs"
+
+[lib]
+name = "lzsw"
+path = "src/lib.rs"
