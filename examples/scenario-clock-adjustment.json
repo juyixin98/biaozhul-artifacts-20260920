@@ -1,0 +1,22 @@
+{
+  "name": "acceptance-wall-clock-adjustment",
+  "description": "验收：墙钟向前/向后校时都不改变已安排超时；只有单调流逝消耗剩余时间",
+  "initialWallClock": "2026-09-25T09:00:00Z",
+  "initialMonotonicNanos": 1000000000,
+  "steps": [
+    {"op": "schedule", "timeoutId": "acc-1", "ruleId": "grace-two-minutes", "version": "1", "note": "安排 2 分钟超时"},
+    {"op": "status", "timeoutId": "acc-1", "note": "期望 remaining=120s, expired=false"},
+
+    {"op": "adjustWallClock", "backwardIso": "PT3H", "note": "管理员把墙钟向后拨 3 小时"},
+    {"op": "status", "timeoutId": "acc-1", "note": "期望 remaining 仍=120s（不被推迟）"},
+
+    {"op": "adjustWallClock", "forwardIso": "P2D", "note": "NTP 把墙钟向前跳 2 天"},
+    {"op": "status", "timeoutId": "acc-1", "note": "期望 remaining 仍=120s（不被提前误判过期）"},
+
+    {"op": "advance", "durationIso": "PT90S", "note": "真实时间流逝 90 秒（只推单调计时器）"},
+    {"op": "status", "timeoutId": "acc-1", "note": "期望 remaining=30s"},
+
+    {"op": "advance", "durationIso": "PT30S", "note": "再流逝 30 秒"},
+    {"op": "status", "timeoutId": "acc-1", "note": "期望 expired=true"}
+  ]
+}

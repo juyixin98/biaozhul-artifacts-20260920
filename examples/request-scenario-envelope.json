@@ -1,0 +1,17 @@
+{
+  "command": "scenario",
+  "store": "data/store-demo",
+  "scenario": {
+    "name": "envelope-demo",
+    "description": "通用 JSON 请求信封：在 scenario 字段内携带场景脚本",
+    "initialWallClock": "2026-09-25T09:00:00Z",
+    "initialMonotonicNanos": 1000000000,
+    "steps": [
+      {"op": "schedule", "timeoutId": "env-1", "ruleId": "grace-two-minutes", "version": "1"},
+      {"op": "adjustWallClock", "backwardIso": "PT1H", "note": "向后校时 1 小时"},
+      {"op": "status", "timeoutId": "env-1"},
+      {"op": "advance", "durationIso": "PT2M"},
+      {"op": "status", "timeoutId": "env-1"}
+    ]
+  }
+}

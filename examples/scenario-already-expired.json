@@ -1,0 +1,14 @@
+{
+  "name": "acceptance-already-expired-deadline",
+  "description": "验收：安排时墙钟截止时间已过（或恰好相等），立即判定过期，时长为负或零",
+  "initialWallClock": "2026-09-25T11:00:00Z",
+  "initialMonotonicNanos": 0,
+  "steps": [
+    {"op": "schedule", "timeoutId": "late-1", "ruleId": "brief-absolute", "version": "1",
+     "note": "固定截止 2026-09-25T10:05:00Z，当前 11:00Z，已过期 55 分钟"},
+    {"op": "status", "timeoutId": "late-1", "note": "期望 alreadyExpiredAtSchedule=true, expired=true, remaining<0"},
+
+    {"op": "adjustWallClock", "backwardIso": "P10D", "note": "即使把墙钟拨回截止之前，也不改变已过期结论"},
+    {"op": "status", "timeoutId": "late-1", "note": "仍 expired=true（运行期只看单调刻度）"}
+  ]
+}

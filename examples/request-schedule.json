@@ -1,0 +1,7 @@
+{
+  "command": "schedule",
+  "timeoutId": "demo-timeout-001",
+  "ruleId": "grace-two-minutes",
+  "version": "1",
+  "store": "data/store"
+}

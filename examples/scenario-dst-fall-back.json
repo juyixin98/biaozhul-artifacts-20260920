@@ -1,0 +1,13 @@
+{
+  "name": "acceptance-dst-fall-back",
+  "description": "验收：每日本地时刻规则在美东夏令时结束日按 TZDB 规则解析（UTC-4→UTC-5）",
+  "initialWallClock": "2026-11-01T20:00:00Z",
+  "initialMonotonicNanos": 0,
+  "steps": [
+    {"op": "schedule", "timeoutId": "dst-1", "ruleId": "daily-1730-newyork", "version": "1",
+     "note": "纽约本地 16:00（冬令时 UTC-5）安排，截止本地 17:30 → 22:30Z"},
+    {"op": "status", "timeoutId": "dst-1", "note": "期望墙钟截止 2026-11-01T22:30:00Z，剩余 2.5 小时"},
+    {"op": "advance", "durationIso": "PT2H30M", "note": "单调流逝 2 小时 30 分"},
+    {"op": "status", "timeoutId": "dst-1", "note": "期望 expired=true"}
+  ]
+}

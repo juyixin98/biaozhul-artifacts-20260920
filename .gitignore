@@ -1,0 +1,17 @@
+# Maven
+target/
+
+# 运行时本地持久化与输出
+data/
+run-output/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# 系统
+.DS_Store
