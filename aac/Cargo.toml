@@ -1,0 +1,20 @@
+[package]
+name = "aac"
+version = "0.1.0"
+edition = "2021"
+description = "Adaptive arithmetic coding: streaming binary codec library + JSON control entry point"
+license = "MIT OR Apache-2.0"
+
+[lib]
+name = "aac"
+path = "src/lib.rs"
+
+[[bin]]
+name = "aac"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3
+
+[profile.dev]
+opt-level = 0
