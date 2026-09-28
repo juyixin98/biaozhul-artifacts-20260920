@@ -1,0 +1,23 @@
+{
+  "storage_root": "var/checkpoints",
+  "seed": 20260927,
+  "dtype": "float64",
+  "model": {
+    "name": "mlp-tanh-v1",
+    "dims": [3, 5, 4, 3]
+  },
+  "data": {
+    "n_samples": 12
+  },
+  "adam": {
+    "lr": 0.01,
+    "beta1": 0.9,
+    "beta2": 0.999,
+    "eps": 1e-08
+  },
+  "train_steps": 6,
+  "api": {
+    "host": "127.0.0.1",
+    "port": 8000
+  }
+}
