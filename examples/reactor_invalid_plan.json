@@ -1,0 +1,31 @@
+{
+  "problem": {
+    "name": "reactor",
+    "horizon": 4,
+    "initial": {"coolant": 2, "pumped": 0},
+    "goal": {"fact": {"fact": "pumped", "op": "==", "value": 1}},
+    "resources": ["rig"],
+    "actions": [
+      {
+        "name": "run_pump",
+        "duration_min": 3,
+        "resources": ["rig"],
+        "precondition": {"fact": {"fact": "coolant", "op": ">=", "value": 1}},
+        "invariant": {"fact": {"fact": "coolant", "op": ">=", "value": 1}},
+        "effects": [{"fact": "pumped", "op": "+=", "value": 1}]
+      },
+      {
+        "name": "vent",
+        "duration_min": 0,
+        "invariant": {"fact": {"fact": "coolant", "op": ">=", "value": 100}},
+        "effects": [{"fact": "coolant", "op": "-=", "value": 2}]
+      }
+    ]
+  },
+  "plan": {
+    "steps": [
+      {"action": "run_pump", "start": 0, "duration": 3},
+      {"action": "vent", "start": 1, "duration": 0}
+    ]
+  }
+}

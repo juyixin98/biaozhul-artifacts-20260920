@@ -1,0 +1,56 @@
+# Workshop scheduling on a 6-step grid.
+#
+# Resource "saw" is held over half-open intervals: a cut ending at t=2
+# releases the saw exactly at t=2, so another cut starting at t=2 is
+# legal (boundary release).
+#
+# "inspect" is a zero-duration pulse that sets inspected=1. Due to the
+# fixed phase order (END -> PRE -> ZERO -> INV), a one-duration "polish"
+# starting at the SAME time as inspect still reads inspected=0 and is
+# rejected; polish has to start one grid step later.
+#
+# "stamp" is a second zero-duration pulse writing the same fact; an
+# inspect and a stamp at the same instant are rejected as a
+# SIMULTANEOUS_CONFLICT (distinct actions, ambiguous write order).
+name: workshop
+horizon: 6
+initial:
+  pieces: 0
+  inspected: 0
+  polished: 0
+goal:
+  all:
+    - fact: {fact: polished, op: ">=", value: 1}
+    - fact: {fact: pieces, op: ">=", value: 2}
+resources:
+  - saw
+actions:
+  - name: cut_a
+    duration_min: 2
+    resources: [saw]
+    invariant:
+      fact: {fact: pieces, op: ">=", value: 0}
+    effects:
+      - {fact: pieces, op: "+=", value: 1}
+  - name: cut_b
+    duration_min: 2
+    resources: [saw]
+    effects:
+      - {fact: pieces, op: "+=", value: 1}
+  - name: inspect
+    duration_min: 0
+    effects:
+      - {fact: inspected, op: "=", value: 1}
+  - name: stamp
+    duration_min: 0
+    effects:
+      - {fact: inspected, op: "=", value: 1}
+  - name: polish
+    duration_min: 1
+    duration_max: 2
+    precondition:
+      fact: {fact: inspected, op: "==", value: 1}
+    invariant:
+      fact: {fact: inspected, op: "==", value: 1}
+    effects:
+      - {fact: polished, op: "+=", value: 1}

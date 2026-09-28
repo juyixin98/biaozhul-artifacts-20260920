@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local data / databases
+data/
+*.db
+*.db-wal
+*.db-shm
+
+# Virtualenvs
+.venv/
+venv/

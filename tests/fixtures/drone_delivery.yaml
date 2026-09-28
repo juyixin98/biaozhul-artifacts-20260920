@@ -1,0 +1,38 @@
+# Drone delivery on a 5-step grid.
+#
+# Facts:  battery (int, starts at 3), delivered (int counter)
+# Resource: sky (exclusive, half-open occupation)
+#
+# recharge is ZERO-duration: it may pulse once at an instant, its effect
+# is visible to starts at STRICTLY LATER times (same-time starts read the
+# pre-zero state by the documented phase order).
+name: drone-delivery
+horizon: 5
+initial:
+  battery: 3
+  delivered: 0
+goal:
+  fact:
+    fact: delivered
+    op: "=="
+    value: 2
+resources:
+  - sky
+actions:
+  - name: fly
+    duration_min: 2
+    resources:
+      - sky
+    precondition:
+      fact: {fact: battery, op: ">=", value: 2}
+    invariant:
+      fact: {fact: battery, op: ">=", value: 1}
+    effects:
+      - {fact: battery, op: "-=", value: 2}
+      - {fact: delivered, op: "+=", value: 1}
+  - name: recharge
+    duration_min: 0
+    precondition:
+      fact: {fact: battery, op: "<=", value: 3}
+    effects:
+      - {fact: battery, op: "+=", value: 2}

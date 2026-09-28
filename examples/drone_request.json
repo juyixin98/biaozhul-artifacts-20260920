@@ -1,0 +1,35 @@
+{
+  "problem": {
+    "name": "drone-delivery",
+    "horizon": 5,
+    "initial": {"battery": 3, "delivered": 0},
+    "goal": {"fact": {"fact": "delivered", "op": "==", "value": 2}},
+    "resources": ["sky"],
+    "actions": [
+      {
+        "name": "fly",
+        "duration_min": 2,
+        "resources": ["sky"],
+        "precondition": {"fact": {"fact": "battery", "op": ">=", "value": 2}},
+        "invariant": {"fact": {"fact": "battery", "op": ">=", "value": 1}},
+        "effects": [
+          {"fact": "battery", "op": "-=", "value": 2},
+          {"fact": "delivered", "op": "+=", "value": 1}
+        ]
+      },
+      {
+        "name": "recharge",
+        "duration_min": 0,
+        "precondition": {"fact": {"fact": "battery", "op": "<=", "value": 3}},
+        "effects": [{"fact": "battery", "op": "+=", "value": 2}]
+      }
+    ]
+  },
+  "options": {
+    "budget_nodes": 100000,
+    "max_steps": 8,
+    "cross_check_reference": true,
+    "reference_max_steps": 5,
+    "reference_max_occurrences": 4
+  }
+}

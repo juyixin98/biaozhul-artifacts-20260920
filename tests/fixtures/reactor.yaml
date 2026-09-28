@@ -1,0 +1,46 @@
+# Reactor cooling on a 4-step grid.
+#
+# run_pump occupies [start, start+3) and requires coolant >= 1 on EVERY
+# interior segment (invariant). The goal only needs pumped == 1, so the
+# optimal plan is the pump running alone.
+#
+# Two deliberately invalid scenarios exercise "invariants are not just
+# endpoints":
+#
+# * vent is a zero-duration pulse at t=1 draining 2 coolant -> the
+#   invariant collapses on the interior segment [1,2); at the start
+#   endpoint t=0 coolant was still 2, so an endpoints-only check would
+#   wrongly accept.
+# * cool_down [0,2) applies its -2 effect when it ENDS at t=2, while the
+#   pump is still running -> the invariant collapses on segment [2,3).
+name: reactor
+horizon: 4
+initial:
+  coolant: 2
+  pumped: 0
+goal:
+  fact: {fact: pumped, op: "==", value: 1}
+resources:
+  - rig
+actions:
+  - name: run_pump
+    duration_min: 3
+    resources: [rig]
+    precondition:
+      fact: {fact: coolant, op: ">=", value: 1}
+    invariant:
+      fact: {fact: coolant, op: ">=", value: 1}
+    effects:
+      - {fact: pumped, op: "+=", value: 1}
+  - name: vent
+    duration_min: 0
+    # Zero-duration actions have no interior segments: even an invariant
+    # like this is vacuous for them (it is still validated structurally).
+    invariant:
+      fact: {fact: coolant, op: ">=", value: 100}
+    effects:
+      - {fact: coolant, op: "-=", value: 2}
+  - name: cool_down
+    duration_min: 2
+    effects:
+      - {fact: coolant, op: "-=", value: 2}
