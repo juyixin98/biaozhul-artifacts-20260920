@@ -1,0 +1,12 @@
+{
+  "name": "ubiquitous",
+  "description": "Item 'base' occurs in every transaction; rules predicting it have confidence 1.0 but lift 1.0",
+  "transactions": [
+    {"transaction_id": "U1", "items": ["base", "apple"]},
+    {"transaction_id": "U2", "items": ["base", "apple"]},
+    {"transaction_id": "U3", "items": ["base", "banana"]},
+    {"transaction_id": "U4", "items": ["base", "banana"]},
+    {"transaction_id": "U5", "items": ["base", "apple"]},
+    {"transaction_id": "U6", "items": ["base", "cherry"]}
+  ]
+}

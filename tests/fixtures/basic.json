@@ -1,0 +1,11 @@
+{
+  "name": "basic",
+  "description": "Classic 5-transaction grocery table; all expected metrics hand-computed in tests/hand_computed.py",
+  "transactions": [
+    {"transaction_id": "T1", "items": ["bread", "milk"]},
+    {"transaction_id": "T2", "items": ["bread", "diapers", "beer", "eggs"]},
+    {"transaction_id": "T3", "items": ["milk", "diapers", "beer", "cola"]},
+    {"transaction_id": "T4", "items": ["bread", "milk", "diapers", "beer"]},
+    {"transaction_id": "T5", "items": ["bread", "milk", "diapers", "cola"]}
+  ]
+}

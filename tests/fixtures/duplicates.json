@@ -1,0 +1,9 @@
+{
+  "name": "duplicates",
+  "description": "Duplicate items inside transactions; dedup semantics must match set-based support libraries",
+  "transactions": [
+    {"transaction_id": "D1", "items": ["x", "x", "y", "y", "y"]},
+    {"transaction_id": "D2", "items": ["x", "z"]},
+    {"transaction_id": "D3", "items": ["y", "z", "z"]}
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "exclusive",
+  "description": "Items 'alpha' and 'beta' never co-occur; mutual exclusion gives negative leverage and zero lift",
+  "transactions": [
+    {"transaction_id": "E1", "items": ["alpha"]},
+    {"transaction_id": "E2", "items": ["alpha"]},
+    {"transaction_id": "E3", "items": ["beta"]},
+    {"transaction_id": "E4", "items": ["beta"]}
+  ]
+}
