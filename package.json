@@ -1,0 +1,26 @@
+{
+  "name": "typed-query-budget-gateway",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static cost estimation and runtime budget gateway for typed queries (TypeScript + Fastify + SQLite)",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node --disable-warning=ExperimentalWarning dist/src/server.js",
+    "dev": "tsx src/server.ts",
+    "test": "node --import tsx --test test/*.test.ts",
+    "replay": "tsx src/diag/replay.ts",
+    "demo": "bash scripts/demo.sh"
+  },
+  "dependencies": {
+    "fastify": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}
