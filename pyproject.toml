@@ -1,0 +1,7 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = [
+    "unit: numerical kernel and engine unit tests",
+    "integration: API / service integration tests",
+]

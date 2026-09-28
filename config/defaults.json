@@ -1,0 +1,16 @@
+{
+  "residual_dps": 60,
+  "backward_tol": "1e-12",
+  "forward_tol": "1e-9",
+  "max_iterations_per_stage": 25,
+  "stagnation_factor": "0.8",
+  "use_fp32_first": true,
+  "use_fp64": true,
+  "mp_dps_ladder": [30, 60, 100],
+  "rank_probe_dps": 120,
+  "singular_pivot_factor": "100",
+  "svd_max_n": 200,
+  "solution_output_dps": 30,
+  "redact_payload": true,
+  "log_level": "INFO"
+}
