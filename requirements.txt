@@ -1,0 +1,9 @@
+# Runtime dependencies - versions locked to the verified environment.
+# Python 3.12.
+fastapi==0.141.1
+uvicorn==0.54.0
+pydantic==2.13.5
+numpy==2.4.6
+
+# Independent high-precision reference oracle (verification only).
+mpmath==1.3.0

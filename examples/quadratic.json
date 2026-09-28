@@ -1,0 +1,33 @@
+{
+  "variables": [
+    {"name": "x", "shape": [3]}
+  ],
+  "expression": {
+    "nodes": [
+      {"id": "x0", "op": "get", "args": ["x"], "index": 0},
+      {"id": "x1", "op": "get", "args": ["x"], "index": 1},
+      {"id": "x2", "op": "get", "args": ["x"], "index": 2},
+      {"id": "x0sq", "op": "mul", "args": ["x0", "x0"]},
+      {"id": "k2", "op": "scalar", "value": 2.0},
+      {"id": "q00", "op": "mul", "args": ["k2", "x0sq"]},
+      {"id": "x0x1", "op": "mul", "args": ["x0", "x1"]},
+      {"id": "km2", "op": "scalar", "value": -2.0},
+      {"id": "q01", "op": "mul", "args": ["km2", "x0x1"]},
+      {"id": "x1sq", "op": "mul", "args": ["x1", "x1"]},
+      {"id": "k4", "op": "scalar", "value": 4.0},
+      {"id": "q11", "op": "mul", "args": ["k4", "x1sq"]},
+      {"id": "x1x2", "op": "mul", "args": ["x1", "x2"]},
+      {"id": "q12", "op": "mul", "args": ["k2", "x1x2"]},
+      {"id": "x2sq", "op": "mul", "args": ["x2", "x2"]},
+      {"id": "k6", "op": "scalar", "value": 6.0},
+      {"id": "q22", "op": "mul", "args": ["k6", "x2sq"]},
+      {"id": "s01", "op": "add", "args": ["q00", "q01"]},
+      {"id": "s012", "op": "add", "args": ["s01", "q11"]},
+      {"id": "s0123", "op": "add", "args": ["s012", "q12"]},
+      {"id": "f", "op": "add", "args": ["s0123", "q22"]}
+    ],
+    "output": "f"
+  },
+  "nonsmooth": {"policy": "reject", "subgradient": 0.0},
+  "budget": {"max_nodes": 200000, "max_evals": 2000000}
+}
