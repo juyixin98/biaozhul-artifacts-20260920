@@ -1,0 +1,9 @@
+{
+  "name": "overlap-unreachable",
+  "rules": [
+    {"name": "A", "pattern": "a[bc]+d", "priority": 0},
+    {"name": "B", "pattern": "[ab]c*d", "priority": 1},
+    {"name": "C", "pattern": "[a-z]+", "priority": 2},
+    {"name": "KW", "pattern": "if", "priority": 3}
+  ]
+}

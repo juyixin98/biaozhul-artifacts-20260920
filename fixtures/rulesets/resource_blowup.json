@@ -1,0 +1,6 @@
+{
+  "name": "resource-blowup",
+  "rules": [
+    {"name": "BIG", "pattern": "(a{50}){50}"}
+  ]
+}

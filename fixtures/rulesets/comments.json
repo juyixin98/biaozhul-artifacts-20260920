@@ -1,0 +1,10 @@
+{
+  "name": "comments",
+  "rules": [
+    {"name": "LINE_COMMENT", "pattern": "//[^\\n]*", "priority": 0},
+    {"name": "KW", "pattern": "if|else", "priority": 1},
+    {"name": "ID", "pattern": "[a-z]+", "priority": 2},
+    {"name": "INT", "pattern": "[0-9]+", "priority": 3},
+    {"name": "WS", "pattern": "[ \\t\\n]+", "priority": 4}
+  ]
+}

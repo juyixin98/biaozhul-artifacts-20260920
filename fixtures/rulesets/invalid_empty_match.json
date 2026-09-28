@@ -1,0 +1,6 @@
+{
+  "name": "invalid-empty-match",
+  "rules": [
+    {"name": "BAD", "pattern": "a*"}
+  ]
+}

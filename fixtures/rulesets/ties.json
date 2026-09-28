@@ -1,0 +1,7 @@
+{
+  "name": "ties",
+  "rules": [
+    {"name": "LIT_AB", "pattern": "ab", "priority": 0},
+    {"name": "PAIR", "pattern": "[a-c][a-c]", "priority": 1}
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "numbers",
+  "rules": [
+    {"name": "INT", "pattern": "[0-9]+", "priority": 0},
+    {"name": "FLOAT", "pattern": "[0-9]+\\.[0-9]+", "priority": 1},
+    {"name": "HEX", "pattern": "0x[0-9a-f]+", "priority": 2},
+    {"name": "WS", "pattern": "[ \\t\\n]+", "priority": 3}
+  ]
+}
