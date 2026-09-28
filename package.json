@@ -1,0 +1,37 @@
+{
+  "name": "range-read-backend",
+  "version": "1.0.0",
+  "description": "Local immutable-object Range read backend (single-range + multipart) with diagnostics",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "seed": "tsx scripts/seed.ts",
+    "start": "tsx src/index.ts",
+    "test": "vitest run",
+    "test:unit": "vitest run test/unit",
+    "test:integration": "vitest run test/integration"
+  },
+  "repository": {
+    "type": "git",
+    "url": "local-only-no-remote"
+  },
+  "keywords": [
+    "range-requests",
+    "fastify",
+    "sqlite"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "fastify": "^5.12.5"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^26.6.3",
+    "@vitest/coverage-v8": "^5.0.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.2"
+  }
+}
