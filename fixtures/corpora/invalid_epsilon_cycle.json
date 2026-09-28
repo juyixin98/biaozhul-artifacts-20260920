@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "meta": {"description": "NEGATIVE fixture: pure epsilon (eps,eps) self-loop must be rejected at load"},
+  "transducers": [
+    {
+      "name": "eps_loop",
+      "kind": "fst",
+      "start": 0,
+      "finals": [{"state": 1, "cost": 0.0}],
+      "arcs": [
+        {"src": 0, "dst": 0, "in": "<eps>", "out": "<eps>", "cost": -0.2},
+        {"src": 0, "dst": 1, "in": "a", "out": "a", "cost": 0.0}
+      ]
+    }
+  ],
+  "pipelines": []
+}

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "meta": {"description": "NEGATIVE fixture: reachable negative-cost cycle must be rejected at load"},
+  "transducers": [
+    {
+      "name": "neg_cycle",
+      "kind": "fst",
+      "start": 0,
+      "finals": [{"state": 2, "cost": 0.0}],
+      "arcs": [
+        {"src": 0, "dst": 1, "in": "a", "out": "a", "cost": 0.0},
+        {"src": 1, "dst": 1, "in": "x", "out": "x", "cost": -1.0},
+        {"src": 1, "dst": 2, "in": "b", "out": "b", "cost": 0.0}
+      ]
+    }
+  ],
+  "pipelines": []
+}

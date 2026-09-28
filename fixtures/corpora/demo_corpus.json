@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "meta": {
+    "description": "Synthetic demo corpus: character correction + word-form morphology + lexicon",
+    "alphabet": "lowercase ascii used by the fixtures"
+  },
+  "transducers": [
+    {
+      "name": "char_correction",
+      "kind": "fst",
+      "start": 0,
+      "finals": [{"state": 0, "cost": 0.0}],
+      "arcs": [
+        {"src": 0, "dst": 0, "in": "a", "out": "a", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "c", "out": "c", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "t", "out": "t", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "d", "out": "d", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "o", "out": "o", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "g", "out": "g", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "h", "out": "h", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "e", "out": "e", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "n", "out": "n", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "r", "out": "r", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "s", "out": "s", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "b", "out": "b", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "i", "out": "i", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "l", "out": "l", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "u", "out": "u", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "f", "out": "f", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "k", "out": "k", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "k", "out": "c", "cost": 1.0},
+        {"src": 0, "dst": 0, "in": "z", "out": "<eps>", "cost": 1.0},
+        {"src": 0, "dst": 0, "in": "<eps>", "out": "e", "cost": 1.5}
+      ]
+    },
+    {
+      "name": "morphology",
+      "kind": "fst",
+      "start": 0,
+      "finals": [
+        {"state": 0, "cost": 0.0},
+        {"state": 1, "cost": 0.0},
+        {"state": 2, "cost": 0.0},
+        {"state": 3, "cost": 0.0}
+      ],
+      "arcs": [
+        {"src": 0, "dst": 0, "in": "a", "out": "a", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "c", "out": "c", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "t", "out": "t", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "d", "out": "d", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "o", "out": "o", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "g", "out": "g", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "h", "out": "h", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "e", "out": "e", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "n", "out": "n", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "r", "out": "r", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "s", "out": "s", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "b", "out": "b", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "i", "out": "i", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "l", "out": "l", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "u", "out": "u", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "f", "out": "f", "cost": 0.0},
+        {"src": 0, "dst": 0, "in": "k", "out": "k", "cost": 0.0},
+        {"src": 0, "dst": 1, "in": "<eps>", "out": "s", "cost": 0.3},
+        {"src": 0, "dst": 2, "in": "<eps>", "out": "i", "cost": 0.4},
+        {"src": 2, "dst": 3, "in": "<eps>", "out": "n", "cost": 0.0},
+        {"src": 3, "dst": 1, "in": "<eps>", "out": "g", "cost": 0.0}
+      ]
+    },
+    {
+      "name": "lex_general",
+      "kind": "lexicon",
+      "identity_alphabet": "abcdefghijklmnopqrstuvwxyz",
+      "entries": [
+        {"input": "cat", "outputs": [["cat", 0.0], ["feline", 1.0]]},
+        {"input": "dog", "outputs": [["dog", 0.0], ["hound", 1.2]]},
+        {"input": "cats", "outputs": [["cats", 0.0], ["felines", 1.1]]}
+      ]
+    }
+  ],
+  "pipelines": [
+    {"name": "correct_then_morph", "sequence": ["char_correction", "morphology"]},
+    {"name": "spell_then_lexicon", "sequence": ["char_correction", "lex_general"]}
+  ]
+}

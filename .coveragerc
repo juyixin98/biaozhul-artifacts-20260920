@@ -1,0 +1,9 @@
+[run]
+source = wfst_service
+omit =
+    wfst_service/main.py
+
+[report]
+exclude_lines =
+    pragma: no cover
+    if TYPE_CHECKING:
