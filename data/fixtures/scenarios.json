@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "description": "Synthetic local fixtures for sample-size planner. Reference values are derived independently from scipy/numpy textbook formulas and exact enumeration, never from the solver under test.",
+    "alpha": 0.05,
+    "power": 0.8
+  },
+  "normal_cases": [
+    {
+      "id": "cohen_d_0.8_two_sided_z",
+      "standardized_effect": 0.8,
+      "direction": "two_sided",
+      "allocation_ratio": 1.0,
+      "one_sample": false,
+      "use_t_distribution": false,
+      "expected_n_per_group": 25,
+      "reference": "n=ceil(2*(z_.975+z_.8)^2/d^2)"
+    },
+    {
+      "id": "cohen_d_0.8_two_sided_t",
+      "standardized_effect": 0.8,
+      "direction": "two_sided",
+      "allocation_ratio": 1.0,
+      "one_sample": false,
+      "use_t_distribution": true,
+      "expected_n_per_group": 26,
+      "reference": "non-central t df=2(n-1)"
+    },
+    {
+      "id": "cohen_d_0.5_one_sample",
+      "standardized_effect": 0.5,
+      "direction": "two_sided",
+      "allocation_ratio": 1.0,
+      "one_sample": true,
+      "use_t_distribution": false,
+      "expected_n_per_group": 32,
+      "reference": "n=ceil((z_.975+z_.8)^2/d^2)"
+    },
+    {
+      "id": "cohen_d_0.8_one_sided",
+      "standardized_effect": 0.8,
+      "direction": "greater",
+      "allocation_ratio": 1.0,
+      "one_sample": false,
+      "use_t_distribution": false,
+      "expected_n_per_group": 20,
+      "reference": "n=ceil(2*(z_.95+z_.8)^2/d^2)"
+    }
+  ],
+  "binomial_cases": [
+    {
+      "id": "p_0.5_vs_0.7_two_sided",
+      "p0": 0.5,
+      "p1": 0.7,
+      "direction": "two_sided",
+      "allocation_ratio": 1.0,
+      "one_sample": false,
+      "expected_n_per_group_approx": 96,
+      "reference": "score-test closed form"
+    },
+    {
+      "id": "low_rate_0.001_vs_0.01",
+      "p0": 0.001,
+      "p1": 0.01,
+      "direction": "greater",
+      "allocation_ratio": 1.0,
+      "one_sample": false,
+      "expect_method": "exact_binomial",
+      "reference": "expected count < 5 forces exact search"
+    },
+    {
+      "id": "extreme_0.99_vs_0.999",
+      "p0": 0.99,
+      "p1": 0.999,
+      "direction": "greater",
+      "allocation_ratio": 1.0,
+      "one_sample": false,
+      "expect_method": "exact_binomial",
+      "reference": "complement event is rare; exact search with backtrack"
+    },
+    {
+      "id": "one_sample_exact_n20_hand_case",
+      "p0": 0.5,
+      "p1": 0.7,
+      "direction": "greater",
+      "n_fixed": 20,
+      "one_sample": true,
+      "exact_size_at_n20": 0.0206947,
+      "exact_power_at_n20": 0.4163712,
+      "reference": "critical region X>=15; Bin(20,.5) tail and Bin(20,.7) tail"
+    }
+  ]
+}

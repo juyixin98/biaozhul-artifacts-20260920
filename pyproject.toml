@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sample-size-planner"
+version = "1.0.0"
+description = "Sample-size planning backend for composite normal and binomial tests"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn>=0.27",
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "pydantic>=2.5",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8.0", "httpx>=0.27"]
+
+[project.scripts]
+sample-size-planner = "sample_size_planner.api.main:run"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+filterwarnings = [
+    "ignore::starlette.exceptions.StarletteDeprecationWarning",
+]
+markers = [
+    "unit: independent unit tests",
+    "normal: normal (z/t) test kernel",
+    "binomial: binomial (proportion) test kernel",
+    "simulation: simulation-based checks",
+    "integration: API / persistence integration tests",
+]

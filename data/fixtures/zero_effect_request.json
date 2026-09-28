@@ -1,0 +1,6 @@
+{
+  "alpha": 0.05,
+  "power": 0.8,
+  "direction": "two_sided",
+  "standardized_effect": 0.0
+}

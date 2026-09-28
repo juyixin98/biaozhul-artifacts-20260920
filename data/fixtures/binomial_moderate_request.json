@@ -1,0 +1,7 @@
+{
+  "alpha": 0.05,
+  "power": 0.8,
+  "direction": "two_sided",
+  "p0": 0.5,
+  "p1": 0.7
+}

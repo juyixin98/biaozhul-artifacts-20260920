@@ -1,0 +1,7 @@
+{
+  "information_times": [0.5, 1.0],
+  "alpha": 0.05,
+  "direction": "two_sided",
+  "family": "pocock",
+  "drift_at_full_information": 2.8
+}

@@ -1,0 +1,11 @@
+{
+  "family": "normal",
+  "n_per_group0": 25,
+  "n_per_group1": 25,
+  "alpha": 0.05,
+  "direction": "two_sided",
+  "standardized_effect": 0.8,
+  "replications": 40000,
+  "seed": 20260927,
+  "target_power": 0.8074
+}

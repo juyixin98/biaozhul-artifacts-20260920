@@ -1,0 +1,8 @@
+{
+  "alpha": 0.05,
+  "power": 0.8,
+  "direction": "greater",
+  "allocation_ratio": 1.0,
+  "p0": 0.001,
+  "p1": 0.01
+}
