@@ -1,0 +1,8 @@
+# 运行时直接依赖（安装后由 pip 解析；可复现环境请用 requirements-lock.txt）
+fastapi==0.141.1
+uvicorn==0.54.0
+pydantic==2.13.5
+# 测试依赖
+httpx==0.28.1
+pytest==9.1.1
+pytest-cov==7.1.0

@@ -1,0 +1,21 @@
+{
+  "corpus_id": "word_morph_demo",
+  "version": "1.0.0",
+  "description": "合成夹具（词级）：词形规则（go -> went/walk -> walked 风格）、插入与删除词、同输入多输出歧义。token 以空格分隔。",
+  "token_level": "word",
+  "edit_tags": ["spell"],
+  "alignments": [
+    {"input": "go", "output": "went", "count": 10, "tag": "spell"},
+    {"input": "walk slowly", "output": "walk slowly", "count": 8, "tag": "spell"},
+    {"input": "walk", "output": "walked", "count": 6, "tag": "spell"},
+
+    {"input": "go", "output": "go", "count": 30, "tag": "lex"},
+    {"input": "go", "output": "goes", "count": 12, "tag": "lex"},
+    {"input": "walk", "output": "walk", "count": 18, "tag": "lex"},
+    {"input": "walk", "output": "walked", "count": 9, "tag": "lex"},
+    {"input": "walk slowly", "output": "walked slowly", "count": 5, "tag": "lex"}
+  ],
+  "rules": [
+    {"ilabel": "go", "olabel": "goes", "weight_hint": 0.4, "kind": "sub"}
+  ]
+}

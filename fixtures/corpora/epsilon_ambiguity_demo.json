@@ -1,0 +1,18 @@
+{
+  "corpus_id": "epsilon_ambiguity_demo",
+  "version": "1.0.0",
+  "description": "合成夹具：聚焦输入/输出 epsilon 的插入与删除、同输入多输出歧义。规模刻意很小，便于对短输入穷举全部路径做独立对照。spell 对齐训练编辑代价，lex 对齐构成词典表面形。",
+  "token_level": "char",
+  "edit_tags": ["spell"],
+  "alignments": [
+    {"input": "ab", "output": "b", "count": 10, "tag": "spell"},
+    {"input": "b", "output": "ab", "count": 4, "tag": "spell"},
+    {"input": "bc", "output": "bxc", "count": 6, "tag": "spell"},
+
+    {"input": "ab", "output": "AB", "count": 10, "tag": "lex"},
+    {"input": "ab", "output": "ab", "count": 6, "tag": "lex"},
+    {"input": "b", "output": "B", "count": 8, "tag": "lex"},
+    {"input": "bxc", "output": "bxc", "count": 7, "tag": "lex"}
+  ],
+  "rules": []
+}

@@ -1,0 +1,35 @@
+{
+  "corpus_id": "char_morph_demo",
+  "version": "1.0.0",
+  "description": "合成夹具：字符拼写纠错（编辑代价挖掘）+ 英语词形规则（y->i 等）+ 歧义词条。全部本地合成，无真实业务数据。",
+  "token_level": "char",
+  "edit_tags": ["spell"],
+  "alignments": [
+    {"input": "kat", "output": "cat", "count": 12, "tag": "spell"},
+    {"input": "kats", "output": "cats", "count": 8, "tag": "spell"},
+    {"input": "bag", "output": "big", "count": 6, "tag": "spell"},
+    {"input": "bagz", "output": "bags", "count": 4, "tag": "spell"},
+    {"input": "doog", "output": "dog", "count": 5, "tag": "spell"},
+    {"input": "citi", "output": "city", "count": 7, "tag": "spell"},
+    {"input": "stpo", "output": "stop", "count": 3, "tag": "spell"},
+
+    {"input": "cat", "output": "cat", "count": 40, "tag": "lex"},
+    {"input": "cat", "output": "cats", "count": 18, "tag": "lex"},
+    {"input": "cats", "output": "cats", "count": 20, "tag": "lex"},
+    {"input": "bags", "output": "bags", "count": 9, "tag": "lex"},
+    {"input": "dog", "output": "dog", "count": 30, "tag": "lex"},
+    {"input": "dog", "output": "dogs", "count": 14, "tag": "lex"},
+    {"input": "dogs", "output": "dogs", "count": 16, "tag": "lex"},
+    {"input": "city", "output": "city", "count": 22, "tag": "lex"},
+    {"input": "city", "output": "cities", "count": 9, "tag": "lex"},
+    {"input": "cities", "output": "cities", "count": 10, "tag": "lex"},
+    {"input": "big", "output": "big", "count": 11, "tag": "lex"},
+    {"input": "stop", "output": "stop", "count": 13, "tag": "lex"},
+    {"input": "stop", "output": "stopped", "count": 5, "tag": "lex"},
+    {"input": "stopped", "output": "stopped", "count": 6, "tag": "lex"}
+  ],
+  "rules": [
+    {"ilabel": "y", "olabel": "i", "weight_hint": 0.35, "kind": "sub"},
+    {"ilabel": "e", "olabel": "", "weight_hint": 0.9, "kind": "del"}
+  ]
+}

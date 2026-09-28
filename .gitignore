@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# 本地数据库与临时服务目录（可由脚本/服务重新生成；results 下的
+# demo_results.* / service_calls.jsonl / runs.* 作为复核证据保留）
+data/
+*.db
+results/serve/
+
+# 系统
+.DS_Store
