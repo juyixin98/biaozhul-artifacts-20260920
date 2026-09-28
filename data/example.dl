@@ -1,0 +1,29 @@
+% ============================================================
+%  Example restricted-Datalog program: family tree + graph
+%  Facts use set semantics (duplicates collapse).
+% ============================================================
+
+parent(eve, ann).
+parent(ann, bob).
+parent(bob, cy).
+parent(cy, dan).
+parent(ann, ben).
+
+% Positive recursion (same stratum): transitive closure.
+ancestor(X, Y) :- parent(X, Y).
+ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).
+
+edge(a, b).
+edge(b, c).
+edge(c, c).
+node(a).
+node(b).
+node(c).
+node(d).
+
+reachable(X) :- edge(a, X).
+reachable(X) :- reachable(Y), edge(Y, X).
+
+% Stratified negation (strictly higher stratum).
+sink(X)       :- node(X), NOT edge(X, _).
+unreachable(X) :- node(X), NOT reachable(X).
