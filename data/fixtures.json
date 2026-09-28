@@ -1,0 +1,47 @@
+{
+  "users": {
+    "u-1001": {
+      "userId": "u-1001",
+      "displayName": "Ada Lin",
+      "loyaltyTier": "gold",
+      "region": "cn-east"
+    },
+    "u-1002": {
+      "userId": "u-1002",
+      "displayName": "Bo Zhao",
+      "loyaltyTier": "standard",
+      "region": "cn-north"
+    }
+  },
+  "contacts": {
+    "u-1001": { "email": "ada.lin@example.test", "phone": "138-0000-1001" },
+    "u-1002": { "email": "bo.zhao@example.test", "phone": "139-0000-2002" }
+  },
+  "catalog": {
+    "sku-1": { "sku": "sku-1", "listPrice": 1299.0, "currency": "CNY" },
+    "sku-2": { "sku": "sku-2", "listPrice": 49.5, "currency": "CNY" }
+  },
+  "loyaltyDiscount": {
+    "gold": 0.15,
+    "silver": 0.08,
+    "standard": 0
+  },
+  "availability": {
+    "cn-east": {
+      "sku-1": { "available": true, "warehouseCount": 3 },
+      "sku-2": { "available": true, "warehouseCount": 1 }
+    },
+    "cn-north": {
+      "sku-1": { "available": false, "warehouseCount": 0 },
+      "sku-2": { "available": true, "warehouseCount": 2 }
+    }
+  },
+  "recommendations": {
+    "u-1001": { "sku-1": { "recommendedSku": "sku-2", "confidence": 0.91 } },
+    "u-1002": { "sku-2": { "recommendedSku": "sku-1", "confidence": 0.72 } }
+  },
+  "promotions": {
+    "sku-1": { "promotionCode": "WELCOME10", "discountPct": 10 },
+    "sku-2": { "promotionCode": null, "discountPct": null }
+  }
+}

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+logs/*.log
+logs/*.jsonl
+data/*.sqlite
+data/*.sqlite-*
+.coverage/
+*.tsbuildinfo
+.DS_Store
