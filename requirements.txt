@@ -1,0 +1,9 @@
+# 实测锁定版本（Python 3.12.3，Linux x86_64）
+# 安装：pip install -r requirements.txt
+numpy==2.4.6
+fastapi==0.141.1
+pydantic==2.13.5
+uvicorn==0.54.0
+httpx==0.28.1
+pytest==9.1.1
+pytest-cov==7.1.0

@@ -1,0 +1,15 @@
+{
+  "n_workers": 3,
+  "n_samples": 12,
+  "shard_sizes": [2, 3, 7],
+  "bucket_capacity": 2,
+  "learning_rate": 0.1,
+  "liveness_timeout": 1.5,
+  "port": 8765,
+  "seed": 445,
+  "workers": {
+    "w0": {},
+    "w1": {},
+    "w2": {"fail_after_bucket": 0}
+  }
+}
