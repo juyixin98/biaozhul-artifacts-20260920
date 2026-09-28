@@ -1,0 +1,38 @@
+{
+  "comparison": {
+    "arm_a": "treatment",
+    "arm_b": "control"
+  },
+  "difference_in_means": 2.0042857142857144,
+  "interpretation_scope": "These statistics describe the observed between-arm difference. A significant p-value is NOT evidence that allocation was correct; allocation correctness is verified via the diagnostics endpoint (block counts, stream replay, reference-oracle agreement).",
+  "means": {
+    "control": -0.004285714285714283,
+    "treatment": 2.0
+  },
+  "n": {
+    "control": 7,
+    "treatment": 6
+  },
+  "permutation_test": {
+    "estimate": 2.0042857142857144,
+    "method": "exact_enumeration",
+    "n_permutations": 1716,
+    "null_mean": 0.0,
+    "null_sd": 0.5788580268936252,
+    "p_value": 0.0005827505827505828,
+    "rng_note": "no RNG used for exact enumeration",
+    "status": "ok"
+  },
+  "proves_allocation_correct": false,
+  "proves_allocation_correct_reason": "post-allocation outcome tests cannot detect a broken or biased randomisation with certainty; they address estimands, not mechanism",
+  "welch": {
+    "ci95_high": 2.028810288986884,
+    "ci95_low": 1.9797611395845445,
+    "df": 10.972953195800846,
+    "estimate": 2.0042857142857144,
+    "p_value": 2.1562116482012906e-20,
+    "se": 0.011139193536924509,
+    "status": "ok",
+    "t_statistic": 179.93095349693425
+  }
+}

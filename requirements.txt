@@ -1,0 +1,9 @@
+# Pinned to the verified local environment (Python 3.12.3).
+# python-multipart is intentionally absent: the API is JSON-only.
+numpy==2.4.6
+scipy==1.15.3
+fastapi==0.141.1
+pydantic==2.13.5
+uvicorn==0.54.0
+httpx==0.28.1
+pytest==9.1.1

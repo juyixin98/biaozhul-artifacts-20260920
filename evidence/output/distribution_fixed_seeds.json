@@ -1,0 +1,21 @@
+{
+  "chi_square": 0.0,
+  "draws_per_stratum": 8,
+  "fixed_seeds": [
+    1,
+    2,
+    3,
+    7,
+    42,
+    99,
+    1234,
+    20260927
+  ],
+  "note": "fixed-seed marginal fairness check; not a validity proof",
+  "p_value": 1.0,
+  "pooled_arm_counts": {
+    "control": 800,
+    "treatment": 800
+  },
+  "strata_per_seed": 25
+}

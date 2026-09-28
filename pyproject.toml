@@ -1,0 +1,15 @@
+[project]
+name = "stratblock"
+version = "1.0.0"
+description = "Stratified permuted-block random allocation service (synthetic, local-only)"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = [
+  "unit: pure kernel / contract tests",
+  "integration: storage and API tests",
+  "concurrency: parallel enrollment tests",
+  "evidence: cross-implementation oracle and distribution tests",
+]

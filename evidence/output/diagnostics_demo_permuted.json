@@ -1,0 +1,178 @@
+{
+  "audit_summary": {
+    "enrolled": 13,
+    "idempotent_returns": 2,
+    "reallocation_refusals": 1
+  },
+  "conclusion": "PASS",
+  "contract": {
+    "allocation_ratio": [
+      1,
+      1
+    ],
+    "arms": [
+      "control",
+      "treatment"
+    ],
+    "block_sizes": [
+      2,
+      4
+    ],
+    "stratification_factors": [
+      "site"
+    ],
+    "tail_policy": "permuted"
+  },
+  "distribution_checks": {
+    "pooled_arm_counts": {
+      "control": 7,
+      "treatment": 6
+    },
+    "pooled_chi_square_vs_ratio": {
+      "chi2": 0.07692307692307693,
+      "expected": [
+        6.5,
+        6.5
+      ],
+      "note": "descriptive balance check on one realised trial; not a validity proof",
+      "observed": [
+        7,
+        6
+      ],
+      "p_value": 0.7815112949987134,
+      "status": "ok"
+    }
+  },
+  "failures": [],
+  "n_strata": 2,
+  "n_subjects": 13,
+  "scope_note": "This report verifies the allocation mechanism. It deliberately does not use post-allocation outcome significance as evidence.",
+  "strata": [
+    {
+      "blocks": [
+        {
+          "block_index": 0,
+          "complete": true,
+          "flag": null,
+          "on_ratio": true,
+          "realised_counts": [
+            2,
+            2
+          ],
+          "required_counts": [
+            2,
+            2
+          ]
+        },
+        {
+          "block_index": 1,
+          "complete": true,
+          "flag": null,
+          "on_ratio": true,
+          "realised_counts": [
+            2,
+            2
+          ],
+          "required_counts": [
+            2,
+            2
+          ]
+        }
+      ],
+      "n_subjects": 8,
+      "observed_arm_counts": {
+        "control": 4,
+        "treatment": 4
+      },
+      "sequence_replay": {
+        "findings": [],
+        "production_kernel_agrees": true,
+        "reference_oracle_agrees": true,
+        "stored_sequence": [
+          "control",
+          "treatment",
+          "treatment",
+          "control",
+          "treatment",
+          "control",
+          "treatment",
+          "control"
+        ]
+      },
+      "stratum_key": "site=A",
+      "stream_provenance": {
+        "key_fingerprint_sha256": "5eecc962eef93fa2f4ab26df7f0119e7303afb30353eaf79b0fd32e8de8812ae",
+        "stream_id": "stratblock-stream-v1:study=demo-permuted;stratum=site=A"
+      }
+    },
+    {
+      "blocks": [
+        {
+          "block_index": 0,
+          "complete": true,
+          "flag": null,
+          "on_ratio": true,
+          "realised_counts": [
+            2,
+            2
+          ],
+          "required_counts": [
+            2,
+            2
+          ]
+        },
+        {
+          "balance_criterion": "feasible_apportionment_set",
+          "block_index": 1,
+          "complete": false,
+          "deviation": [
+            0,
+            0
+          ],
+          "flag": null,
+          "note": "open block sealed before filling; a permuted prefix is flagged only when its counts cannot realise the ratio (e.g. 3/0 in a 1:1 block)",
+          "on_ratio": true,
+          "on_ratio_target_for_prefix": [
+            1,
+            0
+          ],
+          "prefix_length": 1,
+          "realised_counts": [
+            1,
+            0
+          ]
+        }
+      ],
+      "n_subjects": 5,
+      "observed_arm_counts": {
+        "control": 3,
+        "treatment": 2
+      },
+      "sequence_replay": {
+        "findings": [],
+        "production_kernel_agrees": true,
+        "reference_oracle_agrees": true,
+        "stored_sequence": [
+          "control",
+          "treatment",
+          "treatment",
+          "control",
+          "control"
+        ]
+      },
+      "stratum_key": "site=B",
+      "stream_provenance": {
+        "key_fingerprint_sha256": "23c6f1c40776ca12c195a5fd770f78009b8535ec7a6435e6c9cad7d871d2d5cf",
+        "stream_id": "stratblock-stream-v1:study=demo-permuted;stratum=site=B"
+      }
+    }
+  ],
+  "stream_provenance": {
+    "derivation": "HKDF-SHA256(master_seed, study_id, stratum_key) -> SHA256 counter -> rejection-uniform -> Fisher-Yates",
+    "master_seed": 20260927,
+    "scheme": "stratblock-deterministic-rng-v1"
+  },
+  "study_id": "demo-permuted",
+  "study_status": "sealed",
+  "uncertainties": []
+}

@@ -1,0 +1,131 @@
+{
+  "audit_summary": {
+    "enrolled": 5,
+    "idempotent_returns": 0,
+    "reallocation_refusals": 0
+  },
+  "conclusion": "PASS",
+  "contract": {
+    "allocation_ratio": [
+      1,
+      1,
+      1
+    ],
+    "arms": [
+      "C",
+      "T1",
+      "T2"
+    ],
+    "block_sizes": [
+      3,
+      6
+    ],
+    "stratification_factors": [
+      "age",
+      "sex"
+    ],
+    "tail_policy": "balanced_prefix"
+  },
+  "distribution_checks": {
+    "pooled_arm_counts": {
+      "C": 2,
+      "T1": 2,
+      "T2": 1
+    },
+    "pooled_chi_square_vs_ratio": {
+      "expected": [
+        1.6666666666666667,
+        1.6666666666666667,
+        1.6666666666666667
+      ],
+      "observed": [
+        2,
+        2,
+        1
+      ],
+      "reason": "expected cell count < 5; chi-square approximation unreliable",
+      "status": "indeterminate"
+    }
+  },
+  "failures": [],
+  "n_strata": 1,
+  "n_subjects": 5,
+  "scope_note": "This report verifies the allocation mechanism. It deliberately does not use post-allocation outcome significance as evidence.",
+  "strata": [
+    {
+      "blocks": [
+        {
+          "block_index": 0,
+          "complete": true,
+          "flag": null,
+          "on_ratio": true,
+          "realised_counts": [
+            1,
+            1,
+            1
+          ],
+          "required_counts": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "balance_criterion": "deterministic_hamilton_target",
+          "block_index": 1,
+          "complete": false,
+          "deviation": [
+            0,
+            0,
+            0
+          ],
+          "flag": null,
+          "note": "balanced-prefix policy keeps every prefix on the deterministic Hamilton target",
+          "on_ratio": true,
+          "on_ratio_target_for_prefix": [
+            1,
+            1,
+            0
+          ],
+          "prefix_length": 2,
+          "realised_counts": [
+            1,
+            1,
+            0
+          ]
+        }
+      ],
+      "n_subjects": 5,
+      "observed_arm_counts": {
+        "C": 2,
+        "T1": 2,
+        "T2": 1
+      },
+      "sequence_replay": {
+        "findings": [],
+        "production_kernel_agrees": true,
+        "reference_oracle_agrees": true,
+        "stored_sequence": [
+          "C",
+          "T1",
+          "T2",
+          "C",
+          "T1"
+        ]
+      },
+      "stratum_key": "age=old|sex=F",
+      "stream_provenance": {
+        "key_fingerprint_sha256": "2932c81fcf306f04f9a6c506c81acc74f8071f55042f101c46069896eb6ada46",
+        "stream_id": "stratblock-stream-v1:study=demo-balanced;stratum=age=old|sex=F"
+      }
+    }
+  ],
+  "stream_provenance": {
+    "derivation": "HKDF-SHA256(master_seed, study_id, stratum_key) -> SHA256 counter -> rejection-uniform -> Fisher-Yates",
+    "master_seed": 7,
+    "scheme": "stratblock-deterministic-rng-v1"
+  },
+  "study_id": "demo-balanced",
+  "study_status": "active",
+  "uncertainties": []
+}

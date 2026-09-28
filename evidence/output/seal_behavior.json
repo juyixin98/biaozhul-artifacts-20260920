@@ -1,0 +1,5 @@
+{
+  "category": "STRATUM_CLOSED",
+  "http_status": 409,
+  "message": "study 'demo-permuted' is sealed; enrollment is closed"
+}

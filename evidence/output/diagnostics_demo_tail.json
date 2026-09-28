@@ -1,0 +1,126 @@
+{
+  "audit_summary": {
+    "enrolled": 2,
+    "idempotent_returns": 0,
+    "reallocation_refusals": 0
+  },
+  "conclusion": "PASS",
+  "contract": {
+    "allocation_ratio": [
+      1,
+      1
+    ],
+    "arms": [
+      "control",
+      "treatment"
+    ],
+    "block_sizes": [
+      4
+    ],
+    "stratification_factors": [
+      "site"
+    ],
+    "tail_policy": "permuted"
+  },
+  "distribution_checks": {
+    "pooled_arm_counts": {
+      "control": 2,
+      "treatment": 0
+    },
+    "pooled_chi_square_vs_ratio": {
+      "expected": [
+        1.0,
+        1.0
+      ],
+      "observed": [
+        2,
+        0
+      ],
+      "reason": "expected cell count < 5; chi-square approximation unreliable",
+      "status": "indeterminate"
+    }
+  },
+  "failures": [],
+  "n_strata": 1,
+  "n_subjects": 2,
+  "scope_note": "This report verifies the allocation mechanism. It deliberately does not use post-allocation outcome significance as evidence.",
+  "strata": [
+    {
+      "blocks": [
+        {
+          "balance_criterion": "feasible_apportionment_set",
+          "block_index": 0,
+          "complete": false,
+          "deviation": [
+            1,
+            -1
+          ],
+          "flag": "TAIL_BALANCE_VIOLATION",
+          "note": "open block sealed before filling; a permuted prefix is flagged only when its counts cannot realise the ratio (e.g. 3/0 in a 1:1 block)",
+          "on_ratio": false,
+          "on_ratio_target_for_prefix": [
+            1,
+            1
+          ],
+          "prefix_length": 2,
+          "realised_counts": [
+            2,
+            0
+          ]
+        }
+      ],
+      "n_subjects": 2,
+      "observed_arm_counts": {
+        "control": 2,
+        "treatment": 0
+      },
+      "sequence_replay": {
+        "findings": [],
+        "production_kernel_agrees": true,
+        "reference_oracle_agrees": true,
+        "stored_sequence": [
+          "control",
+          "control"
+        ]
+      },
+      "stratum_key": "site=T0",
+      "stream_provenance": {
+        "key_fingerprint_sha256": "56b04b7fed6bb2cc042d08b417caa1f3c66014c40d3a2b67b4ad48fa887744ce",
+        "stream_id": "stratblock-stream-v1:study=demo-tail;stratum=site=T0"
+      }
+    }
+  ],
+  "stream_provenance": {
+    "derivation": "HKDF-SHA256(master_seed, study_id, stratum_key) -> SHA256 counter -> rejection-uniform -> Fisher-Yates",
+    "master_seed": 20260927,
+    "scheme": "stratblock-deterministic-rng-v1"
+  },
+  "study_id": "demo-tail",
+  "study_status": "sealed",
+  "uncertainties": [
+    {
+      "block": {
+        "balance_criterion": "feasible_apportionment_set",
+        "complete": false,
+        "deviation": [
+          1,
+          -1
+        ],
+        "flag": "TAIL_BALANCE_VIOLATION",
+        "note": "open block sealed before filling; a permuted prefix is flagged only when its counts cannot realise the ratio (e.g. 3/0 in a 1:1 block)",
+        "on_ratio": false,
+        "on_ratio_target_for_prefix": [
+          1,
+          1
+        ],
+        "prefix_length": 2,
+        "realised_counts": [
+          2,
+          0
+        ]
+      },
+      "kind": "DISCLOSED_TAIL_IMBALANCE",
+      "stratum_key": "site=T0"
+    }
+  ]
+}

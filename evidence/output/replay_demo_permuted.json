@@ -1,0 +1,9 @@
+{
+  "conclusion": "PASS",
+  "events_checked": 13,
+  "master_seed": 20260927,
+  "mismatches": [],
+  "stream_scheme": "stratblock-deterministic-rng-v1",
+  "study_id": "demo-permuted",
+  "uncertainties": []
+}
