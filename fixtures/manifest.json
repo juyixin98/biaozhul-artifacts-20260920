@@ -1,0 +1,42 @@
+[
+  {
+    "name": "symmetric_tridiag",
+    "file": "symmetric_tridiag.npz",
+    "description": "Symmetric positive definite 1D Laplacian (n=8); normal, well-conditioned case.",
+    "shape": [
+      8,
+      8
+    ],
+    "nnz": 22
+  },
+  {
+    "name": "grcar_nonnormal",
+    "file": "grcar_nonnormal.npz",
+    "description": "Grcar matrix (n=10): highly non-normal Toeplitz; stresses Arnoldi error estimates.",
+    "shape": [
+      10,
+      10
+    ],
+    "nnz": 43
+  },
+  {
+    "name": "jordan_block",
+    "file": "jordan_block.npz",
+    "description": "Single Jordan block (eigenvalue 0.5, n=8): defective matrix, polynomial growth.",
+    "shape": [
+      8,
+      8
+    ],
+    "nnz": 15
+  },
+  {
+    "name": "decay_longtime",
+    "file": "decay_longtime.npz",
+    "description": "Negative Laplacian (n=12): decaying semigroup, used for long-time (t=25) tests.",
+    "shape": [
+      12,
+      12
+    ],
+    "nnz": 34
+  }
+]

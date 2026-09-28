@@ -1,0 +1,11 @@
+# Runtime dependencies (see requirements-lock.txt for pinned versions)
+fastapi
+uvicorn
+numpy
+scipy
+mpmath
+pydantic
+
+# Dev/test dependencies
+pytest
+httpx
