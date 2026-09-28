@@ -1,0 +1,5 @@
+# Optional: mature 2SLS implementation used as an external oracle in tests.
+# The test suite is fully self-contained without this (independent GMM/ILS/
+# bootstrap references are built in), but installing it enables an additional
+# direct comparison against an independently maintained package.
+linearmodels>=6.0
