@@ -1,0 +1,39 @@
+# Fully resolved dependency lock for ipw-ate.
+# Generated on linux / Python 3.12.3 (CPython) against the local environment.
+# Install with:  python -m pip install -r requirements.lock
+#
+# Direct dependencies are listed in requirements.txt / pyproject.toml;
+# this file pins the complete resolved closure used to produce reports/.
+
+# --- direct: numerical / statistical core ---
+numpy==2.4.6
+scipy==1.15.3
+
+# --- direct: service / config ---
+fastapi==0.141.1
+uvicorn==0.54.0
+pydantic==2.13.5
+PyYAML==6.0.1
+
+# --- direct: tests / examples ---
+pytest==9.1.1
+httpx==0.28.1
+
+# --- transitive ---
+annotated-types==0.8.0
+anyio==4.15.1
+certifi==2023.11.17
+click==8.1.6
+h11==0.16.0
+httpcore==1.0.9
+idna==3.6
+iniconfig==2.3.0
+packaging==24.0
+pluggy==1.6.0
+pydantic_core==2.46.5
+starlette==1.7.0
+typing_extensions==4.16.0
+
+# build backend present in the locked environment
+setuptools==68.1.2
+wheel==0.42.0

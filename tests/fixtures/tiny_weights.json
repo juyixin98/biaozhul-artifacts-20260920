@@ -1,0 +1,53 @@
+{
+  "description": "Hand-computed 4-unit fixture. Expected values were derived with paper arithmetic (documented in README), NOT produced by the estimator under test. All kernel tests assert these exact numbers.",
+  "units": [
+    {"id": 1, "a": 1, "p": 0.25, "y": 4.0},
+    {"id": 2, "a": 1, "p": 0.50, "y": 2.0},
+    {"id": 3, "a": 0, "p": 0.25, "y": 0.0},
+    {"id": 4, "a": 0, "p": 0.50, "y": 1.0}
+  ],
+  "marginal_treated_probability": 0.5,
+  "expected": {
+    "ate_stabilized": {
+      "weights": [2.0, 1.0, 0.6666666666666666, 1.0],
+      "mu1": 3.3333333333333335,
+      "mu0": 0.6,
+      "point": 2.7333333333333334,
+      "ess_treated": 1.8,
+      "ess_untreated": 1.923076923076923
+    },
+    "ate_ht": {
+      "weights": [4.0, 2.0, 1.3333333333333333, 2.0],
+      "mu1": 3.3333333333333335,
+      "mu0": 0.6,
+      "point": 2.7333333333333334
+    },
+    "att_stabilized": {
+      "weights": [1.0, 1.0, 0.3333333333333333, 1.0],
+      "mu1": 3.0,
+      "mu0": 0.75,
+      "point": 2.25
+    },
+    "atu_stabilized": {
+      "weights": [3.0, 1.0, 1.0, 1.0],
+      "mu1": 3.5,
+      "mu0": 0.5,
+      "point": 3.0
+    },
+    "clipping_case": {
+      "profile": {"lower": 0.1, "upper": 0.9},
+      "raw_pscores": [0.05, 0.5, 0.5, 0.5],
+      "a": [1, 1, 0, 0],
+      "y": [4.0, 2.0, 0.0, 1.0],
+      "n_clipped": 1,
+      "used_pscore_for_unit_1": 0.1
+    },
+    "positivity_case": {
+      "a": [1, 1, 0, 0],
+      "p": [0.0, 0.5, 0.5, 0.5],
+      "y": [4.0, 2.0, 0.0, 1.0],
+      "expected_error_code": "positivity_violation",
+      "expected_detail_key": "treated_p_le_eps"
+    }
+  }
+}

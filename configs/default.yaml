@@ -1,0 +1,52 @@
+# Default statistical contract. Every value here is part of the declared,
+# auditable contract: results record the exact settings used to produce them.
+# Override with IPW_CONFIG_PATH or explicit API fields (documented subset only).
+
+estimand: ate            # ate | att | atu  (target population)
+weight_type: stabilized  # stabilized | ht  (Horvitz-Thompson = unstabilized)
+
+crossfit:
+  n_splits: 5
+  stratify: true
+  seed: 20260927
+
+model:
+  family: logistic_ridge
+  ridge_lambda: 0.001
+  max_iter: 100
+  tol: 1.0e-8
+
+weights:
+  # Truncation is a single FIXED profile (never data-adaptive quantiles).
+  # Disabled by default; when enabled the estimand silently changes to a
+  # propensity-trimmed population, which is recorded on every result.
+  clipping:
+    enabled: false
+    profile: v1_fixed_p0p02_p0p98
+    method: fixed_propensity_bounds
+    lower: 0.02
+    upper: 0.98
+  positivity_eps: 1.0e-6   # required denominator (p or 1-p) must exceed this;
+                           # violations REJECT the run, never denominator replacement
+
+diagnostics:
+  min_ess_fraction_warn: 0.10
+  min_ess_fraction_reject: 0.02
+  max_weight_warn: 20.0
+  max_weight_reject: 100.0
+  overlap_low_quantile: 0.05
+  overlap_high_quantile: 0.95
+  calibration_slope_bounds: [0.5, 1.5]
+  hosmer_lemeshow_p_min: 0.01
+  hosmer_lemeshow_groups: 10
+  calibration_min_n: 200
+
+api:
+  max_observations: 100000
+  max_covariates: 100
+
+storage:
+  db_path: data/ipw_runs.sqlite3
+
+logging:
+  level: INFO

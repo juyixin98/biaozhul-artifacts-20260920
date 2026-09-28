@@ -1,0 +1,8 @@
+{
+  "description": "300-unit good-overlap synthetic sample, seed 2024 (see ipwate.synthetic). Independent reference: true ATE on this sample is the mean of tau(X)=2+0.5*x0.",
+  "n": 300,
+  "scenario": "good_overlap",
+  "seed": 2024,
+  "ate_true_on_sample": 2.015448417710079,
+  "n_treated": 153
+}
