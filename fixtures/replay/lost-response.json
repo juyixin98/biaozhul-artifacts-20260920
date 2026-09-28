@@ -1,0 +1,94 @@
+{
+  "title": "Lost response replay: an Idempotency-Key turns an ambiguous retry into a faithful replay",
+  "config": {
+    "etagStrength": "strong",
+    "runId": "fixture-lost-response"
+  },
+  "note": "Expected etags are hand-authored from coreutils sha256sum prefixes (first-draft=e9788622a7d0, beta=f44e64e75f39), not produced by the system under test.",
+  "steps": [
+    {
+      "id": "original-create",
+      "clientId": "writer-1",
+      "request": {
+        "method": "PUT",
+        "path": "/resources/lost-response/doc",
+        "headers": {
+          "content-type": "text/plain",
+          "idempotency-key": "postillon-2026-09-27-0001"
+        },
+        "body": "first-draft"
+      },
+      "expect": {
+        "status": 201,
+        "body": "first-draft",
+        "headers": {
+          "etag": "\"v1-e9788622a7d0\"",
+          "x-resource-version": "1"
+        },
+        "headerAbsent": ["idempotent-replay"]
+      }
+    },
+    {
+      "id": "retry-after-lost-response",
+      "clientId": "writer-1",
+      "comment": "The client never received the first response and retries the byte-identical request.",
+      "request": {
+        "method": "PUT",
+        "path": "/resources/lost-response/doc",
+        "headers": {
+          "content-type": "text/plain",
+          "idempotency-key": "postillon-2026-09-27-0001"
+        },
+        "body": "first-draft"
+      },
+      "expect": {
+        "status": 201,
+        "body": "first-draft",
+        "headers": {
+          "etag": "\"v1-e9788622a7d0\"",
+          "x-resource-version": "1",
+          "idempotent-replay": "true"
+        }
+      }
+    },
+    {
+      "id": "retry-with-different-body-conflicts",
+      "clientId": "attacker-or-buggy-client",
+      "comment": "Reusing the same key with a different payload must not silently overwrite anything.",
+      "request": {
+        "method": "PUT",
+        "path": "/resources/lost-response/doc",
+        "headers": {
+          "content-type": "text/plain",
+          "idempotency-key": "postillon-2026-09-27-0001"
+        },
+        "body": "beta"
+      },
+      "expect": {
+        "status": 409,
+        "errorCategory": "idempotency-replay-conflict"
+      }
+    },
+    {
+      "id": "state-unchanged-after-conflict",
+      "clientId": "reader-1",
+      "request": {
+        "method": "GET",
+        "path": "/resources/lost-response/doc",
+        "headers": {}
+      },
+      "expect": {
+        "status": 200,
+        "body": "first-draft",
+        "headers": {
+          "etag": "\"v1-e9788622a7d0\"",
+          "x-resource-version": "1"
+        }
+      }
+    }
+  ],
+  "expectDecisionTrail": {
+    "putStatusesInOrder": [201, 201, 409],
+    "replayedFlagsInOrder": [false, true, true]
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "title": "Weak validators: weak comparison on safe reads, strong comparison on writes",
+  "config": {
+    "etagStrength": "weak",
+    "runId": "fixture-weak-tags"
+  },
+  "note": "In weak mode the server EMITS W/ validators (canonical strong tags are still persisted). Expected hashes: alpha=8ed3f6ad685b, beta=f44e64e75f39.",
+  "steps": [
+    {
+      "id": "create-emits-weak-validator",
+      "clientId": "writer-1",
+      "request": {
+        "method": "PUT",
+        "path": "/resources/weak/doc",
+        "headers": { "content-type": "text/plain" },
+        "body": "alpha"
+      },
+      "expect": {
+        "status": 201,
+        "headers": { "etag": "W/\"v1-8ed3f6ad685b\"", "x-resource-version": "1" }
+      }
+    },
+    {
+      "id": "put-with-weak-if-match-rejected",
+      "clientId": "writer-2",
+      "comment": "Comparison mode follows the method: PUT uses strong comparison, so a weak validator cannot authorize the overwrite even though its opaque tag matches.",
+      "request": {
+        "method": "PUT",
+        "path": "/resources/weak/doc",
+        "headers": {
+          "content-type": "text/plain",
+          "if-match": "W/\"v1-8ed3f6ad685b\""
+        },
+        "body": "beta"
+      },
+      "expect": {
+        "status": 412,
+        "errorCategory": "if-match-mismatch"
+      }
+    },
+    {
+      "id": "get-with-weak-echo-matches-304",
+      "clientId": "reader-1",
+      "request": {
+        "method": "GET",
+        "path": "/resources/weak/doc",
+        "headers": { "if-none-match": "W/\"v1-8ed3f6ad685b\"" }
+      },
+      "expect": {
+        "status": 304,
+        "httpNoBody": true,
+        "headers": { "etag": "W/\"v1-8ed3f6ad685b\"" }
+      }
+    },
+    {
+      "id": "get-with-stale-strong-tag-proceeds-200",
+      "clientId": "reader-1",
+      "request": {
+        "method": "GET",
+        "path": "/resources/weak/doc",
+        "headers": { "if-none-match": "\"v0-000000000000\"" }
+      },
+      "expect": {
+        "status": 200,
+        "body": "alpha",
+        "headers": { "etag": "W/\"v1-8ed3f6ad685b\"" }
+      }
+    },
+    {
+      "id": "put-with-strong-if-match-succeeds",
+      "clientId": "writer-1",
+      "request": {
+        "method": "PUT",
+        "path": "/resources/weak/doc",
+        "headers": {
+          "content-type": "text/plain",
+          "if-match": "\"v1-8ed3f6ad685b\""
+        },
+        "body": "beta"
+      },
+      "expect": {
+        "status": 200,
+        "body": "beta",
+        "headers": { "etag": "W/\"v2-f44e64e75f39\"", "x-resource-version": "2" }
+      }
+    },
+    {
+      "id": "state-verified",
+      "clientId": "reader-2",
+      "request": {
+        "method": "GET",
+        "path": "/resources/weak/doc",
+        "headers": {}
+      },
+      "expect": {
+        "status": 200,
+        "body": "beta",
+        "headers": { "x-resource-version": "2" }
+      }
+    }
+  ]
+}

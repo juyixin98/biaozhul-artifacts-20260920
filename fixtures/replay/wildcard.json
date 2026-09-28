@@ -1,0 +1,89 @@
+{
+  "title": "Wildcard validators: create-only (If-None-Match: *) and update-any (If-Match: *)",
+  "config": {
+    "etagStrength": "strong",
+    "runId": "fixture-wildcard"
+  },
+  "note": "Expected hashes: alpha=8ed3f6ad685b, beta=f44e64e75f39. '*' matches any existing representation; absence vs mismatch stay distinct semantics.",
+  "steps": [
+    {
+      "id": "inm-star-create-on-absent-allowed",
+      "clientId": "creator-1",
+      "request": {
+        "method": "PUT",
+        "path": "/resources/wild/resource",
+        "headers": { "content-type": "text/plain", "if-none-match": "*" },
+        "body": "alpha"
+      },
+      "expect": {
+        "status": 201,
+        "body": "alpha",
+        "headers": { "etag": "\"v1-8ed3f6ad685b\"", "x-resource-version": "1" }
+      }
+    },
+    {
+      "id": "inm-star-overwrite-blocked-412",
+      "clientId": "creator-2",
+      "comment": "The resource now exists; '*' matches it, so an unsafe method gets 412 if-none-match-exists.",
+      "request": {
+        "method": "PUT",
+        "path": "/resources/wild/resource",
+        "headers": { "content-type": "text/plain", "if-none-match": "*" },
+        "body": "beta"
+      },
+      "expect": {
+        "status": 412,
+        "errorCategory": "if-none-match-exists"
+      }
+    },
+    {
+      "id": "state-still-alpha",
+      "clientId": "reader-1",
+      "request": { "method": "GET", "path": "/resources/wild/resource", "headers": {} },
+      "expect": {
+        "status": 200,
+        "body": "alpha",
+        "headers": { "x-resource-version": "1" }
+      }
+    },
+    {
+      "id": "if-match-star-update-allowed",
+      "clientId": "writer-1",
+      "request": {
+        "method": "PUT",
+        "path": "/resources/wild/resource",
+        "headers": { "content-type": "text/plain", "if-match": "*" },
+        "body": "beta"
+      },
+      "expect": {
+        "status": 200,
+        "body": "beta",
+        "headers": { "etag": "\"v2-f44e64e75f39\"", "x-resource-version": "2" }
+      }
+    },
+    {
+      "id": "if-match-star-on-absent-is-412-not-404",
+      "clientId": "writer-2",
+      "comment": "A precondition against a missing representation fails the precondition (412); that is distinct from an unconditional miss (404).",
+      "request": {
+        "method": "PUT",
+        "path": "/resources/wild/never-existed",
+        "headers": { "content-type": "text/plain", "if-match": "*" },
+        "body": "beta"
+      },
+      "expect": {
+        "status": 412,
+        "errorCategory": "if-match-mismatch"
+      }
+    },
+    {
+      "id": "unconditional-get-of-absent-is-404",
+      "clientId": "reader-2",
+      "request": { "method": "GET", "path": "/resources/wild/never-existed", "headers": {} },
+      "expect": {
+        "status": 404,
+        "errorCategory": "not-found"
+      }
+    }
+  ]
+}
