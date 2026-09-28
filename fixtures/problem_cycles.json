@@ -1,0 +1,6 @@
+{
+  "name": "cycles-power-toggle",
+  "objects": ["w1", "bench", "press", "mill"],
+  "init": ["at(w1,bench)", "clear(press)"],
+  "goal": {"pos": ["pressed(w1)"], "neg": ["powered(mill)"]}
+}

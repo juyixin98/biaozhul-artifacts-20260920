@@ -1,0 +1,11 @@
+{
+  "name": "unsolvable-sealed-dock",
+  "objects": ["w1", "bench", "press", "oven", "dock"],
+  "init": [
+    "at(w1,bench)",
+    "clear(press)",
+    "clear(oven)",
+    "sealed(dock)"
+  ],
+  "goal": {"pos": ["at(w1,dock)"], "neg": []}
+}

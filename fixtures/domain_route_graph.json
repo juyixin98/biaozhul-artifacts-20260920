@@ -1,0 +1,22 @@
+{
+  "name": "route-graph",
+  "description": "Synthetic linear graph a-b-c-d with unit-cost walks and a cost-5 direct teleport. Used to assert BFS returns the fewest-hop (expensive) plan while UCS/A* return the cheapest 3-hop plan.",
+  "actions": [
+    {
+      "name": "walk",
+      "parameters": ["?from", "?to"],
+      "preconditions": {"pos": ["edge(?from,?to)", "at(?from)"], "neg": ["blocked(?to)"]},
+      "add": ["at(?to)"],
+      "delete": ["at(?from)"],
+      "cost": 1
+    },
+    {
+      "name": "teleport",
+      "parameters": ["?from", "?to"],
+      "preconditions": {"pos": ["fastlink(?from,?to)", "at(?from)"], "neg": ["jammed(?to)"]},
+      "add": ["at(?to)"],
+      "delete": ["at(?from)"],
+      "cost": 5
+    }
+  ]
+}

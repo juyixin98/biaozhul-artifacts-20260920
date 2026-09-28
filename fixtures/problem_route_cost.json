@@ -1,0 +1,10 @@
+{
+  "name": "cheap-long-vs-expensive-short",
+  "objects": ["a", "b", "c", "d"],
+  "init": [
+    "at(a)",
+    "edge(a,b)", "edge(b,c)", "edge(c,d)",
+    "fastlink(a,d)"
+  ],
+  "goal": {"pos": ["at(d)"], "neg": []}
+}

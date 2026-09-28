@@ -1,0 +1,6 @@
+{
+  "name": "solvable-build-and-ship",
+  "objects": ["w1", "w2", "bench", "press", "oven", "dock", "mill"],
+  "init": ["at(w1,bench)", "clear(press)", "clear(oven)", "clear(dock)", "clear(mill)"],
+  "goal": {"pos": ["shipped(w1)"], "neg": []}
+}

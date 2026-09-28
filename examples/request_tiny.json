@@ -1,0 +1,33 @@
+{
+  "domain": {
+    "name": "resource-ops",
+    "actions": [
+      {
+        "name": "move",
+        "parameters": ["?w", "?from", "?to"],
+        "preconditions": {
+          "pos": ["at(?w,?from)", "clear(?to)"],
+          "neg": ["sealed(?to)", "at(?w,?to)"]
+        },
+        "add": ["at(?w,?to)", "clear(?from)"],
+        "delete": ["at(?w,?from)", "clear(?to)"],
+        "cost": 1
+      },
+      {
+        "name": "press",
+        "parameters": ["?w"],
+        "preconditions": {"pos": ["at(?w,press)"], "neg": ["pressed(?w)"]},
+        "add": ["pressed(?w)"],
+        "delete": [],
+        "cost": 2
+      }
+    ]
+  },
+  "problem": {
+    "name": "tiny-demo",
+    "objects": ["w1", "bench", "press", "dock"],
+    "init": ["at(w1,bench)", "clear(press)", "clear(dock)"],
+    "goal": {"pos": ["pressed(w1)"], "neg": []}
+  },
+  "options": {"algorithm": "astar", "heuristic": "h_max"}
+}

@@ -1,0 +1,180 @@
+{
+  "domain": {
+    "name": "resource-ops",
+    "description": "Synthetic workshop domain: workpieces move between capacity-1 stations, are pressed/heated, and shipped. Includes an expensive unrestricted hauler and power toggles that create action cycles.",
+    "actions": [
+      {
+        "name": "move",
+        "parameters": [
+          "?w",
+          "?from",
+          "?to"
+        ],
+        "preconditions": {
+          "pos": [
+            "at(?w,?from)",
+            "clear(?to)"
+          ],
+          "neg": [
+            "sealed(?to)",
+            "at(?w,?to)"
+          ]
+        },
+        "add": [
+          "at(?w,?to)",
+          "clear(?from)"
+        ],
+        "delete": [
+          "at(?w,?from)",
+          "clear(?to)"
+        ],
+        "cost": 1
+      },
+      {
+        "name": "direct_haul",
+        "parameters": [
+          "?w",
+          "?from",
+          "?to"
+        ],
+        "preconditions": {
+          "pos": [
+            "at(?w,?from)"
+          ],
+          "neg": [
+            "sealed(?to)",
+            "at(?w,?to)"
+          ]
+        },
+        "add": [
+          "at(?w,?to)"
+        ],
+        "delete": [
+          "at(?w,?from)"
+        ],
+        "cost": 4
+      },
+      {
+        "name": "press",
+        "parameters": [
+          "?w"
+        ],
+        "preconditions": {
+          "pos": [
+            "at(?w,press)"
+          ],
+          "neg": [
+            "pressed(?w)"
+          ]
+        },
+        "add": [
+          "pressed(?w)"
+        ],
+        "delete": [],
+        "cost": 2
+      },
+      {
+        "name": "heat",
+        "parameters": [
+          "?w"
+        ],
+        "preconditions": {
+          "pos": [
+            "at(?w,oven)"
+          ],
+          "neg": [
+            "heated(?w)"
+          ]
+        },
+        "add": [
+          "heated(?w)"
+        ],
+        "delete": [],
+        "cost": 2
+      },
+      {
+        "name": "ship",
+        "parameters": [
+          "?w"
+        ],
+        "preconditions": {
+          "pos": [
+            "at(?w,dock)",
+            "heated(?w)",
+            "pressed(?w)"
+          ],
+          "neg": [
+            "shipped(?w)"
+          ]
+        },
+        "add": [
+          "shipped(?w)"
+        ],
+        "delete": [],
+        "cost": 1
+      },
+      {
+        "name": "toggle_power",
+        "parameters": [
+          "?m"
+        ],
+        "preconditions": {
+          "pos": [],
+          "neg": [
+            "powered(?m)"
+          ]
+        },
+        "add": [
+          "powered(?m)"
+        ],
+        "delete": [],
+        "cost": 1
+      },
+      {
+        "name": "cut_power",
+        "parameters": [
+          "?m"
+        ],
+        "preconditions": {
+          "pos": [
+            "powered(?m)"
+          ],
+          "neg": []
+        },
+        "add": [],
+        "delete": [
+          "powered(?m)"
+        ],
+        "cost": 1
+      }
+    ]
+  },
+  "problem": {
+    "name": "bounded-search-demo",
+    "objects": [
+      "w1",
+      "bench",
+      "press",
+      "oven",
+      "dock"
+    ],
+    "init": [
+      "at(w1,bench)",
+      "clear(press)",
+      "clear(oven)",
+      "clear(dock)"
+    ],
+    "goal": {
+      "pos": [
+        "certified(w1)"
+      ],
+      "neg": []
+    }
+  },
+  "options": {
+    "algorithm": "astar",
+    "heuristic": "h_max",
+    "max_expansions": 50,
+    "time_limit_seconds": 5
+  }
+}
