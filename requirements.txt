@@ -1,0 +1,10 @@
+fastapi==0.141.1
+uvicorn==0.54.0
+numpy==2.5.3
+scipy==1.18.1
+mpmath==1.4.1
+pydantic==2.13.5
+pydantic-settings==2.15.0
+PyYAML==6.0.3
+pytest==9.1.1
+httpx==0.28.1

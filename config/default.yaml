@@ -1,0 +1,8 @@
+# 服务默认配置；环境变量（前缀 SUMCMP_）优先于此文件，例如 SUMCMP_PORT=9000
+host: 127.0.0.1
+port: 8429
+log_level: INFO
+max_values: 2000000
+default_chunk_size: 1024
+reference_dps: 50
+pairwise_block: 8

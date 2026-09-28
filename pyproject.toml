@@ -1,0 +1,9 @@
+[project]
+name = "sumcompare"
+version = "0.1.0"
+description = "大流式数列求和比较后端：朴素 / 配对 / 补偿"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
