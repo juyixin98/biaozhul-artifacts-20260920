@@ -1,0 +1,8 @@
+[
+  { "op": "move", "from": "/tags/2", "path": "/tags/0" },
+  { "op": "test", "path": "/tags/0", "value": "gamma" },
+  { "op": "test", "path": "/tags/1", "value": "alpha" },
+  { "op": "test", "path": "/tags/2", "value": "beta" },
+  { "op": "copy", "from": "/shelves/1", "path": "/shelves/-" },
+  { "op": "test", "path": "/shelves/2/name", "value": "b" }
+]

@@ -1,0 +1,9 @@
+[
+  { "op": "test", "path": "/tags/0", "value": "alpha" },
+  { "op": "add", "path": "/tags/1", "value": "inserted" },
+  { "op": "test", "path": "/tags/2", "value": "beta" },
+  { "op": "test", "path": "/tags/3", "value": "gamma" },
+  { "op": "remove", "path": "/tags/0" },
+  { "op": "test", "path": "/tags/0", "value": "inserted" },
+  { "op": "add", "path": "/tags/-", "value": "tail" }
+]

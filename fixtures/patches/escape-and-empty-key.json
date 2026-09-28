@@ -1,0 +1,8 @@
+[
+  { "op": "test", "path": "/weird//a~1b", "value": 1 },
+  { "op": "replace", "path": "/weird//a~1b", "value": 10 },
+  { "op": "test", "path": "/weird//c~0d", "value": 2 },
+  { "op": "add", "path": "/weird//e~01f", "value": 30 },
+  { "op": "test", "path": "/weird//g~001h", "value": 4 },
+  { "op": "add", "path": "/weird//newKey", "value": "empty-key-add" }
+]

@@ -1,0 +1,14 @@
+{
+  "id": "lib-001",
+  "title": "Synthetic Library",
+  "tags": ["alpha", "beta", "gamma"],
+  "shelves": [
+    { "name": "a", "books": [{ "isbn": "111" }, { "isbn": "222" }] },
+    { "name": "b", "books": [] }
+  ],
+  "weird": {
+    "": { "a/b": 1, "c~d": 2, "e~1f": 3, "g~01h": 4 }
+  },
+  "matrix": [[1, 2], [3, 4]],
+  "meta": { "version": 0, "nested": { "deep": { "leaf": "untouched" } } }
+}

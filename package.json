@@ -1,0 +1,32 @@
+{
+  "name": "rfc6902-json-update-service",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Restricted RFC 6902 JSON document update service (test/add/remove/replace/move/copy) with atomic, version-bound patches",
+  "license": "MIT",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "start": "tsx src/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "verify": "bash scripts/verify.sh"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "7.6.13",
+    "@types/node": "22.20.4",
+    "@vitest/coverage-v8": "2.1.8",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vitest": "2.1.8"
+  },
+  "dependencies": {
+    "better-sqlite3": "11.8.1",
+    "fastify": "4.29.1"
+  }
+}

@@ -1,0 +1,7 @@
+[
+  { "op": "add", "path": "/shelves/0/books/0/newField", "value": "should-roll-back" },
+  { "op": "replace", "path": "/title", "value": "Mutated Title" },
+  { "op": "add", "path": "/tags/-", "value": "extra" },
+  { "op": "test", "path": "/meta/version", "value": 999 },
+  { "op": "add", "path": "/never/reached", "value": true }
+]
