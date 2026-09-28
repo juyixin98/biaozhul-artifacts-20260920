@@ -1,0 +1,24 @@
+{
+  "description": "Hand-computed expected rule metrics for the canonical 5-transaction corpus. Every value here was derived by hand from the raw contingency counts (union, antecedent, consequent), NOT produced by the implementation under test. Ratios are stored as exact [numerator, denominator] fractions. Definitions: confidence=|AuC|/|A|; lift=n|AuC|/(|A||C|); leverage=|AuC|/n - (|A|/n)(|C|/n).",
+  "n_transactions": 5,
+  "rules": {
+    "b=>a": {"union": 3, "antecedent": 3, "consequent": 4, "support": [3, 5], "confidence": [1, 1], "lift": [5, 4], "leverage": [3, 25]},
+    "a=>b": {"union": 3, "antecedent": 4, "consequent": 3, "support": [3, 5], "confidence": [3, 4], "lift": [5, 4], "leverage": [3, 25]},
+    "a=>u": {"union": 4, "antecedent": 4, "consequent": 5, "support": [4, 5], "confidence": [1, 1], "lift": [1, 1], "leverage": [0, 1]},
+    "u=>a": {"union": 4, "antecedent": 5, "consequent": 4, "support": [4, 5], "confidence": [4, 5], "lift": [1, 1], "leverage": [0, 1]},
+    "c=>d": {"union": 0, "antecedent": 3, "consequent": 2, "support": [0, 5], "confidence": [0, 3], "lift": [0, 1], "leverage": [-6, 25]},
+    "d=>c": {"union": 0, "antecedent": 2, "consequent": 3, "support": [0, 5], "confidence": [0, 2], "lift": [0, 1], "leverage": [-6, 25]},
+    "a=>e": {"union": 1, "antecedent": 4, "consequent": 2, "support": [1, 5], "confidence": [1, 4], "lift": [5, 8], "leverage": [-3, 25]},
+    "e=>a": {"union": 1, "antecedent": 2, "consequent": 4, "support": [1, 5], "confidence": [1, 2], "lift": [5, 8], "leverage": [-3, 25]},
+    "d=>a": {"union": 2, "antecedent": 2, "consequent": 4, "support": [2, 5], "confidence": [1, 1], "lift": [5, 4], "leverage": [2, 25]},
+    "b=>c": {"union": 2, "antecedent": 3, "consequent": 3, "support": [2, 5], "confidence": [2, 3], "lift": [10, 9], "leverage": [1, 25]},
+    "a,b=>c": {"union": 2, "antecedent": 3, "consequent": 3, "support": [2, 5], "confidence": [2, 3], "lift": [10, 9], "leverage": [1, 25]},
+    "d=>u": {"union": 2, "antecedent": 2, "consequent": 5, "support": [2, 5], "confidence": [1, 1], "lift": [1, 1], "leverage": [0, 1]},
+    "u=>e": {"union": 2, "antecedent": 5, "consequent": 2, "support": [2, 5], "confidence": [2, 5], "lift": [1, 1], "leverage": [0, 1]}
+  },
+  "undefined_cases": {
+    "zero_antecedent": {"union": 0, "antecedent": 0, "consequent": 3, "confidence_defined": false, "lift_defined": false, "leverage": [0, 1]},
+    "zero_consequent": {"union": 0, "antecedent": 3, "consequent": 0, "confidence_defined": true, "confidence_value": [0, 1], "lift_defined": false, "leverage": [0, 1]},
+    "both_zero": {"union": 0, "antecedent": 0, "consequent": 0, "confidence_defined": false, "lift_defined": false, "leverage": [0, 1]}
+  }
+}

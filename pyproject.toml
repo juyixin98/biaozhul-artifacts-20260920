@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "association-rule-lift-audit"
+version = "1.0.0"
+description = "Association rule confidence/lift/leverage generation and audit backend"
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+pythonpath = ["."]
+
+[tool.coverage.run]
+source = ["app"]

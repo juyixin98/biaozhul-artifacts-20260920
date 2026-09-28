@@ -1,0 +1,10 @@
+fastapi==0.141.1
+uvicorn[standard]==0.54.0
+httpx==0.28.1
+pytest==9.1.1
+# Optional but pinned: third-party reference library used for independent
+# cross-validation of support/confidence/lift/leverage and in-transaction
+# deduplication semantics. The test suite skips the cross-check if it is absent.
+mlxtend==0.23.4
+pandas==2.3.3
+numpy==2.4.6

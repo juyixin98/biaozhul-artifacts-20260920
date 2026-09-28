@@ -1,0 +1,50 @@
+{
+  "description": "Canonical 5-transaction synthetic basket corpus. Raw rows intentionally contain duplicate item occurrences (row 2), a blank token (row 3) and an empty row (row 6) to exercise set-based deduplication and empty-row dropping. After normalization there are exactly 5 transactions.",
+  "items": ["u", "a", "b", "c", "d", "e"],
+  "raw_transactions": [
+    ["u", "a", "b", "c"],
+    ["u", "u", "a", "a", "b", "c", "c"],
+    ["u", "a", "b", "d", "   "],
+    ["u", "a", "d", "e"],
+    ["u", "c", "e"],
+    []
+  ],
+  "normalized_transactions": [
+    ["u", "a", "b", "c"],
+    ["u", "a", "b", "c"],
+    ["u", "a", "b", "d"],
+    ["u", "a", "d", "e"],
+    ["u", "c", "e"]
+  ],
+  "n_transactions": 5,
+  "expected_parse": {
+    "dropped_empty_row_indices": [5],
+    "blank_item_tokens_removed": 1,
+    "duplicate_occurrences_collapsed": 3
+  },
+  "singleton_counts": {
+    "u": 5, "a": 4, "b": 3, "c": 3, "d": 2, "e": 2
+  },
+  "pair_counts": {
+    "u,a": 4, "u,b": 3, "u,c": 3, "u,d": 2, "u,e": 2,
+    "a,b": 3, "a,c": 2, "a,d": 2, "a,e": 1,
+    "b,c": 2, "b,d": 1, "b,e": 0,
+    "c,d": 0, "c,e": 1,
+    "d,e": 1
+  },
+  "triple_counts": {
+    "u,a,b": 3, "u,a,c": 2, "u,b,c": 2, "a,b,c": 2,
+    "u,a,d": 2, "u,a,e": 1, "u,b,d": 1, "u,d,e": 1,
+    "u,c,e": 1, "a,d,e": 1
+  },
+  "quad_counts": {
+    "u,a,b,c": 2, "u,a,b,d": 1, "u,a,d,e": 1
+  },
+  "semantic_roles": {
+    "prevalent": "u appears in 5/5 transactions",
+    "positive_pair": "a,b co-occur 3 times",
+    "mutually_exclusive": ["c", "d"],
+    "rare_combo": ["a", "e"],
+    "duplicate_row": 1
+  }
+}
