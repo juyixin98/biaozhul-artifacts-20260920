@@ -1,0 +1,13 @@
+{
+  "layer_sizes": [8, 16, 1],
+  "seed": 1234,
+  "base_lr": 0.01,
+  "lr_decay": 0.05,
+  "momentum": 0.9,
+  "accum_steps": 4,
+  "low_dtype": "float16",
+  "init_scale": 1024.0,
+  "growth_factor": 2.0,
+  "backoff_factor": 0.5,
+  "growth_interval": 8
+}
