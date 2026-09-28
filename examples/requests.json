@@ -1,0 +1,145 @@
+{
+  "explain_scalar": {
+    "method": "POST",
+    "url": "/query/explain",
+    "body": {
+      "budget": 100,
+      "query": {
+        "root": "Org",
+        "rootId": 1,
+        "fields": [
+          { "kind": "field", "alias": "name", "field": "name" },
+          { "kind": "field", "alias": "plan", "field": "plan" },
+          { "kind": "field", "alias": "heavy", "field": "heavyReport" }
+        ]
+      }
+    },
+    "expected": { "estimatedTotal": 8, "accepted": true }
+  },
+  "cardinality_uses_declared_upper_bound": {
+    "method": "POST",
+    "url": "/query/explain",
+    "body": {
+      "budget": 100,
+      "query": {
+        "root": "Org",
+        "rootId": 1,
+        "fields": [
+          {
+            "kind": "list",
+            "alias": "members",
+            "relation": "members",
+            "declaredUpperBound": 3,
+            "children": [
+              { "kind": "field", "alias": "name", "field": "name" },
+              { "kind": "field", "alias": "role", "field": "role" }
+            ]
+          }
+        ]
+      }
+    },
+    "expected": { "estimatedTotal": 6, "accepted": true }
+  },
+  "static_gateway_reject_413": {
+    "method": "POST",
+    "url": "/query",
+    "body": {
+      "budget": 7,
+      "query": {
+        "root": "Org",
+        "rootId": 1,
+        "fields": [
+          {
+            "kind": "list",
+            "alias": "orgTasks",
+            "relation": "orgTasks",
+            "declaredUpperBound": 2,
+            "children": [
+              { "kind": "field", "alias": "title", "field": "title" },
+              { "kind": "field", "alias": "body", "field": "body" }
+            ]
+          }
+        ]
+      }
+    },
+    "expected": { "httpStatus": 413, "code": "BUDGET_EXCEEDED_STATIC", "estimatedTotal": 8 }
+  },
+  "runtime_cancel_partial_200": {
+    "method": "POST",
+    "url": "/query",
+    "body": {
+      "budget": 5,
+      "query": {
+        "root": "Org",
+        "rootId": 1,
+        "fields": [
+          { "kind": "field", "alias": "name", "field": "name" },
+          {
+            "kind": "list",
+            "alias": "orgTasks",
+            "relation": "orgTasks",
+            "declaredUpperBound": 2,
+            "children": [{ "kind": "field", "alias": "title", "field": "title" }]
+          },
+          { "kind": "field", "alias": "plan", "field": "plan" }
+        ]
+      }
+    },
+    "expected": {
+      "httpStatus": 200,
+      "status": "partial",
+      "estimatedTotal": 5,
+      "consumed": 5,
+      "abortAt": ["orgTasks", "title"],
+      "warning": { "code": "DECLARED_BOUND_EXCEEDED", "actualCardinality": 6 }
+    }
+  },
+  "duplicate_alias_400": {
+    "method": "POST",
+    "url": "/query",
+    "body": {
+      "budget": 100,
+      "query": {
+        "root": "Org",
+        "rootId": 1,
+        "fields": [
+          { "kind": "field", "alias": "n", "field": "name" },
+          { "kind": "field", "alias": "n", "field": "plan" }
+        ]
+      }
+    },
+    "expected": { "httpStatus": 400, "code": "DUPLICATE_ALIAS" }
+  },
+  "cyclic_fragment_400": {
+    "method": "POST",
+    "url": "/query",
+    "body": {
+      "budget": 100,
+      "query": { "root": "Org", "rootId": 1, "fields": [{ "kind": "spread", "fragment": "loopA" }] }
+    },
+    "expected": { "httpStatus": 400, "code": "FRAGMENT_CYCLE", "cycle": ["loopA", "loopB", "loopA"] }
+  },
+  "typed_var_filter": {
+    "method": "POST",
+    "url": "/query",
+    "body": {
+      "budget": 100,
+      "query": {
+        "root": "Org",
+        "rootId": 1,
+        "vars": [{ "name": "orgId", "type": "int", "value": 1 }],
+        "fields": [
+          {
+            "kind": "list",
+            "alias": "orgTasks",
+            "relation": "orgTasks",
+            "declaredUpperBound": 6,
+            "args": [{ "var": "orgId", "op": "eq" }],
+            "children": [{ "kind": "field", "alias": "title", "field": "title" }]
+          }
+        ]
+      }
+    },
+    "expected": { "status": "ok", "orgTasksLength": 6 }
+  }
+}
