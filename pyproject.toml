@@ -1,0 +1,14 @@
+[project]
+name = "toeplitz-fft-backend"
+version = "1.0.0"
+description = "Toeplitz matrix-vector / batched matrix multiply backend via circulant embedding and FFT"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-ra"
+log_cli = false
+markers = [
+    "scale: large-memory verification cases (opt-in via TOEPLITZ_VERIFY_LARGE=1)",
+]
