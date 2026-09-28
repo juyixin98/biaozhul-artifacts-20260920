@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ipw-ate"
+version = "1.0.0"
+description = "Cross-fitted IPW average treatment effect estimation with overlap diagnostics"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy==2.4.6",
+    "scipy==1.15.3",
+    "fastapi==0.141.1",
+    "uvicorn==0.54.0",
+    "pydantic==2.13.5",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-ra"

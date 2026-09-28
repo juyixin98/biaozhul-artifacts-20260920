@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+build/
+dist/
+.venv/
+venv/
+
+# Local SQLite stores are regenerable and may contain deployment-specific
+# paths; aggregate experiment evidence under results/ IS committed for review.
+data/*.db
+data/*.sqlite3
+
+# Fixtures under tests/fixtures and reports under results/ are tracked.
