@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sparse-cholesky-backend"
+version = "0.1.0"
+description = "Symbolic and numeric sparse Cholesky backend for symmetric positive-definite matrices"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy==2.4.6",
+    "scipy==1.15.3",
+    "mpmath==1.3.0",
+    "fastapi==0.141.1",
+    "uvicorn==0.54.0",
+    "pydantic==2.13.5",
+]
+
+[tool.setuptools.packages.find]
+include = ["sparse_cholesky*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --cov=sparse_cholesky --cov-report=term-missing"
+markers = [
+    "slow: larger fixtures that are still enabled by default",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["sparse_cholesky"]
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+]
