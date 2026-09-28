@@ -1,0 +1,14 @@
+{
+  "description": "Underdetermined consistent system (2 equations, 3 unknowns, rank 2): x + y + z = 3, x - y = 1. Infinitely many solutions with one free variable; used to verify the parametric solution can be substituted back independently.",
+  "A": [
+    [1, 1, 1],
+    [1, -1, 0]
+  ],
+  "b": [3, 1],
+  "expected": {
+    "classification": "infinite",
+    "rank_A": 2,
+    "rank_augmented": 2,
+    "free_column_count": 1
+  }
+}

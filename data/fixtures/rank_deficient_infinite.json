@@ -1,0 +1,20 @@
+{
+  "description": "Rank-deficient 3x3 matrix: row 3 = 2*row1 + row2 (and b respects the same dependency), so the system is consistent with infinitely many solutions. Exact null vector is (1, -2, 1).",
+  "A": [
+    [1, 2, 3],
+    [4, 5, 6],
+    [6, 9, 12]
+  ],
+  "b": [6, 15, 27],
+  "expected": {
+    "classification": "infinite",
+    "rank_A": 2,
+    "rank_augmented": 2,
+    "null_vector": [1, -2, 1],
+    "particular_check_examples": [
+      {"params": [0]},
+      {"params": [3]},
+      {"params": ["-7/2"]}
+    ]
+  }
+}

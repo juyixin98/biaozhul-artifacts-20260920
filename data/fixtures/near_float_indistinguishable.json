@@ -1,0 +1,17 @@
+{
+  "description": "Near float-indistinguishable matrix with N=10^16. Exact determinant is -1 (full rank, exact unique solution x=(1,1)), but in binary float64 every entry rounds to 10^16 so NumPy/SciPy report rank 1. Demonstrates why the service refuses silent float conversion.",
+  "A": [
+    ["10000000000000001", "10000000000000000"],
+    ["10000000000000000", "9999999999999999"]
+  ],
+  "b": ["20000000000000001", "19999999999999999"],
+  "expected": {
+    "classification": "unique",
+    "rank_A": 2,
+    "rank_augmented": 2,
+    "x": ["1", "1"],
+    "determinant": "-1",
+    "float64_numpy_rank": 1,
+    "float64_rank_mismatch": true
+  }
+}

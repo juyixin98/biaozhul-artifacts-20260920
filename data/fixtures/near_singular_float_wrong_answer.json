@@ -1,0 +1,16 @@
+{
+  "description": "Classical nearly-singular 2x2 system (Trefethen/Bau-style example). Exact determinant is 1/10^8 != 0 and the exact rational solution of A x = (1,1) is x = (-72070000, 108080000). Binary float64 ranks it full and numpy.linalg.solve 'succeeds', but returns ~(-72070000.11, 108080000.17): close in relative norm, wrong as an exact answer. Shows silent float reliance producing a plausible but incorrect result.",
+  "A": [
+    ["1.2969", "0.8648"],
+    ["0.2161", "0.1441"]
+  ],
+  "b": ["1", "1"],
+  "expected": {
+    "classification": "unique",
+    "rank_A": 2,
+    "x": ["-72070000", "108080000"],
+    "determinant": "1/100000000",
+    "float64_numpy_rank": 2,
+    "float64_solve_succeeds_but_wrong": true
+  }
+}

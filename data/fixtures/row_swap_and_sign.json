@@ -1,0 +1,19 @@
+{
+  "description": "Antidiagonal 2x2 requiring a row swap; determinant -1 must keep its sign, and no row may be sign-flipped. Also covers negative first pivot: multiplying row 1 by -1 gives leading pivot -2.",
+  "A_antidiag": [[0, 1], [1, 0]],
+  "b_antidiag": [3, 7],
+  "expected_antidiag": {
+    "classification": "unique",
+    "x": [7, 3],
+    "determinant": "-1",
+    "row_swaps": [[1, 0]]
+  },
+  "A_neg": [[-2, 1], [4, -1]],
+  "b_neg": [1, -1],
+  "expected_neg": {
+    "classification": "unique",
+    "x": [0, 1],
+    "determinant": "-2",
+    "first_pivot_sign": "neg"
+  }
+}

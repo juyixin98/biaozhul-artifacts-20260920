@@ -1,0 +1,14 @@
+{
+  "description": "Square system whose entries share a 10^20 common factor. A naive fraction-free run without reduction carries huge minors; the exact solution nevertheless reduces to tiny fractions. Entries are strings to keep them exact on the wire.",
+  "A": [
+    ["100000000000000000000", "200000000000000000000"],
+    ["300000000000000000000", "500000000000000000000"]
+  ],
+  "b": ["500000000000000000000", "1300000000000000000000"],
+  "expected": {
+    "classification": "unique",
+    "rank_A": 2,
+    "rank_augmented": 2,
+    "x": ["1", "2"]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "description": "Classic inconsistent pair: same left-hand side, contradictory right-hand sides. A left-null witness y = (-1, 1) (the exact certificate produced by fraction-free elimination) gives y^T A = 0 but y^T b = +1. The opposite sign (1, -1) is equally valid.",
+  "A": [
+    [1, 1],
+    [1, 1]
+  ],
+  "b": [1, 2],
+  "expected": {
+    "classification": "inconsistent",
+    "rank_A": 1,
+    "rank_augmented": 2,
+    "witness_y": [-1, 1],
+    "witness_yT_b": "1"
+  }
+}
