@@ -1,0 +1,11 @@
+------goldenBoundary42
+Content-Disposition: form-data; name="label"
+
+金额=12.50
+------goldenBoundary42
+Content-Disposition: form-data; name="report"; filename="rates.txt"; filename*=UTF-8''%E2%82%AC-rates.txt
+Content-Type: text/plain
+
+EURO rate export
+
+------goldenBoundary42--

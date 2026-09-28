@@ -1,0 +1,6 @@
+------goldenBoundary42
+Content-Disposition: form-data; name="doc"; filename="a;b \"c\".txt"
+Content-Type: text/plain
+
+quoted;param;body
+------goldenBoundary42--

@@ -1,0 +1,29 @@
+{
+  "name": "multipart-formdata-backend",
+  "version": "1.0.0",
+  "description": "Streaming multipart/form-data receiver: field parts, restricted file parts, SQLite-backed submissions",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "golden:generate": "tsx scripts/gen-golden.ts",
+    "test": "node --import tsx --test test/unit/charset.test.ts test/unit/content-type.test.ts test/unit/temp-store.test.ts test/unit/parser.test.ts test/golden/golden-vectors.test.ts test/integration/repo.test.ts test/integration/http.test.ts",
+    "test:coverage": "node --import tsx --experimental-test-coverage --test test/unit/charset.test.ts test/unit/content-type.test.ts test/unit/temp-store.test.ts test/unit/parser.test.ts test/golden/golden-vectors.test.ts test/integration/repo.test.ts test/integration/http.test.ts"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "fastify": "^4.29.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/node": "^22.9.0",
+    "tsx": "^4.19.2",
+    "typescript": "~5.6.3"
+  }
+}

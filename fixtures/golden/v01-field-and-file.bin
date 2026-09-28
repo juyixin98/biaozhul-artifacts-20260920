@@ -1,0 +1,11 @@
+------goldenBoundary42
+Content-Disposition: form-data; name="email"
+
+alice@example.com
+------goldenBoundary42
+Content-Disposition: form-data; name="upload"; filename="hello.txt"
+Content-Type: text/plain
+
+hello golden file
+
+------goldenBoundary42--

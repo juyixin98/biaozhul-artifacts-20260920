@@ -1,0 +1,136 @@
+{
+  "generatedAt": "2026-09-27T00:00:00Z",
+  "generator": "scripts/gen-golden.ts (independent encoder + node:crypto)",
+  "vectors": [
+    {
+      "id": "v01-field-and-file",
+      "description": "one text field and one text file",
+      "file": "v01-field-and-file.bin",
+      "boundary": "----goldenBoundary42",
+      "totalBodyBytes": 35,
+      "wireLength": 258,
+      "wireSha256": "a4b0a541bc7321fffda0801fd304cddc0335df44bf4b7c5915dce1bd1fea51c9",
+      "expectedParts": [
+        {
+          "name": "email",
+          "kind": "field",
+          "contentType": "text/plain",
+          "size": 17,
+          "sha256": "ff8d9819fc0e12bf0d24892e45987e249a28dce836a85cad60e28eaaa8c6d976"
+        },
+        {
+          "name": "upload",
+          "kind": "file",
+          "filename": "hello.txt",
+          "contentType": "text/plain",
+          "size": 18,
+          "sha256": "0844542362cc9bba160a382917b54ec9c30a3edfdb486ea51cfde4a8f785c0a7"
+        }
+      ]
+    },
+    {
+      "id": "v02-unicode-filename-star",
+      "description": "UTF-8 field plus RFC 5987 filename* with a euro sign",
+      "file": "v02-unicode-filename-star.bin",
+      "boundary": "----goldenBoundary42",
+      "totalBodyBytes": 29,
+      "wireLength": 290,
+      "wireSha256": "189680ae8d5a7fe245369410ed06815fd97341415a5be3cbc2ea0eca190217fd",
+      "expectedParts": [
+        {
+          "name": "label",
+          "kind": "field",
+          "contentType": "text/plain",
+          "size": 12,
+          "sha256": "72155554dcaa5c99c2af6e3a53d432bccf84906cb4d8d75d7f4e7fada030b70e"
+        },
+        {
+          "name": "report",
+          "kind": "file",
+          "filename": "€-rates.txt",
+          "contentType": "text/plain",
+          "size": 17,
+          "sha256": "7ccac3c64680040cdb234678f6aeaf1c27fe605b6f6e6cb568da14d124642d28"
+        }
+      ]
+    },
+    {
+      "id": "v03-near-boundary-in-body",
+      "description": "binary body embeds a delimiter-like sequence with an extra byte",
+      "file": "v03-near-boundary-in-body.bin",
+      "boundary": "----goldenBoundary42",
+      "totalBodyBytes": 76,
+      "wireLength": 300,
+      "wireSha256": "0a5724b281976bbdef146846a1a78a0cc9f5ddd7a4443562becb9d1da2f36f7d",
+      "expectedParts": [
+        {
+          "name": "note",
+          "kind": "field",
+          "contentType": "text/plain",
+          "size": 6,
+          "sha256": "6db7d803e74f1ffa7d8f5adc0bf95b3e15bf4c8373fffadf546227cc6c6742cb"
+        },
+        {
+          "name": "blob",
+          "kind": "file",
+          "filename": "blob.pdf",
+          "contentType": "application/pdf",
+          "size": 70,
+          "sha256": "3e96ebbd6db475e4b55b1c9720e60ab4b37269ed1b70b209cd8e58e589c85bf7"
+        }
+      ]
+    },
+    {
+      "id": "v04-quoted-parameters",
+      "description": "filename uses quoting, semicolons and backslash escapes",
+      "file": "v04-quoted-parameters.bin",
+      "boundary": "----goldenBoundary42",
+      "totalBodyBytes": 17,
+      "wireLength": 167,
+      "wireSha256": "be31dde879ddcb3e9c8fa0924d0a6473fb6978c902f92e5e624b84c7bd404525",
+      "expectedParts": [
+        {
+          "name": "doc",
+          "kind": "file",
+          "filename": "a;b \"c\".txt",
+          "contentType": "text/plain",
+          "size": 17,
+          "sha256": "fab2f696785b5ef79f28b70f933384efb91c85c3ffc0a805ccbd11564ab3ed06"
+        }
+      ]
+    },
+    {
+      "id": "v05-duplicate-names-and-binary",
+      "description": "two same-named fields and a 99-byte seeded binary file",
+      "file": "v05-duplicate-names-and-binary.bin",
+      "boundary": "----goldenBoundary42",
+      "totalBodyBytes": 103,
+      "wireLength": 392,
+      "wireSha256": "ac177c7c6963344cda35223eab05fd81bb05f9a2baaffe9d203dd4904c4b0bc3",
+      "expectedParts": [
+        {
+          "name": "tag",
+          "kind": "field",
+          "contentType": "text/plain",
+          "size": 2,
+          "sha256": "3bfc269594ef649228e9a74bab00f042efc91d5acc6fbee31a382e80d42388fe"
+        },
+        {
+          "name": "tag",
+          "kind": "field",
+          "contentType": "text/plain",
+          "size": 2,
+          "sha256": "fb04dcb6970e4c3d1873de51fd5a50d7bb46b3383113602665c350ec40b5f990"
+        },
+        {
+          "name": "pack",
+          "kind": "file",
+          "filename": "pack.png",
+          "contentType": "image/png",
+          "size": 99,
+          "sha256": "f943086203c5bd9c0c5e9fa14808ca3f5d0ca04130c052103281e8a2bbabefcd"
+        }
+      ]
+    }
+  ]
+}
