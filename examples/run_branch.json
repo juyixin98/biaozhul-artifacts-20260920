@@ -1,0 +1,17 @@
+{
+  "nodes": [
+    {"id": "x", "op": "input", "attrs": {"shape": [3, 4]}},
+    {"id": "l1", "op": "linear", "inputs": ["x"], "attrs": {"out_features": 5}},
+    {"id": "r1", "op": "relu", "inputs": ["l1"]},
+    {"id": "d1", "op": "dropout", "inputs": ["r1"], "attrs": {"keep_prob": 0.6}},
+    {"id": "a1", "op": "tanh", "inputs": ["d1"]},
+    {"id": "a2", "op": "relu", "inputs": ["a1"]},
+    {"id": "b1", "op": "tanh", "inputs": ["r1"]},
+    {"id": "m", "op": "add", "inputs": ["a2", "b1"]},
+    {"id": "l2", "op": "linear", "inputs": ["m"], "attrs": {"out_features": 2}}
+  ],
+  "outputs": ["l2"],
+  "seed": 99,
+  "budget_elements": 230,
+  "finite_difference": false
+}

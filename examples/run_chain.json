@@ -1,0 +1,14 @@
+{
+  "nodes": [
+    {"id": "x", "op": "input", "attrs": {"shape": [4, 2]}},
+    {"id": "l1", "op": "linear", "inputs": ["x"], "attrs": {"out_features": 3}},
+    {"id": "r1", "op": "relu", "inputs": ["l1"]},
+    {"id": "d1", "op": "dropout", "inputs": ["r1"], "attrs": {"keep_prob": 0.5}},
+    {"id": "l2", "op": "linear", "inputs": ["d1"], "attrs": {"out_features": 1}}
+  ],
+  "outputs": ["l2"],
+  "seed": 77,
+  "budget_elements": 100000,
+  "verify_gradients": true,
+  "finite_difference": true
+}

@@ -1,0 +1,10 @@
+# 运行所需精确版本（验收环境实测）
+numpy==2.4.6
+fastapi==0.141.1
+uvicorn==0.54.0
+pydantic==2.13.5
+
+# 测试
+pytest==9.1.1
+httpx==0.28.1
+pytest-cov==7.1.0

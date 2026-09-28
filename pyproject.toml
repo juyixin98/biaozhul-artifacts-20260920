@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "recomp-scheduler"
+version = "1.0.0"
+description = "激活重计算调度：线性/分支计算图的激活检查点规划与 RNG 重放反向重算"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi==0.141.1",
+    "uvicorn==0.54.0",
+    "pydantic==2.13.5",
+    "numpy==2.4.6",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest==9.1.1",
+    "httpx==0.28.1",
+]
+
+[tool.setuptools]
+packages = ["recomp_scheduler"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = [
+    "unit: 单元测试",
+    "integration: 跨模块集成测试",
+    "api: HTTP 接口测试",
+]
