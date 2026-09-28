@@ -1,0 +1,34 @@
+{
+  "description": "样例语料在 en_US/tertiary/numeric=off/case_first=off 下的参考顺序。由 PyICU 直接调用（对照库）生成，不经过被测服务内核。",
+  "icu_version": "74.2",
+  "pyicu_version": "2.16.2",
+  "rules": {
+    "locale": "en_US",
+    "strength": "tertiary",
+    "numeric": false,
+    "case_first": "off"
+  },
+  "default_rules_order": [
+    "case-apple-lower",
+    "case-apple-title",
+    "case-apple-upper",
+    "canon-cafe-nfc",
+    "canon-cafe-nfd",
+    "accent-cote",
+    "accent-cote-acute",
+    "accent-cote-circ",
+    "accent-cote-both",
+    "num-file1",
+    "num-file10",
+    "num-file2",
+    "num-file20",
+    "tr-istanbul",
+    "tr-izmir",
+    "tr-izmir-dot",
+    "tr-ispanak",
+    "de-mueller-ascii",
+    "de-muller-umlaut",
+    "cjk-tokyo-simple",
+    "cjk-tokyo-trad"
+  ]
+}

@@ -1,0 +1,23 @@
+[
+  {"id": "accent-cote",   "text": "cote"},
+  {"id": "accent-cote-circ", "text": "côte"},
+  {"id": "accent-cote-acute", "text": "coté"},
+  {"id": "accent-cote-both", "text": "côté"},
+  {"id": "num-file1",  "text": "file1"},
+  {"id": "num-file2",  "text": "file2"},
+  {"id": "num-file10", "text": "file10"},
+  {"id": "num-file20", "text": "file20"},
+  {"id": "case-apple-lower", "text": "apple"},
+  {"id": "case-apple-title", "text": "Apple"},
+  {"id": "case-apple-upper", "text": "APPLE"},
+  {"id": "tr-izmir",    "text": "izmir"},
+  {"id": "tr-ispanak",  "text": "ıspanak"},
+  {"id": "tr-izmir-dot", "text": "İzmir"},
+  {"id": "tr-istanbul", "text": "istanbul"},
+  {"id": "canon-cafe-nfc", "text": "café"},
+  {"id": "canon-cafe-nfd", "text": "café"},
+  {"id": "de-muller-umlaut", "text": "Müller"},
+  {"id": "de-mueller-ascii", "text": "Mueller"},
+  {"id": "cjk-tokyo-simple", "text": "东京"},
+  {"id": "cjk-tokyo-trad", "text": "東京"}
+]

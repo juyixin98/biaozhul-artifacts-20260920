@@ -1,0 +1,9 @@
+[project]
+name = "collationsvc"
+version = "0.1.0"
+description = "Locale-aware Unicode string sorting and range retrieval service (FastAPI + SQLite + PyICU)"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
