@@ -1,0 +1,8 @@
+# Pinned direct dependencies (resolved against Python 3.12).
+fastapi==0.141.1
+uvicorn==0.54.0
+pydantic==2.13.5
+PyYAML==6.0.1
+# Test / client dependencies
+httpx==0.28.1
+pytest==9.1.1

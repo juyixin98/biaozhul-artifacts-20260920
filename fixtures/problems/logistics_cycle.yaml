@@ -1,0 +1,11 @@
+# Enables the deliberately non-terminating method.  Expected: METHOD_CYCLE
+# (the identical frame loop_forever(x) repeats on the active stack), not a
+# stack overflow.
+name: loop
+domain: logistics
+initial_facts:
+  - [keep_going]
+goal_task: loop_forever
+goal_args: [x]
+max_depth: 8
+max_expansions: 256

@@ -1,0 +1,15 @@
+# Two independent shipments sharing one dock, under a partial-order body.
+# Feasible: each shipment acquires and releases the dock, so a serial
+# interleaving exists and is found by simulation-guided search.
+name: two-shipments-ok
+domain: logistics
+initial_facts:
+  - [at, truck1, depot]
+  - [at, truck2, depot]
+  - [at, box1, depot]
+  - [at, box2, depot]
+  - [connected, depot, city]
+goal_task: ship_two
+goal_args: [box1, truck1, city, box2, truck2, city]
+max_depth: 8
+max_expansions: 256

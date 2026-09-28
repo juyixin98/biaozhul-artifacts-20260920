@@ -1,0 +1,13 @@
+# No direct edge depot->city; route must recurse through the hub.
+# Exercises recursive decomposition and method mutual exclusion.
+name: via-hub-ship
+domain: logistics
+initial_facts:
+  - [at, truck, depot]
+  - [at, box, depot]
+  - [connected, depot, hub]
+  - [connected, hub, city]
+goal_task: ship
+goal_args: [box, truck, city]
+max_depth: 8
+max_expansions: 256

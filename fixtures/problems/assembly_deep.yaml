@@ -1,0 +1,16 @@
+# 5-level nested bill of materials:
+#   root <- a1 <- a2 <- a3 <- leaf(atomic, available)
+# Exercises genuine recursion and the retained abstract->primitive tree.
+name: assembly-depth-5
+domain: assembly
+initial_facts:
+  - [atomic, leaf]
+  - [available, leaf]
+  - [child_of, a3, leaf]
+  - [child_of, a2, a3]
+  - [child_of, a1, a2]
+  - [child_of, root, a1]
+goal_task: assemble
+goal_args: [root]
+max_depth: 8
+max_expansions: 256

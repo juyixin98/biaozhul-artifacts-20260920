@@ -1,0 +1,9 @@
+# A goal task with neither a primitive nor any method.  Expected:
+# UNRESOLVABLE_TASK.
+name: unknown-goal
+domain: logistics
+initial_facts: []
+goal_task: conjure_cargo
+goal_args: []
+max_depth: 8
+max_expansions: 256

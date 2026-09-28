@@ -1,0 +1,49 @@
+# Synthetic assembly domain: nested bill-of-materials decomposition.
+#
+# A product is assembled by recursively assembling its (unique) child part and
+# then joining; atomic parts terminate the recursion with a take action.  The
+# nesting depth is data (part_of facts), not code, which is what exercises the
+# depth/expansion budgets on real recursion.
+name: assembly
+version: 2.1.0
+
+primitives:
+  take_part:
+    parameters: ["?p"]
+    precondition:
+      - ["atomic", "?p"]
+      - ["available", "?p"]
+    effect:
+      remove: [["available", "?p"]]
+      add:    [["ready", "?p"]]
+
+  join:
+    # join the ready child into the parent assembly
+    parameters: ["?child", "?parent"]
+    precondition:
+      - ["ready", "?child"]
+    effect:
+      remove: [["ready", "?child"]]
+      add:    [["ready", "?parent"]]
+
+methods:
+  # Atomic part: one primitive leaf.
+  - name: m-assemble-atomic
+    task: assemble
+    parameters: ["?p"]
+    guard:
+      - ["atomic", "?p"]
+    subtasks:
+      - {id: take, task: [take_part, "?p"]}
+
+  # Composite: assemble the unique child, then join it into the parent.
+  # bind requires exactly one child_of fact -> deterministic decomposition.
+  - name: m-assemble-composite
+    task: assemble
+    parameters: ["?p"]
+    guard:
+      - ["not", "atomic", "?p"]
+      - ["bind", "?child", "child_of", "?p"]
+    subtasks:
+      - {id: sub,  task: [assemble, "?child"]}
+      - {id: join, task: [join, "?child", "?p"]}

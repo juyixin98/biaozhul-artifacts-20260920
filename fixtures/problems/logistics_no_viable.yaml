@@ -1,0 +1,12 @@
+# Truck is connected to nothing.  Neither haul method's guard holds:
+# direct needs connected(loc,to); via-hub needs not-connected(loc,to) AND
+# connected(loc,hub).  Expected terminal category: NO_VIABLE_METHOD, with both
+# alternatives listed and the rejected guards as evidence.
+name: haul-nowhere
+domain: logistics
+initial_facts:
+  - [at, truck, depot]
+goal_task: haul
+goal_args: [truck, city]
+max_depth: 8
+max_expansions: 256

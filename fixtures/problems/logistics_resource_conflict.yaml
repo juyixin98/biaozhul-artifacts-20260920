@@ -1,0 +1,10 @@
+# Two grabs of a capacity-1 dock with no release.  The second ready sibling
+# always fails on resource availability.  Expected failure category:
+# PARTIAL_ORDER_INFEASIBLE (root cause evidence mentions resource_unavailable).
+name: two-grab-conflict
+domain: logistics
+initial_facts: []
+goal_task: two_grab
+goal_args: [alice, bob]
+max_depth: 8
+max_expansions: 256

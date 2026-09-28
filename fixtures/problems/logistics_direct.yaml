@@ -1,0 +1,11 @@
+# Direct route: depot is connected to city, so haul uses m-haul-direct.
+name: direct-ship
+domain: logistics
+initial_facts:
+  - [at, truck, depot]
+  - [at, box, depot]
+  - [connected, depot, city]
+goal_task: ship
+goal_args: [box, truck, city]
+max_depth: 8
+max_expansions: 256

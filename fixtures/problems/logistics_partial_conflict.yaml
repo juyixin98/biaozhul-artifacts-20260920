@@ -1,0 +1,11 @@
+# Two consumers of a single token in a partial order.  A topological order
+# exists (both orders do) but neither interleaving executes: the second
+# consumer loses the token.  Expected: PARTIAL_ORDER_INFEASIBLE.
+name: two-consume-conflict
+domain: logistics
+initial_facts:
+  - [token_ready]
+goal_task: two_consume
+goal_args: [alice, bob]
+max_depth: 8
+max_expansions: 256

@@ -1,0 +1,156 @@
+# Synthetic logistics domain for finite HTN validation.
+#
+# Demonstrates, without any hard-coded plan table:
+#   * recursive route decomposition (haul = direct leg | leg-to-hub + recurse),
+#   * mutually exclusive methods selected by the *current* state
+#     (connected -> direct; otherwise via the hub),
+#   * a finite shared resource (one loading dock, capacity 1) that is acquired
+#     and released explicitly, so independent partial-order siblings serialize,
+#   * partial-order task bodies whose executability is decided by simulation,
+#     not by topological sorting,
+#   * an intentionally non-terminating method for cycle/depth fixtures.
+name: logistics
+version: 1.0.0
+
+resources:
+  dock:
+    capacity: 1          # a single shared loading bay
+
+primitives:
+  move:
+    parameters: ["?carrier", "?from", "?to"]
+    precondition:
+      - ["at", "?carrier", "?from"]
+      - ["connected", "?from", "?to"]
+    effect:
+      remove: [["at", "?carrier", "?from"]]
+      add:    [["at", "?carrier", "?to"]]
+    duration: 1
+
+  acquire_dock:
+    parameters: ["?who"]
+    precondition:
+      - ["avail", "dock", 1]
+    effect:
+      reserve: ["dock"]
+      add: [["dock_held_by", "?who"]]
+
+  release_dock:
+    parameters: ["?who"]
+    precondition:
+      - ["bound", "dock", 1]        # dock fully held ...
+      - ["dock_held_by", "?who"]    # ... and held by this party
+    effect:
+      release: ["dock"]
+      remove: [["dock_held_by", "?who"]]
+
+  embark:
+    # load ?pkg onto ?carrier co-located at ?loc
+    parameters: ["?pkg", "?carrier", "?loc"]
+    precondition:
+      - ["at", "?pkg", "?loc"]
+      - ["at", "?carrier", "?loc"]
+    effect:
+      remove: [["at", "?pkg", "?loc"]]
+      add:    [["loaded", "?pkg", "?carrier"]]
+
+  disembark:
+    parameters: ["?pkg", "?carrier", "?loc"]
+    precondition:
+      - ["loaded", "?pkg", "?carrier"]
+      - ["at", "?carrier", "?loc"]
+    effect:
+      remove: [["loaded", "?pkg", "?carrier"]]
+      add:    [["at", "?pkg", "?loc"]]
+
+  consume_token:
+    # Consumes a single, non-replenishable fact.  Two such actions can never
+    # both run: whichever runs first destroys the other's precondition.
+    parameters: ["?who"]
+    precondition:
+      - ["token_ready"]
+    effect:
+      remove: [["token_ready"]]
+      add:    [["token_used_by", "?who"]]
+
+methods:
+  # ship = acquire dock, embark, release, haul, acquire, disembark, release.
+  - name: m-ship
+    task: ship
+    parameters: ["?pkg", "?carrier", "?to"]
+    guard:
+      - ["bind", "?loc", "at", "?carrier"]
+      - ["at", "?pkg", "?loc"]
+    subtasks:
+      - {id: q-start, task: [acquire_dock, "?carrier"]}
+      - {id: load,    task: [embark, "?pkg", "?carrier", "?loc"]}
+      - {id: q-rel1,  task: [release_dock, "?carrier"]}
+      - {id: transit, task: [haul, "?carrier", "?to"]}
+      - {id: q-end,   task: [acquire_dock, "?carrier"]}
+      - {id: drop,    task: [disembark, "?pkg", "?carrier", "?to"]}
+      - {id: q-rel2,  task: [release_dock, "?carrier"]}
+
+  # haul: direct leg when origin is connected to destination ...
+  - name: m-haul-direct
+    task: haul
+    parameters: ["?carrier", "?to"]
+    guard:
+      - ["bind", "?loc", "at", "?carrier"]
+      - ["connected", "?loc", "?to"]
+    subtasks:
+      - {id: leg, task: [move, "?carrier", "?loc", "?to"]}
+
+  # ... otherwise hop through the hub and recurse.  The two haul methods are
+  # mutually exclusive for any given state.
+  - name: m-haul-via-hub
+    task: haul
+    parameters: ["?carrier", "?to"]
+    guard:
+      - ["bind", "?loc", "at", "?carrier"]
+      - ["not", "connected", "?loc", "?to"]
+      - ["connected", "?loc", "hub"]
+    subtasks:
+      - {id: to-hub,  task: [move, "?carrier", "?loc", "hub"]}
+      - {id: recurse, task: [haul, "?carrier", "?to"]}
+
+  # Partial order over two independent shipments sharing the single dock.
+  - name: m-ship-two
+    task: ship_two
+    parameters: ["?p1", "?c1", "?t1", "?p2", "?c2", "?t2"]
+    order: partial
+    subtasks:
+      - {id: first,  task: [ship, "?p1", "?c1", "?t1"]}
+      - {id: second, task: [ship, "?p2", "?c2", "?t2"]}
+
+  # Partial order over two primitives consuming the SAME single,
+  # non-replenishable token.  Both topological orders ([a,b] and [b,a]) exist;
+  # simulation proves the second consumer's precondition always fails.  This is
+  # precisely "a topological order is not executability".
+  - name: m-two-consume
+    task: two_consume
+    parameters: ["?a", "?b"]
+    order: partial
+    subtasks:
+      - {id: a, task: [consume_token, "?a"]}
+      - {id: b, task: [consume_token, "?b"]}
+
+  # Partial order over two independent acquisitions of the SAME capacity-1
+  # dock, neither releasing it.  Both topological orders are structurally
+  # valid; simulation shows the second acquire always exhausts the resource.
+  - name: m-two-grab
+    task: two_grab
+    parameters: ["?a", "?b"]
+    order: partial
+    subtasks:
+      - {id: g1, task: [acquire_dock, "?a"]}
+      - {id: g2, task: [acquire_dock, "?b"]}
+
+  # Intentional non-terminating recursion with no state progress: stopped by
+  # the active-frame cycle check.
+  - name: m-loop-forever
+    task: loop_forever
+    parameters: ["?x"]
+    guard:
+      - ["keep_going"]
+    subtasks:
+      - {id: again, task: [loop_forever, "?x"]}

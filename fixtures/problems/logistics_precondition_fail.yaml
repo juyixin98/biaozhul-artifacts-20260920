@@ -1,0 +1,11 @@
+# Directly invoke a primitive whose state precondition does not hold:
+# the truck is not at the move origin.  Expected: PRECONDITION_NOT_STAT.
+name: move-bad-origin
+domain: logistics
+initial_facts:
+  - [at, truck, elsewhere]
+  - [connected, depot, city]
+goal_task: move
+goal_args: [truck, depot, city]
+max_depth: 8
+max_expansions: 256

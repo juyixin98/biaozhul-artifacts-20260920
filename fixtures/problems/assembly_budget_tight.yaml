@@ -1,0 +1,15 @@
+# Same BOM with an expansion budget of 1: the root may expand once, then the
+# next method application is refused.  Expected: EXPANSION_BUDGET_EXHAUSTED.
+name: assembly-budget-tight
+domain: assembly
+initial_facts:
+  - [atomic, leaf]
+  - [available, leaf]
+  - [child_of, a3, leaf]
+  - [child_of, a2, a3]
+  - [child_of, a1, a2]
+  - [child_of, root, a1]
+goal_task: assemble
+goal_args: [root]
+max_depth: 8
+max_expansions: 1
