@@ -1,0 +1,46 @@
+{
+  "name": "demo",
+  "description": "Synthetic multilingual corpus exercising accents, digit runs, case, Turkish tailoring, NFC/NFD canonical equivalence and duplicate raw text. No real business data.",
+  "entries": [
+    {"doc_id": "acc-cote",     "text": "cote",  "tags": ["accent"]},
+    {"doc_id": "acc-cote-acute-nfc", "text": "coté", "tags": ["accent", "nfc"]},
+    {"doc_id": "acc-cote-acute-nfd", "text": "coté", "tags": ["accent", "nfd", "canonical"]},
+    {"doc_id": "acc-cote-circum-nfc", "text": "côte", "tags": ["accent", "nfc"]},
+    {"doc_id": "acc-cote-circum-nfd", "text": "côte", "tags": ["accent", "nfd", "canonical"]},
+    {"doc_id": "acc-cote-both-nfc", "text": "côté", "tags": ["accent", "nfc"]},
+    {"doc_id": "acc-cote-both-nfd", "text": "côté", "tags": ["accent", "nfd", "canonical"]},
+    {"doc_id": "acc-resume-nfc", "text": "résumé", "tags": ["accent", "nfc"]},
+    {"doc_id": "acc-resume-nfd", "text": "résumé", "tags": ["accent", "nfd", "canonical"]},
+
+    {"doc_id": "num-file1",  "text": "file1",  "tags": ["numeric"]},
+    {"doc_id": "num-file2",  "text": "file2",  "tags": ["numeric"]},
+    {"doc_id": "num-file02", "text": "file02", "tags": ["numeric", "leading-zero"]},
+    {"doc_id": "num-file10", "text": "file10", "tags": ["numeric"]},
+    {"doc_id": "num-file20", "text": "file20", "tags": ["numeric"]},
+    {"doc_id": "num-doc2",   "text": "doc2",   "tags": ["numeric"]},
+    {"doc_id": "num-doc10",  "text": "doc10",  "tags": ["numeric"]},
+
+    {"doc_id": "case-apple-lower", "text": "apple",  "tags": ["case"]},
+    {"doc_id": "case-apple-upper", "text": "APPLE",  "tags": ["case"]},
+    {"doc_id": "case-apple-title", "text": "Apple",  "tags": ["case"]},
+    {"doc_id": "case-banana-lower","text": "banana", "tags": ["case"]},
+    {"doc_id": "case-banana-title","text": "Banana", "tags": ["case"]},
+
+    {"doc_id": "tr-cay",   "text": "çay",    "tags": ["turkish"]},
+    {"doc_id": "tr-ogle",  "text": "öğle",   "tags": ["turkish"]},
+    {"doc_id": "tr-uc",    "text": "üç",     "tags": ["turkish"]},
+    {"doc_id": "tr-irmi",  "text": "ırmak",  "tags": ["turkish", "dotless-i"]},
+    {"doc_id": "tr-istanbul-dotted", "text": "İstanbul", "tags": ["turkish", "dotted-i"]},
+    {"doc_id": "tr-sicak", "text": "sıcak",  "tags": ["turkish", "dotless-i"]},
+    {"doc_id": "tr-sapka", "text": "şapka",  "tags": ["turkish"]},
+    {"doc_id": "tr-agir",  "text": "ağır",   "tags": ["turkish"]},
+
+    {"doc_id": "range-etude",  "text": "étude",  "tags": ["range"]},
+    {"doc_id": "range-eleve",  "text": "élève",  "tags": ["range"]},
+    {"doc_id": "range-zebra",  "text": "zebra",  "tags": ["range"]},
+    {"doc_id": "range-apricot","text": "apricot","tags": ["range"]},
+
+    {"doc_id": "dup-stable-a", "text": "stability-probe", "tags": ["duplicate"]},
+    {"doc_id": "dup-stable-b", "text": "stability-probe", "tags": ["duplicate"]}
+  ]
+}

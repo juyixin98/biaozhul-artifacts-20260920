@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "collsvc"
+version = "0.1.0"
+description = "Locale-aware Unicode string sorting and collation-key range retrieval service (ICU / PyICU, FastAPI, SQLite)"
+requires-python = ">=3.10"
+dependencies = [
+    "PyICU>=7.4,<7.5",
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+    "pydantic>=2.6",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-cov>=4",
+    "httpx>=0.27",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+markers = [
+    "fuzz: randomized property tests with fixed seeds",
+]
+
+[tool.coverage.run]
+source = ["src/collsvc"]
+branch = true
