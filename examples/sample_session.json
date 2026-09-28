@@ -1,0 +1,15 @@
+{
+  "description": "Sample teaching session: shared premise P, mutually exclusive assumptions A and B, two independent proofs of C.",
+  "session_id": "demo",
+  "premises": [{"node": "P"}],
+  "assumptions": [{"name": "A"}, {"name": "B"}],
+  "rules": [
+    {"rule_id": "r1", "antecedents": ["P", "A"], "consequent": "C"},
+    {"rule_id": "r2", "antecedents": ["P", "B"], "consequent": "C"},
+    {"rule_id": "rx", "antecedents": ["A", "B"], "consequent": "⊥"}
+  ],
+  "expected": {
+    "label_C": [["A"], ["B"]],
+    "nogoods": [["A", "B"]]
+  }
+}
