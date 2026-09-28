@@ -1,0 +1,23 @@
+{
+  "records": [
+    {"id": "r-001", "name": "Pioneer Corp", "language": "en", "attributes": {"country": "US"}},
+    {"id": "r-002", "name": "Pioneer Corporation", "language": "en", "attributes": {"country": "US"}},
+    {"id": "r-003", "name": "Pioneer Foods", "language": "en", "attributes": {"country": "US"}},
+
+    {"id": "r-010", "name": "Gazprom", "language": "en", "attributes": {"country": "RU"}},
+    {"id": "r-011", "name": "Газпром", "language": "ru", "attributes": {"country": "RU"}},
+    {"id": "r-012", "name": "Rosneft", "language": "en", "attributes": {"country": "RU"}},
+
+    {"id": "r-020", "name": "Acme Bank Ltd", "language": "en", "attributes": {"reg_id": "REG-1"}},
+    {"id": "r-021", "name": "Acme Bank Limited", "language": "en", "attributes": {"reg_id": "REG-1"}},
+    {"id": "r-022", "name": "Acme Bank", "language": "en", "attributes": {"reg_id": "REG-9"}}
+  ],
+  "aliases": {
+    "Gazprom": ["Газпром", "GAZPROM"]
+  },
+  "must_links": [],
+  "cannot_links": [
+    ["r-020", "r-022"],
+    ["r-001", "r-003"]
+  ]
+}

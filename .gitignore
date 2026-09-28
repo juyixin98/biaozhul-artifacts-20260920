@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local runtime artifacts
+data/*.sqlite3
+data/*.sqlite3-wal
+data/*.sqlite3-shm
+logs/*.jsonl
+logs/*.out
