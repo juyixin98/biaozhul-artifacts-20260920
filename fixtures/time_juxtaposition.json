@@ -1,0 +1,33 @@
+{
+  "name": "time_juxtaposition",
+  "description": "Simultaneous events (equal timestamps) and multiple embeddings as evidence. S1 has B at t=0 and t=1 after A@0, so A>B has two embeddings under time_gap=1 but only one under time_gap=0; support stays 1 sequence either way. Expected results computed by hand.",
+  "corpus": {
+    "name": "time_juxtaposition",
+    "sequences": [
+      {"sequence_id": "S1", "events": [{"symbol": "A", "timestamp": 0}, {"symbol": "B", "timestamp": 0}, {"symbol": "B", "timestamp": 1}]},
+      {"sequence_id": "S2", "events": [{"symbol": "A", "timestamp": 0}, {"symbol": "B", "timestamp": 0}]}
+    ]
+  },
+  "cases": [
+    {
+      "label": "time_gap_0_matches_only_simultaneous",
+      "params": {"min_support": 2, "max_pos_gap": null, "max_time_gap": 0},
+      "expected": {
+        "A": {"support": 2, "embeddings": {"S1": [[0]], "S2": [[0]]}},
+        "B": {"support": 2, "embeddings": {"S1": [[1], [2]], "S2": [[1]]}},
+        "A>B": {"support": 2, "embeddings": {"S1": [[0, 1]], "S2": [[0, 1]]}}
+      },
+      "expected_absent": ["B>B", "A>B>B"]
+    },
+    {
+      "label": "time_gap_1_yields_two_embeddings_one_support",
+      "params": {"min_support": 2, "max_pos_gap": null, "max_time_gap": 1},
+      "expected": {
+        "A": {"support": 2, "embeddings": {"S1": [[0]], "S2": [[0]]}},
+        "B": {"support": 2, "embeddings": {"S1": [[1], [2]], "S2": [[1]]}},
+        "A>B": {"support": 2, "embeddings": {"S1": [[0, 1], [0, 2]], "S2": [[0, 1]]}}
+      },
+      "expected_absent": ["B>B", "A>B>B"]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "alternative_embeddings",
+  "description": "Projection must keep ALL embeddings of a prefix. In S1, A@0 cannot reach B@3 within max_pos_gap=2, but A@2 can. A miner that keeps only the first embedding of A would wrongly report support(A>B)=1. Expected results computed by hand.",
+  "corpus": {
+    "name": "alternative_embeddings",
+    "sequences": [
+      {"sequence_id": "S1", "events": [{"symbol": "A"}, {"symbol": "X"}, {"symbol": "A"}, {"symbol": "B"}]},
+      {"sequence_id": "S2", "events": [{"symbol": "A"}, {"symbol": "B"}]}
+    ]
+  },
+  "cases": [
+    {
+      "label": "later_embedding_rescues_support",
+      "params": {"min_support": 2, "max_pos_gap": 2, "max_time_gap": null},
+      "expected": {
+        "A": {"support": 2, "embeddings": {"S1": [[0], [2]], "S2": [[0]]}},
+        "B": {"support": 2, "embeddings": {"S1": [[3]], "S2": [[1]]}},
+        "A>B": {"support": 2, "embeddings": {"S1": [[2, 3]], "S2": [[0, 1]]}}
+      },
+      "expected_absent": ["X", "A>X", "A>A", "A>X>A", "A>A>B"]
+    }
+  ]
+}

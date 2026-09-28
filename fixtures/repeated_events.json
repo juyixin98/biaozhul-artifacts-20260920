@@ -1,0 +1,24 @@
+{
+  "name": "repeated_events",
+  "description": "Repeated symbols inside one sequence must not inflate support: support counts sequence identity. S1 contains A twice but contributes 1 to support(A). Expected results computed by hand.",
+  "corpus": {
+    "name": "repeated_events",
+    "sequences": [
+      {"sequence_id": "S1", "events": [{"symbol": "A"}, {"symbol": "A"}, {"symbol": "B"}]},
+      {"sequence_id": "S2", "events": [{"symbol": "A"}, {"symbol": "B"}]},
+      {"sequence_id": "S3", "events": [{"symbol": "B"}, {"symbol": "A"}]}
+    ]
+  },
+  "cases": [
+    {
+      "label": "identity_based_support",
+      "params": {"min_support": 2, "max_pos_gap": null, "max_time_gap": null},
+      "expected": {
+        "A": {"support": 3, "embeddings": {"S1": [[0], [1]], "S2": [[0]], "S3": [[1]]}},
+        "B": {"support": 3, "embeddings": {"S1": [[2]], "S2": [[1]], "S3": [[0]]}},
+        "A>B": {"support": 2, "embeddings": {"S1": [[0, 2], [1, 2]], "S2": [[0, 1]]}}
+      },
+      "expected_absent": ["A>A", "B>A", "B>B", "A>B>A", "A>A>B"]
+    }
+  ]
+}

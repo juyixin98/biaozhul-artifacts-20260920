@@ -1,0 +1,43 @@
+{
+  "name": "time_gap",
+  "description": "Time-gap boundary, declared independently of position gap. S1 has time gap 5, S2 gap 3, S3 gap 0 (simultaneous events). Expected results computed by hand.",
+  "corpus": {
+    "name": "time_gap",
+    "sequences": [
+      {"sequence_id": "S1", "events": [{"symbol": "A", "timestamp": 0}, {"symbol": "B", "timestamp": 5}]},
+      {"sequence_id": "S2", "events": [{"symbol": "A", "timestamp": 0}, {"symbol": "B", "timestamp": 3}]},
+      {"sequence_id": "S3", "events": [{"symbol": "A", "timestamp": 1}, {"symbol": "B", "timestamp": 1}]}
+    ]
+  },
+  "cases": [
+    {
+      "label": "time_gap_4_excludes_gap_5",
+      "params": {"min_support": 2, "max_pos_gap": null, "max_time_gap": 4},
+      "expected": {
+        "A": {"support": 3, "embeddings": {"S1": [[0]], "S2": [[0]], "S3": [[0]]}},
+        "B": {"support": 3, "embeddings": {"S1": [[1]], "S2": [[1]], "S3": [[1]]}},
+        "A>B": {"support": 2, "embeddings": {"S2": [[0, 1]], "S3": [[0, 1]]}}
+      },
+      "expected_absent": ["B>A"]
+    },
+    {
+      "label": "time_gap_5_includes_all",
+      "params": {"min_support": 2, "max_pos_gap": null, "max_time_gap": 5},
+      "expected": {
+        "A": {"support": 3, "embeddings": {"S1": [[0]], "S2": [[0]], "S3": [[0]]}},
+        "B": {"support": 3, "embeddings": {"S1": [[1]], "S2": [[1]], "S3": [[1]]}},
+        "A>B": {"support": 3, "embeddings": {"S1": [[0, 1]], "S2": [[0, 1]], "S3": [[0, 1]]}}
+      },
+      "expected_absent": ["B>A"]
+    },
+    {
+      "label": "time_gap_0_only_simultaneous",
+      "params": {"min_support": 3, "max_pos_gap": null, "max_time_gap": 0},
+      "expected": {
+        "A": {"support": 3, "embeddings": {"S1": [[0]], "S2": [[0]], "S3": [[0]]}},
+        "B": {"support": 3, "embeddings": {"S1": [[1]], "S2": [[1]], "S3": [[1]]}}
+      },
+      "expected_absent": ["A>B"]
+    }
+  ]
+}

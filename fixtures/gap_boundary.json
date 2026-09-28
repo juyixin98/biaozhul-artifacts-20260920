@@ -1,0 +1,40 @@
+{
+  "name": "gap_boundary",
+  "description": "Position-gap boundary: a match is allowed exactly when index difference <= max_pos_gap. S1 has A@0 and B@3 (gap 3), S2 gap 2, S3 gap 1. Expected results computed by hand.",
+  "corpus": {
+    "name": "gap_boundary",
+    "sequences": [
+      {"sequence_id": "S1", "events": [{"symbol": "A"}, {"symbol": "X"}, {"symbol": "X"}, {"symbol": "B"}]},
+      {"sequence_id": "S2", "events": [{"symbol": "A"}, {"symbol": "X"}, {"symbol": "B"}]},
+      {"sequence_id": "S3", "events": [{"symbol": "A"}, {"symbol": "B"}]}
+    ]
+  },
+  "cases": [
+    {
+      "label": "gap_2_allows_gap_exactly_2",
+      "params": {"min_support": 2, "max_pos_gap": 2, "max_time_gap": null},
+      "expected": {
+        "A": {"support": 3, "embeddings": {"S1": [[0]], "S2": [[0]], "S3": [[0]]}},
+        "B": {"support": 3, "embeddings": {"S1": [[3]], "S2": [[2]], "S3": [[1]]}},
+        "X": {"support": 2, "embeddings": {"S1": [[1], [2]], "S2": [[1]]}},
+        "A>B": {"support": 2, "embeddings": {"S2": [[0, 2]], "S3": [[0, 1]]}},
+        "A>X": {"support": 2, "embeddings": {"S1": [[0, 1], [0, 2]], "S2": [[0, 1]]}},
+        "X>B": {"support": 2, "embeddings": {"S1": [[1, 3], [2, 3]], "S2": [[1, 2]]}},
+        "A>X>B": {"support": 2, "embeddings": {"S1": [[0, 1, 3], [0, 2, 3]], "S2": [[0, 1, 2]]}}
+      },
+      "expected_absent": ["X>X", "A>X>X", "X>X>B", "A>X>X>B"]
+    },
+    {
+      "label": "gap_1_rejects_gap_2",
+      "params": {"min_support": 2, "max_pos_gap": 1, "max_time_gap": null},
+      "expected": {
+        "A": {"support": 3, "embeddings": {"S1": [[0]], "S2": [[0]], "S3": [[0]]}},
+        "B": {"support": 3, "embeddings": {"S1": [[3]], "S2": [[2]], "S3": [[1]]}},
+        "X": {"support": 2, "embeddings": {"S1": [[1], [2]], "S2": [[1]]}},
+        "A>X": {"support": 2, "embeddings": {"S1": [[0, 1]], "S2": [[0, 1]]}},
+        "X>B": {"support": 2, "embeddings": {"S1": [[2, 3]], "S2": [[1, 2]]}}
+      },
+      "expected_absent": ["A>B", "A>X>B", "X>X"]
+    }
+  ]
+}
