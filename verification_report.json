@@ -1,0 +1,636 @@
+{
+  "run_id": "94d499636bc940cbabec44011ae16843",
+  "timestamp": "2026-09-27T19:58:34.089671+00:00",
+  "solver_version": "1.0.0",
+  "python_version": "3.12.3",
+  "elapsed_seconds": 0.072,
+  "total_cases": 15,
+  "passed_cases": 15,
+  "failed_cases": 0,
+  "cases": [
+    {
+      "fixture": "coloring_three_nodes",
+      "checks": [
+        {
+          "label": "root_propagation_not_false_infeasible",
+          "passed": true,
+          "detail": "root propagation raised None on a satisfiable model"
+        },
+        {
+          "label": "root_propagation_keeps_all_viable_values",
+          "passed": true,
+          "detail": "pruned values that occur in solutions: {}"
+        },
+        {
+          "label": "status_agrees_with_oracle",
+          "passed": true,
+          "detail": "solver=sat oracle=sat"
+        },
+        {
+          "label": "solution_satisfies_model",
+          "passed": true,
+          "detail": "returned solution {'a': 1, 'b': 2, 'c': 1} violates the model"
+        },
+        {
+          "label": "solution_in_oracle_set",
+          "passed": true,
+          "detail": "solver solution missing from enumerated solution set"
+        },
+        {
+          "label": "trail_restores_domains_exactly",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "label": "budget_reported_as_unknown",
+          "passed": true,
+          "detail": "unknown status without a budget failure record: {'kind': 'budget', 'limit': 'max_nodes=1, max_backtracks=1000000000', 'nodes': 2, 'backtracks': 0}"
+        }
+      ],
+      "skipped": [],
+      "ok": true,
+      "oracle": {
+        "status": "sat",
+        "solution_count": 12,
+        "method": "full enumeration"
+      }
+    },
+    {
+      "fixture": "deep_backtrack_sat",
+      "checks": [
+        {
+          "label": "root_propagation_not_false_infeasible",
+          "passed": true,
+          "detail": "root propagation raised None on a satisfiable model"
+        },
+        {
+          "label": "root_propagation_keeps_all_viable_values",
+          "passed": true,
+          "detail": "pruned values that occur in solutions: {}"
+        },
+        {
+          "label": "status_agrees_with_oracle",
+          "passed": true,
+          "detail": "solver=sat oracle=sat"
+        },
+        {
+          "label": "solution_satisfies_model",
+          "passed": true,
+          "detail": "returned solution {'v0': 5, 'v1': 3, 'v2': 2, 'v3': 1, 'v4': 4} violates the model"
+        },
+        {
+          "label": "solution_in_oracle_set",
+          "passed": true,
+          "detail": "solver solution missing from enumerated solution set"
+        },
+        {
+          "label": "trail_restores_domains_exactly",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "label": "budget_reported_as_unknown",
+          "passed": true,
+          "detail": "unknown status without a budget failure record: {'kind': 'budget', 'limit': 'max_nodes=1, max_backtracks=1000000000', 'nodes': 2, 'backtracks': 0}"
+        }
+      ],
+      "skipped": [],
+      "ok": true,
+      "oracle": {
+        "status": "sat",
+        "solution_count": 1,
+        "method": "full enumeration"
+      }
+    },
+    {
+      "fixture": "deep_backtrack_unsat",
+      "checks": [
+        {
+          "label": "status_agrees_with_oracle",
+          "passed": true,
+          "detail": "solver=unsat oracle=unsat"
+        },
+        {
+          "label": "unsat_proven",
+          "passed": true,
+          "detail": "expected unsat, got unsat"
+        },
+        {
+          "label": "trail_restores_domains_exactly",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "label": "budget_reported_as_unknown",
+          "passed": true,
+          "detail": "unknown status without a budget failure record: {'kind': 'budget', 'limit': 'max_nodes=1, max_backtracks=1000000000', 'nodes': 2, 'backtracks': 0}"
+        }
+      ],
+      "skipped": [],
+      "ok": true,
+      "oracle": {
+        "status": "unsat",
+        "solution_count": 0,
+        "method": "full enumeration"
+      }
+    },
+    {
+      "fixture": "explicit_relation_table",
+      "checks": [
+        {
+          "label": "root_propagation_not_false_infeasible",
+          "passed": true,
+          "detail": "root propagation raised None on a satisfiable model"
+        },
+        {
+          "label": "root_propagation_keeps_all_viable_values",
+          "passed": true,
+          "detail": "pruned values that occur in solutions: {}"
+        },
+        {
+          "label": "status_agrees_with_oracle",
+          "passed": true,
+          "detail": "solver=sat oracle=sat"
+        },
+        {
+          "label": "solution_satisfies_model",
+          "passed": true,
+          "detail": "returned solution {'u': 1, 'v': 1, 'w': 0} violates the model"
+        },
+        {
+          "label": "solution_in_oracle_set",
+          "passed": true,
+          "detail": "solver solution missing from enumerated solution set"
+        },
+        {
+          "label": "trail_restores_domains_exactly",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "label": "budget_reported_as_unknown",
+          "passed": true,
+          "detail": "unknown status without a budget failure record: {'kind': 'budget', 'limit': 'max_nodes=1, max_backtracks=1000000000', 'nodes': 2, 'backtracks': 0}"
+        }
+      ],
+      "skipped": [],
+      "ok": true,
+      "oracle": {
+        "status": "sat",
+        "solution_count": 6,
+        "method": "full enumeration"
+      }
+    },
+    {
+      "fixture": "forced_chain",
+      "checks": [
+        {
+          "label": "root_propagation_not_false_infeasible",
+          "passed": true,
+          "detail": "root propagation raised None on a satisfiable model"
+        },
+        {
+          "label": "root_propagation_keeps_all_viable_values",
+          "passed": true,
+          "detail": "pruned values that occur in solutions: {}"
+        },
+        {
+          "label": "status_agrees_with_oracle",
+          "passed": true,
+          "detail": "solver=sat oracle=sat"
+        },
+        {
+          "label": "solution_satisfies_model",
+          "passed": true,
+          "detail": "returned solution {'d1': 1, 'd2': 2, 'd3': 3, 'd4': 4} violates the model"
+        },
+        {
+          "label": "solution_in_oracle_set",
+          "passed": true,
+          "detail": "solver solution missing from enumerated solution set"
+        },
+        {
+          "label": "trail_restores_domains_exactly",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "label": "budget_reported_as_unknown",
+          "passed": true,
+          "detail": "decided within a single node: sat"
+        }
+      ],
+      "skipped": [],
+      "ok": true,
+      "oracle": {
+        "status": "sat",
+        "solution_count": 1,
+        "method": "full enumeration"
+      }
+    },
+    {
+      "fixture": "hall_conflict",
+      "checks": [
+        {
+          "label": "status_agrees_with_oracle",
+          "passed": true,
+          "detail": "solver=unsat oracle=unsat"
+        },
+        {
+          "label": "unsat_proven",
+          "passed": true,
+          "detail": "expected unsat, got unsat"
+        },
+        {
+          "label": "trail_restores_domains_exactly",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "label": "budget_reported_as_unknown",
+          "passed": true,
+          "detail": "decided within a single node: unsat"
+        }
+      ],
+      "skipped": [],
+      "ok": true,
+      "oracle": {
+        "status": "unsat",
+        "solution_count": 0,
+        "method": "full enumeration"
+      }
+    },
+    {
+      "fixture": "induced_hall_conflict",
+      "checks": [
+        {
+          "label": "status_agrees_with_oracle",
+          "passed": true,
+          "detail": "solver=unsat oracle=unsat"
+        },
+        {
+          "label": "unsat_proven",
+          "passed": true,
+          "detail": "expected unsat, got unsat"
+        },
+        {
+          "label": "trail_restores_domains_exactly",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "label": "budget_reported_as_unknown",
+          "passed": true,
+          "detail": "decided within a single node: unsat"
+        }
+      ],
+      "skipped": [],
+      "ok": true,
+      "oracle": {
+        "status": "unsat",
+        "solution_count": 0,
+        "method": "full enumeration"
+      }
+    },
+    {
+      "fixture": "isolated_variable",
+      "checks": [
+        {
+          "label": "root_propagation_not_false_infeasible",
+          "passed": true,
+          "detail": "root propagation raised None on a satisfiable model"
+        },
+        {
+          "label": "root_propagation_keeps_all_viable_values",
+          "passed": true,
+          "detail": "pruned values that occur in solutions: {}"
+        },
+        {
+          "label": "status_agrees_with_oracle",
+          "passed": true,
+          "detail": "solver=sat oracle=sat"
+        },
+        {
+          "label": "solution_satisfies_model",
+          "passed": true,
+          "detail": "returned solution {'a': 1, 'b': 2, 'lonely': 7} violates the model"
+        },
+        {
+          "label": "solution_in_oracle_set",
+          "passed": true,
+          "detail": "solver solution missing from enumerated solution set"
+        },
+        {
+          "label": "trail_restores_domains_exactly",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "label": "budget_reported_as_unknown",
+          "passed": true,
+          "detail": "unknown status without a budget failure record: {'kind': 'budget', 'limit': 'max_nodes=1, max_backtracks=1000000000', 'nodes': 2, 'backtracks': 0}"
+        }
+      ],
+      "skipped": [],
+      "ok": true,
+      "oracle": {
+        "status": "sat",
+        "solution_count": 6,
+        "method": "full enumeration"
+      }
+    },
+    {
+      "fixture": "multiple_solutions",
+      "checks": [
+        {
+          "label": "root_propagation_not_false_infeasible",
+          "passed": true,
+          "detail": "root propagation raised None on a satisfiable model"
+        },
+        {
+          "label": "root_propagation_keeps_all_viable_values",
+          "passed": true,
+          "detail": "pruned values that occur in solutions: {}"
+        },
+        {
+          "label": "status_agrees_with_oracle",
+          "passed": true,
+          "detail": "solver=sat oracle=sat"
+        },
+        {
+          "label": "solution_satisfies_model",
+          "passed": true,
+          "detail": "returned solution {'x': 1, 'y': 2, 'z': 3} violates the model"
+        },
+        {
+          "label": "solution_in_oracle_set",
+          "passed": true,
+          "detail": "solver solution missing from enumerated solution set"
+        },
+        {
+          "label": "trail_restores_domains_exactly",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "label": "budget_reported_as_unknown",
+          "passed": true,
+          "detail": "unknown status without a budget failure record: {'kind': 'budget', 'limit': 'max_nodes=1, max_backtracks=1000000000', 'nodes': 2, 'backtracks': 0}"
+        }
+      ],
+      "skipped": [],
+      "ok": true,
+      "oracle": {
+        "status": "sat",
+        "solution_count": 6,
+        "method": "full enumeration"
+      }
+    },
+    {
+      "fixture": "overlapping_groups",
+      "checks": [
+        {
+          "label": "root_propagation_not_false_infeasible",
+          "passed": true,
+          "detail": "root propagation raised None on a satisfiable model"
+        },
+        {
+          "label": "root_propagation_keeps_all_viable_values",
+          "passed": true,
+          "detail": "pruned values that occur in solutions: {}"
+        },
+        {
+          "label": "status_agrees_with_oracle",
+          "passed": true,
+          "detail": "solver=sat oracle=sat"
+        },
+        {
+          "label": "solution_satisfies_model",
+          "passed": true,
+          "detail": "returned solution {'a': 1, 'b': 2, 'c': 1, 'd': 3} violates the model"
+        },
+        {
+          "label": "solution_in_oracle_set",
+          "passed": true,
+          "detail": "solver solution missing from enumerated solution set"
+        },
+        {
+          "label": "trail_restores_domains_exactly",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "label": "budget_reported_as_unknown",
+          "passed": true,
+          "detail": "unknown status without a budget failure record: {'kind': 'budget', 'limit': 'max_nodes=1, max_backtracks=1000000000', 'nodes': 2, 'backtracks': 0}"
+        }
+      ],
+      "skipped": [],
+      "ok": true,
+      "oracle": {
+        "status": "sat",
+        "solution_count": 4,
+        "method": "full enumeration"
+      }
+    },
+    {
+      "fixture": "queens_4",
+      "checks": [
+        {
+          "label": "root_propagation_not_false_infeasible",
+          "passed": true,
+          "detail": "root propagation raised None on a satisfiable model"
+        },
+        {
+          "label": "root_propagation_keeps_all_viable_values",
+          "passed": true,
+          "detail": "pruned values that occur in solutions: {}"
+        },
+        {
+          "label": "status_agrees_with_oracle",
+          "passed": true,
+          "detail": "solver=sat oracle=sat"
+        },
+        {
+          "label": "solution_satisfies_model",
+          "passed": true,
+          "detail": "returned solution {'q0': 2, 'q1': 4, 'q2': 1, 'q3': 3} violates the model"
+        },
+        {
+          "label": "solution_in_oracle_set",
+          "passed": true,
+          "detail": "solver solution missing from enumerated solution set"
+        },
+        {
+          "label": "trail_restores_domains_exactly",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "label": "budget_reported_as_unknown",
+          "passed": true,
+          "detail": "decided within a single node: sat"
+        }
+      ],
+      "skipped": [],
+      "ok": true,
+      "oracle": {
+        "status": "sat",
+        "solution_count": 2,
+        "method": "full enumeration"
+      }
+    },
+    {
+      "fixture": "queens_8",
+      "checks": [
+        {
+          "label": "status_is_decided",
+          "passed": true,
+          "detail": "unexpected unknown status for queens_8"
+        },
+        {
+          "label": "solution_satisfies_model",
+          "passed": true,
+          "detail": "returned solution {'q0': 1, 'q1': 5, 'q2': 8, 'q3': 6, 'q4': 3, 'q5': 7, 'q6': 2, 'q7': 4} violates the model"
+        },
+        {
+          "label": "trail_restores_domains_exactly",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "label": "budget_reported_as_unknown",
+          "passed": true,
+          "detail": "unknown status without a budget failure record: {'kind': 'budget', 'limit': 'max_nodes=1, max_backtracks=1000000000', 'nodes': 2, 'backtracks': 0}"
+        }
+      ],
+      "skipped": [
+        {
+          "label": "full_enumeration",
+          "detail": "complete assignment space too large to enumerate; solution validity is still checked directly"
+        },
+        {
+          "label": "root_propagation_soundness",
+          "detail": "requires the enumerated viable-value set"
+        }
+      ],
+      "ok": true,
+      "oracle": {
+        "status": null,
+        "solution_count": null,
+        "method": "not executed (assignment space too large)"
+      }
+    },
+    {
+      "fixture": "seeded_random",
+      "checks": [
+        {
+          "label": "root_propagation_not_false_infeasible",
+          "passed": true,
+          "detail": "root propagation raised None on a satisfiable model"
+        },
+        {
+          "label": "root_propagation_keeps_all_viable_values",
+          "passed": true,
+          "detail": "pruned values that occur in solutions: {}"
+        },
+        {
+          "label": "status_agrees_with_oracle",
+          "passed": true,
+          "detail": "solver=sat oracle=sat"
+        },
+        {
+          "label": "solution_satisfies_model",
+          "passed": true,
+          "detail": "returned solution {'v0': 0, 'v1': 3, 'v2': 2, 'v3': 2, 'v4': 3} violates the model"
+        },
+        {
+          "label": "solution_in_oracle_set",
+          "passed": true,
+          "detail": "solver solution missing from enumerated solution set"
+        },
+        {
+          "label": "trail_restores_domains_exactly",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "label": "budget_reported_as_unknown",
+          "passed": true,
+          "detail": "unknown status without a budget failure record: {'kind': 'budget', 'limit': 'max_nodes=1, max_backtracks=1000000000', 'nodes': 2, 'backtracks': 0}"
+        }
+      ],
+      "skipped": [],
+      "ok": true,
+      "oracle": {
+        "status": "sat",
+        "solution_count": 13,
+        "method": "full enumeration"
+      }
+    },
+    {
+      "fixture": "unsat_arc_only",
+      "checks": [
+        {
+          "label": "status_agrees_with_oracle",
+          "passed": true,
+          "detail": "solver=unsat oracle=unsat"
+        },
+        {
+          "label": "unsat_proven",
+          "passed": true,
+          "detail": "expected unsat, got unsat"
+        },
+        {
+          "label": "trail_restores_domains_exactly",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "label": "budget_reported_as_unknown",
+          "passed": true,
+          "detail": "decided within a single node: unsat"
+        }
+      ],
+      "skipped": [],
+      "ok": true,
+      "oracle": {
+        "status": "unsat",
+        "solution_count": 0,
+        "method": "full enumeration"
+      }
+    },
+    {
+      "fixture": "unsat_mixed",
+      "checks": [
+        {
+          "label": "status_agrees_with_oracle",
+          "passed": true,
+          "detail": "solver=unsat oracle=unsat"
+        },
+        {
+          "label": "unsat_proven",
+          "passed": true,
+          "detail": "expected unsat, got unsat"
+        },
+        {
+          "label": "trail_restores_domains_exactly",
+          "passed": true,
+          "detail": ""
+        },
+        {
+          "label": "budget_reported_as_unknown",
+          "passed": true,
+          "detail": "decided within a single node: unsat"
+        }
+      ],
+      "skipped": [],
+      "ok": true,
+      "oracle": {
+        "status": "unsat",
+        "solution_count": 0,
+        "method": "full enumeration"
+      }
+    }
+  ]
+}
