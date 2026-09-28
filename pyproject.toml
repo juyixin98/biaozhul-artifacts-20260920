@@ -1,0 +1,21 @@
+[project]
+name = "bracket-index"
+version = "0.1.0"
+description = "Typed bracket structure index over large text: local edits, match jump, shortest unbalanced interval"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi==0.141.1",
+    "uvicorn==0.54.0",
+    "pydantic==2.13.5",
+]
+
+[project.optional-dependencies]
+test = ["pytest==9.1.1", "httpx==0.28.1"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-ra"
+
+[tool.coverage.run]
+source = ["app"]
