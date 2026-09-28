@@ -1,0 +1,125 @@
+{
+  "model_id": "demo_mlp",
+  "model_version": "d35f2ce4b30aa810",
+  "quantizer_version": "quant-asy-v1.0.0",
+  "architecture": [
+    3,
+    4,
+    2
+  ],
+  "input_params": {
+    "kind": "QParams",
+    "scale": 0.01567338643395665,
+    "zero_point": -1,
+    "dtype": "int8"
+  },
+  "layers": [
+    {
+      "name": "layer1",
+      "weights_int": [
+        [
+          127,
+          -128,
+          14
+        ],
+        [
+          -67,
+          127,
+          -128
+        ],
+        [
+          -128,
+          127,
+          -52
+        ],
+        [
+          -128,
+          77,
+          127
+        ]
+      ],
+      "weight_params": {
+        "kind": "PerChannelQParams",
+        "scales": [
+          0.0007467503072367764,
+          0.0007310188555892229,
+          0.0008361491669918239,
+          0.0012256380448363285
+        ],
+        "zero_points": [
+          111,
+          -25,
+          90,
+          34
+        ],
+        "dtype": "int8"
+      },
+      "bias_q": [
+        -397,
+        4252,
+        686,
+        -1792
+      ],
+      "output_params": {
+        "kind": "QParams",
+        "scale": 0.00482580719864336,
+        "zero_point": 1,
+        "dtype": "int8"
+      },
+      "apply_relu": true,
+      "accumulator_dtype": "int32"
+    },
+    {
+      "name": "layer2",
+      "weights_int": [
+        [
+          -128,
+          64,
+          99,
+          127
+        ],
+        [
+          -128,
+          -91,
+          127,
+          95
+        ]
+      ],
+      "weight_params": {
+        "kind": "PerChannelQParams",
+        "scales": [
+          0.0013536468257952087,
+          0.001019961565139234
+        ],
+        "zero_points": [
+          -20,
+          20
+        ],
+        "dtype": "int8"
+      },
+      "bias_q": [
+        3927,
+        -8919
+      ],
+      "output_params": {
+        "kind": "PerChannelQParams",
+        "scales": [
+          0.0010331027978061394,
+          0.0005073554488609196
+        ],
+        "zero_points": [
+          -84,
+          103
+        ],
+        "dtype": "int8"
+      },
+      "apply_relu": false,
+      "accumulator_dtype": "int32"
+    }
+  ],
+  "calibration": {
+    "sample_count": 256,
+    "created_at": "2026-09-28T05:02:51.333738+00:00",
+    "calibration_fingerprint": "aad44ef9cb751bbf"
+  }
+}

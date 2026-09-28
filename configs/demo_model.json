@@ -1,0 +1,14 @@
+{
+  "model_id": "demo_mlp",
+  "seed": 20260928,
+  "architecture": [3, 4, 2],
+  "hidden_relu": true,
+  "calibration_samples": 256,
+  "activation_dtype": "int8",
+  "weight_dtype": "int8",
+  "output_dtype": "int8",
+  "accumulator_dtype": "int32",
+  "input_range": [-2.0, 2.0],
+  "weight_scale": 0.2,
+  "bias_scale": 0.05
+}
