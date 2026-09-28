@@ -1,0 +1,10 @@
+{
+  "description": "p(x) = (x^2+1)(x^4+1) = x^6 + x^4 + x^2 + 1. No real roots; all six roots are non-real. Sturm variation counts at the Cauchy bracket must be equal, proving 0 real roots.",
+  "coefficients": [1, 0, 1, 0, 1, 0, 1],
+  "target_width": "1/1000000",
+  "expected": {
+    "degree": 6,
+    "distinct_real_roots": 0,
+    "roots": []
+  }
+}

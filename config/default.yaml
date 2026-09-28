@@ -1,0 +1,27 @@
+# Root isolation service configuration.
+# Every limit here is a *budget* the kernel checks explicitly; exceeding one
+# raises BudgetExceeded rather than silently degrading precision.
+service:
+  host: "127.0.0.1"
+  port: 8000
+  log_level: "info"
+
+kernel:
+  # Internal decimal working precision for mpmath sign evaluations.
+  # The evidence module escalates adaptively from this; the escalation cap is
+  # an evidence-module constant, above which a sign is reported undetermined.
+  precision_dps: 100
+  # Hard cap on degree (degree-agnostic safeguards against pathological input).
+  max_degree: 200
+  # Maximum number of exact rational coefficients a request may carry.
+  max_coefficients: 201
+  # Bisection budget per isolation task (work interval halvings, total).
+  max_bisections: 20000
+  # Cap on Sturm sequence length (always degree+1, kept as an explicit guard).
+  max_sturm_length: 202
+  # Bit-length budget for a single exact rational coefficient numerator/denom.
+  max_coeff_bits: 20000
+
+http:
+  # Root-only inputs are rejected at the boundary with 422.
+  max_body_bytes: 65536

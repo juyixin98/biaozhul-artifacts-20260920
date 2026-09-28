@@ -1,0 +1,15 @@
+{
+  "description": "p(x) = (x-1)^2 (x-2) (x-3)^3 queried on the search interval (1, 3]; BOTH endpoints are exact roots of different multiplicity, exercising the half-open cell endpoint handling.",
+  "coefficients": [54, -189, 261, -182, 68, -13, 1],
+  "target_width": "1/1000000",
+  "interval_lo": "1",
+  "interval_hi": "3",
+  "expected": {
+    "distinct_real_roots": 3,
+    "roots": [
+      {"exact": true, "value": "1", "multiplicity": 2},
+      {"exact": true, "value": "2", "multiplicity": 1},
+      {"exact": true, "value": "3", "multiplicity": 3}
+    ]
+  }
+}

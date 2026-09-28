@@ -1,0 +1,14 @@
+{
+  "description": "p(x) = (10^20 x - 1)(x + 10^-20) = 10^20 x^2 - 10^-20. Roots exactly at +10^-20 and -10^-20 while coefficients span 40 orders of magnitude. Expanded exactly: 10^20*x^2 + (1-1)*x - 10^-20.",
+  "coefficients": ["-1/100000000000000000000", 0, 100000000000000000000],
+  "target_width": "1/100000000000000000000000",
+  "expected": {
+    "degree": 2,
+    "distinct_real_roots": 2,
+    "roots": [
+      {"near": "-1/100000000000000000000", "multiplicity": 1},
+      {"near": "1/100000000000000000000", "multiplicity": 1}
+    ],
+    "note": "the float64 companion witness is explicitly unreliable here; the exact Sturm answer and the mpmath directed-rounded enclosures still apply"
+  }
+}
