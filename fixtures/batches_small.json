@@ -1,0 +1,53 @@
+{
+  "description": "Hand-authored synthetic batches for a 6x2 table. expected_aggregated values were computed by hand (not produced by the code under test) and encode the duplicate-aggregation and zero-row rules.",
+  "batches": [
+    {
+      "id": "duplicates_basic",
+      "indices": [0, 2, 0, 2, 2],
+      "values": [[1, 0], [0, 2], [3, 4], [-1, 0], [1, 1]],
+      "expected_unique": [0, 2],
+      "expected_aggregated": [[4, 4], [0, 3]],
+      "expected_row_norms": [5.656854249492381, 3.0],
+      "expected_global_norm": 6.4031242374328485
+    },
+    {
+      "id": "hot_cold_zero_row",
+      "indices": [5, 0, 5, 1],
+      "values": [[10, 10], [1, 1], [-10, -10], [2, 2]],
+      "expected_unique": [0, 1, 5],
+      "expected_aggregated": [[1, 1], [2, 2], [0, 0]],
+      "expected_active": [0, 1],
+      "expected_zero_skipped": [5]
+    },
+    {
+      "id": "empty",
+      "indices": [],
+      "values": [],
+      "expect_verdict": "empty"
+    },
+    {
+      "id": "large_gradient",
+      "indices": [3],
+      "values": [[1000000, 0]],
+      "expected_aggregated": [[1000000, 0]]
+    },
+    {
+      "id": "out_of_range_high",
+      "indices": [0, 6],
+      "values": [[1, 1], [1, 1]],
+      "expect_error_code": "batch_rejected"
+    },
+    {
+      "id": "out_of_range_negative",
+      "indices": [-1, 2],
+      "values": [[1, 1], [1, 1]],
+      "expect_error_code": "batch_rejected"
+    },
+    {
+      "id": "width_mismatch",
+      "indices": [0],
+      "values": [[1, 2, 3]],
+      "expect_error_code": "batch_rejected"
+    }
+  ]
+}

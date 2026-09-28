@@ -1,0 +1,13 @@
+{
+  "table": { "num_rows": 6, "dim": 2 },
+  "optimizer": {
+    "name": "sgd_momentum",
+    "lr": 0.1,
+    "momentum": 0.9,
+    "weight_decay": 0.0,
+    "step_zero_rows": false
+  },
+  "clip": { "mode": "none", "max_norm": null },
+  "state_dir": "var/state",
+  "seed": 7
+}
