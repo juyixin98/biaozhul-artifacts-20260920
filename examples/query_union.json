@@ -1,0 +1,25 @@
+{
+  "version_id": 1,
+  "query": {
+    "op": "union",
+    "left": {
+      "op": "project",
+      "columns": ["l.eid"],
+      "input": {
+        "op": "join",
+        "left": {
+          "op": "select",
+          "condition": {"col": "l.dept", "op": "=", "value": "Eng"},
+          "input": {"op": "relation", "relation": "emp", "alias": "l"}
+        },
+        "right": {"op": "relation", "relation": "dept", "alias": "d"},
+        "on": [["l.dept", "d.dept"]]
+      }
+    },
+    "right": {
+      "op": "project",
+      "columns": ["lead.eid"],
+      "input": {"op": "relation", "relation": "lead"}
+    }
+  }
+}

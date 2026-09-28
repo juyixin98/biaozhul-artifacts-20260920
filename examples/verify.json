@@ -1,0 +1,17 @@
+{
+  "version_id": 1,
+  "rows": [
+    {
+      "values": ["alice", "alice"],
+      "provenance": "emp.e1^2 + 2*emp.e1*emp.e6 + emp.e6^2",
+      "expression": {
+        "terms": [
+          {"witnesses": ["emp.e1", "emp.e1"], "coefficient": 1},
+          {"witnesses": ["emp.e1", "emp.e6"], "coefficient": 2},
+          {"witnesses": ["emp.e6", "emp.e6"], "coefficient": 1}
+        ]
+      },
+      "expected_value": 121
+    }
+  ]
+}

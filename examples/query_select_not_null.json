@@ -1,0 +1,8 @@
+{
+  "version_id": 1,
+  "query": {
+    "op": "select",
+    "condition": {"col": "emp.dept", "op": "is_not_null"},
+    "input": {"op": "relation", "relation": "emp"}
+  }
+}

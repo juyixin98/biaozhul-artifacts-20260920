@@ -1,0 +1,13 @@
+{
+  "version_id": 1,
+  "query": {
+    "op": "project",
+    "columns": ["l.eid", "r.eid"],
+    "input": {
+      "op": "join",
+      "left": {"op": "relation", "relation": "emp", "alias": "l"},
+      "right": {"op": "relation", "relation": "emp", "alias": "r"},
+      "on": [["l.dept", "r.dept"]]
+    }
+  }
+}
