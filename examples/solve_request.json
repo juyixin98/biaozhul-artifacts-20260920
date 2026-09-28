@@ -1,0 +1,28 @@
+{
+  "problem": {
+    "horizon": 6,
+    "fluents": {"x": 0, "y": 0},
+    "resources": [{"id": "robot", "capacity": 1, "kind": "renewable"}],
+    "actions": [
+      {
+        "id": "carry_a",
+        "duration": 3,
+        "start_condition": [],
+        "invariant": [],
+        "effects": [{"fluent": "x", "op": "+", "amount": 1}],
+        "resource_use": [{"resource": "robot", "amount": 1}]
+      },
+      {
+        "id": "carry_b",
+        "duration": 2,
+        "start_condition": [{"fluent": {"id": "x", "op": ">=", "value": 1}}],
+        "invariant": [{"fluent": {"id": "x", "op": ">=", "value": 1}}],
+        "effects": [{"fluent": "y", "op": "+", "amount": 1}],
+        "resource_use": [{"resource": "robot", "amount": 1}]
+      }
+    ],
+    "goal": {"fluent": {"id": "y", "op": ">=", "value": 1}}
+  },
+  "node_budget": 100000,
+  "time_budget_seconds": 10
+}
