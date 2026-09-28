@@ -1,0 +1,30 @@
+{
+  "name": "composite-api-failure-aggregation",
+  "version": "1.0.0",
+  "description": "Composite query API with dependency-graph fetching, deadline propagation, snapshot consistency and partial-failure aggregation (Fastify + SQLite, local synthetic fixtures only).",
+  "type": "module",
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.check.json",
+    "start": "node --no-warnings=ExperimentalWarning dist/index.js",
+    "dev": "tsx src/index.ts",
+    "demo": "tsx scripts/demo.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "fastify": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "@vitest/coverage-v8": "^3.2.7",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  }
+}
