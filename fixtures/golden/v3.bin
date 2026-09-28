@@ -1,0 +1,19 @@
+--BOUND
+Content-Disposition: form-data; name="payload"; filename="decoy.txt"
+Content-Type: text/plain
+
+start--BOUND
+--BOUNDX
+--BOUND X
+--BOUND--x
+--BOUND-r
+--BOUNDq
+--BOUND                                                                                                     
+Z
+--BOUNDX
+real-end
+--BOUND
+Content-Disposition: form-data; name="note"
+
+done
+--BOUND--

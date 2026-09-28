@@ -1,0 +1,6 @@
+--NB
+Content-Disposition: form-data; name="a"
+Content-Disposition: form-data; name="b"
+
+x
+--NB--

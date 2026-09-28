@@ -1,0 +1,223 @@
+{
+  "negative": [
+    {
+      "boundary": "NB",
+      "errorClass": "INPUT_ERROR",
+      "errorCode": "MISSING_TERMINATING_BOUNDARY",
+      "file": "n1.bin",
+      "id": "n1-missing-terminating-boundary",
+      "wireLength": 53
+    },
+    {
+      "boundary": "NB",
+      "errorClass": "INPUT_ERROR",
+      "errorCode": "PATH_TRAVERSAL_FILENAME",
+      "file": "n2.bin",
+      "id": "n2-path-traversal-filename",
+      "wireLength": 116
+    },
+    {
+      "boundary": "NB",
+      "errorClass": "INPUT_ERROR",
+      "errorCode": "DUPLICATE_CONTENT_DISPOSITION",
+      "file": "n3.bin",
+      "id": "n3-duplicate-content-disposition",
+      "wireLength": 103
+    },
+    {
+      "boundary": "NB",
+      "errorClass": "INPUT_ERROR",
+      "errorCode": "MALFORMED_HEADER_SYNTAX",
+      "file": "n4.bin",
+      "id": "n4-unterminated-quoted-filename",
+      "wireLength": 80
+    },
+    {
+      "boundary": "NB",
+      "errorClass": "INPUT_ERROR",
+      "errorCode": "PROLOGUE_NOT_EMPTY",
+      "file": "n5.bin",
+      "id": "n5-prologue-not-empty",
+      "wireLength": 74
+    }
+  ],
+  "positive": [
+    {
+      "boundary": "----WebKitBoundary7MA4YWxkTrZu0gW",
+      "counters": {
+        "bodyBytes": 86,
+        "fields": 1,
+        "files": 1,
+        "headerBytes": 143,
+        "parts": 2
+      },
+      "file": "v1.bin",
+      "id": "v1-field-and-png",
+      "parts": [
+        {
+          "contentType": null,
+          "filename": null,
+          "index": 1,
+          "isFile": false,
+          "name": "title",
+          "sha256": "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9",
+          "size": 11,
+          "value": "hello world"
+        },
+        {
+          "contentType": "image/png",
+          "filename": "pixel.png",
+          "index": 2,
+          "isFile": true,
+          "name": "asset",
+          "sha256": "84549424e0e59a80b5752b6b4c8d7808aec2455ff1cd3d852ecc6a8960527080",
+          "size": 75
+        }
+      ],
+      "wireLength": 346
+    },
+    {
+      "boundary": "B2",
+      "counters": {
+        "bodyBytes": 10,
+        "fields": 1,
+        "files": 1,
+        "headerBytes": 145,
+        "parts": 2
+      },
+      "file": "v2.bin",
+      "id": "v2-quoted-params",
+      "parts": [
+        {
+          "contentType": "text/plain",
+          "filename": "na\"me;.txt",
+          "index": 1,
+          "isFile": true,
+          "name": "file",
+          "sha256": "b6580e3c3641663b7d968029c04ccbdf8cf51affb119825b65189c28c0d25f9b",
+          "size": 5
+        },
+        {
+          "contentType": null,
+          "filename": null,
+          "index": 2,
+          "isFile": false,
+          "name": "a;b=c",
+          "sha256": "6ec22ca6e54cdcfc733c75d68e0f040c40cf7c5fae452e3df1e7a1560a31c54e",
+          "size": 5,
+          "value": "x=\"y\""
+        }
+      ],
+      "wireLength": 179
+    },
+    {
+      "boundary": "BOUND",
+      "counters": {
+        "bodyBytes": 203,
+        "fields": 1,
+        "files": 1,
+        "headerBytes": 145,
+        "parts": 2
+      },
+      "file": "v3.bin",
+      "id": "v3-boundary-decoys-in-body",
+      "parts": [
+        {
+          "contentType": "text/plain",
+          "filename": "decoy.txt",
+          "index": 1,
+          "isFile": true,
+          "name": "payload",
+          "sha256": "f61fb1d328e9d26d4de1ef45fc10f90231d4e491a5d1fc24445d61878d44e0dc",
+          "size": 199
+        },
+        {
+          "contentType": null,
+          "filename": null,
+          "index": 2,
+          "isFile": false,
+          "name": "note",
+          "sha256": "a4c3ed04a95a3da14a9d235c83d868bed7c0f45cf7f3faa751ee8f50598d2211",
+          "size": 4,
+          "value": "done"
+        }
+      ],
+      "wireLength": 381
+    },
+    {
+      "boundary": "xf",
+      "counters": {
+        "bodyBytes": 6,
+        "fields": 0,
+        "files": 1,
+        "headerBytes": 138,
+        "parts": 1
+      },
+      "file": "v4.bin",
+      "id": "v4-filename-star-precedence",
+      "parts": [
+        {
+          "contentType": "text/plain",
+          "filename": "文件.txt",
+          "filenameStar": "文件.txt",
+          "filenameStarCharset": "UTF-8",
+          "index": 1,
+          "isFile": true,
+          "name": "doc",
+          "sha256": "f6a63b91aba4aac54cffbebdc6156d34abadbe990707bf2eca1fd14ffffd2e14",
+          "size": 6
+        }
+      ],
+      "wireLength": 160
+    },
+    {
+      "boundary": "e",
+      "counters": {
+        "bodyBytes": 9,
+        "fields": 1,
+        "files": 0,
+        "headerBytes": 65,
+        "parts": 1
+      },
+      "file": "v5.bin",
+      "id": "v5-empty-filename-is-field",
+      "parts": [
+        {
+          "contentType": null,
+          "filename": null,
+          "index": 1,
+          "isFile": false,
+          "name": "emptyfile",
+          "sha256": "9c7d54b0bf7a9369d8594201c7b11955514343809d09fbec33966c1fd9794015",
+          "size": 9,
+          "value": "text-only"
+        }
+      ],
+      "wireLength": 88
+    },
+    {
+      "boundary": "longboundaryvalue",
+      "counters": {
+        "bodyBytes": 53,
+        "fields": 1,
+        "files": 0,
+        "headerBytes": 47,
+        "parts": 1
+      },
+      "file": "v6.bin",
+      "id": "v6-crlf-dash-heavy-body",
+      "parts": [
+        {
+          "contentType": null,
+          "filename": null,
+          "index": 1,
+          "isFile": false,
+          "name": "crlf",
+          "sha256": "c2ebc69799ace2e949fc820ef347d151004675218eafdb82038cadd585c5f479",
+          "size": 53
+        }
+      ],
+      "wireLength": 146
+    }
+  ]
+}

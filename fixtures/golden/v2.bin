@@ -1,0 +1,10 @@
+--B2
+Content-Disposition: form-data; name="file"; filename="na\"me;.txt"
+Content-Type: text/plain
+
+AB	CD
+--B2
+Content-Disposition: form-data; name="a;b=c"
+
+x="y"
+--B2--

@@ -1,0 +1,27 @@
+{
+  "name": "multipart-formdata-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Streaming multipart/form-data receiver: field parts, restricted file parts, boundary-safe parsing, SQLite commit gate",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node --experimental-sqlite dist/src/server.js",
+    "dev": "node --experimental-sqlite --import tsx src/server.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --experimental-sqlite --no-warnings node_modules/vitest/vitest.mjs run",
+    "test:watch": "node --experimental-sqlite --no-warnings node_modules/vitest/vitest.mjs"
+  },
+  "dependencies": {
+    "fastify": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.4"
+  }
+}
