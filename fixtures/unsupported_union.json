@@ -1,0 +1,7 @@
+{
+  "name": "unsupported_union",
+  "description": "Intentionally invalid: uses OWL unionOf, which the restricted service must refuse (UNSUPPORTED_CONSTRUCTOR), not treat as a label.",
+  "axioms": [
+    {"sub": "PetOwner", "super": {"union": ["CatOwner", "DogOwner"]}, "source": "fixture:bad-union"}
+  ]
+}

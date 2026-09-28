@@ -1,0 +1,13 @@
+{
+  "name": "equivalence_ring",
+  "description": "Equivalence ring Admin == SuperUser == RootUser declared by two axioms from different sources. RootUser subclass of LockedAccount, Admin disjoint LockedAccount -> whole ring unsatisfiable, no instance so ontology consistent. Also a healthy instance of Guest to show normal inference.",
+  "axioms": [
+    {"equivalent": ["Admin", "SuperUser"], "source": "fixture:eq-admin-superuser"},
+    {"equivalent": ["SuperUser", "RootUser"], "source": "fixture:eq-superuser-root"},
+    {"sub": "RootUser", "super": "LockedAccount", "source": "fixture:root-locked"},
+    {"disjoint": ["Admin", "LockedAccount"], "source": "fixture:admin-not-locked"},
+
+    {"sub": "Guest", "super": "User", "source": "fixture:guest-user"},
+    {"instance": "visitor-42", "class": "Guest", "source": "fixture:visitor-assertion"}
+  ]
+}

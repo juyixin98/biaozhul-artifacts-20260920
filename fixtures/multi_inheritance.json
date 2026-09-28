@@ -1,0 +1,15 @@
+{
+  "name": "multi_inheritance",
+  "description": "Multi-level inheritance: Penguin is a bird and a swimmer; Bird and Swimmer are NOT disjoint, so satisfiable. Separately, Dodo is forced into two disjoint classes -> Dodo unsatisfiable, but ontology stays consistent (no instance).",
+  "axioms": [
+    {"sub": "Penguin", "super": "Bird", "source": "fixture:penguin-bird"},
+    {"sub": "Penguin", "super": "Swimmer", "source": "fixture:penguin-swimmer"},
+    {"sub": "EmperorPenguin", "super": "Penguin", "source": "fixture:emperor-penguin"},
+
+    {"sub": "Dodo", "super": "Bird", "source": "fixture:dodo-bird"},
+    {"sub": "Dodo", "super": "FlightedBird", "source": "fixture:dodo-flighted"},
+    {"sub": "FlightedBird", "super": "Bird", "source": "fixture:flighted-is-bird"},
+    {"disjoint": ["FlightedBird", "FlightlessBird"], "source": "fixture:flighted-flightless"},
+    {"sub": "Dodo", "super": "FlightlessBird", "source": "fixture:dodo-flightless"}
+  ]
+}

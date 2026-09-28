@@ -1,0 +1,11 @@
+{
+  "name": "two_assertions_conflict",
+  "description": "Instance carol-3 separately asserted as Cat and as Dog, with Cat disjoint Dog. The instance conflict path has one hop from each assertion; ontology is inconsistent while no named class is unsatisfiable.",
+  "axioms": [
+    {"disjoint": ["Cat", "Dog"], "source": "fixture:cat-dog-disjoint"},
+    {"sub": "Cat", "super": "Mammal", "source": "fixture:cat-mammal"},
+    {"sub": "Dog", "super": "Mammal", "source": "fixture:dog-mammal"},
+    {"instance": "carol-3", "class": "Cat", "source": "fixture:carol-cat"},
+    {"instance": "carol-3", "class": "Dog", "source": "fixture:carol-dog"}
+  ]
+}

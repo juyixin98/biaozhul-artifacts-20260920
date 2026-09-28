@@ -1,0 +1,13 @@
+{
+  "name": "intersection_disjoint_conflict",
+  "description": "TA subclass of (Employee intersection Student); Employee and Student are disjoint. TA is unsatisfiable and instance alice-7 witnesses inconsistency. Conflict path goes through the intersection with introduction/elimination steps.",
+  "axioms": [
+    {"sub": "TA", "super": {"intersection": ["Employee", "Student"]}, "source": "fixture:ta-is-employee-and-student"},
+    {"disjoint": ["Employee", "Student"], "source": "fixture:employee-student-disjoint"},
+    {"instance": "alice-7", "class": "TA", "source": "fixture:alice-ta-assertion"},
+
+    {"sub": "Employee", "super": "Person", "source": "fixture:employee-person"},
+    {"sub": "Student", "super": "Person", "source": "fixture:student-person"},
+    {"instance": "bob-9", "class": "Employee", "source": "fixture:bob-employee"}
+  ]
+}
