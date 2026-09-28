@@ -1,0 +1,23 @@
+{
+  "case": "logistics_direct",
+  "expected_status": "success",
+  "expected_actions": [
+    ["!load", ["crate1", "truck1", "depot"]],
+    ["!drive", ["truck1", "depot", "port"]],
+    ["!unload", ["crate1", "truck1", "port"]]
+  ],
+  "expected_final_state_contains": [
+    ["at", "crate1", "port"],
+    ["free", "truck1"]
+  ],
+  "expected_methods_on_path": ["m-direct"],
+  "expected_failure_categories": [],
+  "verification": {
+    "ok": true,
+    "executable": true,
+    "hierarchy_consistent": true,
+    "order_consistent": true,
+    "feasible_linearizations": 1,
+    "linearizations_examined": 1
+  }
+}

@@ -1,0 +1,33 @@
+;; Bounds-and-cycle edge domain.
+;;
+;; m-spin is a non-progress method: it re-expands the identical ground task
+;; under an unchanged world state, so the planner can prove a definitive
+;; 'cycle' failure (not merely hit a depth bound).
+;;
+;; m-step is genuine progress recursion over an explicit chain: it advances
+;; the ground origin each call.  When the supplied depth horizon is smaller
+;; than the chain, the planner cannot decide and must report an *inconclusive*
+;; budget cut rather than claim failure.
+(:domain bounds
+  (:operator (!tick ?x)
+    (:pre (at ?x))
+    (:del (at ?x))
+    (:add (done ?x)))
+
+  (:operator (!hop ?x ?y)
+    (:pre (at ?x) (edge ?x ?y))
+    (:del (at ?x))
+    (:add (at ?y)))
+
+  (:method m-base (walk ?x)
+    (:pre (target ?x))
+    (:tasks (!tick ?x)))
+
+  (:method m-step (walk ?x)
+    (:pre (edge ?x ?y) (not (target ?x)))
+    (:tasks (!hop ?x ?y) (walk ?y)))
+
+  (:method m-spin (spin ?x)
+    (:pre (spinning ?x))
+    (:tasks (spin ?x)))
+)

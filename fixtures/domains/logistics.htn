@@ -1,0 +1,51 @@
+;; Logistics domain for bounded HTN fixtures.
+;;
+;; Covers:
+;;   * recursive decomposition  - deliver/m-via-hub recurses along a road chain
+;;   * method mutual exclusion  - m-direct vs m-via-hub (guarded by negation)
+;;   * existential preconditions - m-ship binds ?from/?to from the manifest
+;;   * ordered subtask sequences - load -> drive -> unload
+;;
+;; Every primitive operator has real preconditions checked against state;
+;; nothing here is a hard-coded demonstration branch.
+(:domain logistics
+  (:operator (!load ?p ?v ?l)
+    (:pre (at ?p ?l) (at ?v ?l) (free ?v))
+    (:del (at ?p ?l) (free ?v))
+    (:add (in ?p ?v)))
+
+  (:operator (!unload ?p ?v ?l)
+    (:pre (in ?p ?v) (at ?v ?l))
+    (:del (in ?p ?v))
+    (:add (at ?p ?l) (free ?v)))
+
+  (:operator (!drive ?v ?a ?b)
+    (:pre (at ?v ?a) (road ?a ?b))
+    (:del (at ?v ?a))
+    (:add (at ?v ?b)))
+
+  ;; Base case: a direct road exists between origin and destination.
+  (:method m-direct (deliver ?p ?v ?from ?to)
+    (:pre (road ?from ?to))
+    (:tasks (!load ?p ?v ?from)
+            (!drive ?v ?from ?to)
+            (!unload ?p ?v ?to)))
+
+  ;; Recursive case: no direct road, take one hop to an intermediate node
+  ;; (existential ?mid; several outgoing roads produce search branches) and
+  ;; re-deliver from there.  The ground origin advances along the road chain
+  ;; on every call, so well-founded recursion shrinks ground terms.
+  (:method m-via-hub (deliver ?p ?v ?from ?to)
+    (:pre (road ?from ?mid)
+          (not (road ?from ?to)))
+    (:tasks (!load ?p ?v ?from)
+            (!drive ?v ?from ?mid)
+            (!unload ?p ?v ?mid)
+            (deliver ?p ?v ?mid ?to)))
+
+  ;; Look up package endpoints from the shipping manifest.  The positive
+  ;; preconditions introduce existential ?from and ?to.
+  (:method m-ship (ship ?p ?v)
+    (:pre (origin ?p ?from) (dest ?p ?to))
+    (:tasks (deliver ?p ?v ?from ?to)))
+)

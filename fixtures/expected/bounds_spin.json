@@ -1,0 +1,19 @@
+{
+  "case": "bounds_spin",
+  "expected_status": "failure",
+  "expected_actions": [],
+  "expected_failure_categories": ["cycle"],
+  "expected_failure_details": [
+    {
+      "category": "cycle",
+      "task_head": "spin",
+      "cycle_chain_first_equals_last": true,
+      "method_name_substring": "m-spin"
+    }
+  ],
+  "verification": {
+    "ok": true,
+    "failure_sound": true
+  },
+  "note": "m-spin re-expands the identical ground task under an unchanged state: a proved non-progress cycle, distinct from hitting a depth horizon."
+}

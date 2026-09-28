@@ -1,0 +1,35 @@
+;; Shared-resource domain for partial-order HTN fixtures.
+;;
+;; Two workers must use a single exclusive lock.  Each worker's method is an
+;; ordered lock -> unlock pair, but the two worker subtasks are *unordered*,
+;; so the task network admits 6 topological orders; only the 2 that do not
+;; overlap lock-holding are actually executable.  This is the fixture that
+;; proves a topological sort is not executability.
+(:domain docks
+  (:operator (!lock ?r ?w)
+    (:pre (free ?r))
+    (:del (free ?r))
+    (:add (locked ?r ?w)))
+
+  (:operator (!unlock ?r ?w)
+    (:pre (locked ?r ?w))
+    (:del (locked ?r ?w))
+    (:add (free ?r)))
+
+  (:method m-work (work ?r ?w)
+    (:pre (worker ?w))
+    (:tasks (!lock ?r ?w) (!unlock ?r ?w)))
+
+  (:method m-parallel (parallel-work ?r ?w1 ?w2)
+    (:pre (worker ?w1) (worker ?w2))
+    (:tasks (:partial ((work ?r ?w1) (work ?r ?w2)))))
+
+  ;; Three workers with explicit precedence: worker 0 before worker 2;
+  ;; worker 1 is unordered relative to both.  Demonstrates partial order
+  ;; constraints (not a total chain) while still sharing one lock.
+  (:method m-three (three-work ?r ?w0 ?w1 ?w2)
+    (:pre (worker ?w0) (worker ?w1) (worker ?w2))
+    (:tasks
+      (:partial ((work ?r ?w0) (work ?r ?w1) (work ?r ?w2))
+                (:before 0 2))))
+)

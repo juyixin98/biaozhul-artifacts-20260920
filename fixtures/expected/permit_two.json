@@ -1,0 +1,25 @@
+{
+  "case": "permit_two",
+  "expected_status": "failure",
+  "expected_actions": [],
+  "expected_methods_on_path": [],
+  "expected_failure_categories": ["deadlock"],
+  "expected_failure_details": [
+    {
+      "category": "deadlock",
+      "blocked_task_heads": ["!grab"],
+      "unmet_substring": "(free permit-1)",
+      "snapshot_minimal_count": 1,
+      "snapshot_prefix_grabs": 1,
+      "blocked_claimers_union": ["p1", "p2"],
+      "prefix_claimers_union": ["p1", "p2"]
+    }
+  ],
+  "verification": {
+    "ok": true,
+    "executable": true,
+    "failure_sound": true,
+    "feasible_linearizations": 0
+  },
+  "note": "Two unordered grabs of a single non-released permit: the network is a DAG but neither of the two linearizations can execute both. Topological sort != executability."
+}

@@ -1,0 +1,23 @@
+;; Deadlock domain: a partial-order task network that is a valid DAG but is
+;; not executable in ANY linearization.
+;;
+;; Two parallel subtasks each acquire the same single non-reusable permit.
+;; There is no release operator.  Every topological order can execute exactly
+;; one acquisition; the other's (free permit) precondition is then false, and
+;; because both are minimal at the dead end, no reduction is possible.  The
+;; expected planner verdict is a definitive 'deadlock' failure with evidence
+;; listing both blocked primitive tasks - NOT a topological plan.
+(:domain permit-deadlock
+  (:operator (!grab ?permit ?who)
+    (:pre (free ?permit))
+    (:del (free ?permit))
+    (:add (held ?permit ?who)))
+
+  (:method m-grab (claim ?permit ?who)
+    (:pre (claimer ?who))
+    (:tasks (!grab ?permit ?who)))
+
+  (:method m-both (claim-both ?permit ?a ?b)
+    (:pre (claimer ?a) (claimer ?b))
+    (:tasks (:partial ((claim ?permit ?a) (claim ?permit ?b)))))
+)

@@ -1,0 +1,20 @@
+{
+  "case": "bounds_walk_long",
+  "bounds": {"max_depth": 1},
+  "expected_status": "inconclusive",
+  "expected_actions": [],
+  "expected_failure_categories": [],
+  "expected_uncertain_categories": ["depth_budget"],
+  "verification": {
+    "ok": false,
+    "expected_violation_code": "inconclusive_not_verifiable"
+  },
+  "adequate_bounds": {"max_depth": 5},
+  "adequate_expected_status": "success",
+  "adequate_expected_actions": [
+    ["!hop", ["a", "b"]],
+    ["!hop", ["b", "c"]],
+    ["!tick", ["c"]]
+  ],
+  "note": "A depth horizon smaller than the real solution proves nothing: the no-solution verdict must be reported as inconclusive depth_budget, not failure. The same problem succeeds once the bound is adequate."
+}

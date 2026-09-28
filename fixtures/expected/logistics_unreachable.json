@@ -1,0 +1,21 @@
+{
+  "case": "logistics_unreachable",
+  "expected_status": "failure",
+  "expected_actions": [],
+  "expected_methods_on_path": [],
+  "expected_failure_categories": ["no_applicable_method"],
+  "expected_failure_details": [
+    {
+      "category": "no_applicable_method",
+      "task_head": "deliver",
+      "rejected_methods_exactly": ["m-direct", "m-via-hub"],
+      "rejected_unmet_substrings": ["(road depot moon)", "(road depot ?mid)"]
+    }
+  ],
+  "verification": {
+    "ok": true,
+    "executable": true,
+    "failure_sound": true
+  },
+  "note": "No outgoing road from depot: independently rechecked that both methods fail."
+}

@@ -1,0 +1,22 @@
+{
+  "case": "docks_two",
+  "expected_status": "success",
+  "expected_actions": [
+    ["!lock", ["lock-1", "alice"]],
+    ["!unlock", ["lock-1", "alice"]],
+    ["!lock", ["lock-1", "bob"]],
+    ["!unlock", ["lock-1", "bob"]]
+  ],
+  "expected_methods_on_path": ["m-parallel", "m-work"],
+  "expected_failure_categories": [],
+  "verification": {
+    "ok": true,
+    "executable": true,
+    "hierarchy_consistent": true,
+    "order_consistent": true,
+    "feasible_linearizations": 2,
+    "linearizations_examined": 6,
+    "linearizations_truncated": false
+  },
+  "note": "4 actions over 2 unordered lock/unlock pairs: 6 topological orders, only 2 executable."
+}

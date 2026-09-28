@@ -1,0 +1,27 @@
+{
+  "case": "logistics_recursive",
+  "expected_status": "success",
+  "expected_actions": [
+    ["!load", ["crate2", "truck1", "depot"]],
+    ["!drive", ["truck1", "depot", "port"]],
+    ["!unload", ["crate2", "truck1", "port"]],
+    ["!load", ["crate2", "truck1", "port"]],
+    ["!drive", ["truck1", "port", "pier"]],
+    ["!unload", ["crate2", "truck1", "pier"]]
+  ],
+  "expected_final_state_contains": [
+    ["at", "crate2", "pier"],
+    ["free", "truck1"]
+  ],
+  "expected_methods_on_path": ["m-via-hub", "m-direct"],
+  "expected_failure_categories": [],
+  "expected_min_expansions": 2,
+  "verification": {
+    "ok": true,
+    "executable": true,
+    "hierarchy_consistent": true,
+    "order_consistent": true,
+    "feasible_linearizations": 1,
+    "linearizations_examined": 1
+  }
+}

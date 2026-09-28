@@ -1,0 +1,24 @@
+{
+  "case": "logistics_ship",
+  "expected_status": "success",
+  "expected_actions": [
+    ["!load", ["crate3", "truck2", "depot"]],
+    ["!drive", ["truck2", "depot", "port"]],
+    ["!unload", ["crate3", "truck2", "port"]]
+  ],
+  "expected_final_state_contains": [
+    ["at", "crate3", "port"],
+    ["free", "truck2"]
+  ],
+  "expected_methods_on_path": ["m-ship", "m-direct"],
+  "expected_failure_categories": [],
+  "note": "?from and ?to are introduced existentially from origin/dest facts",
+  "verification": {
+    "ok": true,
+    "executable": true,
+    "hierarchy_consistent": true,
+    "order_consistent": true,
+    "feasible_linearizations": 1,
+    "linearizations_examined": 1
+  }
+}

@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "htn-planner"
+version = "0.1.0"
+description = "Bounded HTN task planner: method selection, ordered/partial subtasks, evidence"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi==0.141.1",
+    "uvicorn==0.54.0",
+    "pydantic==2.13.5",
+]
+
+[project.scripts]
+htn-plan = "htn_planner.cli:main"
+
+[tool.setuptools]
+packages = ["htn_planner", "htn_planner.core"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -q"
+markers = [
+    "unit: unit tests for an individual module",
+    "integration: multi-module or API tests",
+]
+
+[tool.coverage.run]
+source = ["htn_planner"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 0

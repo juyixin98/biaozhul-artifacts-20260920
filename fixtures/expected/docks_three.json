@@ -1,0 +1,25 @@
+{
+  "case": "docks_three",
+  "expected_status": "success",
+  "expected_actions": [
+    ["!lock", ["lock-1", "alpha"]],
+    ["!unlock", ["lock-1", "alpha"]],
+    ["!lock", ["lock-1", "beta"]],
+    ["!unlock", ["lock-1", "beta"]],
+    ["!lock", ["lock-1", "gamma"]],
+    ["!unlock", ["lock-1", "gamma"]]
+  ],
+  "expected_methods_on_path": ["m-three", "m-work"],
+  "expected_failure_categories": [],
+  "plan_must_place_alpha_before_gamma": true,
+  "verification": {
+    "ok": true,
+    "executable": true,
+    "hierarchy_consistent": true,
+    "order_consistent": true,
+    "feasible_linearizations": 3,
+    "linearizations_examined": 15,
+    "linearizations_truncated": false
+  },
+  "note": "Partial constraint (:before 0 2) forces alpha entirely before gamma; beta floats. 15 topo orders, 3 executable."
+}

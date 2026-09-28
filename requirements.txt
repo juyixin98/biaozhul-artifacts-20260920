@@ -1,0 +1,16 @@
+# Pinned runtime/test dependencies.
+# Versions are exactly those the implementation was developed and verified
+# against on Python 3.12.  Install with: pip install -r requirements.txt
+fastapi==0.141.1
+uvicorn==0.54.0
+pydantic==2.13.5
+pydantic-core==2.46.5
+starlette==1.7.0
+anyio==4.15.1
+typing-extensions==4.16.0
+# Test / local verification client
+httpx==0.28.1
+pytest==9.1.1
+idna==3.6
+h11==0.16.0
+annotated-types==0.8.0
