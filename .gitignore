@@ -1,0 +1,15 @@
+# 合成实验本地运行目录
+data/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 临时
+*.tmp
+*.wal
+*.shm

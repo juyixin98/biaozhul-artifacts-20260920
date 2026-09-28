@@ -1,0 +1,1474 @@
+{
+  "report": "stratified-block-randomization/reproduction/v1",
+  "workdir": "./data/repro",
+  "temporary_workdir": false,
+  "serial_double_run_comparisons": [
+    {
+      "fixture": "two_arm_keep_open",
+      "mode": "serial_fixed_order",
+      "identical": true,
+      "n_compared": 23,
+      "mismatches": [],
+      "contract_fingerprint_same": true,
+      "note": "串行固定入组顺序下逐对象可复现；并发到达顺序不固定，逐对象差异不视为失败。"
+    },
+    {
+      "fixture": "two_arm_seal_early",
+      "mode": "serial_fixed_order",
+      "identical": true,
+      "n_compared": 23,
+      "mismatches": [],
+      "contract_fingerprint_same": true,
+      "note": "串行固定入组顺序下逐对象可复现；并发到达顺序不固定，逐对象差异不视为失败。"
+    },
+    {
+      "fixture": "ratio_1_2",
+      "mode": "serial_fixed_order",
+      "identical": true,
+      "n_compared": 13,
+      "mismatches": [],
+      "contract_fingerprint_same": true,
+      "note": "串行固定入组顺序下逐对象可复现；并发到达顺序不固定，逐对象差异不视为失败。"
+    }
+  ],
+  "concurrent_runs": {
+    "two_arm_keep_open": {
+      "label": "two_arm_keep_open__concurrent",
+      "mode": "concurrent",
+      "locations": {
+        "database": "./data/repro/two_arm_keep_open__concurrent.db",
+        "seeds": "./data/repro/two_arm_keep_open__concurrent-seeds.json",
+        "audit_log": "./data/repro/two_arm_keep_open__concurrent.audit.log"
+      },
+      "contract": {
+        "study_id": "FIXT-2ARM-2STRATA",
+        "contract_fingerprint": "ctr_f153039c2ab2618bd799c4fd60ea130e55eb544ebd608c2d7a7c5d46094940bf",
+        "block_size": 4,
+        "arms": [
+          {
+            "arm_id": "control",
+            "ratio": 1,
+            "slots_per_block": 2
+          },
+          {
+            "arm_id": "treatment",
+            "ratio": 1,
+            "slots_per_block": 2
+          }
+        ],
+        "tail_policy": "keep_open",
+        "spec_version": "contract/v1",
+        "version": 1
+      },
+      "allocations": [
+        {
+          "subject_id": "S000",
+          "arm": "treatment",
+          "stratum_key": "C1|early",
+          "block_index": 0,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S001",
+          "arm": "control",
+          "stratum_key": "C2|late",
+          "block_index": 0,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S002",
+          "arm": "treatment",
+          "stratum_key": "C3|early",
+          "block_index": 0,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S003",
+          "arm": "control",
+          "stratum_key": "C1|late",
+          "block_index": 0,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S004",
+          "arm": "control",
+          "stratum_key": "C2|early",
+          "block_index": 0,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S005",
+          "arm": "treatment",
+          "stratum_key": "C3|late",
+          "block_index": 0,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S006",
+          "arm": "control",
+          "stratum_key": "C1|early",
+          "block_index": 0,
+          "position": 1,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S007",
+          "arm": "control",
+          "stratum_key": "C2|late",
+          "block_index": 0,
+          "position": 1,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S008",
+          "arm": "control",
+          "stratum_key": "C3|early",
+          "block_index": 0,
+          "position": 1,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S009",
+          "arm": "treatment",
+          "stratum_key": "C1|late",
+          "block_index": 0,
+          "position": 1,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S010",
+          "arm": "treatment",
+          "stratum_key": "C2|early",
+          "block_index": 0,
+          "position": 1,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S011",
+          "arm": "treatment",
+          "stratum_key": "C3|late",
+          "block_index": 0,
+          "position": 1,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S012",
+          "arm": "treatment",
+          "stratum_key": "C1|early",
+          "block_index": 0,
+          "position": 2,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S013",
+          "arm": "treatment",
+          "stratum_key": "C2|late",
+          "block_index": 0,
+          "position": 2,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S014",
+          "arm": "treatment",
+          "stratum_key": "C3|early",
+          "block_index": 0,
+          "position": 2,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S015",
+          "arm": "control",
+          "stratum_key": "C1|late",
+          "block_index": 0,
+          "position": 2,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S016",
+          "arm": "treatment",
+          "stratum_key": "C2|early",
+          "block_index": 0,
+          "position": 2,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S017",
+          "arm": "control",
+          "stratum_key": "C3|late",
+          "block_index": 0,
+          "position": 2,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S018",
+          "arm": "control",
+          "stratum_key": "C1|early",
+          "block_index": 0,
+          "position": 3,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S019",
+          "arm": "treatment",
+          "stratum_key": "C2|late",
+          "block_index": 0,
+          "position": 3,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S020",
+          "arm": "control",
+          "stratum_key": "C3|early",
+          "block_index": 0,
+          "position": 3,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S021",
+          "arm": "treatment",
+          "stratum_key": "C1|late",
+          "block_index": 0,
+          "position": 3,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S022",
+          "arm": "control",
+          "stratum_key": "C2|early",
+          "block_index": 0,
+          "position": 3,
+          "outcome": "committed"
+        }
+      ],
+      "concurrent_errors": [],
+      "wave_rejection": null,
+      "random_source": {
+        "seed_fingerprint": "seed_969e98ab0b5ce312a32a775bce44c3bd5145b1093d11477178f130880cacae66",
+        "seed_b64": "cmN0LWZpeGVkLXNlZWQtdjEtQTAwMDAwMDAwMDAwMDA=",
+        "prf": "HMAC-SHA256 counter mode",
+        "block_key_derivation": "HKDF-style two-stage HMAC",
+        "shuffle": "unbiased Fisher-Yates",
+        "integer_sampling": "rejection sampling on uint32 (unbiased)",
+        "domain": "rct/v1/block-permutation",
+        "locator_coordinates": "study_id|contract_fingerprint|stratum_key|block_index|draw_index"
+      },
+      "tampered_replays": [
+        {
+          "subject_id": "S000",
+          "rejected": true,
+          "category": "FEATURES_CHANGED_AFTER_ALLOCATION",
+          "category_correct": true,
+          "original_arm_preserved": true
+        },
+        {
+          "subject_id": "S001",
+          "rejected": true,
+          "category": "FEATURES_CHANGED_AFTER_ALLOCATION",
+          "category_correct": true,
+          "original_arm_preserved": true
+        }
+      ],
+      "idempotent_replay": {
+        "subject_id": "S000",
+        "outcome": "replayed",
+        "arm": "treatment",
+        "returns_original": true
+      },
+      "tail": {
+        "seal_report": {
+          "study_id": "FIXT-2ARM-2STRATA",
+          "sealed_tails": [
+            {
+              "stratum_key": "C1|early",
+              "block_index": 1,
+              "filled": 1,
+              "block_size": 4,
+              "missing": 3
+            },
+            {
+              "stratum_key": "C3|late",
+              "block_index": 0,
+              "filled": 3,
+              "block_size": 4,
+              "missing": 1
+            }
+          ]
+        },
+        "tail_note": {
+          "kept_open_then_filled": {
+            "block_index": 1,
+            "position": 0
+          }
+        }
+      },
+      "concurrency": {
+        "batch_size": 8,
+        "succeeded": 8,
+        "unique_slots": 8,
+        "no_slot_collision": true,
+        "no_subject_lost": true
+      },
+      "balance": {
+        "study_id": "FIXT-2ARM-2STRATA",
+        "contract_fingerprint": "ctr_f153039c2ab2618bd799c4fd60ea130e55eb544ebd608c2d7a7c5d46094940bf",
+        "verdict": "PASS",
+        "blocks": [
+          {
+            "stratum_key": "C1|early",
+            "block_index": 0,
+            "block_size": 4,
+            "filled": 4,
+            "status": "full",
+            "counts": {
+              "control": 2,
+              "treatment": 2
+            },
+            "expected_counts": {
+              "control": 2,
+              "treatment": 2
+            },
+            "deviations": {
+              "control": 0,
+              "treatment": 0
+            }
+          },
+          {
+            "stratum_key": "C1|early",
+            "block_index": 1,
+            "block_size": 4,
+            "filled": 1,
+            "status": "sealed_tail",
+            "counts": {
+              "control": 0,
+              "treatment": 1
+            },
+            "expected_counts_if_completed": {
+              "control": 2,
+              "treatment": 2
+            },
+            "missing_to_completion": 3
+          },
+          {
+            "stratum_key": "C1|late",
+            "block_index": 0,
+            "block_size": 4,
+            "filled": 4,
+            "status": "full",
+            "counts": {
+              "control": 2,
+              "treatment": 2
+            },
+            "expected_counts": {
+              "control": 2,
+              "treatment": 2
+            },
+            "deviations": {
+              "control": 0,
+              "treatment": 0
+            }
+          },
+          {
+            "stratum_key": "C2|early",
+            "block_index": 0,
+            "block_size": 4,
+            "filled": 4,
+            "status": "full",
+            "counts": {
+              "control": 2,
+              "treatment": 2
+            },
+            "expected_counts": {
+              "control": 2,
+              "treatment": 2
+            },
+            "deviations": {
+              "control": 0,
+              "treatment": 0
+            }
+          },
+          {
+            "stratum_key": "C2|late",
+            "block_index": 0,
+            "block_size": 4,
+            "filled": 4,
+            "status": "full",
+            "counts": {
+              "control": 2,
+              "treatment": 2
+            },
+            "expected_counts": {
+              "control": 2,
+              "treatment": 2
+            },
+            "deviations": {
+              "control": 0,
+              "treatment": 0
+            }
+          },
+          {
+            "stratum_key": "C3|early",
+            "block_index": 0,
+            "block_size": 4,
+            "filled": 4,
+            "status": "full",
+            "counts": {
+              "control": 2,
+              "treatment": 2
+            },
+            "expected_counts": {
+              "control": 2,
+              "treatment": 2
+            },
+            "deviations": {
+              "control": 0,
+              "treatment": 0
+            }
+          },
+          {
+            "stratum_key": "C3|late",
+            "block_index": 0,
+            "block_size": 4,
+            "filled": 3,
+            "status": "sealed_tail",
+            "counts": {
+              "control": 1,
+              "treatment": 2
+            },
+            "expected_counts_if_completed": {
+              "control": 2,
+              "treatment": 2
+            },
+            "missing_to_completion": 1
+          }
+        ],
+        "aggregate": {
+          "n_allocated": 24,
+          "counts": {
+            "control": 11,
+            "treatment": 13
+          },
+          "observed_proportions": {
+            "control": 0.458333,
+            "treatment": 0.541667
+          },
+          "target_proportions": {
+            "control": 0.5,
+            "treatment": 0.5
+          },
+          "completed_blocks": 5
+        },
+        "failures": [],
+        "uncertainties": [
+          {
+            "category": "INCOMPLETE_TAIL_BLOCK",
+            "stratum_key": "C1|early",
+            "block_index": 1,
+            "filled": 1,
+            "block_size": 4,
+            "status": "sealed_tail",
+            "reason": "尾组已提前封闭（seal_early），按设计不补齐"
+          },
+          {
+            "category": "INCOMPLETE_TAIL_BLOCK",
+            "stratum_key": "C3|late",
+            "block_index": 0,
+            "filled": 3,
+            "block_size": 4,
+            "status": "sealed_tail",
+            "reason": "尾组已提前封闭（seal_early），按设计不补齐"
+          }
+        ],
+        "interpretation": "完整区组比例由槽位铺设确定性保证；尾组偏差单列，不计入失败。本报告不涉及任何分配后效果指标。"
+      },
+      "verification": {
+        "verdict": "PASS",
+        "checks_performed": 34,
+        "n_allocations": 24,
+        "n_blocks": 7,
+        "failures": []
+      }
+    },
+    "two_arm_seal_early": {
+      "label": "two_arm_seal_early__concurrent",
+      "mode": "concurrent",
+      "locations": {
+        "database": "./data/repro/two_arm_seal_early__concurrent.db",
+        "seeds": "./data/repro/two_arm_seal_early__concurrent-seeds.json",
+        "audit_log": "./data/repro/two_arm_seal_early__concurrent.audit.log"
+      },
+      "contract": {
+        "study_id": "FIXT-2ARM-2STRATA",
+        "contract_fingerprint": "ctr_d611bb087f24849c63eb0befb818a2a4062cd5ca612d92fa66081d6ed8c32b9a",
+        "block_size": 4,
+        "arms": [
+          {
+            "arm_id": "control",
+            "ratio": 1,
+            "slots_per_block": 2
+          },
+          {
+            "arm_id": "treatment",
+            "ratio": 1,
+            "slots_per_block": 2
+          }
+        ],
+        "tail_policy": "seal_early",
+        "spec_version": "contract/v1",
+        "version": 1
+      },
+      "allocations": [
+        {
+          "subject_id": "S000",
+          "arm": "control",
+          "stratum_key": "C1|early",
+          "block_index": 0,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S001",
+          "arm": "control",
+          "stratum_key": "C2|late",
+          "block_index": 0,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S002",
+          "arm": "control",
+          "stratum_key": "C3|early",
+          "block_index": 0,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S003",
+          "arm": "treatment",
+          "stratum_key": "C1|late",
+          "block_index": 0,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S004",
+          "arm": "control",
+          "stratum_key": "C2|early",
+          "block_index": 0,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S005",
+          "arm": "control",
+          "stratum_key": "C3|late",
+          "block_index": 0,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S006",
+          "arm": "treatment",
+          "stratum_key": "C1|early",
+          "block_index": 0,
+          "position": 1,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S007",
+          "arm": "control",
+          "stratum_key": "C2|late",
+          "block_index": 1,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S008",
+          "arm": "treatment",
+          "stratum_key": "C3|early",
+          "block_index": 1,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S009",
+          "arm": "treatment",
+          "stratum_key": "C1|late",
+          "block_index": 1,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S010",
+          "arm": "treatment",
+          "stratum_key": "C2|early",
+          "block_index": 1,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S011",
+          "arm": "treatment",
+          "stratum_key": "C3|late",
+          "block_index": 1,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S012",
+          "arm": "treatment",
+          "stratum_key": "C1|early",
+          "block_index": 1,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S013",
+          "arm": "control",
+          "stratum_key": "C2|late",
+          "block_index": 1,
+          "position": 1,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S014",
+          "arm": "control",
+          "stratum_key": "C3|early",
+          "block_index": 1,
+          "position": 1,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S015",
+          "arm": "control",
+          "stratum_key": "C1|late",
+          "block_index": 1,
+          "position": 1,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S016",
+          "arm": "control",
+          "stratum_key": "C2|early",
+          "block_index": 1,
+          "position": 1,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S017",
+          "arm": "control",
+          "stratum_key": "C3|late",
+          "block_index": 1,
+          "position": 1,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S018",
+          "arm": "control",
+          "stratum_key": "C1|early",
+          "block_index": 1,
+          "position": 1,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S019",
+          "arm": "treatment",
+          "stratum_key": "C2|late",
+          "block_index": 1,
+          "position": 2,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S020",
+          "arm": "treatment",
+          "stratum_key": "C3|early",
+          "block_index": 1,
+          "position": 2,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S021",
+          "arm": "treatment",
+          "stratum_key": "C1|late",
+          "block_index": 1,
+          "position": 2,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "S022",
+          "arm": "treatment",
+          "stratum_key": "C2|early",
+          "block_index": 1,
+          "position": 2,
+          "outcome": "committed"
+        }
+      ],
+      "concurrent_errors": [],
+      "wave_rejection": {
+        "rejected": true,
+        "category": "STRATUM_SEALED",
+        "category_correct": true
+      },
+      "random_source": {
+        "seed_fingerprint": "seed_969e98ab0b5ce312a32a775bce44c3bd5145b1093d11477178f130880cacae66",
+        "seed_b64": "cmN0LWZpeGVkLXNlZWQtdjEtQTAwMDAwMDAwMDAwMDA=",
+        "prf": "HMAC-SHA256 counter mode",
+        "block_key_derivation": "HKDF-style two-stage HMAC",
+        "shuffle": "unbiased Fisher-Yates",
+        "integer_sampling": "rejection sampling on uint32 (unbiased)",
+        "domain": "rct/v1/block-permutation",
+        "locator_coordinates": "study_id|contract_fingerprint|stratum_key|block_index|draw_index"
+      },
+      "tampered_replays": [
+        {
+          "subject_id": "S000",
+          "rejected": true,
+          "category": "FEATURES_CHANGED_AFTER_ALLOCATION",
+          "category_correct": true,
+          "original_arm_preserved": true
+        },
+        {
+          "subject_id": "S001",
+          "rejected": true,
+          "category": "FEATURES_CHANGED_AFTER_ALLOCATION",
+          "category_correct": true,
+          "original_arm_preserved": true
+        }
+      ],
+      "idempotent_replay": {
+        "subject_id": "S000",
+        "outcome": "replayed",
+        "arm": "control",
+        "returns_original": true
+      },
+      "tail": {
+        "seal_report": {
+          "study_id": "FIXT-2ARM-2STRATA",
+          "sealed_tails": [
+            {
+              "stratum_key": "C1|early",
+              "block_index": 1,
+              "filled": 2,
+              "block_size": 4,
+              "missing": 2
+            },
+            {
+              "stratum_key": "C2|late",
+              "block_index": 1,
+              "filled": 3,
+              "block_size": 4,
+              "missing": 1
+            },
+            {
+              "stratum_key": "C3|early",
+              "block_index": 1,
+              "filled": 3,
+              "block_size": 4,
+              "missing": 1
+            },
+            {
+              "stratum_key": "C1|late",
+              "block_index": 1,
+              "filled": 3,
+              "block_size": 4,
+              "missing": 1
+            },
+            {
+              "stratum_key": "C2|early",
+              "block_index": 1,
+              "filled": 3,
+              "block_size": 4,
+              "missing": 1
+            },
+            {
+              "stratum_key": "C3|late",
+              "block_index": 1,
+              "filled": 2,
+              "block_size": 4,
+              "missing": 2
+            }
+          ]
+        },
+        "tail_note": null
+      },
+      "concurrency": {
+        "batch_size": 8,
+        "succeeded": 8,
+        "unique_slots": 8,
+        "no_slot_collision": true,
+        "no_subject_lost": true
+      },
+      "balance": {
+        "study_id": "FIXT-2ARM-2STRATA",
+        "contract_fingerprint": "ctr_d611bb087f24849c63eb0befb818a2a4062cd5ca612d92fa66081d6ed8c32b9a",
+        "verdict": "PASS",
+        "blocks": [
+          {
+            "stratum_key": "C1|early",
+            "block_index": 0,
+            "block_size": 4,
+            "filled": 2,
+            "status": "sealed_tail",
+            "counts": {
+              "control": 1,
+              "treatment": 1
+            },
+            "expected_counts_if_completed": {
+              "control": 2,
+              "treatment": 2
+            },
+            "missing_to_completion": 2
+          },
+          {
+            "stratum_key": "C1|early",
+            "block_index": 1,
+            "block_size": 4,
+            "filled": 2,
+            "status": "sealed_tail",
+            "counts": {
+              "control": 1,
+              "treatment": 1
+            },
+            "expected_counts_if_completed": {
+              "control": 2,
+              "treatment": 2
+            },
+            "missing_to_completion": 2
+          },
+          {
+            "stratum_key": "C1|late",
+            "block_index": 0,
+            "block_size": 4,
+            "filled": 1,
+            "status": "sealed_tail",
+            "counts": {
+              "control": 0,
+              "treatment": 1
+            },
+            "expected_counts_if_completed": {
+              "control": 2,
+              "treatment": 2
+            },
+            "missing_to_completion": 3
+          },
+          {
+            "stratum_key": "C1|late",
+            "block_index": 1,
+            "block_size": 4,
+            "filled": 3,
+            "status": "sealed_tail",
+            "counts": {
+              "control": 1,
+              "treatment": 2
+            },
+            "expected_counts_if_completed": {
+              "control": 2,
+              "treatment": 2
+            },
+            "missing_to_completion": 1
+          },
+          {
+            "stratum_key": "C2|early",
+            "block_index": 0,
+            "block_size": 4,
+            "filled": 1,
+            "status": "sealed_tail",
+            "counts": {
+              "control": 1,
+              "treatment": 0
+            },
+            "expected_counts_if_completed": {
+              "control": 2,
+              "treatment": 2
+            },
+            "missing_to_completion": 3
+          },
+          {
+            "stratum_key": "C2|early",
+            "block_index": 1,
+            "block_size": 4,
+            "filled": 3,
+            "status": "sealed_tail",
+            "counts": {
+              "control": 1,
+              "treatment": 2
+            },
+            "expected_counts_if_completed": {
+              "control": 2,
+              "treatment": 2
+            },
+            "missing_to_completion": 1
+          },
+          {
+            "stratum_key": "C2|late",
+            "block_index": 0,
+            "block_size": 4,
+            "filled": 1,
+            "status": "sealed_tail",
+            "counts": {
+              "control": 1,
+              "treatment": 0
+            },
+            "expected_counts_if_completed": {
+              "control": 2,
+              "treatment": 2
+            },
+            "missing_to_completion": 3
+          },
+          {
+            "stratum_key": "C2|late",
+            "block_index": 1,
+            "block_size": 4,
+            "filled": 3,
+            "status": "sealed_tail",
+            "counts": {
+              "control": 2,
+              "treatment": 1
+            },
+            "expected_counts_if_completed": {
+              "control": 2,
+              "treatment": 2
+            },
+            "missing_to_completion": 1
+          },
+          {
+            "stratum_key": "C3|early",
+            "block_index": 0,
+            "block_size": 4,
+            "filled": 1,
+            "status": "sealed_tail",
+            "counts": {
+              "control": 1,
+              "treatment": 0
+            },
+            "expected_counts_if_completed": {
+              "control": 2,
+              "treatment": 2
+            },
+            "missing_to_completion": 3
+          },
+          {
+            "stratum_key": "C3|early",
+            "block_index": 1,
+            "block_size": 4,
+            "filled": 3,
+            "status": "sealed_tail",
+            "counts": {
+              "control": 1,
+              "treatment": 2
+            },
+            "expected_counts_if_completed": {
+              "control": 2,
+              "treatment": 2
+            },
+            "missing_to_completion": 1
+          },
+          {
+            "stratum_key": "C3|late",
+            "block_index": 0,
+            "block_size": 4,
+            "filled": 1,
+            "status": "sealed_tail",
+            "counts": {
+              "control": 1,
+              "treatment": 0
+            },
+            "expected_counts_if_completed": {
+              "control": 2,
+              "treatment": 2
+            },
+            "missing_to_completion": 3
+          },
+          {
+            "stratum_key": "C3|late",
+            "block_index": 1,
+            "block_size": 4,
+            "filled": 2,
+            "status": "sealed_tail",
+            "counts": {
+              "control": 1,
+              "treatment": 1
+            },
+            "expected_counts_if_completed": {
+              "control": 2,
+              "treatment": 2
+            },
+            "missing_to_completion": 2
+          }
+        ],
+        "aggregate": {
+          "n_allocated": 23,
+          "counts": {
+            "control": 12,
+            "treatment": 11
+          },
+          "observed_proportions": {
+            "control": 0.521739,
+            "treatment": 0.478261
+          },
+          "target_proportions": {
+            "control": 0.5,
+            "treatment": 0.5
+          },
+          "completed_blocks": 0
+        },
+        "failures": [],
+        "uncertainties": [
+          {
+            "category": "INCOMPLETE_TAIL_BLOCK",
+            "stratum_key": "C1|early",
+            "block_index": 0,
+            "filled": 2,
+            "block_size": 4,
+            "status": "sealed_tail",
+            "reason": "尾组已提前封闭（seal_early），按设计不补齐"
+          },
+          {
+            "category": "INCOMPLETE_TAIL_BLOCK",
+            "stratum_key": "C1|early",
+            "block_index": 1,
+            "filled": 2,
+            "block_size": 4,
+            "status": "sealed_tail",
+            "reason": "尾组已提前封闭（seal_early），按设计不补齐"
+          },
+          {
+            "category": "INCOMPLETE_TAIL_BLOCK",
+            "stratum_key": "C1|late",
+            "block_index": 0,
+            "filled": 1,
+            "block_size": 4,
+            "status": "sealed_tail",
+            "reason": "尾组已提前封闭（seal_early），按设计不补齐"
+          },
+          {
+            "category": "INCOMPLETE_TAIL_BLOCK",
+            "stratum_key": "C1|late",
+            "block_index": 1,
+            "filled": 3,
+            "block_size": 4,
+            "status": "sealed_tail",
+            "reason": "尾组已提前封闭（seal_early），按设计不补齐"
+          },
+          {
+            "category": "INCOMPLETE_TAIL_BLOCK",
+            "stratum_key": "C2|early",
+            "block_index": 0,
+            "filled": 1,
+            "block_size": 4,
+            "status": "sealed_tail",
+            "reason": "尾组已提前封闭（seal_early），按设计不补齐"
+          },
+          {
+            "category": "INCOMPLETE_TAIL_BLOCK",
+            "stratum_key": "C2|early",
+            "block_index": 1,
+            "filled": 3,
+            "block_size": 4,
+            "status": "sealed_tail",
+            "reason": "尾组已提前封闭（seal_early），按设计不补齐"
+          },
+          {
+            "category": "INCOMPLETE_TAIL_BLOCK",
+            "stratum_key": "C2|late",
+            "block_index": 0,
+            "filled": 1,
+            "block_size": 4,
+            "status": "sealed_tail",
+            "reason": "尾组已提前封闭（seal_early），按设计不补齐"
+          },
+          {
+            "category": "INCOMPLETE_TAIL_BLOCK",
+            "stratum_key": "C2|late",
+            "block_index": 1,
+            "filled": 3,
+            "block_size": 4,
+            "status": "sealed_tail",
+            "reason": "尾组已提前封闭（seal_early），按设计不补齐"
+          },
+          {
+            "category": "INCOMPLETE_TAIL_BLOCK",
+            "stratum_key": "C3|early",
+            "block_index": 0,
+            "filled": 1,
+            "block_size": 4,
+            "status": "sealed_tail",
+            "reason": "尾组已提前封闭（seal_early），按设计不补齐"
+          },
+          {
+            "category": "INCOMPLETE_TAIL_BLOCK",
+            "stratum_key": "C3|early",
+            "block_index": 1,
+            "filled": 3,
+            "block_size": 4,
+            "status": "sealed_tail",
+            "reason": "尾组已提前封闭（seal_early），按设计不补齐"
+          },
+          {
+            "category": "INCOMPLETE_TAIL_BLOCK",
+            "stratum_key": "C3|late",
+            "block_index": 0,
+            "filled": 1,
+            "block_size": 4,
+            "status": "sealed_tail",
+            "reason": "尾组已提前封闭（seal_early），按设计不补齐"
+          },
+          {
+            "category": "INCOMPLETE_TAIL_BLOCK",
+            "stratum_key": "C3|late",
+            "block_index": 1,
+            "filled": 2,
+            "block_size": 4,
+            "status": "sealed_tail",
+            "reason": "尾组已提前封闭（seal_early），按设计不补齐"
+          }
+        ],
+        "interpretation": "完整区组比例由槽位铺设确定性保证；尾组偏差单列，不计入失败。本报告不涉及任何分配后效果指标。"
+      },
+      "verification": {
+        "verdict": "PASS",
+        "checks_performed": 38,
+        "n_allocations": 23,
+        "n_blocks": 12,
+        "failures": []
+      }
+    },
+    "ratio_1_2": {
+      "label": "ratio_1_2__concurrent",
+      "mode": "concurrent",
+      "locations": {
+        "database": "./data/repro/ratio_1_2__concurrent.db",
+        "seeds": "./data/repro/ratio_1_2__concurrent-seeds.json",
+        "audit_log": "./data/repro/ratio_1_2__concurrent.audit.log"
+      },
+      "contract": {
+        "study_id": "FIXT-RATIO-1-2",
+        "contract_fingerprint": "ctr_b105f1bb5dd94d998be321249966b71a093ba2d52d2a8f6b8df00f607ce3d66a",
+        "block_size": 6,
+        "arms": [
+          {
+            "arm_id": "A",
+            "ratio": 1,
+            "slots_per_block": 2
+          },
+          {
+            "arm_id": "B",
+            "ratio": 2,
+            "slots_per_block": 4
+          }
+        ],
+        "tail_policy": "keep_open",
+        "spec_version": "contract/v1",
+        "version": 1
+      },
+      "allocations": [
+        {
+          "subject_id": "R000",
+          "arm": "B",
+          "stratum_key": "N",
+          "block_index": 0,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "R001",
+          "arm": "B",
+          "stratum_key": "S",
+          "block_index": 0,
+          "position": 2,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "R002",
+          "arm": "B",
+          "stratum_key": "N",
+          "block_index": 0,
+          "position": 1,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "R003",
+          "arm": "B",
+          "stratum_key": "S",
+          "block_index": 0,
+          "position": 0,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "R004",
+          "arm": "B",
+          "stratum_key": "N",
+          "block_index": 0,
+          "position": 2,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "R005",
+          "arm": "A",
+          "stratum_key": "S",
+          "block_index": 0,
+          "position": 1,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "R006",
+          "arm": "A",
+          "stratum_key": "N",
+          "block_index": 0,
+          "position": 3,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "R007",
+          "arm": "A",
+          "stratum_key": "S",
+          "block_index": 0,
+          "position": 3,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "R008",
+          "arm": "B",
+          "stratum_key": "N",
+          "block_index": 0,
+          "position": 4,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "R009",
+          "arm": "B",
+          "stratum_key": "S",
+          "block_index": 0,
+          "position": 4,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "R010",
+          "arm": "A",
+          "stratum_key": "N",
+          "block_index": 0,
+          "position": 5,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "R011",
+          "arm": "B",
+          "stratum_key": "S",
+          "block_index": 0,
+          "position": 5,
+          "outcome": "committed"
+        },
+        {
+          "subject_id": "R012",
+          "arm": "A",
+          "stratum_key": "N",
+          "block_index": 1,
+          "position": 0,
+          "outcome": "committed"
+        }
+      ],
+      "concurrent_errors": [],
+      "wave_rejection": null,
+      "random_source": {
+        "seed_fingerprint": "seed_7f0e5015b9bf5540b07275ff0cb6fcb18c54abb86567a59ec9aa71a727cb4a0d",
+        "seed_b64": "cmN0LWZpeGVkLXNlZWQtdjEtQjAwMDAwMDAwMDAwMDA=",
+        "prf": "HMAC-SHA256 counter mode",
+        "block_key_derivation": "HKDF-style two-stage HMAC",
+        "shuffle": "unbiased Fisher-Yates",
+        "integer_sampling": "rejection sampling on uint32 (unbiased)",
+        "domain": "rct/v1/block-permutation",
+        "locator_coordinates": "study_id|contract_fingerprint|stratum_key|block_index|draw_index"
+      },
+      "tampered_replays": [],
+      "idempotent_replay": {
+        "subject_id": "R000",
+        "outcome": "replayed",
+        "arm": "B",
+        "returns_original": true
+      },
+      "tail": {
+        "seal_report": {
+          "study_id": "FIXT-RATIO-1-2",
+          "sealed_tails": [
+            {
+              "stratum_key": "N",
+              "block_index": 1,
+              "filled": 2,
+              "block_size": 6,
+              "missing": 4
+            }
+          ]
+        },
+        "tail_note": {
+          "kept_open_then_filled": {
+            "block_index": 1,
+            "position": 1
+          }
+        }
+      },
+      "concurrency": {
+        "batch_size": 6,
+        "succeeded": 6,
+        "unique_slots": 6,
+        "no_slot_collision": true,
+        "no_subject_lost": true
+      },
+      "balance": {
+        "study_id": "FIXT-RATIO-1-2",
+        "contract_fingerprint": "ctr_b105f1bb5dd94d998be321249966b71a093ba2d52d2a8f6b8df00f607ce3d66a",
+        "verdict": "PASS",
+        "blocks": [
+          {
+            "stratum_key": "N",
+            "block_index": 0,
+            "block_size": 6,
+            "filled": 6,
+            "status": "full",
+            "counts": {
+              "A": 2,
+              "B": 4
+            },
+            "expected_counts": {
+              "A": 2,
+              "B": 4
+            },
+            "deviations": {
+              "A": 0,
+              "B": 0
+            }
+          },
+          {
+            "stratum_key": "N",
+            "block_index": 1,
+            "block_size": 6,
+            "filled": 2,
+            "status": "sealed_tail",
+            "counts": {
+              "A": 2,
+              "B": 0
+            },
+            "expected_counts_if_completed": {
+              "A": 2,
+              "B": 4
+            },
+            "missing_to_completion": 4
+          },
+          {
+            "stratum_key": "S",
+            "block_index": 0,
+            "block_size": 6,
+            "filled": 6,
+            "status": "full",
+            "counts": {
+              "A": 2,
+              "B": 4
+            },
+            "expected_counts": {
+              "A": 2,
+              "B": 4
+            },
+            "deviations": {
+              "A": 0,
+              "B": 0
+            }
+          }
+        ],
+        "aggregate": {
+          "n_allocated": 14,
+          "counts": {
+            "A": 6,
+            "B": 8
+          },
+          "observed_proportions": {
+            "A": 0.428571,
+            "B": 0.571429
+          },
+          "target_proportions": {
+            "A": 0.3333333333333333,
+            "B": 0.6666666666666666
+          },
+          "completed_blocks": 2
+        },
+        "failures": [],
+        "uncertainties": [
+          {
+            "category": "INCOMPLETE_TAIL_BLOCK",
+            "stratum_key": "N",
+            "block_index": 1,
+            "filled": 2,
+            "block_size": 6,
+            "status": "sealed_tail",
+            "reason": "尾组已提前封闭（seal_early），按设计不补齐"
+          }
+        ],
+        "interpretation": "完整区组比例由槽位铺设确定性保证；尾组偏差单列，不计入失败。本报告不涉及任何分配后效果指标。"
+      },
+      "verification": {
+        "verdict": "PASS",
+        "checks_performed": 20,
+        "n_allocations": 14,
+        "n_blocks": 3,
+        "failures": []
+      }
+    }
+  },
+  "recovery": [
+    {
+      "fixture": "two_arm_keep_open",
+      "replayed_outcome": "replayed",
+      "replayed_arm_matches": true,
+      "new_subject_allocated_after_restart": true,
+      "new_subject_arm": "treatment",
+      "new_subject_coordinates": {
+        "stratum_key": "C1|early",
+        "block_index": 1,
+        "position": 0
+      },
+      "verification_after_recovery": "PASS"
+    },
+    {
+      "fixture": "two_arm_seal_early",
+      "replayed_outcome": "replayed",
+      "replayed_arm_matches": true,
+      "new_subject_allocated_after_restart": true,
+      "new_subject_arm": "control",
+      "new_subject_coordinates": {
+        "stratum_key": "C1|early",
+        "block_index": 1,
+        "position": 2
+      },
+      "verification_after_recovery": "PASS"
+    },
+    {
+      "fixture": "ratio_1_2",
+      "replayed_outcome": "replayed",
+      "replayed_arm_matches": true,
+      "new_subject_allocated_after_restart": true,
+      "new_subject_arm": "A",
+      "new_subject_coordinates": {
+        "stratum_key": "N",
+        "block_index": 1,
+        "position": 1
+      },
+      "verification_after_recovery": "PASS"
+    }
+  ],
+  "summary": {
+    "all_serial_double_runs_identical": true,
+    "all_concurrent_slot_integrity_ok": true,
+    "all_feature_tampering_rejected_and_preserved": true,
+    "all_idempotent_replays_return_original": true,
+    "all_tail_wave_rejections_correct": true,
+    "tail_seal_reports_present": true,
+    "all_balance_reports_pass": true,
+    "all_stream_verifications_pass": true,
+    "all_recoveries_ok": true,
+    "overall": "PASS"
+  },
+  "disclaimer": "本报告只验证分配机制（比例、随机流复算、幂等、并发、尾组、恢复）。任何分配后效果指标（结局差异、p 值等）都不是分配正确性的证据。"
+}

@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "warning": "LOCAL SYNTHETIC seed store (0600). 不适用于生产。",
+  "studies": {
+    "FIXT-RATIO-1-2": {
+      "seed_b64": "cmN0LWZpeGVkLXNlZWQtdjEtQjAwMDAwMDAwMDAwMDA=",
+      "fingerprint": "seed_7f0e5015b9bf5540b07275ff0cb6fcb18c54abb86567a59ec9aa71a727cb4a0d"
+    }
+  }
+}

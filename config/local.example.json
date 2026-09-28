@@ -1,0 +1,11 @@
+{
+  "database_path": "./data/rct.db",
+  "seeds_path": "./data/seeds.json",
+  "log_path": "./data/audit.log",
+  "env": "local-synthetic",
+  "tokens": {
+    "synt-investigator-token": "investigator",
+    "synt-auditor-token": "auditor",
+    "synt-admin-token": "admin"
+  }
+}
