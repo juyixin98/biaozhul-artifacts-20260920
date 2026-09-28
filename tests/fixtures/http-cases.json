@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "description": "Replayable HTTP scenarios. Each scenario resets its own resource ids. Expected ETags were precomputed by an independent canonicalizer (tests/helpers/oracle.ts), not by the server under test.",
+    "etagFormat": "v<version>-<sha256-prefix-of-canonical-json>"
+  },
+  "scenarios": [
+    {
+      "name": "create-then-replace lifecycle",
+      "setup": [],
+      "steps": [
+        { "method": "PUT", "path": "/resources/w-1", "body": { "name": "widget", "count": 1, "tags": ["x"] }, "headers": {}, "expectStatus": 201, "expectEtag": "\"v1-d00ddb0d\"" },
+        { "method": "GET", "path": "/resources/w-1", "headers": {}, "expectStatus": 200, "expectEtag": "\"v1-d00ddb0d\"", "expectVersion": 1 },
+        { "method": "PUT", "path": "/resources/w-1", "body": { "name": "widget", "count": 2, "tags": ["x"] }, "headers": {}, "expectStatus": 200, "expectEtag": "\"v2-ce5ede1f\"", "expectVersion": 2 },
+        { "method": "DELETE", "path": "/resources/w-1", "headers": {}, "expectStatus": 204 },
+        { "method": "GET", "path": "/resources/w-1", "headers": {}, "expectStatus": 404, "expectErrorCode": "RESOURCE_NOT_FOUND" }
+      ]
+    },
+    {
+      "name": "wildcard create-only (If-None-Match: *)",
+      "setup": [],
+      "steps": [
+        { "method": "PUT", "path": "/resources/wc", "body": { "v": 1 }, "headers": { "If-None-Match": "*" }, "expectStatus": 201 },
+        { "method": "PUT", "path": "/resources/wc", "body": { "v": 2 }, "headers": { "If-None-Match": "*" }, "expectStatus": 412, "expectErrorCode": "PRECONDITION_IF_NONE_MATCH_FAILED" },
+        { "method": "GET", "path": "/resources/wc", "headers": {}, "expectStatus": 200, "expectVersion": 1, "comment": "failed conditional write must not change state" }
+      ]
+    },
+    {
+      "name": "lost-response replay stays idempotent under optimistic concurrency",
+      "setup": [
+        { "method": "PUT", "path": "/resources/lost", "body": { "phase": "original" } }
+      ],
+      "steps": [
+        { "method": "PUT", "path": "/resources/lost", "body": { "phase": "client-edit" }, "headers": { "If-Match": "\"__INITIAL__\"" }, "expectStatus": 200, "comment": "first send (response is presumed lost by the client)" },
+        { "method": "PUT", "path": "/resources/lost", "body": { "phase": "client-edit" }, "headers": { "If-Match": "\"__INITIAL__\"" }, "expectStatus": 412, "expectErrorCode": "PRECONDITION_IF_MATCH_FAILED", "comment": "blind replay of the same stale conditional write is rejected" },
+        { "method": "GET", "path": "/resources/lost", "headers": {}, "expectStatus": 200, "expectBodyField": ["phase", "client-edit"], "comment": "the first edit is intact; no duplicate/lost version" }
+      ]
+    },
+    {
+      "name": "weak validator accepted for GET 304 but rejected for If-Match write",
+      "setup": [
+        { "method": "PUT", "path": "/resources/weak", "body": { "n": 7 } }
+      ],
+      "steps": [
+        { "method": "GET", "path": "/resources/weak", "headers": { "If-None-Match": "W/\"__CURRENT__\"" }, "expectStatus": 304, "comment": "weak comparison on safe methods" },
+        { "method": "PUT", "path": "/resources/weak", "body": { "n": 8 }, "headers": { "If-Match": "W/\"__CURRENT__\"" }, "expectStatus": 412, "expectErrorCode": "PRECONDITION_IF_MATCH_FAILED", "comment": "If-Match always uses strong comparison; W/ cannot match" },
+        { "method": "PUT", "path": "/resources/weak", "body": { "n": 8 }, "headers": { "If-None-Match": "W/\"__CURRENT__\"" }, "expectStatus": 412, "expectErrorCode": "PRECONDITION_IF_NONE_MATCH_FAILED", "comment": "If-None-Match on writes uses weak comparison and therefore blocks" },
+        { "method": "GET", "path": "/resources/weak", "headers": {}, "expectStatus": 200, "expectBodyField": ["n", 7] }
+      ]
+    },
+    {
+      "name": "entity-tag condition takes precedence over date condition",
+      "setup": [
+        { "method": "PUT", "path": "/resources/prec", "body": { "v": 1 } }
+      ],
+      "steps": [
+        { "method": "GET", "path": "/resources/prec", "headers": { "If-None-Match": "\"__CURRENT__\"", "If-Modified-Since": "Wed, 01 Jan 2020 00:00:00 GMT" }, "expectStatus": 304, "comment": "INM matches; the ancient IMS that would also block is irrelevant" },
+        { "method": "GET", "path": "/resources/prec", "headers": { "If-None-Match": "\"v0-deadbeef\"", "If-Modified-Since": "Wed, 01 Jan 2020 00:00:00 GMT" }, "expectStatus": 200, "comment": "INM present but non-matching: IMS is ignored per RFC 9110, so response is 200 not 304" }
+      ]
+    },
+    {
+      "name": "server-issued weak validator round trips correctly",
+      "setup": [
+        { "method": "PUT", "path": "/resources/wsrv", "body": { "n": 7 } }
+      ],
+      "steps": [
+        { "method": "GET", "path": "/resources/wsrv?weak=1", "headers": {}, "expectStatus": 200, "comment": "server can emit W/ on an otherwise identical representation" },
+        { "method": "GET", "path": "/resources/wsrv", "headers": { "If-None-Match": "W/\"__CURRENT_WEAK__\"" }, "expectStatus": 304, "comment": "a server-issued weak tag yields 304 under weak comparison" },
+        { "method": "PUT", "path": "/resources/wsrv", "body": { "n": 8 }, "headers": { "If-Match": "W/\"__CURRENT_WEAK__\"" }, "expectStatus": 412, "expectErrorCode": "PRECONDITION_IF_MATCH_FAILED", "comment": "the same weak tag is rejected for a write under strong comparison" },
+        { "method": "PUT", "path": "/resources/wsrv", "body": { "n": 8 }, "headers": { "If-Match": "\"__CURRENT__\"" }, "expectStatus": 200, "comment": "the equivalent strong tag succeeds" }
+      ]
+    },
+    {
+      "name": "malformed condition headers are 400, not 412",
+      "setup": [
+        { "method": "PUT", "path": "/resources/mal", "body": { "v": 1 } }
+      ],
+      "steps": [
+        { "method": "PUT", "path": "/resources/mal", "body": { "v": 2 }, "headers": { "If-Match": "not-a-tag" }, "expectStatus": 400, "expectErrorCode": "MALFORMED_CONDITION_HEADER" },
+        { "method": "GET", "path": "/resources/mal", "headers": { "If-None-Match": "\"unterminated" }, "expectStatus": 400, "expectErrorCode": "MALFORMED_CONDITION_HEADER" },
+        { "method": "PUT", "path": "/resources/mal", "body": { "v": 2 }, "headers": { "If-Match": "*, \"x\"" }, "expectStatus": 400, "expectErrorCode": "MALFORMED_CONDITION_HEADER" }
+      ]
+    },
+    {
+      "name": "absent resource semantics differ by method",
+      "setup": [],
+      "steps": [
+        { "method": "GET", "path": "/resources/ghost", "headers": {}, "expectStatus": 404, "expectErrorCode": "RESOURCE_NOT_FOUND" },
+        { "method": "PATCH", "path": "/resources/ghost", "body": { "v": 1 }, "headers": {}, "expectStatus": 404, "expectErrorCode": "RESOURCE_NOT_FOUND" },
+        { "method": "DELETE", "path": "/resources/ghost", "headers": {}, "expectStatus": 404, "expectErrorCode": "RESOURCE_NOT_FOUND" },
+        { "method": "PUT", "path": "/resources/ghost", "body": { "v": 1 }, "headers": { "If-Match": "*" }, "expectStatus": 412, "expectErrorCode": "PRECONDITION_IF_MATCH_FAILED", "comment": "If-Match on an absent target is false: 412, distinct from 404" },
+        { "method": "PUT", "path": "/resources/ghost", "body": { "v": 1 }, "headers": { "If-None-Match": "*" }, "expectStatus": 201, "comment": "If-None-Match * passes only when nothing exists" }
+      ]
+    }
+  ]
+}
