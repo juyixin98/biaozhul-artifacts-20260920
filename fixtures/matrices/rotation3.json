@@ -1,0 +1,27 @@
+{
+  "name": "rotation3",
+  "description": "rotation generator plus damped mode; used with t < 0 in tests",
+  "n": 3,
+  "row": [
+    0,
+    1,
+    2
+  ],
+  "col": [
+    1,
+    0,
+    2
+  ],
+  "data": [
+    -1.0,
+    1.0,
+    -0.1
+  ],
+  "vector": [
+    1.0,
+    0.0,
+    3.0
+  ],
+  "t": -2.0,
+  "tol": 1e-12
+}

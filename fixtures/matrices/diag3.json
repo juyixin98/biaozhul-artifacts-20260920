@@ -1,0 +1,27 @@
+{
+  "name": "diag3",
+  "description": "diagonal 3x3, closed-form reference",
+  "n": 3,
+  "row": [
+    0,
+    1,
+    2
+  ],
+  "col": [
+    0,
+    1,
+    2
+  ],
+  "data": [
+    -1.0,
+    -0.5,
+    0.25
+  ],
+  "vector": [
+    1.0,
+    -2.0,
+    0.5
+  ],
+  "t": 1.25,
+  "tol": 1e-12
+}

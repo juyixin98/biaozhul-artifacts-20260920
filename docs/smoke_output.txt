@@ -1,0 +1,21 @@
+## smoke test run: 2026-09-27T20:00:46Z
+
+### normal + abnormal call via examples/client_example.py
+== normal call: exp(t*J) @ v for the 4x4 Jordan block ==
+request_id           : example-jordan4-001
+status               : converged
+w                    : [0.907651036757058, 0.8311021541389947, 0.9623288100556769, 0.6998754982223108]
+total error estimate : 0.000e+00
+max subspace residual: 0.000e+00
+steps                : 1
+versions             : {'krylov_expv': '0.1.0', 'numpy': '2.4.6', 'scipy': '1.15.3'}
+
+== abnormal call: COO index out of bounds ==
+HTTP 400: {'request_id': 'example-bad-002', 'status': 'rejected', 'failure': {'category': 'invalid_input', 'message': 'COO indices out of bounds for n=4: row range [0, 99], col range [0, 3]'}}
+
+### not-converged call (m_max=8, max_steps=2 on advection60_long)
+HTTP 200 | status: not_converged | failure: {'category': 'max_steps_exceeded', 'message': 'tolerance 1.000e-09 not reached after 2 steps; |remaining t| = 1.195312e+02, accumulated error estimate = 2.982e-13'}
+steps: 2 | partial |w|: 2.7192928139593286
+
+### GET /version
+{"service":"krylov-expv","version":"0.1.0","versions":{"krylov_expv":"0.1.0","numpy":"2.4.6","scipy":"1.15.3"}}
