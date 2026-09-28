@@ -1,0 +1,29 @@
+{
+  "case_id": "event_staggered_refused",
+  "description": "Staggered adoption: T1 is first treated in period 2, T3 in period 3. The supported model is a single common cohort, so the request must be REFUSED with event_stagger_unsupported rather than silently fitting a contaminated TWFE event study.",
+  "min_event_time": -2,
+  "max_event_time": 1,
+  "observations": [
+    {"object_id": "T1", "period": 0, "y": 10.0, "treated_group": true, "treated_this_period": false},
+    {"object_id": "T1", "period": 1, "y": 11.0, "treated_group": true, "treated_this_period": false},
+    {"object_id": "T1", "period": 2, "y": 17.0, "treated_group": true, "treated_this_period": true},
+    {"object_id": "T1", "period": 3, "y": 18.0, "treated_group": true, "treated_this_period": true},
+    {"object_id": "T2", "period": 0, "y": 12.0, "treated_group": true, "treated_this_period": false},
+    {"object_id": "T2", "period": 1, "y": 13.0, "treated_group": true, "treated_this_period": false},
+    {"object_id": "T2", "period": 2, "y": 19.0, "treated_group": true, "treated_this_period": true},
+    {"object_id": "T2", "period": 3, "y": 20.0, "treated_group": true, "treated_this_period": true},
+    {"object_id": "T3_LATE", "period": 0, "y": 9.0, "treated_group": true, "treated_this_period": false},
+    {"object_id": "T3_LATE", "period": 1, "y": 10.0, "treated_group": true, "treated_this_period": false},
+    {"object_id": "T3_LATE", "period": 2, "y": 11.0, "treated_group": true, "treated_this_period": false},
+    {"object_id": "T3_LATE", "period": 3, "y": 17.0, "treated_group": true, "treated_this_period": true},
+    {"object_id": "C1", "period": 0, "y": 8.0, "treated_group": false, "treated_this_period": false},
+    {"object_id": "C1", "period": 1, "y": 9.0, "treated_group": false, "treated_this_period": false},
+    {"object_id": "C1", "period": 2, "y": 10.0, "treated_group": false, "treated_this_period": false},
+    {"object_id": "C1", "period": 3, "y": 11.0, "treated_group": false, "treated_this_period": false}
+  ],
+  "expected": {
+    "status": "refused",
+    "failure_category": "event_stagger_unsupported",
+    "cohorts": {"T1": 2, "T2": 2, "T3_LATE": 3}
+  }
+}

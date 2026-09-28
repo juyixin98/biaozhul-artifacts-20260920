@@ -1,0 +1,28 @@
+{
+  "case_id": "contamination",
+  "description": "CX is labelled control but is treated in the post period (contaminated control); TX is treated already in the pre period (not a clean switcher). Both must be excluded. The balanced clean objects again give DID=2.0.",
+  "pre_period": 1,
+  "post_period": 2,
+  "earlier_period": null,
+  "observations": [
+    {"object_id": "T1", "period": 1, "y": 10.0, "treated_group": true,  "treated_this_period": false},
+    {"object_id": "T1", "period": 2, "y": 14.0, "treated_group": true,  "treated_this_period": true},
+    {"object_id": "T2", "period": 1, "y": 12.0, "treated_group": true,  "treated_this_period": false},
+    {"object_id": "T2", "period": 2, "y": 15.0, "treated_group": true,  "treated_this_period": true},
+    {"object_id": "C1", "period": 1, "y": 8.0,  "treated_group": false, "treated_this_period": false},
+    {"object_id": "C1", "period": 2, "y": 9.0,  "treated_group": false, "treated_this_period": false},
+    {"object_id": "C2", "period": 1, "y": 10.0, "treated_group": false, "treated_this_period": false},
+    {"object_id": "C2", "period": 2, "y": 12.0, "treated_group": false, "treated_this_period": false},
+    {"object_id": "CX_CONTAMINATED", "period": 1, "y": 10.0, "treated_group": false, "treated_this_period": false},
+    {"object_id": "CX_CONTAMINATED", "period": 2, "y": 50.0, "treated_group": false, "treated_this_period": true},
+    {"object_id": "TX_EARLY", "period": 1, "y": 20.0, "treated_group": true, "treated_this_period": true},
+    {"object_id": "TX_EARLY", "period": 2, "y": 21.0, "treated_group": true, "treated_this_period": true}
+  ],
+  "expected": {
+    "did_clean_sample": 2.0,
+    "n_objects_clean": 4,
+    "contaminated_control_ids": ["CX_CONTAMINATED"],
+    "treated_pre_ids": ["TX_EARLY"],
+    "derivation": "Including CX as a control post value 50 would drag the control change up and bias the DID toward zero/negative; it is a treated unit, not a counterfactual. After exclusion clean DID = treated change 3.5 - control change 1.5 = 2.0."
+  }
+}

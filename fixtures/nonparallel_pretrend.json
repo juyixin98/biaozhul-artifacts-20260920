@@ -1,0 +1,30 @@
+{
+  "case_id": "nonparallel_pretrend",
+  "description": "Three periods (0,1,2). Treated and control trends diverge ALREADY before treatment (0->1): pre-trend must be REJECTED. Treatment only starts in period 2.",
+  "pre_period": 1,
+  "post_period": 2,
+  "earlier_period": 0,
+  "observations": [
+    {"object_id": "T1", "period": 0, "y": 10.0, "treated_group": true,  "treated_this_period": false},
+    {"object_id": "T1", "period": 1, "y": 20.0, "treated_group": true,  "treated_this_period": false},
+    {"object_id": "T1", "period": 2, "y": 24.0, "treated_group": true,  "treated_this_period": true},
+    {"object_id": "T2", "period": 0, "y": 12.0, "treated_group": true,  "treated_this_period": false},
+    {"object_id": "T2", "period": 1, "y": 21.0, "treated_group": true,  "treated_this_period": false},
+    {"object_id": "T2", "period": 2, "y": 26.0, "treated_group": true,  "treated_this_period": true},
+    {"object_id": "C1", "period": 0, "y": 10.0, "treated_group": false, "treated_this_period": false},
+    {"object_id": "C1", "period": 1, "y": 11.0, "treated_group": false, "treated_this_period": false},
+    {"object_id": "C1", "period": 2, "y": 12.0, "treated_group": false, "treated_this_period": false},
+    {"object_id": "C2", "period": 0, "y": 11.0, "treated_group": false, "treated_this_period": false},
+    {"object_id": "C2", "period": 1, "y": 13.0, "treated_group": false, "treated_this_period": false},
+    {"object_id": "C2", "period": 2, "y": 15.0, "treated_group": false, "treated_this_period": false}
+  ],
+  "expected": {
+    "did_periods_1_2": 3.0,
+    "pretrend_difference": 8.0,
+    "pretrend_se": 0.5773502691896257,
+    "pretrend_t": 13.856406460551018,
+    "pretrend_conclusion": "parallel_trends_rejected",
+    "derivation_pretrend": "pre-window deltas 0->1: treated (20-10)=10, (21-12)=9 (mean 9.5); control (11-10)=1, (13-11)=2 (mean 1.5); difference 8.0; same residual sandwich as handcalc_2x2 gives se=1/sqrt(3).",
+    "derivation_did": "treated change 1->2: (24-20)=4,(26-21)=5 mean 4.5; control: (12-11)=1,(15-13)=2 mean 1.5; DID 3.0. The point estimate is returned WITH the rejected-pre-trend warning; the diagnostic is evidence, and even a non-rejection would not prove parallel trends."
+  }
+}

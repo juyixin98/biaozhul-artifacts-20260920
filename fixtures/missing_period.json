@@ -1,0 +1,28 @@
+{
+  "case_id": "missing_period",
+  "description": "Two objects have a missing period. A missing period is NOT zero: they are excluded from the balanced sample. The four balanced objects reproduce handcalc_2x2 exactly.",
+  "pre_period": 1,
+  "post_period": 2,
+  "earlier_period": null,
+  "observations": [
+    {"object_id": "T1", "period": 1, "y": 10.0, "treated_group": true,  "treated_this_period": false},
+    {"object_id": "T1", "period": 2, "y": 14.0, "treated_group": true,  "treated_this_period": true},
+    {"object_id": "T2", "period": 1, "y": 12.0, "treated_group": true,  "treated_this_period": false},
+    {"object_id": "T2", "period": 2, "y": 15.0, "treated_group": true,  "treated_this_period": true},
+    {"object_id": "C1", "period": 1, "y": 8.0,  "treated_group": false, "treated_this_period": false},
+    {"object_id": "C1", "period": 2, "y": 9.0,  "treated_group": false, "treated_this_period": false},
+    {"object_id": "C2", "period": 1, "y": 10.0, "treated_group": false, "treated_this_period": false},
+    {"object_id": "C2", "period": 2, "y": 12.0, "treated_group": false, "treated_this_period": false},
+    {"object_id": "T3_MISSING_POST", "period": 1, "y": 99.0, "treated_group": true, "treated_this_period": false},
+    {"object_id": "C3_MISSING_PRE",  "period": 2, "y": -99.0, "treated_group": false, "treated_this_period": false}
+  ],
+  "expected": {
+    "did": 2.0,
+    "n_objects": 4,
+    "excluded": [
+      {"object_id": "T3_MISSING_POST", "reasons": ["identity_missing_period"], "missing_periods": [2], "periods_present": [1]},
+      {"object_id": "C3_MISSING_PRE",  "reasons": ["identity_missing_period"], "missing_periods": [1], "periods_present": [2]}
+    ],
+    "derivation": "If missing periods were wrongly coded as zero, T3 would enter post as 0 and C3 would enter pre as 0 and the DID would change. Both must instead be excluded, leaving DID=2.0 from the balanced four."
+  }
+}
