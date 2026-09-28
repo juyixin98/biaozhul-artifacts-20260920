@@ -1,0 +1,188 @@
+{
+  "name": "resource-ops-unsolvable",
+  "notes": [
+    "Same synthetic domain as resource_ops with an extra isolated location",
+    "'vault' that has no incoming adjacent/express link. Goal requires the",
+    "robot at the vault, which is provably unreachable; exhaustive search must",
+    "report UNSOLVABLE rather than hit a limit or invent a plan."
+  ],
+  "types": [
+    "robot",
+    "location",
+    "crate"
+  ],
+  "objects": {
+    "robot": [
+      "r1"
+    ],
+    "location": [
+      "depot",
+      "site1",
+      "site2",
+      "vault"
+    ],
+    "crate": [
+      "crate_a",
+      "crate_b"
+    ]
+  },
+  "predicates": {
+    "at": {
+      "types": [
+        "robot",
+        "location"
+      ],
+      "static": false
+    },
+    "adjacent": {
+      "types": [
+        "location",
+        "location"
+      ],
+      "static": true
+    },
+    "express": {
+      "types": [
+        "location",
+        "location"
+      ],
+      "static": true
+    },
+    "blocked": {
+      "types": [
+        "location"
+      ],
+      "static": false
+    },
+    "handempty": {
+      "types": [
+        "robot"
+      ],
+      "static": false
+    },
+    "carrying": {
+      "types": [
+        "robot",
+        "crate"
+      ],
+      "static": false
+    },
+    "stored": {
+      "types": [
+        "crate",
+        "location"
+      ],
+      "static": false
+    }
+  },
+  "actions": [
+    {
+      "name": "move",
+      "cost": 1,
+      "parameters": [
+        {
+          "name": "?r",
+          "type": "robot"
+        },
+        {
+          "name": "?from",
+          "type": "location"
+        },
+        {
+          "name": "?to",
+          "type": "location"
+        }
+      ],
+      "preconditions": {
+        "pos": [
+          "(at ?r ?from)",
+          "(adjacent ?from ?to)"
+        ],
+        "neg": [
+          "(blocked ?to)"
+        ]
+      },
+      "effects": {
+        "add": [
+          "(at ?r ?to)"
+        ],
+        "del": [
+          "(at ?r ?from)"
+        ]
+      }
+    },
+    {
+      "name": "express_move",
+      "cost": 9,
+      "parameters": [
+        {
+          "name": "?r",
+          "type": "robot"
+        },
+        {
+          "name": "?from",
+          "type": "location"
+        },
+        {
+          "name": "?to",
+          "type": "location"
+        }
+      ],
+      "preconditions": {
+        "pos": [
+          "(at ?r ?from)",
+          "(express ?from ?to)"
+        ],
+        "neg": [
+          "(blocked ?to)"
+        ]
+      },
+      "effects": {
+        "add": [
+          "(at ?r ?to)"
+        ],
+        "del": [
+          "(at ?r ?from)"
+        ]
+      }
+    },
+    {
+      "name": "clear_block",
+      "cost": 5,
+      "parameters": [
+        {
+          "name": "?l",
+          "type": "location"
+        }
+      ],
+      "preconditions": {
+        "pos": [
+          "(blocked ?l)"
+        ],
+        "neg": []
+      },
+      "effects": {
+        "add": [],
+        "del": [
+          "(blocked ?l)"
+        ]
+      }
+    }
+  ],
+  "init": [
+    "(at r1 depot)",
+    "(handempty r1)",
+    "(blocked site1)",
+    "(adjacent depot site1)",
+    "(adjacent site1 depot)",
+    "(adjacent site1 site2)",
+    "(adjacent site2 site1)",
+    "(express depot site2)"
+  ],
+  "goal": {
+    "pos": [
+      "(at r1 vault)"
+    ],
+    "neg": []
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "name": "door-negative-goal-loops",
+  "notes": [
+    "Tiny synthetic domain for negative goals and cyclic/self-loop actions.",
+    "A door starts locked; the goal requires (not (locked door)), which only",
+    "unlock_door achieves. unlock/lock form a 2-cycle; 'wait' has empty add and",
+    "delete effects, producing a self-loop edge at every state; 'patrol' moves",
+    "the robot back and forth. State-encoding dedupe must collapse all loops."
+  ],
+  "types": ["robot", "location"],
+  "objects": {
+    "robot": ["r1"],
+    "location": ["dock", "yard"]
+  },
+  "predicates": {
+    "at": {"types": ["robot", "location"], "static": false},
+    "locked": {"types": [], "static": false},
+    "idle": {"types": ["robot"], "static": false}
+  },
+  "actions": [
+    {
+      "name": "unlock_door",
+      "cost": 2,
+      "parameters": [],
+      "preconditions": {"pos": ["(locked)"], "neg": []},
+      "effects": {"add": [], "del": ["(locked)"]}
+    },
+    {
+      "name": "lock_door",
+      "cost": 2,
+      "parameters": [],
+      "preconditions": {"pos": [], "neg": ["(locked)"]},
+      "effects": {"add": ["(locked)"], "del": []}
+    },
+    {
+      "name": "wait",
+      "cost": 1,
+      "parameters": [{"name": "?r", "type": "robot"}],
+      "preconditions": {"pos": ["(idle ?r)"], "neg": []},
+      "effects": {"add": [], "del": []}
+    },
+    {
+      "name": "patrol",
+      "cost": 3,
+      "parameters": [
+        {"name": "?r", "type": "robot"},
+        {"name": "?from", "type": "location"},
+        {"name": "?to", "type": "location"}
+      ],
+      "preconditions": {"pos": ["(at ?r ?from)"], "neg": ["(locked)"]},
+      "effects": {"add": ["(at ?r ?to)"], "del": ["(at ?r ?from)"]}
+    }
+  ],
+  "init": ["(at r1 dock)", "(locked)", "(idle r1)"],
+  "goal": {"pos": [], "neg": ["(locked)"]}
+}

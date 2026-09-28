@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Test / coverage caches
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local runtime state (committed evidence lives under results/)
+data/
+logs/
+*.db-wal
+*.db-shm
+
+# Editor/OS
+.DS_Store

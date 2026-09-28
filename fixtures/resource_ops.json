@@ -1,0 +1,265 @@
+{
+  "name": "resource-ops",
+  "notes": [
+    "Synthetic resource operations domain. A robot moves between locations over",
+    "static 'adjacent' (cost-1) and 'express' (cost-9) links, can clear a",
+    "blocked site at cost 5, and can pick/drop crates with a handempty fluent.",
+    "site1 starts blocked. Reaching site2 has multiple cost paths: the direct",
+    "express depot->site2 costs 9 (1 action), while clear site1 (5) plus two",
+    "cost-1 moves costs 7 (3 actions). BFS must pick the 1-action plan; UCS/A*",
+    "must pick the 3-action cheaper plan. Bidirectional adjacent links create",
+    "move cycles that state-encoding dedupe must collapse."
+  ],
+  "types": [
+    "robot",
+    "location",
+    "crate"
+  ],
+  "objects": {
+    "robot": [
+      "r1"
+    ],
+    "location": [
+      "depot",
+      "site1",
+      "site2"
+    ],
+    "crate": [
+      "crate_a",
+      "crate_b"
+    ]
+  },
+  "predicates": {
+    "at": {
+      "types": [
+        "robot",
+        "location"
+      ],
+      "static": false
+    },
+    "adjacent": {
+      "types": [
+        "location",
+        "location"
+      ],
+      "static": true
+    },
+    "express": {
+      "types": [
+        "location",
+        "location"
+      ],
+      "static": true
+    },
+    "blocked": {
+      "types": [
+        "location"
+      ],
+      "static": false
+    },
+    "handempty": {
+      "types": [
+        "robot"
+      ],
+      "static": false
+    },
+    "carrying": {
+      "types": [
+        "robot",
+        "crate"
+      ],
+      "static": false
+    },
+    "stored": {
+      "types": [
+        "crate",
+        "location"
+      ],
+      "static": false
+    }
+  },
+  "actions": [
+    {
+      "name": "move",
+      "cost": 1,
+      "parameters": [
+        {
+          "name": "?r",
+          "type": "robot"
+        },
+        {
+          "name": "?from",
+          "type": "location"
+        },
+        {
+          "name": "?to",
+          "type": "location"
+        }
+      ],
+      "preconditions": {
+        "pos": [
+          "(at ?r ?from)",
+          "(adjacent ?from ?to)"
+        ],
+        "neg": [
+          "(blocked ?to)"
+        ]
+      },
+      "effects": {
+        "add": [
+          "(at ?r ?to)"
+        ],
+        "del": [
+          "(at ?r ?from)"
+        ]
+      }
+    },
+    {
+      "name": "express_move",
+      "cost": 9,
+      "parameters": [
+        {
+          "name": "?r",
+          "type": "robot"
+        },
+        {
+          "name": "?from",
+          "type": "location"
+        },
+        {
+          "name": "?to",
+          "type": "location"
+        }
+      ],
+      "preconditions": {
+        "pos": [
+          "(at ?r ?from)",
+          "(express ?from ?to)"
+        ],
+        "neg": [
+          "(blocked ?to)"
+        ]
+      },
+      "effects": {
+        "add": [
+          "(at ?r ?to)"
+        ],
+        "del": [
+          "(at ?r ?from)"
+        ]
+      }
+    },
+    {
+      "name": "clear_block",
+      "cost": 5,
+      "parameters": [
+        {
+          "name": "?l",
+          "type": "location"
+        }
+      ],
+      "preconditions": {
+        "pos": [
+          "(blocked ?l)"
+        ],
+        "neg": []
+      },
+      "effects": {
+        "add": [],
+        "del": [
+          "(blocked ?l)"
+        ]
+      }
+    },
+    {
+      "name": "pick",
+      "cost": 1,
+      "parameters": [
+        {
+          "name": "?r",
+          "type": "robot"
+        },
+        {
+          "name": "?c",
+          "type": "crate"
+        },
+        {
+          "name": "?l",
+          "type": "location"
+        }
+      ],
+      "preconditions": {
+        "pos": [
+          "(at ?r ?l)",
+          "(stored ?c ?l)",
+          "(handempty ?r)"
+        ],
+        "neg": []
+      },
+      "effects": {
+        "add": [
+          "(carrying ?r ?c)"
+        ],
+        "del": [
+          "(stored ?c ?l)",
+          "(handempty ?r)"
+        ]
+      }
+    },
+    {
+      "name": "drop",
+      "cost": 1,
+      "parameters": [
+        {
+          "name": "?r",
+          "type": "robot"
+        },
+        {
+          "name": "?c",
+          "type": "crate"
+        },
+        {
+          "name": "?l",
+          "type": "location"
+        }
+      ],
+      "preconditions": {
+        "pos": [
+          "(at ?r ?l)",
+          "(carrying ?r ?c)"
+        ],
+        "neg": [
+          "(blocked ?l)"
+        ]
+      },
+      "effects": {
+        "add": [
+          "(stored ?c ?l)",
+          "(handempty ?r)"
+        ],
+        "del": [
+          "(carrying ?r ?c)"
+        ]
+      }
+    }
+  ],
+  "init": [
+    "(at r1 depot)",
+    "(handempty r1)",
+    "(blocked site1)",
+    "(stored crate_a depot)",
+    "(stored crate_b depot)",
+    "(adjacent depot site1)",
+    "(adjacent site1 depot)",
+    "(adjacent site1 site2)",
+    "(adjacent site2 site1)",
+    "(express depot site2)"
+  ],
+  "goal": {
+    "pos": [
+      "(stored crate_a site2)",
+      "(at r1 site2)"
+    ],
+    "neg": []
+  }
+}
