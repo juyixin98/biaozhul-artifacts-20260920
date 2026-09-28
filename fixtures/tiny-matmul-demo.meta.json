@@ -1,0 +1,7 @@
+{
+  "model_id": "tiny-matmul-demo",
+  "model_version": "2026-09-28-v1",
+  "input_dim": 4,
+  "hidden": 3,
+  "output": 2
+}
