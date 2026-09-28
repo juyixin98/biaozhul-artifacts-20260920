@@ -1,0 +1,31 @@
+# DID Panel Service — local configuration.
+# Everything is local: no production accounts, no external services.
+
+service:
+  name: did-panel-service
+  version: "1.0.0"
+  # Reported back in every response envelope so results are traceable to code.
+  core_version: "did-core-1.0.0"
+
+database:
+  # SQLite run ledger: request identity, key steps, status, failure reasons.
+  path: "data/did_ledger.db"
+
+logging:
+  # Structured (JSON-lines) logs, correlated by request_id.
+  path: "logs/service.log"
+  level: "INFO"
+
+estimation:
+  # Cluster-robust inference defaults. CRV1 is the small-sample adjustment
+  # (G/(G-1) factor); G is the number of distinct clusters (units).
+  cluster_adjustment: "crv1"
+  # Degrees-of-freedom adjustment for the OLS variance: use the residual dof
+  # (n - rank) estimator, matching statsmodels/lm-sandwich conventions.
+  # Minimum number of clusters below which inference is flagged unreliable.
+  min_clusters: 2
+
+reproducibility:
+  # Seed used by the bundled synthetic fixtures (fixtures are deterministic).
+  fixture_seed: 20260927
+  rng_algo: "PCG64"

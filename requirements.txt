@@ -1,0 +1,12 @@
+# Locked key dependencies (versions verified in the delivery environment,
+# Python 3.12.3). Upper pins are intentionally absent for patch releases only
+# in the sense that these exact versions are what CI/docs were run against.
+fastapi==0.141.1
+uvicorn==0.54.0
+pydantic==2.13.5
+numpy==2.4.6
+scipy==1.15.3
+httpx==0.28.1
+pytest==9.1.1
+pytest-cov==7.1.1
+PyYAML==6.0.1
