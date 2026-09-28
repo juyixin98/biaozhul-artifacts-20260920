@@ -1,0 +1,29 @@
+{
+  "name": "openapi-contract-diff",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "OpenAPI 3.1 subset contract compatibility diff service with directional witnesses",
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "start": "tsx src/server.ts",
+    "diff": "tsx scripts/diff-cli.ts",
+    "check": "npm run typecheck && npm run test"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.6.0",
+    "fastify": "^4.29.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/node": "^22.9.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.5"
+  }
+}

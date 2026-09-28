@@ -1,0 +1,39 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "pets-api", "version": "1.1.0" },
+  "paths": {
+    "/pets": {
+      "get": {
+        "operationId": "listPets",
+        "parameters": [
+          { "name": "status", "in": "query", "required": false,
+            "schema": { "type": "string", "enum": ["available", "pending"] } },
+          { "name": "limit", "in": "query", "required": false,
+            "schema": { "type": "integer", "default": 25 } },
+          { "name": "tag", "in": "query", "required": false,
+            "schema": { "type": "string" } },
+          { "name": "zone", "in": "query", "required": true,
+            "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "a page of pets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "state": { "type": "string", "enum": ["active", "pending", "archived"] }
+                  },
+                  "required": ["id"]
+                }
+              }
+            }
+          },
+          "429": { "description": "rate limited" }
+        }
+      }
+    }
+  }
+}
