@@ -1,0 +1,4 @@
+{
+  "query": "query ByIds($ids: [ID!], $status: PostStatus) {\n  users(ids: $ids) { id handle emailVerified }\n  posts(status: $status, limit: 5) { id title status tags }\n}",
+  "variables": { "ids": ["u-01", "u-02"], "status": "PUBLIC" }
+}

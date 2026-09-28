@@ -1,0 +1,4 @@
+{
+  "_comment": "mutation 顶层按序：b 延迟最久却先出现，编号仍按文档顺序为 1,2,3。",
+  "query": "mutation Ordered {\n  third:  recordPulse(label: \"third\",  delayMs: 0)\n  second: recordPulse(label: \"second\", delayMs: 60)\n  first:  recordPulse(label: \"first\",  delayMs: 120)\n}"
+}

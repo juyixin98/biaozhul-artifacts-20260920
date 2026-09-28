@@ -1,0 +1,25 @@
+{
+  "name": "restricted-graphql-backend",
+  "version": "1.0.0",
+  "description": "受限 GraphQL 执行后端：对象/列表/别名/片段/变量，含非空冒泡诊断（Fastify + 内置 SQLite）",
+  "type": "module",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.test.json",
+    "start": "node --disable-warning=ExperimentalWarning dist/server.js",
+    "dev": "tsx watch src/server.ts",
+    "seed": "tsx src/scripts/seed.ts --reset",
+    "test": "node --disable-warning=ExperimentalWarning --import tsx --test tests/unit/*.test.ts tests/integration/*.test.ts tests/http/*.test.ts"
+  },
+  "dependencies": {
+    "fastify": "^4.29.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

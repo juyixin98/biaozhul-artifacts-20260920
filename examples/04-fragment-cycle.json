@@ -1,0 +1,4 @@
+{
+  "_comment": "片段循环（应 400 FRAGMENT_CYCLE）；把 ...A 改成不存在的片段可验证 FRAGMENT_NOT_FOUND。",
+  "query": "{ post(id: \"p-01\") { ...A } }\nfragment A on Post { ...B }\nfragment B on Post { ...A }"
+}

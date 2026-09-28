@@ -1,0 +1,5 @@
+{
+  "query": "fragment UserCore on User { id handle displayName }\n\nquery GetAda($withFriends: Boolean = true) {\n  user(handle: \"ada\") {\n    ...UserCore\n    nickname\n    friends @include(if: $withFriends) { handle }\n    posts { id title status }\n  }\n}",
+  "variables": { "withFriends": true },
+  "operationName": "GetAda"
+}
