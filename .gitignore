@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# Local run artifacts
+.demo_checkpoint/
+logs/
+*.jsonl
