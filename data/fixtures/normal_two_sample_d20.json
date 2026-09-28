@@ -1,0 +1,25 @@
+{
+  "name": "normal_two_sample_d20",
+  "description": "Two-sample pooled z test, equal allocation, d=0.2 (small effect), alpha=0.05 two-sided, 80% power. Allocation contract: n1=round(n0); the minimal control size is n0=393 (n1=393, total 786). n0=392 (392+392=784) gives 0.79956 and fails.",
+  "request": {
+    "endpoint": "normal",
+    "alternative": "two_sided",
+    "alpha": 0.05,
+    "target_power": 0.8,
+    "effect": 0.2,
+    "effect_scale": "standardized_d",
+    "two_sample": true,
+    "known_sigma": true,
+    "allocation_ratio": 1.0,
+    "interim_looks": 1,
+    "method_preference": "auto"
+  },
+  "reference": {
+    "provenance": "Direct scipy.stats.norm evaluation with n1 derived from n0, independently of ssp.kernels",
+    "n0": 393,
+    "n1": 393,
+    "n_total": 786,
+    "power_at_n": 0.80056,
+    "power_at_n_minus_one": 0.79956
+  }
+}

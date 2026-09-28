@@ -1,0 +1,27 @@
+{
+  "name": "binomial_moderate_asymptotic",
+  "description": "Two-sample comparison p0=0.20 vs p1=0.30, alpha=0.05 two-sided, 80% power, equal allocation. Expected counts are adequate, so AUTO uses the pooled normal approximation; minimal n0=n1=295 (total 590); n0=294 (294+294=588) gives 0.79956 and fails. Note: the analytic value is a fixed-SE approximation; exact enumeration of the random-denominator score statistic and Monte-Carlo evidence are checked separately in tests.",
+  "request": {
+    "endpoint": "binomial",
+    "alternative": "two_sided",
+    "alpha": 0.05,
+    "target_power": 0.8,
+    "p0": 0.2,
+    "effect": 0.3,
+    "effect_scale": "proportions",
+    "two_sample": true,
+    "allocation_ratio": 1.0,
+    "interim_looks": 1,
+    "method_preference": "auto"
+  },
+  "reference": {
+    "provenance": "Direct normal tail evaluation with n1 derived from n0, independently of ssp.kernels",
+    "n0": 295,
+    "n1": 295,
+    "n_total": 590,
+    "method": "binomial_normal_approx_two_sample",
+    "power_at_n": 0.80089,
+    "power_at_n_minus_one": 0.79956,
+    "approximation_allowance": 0.015
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "binomial_fisher_exact_two_sample",
+  "description": "Two-sample exact Fisher test, p0=0.05 vs p1=0.15, one-sided greater, alpha=0.05, 80% power, equal allocation. Unconditional power mixes the conditional hypergeometric rejection rule over S=X0+X1; minimal n0=n1=126 (total 252); n0=125 (125+125=250) gives 0.79779 and fails.",
+  "request": {
+    "endpoint": "binomial",
+    "alternative": "greater",
+    "alpha": 0.05,
+    "target_power": 0.8,
+    "p0": 0.05,
+    "effect": 0.15,
+    "effect_scale": "proportions",
+    "two_sample": true,
+    "allocation_ratio": 1.0,
+    "interim_looks": 1,
+    "method_preference": "exact"
+  },
+  "reference": {
+    "provenance": "Independent double enumeration over (x0,x1) tables with scipy.stats.hypergeom, not using ssp.kernels",
+    "n0": 126,
+    "n1": 126,
+    "n_total": 252,
+    "method": "fisher_exact_two_sample",
+    "power_at_n": 0.80141,
+    "power_at_n_minus_one": 0.79779
+  }
+}

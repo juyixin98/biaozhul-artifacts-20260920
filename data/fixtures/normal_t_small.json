@@ -1,0 +1,23 @@
+{
+  "name": "normal_one_sample_t_unknown_sigma",
+  "description": "One-sample Student t (sigma unknown), d=0.5, alpha=0.05 two-sided, 80% power. Non-central t gives the minimal integer n=34; the normal approximation would under-size at 32.",
+  "request": {
+    "endpoint": "normal",
+    "alternative": "two_sided",
+    "alpha": 0.05,
+    "target_power": 0.8,
+    "effect": 0.5,
+    "effect_scale": "standardized_d",
+    "two_sample": false,
+    "known_sigma": false,
+    "allocation_ratio": 1.0,
+    "interim_looks": 1,
+    "method_preference": "auto"
+  },
+  "reference": {
+    "provenance": "Direct scipy.stats.nct evaluation, independently of ssp.kernels",
+    "n_total": 34,
+    "power_at_n": 0.80778,
+    "power_at_n_minus_one": 0.79537
+  }
+}

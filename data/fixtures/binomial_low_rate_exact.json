@@ -1,0 +1,26 @@
+{
+  "name": "binomial_low_base_rate_exact",
+  "description": "One-sample exact binomial test at a low base rate p0=0.01 vs p1=0.03, one-sided greater, alpha=0.05, 80% power. Expected success counts are far below 5, so AUTO rejects the normal approximation and switches to the exact binomial test; minimal n=301 (n=300 gives 0.79737 and fails).",
+  "request": {
+    "endpoint": "binomial",
+    "alternative": "greater",
+    "alpha": 0.05,
+    "target_power": 0.8,
+    "p0": 0.01,
+    "effect": 0.03,
+    "effect_scale": "proportions",
+    "two_sample": false,
+    "allocation_ratio": 1.0,
+    "interim_looks": 1,
+    "method_preference": "auto"
+  },
+  "reference": {
+    "provenance": "Independent enumeration of the exact Binomial(n,p) critical region with scipy.stats.binom",
+    "n0": 301,
+    "n_total": 301,
+    "method": "binomial_exact_one_sample",
+    "power_at_n": 0.80009,
+    "power_at_n_minus_one": 0.79737,
+    "min_expected_successes_at_n_under_p0": 3.01
+  }
+}
