@@ -1,0 +1,12 @@
+{
+  "graph_id": "broadcast-demo",
+  "constants": {
+    "row": [[1, 2, 3]],
+    "zero": [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
+  },
+  "steps": [
+    {"op": "add", "out": "summed", "a": "row", "b": "zero"},
+    {"op": "square", "out": "sq", "src": "summed"},
+    {"op": "reduce_sum", "out": "total", "src": "sq"}
+  ]
+}

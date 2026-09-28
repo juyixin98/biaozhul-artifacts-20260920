@@ -1,0 +1,9 @@
+{
+  "graph_id": "overlap-demo",
+  "constants": {"v": [0, 1, 2, 3, 4, 5]},
+  "steps": [
+    {"op": "slice", "out": "dst", "src": "v", "start": [0], "stop": [4]},
+    {"op": "slice", "out": "src", "src": "v", "start": [2], "stop": [6]},
+    {"op": "assign", "dst": "dst", "src": "src", "overlap_policy": "temp"}
+  ]
+}
