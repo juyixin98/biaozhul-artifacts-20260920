@@ -1,0 +1,305 @@
+{
+  "meta": {
+    "description": "手写固定规范样例（golden answers）。这些期望结果由人工依据 GraphQL 规范第 6.6 节（执行）与非空冒泡规则推导，不是由被测核心生成。测试逐条断言 data 全量形状、error.path 与 extensions.category。",
+    "specRefs": [
+      "GraphQL Spec 6.6 Executing Operations",
+      "6.6.3 Normal and Serial Execution",
+      "6.6.4 Errors and Non-Null Bubbling"
+    ]
+  },
+  "cases": [
+    {
+      "id": "nested-nn-list-to-null-data",
+      "title": "[Tag!]! 元素非空失败：冒泡穿透列表非空边界，data=null，路径定位到元素下标",
+      "query": "{ strictTags }",
+      "variables": null,
+      "expectedDecision": "accepted",
+      "expectedData": null,
+      "expectedErrors": [
+        {
+          "path": ["strictTags", 2],
+          "category": "RESOLVER",
+          "messageIncludes": "fixture marker"
+        }
+      ]
+    },
+    {
+      "id": "nested-nn-element-nullable-field",
+      "title": "[Tag!]（列表本身可空）元素非空失败：冒泡止于字段，字段=null 而非 data=null",
+      "query": "{ looseTags }",
+      "variables": null,
+      "expectedDecision": "accepted",
+      "expectedData": { "looseTags": null },
+      "expectedErrors": [
+        {
+          "path": ["looseTags", 1],
+          "category": "RESOLVER",
+          "messageIncludes": "fixture marker"
+        }
+      ]
+    },
+    {
+      "id": "nested-list-deep-bubble",
+      "title": "[[Tag!]!]! 深层元素 [1][1] 失败：冒泡穿透两层非空列表，data=null",
+      "query": "{ nestedTags }",
+      "variables": null,
+      "expectedDecision": "accepted",
+      "expectedData": null,
+      "expectedErrors": [
+        {
+          "path": ["nestedTags", 1, 1],
+          "category": "RESOLVER"
+        }
+      ]
+    },
+    {
+      "id": "nested-list-outer-nullable",
+      "title": "[[Tag!]!]（外层可空）内层非空失败：外层字段=null，data 保留",
+      "query": "{ nestedLoose }",
+      "variables": null,
+      "expectedDecision": "accepted",
+      "expectedData": { "nestedLoose": null },
+      "expectedErrors": [
+        {
+          "path": ["nestedLoose", 1, 1],
+          "category": "RESOLVER"
+        }
+      ]
+    },
+    {
+      "id": "object-nn-field-bubbles-to-nullable-parent",
+      "title": "Pet.name! 失败沿对象树冒泡到可空的 pet 边界：pet=null，兄弟字段 id 保留",
+      "query": "query($id: ID!) { user(id: $id) { id pet { name } } }",
+      "variables": { "id": "u3" },
+      "expectedDecision": "accepted",
+      "expectedData": { "user": { "id": "u3", "pet": null } },
+      "expectedErrors": [
+        {
+          "path": ["user", "pet", "name"],
+          "category": "RESOLVER"
+        }
+      ]
+    },
+    {
+      "id": "nullable-field-resolver-error-partial-data",
+      "title": "Post.title 可空解析器失败：仅该元素 title=null，列表与兄弟字段完整保留",
+      "query": "{ posts { id title } }",
+      "variables": null,
+      "expectedDecision": "accepted",
+      "expectedData": {
+        "posts": [
+          { "id": "p1", "title": "Hello world" },
+          { "id": "p2", "title": "GraphQL internals" },
+          { "id": "p3", "title": "Carol reads specs" },
+          { "id": "p4", "title": null }
+        ]
+      },
+      "expectedErrors": [
+        {
+          "path": ["posts", 3, "title"],          "category": "RESOLVER",
+          "messageIncludes": "Synthetic failure resolving post title"
+        }
+      ]
+    },
+    {
+      "id": "alias-response-key-conflict",
+      "title": "别名冲突：同一响应键 id 指向不同字段 id/name => 执行前 VALIDATION 拒绝",
+      "query": "{ user(id: \"u1\") { id id: name } }",
+      "variables": null,
+      "expectedDecision": "rejected",
+      "expectedReasons": ["VALIDATION_FIELD_CONFLICT"],
+      "expectedData": "ABSENT",
+      "expectedErrors": [
+        {
+          "category": "VALIDATION",
+          "messageIncludes": "same response key"
+        }
+      ]
+    },
+    {
+      "id": "alias-same-key-differing-arguments",
+      "title": "同响应键同字段但参数不同 => 合并冲突拒绝",
+      "query": "{ a: user(id: \"u1\") { name } a: user(id: \"u2\") { name } }",
+      "variables": null,
+      "expectedDecision": "rejected",
+      "expectedReasons": ["VALIDATION_FIELD_CONFLICT"],
+      "expectedData": "ABSENT",
+      "expectedErrors": [
+        {
+          "category": "VALIDATION",
+          "messageIncludes": "differing arguments"
+        }
+      ]
+    },
+    {
+      "id": "alias-valid-duplicate-merge",
+      "title": "合法别名与重复字段合并：id 与 dup:id 各自出现在响应中",
+      "query": "{ users(limit: 1) { id dup: id name } }",
+      "variables": null,
+      "expectedDecision": "accepted",
+      "expectedData": {
+        "users": [{ "id": "u1", "dup": "u1", "name": "Alice" }]
+      },
+      "expectedErrors": []
+    },
+    {
+      "id": "fragment-cycle-rejected",
+      "title": "片段循环 A->B->A：执行前 VALIDATION 拒绝，错误含展开链",
+      "query": "fragment A on User { ...B } fragment B on User { ...A } query { users(limit: 1) { ...A } }",
+      "variables": null,
+      "expectedDecision": "rejected",
+      "expectedReasons": ["VALIDATION_FRAGMENT_CYCLE"],
+      "expectedData": "ABSENT",
+      "expectedErrors": [
+        {
+          "category": "VALIDATION",
+          "messageIncludes": "within itself"
+        }
+      ]
+    },
+    {
+      "id": "fragment-and-inline-fragment-merge",
+      "title": "具名片段 + 内联片段字段合并，精确全量数据",
+      "query": "query($id: ID!) { user(id: $id) { ...UserFields posts { id ...PostFields } } } fragment UserFields on User { id name tags } fragment PostFields on Post { title tags }",
+      "variables": { "id": "u1" },
+      "expectedDecision": "accepted",
+      "expectedData": {
+        "user": {
+          "id": "u1",
+          "name": "Alice",
+          "tags": ["admin", "author"],
+          "posts": [
+            { "id": "p1", "title": "Hello world", "tags": ["intro", "db"] },
+            { "id": "p2", "title": "GraphQL internals", "tags": ["graphql"] }
+          ]
+        }
+      },
+      "expectedErrors": []
+    },
+    {
+      "id": "fragment-type-condition-mismatch-skipped",
+      "title": "类型条件不重叠的片段展开被安全跳过（不报错、不注入字段）",
+      "query": "{ users(limit: 1) { id ...OnPost } } fragment OnPost on Post { title }",
+      "variables": null,
+      "expectedDecision": "accepted",
+      "expectedData": { "users": [{ "id": "u1" }] },
+      "expectedErrors": []
+    },
+    {
+      "id": "variable-wrong-type-coercion",
+      "title": "执行前变量类型校验：Int! 收到字符串 => COERCION 拒绝，不运行 resolver",
+      "query": "query($n: Int!) { users(limit: $n) { id } }",
+      "variables": { "n": "abc" },
+      "expectedDecision": "rejected",
+      "expectedReasons": ["VARIABLE_COERCION"],
+      "expectedData": "ABSENT",
+      "expectedErrors": [
+        {
+          "category": "COERCION",
+          "messageIncludes": "$n"
+        }
+      ]
+    },
+    {
+      "id": "variable-missing-required",
+      "title": "必填变量缺失 => COERCION 拒绝",
+      "query": "query($id: ID!) { user(id: $id) { id } }",
+      "variables": {},
+      "expectedDecision": "rejected",
+      "expectedReasons": ["VARIABLE_COERCION"],
+      "expectedData": "ABSENT",
+      "expectedErrors": [
+        {
+          "category": "COERCION",
+          "messageIncludes": "not provided"
+        }
+      ]
+    },
+    {
+      "id": "variable-null-for-nonnull",
+      "title": "非空变量显式传 null => COERCION 拒绝",
+      "query": "query($id: ID!) { user(id: $id) { id } }",
+      "variables": { "id": null },
+      "expectedDecision": "rejected",
+      "expectedReasons": ["VARIABLE_COERCION"],
+      "expectedData": "ABSENT",
+      "expectedErrors": [
+        {
+          "category": "COERCION",
+          "messageIncludes": "must not be null"
+        }
+      ]
+    },
+    {
+      "id": "variable-incompatible-position",
+      "title": "String 变量用于要求 Int 的参数位置 => VALIDATION 拒绝",
+      "query": "query($x: String) { users(limit: $x) { id } }",
+      "variables": { "x": "1" },
+      "expectedDecision": "rejected",
+      "expectedReasons": ["VALIDATION_VARIABLE_USAGE"],
+      "expectedData": "ABSENT",
+      "expectedErrors": [
+        {
+          "category": "VALIDATION",
+          "messageIncludes": "used in position expecting type"
+        }
+      ]
+    },
+    {
+      "id": "variable-default-value-applied",
+      "title": "缺省变量使用声明默认值，查询成功",
+      "query": "query($n: Int = 1) { users(limit: $n) { id } }",
+      "variables": {},
+      "expectedDecision": "accepted",
+      "expectedData": { "users": [{ "id": "u1" }] },
+      "expectedErrors": []
+    },
+    {
+      "id": "mutation-top-level-serial",
+      "title": "mutation 顶层字段按序执行：两个 bump 分别读到 1 与 2",
+      "query": "mutation { a: bump { value } b: bump { value } }",
+      "variables": null,
+      "expectedDecision": "accepted",
+      "expectedData": { "a": { "value": 1 }, "b": { "value": 2 } },
+      "expectedErrors": []
+    },
+    {
+      "id": "query-top-level-parallel-snapshot",
+      "title": "query 顶层字段并发：无 mutation 时两个快照读到同一值 0",
+      "query": "{ a: snapshotCounter(delayMs: 5) b: snapshotCounter(delayMs: 5) }",
+      "variables": null,
+      "expectedDecision": "accepted",
+      "expectedData": { "a": 0, "b": 0 },
+      "expectedErrors": []
+    },
+    {
+      "id": "parse-error",
+      "title": "语法错误 => PARSE，data 缺省",
+      "query": "{ users( { }",
+      "variables": null,
+      "expectedDecision": "rejected",
+      "expectedReasons": ["PARSE_SYNTAX"],
+      "expectedData": "ABSENT",
+      "expectedErrors": [
+        {
+          "category": "PARSE"
+        }
+      ]
+    },
+    {
+      "id": "unknown-field-validation",
+      "title": "查询不存在的字段 => VALIDATION 拒绝",
+      "query": "{ users { nope } }",
+      "variables": null,
+      "expectedDecision": "rejected",
+      "expectedReasons": ["VALIDATION_SCHEMA"],
+      "expectedData": "ABSENT",
+      "expectedErrors": [
+        {
+          "category": "VALIDATION",
+          "messageIncludes": "Cannot query field"
+        }
+      ]
+    }
+  ]
+}

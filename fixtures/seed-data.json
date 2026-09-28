@@ -1,0 +1,43 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "name": "Alice",
+      "email": "alice@example.com",
+      "tags": ["admin", "author"],
+      "scores": [10, 20, 30],
+      "bestFriendId": "u2"
+    },
+    {
+      "id": "u2",
+      "name": "Bob",
+      "email": "bob@example.com",
+      "tags": ["reader"],
+      "scores": [5, null, 15],
+      "bestFriendId": "u3"
+    },
+    {
+      "id": "u3",
+      "name": "Carol",
+      "email": "carol@example.com",
+      "tags": ["reader", "banned-pending"],
+      "scores": [1, 2],
+      "bestFriendId": null
+    }
+  ],
+  "posts": [
+    { "id": "p1", "authorId": "u1", "title": "Hello world", "tags": ["intro", "db"] },
+    { "id": "p2", "authorId": "u1", "title": "GraphQL internals", "tags": ["graphql"] },
+    { "id": "p3", "authorId": "u3", "title": "Carol reads specs", "tags": ["spec"] },
+    { "id": "p4", "authorId": "u3", "title": null, "tags": ["fixture"], "failTitle": true }
+  ],
+  "comments": [
+    { "id": "c1", "postId": "p1", "authorId": "u2", "body": "Nice post" },
+    { "id": "c2", "postId": "p1", "authorId": "u3", "body": "Welcome!" }
+  ],
+  "counters": [
+    { "id": "c1", "value": 0 }
+  ],
+  "strictTags": ["alpha", "beta", "__THROW__", "delta"],
+  "looseTags": ["alpha", "__THROW__", "gamma"]
+}

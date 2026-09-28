@@ -1,0 +1,116 @@
+### 受限 GraphQL 后端示例请求集合
+### 用法：VS Code REST Client 直接 Send，或复制 curl。
+@host = http://localhost:4000
+
+### 健康检查
+GET {{host}}/healthz
+
+### 1. 基本对象 + 列表 + 嵌套（成功）
+POST {{host}}/graphql
+Content-Type: application/json
+
+{
+  "query": "{ users(limit: 2) { id name tags scores posts { id title } } }"
+}
+
+### 2. 变量 + 具名片段 + 内联片段
+POST {{host}}/graphql
+Content-Type: application/json
+
+{
+  "query": "query($id: ID!) { user(id: $id) { ...UserFields posts { id ...PostFields } } } fragment UserFields on User { id name } fragment PostFields on Post { title tags }",
+  "variables": { "id": "u1" }
+}
+
+### 3. 别名合法合并
+POST {{host}}/graphql
+Content-Type: application/json
+
+{
+  "query": "{ users(limit: 1) { id dup: id display: name } }"
+}
+
+### 4. [Tag!]! 非空列表元素失败 -> data=null（错误冒泡穿透）
+POST {{host}}/graphql
+Content-Type: application/json
+
+{
+  "query": "{ strictTags }"
+}
+
+### 5. [Tag!] 列表本身可空 -> 仅字段 null，data 保留
+POST {{host}}/graphql
+Content-Type: application/json
+
+{
+  "query": "{ looseTags }"
+}
+
+### 6. [[Tag!]!]! 两层嵌套非空 -> data=null，path 两个下标
+POST {{host}}/graphql
+Content-Type: application/json
+
+{
+  "query": "{ nestedTags }"
+}
+
+### 7. 可空 Post.title 解析器失败 -> 部分数据
+POST {{host}}/graphql
+Content-Type: application/json
+
+{
+  "query": "{ posts { id title } }"
+}
+
+### 8. 对象树非空冒泡：pet.name! 失败止于可空 pet
+POST {{host}}/graphql
+Content-Type: application/json
+
+{
+  "query": "query($id: ID!) { user(id: $id) { id pet { name } } }",
+  "variables": { "id": "u3" }
+}
+
+### 9. 别名响应键冲突 -> VALIDATION（无 data）
+POST {{host}}/graphql
+Content-Type: application/json
+
+{
+  "query": "{ user(id: \"u1\") { id id: name } }"
+}
+
+### 10. 片段循环 A->B->A -> VALIDATION
+POST {{host}}/graphql
+Content-Type: application/json
+
+{
+  "query": "fragment A on User { ...B } fragment B on User { ...A } query { users(limit: 1) { ...A } }"
+}
+
+### 11. 变量类型错误 -> COERCION（执行前拒绝）
+POST {{host}}/graphql
+Content-Type: application/json
+
+{
+  "query": "query($n: Int!) { users(limit: $n) { id } }",
+  "variables": { "n": "abc" }
+}
+
+### 12. mutation 顶层串行
+POST {{host}}/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation { a: bump { value } b: bump { value } }"
+}
+
+### 13. query 顶层并发（两个快照读到同一值 0）
+POST {{host}}/graphql
+Content-Type: application/json
+
+{
+  "query": "{ a: snapshotCounter(delayMs: 5) b: snapshotCounter(delayMs: 5) }"
+}
+
+### 诊断（把上面响应头 x-request-id 的值替换进来）
+GET {{host}}/diagnostics?limit=5
