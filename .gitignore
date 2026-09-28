@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.test-logs/
+data/
+*.db
+*.db-wal
+*.db-shm
+*.egg-info/
+.venv/
+build/
+dist/
+.coverage

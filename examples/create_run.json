@@ -1,0 +1,63 @@
+{
+  "run_id": "demo",
+  "duplicate_policy": "multiset",
+  "rules": [
+    {
+      "name": "gold_customer_order",
+      "salience": 20,
+      "conditions": [
+        {"type": "Customer", "constraints": [
+          {"field": "id", "variable": "?cid"},
+          {"field": "tier", "op": "==", "value": "gold"}
+        ]},
+        {"type": "Order", "constraints": [
+          {"field": "customer", "variable": "?cid"},
+          {"field": "amount", "op": ">", "value": 100}
+        ]}
+      ],
+      "action": {"assert": [
+        {"type": "Discount", "fields": {
+          "customer": {"variable": "cid"},
+          "amount": {"value": 10}
+        }}
+      ]}
+    },
+    {
+      "name": "customer_order_any_tier",
+      "salience": 0,
+      "conditions": [
+        {"type": "Customer", "constraints": [
+          {"field": "id", "variable": "?cid"}
+        ]},
+        {"type": "Order", "constraints": [
+          {"field": "customer", "variable": "?cid"}
+        ]}
+      ],
+      "action": {"assert": [
+        {"type": "Paired", "fields": {"customer": {"variable": "cid"}}}
+      ]}
+    },
+    {
+      "name": "same_city_customer_pair",
+      "salience": 5,
+      "conditions": [
+        {"type": "Customer", "constraints": [
+          {"field": "id", "variable": "?a"},
+          {"field": "city", "variable": "?city"}
+        ]},
+        {"type": "Customer", "constraints": [
+          {"field": "id", "variable": "?b"},
+          {"field": "city", "variable": "?city"},
+          {"field": "id", "op": "!=", "variable": "?a"}
+        ]}
+      ],
+      "action": {"assert": [
+        {"type": "CityPair", "fields": {
+          "a": {"variable": "a"},
+          "b": {"variable": "b"},
+          "city": {"variable": "city"}
+        }}
+      ]}
+    }
+  ]
+}

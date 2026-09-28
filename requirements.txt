@@ -1,0 +1,9 @@
+# Pinned to the locally verified environment (Python 3.12.3).
+# sqlite3 is part of the Python standard library and needs no pin.
+fastapi==0.141.1
+uvicorn==0.54.0
+pydantic==2.13.5
+httpx==0.28.1
+pytest==9.1.1
+pytest-cov==7.1.0
+coverage==7.16.1

@@ -1,0 +1,34 @@
+{
+  "rules": [
+    {
+      "name": "seed_to_need",
+      "salience": 30,
+      "conditions": [
+        {"type": "Seed", "constraints": [{"field": "n", "variable": "?n"}]}
+      ],
+      "action": {"assert": [
+        {"type": "Need", "fields": {"n": {"variable": "n"}}}
+      ], "retract_ce_indices": [0]}
+    },
+    {
+      "name": "need_to_done",
+      "salience": 20,
+      "conditions": [
+        {"type": "Need", "constraints": [{"field": "n", "variable": "?n"}]}
+      ],
+      "action": {"assert": [
+        {"type": "Done", "fields": {"n": {"variable": "n"}}}
+      ]}
+    },
+    {
+      "name": "done_final",
+      "salience": 10,
+      "conditions": [
+        {"type": "Done", "constraints": [{"field": "n", "variable": "?n"}]}
+      ],
+      "action": {"assert": [
+        {"type": "Finished", "fields": {"n": {"variable": "n"}}}
+      ]}
+    }
+  ]
+}

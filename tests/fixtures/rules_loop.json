@@ -1,0 +1,17 @@
+{
+  "rules": [
+    {
+      "name": "count_up",
+      "salience": 0,
+      "refraction": true,
+      "conditions": [
+        {"type": "Counter", "constraints": [
+          {"field": "n", "variable": "?n"}
+        ]}
+      ],
+      "action": {"assert": [
+        {"type": "Counter", "fields": {"n": {"variable": "n"}}}
+      ]}
+    }
+  ]
+}
