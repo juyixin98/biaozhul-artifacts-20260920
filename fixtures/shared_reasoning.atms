@@ -1,0 +1,23 @@
+# Shared-premise / multiple-proof / mutual-exclusion fixture.
+#
+# Hand-computed label table (independently, not produced by the engine):
+#   P : { {} }                 (premise fact)
+#   X : { {A}, {B} }           (two independent proofs, both need P)
+#   Y : { {A}, {B} }           (X => Y)
+#   Z : { {C} }
+#   nogoods: { {A, C} }        (A and C are mutually exclusive)
+#
+# Filtering checks:
+#   context {A, C}      -> REJECTED, blocked by nogood {A, C}
+#   context {A}         -> X and Y accepted
+#   context {B, C}      -> X via {B} and Z via {C}; {B, C} is consistent
+# Retraction checks:
+#   withdraw A          -> X survives via {B}; Z via {C}; nogood disappears
+#   withdraw A and B    -> X, Y removed (no support left); Z survives
+assume A, B, C
+fact P
+rule r1: A, P => X
+rule r2: B, P => X
+rule r3: X => Y
+rule r4: C => Z
+rule r5: A, C => FALSE

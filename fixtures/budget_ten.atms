@@ -1,0 +1,24 @@
+# Budget fixture: ten independent proofs of one node.
+#
+#   X  : { {A1}, {A2}, ..., {A10} }   (ten minimal environments)
+#   L9 : { {A9} }
+#
+# With max_label_envs=4 the cap fills at X (seed order sorts rules and
+# assumptions; the fourth accepted env is {A3}): propagation stops there.
+#   * X already has consistent envs -> query X is still ACCEPTED.
+#   * L9 depends on assumption A9, whose singleton is processed later in
+#     the seed order, so its only env is never generated -> the answer is
+#     UNDETERMINED, never a proven rejection.
+# After a run with a normal budget, L9 is genuinely supported by {A9}.
+assume A1, A2, A3, A4, A5, A6, A7, A8, A9, A10
+rule r1: A1 => X
+rule r2: A2 => X
+rule r3: A3 => X
+rule r4: A4 => X
+rule r5: A5 => X
+rule r6: A6 => X
+rule r7: A7 => X
+rule r8: A8 => X
+rule r9: A9 => X
+rule r10: A10 => X
+rule late9: A9 => L9

@@ -1,0 +1,16 @@
+# Diamond proofs with a conflicting pair and a shared downstream node.
+#
+# Hand-computed labels:
+#   M : { {A}, {B} }
+#   Q : { {A, D}, {B, D} }
+#   nogoods: { {A, B} }
+#
+# Subtle point: {A, D} and {B, D} remain valid even though A and B clash,
+# because the nogood {A, B} is a subset of neither.  But asking under the
+# full context {A, B, D} must be REJECTED: that context itself contains
+# the nogood, even though Q has consistent supporting environments.
+assume A, B, D
+rule r1: A => M
+rule r2: B => M
+rule r3: M, D => Q
+rule r4: A, B => FALSE
