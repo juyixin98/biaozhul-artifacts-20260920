@@ -1,0 +1,27 @@
+{
+  "name": "rfc6902-patch-service",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "RFC 6902 constrained JSON document update service (test/add/remove/replace/move/copy)",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "start": "node --no-warnings=ExperimentalWarning dist/server.js",
+    "dev": "node --no-warnings=ExperimentalWarning --import tsx src/server.ts",
+    "test": "node --no-warnings=ExperimentalWarning --import tsx --test test/pointer.test.ts test/contract.test.ts test/kernel.test.ts test/crosscheck.test.ts test/store.test.ts test/api.test.ts",
+    "verify": "bash scripts/verify.sh"
+  },
+  "dependencies": {
+    "fastify": "5.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.2",
+    "fast-json-patch": "3.1.1",
+    "tsx": "4.19.2",
+    "typescript": "5.7.2"
+  }
+}

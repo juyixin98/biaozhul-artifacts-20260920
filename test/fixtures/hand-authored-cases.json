@@ -1,0 +1,243 @@
+{
+  "_meta": "Hand-authored RFC 6902 boundary cases. Concrete inputs and concrete expected results/failure categories — never mere interface checks.",
+  "cases": [
+    {
+      "id": "array-add-at-zero-shifts-right",
+      "document": [1, 2, 3],
+      "operations": [{ "op": "add", "path": "/0", "value": 9 }],
+      "expected": { "ok": true, "result": [9, 1, 2, 3] }
+    },
+    {
+      "id": "array-add-middle-shifts-tail",
+      "document": [1, 2, 3],
+      "operations": [{ "op": "add", "path": "/1", "value": 9 }],
+      "expected": { "ok": true, "result": [1, 9, 2, 3] }
+    },
+    {
+      "id": "array-add-at-length-appends",
+      "document": [1, 2, 3],
+      "operations": [{ "op": "add", "path": "/3", "value": 9 }],
+      "expected": { "ok": true, "result": [1, 2, 3, 9] }
+    },
+    {
+      "id": "array-add-dash-appends",
+      "document": [1, 2, 3],
+      "operations": [{ "op": "add", "path": "/-", "value": 9 }],
+      "expected": { "ok": true, "result": [1, 2, 3, 9] }
+    },
+    {
+      "id": "array-add-index-past-length-invalid",
+      "document": [1, 2, 3],
+      "operations": [{ "op": "add", "path": "/4", "value": 9 }],
+      "expected": { "ok": false, "category": "POINTER_ERROR", "failedAtIndex": 0 }
+    },
+    {
+      "id": "array-add-leading-zero-invalid",
+      "document": [1, 2, 3],
+      "operations": [{ "op": "add", "path": "/01", "value": 9 }],
+      "expected": { "ok": false, "category": "POINTER_ERROR", "failedAtIndex": 0 }
+    },
+    {
+      "id": "array-remove-shifts",
+      "document": [1, 2, 3],
+      "operations": [{ "op": "remove", "path": "/1" }],
+      "expected": { "ok": true, "result": [1, 3] }
+    },
+    {
+      "id": "array-remove-dash-invalid",
+      "document": [1, 2, 3],
+      "operations": [{ "op": "remove", "path": "/-" }],
+      "expected": { "ok": false, "category": "POINTER_ERROR", "failedAtIndex": 0 }
+    },
+    {
+      "id": "array-read-minus-invalid-for-test",
+      "document": [1, 2],
+      "operations": [{ "op": "test", "path": "/-", "value": 2 }],
+      "expected": { "ok": false, "category": "TEST_FAILED", "failedAtIndex": 0 }
+    },
+    {
+      "id": "empty-key-is-root-member",
+      "document": { "": 42, "x": 1 },
+      "operations": [
+        { "op": "test", "path": "/", "value": 42 },
+        { "op": "replace", "path": "/", "value": "empty" }
+      ],
+      "expected": { "ok": true, "result": { "": "empty", "x": 1 } }
+    },
+    {
+      "id": "nested-empty-key-segment",
+      "document": { "": { "": "deep" } },
+      "operations": [{ "op": "test", "path": "//", "value": "deep" }],
+      "expected": { "ok": true, "result": { "": { "": "deep" } } }
+    },
+    {
+      "id": "slash-escaping-in-key",
+      "document": { "a/b": 1 },
+      "operations": [
+        { "op": "test", "path": "/a~1b", "value": 1 },
+        { "op": "replace", "path": "/a~1b", "value": 2 }
+      ],
+      "expected": { "ok": true, "result": { "a/b": 2 } }
+    },
+    {
+      "id": "tilde-escaping-in-key",
+      "document": { "a~b": 1 },
+      "operations": [{ "op": "replace", "path": "/a~0b", "value": 2 }],
+      "expected": { "ok": true, "result": { "a~b": 2 } }
+    },
+    {
+      "id": "tilde-one-literal-uses-tilde-zero-first",
+      "document": { "a~1b": "x" },
+      "operations": [{ "op": "test", "path": "/a~01b", "value": "x" }],
+      "expected": { "ok": true, "result": { "a~1b": "x" } }
+    },
+    {
+      "id": "unescaped-slash-splits-into-two-segments-miss",
+      "document": { "a/b": 1 },
+      "operations": [{ "op": "test", "path": "/a/b", "value": 1 }],
+      "expected": { "ok": false, "category": "TEST_FAILED", "failedAtIndex": 0 }
+    },
+    {
+      "id": "mid-patch-test-failure-rolls-back-all",
+      "document": { "list": [1, 2], "n": 0 },
+      "operations": [
+        { "op": "add", "path": "/list/-", "value": 3 },
+        { "op": "replace", "path": "/n", "value": 5 },
+        { "op": "test", "path": "/n", "value": 999 },
+        { "op": "remove", "path": "/list/0" }
+      ],
+      "expected": {
+        "ok": false,
+        "category": "TEST_FAILED",
+        "failedAtIndex": 2,
+        "appliedBeforeFailure": 2,
+        "documentUnchanged": { "list": [1, 2], "n": 0 }
+      }
+    },
+    {
+      "id": "pointer-failure-mid-patch-rolls-back",
+      "document": { "a": [1] },
+      "operations": [
+        { "op": "add", "path": "/a/-", "value": 2 },
+        { "op": "remove", "path": "/missing/x" }
+      ],
+      "expected": {
+        "ok": false,
+        "category": "POINTER_ERROR",
+        "failedAtIndex": 1,
+        "appliedBeforeFailure": 1,
+        "documentUnchanged": { "a": [1] }
+      }
+    },
+    {
+      "id": "ops-take-values-from-previous-result",
+      "document": { "src": { "k": "v" }, "dst": null },
+      "operations": [
+        { "op": "add", "path": "/src/new", "value": [1, 2] },
+        { "op": "copy", "from": "/src/new", "path": "/dst" },
+        { "op": "test", "path": "/dst/1", "value": 2 }
+      ],
+      "expected": {
+        "ok": true,
+        "result": { "src": { "k": "v", "new": [1, 2] }, "dst": [1, 2] }
+      }
+    },
+    {
+      "id": "move-cannot-target-descendant",
+      "document": { "a": { "b": 1 } },
+      "operations": [{ "op": "move", "from": "/a", "path": "/a/x" }],
+      "expected": { "ok": false, "category": "MOVE_TARGET_DESCENDANT", "failedAtIndex": 0 }
+    },
+    {
+      "id": "move-to-self-rejected",
+      "document": { "a": 1 },
+      "operations": [{ "op": "move", "from": "/a", "path": "/a" }],
+      "expected": { "ok": false, "category": "MOVE_TARGET_DESCENDANT", "failedAtIndex": 0 }
+    },
+    {
+      "id": "move-to-later-index-uses-post-removal-position",
+      "document": ["a", "b", "c"],
+      "operations": [{ "op": "move", "from": "/0", "path": "/1" }],
+      "expected": { "ok": true, "result": ["b", "a", "c"] }
+    },
+    {
+      "id": "move-to-earlier-index",
+      "document": ["a", "b", "c"],
+      "operations": [{ "op": "move", "from": "/2", "path": "/0" }],
+      "expected": { "ok": true, "result": ["c", "a", "b"] }
+    },
+    {
+      "id": "move-subtree-then-test-result",
+      "document": { "from": { "nested": [1, { "k": 2 }] }, "to": {} },
+      "operations": [
+        { "op": "move", "from": "/from/nested", "path": "/to/moved" },
+        { "op": "test", "path": "/to/moved/1/k", "value": 2 },
+        { "op": "test", "path": "/from", "value": {} }
+      ],
+      "expected": { "ok": true, "result": { "from": {}, "to": { "moved": [1, { "k": 2 }] } } }
+    },
+    {
+      "id": "copy-leaves-source-in-place",
+      "document": { "a": [1, 2] },
+      "operations": [{ "op": "copy", "from": "/a", "path": "/b" }],
+      "expected": { "ok": true, "result": { "a": [1, 2], "b": [1, 2] } }
+    },
+    {
+      "id": "copy-mutation-of-copy-does-not-affect-source",
+      "document": { "a": { "x": 1 } },
+      "operations": [
+        { "op": "copy", "from": "/a", "path": "/b" },
+        { "op": "replace", "path": "/b/x", "value": 9 }
+      ],
+      "expected": { "ok": true, "result": { "a": { "x": 1 }, "b": { "x": 9 } } }
+    },
+    {
+      "id": "add-root-replaces-whole-document",
+      "document": { "old": true },
+      "operations": [{ "op": "add", "path": "", "value": { "fresh": [1] } }],
+      "expected": { "ok": true, "result": { "fresh": [1] } }
+    },
+    {
+      "id": "replace-root",
+      "document": [1, 2],
+      "operations": [{ "op": "replace", "path": "", "value": "new" }],
+      "expected": { "ok": true, "result": "new" }
+    },
+    {
+      "id": "remove-root-invalid",
+      "document": { "a": 1 },
+      "operations": [{ "op": "remove", "path": "" }],
+      "expected": { "ok": false, "category": "ROOT_LOCATION_INVALID", "failedAtIndex": 0 }
+    },
+    {
+      "id": "move-root-invalid",
+      "document": { "a": 1 },
+      "operations": [{ "op": "move", "from": "", "path": "/x" }],
+      "expected": { "ok": false, "category": "ROOT_LOCATION_INVALID", "failedAtIndex": 0 }
+    },
+    {
+      "id": "replace-missing-object-member-invalid",
+      "document": { "a": 1 },
+      "operations": [{ "op": "replace", "path": "/b", "value": 2 }],
+      "expected": { "ok": false, "category": "POINTER_ERROR", "failedAtIndex": 0 }
+    },
+    {
+      "id": "test-deep-equality-not-identity",
+      "document": { "a": { "b": [1, 2, { "c": null }] } },
+      "operations": [{ "op": "test", "path": "/a", "value": { "b": [1, 2, { "c": null }] } }],
+      "expected": { "ok": true, "result": { "a": { "b": [1, 2, { "c": null }] } } }
+    },
+    {
+      "id": "test-type-sensitive-1-vs-true",
+      "document": { "a": 1 },
+      "operations": [{ "op": "test", "path": "/a", "value": true }],
+      "expected": { "ok": false, "category": "TEST_FAILED", "failedAtIndex": 0 }
+    },
+    {
+      "id": "escaped-path-through-arrays",
+      "document": [{ "a/b": [{ "~": "hit" }] }],
+      "operations": [{ "op": "test", "path": "/0/a~1b/0/~0", "value": "hit" }],
+      "expected": { "ok": true, "result": [{ "a/b": [{ "~": "hit" }] }] }
+    }
+  ]
+}

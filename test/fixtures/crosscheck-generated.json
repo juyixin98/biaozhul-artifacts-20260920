@@ -1,0 +1,5599 @@
+{
+  "_meta": {
+    "generator": "scripts/generate-crosscheck.py",
+    "oracle": "independent Python stdlib RFC 6902 reference",
+    "seed": 6902,
+    "count": 140
+  },
+  "scenarios": [
+    {
+      "id": "gen-6902-0000",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/2/1"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          10,
+          20,
+          [
+            30
+          ],
+          {
+            "k": "v"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0001",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/matrix/0/0"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": [
+              true,
+              false,
+              null
+            ]
+          },
+          "matrix": [
+            [],
+            [
+              2,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0002",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "add",
+          "path": "/",
+          "value": {
+            "nested": {
+              "z": 6
+            }
+          }
+        },
+        {
+          "op": "test",
+          "path": "//nested",
+          "value": {
+            "z": 6
+          }
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "nested": {
+              "z": 6
+            }
+          },
+          "matrix": [
+            [
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0003",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "add",
+          "path": "/foo/bar/0",
+          "value": true
+        },
+        {
+          "op": "replace",
+          "path": "/foo/bar/1",
+          "value": [
+            3,
+            7
+          ]
+        },
+        {
+          "op": "move",
+          "from": "/foo/bar/3",
+          "path": "/foo/bar/3/0"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 2,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0004",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/items/0",
+          "path": ""
+        },
+        {
+          "op": "replace",
+          "path": "",
+          "value": {
+            "nested": {
+              "z": 2
+            }
+          }
+        },
+        {
+          "op": "move",
+          "from": "/nested",
+          "path": "/nested/z"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 2,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0005",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "add",
+          "path": "//x",
+          "value": ""
+        },
+        {
+          "op": "move",
+          "from": "/matrix/1/0",
+          "path": "//x"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": 2
+          },
+          "matrix": [
+            [
+              1
+            ],
+            [
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0006",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/n",
+          "value": ""
+        },
+        {
+          "op": "move",
+          "from": "/foo/bar/0",
+          "path": "/n"
+        },
+        {
+          "op": "copy",
+          "from": "/n",
+          "path": "/foo/bar"
+        },
+        {
+          "op": "copy",
+          "from": "/foo/bar",
+          "path": "/foo/bar"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "foo": {
+            "bar": 1,
+            "baz": "qux"
+          },
+          "n": 1
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0007",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "add",
+          "path": "/items/0/id",
+          "value": [
+            3
+          ]
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            {
+              "id": [
+                3
+              ]
+            },
+            {
+              "id": 2
+            }
+          ],
+          "count": 2,
+          "meta": {
+            "tags": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0008",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/foo/bar/0"
+        },
+        {
+          "op": "copy",
+          "from": "/foo/bar/0",
+          "path": "/foo"
+        },
+        {
+          "op": "copy",
+          "from": "/n",
+          "path": "/n"
+        },
+        {
+          "op": "replace",
+          "path": "/n",
+          "value": -42
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "foo": 2,
+          "n": -42
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0009",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/meta/tags/0",
+          "value": {
+            "nested": {
+              "z": 6
+            }
+          }
+        },
+        {
+          "op": "copy",
+          "from": "/meta/tags/0/nested",
+          "path": "/meta/tags"
+        },
+        {
+          "op": "add",
+          "path": "/items/1/id",
+          "value": [
+            7
+          ]
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            {
+              "id": 1
+            },
+            {
+              "id": [
+                7
+              ]
+            }
+          ],
+          "count": 2,
+          "meta": {
+            "tags": {
+              "z": 6
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0010",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/list"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "a/b": {
+            "a~b": [
+              1,
+              {
+                "": "empty"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0011",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/a~1b/a~0b/0"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "a/b": {
+            "a~b": [
+              {
+                "": "empty"
+              }
+            ]
+          },
+          "list": []
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0012",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/3"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          10,
+          20,
+          [
+            30,
+            31
+          ]
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0013",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "copy",
+          "from": "/a~1b/a~0b/1",
+          "path": "/a~1b"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "a/b": {
+            "": "empty"
+          },
+          "list": []
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0014",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/matrix/0/0",
+          "path": "/matrix/0/0/0"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0015",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "copy",
+          "from": "//x/2",
+          "path": "//x"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": null
+          },
+          "matrix": [
+            [
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0016",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/a~1b/a~0b/1/",
+          "value": {
+            "k": 0
+          }
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "a/b": {
+            "a~b": [
+              1,
+              {
+                "": {
+                  "k": 0
+                }
+              }
+            ]
+          },
+          "list": []
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0017",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "test",
+          "path": "/2/0",
+          "value": 21
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0018",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "add",
+          "path": "//x/2",
+          "value": {
+            "": 6
+          }
+        },
+        {
+          "op": "copy",
+          "from": "//x/0",
+          "path": ""
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": true
+      }
+    },
+    {
+      "id": "gen-6902-0019",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "add",
+          "path": "/foo/bar/1",
+          "value": ""
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "foo": {
+            "bar": [
+              1,
+              "",
+              2,
+              3
+            ],
+            "baz": "qux"
+          },
+          "n": 0
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0020",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/a~1b/a~0b",
+          "value": {
+            "k": 8
+          }
+        },
+        {
+          "op": "replace",
+          "path": "/a~1b",
+          "value": null
+        },
+        {
+          "op": "copy",
+          "from": "/list",
+          "path": ""
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": []
+      }
+    },
+    {
+      "id": "gen-6902-0021",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/matrix/1/0",
+          "value": null
+        },
+        {
+          "op": "copy",
+          "from": "/",
+          "path": "/"
+        },
+        {
+          "op": "remove",
+          "path": "//x"
+        },
+        {
+          "op": "move",
+          "from": "/matrix/0",
+          "path": "/matrix/1/-"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 3,
+        "category": "POINTER_ERROR",
+        "message": "index 1 out of bounds (len 1)"
+      }
+    },
+    {
+      "id": "gen-6902-0022",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/items/0/id",
+          "value": [
+            8,
+            1
+          ]
+        },
+        {
+          "op": "move",
+          "from": "/items/1/id",
+          "path": "/items/0/id"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            {
+              "id": 2
+            },
+            {}
+          ],
+          "count": 2,
+          "meta": {
+            "tags": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0023",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/matrix/1/0",
+          "value": 2
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": [
+              true,
+              false,
+              null
+            ]
+          },
+          "matrix": [
+            [
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0024",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "add",
+          "path": "",
+          "value": null
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": null
+      }
+    },
+    {
+      "id": "gen-6902-0025",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/foo/bar/2"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "foo": {
+            "bar": [
+              1,
+              2
+            ],
+            "baz": "qux"
+          },
+          "n": 0
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0026",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/meta",
+          "path": "/meta/child"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0027",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/foo/bar"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "foo": {
+            "baz": "qux"
+          },
+          "n": 0
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0028",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "",
+          "value": {
+            "a/b": 5
+          }
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "a/b": 5
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0029",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/foo/bar",
+          "value": true
+        },
+        {
+          "op": "test",
+          "path": "",
+          "value": [
+            2,
+            2
+          ]
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 1,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0030",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "copy",
+          "from": "/0",
+          "path": "/2/0"
+        },
+        {
+          "op": "copy",
+          "from": "/2/0",
+          "path": "/-"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          10,
+          20,
+          [
+            10,
+            30,
+            31
+          ],
+          {
+            "k": "v"
+          },
+          10
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0031",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/foo/bar",
+          "value": false
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0032",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "//x",
+          "value": [
+            true,
+            false,
+            null
+          ]
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": [
+              true,
+              false,
+              null
+            ]
+          },
+          "matrix": [
+            [
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0033",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/meta/tags",
+          "path": "/items/1"
+        },
+        {
+          "op": "remove",
+          "path": "/items/0"
+        },
+        {
+          "op": "test",
+          "path": "/items",
+          "value": [
+            [
+              "a"
+            ],
+            {
+              "id": 2
+            }
+          ]
+        },
+        {
+          "op": "copy",
+          "from": "/items/1/id",
+          "path": ""
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": 2
+      }
+    },
+    {
+      "id": "gen-6902-0034",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "",
+          "value": []
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0035",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "copy",
+          "from": "/count",
+          "path": "/items/1/id"
+        },
+        {
+          "op": "copy",
+          "from": "/items/1",
+          "path": "/meta/tags"
+        },
+        {
+          "op": "replace",
+          "path": "/items/0",
+          "value": false
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            false,
+            {
+              "id": 2
+            }
+          ],
+          "count": 2,
+          "meta": {
+            "tags": {
+              "id": 2
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0036",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/matrix/0/0",
+          "value": "x"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": [
+              true,
+              false,
+              null
+            ]
+          },
+          "matrix": [
+            [
+              "x"
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0037",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/items/0/id"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            {},
+            {
+              "id": 2
+            }
+          ],
+          "count": 2,
+          "meta": {
+            "tags": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0038",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/items/0/id",
+          "path": "/items/1"
+        },
+        {
+          "op": "add",
+          "path": "/count",
+          "value": ""
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            {},
+            1,
+            {
+              "id": 2
+            }
+          ],
+          "count": "",
+          "meta": {
+            "tags": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0039",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "add",
+          "path": "/foo/bar/-",
+          "value": {
+            "k": 3
+          }
+        },
+        {
+          "op": "replace",
+          "path": "/foo/bar/0",
+          "value": null
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "foo": {
+            "bar": [
+              null,
+              2,
+              3,
+              {
+                "k": 3
+              }
+            ],
+            "baz": "qux"
+          },
+          "n": 0
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0040",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/meta/tags",
+          "path": "/meta/tags/0"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0041",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/items/1",
+          "value": {
+            "": 1
+          }
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            {
+              "id": 1
+            },
+            {
+              "": 1
+            }
+          ],
+          "count": 2,
+          "meta": {
+            "tags": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0042",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/a~1b/a~0b/0"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "a/b": {
+            "a~b": [
+              {
+                "": "empty"
+              }
+            ]
+          },
+          "list": []
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0043",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/a~1b/a~0b/1",
+          "path": "/a~1b/a~0b/1"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0044",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "copy",
+          "from": "/foo/baz",
+          "path": "/foo"
+        },
+        {
+          "op": "add",
+          "path": "/n",
+          "value": {
+            "nested": {
+              "z": 2
+            }
+          }
+        },
+        {
+          "op": "test",
+          "path": "/n/nested",
+          "value": null
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 2,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0045",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/a~1b/a~0b",
+          "value": {
+            "nested": {
+              "z": 8
+            }
+          }
+        },
+        {
+          "op": "add",
+          "path": "/a~1b/a~0b",
+          "value": {
+            "nested": {
+              "z": 1
+            }
+          }
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "a/b": {
+            "a~b": {
+              "nested": {
+                "z": 1
+              }
+            }
+          },
+          "list": []
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0046",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/meta/tags",
+          "value": [
+            3
+          ]
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            }
+          ],
+          "count": 2,
+          "meta": {
+            "tags": [
+              3
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0047",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "copy",
+          "from": "/items/1",
+          "path": "/meta/tags/-"
+        },
+        {
+          "op": "move",
+          "from": "/meta",
+          "path": "/items/-"
+        },
+        {
+          "op": "test",
+          "path": "/items/2/tags/0",
+          "value": "a"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            },
+            {
+              "tags": [
+                "a",
+                {
+                  "id": 2
+                }
+              ]
+            }
+          ],
+          "count": 2
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0048",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/foo/bar",
+          "value": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "op": "add",
+          "path": "/foo/bar",
+          "value": false
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "foo": {
+            "bar": false,
+            "baz": "qux"
+          },
+          "n": 0
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0049",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/a~1b"
+        },
+        {
+          "op": "replace",
+          "path": "",
+          "value": []
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": []
+      }
+    },
+    {
+      "id": "gen-6902-0050",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "add",
+          "path": "/foo/bar/1",
+          "value": [
+            7,
+            8
+          ]
+        },
+        {
+          "op": "copy",
+          "from": "",
+          "path": "/foo/bar/1"
+        },
+        {
+          "op": "move",
+          "from": "/foo/bar/1/n",
+          "path": "/foo/bar/1/foo/bar"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "foo": {
+            "bar": [
+              1,
+              {
+                "foo": {
+                  "bar": 0,
+                  "baz": "qux"
+                }
+              },
+              [
+                7,
+                8
+              ],
+              2,
+              3
+            ],
+            "baz": "qux"
+          },
+          "n": 0
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0051",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/items/1",
+          "value": {
+            "id": 2
+          }
+        },
+        {
+          "op": "replace",
+          "path": "/items/0",
+          "value": "x"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            "x",
+            {
+              "id": 2
+            }
+          ],
+          "count": 2,
+          "meta": {
+            "tags": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0052",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/meta"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            }
+          ],
+          "count": 2
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0053",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "copy",
+          "from": "/items",
+          "path": "/meta/tags/-"
+        },
+        {
+          "op": "remove",
+          "path": "/count"
+        },
+        {
+          "op": "replace",
+          "path": "",
+          "value": {
+            "a/b": 6
+          }
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "a/b": 6
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0054",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/0",
+          "value": null
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          null,
+          20,
+          [
+            30,
+            31
+          ],
+          {
+            "k": "v"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0055",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "copy",
+          "from": "/foo/bar",
+          "path": "/foo/bar"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "foo": {
+            "bar": [
+              1,
+              2,
+              3
+            ],
+            "baz": "qux"
+          },
+          "n": 0
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0056",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/a~1b"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "list": []
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0057",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "test",
+          "path": "/2",
+          "value": {
+            "k": 2
+          }
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0058",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "copy",
+          "from": "/matrix/0",
+          "path": "//x/2"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": [
+              true,
+              false,
+              [
+                1
+              ],
+              null
+            ]
+          },
+          "matrix": [
+            [
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0059",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "add",
+          "path": "/3/k",
+          "value": [
+            7
+          ]
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          10,
+          20,
+          [
+            30,
+            31
+          ],
+          {
+            "k": [
+              7
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0060",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "copy",
+          "from": "/items/1/id",
+          "path": "/meta/tags/-"
+        },
+        {
+          "op": "move",
+          "from": "/meta/tags/1",
+          "path": "/items/0/id"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            {
+              "id": 2
+            },
+            {
+              "id": 2
+            }
+          ],
+          "count": 2,
+          "meta": {
+            "tags": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0061",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/foo/baz",
+          "value": {
+            "k": 2
+          }
+        },
+        {
+          "op": "remove",
+          "path": "/foo/bar/2"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "foo": {
+            "bar": [
+              1,
+              2
+            ],
+            "baz": {
+              "k": 2
+            }
+          },
+          "n": 0
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0062",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/2/1"
+        },
+        {
+          "op": "move",
+          "from": "/1",
+          "path": "/2/0"
+        },
+        {
+          "op": "move",
+          "from": "/1/0",
+          "path": "/1"
+        },
+        {
+          "op": "move",
+          "from": "/3/0",
+          "path": "/3/0"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 3,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0063",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/items/1/id",
+          "value": 2
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            }
+          ],
+          "count": 2,
+          "meta": {
+            "tags": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0064",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/a~1b/a~0b/1",
+          "path": "/a~1b/a~0b/1/child"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0065",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/a~1b/a~0b/0",
+          "value": 25
+        },
+        {
+          "op": "copy",
+          "from": "/a~1b",
+          "path": "/a~1b/a~0b/0"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "a/b": {
+            "a~b": [
+              {
+                "a~b": [
+                  25,
+                  {
+                    "": "empty"
+                  }
+                ]
+              },
+              25,
+              {
+                "": "empty"
+              }
+            ]
+          },
+          "list": []
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0066",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "copy",
+          "from": "/a~1b",
+          "path": "/a~1b/a~0b"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "a/b": {
+            "a~b": {
+              "a~b": [
+                1,
+                {
+                  "": "empty"
+                }
+              ]
+            }
+          },
+          "list": []
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0067",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/items/0/id",
+          "value": null
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0068",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "copy",
+          "from": "//x/1",
+          "path": "/matrix/-"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": [
+              true,
+              false,
+              null
+            ]
+          },
+          "matrix": [
+            [
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            false
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0069",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/matrix/0",
+          "value": [
+            1
+          ]
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": [
+              true,
+              false,
+              null
+            ]
+          },
+          "matrix": [
+            [
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0070",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "add",
+          "path": "/count",
+          "value": {
+            "nested": {
+              "z": 0
+            }
+          }
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            }
+          ],
+          "count": {
+            "nested": {
+              "z": 0
+            }
+          },
+          "meta": {
+            "tags": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0071",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "move",
+          "from": "/2/0",
+          "path": "/0"
+        },
+        {
+          "op": "add",
+          "path": "/4",
+          "value": "x"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          30,
+          10,
+          20,
+          [
+            31
+          ],
+          "x",
+          {
+            "k": "v"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0072",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/count",
+          "path": "/count/child"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0073",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/a~1b/a~0b/1/",
+          "value": {
+            "": 2
+          }
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0074",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/foo/bar/0",
+          "value": null
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0075",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "add",
+          "path": "/foo/bar",
+          "value": -8
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "foo": {
+            "bar": -8,
+            "baz": "qux"
+          },
+          "n": 0
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0076",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/items",
+          "path": "/items/-"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0077",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "",
+          "value": []
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0078",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/",
+          "value": {
+            "a/b": 4
+          }
+        },
+        {
+          "op": "copy",
+          "from": "/",
+          "path": "/matrix"
+        },
+        {
+          "op": "replace",
+          "path": "/",
+          "value": null
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": null,
+          "matrix": {
+            "a/b": 4
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0079",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/matrix/1/1",
+          "value": 3
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": [
+              true,
+              false,
+              null
+            ]
+          },
+          "matrix": [
+            [
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0080",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "test",
+          "path": "/2/1",
+          "value": 31
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          10,
+          20,
+          [
+            30,
+            31
+          ],
+          {
+            "k": "v"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0081",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/3"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          10,
+          20,
+          [
+            30,
+            31
+          ]
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0082",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "add",
+          "path": "//x",
+          "value": {
+            "": 6
+          }
+        },
+        {
+          "op": "replace",
+          "path": "/matrix/1",
+          "value": []
+        },
+        {
+          "op": "copy",
+          "from": "/matrix",
+          "path": "//x"
+        },
+        {
+          "op": "replace",
+          "path": "//x",
+          "value": false
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": false
+          },
+          "matrix": [
+            [
+              1
+            ],
+            []
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0083",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "copy",
+          "from": "/a~1b/a~0b/1/",
+          "path": ""
+        },
+        {
+          "op": "copy",
+          "from": "",
+          "path": ""
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": "empty"
+      }
+    },
+    {
+      "id": "gen-6902-0084",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/list"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "a/b": {
+            "a~b": [
+              1,
+              {
+                "": "empty"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0085",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/count",
+          "value": {
+            "nested": {
+              "z": 1
+            }
+          }
+        },
+        {
+          "op": "test",
+          "path": "/meta/tags/0",
+          "value": "a"
+        },
+        {
+          "op": "replace",
+          "path": "/count/nested/z",
+          "value": 42
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            }
+          ],
+          "count": {
+            "nested": {
+              "z": 42
+            }
+          },
+          "meta": {
+            "tags": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0086",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/a~1b/a~0b/1",
+          "value": null
+        },
+        {
+          "op": "copy",
+          "from": "/a~1b/a~0b/1",
+          "path": "/list"
+        },
+        {
+          "op": "move",
+          "from": "/a~1b/a~0b",
+          "path": "/a~1b/a~0b"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 2,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0087",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "add",
+          "path": "",
+          "value": null
+        },
+        {
+          "op": "add",
+          "path": "",
+          "value": {
+            "nested": {
+              "z": 5
+            }
+          }
+        },
+        {
+          "op": "remove",
+          "path": "/nested"
+        },
+        {
+          "op": "copy",
+          "from": "",
+          "path": ""
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {}
+      }
+    },
+    {
+      "id": "gen-6902-0088",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "add",
+          "path": "//x/0",
+          "value": null
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": [
+              null,
+              true,
+              false,
+              null
+            ]
+          },
+          "matrix": [
+            [
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0089",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "test",
+          "path": "/0",
+          "value": 10
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          10,
+          20,
+          [
+            30,
+            31
+          ],
+          {
+            "k": "v"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0090",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/0",
+          "value": {
+            "": 7
+          }
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          {
+            "": 7
+          },
+          20,
+          [
+            30,
+            31
+          ],
+          {
+            "k": "v"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0091",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/matrix",
+          "value": false
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": [
+              true,
+              false,
+              null
+            ]
+          },
+          "matrix": false
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0092",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/a~1b/a~0b/0",
+          "value": {
+            "nested": {
+              "z": 6
+            }
+          }
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0093",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/list",
+          "path": "/list"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0094",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "add",
+          "path": "/2/-",
+          "value": -7
+        },
+        {
+          "op": "replace",
+          "path": "/3",
+          "value": {
+            "nested": {
+              "z": 3
+            }
+          }
+        },
+        {
+          "op": "test",
+          "path": "/1",
+          "value": -16
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 2,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0095",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/meta"
+        },
+        {
+          "op": "remove",
+          "path": "/count"
+        },
+        {
+          "op": "copy",
+          "from": "/items/0",
+          "path": "/items/0/id"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            {
+              "id": {
+                "id": 1
+              }
+            },
+            {
+              "id": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0096",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/matrix/1/0",
+          "path": "/matrix/1"
+        },
+        {
+          "op": "remove",
+          "path": "//x/2"
+        },
+        {
+          "op": "remove",
+          "path": "/matrix/0/0"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": [
+              true,
+              false
+            ]
+          },
+          "matrix": [
+            [],
+            2,
+            [
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0097",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "",
+          "value": [
+            3
+          ]
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          3
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0098",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "copy",
+          "from": "/matrix/1/1",
+          "path": "//x/2"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": [
+              true,
+              false,
+              3,
+              null
+            ]
+          },
+          "matrix": [
+            [
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0099",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/foo",
+          "value": 49
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0100",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "copy",
+          "from": "",
+          "path": "/2/0"
+        },
+        {
+          "op": "copy",
+          "from": "/2/0/3/k",
+          "path": "/2/1"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          10,
+          20,
+          [
+            [
+              10,
+              20,
+              [
+                30,
+                31
+              ],
+              {
+                "k": "v"
+              }
+            ],
+            "v",
+            30,
+            31
+          ],
+          {
+            "k": "v"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0101",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/matrix/1/1",
+          "value": 3
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": [
+              true,
+              false,
+              null
+            ]
+          },
+          "matrix": [
+            [
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0102",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "add",
+          "path": "/0",
+          "value": -23
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          -23,
+          10,
+          20,
+          [
+            30,
+            31
+          ],
+          {
+            "k": "v"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0103",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/foo/bar/0",
+          "value": 32
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0104",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/matrix/1/0",
+          "value": 2
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": [
+              true,
+              false,
+              null
+            ]
+          },
+          "matrix": [
+            [
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0105",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "copy",
+          "from": "/foo/bar",
+          "path": "/foo"
+        },
+        {
+          "op": "move",
+          "from": "/foo/0",
+          "path": "/foo/0/child"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 1,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0106",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "move",
+          "from": "/2/1",
+          "path": "/2/-"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          10,
+          20,
+          [
+            30,
+            31
+          ],
+          {
+            "k": "v"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0107",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/a~1b/a~0b/1/",
+          "path": "/a~1b/a~0b/-"
+        },
+        {
+          "op": "move",
+          "from": "/a~1b/a~0b/0",
+          "path": "/a~1b/a~0b/0"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 1,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0108",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "copy",
+          "from": "/a~1b",
+          "path": "/a~1b/a~0b"
+        },
+        {
+          "op": "add",
+          "path": "/a~1b/a~0b/a~0b/1",
+          "value": null
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "a/b": {
+            "a~b": {
+              "a~b": [
+                1,
+                null,
+                {
+                  "": "empty"
+                }
+              ]
+            }
+          },
+          "list": []
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0109",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "move",
+          "from": "/2",
+          "path": "/2"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0110",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/items/1",
+          "value": ""
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0111",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "add",
+          "path": "/matrix/1/-",
+          "value": [
+            1
+          ]
+        },
+        {
+          "op": "add",
+          "path": "/matrix/1/2",
+          "value": null
+        },
+        {
+          "op": "remove",
+          "path": "/matrix"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": [
+              true,
+              false,
+              null
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0112",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/count",
+          "value": 2
+        },
+        {
+          "op": "test",
+          "path": "/items/1",
+          "value": {
+            "nested": {
+              "z": 7
+            }
+          }
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 1,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0113",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/items/1/id",
+          "path": "/items/-"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            {
+              "id": 1
+            },
+            {},
+            2
+          ],
+          "count": 2,
+          "meta": {
+            "tags": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0114",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "copy",
+          "from": "/foo",
+          "path": "/foo/bar/-"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "foo": {
+            "bar": [
+              1,
+              2,
+              3,
+              {
+                "bar": [
+                  1,
+                  2,
+                  3
+                ],
+                "baz": "qux"
+              }
+            ],
+            "baz": "qux"
+          },
+          "n": 0
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0115",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "copy",
+          "from": "/count",
+          "path": "/meta/tags/0"
+        },
+        {
+          "op": "test",
+          "path": "/items/0/id",
+          "value": "a/b"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 1,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0116",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "add",
+          "path": "/a~1b",
+          "value": {
+            "a/b": 5
+          }
+        },
+        {
+          "op": "move",
+          "from": "/a~1b",
+          "path": "/a~1b"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 1,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0117",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "add",
+          "path": "/-",
+          "value": "x"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          10,
+          20,
+          [
+            30,
+            31
+          ],
+          {
+            "k": "v"
+          },
+          "x"
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0118",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/2"
+        },
+        {
+          "op": "copy",
+          "from": "/2",
+          "path": ""
+        },
+        {
+          "op": "replace",
+          "path": "",
+          "value": []
+        },
+        {
+          "op": "test",
+          "path": "",
+          "value": -15
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 3,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0119",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/foo/bar/1",
+          "value": {
+            "a/b": 6
+          }
+        },
+        {
+          "op": "move",
+          "from": "/foo/bar/2",
+          "path": "/n"
+        },
+        {
+          "op": "remove",
+          "path": "/foo/bar/0"
+        },
+        {
+          "op": "remove",
+          "path": "/foo/baz"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "foo": {
+            "bar": [
+              {
+                "a/b": 6
+              }
+            ]
+          },
+          "n": 3
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0120",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/3"
+        },
+        {
+          "op": "test",
+          "path": "",
+          "value": [
+            10,
+            20,
+            [
+              30,
+              31
+            ]
+          ]
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          10,
+          20,
+          [
+            30,
+            31
+          ]
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0121",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "add",
+          "path": "/n",
+          "value": {
+            "nested": {
+              "z": 0
+            }
+          }
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "foo": {
+            "bar": [
+              1,
+              2,
+              3
+            ],
+            "baz": "qux"
+          },
+          "n": {
+            "nested": {
+              "z": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0122",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/matrix/0/0",
+          "value": true
+        },
+        {
+          "op": "test",
+          "path": "/matrix",
+          "value": {
+            "a/b": 8
+          }
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 1,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0123",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "add",
+          "path": "/3/k",
+          "value": -47
+        },
+        {
+          "op": "remove",
+          "path": "/3"
+        },
+        {
+          "op": "move",
+          "from": "/0",
+          "path": "/-"
+        },
+        {
+          "op": "remove",
+          "path": "/2"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          20,
+          [
+            30,
+            31
+          ]
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0124",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/items/1/id",
+          "path": "/items/1/id/0"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0125",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "//x/2",
+          "path": "//x/2/child"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0126",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/2/0"
+        },
+        {
+          "op": "move",
+          "from": "/0",
+          "path": "/0/child"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 1,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    },
+    {
+      "id": "gen-6902-0127",
+      "document": {
+        "": {
+          "x": [
+            true,
+            false,
+            null
+          ]
+        },
+        "matrix": [
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "//x/0",
+          "value": true
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "": {
+            "x": [
+              true,
+              false,
+              null
+            ]
+          },
+          "matrix": [
+            [
+              1
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0128",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/a~1b/a~0b",
+          "path": "/list/-"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "a/b": {},
+          "list": [
+            [
+              1,
+              {
+                "": "empty"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0129",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/a~1b",
+          "value": []
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0130",
+      "document": {
+        "foo": {
+          "bar": [
+            1,
+            2,
+            3
+          ],
+          "baz": "qux"
+        },
+        "n": 0
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/foo/bar/0",
+          "value": 18
+        },
+        {
+          "op": "add",
+          "path": "/foo/bar/2",
+          "value": {
+            "": 8
+          }
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "foo": {
+            "bar": [
+              18,
+              2,
+              {
+                "": 8
+              },
+              3
+            ],
+            "baz": "qux"
+          },
+          "n": 0
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0131",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/1"
+        },
+        {
+          "op": "remove",
+          "path": "/2/k"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          10,
+          [
+            30,
+            31
+          ],
+          {}
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0132",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/a~1b/a~0b/1/",
+          "path": "/list"
+        },
+        {
+          "op": "replace",
+          "path": "/list",
+          "value": 46
+        },
+        {
+          "op": "replace",
+          "path": "",
+          "value": "a/b"
+        },
+        {
+          "op": "add",
+          "path": "",
+          "value": {
+            "a/b": 2
+          }
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "a/b": 2
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0133",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "add",
+          "path": "/a~1b",
+          "value": ""
+        },
+        {
+          "op": "remove",
+          "path": "/list"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "a/b": ""
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0134",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/2/1"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          10,
+          20,
+          [
+            30
+          ],
+          {
+            "k": "v"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0135",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/count",
+          "value": {
+            "nested": {
+              "z": 6
+            }
+          }
+        },
+        {
+          "op": "move",
+          "from": "/count/nested",
+          "path": "/items/0"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": {
+          "items": [
+            {
+              "z": 6
+            },
+            {
+              "id": 1
+            },
+            {
+              "id": 2
+            }
+          ],
+          "count": {},
+          "meta": {
+            "tags": [
+              "a"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "gen-6902-0136",
+      "document": {
+        "items": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "count": 2,
+        "meta": {
+          "tags": [
+            "a"
+          ]
+        }
+      },
+      "operations": [
+        {
+          "op": "test",
+          "path": "/count",
+          "value": "alpha"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "TEST_FAILED",
+        "message": "values differ"
+      }
+    },
+    {
+      "id": "gen-6902-0137",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "add",
+          "path": "/1",
+          "value": {
+            "a/b": 6
+          }
+        },
+        {
+          "op": "add",
+          "path": "",
+          "value": [
+            8,
+            6
+          ]
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          8,
+          6
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0138",
+      "document": [
+        10,
+        20,
+        [
+          30,
+          31
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/3/k",
+          "value": null
+        },
+        {
+          "op": "add",
+          "path": "/1",
+          "value": null
+        },
+        {
+          "op": "remove",
+          "path": "/2"
+        },
+        {
+          "op": "move",
+          "from": "/2",
+          "path": "/0"
+        }
+      ],
+      "expected": {
+        "ok": true,
+        "result": [
+          [
+            30,
+            31
+          ],
+          10,
+          null,
+          {
+            "k": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "gen-6902-0139",
+      "document": {
+        "a/b": {
+          "a~b": [
+            1,
+            {
+              "": "empty"
+            }
+          ]
+        },
+        "list": []
+      },
+      "operations": [
+        {
+          "op": "move",
+          "from": "/list",
+          "path": "/list/0"
+        }
+      ],
+      "expected": {
+        "ok": false,
+        "failedAtIndex": 0,
+        "category": "MOVE_TARGET_DESCENDANT",
+        "message": "move into self/descendant"
+      }
+    }
+  ]
+}
