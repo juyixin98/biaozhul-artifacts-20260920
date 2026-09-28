@@ -1,0 +1,30 @@
+{
+  "name": "local-range-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local immutable-object Range read backend (single + multipart ranges) on Fastify and SQLite",
+  "type": "module",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node --experimental-sqlite dist/src/index.js",
+    "dev": "node --experimental-sqlite --import tsx src/index.ts",
+    "seed": "node --experimental-sqlite --import tsx scripts/seed.ts",
+    "make:samples": "node --experimental-sqlite --import tsx scripts/make-samples.ts",
+    "verify:samples": "node --experimental-sqlite --import tsx scripts/verify-samples.ts",
+    "test": "node --experimental-sqlite --import tsx --test test/unit-node/*.test.ts test/integration/*.test.ts",
+    "test:unit": "node --experimental-sqlite --import tsx --test test/unit-node/*.test.ts",
+    "test:integration": "node --experimental-sqlite --import tsx --test test/integration/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "fastify": "^4.29.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "tsx": "^4.23.15",
+    "typescript": "~5.5.4"
+  }
+}
