@@ -1,0 +1,44 @@
+{
+  "ontology_id": "fixture-unsat-but-consistent",
+  "label": "Intersection + disjointness: Hermaphrodite is unsatisfiable, yet the ontology itself stays consistent (no instance violates an axiom)",
+  "axioms": [
+    {"type": "SubClassOf", "sub": {"type": "ObjectIntersectionOf", "operands": [
+      {"type": "Class", "name": "Parent"},
+      {"type": "Class", "name": "Male"}
+    ]}, "sup": {"type": "Class", "name": "Father"}},
+
+    {"type": "SubClassOf", "sub": {"type": "Class", "name": "Father"}, "sup": {"type": "ObjectIntersectionOf", "operands": [
+      {"type": "Class", "name": "Parent"},
+      {"type": "Class", "name": "Male"}
+    ]}},
+
+    {"type": "EquivalentClasses", "operands": [
+      {"type": "Class", "name": "Father"},
+      {"type": "ObjectIntersectionOf", "operands": [
+        {"type": "Class", "name": "Male"},
+        {"type": "Class", "name": "Parent"}
+      ]}
+    ]},
+
+    {"type": "DisjointClasses", "operands": [
+      {"type": "Class", "name": "Male"},
+      {"type": "Class", "name": "Female"}
+    ]},
+
+    {"type": "SubClassOf", "sub": {"type": "Class", "name": "Mother"}, "sup": {"type": "ObjectIntersectionOf", "operands": [
+      {"type": "Class", "name": "Parent"},
+      {"type": "Class", "name": "Female"}
+    ]}},
+    {"type": "SubClassOf", "sub": {"type": "Class", "name": "Mother"}, "sup": {"type": "Class", "name": "Female"}},
+
+    {"type": "SubClassOf", "sub": {"type": "Class", "name": "Hermaphrodite"}, "sup": {"type": "Class", "name": "Male"}},
+    {"type": "SubClassOf", "sub": {"type": "Class", "name": "Hermaphrodite"}, "sup": {"type": "Class", "name": "Female"}},
+
+    {"type": "ClassAssertion", "individual": "bob", "class": {"type": "ObjectIntersectionOf", "operands": [
+      {"type": "Class", "name": "Parent"},
+      {"type": "Class", "name": "Male"}
+    ]}},
+    {"type": "ClassAssertion", "individual": "carol", "class": {"type": "Class", "name": "Mother"}},
+    {"type": "ClassAssertion", "individual": "dave", "class": {"type": "Class", "name": "Male"}}
+  ]
+}

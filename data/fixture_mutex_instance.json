@@ -1,0 +1,23 @@
+{
+  "ontology_id": "fixture-mutex-instance",
+  "label": "Ontology-inconsistent: individual mallory belongs to Father and Mother which force disjoint Male/Female; both classes themselves remain satisfiable",
+  "axioms": [
+    {"type": "SubClassOf", "sub": {"type": "Class", "name": "Mother"}, "sup": {"type": "ObjectIntersectionOf", "operands": [
+      {"type": "Class", "name": "Parent"},
+      {"type": "Class", "name": "Female"}
+    ]}},
+    {"type": "SubClassOf", "sub": {"type": "Class", "name": "Mother"}, "sup": {"type": "Class", "name": "Female"}},
+    {"type": "SubClassOf", "sub": {"type": "Class", "name": "Father"}, "sup": {"type": "ObjectIntersectionOf", "operands": [
+      {"type": "Class", "name": "Parent"},
+      {"type": "Class", "name": "Male"}
+    ]}},
+    {"type": "SubClassOf", "sub": {"type": "Class", "name": "Father"}, "sup": {"type": "Class", "name": "Male"}},
+    {"type": "DisjointClasses", "operands": [
+      {"type": "Class", "name": "Male"},
+      {"type": "Class", "name": "Female"}
+    ]},
+    {"type": "ClassAssertion", "individual": "mallory", "class": {"type": "Class", "name": "Mother"}},
+    {"type": "ClassAssertion", "individual": "mallory", "class": {"type": "Class", "name": "Father"}},
+    {"type": "ClassAssertion", "individual": "nina", "class": {"type": "Class", "name": "Female"}}
+  ]
+}

@@ -1,0 +1,10 @@
+# Functional-syntax fixture: multi-level inheritance + equivalence ring.
+# One axiom per line; lines beginning with '#' are comments.
+SubClassOf(Dog Mammal)
+SubClassOf(Mammal Animal)
+SubClassOf(Animal Organism)
+SubClassOf(Cat Mammal)
+EquivalentClasses(HomoSapiens Human Person)
+SubClassOf(Human Mammal)
+ClassAssertion(Dog rex)
+ClassAssertion(Person alice)

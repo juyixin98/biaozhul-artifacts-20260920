@@ -1,0 +1,20 @@
+{
+  "ontology_id": "fixture-hierarchy",
+  "label": "Multi-level inheritance + equivalence ring (no conflict)",
+  "axioms": [
+    {"type": "SubClassOf", "sub": {"type": "Class", "name": "Dog"}, "sup": {"type": "Class", "name": "Mammal"}},
+    {"type": "SubClassOf", "sub": {"type": "Class", "name": "Mammal"}, "sup": {"type": "Class", "name": "Animal"}},
+    {"type": "SubClassOf", "sub": {"type": "Class", "name": "Animal"}, "sup": {"type": "Class", "name": "Organism"}},
+    {"type": "SubClassOf", "sub": {"type": "Class", "name": "Cat"}, "sup": {"type": "Class", "name": "Mammal"}},
+
+    {"type": "EquivalentClasses", "operands": [
+      {"type": "Class", "name": "HomoSapiens"},
+      {"type": "Class", "name": "Human"},
+      {"type": "Class", "name": "Person"}
+    ]},
+    {"type": "SubClassOf", "sub": {"type": "Class", "name": "Human"}, "sup": {"type": "Class", "name": "Mammal"}},
+
+    {"type": "ClassAssertion", "individual": "rex", "class": {"type": "Class", "name": "Dog"}},
+    {"type": "ClassAssertion", "individual": "alice", "class": {"type": "Class", "name": "Person"}}
+  ]
+}

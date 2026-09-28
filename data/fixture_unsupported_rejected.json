@@ -1,0 +1,16 @@
+{
+  "ontology_id": "fixture-unsupported-rejected",
+  "label": "Must be rejected with UNSUPPORTED_CONSTRUCTOR, not parsed as labels",
+  "axioms": [
+    {"type": "SubClassOf", "sub": {"type": "Class", "name": "Dog"}, "sup": {"type": "Class", "name": "Animal"}},
+
+    {"type": "SubClassOf", "sub": {"type": "ObjectSomeValuesFrom",
+      "property": {"type": "ObjectProperty", "name": "hasPet"},
+      "filler": {"type": "Class", "name": "Cat"}},
+      "sup": {"type": "Class", "name": "PetOwner"}},
+
+    {"type": "SubClassOf", "sub": {"type": "ObjectUnionOf", "operands": [
+      {"type": "Class", "name": "Cat"}, {"type": "Class", "name": "Dog"}
+    ]}, "sup": {"type": "Class", "name": "Animal"}}
+  ]
+}
