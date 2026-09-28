@@ -1,0 +1,18 @@
+# Locked against the environment the test suite was executed on
+# (Python 3.12.3, Linux). Install with: pip install -r requirements.txt
+fastapi==0.141.1
+uvicorn==0.54.0
+pydantic==2.13.5
+pydantic_core==2.46.5
+starlette==1.7.0
+anyio==4.15.1
+annotated-types==0.8.0
+typing-extensions==4.16.0
+h11==0.16.0
+click==8.1.6
+idna==3.6
+certifi==2023.11.17
+# test dependencies
+pytest==9.1.1
+pytest-cov==7.1.0
+httpx==0.28.1
