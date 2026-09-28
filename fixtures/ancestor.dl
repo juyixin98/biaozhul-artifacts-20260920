@@ -1,0 +1,11 @@
+% Ancestor closure fixture.
+% A 4-generation linear chain plus a 2-generation side branch off alice.
+parent(alice, bob).
+parent(bob, carol).
+parent(carol, dave).
+parent(dave, erin).
+parent(alice, frank).
+parent(frank, grace).
+
+ancestor(X, Y) :- parent(X, Y).
+ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).

@@ -1,0 +1,20 @@
+% Recursive predicate plus stratified negation.
+% indirect/2 = ancestors that are NOT direct parents (length >= 2 paths).
+parent(alice, bob).
+parent(bob, carol).
+parent(carol, dave).
+parent(dave, erin).
+parent(alice, frank).
+parent(frank, grace).
+
+ancestor(X, Y) :- parent(X, Y).
+ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).
+
+indirect(X, Y) :- ancestor(X, Y), not parent(X, Y).
+
+% Set-difference in a second negation pattern: nodes with no parent edge
+% pointing at them are the roots of the family graph.
+node(X) :- parent(X, Y).
+node(Y) :- parent(X, Y).
+root(X) :- node(X), not has_parent(X).
+has_parent(X) :- parent(P, X).
