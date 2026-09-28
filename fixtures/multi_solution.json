@@ -1,0 +1,21 @@
+{
+  "name": "multi_solution",
+  "description": "all_different over 3 variables with 3 values: exactly 3! = 6 solutions, no root pruning",
+  "problem": {
+    "name": "multi_solution",
+    "variables": [
+      {"name": "p", "domain": [1, 2, 3]},
+      {"name": "q", "domain": [1, 2, 3]},
+      {"name": "r", "domain": [1, 2, 3]}
+    ],
+    "constraints": [
+      {"type": "all_different", "id": "ad_pqr", "vars": ["p", "q", "r"]}
+    ]
+  },
+  "expect": {
+    "status": "SAT",
+    "solution_count": 6,
+    "root_prunings": [],
+    "expectation_basis": "hand-computed: bijections {p,q,r} -> {1,2,3} = 3! = 6; complete bipartite graph K_3,3 keeps every edge in some perfect matching, so root propagation prunes nothing"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "hall_conflict",
+  "description": "3 variables over a 2-value domain: Hall violation at the root, no search needed",
+  "problem": {
+    "name": "hall_conflict",
+    "variables": [
+      {"name": "a", "domain": [1, 2]},
+      {"name": "b", "domain": [1, 2]},
+      {"name": "c", "domain": [1, 2]}
+    ],
+    "constraints": [
+      {"type": "all_different", "id": "ad_abc", "vars": ["a", "b", "c"]}
+    ]
+  },
+  "expect": {
+    "status": "UNSAT",
+    "solution_count": 0,
+    "nodes": 0,
+    "hall_violation": {"vars": ["a", "b", "c"], "values": [1, 2]},
+    "expectation_basis": "hand-computed: S={a,b,c} has neighbourhood N(S)={1,2}, |N(S)|=2 < 3=|S|, infeasible before any branching"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "isolated_variable",
+  "description": "Binary table prunes unsupported values; unconstrained variable z must stay untouched",
+  "problem": {
+    "name": "isolated_variable",
+    "variables": [
+      {"name": "x", "domain": [1, 2, 3]},
+      {"name": "y", "domain": [1, 2, 3]},
+      {"name": "z", "domain": [1, 2, 3, 4]}
+    ],
+    "constraints": [
+      {"type": "table", "id": "t_xy", "vars": ["x", "y"], "allowed": [[1, 2], [2, 3]]}
+    ]
+  },
+  "expect": {
+    "status": "SAT",
+    "solution_count": 8,
+    "root_prunings": [["x", 3], ["y", 1]],
+    "untouched_domains": {"z": [1, 2, 3, 4]},
+    "expectation_basis": "hand-computed: x=3 and y=1 have no support in t_xy; remaining (x,y) in {(1,2),(2,3)} times 4 values of unconstrained z = 8 solutions"
+  }
+}
