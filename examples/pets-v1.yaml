@@ -1,0 +1,125 @@
+
+openapi: 3.1.0
+info:
+  title: Pets API
+  version: "1.0.0"
+paths:
+  /pets:
+    get:
+      operationId: listPets
+      parameters:
+        - name: tag
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [cat, dog]
+            default: cat
+        - name: trace
+          in: header
+          required: false
+          schema:
+            type:
+              - string
+              - 'null'
+        - name: X-Tenant
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: list
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items]
+                additionalProperties: false
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pet'
+        '404':
+          description: not found
+    post:
+      operationId: createPet
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PetCreate'
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+  /pets/{id}:
+    get:
+      operationId: getPet
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+  /legacy:
+    get:
+      operationId: legacy
+      responses:
+        '200':
+          description: ok
+components:
+  schemas:
+    Pet:
+      type: object
+      required: [id, name, tags]
+      properties:
+        id:
+          type: string
+        name:
+          type:
+            - string
+            - 'null'
+        note:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+    Link:
+      type: object
+      required: [href]
+      properties:
+        href:
+          type: string
+        next:
+          $ref: '#/components/schemas/Link'
+    PetCreate:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+        kind:
+          type: string
+          enum: [cat, dog, bird]
+        note:
+          type:
+            - string
+            - 'null'
