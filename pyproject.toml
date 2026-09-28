@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sturm-root-isolator"
+version = "1.0.0"
+description = "Exact real-root isolation service for rational-coefficient polynomials, based on Sturm sequences"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi==0.141.1",
+    "uvicorn==0.54.0",
+    "pydantic==2.13.5",
+    "numpy==2.4.6",
+    "scipy==1.15.3",
+    "mpmath==1.3.0",
+]
+
+[project.optional-dependencies]
+test = ["pytest==9.1.1", "httpx==0.28.1"]
+
+[tool.setuptools]
+packages = ["root_isolator", "root_isolator.input", "root_isolator.kernel", "root_isolator.evidence", "root_isolator.service", "config"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-ra"

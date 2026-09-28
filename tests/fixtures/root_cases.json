@@ -1,0 +1,85 @@
+{
+  "description": "Synthetic local fixtures with INDEPENDENT hand/known-constant reference answers. The hand Sturm sign tables and reference decimals are authored directly (root radicals and published constants), never produced by the kernel under test.",
+  "cases": [
+    {
+      "id": "x_squared_minus_1",
+      "polynomial": {"coefficients": [1, 0, -1], "order": "descending"},
+      "factored_form": "(x-1)(x+1)",
+      "distinct_real_roots": 2,
+      "real_roots_with_multiplicity": 2,
+      "complex_roots_with_multiplicity": 0,
+      "reference_roots_exact": ["-1", "1"],
+      "hand_sturm_chain": ["x^2 - 1", "x", "1"],
+      "hand_sign_table": [
+        {"point": "-2", "raw_signs": [1, -1, 1], "variations_ignoring_zeros": 2, "first_member_is_zero": false},
+        {"point": "-1", "raw_signs": [0, -1, 1], "variations_ignoring_zeros": 1, "first_member_is_zero": true},
+        {"point": "0",  "raw_signs": [-1, 0, 1], "variations_ignoring_zeros": 1, "first_member_is_zero": false},
+        {"point": "1",  "raw_signs": [0, 1, 1],  "variations_ignoring_zeros": 0, "first_member_is_zero": true},
+        {"point": "2",  "raw_signs": [1, 1, 1],  "variations_ignoring_zeros": 0, "first_member_is_zero": false}
+      ],
+      "half_open_counts": [
+        {"interval": "(-2, 2]", "count": 2, "note": "both roots strictly inside"},
+        {"interval": "(-1, 1]", "count": 1, "note": "root at left endpoint -1 is excluded; root 1 is included"},
+        {"interval": "(-2, -1]", "count": 1, "note": "root at the right endpoint -1 is included"},
+        {"interval": "(-1, 2]", "count": 1, "note": "root -1 excluded, root 1 included"}
+      ]
+    },
+    {
+      "id": "double_root_times_simple",
+      "polynomial": {"coefficients": [1, 0, -3, 2], "order": "descending"},
+      "factored_form": "(x-1)^2 (x+2) = x^3 - 3x + 2",
+      "distinct_real_roots": 2,
+      "real_roots_with_multiplicity": 3,
+      "complex_roots_with_multiplicity": 0,
+      "reference_roots_exact": ["-2", "1"],
+      "reference_multiplicities": {"-2": 1, "1": 2},
+      "square_free_factor_multiplicities": [1, 2],
+      "root_1_is_at_a_bisection_endpoint": true
+    },
+    {
+      "id": "no_real_roots",
+      "polynomial": {"coefficients": [1, 0, 1], "order": "descending"},
+      "factored_form": "x^2 + 1",
+      "distinct_real_roots": 0,
+      "real_roots_with_multiplicity": 0,
+      "complex_roots_with_multiplicity": 2,
+      "reference_roots_exact": [],
+      "expected_verdict": "accepted"
+    },
+    {
+      "id": "irrational_roots_sqrt2",
+      "polynomial": {"coefficients": [1, 0, -2], "order": "descending"},
+      "factored_form": "x^2 - 2",
+      "distinct_real_roots": 2,
+      "real_roots_with_multiplicity": 2,
+      "complex_roots_with_multiplicity": 0,
+      "reference_roots_decimal": [
+        "-1.4142135623730950488016887242096980785696718753769",
+        "1.4142135623730950488016887242096980785696718753769"
+      ],
+      "reference_source": "published decimal expansion of sqrt(2), authored independently",
+      "decimal_match_digits": 30
+    },
+    {
+      "id": "triple_root",
+      "polynomial": {"coefficients": [-8, 12, -6, 1], "order": "descending"},
+      "factored_form": "(x-2)^3 = x^3 - 6x^2 + 12x - 8",
+      "distinct_real_roots": 1,
+      "real_roots_with_multiplicity": 3,
+      "complex_roots_with_multiplicity": 0,
+      "reference_roots_exact": ["2"],
+      "reference_multiplicities": {"2": 3},
+      "square_free_factor_multiplicities": [3]
+    },
+    {
+      "id": "high_dynamic_range_tiny_roots",
+      "polynomial": {"coefficients": ["10000000000000000000000000000000000000000", "0", "-1"], "order": "descending"},
+      "factored_form": "10^40 x^2 - 1",
+      "distinct_real_roots": 2,
+      "real_roots_with_multiplicity": 2,
+      "complex_roots_with_multiplicity": 0,
+      "reference_roots_scientific": ["-1e-20", "1e-20"],
+      "float64_expected_status": "inconclusive"
+    }
+  ]
+}
