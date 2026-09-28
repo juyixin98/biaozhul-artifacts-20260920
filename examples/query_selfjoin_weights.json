@@ -1,0 +1,21 @@
+{
+  "request_id": "demo-selfjoin",
+  "plan": {
+    "op": "project",
+    "columns": ["x.src", "y.dst"],
+    "child": {
+      "op": "join",
+      "left":  { "op": "relation", "name": "edge", "version": "v1", "alias": "x" },
+      "right": { "op": "relation", "name": "edge", "version": "v1", "alias": "y" },
+      "predicates": [ { "op": "=", "left": "x.dst", "right": "y.src" } ]
+    }
+  },
+  "weights": {
+    "edge.e1": 2,
+    "edge.e2": 3,
+    "edge.e3": 5,
+    "edge.e4": 7,
+    "edge.e5": 11,
+    "edge.e6": 13
+  }
+}

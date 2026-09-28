@@ -1,0 +1,32 @@
+{
+  "version": "v1",
+  "relations": {
+    "edge": {
+      "columns": ["src", "dst"],
+      "rows": [
+        { "id": "e1", "data": { "src": "a", "dst": "b" } },
+        { "id": "e2", "data": { "src": "b", "dst": "c" } },
+        { "id": "e3", "data": { "src": "a", "dst": "b" } },
+        { "id": "e4", "data": { "src": "c", "dst": "d" } },
+        { "id": "e5", "data": { "src": "a", "dst": null } },
+        { "id": "e6", "data": { "src": "d", "dst": "d" } }
+      ]
+    },
+    "label": {
+      "columns": ["node", "kind"],
+      "rows": [
+        { "id": "l1", "data": { "node": "a", "kind": "root" } },
+        { "id": "l2", "data": { "node": "b", "kind": "mid" } },
+        { "id": "l3", "data": { "node": "c", "kind": "mid" } },
+        { "id": "l4", "data": { "node": "d", "kind": "leaf" } }
+      ]
+    },
+    "redge": {
+      "columns": ["src", "dst"],
+      "rows": [
+        { "id": "r1", "data": { "src": "b", "dst": "a" } },
+        { "id": "r2", "data": { "src": "c", "dst": "b" } }
+      ]
+    }
+  }
+}

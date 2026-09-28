@@ -1,0 +1,8 @@
+{
+  "request_id": "demo-union",
+  "plan": {
+    "op": "union",
+    "left":  { "op": "relation", "name": "edge", "version": "v1" },
+    "right": { "op": "relation", "name": "redge", "version": "v1" }
+  }
+}

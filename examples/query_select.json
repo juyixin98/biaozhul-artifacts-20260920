@@ -1,0 +1,12 @@
+{
+  "request_id": "demo-select",
+  "plan": {
+    "op": "project",
+    "columns": ["dst"],
+    "child": {
+      "op": "select",
+      "child": { "op": "relation", "name": "edge", "version": "v1" },
+      "predicates": [ { "op": "=", "left": "src", "literal": "a" } ]
+    }
+  }
+}
