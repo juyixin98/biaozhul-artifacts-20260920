@@ -1,0 +1,8 @@
+# Exact versions used during development and verification (Python 3.12.3).
+# Only fastapi/uvicorn are needed to run the service; pydantic ships with fastapi.
+# httpx + pytest are required for the test-suite and the local smoke demo.
+fastapi==0.141.1
+uvicorn==0.54.0
+pydantic==2.13.5
+httpx==0.28.1
+pytest==9.1.1
