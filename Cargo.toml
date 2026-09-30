@@ -1,0 +1,33 @@
+[package]
+name = "leapfrog-triejoin"
+version = "0.1.0"
+edition = "2021"
+description = "Three-table and restricted multiway natural join with a Leapfrog Triejoin backend (Rust + Axum + Arrow2)"
+license = "MIT"
+
+[lib]
+name = "leapfrog_triejoin"
+path = "src/lib.rs"
+
+[[bin]]
+name = "lft-server"
+path = "src/bin/server.rs"
+
+[[bin]]
+name = "lft-verify"
+path = "src/bin/verify.rs"
+
+[dependencies]
+axum = { version = "0.7", features = ["macros"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "signal"] }
+tower = { version = "0.5", features = ["util"] }
+arrow2 = { version = "0.18", features = ["io_csv"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+thiserror = "1"
+base64 = "0.22"
+
+[dev-dependencies]
+# tower/util is already present in main deps (oneshot service used by API tests)
