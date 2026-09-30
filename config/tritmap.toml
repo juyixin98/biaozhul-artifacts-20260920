@@ -1,0 +1,17 @@
+# tritmap configuration. Every key can be overridden by an environment
+# variable prefixed with TRITMAP_ (e.g. TRITMAP_PORT, TRITMAP_VERIFY_SEED).
+[server]
+host = "127.0.0.1"
+port = 8080
+
+[data]
+fixture_dir = "fixtures"
+table_file = "users.csv"
+# Immutable data snapshot version; deletions advance strictly above it.
+data_version = 1
+
+[verify]
+seed = 0x5EED1234
+iterations = 24
+rows = 200
+null_density = 40
