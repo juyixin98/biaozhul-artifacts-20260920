@@ -1,0 +1,22 @@
+[package]
+name = "decorr-service"
+version = "0.1.0"
+edition = "2021"
+description = "Decorrelation compiler and execution service for restricted correlated subqueries (EXISTS / NOT EXISTS / scalar aggregates)"
+
+[dependencies]
+axum = "=0.7.9"
+tokio = { version = "=1.38.0", features = ["macros", "rt-multi-thread"] }
+arrow2 = "=0.18.0"
+sqlparser = "=0.47.0"
+serde = { version = "=1.0.203", features = ["derive"] }
+serde_json = "=1.0.117"
+tracing = "=0.1.40"
+tracing-subscriber = { version = "=0.3.18", features = ["fmt", "env-filter"] }
+uuid = { version = "=1.8.0", features = ["v4"] }
+thiserror = "=1.0.61"
+
+[dev-dependencies]
+reqwest = { version = "=0.12.4", features = ["json"] }
+rand = "=0.8.5"
+tokio = { version = "=1.38.0", features = ["macros", "rt-multi-thread"] }

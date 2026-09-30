@@ -1,0 +1,9 @@
+{
+  "comment": "Synthetic outer table. cust_key has duplicates (10 x3) and a NULL (id=4); key 40 matches no inner row; key 50 matches one all-NULL inner row.",
+  "columns": [
+    {"name": "id", "type": "int", "values": [1, 2, 3, 4, 5, 6, 7, 8]},
+    {"name": "cust_key", "type": "int", "values": [10, 20, 10, null, 30, 10, 40, 50]},
+    {"name": "amount", "type": "float", "values": [100.0, 200.5, 150.0, 50.0, 75.25, 300.0, 120.0, 10.0]},
+    {"name": "status", "type": "str", "values": ["new", "paid", "new", "new", "paid", "hold", "new", "new"]}
+  ]
+}

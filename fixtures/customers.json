@@ -1,0 +1,7 @@
+{
+  "comment": "String-key outer table: duplicate 'eu' rows and a NULL region.",
+  "columns": [
+    {"name": "name", "type": "str", "values": ["Ana", "Bo", "Cy", "Di"]},
+    {"name": "region", "type": "str", "values": ["eu", "us", null, "eu"]}
+  ]
+}

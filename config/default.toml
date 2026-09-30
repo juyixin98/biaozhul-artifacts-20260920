@@ -1,0 +1,16 @@
+# decorr-service — service configuration
+# All values can be overridden with environment variables prefixed DECORR_
+# (e.g. DECORR_PORT=9090, DECORR_MAX_ROWS=100000).
+
+host = "127.0.0.1"
+port = 8080
+
+# Directory containing local synthetic table fixtures (JSON files).
+fixtures_dir = "fixtures"
+
+# Safety limits (resource governance).
+max_rows_per_table = 50000
+max_outer_rows_per_query = 100000
+
+# Log level filter (tracing-subscriber EnvFilter syntax).
+log_level = "info,decorr_service=debug"

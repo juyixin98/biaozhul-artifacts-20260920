@@ -1,0 +1,8 @@
+{
+  "comment": "Synthetic inner table. order_key=10 x3 and 20 x3 give multi-row groups (scalar cardinality counterexample); NULL key never matches; key 50 has qty/price all NULL (COUNT(col)=0 vs SUM(col)=NULL on a non-empty group).",
+  "columns": [
+    {"name": "order_key", "type": "int", "values": [10, 10, 20, 20, 20, 30, null, 10, 50]},
+    {"name": "qty", "type": "int", "values": [2, 3, 1, null, 4, 5, 9, 1, null]},
+    {"name": "price", "type": "float", "values": [9.5, 1.5, 100.0, 3.0, 2.0, 7.25, 4.0, 0.5, null]}
+  ]
+}

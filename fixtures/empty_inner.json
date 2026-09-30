@@ -1,0 +1,7 @@
+{
+  "comment": "Empty inner table: exercises empty-correlated-group semantics (COUNT=0, SUM=NULL, EXISTS=false, NOT EXISTS=true, scalar=NULL).",
+  "columns": [
+    {"name": "k", "type": "int", "values": []},
+    {"name": "v", "type": "int", "values": []}
+  ]
+}
