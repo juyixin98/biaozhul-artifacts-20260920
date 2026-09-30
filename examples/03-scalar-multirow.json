@@ -1,0 +1,42 @@
+{
+  "request_id": "example-scalar-cardinality",
+  "outer": {
+    "name": "departments",
+    "schema": [
+      { "name": "dept_id", "type": "Int64" },
+      { "name": "label", "type": "Utf8" }
+    ],
+    "rows": [
+      { "dept_id": 10, "label": "single-boss" },
+      { "dept_id": 20, "label": "two-bosses-violates" },
+      { "dept_id": 30, "label": "no-boss-null" },
+      { "dept_id": null, "label": "null-dept-key" }
+    ]
+  },
+  "relations": [
+    {
+      "name": "bosses",
+      "schema": [
+        { "name": "boss_name", "type": "Utf8" },
+        { "name": "dept_id", "type": "Int64" }
+      ],
+      "rows": [
+        { "boss_name": "ada", "dept_id": 10 },
+        { "boss_name": "ben", "dept_id": 20 },
+        { "boss_name": "cleo", "dept_id": 20 },
+        { "boss_name": "dana", "dept_id": null }
+      ]
+    }
+  ],
+  "subqueries": [
+    {
+      "alias": "the_boss",
+      "type": "scalar",
+      "input": "bosses",
+      "value": { "name": "boss_name" },
+      "correlations": [
+        { "outer": { "name": "dept_id" }, "inner": { "name": "dept_id" } }
+      ]
+    }
+  ]
+}

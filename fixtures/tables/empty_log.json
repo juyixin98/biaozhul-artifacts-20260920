@@ -1,0 +1,9 @@
+{
+  "name": "empty_log",
+  "schema": [
+    { "name": "id", "type": "Int64" },
+    { "name": "customer_id", "type": "Int64" },
+    { "name": "note", "type": "Utf8" }
+  ],
+  "rows": []
+}

@@ -1,0 +1,13 @@
+{
+  "name": "scalar_notes",
+  "schema": [
+    { "name": "id", "type": "Int64" },
+    { "name": "customer_id", "type": "Int64" },
+    { "name": "label", "type": "Utf8" }
+  ],
+  "rows": [
+    { "id": 1, "customer_id": 1, "label": "alpha" },
+    { "id": 2, "customer_id": 1, "label": "beta" },
+    { "id": 3, "customer_id": 3, "label": "gamma" }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "bind": "127.0.0.1:8080",
+  "fixtures_dir": "fixtures/tables",
+  "log_filter": "info,decorrelate=debug",
+  "log_json": true
+}

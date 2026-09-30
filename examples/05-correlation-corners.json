@@ -1,0 +1,68 @@
+{
+  "request_id": "example-correlation-corners",
+  "outer": {
+    "name": "outer_t",
+    "schema": [
+      { "name": "k", "type": "Int64" },
+      { "name": "tag", "type": "Utf8" }
+    ],
+    "rows": [
+      { "k": 1, "tag": "once" },
+      { "k": 2, "tag": "duplicate-A" },
+      { "k": 2, "tag": "duplicate-B" },
+      { "k": null, "tag": "null-outer-key" }
+    ]
+  },
+  "relations": [
+    {
+      "name": "inner_t",
+      "schema": [
+        { "name": "ik", "type": "Int64" },
+        { "name": "v", "type": "Int64" }
+      ],
+      "rows": [
+        { "ik": 1, "v": 10 },
+        { "ik": 1, "v": null },
+        { "ik": 2, "v": 7 },
+        { "ik": null, "v": 99 }
+      ]
+    },
+    {
+      "name": "empty_t",
+      "schema": [
+        { "name": "ik", "type": "Int64" },
+        { "name": "v", "type": "Int64" }
+      ],
+      "rows": []
+    }
+  ],
+  "subqueries": [
+    {
+      "alias": "has",
+      "type": "exists",
+      "input": "inner_t",
+      "correlations": [ { "outer": { "name": "k" }, "inner": { "name": "ik" } } ]
+    },
+    {
+      "alias": "cnt_star",
+      "type": "scalar_agg",
+      "input": "inner_t",
+      "agg_func": "count",
+      "correlations": [ { "outer": { "name": "k" }, "inner": { "name": "ik" } } ]
+    },
+    {
+      "alias": "sum_v",
+      "type": "scalar_agg",
+      "input": "inner_t",
+      "agg_func": "sum",
+      "agg_argument": { "name": "v" },
+      "correlations": [ { "outer": { "name": "k" }, "inner": { "name": "ik" } } ]
+    },
+    {
+      "alias": "missing_in_empty",
+      "type": "not_exists",
+      "input": "empty_t",
+      "correlations": [ { "outer": { "name": "k" }, "inner": { "name": "ik" } } ]
+    }
+  ]
+}

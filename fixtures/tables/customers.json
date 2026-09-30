@@ -1,0 +1,15 @@
+{
+  "name": "customers",
+  "schema": [
+    { "name": "id", "type": "Int64" },
+    { "name": "name", "type": "Utf8" }
+  ],
+  "rows": [
+    { "id": 1, "name": "ada" },
+    { "id": 2, "name": "ben-no-orders" },
+    { "id": 3, "name": "cleo" },
+    { "id": 3, "name": "cleo-duplicate-row" },
+    { "id": null, "name": "dana-null-key" },
+    { "id": 4, "name": "evan-null-amount-order" }
+  ]
+}

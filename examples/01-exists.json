@@ -1,0 +1,22 @@
+{
+  "request_id": "example-exists",
+  "outer": { "relation": "customers" },
+  "subqueries": [
+    {
+      "alias": "has_orders",
+      "type": "exists",
+      "input": "orders",
+      "correlations": [
+        { "outer": { "name": "id" }, "inner": { "name": "customer_id" } }
+      ]
+    },
+    {
+      "alias": "no_orders",
+      "type": "not_exists",
+      "input": "orders",
+      "correlations": [
+        { "outer": { "name": "id" }, "inner": { "name": "customer_id" } }
+      ]
+    }
+  ]
+}

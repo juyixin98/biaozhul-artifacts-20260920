@@ -1,0 +1,54 @@
+{
+  "request_id": "example-count-sum-empty-group",
+  "outer": { "relation": "customers" },
+  "subqueries": [
+    {
+      "alias": "order_count_star",
+      "type": "scalar_agg",
+      "input": "orders",
+      "agg_func": "count",
+      "correlations": [
+        { "outer": { "name": "id" }, "inner": { "name": "customer_id" } }
+      ]
+    },
+    {
+      "alias": "order_count_amount",
+      "type": "scalar_agg",
+      "input": "orders",
+      "agg_func": "count",
+      "agg_argument": { "name": "amount" },
+      "correlations": [
+        { "outer": { "name": "id" }, "inner": { "name": "customer_id" } }
+      ]
+    },
+    {
+      "alias": "total_amount",
+      "type": "scalar_agg",
+      "input": "orders",
+      "agg_func": "sum",
+      "agg_argument": { "name": "amount" },
+      "correlations": [
+        { "outer": { "name": "id" }, "inner": { "name": "customer_id" } }
+      ]
+    },
+    {
+      "alias": "log_count_against_empty_table",
+      "type": "scalar_agg",
+      "input": "empty_log",
+      "agg_func": "count",
+      "correlations": [
+        { "outer": { "name": "id" }, "inner": { "name": "customer_id" } }
+      ]
+    },
+    {
+      "alias": "log_sum_against_empty_table",
+      "type": "scalar_agg",
+      "input": "empty_log",
+      "agg_func": "sum",
+      "agg_argument": { "name": "id" },
+      "correlations": [
+        { "outer": { "name": "id" }, "inner": { "name": "customer_id" } }
+      ]
+    }
+  ]
+}
