@@ -1,0 +1,33 @@
+[package]
+name = "iejoin"
+version = "0.1.0"
+edition = "2021"
+description = "IEJoin-style batch join backend for two range predicates (two tables)"
+license = "MIT"
+
+[dependencies]
+# Direct dependency versions are pinned exactly so a checkout of this tree
+# builds the same graph offline (a committed Cargo.lock is the second lock).
+arrow2 = { version = "=0.18.0", default-features = false, features = ["io_ipc"] }
+axum = "=0.7.9"
+tokio = { version = "=1.53.1", features = ["rt-multi-thread", "macros", "net", "signal", "sync"] }
+serde = { version = "=1.0.229", features = ["derive"] }
+serde_json = "=1.0.151"
+clap = { version = "=4.6.7", features = ["derive"] }
+thiserror = "=1.0.69"
+tracing = "=0.1.44"
+tracing-subscriber = { version = "=0.3.23", features = ["env-filter"] }
+rand = "=0.8.5"
+uuid = { version = "=1.18.1", features = ["v4"] }
+
+[dev-dependencies]
+tower = { version = "=0.5.3", features = ["util"] }
+http-body-util = "=0.1.5"
+
+[[bin]]
+name = "iejoin"
+path = "src/main.rs"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
