@@ -1,0 +1,33 @@
+[package]
+name = "iejoin-range-backend"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.98.1"
+description = "IEJoin-style batch range join backend (two inequality predicates) with Axum + arrow2"
+license = "MIT OR Apache-2.0"
+
+[lib]
+name = "iejoin_backend"
+path = "src/lib.rs"
+
+[[bin]]
+name = "iejoin"
+path = "src/main.rs"
+
+[dependencies]
+# Pinned exact versions; Cargo.lock additionally pins every transitive dependency.
+arrow2 = { version = "=0.18.0", default-features = true }
+axum = { version = "=0.7.9", features = ["json"] }
+tokio = { version = "=1.53.1", features = ["rt-multi-thread", "macros", "net", "signal", "time"] }
+serde = { version = "=1.0.229", features = ["derive"] }
+serde_json = { version = "=1.0.151" }
+clap = { version = "=4.6.7", features = ["derive"] }
+tracing = "=0.1.44"
+tracing-subscriber = { version = "=0.3.23", features = ["fmt"] }
+
+[dev-dependencies]
+tower = { version = "=0.5.2", features = ["util"] }
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
